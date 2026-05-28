@@ -26,7 +26,7 @@ jobs:
       - name: Install agent Python dependencies
         run: |
           pip install --target agent/layer/python --platform manylinux2014_x86_64 --only-binary=:all: --python-version 3.12 strands-agents strands-agents-tools httpx
-          cd agent/layer/python && rm -rf *.dist-info __pycache__ */__pycache__ boto3 botocore s3transfer jmespath sympy PIL pillow.libs pillow cryptography pygments slack_sdk slack_bolt prompt_toolkit mpmath opentelemetry watchdog uvicorn starlette sse_starlette fastapi dill mcp markdownify beautifulsoup4 bs4 soupsieve markdown_it_py mdurl python_multipart wcwidth
+          cd agent/layer/python && rm -rf *.dist-info __pycache__ */__pycache__ boto3 botocore s3transfer jmespath sympy PIL pillow.libs pillow cryptography pygments slack_sdk slack_bolt prompt_toolkit mpmath watchdog uvicorn starlette sse_starlette fastapi dill mcp markdownify beautifulsoup4 bs4 soupsieve markdown_it_py mdurl python_multipart wcwidth
 
       - name: CDK Diff
         if: github.event_name == 'pull_request'
