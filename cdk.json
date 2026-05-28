@@ -21,7 +21,7 @@
     "supabaseUrl": "https://regphejnlvfpyokpniny.supabase.co",
     "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJlZ3BoZWpubHZmcHlva3BuaW55Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQxMDM2MjAsImV4cCI6MjA3OTY3OTYyMH0.rEbxQIJUqQ-zvxwUgKKZkZ5r53e4Qh8MXmFqHdSpLao",
     "frontendRepo": "jumpserve-networks/jumpserve-front-end",
-    "customDomain": "jumpserve.bradleyfang.com",
+    "customDomain": "jumpserve.quaint-lab.org",
     "benchmarkApiUrl": "https://d3o7xdethb.execute-api.us-east-1.amazonaws.com",
     "@aws-cdk/aws-signer:signingProfileNamePassedToCfn": true,
     "@aws-cdk/aws-ecs-patterns:secGroupsDisablesImplicitOpenListener": true,
