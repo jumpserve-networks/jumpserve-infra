@@ -146,6 +146,29 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
       targets: [new eventsTargets.LambdaFunction(cleanupFn)],
     });
 
+    // Lambda: cancel a running benchmark
+    const cancelFn = new lambda.NodejsFunction(this, 'CancelBenchmarkFn', {
+      entry: path.join(__dirname, '..', 'lambda', 'cancel-benchmark', 'index.ts'),
+      handler: 'handler',
+      runtime: lambdaRuntime.Runtime.NODEJS_22_X,
+      timeout: cdk.Duration.seconds(15),
+      memorySize: 256,
+      environment: {
+        SUPABASE_URL: supabaseUrl,
+        SUPABASE_SECRET_ARN: supabaseSecret.secretArn,
+      },
+      bundling: {
+        externalModules: ['@aws-sdk/*'],
+      },
+    });
+
+    supabaseSecret.grantRead(cancelFn);
+
+    cancelFn.addToRolePolicy(new iam.PolicyStatement({
+      actions: ['ec2:TerminateInstances'],
+      resources: ['*'],
+    }));
+
     // Lambda: get benchmark logs from CloudWatch
     const getLogsFn = new lambda.NodejsFunction(this, 'GetBenchmarkLogsFn', {
       entry: path.join(__dirname, '..', 'lambda', 'get-benchmark-logs', 'index.ts'),
@@ -181,6 +204,14 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
       methods: [apigatewayv2.HttpMethod.POST],
       integration: new apigatewayv2Integrations.HttpLambdaIntegration(
         'LaunchBenchmarkIntegration', launchFn
+      ),
+    });
+
+    httpApi.addRoutes({
+      path: '/benchmarks/cancel',
+      methods: [apigatewayv2.HttpMethod.POST],
+      integration: new apigatewayv2Integrations.HttpLambdaIntegration(
+        'CancelBenchmarkIntegration', cancelFn
       ),
     });
 

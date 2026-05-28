@@ -178,9 +178,42 @@ ${benchmarkCommand} \\
   --supabase-service-role-key '${supabaseKey}'
 BENCHMARK_EXIT=$?
 
-# Update final status
+# Link parent_run_id and update final status
 if [ $BENCHMARK_EXIT -eq 0 ]; then
-  update_status "completed"
+  # Find the most recently created parent run and link it to this job
+  PARENT_RUN_ID=$(python3 -c "
+import urllib.request, json
+req = urllib.request.Request(
+    '${supabaseUrl}/rest/v1/emulated_parent_runs?order=created_at.desc&limit=1&select=id',
+    headers={
+        'apikey': '${supabaseKey}',
+        'Authorization': 'Bearer ${supabaseKey}',
+    }
+)
+resp = urllib.request.urlopen(req)
+data = json.loads(resp.read())
+print(data[0]['id'] if data else '')
+" 2>/dev/null || echo "")
+
+  if [ -n "$PARENT_RUN_ID" ]; then
+    python3 -c "
+import urllib.request, json
+req = urllib.request.Request(
+    '${supabaseUrl}/rest/v1/benchmark_jobs?id=eq.${jobId}',
+    data=json.dumps({'status': 'completed', 'parent_run_id': $PARENT_RUN_ID, 'updated_at': '$(date -u +%Y-%m-%dT%H:%M:%SZ)'}).encode(),
+    headers={
+        'apikey': '${supabaseKey}',
+        'Authorization': 'Bearer ${supabaseKey}',
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+    },
+    method='PATCH'
+)
+urllib.request.urlopen(req)
+" || true
+  else
+    update_status "completed"
+  fi
 else
   update_status "failed" "Benchmark exited with code $BENCHMARK_EXIT"
 fi
