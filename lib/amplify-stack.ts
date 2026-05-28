@@ -23,6 +23,7 @@ export class AmplifyStack extends cdk.Stack {
       environmentVariables: [
         { name: 'NEXT_PUBLIC_SUPABASE_URL', value: supabaseUrl },
         { name: 'NEXT_PUBLIC_SUPABASE_ANON_KEY', value: supabaseAnonKey },
+        { name: 'NEXT_PUBLIC_BENCHMARK_API_URL', value: this.node.tryGetContext('benchmarkApiUrl') || '' },
       ],
       buildSpec: JSON.stringify({
         version: 1,
