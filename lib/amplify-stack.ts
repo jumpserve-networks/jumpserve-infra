@@ -11,26 +11,18 @@ export class AmplifyStack extends cdk.Stack {
       this, 'GitHubToken', 'jumpserve/github-token'
     );
 
-    const supabaseUrl = new cdk.CfnParameter(this, 'SupabaseUrl', {
-      type: 'String',
-      description: 'Supabase project URL',
-      noEcho: true,
-    });
-
-    const supabaseAnonKey = new cdk.CfnParameter(this, 'SupabaseAnonKey', {
-      type: 'String',
-      description: 'Supabase anonymous key',
-      noEcho: true,
-    });
+    const supabaseUrl = this.node.tryGetContext('supabaseUrl');
+    const supabaseAnonKey = this.node.tryGetContext('supabaseAnonKey');
+    const frontendRepo = this.node.tryGetContext('frontendRepo') || 'BradleyFang/jumpserve-front-end';
 
     const amplifyApp = new amplify.CfnApp(this, 'JumpServeFrontend', {
       name: 'jumpserve-frontend',
-      repository: 'https://github.com/BradleyFang/jumpserve-front-end',
+      repository: `https://github.com/${frontendRepo}`,
       accessToken: githubToken.secretValue.unsafeUnwrap(),
       platform: 'WEB_COMPUTE',
       environmentVariables: [
-        { name: 'NEXT_PUBLIC_SUPABASE_URL', value: supabaseUrl.valueAsString },
-        { name: 'NEXT_PUBLIC_SUPABASE_ANON_KEY', value: supabaseAnonKey.valueAsString },
+        { name: 'NEXT_PUBLIC_SUPABASE_URL', value: supabaseUrl },
+        { name: 'NEXT_PUBLIC_SUPABASE_ANON_KEY', value: supabaseAnonKey },
       ],
       buildSpec: JSON.stringify({
         version: 1,

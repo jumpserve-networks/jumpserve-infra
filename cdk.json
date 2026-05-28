@@ -18,6 +18,9 @@
   },
   "context": {
     "allowedSshCidr": "0.0.0.0/0",
+    "supabaseUrl": "https://regphejnlvfpyokpniny.supabase.co",
+    "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJlZ3BoZWpubHZmcHlva3BuaW55Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQxMDM2MjAsImV4cCI6MjA3OTY3OTYyMH0.rEbxQIJUqQ-zvxwUgKKZkZ5r53e4Qh8MXmFqHdSpLao",
+    "frontendRepo": "BradleyFang/jumpserve-front-end",
     "@aws-cdk/aws-signer:signingProfileNamePassedToCfn": true,
     "@aws-cdk/aws-ecs-patterns:secGroupsDisablesImplicitOpenListener": true,
     "@aws-cdk/aws-lambda:recognizeLayerVersion": true,
