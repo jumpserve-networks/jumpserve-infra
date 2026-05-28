@@ -49,6 +49,25 @@ export class AmplifyStack extends cdk.Stack {
       stage: 'PRODUCTION',
     });
 
+    const customDomain = this.node.tryGetContext('customDomain');
+    if (customDomain) {
+      const domain = new amplify.CfnDomain(this, 'CustomDomain', {
+        appId: amplifyApp.attrAppId,
+        domainName: customDomain,
+        subDomainSettings: [
+          {
+            branchName: mainBranch.branchName,
+            prefix: '',
+          },
+        ],
+      });
+
+      new cdk.CfnOutput(this, 'CustomDomainUrl', {
+        value: `https://${customDomain}`,
+        description: 'Custom domain URL',
+      });
+    }
+
     new cdk.CfnOutput(this, 'AmplifyAppId', {
       value: amplifyApp.attrAppId,
       description: 'Amplify App ID',
