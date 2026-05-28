@@ -9,3 +9,4 @@ cdk.out
 
 # Agent Python dependencies (built locally, deployed via Lambda Layer)
 agent/package
+agent/layer

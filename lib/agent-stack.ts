@@ -16,9 +16,9 @@ export class AgentStack extends cdk.Stack {
       this, 'SupabaseServiceKey', 'jumpserve/supabase-service-key'
     );
 
-    // Dependencies layer (pre-installed in agent/package/)
+    // Dependencies layer (pre-installed in agent/layer/python/)
     const depsLayer = new lambda.LayerVersion(this, 'AgentDepsLayer', {
-      code: lambda.Code.fromAsset(path.join(__dirname, '..', 'agent', 'package')),
+      code: lambda.Code.fromAsset(path.join(__dirname, '..', 'agent', 'layer')),
       compatibleRuntimes: [lambda.Runtime.PYTHON_3_12],
       description: 'Strands Agents SDK and dependencies',
     });
