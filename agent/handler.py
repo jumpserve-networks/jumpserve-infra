@@ -114,7 +114,7 @@ def lambda_handler(event, context):
 
     # Create the agent
     model = BedrockModel(
-        model_id="us.anthropic.claude-sonnet-4-20250514-v1:0",
+        model_id="us.anthropic.claude-sonnet-4-6",
         region_name="us-east-1",
     )
 
