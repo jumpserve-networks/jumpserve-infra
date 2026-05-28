@@ -1,4 +1,4 @@
-import json
+import math
 import os
 import httpx
 from strands import tool
@@ -120,9 +120,29 @@ def get_run_results(parent_run_id: int) -> dict:
                 "num_snapshots": len(stats),
             })
 
+    # Compute fairness metrics
+    fairness = {}
+    throughputs = [c["throughput_avg_mbps"] for c in results if c["throughput_avg_mbps"] is not None]
+    fcts = [c["flow_completion_time_ms"] for c in results if c["flow_completion_time_ms"] is not None]
+
+    if len(throughputs) >= 2:
+        n = len(throughputs)
+        sum_t = sum(throughputs)
+        sum_t2 = sum(t ** 2 for t in throughputs)
+        fairness["jains_index"] = round(sum_t ** 2 / (n * sum_t2), 4) if sum_t2 > 0 else None
+        fairness["throughput_ratio"] = round(max(throughputs) / min(throughputs), 2) if min(throughputs) > 0 else None
+        fairness["throughput_stdev_mbps"] = round(math.sqrt(sum((t - sum_t / n) ** 2 for t in throughputs) / n), 2)
+        fairness["throughput_cv"] = round(fairness["throughput_stdev_mbps"] / (sum_t / n), 4) if sum_t > 0 else None
+
+    if len(fcts) >= 2:
+        fairness["fct_ratio"] = round(max(fcts) / min(fcts), 2) if min(fcts) > 0 else None
+        avg_fct = sum(fcts) / len(fcts)
+        fairness["fct_stdev_ms"] = round(math.sqrt(sum((f - avg_fct) ** 2 for f in fcts) / len(fcts)), 2)
+
     return {
         "parent_run": parent,
         "clients": results,
+        "fairness": fairness,
     }
 
 
