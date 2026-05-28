@@ -17,7 +17,16 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - run: npm ci
+
+      - name: Install agent Python dependencies
+        run: |
+          pip install --target agent/package strands-agents strands-agents-tools httpx
+          cd agent/package && rm -rf *.dist-info __pycache__ */__pycache__ boto3 botocore s3transfer jmespath
 
       - name: CDK Diff
         if: github.event_name == 'pull_request'
