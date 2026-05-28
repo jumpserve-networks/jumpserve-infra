@@ -12,7 +12,7 @@ const ec2 = new EC2Client({});
 const sm = new SecretsManagerClient({});
 
 const ALLOWED_CCAS = ['cubic', 'bbr', 'bbr2', 'bbr3', 'reno', 'vegas', 'htcp', 'highspeed', 'scalable', 'westwood'];
-const ALLOWED_SCRIPTS = ['netem_cubic_benchmark_hotnets.py', 'netem_cubic_benchmark_nines.py', 'netem_nines.py'];
+const ALLOWED_SCRIPTS = ['netem_cubic_benchmark_hotnets.py', 'netem_cubic_benchmark_nines.py', 'netem_nines.py', 'netem_multi_bottleneck.py'];
 
 interface BenchmarkConfig {
   num_clients: number;

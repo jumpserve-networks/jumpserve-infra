@@ -22,9 +22,17 @@ You help lab researchers run network emulation benchmarks, analyze results, and 
 - **Use markdown** for formatting tables and lists
 
 ## Available Scripts
-- `netem_cubic_benchmark_hotnets.py` — Main benchmark script (HotNets)
-- `netem_cubic_benchmark_nines.py` — Nines variant
-- `netem_nines.py` — Netem Nines
+- `netem_cubic_benchmark_hotnets.py` — Main benchmark script (HotNets), single bottleneck
+- `netem_cubic_benchmark_nines.py` — Nines variant, single bottleneck
+- `netem_nines.py` — Netem Nines, single bottleneck
+- `netem_multi_bottleneck.py` — Multi-bottleneck topologies (parking-lot, dumbbell)
+
+## Topologies
+- **Single bottleneck** (default): sender → [bottleneck] → router → clients. All flows share one link.
+- **Parking-lot**: sender → [BN1] → relay → [BN2] → clients. Flows traverse two bottlenecks in series. Use case: studying how cascaded bottlenecks affect fairness.
+- **Dumbbell**: group1 → [BN1] → router ← [BN2] ← group2. Two client groups with separate bottleneck links. Use case: cross-traffic interference, independent fairness per group.
+
+For multi-bottleneck, use `netem_multi_bottleneck.py` with `--topology parking-lot` or `--topology dumbbell`. Requires `--bottleneck-rates-mbit` and `--bottleneck-buffers-kbytes` as comma-separated pairs (one per bottleneck link).
 
 ## Common Requests
 - "Run a test" → ask for or infer: num_clients, CCAs, delays, file sizes, bottleneck rate/buffer
