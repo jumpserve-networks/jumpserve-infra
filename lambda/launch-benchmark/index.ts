@@ -26,6 +26,9 @@ interface BenchmarkConfig {
   script?: string;
   loss_pct?: number;
   snapshot_interval_ms?: number;
+  experiment_name?: string;
+  tags?: string[];
+  notes?: string;
 }
 
 function validateConfig(config: BenchmarkConfig): string | null {
@@ -85,6 +88,15 @@ function buildBenchmarkArgs(config: BenchmarkConfig): string {
   }
   if (config.snapshot_interval_ms !== undefined) {
     args.push(`--snapshot-interval-ms ${config.snapshot_interval_ms}`);
+  }
+  if (config.experiment_name) {
+    args.push(`--experiment-name '${config.experiment_name.replace(/'/g, "'\\''")}'`);
+  }
+  if (config.tags && config.tags.length > 0) {
+    args.push(`--experiment-tags ${config.tags.join(',')}`);
+  }
+  if (config.notes) {
+    args.push(`--experiment-notes '${config.notes.replace(/'/g, "'\\''")}'`);
   }
   return `sudo python3 /home/ubuntu/jumpserve-back-end/${script} ${args.join(' ')}`;
 }

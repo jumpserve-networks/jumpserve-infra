@@ -78,8 +78,8 @@ def get_run_results(parent_run_id: int) -> dict:
     Args:
         parent_run_id: The ID of the parent run (from emulated_parent_runs table)
     """
-    # Get parent run metadata
-    parent = _supabase_get(f"emulated_parent_runs?id=eq.{parent_run_id}&select=*")
+    # Get parent run metadata (including tags)
+    parent = _supabase_get(f"emulated_parent_runs?id=eq.{parent_run_id}&select=*,tags,notes,experiment_name")
     if not parent:
         return {"error": "Parent run not found"}
     parent = parent[0]
@@ -171,6 +171,8 @@ def search_runs(
     min_rate_mbit: int | None = None,
     max_rate_mbit: int | None = None,
     num_clients: int | None = None,
+    tag: str | None = None,
+    experiment_name: str | None = None,
     limit: int = 10,
 ) -> list[dict]:
     """Search for benchmark parent runs by parameters.
@@ -182,12 +184,14 @@ def search_runs(
         min_rate_mbit: Minimum bottleneck rate in Mbit/s
         max_rate_mbit: Maximum bottleneck rate in Mbit/s
         num_clients: Filter by number of clients
+        tag: Filter by tag (e.g. "fairness", "paper-fig3")
+        experiment_name: Filter by experiment name
         limit: Maximum number of results (default 10)
     """
     path = (
         f"emulated_parent_runs?order=created_at.desc&limit={limit}"
         f"&select=id,created_at,number_of_clients,bottleneck_rate_megabit,"
-        f"queue_buffer_size_kilobyte,snapshot_length_ms"
+        f"queue_buffer_size_kilobyte,snapshot_length_ms,tags,experiment_name,notes"
     )
     if num_clients:
         path += f"&number_of_clients=eq.{num_clients}"
@@ -195,6 +199,10 @@ def search_runs(
         path += f"&bottleneck_rate_megabit=gte.{min_rate_mbit}"
     if max_rate_mbit:
         path += f"&bottleneck_rate_megabit=lte.{max_rate_mbit}"
+    if tag:
+        path += f"&tags=cs.{{{tag}}}"
+    if experiment_name:
+        path += f"&experiment_name=ilike.*{experiment_name}*"
 
     results = _supabase_get(path)
     return results

@@ -30,6 +30,9 @@ def run_benchmark(
     client_start_delays_ms: list[float] | None = None,
     script: str = "netem_cubic_benchmark_hotnets.py",
     loss_pct: float = 0.0,
+    experiment_name: str | None = None,
+    tags: list[str] | None = None,
+    notes: str | None = None,
 ) -> dict:
     """Launch a TCP congestion control benchmark on a fresh EC2 instance.
 
@@ -43,6 +46,9 @@ def run_benchmark(
         client_start_delays_ms: Optional per-client flow start delays in ms
         script: Benchmark script to run
         loss_pct: Packet loss percentage (0-100)
+        experiment_name: Optional short name for the experiment (e.g. "bbr-fairness-v2")
+        tags: Optional list of tags (e.g. ["fairness", "bbr", "paper-fig3"])
+        notes: Optional free-text notes about the experiment
     """
     config = {
         "num_clients": num_clients,
@@ -57,6 +63,12 @@ def run_benchmark(
     }
     if loss_pct > 0:
         config["loss_pct"] = loss_pct
+    if experiment_name:
+        config["experiment_name"] = experiment_name
+    if tags:
+        config["tags"] = tags
+    if notes:
+        config["notes"] = notes
 
     resp = httpx.post(
         f"{BENCHMARK_API_URL}/benchmarks",
