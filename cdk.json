@@ -23,6 +23,7 @@
     "frontendRepo": "jumpserve-networks/jumpserve-front-end",
     "customDomain": "jumpserve.quaint-lab.org",
     "benchmarkApiUrl": "https://d3o7xdethb.execute-api.us-east-1.amazonaws.com",
+    "agentUrl": "https://idk3jouyc6g2uolmge5ctuizwq0kpgcf.lambda-url.us-east-1.on.aws/",
     "@aws-cdk/aws-signer:signingProfileNamePassedToCfn": true,
     "@aws-cdk/aws-ecs-patterns:secGroupsDisablesImplicitOpenListener": true,
     "@aws-cdk/aws-lambda:recognizeLayerVersion": true,

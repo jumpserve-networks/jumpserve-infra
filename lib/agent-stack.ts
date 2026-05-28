@@ -6,8 +6,6 @@ import { Construct } from 'constructs';
 import * as path from 'path';
 
 export class AgentStack extends cdk.Stack {
-  public readonly functionUrl: string;
-
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
@@ -18,11 +16,21 @@ export class AgentStack extends cdk.Stack {
       this, 'SupabaseServiceKey', 'jumpserve/supabase-service-key'
     );
 
-    // Lambda function from Docker image
-    const agentFn = new lambda.DockerImageFunction(this, 'AgentFn', {
-      code: lambda.DockerImageCode.fromImageAsset(
-        path.join(__dirname, '..', 'agent')
-      ),
+    // Dependencies layer (pre-installed in agent/package/)
+    const depsLayer = new lambda.LayerVersion(this, 'AgentDepsLayer', {
+      code: lambda.Code.fromAsset(path.join(__dirname, '..', 'agent', 'package')),
+      compatibleRuntimes: [lambda.Runtime.PYTHON_3_12],
+      description: 'Strands Agents SDK and dependencies',
+    });
+
+    // Agent function code (handler + tools + prompt)
+    const agentFn = new lambda.Function(this, 'AgentFn', {
+      runtime: lambda.Runtime.PYTHON_3_12,
+      handler: 'handler.lambda_handler',
+      code: lambda.Code.fromAsset(path.join(__dirname, '..', 'agent'), {
+        exclude: ['package', 'package/*', 'Dockerfile', 'requirements.txt', '*.pyc', '__pycache__'],
+      }),
+      layers: [depsLayer],
       memorySize: 1024,
       timeout: cdk.Duration.seconds(120),
       environment: {
@@ -39,7 +47,10 @@ export class AgentStack extends cdk.Stack {
         'bedrock:InvokeModel',
         'bedrock:InvokeModelWithResponseStream',
       ],
-      resources: ['arn:aws:bedrock:*::foundation-model/anthropic.*', 'arn:aws:bedrock:*::foundation-model/us.anthropic.*'],
+      resources: [
+        'arn:aws:bedrock:*::foundation-model/anthropic.*',
+        'arn:aws:bedrock:*::foundation-model/us.anthropic.*',
+      ],
     }));
 
     // Secrets Manager access
