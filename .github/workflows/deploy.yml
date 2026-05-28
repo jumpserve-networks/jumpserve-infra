@@ -26,7 +26,7 @@ jobs:
       - name: Install agent Python dependencies
         run: |
           pip install --target agent/layer/python --platform manylinux2014_x86_64 --only-binary=:all: --python-version 3.12 strands-agents httpx
-          cd agent/layer/python && rm -rf *.dist-info __pycache__ */__pycache__ boto3 botocore s3transfer jmespath
+          cd agent/layer/python && rm -rf __pycache__ */__pycache__ boto3 botocore s3transfer jmespath botocore-*.dist-info boto3-*.dist-info s3transfer-*.dist-info jmespath-*.dist-info
 
       - name: CDK Diff
         if: github.event_name == 'pull_request'
