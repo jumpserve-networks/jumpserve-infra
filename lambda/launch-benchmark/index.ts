@@ -96,7 +96,35 @@ function buildUserData(config: BenchmarkConfig, jobId: string, supabaseKey: stri
   const script = `#!/bin/bash
 set -euxo pipefail
 
-# Install dependencies
+# Helper: update job status in Supabase
+update_status() {
+  local STATUS="$1"
+  local ERROR_MSG="\${2:-}"
+  local PAYLOAD
+  if [ -n "$ERROR_MSG" ]; then
+    PAYLOAD=$(python3 -c "import json; print(json.dumps({'status': '$STATUS', 'error_message': '$ERROR_MSG', 'updated_at': '$(date -u +%Y-%m-%dT%H:%M:%SZ)'}))")
+  else
+    PAYLOAD=$(python3 -c "import json; print(json.dumps({'status': '$STATUS', 'updated_at': '$(date -u +%Y-%m-%dT%H:%M:%SZ)'}))")
+  fi
+  python3 -c "
+import urllib.request
+req = urllib.request.Request(
+    '${supabaseUrl}/rest/v1/benchmark_jobs?id=eq.${jobId}',
+    data=b'$PAYLOAD',
+    headers={
+        'apikey': '${supabaseKey}',
+        'Authorization': 'Bearer ${supabaseKey}',
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+    },
+    method='PATCH'
+)
+urllib.request.urlopen(req)
+" || true
+}
+
+# Phase: installing
+update_status "installing"
 apt-get update
 apt-get install -y iproute2 ethtool python3 python3-pip git net-tools jq unzip
 
@@ -106,7 +134,35 @@ unzip -q awscliv2.zip
 ./aws/install
 rm -rf aws awscliv2.zip
 
-# Clone backend repo
+# Install CloudWatch agent for log streaming
+curl -s "https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb" -o "cwagent.deb"
+dpkg -i cwagent.deb || true
+rm -f cwagent.deb
+
+# Configure CloudWatch agent to stream UserData output
+mkdir -p /opt/aws/amazon-cloudwatch-agent/etc
+cat > /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json << 'CWEOF'
+{
+  "logs": {
+    "logs_collected": {
+      "files": {
+        "collect_list": [
+          {
+            "file_path": "/var/log/cloud-init-output.log",
+            "log_group_name": "/jumpserve/benchmark",
+            "log_stream_name": "${jobId}",
+            "retention_in_days": 7
+          }
+        ]
+      }
+    }
+  }
+}
+CWEOF
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json || true
+
+# Phase: cloning
+update_status "cloning"
 cd /home/ubuntu
 git clone https://github.com/jumpserve-networks/jumpserve-back-end.git
 cd jumpserve-back-end
@@ -114,51 +170,20 @@ cd jumpserve-back-end
 # Enable ip forwarding
 sysctl -w net.ipv4.ip_forward=1
 
-# Update job status to running
-python3 -c "
-import urllib.request, json
-req = urllib.request.Request(
-    '${supabaseUrl}/rest/v1/benchmark_jobs?id=eq.${jobId}',
-    data=json.dumps({'status': 'running', 'updated_at': 'now()'}).encode(),
-    headers={
-        'apikey': '${supabaseKey}',
-        'Authorization': 'Bearer ${supabaseKey}',
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-    },
-    method='PATCH'
-)
-urllib.request.urlopen(req)
-" || true
+# Phase: running
+update_status "running"
 
-# Run the benchmark
 ${benchmarkCommand} \\
   --supabase-project-id regphejnlvfpyokpniny \\
   --supabase-service-role-key '${supabaseKey}'
 BENCHMARK_EXIT=$?
 
-# Update job status
+# Update final status
 if [ $BENCHMARK_EXIT -eq 0 ]; then
-  STATUS="completed"
+  update_status "completed"
 else
-  STATUS="failed"
+  update_status "failed" "Benchmark exited with code $BENCHMARK_EXIT"
 fi
-
-python3 -c "
-import urllib.request, json
-req = urllib.request.Request(
-    '${supabaseUrl}/rest/v1/benchmark_jobs?id=eq.${jobId}',
-    data=json.dumps({'status': '$STATUS', 'updated_at': 'now()'}).encode(),
-    headers={
-        'apikey': '${supabaseKey}',
-        'Authorization': 'Bearer ${supabaseKey}',
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-    },
-    method='PATCH'
-)
-urllib.request.urlopen(req)
-" || true
 
 # Self-terminate
 TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 60")

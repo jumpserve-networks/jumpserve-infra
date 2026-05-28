@@ -53,6 +53,17 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
     // Allow reading the Supabase secret
     supabaseSecret.grantRead(benchmarkInstanceRole);
 
+    // Allow CloudWatch Logs for log streaming
+    benchmarkInstanceRole.addToPolicy(new iam.PolicyStatement({
+      actions: [
+        'logs:CreateLogGroup',
+        'logs:CreateLogStream',
+        'logs:PutLogEvents',
+        'logs:DescribeLogStreams',
+      ],
+      resources: ['arn:aws:logs:*:*:log-group:/jumpserve/benchmark*'],
+    }));
+
     // Instance profile for benchmark instances
     const instanceProfile = new iam.CfnInstanceProfile(this, 'BenchmarkInstanceProfile', {
       roles: [benchmarkInstanceRole.roleName],
@@ -135,12 +146,32 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
       targets: [new eventsTargets.LambdaFunction(cleanupFn)],
     });
 
+    // Lambda: get benchmark logs from CloudWatch
+    const getLogsFn = new lambda.NodejsFunction(this, 'GetBenchmarkLogsFn', {
+      entry: path.join(__dirname, '..', 'lambda', 'get-benchmark-logs', 'index.ts'),
+      handler: 'handler',
+      runtime: lambdaRuntime.Runtime.NODEJS_22_X,
+      timeout: cdk.Duration.seconds(15),
+      memorySize: 256,
+      bundling: {
+        externalModules: ['@aws-sdk/*'],
+      },
+    });
+
+    getLogsFn.addToRolePolicy(new iam.PolicyStatement({
+      actions: [
+        'logs:GetLogEvents',
+        'logs:DescribeLogStreams',
+      ],
+      resources: ['arn:aws:logs:*:*:log-group:/jumpserve/benchmark*'],
+    }));
+
     // HTTP API Gateway
     const httpApi = new apigatewayv2.HttpApi(this, 'BenchmarkApi', {
       apiName: 'JumpServeBenchmarkApi',
       corsPreflight: {
         allowOrigins: ['*'],
-        allowMethods: [apigatewayv2.CorsHttpMethod.POST, apigatewayv2.CorsHttpMethod.OPTIONS],
+        allowMethods: [apigatewayv2.CorsHttpMethod.GET, apigatewayv2.CorsHttpMethod.POST, apigatewayv2.CorsHttpMethod.OPTIONS],
         allowHeaders: ['Content-Type', 'Authorization'],
       },
     });
@@ -150,6 +181,14 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
       methods: [apigatewayv2.HttpMethod.POST],
       integration: new apigatewayv2Integrations.HttpLambdaIntegration(
         'LaunchBenchmarkIntegration', launchFn
+      ),
+    });
+
+    httpApi.addRoutes({
+      path: '/benchmarks/logs',
+      methods: [apigatewayv2.HttpMethod.GET],
+      integration: new apigatewayv2Integrations.HttpLambdaIntegration(
+        'GetBenchmarkLogsIntegration', getLogsFn
       ),
     });
 
