@@ -6,3 +6,6 @@ node_modules
 # CDK asset staging directory
 .cdk.staging
 cdk.out
+
+# Agent Python dependencies (built locally, deployed via Lambda Layer)
+agent/package
