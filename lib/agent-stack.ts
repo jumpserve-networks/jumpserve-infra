@@ -41,16 +41,15 @@ export class AgentStack extends cdk.Stack {
       architecture: lambda.Architecture.X86_64,
     });
 
-    // Bedrock model access
+    // Bedrock model access (foundation models + inference profiles)
     agentFn.addToRolePolicy(new iam.PolicyStatement({
       actions: [
         'bedrock:InvokeModel',
         'bedrock:InvokeModelWithResponseStream',
+        'bedrock:Converse',
+        'bedrock:ConverseStream',
       ],
-      resources: [
-        'arn:aws:bedrock:*::foundation-model/anthropic.*',
-        'arn:aws:bedrock:*::foundation-model/us.anthropic.*',
-      ],
+      resources: ['*'],
     }));
 
     // Secrets Manager access
