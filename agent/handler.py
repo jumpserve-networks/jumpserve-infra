@@ -88,25 +88,8 @@ def lambda_handler(event, context):
     if not message:
         return {
             "statusCode": 400,
-            "headers": {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Content-Type",
-                "Access-Control-Allow-Methods": "POST,OPTIONS",
-            },
+            "headers": {"Content-Type": "application/json"},
             "body": json.dumps({"error": "message is required"}),
-        }
-
-    # Handle CORS preflight
-    if event.get("requestContext", {}).get("http", {}).get("method") == "OPTIONS":
-        return {
-            "statusCode": 200,
-            "headers": {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Content-Type",
-                "Access-Control-Allow-Methods": "POST,OPTIONS",
-            },
-            "body": "",
         }
 
     # Load session history
@@ -148,12 +131,7 @@ def lambda_handler(event, context):
 
     return {
         "statusCode": 200,
-        "headers": {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Content-Type",
-            "Access-Control-Allow-Methods": "POST,OPTIONS",
-        },
+        "headers": {"Content-Type": "application/json"},
         "body": json.dumps({
             "response": response_text,
             "tool_events": tool_events,
