@@ -1,4 +1,3 @@
-import json
 import os
 import httpx
 from strands import tool
@@ -62,3 +61,60 @@ def save_config(name: str, description: str, config: dict) -> dict:
     resp.raise_for_status()
     data = resp.json()
     return data[0] if data else {"status": "saved"}
+
+
+@tool
+def delete_config(config_id: str) -> dict:
+    """Delete a saved benchmark configuration.
+
+    Args:
+        config_id: The UUID of the config to delete
+    """
+    key = _get_supabase_key()
+    resp = httpx.delete(
+        f"{SUPABASE_URL}/rest/v1/benchmark_configs?id=eq.{config_id}",
+        headers={
+            "apikey": key,
+            "Authorization": f"Bearer {key}",
+        },
+        timeout=15,
+    )
+    resp.raise_for_status()
+    return {"status": "deleted", "id": config_id}
+
+
+@tool
+def run_saved_config(config_id: str) -> dict:
+    """Run a benchmark using a previously saved configuration.
+
+    Fetches the saved config by ID and launches a benchmark with it.
+    Returns the config details so you can confirm with the user before launching.
+
+    Args:
+        config_id: The UUID of the saved config to run
+    """
+    key = _get_supabase_key()
+    resp = httpx.get(
+        f"{SUPABASE_URL}/rest/v1/benchmark_configs?id=eq.{config_id}&select=*",
+        headers={
+            "apikey": key,
+            "Authorization": f"Bearer {key}",
+        },
+        timeout=15,
+    )
+    resp.raise_for_status()
+    configs = resp.json()
+    if not configs:
+        return {"error": "Config not found"}
+
+    saved = configs[0]
+    config = saved["config"]
+
+    # Return the config for the agent to confirm with the user,
+    # then the agent should call run_benchmark with these params
+    return {
+        "status": "ready_to_launch",
+        "name": saved.get("name"),
+        "description": saved.get("description"),
+        "config": config,
+    }
