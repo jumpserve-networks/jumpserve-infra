@@ -69,11 +69,8 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
       roles: [benchmarkInstanceRole.roleName],
     });
 
-    // Ubuntu 22.04 AMI
-    const ubuntuAmi = ec2.MachineImage.fromSsmParameter(
-      '/aws/service/canonical/ubuntu/server/22.04/stable/current/amd64/hvm/ebs-gp2/ami-id'
-    );
-    const amiId = ubuntuAmi.getImage(this).imageId;
+    // Pre-baked AMI with all dependencies (iproute2, ethtool, python3, aws-cli, cloudwatch-agent, jumpserve-back-end)
+    const amiId = this.node.tryGetContext('benchmarkAmiId') || 'ami-000c57b3706892e69';
 
     // Lambda: launch benchmark
     const launchFn = new lambda.NodejsFunction(this, 'LaunchBenchmarkFn', {
