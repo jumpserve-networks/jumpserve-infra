@@ -70,7 +70,7 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
     });
 
     // Pre-baked AMI with all dependencies (iproute2, ethtool, python3, aws-cli, cloudwatch-agent, jumpserve-back-end)
-    const amiId = this.node.tryGetContext('benchmarkAmiId') || 'ami-02e1859c791f54223';
+    const amiId = this.node.tryGetContext('benchmarkAmiId') || 'ami-0a4924abd9b83628c';
 
     // Lambda: launch benchmark
     const launchFn = new lambda.NodejsFunction(this, 'LaunchBenchmarkFn', {
