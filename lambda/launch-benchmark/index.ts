@@ -82,6 +82,9 @@ function buildBenchmarkArgs(config: BenchmarkConfig): string {
   }
   if (config.snapshot_metrics_source) {
     args.push(`--snapshot-metrics-source ${config.snapshot_metrics_source}`);
+    if (config.snapshot_metrics_source === 'ss') {
+      args.push('--ss-log-file /tmp/ss-log.jsonl');
+    }
   }
   if (config.loss_pct !== undefined && config.loss_pct > 0) {
     args.push(`--loss-pct ${config.loss_pct}`);
