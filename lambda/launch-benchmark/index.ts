@@ -138,10 +138,24 @@ urllib.request.urlopen(req)
 " || true
 }
 
-# Phase: installing (pre-baked AMI — just configure CloudWatch and pull latest code)
+# Phase: installing
 update_status "installing"
+export DEBIAN_FRONTEND=noninteractive
+apt-get update -qq
+apt-get install -y -qq iproute2 ethtool python3 python3-pip git net-tools jq unzip < /dev/null
 
-# Configure CloudWatch agent for this job's log stream
+# Install AWS CLI
+curl -s "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip -q awscliv2.zip
+./aws/install
+rm -rf aws awscliv2.zip
+
+# Install CloudWatch agent for log streaming
+curl -s "https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb" -o "cwagent.deb"
+dpkg -i cwagent.deb || true
+rm -f cwagent.deb
+
+# Configure CloudWatch agent to stream UserData output
 mkdir -p /opt/aws/amazon-cloudwatch-agent/etc
 cat > /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json << 'CWEOF'
 {
@@ -163,10 +177,11 @@ cat > /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json << 'CWEO
 CWEOF
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json || true
 
-# Phase: cloning (pull latest code)
+# Phase: cloning
 update_status "cloning"
-cd /home/ubuntu/jumpserve-back-end
-git pull origin main || true
+cd /home/ubuntu
+git clone https://github.com/jumpserve-networks/jumpserve-back-end.git
+cd jumpserve-back-end
 
 # Enable ip forwarding
 sysctl -w net.ipv4.ip_forward=1
