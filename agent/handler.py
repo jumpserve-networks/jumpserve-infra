@@ -36,45 +36,44 @@ def _load_session(session_id: str) -> list[dict]:
     return []
 
 
+def _serialize_messages(messages: list) -> list[dict]:
+    """Ensure messages are JSON-serializable plain dicts."""
+    serialized = []
+    for msg in messages:
+        m = dict(msg) if not isinstance(msg, dict) else msg
+        if "content" in m and isinstance(m["content"], list):
+            clean_content = []
+            for block in m["content"]:
+                if isinstance(block, dict):
+                    clean_content.append(block)
+                elif isinstance(block, str):
+                    clean_content.append({"type": "text", "text": block})
+                else:
+                    clean_content.append({"type": "text", "text": str(block)})
+            m["content"] = clean_content
+        serialized.append(m)
+    return serialized
+
+
 def _save_session(session_id: str, messages: list[dict], user_id: str) -> None:
     """Save conversation history to Supabase (upsert)."""
     key = _get_supabase_key()
-    # Try update first
-    resp = httpx.patch(
-        f"{SUPABASE_URL}/rest/v1/agent_sessions?id=eq.{session_id}",
+    safe_messages = _serialize_messages(messages)
+    httpx.post(
+        f"{SUPABASE_URL}/rest/v1/agent_sessions",
         headers={
             "apikey": key,
             "Authorization": f"Bearer {key}",
             "Content-Type": "application/json",
-            "Prefer": "return=minimal",
+            "Prefer": "resolution=merge-duplicates,return=minimal",
         },
-        json={"messages": messages, "updated_at": "now()"},
+        json={
+            "id": session_id,
+            "user_id": user_id,
+            "messages": safe_messages,
+        },
         timeout=10,
     )
-    # If no rows updated, insert
-    if resp.status_code == 200:
-        # Check if we actually updated anything by trying a GET
-        check = httpx.get(
-            f"{SUPABASE_URL}/rest/v1/agent_sessions?id=eq.{session_id}&select=id",
-            headers={"apikey": key, "Authorization": f"Bearer {key}"},
-            timeout=10,
-        )
-        if not check.json():
-            httpx.post(
-                f"{SUPABASE_URL}/rest/v1/agent_sessions",
-                headers={
-                    "apikey": key,
-                    "Authorization": f"Bearer {key}",
-                    "Content-Type": "application/json",
-                    "Prefer": "return=minimal",
-                },
-                json={
-                    "id": session_id,
-                    "user_id": user_id,
-                    "messages": messages,
-                },
-                timeout=10,
-            )
 
 
 def lambda_handler(event, context):
