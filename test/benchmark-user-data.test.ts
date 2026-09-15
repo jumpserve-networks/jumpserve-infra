@@ -44,7 +44,7 @@ test('generated bootstrap is valid bash and does not enable credential tracing',
   expect(script).toContain('urlopen(req, timeout=10)');
 });
 
-function runFinalizer(body: string, failStatusUpdate = false) {
+function runFinalizer(body: string, failStatusUpdate = false, activeLogAgent = false) {
   const setup = userData().split('# Phase: installing')[0];
   // Exercise the actual generated traps without running setup, network calls,
   // or a real shutdown. The shell functions replace those two side effects.
@@ -54,6 +54,9 @@ update_status() {
   return ${failStatusUpdate ? 1 : 0}
 }
 shutdown() { echo SHUTDOWN; }
+systemctl() { return ${activeLogAgent ? 0 : 1}; }
+sleep() { echo LOG_COLLECTION_WAIT; }
+timeout() { echo LOG_FLUSH; return 1; }
 ${body}
 `], { encoding: 'utf8' });
 }
@@ -88,4 +91,11 @@ test('termination signals go through failure reporting and shutdown', () => {
   expect(result.status).toBe(143);
   expect(result.stdout).toContain('STATUS:failed:');
   expect(result.stdout.match(/SHUTDOWN/g)).toHaveLength(1);
+});
+
+test('log flushing happens before shutdown and cannot block it on failure', () => {
+  const result = runFinalizer('exit 2', false, true);
+  expect(result.status).toBe(2);
+  expect(result.stdout.indexOf('LOG_COLLECTION_WAIT')).toBeLessThan(result.stdout.indexOf('LOG_FLUSH'));
+  expect(result.stdout.indexOf('LOG_FLUSH')).toBeLessThan(result.stdout.indexOf('SHUTDOWN'));
 });

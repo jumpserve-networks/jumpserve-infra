@@ -105,6 +105,11 @@ finalize_benchmark() {
     update_status "failed" "Benchmark failed during $BENCHMARK_PHASE (exit $exit_code)"
   fi
   echo "Benchmark bootstrap exited with code $exit_code; shutting down instance."
+  if command -v systemctl >/dev/null && systemctl is-active --quiet amazon-cloudwatch-agent; then
+    # Give the file collector time to read the final error, then flush on stop.
+    sleep 5
+    timeout 20 systemctl stop amazon-cloudwatch-agent || true
+  fi
   shutdown -h now
   exit "$exit_code"
 }
@@ -134,6 +139,7 @@ mkdir -p /opt/aws/amazon-cloudwatch-agent/etc
 cat > /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json << 'CWEOF'
 {
   "logs": {
+    "force_flush_interval": 1,
     "logs_collected": {
       "files": {
         "collect_list": [
