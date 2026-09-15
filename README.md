@@ -33,6 +33,18 @@ ssh -i ~/.ssh/id_rsa ubuntu@3.215.213.116
 
 ## Running Benchmarks
 
+Ephemeral benchmarks launched through the API shut down after either success or
+failure. Instances use `InstanceInitiatedShutdownBehavior=terminate`, so the
+bootstrap's exit trap terminates the instance even if installation fails before
+AWS CLI is available. Status updates have timeouts and cannot prevent shutdown.
+
+Experiment metadata remains in `benchmark_jobs.config`. Only
+`netem_multi_bottleneck.py` receives the experiment metadata CLI flags; the other
+runners do not support them.
+
+Run `npm test -- --runInBand` for the launcher and bootstrap lifecycle regression
+tests, which mock cloud calls and operating-system shutdown.
+
 SSH into the instance, then:
 
 ```bash
