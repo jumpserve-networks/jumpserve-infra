@@ -59,6 +59,39 @@ export function buildBenchmarkArgs(config: BenchmarkConfig): string {
 export function buildUserData(config: BenchmarkConfig, jobId: string, supabaseKey: string): string {
   const supabaseUrl = process.env.SUPABASE_URL!;
   const benchmarkCommand = buildBenchmarkArgs(config);
+  const prebaked = process.env.BENCHMARK_IMAGE_MODE === 'prebaked';
+  const installation = prebaked ? `
+echo "Preparing prebuilt benchmark image"
+test -x /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl
+` : `
+export DEBIAN_FRONTEND=noninteractive
+apt-get update -qq
+apt-get install -y -qq iproute2 ethtool python3 python3-pip git net-tools jq unzip < /dev/null
+
+curl -s "https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb" -o "cwagent.deb"
+dpkg -i cwagent.deb
+rm -f cwagent.deb
+`;
+  const backendPreparation = prebaked ? `
+# Reject an incorrect or incomplete image instead of silently installing at boot.
+python3 - <<'IMAGECHECK'
+import json, pathlib, re, shutil
+manifest = json.loads(pathlib.Path('/etc/jumpserve-image.json').read_text())
+assert manifest.get('schema_version') == 1, 'Unsupported benchmark image schema'
+assert re.fullmatch('[0-9a-f]{40}', manifest.get('backend_commit', '')), 'Missing backend commit'
+for command in ('ip', 'tc', 'ss', 'ethtool', 'python3', 'sysctl', 'shutdown', 'timeout'):
+    assert shutil.which(command), f'Missing image dependency: {command}'
+for runner in ('netem_cubic_benchmark_hotnets.py', 'netem_cubic_benchmark_nines.py', 'netem_nines.py', 'netem_multi_bottleneck.py'):
+    assert pathlib.Path('/home/ubuntu/jumpserve-back-end', runner).is_file(), f'Missing runner: {runner}'
+print('Benchmark image backend commit: ' + manifest['backend_commit'], flush=True)
+IMAGECHECK
+cd /home/ubuntu/jumpserve-back-end
+` : `
+update_status "cloning"
+cd /home/ubuntu
+git clone https://github.com/jumpserve-networks/jumpserve-back-end.git
+cd jumpserve-back-end
+`;
 
   const script = `#!/bin/bash
 set -euo pipefail
@@ -119,20 +152,7 @@ trap 'exit 130' INT
 
 # Phase: installing
 update_status "installing"
-export DEBIAN_FRONTEND=noninteractive
-apt-get update -qq
-apt-get install -y -qq iproute2 ethtool python3 python3-pip git net-tools jq unzip < /dev/null
-
-# Install AWS CLI
-curl -s "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip -q awscliv2.zip
-./aws/install
-rm -rf aws awscliv2.zip
-
-# Install CloudWatch agent for log streaming
-curl -s "https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb" -o "cwagent.deb"
-dpkg -i cwagent.deb || true
-rm -f cwagent.deb
+${installation}
 
 # Configure CloudWatch agent to stream UserData output
 mkdir -p /opt/aws/amazon-cloudwatch-agent/etc
@@ -155,13 +175,10 @@ cat > /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json << 'CWEO
   }
 }
 CWEOF
-/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json || true
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
 
-# Phase: cloning
-update_status "cloning"
-cd /home/ubuntu
-git clone https://github.com/jumpserve-networks/jumpserve-back-end.git
-cd jumpserve-back-end
+# Phase: preparing backend
+${backendPreparation}
 
 # Enable ip forwarding
 sysctl -w net.ipv4.ip_forward=1

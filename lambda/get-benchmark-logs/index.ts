@@ -1,9 +1,18 @@
 import {
   CloudWatchLogsClient,
   GetLogEventsCommand,
+  type GetLogEventsCommandInput,
 } from '@aws-sdk/client-cloudwatch-logs';
 
 const cwl = new CloudWatchLogsClient({});
+
+// Older bootstraps used shell tracing. Avoid redisplaying their credentials
+// when the viewer requests the latest part of those historical log streams.
+function redactCredentials(message: string | undefined): string {
+  return (message || '')
+    .replace(/\beyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\b/g, '[REDACTED]')
+    .replace(/\bsb_secret_[A-Za-z0-9_-]+\b/g, '[REDACTED]');
+}
 
 export const handler = async (event: any) => {
   const corsHeaders = {
@@ -28,15 +37,17 @@ export const handler = async (event: any) => {
       };
     }
 
-    const params: any = {
+    const params: GetLogEventsCommandInput = {
       logGroupName: '/jumpserve/benchmark',
       logStreamName: jobId,
-      startFromHead: true,
+      // The UI polls without a token: show recent output, not the same first
+      // 200 package-installation events forever. Forward cursors require true.
+      startFromHead: Boolean(nextToken),
       limit: 200,
     };
 
     if (nextToken) {
-      params.nextForwardToken = nextToken;
+      params.nextToken = nextToken;
     }
 
     const result = await cwl.send(new GetLogEventsCommand(params));
@@ -47,7 +58,7 @@ export const handler = async (event: any) => {
       body: JSON.stringify({
         events: (result.events || []).map(e => ({
           timestamp: e.timestamp,
-          message: e.message,
+          message: redactCredentials(e.message),
         })),
         nextToken: result.nextForwardToken,
       }),

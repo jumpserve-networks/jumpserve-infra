@@ -69,11 +69,23 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
       roles: [benchmarkInstanceRole.roleName],
     });
 
-    // Ubuntu 22.04 AMI (fresh each time, dependencies installed via UserData)
+    // Keep the base-image path for rollback. CloudFormation retains this
+    // parameter on later deployments, unlike a one-off Lambda environment edit.
+    const benchmarkAmi = new cdk.CfnParameter(this, 'BenchmarkAmiId', {
+      type: 'String',
+      default: '',
+      allowedPattern: '^(|ami-([0-9a-f]{8}|[0-9a-f]{17}))$',
+      description: 'Private AMI created by ami/build.py; empty uses Ubuntu with installation at boot',
+    });
+    const useBenchmarkAmi = new cdk.CfnCondition(this, 'UseBenchmarkAmi', {
+      expression: cdk.Fn.conditionNot(cdk.Fn.conditionEquals(benchmarkAmi.valueAsString, '')),
+    });
     const ubuntuAmi = ec2.MachineImage.fromSsmParameter(
       '/aws/service/canonical/ubuntu/server/22.04/stable/current/amd64/hvm/ebs-gp2/ami-id'
     );
-    const amiId = ubuntuAmi.getImage(this).imageId;
+    const amiId = cdk.Fn.conditionIf(
+      useBenchmarkAmi.logicalId, benchmarkAmi.valueAsString, ubuntuAmi.getImage(this).imageId,
+    ).toString();
 
     // Lambda: launch benchmark
     const launchFn = new lambda.NodejsFunction(this, 'LaunchBenchmarkFn', {
@@ -86,6 +98,7 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
         SUPABASE_URL: supabaseUrl,
         SUPABASE_SECRET_ARN: supabaseSecret.secretArn,
         AMI_ID: amiId,
+        BENCHMARK_IMAGE_MODE: cdk.Fn.conditionIf(useBenchmarkAmi.logicalId, 'prebaked', 'base').toString(),
         SECURITY_GROUP_ID: benchmarkSg.securityGroupId,
         SUBNET_ID: publicSubnets[0].subnetId,
         INSTANCE_PROFILE_ARN: instanceProfile.attrArn,
@@ -231,6 +244,11 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'BenchmarkSecurityGroupId', {
       value: benchmarkSg.securityGroupId,
       description: 'Security group for benchmark instances',
+    });
+
+    new cdk.CfnOutput(this, 'BenchmarkImageId', {
+      value: amiId,
+      description: 'AMI used for new benchmark instances',
     });
   }
 }

@@ -13,8 +13,15 @@ const config: BenchmarkConfig = {
   notes: "test's notes",
 };
 
-function userData() {
-  return Buffer.from(buildUserData(config, 'test-job', 'test-service-key'), 'base64').toString();
+function userData(mode = 'base') {
+  const previous = process.env.BENCHMARK_IMAGE_MODE;
+  process.env.BENCHMARK_IMAGE_MODE = mode;
+  try {
+    return Buffer.from(buildUserData(config, 'test-job', 'test-service-key'), 'base64').toString();
+  } finally {
+    if (previous === undefined) delete process.env.BENCHMARK_IMAGE_MODE;
+    else process.env.BENCHMARK_IMAGE_MODE = previous;
+  }
 }
 
 test.each([
@@ -42,6 +49,24 @@ test('generated bootstrap is valid bash and does not enable credential tracing',
   expect(spawnSync('bash', ['-n'], { input: script }).status).toBe(0);
   expect(script).not.toMatch(/set -[^\n]*x/);
   expect(script).toContain('urlopen(req, timeout=10)');
+});
+
+test('prebuilt instances run the baked backend without installing or fetching software', () => {
+  const script = userData('prebaked');
+  expect(spawnSync('bash', ['-n'], { input: script }).status).toBe(0);
+  expect(script).not.toMatch(/apt-get|dpkg|pip install|git (clone|pull|fetch)|curl /);
+  expect(script).toContain('/etc/jumpserve-image.json');
+  expect(script).toContain("manifest.get('schema_version') == 1");
+  expect(script).toContain('Benchmark image backend commit:');
+  expect(script).toContain('"log_stream_name": "test-job"');
+  expect(script).toContain('trap finalize_benchmark EXIT');
+  expect(script).not.toMatch(/set -[^\n]*x/);
+});
+
+test('base-image rollback retains dependency installation and a fresh backend checkout', () => {
+  const script = userData('base');
+  expect(script).toContain('apt-get install');
+  expect(script).toContain('git clone https://github.com/jumpserve-networks/jumpserve-back-end.git');
 });
 
 function runFinalizer(body: string, failStatusUpdate = false, activeLogAgent = false) {

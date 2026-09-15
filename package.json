@@ -8,6 +8,8 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
+    "test:ami": "python3 -B -m unittest discover -s test -p '*_test.py' -v",
+    "cdk:benchmark": "cdk --app \"npx ts-node --prefer-ts-exts bin/benchmark.ts\"",
     "cdk": "cdk"
   },
   "devDependencies": {
