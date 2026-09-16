@@ -1,35 +1,20 @@
 # JumpServe Infrastructure
 
-AWS CDK (TypeScript) infrastructure for the JumpServe project. Manages deployment of the frontend (AWS Amplify) and backend (EC2) resources.
+AWS CDK infrastructure for the JumpServe frontend, benchmark API and AI tools.
+No EC2 instance needs to run continuously for benchmarks.
 
 ## Architecture
 
-```
-jumpserve-infra (this repo)
-├── AmplifyStack    → Hosts Next.js frontend, auto-deploys on push to main
-└── Ec2Stack        → Ubuntu 22.04 t3.medium for network benchmarking
-```
+- Amplify hosts the Next.js frontend at https://jumpserve.quaint-lab.org.
+- API Gateway and Lambda launch one disposable EC2 instance per benchmark.
+- Each instance boots a verified AMI, saves results to Supabase, streams logs to
+  CloudWatch and terminates automatically after success or failure.
+- Backend deployments briefly create an AMI builder and verification instances.
+- The agent stack provides the AI tools independently of benchmark compute.
 
-- **Frontend**: [jumpserve-networks/jumpserve-front-end](https://github.com/jumpserve-networks/jumpserve-front-end) → AWS Amplify
-- **Backend**: [jumpserve-networks/jumpserve-back-end](https://github.com/jumpserve-networks/jumpserve-back-end) → EC2 instance
-
-## Live Resources
-
-| Resource | Details |
-|----------|---------|
-| Frontend URL | https://main.d24jvguj7brnkj.amplifyapp.com |
-| Amplify App ID | `d24jvguj7brnkj` |
-| EC2 Elastic IP | `3.215.213.116` |
-| EC2 Instance ID | `i-0f62a10b6c2eff2e8` |
-| AWS Account | `395567831870` |
-| AWS Region | `us-east-1` |
-| AWS CLI Profile | `dna-lab` |
-
-## SSH into the EC2 Instance
-
-```bash
-ssh -i ~/.ssh/id_rsa ubuntu@3.215.213.116
-```
+AWS account: `395567831870`; region: `us-east-1`.
+The legacy `JumpServeEc2Stack` is removed from the CDK app so `deploy --all` cannot
+recreate the permanent server, Elastic IP or SSH access.
 
 ## Running Benchmarks
 
@@ -123,92 +108,80 @@ are disabled to avoid package activity during benchmarks; rebuild regularly from
 an updated Canonical base image for security updates. Keep the last verified AMI
 for rollback, and remove superseded AMIs and snapshots through a separate review.
 
-SSH into the instance, then:
+## Automated backend deployment
+
+The backend repository's `Deploy benchmark AMI` workflow calls
+[`.github/workflows/benchmark-ami.yml`](.github/workflows/benchmark-ami.yml).
+Pushes to backend `main` rebuild the image, except changes confined to Markdown
+or `experiments/`. Run that workflow manually on `main` to refresh OS packages
+without a backend code change. Builds are serialized and do not cancel an
+already running deployment.
+
+The workflow:
+
+1. Checks out the exact infrastructure workflow commit and runs local tests.
+2. Uses GitHub OIDC to obtain temporary credentials for
+   `JumpServeBenchmarkImageBuilder`. Only the backend repository's `main` branch
+   can assume this role. No backend AWS access-key secrets are required.
+3. Builds from the current Canonical Ubuntu 22.04 image with the triggering
+   backend commit pinned. The builder has only temporary SSM permissions.
+4. Verifies both a successful benchmark and an intentional runner failure,
+   including saved results, no startup installation and automatic termination.
+5. Rejects outdated commits, then updates only `BenchmarkAmiId` using the
+   deployed CloudFormation template and preserving every other parameter.
+6. Verifies a real request through the deployed benchmark API. If that check
+   fails or is interrupted, restores the previous image, provided the selected
+   image still belongs to this deployment.
+7. Cleans up recorded builder and test instances and temporary IAM resources.
+   It uploads image IDs and verification reports, never credentials or raw logs.
+
+Cleanup checkpoints allow an always-run step to recover from cancellation.
+A transient builder timer also stops compute after 45 minutes if the runner
+becomes unavailable. A hard runner loss can still require manual cleanup of
+stopped volumes or temporary IAM resources using the saved checkpoint:
 
 ```bash
-# View available options
-sudo python3 /home/ubuntu/jumpserve-back-end/netem_cubic_benchmark_hotnets.py --help
-
-# Example: run a 2-client benchmark
-sudo python3 /home/ubuntu/jumpserve-back-end/netem_cubic_benchmark_hotnets.py \
-  --num-clients 2 \
-  --client-delays-ms 10,60 \
-  --client-ccas cubic,bbr \
-  --client-file-sizes-mbytes 50,35 \
-  --bottleneck-all-client-rate-mbit 100 \
-  --bottleneck-buffer-kbytes 125
-
-# Run a batch of scenarios from a queue file
-cd /home/ubuntu/jumpserve-back-end
-sudo python3 run_queue.py                        # runs queues/default.yaml
-sudo python3 run_queue.py staggered-start        # runs queues/staggered-start.yaml
-sudo python3 run_queue.py --list                 # list available queue files
+python3 -B ami/cleanup.py --profile default
 ```
 
-## CI/CD
+AMIs and snapshots are retained, including failed candidates, for diagnosis and
+rollback; their storage still incurs charges. Remove obsolete images through a
+separate review. This workflow does not rotate or delete existing credentials.
 
-### This repo (jumpserve-infra)
-- Push to `main` → GitHub Actions runs `cdk deploy --all`
-- PRs against `main` → GitHub Actions runs `cdk diff --all`
+## CI/CD and configuration
 
-### Frontend (jumpserve-front-end)
-- Push to `main` → Amplify automatically builds and deploys (via webhook)
+- Infrastructure `main`: GitHub Actions runs `cdk deploy --all`; pull requests
+  run `cdk diff --all`.
+- Frontend `main`: Amplify builds and deploys through its webhook.
+- Backend `main`: builds, verifies and selects a new benchmark AMI as above.
 
-### Backend (jumpserve-back-end)
-- Push to `main` → GitHub Actions sends an SSM command to the EC2 instance to `git pull`
+The infrastructure deployment still uses its existing `AWS_ACCESS_KEY_ID` and
+`AWS_SECRET_ACCESS_KEY` GitHub secrets. The backend workflow no longer reads
+those secrets or `EC2_INSTANCE_ID`; existing secret values are not removed by
+this change.
 
-## GitHub Secrets
+AWS Secrets Manager holds `jumpserve/github-token` for Amplify and
+`jumpserve/supabase-service-key` for benchmark status/results. Neither belongs
+in source control or AMI snapshots.
 
-| Repo | Secret | Purpose |
-|------|--------|---------|
-| `jumpserve-infra` | `AWS_ACCESS_KEY_ID` | CDK deploy |
-| `jumpserve-infra` | `AWS_SECRET_ACCESS_KEY` | CDK deploy |
-| `jumpserve-back-end` | `AWS_ACCESS_KEY_ID` | SSM deploy command |
-| `jumpserve-back-end` | `AWS_SECRET_ACCESS_KEY` | SSM deploy command |
-| `jumpserve-back-end` | `EC2_INSTANCE_ID` | Target EC2 instance |
-
-## AWS Secrets Manager
-
-| Secret | Purpose |
-|--------|---------|
-| `jumpserve/github-token` | GitHub PAT for Amplify repo webhook |
-
-## Prerequisites
-
-- [AWS CLI](https://aws.amazon.com/cli/) configured with profile `dna-lab`
-- [AWS CDK](https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html) (`npm install -g aws-cdk`)
-- [GitHub CLI](https://cli.github.com/) (`gh`) authenticated
-
-## CDK Commands
+## Development
 
 ```bash
-# Synthesize CloudFormation templates
-npx cdk synth --all --profile dna-lab
-
-# Preview changes
-npx cdk diff --all --profile dna-lab
-
-# Deploy all stacks
-npx cdk deploy --all --require-approval never --profile dna-lab
-
-# Deploy a single stack
-npx cdk deploy JumpServeEc2Stack --require-approval never --profile dna-lab
-npx cdk deploy JumpServeAmplifyStack --require-approval never --profile dna-lab
-
-# Destroy all stacks (careful!)
-npx cdk destroy --all --profile dna-lab
+npm ci
+npm run build
+npm test -- --runInBand
+npm run test:ami
+npm run cdk:benchmark -- diff JumpServeBenchmarkStack --profile default
 ```
 
-## Project Structure
+The full app also needs the agent Python layer; see `.github/workflows/deploy.yml`
+for its build steps. Deploying the standalone benchmark app does not require it.
 
-```
-jumpserve-infra/
-├── bin/jumpserve-infra.ts          # CDK app entry point
-├── lib/
-│   ├── amplify-stack.ts            # Amplify app + branch config
-│   └── ec2-stack.ts                # EC2 instance, security group, EIP, key pair
-├── .github/workflows/deploy.yml    # CI/CD for CDK deploy
-├── cdk.json                        # CDK context (Supabase vars, SSH CIDR, etc.)
-├── package.json
-└── tsconfig.json
-```
+## Project structure
+
+- `bin/jumpserve-infra.ts`: full CDK app, without the legacy EC2 stack.
+- `bin/benchmark.ts`: standalone benchmark CDK app.
+- `lib/benchmark-orchestrator-stack.ts`: API, Lambda, ephemeral compute roles.
+- `lib/benchmark-image-pipeline.ts`: GitHub OIDC provider and scoped image role.
+- `ami/`: image building, verification, guarded promotion/rollback and cleanup.
+- `test/`: launcher, lifecycle, IAM and AMI regression tests.

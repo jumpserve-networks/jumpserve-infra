@@ -1,0 +1,99 @@
+name: Build and verify benchmark AMI
+
+on:
+  workflow_call:
+    inputs:
+      backend_commit:
+        description: Full backend commit to bake into the image
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    timeout-minutes: 110
+    env:
+      AWS_REGION: us-east-1
+      AWS_DEFAULT_REGION: us-east-1
+      BACKEND_COMMIT: ${{ inputs.backend_commit }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # A reusable workflow's github context belongs to its caller.
+          repository: ${{ job.workflow_repository }}
+          ref: ${{ job.workflow_sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - run: npm run build
+      - run: npm test -- --runInBand
+      - run: npm run test:ami
+
+      - name: Obtain temporary AWS credentials
+        id: credentials
+        uses: aws-actions/configure-aws-credentials@v6.2.3
+        with:
+          role-to-assume: arn:aws:iam::395567831870:role/JumpServeBenchmarkImageBuilder
+          role-session-name: benchmark-image-${{ github.run_id }}
+          aws-region: us-east-1
+          allowed-account-ids: '395567831870'
+          role-duration-seconds: 7200
+
+      - name: Build pinned image
+        timeout-minutes: 65
+        run: |
+          base_ami=$(aws ssm get-parameter --name /aws/service/canonical/ubuntu/server/22.04/stable/current/amd64/hvm/ebs-gp2/ami-id --query Parameter.Value --output text)
+          launcher=$(aws lambda get-function-configuration --function-name JumpServeBenchmarkStack-LaunchBenchmarkFn5833EFAD-L6HWyzv2tgwl --query Environment.Variables --output json)
+          subnet=$(jq -r .SUBNET_ID <<< "$launcher")
+          security_group=$(jq -r .SECURITY_GROUP_ID <<< "$launcher")
+          python3 -B ami/build.py --base-ami "$base_ami" --subnet-id "$subnet" \
+            --security-group-id "$security_group" --backend-commit "$BACKEND_COMMIT" --apply
+
+      - name: Verify success, failure and automatic termination
+        timeout-minutes: 23
+        run: node ami/verify.cjs
+
+      - name: Select verified image
+        id: promote
+        timeout-minutes: 17
+        run: python3 -B ami/promote.py --apply
+
+      - name: Verify the deployed benchmark API
+        id: live
+        timeout-minutes: 12
+        run: node ami/verify.cjs --live-api
+
+      - name: Restore previous image if deployment verification did not finish
+        if: ${{ always() && steps.credentials.outcome == 'success' && steps.live.outcome != 'success' }}
+        timeout-minutes: 17
+        run: python3 -B ami/promote.py --rollback --apply
+
+      - name: Clean up temporary compute and IAM resources
+        if: ${{ always() && steps.credentials.outcome == 'success' }}
+        timeout-minutes: 5
+        run: python3 -B ami/cleanup.py
+
+      - name: Save image IDs and verification results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-image-${{ github.run_id }}
+          if-no-files-found: ignore
+          retention-days: 30
+          path: |
+            cdk.out/benchmark-ami.json
+            cdk.out/benchmark-ami-build-state.json
+            cdk.out/benchmark-ami-verification.json
+            cdk.out/benchmark-ami-live-verification.json
+            cdk.out/benchmark-ami-verification-instances.json
+            cdk.out/benchmark-ami-promotion.json

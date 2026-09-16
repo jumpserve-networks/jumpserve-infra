@@ -4,6 +4,7 @@ import argparse
 import base64
 import datetime
 import json
+import os
 import pathlib
 import re
 import subprocess
@@ -15,7 +16,7 @@ ACCOUNT = '395567831870'
 def aws(args, service, operation, *options):
     try:
         result = subprocess.run([
-            'aws', '--profile', args.profile, '--region', args.region,
+            'aws', *(['--profile', args.profile] if args.profile else []), '--region', args.region,
             '--no-cli-pager', '--output', 'json', service, operation, *options,
         ], check=True, capture_output=True, text=True, timeout=90)
     except subprocess.CalledProcessError as error:
@@ -46,15 +47,18 @@ def build(args):
     provision = pathlib.Path(__file__).with_name('provision.sh').read_text()
     provision = provision.replace('__BACKEND_COMMIT__', args.backend_commit)
     stamp = datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+    role_name = f'JumpServeAmiBuilder-{stamp}'
     name = f'jumpserve-benchmark-{stamp}-{args.backend_commit[:12]}'
     tags = [
         {'Key': 'Project', 'Value': 'JumpServe'},
         {'Key': 'Purpose', 'Value': 'BenchmarkAMI'},
         {'Key': 'BackendCommit', 'Value': args.backend_commit},
         {'Key': 'Name', 'Value': name},
+        {'Key': 'BuildId', 'Value': role_name},
     ]
     request = {
         'ImageId': args.base_ami,
+        'ClientToken': role_name,
         'InstanceType': 't3.medium',
         'MinCount': 1, 'MaxCount': 1,
         'InstanceInitiatedShutdownBehavior': 'stop',
@@ -82,7 +86,12 @@ def build(args):
 
     instance_id = None
     image_id = None
-    role_name = f'JumpServeAmiBuilder-{stamp}'
+    # Persist before the first mutation so an always-run CI cleanup can recover
+    # even if the process is cancelled between an AWS response and local writes.
+    state = pathlib.Path(args.output).with_name('benchmark-ami-build-state.json')
+    state.parent.mkdir(parents=True, exist_ok=True)
+    state.write_text(json.dumps({'account_id': ACCOUNT, 'region': args.region,
+                                'role_name': role_name, 'backend_commit': args.backend_commit}) + '\n')
     role_created = False
     profile_created = False
     policy_attached = False
@@ -198,7 +207,7 @@ def build(args):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--profile', default='default')
+    parser.add_argument('--profile', default=os.environ.get('AWS_PROFILE'))
     parser.add_argument('--region', default='us-east-1')
     parser.add_argument('--base-ami', required=True)
     parser.add_argument('--subnet-id', required=True)

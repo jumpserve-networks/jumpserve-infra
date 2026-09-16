@@ -10,6 +10,7 @@ import * as events from 'aws-cdk-lib/aws-events';
 import * as eventsTargets from 'aws-cdk-lib/aws-events-targets';
 import { Construct } from 'constructs';
 import * as path from 'path';
+import { addBenchmarkImagePipelineRole } from './benchmark-image-pipeline';
 
 export class BenchmarkOrchestratorStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -126,6 +127,9 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
       actions: ['iam:PassRole'],
       resources: [benchmarkInstanceRole.roleArn],
     }));
+
+    const imagePipelineRole = addBenchmarkImagePipelineRole(this, benchmarkInstanceRole, launchFn.functionArn);
+    supabaseSecret.grantRead(imagePipelineRole);
 
     // Lambda: cleanup stale benchmarks
     const cleanupFn = new lambda.NodejsFunction(this, 'CleanupBenchmarksFn', {

@@ -9,10 +9,10 @@ assert.ok(process.argv.slice(2).every(argument => argument === '--live-api'), 'O
 const liveApi = process.argv.includes('--live-api');
 
 const manifest = JSON.parse(fs.readFileSync('cdk.out/benchmark-ami.json', 'utf8'));
-const profile = process.env.AWS_PROFILE || 'default';
+const profile = process.env.AWS_PROFILE;
 const region = manifest.region;
 const aws = (...args) => JSON.parse(execFileSync('aws', [
-  '--profile', profile, '--region', region, '--no-cli-pager', '--output', 'json', ...args,
+  ...(profile ? ['--profile', profile] : []), '--region', region, '--no-cli-pager', '--output', 'json', ...args,
 ], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }));
 
 async function main() {
@@ -21,6 +21,7 @@ async function main() {
   assert.equal(image.OwnerId, '395567831870');
   assert.equal(image.State, 'available');
   assert.ok(image.Tags.some(tag => tag.Key === 'Purpose' && tag.Value === 'BenchmarkAMI'));
+  assert.ok(image.Tags.some(tag => tag.Key === 'BackendCommit' && tag.Value === manifest.backend_commit));
 
   const configuration = aws('lambda', 'get-function-configuration', '--function-name',
     'JumpServeBenchmarkStack-LaunchBenchmarkFn5833EFAD-L6HWyzv2tgwl');
@@ -29,7 +30,7 @@ async function main() {
     assert.equal(configuration.Environment.Variables.BENCHMARK_IMAGE_MODE, 'prebaked');
   }
   Object.assign(process.env, configuration.Environment.Variables, {
-    AWS_PROFILE: profile, AWS_REGION: region,
+    AWS_REGION: region,
     AMI_ID: manifest.ami_id, BENCHMARK_IMAGE_MODE: 'prebaked',
   });
   const { handler } = require('../lambda/launch-benchmark/index.js');
@@ -60,6 +61,11 @@ async function main() {
     }
     assert.equal(response.statusCode, 200, 'Candidate launcher failed');
     const job = JSON.parse(response.body);
+    // Safe identifiers only; never persist credentials, user data or raw logs.
+    const checkpoint = 'cdk.out/benchmark-ami-verification-instances.json';
+    const launched = fs.existsSync(checkpoint) ? JSON.parse(fs.readFileSync(checkpoint, 'utf8')) : [];
+    launched.push({ jobId: job.jobId, instanceId: job.instanceId, amiId: manifest.ami_id });
+    fs.writeFileSync(checkpoint, JSON.stringify(launched, null, 2) + '\n');
     console.log(JSON.stringify({ expectedStatus, ...job, amiId: manifest.ami_id }));
     let terminal = false;
     try {
@@ -81,7 +87,8 @@ async function main() {
       assert.ok(output.includes(`Benchmark image backend commit: ${manifest.backend_commit}`), 'Fresh user data did not verify the baked backend');
       assert.ok(!/Unpacking |Preparing to unpack |apt-get|git clone|git pull/.test(output), 'Software installation occurred during benchmark startup');
       assert.ok(!output.includes(secret.SecretString), 'Credential found in benchmark logs');
-      const report = { jobId: job.jobId, instanceId: job.instanceId, status: row.status,
+      const report = { amiId: manifest.ami_id, backendCommit: manifest.backend_commit,
+        jobId: job.jobId, instanceId: job.instanceId, status: row.status,
         parentRunId: row.parent_run_id, totalSeconds: Math.round((Date.now() - start) / 1000),
         createdAt: row.created_at, updatedAt: row.updated_at, logEvents: events.length };
       reports.push(report);

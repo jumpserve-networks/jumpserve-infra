@@ -16,6 +16,10 @@ trap build_failed EXIT
 export DEBIAN_FRONTEND=noninteractive
 export NEEDRESTART_MODE=a
 
+# If CI is interrupted before it can clean up, cap builder compute time.
+# This transient timer is in /run and is not persisted in the AMI.
+systemd-run --unit=jumpserve-image-builder-timeout --on-active=45min /sbin/shutdown -h now
+
 # Avoid unattended package activity while measuring network performance. Rebuild
 # the image regularly to apply OS updates; job instances never install packages.
 systemctl mask --now apt-daily.timer apt-daily-upgrade.timer
