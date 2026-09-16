@@ -22,6 +22,14 @@ test('image workflow trusts only backend main and limits temporary role permissi
   });
   template.hasResourceProperties('AWS::IAM::Policy', {
     PolicyDocument: { Statement: Match.arrayWith([Match.objectLike({
+      Action: 'ec2:CreateTags',
+      Resource: [
+        Match.anyValue(),
+        { 'Fn::Join': ['', ['arn:', { Ref: 'AWS::Partition' }, ':ec2:us-east-1::image/*']] },
+        { 'Fn::Join': ['', ['arn:', { Ref: 'AWS::Partition' }, ':ec2:us-east-1::snapshot/*']] },
+      ],
+      Condition: { StringEquals: { 'ec2:CreateAction': ['RunInstances', 'CreateImage'] } },
+    }), Match.objectLike({
       Action: 'ec2:TerminateInstances',
       Condition: { StringEquals: { 'ec2:ResourceTag/Project': 'JumpServe' } },
     }), Match.objectLike({

@@ -32,7 +32,8 @@ export function addBenchmarkImagePipelineRole(
   allow(['ec2:RunInstances', 'ec2:CreateImage'], ['*'], {
     StringEquals: { 'aws:RequestedRegion': stack.region },
   });
-  allow(['ec2:CreateTags'], [arn('ec2', '*'), arn('ec2', 'image/*', '')], {
+  // EC2 authorizes AMI/snapshot creation against ARNs without an account field.
+  allow(['ec2:CreateTags'], [arn('ec2', '*'), arn('ec2', 'image/*', ''), arn('ec2', 'snapshot/*', '')], {
     StringEquals: { 'ec2:CreateAction': ['RunInstances', 'CreateImage'] },
   });
   allow(['ec2:TerminateInstances'], [arn('ec2', 'instance/*')], {
