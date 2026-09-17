@@ -33,6 +33,10 @@ def run_benchmark(
     experiment_name: str | None = None,
     tags: list[str] | None = None,
     notes: str | None = None,
+    topology: str | None = None,
+    bottleneck_rates_mbit: list[float] | None = None,
+    bottleneck_buffers_kbytes: list[float] | None = None,
+    client_groups: list[int] | None = None,
 ) -> dict:
     """Launch a TCP congestion control benchmark on a fresh EC2 instance.
 
@@ -49,6 +53,10 @@ def run_benchmark(
         experiment_name: Optional short name for the experiment (e.g. "bbr-fairness-v2")
         tags: Optional list of tags (e.g. ["fairness", "bbr", "paper-fig3"])
         notes: Optional free-text notes about the experiment
+        topology: Required for multi-bottleneck: parking-lot or dumbbell
+        bottleneck_rates_mbit: Two link rates required for multi-bottleneck
+        bottleneck_buffers_kbytes: Two link buffers required for multi-bottleneck
+        client_groups: For dumbbell, two positive group sizes summing to num_clients
     """
     config = {
         "num_clients": num_clients,
@@ -69,6 +77,13 @@ def run_benchmark(
         config["tags"] = tags
     if notes:
         config["notes"] = notes
+    if script == "netem_multi_bottleneck.py":
+        config.update(
+            topology=topology,
+            bottleneck_rates_mbit=bottleneck_rates_mbit,
+            bottleneck_buffers_kbytes=bottleneck_buffers_kbytes,
+            client_groups=client_groups,
+        )
 
     resp = httpx.post(
         f"{BENCHMARK_API_URL}/benchmarks",

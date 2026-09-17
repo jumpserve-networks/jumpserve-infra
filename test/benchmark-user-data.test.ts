@@ -36,13 +36,41 @@ test.each([
 });
 
 test('multi-bottleneck metadata is passed as intact shell arguments', () => {
-  const command = buildBenchmarkArgs({ ...config, script: 'netem_multi_bottleneck.py' });
+  const command = buildBenchmarkArgs({ ...config, script: 'netem_multi_bottleneck.py',
+    topology: 'parking-lot', bottleneck_rates_mbit: [100, 50], bottleneck_buffers_kbytes: [125, 125] });
   const result = spawnSync('bash', ['-c', `sudo() { printf '<%s>\\n' "$@"; }; ${command}`], { encoding: 'utf8' });
   expect(result.status).toBe(0);
   expect(result.stdout).toContain("<--experiment-name>\n<test's experiment>");
   expect(result.stdout).toContain('<--experiment-tags>\n<lifecycle,regression>');
   expect(result.stdout).toContain("<--experiment-notes>\n<test's notes>");
 });
+
+test.each(['parking-lot', 'dumbbell'] as const)('%s receives its own CLI flags without single-bottleneck flags', (topology) => {
+  const command = buildBenchmarkArgs({
+    ...config, script: 'netem_multi_bottleneck.py', topology,
+    bottleneck_rates_mbit: [100, 50], bottleneck_buffers_kbytes: [125, 64],
+    client_groups: [1, 1], snapshot_metrics_source: 'ss',
+    client_start_delays_ms: [0, 250], snapshot_interval_ms: 50,
+  });
+  expect(command).toContain(`--topology ${topology}`);
+  expect(command).toContain('--bottleneck-rates-mbit 100,50');
+  expect(command).toContain('--bottleneck-buffers-kbytes 125,64');
+  expect(command).toContain('--client-start-delays-ms 0,250');
+  expect(command).toContain('--snapshot-interval-ms 50');
+  expect(command.includes('--client-groups 1,1')).toBe(topology === 'dumbbell');
+  expect(command).not.toMatch(/--bottleneck-all-client-rate-mbit|--bottleneck-buffer-kbytes|--snapshot-metrics-source|--ss-log-file/);
+});
+
+test.each(['netem_cubic_benchmark_hotnets.py', 'netem_cubic_benchmark_nines.py', 'netem_nines.py'])(
+  '%s retains single-bottleneck settings and ignores leftover topology settings', (script) => {
+    const command = buildBenchmarkArgs({ ...config, script, snapshot_metrics_source: 'ss', topology: 'dumbbell',
+      bottleneck_rates_mbit: [100, 50], bottleneck_buffers_kbytes: [125, 64], client_groups: [1, 1] });
+    expect(command).toContain('--bottleneck-all-client-rate-mbit 10');
+    expect(command).toContain('--bottleneck-buffer-kbytes 125');
+    expect(command).toContain('--snapshot-metrics-source ss --ss-log-file /tmp/ss-log.jsonl');
+    expect(command).not.toMatch(/--topology|--client-groups|--bottleneck-rates-mbit|--bottleneck-buffers-kbytes/);
+  },
+);
 
 test('generated bootstrap is valid bash and does not enable credential tracing', () => {
   const script = userData();

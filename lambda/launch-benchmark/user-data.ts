@@ -8,6 +8,10 @@ export interface BenchmarkConfig {
   bottleneck_buffer_kbytes: number;
   snapshot_metrics_source?: string;
   script?: string;
+  topology?: 'parking-lot' | 'dumbbell';
+  bottleneck_rates_mbit?: number[];
+  bottleneck_buffers_kbytes?: number[];
+  client_groups?: number[];
   loss_pct?: number;
   snapshot_interval_ms?: number;
   experiment_name?: string;
@@ -17,18 +21,34 @@ export interface BenchmarkConfig {
 
 export function buildBenchmarkArgs(config: BenchmarkConfig): string {
   const script = config.script || 'netem_cubic_benchmark_hotnets.py';
+  const multiBottleneck = script === 'netem_multi_bottleneck.py';
   const args = [
     `--num-clients ${config.num_clients}`,
     `--client-delays-ms ${config.client_delays_ms.join(',')}`,
     `--client-ccas ${config.client_ccas.join(',')}`,
     `--client-file-sizes-mbytes ${config.client_file_sizes_mbytes.join(',')}`,
-    `--bottleneck-all-client-rate-mbit ${config.bottleneck_all_client_rate_mbit}`,
-    `--bottleneck-buffer-kbytes ${config.bottleneck_buffer_kbytes}`,
   ];
+  if (multiBottleneck) {
+    // Required by this runner; validation rejects missing topology/link settings
+    // before creating a job or starting an instance.
+    args.push(
+      `--topology ${config.topology}`,
+      `--bottleneck-rates-mbit ${config.bottleneck_rates_mbit!.join(',')}`,
+      `--bottleneck-buffers-kbytes ${config.bottleneck_buffers_kbytes!.join(',')}`,
+    );
+    if (config.topology === 'dumbbell') {
+      args.push(`--client-groups ${config.client_groups!.join(',')}`);
+    }
+  } else {
+    args.push(
+      `--bottleneck-all-client-rate-mbit ${config.bottleneck_all_client_rate_mbit}`,
+      `--bottleneck-buffer-kbytes ${config.bottleneck_buffer_kbytes}`,
+    );
+  }
   if (config.client_start_delays_ms && config.client_start_delays_ms.length > 0) {
     args.push(`--client-start-delays-ms ${config.client_start_delays_ms.join(',')}`);
   }
-  if (config.snapshot_metrics_source) {
+  if (!multiBottleneck && config.snapshot_metrics_source) {
     args.push(`--snapshot-metrics-source ${config.snapshot_metrics_source}`);
     if (config.snapshot_metrics_source === 'ss') {
       args.push('--ss-log-file /tmp/ss-log.jsonl');

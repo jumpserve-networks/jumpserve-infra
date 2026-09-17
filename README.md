@@ -30,6 +30,28 @@ runners do not support them.
 Run `npm test -- --runInBand` for the launcher and bootstrap lifecycle regression
 tests, which mock cloud calls and operating-system shutdown.
 
+Multi-bottleneck requests must include `topology` (`parking-lot` or `dumbbell`),
+`bottleneck_rates_mbit` and `bottleneck_buffers_kbytes` (two-number arrays).
+Dumbbell also requires `client_groups`: two positive group sizes summing to
+`num_clients`. The launcher rejects incomplete configurations before creating a
+job or starting EC2. Older saved multi-bottleneck configurations need these fields
+filled in; no topology is chosen implicitly. Single-bottleneck runners continue
+using `bottleneck_all_client_rate_mbit`, `bottleneck_buffer_kbytes` and the metrics
+source flags. Multi-bottleneck does not accept those CLI flags.
+
+Current multi-bottleneck runner limitations: stored snapshots contain throughput
+but no RTT/cwnd/in-flight measurements. Parking-lot currently applies only the
+first link's rate and buffer. These limitations are also shown in the frontend.
+
+To check generated commands against all four real backend argument parsers:
+
+```bash
+JUMPSERVE_BACKEND_CHECKOUT=/path/to/jumpserve-back-end npm test -- --runInBand
+```
+
+Without that checkout, the five CLI contract cases are skipped; launcher and
+lifecycle tests still run normally.
+
 ### Prebuilt benchmark AMIs
 
 `ami/build.py` provisions a disposable Ubuntu 22.04 builder, installs networking

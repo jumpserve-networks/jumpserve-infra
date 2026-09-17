@@ -16,7 +16,9 @@ const ALLOWED_CCAS = ['cubic', 'bbr', 'bbr2', 'bbr3', 'reno', 'vegas', 'htcp', '
 const ALLOWED_SCRIPTS = ['netem_cubic_benchmark_hotnets.py', 'netem_cubic_benchmark_nines.py', 'netem_nines.py', 'netem_multi_bottleneck.py'];
 
 function validateConfig(config: BenchmarkConfig): string | null {
-  if (!config.num_clients || config.num_clients < 1 || config.num_clients > 10) {
+  const inRange = (value: unknown, min: number, max: number): boolean =>
+    typeof value === 'number' && Number.isFinite(value) && value >= min && value <= max;
+  if (!Number.isInteger(config.num_clients) || !inRange(config.num_clients, 1, 10)) {
     return 'num_clients must be between 1 and 10';
   }
   if (!Array.isArray(config.client_delays_ms) || config.client_delays_ms.length !== config.num_clients) {
@@ -34,16 +36,49 @@ function validateConfig(config: BenchmarkConfig): string | null {
     return 'client_file_sizes_mbytes must match num_clients';
   }
   for (const d of config.client_delays_ms) {
-    if (d < 0 || d > 5000) return 'client_delays_ms values must be 0-5000';
+    if (!inRange(d, 0, 5000)) return 'client_delays_ms values must be numbers from 0-5000';
   }
   for (const s of config.client_file_sizes_mbytes) {
-    if (s < 0.1 || s > 1000) return 'client_file_sizes_mbytes values must be 0.1-1000';
+    if (!inRange(s, 0.1, 1000)) return 'client_file_sizes_mbytes values must be numbers from 0.1-1000';
   }
-  if (config.bottleneck_all_client_rate_mbit < 1 || config.bottleneck_all_client_rate_mbit > 10000) {
-    return 'bottleneck_all_client_rate_mbit must be 1-10000';
+  if (config.client_start_delays_ms !== undefined && (
+    !Array.isArray(config.client_start_delays_ms) ||
+    config.client_start_delays_ms.length !== config.num_clients ||
+    !config.client_start_delays_ms.every((delay) => inRange(delay, 0, 600000))
+  )) return 'client_start_delays_ms must contain one number from 0-600000 per client';
+  if (config.loss_pct !== undefined && !inRange(config.loss_pct, 0, 100)) {
+    return 'loss_pct must be a number from 0-100';
   }
-  if (config.bottleneck_buffer_kbytes < 0 || config.bottleneck_buffer_kbytes > 100000) {
-    return 'bottleneck_buffer_kbytes must be 0-100000';
+  if (config.snapshot_interval_ms !== undefined && (
+    !Number.isInteger(config.snapshot_interval_ms) || !inRange(config.snapshot_interval_ms, 1, 60000)
+  )) return 'snapshot_interval_ms must be an integer from 1-60000';
+  if (config.script === 'netem_multi_bottleneck.py') {
+    if (!['parking-lot', 'dumbbell'].includes(config.topology!)) {
+      return 'Choose a topology for the multi-bottleneck benchmark: parking-lot or dumbbell';
+    }
+    if (!Array.isArray(config.bottleneck_rates_mbit) || config.bottleneck_rates_mbit.length !== 2 ||
+        !config.bottleneck_rates_mbit.every((rate) => inRange(rate, 1, 10000))) {
+      return 'bottleneck_rates_mbit must contain exactly two numbers from 1-10000';
+    }
+    if (!Array.isArray(config.bottleneck_buffers_kbytes) || config.bottleneck_buffers_kbytes.length !== 2 ||
+        !config.bottleneck_buffers_kbytes.every((buffer) => inRange(buffer, 0, 100000))) {
+      return 'bottleneck_buffers_kbytes must contain exactly two numbers from 0-100000';
+    }
+    if (config.topology === 'dumbbell' && (
+      !Array.isArray(config.client_groups) || config.client_groups.length !== 2 ||
+      !config.client_groups.every((size) => Number.isInteger(size) && size > 0) ||
+      config.client_groups.reduce((sum, size) => sum + size, 0) !== config.num_clients
+    )) return 'client_groups must contain two positive group sizes adding up to num_clients';
+  } else {
+    if (!inRange(config.bottleneck_all_client_rate_mbit, 1, 10000)) {
+      return 'bottleneck_all_client_rate_mbit must be 1-10000';
+    }
+    if (!inRange(config.bottleneck_buffer_kbytes, 0, 100000)) {
+      return 'bottleneck_buffer_kbytes must be 0-100000';
+    }
+    if (config.snapshot_metrics_source && !['kernel', 'ss'].includes(config.snapshot_metrics_source)) {
+      return 'snapshot_metrics_source must be kernel or ss';
+    }
   }
   if (config.script && !ALLOWED_SCRIPTS.includes(config.script)) {
     return `Invalid script: ${config.script}. Allowed: ${ALLOWED_SCRIPTS.join(', ')}`;
