@@ -11,6 +11,7 @@
     "test:ami": "python3 -B -m unittest discover -s test -p '*_test.py' -v",
     "test:agent": "python3 -B -m unittest discover -s test -p 'agent*_test.py' -v",
     "test:agent:database": "python3 -B test/check_agent_prompt_database.py",
+    "test:database:rls": "python3 -B test/check_database_rls.py",
     "cdk:benchmark": "cdk --app \"npx ts-node --prefer-ts-exts bin/benchmark.ts\"",
     "cdk": "cdk"
   },

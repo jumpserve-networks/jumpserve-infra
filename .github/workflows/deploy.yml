@@ -55,6 +55,7 @@ jobs:
         run: |
           npm run test:ami
           npm run test:agent:database
+          npm run test:database:rls
           npm test -- --runInBand
           npm run build
         env:

@@ -351,6 +351,46 @@ Database integration tests require an isolated PostgreSQL database named
 `npm run test:agent:database`; all test schema and data changes roll back. CI
 provides an isolated PostgreSQL 17 service for this check.
 
+## Supabase table access
+
+`database/202609200002_authenticated_table_access.sql` protects all 16 application
+tables in JumpServe (`regphejnlvfpyokpniny`). It enables RLS, removes anonymous
+schema/table/column/sequence/RPC access, and adds a restrictive signed-in-user
+policy. Supabase anonymous-auth sessions are also denied. Researchers retain
+read access to measurements; existing benchmark/session policies and the
+server-only prompt permissions remain in place. Trusted backend writers keep
+their `service_role` access.
+
+An event trigger enables RLS on new public tables, including partitions and
+tables created with `CREATE TABLE AS` or `SELECT INTO`. New tables have no
+permissive policy: migrations must explicitly define their intended access.
+Default grants no longer expose new objects anonymously. Existing public views
+use the caller's permissions. Supabase-managed auth, storage, realtime, and
+extension schemas retain their platform-managed configuration.
+
+Run the local regression suite with `npm run test:database:rls` and an isolated
+`jumpserve_prompt_test` database (optionally set `PROMPT_TEST_DATABASE_URL`). It
+checks anonymous rejection, signed-in reads/config/session operations, backend
+writes, independent column grants, view behavior, migration idempotency, and new
+tables. Fixtures, roles, and DDL roll back. CI runs it alongside the prompt tests.
+
+The operator command is pinned to JumpServe. It reads `SUPABASE_ACCESS_TOKEN` or
+the Supabase CLI login from the macOS keychain without printing credentials:
+
+```bash
+python3 -B bin/supabase-rls.py
+python3 -B bin/supabase-rls.py --apply
+python3 -B bin/supabase-rls.py --verify
+python3 -B bin/supabase-rls.py --http-check /path/to/jumpserve-front-end/.env.local
+```
+
+`--apply` applies only this migration and runs role-based checks before committing;
+any failed check aborts the transaction. `--verify` uses temporary test objects
+and rolls back. The HTTP check uses only the frontend's public configuration and
+requests no row data. Production verification on 2026-09-20 confirmed RLS on all
+16 tables, authenticated/backend access, and HTTP 401 / SQLSTATE 42501 for every
+anonymous table request. This migration contains no experiment-data changes.
+
 ## CI/CD and configuration
 
 - Infrastructure `main`: GitHub Actions runs `cdk deploy --all`; pull requests
