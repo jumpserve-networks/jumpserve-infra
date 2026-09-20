@@ -1,0 +1,2508 @@
+{
+  "source": "Public metrics for parent run 2352, read 2026-09-20; no conversations, credentials, or user identifiers.",
+  "parent": {
+    "id": 2352,
+    "number_of_clients": 2,
+    "bottleneck_rate_megabit": 50,
+    "queue_buffer_size_kilobyte": 125,
+    "snapshot_length_ms": 100,
+    "topology": "single-bottleneck",
+    "topology_config": null
+  },
+  "runs": [
+    {
+      "id": 5088,
+      "client_number": 1,
+      "delay_added": 10,
+      "client_file_size_megabytes": 50,
+      "client_start_delay_ms": 0,
+      "flow_completion_time_ms": 17079,
+      "congestion_control_algorithms": {
+        "name": "bbr"
+      }
+    },
+    {
+      "id": 5089,
+      "client_number": 2,
+      "delay_added": 60,
+      "client_file_size_megabytes": 50,
+      "client_start_delay_ms": 0,
+      "flow_completion_time_ms": 14649,
+      "congestion_control_algorithms": {
+        "name": "bbr"
+      }
+    }
+  ],
+  "snapshots": {
+    "5088": [
+      {
+        "snapshot_index": 1,
+        "elapsed_microseconds": 338,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 0,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 2,
+        "elapsed_microseconds": 175813,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 0,
+        "congestion_window_bytes": 5240,
+        "in_flight_packets": 1
+      },
+      {
+        "snapshot_index": 3,
+        "elapsed_microseconds": 299378,
+        "megabits_per_second": 47.559392,
+        "round_trip_time_ms": 30.699,
+        "bottleneck_queuing_delay_ms": 20.10592,
+        "congestion_window_bytes": 185344,
+        "in_flight_packets": 187
+      },
+      {
+        "snapshot_index": 4,
+        "elapsed_microseconds": 417232,
+        "megabits_per_second": 25.686072,
+        "round_trip_time_ms": 18.634,
+        "bottleneck_queuing_delay_ms": 6.056,
+        "congestion_window_bytes": 165072,
+        "in_flight_packets": 65
+      },
+      {
+        "snapshot_index": 5,
+        "elapsed_microseconds": 538421,
+        "megabits_per_second": 43.785608,
+        "round_trip_time_ms": 23.115,
+        "bottleneck_queuing_delay_ms": 18.41024,
+        "congestion_window_bytes": 144800,
+        "in_flight_packets": 94
+      },
+      {
+        "snapshot_index": 6,
+        "elapsed_microseconds": 657168,
+        "megabits_per_second": 36.025008,
+        "round_trip_time_ms": 29.675,
+        "bottleneck_queuing_delay_ms": 19.3792,
+        "congestion_window_bytes": 141904,
+        "in_flight_packets": 96
+      },
+      {
+        "snapshot_index": 7,
+        "elapsed_microseconds": 775413,
+        "megabits_per_second": 40.245512,
+        "round_trip_time_ms": 26.168,
+        "bottleneck_queuing_delay_ms": 12.112,
+        "congestion_window_bytes": 144800,
+        "in_flight_packets": 99
+      },
+      {
+        "snapshot_index": 8,
+        "elapsed_microseconds": 893213,
+        "megabits_per_second": 24.120768,
+        "round_trip_time_ms": 30.93,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 133216,
+        "in_flight_packets": 129
+      },
+      {
+        "snapshot_index": 9,
+        "elapsed_microseconds": 1012995,
+        "megabits_per_second": 39.8308,
+        "round_trip_time_ms": 28.572,
+        "bottleneck_queuing_delay_ms": 13.56544,
+        "congestion_window_bytes": 170864,
+        "in_flight_packets": 217
+      },
+      {
+        "snapshot_index": 10,
+        "elapsed_microseconds": 1133546,
+        "megabits_per_second": 45.657888,
+        "round_trip_time_ms": 27.974,
+        "bottleneck_queuing_delay_ms": 14.77664,
+        "congestion_window_bytes": 162176,
+        "in_flight_packets": 105
+      },
+      {
+        "snapshot_index": 11,
+        "elapsed_microseconds": 1254626,
+        "megabits_per_second": 18.010976,
+        "round_trip_time_ms": 27.044,
+        "bottleneck_queuing_delay_ms": 12.112,
+        "congestion_window_bytes": 149144,
+        "in_flight_packets": 142
+      },
+      {
+        "snapshot_index": 12,
+        "elapsed_microseconds": 1376652,
+        "megabits_per_second": 24.981584,
+        "round_trip_time_ms": 30.543,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 131768,
+        "in_flight_packets": 134
+      },
+      {
+        "snapshot_index": 13,
+        "elapsed_microseconds": 1495731,
+        "megabits_per_second": 28.227384,
+        "round_trip_time_ms": 31.187,
+        "bottleneck_queuing_delay_ms": 20.83264,
+        "congestion_window_bytes": 130320,
+        "in_flight_packets": 208
+      },
+      {
+        "snapshot_index": 14,
+        "elapsed_microseconds": 1616832,
+        "megabits_per_second": 25.471336,
+        "round_trip_time_ms": 31.095,
+        "bottleneck_queuing_delay_ms": 18.41024,
+        "congestion_window_bytes": 91224,
+        "in_flight_packets": 167
+      },
+      {
+        "snapshot_index": 15,
+        "elapsed_microseconds": 1737038,
+        "megabits_per_second": 23.59724,
+        "round_trip_time_ms": 30.758,
+        "bottleneck_queuing_delay_ms": 19.86368,
+        "congestion_window_bytes": 88328,
+        "in_flight_packets": 70
+      },
+      {
+        "snapshot_index": 16,
+        "elapsed_microseconds": 1855775,
+        "megabits_per_second": 22.097416,
+        "round_trip_time_ms": 29.497,
+        "bottleneck_queuing_delay_ms": 18.89472,
+        "congestion_window_bytes": 86880,
+        "in_flight_packets": 60
+      },
+      {
+        "snapshot_index": 17,
+        "elapsed_microseconds": 1975432,
+        "megabits_per_second": 26.581,
+        "round_trip_time_ms": 24.799,
+        "bottleneck_queuing_delay_ms": 17.44128,
+        "congestion_window_bytes": 86880,
+        "in_flight_packets": 60
+      },
+      {
+        "snapshot_index": 18,
+        "elapsed_microseconds": 2095072,
+        "megabits_per_second": 23.519592,
+        "round_trip_time_ms": 29.358,
+        "bottleneck_queuing_delay_ms": 19.62144,
+        "congestion_window_bytes": 86880,
+        "in_flight_packets": 60
+      },
+      {
+        "snapshot_index": 19,
+        "elapsed_microseconds": 2214536,
+        "megabits_per_second": 23.40964,
+        "round_trip_time_ms": 30.723,
+        "bottleneck_queuing_delay_ms": 19.3792,
+        "congestion_window_bytes": 89776,
+        "in_flight_packets": 62
+      },
+      {
+        "snapshot_index": 20,
+        "elapsed_microseconds": 2336193,
+        "megabits_per_second": 23.51696,
+        "round_trip_time_ms": 30.29,
+        "bottleneck_queuing_delay_ms": 19.86368,
+        "congestion_window_bytes": 89776,
+        "in_flight_packets": 62
+      },
+      {
+        "snapshot_index": 21,
+        "elapsed_microseconds": 2455127,
+        "megabits_per_second": 22.675496,
+        "round_trip_time_ms": 25.607,
+        "bottleneck_queuing_delay_ms": 15.26112,
+        "congestion_window_bytes": 86880,
+        "in_flight_packets": 58
+      },
+      {
+        "snapshot_index": 22,
+        "elapsed_microseconds": 2574004,
+        "megabits_per_second": 23.885328,
+        "round_trip_time_ms": 29.763,
+        "bottleneck_queuing_delay_ms": 20.10592,
+        "congestion_window_bytes": 89776,
+        "in_flight_packets": 61
+      },
+      {
+        "snapshot_index": 23,
+        "elapsed_microseconds": 2693889,
+        "megabits_per_second": 23.428736,
+        "round_trip_time_ms": 30.431,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 89776,
+        "in_flight_packets": 62
+      },
+      {
+        "snapshot_index": 24,
+        "elapsed_microseconds": 2813426,
+        "megabits_per_second": 22.930144,
+        "round_trip_time_ms": 30.055,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 86880,
+        "in_flight_packets": 60
+      },
+      {
+        "snapshot_index": 25,
+        "elapsed_microseconds": 2934283,
+        "megabits_per_second": 18.380744,
+        "round_trip_time_ms": 30.203,
+        "bottleneck_queuing_delay_ms": 15.50336,
+        "congestion_window_bytes": 86880,
+        "in_flight_packets": 60
+      },
+      {
+        "snapshot_index": 26,
+        "elapsed_microseconds": 3052411,
+        "megabits_per_second": 22.866912,
+        "round_trip_time_ms": 30.506,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 86880,
+        "in_flight_packets": 59
+      },
+      {
+        "snapshot_index": 27,
+        "elapsed_microseconds": 3171816,
+        "megabits_per_second": 20.055008,
+        "round_trip_time_ms": 30.04,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 86880,
+        "in_flight_packets": 59
+      },
+      {
+        "snapshot_index": 28,
+        "elapsed_microseconds": 3292096,
+        "megabits_per_second": 20.911088,
+        "round_trip_time_ms": 30.838,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 82536,
+        "in_flight_packets": 72
+      },
+      {
+        "snapshot_index": 29,
+        "elapsed_microseconds": 3410341,
+        "megabits_per_second": 18.074016,
+        "round_trip_time_ms": 30.863,
+        "bottleneck_queuing_delay_ms": 17.68352,
+        "congestion_window_bytes": 75296,
+        "in_flight_packets": 92
+      },
+      {
+        "snapshot_index": 30,
+        "elapsed_microseconds": 3528915,
+        "megabits_per_second": 21.363928,
+        "round_trip_time_ms": 23.37,
+        "bottleneck_queuing_delay_ms": 18.168,
+        "congestion_window_bytes": 83984,
+        "in_flight_packets": 45
+      },
+      {
+        "snapshot_index": 31,
+        "elapsed_microseconds": 3648096,
+        "megabits_per_second": 20.783128,
+        "round_trip_time_ms": 30.823,
+        "bottleneck_queuing_delay_ms": 19.86368,
+        "congestion_window_bytes": 78192,
+        "in_flight_packets": 61
+      },
+      {
+        "snapshot_index": 32,
+        "elapsed_microseconds": 3769234,
+        "megabits_per_second": 18.21664,
+        "round_trip_time_ms": 30.332,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 75296,
+        "in_flight_packets": 102
+      },
+      {
+        "snapshot_index": 33,
+        "elapsed_microseconds": 3887903,
+        "megabits_per_second": 18.52532,
+        "round_trip_time_ms": 29.97,
+        "bottleneck_queuing_delay_ms": 20.83264,
+        "congestion_window_bytes": 75296,
+        "in_flight_packets": 52
+      },
+      {
+        "snapshot_index": 34,
+        "elapsed_microseconds": 4008215,
+        "megabits_per_second": 22.100712,
+        "round_trip_time_ms": 23.897,
+        "bottleneck_queuing_delay_ms": 17.19904,
+        "congestion_window_bytes": 86880,
+        "in_flight_packets": 43
+      },
+      {
+        "snapshot_index": 35,
+        "elapsed_microseconds": 4126515,
+        "megabits_per_second": 18.467032,
+        "round_trip_time_ms": 30.864,
+        "bottleneck_queuing_delay_ms": 20.10592,
+        "congestion_window_bytes": 86880,
+        "in_flight_packets": 102
+      },
+      {
+        "snapshot_index": 36,
+        "elapsed_microseconds": 4245057,
+        "megabits_per_second": 19.7044,
+        "round_trip_time_ms": 29.724,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 78192,
+        "in_flight_packets": 54
+      },
+      {
+        "snapshot_index": 37,
+        "elapsed_microseconds": 4371280,
+        "megabits_per_second": 18.903872,
+        "round_trip_time_ms": 31.002,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 78192,
+        "in_flight_packets": 78
+      },
+      {
+        "snapshot_index": 38,
+        "elapsed_microseconds": 4491261,
+        "megabits_per_second": 18.770456,
+        "round_trip_time_ms": 27.63,
+        "bottleneck_queuing_delay_ms": 17.19904,
+        "congestion_window_bytes": 75296,
+        "in_flight_packets": 51
+      },
+      {
+        "snapshot_index": 39,
+        "elapsed_microseconds": 4610302,
+        "megabits_per_second": 17.543032,
+        "round_trip_time_ms": 30.704,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 75296,
+        "in_flight_packets": 87
+      },
+      {
+        "snapshot_index": 40,
+        "elapsed_microseconds": 4730213,
+        "megabits_per_second": 15.947744,
+        "round_trip_time_ms": 29.973,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 75296,
+        "in_flight_packets": 84
+      },
+      {
+        "snapshot_index": 41,
+        "elapsed_microseconds": 4849807,
+        "megabits_per_second": 18.897824,
+        "round_trip_time_ms": 31.164,
+        "bottleneck_queuing_delay_ms": 20.10592,
+        "congestion_window_bytes": 75296,
+        "in_flight_packets": 74
+      },
+      {
+        "snapshot_index": 42,
+        "elapsed_microseconds": 4969724,
+        "megabits_per_second": 14.296256,
+        "round_trip_time_ms": 30.699,
+        "bottleneck_queuing_delay_ms": 14.5344,
+        "congestion_window_bytes": 66608,
+        "in_flight_packets": 78
+      },
+      {
+        "snapshot_index": 43,
+        "elapsed_microseconds": 5089156,
+        "megabits_per_second": 18.049496,
+        "round_trip_time_ms": 27.094,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 75296,
+        "in_flight_packets": 45
+      },
+      {
+        "snapshot_index": 44,
+        "elapsed_microseconds": 5210739,
+        "megabits_per_second": 17.568504,
+        "round_trip_time_ms": 30.998,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 72400,
+        "in_flight_packets": 45
+      },
+      {
+        "snapshot_index": 45,
+        "elapsed_microseconds": 5331433,
+        "megabits_per_second": 17.112976,
+        "round_trip_time_ms": 30.757,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 66608,
+        "in_flight_packets": 78
+      },
+      {
+        "snapshot_index": 46,
+        "elapsed_microseconds": 5450736,
+        "megabits_per_second": 13.95176,
+        "round_trip_time_ms": 30.903,
+        "bottleneck_queuing_delay_ms": 17.44128,
+        "congestion_window_bytes": 66608,
+        "in_flight_packets": 78
+      },
+      {
+        "snapshot_index": 47,
+        "elapsed_microseconds": 5570159,
+        "megabits_per_second": 17.818192,
+        "round_trip_time_ms": 25.497,
+        "bottleneck_queuing_delay_ms": 19.3792,
+        "congestion_window_bytes": 72400,
+        "in_flight_packets": 41
+      },
+      {
+        "snapshot_index": 48,
+        "elapsed_microseconds": 5690865,
+        "megabits_per_second": 15.832176,
+        "round_trip_time_ms": 30.489,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 69504,
+        "in_flight_packets": 81
+      },
+      {
+        "snapshot_index": 49,
+        "elapsed_microseconds": 5807829,
+        "megabits_per_second": 17.619104,
+        "round_trip_time_ms": 30.881,
+        "bottleneck_queuing_delay_ms": 20.10592,
+        "congestion_window_bytes": 66608,
+        "in_flight_packets": 68
+      },
+      {
+        "snapshot_index": 50,
+        "elapsed_microseconds": 5925413,
+        "megabits_per_second": 15.37732,
+        "round_trip_time_ms": 30.588,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 63712,
+        "in_flight_packets": 42
+      },
+      {
+        "snapshot_index": 51,
+        "elapsed_microseconds": 6043323,
+        "megabits_per_second": 16.403408,
+        "round_trip_time_ms": 22.839,
+        "bottleneck_queuing_delay_ms": 15.7456,
+        "congestion_window_bytes": 69504,
+        "in_flight_packets": 37
+      },
+      {
+        "snapshot_index": 52,
+        "elapsed_microseconds": 6160592,
+        "megabits_per_second": 15.882656,
+        "round_trip_time_ms": 31.005,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 63712,
+        "in_flight_packets": 70
+      },
+      {
+        "snapshot_index": 53,
+        "elapsed_microseconds": 6278226,
+        "megabits_per_second": 16.180304,
+        "round_trip_time_ms": 31.01,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 69504,
+        "in_flight_packets": 79
+      },
+      {
+        "snapshot_index": 54,
+        "elapsed_microseconds": 6396279,
+        "megabits_per_second": 16.052072,
+        "round_trip_time_ms": 30.834,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 60816,
+        "in_flight_packets": 56
+      },
+      {
+        "snapshot_index": 55,
+        "elapsed_microseconds": 6513679,
+        "megabits_per_second": 15.49572,
+        "round_trip_time_ms": 28.444,
+        "bottleneck_queuing_delay_ms": 13.3232,
+        "congestion_window_bytes": 63712,
+        "in_flight_packets": 78
+      },
+      {
+        "snapshot_index": 56,
+        "elapsed_microseconds": 6631489,
+        "megabits_per_second": 16.697912,
+        "round_trip_time_ms": 30.035,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 72400,
+        "in_flight_packets": 50
+      },
+      {
+        "snapshot_index": 57,
+        "elapsed_microseconds": 6749100,
+        "megabits_per_second": 17.142568,
+        "round_trip_time_ms": 30.682,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 72400,
+        "in_flight_packets": 89
+      },
+      {
+        "snapshot_index": 58,
+        "elapsed_microseconds": 6866229,
+        "megabits_per_second": 16.088368,
+        "round_trip_time_ms": 31.065,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 69504,
+        "in_flight_packets": 82
+      },
+      {
+        "snapshot_index": 59,
+        "elapsed_microseconds": 6983958,
+        "megabits_per_second": 14.892328,
+        "round_trip_time_ms": 31.039,
+        "bottleneck_queuing_delay_ms": 16.9568,
+        "congestion_window_bytes": 63712,
+        "in_flight_packets": 103
+      },
+      {
+        "snapshot_index": 60,
+        "elapsed_microseconds": 7102502,
+        "megabits_per_second": 16.301072,
+        "round_trip_time_ms": 29.129,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 66608,
+        "in_flight_packets": 45
+      },
+      {
+        "snapshot_index": 61,
+        "elapsed_microseconds": 7220487,
+        "megabits_per_second": 14.5612,
+        "round_trip_time_ms": 30.655,
+        "bottleneck_queuing_delay_ms": 20.10592,
+        "congestion_window_bytes": 63712,
+        "in_flight_packets": 76
+      },
+      {
+        "snapshot_index": 62,
+        "elapsed_microseconds": 7338172,
+        "megabits_per_second": 15.482592,
+        "round_trip_time_ms": 30.766,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 63712,
+        "in_flight_packets": 69
+      },
+      {
+        "snapshot_index": 63,
+        "elapsed_microseconds": 7457287,
+        "megabits_per_second": 14.421296,
+        "round_trip_time_ms": 30.996,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 63712,
+        "in_flight_packets": 55
+      },
+      {
+        "snapshot_index": 64,
+        "elapsed_microseconds": 7574182,
+        "megabits_per_second": 16.747944,
+        "round_trip_time_ms": 23.035,
+        "bottleneck_queuing_delay_ms": 15.98784,
+        "congestion_window_bytes": 69504,
+        "in_flight_packets": 35
+      },
+      {
+        "snapshot_index": 65,
+        "elapsed_microseconds": 7693487,
+        "megabits_per_second": 16,
+        "round_trip_time_ms": 30.772,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 63712,
+        "in_flight_packets": 56
+      },
+      {
+        "snapshot_index": 66,
+        "elapsed_microseconds": 7811464,
+        "megabits_per_second": 16.020584,
+        "round_trip_time_ms": 30.542,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 66608,
+        "in_flight_packets": 45
+      },
+      {
+        "snapshot_index": 67,
+        "elapsed_microseconds": 7929442,
+        "megabits_per_second": 14.892328,
+        "round_trip_time_ms": 30.932,
+        "bottleneck_queuing_delay_ms": 20.83264,
+        "congestion_window_bytes": 59368,
+        "in_flight_packets": 54
+      },
+      {
+        "snapshot_index": 68,
+        "elapsed_microseconds": 8047489,
+        "megabits_per_second": 16.265848,
+        "round_trip_time_ms": 27.393,
+        "bottleneck_queuing_delay_ms": 12.59648,
+        "congestion_window_bytes": 63712,
+        "in_flight_packets": 35
+      },
+      {
+        "snapshot_index": 69,
+        "elapsed_microseconds": 8164002,
+        "megabits_per_second": 14.630992,
+        "round_trip_time_ms": 28.465,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 66608,
+        "in_flight_packets": 43
+      },
+      {
+        "snapshot_index": 70,
+        "elapsed_microseconds": 8280826,
+        "megabits_per_second": 15.134944,
+        "round_trip_time_ms": 30.861,
+        "bottleneck_queuing_delay_ms": 20.10592,
+        "congestion_window_bytes": 66608,
+        "in_flight_packets": 82
+      },
+      {
+        "snapshot_index": 71,
+        "elapsed_microseconds": 8396686,
+        "megabits_per_second": 6.648552,
+        "round_trip_time_ms": 17.082,
+        "bottleneck_queuing_delay_ms": 2.4224,
+        "congestion_window_bytes": 98464,
+        "in_flight_packets": 16
+      },
+      {
+        "snapshot_index": 72,
+        "elapsed_microseconds": 8573148,
+        "megabits_per_second": 13.395,
+        "round_trip_time_ms": 25.482,
+        "bottleneck_queuing_delay_ms": 18.89472,
+        "congestion_window_bytes": 66608,
+        "in_flight_packets": 39
+      },
+      {
+        "snapshot_index": 73,
+        "elapsed_microseconds": 8691608,
+        "megabits_per_second": 15.961128,
+        "round_trip_time_ms": 26.661,
+        "bottleneck_queuing_delay_ms": 16.47232,
+        "congestion_window_bytes": 69504,
+        "in_flight_packets": 43
+      },
+      {
+        "snapshot_index": 74,
+        "elapsed_microseconds": 8808480,
+        "megabits_per_second": 15.51824,
+        "round_trip_time_ms": 30.913,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 62264,
+        "in_flight_packets": 61
+      },
+      {
+        "snapshot_index": 75,
+        "elapsed_microseconds": 8925542,
+        "megabits_per_second": 14.668048,
+        "round_trip_time_ms": 30.469,
+        "bottleneck_queuing_delay_ms": 19.3792,
+        "congestion_window_bytes": 69504,
+        "in_flight_packets": 84
+      },
+      {
+        "snapshot_index": 76,
+        "elapsed_microseconds": 9042757,
+        "megabits_per_second": 14.941792,
+        "round_trip_time_ms": 30.98,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 62264,
+        "in_flight_packets": 66
+      },
+      {
+        "snapshot_index": 77,
+        "elapsed_microseconds": 9160103,
+        "megabits_per_second": 19.020648,
+        "round_trip_time_ms": 25.898,
+        "bottleneck_queuing_delay_ms": 19.62144,
+        "congestion_window_bytes": 72400,
+        "in_flight_packets": 39
+      },
+      {
+        "snapshot_index": 78,
+        "elapsed_microseconds": 9276920,
+        "megabits_per_second": 14.005472,
+        "round_trip_time_ms": 30.928,
+        "bottleneck_queuing_delay_ms": 20.83264,
+        "congestion_window_bytes": 70952,
+        "in_flight_packets": 82
+      },
+      {
+        "snapshot_index": 79,
+        "elapsed_microseconds": 9393747,
+        "megabits_per_second": 15.97392,
+        "round_trip_time_ms": 31.24,
+        "bottleneck_queuing_delay_ms": 20.83264,
+        "congestion_window_bytes": 72400,
+        "in_flight_packets": 141
+      },
+      {
+        "snapshot_index": 80,
+        "elapsed_microseconds": 9517172,
+        "megabits_per_second": 12.388256,
+        "round_trip_time_ms": 21.114,
+        "bottleneck_queuing_delay_ms": 14.77664,
+        "congestion_window_bytes": 75296,
+        "in_flight_packets": 25
+      },
+      {
+        "snapshot_index": 81,
+        "elapsed_microseconds": 9643360,
+        "megabits_per_second": 21.270656,
+        "round_trip_time_ms": 13.109,
+        "bottleneck_queuing_delay_ms": 5.32928,
+        "congestion_window_bytes": 81088,
+        "in_flight_packets": 16
+      },
+      {
+        "snapshot_index": 82,
+        "elapsed_microseconds": 9848029,
+        "megabits_per_second": 19.906888,
+        "round_trip_time_ms": 12.066,
+        "bottleneck_queuing_delay_ms": 7.75168,
+        "congestion_window_bytes": 86880,
+        "in_flight_packets": 23
+      },
+      {
+        "snapshot_index": 83,
+        "elapsed_microseconds": 10063180,
+        "megabits_per_second": 15.347856,
+        "round_trip_time_ms": 22.866,
+        "bottleneck_queuing_delay_ms": 3.14912,
+        "congestion_window_bytes": 78192,
+        "in_flight_packets": 36
+      },
+      {
+        "snapshot_index": 84,
+        "elapsed_microseconds": 10328982,
+        "megabits_per_second": 20.75556,
+        "round_trip_time_ms": 13.531,
+        "bottleneck_queuing_delay_ms": 5.08704,
+        "congestion_window_bytes": 5792,
+        "in_flight_packets": 4
+      },
+      {
+        "snapshot_index": 85,
+        "elapsed_microseconds": 10590206,
+        "megabits_per_second": 15.932456,
+        "round_trip_time_ms": 16.448,
+        "bottleneck_queuing_delay_ms": 4.8448,
+        "congestion_window_bytes": 75296,
+        "in_flight_packets": 20
+      },
+      {
+        "snapshot_index": 86,
+        "elapsed_microseconds": 10769759,
+        "megabits_per_second": 15.267376,
+        "round_trip_time_ms": 21.252,
+        "bottleneck_queuing_delay_ms": 1.69568,
+        "congestion_window_bytes": 75296,
+        "in_flight_packets": 33
+      },
+      {
+        "snapshot_index": 87,
+        "elapsed_microseconds": 10931823,
+        "megabits_per_second": 8.81888,
+        "round_trip_time_ms": 13.716,
+        "bottleneck_queuing_delay_ms": 2.18016,
+        "congestion_window_bytes": 72400,
+        "in_flight_packets": 10
+      },
+      {
+        "snapshot_index": 88,
+        "elapsed_microseconds": 11109314,
+        "megabits_per_second": 15.971808,
+        "round_trip_time_ms": 13.159,
+        "bottleneck_queuing_delay_ms": 6.29824,
+        "congestion_window_bytes": 78192,
+        "in_flight_packets": 23
+      },
+      {
+        "snapshot_index": 89,
+        "elapsed_microseconds": 11272767,
+        "megabits_per_second": 15.891888,
+        "round_trip_time_ms": 22.437,
+        "bottleneck_queuing_delay_ms": 10.9008,
+        "congestion_window_bytes": 86880,
+        "in_flight_packets": 35
+      },
+      {
+        "snapshot_index": 90,
+        "elapsed_microseconds": 11469016,
+        "megabits_per_second": 19.905088,
+        "round_trip_time_ms": 15.213,
+        "bottleneck_queuing_delay_ms": 4.11808,
+        "congestion_window_bytes": 89776,
+        "in_flight_packets": 23
+      },
+      {
+        "snapshot_index": 91,
+        "elapsed_microseconds": 11659478,
+        "megabits_per_second": 15.97364,
+        "round_trip_time_ms": 22.914,
+        "bottleneck_queuing_delay_ms": 11.86976,
+        "congestion_window_bytes": 78192,
+        "in_flight_packets": 32
+      },
+      {
+        "snapshot_index": 92,
+        "elapsed_microseconds": 11819300,
+        "megabits_per_second": 22.785968,
+        "round_trip_time_ms": 23.099,
+        "bottleneck_queuing_delay_ms": 15.50336,
+        "congestion_window_bytes": 89776,
+        "in_flight_packets": 35
+      },
+      {
+        "snapshot_index": 93,
+        "elapsed_microseconds": 11948321,
+        "megabits_per_second": 19.224448,
+        "round_trip_time_ms": 29.26,
+        "bottleneck_queuing_delay_ms": 20.10592,
+        "congestion_window_bytes": 81088,
+        "in_flight_packets": 53
+      },
+      {
+        "snapshot_index": 94,
+        "elapsed_microseconds": 12091549,
+        "megabits_per_second": 18.86952,
+        "round_trip_time_ms": 28.072,
+        "bottleneck_queuing_delay_ms": 14.5344,
+        "congestion_window_bytes": 89776,
+        "in_flight_packets": 38
+      },
+      {
+        "snapshot_index": 95,
+        "elapsed_microseconds": 12225477,
+        "megabits_per_second": 16.584368,
+        "round_trip_time_ms": 29.044,
+        "bottleneck_queuing_delay_ms": 17.68352,
+        "congestion_window_bytes": 86880,
+        "in_flight_packets": 59
+      },
+      {
+        "snapshot_index": 96,
+        "elapsed_microseconds": 12351939,
+        "megabits_per_second": 20.581456,
+        "round_trip_time_ms": 26.037,
+        "bottleneck_queuing_delay_ms": 16.23008,
+        "congestion_window_bytes": 81088,
+        "in_flight_packets": 49
+      },
+      {
+        "snapshot_index": 97,
+        "elapsed_microseconds": 12473731,
+        "megabits_per_second": 18.644176,
+        "round_trip_time_ms": 30.094,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 78192,
+        "in_flight_packets": 54
+      },
+      {
+        "snapshot_index": 98,
+        "elapsed_microseconds": 12591634,
+        "megabits_per_second": 18.713448,
+        "round_trip_time_ms": 30.921,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 75296,
+        "in_flight_packets": 94
+      },
+      {
+        "snapshot_index": 99,
+        "elapsed_microseconds": 12708706,
+        "megabits_per_second": 16.658568,
+        "round_trip_time_ms": 31.022,
+        "bottleneck_queuing_delay_ms": 19.3792,
+        "congestion_window_bytes": 69504,
+        "in_flight_packets": 83
+      },
+      {
+        "snapshot_index": 100,
+        "elapsed_microseconds": 12825969,
+        "megabits_per_second": 18.296216,
+        "round_trip_time_ms": 26.643,
+        "bottleneck_queuing_delay_ms": 20.83264,
+        "congestion_window_bytes": 75296,
+        "in_flight_packets": 51
+      },
+      {
+        "snapshot_index": 101,
+        "elapsed_microseconds": 12944468,
+        "megabits_per_second": 19.052624,
+        "round_trip_time_ms": 30.924,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 78192,
+        "in_flight_packets": 74
+      },
+      {
+        "snapshot_index": 102,
+        "elapsed_microseconds": 13061808,
+        "megabits_per_second": 17.947192,
+        "round_trip_time_ms": 30.97,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 69504,
+        "in_flight_packets": 72
+      },
+      {
+        "snapshot_index": 103,
+        "elapsed_microseconds": 13178827,
+        "megabits_per_second": 17.686064,
+        "round_trip_time_ms": 30.896,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 66608,
+        "in_flight_packets": 61
+      },
+      {
+        "snapshot_index": 104,
+        "elapsed_microseconds": 13297118,
+        "megabits_per_second": 19.256912,
+        "round_trip_time_ms": 22.974,
+        "bottleneck_queuing_delay_ms": 15.7456,
+        "congestion_window_bytes": 75296,
+        "in_flight_packets": 41
+      },
+      {
+        "snapshot_index": 105,
+        "elapsed_microseconds": 13424034,
+        "megabits_per_second": 19.057104,
+        "round_trip_time_ms": 29.289,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 72400,
+        "in_flight_packets": 45
+      },
+      {
+        "snapshot_index": 106,
+        "elapsed_microseconds": 13542730,
+        "megabits_per_second": 17.779368,
+        "round_trip_time_ms": 31.058,
+        "bottleneck_queuing_delay_ms": 19.3792,
+        "congestion_window_bytes": 65160,
+        "in_flight_packets": 67
+      },
+      {
+        "snapshot_index": 107,
+        "elapsed_microseconds": 13666195,
+        "megabits_per_second": 15.757984,
+        "round_trip_time_ms": 30.891,
+        "bottleneck_queuing_delay_ms": 20.11712,
+        "congestion_window_bytes": 63712,
+        "in_flight_packets": 52
+      },
+      {
+        "snapshot_index": 108,
+        "elapsed_microseconds": 13787505,
+        "megabits_per_second": 17.714728,
+        "round_trip_time_ms": 23.411,
+        "bottleneck_queuing_delay_ms": 18.65248,
+        "congestion_window_bytes": 83984,
+        "in_flight_packets": 43
+      },
+      {
+        "snapshot_index": 109,
+        "elapsed_microseconds": 13905026,
+        "megabits_per_second": 16.3228,
+        "round_trip_time_ms": 30.836,
+        "bottleneck_queuing_delay_ms": 20.83264,
+        "congestion_window_bytes": 83984,
+        "in_flight_packets": 85
+      },
+      {
+        "snapshot_index": 110,
+        "elapsed_microseconds": 14021649,
+        "megabits_per_second": 20.746576,
+        "round_trip_time_ms": 30.748,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 72400,
+        "in_flight_packets": 108
+      },
+      {
+        "snapshot_index": 111,
+        "elapsed_microseconds": 14145082,
+        "megabits_per_second": 15.806552,
+        "round_trip_time_ms": 31.213,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 72400,
+        "in_flight_packets": 92
+      },
+      {
+        "snapshot_index": 112,
+        "elapsed_microseconds": 14268329,
+        "megabits_per_second": 20.29588,
+        "round_trip_time_ms": 22.335,
+        "bottleneck_queuing_delay_ms": 18.65248,
+        "congestion_window_bytes": 81088,
+        "in_flight_packets": 43
+      },
+      {
+        "snapshot_index": 113,
+        "elapsed_microseconds": 14395363,
+        "megabits_per_second": 17.368976,
+        "round_trip_time_ms": 30.914,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 78192,
+        "in_flight_packets": 91
+      },
+      {
+        "snapshot_index": 114,
+        "elapsed_microseconds": 14515249,
+        "megabits_per_second": 17.03476,
+        "round_trip_time_ms": 30.843,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 69504,
+        "in_flight_packets": 86
+      },
+      {
+        "snapshot_index": 115,
+        "elapsed_microseconds": 14633253,
+        "megabits_per_second": 15.573376,
+        "round_trip_time_ms": 31.038,
+        "bottleneck_queuing_delay_ms": 20.10592,
+        "congestion_window_bytes": 69504,
+        "in_flight_packets": 92
+      },
+      {
+        "snapshot_index": 116,
+        "elapsed_microseconds": 14753655,
+        "megabits_per_second": 18.860016,
+        "round_trip_time_ms": 25.51,
+        "bottleneck_queuing_delay_ms": 19.3792,
+        "congestion_window_bytes": 72400,
+        "in_flight_packets": 46
+      },
+      {
+        "snapshot_index": 117,
+        "elapsed_microseconds": 14872192,
+        "megabits_per_second": 16.266472,
+        "round_trip_time_ms": 30.985,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 63712,
+        "in_flight_packets": 88
+      },
+      {
+        "snapshot_index": 118,
+        "elapsed_microseconds": 14990089,
+        "megabits_per_second": 24.255448,
+        "round_trip_time_ms": 10.603,
+        "bottleneck_queuing_delay_ms": 0,
+        "congestion_window_bytes": 118736,
+        "in_flight_packets": 25
+      },
+      {
+        "snapshot_index": 119,
+        "elapsed_microseconds": 15111021,
+        "megabits_per_second": 48.300776,
+        "round_trip_time_ms": 13.707,
+        "bottleneck_queuing_delay_ms": 3.14912,
+        "congestion_window_bytes": 153488,
+        "in_flight_packets": 58
+      },
+      {
+        "snapshot_index": 120,
+        "elapsed_microseconds": 15229420,
+        "megabits_per_second": 46.275416,
+        "round_trip_time_ms": 13.417,
+        "bottleneck_queuing_delay_ms": 4.11808,
+        "congestion_window_bytes": 165072,
+        "in_flight_packets": 65
+      },
+      {
+        "snapshot_index": 121,
+        "elapsed_microseconds": 15347381,
+        "megabits_per_second": 44.577488,
+        "round_trip_time_ms": 13.743,
+        "bottleneck_queuing_delay_ms": 3.39136,
+        "congestion_window_bytes": 150592,
+        "in_flight_packets": 57
+      },
+      {
+        "snapshot_index": 122,
+        "elapsed_microseconds": 15468910,
+        "megabits_per_second": 47.776888,
+        "round_trip_time_ms": 14.533,
+        "bottleneck_queuing_delay_ms": 6.78272,
+        "congestion_window_bytes": 156384,
+        "in_flight_packets": 61
+      },
+      {
+        "snapshot_index": 123,
+        "elapsed_microseconds": 15586715,
+        "megabits_per_second": 47.760112,
+        "round_trip_time_ms": 18.422,
+        "bottleneck_queuing_delay_ms": 5.81376,
+        "congestion_window_bytes": 150592,
+        "in_flight_packets": 67
+      },
+      {
+        "snapshot_index": 124,
+        "elapsed_microseconds": 15705912,
+        "megabits_per_second": 47.667896,
+        "round_trip_time_ms": 16.205,
+        "bottleneck_queuing_delay_ms": 5.57056,
+        "congestion_window_bytes": 153488,
+        "in_flight_packets": 69
+      },
+      {
+        "snapshot_index": 125,
+        "elapsed_microseconds": 15823072,
+        "megabits_per_second": 46.177264,
+        "round_trip_time_ms": 15.678,
+        "bottleneck_queuing_delay_ms": 5.32928,
+        "congestion_window_bytes": 144800,
+        "in_flight_packets": 72
+      },
+      {
+        "snapshot_index": 126,
+        "elapsed_microseconds": 15940933,
+        "megabits_per_second": 45.711504,
+        "round_trip_time_ms": 15.326,
+        "bottleneck_queuing_delay_ms": 5.32928,
+        "congestion_window_bytes": 150592,
+        "in_flight_packets": 62
+      },
+      {
+        "snapshot_index": 127,
+        "elapsed_microseconds": 16058107,
+        "megabits_per_second": 47.55336,
+        "round_trip_time_ms": 15.497,
+        "bottleneck_queuing_delay_ms": 7.99392,
+        "congestion_window_bytes": 147696,
+        "in_flight_packets": 64
+      },
+      {
+        "snapshot_index": 128,
+        "elapsed_microseconds": 16175113,
+        "megabits_per_second": 47.947608,
+        "round_trip_time_ms": 16.641,
+        "bottleneck_queuing_delay_ms": 4.60256,
+        "congestion_window_bytes": 147696,
+        "in_flight_packets": 63
+      },
+      {
+        "snapshot_index": 129,
+        "elapsed_microseconds": 16293549,
+        "megabits_per_second": 47.762712,
+        "round_trip_time_ms": 14.967,
+        "bottleneck_queuing_delay_ms": 5.08704,
+        "congestion_window_bytes": 159280,
+        "in_flight_packets": 63
+      },
+      {
+        "snapshot_index": 130,
+        "elapsed_microseconds": 16411327,
+        "megabits_per_second": 47.867768,
+        "round_trip_time_ms": 15.487,
+        "bottleneck_queuing_delay_ms": 5.32928,
+        "congestion_window_bytes": 153488,
+        "in_flight_packets": 66
+      },
+      {
+        "snapshot_index": 131,
+        "elapsed_microseconds": 16528994,
+        "megabits_per_second": 46.40248,
+        "round_trip_time_ms": 15.622,
+        "bottleneck_queuing_delay_ms": 5.32928,
+        "congestion_window_bytes": 147696,
+        "in_flight_packets": 66
+      },
+      {
+        "snapshot_index": 132,
+        "elapsed_microseconds": 16648794,
+        "megabits_per_second": 47.882528,
+        "round_trip_time_ms": 15.715,
+        "bottleneck_queuing_delay_ms": 6.78272,
+        "congestion_window_bytes": 159280,
+        "in_flight_packets": 70
+      },
+      {
+        "snapshot_index": 133,
+        "elapsed_microseconds": 16767704,
+        "megabits_per_second": 45.028872,
+        "round_trip_time_ms": 16.772,
+        "bottleneck_queuing_delay_ms": 5.57056,
+        "congestion_window_bytes": 147696,
+        "in_flight_packets": 67
+      },
+      {
+        "snapshot_index": 134,
+        "elapsed_microseconds": 16886465,
+        "megabits_per_second": 46.300064,
+        "round_trip_time_ms": 16.028,
+        "bottleneck_queuing_delay_ms": 5.81376,
+        "congestion_window_bytes": 147696,
+        "in_flight_packets": 68
+      },
+      {
+        "snapshot_index": 135,
+        "elapsed_microseconds": 17003652,
+        "megabits_per_second": 47.924736,
+        "round_trip_time_ms": 16.852,
+        "bottleneck_queuing_delay_ms": 5.57056,
+        "congestion_window_bytes": 150592,
+        "in_flight_packets": 65
+      },
+      {
+        "snapshot_index": 136,
+        "elapsed_microseconds": 17121481,
+        "megabits_per_second": 47.864896,
+        "round_trip_time_ms": 16.623,
+        "bottleneck_queuing_delay_ms": 6.54048,
+        "congestion_window_bytes": 150592,
+        "in_flight_packets": 67
+      },
+      {
+        "snapshot_index": 137,
+        "elapsed_microseconds": 17240034,
+        "megabits_per_second": 46.552328,
+        "round_trip_time_ms": 16.365,
+        "bottleneck_queuing_delay_ms": 6.29824,
+        "congestion_window_bytes": 156384,
+        "in_flight_packets": 74
+      }
+    ],
+    "5089": [
+      {
+        "snapshot_index": 1,
+        "elapsed_microseconds": 338,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 0,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 2,
+        "elapsed_microseconds": 175813,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 0,
+        "congestion_window_bytes": 5240,
+        "in_flight_packets": 1
+      },
+      {
+        "snapshot_index": 3,
+        "elapsed_microseconds": 299378,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 20.10592,
+        "congestion_window_bytes": 5240,
+        "in_flight_packets": 1
+      },
+      {
+        "snapshot_index": 4,
+        "elapsed_microseconds": 417232,
+        "megabits_per_second": 1.470472,
+        "round_trip_time_ms": 92.447,
+        "bottleneck_queuing_delay_ms": 6.056,
+        "congestion_window_bytes": 28960,
+        "in_flight_packets": 12
+      },
+      {
+        "snapshot_index": 5,
+        "elapsed_microseconds": 538421,
+        "megabits_per_second": 3.232592,
+        "round_trip_time_ms": 69.043,
+        "bottleneck_queuing_delay_ms": 18.41024,
+        "congestion_window_bytes": 60816,
+        "in_flight_packets": 34
+      },
+      {
+        "snapshot_index": 6,
+        "elapsed_microseconds": 657168,
+        "megabits_per_second": 7.54472,
+        "round_trip_time_ms": 79.488,
+        "bottleneck_queuing_delay_ms": 19.3792,
+        "congestion_window_bytes": 157832,
+        "in_flight_packets": 105
+      },
+      {
+        "snapshot_index": 7,
+        "elapsed_microseconds": 775413,
+        "megabits_per_second": 13.736424,
+        "round_trip_time_ms": 78.604,
+        "bottleneck_queuing_delay_ms": 12.112,
+        "congestion_window_bytes": 194032,
+        "in_flight_packets": 125
+      },
+      {
+        "snapshot_index": 8,
+        "elapsed_microseconds": 893213,
+        "megabits_per_second": 9.253088,
+        "round_trip_time_ms": 78.805,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 298288,
+        "in_flight_packets": 236
+      },
+      {
+        "snapshot_index": 9,
+        "elapsed_microseconds": 1012995,
+        "megabits_per_second": 17.496784,
+        "round_trip_time_ms": 81.305,
+        "bottleneck_queuing_delay_ms": 13.56544,
+        "congestion_window_bytes": 434400,
+        "in_flight_packets": 257
+      },
+      {
+        "snapshot_index": 10,
+        "elapsed_microseconds": 1133546,
+        "megabits_per_second": 6.908448,
+        "round_trip_time_ms": 80.739,
+        "bottleneck_queuing_delay_ms": 14.77664,
+        "congestion_window_bytes": 480736,
+        "in_flight_packets": 237
+      },
+      {
+        "snapshot_index": 11,
+        "elapsed_microseconds": 1254626,
+        "megabits_per_second": 7.77368,
+        "round_trip_time_ms": 80.723,
+        "bottleneck_queuing_delay_ms": 12.112,
+        "congestion_window_bytes": 325800,
+        "in_flight_packets": 257
+      },
+      {
+        "snapshot_index": 12,
+        "elapsed_microseconds": 1376652,
+        "megabits_per_second": 8.78604,
+        "round_trip_time_ms": 78.177,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 280912,
+        "in_flight_packets": 270
+      },
+      {
+        "snapshot_index": 13,
+        "elapsed_microseconds": 1495731,
+        "megabits_per_second": 17.502352,
+        "round_trip_time_ms": 80.465,
+        "bottleneck_queuing_delay_ms": 20.83264,
+        "congestion_window_bytes": 483632,
+        "in_flight_packets": 382
+      },
+      {
+        "snapshot_index": 14,
+        "elapsed_microseconds": 1616832,
+        "megabits_per_second": 21.950528,
+        "round_trip_time_ms": 80.34,
+        "bottleneck_queuing_delay_ms": 18.41024,
+        "congestion_window_bytes": 483632,
+        "in_flight_packets": 416
+      },
+      {
+        "snapshot_index": 15,
+        "elapsed_microseconds": 1737038,
+        "megabits_per_second": 24.662576,
+        "round_trip_time_ms": 79.637,
+        "bottleneck_queuing_delay_ms": 19.86368,
+        "congestion_window_bytes": 483632,
+        "in_flight_packets": 506
+      },
+      {
+        "snapshot_index": 16,
+        "elapsed_microseconds": 1855775,
+        "megabits_per_second": 24.650768,
+        "round_trip_time_ms": 80.932,
+        "bottleneck_queuing_delay_ms": 18.89472,
+        "congestion_window_bytes": 246160,
+        "in_flight_packets": 335
+      },
+      {
+        "snapshot_index": 17,
+        "elapsed_microseconds": 1975432,
+        "megabits_per_second": 23.508,
+        "round_trip_time_ms": 78.899,
+        "bottleneck_queuing_delay_ms": 17.44128,
+        "congestion_window_bytes": 483632,
+        "in_flight_packets": 143
+      },
+      {
+        "snapshot_index": 18,
+        "elapsed_microseconds": 2095072,
+        "megabits_per_second": 23.403792,
+        "round_trip_time_ms": 78.733,
+        "bottleneck_queuing_delay_ms": 19.62144,
+        "congestion_window_bytes": 419920,
+        "in_flight_packets": 168
+      },
+      {
+        "snapshot_index": 19,
+        "elapsed_microseconds": 2214536,
+        "megabits_per_second": 24.483784,
+        "round_trip_time_ms": 80.357,
+        "bottleneck_queuing_delay_ms": 19.3792,
+        "congestion_window_bytes": 419920,
+        "in_flight_packets": 171
+      },
+      {
+        "snapshot_index": 20,
+        "elapsed_microseconds": 2336193,
+        "megabits_per_second": 24.374384,
+        "round_trip_time_ms": 81.092,
+        "bottleneck_queuing_delay_ms": 19.86368,
+        "congestion_window_bytes": 253400,
+        "in_flight_packets": 301
+      },
+      {
+        "snapshot_index": 21,
+        "elapsed_microseconds": 2455127,
+        "megabits_per_second": 24.451488,
+        "round_trip_time_ms": 81.155,
+        "bottleneck_queuing_delay_ms": 15.26112,
+        "congestion_window_bytes": 228784,
+        "in_flight_packets": 246
+      },
+      {
+        "snapshot_index": 22,
+        "elapsed_microseconds": 2574004,
+        "megabits_per_second": 21.622568,
+        "round_trip_time_ms": 77.87,
+        "bottleneck_queuing_delay_ms": 20.10592,
+        "congestion_window_bytes": 414128,
+        "in_flight_packets": 168
+      },
+      {
+        "snapshot_index": 23,
+        "elapsed_microseconds": 2693889,
+        "megabits_per_second": 24.48352,
+        "round_trip_time_ms": 80.036,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 414128,
+        "in_flight_packets": 172
+      },
+      {
+        "snapshot_index": 24,
+        "elapsed_microseconds": 2813426,
+        "megabits_per_second": 24.733392,
+        "round_trip_time_ms": 81.114,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 251952,
+        "in_flight_packets": 373
+      },
+      {
+        "snapshot_index": 25,
+        "elapsed_microseconds": 2934283,
+        "megabits_per_second": 25.514464,
+        "round_trip_time_ms": 81.413,
+        "bottleneck_queuing_delay_ms": 15.50336,
+        "congestion_window_bytes": 260640,
+        "in_flight_packets": 220
+      },
+      {
+        "snapshot_index": 26,
+        "elapsed_microseconds": 3052411,
+        "megabits_per_second": 20.939256,
+        "round_trip_time_ms": 77.328,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 367792,
+        "in_flight_packets": 349
+      },
+      {
+        "snapshot_index": 27,
+        "elapsed_microseconds": 3171816,
+        "megabits_per_second": 26.783808,
+        "round_trip_time_ms": 81.559,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 280912,
+        "in_flight_packets": 379
+      },
+      {
+        "snapshot_index": 28,
+        "elapsed_microseconds": 3292096,
+        "megabits_per_second": 26.015568,
+        "round_trip_time_ms": 81.122,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 463360,
+        "in_flight_packets": 339
+      },
+      {
+        "snapshot_index": 29,
+        "elapsed_microseconds": 3410341,
+        "megabits_per_second": 26.794792,
+        "round_trip_time_ms": 81.455,
+        "bottleneck_queuing_delay_ms": 17.68352,
+        "congestion_window_bytes": 463360,
+        "in_flight_packets": 427
+      },
+      {
+        "snapshot_index": 30,
+        "elapsed_microseconds": 3528915,
+        "megabits_per_second": 24.162344,
+        "round_trip_time_ms": 73.571,
+        "bottleneck_queuing_delay_ms": 18.168,
+        "congestion_window_bytes": 489424,
+        "in_flight_packets": 365
+      },
+      {
+        "snapshot_index": 31,
+        "elapsed_microseconds": 3648096,
+        "megabits_per_second": 26.820512,
+        "round_trip_time_ms": 78.974,
+        "bottleneck_queuing_delay_ms": 19.86368,
+        "congestion_window_bytes": 489424,
+        "in_flight_packets": 198
+      },
+      {
+        "snapshot_index": 32,
+        "elapsed_microseconds": 3769234,
+        "megabits_per_second": 28.011088,
+        "round_trip_time_ms": 81.18,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 306976,
+        "in_flight_packets": 437
+      },
+      {
+        "snapshot_index": 33,
+        "elapsed_microseconds": 3887903,
+        "megabits_per_second": 28.225352,
+        "round_trip_time_ms": 80.829,
+        "bottleneck_queuing_delay_ms": 20.83264,
+        "congestion_window_bytes": 495216,
+        "in_flight_packets": 278
+      },
+      {
+        "snapshot_index": 34,
+        "elapsed_microseconds": 4008215,
+        "megabits_per_second": 30.869416,
+        "round_trip_time_ms": 80.264,
+        "bottleneck_queuing_delay_ms": 17.19904,
+        "congestion_window_bytes": 535760,
+        "in_flight_packets": 365
+      },
+      {
+        "snapshot_index": 35,
+        "elapsed_microseconds": 4126515,
+        "megabits_per_second": 27.933408,
+        "round_trip_time_ms": 81.077,
+        "bottleneck_queuing_delay_ms": 20.10592,
+        "congestion_window_bytes": 535760,
+        "in_flight_packets": 258
+      },
+      {
+        "snapshot_index": 36,
+        "elapsed_microseconds": 4245057,
+        "megabits_per_second": 28.0408,
+        "round_trip_time_ms": 80.888,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 432952,
+        "in_flight_packets": 435
+      },
+      {
+        "snapshot_index": 37,
+        "elapsed_microseconds": 4371280,
+        "megabits_per_second": 29.3392,
+        "round_trip_time_ms": 81.432,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 541552,
+        "in_flight_packets": 559
+      },
+      {
+        "snapshot_index": 38,
+        "elapsed_microseconds": 4491261,
+        "megabits_per_second": 31.408352,
+        "round_trip_time_ms": 80.982,
+        "bottleneck_queuing_delay_ms": 17.19904,
+        "congestion_window_bytes": 535760,
+        "in_flight_packets": 435
+      },
+      {
+        "snapshot_index": 39,
+        "elapsed_microseconds": 4610302,
+        "megabits_per_second": 27.528312,
+        "round_trip_time_ms": 80.344,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 535760,
+        "in_flight_packets": 223
+      },
+      {
+        "snapshot_index": 40,
+        "elapsed_microseconds": 4730213,
+        "megabits_per_second": 30.683432,
+        "round_trip_time_ms": 81.099,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 376480,
+        "in_flight_packets": 465
+      },
+      {
+        "snapshot_index": 41,
+        "elapsed_microseconds": 4849807,
+        "megabits_per_second": 30.06748,
+        "round_trip_time_ms": 81.316,
+        "bottleneck_queuing_delay_ms": 20.10592,
+        "congestion_window_bytes": 535760,
+        "in_flight_packets": 332
+      },
+      {
+        "snapshot_index": 42,
+        "elapsed_microseconds": 4969724,
+        "megabits_per_second": 30.178104,
+        "round_trip_time_ms": 81.039,
+        "bottleneck_queuing_delay_ms": 14.5344,
+        "congestion_window_bytes": 535760,
+        "in_flight_packets": 459
+      },
+      {
+        "snapshot_index": 43,
+        "elapsed_microseconds": 5089156,
+        "megabits_per_second": 26.337248,
+        "round_trip_time_ms": 75.185,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 538656,
+        "in_flight_packets": 385
+      },
+      {
+        "snapshot_index": 44,
+        "elapsed_microseconds": 5210739,
+        "megabits_per_second": 29.579448,
+        "round_trip_time_ms": 81.588,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 328696,
+        "in_flight_packets": 310
+      },
+      {
+        "snapshot_index": 45,
+        "elapsed_microseconds": 5331433,
+        "megabits_per_second": 30.173736,
+        "round_trip_time_ms": 80.98,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 522728,
+        "in_flight_packets": 451
+      },
+      {
+        "snapshot_index": 46,
+        "elapsed_microseconds": 5450736,
+        "megabits_per_second": 30.251416,
+        "round_trip_time_ms": 80.849,
+        "bottleneck_queuing_delay_ms": 17.44128,
+        "congestion_window_bytes": 535760,
+        "in_flight_packets": 501
+      },
+      {
+        "snapshot_index": 47,
+        "elapsed_microseconds": 5570159,
+        "megabits_per_second": 25.951872,
+        "round_trip_time_ms": 73.057,
+        "bottleneck_queuing_delay_ms": 19.3792,
+        "congestion_window_bytes": 556032,
+        "in_flight_packets": 404
+      },
+      {
+        "snapshot_index": 48,
+        "elapsed_microseconds": 5690865,
+        "megabits_per_second": 29.98764,
+        "round_trip_time_ms": 81.404,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 556032,
+        "in_flight_packets": 275
+      },
+      {
+        "snapshot_index": 49,
+        "elapsed_microseconds": 5807829,
+        "megabits_per_second": 31.162168,
+        "round_trip_time_ms": 80.952,
+        "bottleneck_queuing_delay_ms": 20.10592,
+        "congestion_window_bytes": 460464,
+        "in_flight_packets": 412
+      },
+      {
+        "snapshot_index": 50,
+        "elapsed_microseconds": 5925413,
+        "megabits_per_second": 31.401384,
+        "round_trip_time_ms": 81.2,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 561824,
+        "in_flight_packets": 512
+      },
+      {
+        "snapshot_index": 51,
+        "elapsed_microseconds": 6043323,
+        "megabits_per_second": 32.21896,
+        "round_trip_time_ms": 79.627,
+        "bottleneck_queuing_delay_ms": 15.7456,
+        "congestion_window_bytes": 564720,
+        "in_flight_packets": 454
+      },
+      {
+        "snapshot_index": 52,
+        "elapsed_microseconds": 6160592,
+        "megabits_per_second": 31.09444,
+        "round_trip_time_ms": 78.71,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 564720,
+        "in_flight_packets": 231
+      },
+      {
+        "snapshot_index": 53,
+        "elapsed_microseconds": 6278226,
+        "megabits_per_second": 32.324808,
+        "round_trip_time_ms": 81.576,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 340280,
+        "in_flight_packets": 470
+      },
+      {
+        "snapshot_index": 54,
+        "elapsed_microseconds": 6396279,
+        "megabits_per_second": 31.240176,
+        "round_trip_time_ms": 81.196,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 570512,
+        "in_flight_packets": 488
+      },
+      {
+        "snapshot_index": 55,
+        "elapsed_microseconds": 6513679,
+        "megabits_per_second": 34.231,
+        "round_trip_time_ms": 81.094,
+        "bottleneck_queuing_delay_ms": 13.3232,
+        "congestion_window_bytes": 567616,
+        "in_flight_packets": 480
+      },
+      {
+        "snapshot_index": 56,
+        "elapsed_microseconds": 6631489,
+        "megabits_per_second": 29.880448,
+        "round_trip_time_ms": 75.664,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 584992,
+        "in_flight_packets": 231
+      },
+      {
+        "snapshot_index": 57,
+        "elapsed_microseconds": 6749100,
+        "megabits_per_second": 31.328024,
+        "round_trip_time_ms": 81.523,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 346072,
+        "in_flight_packets": 438
+      },
+      {
+        "snapshot_index": 58,
+        "elapsed_microseconds": 6866229,
+        "megabits_per_second": 30.718368,
+        "round_trip_time_ms": 80.719,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 584992,
+        "in_flight_packets": 470
+      },
+      {
+        "snapshot_index": 59,
+        "elapsed_microseconds": 6983958,
+        "megabits_per_second": 32.460536,
+        "round_trip_time_ms": 80.956,
+        "bottleneck_queuing_delay_ms": 16.9568,
+        "congestion_window_bytes": 584992,
+        "in_flight_packets": 526
+      },
+      {
+        "snapshot_index": 60,
+        "elapsed_microseconds": 7102502,
+        "megabits_per_second": 28.269672,
+        "round_trip_time_ms": 75.072,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 584992,
+        "in_flight_packets": 430
+      },
+      {
+        "snapshot_index": 61,
+        "elapsed_microseconds": 7220487,
+        "megabits_per_second": 32.732768,
+        "round_trip_time_ms": 81.445,
+        "bottleneck_queuing_delay_ms": 20.10592,
+        "congestion_window_bytes": 350416,
+        "in_flight_packets": 431
+      },
+      {
+        "snapshot_index": 62,
+        "elapsed_microseconds": 7338172,
+        "megabits_per_second": 31.806536,
+        "round_trip_time_ms": 80.667,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 582096,
+        "in_flight_packets": 492
+      },
+      {
+        "snapshot_index": 63,
+        "elapsed_microseconds": 7457287,
+        "megabits_per_second": 32.207592,
+        "round_trip_time_ms": 80.861,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 579200,
+        "in_flight_packets": 536
+      },
+      {
+        "snapshot_index": 64,
+        "elapsed_microseconds": 7574182,
+        "megabits_per_second": 31.680544,
+        "round_trip_time_ms": 77.934,
+        "bottleneck_queuing_delay_ms": 15.98784,
+        "congestion_window_bytes": 570512,
+        "in_flight_packets": 441
+      },
+      {
+        "snapshot_index": 65,
+        "elapsed_microseconds": 7693487,
+        "megabits_per_second": 31.813296,
+        "round_trip_time_ms": 78.101,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 570512,
+        "in_flight_packets": 231
+      },
+      {
+        "snapshot_index": 66,
+        "elapsed_microseconds": 7811464,
+        "megabits_per_second": 31.945632,
+        "round_trip_time_ms": 81.472,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 337384,
+        "in_flight_packets": 448
+      },
+      {
+        "snapshot_index": 67,
+        "elapsed_microseconds": 7929442,
+        "megabits_per_second": 31.691616,
+        "round_trip_time_ms": 80.325,
+        "bottleneck_queuing_delay_ms": 20.83264,
+        "congestion_window_bytes": 576304,
+        "in_flight_packets": 476
+      },
+      {
+        "snapshot_index": 68,
+        "elapsed_microseconds": 8047489,
+        "megabits_per_second": 34.651168,
+        "round_trip_time_ms": 81.046,
+        "bottleneck_queuing_delay_ms": 12.59648,
+        "congestion_window_bytes": 579200,
+        "in_flight_packets": 492
+      },
+      {
+        "snapshot_index": 69,
+        "elapsed_microseconds": 8164002,
+        "megabits_per_second": 31.0348,
+        "round_trip_time_ms": 75.429,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 584992,
+        "in_flight_packets": 229
+      },
+      {
+        "snapshot_index": 70,
+        "elapsed_microseconds": 8280826,
+        "megabits_per_second": 32.50192,
+        "round_trip_time_ms": 81.393,
+        "bottleneck_queuing_delay_ms": 20.10592,
+        "congestion_window_bytes": 351864,
+        "in_flight_packets": 382
+      },
+      {
+        "snapshot_index": 71,
+        "elapsed_microseconds": 8396686,
+        "megabits_per_second": 9.290464,
+        "round_trip_time_ms": 66.41,
+        "bottleneck_queuing_delay_ms": 2.4224,
+        "congestion_window_bytes": 596576,
+        "in_flight_packets": 91
+      },
+      {
+        "snapshot_index": 72,
+        "elapsed_microseconds": 8573148,
+        "megabits_per_second": 32.22048,
+        "round_trip_time_ms": 69.437,
+        "bottleneck_queuing_delay_ms": 18.89472,
+        "congestion_window_bytes": 651600,
+        "in_flight_packets": 233
+      },
+      {
+        "snapshot_index": 73,
+        "elapsed_microseconds": 8691608,
+        "megabits_per_second": 30.929648,
+        "round_trip_time_ms": 77.448,
+        "bottleneck_queuing_delay_ms": 16.47232,
+        "congestion_window_bytes": 298288,
+        "in_flight_packets": 335
+      },
+      {
+        "snapshot_index": 74,
+        "elapsed_microseconds": 8808480,
+        "megabits_per_second": 30.342128,
+        "round_trip_time_ms": 77.63,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 651600,
+        "in_flight_packets": 236
+      },
+      {
+        "snapshot_index": 75,
+        "elapsed_microseconds": 8925542,
+        "megabits_per_second": 32.82428,
+        "round_trip_time_ms": 81.56,
+        "bottleneck_queuing_delay_ms": 19.3792,
+        "congestion_window_bytes": 341728,
+        "in_flight_packets": 490
+      },
+      {
+        "snapshot_index": 76,
+        "elapsed_microseconds": 9042757,
+        "megabits_per_second": 31.393336,
+        "round_trip_time_ms": 79.249,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 558928,
+        "in_flight_packets": 421
+      },
+      {
+        "snapshot_index": 77,
+        "elapsed_microseconds": 9160103,
+        "megabits_per_second": 31.046792,
+        "round_trip_time_ms": 79.646,
+        "bottleneck_queuing_delay_ms": 19.62144,
+        "congestion_window_bytes": 553136,
+        "in_flight_packets": 455
+      },
+      {
+        "snapshot_index": 78,
+        "elapsed_microseconds": 9276920,
+        "megabits_per_second": 30.841768,
+        "round_trip_time_ms": 81.241,
+        "bottleneck_queuing_delay_ms": 20.83264,
+        "congestion_window_bytes": 553136,
+        "in_flight_packets": 289
+      },
+      {
+        "snapshot_index": 79,
+        "elapsed_microseconds": 9393747,
+        "megabits_per_second": 31.70648,
+        "round_trip_time_ms": 81.262,
+        "bottleneck_queuing_delay_ms": 20.83264,
+        "congestion_window_bytes": 553136,
+        "in_flight_packets": 474
+      },
+      {
+        "snapshot_index": 80,
+        "elapsed_microseconds": 9517172,
+        "megabits_per_second": 29.560904,
+        "round_trip_time_ms": 77.403,
+        "bottleneck_queuing_delay_ms": 14.77664,
+        "congestion_window_bytes": 561824,
+        "in_flight_packets": 416
+      },
+      {
+        "snapshot_index": 81,
+        "elapsed_microseconds": 9643360,
+        "megabits_per_second": 25.115464,
+        "round_trip_time_ms": 63.636,
+        "bottleneck_queuing_delay_ms": 5.32928,
+        "congestion_window_bytes": 564720,
+        "in_flight_packets": 143
+      },
+      {
+        "snapshot_index": 82,
+        "elapsed_microseconds": 9848029,
+        "megabits_per_second": 26.068624,
+        "round_trip_time_ms": 63.959,
+        "bottleneck_queuing_delay_ms": 7.75168,
+        "congestion_window_bytes": 561824,
+        "in_flight_packets": 143
+      },
+      {
+        "snapshot_index": 83,
+        "elapsed_microseconds": 10063180,
+        "megabits_per_second": 24.81208,
+        "round_trip_time_ms": 75.287,
+        "bottleneck_queuing_delay_ms": 3.14912,
+        "congestion_window_bytes": 256296,
+        "in_flight_packets": 343
+      },
+      {
+        "snapshot_index": 84,
+        "elapsed_microseconds": 10328982,
+        "megabits_per_second": 19.588816,
+        "round_trip_time_ms": 62.698,
+        "bottleneck_queuing_delay_ms": 5.08704,
+        "congestion_window_bytes": 509696,
+        "in_flight_packets": 75
+      },
+      {
+        "snapshot_index": 85,
+        "elapsed_microseconds": 10590206,
+        "megabits_per_second": 29.85432,
+        "round_trip_time_ms": 65.043,
+        "bottleneck_queuing_delay_ms": 4.8448,
+        "congestion_window_bytes": 521280,
+        "in_flight_packets": 162
+      },
+      {
+        "snapshot_index": 86,
+        "elapsed_microseconds": 10769759,
+        "megabits_per_second": 32.433264,
+        "round_trip_time_ms": 68.688,
+        "bottleneck_queuing_delay_ms": 1.69568,
+        "congestion_window_bytes": 529968,
+        "in_flight_packets": 170
+      },
+      {
+        "snapshot_index": 87,
+        "elapsed_microseconds": 10931823,
+        "megabits_per_second": 22.49828,
+        "round_trip_time_ms": 62.338,
+        "bottleneck_queuing_delay_ms": 2.18016,
+        "congestion_window_bytes": 544448,
+        "in_flight_packets": 96
+      },
+      {
+        "snapshot_index": 88,
+        "elapsed_microseconds": 11109314,
+        "megabits_per_second": 26.265528,
+        "round_trip_time_ms": 65.083,
+        "bottleneck_queuing_delay_ms": 6.29824,
+        "congestion_window_bytes": 544448,
+        "in_flight_packets": 148
+      },
+      {
+        "snapshot_index": 89,
+        "elapsed_microseconds": 11272767,
+        "megabits_per_second": 30.187456,
+        "round_trip_time_ms": 77.7,
+        "bottleneck_queuing_delay_ms": 10.9008,
+        "congestion_window_bytes": 550240,
+        "in_flight_packets": 173
+      },
+      {
+        "snapshot_index": 90,
+        "elapsed_microseconds": 11469016,
+        "megabits_per_second": 23.987944,
+        "round_trip_time_ms": 64.392,
+        "bottleneck_queuing_delay_ms": 4.11808,
+        "congestion_window_bytes": 529968,
+        "in_flight_packets": 153
+      },
+      {
+        "snapshot_index": 91,
+        "elapsed_microseconds": 11659478,
+        "megabits_per_second": 27.550392,
+        "round_trip_time_ms": 68.592,
+        "bottleneck_queuing_delay_ms": 11.86976,
+        "congestion_window_bytes": 538656,
+        "in_flight_packets": 184
+      },
+      {
+        "snapshot_index": 92,
+        "elapsed_microseconds": 11819300,
+        "megabits_per_second": 30.595904,
+        "round_trip_time_ms": 76.345,
+        "bottleneck_queuing_delay_ms": 15.50336,
+        "congestion_window_bytes": 529968,
+        "in_flight_packets": 175
+      },
+      {
+        "snapshot_index": 93,
+        "elapsed_microseconds": 11948321,
+        "megabits_per_second": 27.684528,
+        "round_trip_time_ms": 80.794,
+        "bottleneck_queuing_delay_ms": 20.10592,
+        "congestion_window_bytes": 529968,
+        "in_flight_packets": 207
+      },
+      {
+        "snapshot_index": 94,
+        "elapsed_microseconds": 12091549,
+        "megabits_per_second": 26.776112,
+        "round_trip_time_ms": 79.209,
+        "bottleneck_queuing_delay_ms": 14.5344,
+        "congestion_window_bytes": 461912,
+        "in_flight_packets": 515
+      },
+      {
+        "snapshot_index": 95,
+        "elapsed_microseconds": 12225477,
+        "megabits_per_second": 27.56536,
+        "round_trip_time_ms": 75.326,
+        "bottleneck_queuing_delay_ms": 17.68352,
+        "congestion_window_bytes": 529968,
+        "in_flight_packets": 238
+      },
+      {
+        "snapshot_index": 96,
+        "elapsed_microseconds": 12351939,
+        "megabits_per_second": 24.82416,
+        "round_trip_time_ms": 76.463,
+        "bottleneck_queuing_delay_ms": 16.23008,
+        "congestion_window_bytes": 259192,
+        "in_flight_packets": 378
+      },
+      {
+        "snapshot_index": 97,
+        "elapsed_microseconds": 12473731,
+        "megabits_per_second": 27.496968,
+        "round_trip_time_ms": 79.568,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 529968,
+        "in_flight_packets": 219
+      },
+      {
+        "snapshot_index": 98,
+        "elapsed_microseconds": 12591634,
+        "megabits_per_second": 30.280648,
+        "round_trip_time_ms": 80.301,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 369240,
+        "in_flight_packets": 446
+      },
+      {
+        "snapshot_index": 99,
+        "elapsed_microseconds": 12708706,
+        "megabits_per_second": 29.934656,
+        "round_trip_time_ms": 81.615,
+        "bottleneck_queuing_delay_ms": 19.3792,
+        "congestion_window_bytes": 529968,
+        "in_flight_packets": 503
+      },
+      {
+        "snapshot_index": 100,
+        "elapsed_microseconds": 12825969,
+        "megabits_per_second": 28.179024,
+        "round_trip_time_ms": 75.87,
+        "bottleneck_queuing_delay_ms": 20.83264,
+        "congestion_window_bytes": 506800,
+        "in_flight_packets": 416
+      },
+      {
+        "snapshot_index": 101,
+        "elapsed_microseconds": 12944468,
+        "megabits_per_second": 29.033296,
+        "round_trip_time_ms": 81.623,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 321456,
+        "in_flight_packets": 310
+      },
+      {
+        "snapshot_index": 102,
+        "elapsed_microseconds": 13061808,
+        "megabits_per_second": 28.748672,
+        "round_trip_time_ms": 81.038,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 501008,
+        "in_flight_packets": 435
+      },
+      {
+        "snapshot_index": 103,
+        "elapsed_microseconds": 13178827,
+        "megabits_per_second": 30.172992,
+        "round_trip_time_ms": 81.047,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 509696,
+        "in_flight_packets": 440
+      },
+      {
+        "snapshot_index": 104,
+        "elapsed_microseconds": 13297118,
+        "megabits_per_second": 28.206296,
+        "round_trip_time_ms": 77.559,
+        "bottleneck_queuing_delay_ms": 15.7456,
+        "congestion_window_bytes": 503904,
+        "in_flight_packets": 414
+      },
+      {
+        "snapshot_index": 105,
+        "elapsed_microseconds": 13424034,
+        "megabits_per_second": 29.574256,
+        "round_trip_time_ms": 76.896,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 503904,
+        "in_flight_packets": 208
+      },
+      {
+        "snapshot_index": 106,
+        "elapsed_microseconds": 13542730,
+        "megabits_per_second": 30.310008,
+        "round_trip_time_ms": 81.55,
+        "bottleneck_queuing_delay_ms": 19.3792,
+        "congestion_window_bytes": 320008,
+        "in_flight_packets": 348
+      },
+      {
+        "snapshot_index": 107,
+        "elapsed_microseconds": 13666195,
+        "megabits_per_second": 30.960936,
+        "round_trip_time_ms": 81.177,
+        "bottleneck_queuing_delay_ms": 20.11712,
+        "congestion_window_bytes": 509696,
+        "in_flight_packets": 484
+      },
+      {
+        "snapshot_index": 108,
+        "elapsed_microseconds": 13787505,
+        "megabits_per_second": 30.465848,
+        "round_trip_time_ms": 77.848,
+        "bottleneck_queuing_delay_ms": 18.65248,
+        "congestion_window_bytes": 304080,
+        "in_flight_packets": 438
+      },
+      {
+        "snapshot_index": 109,
+        "elapsed_microseconds": 13905026,
+        "megabits_per_second": 29.406696,
+        "round_trip_time_ms": 81.339,
+        "bottleneck_queuing_delay_ms": 20.83264,
+        "congestion_window_bytes": 356208,
+        "in_flight_packets": 287
+      },
+      {
+        "snapshot_index": 110,
+        "elapsed_microseconds": 14021649,
+        "megabits_per_second": 29.41732,
+        "round_trip_time_ms": 81.063,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 460464,
+        "in_flight_packets": 455
+      },
+      {
+        "snapshot_index": 111,
+        "elapsed_microseconds": 14145082,
+        "megabits_per_second": 30.924712,
+        "round_trip_time_ms": 81.176,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 550240,
+        "in_flight_packets": 470
+      },
+      {
+        "snapshot_index": 112,
+        "elapsed_microseconds": 14268329,
+        "megabits_per_second": 30.370824,
+        "round_trip_time_ms": 78.396,
+        "bottleneck_queuing_delay_ms": 18.65248,
+        "congestion_window_bytes": 547344,
+        "in_flight_packets": 418
+      },
+      {
+        "snapshot_index": 113,
+        "elapsed_microseconds": 14395363,
+        "megabits_per_second": 29.370616,
+        "round_trip_time_ms": 81.365,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 356208,
+        "in_flight_packets": 280
+      },
+      {
+        "snapshot_index": 114,
+        "elapsed_microseconds": 14515249,
+        "megabits_per_second": 29.90264,
+        "round_trip_time_ms": 80.798,
+        "bottleneck_queuing_delay_ms": 20.34816,
+        "congestion_window_bytes": 444536,
+        "in_flight_packets": 500
+      },
+      {
+        "snapshot_index": 115,
+        "elapsed_microseconds": 14633253,
+        "megabits_per_second": 31.068144,
+        "round_trip_time_ms": 81.248,
+        "bottleneck_queuing_delay_ms": 20.10592,
+        "congestion_window_bytes": 553136,
+        "in_flight_packets": 494
+      },
+      {
+        "snapshot_index": 116,
+        "elapsed_microseconds": 14753655,
+        "megabits_per_second": 30.46568,
+        "round_trip_time_ms": 79.867,
+        "bottleneck_queuing_delay_ms": 19.3792,
+        "congestion_window_bytes": 532864,
+        "in_flight_packets": 572
+      },
+      {
+        "snapshot_index": 117,
+        "elapsed_microseconds": 14872192,
+        "megabits_per_second": 29.217248,
+        "round_trip_time_ms": 81.479,
+        "bottleneck_queuing_delay_ms": 20.5904,
+        "congestion_window_bytes": 532864,
+        "in_flight_packets": 285
+      },
+      {
+        "snapshot_index": 118,
+        "elapsed_microseconds": 14990089,
+        "megabits_per_second": 25.683864,
+        "round_trip_time_ms": 81.509,
+        "bottleneck_queuing_delay_ms": 0,
+        "congestion_window_bytes": 524176,
+        "in_flight_packets": 327
+      },
+      {
+        "snapshot_index": 119,
+        "elapsed_microseconds": 15111021,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 3.14912,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 120,
+        "elapsed_microseconds": 15229420,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 4.11808,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 121,
+        "elapsed_microseconds": 15347381,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 3.39136,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 122,
+        "elapsed_microseconds": 15468910,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 6.78272,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 123,
+        "elapsed_microseconds": 15586715,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 5.81376,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 124,
+        "elapsed_microseconds": 15705912,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 5.57056,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 125,
+        "elapsed_microseconds": 15823072,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 5.32928,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 126,
+        "elapsed_microseconds": 15940933,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 5.32928,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 127,
+        "elapsed_microseconds": 16058107,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 7.99392,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 128,
+        "elapsed_microseconds": 16175113,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 4.60256,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 129,
+        "elapsed_microseconds": 16293549,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 5.08704,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 130,
+        "elapsed_microseconds": 16411327,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 5.32928,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 131,
+        "elapsed_microseconds": 16528994,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 5.32928,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 132,
+        "elapsed_microseconds": 16648794,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 6.78272,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 133,
+        "elapsed_microseconds": 16767704,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 5.57056,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 134,
+        "elapsed_microseconds": 16886465,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 5.81376,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 135,
+        "elapsed_microseconds": 17003652,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 5.57056,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 136,
+        "elapsed_microseconds": 17121481,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 6.54048,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      },
+      {
+        "snapshot_index": 137,
+        "elapsed_microseconds": 17240034,
+        "megabits_per_second": 0,
+        "round_trip_time_ms": 0,
+        "bottleneck_queuing_delay_ms": 6.29824,
+        "congestion_window_bytes": 0,
+        "in_flight_packets": 0
+      }
+    ]
+  }
+}

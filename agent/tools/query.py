@@ -1,7 +1,7 @@
-import math
 import os
 import httpx
 from strands import tool
+from run_analysis import summarize_run
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
 _supabase_key: str | None = None
@@ -71,6 +71,26 @@ def get_job_status(job_id: str) -> dict:
     return jobs[0]
 
 
+MAX_SNAPSHOT_ROWS = 100_000
+
+
+def _snapshot_pages(run_id):
+    rows = []
+    while True:
+        limit = min(1000, MAX_SNAPSHOT_ROWS - len(rows) + 1)
+        page = _supabase_get(
+            f"emulated_snapshot_stats?emulated_run_id=eq.{run_id}"
+            "&select=snapshot_index,elapsed_microseconds,megabits_per_second,"
+            "round_trip_time_ms,bottleneck_queuing_delay_ms,congestion_window_bytes,in_flight_packets"
+            f"&order=snapshot_index,id&limit={limit}&offset={len(rows)}"
+        )
+        if not page:
+            return rows, True
+        rows.extend(page)
+        if len(rows) > MAX_SNAPSHOT_ROWS:
+            return rows[:MAX_SNAPSHOT_ROWS], False
+
+
 @tool
 def get_run_results(parent_run_id: int) -> dict:
     """Get the results of a completed benchmark run including per-client metrics.
@@ -89,61 +109,25 @@ def get_run_results(parent_run_id: int) -> dict:
         f"emulated_runs?emulated_parent_run_id=eq.{parent_run_id}"
         f"&select=id,client_number,delay_added,client_file_size_megabytes,"
         f"client_start_delay_ms,flow_completion_time_ms,"
-        f"congestion_control_algorithm_id,congestion_control_algorithms(name)"
+        f"congestion_control_algorithm_id,congestion_control_algorithms(name)&order=client_number"
     )
 
-    # Get snapshot stats (summarized — too many rows for full data)
-    results = []
+    # Retrieve every page, including when the server caps pages below our limit.
+    snapshots, incomplete = {}, []
     for run in runs:
-        stats = _supabase_get(
-            f"emulated_snapshot_stats?emulated_run_id=eq.{run['id']}"
-            f"&select=megabits_per_second,round_trip_time_ms,bottleneck_queuing_delay_ms,"
-            f"congestion_window_bytes,in_flight_packets"
-            f"&order=snapshot_index"
-        )
-        # Compute summary statistics
-        if stats:
-            throughputs = [float(s["megabits_per_second"]) for s in stats if s["megabits_per_second"]]
-            rtts = [float(s["round_trip_time_ms"]) for s in stats if s["round_trip_time_ms"]]
-            cca_name = run.get("congestion_control_algorithms", {}).get("name", "unknown")
+        rows, complete = _snapshot_pages(run['id'])
+        snapshots[str(run['id'])] = rows
+        if not complete:
+            incomplete.append(run['id'])
 
-            results.append({
-                "client_number": run["client_number"],
-                "cca": cca_name,
-                "delay_ms": run["delay_added"],
-                "file_size_mb": run["client_file_size_megabytes"],
-                "flow_completion_time_ms": run["flow_completion_time_ms"],
-                "throughput_avg_mbps": round(sum(throughputs) / len(throughputs), 2) if throughputs else None,
-                "throughput_max_mbps": round(max(throughputs), 2) if throughputs else None,
-                "rtt_avg_ms": round(sum(rtts) / len(rtts), 2) if rtts else None,
-                "rtt_p95_ms": round(sorted(rtts)[int(len(rtts) * 0.95)] if rtts else 0, 2),
-                "num_snapshots": len(stats),
-            })
+    # Only configuration is needed for provenance; never return other users' job
+    # metadata or conversations as part of an experiment analysis.
+    jobs = _supabase_get(
+        f"benchmark_jobs?parent_run_id=eq.{parent_run_id}&select=config&limit=2"
+    )
+    job_config = jobs[0].get('config') if len(jobs) == 1 else None
+    return summarize_run(parent, runs, snapshots, job_config, incomplete)
 
-    # Compute fairness metrics
-    fairness = {}
-    throughputs = [c["throughput_avg_mbps"] for c in results if c["throughput_avg_mbps"] is not None]
-    fcts = [c["flow_completion_time_ms"] for c in results if c["flow_completion_time_ms"] is not None]
-
-    if len(throughputs) >= 2:
-        n = len(throughputs)
-        sum_t = sum(throughputs)
-        sum_t2 = sum(t ** 2 for t in throughputs)
-        fairness["jains_index"] = round(sum_t ** 2 / (n * sum_t2), 4) if sum_t2 > 0 else None
-        fairness["throughput_ratio"] = round(max(throughputs) / min(throughputs), 2) if min(throughputs) > 0 else None
-        fairness["throughput_stdev_mbps"] = round(math.sqrt(sum((t - sum_t / n) ** 2 for t in throughputs) / n), 2)
-        fairness["throughput_cv"] = round(fairness["throughput_stdev_mbps"] / (sum_t / n), 4) if sum_t > 0 else None
-
-    if len(fcts) >= 2:
-        fairness["fct_ratio"] = round(max(fcts) / min(fcts), 2) if min(fcts) > 0 else None
-        avg_fct = sum(fcts) / len(fcts)
-        fairness["fct_stdev_ms"] = round(math.sqrt(sum((f - avg_fct) ** 2 for f in fcts) / len(fcts)), 2)
-
-    return {
-        "parent_run": parent,
-        "clients": results,
-        "fairness": fairness,
-    }
 
 
 @tool
@@ -154,8 +138,8 @@ def compare_runs(parent_run_id_1: int, parent_run_id_2: int) -> dict:
         parent_run_id_1: The ID of the first parent run
         parent_run_id_2: The ID of the second parent run
     """
-    run1 = get_run_results.tool_handler(parent_run_id=parent_run_id_1)
-    run2 = get_run_results.tool_handler(parent_run_id=parent_run_id_2)
+    run1 = get_run_results(parent_run_id=parent_run_id_1)
+    run2 = get_run_results(parent_run_id=parent_run_id_2)
 
     return {
         "run_1": run1,

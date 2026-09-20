@@ -23,6 +23,31 @@ jobs:
 
       - run: npm ci
 
+      - name: Test experiment analysis and infrastructure
+        run: |
+          npm run test:ami
+          npm test -- --runInBand
+          npm run build
+
+      - name: Evaluate research answers with Bedrock
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        timeout-minutes: 15
+        run: |
+          python -m pip install strands-agents httpx boto3
+          python -B test/evaluate_agent.py --live
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-east-1
+
+      - name: Save answer evaluation report
+        if: always() && github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-answer-evaluation
+          path: .test-artifacts/agent-evaluation.json
+          if-no-files-found: ignore
+
       - name: Install agent Python dependencies
         run: |
           pip install --target agent/layer/python --platform manylinux2014_x86_64 --only-binary=:all: --python-version 3.12 strands-agents httpx

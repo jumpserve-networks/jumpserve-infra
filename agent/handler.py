@@ -5,6 +5,7 @@ import httpx
 from strands import Agent
 from strands.models.bedrock import BedrockModel
 from prompt import SYSTEM_PROMPT
+from settings import MODEL_ID, MODEL_REGION
 from tools import ALL_TOOLS
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
@@ -96,8 +97,8 @@ def lambda_handler(event, context):
 
     # Create the agent
     model = BedrockModel(
-        model_id="us.anthropic.claude-sonnet-4-6",
-        region_name="us-east-1",
+        model_id=MODEL_ID,
+        region_name=MODEL_REGION,
     )
 
     agent = Agent(

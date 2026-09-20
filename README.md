@@ -170,6 +170,49 @@ AMIs and snapshots are retained, including failed candidates, for diagnosis and
 rollback; their storage still incurs charges. Remove obsolete images through a
 separate review. This workflow does not rotate or delete existing credentials.
 
+## AI experiment explanations
+
+`agent/research-context.md` is the versioned measurement/research reference
+included in every system prompt. It documents added-RTT semantics, BBR versus
+CUBIC interpretation, the NINeS 2026 citation, and unavailable measurements.
+`agent/run_analysis.py` calculates summaries without a language model:
+
+- Configured delay contributes once to RTT for the documented runners; it is
+  not a measurement of the entire unloaded path. Unknown/conflicting provenance
+  leaves the interpretation unavailable.
+- RTT zero placeholders are excluded and counted. Throughput/queue zeros remain
+  valid when supported; non-finite, negative and missing values are counted.
+- Queue delay comes from the stored backlog/capacity estimate, not RTT subtraction.
+  RTT below configured added delay and negative metrics produce explicit warnings.
+- Both sample and interval-weighted throughput means have named windows. The
+  old nonzero-only mean is labelled diagnostic. Fairness uses all clients and
+  identical complete intervals at one shared bottleneck, including zeros; it is
+  explicitly not isolated concurrent-transfer fairness.
+- Snapshot queries paginate through server-imposed page caps. A 100,000-row
+  safety cap per client is reported as incomplete and disables full-run fairness.
+
+The sanitized fixture `test/fixtures/run-2352.json` contains public numeric run
+measurements only, with no credentials, conversations, or user identifiers.
+Use `npm run test:agent` for deterministic calculations and mocked query tests.
+The deployment workflow runs all Python/Jest tests, then eight opt-in Bedrock
+answer evaluations before deployment to main. Cases cover #2352 twice, correcting
+an earlier mistaken answer, CUBIC, BBRv3 uncertainty, inconsistent measurements,
+unsupported multi-bottleneck metrics and a missing client. It uses the same
+model ID and system prompt as production, with only a fixture results tool.
+It cannot start EC2 or access production sessions/data. Model answers and a
+separate model-based assessment are saved as the `agent-answer-evaluation`
+artifact; review these alongside deterministic tests, since model grading is
+not a guarantee of correctness for every future answer.
+
+To run the answer evaluation locally with AWS account 395567831870 credentials
+and `strands-agents`, `httpx`, and `boto3` installed:
+
+```bash
+python3 -B test/evaluate_agent.py --live
+```
+
+This makes billed Bedrock calls. Without `--live`, the script refuses to run.
+
 ## CI/CD and configuration
 
 - Infrastructure `main`: GitHub Actions runs `cdk deploy --all`; pull requests
