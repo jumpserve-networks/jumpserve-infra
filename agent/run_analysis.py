@@ -1,7 +1,8 @@
 """Deterministic, unit-labelled summaries for the research assistant (no I/O)."""
 import math
+from comparison import recorded_configuration
 
-ANALYSIS_VERSION = '2026-09-20.2'
+ANALYSIS_VERSION = '2026-09-20.3'
 SINGLE_RUNNERS = {
     'netem_cubic_benchmark_hotnets.py', 'netem_cubic_benchmark_nines.py', 'netem_nines.py',
 }
@@ -192,6 +193,7 @@ def summarize_run(parent, runs, snapshots, job_config=None, incomplete_run_ids=(
         warn('fairness_window', 'Full-run fairness includes intervals after a client finishes; equal file sizes can mask different completion times. Nonzero-sample averages are not common-window fairness.')
     return {
         'analysis_version': ANALYSIS_VERSION, 'parent_run': parent,
+        'comparison_configuration': recorded_configuration(parent, runs, job_config),
         'measurement_contract': contract, 'clients': clients, 'fairness': fairness,
         'bottleneck_buffer': {
             'nominal_drain_time_ms': nominal_drain_ms,

@@ -190,6 +190,16 @@ requires no infrastructure deployment or database migration.
 
 ## AI experiment explanations
 
+`compare_runs` now returns `comparison_validity` before any algorithm-effect
+interpretation: complete recorded configurations must match apart from the CCA,
+with homogeneous BBR and CUBIC competition in supported single-bottleneck runners.
+It lists differing configuration fields and unavailable provenance, and returns
+descriptive CUBIC-minus-BBR FCT differences in seconds only for matching settings.
+Two runs supply only one parent-run observation per algorithm. The tool does not
+invent replication confidence intervals or trial pairing from client/snapshot
+counts, run order, or timestamps. These deterministic tool checks complement the
+database-managed research prompt; the migration seed remains immutable.
+
 The active system prompt and research context live in Supabase's
 `public.agent_prompt_versions` table. Every chat request loads one complete
 published version through `get_active_agent_prompt`; a warm Lambda sees changes

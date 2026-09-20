@@ -2,6 +2,7 @@ import os
 import httpx
 from strands import tool
 from run_analysis import summarize_run
+from comparison import compare_validity
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
 _supabase_key: str | None = None
@@ -132,7 +133,10 @@ def get_run_results(parent_run_id: int) -> dict:
 
 @tool
 def compare_runs(parent_run_id_1: int, parent_run_id_2: int) -> dict:
-    """Compare the results of two benchmark runs side-by-side.
+    """Compare two runs with recorded-configuration and replication checks.
+
+    Read comparison_validity before interpreting differences. Unmatched settings
+    cannot establish an algorithm effect; two runs cannot provide replication CIs.
 
     Args:
         parent_run_id_1: The ID of the first parent run
@@ -144,6 +148,7 @@ def compare_runs(parent_run_id_1: int, parent_run_id_2: int) -> dict:
     return {
         "run_1": run1,
         "run_2": run2,
+        "comparison_validity": compare_validity(run1, run2),
     }
 
 
