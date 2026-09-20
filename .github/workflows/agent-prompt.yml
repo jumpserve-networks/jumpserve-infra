@@ -1,0 +1,42 @@
+name: Publish Agent Prompt
+
+on:
+  workflow_dispatch:
+    inputs:
+      prompt_id:
+        description: 'UUID of the database draft (or previous published version to restore)'
+        required: true
+        type: string
+
+concurrency:
+  group: agent-prompt-publication
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test prompt loading and analysis
+        run: python -B -m unittest discover -s test -p 'agent*_test.py' -v
+      - name: Evaluate and publish the selected version
+        run: |
+          python -m pip install strands-agents httpx boto3
+          python -B test/evaluate_agent.py --live --prompt-id "$PROMPT_ID" --publish
+        env:
+          PROMPT_ID: ${{ inputs.prompt_id }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-east-1
+      - name: Save evaluation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-prompt-evaluation
+          path: .test-artifacts/agent-evaluation.json
+          if-no-files-found: ignore

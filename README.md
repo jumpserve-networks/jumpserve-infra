@@ -172,9 +172,70 @@ separate review. This workflow does not rotate or delete existing credentials.
 
 ## AI experiment explanations
 
-`agent/research-context.md` is the versioned measurement/research reference
-included in every system prompt. It documents added-RTT semantics, BBR versus
-CUBIC interpretation, the NINeS 2026 citation, and unavailable measurements.
+The active system prompt and research context live in Supabase's
+`public.agent_prompt_versions` table. Every chat request loads one complete
+published version through `get_active_agent_prompt`; a warm Lambda sees changes
+on its next request. There is no hardcoded prompt fallback. Missing/invalid
+configuration or a database error returns HTTP 503 before calling the model.
+
+Each successful answer is saved in `public.agent_answers`, including its prompt
+version ID, model ID and analysis version. Saving the answer and conversation
+history is atomic. Existing historical answers retain their original history;
+we do not retroactively assign prompt versions to them.
+
+### Editing and publishing prompts
+
+1. Open the JumpServe Supabase project (`regphejnlvfpyokpniny`). Check
+   `agent_prompt_settings.active_version_id` for the current version.
+2. Create a draft with a new UUID and unique `version`, copying `system_prompt`
+   and `research_context` from the current version. Fill in `created_by` and
+   `updated_by`. The database sets timestamps and the content checksum. You can
+   also clone a version with:
+
+   ```bash
+   python3 -B bin/agent-prompts.py draft --from-id <version-uuid> --version <new-version> --actor <your-name>
+   ```
+
+3. Edit the draft's text and set `updated_by` in the Supabase Table Editor. Published rows are
+   immutable; corrections always use a new draft.
+4. Run the [Publish Agent Prompt workflow](https://github.com/jumpserve-networks/jumpserve-infra/actions/workflows/agent-prompt.yml)
+   on `main`, supplying the draft UUID. It runs unit tests and the eight live
+   Bedrock evaluations, stores the report, then atomically activates the exact
+   evaluated content. Publishing fails if the draft or active version changed
+   during evaluation. This makes billed Bedrock calls.
+5. The next chat request uses the new version without an application deployment.
+   The response includes `answer_id`, `prompt_version_id` and `prompt_version`.
+
+To roll back, run the same workflow with a previous published version's UUID.
+It is re-evaluated against the current model/analysis before activation. Every
+activation records the previous version, actor, timestamp and full evaluation
+report in `agent_prompt_publications`. Model grading is a regression check, not
+proof of scientific correctness; review the saved answers as well.
+
+Prompt text, publication RPCs and answer audit records are inaccessible to
+`anon` and ordinary `authenticated` clients. Administration uses Supabase
+Dashboard privileges or the backend service role. The model's tools have no
+prompt-editing or publishing capability. Database owners can override database
+permissions and must follow the publication workflow too.
+
+### Initial database setup
+
+Apply the additive migration **before** deploying the new agent:
+
+```bash
+python3 -B bin/agent-prompts.py migrate
+python3 -B bin/agent-prompts.py list
+```
+
+These scoped commands use `SUPABASE_ACCESS_TOKEN` or the existing macOS Supabase
+CLI login and verify the configured JumpServe project. `migrate` checks the
+existing session schema, creates the prompt tables/functions, and imports
+`database/seed-agent-prompt.json` as a draft. That file is a migration snapshot
+of the previously deployed prompt; editing it does not update the live prompt.
+The first infrastructure deployment evaluates and publishes this seed if no
+version is active. Later deployments evaluate the database's active version.
+They never replace edited database prompts with a repository copy.
+
 `agent/run_analysis.py` calculates summaries without a language model:
 
 - Configured delay contributes once to RTT for the documented runners; it is
@@ -198,8 +259,10 @@ The deployment workflow runs all Python/Jest tests, then eight opt-in Bedrock
 answer evaluations before deployment to main. Cases cover #2352 twice, correcting
 an earlier mistaken answer, CUBIC, BBRv3 uncertainty, inconsistent measurements,
 unsupported multi-bottleneck metrics and a missing client. It uses the same
-model ID and system prompt as production, with only a fixture results tool.
-It cannot start EC2 or access production sessions/data. Model answers and a
+model ID and database prompt as production, with only a fixture results tool.
+The model cannot start EC2 or access production sessions or run data. The test
+harness reads prompt configuration and writes publication metadata only when
+explicitly requested (or when bootstrapping the first active prompt). Model answers and a
 separate model-based assessment are saved as the `agent-answer-evaluation`
 artifact; review these alongside deterministic tests, since model grading is
 not a guarantee of correctness for every future answer.
@@ -211,7 +274,15 @@ and `strands-agents`, `httpx`, and `boto3` installed:
 python3 -B test/evaluate_agent.py --live
 ```
 
-This makes billed Bedrock calls. Without `--live`, the script refuses to run.
+This makes billed Bedrock calls and reads the active database prompt using the
+existing Supabase service-key secret. Without `--live`, the script refuses to
+run. To test a draft locally, add `--prompt-id <uuid>`; add `--publish --actor
+<name>` only when ready to activate it after all cases pass.
+
+Database integration tests require an isolated PostgreSQL database named
+`jumpserve_prompt_test` and `PROMPT_TEST_DATABASE_URL` pointing to it. Run
+`npm run test:agent:database`; all test schema and data changes roll back. CI
+provides an isolated PostgreSQL 17 service for this check.
 
 ## CI/CD and configuration
 

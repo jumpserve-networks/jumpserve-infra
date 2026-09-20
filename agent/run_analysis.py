@@ -198,6 +198,4 @@ def summarize_run(parent, runs, snapshots, job_config=None, incomplete_run_ids=(
             'interpretation': 'Configured-capacity approximation, not a strict measured queue-delay upper bound; packet rounding and accounting matter.',
         },
         'warnings': warnings,
-        'research_reference': {'title': 'Making Congestion Control Algorithms Insensitive to Underlying Propagation Delays',
-                               'url': 'https://doi.org/10.4230/OASIcs.NINeS.2026.27', 'context_version': ANALYSIS_VERSION},
     }

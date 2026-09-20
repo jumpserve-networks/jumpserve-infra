@@ -1,40 +1,20 @@
 import json
-import os
-import boto3
-import httpx
+import logging
+from uuid import UUID, uuid4
 from strands import Agent
 from strands.models.bedrock import BedrockModel
-from prompt import SYSTEM_PROMPT
+from database import Database
+from prompt import load_active_prompt
+from run_analysis import ANALYSIS_VERSION
 from settings import MODEL_ID, MODEL_REGION
 from tools import ALL_TOOLS
 
-SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
-_supabase_key: str | None = None
+logger = logging.getLogger(__name__)
 
 
-def _get_supabase_key() -> str:
-    global _supabase_key
-    if _supabase_key:
-        return _supabase_key
-    sm = boto3.client("secretsmanager")
-    resp = sm.get_secret_value(SecretId=os.environ["SUPABASE_SECRET_ARN"])
-    _supabase_key = resp["SecretString"]
-    return _supabase_key
-
-
-def _load_session(session_id: str) -> list[dict]:
-    """Load conversation history from Supabase."""
-    key = _get_supabase_key()
-    resp = httpx.get(
-        f"{SUPABASE_URL}/rest/v1/agent_sessions?id=eq.{session_id}&select=messages",
-        headers={"apikey": key, "Authorization": f"Bearer {key}"},
-        timeout=10,
-    )
-    if resp.status_code == 200:
-        data = resp.json()
-        if data and data[0].get("messages"):
-            return data[0]["messages"]
-    return []
+def _load_session(database, session_id: str) -> list[dict]:
+    rows = database.get('agent_sessions', params={'id': f'eq.{session_id}', 'select': 'messages'})
+    return rows[0].get('messages', []) if rows else []
 
 
 def _serialize_messages(messages: list) -> list[dict]:
@@ -56,44 +36,48 @@ def _serialize_messages(messages: list) -> list[dict]:
     return serialized
 
 
-def _save_session(session_id: str, messages: list[dict], user_id: str) -> None:
-    """Save conversation history to Supabase (upsert)."""
-    key = _get_supabase_key()
-    safe_messages = _serialize_messages(messages)
-    httpx.post(
-        f"{SUPABASE_URL}/rest/v1/agent_sessions",
-        headers={
-            "apikey": key,
-            "Authorization": f"Bearer {key}",
-            "Content-Type": "application/json",
-            "Prefer": "resolution=merge-duplicates,return=minimal",
-        },
-        json={
-            "id": session_id,
-            "user_id": user_id,
-            "messages": safe_messages,
-        },
-        timeout=10,
-    )
+def _save_turn(database, session_id, user_id, messages, prompt, response_text, answer_id):
+    database.rpc('save_agent_turn', {
+        'p_session_id': session_id, 'p_user_id': user_id,
+        'p_messages': _serialize_messages(messages), 'p_answer_id': answer_id,
+        'p_prompt_version_id': prompt.id, 'p_model_id': MODEL_ID,
+        'p_analysis_version': ANALYSIS_VERSION, 'p_response': response_text,
+    })
+
+
+def _error(status, message):
+    return {'statusCode': status, 'headers': {'Content-Type': 'application/json'},
+            'body': json.dumps({'error': message})}
 
 
 def lambda_handler(event, context):
     """Lambda handler for the agent — non-streaming for simplicity."""
     # Parse request
-    body = json.loads(event.get("body", "{}"))
+    try:
+        body = json.loads(event.get("body", "{}"))
+        if not isinstance(body, dict):
+            raise ValueError('Expected object')
+        session_id = str(UUID(body['session_id'])) if body.get('session_id') else str(uuid4())
+    except (ValueError, TypeError, AttributeError):
+        return _error(400, 'Invalid request or session ID')
     message = body.get("message", "")
-    session_id = body.get("session_id", "default")
     user_id = body.get("user_id", "anonymous")
 
-    if not message:
+    if not isinstance(message, str) or not message.strip():
         return {
             "statusCode": 400,
             "headers": {"Content-Type": "application/json"},
             "body": json.dumps({"error": "message is required"}),
         }
 
-    # Load session history
-    history = _load_session(session_id)
+    # Select a complete, immutable prompt snapshot before making any model call.
+    try:
+        database = Database()
+        prompt = load_active_prompt(database)
+        history = _load_session(database, session_id)
+    except Exception as exc:
+        logger.error('Agent context unavailable (%s)', type(exc).__name__)
+        return _error(503, 'AI context is temporarily unavailable. Please try again.')
 
     # Create the agent
     model = BedrockModel(
@@ -103,7 +87,7 @@ def lambda_handler(event, context):
 
     agent = Agent(
         model=model,
-        system_prompt=SYSTEM_PROMPT,
+        system_prompt=prompt.text,
         tools=ALL_TOOLS,
     )
 
@@ -115,8 +99,12 @@ def lambda_handler(event, context):
     result = agent(message)
     response_text = str(result)
 
-    # Save updated session
-    _save_session(session_id, agent.messages, user_id)
+    answer_id = str(uuid4())
+    try:
+        _save_turn(database, session_id, user_id, agent.messages, prompt, response_text, answer_id)
+    except Exception as exc:
+        logger.error('Agent answer persistence failed (%s)', type(exc).__name__)
+        return _error(503, 'The AI answer could not be saved. Please try again.')
 
     # Collect tool events from the result
     tool_events = []
@@ -136,5 +124,8 @@ def lambda_handler(event, context):
             "response": response_text,
             "tool_events": tool_events,
             "session_id": session_id,
+            "answer_id": answer_id,
+            "prompt_version_id": prompt.id,
+            "prompt_version": prompt.version,
         }),
     }

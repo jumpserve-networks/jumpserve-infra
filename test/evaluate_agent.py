@@ -1,4 +1,4 @@
-"""Opt-in Bedrock answer regression tests. Fixture tools only; no DB/EC2 access.
+"""Opt-in Bedrock answer regression tests. Model tools only access run fixtures.
 
 python3 test/evaluate_agent.py --live --output .test-artifacts/agent-evaluation.json
 Requires strands-agents, boto3 and credentials for account 395567831870.
@@ -6,12 +6,14 @@ Requires strands-agents, boto3 and credentials for account 395567831870.
 import argparse
 import copy
 import json
+import os
 import pathlib
 import sys
+from uuid import UUID
 
 ROOT = pathlib.Path(__file__).parents[1]
 sys.path.insert(0, str(ROOT / 'agent'))
-from prompt import SYSTEM_PROMPT
+from prompt_publication import evaluation_snapshot, publish_evaluated_prompt
 from run_analysis import ANALYSIS_VERSION, summarize_run
 from settings import MODEL_ID, MODEL_REGION
 
@@ -88,18 +90,28 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--live', action='store_true', help='Opt in to billed Bedrock model calls with fixture-only tools')
     parser.add_argument('--output', default='.test-artifacts/agent-evaluation.json')
+    parser.add_argument('--prompt-id', type=UUID, help='Database draft or published UUID to evaluate; default is the active version')
+    parser.add_argument('--publish', action='store_true', help='Activate this exact snapshot only after every case passes')
+    parser.add_argument('--bootstrap-if-empty', action='store_true', help='Evaluate and publish the migration seed only when no prompt is active')
+    parser.add_argument('--actor', default=os.environ.get('GITHUB_ACTOR'), help='Required audit identity when publishing')
     args = parser.parse_args()
     if not args.live:
         parser.error('--live is required; this evaluation calls Bedrock')
+    if (args.publish or args.bootstrap_if_empty) and not args.actor:
+        parser.error('--actor is required when publishing')
 
     import boto3
     from pydantic import BaseModel, Field
     from strands import Agent, tool
     from strands.models.bedrock import BedrockModel
+    from database import Database
 
     account = boto3.client('sts', region_name=MODEL_REGION).get_caller_identity()['Account']
     if account != '395567831870':
         raise RuntimeError('Evaluation requires AWS account 395567831870')
+
+    database = Database(os.environ.get('SUPABASE_URL') or json.loads((ROOT / 'cdk.json').read_text())['context']['supabaseUrl'])
+    prompt, previous_id = evaluation_snapshot(database, str(args.prompt_id) if args.prompt_id else None, args.bootstrap_if_empty)
 
     class Verdict(BaseModel):
         correct: bool = Field(description='All applicable criteria met, without factual contradictions')
@@ -107,7 +119,9 @@ def main():
 
     output = pathlib.Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
-    report = {'analysis_version': ANALYSIS_VERSION, 'model_id': MODEL_ID, 'cases': []}
+    report = {'analysis_version': ANALYSIS_VERSION, 'model_id': MODEL_ID,
+              'prompt_version_id': prompt.id, 'prompt_version': prompt.version,
+              'prompt_content_sha256': prompt.content_sha256, 'cases': []}
     for case in cases():
         calls = []
 
@@ -124,7 +138,7 @@ def main():
             return case['summary']
 
         agent = Agent(model=BedrockModel(model_id=MODEL_ID, region_name=MODEL_REGION, max_tokens=2400),
-                      system_prompt=SYSTEM_PROMPT, tools=[get_run_results], callback_handler=None)
+                      system_prompt=prompt.text, tools=[get_run_results], callback_handler=None)
         if case.get('history'):
             agent.messages = case['history']
         answer = str(agent(case['question'] + ' Fetch the supplied fixture for parent run #2352.'))
@@ -142,6 +156,9 @@ def main():
             print(judgement.explanation, flush=True)
     if not all(case['passed'] for case in report['cases']):
         raise SystemExit('Agent answer regression failed; review saved answers and verdicts')
+    if args.publish or (args.bootstrap_if_empty and previous_id is None):
+        publish_evaluated_prompt(database, prompt, previous_id, report, args.actor)
+        print(f'Published prompt {prompt.version} ({prompt.id})', flush=True)
 
 
 if __name__ == '__main__':
