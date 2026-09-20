@@ -81,11 +81,25 @@ def main():
     clone.add_argument('--from-id', type=UUID, required=True)
     clone.add_argument('--version', required=True)
     clone.add_argument('--actor', required=True)
+    edit = commands.add_parser('edit', help='Update a draft from JSON, rejecting concurrent edits or published versions')
+    edit.add_argument('--id', type=UUID, required=True)
+    edit.add_argument('--file', type=Path, required=True)
+    edit.add_argument('--expected-sha256', required=True)
+    edit.add_argument('--actor', required=True)
     args = parser.parse_args()
     if args.command == 'migrate':
         result = migrate()
     elif args.command == 'list':
         result = query("select v.id, v.version, v.content_sha256, v.created_by, v.updated_by, v.updated_at, case when s.active_version_id=v.id then 'active' when v.published_at is not null then 'published' else 'draft' end as status from public.agent_prompt_versions v cross join public.agent_prompt_settings s order by v.created_at desc")
+    elif args.command == 'edit':
+        draft = json.loads(args.file.read_text())
+        fields = ('version', 'system_prompt', 'research_context')
+        if any(not isinstance(draft.get(field), str) or not draft[field].strip() for field in fields):
+            raise RuntimeError('Draft JSON requires nonempty version, system_prompt and research_context strings')
+        assignments = ','.join(f'{field}={literal(draft[field])}' for field in fields)
+        result = query(f"update public.agent_prompt_versions set {assignments},updated_by={literal(args.actor)} where id={literal(args.id)}::uuid and published_at is null and content_sha256={literal(args.expected_sha256)} returning id,version,content_sha256", read_only=False)
+        if not result:
+            raise RuntimeError('Draft changed, is already published, or does not exist; no update made')
     else:
         result = query(f"insert into public.agent_prompt_versions (id,version,system_prompt,research_context,created_by,updated_by) select {literal(uuid4())}::uuid,{literal(args.version)},system_prompt,research_context,{literal(args.actor)},{literal(args.actor)} from public.agent_prompt_versions where id={literal(args.from_id)}::uuid returning id,version", read_only=False)
         if not result:

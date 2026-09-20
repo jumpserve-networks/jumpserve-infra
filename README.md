@@ -198,6 +198,10 @@ we do not retroactively assign prompt versions to them.
 
 3. Edit the draft's text and set `updated_by` in the Supabase Table Editor. Published rows are
    immutable; corrections always use a new draft.
+   For file-based edits, use `bin/agent-prompts.py edit --id <uuid> --file <json>
+   --expected-sha256 <current-checksum> --actor <name>`. The JSON contains
+   `version`, `system_prompt` and `research_context`; the update rejects stale
+   checksums and published versions.
 4. Run the [Publish Agent Prompt workflow](https://github.com/jumpserve-networks/jumpserve-infra/actions/workflows/agent-prompt.yml)
    on `main`, supplying the draft UUID. It runs unit tests and the eight live
    Bedrock evaluations, stores the report, then atomically activates the exact
