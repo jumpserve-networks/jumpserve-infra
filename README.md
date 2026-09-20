@@ -170,6 +170,24 @@ AMIs and snapshots are retained, including failed candidates, for diagnosis and
 rollback; their storage still incurs charges. Remove obsolete images through a
 separate review. This workflow does not rotate or delete existing credentials.
 
+## Application modules
+
+The frontend's post-login module chooser groups the current benchmark launcher,
+run explorers, and AI chat under **Congestion Control Emulated Tests**
+(`congestion-control-emulated`). Its module home is
+`/modules/congestion-control-emulated`; existing tool and API URLs remain valid.
+The catalog and route ownership are defined in the frontend's
+`lib/test-modules.ts`. Selection is a navigation concern, not an authorization
+boundary or a new parameter accepted by the current benchmark API.
+
+**Congestion Control Real World Tests** (`congestion-control-real-world`) is
+planned and disabled in the chooser. Before enabling it or future CDN modules,
+provide explicit runner orchestration, data ownership, and API integration for
+that module. The existing benchmark stack, emulated result queries, and agent
+prompt configuration continue to serve emulated congestion-control tests; they
+must not silently process a different kind of experiment. This navigation change
+requires no infrastructure deployment or database migration.
+
 ## AI experiment explanations
 
 The active system prompt and research context live in Supabase's
