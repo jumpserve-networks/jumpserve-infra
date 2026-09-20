@@ -90,6 +90,7 @@ class HandlerPromptTest(unittest.TestCase):
     def test_answer_uses_and_records_one_snapshot_without_rereading_active_version(self):
         result = self.handler.lambda_handler(self.request, None)
         self.assertEqual(result['statusCode'], 200)
+        self.assertEqual(self.handler.BedrockModel.call_args.kwargs['temperature'], 0)
         response = json.loads(result['body'])
         self.assertEqual(self.agent_factory.call_args.kwargs['system_prompt'], PromptVersion.from_record(record()).text)
         self.assertEqual(response['prompt_version_id'], record()['id'])

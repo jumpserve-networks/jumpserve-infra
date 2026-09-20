@@ -15,7 +15,7 @@ ROOT = pathlib.Path(__file__).parents[1]
 sys.path.insert(0, str(ROOT / 'agent'))
 from prompt_publication import evaluation_snapshot, publish_evaluated_prompt
 from run_analysis import ANALYSIS_VERSION, summarize_run
-from settings import MODEL_ID, MODEL_REGION
+from settings import MODEL_ID, MODEL_REGION, MODEL_TEMPERATURE
 
 
 def cases():
@@ -126,6 +126,7 @@ def main():
     output = pathlib.Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
     report = {'analysis_version': ANALYSIS_VERSION, 'model_id': MODEL_ID,
+              'model_temperature': MODEL_TEMPERATURE,
               'prompt_version_id': prompt.id, 'prompt_version': prompt.version,
               'prompt_content_sha256': prompt.content_sha256, 'cases': []}
     for case in cases():
@@ -143,7 +144,8 @@ def main():
             calls.append(parent_run_id)
             return case['summary']
 
-        agent = Agent(model=BedrockModel(model_id=MODEL_ID, region_name=MODEL_REGION, max_tokens=2400),
+        agent = Agent(model=BedrockModel(model_id=MODEL_ID, region_name=MODEL_REGION,
+                                        temperature=MODEL_TEMPERATURE, max_tokens=2400),
                       system_prompt=prompt.text, tools=[get_run_results], callback_handler=None)
         if case.get('history'):
             agent.messages = case['history']

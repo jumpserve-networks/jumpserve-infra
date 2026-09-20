@@ -6,7 +6,7 @@ from strands.models.bedrock import BedrockModel
 from database import Database
 from prompt import load_active_prompt
 from run_analysis import ANALYSIS_VERSION
-from settings import MODEL_ID, MODEL_REGION
+from settings import MODEL_ID, MODEL_REGION, MODEL_TEMPERATURE
 from tools import ALL_TOOLS
 
 logger = logging.getLogger(__name__)
@@ -83,6 +83,7 @@ def lambda_handler(event, context):
     model = BedrockModel(
         model_id=MODEL_ID,
         region_name=MODEL_REGION,
+        temperature=MODEL_TEMPERATURE,
     )
 
     agent = Agent(
