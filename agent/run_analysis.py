@@ -1,7 +1,7 @@
 """Deterministic, unit-labelled summaries for the research assistant (no I/O)."""
 import math
 
-ANALYSIS_VERSION = '2026-09-20'
+ANALYSIS_VERSION = '2026-09-20.2'
 SINGLE_RUNNERS = {
     'netem_cubic_benchmark_hotnets.py', 'netem_cubic_benchmark_nines.py', 'netem_nines.py',
 }
@@ -47,6 +47,7 @@ def measurement_contract(parent, job_config):
         'delay_is_measured_unloaded_rtt': False,
         'rtt_source': job_config.get('snapshot_metrics_source', 'not recorded') if single else 'unavailable',
         'queue_delay_source': 'stored estimate: backlog_bytes * 8 * 1000 / configured_link_bits_per_second' if single else 'unavailable',
+        'buffer_setting_unit': 'KiB (1024 bytes); rounded up to a packet limit' if single else 'unknown',
         'tcp_and_queue_snapshots_supported': True if single else (False if multi else None),
     }
 
@@ -106,6 +107,13 @@ def timed_throughput(rows):
 def summarize_run(parent, runs, snapshots, job_config=None, incomplete_run_ids=()):
     contract = measurement_contract(parent, job_config or {})
     clients, warnings, timings = [], [], []
+    buffer_kib = number(parent.get('queue_buffer_size_kilobyte'))
+    capacity_mbps = number(parent.get('bottleneck_rate_megabit'))
+    nominal_drain_ms = None
+    if (contract['tcp_and_queue_snapshots_supported'] is True and
+            buffer_kib is not None and buffer_kib > 0 and
+            capacity_mbps is not None and capacity_mbps > 0):
+        nominal_drain_ms = rounded(buffer_kib * 1024 * 8 / (capacity_mbps * 1000))
 
     def warn(code, detail, client=None):
         warnings.append({'code': code, 'client_number': client, 'detail': detail})
@@ -161,6 +169,7 @@ def summarize_run(parent, runs, snapshots, job_config=None, incomplete_run_ids=(
             'num_snapshots': len(rows), 'complete_snapshot_fetch': run['id'] not in incomplete_run_ids,
             'window': {'first_sample_elapsed_ms': rounded(number(rows[0].get('elapsed_microseconds')) / 1000) if rows and number(rows[0].get('elapsed_microseconds')) is not None else None,
                        'last_sample_elapsed_ms': rounded(number(rows[-1].get('elapsed_microseconds')) / 1000) if rows and number(rows[-1].get('elapsed_microseconds')) is not None else None},
+            'sample_timing_note': 'Aggregate zero/missing counts do not establish which samples occur at startup, during transfer, or after completion.',
             'metrics': metrics,
         })
 
@@ -184,6 +193,10 @@ def summarize_run(parent, runs, snapshots, job_config=None, incomplete_run_ids=(
     return {
         'analysis_version': ANALYSIS_VERSION, 'parent_run': parent,
         'measurement_contract': contract, 'clients': clients, 'fairness': fairness,
+        'bottleneck_buffer': {
+            'nominal_drain_time_ms': nominal_drain_ms,
+            'interpretation': 'Configured-capacity approximation, not a strict measured queue-delay upper bound; packet rounding and accounting matter.',
+        },
         'warnings': warnings,
         'research_reference': {'title': 'Making Congestion Control Algorithms Insensitive to Underlying Propagation Delays',
                                'url': 'https://doi.org/10.4230/OASIcs.NINeS.2026.27', 'context_version': ANALYSIS_VERSION},

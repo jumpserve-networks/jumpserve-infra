@@ -33,6 +33,8 @@ class RunAnalysisTest(unittest.TestCase):
         self.assertAlmostEqual(b['metrics']['rtt']['mean'], 78.408948, places=5)
         self.assertAlmostEqual(b['metrics']['queue_delay']['mean'], 15.450375, places=5)
         self.assertIn('backlog_bytes', result['measurement_contract']['queue_delay_source'])
+        self.assertEqual(result['bottleneck_buffer']['nominal_drain_time_ms'], 20.48)
+        self.assertIn('not a strict', result['bottleneck_buffer']['interpretation'])
         self.assertEqual(b['metrics']['rtt']['zero_unavailable_samples'], 22)
         self.assertFalse(any(w['code'] == 'rtt_below_configured_added_delay' for w in result['warnings']))
 

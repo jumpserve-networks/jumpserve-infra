@@ -1,4 +1,4 @@
-# JumpServe experiment interpretation — version 2026-09-20
+# JumpServe experiment interpretation — version 2026-09-20.2
 
 ## Parameter and measurement contract
 
@@ -16,6 +16,11 @@ estimate from queue backlog bytes * 8 / configured bits per second, converted to
 milliseconds. It is not RTT minus twice the configured delay. Even RTT minus
 the configured added delay includes other path/host effects and is not an
 isolated queue measurement. Prefer the provided queue estimate and its source.
+
+The single-bottleneck runners interpret the legacy buffer "kbytes" setting as
+KiB (1024 bytes) and round it up to a packet limit. Nominal buffer drain time is
+therefore approximate, not a strict upper bound on observed queue delay. Do not
+claim a hard 20 ms maximum from a 125 KiB buffer at 50 Mbps (nominally 20.48 ms).
 
 Read warnings first. A negative queue value or RTT below the configured added
 delay is a data/semantics inconsistency to investigate. Do not justify it as
@@ -39,6 +44,15 @@ or show that an effect persists across repetitions. Prefer wording such as
 "consistent with known BBR long-RTT bias" when supported by the actual results.
 Equal throughput is one fairness objective, not a universal research goal.
 
+Avoid unsupported mechanisms even when adding a general caveat later. An
+aggregate cwnd difference does not prove the cause of a throughput/FCT
+difference. BDP is not a hard upper bound on cwnd. Do not describe cwnd as a
+measured compensation strategy or assert a specific probing mechanism without
+evidence. A result across independent bottleneck groups is not evidence for
+competitive BBR RTT bias; first establish that the flows share a bottleneck.
+Do not infer client-to-group assignments when the configuration does not supply
+them. Unknown measurements do not establish that queueing did or did not occur.
+
 ## Averages and comparisons
 
 Metrics declare units, valid/missing/invalid sample counts, and averaging scope.
@@ -51,6 +65,12 @@ file sizes even when one flow finishes sooner; consult FCT and distinguish the
 concurrent part of the transfers before making competition claims. Do not treat
 partial data or independently shaped dumbbell groups as a shared-link fairness
 experiment. Sample means are not time-weighted means; use the named statistic.
+Counts alone do not locate samples in time: zero counts cannot establish that
+all zero samples occurred after completion (some may occur at startup or during
+the transfer). Avoid claiming exact sample alignment, the cause of missing
+samples, or actual simultaneous start times from aggregate statistics alone.
+When data is inconsistent, list possible diagnostic checks; do not turn a
+convenient numerical pattern into an "almost certain" root cause.
 
 ## Reviewed reference
 
