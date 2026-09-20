@@ -428,3 +428,23 @@ for its build steps. Deploying the standalone benchmark app does not require it.
 - `lib/benchmark-image-pipeline.ts`: GitHub OIDC provider and scoped image role.
 - `ami/`: image building, verification, guarded promotion/rollback and cleanup.
 - `test/`: launcher, lifecycle, IAM and AMI regression tests.
+
+## Shared real-world research reports
+
+The real-world API includes authenticated `GET /real-world/reports`,
+`GET /real-world/reports/{jobId}` (optional `?summary=1`), and
+`GET /real-world/reports/{jobId}/artifacts`. Reports are shared across signed-in
+Google researchers; test management and cancellation remain owner-scoped.
+The S3 bucket stays private. Download links last five minutes and only cover
+expected machine reports. The API never returns owner IDs or internal commands.
+
+The `reports-created` DynamoDB index orders shared history by `created_at` within
+`schema_version`. Existing version-1 jobs already have these fields; DynamoDB
+backfills the new index during deployment. No data rewrite or Supabase RLS change
+is needed. Wait for the index to become ACTIVE before verifying catalog reads.
+Future schema versions must explicitly extend catalog/version handling.
+
+The backend revision in `real-world-runtime.json` includes the versioned report
+analyzer and its offline regression tests. CI installs its test dependencies,
+checks access control, unit conversions, data quality, and scientific eligibility,
+then deploys the report routes and catalog index with the existing control plane.

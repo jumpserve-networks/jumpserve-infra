@@ -16,6 +16,12 @@ test('real-world lifecycle retains evidence and independently reaps expired reso
   template.hasResource('AWS::DynamoDB::Table', { DeletionPolicy: 'RetainExceptOnCreate' });
   template.hasResourceProperties('AWS::DynamoDB::Table', { GlobalSecondaryIndexes: Match.arrayWith([Match.objectLike({ IndexName: 'active-deadline' })]) });
   template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'POST /real-world/tests/{jobId}/cancel' });
+  for (const route of ['/real-world/reports', '/real-world/reports/{jobId}', '/real-world/reports/{jobId}/artifacts']) {
+    template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: `GET ${route}` });
+  }
+  template.hasResourceProperties('AWS::DynamoDB::Table', { GlobalSecondaryIndexes: Match.arrayWith([Match.objectLike({ IndexName: 'reports-created', KeySchema: [
+    { AttributeName: 'schema_version', KeyType: 'HASH' }, { AttributeName: 'created_at', KeyType: 'RANGE' },
+  ] })]) });
   const roles = template.findResources('AWS::IAM::Role');
   const instanceRole = Object.entries(roles).find(([name]) => name.includes('InstanceRole'))?.[1];
   expect(JSON.stringify(instanceRole)).not.toContain('secretsmanager');

@@ -34,6 +34,11 @@ export class RealWorldTests extends Construct {
     table.addGlobalSecondaryIndex({ indexName: 'active-deadline',
       partitionKey: { name: 'active', type: dynamodb.AttributeType.STRING },
       sortKey: { name: 'deadline', type: dynamodb.AttributeType.NUMBER } });
+    // Existing jobs already record schema_version, so DynamoDB backfills the
+    // shared research catalog without rewriting lifecycle records.
+    table.addGlobalSecondaryIndex({ indexName: 'reports-created',
+      partitionKey: { name: 'schema_version', type: dynamodb.AttributeType.NUMBER },
+      sortKey: { name: 'created_at', type: dynamodb.AttributeType.NUMBER } });
     const results = new s3.Bucket(this, 'Results', {
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL, encryption: s3.BucketEncryption.S3_MANAGED,
       enforceSSL: true, versioned: true, removalPolicy: cdk.RemovalPolicy.RETAIN_ON_UPDATE_OR_DELETE,
@@ -96,7 +101,7 @@ export class RealWorldTests extends Construct {
     machine.grantStartExecution(service);
     service.addToRolePolicy(new iam.PolicyStatement({ actions: ['ec2:DescribeRegions', 'ec2:DescribeAvailabilityZones', 'ec2:DescribeInstanceTypeOfferings'], resources: ['*'] }));
     const integration = new HttpLambdaIntegration('RealWorldIntegration', service);
-    for (const route of ['/real-world/regions', '/real-world/locations', '/real-world/tests', '/real-world/tests/{jobId}', '/real-world/tests/{jobId}/artifacts']) {
+    for (const route of ['/real-world/regions', '/real-world/locations', '/real-world/tests', '/real-world/tests/{jobId}', '/real-world/tests/{jobId}/artifacts', '/real-world/reports', '/real-world/reports/{jobId}', '/real-world/reports/{jobId}/artifacts']) {
       httpApi.addRoutes({ path: route, methods: [api.HttpMethod.GET], integration });
     }
     for (const route of ['/real-world/tests', '/real-world/tests/{jobId}/cancel']) {
