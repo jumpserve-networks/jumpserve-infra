@@ -26,6 +26,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Read pinned real-world runtime revision
+        id: real-world-runtime
+        run: echo "revision=$(python3 -c 'import json; print(json.load(open("real-world-runtime.json"))["revision"])')" >> "$GITHUB_OUTPUT"
+
+      - name: Check out real-world runtime
+        uses: actions/checkout@v4
+        with:
+          repository: jumpserve-networks/jumpserve-back-end
+          ref: ${{ steps.real-world-runtime.outputs.revision }}
+          path: .runtime-backend
+
+      - name: Test real-world runtime
+        run: python3 -B -m unittest discover -s .runtime-backend/real_world/tests -v
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'

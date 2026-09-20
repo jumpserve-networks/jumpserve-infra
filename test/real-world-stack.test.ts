@@ -1,0 +1,30 @@
+import * as cdk from 'aws-cdk-lib';
+import * as api from 'aws-cdk-lib/aws-apigatewayv2';
+import { Template, Match } from 'aws-cdk-lib/assertions';
+import { RealWorldTests } from '../lib/real-world-tests';
+
+test('real-world lifecycle retains evidence and independently reaps expired resources', () => {
+  const app = new cdk.App({ context: { supabaseUrl: 'https://example.supabase.co', supabaseAnonKey: 'public-test-key' } });
+  const stack = new cdk.Stack(app, 'RealWorldTest', { env: { account: '123456789012', region: 'us-east-1' } });
+  new RealWorldTests(stack, 'RealWorld', new api.HttpApi(stack, 'Api'));
+  const template = Template.fromStack(stack);
+  template.resourceCountIs('AWS::StepFunctions::StateMachine', 1);
+  template.hasResourceProperties('AWS::Events::Rule', { ScheduleExpression: 'rate(5 minutes)' });
+  template.hasResourceProperties('AWS::Lambda::Function', { Handler: 'controller.reap', Timeout: 240 });
+  template.hasResourceProperties('AWS::Lambda::Function', { Handler: 'api.handler', Environment: { Variables: Match.objectLike({ SUPABASE_URL: 'https://example.supabase.co' }) } });
+  template.hasResource('AWS::S3::Bucket', { DeletionPolicy: 'RetainExceptOnCreate' });
+  template.hasResource('AWS::DynamoDB::Table', { DeletionPolicy: 'RetainExceptOnCreate' });
+  template.hasResourceProperties('AWS::DynamoDB::Table', { GlobalSecondaryIndexes: Match.arrayWith([Match.objectLike({ IndexName: 'active-deadline' })]) });
+  template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'POST /real-world/tests/{jobId}/cancel' });
+  const roles = template.findResources('AWS::IAM::Role');
+  const instanceRole = Object.entries(roles).find(([name]) => name.includes('InstanceRole'))?.[1];
+  expect(JSON.stringify(instanceRole)).not.toContain('secretsmanager');
+  const policies = JSON.stringify(template.findResources('AWS::IAM::Policy'));
+  expect(policies).toContain('ec2:ResourceTag/Project');
+  expect(policies).toContain('JumpServeRealWorld');
+  for (const policy of Object.values(template.findResources('AWS::IAM::Policy'))) {
+    for (const statement of policy.Properties.PolicyDocument.Statement) {
+      expect([statement.Action].flat()).not.toContain('ec2:*');
+    }
+  }
+});

@@ -35,6 +35,17 @@ jobs:
         with:
           python-version: '3.12'
       - run: npm ci
+      - name: Read pinned real-world runtime revision
+        id: real-world-runtime
+        run: echo "revision=$(python3 -c 'import json; print(json.load(open("real-world-runtime.json"))["revision"])')" >> "$GITHUB_OUTPUT"
+
+      - name: Check out real-world runtime for infrastructure tests
+        uses: actions/checkout@v4
+        with:
+          repository: jumpserve-networks/jumpserve-back-end
+          ref: ${{ steps.real-world-runtime.outputs.revision }}
+          path: .runtime-backend
+
       - run: npm run build
       - run: npm test -- --runInBand
       - run: npm run test:ami

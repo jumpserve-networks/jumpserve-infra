@@ -11,6 +11,7 @@ import * as eventsTargets from 'aws-cdk-lib/aws-events-targets';
 import { Construct } from 'constructs';
 import * as path from 'path';
 import { addBenchmarkImagePipelineRole } from './benchmark-image-pipeline';
+import { RealWorldTests } from './real-world-tests';
 
 export class BenchmarkOrchestratorStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -239,6 +240,8 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
         'GetBenchmarkLogsIntegration', getLogsFn
       ),
     });
+
+    new RealWorldTests(this, 'RealWorldTests', httpApi);
 
     new cdk.CfnOutput(this, 'BenchmarkApiUrl', {
       value: httpApi.apiEndpoint,

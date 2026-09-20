@@ -6,7 +6,7 @@ No EC2 instance needs to run continuously for benchmarks.
 ## Architecture
 
 - Amplify hosts the Next.js frontend at https://jumpserve.quaint-lab.org.
-- API Gateway and Lambda launch one disposable EC2 instance per benchmark.
+- API Gateway and Lambda launch disposable EC2 machines for each test module.
 - Each instance boots a verified AMI, saves results to Supabase, streams logs to
   CloudWatch and terminates automatically after success or failure.
 - Backend deployments briefly create an AMI builder and verification instances.
@@ -15,6 +15,41 @@ No EC2 instance needs to run continuously for benchmarks.
 AWS account: `395567831870`; region: `us-east-1`.
 The legacy `JumpServeEc2Stack` is removed from the CDK app so `deploy --all` cannot
 recreate the permanent server, Elastic IP or SSH access.
+
+## Real-world congestion-control tests
+
+`lib/real-world-tests.ts` adds authenticated `/real-world/*` endpoints to the
+existing benchmark API, a Step Functions lifecycle, DynamoDB job/configuration
+storage, private versioned S3 reports, and an independent five-minute reaper.
+Both evidence stores use retain policies. The real-world EC2 role has SSM access
+only; it has no Supabase service key. Worker mutations and terminations target
+resources tagged `Project=JumpServeRealWorld`.
+
+Each test creates its own VPC/network resources in the selected Regions and a
+fresh server, bottleneck, and 1–16 receivers. WireGuard forces test TCP/ACKs
+through the bottleneck. Machine placement uses the live AWS Region/AZ/type
+catalog and supports compatible enabled Local Zones. Unavailable/opt-in zones
+are explained; Wavelength networking and other AWS partitions are not silently
+substituted. CCAs are stock Linux CUBIC/BBR/Reno. Resources are removed on success,
+failure, or cancellation; status remains `cleaning` until removal is confirmed.
+There is a 45-minute job deadline and independent 60-minute instance shutdown.
+
+The runtime belongs to `jumpserve-back-end/real_world`. `real-world-runtime.json`
+pins its Git revision; CI checks out that exact commit into `.runtime-backend`
+and tests it before synthesis. For local builds/tests/synthesis, use:
+
+```bash
+export REAL_WORLD_RUNTIME_PATH=/path/to/jumpserve-back-end/real_world
+npm run build
+npm test -- --runInBand
+```
+
+For deployments, use the pinned checkout, update the revision when changing the
+runtime, and deploy the benchmark stack before publishing the frontend module.
+No new frontend environment variable is needed. A deployment provisions the
+control plane only; EC2 machines are allocated by individual test requests.
+The backend's `real_world/README.md` documents routing, lifecycle, units,
+authentication, costs, and evidence limitations in detail.
 
 ## Running Benchmarks
 
