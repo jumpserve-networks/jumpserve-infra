@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'agent'))
 from prompt import PromptUnavailable, PromptVersion, load_active_prompt
 from prompt_publication import evaluation_snapshot, publish_evaluated_prompt
+from evaluate_agent import grading_payload
 
 
 def record(version='one', identifier='00000000-0000-4000-8000-000000000001'):
@@ -58,6 +59,15 @@ class PromptLoadingTest(unittest.TestCase):
         self.assertEqual(payload['p_version_id'], prompt.id)
         self.assertIsNone(payload['p_expected_active_version_id'])
         self.assertIs(payload['p_report'], report)
+
+    def test_grader_receives_the_same_research_snapshot_without_candidate_system_instructions(self):
+        prompt = PromptVersion.from_record(record())
+        case = {'rubric': 'independent evaluation criteria', 'summary': {'topology': 'single-bottleneck'}}
+        payload = grading_payload(case, prompt, 'candidate answer')
+        self.assertEqual(payload['research_context'], prompt.research_context)
+        self.assertEqual(payload['metrics'], case['summary'])
+        self.assertEqual(payload['rubric'], case['rubric'])
+        self.assertNotIn(prompt.system_prompt, json.dumps(payload))
 
 
 class HandlerPromptTest(unittest.TestCase):
