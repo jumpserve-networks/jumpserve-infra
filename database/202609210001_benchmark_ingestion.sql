@@ -45,6 +45,7 @@ declare
     raw_id text;
     next_status text;
     rounding_tolerance numeric;
+    multi_bottleneck boolean;
     phases text[] := array['pending','launching','installing','cloning','running'];
 begin
     select * into job from public.benchmark_jobs where id=target for update;
@@ -81,9 +82,10 @@ begin
         raise exception 'Unsupported ingestion operation' using errcode='22023';
     end if;
     expected_clients := (job.config->>'num_clients')::integer;
+    multi_bottleneck := coalesce(job.config->>'script'='netem_multi_bottleneck.py',false);
     -- Existing schemas store integer milliseconds/MB: base runners round while
     -- the multi-bottleneck runner truncates. Preserve that measurement contract.
-    rounding_tolerance := case when job.config->>'script'='netem_multi_bottleneck.py' then 0.999999 else 0.5 end;
+    rounding_tolerance := case when multi_bottleneck then 0.999999 else 0.5 end;
     parent := payload->'parent';
     if jsonb_typeof(parent) is distinct from 'object' or
        jsonb_typeof(payload->'runs') is distinct from 'array' or
@@ -100,17 +102,19 @@ begin
         raise exception 'Report size or client count invalid' using errcode='22023';
     end if;
     if (parent->>'bottleneck_rate_megabit')::numeric is distinct from
-        coalesce((job.config->'bottleneck_rates_mbit'->>0)::numeric,(job.config->>'bottleneck_all_client_rate_mbit')::numeric) or
+        (case when multi_bottleneck then (job.config->'bottleneck_rates_mbit'->>0)::numeric
+              else (job.config->>'bottleneck_all_client_rate_mbit')::numeric end) or
        (parent->>'queue_buffer_size_kilobyte')::numeric is distinct from
-        coalesce((job.config->'bottleneck_buffers_kbytes'->>0)::numeric,(job.config->>'bottleneck_buffer_kbytes')::numeric) then
+        (case when multi_bottleneck then (job.config->'bottleneck_buffers_kbytes'->>0)::numeric
+              else (job.config->>'bottleneck_buffer_kbytes')::numeric end) then
         raise exception 'Report configuration does not match job' using errcode='22023';
     end if;
     insert into public.emulated_parent_runs(number_of_clients,bottleneck_rate_megabit,
         queue_buffer_size_kilobyte,snapshot_length_ms,topology,topology_config,tags,notes,experiment_name)
     values(expected_clients,(parent->>'bottleneck_rate_megabit')::numeric,
         (parent->>'queue_buffer_size_kilobyte')::numeric,(parent->>'snapshot_length_ms')::smallint,
-        coalesce(job.config->>'topology','single-bottleneck'),
-        case when job.config ? 'topology' then jsonb_build_object('topology',job.config->'topology',
+        case when multi_bottleneck then job.config->>'topology' else 'single-bottleneck' end,
+        case when multi_bottleneck then jsonb_build_object('topology',job.config->'topology',
             'bottleneck_rates_mbit',job.config->'bottleneck_rates_mbit',
             'bottleneck_buffers_kbytes',job.config->'bottleneck_buffers_kbytes','client_groups',job.config->'client_groups') end,
         array(select jsonb_array_elements_text(coalesce(job.config->'tags','[]'::jsonb))),

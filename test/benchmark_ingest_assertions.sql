@@ -10,7 +10,7 @@ do $$ begin
     end if;
 end $$;
 insert into public.benchmark_jobs(id,status,config) values
-('11111111-1111-4111-8111-111111111111','launching','{"num_clients":1,"client_ccas":["cubic"],"client_delays_ms":[10],"client_file_sizes_mbytes":[5],"bottleneck_all_client_rate_mbit":10,"bottleneck_buffer_kbytes":125}'),
+('11111111-1111-4111-8111-111111111111','launching','{"num_clients":1,"client_ccas":["cubic"],"client_delays_ms":[10],"client_file_sizes_mbytes":[5],"bottleneck_all_client_rate_mbit":10,"bottleneck_buffer_kbytes":125,"topology":"dumbbell","bottleneck_rates_mbit":[100,50],"bottleneck_buffers_kbytes":[900,800]}'),
 ('22222222-2222-4222-8222-222222222222','running','{}');
 insert into public.benchmark_ingest_tokens(job_id,token_hash) values
 ('11111111-1111-4111-8111-111111111111',repeat('a',64)),
@@ -54,6 +54,22 @@ begin
        (select parent_run_id from public.benchmark_jobs where id=target) is distinct from (result->>'parent_run_id')::integer or
        (select emulated_run_id from public.emulated_snapshot_stats) is distinct from (result->'run_ids'->>'1')::integer then
         raise exception 'Atomic result linkage failed';
+    end if;
+    if (select topology from public.emulated_parent_runs)<>'single-bottleneck' or
+       (select topology_config from public.emulated_parent_runs) is not null then
+        raise exception 'Single-bottleneck result inherited unused topology settings';
+    end if;
+    insert into public.benchmark_jobs(id,status,config) values
+        ('33333333-3333-4333-8333-333333333333','running',
+         '{"script":"netem_multi_bottleneck.py","num_clients":1,"client_ccas":["cubic"],"client_delays_ms":[10],"client_file_sizes_mbytes":[5],"bottleneck_all_client_rate_mbit":10,"bottleneck_buffer_kbytes":125,"topology":"parking-lot","bottleneck_rates_mbit":[50,20],"bottleneck_buffers_kbytes":[64,32]}');
+    insert into public.benchmark_ingest_tokens(job_id,token_hash) values
+        ('33333333-3333-4333-8333-333333333333',repeat('c',64));
+    report := jsonb_set(jsonb_set(report,'{parent,bottleneck_rate_megabit}','50'),'{parent,queue_buffer_size_kilobyte}','64');
+    result := public.benchmark_ingest('33333333-3333-4333-8333-333333333333',repeat('c',64),'results',report);
+    if not exists(select 1 from public.emulated_parent_runs where id=(result->>'parent_run_id')::integer
+        and topology='parking-lot' and bottleneck_rate_megabit=50 and queue_buffer_size_kilobyte=64
+        and topology_config->'bottleneck_rates_mbit'='[50,20]'::jsonb) then
+        raise exception 'Multi-bottleneck result lost its topology';
     end if;
 end $$;
 select public.benchmark_ingest('22222222-2222-4222-8222-222222222222',repeat('b',64),'status','{"status":"failed","error_message":"expected fixture failure"}');
