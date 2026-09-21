@@ -30,9 +30,10 @@ Each test creates its own VPC/network resources in the selected Regions and a
 fresh server, bottleneck, and 1–16 receivers. WireGuard forces test TCP/ACKs
 through the bottleneck. Machine placement uses the live AWS Region/AZ/type
 catalog and supports compatible enabled Local Zones. Every server, bottleneck,
-and receiver uses t3.medium. The live catalog and launch validation enforce this
-restriction, and the worker IAM policy permits RunInstances only for t3.medium
-instance resources. Unavailable/opt-in zones
+and receiver independently selects t3.small, t3.medium, or t3.large (default:
+t3.medium). The live catalog and launch validation check that exact size in its
+zone, and the worker IAM policy permits RunInstances only for those three types
+on instance resources. Unavailable/opt-in zones
 are explained; Wavelength networking and other AWS partitions are not silently
 substituted. CCAs are stock Linux CUBIC/BBR/Reno. Resources are removed on success,
 failure, or cancellation; status remains `cleaning` until removal is confirmed.

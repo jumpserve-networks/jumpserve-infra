@@ -67,7 +67,7 @@ export class RealWorldTests extends Construct {
       `arn:${stack.partition}:ec2:*::image/*`, ec2Arn('volume'), ec2Arn('network-interface'),
     ] }));
     workerRole.addToPolicy(new iam.PolicyStatement({ actions: ['ec2:RunInstances'], resources: [ec2Arn('instance')],
-      conditions: { StringEquals: { 'ec2:InstanceType': 't3.medium' } } }));
+      conditions: { StringEquals: { 'ec2:InstanceType': ['t3.small', 't3.medium', 't3.large'] } } }));
     workerRole.addToPolicy(new iam.PolicyStatement({ actions: ['ec2:RunInstances'], resources: [ec2Arn('subnet'), ec2Arn('security-group')], conditions: tagged }));
     workerRole.addToPolicy(new iam.PolicyStatement({ actions: ['ec2:CreateVpc', 'ec2:CreateSubnet', 'ec2:CreateInternetGateway', 'ec2:CreateSecurityGroup', 'ec2:CreateRouteTable'], resources: ['*'] }));
     workerRole.addToPolicy(new iam.PolicyStatement({ actions: ['ec2:CreateTags'], resources: ['*'], conditions: {

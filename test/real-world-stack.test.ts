@@ -48,7 +48,7 @@ test('real-world lifecycle retains evidence and independently reaps expired reso
     [statement.Action].flat().includes('ec2:RunInstances'));
   const instanceLaunches = launches.filter((statement: { Resource: unknown }) => JSON.stringify(statement.Resource).includes(':instance/*'));
   expect(instanceLaunches).toHaveLength(1);
-  expect(instanceLaunches[0].Condition).toEqual({ StringEquals: { 'ec2:InstanceType': 't3.medium' } });
+  expect(instanceLaunches[0].Condition).toEqual({ StringEquals: { 'ec2:InstanceType': ['t3.small', 't3.medium', 't3.large'] } });
   expect(launches.every((statement: { Resource: unknown }) => statement.Resource !== '*')).toBe(true);
   for (const policy of Object.values(template.findResources('AWS::IAM::Policy'))) {
     for (const statement of policy.Properties.PolicyDocument.Statement) {
