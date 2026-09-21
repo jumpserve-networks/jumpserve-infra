@@ -52,8 +52,12 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
       },
     }));
 
-    // Allow reading the Supabase secret
-    supabaseSecret.grantRead(benchmarkInstanceRole);
+    // An EC2 runner must never be able to retrieve a database credential.
+    benchmarkInstanceRole.addToPolicy(new iam.PolicyStatement({
+      effect: iam.Effect.DENY,
+      actions: ['secretsmanager:GetSecretValue', 'secretsmanager:BatchGetSecretValue'],
+      resources: ['*'],
+    }));
 
     // Allow CloudWatch Logs for log streaming
     benchmarkInstanceRole.addToPolicy(new iam.PolicyStatement({
@@ -227,6 +231,20 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
         'LaunchBenchmarkIntegration', launchFn
       ),
     });
+
+    const ingestFn = new lambda.NodejsFunction(this, 'BenchmarkIngestFn', {
+      entry: path.join(__dirname, '..', 'lambda', 'benchmark-ingest', 'index.ts'),
+      handler: 'handler', runtime: lambdaRuntime.Runtime.NODEJS_22_X,
+      timeout: cdk.Duration.seconds(60), memorySize: 512,
+      environment: { SUPABASE_URL: supabaseUrl, SUPABASE_SECRET_ARN: supabaseSecret.secretArn },
+      bundling: { externalModules: ['@aws-sdk/*'] },
+    });
+    supabaseSecret.grantRead(ingestFn);
+    httpApi.addRoutes({
+      path: '/benchmarks/ingest', methods: [apigatewayv2.HttpMethod.POST],
+      integration: new apigatewayv2Integrations.HttpLambdaIntegration('BenchmarkIngestIntegration', ingestFn),
+    });
+    launchFn.addEnvironment('BENCHMARK_INGEST_URL', `${httpApi.apiEndpoint}/benchmarks/ingest`);
 
     httpApi.addRoutes({
       path: '/benchmarks/cancel',

@@ -17,6 +17,15 @@ test('the selected AMI and bootstrap mode always change together', () => {
     });
     const template = Template.fromStack(stack);
   template.resourceCountIs('AWS::Lambda::Url', 0);
+    const policies = template.findResources('AWS::IAM::Policy');
+    const instancePolicies = Object.values(policies).filter((policy: any) =>
+      JSON.stringify(policy.Properties.Roles).includes('BenchmarkInstanceRole'));
+    const statements = instancePolicies.flatMap((policy: any) => policy.Properties.PolicyDocument.Statement);
+    expect(statements.some((statement: any) => statement.Effect === 'Deny' &&
+      statement.Action.includes('secretsmanager:GetSecretValue'))).toBe(true);
+    expect(statements.some((statement: any) => statement.Effect === 'Allow' &&
+      JSON.stringify(statement.Action).includes('secretsmanager:'))).toBe(false);
+    template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'POST /benchmarks/ingest' });
     template.hasParameter('BenchmarkAmiId', { Type: 'String', Default: '' });
     template.hasCondition('UseBenchmarkAmi', {
       'Fn::Not': [{ 'Fn::Equals': [{ Ref: 'BenchmarkAmiId' }, ''] }],

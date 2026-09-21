@@ -45,7 +45,7 @@ async function main() {
       num_clients: 2, client_delays_ms: [10, 20], client_ccas: ['cubic', 'cubic'],
       client_file_sizes_mbytes: [5, 5], client_start_delays_ms: [0, 0],
       bottleneck_all_client_rate_mbit: 10, bottleneck_buffer_kbytes: 125,
-      snapshot_metrics_source: expectedStatus === 'failed' ? 'invalid-ami-verification' : 'kernel',
+      snapshot_metrics_source: 'kernel',
       script: 'netem_cubic_benchmark_nines.py', experiment_name: `ami-verification-${expectedStatus}`,
     };
     const start = Date.now();
@@ -63,7 +63,20 @@ async function main() {
         if (fs.existsSync(responseFile)) fs.unlinkSync(responseFile);
       }
     } else {
-      response = await handler(invocation);
+      // Exercise a real runner failure after image validation. The public
+      // launcher correctly rejects invalid configuration before creating EC2.
+      // Inject only into this local verification process, never the live Lambda.
+      const bootstrap = require('../lambda/launch-benchmark/user-data.js');
+      const original = bootstrap.buildUserData;
+      if (expectedStatus === 'failed') {
+        bootstrap.buildUserData = (...args) => {
+          const script = Buffer.from(original(...args), 'base64').toString().replace(
+            '/netem_cubic_benchmark_nines.py ', '/netem_cubic_benchmark_nines.py --mode invalid-ami-verification ');
+          return Buffer.from(script).toString('base64');
+        };
+      }
+      try { response = await handler(invocation); }
+      finally { bootstrap.buildUserData = original; }
     }
     assert.equal(response.statusCode, 200, 'Candidate launcher failed');
     const job = JSON.parse(response.body);

@@ -73,11 +73,15 @@ export function buildBenchmarkArgs(config: BenchmarkConfig): string {
       args.push(`--experiment-notes '${config.notes.replace(/'/g, "'\\''")}'`);
     }
   }
-  return `sudo python3 /home/ubuntu/jumpserve-back-end/${script} ${args.join(' ')}`;
+  return `sudo --preserve-env=JUMPSERVE_INGEST_URL,JUMPSERVE_JOB_ID,JUMPSERVE_JOB_TOKEN python3 /home/ubuntu/jumpserve-back-end/${script} ${args.join(' ')}`;
 }
 
-export function buildUserData(config: BenchmarkConfig, jobId: string, supabaseKey: string): string {
-  const supabaseUrl = process.env.SUPABASE_URL!;
+export function buildUserData(config: BenchmarkConfig, jobId: string, jobToken: string): string {
+  const ingestUrl = process.env.BENCHMARK_INGEST_URL!;
+  if (!/^https:\/\/[a-z0-9.-]+\/benchmarks\/ingest$/.test(ingestUrl) ||
+      !/^[a-f0-9-]{36}$/i.test(jobId) || !/^[a-f0-9]{64}$/.test(jobToken)) {
+    throw new Error('Invalid job ingestion configuration');
+  }
   const benchmarkCommand = buildBenchmarkArgs(config);
   const prebaked = process.env.BENCHMARK_IMAGE_MODE === 'prebaked';
   const installation = prebaked ? `
@@ -101,7 +105,7 @@ assert manifest.get('schema_version') == 1, 'Unsupported benchmark image schema'
 assert re.fullmatch('[0-9a-f]{40}', manifest.get('backend_commit', '')), 'Missing backend commit'
 for command in ('ip', 'tc', 'ss', 'ethtool', 'python3', 'sysctl', 'shutdown', 'timeout'):
     assert shutil.which(command), f'Missing image dependency: {command}'
-for runner in ('netem_cubic_benchmark_hotnets.py', 'netem_cubic_benchmark_nines.py', 'netem_nines.py', 'netem_multi_bottleneck.py'):
+for runner in ('benchmark_ingest.py', 'netem_cubic_benchmark_hotnets.py', 'netem_cubic_benchmark_nines.py', 'netem_nines.py', 'netem_multi_bottleneck.py'):
     assert pathlib.Path('/home/ubuntu/jumpserve-back-end', runner).is_file(), f'Missing runner: {runner}'
 print('Benchmark image backend commit: ' + manifest['backend_commit'], flush=True)
 IMAGECHECK
@@ -109,7 +113,7 @@ cd /home/ubuntu/jumpserve-back-end
 ` : `
 update_status "cloning"
 cd /home/ubuntu
-git clone https://github.com/jumpserve-networks/jumpserve-back-end.git
+git clone --depth 1 https://github.com/jumpserve-networks/jumpserve-back-end.git
 cd jumpserve-back-end
 `;
 
@@ -117,35 +121,30 @@ cd jumpserve-back-end
 set -euo pipefail
 BENCHMARK_PHASE=bootstrapping
 
-# Helper: update job status in Supabase
+# This capability is scoped to this job and expires after 45 minutes.
+export JUMPSERVE_INGEST_URL='${ingestUrl}'
+export JUMPSERVE_JOB_ID='${jobId}'
+export JUMPSERVE_JOB_TOKEN='${jobToken}'
+
 update_status() {
   local STATUS="$1"
   local ERROR_MSG="\${2:-}"
-  local PAYLOAD
   case "$STATUS" in
     installing|cloning|running) BENCHMARK_PHASE="$STATUS" ;;
   esac
   echo "Benchmark phase: $STATUS"
-  if [ -n "$ERROR_MSG" ]; then
-    PAYLOAD=$(python3 -c "import json; print(json.dumps({'status': '$STATUS', 'error_message': '$ERROR_MSG', 'updated_at': '$(date -u +%Y-%m-%dT%H:%M:%SZ)'}))")
-  else
-    PAYLOAD=$(python3 -c "import json; print(json.dumps({'status': '$STATUS', 'updated_at': '$(date -u +%Y-%m-%dT%H:%M:%SZ)'}))")
-  fi
-  python3 -c "
-import urllib.request
-req = urllib.request.Request(
-    '${supabaseUrl}/rest/v1/benchmark_jobs?id=eq.${jobId}',
-    data=b'$PAYLOAD',
-    headers={
-        'apikey': '${supabaseKey}',
-        'Authorization': 'Bearer ${supabaseKey}',
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-    },
-    method='PATCH'
-)
-urllib.request.urlopen(req, timeout=10)
-" || true
+  python3 - "$STATUS" "$ERROR_MSG" <<'STATUSUPDATE' || true
+import json, os, sys, urllib.request
+request = urllib.request.Request(os.environ['JUMPSERVE_INGEST_URL'], method='POST',
+    data=json.dumps({'job_id': os.environ['JUMPSERVE_JOB_ID'], 'action': 'status',
+        'status': sys.argv[1], 'error_message': sys.argv[2]}).encode(),
+    headers={'Authorization': 'Bearer ' + os.environ['JUMPSERVE_JOB_TOKEN'],
+        'Content-Type': 'application/json'})
+try:
+    urllib.request.urlopen(request, timeout=10).close()
+except Exception:
+    print('Job status update unavailable', file=sys.stderr)
+STATUSUPDATE
 }
 
 # Run on both success and failure, including failures before AWS CLI is installed.
@@ -206,44 +205,8 @@ sysctl -w net.ipv4.ip_forward=1
 # Phase: running
 update_status "running"
 
-${benchmarkCommand} \\
-  --supabase-project-id regphejnlvfpyokpniny \\
-  --supabase-service-role-key '${supabaseKey}'
-# Link parent_run_id and update final status after a successful benchmark.
-# Find the most recently created parent run and link it to this job
-PARENT_RUN_ID=$(python3 -c "
-import urllib.request, json
-req = urllib.request.Request(
-  '${supabaseUrl}/rest/v1/emulated_parent_runs?order=created_at.desc&limit=1&select=id',
-  headers={
-      'apikey': '${supabaseKey}',
-      'Authorization': 'Bearer ${supabaseKey}',
-  }
-)
-resp = urllib.request.urlopen(req, timeout=10)
-data = json.loads(resp.read())
-print(data[0]['id'] if data else '')
-" 2>/dev/null || echo "")
-
-if [ -n "$PARENT_RUN_ID" ]; then
-  python3 -c "
-import urllib.request, json
-req = urllib.request.Request(
-  '${supabaseUrl}/rest/v1/benchmark_jobs?id=eq.${jobId}',
-  data=json.dumps({'status': 'completed', 'parent_run_id': $PARENT_RUN_ID, 'updated_at': '$(date -u +%Y-%m-%dT%H:%M:%SZ)'}).encode(),
-  headers={
-      'apikey': '${supabaseKey}',
-      'Authorization': 'Bearer ${supabaseKey}',
-      'Content-Type': 'application/json',
-      'Prefer': 'return=minimal'
-  },
-  method='PATCH'
-)
-urllib.request.urlopen(req, timeout=10)
-" || true
-else
-  update_status "completed"
-fi
+# The runner commits the complete report and marks this exact job completed.
+${benchmarkCommand}
 
 # The EXIT trap shuts down the instance without requiring AWS CLI or IMDS calls.
 `;

@@ -1,4 +1,5 @@
 import { AuthError, requireUser } from '../shared/auth';
+import { randomBytes, createHash } from 'node:crypto';
 import { buildUserData, type BenchmarkConfig } from './user-data';
 import {
   EC2Client,
@@ -94,7 +95,6 @@ async function supabaseRequest(method: string, path: string, body?: object, apiK
 
   const headers: Record<string, string> = {
     'apikey': key,
-    'Authorization': `Bearer ${key}`,
     'Content-Type': 'application/json',
     'Prefer': method === 'POST' ? 'return=representation' : 'return=minimal',
   };
@@ -166,7 +166,7 @@ export const handler = async (event: any) => {
     // Check concurrent running jobs
     const runningJobs = await supabaseRequest(
       'GET',
-      'benchmark_jobs?status=in.(launching,running)&select=id',
+      'benchmark_jobs?status=in.(pending,launching,installing,cloning,running)&select=id',
       undefined,
       supabaseKey,
     );
@@ -187,13 +187,19 @@ export const handler = async (event: any) => {
 
     const jobId = job.id;
 
-    // Build user data and launch EC2
-    const userData = buildUserData(config, jobId, supabaseKey);
+    // Store only the token hash. The runner can submit exactly this job's report.
+    const jobToken = randomBytes(32).toString('hex');
+    await supabaseRequest('POST', 'benchmark_ingest_tokens', {
+      job_id: jobId,
+      token_hash: createHash('sha256').update(jobToken).digest('hex'),
+    }, supabaseKey);
+    const userData = buildUserData(config, jobId, jobToken);
 
     const runResult = await ec2.send(new RunInstancesCommand({
       ImageId: process.env.AMI_ID!,
       InstanceType: 't3.medium',
       InstanceInitiatedShutdownBehavior: 'terminate',
+      MetadataOptions: { HttpTokens: 'required', HttpEndpoint: 'enabled' },
       MinCount: 1,
       MaxCount: 1,
       UserData: userData,

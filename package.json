@@ -13,7 +13,8 @@
     "test:agent:database": "python3 -B test/check_agent_prompt_database.py",
     "test:database:rls": "python3 -B test/check_database_rls.py",
     "cdk:benchmark": "cdk --app \"npx ts-node --prefer-ts-exts bin/benchmark.ts\"",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "test:database:ingest": "python3 -B test/check_benchmark_ingest_database.py"
   },
   "devDependencies": {
     "@aws-sdk/client-cloudwatch-logs": "^3.1132.0",

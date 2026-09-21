@@ -42,6 +42,7 @@ git -C /home/ubuntu/jumpserve-back-end checkout --detach FETCH_HEAD
 test "$(git -C /home/ubuntu/jumpserve-back-end rev-parse HEAD)" = "$BACKEND_COMMIT"
 
 # Check every runner before allowing an AMI to be registered.
+test -f /home/ubuntu/jumpserve-back-end/benchmark_ingest.py
 for runner in netem_cubic_benchmark_hotnets.py netem_cubic_benchmark_nines.py netem_nines.py netem_multi_bottleneck.py; do
   python3 "/home/ubuntu/jumpserve-back-end/$runner" --help > /dev/null
 done

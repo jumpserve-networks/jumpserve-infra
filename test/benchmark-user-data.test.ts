@@ -1,3 +1,4 @@
+process.env.BENCHMARK_INGEST_URL = 'https://example.test/benchmarks/ingest';
 import { spawnSync } from 'node:child_process';
 import { buildBenchmarkArgs, buildUserData, type BenchmarkConfig } from '../lambda/launch-benchmark/user-data';
 
@@ -17,7 +18,7 @@ function userData(mode = 'base') {
   const previous = process.env.BENCHMARK_IMAGE_MODE;
   process.env.BENCHMARK_IMAGE_MODE = mode;
   try {
-    return Buffer.from(buildUserData(config, 'test-job', 'test-service-key'), 'base64').toString();
+    return Buffer.from(buildUserData(config, '11111111-1111-4111-8111-111111111111', 'a'.repeat(64)), 'base64').toString();
   } finally {
     if (previous === undefined) delete process.env.BENCHMARK_IMAGE_MODE;
     else process.env.BENCHMARK_IMAGE_MODE = previous;
@@ -76,7 +77,9 @@ test('generated bootstrap is valid bash and does not enable credential tracing',
   const script = userData();
   expect(spawnSync('bash', ['-n'], { input: script }).status).toBe(0);
   expect(script).not.toMatch(/set -[^\n]*x/);
-  expect(script).toContain('urlopen(req, timeout=10)');
+  expect(script).not.toMatch(/supabase\.co|--supabase-service-role-key|SUPABASE_SERVICE|apikey/);
+  expect(script).toContain('JUMPSERVE_JOB_TOKEN');
+  expect(script).toContain('urlopen(request, timeout=10)');
 });
 
 test('prebuilt instances run the baked backend without installing or fetching software', () => {
@@ -86,7 +89,7 @@ test('prebuilt instances run the baked backend without installing or fetching so
   expect(script).toContain('/etc/jumpserve-image.json');
   expect(script).toContain("manifest.get('schema_version') == 1");
   expect(script).toContain('Benchmark image backend commit:');
-  expect(script).toContain('"log_stream_name": "test-job"');
+  expect(script).toContain('"log_stream_name": "11111111-1111-4111-8111-111111111111"');
   expect(script).toContain('trap finalize_benchmark EXIT');
   expect(script).not.toMatch(/set -[^\n]*x/);
 });
@@ -94,7 +97,7 @@ test('prebuilt instances run the baked backend without installing or fetching so
 test('base-image rollback retains dependency installation and a fresh backend checkout', () => {
   const script = userData('base');
   expect(script).toContain('apt-get install');
-  expect(script).toContain('git clone https://github.com/jumpserve-networks/jumpserve-back-end.git');
+  expect(script).toContain('git clone --depth 1 https://github.com/jumpserve-networks/jumpserve-back-end.git');
 });
 
 function runFinalizer(body: string, failStatusUpdate = false, activeLogAgent = false) {
@@ -130,7 +133,7 @@ test.each([
   expect(result.status).toBe(exitCode);
   expect(result.stdout).toContain(`STATUS:failed:Benchmark failed during ${phase} (exit ${exitCode})`);
   expect(result.stdout.match(/SHUTDOWN/g)).toHaveLength(1);
-  expect(result.stdout + result.stderr).not.toContain('test-service-key');
+  expect(result.stdout + result.stderr).not.toContain('a'.repeat(64));
 });
 
 test('a failed status update cannot prevent shutdown', () => {

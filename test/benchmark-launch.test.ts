@@ -1,3 +1,4 @@
+process.env.BENCHMARK_INGEST_URL = 'https://example.test/benchmarks/ingest';
 import { EC2Client, RunInstancesCommand } from '@aws-sdk/client-ec2';
 import { SecretsManagerClient } from '@aws-sdk/client-secrets-manager';
 import * as auth from '../lambda/shared/auth';
@@ -42,8 +43,8 @@ test.each(['parking-lot', 'dumbbell'])('valid %s config reaches EC2 and is retai
   jest.spyOn(globalThis, 'fetch').mockImplementation(async (_url, options) => {
     if (options?.method === 'GET') return Response.json([]);
     if (options?.method === 'POST') {
-      inserted = JSON.parse(options.body as string);
-      return Response.json([{ id: 'test-job' }]);
+      if (String(_url).endsWith("/benchmark_jobs")) inserted = JSON.parse(options.body as string);
+      return Response.json([{ id: '11111111-1111-4111-8111-111111111111' }]);
     }
     return new Response(null, { status: 204 });
   });
@@ -67,7 +68,7 @@ test('launched benchmarks terminate on OS shutdown and retain metadata in the jo
   jest.spyOn(globalThis, 'fetch').mockImplementation(async (_url, options) => {
     requests.push({ method: options?.method, body: options?.body });
     if (options?.method === 'GET') return Response.json([]);
-    if (options?.method === 'POST') return Response.json([{ id: 'test-job' }]);
+    if (options?.method === 'POST') return Response.json([{ id: '11111111-1111-4111-8111-111111111111' }]);
     return new Response(null, { status: 204 });
   });
 

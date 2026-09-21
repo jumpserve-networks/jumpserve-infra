@@ -26,8 +26,8 @@ contractTest.each([
 import importlib, pathlib, shlex, sys
 sys.path.insert(0, sys.argv[1])
 tokens = shlex.split(sys.argv[2])
-runner = importlib.import_module(pathlib.Path(tokens[2]).stem)
-args = runner.build_parser().parse_args(tokens[3:] + ['--supabase-service-role-key', ''])
+runner = importlib.import_module(pathlib.Path(tokens[3]).stem)
+args = runner.build_parser().parse_args(tokens[4:])
 assert args.num_clients == 2
 `, backend!, command], { encoding: 'utf8' });
   expect({ status: result.status, error: result.stderr }).toEqual({ status: 0, error: '' });

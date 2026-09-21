@@ -58,6 +58,34 @@ authentication, costs, and evidence limitations in detail.
 
 ## Running Benchmarks
 
+Emulated EC2 instances receive only a random, 45-minute job capability for
+`POST /benchmarks/ingest`. Its SHA-256 hash is stored in the private,
+RLS-protected `benchmark_ingest_tokens` table. The endpoint accepts status
+updates and one complete compressed result report. The database RPC locks the
+job, validates its configuration and run references, inserts measurements in a
+single transaction, and links the actual parent run to the job. Exact retries
+are idempotent; changed reports, expired tokens and terminal jobs are rejected.
+Limits are 32 MiB uncompressed, 3 MiB compressed, and 200,000 snapshot rows.
+
+Database credentials stay in Secrets Manager and trusted control-plane Lambdas.
+The EC2 role explicitly denies Secrets Manager reads. User data and runner
+commands contain no Supabase API key. Prebuilt images must contain the new
+ingestion client; use `BenchmarkAmiId=''` until a compatible image is verified.
+
+Apply `database/202609210001_benchmark_ingestion.sql` before deploying the
+launcher (`python3 scripts/apply_benchmark_ingestion.py --apply`). Run
+`npm run test:database:ingest` against the isolated `jumpserve_prompt_test`
+database to verify token isolation, expiry, cancellation, replay handling,
+transaction rollback and result linkage.
+
+Supabase now uses a publishable browser key and a server-only secret key. The
+existing environment variable names remain compatible. Legacy API keys **and
+the legacy JWT signing key** must be disabled: an exposed legacy key can still
+work as a bearer JWT with a publishable API key until its signer is revoked.
+The incident tooling in `scripts/rotate_supabase_keys.py` separates preparation,
+installation and revocation and never prints credentials. Existing user
+sessions may need to refresh or sign in again after emergency signer revocation.
+
 Ephemeral benchmarks launched through the API shut down after either success or
 failure. Instances use `InstanceInitiatedShutdownBehavior=terminate`, so the
 bootstrap's exit trap terminates the instance even if installation fails before
