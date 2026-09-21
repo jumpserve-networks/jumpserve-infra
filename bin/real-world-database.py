@@ -16,7 +16,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
     checks = (ROOT / 'test/public_results_assertions.sql').read_text() + (ROOT / 'test/real_world_database_assertions.sql').read_text()
     if args.apply:
-        sql = (ROOT / 'database/202609200004_real_world_supabase.sql').read_text().rsplit('commit;', 1)[0] + checks + '\ncommit;'
+        migrations = ['202609200004_real_world_supabase.sql', '202609200005_real_world_status_history.sql']
+        sql = 'begin;\n' + '\n'.join((ROOT / 'database' / name).read_text().replace('begin;\n', '', 1).rsplit('commit;', 1)[0]
+                                     for name in migrations) + checks + '\ncommit;'
     else:
         sql = 'begin;\n' + checks + '\nrollback;'
     audit.query(sql, read_only=False)

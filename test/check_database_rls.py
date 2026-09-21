@@ -145,9 +145,16 @@ subprocess.run([psql, url, '-X', '-v', 'ON_ERROR_STOP=1', '-q'],
     + migration_body('202609200003_public_test_results.sql') * 2
     + (ROOT / 'test/public_results_assertions.sql').read_text()
     + migration_body('202609200004_real_world_supabase.sql') * 2
+    + """
+select public.real_world_put_job(
+    '{"job_id":"55555555-0000-4000-8000-000000000009","owner":"legacy","created_at":1,"schema_version":1,"active":"no","deadline":1,"status":"completed","config":{}}',
+    '{"job_id":"55555555-0000-4000-8000-000000000009","created_at":1,"schema_version":1,"status":"completed","config":{}}',true);
+"""
+    + migration_body('202609200005_real_world_status_history.sql') * 2
     + (ROOT / 'test/public_results_assertions.sql').read_text()
     + (ROOT / 'test/real_world_database_assertions.sql').read_text()
-    + (ROOT / 'test/real_world_database_lifecycle.sql').read_text() + """
+    + (ROOT / 'test/real_world_database_lifecycle.sql').read_text()
+    + (ROOT / 'test/real_world_status_history.sql').read_text() + """
 create table public.public_results_future_table (id int);
 set local role anon;
 select pg_temp.expect_permission_denied('select * from public.public_results_future_table');

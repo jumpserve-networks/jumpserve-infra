@@ -461,12 +461,18 @@ within `schema_version`. Private `real_world_jobs` stores owner/controller state
 `real_world_artifacts` stores hashes and archived Storage paths. Public reads
 expose only safe run projections and reports, with RLS enabled everywhere.
 
-Apply the fixed migration before deploying this runtime:
+Apply the real-world storage and status-history migrations before deploying this runtime:
 
 ```bash
 python3 -B bin/real-world-database.py --apply
 npm run test:database:rls
 ```
+
+`202609200005_real_world_status_history.sql` records stage transitions in a public
+read-only table in the same transaction as the job checkpoint. It preserves
+failed/cancelled outcomes, timestamps cleanup independently, and leaves historical
+times unknown for older tests. The detail API embeds this history with the current
+state in one database snapshot. RLS and grants prohibit client writes.
 
 The applier validates access rules in the migration transaction before COMMIT.
 It requires a Supabase CLI login or `SUPABASE_ACCESS_TOKEN`. Lambda service keys

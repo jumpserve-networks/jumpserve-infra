@@ -12,7 +12,7 @@ begin
             or has_any_column_privilege('anon',relation.oid,'INSERT,UPDATE,REFERENCES') then
             raise exception 'Anonymous write grant: %',relation.relname;
         end if;
-        if relation.relname in ('congestion_control_algorithms','emulated_parent_runs','emulated_runs','emulated_snapshot_stats','real_world_runs','real_world_reports') then
+        if relation.relname in ('congestion_control_algorithms','emulated_parent_runs','emulated_runs','emulated_snapshot_stats','real_world_runs','real_world_reports','real_world_status_history') then
             if not has_table_privilege('anon',relation.oid,'SELECT') then raise exception 'Public results inaccessible: %',relation.relname; end if;
         elsif relation.relname = 'benchmark_jobs' then
             for column_record in select attnum,attname from pg_attribute where attrelid=relation.oid and attnum>0 and not attisdropped loop

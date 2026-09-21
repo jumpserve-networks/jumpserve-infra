@@ -1,13 +1,13 @@
 -- Read-only checks suitable for a production migration transaction.
 do $$ declare relation text; routine regprocedure; begin
-    foreach relation in array array['real_world_jobs','real_world_runs','real_world_artifacts','real_world_reports'] loop
+    foreach relation in array array['real_world_jobs','real_world_runs','real_world_artifacts','real_world_reports','real_world_status_history'] loop
         if not (select relrowsecurity from pg_class where oid=('public.'||relation)::regclass) then
             raise exception 'RLS missing on %',relation;
         end if;
         if has_table_privilege('authenticated','public.'||relation,'INSERT,UPDATE,DELETE,TRUNCATE') then
             raise exception 'Client write access on %',relation;
         end if;
-        if has_table_privilege('authenticated','public.'||relation,'SELECT') is distinct from (relation in ('real_world_runs','real_world_reports')) then
+        if has_table_privilege('authenticated','public.'||relation,'SELECT') is distinct from (relation in ('real_world_runs','real_world_reports','real_world_status_history')) then
             raise exception 'Unexpected client read access on %',relation;
         end if;
     end loop;
@@ -28,8 +28,12 @@ end $$;
 set local role anon;
 select * from public.real_world_runs limit 0;
 select * from public.real_world_reports limit 0;
+select * from public.real_world_status_history limit 0;
 select pg_temp.expect_permission_denied('select * from public.real_world_jobs');
 select pg_temp.expect_permission_denied('select * from public.real_world_artifacts');
 select pg_temp.expect_permission_denied('select public.real_world_claim_job(gen_random_uuid())');
 select pg_temp.expect_permission_denied('insert into public.real_world_runs default values');
+select pg_temp.expect_permission_denied('insert into public.real_world_status_history default values');
+select pg_temp.expect_permission_denied('update public.real_world_status_history set status=''completed''');
+select pg_temp.expect_permission_denied('delete from public.real_world_status_history');
 reset role;
