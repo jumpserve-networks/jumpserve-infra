@@ -72,7 +72,7 @@ class PromptLoadingTest(unittest.TestCase):
 
 class HandlerPromptTest(unittest.TestCase):
     def setUp(self):
-        modules = {name: types.ModuleType(name) for name in ('strands', 'strands.models', 'strands.models.bedrock', 'database', 'tools')}
+        modules = {name: types.ModuleType(name) for name in ('strands', 'strands.models', 'strands.models.bedrock', 'database', 'tools', 'httpx')}
         self.agent = Mock(messages=[{'role': 'assistant', 'content': [{'text': 'answer'}]}], return_value='answer')
         self.agent_factory = Mock(return_value=self.agent)
         modules['strands'].Agent = self.agent_factory
@@ -84,8 +84,11 @@ class HandlerPromptTest(unittest.TestCase):
         self.handler = importlib.util.module_from_spec(spec)
         with patch.dict(sys.modules, modules):
             spec.loader.exec_module(self.handler)
+        self.auth_patch = patch.object(self.handler, 'authenticate', return_value=({'id': 'verified-id', 'email': 'researcher'}, 'Bearer verified-session'))
+        self.auth_patch.start()
+        self.addCleanup(self.auth_patch.stop)
         self.db.get.side_effect = [[record()], []]
-        self.request = {'body': json.dumps({'message': 'Explain run 2352', 'session_id': '00000000-0000-4000-8000-000000000003', 'user_id': 'researcher'})}
+        self.request = {'body': json.dumps({'message': 'Explain run 2352', 'session_id': '00000000-0000-4000-8000-000000000003', 'user_id': 'forged-owner'})}
 
     def test_answer_uses_and_records_one_snapshot_without_rereading_active_version(self):
         result = self.handler.lambda_handler(self.request, None)
@@ -99,12 +102,14 @@ class HandlerPromptTest(unittest.TestCase):
         self.assertEqual(payload['p_prompt_version_id'], response['prompt_version_id'])
         self.assertEqual(payload['p_answer_id'], response['answer_id'])
         self.assertEqual(payload['p_response'], 'answer')
+        self.assertEqual(payload['p_user_id'], 'researcher')
+        self.agent.assert_called_once_with('Explain run 2352', authorization='Bearer verified-session')
         self.assertEqual(payload['p_messages'], self.agent.messages)
         self.assertEqual(self.db.get.call_count, 2)
 
     def test_loads_existing_history_with_current_prompt(self):
         history = [{'role': 'user', 'content': [{'text': 'prior question'}]}]
-        self.db.get.side_effect = [[record('new')], [{'messages': history}]]
+        self.db.get.side_effect = [[record('new')], [{'messages': history, 'user_id': 'researcher'}]]
         self.handler.lambda_handler(self.request, None)
         self.assertEqual(self.agent.messages, history)
         self.assertIn('System new', self.agent_factory.call_args.kwargs['system_prompt'])
@@ -130,6 +135,20 @@ class HandlerPromptTest(unittest.TestCase):
             result = self.handler.lambda_handler({'body': json.dumps(body)}, None)
             self.assertEqual(result['statusCode'], 400)
         self.db.get.assert_not_called()
+
+    def test_anonymous_request_never_reads_private_context_or_calls_model(self):
+        with patch.object(self.handler, 'authenticate', side_effect=self.handler.AuthError(401, 'Sign in')):
+            result = self.handler.lambda_handler(self.request, None)
+        self.assertEqual(result['statusCode'], 401)
+        self.db.get.assert_not_called()
+        self.agent_factory.assert_not_called()
+
+    def test_other_users_session_cannot_be_read_or_overwritten(self):
+        self.db.get.side_effect = [[record()], [{'messages': [], 'user_id': 'another-user'}]]
+        result = self.handler.lambda_handler(self.request, None)
+        self.assertEqual(result['statusCode'], 403)
+        self.agent_factory.assert_not_called()
+        self.db.rpc.assert_not_called()
 
 
 if __name__ == '__main__':

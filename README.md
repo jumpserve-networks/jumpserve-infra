@@ -18,7 +18,7 @@ recreate the permanent server, Elastic IP or SSH access.
 
 ## Real-world congestion-control tests
 
-`lib/real-world-tests.ts` adds authenticated `/real-world/*` endpoints to the
+`lib/real-world-tests.ts` adds public result reads and authenticated test actions under `/real-world/*` to the
 existing benchmark API, a Step Functions lifecycle, DynamoDB job/configuration
 storage, private versioned S3 reports, and an independent five-minute reaper.
 Both evidence stores use retain policies. The real-world EC2 role has SSM access
@@ -356,13 +356,15 @@ provides an isolated PostgreSQL 17 service for this check.
 
 ## Supabase table access
 
-`database/202609200002_authenticated_table_access.sql` protects all 16 application
-tables in JumpServe (`regphejnlvfpyokpniny`). It enables RLS, removes anonymous
-schema/table/column/sequence/RPC access, and adds a restrictive signed-in-user
-policy. Supabase anonymous-auth sessions are also denied. Researchers retain
-read access to measurements; existing benchmark/session policies and the
-server-only prompt permissions remain in place. Trusted backend writers keep
-their `service_role` access.
+`database/202609200002_authenticated_table_access.sql` enables RLS on all application
+tables and defaults to authenticated access. Apply
+`database/202609200003_public_test_results.sql` afterward to allow anonymous SELECT
+on congestion-control algorithms, emulated parent runs, runs, and snapshots. Public
+benchmark job reads use an explicit column grant: identity/timestamps/status,
+configuration, EC2 instance ID, parent run ID, and error message. Requester emails
+remain private. Saved configurations, chat sessions, AI prompts/answers, RPCs,
+sequences, and all anonymous writes stay protected. RLS remains enabled everywhere;
+trusted backend writers retain their `service_role` access.
 
 An event trigger enables RLS on new public tables, including partitions and
 tables created with `CREATE TABLE AS` or `SELECT INTO`. New tables have no
@@ -373,7 +375,7 @@ extension schemas retain their platform-managed configuration.
 
 Run the local regression suite with `npm run test:database:rls` and an isolated
 `jumpserve_prompt_test` database (optionally set `PROMPT_TEST_DATABASE_URL`). It
-checks anonymous rejection, signed-in reads/config/session operations, backend
+checks public result reads, private-data rejection, signed-in config/session operations, backend
 writes, independent column grants, view behavior, migration idempotency, and new
 tables. Fixtures, roles, and DDL roll back. CI runs it alongside the prompt tests.
 
@@ -387,12 +389,18 @@ python3 -B bin/supabase-rls.py --verify
 python3 -B bin/supabase-rls.py --http-check /path/to/jumpserve-front-end/.env.local
 ```
 
-`--apply` applies only this migration and runs role-based checks before committing;
-any failed check aborts the transaction. `--verify` uses temporary test objects
-and rolls back. The HTTP check uses only the frontend's public configuration and
-requests no row data. Production verification on 2026-09-20 confirmed RLS on all
-16 tables, authenticated/backend access, and HTTP 401 / SQLSTATE 42501 for every
-anonymous table request. This migration contains no experiment-data changes.
+`--apply` applies only the public-results migration and runs role-based checks before
+committing; failures roll back the change. `--verify` rolls back temporary test
+objects. The HTTP check uses the frontend public configuration and requests no row
+data: result projections must succeed, private tables and requester columns must
+remain inaccessible. The migrations do not change experiment data.
+
+Emulated launch/cancel APIs and the AI Function URL validate the Supabase Google
+session at `/auth/v1/user` before privileged access. Requester identity comes from
+Auth, not the request body. The agent forwards the verified bearer token to action
+tools through Strands invocation state, outside the model prompt and tool schema.
+The Function URL CORS policy accepts Authorization. Real-world result GETs are
+public, while launch and cancellation retain verified sessions and ownership checks.
 
 ## CI/CD and configuration
 
@@ -434,10 +442,10 @@ for its build steps. Deploying the standalone benchmark app does not require it.
 
 ## Shared real-world research reports
 
-The real-world API includes authenticated `GET /real-world/reports`,
+The real-world API includes public `GET /real-world/reports`,
 `GET /real-world/reports/{jobId}` (optional `?summary=1`), and
-`GET /real-world/reports/{jobId}/artifacts`. Reports are shared across signed-in
-Google researchers; test management and cancellation remain owner-scoped.
+`GET /real-world/reports/{jobId}/artifacts`. Reports can be viewed without signing in; test
+launches require Google authentication and cancellation remains owner-scoped.
 The S3 bucket stays private. Download links last five minutes and only cover
 expected machine reports. The API never returns owner IDs or internal commands.
 

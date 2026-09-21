@@ -1,7 +1,7 @@
 import json
 import os
 import httpx
-from strands import tool
+from strands import tool, ToolContext
 
 BENCHMARK_API_URL = os.environ.get("BENCHMARK_API_URL", "")
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
@@ -19,8 +19,9 @@ def _get_supabase_key() -> str:
     return _supabase_key
 
 
-@tool
+@tool(context=True)
 def run_benchmark(
+    tool_context: ToolContext,
     num_clients: int,
     client_ccas: list[str],
     client_delays_ms: list[float],
@@ -41,6 +42,7 @@ def run_benchmark(
     """Launch a TCP congestion control benchmark on a fresh EC2 instance.
 
     Args:
+        tool_context: Request authentication supplied by the application
         num_clients: Number of clients (1-10)
         client_ccas: List of CCA names per client (e.g. ["cubic", "bbr"])
         client_delays_ms: Per-client network delay in milliseconds
@@ -85,23 +87,32 @@ def run_benchmark(
             client_groups=client_groups,
         )
 
+    authorization = tool_context.invocation_state.get("authorization")
+    if not authorization:
+        return {"error": "Sign in to run or manage tests."}
     resp = httpx.post(
         f"{BENCHMARK_API_URL}/benchmarks",
+        headers={"Authorization": authorization},
         json={"config": config},
         timeout=30,
     )
     return resp.json()
 
 
-@tool
-def cancel_benchmark(job_id: str) -> dict:
+@tool(context=True)
+def cancel_benchmark(job_id: str, tool_context: ToolContext) -> dict:
     """Cancel a running benchmark by terminating its EC2 instance.
 
     Args:
         job_id: The UUID of the benchmark job to cancel
+        tool_context: Request authentication supplied by the application
     """
+    authorization = tool_context.invocation_state.get("authorization")
+    if not authorization:
+        return {"error": "Sign in to run or manage tests."}
     resp = httpx.post(
         f"{BENCHMARK_API_URL}/benchmarks/cancel",
+        headers={"Authorization": authorization},
         json={"jobId": job_id},
         timeout=15,
     )

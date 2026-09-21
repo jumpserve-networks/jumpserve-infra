@@ -98,6 +98,7 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
       memorySize: 256,
       environment: {
         SUPABASE_URL: supabaseUrl,
+        SUPABASE_ANON_KEY: this.node.tryGetContext('supabaseAnonKey') ?? '',
         SUPABASE_SECRET_ARN: supabaseSecret.secretArn,
         AMI_ID: amiId,
         BENCHMARK_IMAGE_MODE: cdk.Fn.conditionIf(useBenchmarkAmi.logicalId, 'prebaked', 'base').toString(),
@@ -141,6 +142,7 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
       memorySize: 256,
       environment: {
         SUPABASE_URL: supabaseUrl,
+        SUPABASE_ANON_KEY: this.node.tryGetContext('supabaseAnonKey') ?? '',
         SUPABASE_SECRET_ARN: supabaseSecret.secretArn,
       },
       bundling: {
@@ -173,6 +175,7 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
       memorySize: 256,
       environment: {
         SUPABASE_URL: supabaseUrl,
+        SUPABASE_ANON_KEY: this.node.tryGetContext('supabaseAnonKey') ?? '',
         SUPABASE_SECRET_ARN: supabaseSecret.secretArn,
       },
       bundling: {

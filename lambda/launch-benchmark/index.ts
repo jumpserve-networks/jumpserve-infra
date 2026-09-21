@@ -1,3 +1,4 @@
+import { AuthError, requireUser } from '../shared/auth';
 import { buildUserData, type BenchmarkConfig } from './user-data';
 import {
   EC2Client,
@@ -127,9 +128,10 @@ export const handler = async (event: any) => {
   }
 
   try {
+    const user = await requireUser(event);
     const body = JSON.parse(event.body || '{}');
     const config: BenchmarkConfig = body.config;
-    const requestedBy: string | undefined = body.requested_by;
+    const requestedBy = user.email || user.id;
 
     if (!config) {
       return {
@@ -219,6 +221,7 @@ export const handler = async (event: any) => {
       body: JSON.stringify({ jobId, instanceId, status: 'launching' }),
     };
   } catch (err: any) {
+    if (err instanceof AuthError) return { statusCode: err.status, headers: corsHeaders, body: JSON.stringify({ error: err.message }) };
     console.error('Error launching benchmark:', err);
     return {
       statusCode: 500,

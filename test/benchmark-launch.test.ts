@@ -1,7 +1,9 @@
 import { EC2Client, RunInstancesCommand } from '@aws-sdk/client-ec2';
 import { SecretsManagerClient } from '@aws-sdk/client-secrets-manager';
+import * as auth from '../lambda/shared/auth';
 import { handler } from '../lambda/launch-benchmark';
 
+beforeEach(() => jest.spyOn(auth, 'requireUser').mockResolvedValue({ id: 'user-id', email: 'verified@example.test' }));
 afterEach(() => jest.restoreAllMocks());
 
 const multiConfig = {
@@ -46,7 +48,7 @@ test.each(['parking-lot', 'dumbbell'])('valid %s config reaches EC2 and is retai
     return new Response(null, { status: 204 });
   });
   const config = { ...multiConfig, topology, client_groups: topology === 'dumbbell' ? [1, 1] : undefined };
-  const response = await handler({ body: JSON.stringify({ config }) });
+  const response = await handler({ body: JSON.stringify({ config, requested_by: 'forged@example.test' }) });
   expect(response.statusCode).toBe(200);
   const command = ec2.mock.calls[0][0] as RunInstancesCommand;
   expect(command.input.InstanceInitiatedShutdownBehavior).toBe('terminate');
@@ -54,6 +56,7 @@ test.each(['parking-lot', 'dumbbell'])('valid %s config reaches EC2 and is retai
   expect(bootstrap).toContain(`--topology ${topology}`);
   expect(bootstrap).toContain('--bottleneck-rates-mbit 100,50');
   expect(bootstrap).not.toContain('--bottleneck-all-client-rate-mbit');
+  expect(inserted.requested_by).toBe('verified@example.test');
   expect(inserted.config).toEqual(JSON.parse(JSON.stringify(config)));
 });
 
@@ -78,7 +81,7 @@ test('launched benchmarks terminate on OS shutdown and retain metadata in the jo
     script: 'netem_cubic_benchmark_nines.py',
     experiment_name: 'test',
   };
-  const response = await handler({ body: JSON.stringify({ config }) });
+  const response = await handler({ body: JSON.stringify({ config, requested_by: 'forged@example.test' }) });
   expect(response.statusCode).toBe(200);
   const command = ec2.mock.calls[0][0] as RunInstancesCommand;
   expect(command.input.InstanceInitiatedShutdownBehavior).toBe('terminate');

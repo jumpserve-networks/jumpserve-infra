@@ -4,6 +4,7 @@ from uuid import UUID, uuid4
 from strands import Agent
 from strands.models.bedrock import BedrockModel
 from database import Database
+from auth import authenticate, AuthError
 from prompt import load_active_prompt
 from run_analysis import ANALYSIS_VERSION
 from settings import MODEL_ID, MODEL_REGION, MODEL_TEMPERATURE
@@ -12,8 +13,10 @@ from tools import ALL_TOOLS
 logger = logging.getLogger(__name__)
 
 
-def _load_session(database, session_id: str) -> list[dict]:
-    rows = database.get('agent_sessions', params={'id': f'eq.{session_id}', 'select': 'messages'})
+def _load_session(database, session_id: str, user_id: str) -> list[dict]:
+    rows = database.get('agent_sessions', params={'id': f'eq.{session_id}', 'select': 'messages,user_id'})
+    if rows and rows[0].get('user_id') != user_id:
+        raise AuthError(403, 'This conversation belongs to another user.')
     return rows[0].get('messages', []) if rows else []
 
 
@@ -52,6 +55,12 @@ def _error(status, message):
 
 def lambda_handler(event, context):
     """Lambda handler for the agent — non-streaming for simplicity."""
+    try:
+        user, bearer = authenticate(event)
+    except AuthError as error:
+        return _error(error.status, str(error))
+    user_id = user.get('email') or user['id']
+
     # Parse request
     try:
         body = json.loads(event.get("body", "{}"))
@@ -61,7 +70,6 @@ def lambda_handler(event, context):
     except (ValueError, TypeError, AttributeError):
         return _error(400, 'Invalid request or session ID')
     message = body.get("message", "")
-    user_id = body.get("user_id", "anonymous")
 
     if not isinstance(message, str) or not message.strip():
         return {
@@ -74,7 +82,9 @@ def lambda_handler(event, context):
     try:
         database = Database()
         prompt = load_active_prompt(database)
-        history = _load_session(database, session_id)
+        history = _load_session(database, session_id, user_id)
+    except AuthError as error:
+        return _error(error.status, str(error))
     except Exception as exc:
         logger.error('Agent context unavailable (%s)', type(exc).__name__)
         return _error(503, 'AI context is temporarily unavailable. Please try again.')
@@ -97,7 +107,7 @@ def lambda_handler(event, context):
         agent.messages = history
 
     # Run the agent
-    result = agent(message)
+    result = agent(message, authorization=bearer)
     response_text = str(result)
 
     answer_id = str(uuid4())

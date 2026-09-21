@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit, apply, and verify JumpServe's fixed authenticated-table-access migration."""
+"""Audit, apply, and verify JumpServe's fixed public-results access migration."""
 import base64
 import argparse
 import json
@@ -13,7 +13,7 @@ import urllib.request
 
 PROJECT_REF = "regphejnlvfpyokpniny"
 ROOT = Path(__file__).resolve().parents[1]
-MIGRATION_NAME = "202609200002_authenticated_table_access.sql"
+MIGRATION_NAME = "202609200003_public_test_results.sql"
 
 
 def access_token():
@@ -53,7 +53,7 @@ def query(sql, *, read_only=True):
 
 
 def verify(*, apply=False):
-    checks = (ROOT / "test/database_rls_assertions.sql").read_text()
+    checks = (ROOT / "test/public_results_assertions.sql").read_text()
     if apply:
         migration = (ROOT / "database" / MIGRATION_NAME).read_text()
         # All access checks run before COMMIT; any failure rolls back the change.
@@ -80,18 +80,26 @@ def http_check(env_path):
     tables = [t["name"] for t in audit["tables"] if t["schema"] == "public"]
     context = ssl.create_default_context(cafile=os.environ.get("SSL_CERT_FILE") or
         ("/etc/ssl/cert.pem" if Path("/etc/ssl/cert.pem").is_file() else None))
+    public_tables = {"congestion_control_algorithms", "emulated_parent_runs", "emulated_runs", "emulated_snapshot_stats"}
     for table in tables:
         request = urllib.request.Request(f"{url}/rest/v1/{urllib.parse.quote(table, safe='')}?select=*&limit=0",
             headers={"apikey": key, "Authorization": f"Bearer {key}"})
         try:
             with urllib.request.urlopen(request, timeout=30, context=context) as response:
-                raise SystemExit(f"Anonymous API access unexpectedly succeeded for {table}: {response.status}")
+                if table not in public_tables:
+                    raise SystemExit(f"Anonymous API access unexpectedly succeeded for {table}: {response.status}")
+                print(json.dumps({"table": table, "anonymous_http_status": response.status}))
         except urllib.error.HTTPError as error:
             body = json.loads(error.read())
-            if error.code not in (401, 403) or body.get("code") != "42501":
+            if table in public_tables or error.code not in (401, 403) or body.get("code") != "42501":
                 raise SystemExit(f"Unexpected API response for {table}: HTTP {error.code}, code {body.get('code')}") from None
             print(json.dumps({"table": table, "anonymous_http_status": error.code, "sqlstate": body["code"]}))
-    print(json.dumps({"anonymous_rest_access": "blocked", "tables_checked": len(tables)}))
+    projection = "id,created_at,updated_at,status,config,ec2_instance_id,parent_run_id,error_message"
+    request = urllib.request.Request(f"{url}/rest/v1/benchmark_jobs?select={projection}&limit=0",
+        headers={"apikey": key, "Authorization": f"Bearer {key}"})
+    with urllib.request.urlopen(request, timeout=30, context=context) as response:
+        if response.status != 200: raise SystemExit("Public benchmark projection unavailable")
+    print(json.dumps({"public_results": "readable", "private_data": "blocked", "tables_checked": len(tables)}))
 
 
 AUDIT_SQL = """
@@ -140,7 +148,7 @@ if __name__ == "__main__":
     operation = parser.add_mutually_exclusive_group()
     operation.add_argument("--verify", action="store_true", help="Run role-based assertions; roll back temporary test objects")
     operation.add_argument("--apply", action="store_true", help="Apply only the fixed migration, verifying before COMMIT")
-    operation.add_argument("--http-check", metavar="FRONTEND_ENV", help="Verify anonymous REST rejection using frontend public keys")
+    operation.add_argument("--http-check", metavar="FRONTEND_ENV", help="Verify public result reads and private REST rejection using frontend public keys")
     args = parser.parse_args()
     if args.apply or args.verify:
         verify(apply=args.apply)

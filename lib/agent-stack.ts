@@ -35,6 +35,7 @@ export class AgentStack extends cdk.Stack {
       timeout: cdk.Duration.seconds(120),
       environment: {
         SUPABASE_URL: supabaseUrl,
+        SUPABASE_ANON_KEY: this.node.tryGetContext('supabaseAnonKey') ?? '',
         SUPABASE_SECRET_ARN: supabaseSecret.secretArn,
         BENCHMARK_API_URL: benchmarkApiUrl,
       },
@@ -61,7 +62,7 @@ export class AgentStack extends cdk.Stack {
       cors: {
         allowedOrigins: ['*'],
         allowedMethods: [lambda.HttpMethod.POST],
-        allowedHeaders: ['Content-Type'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
       },
     });
 

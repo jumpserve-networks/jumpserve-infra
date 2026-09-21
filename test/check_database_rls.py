@@ -47,9 +47,9 @@ insert into public.agent_sessions (id,user_id) values
 alter table public.agent_sessions enable row level security;
 create policy sessions_manage on public.agent_sessions for all to authenticated using (true) with check (true);
 create table public.benchmark_configs (id int primary key, notes text);
-create table public.benchmark_jobs (id int primary key, notes text);
+create table public.benchmark_jobs (id int primary key, notes text, created_at timestamptz, updated_at timestamptz, status text, config jsonb, ec2_instance_id text, parent_run_id bigint, error_message text, requested_by text);
 insert into public.benchmark_configs values (1,'fixture');
-insert into public.benchmark_jobs values (1,'fixture');
+insert into public.benchmark_jobs (id,notes) values (1,'fixture');
 alter table public.benchmark_configs enable row level security;
 alter table public.benchmark_jobs enable row level security;
 create policy config_read on public.benchmark_configs for select to authenticated using (true);
@@ -74,7 +74,7 @@ extra = """
 set local role authenticated;
 set local request.jwt.claims = '{"sub":"00000000-0000-4000-8000-000000000099","role":"authenticated","is_anonymous":false}';
 insert into public.benchmark_configs values (2,'signed-in config still works');
-insert into public.benchmark_jobs values (2,'signed-in job still works');
+insert into public.benchmark_jobs (id,notes) values (2,'signed-in job still works');
 update public.agent_sessions set messages='[{}]' where user_id='researcher';
 do $$ begin
     if (select count(*) from public.rls_fixture_view) <> 1 then raise exception 'View read broken'; end if;
@@ -137,6 +137,14 @@ migration = migration_body('202609200002_authenticated_table_access.sql')
 checks = (ROOT / 'test/database_rls_assertions.sql').read_text()
 subprocess.run([psql, url, '-X', '-v', 'ON_ERROR_STOP=1', '-q'],
     input=setup + migration_body('202609200001_agent_prompts.sql')
-    + migration + migration + checks + extra + '\nrollback;\n',
+    + migration + migration + checks + extra
+    + migration_body('202609200003_public_test_results.sql') * 2
+    + (ROOT / 'test/public_results_assertions.sql').read_text() + """
+create table public.public_results_future_table (id int);
+set local role anon;
+select pg_temp.expect_permission_denied('select * from public.public_results_future_table');
+reset role;
+rollback;
+""",
     text=True, check=True)
 print('Database RLS tests passed; all fixtures and DDL rolled back.')

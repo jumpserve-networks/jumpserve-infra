@@ -1,3 +1,4 @@
+import { AuthError, requireUser } from '../shared/auth';
 import {
   EC2Client,
   TerminateInstancesCommand,
@@ -39,7 +40,7 @@ async function supabaseRequest(method: string, path: string, body: object | unde
 export const handler = async (event: any) => {
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': 'Content-Type,Authorization',
     'Access-Control-Allow-Methods': 'POST,OPTIONS',
   };
 
@@ -48,14 +49,15 @@ export const handler = async (event: any) => {
   }
 
   try {
+    await requireUser(event);
     const body = JSON.parse(event.body || '{}');
     const jobId: string = body.jobId;
 
-    if (!jobId) {
+    if (typeof jobId !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(jobId)) {
       return {
         statusCode: 400,
         headers: corsHeaders,
-        body: JSON.stringify({ error: 'jobId is required' }),
+        body: JSON.stringify({ error: 'A valid jobId is required' }),
       };
     }
 
@@ -115,6 +117,7 @@ export const handler = async (event: any) => {
       body: JSON.stringify({ jobId, status: 'cancelled' }),
     };
   } catch (err: any) {
+    if (err instanceof AuthError) return { statusCode: err.status, headers: corsHeaders, body: JSON.stringify({ error: err.message }) };
     console.error('Error cancelling benchmark:', err);
     return {
       statusCode: 500,
