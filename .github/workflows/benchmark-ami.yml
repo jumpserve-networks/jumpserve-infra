@@ -79,10 +79,10 @@ jobs:
         timeout-minutes: 17
         run: python3 -B ami/promote.py --apply
 
-      - name: Verify the deployed benchmark API
+      - name: Verify the deployed launcher with AWS authentication
         id: live
         timeout-minutes: 12
-        run: node ami/verify.cjs --live-api
+        run: node ami/verify.cjs --live-launcher
 
       - name: Restore previous image if deployment verification did not finish
         if: ${{ always() && steps.credentials.outcome == 'success' && steps.live.outcome != 'success' }}

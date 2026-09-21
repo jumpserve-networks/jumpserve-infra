@@ -91,3 +91,11 @@ test('launched benchmarks terminate on OS shutdown and retain metadata in the jo
   const inserted = requests.find((request) => request.method === 'POST');
   expect(JSON.parse(inserted!.body as string).config.experiment_name).toBe('test');
 });
+
+test('IAM-only image verification retains the privileged local runner path', async () => {
+  const verify = jest.spyOn(auth, 'requireUser');
+  const response = await handler({ source: 'jumpserve.ami-verification', body: JSON.stringify({ config: {} }) });
+  expect(response.statusCode).toBe(400);
+  expect(verify).not.toHaveBeenCalled();
+  verify.mockRestore();
+});

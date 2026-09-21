@@ -47,3 +47,14 @@ test('auth outages fail closed', async () => {
   jest.spyOn(globalThis, 'fetch').mockRejectedValue(new Error('network'));
   await expect(requireUser({ headers: { authorization: 'Bearer session' } })).rejects.toMatchObject({ status: 503 });
 });
+
+test('an HTTP request cannot impersonate the IAM-only verification envelope', async () => {
+  const ec2 = jest.spyOn(EC2Client.prototype, 'send');
+  const response = await launch({
+    source: 'jumpserve.ami-verification', body: '{}',
+    requestContext: { http: { method: 'POST' } },
+  });
+  expect(response.statusCode).toBe(401);
+  expect(ec2).not.toHaveBeenCalled();
+  ec2.mockRestore();
+});

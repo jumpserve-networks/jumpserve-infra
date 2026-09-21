@@ -16,6 +16,7 @@ test('the selected AMI and bootstrap mode always change together', () => {
       env: { account: '395567831870', region: 'us-east-1' },
     });
     const template = Template.fromStack(stack);
+  template.resourceCountIs('AWS::Lambda::Url', 0);
     template.hasParameter('BenchmarkAmiId', { Type: 'String', Default: '' });
     template.hasCondition('UseBenchmarkAmi', {
       'Fn::Not': [{ 'Fn::Equals': [{ Ref: 'BenchmarkAmiId' }, ''] }],

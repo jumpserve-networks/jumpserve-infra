@@ -59,7 +59,7 @@ export function addBenchmarkImagePipelineRole(
   });
   allow(['ssm:GetParameter'], [arn('ssm',
     'parameter/aws/service/canonical/ubuntu/server/22.04/stable/current/amd64/hvm/ebs-gp2/ami-id', '')]);
-  allow(['lambda:GetFunctionConfiguration'], [launcherArn]);
+  allow(['lambda:GetFunctionConfiguration', 'lambda:InvokeFunction'], [launcherArn]);
   allow(['logs:GetLogEvents'], [arn('logs', 'log-group:/jumpserve/benchmark:*')]);
   allow(['cloudformation:DescribeStacks', 'cloudformation:UpdateStack'], [arn('cloudformation', 'stack/JumpServeBenchmarkStack/*')]);
   allow(['iam:PassRole'], [arn('iam', `role/cdk-hnb659fds-cfn-exec-role-${stack.account}-${stack.region}`)], {

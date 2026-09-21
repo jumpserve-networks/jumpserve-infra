@@ -5,8 +5,8 @@ const assert = require('node:assert/strict');
 const { execFileSync } = require('node:child_process');
 const fs = require('node:fs');
 const { setTimeout: delay } = require('node:timers/promises');
-assert.ok(process.argv.slice(2).every(argument => argument === '--live-api'), 'Only --live-api is supported');
-const liveApi = process.argv.includes('--live-api');
+assert.ok(process.argv.slice(2).every(argument => argument === '--live-launcher'), 'Only --live-launcher is supported');
+const liveLauncher = process.argv.includes('--live-launcher');
 
 const manifest = JSON.parse(fs.readFileSync('cdk.out/benchmark-ami.json', 'utf8'));
 const profile = process.env.AWS_PROFILE;
@@ -25,7 +25,7 @@ async function main() {
 
   const configuration = aws('lambda', 'get-function-configuration', '--function-name',
     'JumpServeBenchmarkStack-LaunchBenchmarkFn5833EFAD-L6HWyzv2tgwl');
-  if (liveApi) {
+  if (liveLauncher) {
     assert.equal(configuration.Environment.Variables.AMI_ID, manifest.ami_id);
     assert.equal(configuration.Environment.Variables.BENCHMARK_IMAGE_MODE, 'prebaked');
   }
@@ -40,7 +40,7 @@ async function main() {
   }));
   const headers = { apikey: secret.SecretString, Authorization: `Bearer ${secret.SecretString}` };
   const reports = [];
-  for (const expectedStatus of (liveApi ? ['completed'] : ['completed', 'failed'])) {
+  for (const expectedStatus of (liveLauncher ? ['completed'] : ['completed', 'failed'])) {
     const config = {
       num_clients: 2, client_delays_ms: [10, 20], client_ccas: ['cubic', 'cubic'],
       client_file_sizes_mbytes: [5, 5], client_start_delays_ms: [0, 0],
@@ -49,15 +49,21 @@ async function main() {
       script: 'netem_cubic_benchmark_nines.py', experiment_name: `ami-verification-${expectedStatus}`,
     };
     const start = Date.now();
-    const body = JSON.stringify({ config, requested_by: 'codex-ami-verification' });
+    const body = JSON.stringify({ config });
+    const invocation = { source: 'jumpserve.ami-verification', body };
     let response;
-    if (liveApi) {
-      const result = await fetch('https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/benchmarks', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' }, body,
-      });
-      response = { statusCode: result.status, body: await result.text() };
+    if (liveLauncher) {
+      const responseFile = 'cdk.out/ami-launcher-response.json';
+      try {
+        const result = aws('lambda', 'invoke', '--function-name', configuration.FunctionArn,
+          '--cli-binary-format', 'raw-in-base64-out', '--payload', JSON.stringify(invocation), responseFile);
+        assert.ok(!result.FunctionError, 'Deployed launcher invocation failed');
+        response = JSON.parse(fs.readFileSync(responseFile, 'utf8'));
+      } finally {
+        if (fs.existsSync(responseFile)) fs.unlinkSync(responseFile);
+      }
     } else {
-      response = await handler({ body });
+      response = await handler(invocation);
     }
     assert.equal(response.statusCode, 200, 'Candidate launcher failed');
     const job = JSON.parse(response.body);
@@ -100,7 +106,7 @@ async function main() {
       }
     }
   }
-  fs.writeFileSync(`cdk.out/benchmark-ami${liveApi ? '-live' : ''}-verification.json`, JSON.stringify(reports, null, 2) + '\n');
+  fs.writeFileSync(`cdk.out/benchmark-ami${liveLauncher ? '-live' : ''}-verification.json`, JSON.stringify(reports, null, 2) + '\n');
 }
 
 main().catch(error => {

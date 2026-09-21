@@ -37,4 +37,11 @@ test('image workflow trusts only backend main and limits temporary role permissi
       Condition: { ArnEquals: { 'iam:PolicyARN': 'arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore' } },
     })]), Version: '2012-10-17' },
   });
+  template.hasResourceProperties('AWS::IAM::Policy', {
+    PolicyDocument: { Statement: Match.arrayWith([Match.objectLike({
+      Action: ['lambda:GetFunctionConfiguration', 'lambda:InvokeFunction'],
+      Resource: 'arn:aws:lambda:us-east-1:395567831870:function:Launch',
+    })]) },
+  });
+
 });

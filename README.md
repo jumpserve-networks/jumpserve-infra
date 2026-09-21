@@ -129,8 +129,12 @@ launcher code: one successful run and one deliberate runner failure. It checks
 saved status/results, fresh startup logs and automatic termination, and writes
 `cdk.out/benchmark-ami-verification.json`. It uses the service key in memory for
 the normal job API operations; it does not change the deployed Lambda.
-After deployment, `node ami/verify.cjs --live-api` runs one successful job through
-the public benchmark API and checks the same results and shutdown behavior.
+After deployment, `node ami/verify.cjs --live-launcher` runs one successful job through
+an IAM-authenticated Lambda invocation and checks the same results and shutdown behavior. The image builder role may invoke
+only the benchmark launcher. The operator event envelope is accepted only for
+direct invocations without any HTTP request context; API Gateway always supplies
+that context, and public requests must pass Supabase authentication. The launcher
+must not have a Function URL or an untrusted event-source mapping.
 
 After verifying the AMI with fresh benchmark instances, select it through the
 benchmark stack parameter:

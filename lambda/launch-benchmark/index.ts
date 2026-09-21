@@ -128,7 +128,14 @@ export const handler = async (event: any) => {
   }
 
   try {
-    const user = await requireUser(event);
+    // This function has no Function URL. API Gateway always supplies requestContext;
+    // the exact operator envelope below is reachable only through IAM-authorized
+    // Lambda Invoke (or locally, where AWS credentials authorize privileged calls).
+    const operatorVerification = event.source === 'jumpserve.ami-verification' &&
+      Object.keys(event).every((key) => key === 'source' || key === 'body');
+    const user = operatorVerification
+      ? { id: 'jumpserve-ami-verification', email: undefined }
+      : await requireUser(event);
     const body = JSON.parse(event.body || '{}');
     const config: BenchmarkConfig = body.config;
     const requestedBy = user.email || user.id;
