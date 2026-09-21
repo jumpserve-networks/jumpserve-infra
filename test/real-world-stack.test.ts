@@ -28,6 +28,20 @@ test('real-world lifecycle retains evidence and independently reaps expired reso
   const policies = JSON.stringify(template.findResources('AWS::IAM::Policy'));
   expect(policies).toContain('ec2:ResourceTag/Project');
   expect(policies).toContain('JumpServeRealWorld');
+  expect(policies).toContain('secretsmanager:GetSecretValue');
+  expect(policies).not.toContain('dynamodb:');
+  expect(policies).not.toContain('s3:GetObject');
+  expect(policies).not.toContain('s3:PutObject');
+  const functions = Object.values(template.findResources('AWS::Lambda::Function'));
+  for (const fn of functions) {
+    const environment = fn.Properties.Environment?.Variables;
+    if (['api.handler', 'controller.handler', 'controller.reap'].includes(fn.Properties.Handler)) {
+      expect(environment.SUPABASE_SECRET_ARN).toBeDefined();
+      expect(environment.SUPABASE_URL).toBe('https://example.supabase.co');
+      expect(environment.TABLE_NAME).toBeUndefined();
+      expect(environment.RESULTS_BUCKET).toBeUndefined();
+    }
+  }
   const workerPolicy = Object.entries(template.findResources('AWS::IAM::Policy')).find(([name]) => name.includes('WorkerRole'))?.[1];
   if (!workerPolicy) throw new Error('Missing real-world worker policy');
   const launches = workerPolicy.Properties.PolicyDocument.Statement.filter((statement: { Action: string | string[] }) =>

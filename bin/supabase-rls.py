@@ -80,7 +80,7 @@ def http_check(env_path):
     tables = [t["name"] for t in audit["tables"] if t["schema"] == "public"]
     context = ssl.create_default_context(cafile=os.environ.get("SSL_CERT_FILE") or
         ("/etc/ssl/cert.pem" if Path("/etc/ssl/cert.pem").is_file() else None))
-    public_tables = {"congestion_control_algorithms", "emulated_parent_runs", "emulated_runs", "emulated_snapshot_stats"}
+    public_tables = {"congestion_control_algorithms", "emulated_parent_runs", "emulated_runs", "emulated_snapshot_stats", "real_world_runs", "real_world_reports"}
     for table in tables:
         request = urllib.request.Request(f"{url}/rest/v1/{urllib.parse.quote(table, safe='')}?select=*&limit=0",
             headers={"apikey": key, "Authorization": f"Bearer {key}"})

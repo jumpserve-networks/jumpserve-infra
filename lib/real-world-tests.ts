@@ -7,6 +7,7 @@ import * as targets from 'aws-cdk-lib/aws-events-targets';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as secretsmanager from 'aws-cdk-lib/aws-secretsmanager';
 import * as sfn from 'aws-cdk-lib/aws-stepfunctions';
 import * as tasks from 'aws-cdk-lib/aws-stepfunctions-tasks';
 import { Construct } from 'constructs';
@@ -22,6 +23,7 @@ export class RealWorldTests extends Construct {
       throw new Error('Fetch the pinned backend runtime (see README) or set REAL_WORLD_RUNTIME_PATH to jumpserve-back-end/real_world.');
     }
     const code = lambda.Code.fromAsset(runtimePath, { exclude: ['__pycache__', '*.pyc', 'tests'] });
+    // Retain legacy stores as migration backups; new runtime has no access.
     const table = new dynamodb.Table(this, 'Jobs', {
       partitionKey: { name: 'job_id', type: dynamodb.AttributeType.STRING },
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
@@ -48,7 +50,8 @@ export class RealWorldTests extends Construct {
       managedPolicies: [iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonSSMManagedInstanceCore')],
     });
     const profile = new iam.CfnInstanceProfile(this, 'InstanceProfile', { roles: [instanceRole.roleName] });
-    const environment = { TABLE_NAME: table.tableName, RESULTS_BUCKET: results.bucketName,
+    const supabaseSecret = secretsmanager.Secret.fromSecretNameV2(this, 'SupabaseServiceKey', 'jumpserve/supabase-service-key');
+    const environment = { SUPABASE_URL: this.node.tryGetContext('supabaseUrl'), SUPABASE_SECRET_ARN: supabaseSecret.secretArn,
       INSTANCE_PROFILE_ARN: profile.attrArn, RUNTIME_REVISION: revision };
     const workerRole = new iam.Role(this, 'WorkerRole', {
       assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
@@ -77,8 +80,7 @@ export class RealWorldTests extends Construct {
     ], resources: ['*'], conditions: tagged }));
     workerRole.addToPolicy(new iam.PolicyStatement({ actions: ['ssm:SendCommand'], resources: [`arn:${stack.partition}:ssm:*::document/AWS-RunShellScript`] }));
     workerRole.addToPolicy(new iam.PolicyStatement({ actions: ['ssm:SendCommand'], resources: [ec2Arn('instance')], conditions: { StringEquals: { 'ssm:resourceTag/Project': 'JumpServeRealWorld' } } }));
-    table.grantReadWriteData(workerRole);
-    results.grantReadWrite(workerRole);
+    supabaseSecret.grantRead(workerRole);
     const worker = new lambda.Function(this, 'Worker', { code, handler: 'controller.handler', runtime: lambda.Runtime.PYTHON_3_12,
       timeout: cdk.Duration.minutes(4), memorySize: 512, environment, role: workerRole });
     const reaper = new lambda.Function(this, 'Reaper', { code, handler: 'controller.reap', runtime: lambda.Runtime.PYTHON_3_12,
@@ -98,8 +100,7 @@ export class RealWorldTests extends Construct {
     const service = new lambda.Function(this, 'Api', { code, handler: 'api.handler', runtime: lambda.Runtime.PYTHON_3_12,
       timeout: cdk.Duration.seconds(29), memorySize: 512, environment: { ...environment,
         SUPABASE_URL: this.node.tryGetContext('supabaseUrl'), SUPABASE_ANON_KEY: this.node.tryGetContext('supabaseAnonKey') ?? '', STATE_MACHINE_ARN: machine.stateMachineArn } });
-    table.grantReadWriteData(service);
-    results.grantRead(service);
+    supabaseSecret.grantRead(service);
     machine.grantStartExecution(service);
     service.addToRolePolicy(new iam.PolicyStatement({ actions: ['ec2:DescribeRegions', 'ec2:DescribeAvailabilityZones', 'ec2:DescribeInstanceTypeOfferings'], resources: ['*'] }));
     const integration = new HttpLambdaIntegration('RealWorldIntegration', service);

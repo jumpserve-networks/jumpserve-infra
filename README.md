@@ -19,9 +19,10 @@ recreate the permanent server, Elastic IP or SSH access.
 ## Real-world congestion-control tests
 
 `lib/real-world-tests.ts` adds public result reads and authenticated test actions under `/real-world/*` to the
-existing benchmark API, a Step Functions lifecycle, DynamoDB job/configuration
-storage, private versioned S3 reports, and an independent five-minute reaper.
-Both evidence stores use retain policies. The real-world EC2 role has SSM access
+existing benchmark API, a Step Functions lifecycle, Supabase Postgres records and
+normalized reports, private Supabase Storage evidence, and an independent
+five-minute reaper. Legacy DynamoDB/S3 stores remain retained migration backups;
+the runtime has no access to them. The real-world EC2 role has SSM access
 only; it has no Supabase service key. Worker mutations and terminations target
 resources tagged `Project=JumpServeRealWorld`.
 
@@ -450,16 +451,35 @@ The real-world API includes public `GET /real-world/reports`,
 `GET /real-world/reports/{jobId}` (optional `?summary=1`), and
 `GET /real-world/reports/{jobId}/artifacts`. Reports can be viewed without signing in; test
 launches require Google authentication and cancellation remains owner-scoped.
-The S3 bucket stays private. Download links last five minutes and only cover
+The Supabase Storage bucket stays private. Download links last five minutes and only cover
 expected machine reports. The API never returns owner IDs or internal commands.
 
-The `reports-created` DynamoDB index orders shared history by `created_at` within
-`schema_version`. Existing version-1 jobs already have these fields; DynamoDB
-backfills the new index during deployment. No data rewrite or Supabase RLS change
-is needed. Wait for the index to become ACTIVE before verifying catalog reads.
-Future schema versions must explicitly extend catalog/version handling.
+The Supabase `real_world_runs` index orders shared history by `(created_at, job_id)`
+within `schema_version`. Private `real_world_jobs` stores owner/controller state;
+`real_world_reports` stores normalized summaries and traces; private
+`real_world_artifacts` stores hashes and archived Storage paths. Public reads
+expose only safe run projections and reports, with RLS enabled everywhere.
+
+Apply the fixed migration before deploying this runtime:
+
+```bash
+python3 -B bin/real-world-database.py --apply
+npm run test:database:rls
+```
+
+The applier validates access rules in the migration transaction before COMMIT.
+It requires a Supabase CLI login or `SUPABASE_ACCESS_TOKEN`. Lambda service keys
+come from `jumpserve/supabase-service-key`; they are never shipped to EC2.
+
+For initial migration, use the backend's `real_world/migrate_supabase.py` (preview,
+`--apply`, `--verify`, and `--check-storage`). It requires operator AWS credentials,
+refuses active legacy jobs, and verifies exact raw bytes, hashes, metadata and
+normalized analysis. Quiesce the old API and drain in-flight requests before the
+final import/cutover; restore concurrency after deploying all three Lambdas.
+See the backend README for sequencing. Retain original DynamoDB/S3 evidence.
+The reaper also retries missing final report archives after resource cleanup.
 
 The backend revision in `real-world-runtime.json` includes the versioned report
 analyzer and its offline regression tests. CI installs its test dependencies,
 checks access control, unit conversions, data quality, and scientific eligibility,
-then deploys the report routes and catalog index with the existing control plane.
+then deploys the report routes with the existing AWS control plane.

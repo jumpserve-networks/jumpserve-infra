@@ -27,6 +27,10 @@ do $$ begin create role anon; exception when duplicate_object then null; end $$;
 do $$ begin create role authenticated; exception when duplicate_object then null; end $$;
 do $$ begin create role service_role bypassrls; exception when duplicate_object then null; end $$;
 set session authorization postgres;
+create schema storage;
+create table storage.buckets(id text primary key,name text,public boolean,file_size_limit bigint,allowed_mime_types text[]);
+create table storage.objects(id uuid primary key,bucket_id text);
+alter table storage.objects enable row level security;
 create schema auth;
 grant usage on schema auth, public to anon, authenticated, service_role;
 create function auth.jwt() returns jsonb language sql stable as $$
@@ -139,7 +143,11 @@ subprocess.run([psql, url, '-X', '-v', 'ON_ERROR_STOP=1', '-q'],
     input=setup + migration_body('202609200001_agent_prompts.sql')
     + migration + migration + checks + extra
     + migration_body('202609200003_public_test_results.sql') * 2
-    + (ROOT / 'test/public_results_assertions.sql').read_text() + """
+    + (ROOT / 'test/public_results_assertions.sql').read_text()
+    + migration_body('202609200004_real_world_supabase.sql') * 2
+    + (ROOT / 'test/public_results_assertions.sql').read_text()
+    + (ROOT / 'test/real_world_database_assertions.sql').read_text()
+    + (ROOT / 'test/real_world_database_lifecycle.sql').read_text() + """
 create table public.public_results_future_table (id int);
 set local role anon;
 select pg_temp.expect_permission_denied('select * from public.public_results_future_table');
