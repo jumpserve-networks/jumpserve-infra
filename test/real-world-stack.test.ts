@@ -28,6 +28,14 @@ test('real-world lifecycle retains evidence and independently reaps expired reso
   const policies = JSON.stringify(template.findResources('AWS::IAM::Policy'));
   expect(policies).toContain('ec2:ResourceTag/Project');
   expect(policies).toContain('JumpServeRealWorld');
+  const workerPolicy = Object.entries(template.findResources('AWS::IAM::Policy')).find(([name]) => name.includes('WorkerRole'))?.[1];
+  if (!workerPolicy) throw new Error('Missing real-world worker policy');
+  const launches = workerPolicy.Properties.PolicyDocument.Statement.filter((statement: { Action: string | string[] }) =>
+    [statement.Action].flat().includes('ec2:RunInstances'));
+  const instanceLaunches = launches.filter((statement: { Resource: unknown }) => JSON.stringify(statement.Resource).includes(':instance/*'));
+  expect(instanceLaunches).toHaveLength(1);
+  expect(instanceLaunches[0].Condition).toEqual({ StringEquals: { 'ec2:InstanceType': 't3.medium' } });
+  expect(launches.every((statement: { Resource: unknown }) => statement.Resource !== '*')).toBe(true);
   for (const policy of Object.values(template.findResources('AWS::IAM::Policy'))) {
     for (const statement of policy.Properties.PolicyDocument.Statement) {
       expect([statement.Action].flat()).not.toContain('ec2:*');

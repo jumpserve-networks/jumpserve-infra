@@ -61,8 +61,10 @@ export class RealWorldTests extends Construct {
     const stack = cdk.Stack.of(this);
     const ec2Arn = (resource: string) => `arn:${stack.partition}:ec2:*:${stack.account}:${resource}/*`;
     workerRole.addToPolicy(new iam.PolicyStatement({ actions: ['ec2:RunInstances'], resources: [
-      `arn:${stack.partition}:ec2:*::image/*`, ec2Arn('instance'), ec2Arn('volume'), ec2Arn('network-interface'),
+      `arn:${stack.partition}:ec2:*::image/*`, ec2Arn('volume'), ec2Arn('network-interface'),
     ] }));
+    workerRole.addToPolicy(new iam.PolicyStatement({ actions: ['ec2:RunInstances'], resources: [ec2Arn('instance')],
+      conditions: { StringEquals: { 'ec2:InstanceType': 't3.medium' } } }));
     workerRole.addToPolicy(new iam.PolicyStatement({ actions: ['ec2:RunInstances'], resources: [ec2Arn('subnet'), ec2Arn('security-group')], conditions: tagged }));
     workerRole.addToPolicy(new iam.PolicyStatement({ actions: ['ec2:CreateVpc', 'ec2:CreateSubnet', 'ec2:CreateInternetGateway', 'ec2:CreateSecurityGroup', 'ec2:CreateRouteTable'], resources: ['*'] }));
     workerRole.addToPolicy(new iam.PolicyStatement({ actions: ['ec2:CreateTags'], resources: ['*'], conditions: {
