@@ -1,0 +1,53 @@
+{
+  "verified_at": "2026-09-28 04:08:37 UTC",
+  "workers": [
+    {
+      "id": "i-05d1e779a020f9915",
+      "state": "terminated",
+      "reason": "User initiated",
+      "launched_at": "2026-09-28T00:40:44+00:00"
+    },
+    {
+      "id": "i-017bd783ab2f9c6ce",
+      "state": "terminated",
+      "reason": "User initiated",
+      "launched_at": "2026-09-28T00:34:45+00:00"
+    },
+    {
+      "id": "i-0f5f999f1598fc33c",
+      "state": "terminated",
+      "reason": "User initiated",
+      "launched_at": "2026-09-28T00:40:42+00:00"
+    },
+    {
+      "id": "i-0fe35f424add9db76",
+      "state": "terminated",
+      "reason": "User initiated",
+      "launched_at": "2026-09-28T00:40:48+00:00"
+    },
+    {
+      "id": "i-0d3a7fe046f7a5395",
+      "state": "terminated",
+      "reason": "User initiated",
+      "launched_at": "2026-09-28T00:40:46+00:00"
+    },
+    {
+      "id": "i-05cce5f6644e31322",
+      "state": "terminated",
+      "reason": "User initiated",
+      "launched_at": "2026-09-28T00:40:41+00:00"
+    },
+    {
+      "id": "i-00a144b672ff4728f",
+      "state": "terminated",
+      "reason": "User initiated",
+      "launched_at": "2026-09-28T00:40:37+00:00"
+    },
+    {
+      "id": "i-07a3347ce317d0853",
+      "state": "terminated",
+      "reason": "User initiated",
+      "launched_at": "2026-09-28T00:40:39+00:00"
+    }
+  ]
+}

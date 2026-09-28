@@ -1,0 +1,89 @@
+{
+  "account": "395567831870",
+  "region": "us-east-1",
+  "builder_instance_id": "i-0a97b04e81d75fed6",
+  "builder_instance_type": "c7i.4xlarge",
+  "source_ami": "ami-0045d7fc2ad003464",
+  "bucket": "jumpserve-nines2026-395567831870-us-east-1",
+  "iam_role": "JumpServeNines2026Research",
+  "instance_profile": "JumpServeNines2026Research",
+  "security_group_id": "sg-099f58900281031bf",
+  "temporary_ssh_rule_id": "sgr-0e0f754d2af9e2cf7",
+  "subnet_id": "subnet-034d7a034aaa1c49b",
+  "vpc_id": "vpc-0513ad61ccb535a10",
+  "kernel_commit": "90210de4b779d40496dee0b89081780eeddf2a60",
+  "temporary_ssh_rule_status": "revoked",
+  "research_ami": "ami-0b550a96183614a18",
+  "research_snapshot": "snap-0807bec56fb0e2b69",
+  "status": "campaign-completed-workers-terminated",
+  "builder_status": "terminated",
+  "workers": [
+    {
+      "shard": 0,
+      "instance_id": "i-017bd783ab2f9c6ce",
+      "instance_type": "c7i.large",
+      "launched_at": "2026-09-28T00:34:45Z",
+      "status": "terminated",
+      "termination_verified_at": "2026-09-28 04:08:37 UTC"
+    },
+    {
+      "shard": 1,
+      "instance_id": "i-00a144b672ff4728f",
+      "instance_type": "c7i.large",
+      "launched_at": "2026-09-28T00:40:37Z",
+      "status": "terminated",
+      "termination_verified_at": "2026-09-28 04:08:37 UTC"
+    },
+    {
+      "shard": 2,
+      "instance_id": "i-07a3347ce317d0853",
+      "instance_type": "c7i.large",
+      "launched_at": "2026-09-28T00:40:39Z",
+      "status": "terminated",
+      "termination_verified_at": "2026-09-28 04:08:37 UTC"
+    },
+    {
+      "shard": 3,
+      "instance_id": "i-05cce5f6644e31322",
+      "instance_type": "c7i.large",
+      "launched_at": "2026-09-28T00:40:41Z",
+      "status": "terminated",
+      "termination_verified_at": "2026-09-28 04:08:37 UTC"
+    },
+    {
+      "shard": 4,
+      "instance_id": "i-0f5f999f1598fc33c",
+      "instance_type": "c7i.large",
+      "launched_at": "2026-09-28T00:40:42Z",
+      "status": "terminated",
+      "termination_verified_at": "2026-09-28 04:08:37 UTC"
+    },
+    {
+      "shard": 5,
+      "instance_id": "i-05d1e779a020f9915",
+      "instance_type": "c7i.large",
+      "launched_at": "2026-09-28T00:40:44Z",
+      "status": "terminated",
+      "termination_verified_at": "2026-09-28 04:08:37 UTC"
+    },
+    {
+      "shard": 6,
+      "instance_id": "i-0d3a7fe046f7a5395",
+      "instance_type": "c7i.large",
+      "launched_at": "2026-09-28T00:40:46Z",
+      "status": "terminated",
+      "termination_verified_at": "2026-09-28 04:08:37 UTC"
+    },
+    {
+      "shard": 7,
+      "instance_id": "i-0fe35f424add9db76",
+      "instance_type": "c7i.large",
+      "launched_at": "2026-09-28T00:40:48Z",
+      "status": "terminated",
+      "termination_verified_at": "2026-09-28 04:08:37 UTC"
+    }
+  ],
+  "termination_verified_at": "2026-09-28 04:08:37 UTC",
+  "completed_trials": 820,
+  "campaign_finished_at": "2026-09-28T04:08:02.705602+00:00"
+}
