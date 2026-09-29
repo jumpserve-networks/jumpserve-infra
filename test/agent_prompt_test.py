@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / 'agent'))
 from prompt import PromptUnavailable, PromptVersion, load_active_prompt
 from prompt_publication import evaluation_snapshot, publish_evaluated_prompt
 from evaluate_agent import grading_payload
+from modules import EMULATED_MODULE, REAL_WORLD_MODULE
 
 
 def record(version='one', identifier='00000000-0000-4000-8000-000000000001'):
@@ -79,7 +80,7 @@ class HandlerPromptTest(unittest.TestCase):
         modules['strands.models.bedrock'].BedrockModel = Mock()
         self.db = Mock()
         modules['database'].Database = Mock(return_value=self.db)
-        modules['tools'].ALL_TOOLS = []
+        modules['tools'].MODULE_TOOLS = {EMULATED_MODULE: ['emulated-tool'], REAL_WORLD_MODULE: ['real-world-tool']}
         spec = importlib.util.spec_from_file_location('handler_prompt_test', ROOT / 'agent/handler.py')
         self.handler = importlib.util.module_from_spec(spec)
         with patch.dict(sys.modules, modules):
@@ -149,6 +150,52 @@ class HandlerPromptTest(unittest.TestCase):
         self.assertEqual(result['statusCode'], 403)
         self.agent_factory.assert_not_called()
         self.db.rpc.assert_not_called()
+
+    def test_module_selects_prompt_tools_and_persisted_answer_identity(self):
+        self.db.get.side_effect = [[dict(record(), module_id=REAL_WORLD_MODULE)], []]
+        self.request['body'] = json.dumps({'message': 'Explain this EC2 test', 'module_id': REAL_WORLD_MODULE})
+        result = self.handler.lambda_handler(self.request, None)
+        self.assertEqual(result['statusCode'], 200)
+        self.assertEqual(json.loads(result['body'])['module_id'], REAL_WORLD_MODULE)
+        self.assertEqual(self.agent_factory.call_args.kwargs['tools'], ['real-world-tool'])
+        self.assertEqual(self.db.get.call_args_list[0].kwargs['params'], {'p_module_id': REAL_WORLD_MODULE})
+        self.assertEqual(self.db.rpc.call_args.args[1]['p_module_id'], REAL_WORLD_MODULE)
+        self.assertEqual(self.db.rpc.call_args.args[1]['p_analysis_version'], 'real-world-chat-v1')
+
+    def test_other_module_history_and_wrong_prompt_are_rejected_before_model(self):
+        self.request['body'] = json.dumps({'message': 'Explain EC2 results', 'module_id': REAL_WORLD_MODULE})
+        self.db.get.side_effect = [[dict(record(), module_id=REAL_WORLD_MODULE)], [{'messages': [], 'user_id': 'researcher', 'module_id': EMULATED_MODULE}]]
+        self.assertEqual(self.handler.lambda_handler(self.request, None)['statusCode'], 409)
+        self.db.get.side_effect = [[record()]]
+        self.assertEqual(self.handler.lambda_handler(self.request, None)['statusCode'], 503)
+        self.agent_factory.assert_not_called()
+        self.db.rpc.assert_not_called()
+
+    def test_unknown_modules_are_not_prompt_or_tool_selectors(self):
+        for module in ('arbitrary-prompt', None, {}, []):
+            result = self.handler.lambda_handler({'body': json.dumps({'message': 'hi', 'module_id': module})}, None)
+            self.assertEqual(result['statusCode'], 400)
+        self.db.get.assert_not_called()
+        self.agent_factory.assert_not_called()
+
+    def test_capability_probe_is_authenticated_and_never_calls_model_or_database(self):
+        request = {'body': json.dumps({'action': 'capabilities', 'module_id': REAL_WORLD_MODULE})}
+        result = self.handler.lambda_handler(request, None)
+        self.assertEqual(result['statusCode'], 200)
+        self.assertIn(REAL_WORLD_MODULE, json.loads(result['body'])['modules'])
+        with patch.object(self.handler, 'authenticate', side_effect=self.handler.AuthError(401, 'Sign in')):
+            self.assertEqual(self.handler.lambda_handler(request, None)['statusCode'], 401)
+        self.db.get.assert_not_called()
+        self.agent_factory.assert_not_called()
+
+    def test_tool_badges_contain_current_turn_strands_calls_only(self):
+        self.agent.messages = [{'role': 'assistant', 'content': [{'toolUse': {'name': 'old', 'input': {}}}]}]
+        def answer(*args, **kwargs):
+            self.agent.messages.extend([{'role': 'assistant', 'content': [{'toolUse': {'name': 'get_real_world_results', 'input': {'job_id': 'test'}}}]}])
+            return 'answer'
+        self.agent.side_effect = answer
+        result = json.loads(self.handler.lambda_handler(self.request, None)['body'])
+        self.assertEqual([event['name'] for event in result['tool_events']], ['get_real_world_results'])
 
 
 if __name__ == '__main__':

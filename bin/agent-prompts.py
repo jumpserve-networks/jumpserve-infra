@@ -65,17 +65,24 @@ def migrate():
     exists = query("select to_regclass('public.agent_prompt_versions') is not null as present")[0]['present']
     if not exists:
         query((ROOT / 'database/202609200001_agent_prompts.sql').read_text(), read_only=False)
-    seed = json.loads((ROOT / 'database/seed-agent-prompt.json').read_text())
-    keys = ('id', 'version', 'system_prompt', 'research_context', 'created_by')
-    values = ','.join(literal(seed[key]) for key in keys)
-    query(f"insert into public.agent_prompt_versions ({','.join(keys)},updated_by) values ({values},{literal(seed['created_by'])}) on conflict (id) do nothing", read_only=False)
-    return {'project': PROJECT_REF, 'seed_id': seed['id'], 'note': 'Seed is a draft until evaluated and published; existing prompts are preserved.'}
+    modules = query("select 1 from information_schema.columns where table_schema='public' and table_name='agent_prompt_settings' and column_name='module_id'")
+    if not modules:
+        query((ROOT / 'database/202609290001_real_world_agent.sql').read_text(), read_only=False)
+    identifiers = []
+    for filename in ('seed-agent-prompt.json', 'seed-real-world-agent-prompt.json'):
+        seed = json.loads((ROOT / 'database' / filename).read_text())
+        seed.setdefault('module_id', 'congestion-control-emulated')
+        keys = ('id', 'version', 'module_id', 'system_prompt', 'research_context', 'created_by')
+        values = ','.join(literal(seed[key]) for key in keys)
+        query(f"insert into public.agent_prompt_versions ({','.join(keys)},updated_by) values ({values},{literal(seed['created_by'])}) on conflict (id) do nothing", read_only=False)
+        identifiers.append(seed['id'])
+    return {'project': PROJECT_REF, 'seed_ids': identifiers, 'note': 'Seeds remain drafts until evaluated and published; existing prompts and active pointers are preserved.'}
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
-    commands.add_parser('migrate', help='Apply the additive schema and seed the existing prompt as a draft')
+    commands.add_parser('migrate', help='Apply prompt/module migrations and seed both modules as unpublished drafts')
     commands.add_parser('list', help='List prompt metadata and the active version (no conversation data)')
     clone = commands.add_parser('draft', help='Copy a version into an editable draft')
     clone.add_argument('--from-id', type=UUID, required=True)
@@ -90,7 +97,7 @@ def main():
     if args.command == 'migrate':
         result = migrate()
     elif args.command == 'list':
-        result = query("select v.id, v.version, v.content_sha256, v.created_by, v.updated_by, v.updated_at, case when s.active_version_id=v.id then 'active' when v.published_at is not null then 'published' else 'draft' end as status from public.agent_prompt_versions v cross join public.agent_prompt_settings s order by v.created_at desc")
+        result = query("select v.id, v.version, v.module_id, v.content_sha256, v.created_by, v.updated_by, v.updated_at, case when s.active_version_id=v.id then 'active' when v.published_at is not null then 'published' else 'draft' end as status from public.agent_prompt_versions v join public.agent_prompt_settings s using(module_id) order by v.created_at desc")
     elif args.command == 'edit':
         draft = json.loads(args.file.read_text())
         fields = ('version', 'system_prompt', 'research_context')
@@ -101,7 +108,7 @@ def main():
         if not result:
             raise RuntimeError('Draft changed, is already published, or does not exist; no update made')
     else:
-        result = query(f"insert into public.agent_prompt_versions (id,version,system_prompt,research_context,created_by,updated_by) select {literal(uuid4())}::uuid,{literal(args.version)},system_prompt,research_context,{literal(args.actor)},{literal(args.actor)} from public.agent_prompt_versions where id={literal(args.from_id)}::uuid returning id,version", read_only=False)
+        result = query(f"insert into public.agent_prompt_versions (id,version,module_id,system_prompt,research_context,created_by,updated_by) select {literal(uuid4())}::uuid,{literal(args.version)},module_id,system_prompt,research_context,{literal(args.actor)},{literal(args.actor)} from public.agent_prompt_versions where id={literal(args.from_id)}::uuid returning id,version,module_id", read_only=False)
         if not result:
             raise RuntimeError('Source prompt version not found')
     print(json.dumps(result, indent=2))

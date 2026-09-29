@@ -8,15 +8,18 @@ from auth import authenticate, AuthError
 from prompt import load_active_prompt
 from run_analysis import ANALYSIS_VERSION
 from settings import MODEL_ID, MODEL_REGION, MODEL_TEMPERATURE
-from tools import ALL_TOOLS
+from tools import MODULE_TOOLS
+from modules import CHAT_MODULES, EMULATED_MODULE, REAL_WORLD_MODULE, REAL_WORLD_ANALYSIS_VERSION
 
 logger = logging.getLogger(__name__)
 
 
-def _load_session(database, session_id: str, user_id: str) -> list[dict]:
-    rows = database.get('agent_sessions', params={'id': f'eq.{session_id}', 'select': 'messages,user_id'})
+def _load_session(database, session_id: str, user_id: str, module_id=EMULATED_MODULE) -> list[dict]:
+    rows = database.get('agent_sessions', params={'id': f'eq.{session_id}', 'select': 'messages,user_id,module_id'})
     if rows and rows[0].get('user_id') != user_id:
         raise AuthError(403, 'This conversation belongs to another user.')
+    if rows and rows[0].get('module_id', EMULATED_MODULE) != module_id:
+        raise AuthError(409, 'This conversation belongs to another test module. Start a new chat.')
     return rows[0].get('messages', []) if rows else []
 
 
@@ -44,7 +47,8 @@ def _save_turn(database, session_id, user_id, messages, prompt, response_text, a
         'p_session_id': session_id, 'p_user_id': user_id,
         'p_messages': _serialize_messages(messages), 'p_answer_id': answer_id,
         'p_prompt_version_id': prompt.id, 'p_model_id': MODEL_ID,
-        'p_analysis_version': ANALYSIS_VERSION, 'p_response': response_text,
+        'p_analysis_version': REAL_WORLD_ANALYSIS_VERSION if prompt.module_id == REAL_WORLD_MODULE else ANALYSIS_VERSION,
+        'p_response': response_text, 'p_module_id': prompt.module_id,
     })
 
 
@@ -70,6 +74,12 @@ def lambda_handler(event, context):
     except (ValueError, TypeError, AttributeError):
         return _error(400, 'Invalid request or session ID')
     message = body.get("message", "")
+    module_id = body.get('module_id', EMULATED_MODULE)
+    if not isinstance(module_id, str) or module_id not in CHAT_MODULES:
+        return _error(400, 'Unsupported chat module')
+    if body.get('action') == 'capabilities':
+        return {'statusCode': 200, 'headers': {'Content-Type': 'application/json'},
+                'body': json.dumps({'modules': list(CHAT_MODULES)})}
 
     if not isinstance(message, str) or not message.strip():
         return {
@@ -81,8 +91,8 @@ def lambda_handler(event, context):
     # Select a complete, immutable prompt snapshot before making any model call.
     try:
         database = Database()
-        prompt = load_active_prompt(database)
-        history = _load_session(database, session_id, user_id)
+        prompt = load_active_prompt(database, module_id)
+        history = _load_session(database, session_id, user_id, module_id)
     except AuthError as error:
         return _error(error.status, str(error))
     except Exception as exc:
@@ -99,7 +109,7 @@ def lambda_handler(event, context):
     agent = Agent(
         model=model,
         system_prompt=prompt.text,
-        tools=ALL_TOOLS,
+        tools=MODULE_TOOLS[module_id],
     )
 
     # Load history into the agent
@@ -107,6 +117,7 @@ def lambda_handler(event, context):
         agent.messages = history
 
     # Run the agent
+    history_length = len(agent.messages)
     result = agent(message, authorization=bearer)
     response_text = str(result)
 
@@ -119,13 +130,16 @@ def lambda_handler(event, context):
 
     # Collect tool events from the result
     tool_events = []
-    for msg in agent.messages:
+    for msg in agent.messages[history_length:]:
         if msg.get("role") == "assistant" and msg.get("content"):
             for block in msg["content"]:
-                if isinstance(block, dict) and block.get("type") == "tool_use":
+                if not isinstance(block, dict):
+                    continue
+                call = block.get('toolUse') or (block if block.get('type') == 'tool_use' else None)
+                if isinstance(call, dict) and isinstance(call.get('name'), str):
                     tool_events.append({
-                        "name": block.get("name"),
-                        "input": block.get("input"),
+                        "name": call['name'],
+                        "input": call.get("input"),
                     })
 
     return {
@@ -138,5 +152,6 @@ def lambda_handler(event, context):
             "answer_id": answer_id,
             "prompt_version_id": prompt.id,
             "prompt_version": prompt.version,
+            "module_id": module_id,
         }),
     }

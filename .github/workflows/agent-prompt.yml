@@ -3,6 +3,14 @@ name: Publish Agent Prompt
 on:
   workflow_dispatch:
     inputs:
+      module:
+        description: 'Test module for the draft and its evaluation suite'
+        required: true
+        type: choice
+        default: congestion-control-emulated
+        options:
+          - congestion-control-emulated
+          - congestion-control-real-world
       prompt_id:
         description: 'UUID of the database draft (or previous published version to restore)'
         required: true
@@ -27,9 +35,10 @@ jobs:
       - name: Evaluate and publish the selected version
         run: |
           python -m pip install strands-agents httpx boto3
-          python -B test/evaluate_agent.py --live --prompt-id "$PROMPT_ID" --publish
+          python -B test/evaluate_agent.py --live --module "$PROMPT_MODULE" --prompt-id "$PROMPT_ID" --publish
         env:
           PROMPT_ID: ${{ inputs.prompt_id }}
+          PROMPT_MODULE: ${{ inputs.module }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-east-1

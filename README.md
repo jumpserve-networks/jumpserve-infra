@@ -272,7 +272,7 @@ invent replication confidence intervals or trial pairing from client/snapshot
 counts, run order, or timestamps. These deterministic tool checks complement the
 database-managed research prompt; the migration seed remains immutable.
 
-The active system prompt and research context live in Supabase's
+The active system prompt and research context for each module live in Supabase's
 `public.agent_prompt_versions` table. Every chat request loads one complete
 published version through `get_active_agent_prompt`; a warm Lambda sees changes
 on its next request. There is no hardcoded prompt fallback. Missing/invalid
@@ -280,15 +280,22 @@ configuration or a database error returns HTTP 503 before calling the model.
 
 Each successful answer is saved in `public.agent_answers`, including its prompt
 version ID, model ID and analysis version. Saving the answer and conversation
-history is atomic. Existing historical answers retain their original history;
+history is atomic. Sessions are scoped to both user and module; attempts to reuse
+a session from another module or owner fail before a model call, and the database
+enforces the same rule on writes. Existing historical answers retain their original history;
 we do not retroactively assign prompt versions to them.
 
 ### Editing and publishing prompts
 
+For the module migration, real-world measurement tools, and deployment order,
+see [Real-world measurement chat](docs/real-world-chat.md). Each module has its
+own active pointer and answer-evaluation suite; publishing one does not alter
+the other's context.
+
 1. Open the JumpServe Supabase project (`regphejnlvfpyokpniny`). Check
-   `agent_prompt_settings.active_version_id` for the current version.
+   the selected module's `agent_prompt_settings.active_version_id` for the current version.
 2. Create a draft with a new UUID and unique `version`, copying `system_prompt`
-   and `research_context` from the current version. Fill in `created_by` and
+   and `research_context` from the current version, retaining its `module_id`. Fill in `created_by` and
    `updated_by`. The database sets timestamps and the content checksum. You can
    also clone a version with:
 
@@ -303,7 +310,7 @@ we do not retroactively assign prompt versions to them.
    `version`, `system_prompt` and `research_context`; the update rejects stale
    checksums and published versions.
 4. Run the [Publish Agent Prompt workflow](https://github.com/jumpserve-networks/jumpserve-infra/actions/workflows/agent-prompt.yml)
-   on `main`, supplying the draft UUID. It runs unit tests and the eight live
+   on `main`, supplying the module and draft UUID. It runs unit tests and that module's eight live
    Bedrock evaluations, stores the report, then atomically activates the exact
    evaluated content. Publishing fails if the draft or active version changed
    during evaluation. This makes billed Bedrock calls.

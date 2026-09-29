@@ -29,6 +29,8 @@ create table public.agent_sessions (
 grant all on public.agent_sessions to service_role;
 """
 checks = (ROOT / 'test/agent_prompt_database.sql').read_text()
+module_migration = (ROOT / 'database/202609290001_real_world_agent.sql').read_text().replace('begin;\n', '', 1).rsplit('commit;', 1)[0]
+module_checks = (ROOT / 'test/real_world_agent_database.sql').read_text()
 subprocess.run([psql, url, '-X', '-v', 'ON_ERROR_STOP=1', '-q'],
-               input=setup + migration + checks + '\nrollback;\n', text=True, check=True)
+               input=setup + migration + checks + module_migration + module_checks + '\nrollback;\n', text=True, check=True)
 print('Prompt schema tests passed (all test data rolled back)')
