@@ -210,11 +210,15 @@ def main():
                           structured_output_model=Verdict).structured_output
         used_required_tool = 'compare_real_world_tests' in calls if case.get('requires_comparison') else bool(calls)
         record = {'name': case['name'], 'passed': used_required_tool and judgement.correct,
+                  'used_required_tool': used_required_tool,
                   'tool_calls': calls, 'answer': answer, 'judgement': judgement.model_dump()}
         report['cases'].append(record)
         output.write_text(json.dumps(report, indent=2) + '\n')
         print(f"{case['name']}: {'PASS' if record['passed'] else 'FAIL'}", flush=True)
         if not record['passed']:
+            if not used_required_tool:
+                required = 'compare_real_world_tests' if case.get('requires_comparison') else 'a result lookup'
+                print(f'Required tool missing: {required}; observed calls: {calls}', flush=True)
             print(judgement.explanation, flush=True)
     if not all(case['passed'] for case in report['cases']):
         raise SystemExit('Agent answer regression failed; review saved answers and verdicts')

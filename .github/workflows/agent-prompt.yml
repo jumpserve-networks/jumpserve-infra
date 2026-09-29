@@ -48,4 +48,5 @@ jobs:
         with:
           name: agent-prompt-evaluation
           path: .test-artifacts/agent-evaluation.json
+          include-hidden-files: true
           if-no-files-found: ignore

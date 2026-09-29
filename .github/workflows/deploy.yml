@@ -82,6 +82,7 @@ jobs:
         with:
           name: agent-answer-evaluation
           path: .test-artifacts/*agent-evaluation.json
+          include-hidden-files: true
           if-no-files-found: ignore
 
       - name: Install agent Python dependencies
