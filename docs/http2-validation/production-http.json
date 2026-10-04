@@ -1,0 +1,78 @@
+{
+  "origin": "https://jumpserve.quaint-lab.org",
+  "started_at": "2026-10-04T23:43:05.956Z",
+  "checks": [
+    {
+      "name": "public completed pages",
+      "passed": true,
+      "evidence": [
+        {
+          "suffix": "",
+          "status": 200
+        },
+        {
+          "suffix": "/test-results",
+          "status": 200
+        },
+        {
+          "suffix": "/methods",
+          "status": 200
+        },
+        {
+          "suffix": "/literature",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "name": "complete public JSON export",
+      "passed": true,
+      "evidence": {
+        "sha256": "00400c9bd82e62c150617a737f9ba76ff71d6b517416ba6259851854b480931a",
+        "bytes": 3815116,
+        "measurements": 7176,
+        "loopback": 84,
+        "unknown": 443
+      }
+    },
+    {
+      "name": "complete CSV with missing error codes",
+      "passed": true,
+      "evidence": {
+        "sha256": "6a4ba2815bfa52d8a699c88c4c16221d2363d2dcf49b57a33932a958ec8ede98",
+        "rows": 7176,
+        "fields": 15
+      }
+    },
+    {
+      "name": "bounded measurement API",
+      "passed": true,
+      "evidence": {
+        "invalid_status": 400,
+        "valid_status": 200
+      }
+    },
+    {
+      "name": "published prompt and evaluated answer provenance",
+      "passed": true,
+      "evidence": {
+        "sha256": "ad537fbd3fd3703a6c193ddae53753fd15e2b2bde37e4fab0a993e7badf5f93a",
+        "prompt": "http2-evidence-v9",
+        "evaluated_answers": 8,
+        "reviewer_type": "AI agent; not a human scientific review or user approval"
+      }
+    },
+    {
+      "name": "Google sign-in preserves configuration deep link",
+      "passed": true,
+      "evidence": {
+        "destination": "/login",
+        "next": "/module/http2-compliance-study/chat?configuration=Mitmproxy-11.1.0",
+        "actual_authenticated_chat": "not exercised: no legitimate Google session in this verifier"
+      }
+    }
+  ],
+  "errors": [],
+  "ended_at": "2026-10-04T23:43:17.221Z",
+  "passed": true
+}

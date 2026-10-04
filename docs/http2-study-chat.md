@@ -10,7 +10,12 @@ Scientific inputs, six protocols and locks, original artifact revisions,
 reproduction commands, source inventory and limitations are in
 `jumpserve-back-end/experiments/http2_compliance/README.md`. Original downloaded
 bytes and author checkouts are retained locally; original author payloads are
-also retained in backend-only Supabase artifact records. Public JSON contains
+also retained in backend-only Supabase artifact records. Migration 010 creates
+the private `http2-study-artifacts` Storage bucket. All 40 accessible adopted
+sources and 57 original author JSON files (97 files, 34,909,794 bytes) passed
+upload/download SHA-256 checks. A private relational manifest links these exact
+bytes to the campaign; JSONB payloads alone do not preserve original formatting.
+Public JSON contains
 7,176 archived case observations and 84 separately identified loopback frames;
 CSV exports the archived observations with missing fields blank.
 
@@ -51,10 +56,11 @@ status. Complete supporting-literature coverage is not claimed.
 Target AWS account: `395567831870` using the `jumpserve` profile. Target Supabase:
 `regphejnlvfpyokpniny`. Purpose-specific import/deployment tools verify those
 targets before mutation. Connected tools for other Supabase projects are not
-used. Migrations `202610040003` through `202610040009` create eleven study
+used. Migrations `202610040003` through `202610040010` create eleven study
 relations, extend module/prompt constraints, preserve unsigned 32-bit error
 codes, enforce manual answer review and save model usage and typed evidence
-selection with answer provenance.
+selection with answer provenance and private original-byte storage. The Storage
+policy is restrictive even when unrelated buckets have permissive policies.
 
 Ten study relations are public SELECT-only with RLS; author raw/evaluation
 artifacts are backend-only. Browser writes are denied. Original execution dates
@@ -101,7 +107,12 @@ the full fresh snapshot remains available to backend rendering and read tools.
 1. Apply/import with `python3 -B bin/http2-study-database.py --apply` for a new,
    verified study bundle. Do not overwrite an existing campaign with a different
    protocol or analysis. `--prepare` applies subsequent migrations and inserts
-   immutable draft seeds; `--verify` reads persisted counts.
+   immutable draft seeds; `--verify` reads persisted counts. Preserve pinned
+   originals with the dependency-pinned virtualenv command
+   `../jumpserve-back-end/experiments/leo_failover/.venv/bin/python -B
+   bin/http2-raw-storage.py`. It checks account, project, campaign, pinned
+   revision and every original hash before storage mutation. Reruns retain
+   the initial manifest identity and timestamp after matching all files.
 2. Run `npm run test:agent`, `npm run build`, `npm test`, and isolated database
    checks with `PROMPT_TEST_DATABASE_URL=postgresql:///jumpserve_prompt_test
    npm run test:agent:database`. Frontend requires its tests, lint, production
@@ -141,3 +152,19 @@ estimates include failed rounds and use the recorded per-model prices. They are
 not reconciled billing; existing hosting/build charges, workstation allocation
 and Codex orchestration charges are unavailable. No AWS experiment instances
 were provisioned.
+
+The report and private raw-storage manifest are frozen as version 1. Retained
+production HTTP/code checks and screenshots are in `docs/http2-validation`.
+`python3 -B bin/http2-release-report.py --save` verifies AWS/Supabase targets,
+campaign and active prompt before saving the existing report immutably to
+`http2_study_artifacts`; the saved hash and JSON payload must match. Report
+generation refuses to overwrite the frozen local file. Later verification
+campaigns need a new report version.
+
+The released prompt is `http2-evidence-v9`
+(`caf6bae2-acd3-4ef4-8147-bd8bc39895e2`), evaluated by
+`http2-evaluation-v12` (`d34c53a8-5f90-456d-b46c-114d16ca6a5c`). Its eight
+automatic checks and separate Codex evidence inspection passed. Legacy
+evaluation text calls that inspection "human review"; the explicit reviewer
+type and this report identify it as AI review. A deployed Google-authenticated
+request remains unverified because no legitimate session was available.

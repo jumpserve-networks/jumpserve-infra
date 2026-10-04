@@ -1,0 +1,1174 @@
+{
+  "version": "http2-release-report-v1",
+  "recorded_at": "2026-10-04T23:53:56.235543+00:00",
+  "software_release": "deployed and verified within stated scope",
+  "scientific_coverage": "partial reproduction; no independent historical proxy/cloud fleet replication",
+  "targets": {
+    "aws_account": "395567831870",
+    "aws_profile": "jumpserve",
+    "aws_region": "us-east-1",
+    "supabase_project": "regphejnlvfpyokpniny"
+  },
+  "urls": {
+    "module": "https://jumpserve.quaint-lab.org/module/http2-compliance-study",
+    "results": "https://jumpserve.quaint-lab.org/module/http2-compliance-study/test-results",
+    "methods": "https://jumpserve.quaint-lab.org/module/http2-compliance-study/methods",
+    "literature": "https://jumpserve.quaint-lab.org/module/http2-compliance-study/literature",
+    "data": "https://jumpserve.quaint-lab.org/module/http2-compliance-study/api/results",
+    "prompt_and_answers": "https://jumpserve.quaint-lab.org/module/http2-compliance-study/chat-release.json"
+  },
+  "release": {
+    "frontend_commit": "8ff00eab249e79c355e6ce7c34326ef6f89f31cf",
+    "amplify_app": "d24jvguj7brnkj",
+    "amplify_job": "100",
+    "amplify_status": "SUCCEED",
+    "amplify_ended_at": "2026-10-04T18:31:35.488000-05:00",
+    "evaluated_agent_implementation_commit": "4c2e56bb4899fcf0fae9ccf273260476963de72f",
+    "infra_branch": "study/http2-compliance",
+    "backend_commit_at_verification": "543cc9690ea0e811a7361ad3c4ad334a00a28a1f",
+    "agent_stack": "JumpServeAgentStack",
+    "agent_status": "UPDATE_COMPLETE",
+    "scope": "Only Agent stack and existing frontend Amplify build; no experiment instances or unrelated infrastructure deployment."
+  },
+  "paper": {
+    "doi": "10.1145/3730567.3764447",
+    "version": "ACM version of record supplied by user",
+    "sha256": "0624b02908d973efd875b908995107a9fee78cbf4320a31dcd14b15e33c5fa35",
+    "review": "16 pages, Figures 1\u20138, Tables 1\u20139, Appendices A\u2013B; all pages visually examined. Figure 4 raster cells not all independently checked."
+  },
+  "literature": {
+    "entries": 49,
+    "review_counts": {
+      "complete": 3,
+      "unavailable": 9,
+      "unreviewed": 8,
+      "partial": 29
+    },
+    "original_hashes_checked": 40,
+    "unavailable_reference_numbers": [
+      1,
+      5,
+      7,
+      13,
+      20,
+      36,
+      37,
+      39,
+      40
+    ],
+    "inventory": "jumpserve-back-end/experiments/http2_compliance/literature.json",
+    "review_notes": "jumpserve-back-end/experiments/http2_compliance/review-notes.json",
+    "hash_validation": "jumpserve-back-end/experiments/http2_compliance/evidence/source-hash-validation.json",
+    "scope": "Main plus 48 direct citations; no recursive bibliography expansion. Downloaded/unreviewed and partial reviews do not establish complete literature coverage."
+  },
+  "protocols": [
+    {
+      "id": "http2-compliance-artifact-v1",
+      "version": 1,
+      "stage": "main artifact reanalysis; fresh network pilots are separate",
+      "document": {
+        "id": "http2-compliance-artifact-v1",
+        "version": 1,
+        "stage": "main artifact reanalysis; fresh network pilots are separate",
+        "paper_doi": "10.1145/3730567.3764447",
+        "paper_full_text_status_at_freeze": "unavailable: ACM security challenge; KAUST security challenge. Indexed excerpts and author artifacts available. Figure/table mapping remains provisional until full text is inspected.",
+        "questions": [
+          "Does the released test universe contain the reported 156 unique tests?",
+          "Can the released aggregate outcome table be recovered from archived worker records under the authors' classifier?",
+          "How do preserving missing data and requiring RFC error scope change the apparent classification?",
+          "Are client/server, historical-version and translation comparisons based on matched test identities?"
+        ],
+        "hypotheses": [
+          {
+            "id": "H1",
+            "criterion": "Exactly 156 distinct test IDs 1 through 156, partitioned into 78 client-side and 78 server-side tests."
+          },
+          {
+            "id": "H2",
+            "criterion": "Exact integer agreement with all 15 rows in the released analysis/tables/result_counts.md. This is artifact numerical reproduction; paper figure agreement is inconclusive until full text review."
+          },
+          {
+            "id": "H3",
+            "criterion": "Report all classification changes from preserving missing/ambiguous data and error scope; no prespecified direction."
+          }
+        ],
+        "artifact": {
+          "repository": "https://github.com/attia-mahmoud/HTTP2-Compliance-Tests",
+          "commit": "03bcd5d88c98cb82fac0c2afb626bb16ec2fa402",
+          "selection": "Every archived results/**/*.json, sorted by path. No ctime-based selection; all datasets retained, primary aggregate row uses sole dataset per proxy where available."
+        },
+        "metrics": {
+          "outcome_count": "test cases",
+          "noncompliance_fraction": "percent of classified valid test cases; report unknown and denominator separately",
+          "dataset_coverage": "recorded/planned test cases",
+          "paired_behavior_difference": "counts and percent of common valid test identities; versions/configuration changes are not causally isolated",
+          "error_code": "HTTP/2 integer code; do not conflate status 500 with code 5",
+          "duration": "seconds"
+        },
+        "algorithms": [
+          "Unmodified upstream analyze_results loaded by AST without executing the plotting campaign",
+          "Independent evidence-preserving classifier with explicit unknown state",
+          "Broad author conformance rule and strict RFC-scope sensitivity reported separately"
+        ],
+        "configurations": "Preserve proxy name, version/commit, TLS and H2EE/H2H1 as separate fields. Missing deployment details, architecture, resource counts and dates remain null. Archived file names are labels, not trustworthy UTC timestamps.",
+        "orbital_epochs": "not applicable: HTTP/2 empirical protocol compliance study, no satellite simulator",
+        "random_seed": 3764447,
+        "controls": [
+          "Positive valid request and malformed-frame controls for later network pilots",
+          "Independent count conservation and exact ID coverage",
+          "Parse all input JSON independently; retain empty, failed and excluded records",
+          "Compare against committed table rather than regenerating/overwriting upstream output"
+        ],
+        "sensitivities": [
+          "Missing/empty/string worker results classified unknown versus authors' dropped",
+          "Unrecognized worker states classified unknown versus fallback dropped or mitmproxy unmodified",
+          "RST_STREAM versus GOAWAY versus generic HTTP 500 rejection",
+          "Separate TLS/non-TLS and H2EE/H2H1",
+          "All archived versions retained rather than latest ctime"
+        ],
+        "replication_unit": "Archived dataset for one proxy/configuration; protocol cases and old/new versions are correlated designed cases, not independent random research replicates.",
+        "sample_size_rationale": "Census of all 57 released JSON datasets and all 156 designed cases. No population-power calculation or confidence intervals justified by this deterministic convenience test suite.",
+        "exclusions": [
+          "Metadata and ID 0 are not experimental test cases; preserve in private raw artifact",
+          "Unknown IDs or malformed JSON mark dataset invalid with reason rather than silently discard",
+          "Absent expected IDs produce explicit missing measurements",
+          "Client-only H2H1 configurations plan only IDs 1-78; never call the server half missing"
+        ],
+        "statistics": "Exact counts, proportions and paired identity differences only. No t-test, binomial CI over protocol cases, bootstrap of adjacent observations, or significance-based compliance claim. Sensitivity is a descriptive recoding comparison, not a confidence interval.",
+        "comparison_criteria": "Equivalent named configuration and identical test IDs. Archived numerical counts can be reproduced; RFC conformance requires response semantics and scope. Nonconformance does not prove exploitability. Full compliance is never established by this finite suite.",
+        "out_of_scope": [
+          "Independent physical multi-network/cloud measurements and cloud geolocation",
+          "Internet-wide prevalence",
+          "DoS effectiveness, traffic performance and exploitable vulnerabilities",
+          "Historical deployment reconstruction where configs/binaries are absent",
+          "Simulator verification (no simulator in this study)"
+        ],
+        "costs": "Record wall time and incremental local execution cost (zero additional purchased compute); actual allocated workstation cost unavailable. AWS/model-call bills tracked separately when used. No compute/model budget invented.",
+        "followup_rule": "Later fresh network experiments get their own frozen protocol and campaign identity; never replace the archived main reanalysis. Scope amendments are versioned and retain this file."
+      },
+      "sha256": "9b5ee2cc2c669145e17c6b59fca90891a057d4763604063f4acd22a1d4c1ea4c",
+      "locked_at": "2026-10-04T20:47:17.465312+00:00",
+      "code_sha256": "a9c5f83433a58166089ed885beaff8852483cc774cf643e2bf50ee977cb2ad63"
+    },
+    {
+      "id": "http2-compliance-artifact-v2",
+      "version": 2,
+      "stage": "main artifact reanalysis; fresh network pilots are separate",
+      "document": {
+        "id": "http2-compliance-artifact-v2",
+        "version": 2,
+        "stage": "main artifact reanalysis; fresh network pilots are separate",
+        "paper_doi": "10.1145/3730567.3764447",
+        "paper_full_text_status_at_freeze": "Complete supplied ACM version of record PDF reviewed: 16 pages, Figures 1\u20138, Tables 1\u20139, Appendices A\u2013B. SHA-256 0624b02908d973efd875b908995107a9fee78cbf4320a31dcd14b15e33c5fa35",
+        "questions": [
+          "Does the released test universe contain the reported 156 unique tests?",
+          "Can the released aggregate outcome table be recovered from archived worker records under the authors' classifier?",
+          "How do preserving missing data and requiring RFC error scope change the apparent classification?",
+          "Are client/server, historical-version and translation comparisons based on matched test identities?"
+        ],
+        "hypotheses": [
+          {
+            "id": "H1",
+            "criterion": "Exactly 156 distinct test IDs 1 through 156, partitioned into 78 client-side and 78 server-side tests."
+          },
+          {
+            "id": "H2",
+            "criterion": "Exact integer agreement with all 15 rows of paper Table 5 (1950 designed cases); separately compare rounded Figure 6 percentages and Figures 7\u20138 stated changes. No tolerance for counts, rounding tolerance 0.05 percentage points for one-decimal values."
+          },
+          {
+            "id": "H3",
+            "criterion": "Report all classification changes from preserving missing/ambiguous data and error scope; no prespecified direction."
+          }
+        ],
+        "artifact": {
+          "repository": "https://github.com/attia-mahmoud/HTTP2-Compliance-Tests",
+          "commit": "03bcd5d88c98cb82fac0c2afb626bb16ec2fa402",
+          "selection": "Every archived results/**/*.json, sorted by path. No ctime-based selection; all datasets retained, primary aggregate row uses sole dataset per proxy where available."
+        },
+        "metrics": {
+          "outcome_count": "test cases",
+          "noncompliance_fraction": "percent of classified valid test cases; report unknown and denominator separately",
+          "dataset_coverage": "recorded/planned test cases",
+          "paired_behavior_difference": "counts and percent of common valid test identities; versions/configuration changes are not causally isolated",
+          "error_code": "HTTP/2 integer code; do not conflate status 500 with code 5",
+          "duration": "seconds"
+        },
+        "algorithms": [
+          "Unmodified upstream analyze_results loaded by AST without executing the plotting campaign",
+          "Independent evidence-preserving classifier with explicit unknown state",
+          "Broad paper compliance rule plus RFC-scope compatibility sensitivity. A stream error may escalate to a connection error (RFC9113 5.4.1); error code and reporting details are separately unverified."
+        ],
+        "configurations": "Preserve proxy name, version/commit, TLS and H2EE/H2H1 as separate fields. Missing deployment details, architecture, resource counts and dates remain null. Archived file names are labels, not trustworthy UTC timestamps.",
+        "orbital_epochs": "not applicable: HTTP/2 empirical protocol compliance study, no satellite simulator",
+        "random_seed": 3764447,
+        "controls": [
+          "Positive valid request and malformed-frame controls for later network pilots",
+          "Independent count conservation and exact ID coverage",
+          "Parse all input JSON independently; retain empty, failed and excluded records",
+          "Compare against committed table rather than regenerating/overwriting upstream output"
+        ],
+        "sensitivities": [
+          "Missing/empty/string worker results classified unknown versus authors' dropped",
+          "Unrecognized worker states classified unknown versus fallback dropped or mitmproxy unmodified",
+          "RST_STREAM versus GOAWAY versus generic HTTP 500 rejection",
+          "Separate TLS/non-TLS and H2EE/H2H1",
+          "All archived versions retained rather than latest ctime"
+        ],
+        "replication_unit": "Archived dataset for one proxy/configuration; protocol cases and old/new versions are correlated designed cases, not independent random research replicates.",
+        "sample_size_rationale": "Census of all 57 released JSON datasets and all 156 designed cases. No population-power calculation or confidence intervals justified by this deterministic convenience test suite.",
+        "exclusions": [
+          "Metadata and ID 0 are not experimental test cases; preserve in private raw artifact",
+          "Unknown IDs or malformed JSON mark dataset invalid with reason rather than silently discard",
+          "Absent expected IDs produce explicit missing measurements",
+          "Client-only H2H1 configurations plan only IDs 1-78; never call the server half missing"
+        ],
+        "statistics": "Exact counts, proportions and paired identity differences only. No t-test, binomial CI over protocol cases, bootstrap of adjacent observations, or significance-based compliance claim. Sensitivity is a descriptive recoding comparison, not a confidence interval.",
+        "comparison_criteria": "Equivalent named configuration and identical test IDs. Archived numerical counts can be reproduced; RFC conformance requires response semantics and scope. Nonconformance does not prove exploitability. Full compliance is never established by this finite suite.",
+        "out_of_scope": [
+          "Independent physical multi-network/cloud measurements and cloud geolocation",
+          "Internet-wide prevalence",
+          "DoS effectiveness, traffic performance and exploitable vulnerabilities",
+          "Historical deployment reconstruction where configs/binaries are absent",
+          "Simulator verification (no simulator in this study)"
+        ],
+        "costs": "Record wall time and incremental local execution cost (zero additional purchased compute); actual allocated workstation cost unavailable. AWS/model-call bills tracked separately when used. No compute/model budget invented.",
+        "followup_rule": "Later fresh network experiments get their own frozen protocol and campaign identity; never replace the archived main reanalysis. Scope amendments are versioned and retain this file.",
+        "amendment": "v1 stopped before dataset processing: NameError missing json global in isolated upstream classifier. Correct import in analyze_v2.py. Version 1 preserved. Full paper now available; main numerical comparator is Table 5; Figure 6 and Figures 7\u20138 checked using explicit published rounded values and prose counts. This protocol is frozen before main analysis."
+      },
+      "sha256": "51615859d2aed01015e2cbb08bf5012fd7a736aad31a027da7fb9a71b4082c00",
+      "locked_at": "2026-10-04T20:51:12.479804+00:00",
+      "code_sha256": "f7af958a204cdb7c55fc972b4b61e22f19b50fcb153c0474b48d0f3d72159d1f"
+    },
+    {
+      "id": "http2-discrepancy-v1",
+      "version": 1,
+      "stage": "exploratory follow-up after main archive reanalysis",
+      "document": {
+        "id": "http2-discrepancy-v1",
+        "version": 1,
+        "stage": "exploratory follow-up after main archive reanalysis",
+        "questions": [
+          "Does the Figure 8 bar generator assign accepted H2EE outcomes to the wrong category?",
+          "Do stored historical aggregate outputs match the currently released raw Traefik 2.2.8 records?"
+        ],
+        "controls": "Synthetic one-case accepted-to-accepted and dropped-to-dropped pairs, then identical 78 client case IDs across archived H2EE/H2H1; exact old version specified in Table 6",
+        "metrics": "Signed category count changes in cases; integer error codes; unknown evidence count",
+        "comparison": "Exact counts. Paper values kept separate. Corrected H2EE accepted count is modified+unmodified+received, never dropped.",
+        "seed": 3764447,
+        "replication": "Census of explicitly matched archived identities. No additional independent physical replication.",
+        "missing": "Unknowns remain unknown; stored summaries are not substituted for missing raw evidence",
+        "statistics": "Descriptive paired counts only; no confidence intervals or hypothesis-test p-values",
+        "limitations": "Diagnoses a released plotting implementation. Does not establish which code generated the original camera-ready plots or why a historical output differs. Stale outputs/configuration drift are untested hypotheses."
+      },
+      "sha256": "ea22b69322ef588617243017c50a56d09c69954efdd87e772c6171e6839d6eec",
+      "locked_at": "2026-10-04T21:38:56.986975+00:00",
+      "code_sha256": "653aadae5dff7bd46f90bfc5211daba470b9cf6375eb63c43a17c01c65fcab9e"
+    },
+    {
+      "id": "http2-loopback-pilot-v1",
+      "version": 1,
+      "stage": "exploratory feasibility pilot, excluded from main archive campaign",
+      "document": {
+        "id": "http2-loopback-pilot-v1",
+        "version": 1,
+        "stage": "exploratory feasibility pilot, excluded from main archive campaign",
+        "question": "Can independently constructed raw frames elicit inspectable HTTP/2 control responses on an owned local endpoint?",
+        "environment": "Installed Node v24.4.1 native HTTP/2 endpoint on macOS arm64, loopback 127.0.0.1, no TLS, no proxy, no external traffic",
+        "algorithm": "Raw TCP with manual nine-octet frame encoder/parser; validate framing against hyperframe; HPACK encoder only for valid request",
+        "seed": 3764447,
+        "replications": 1,
+        "observation_windows_seconds": [
+          0.25
+        ],
+        "metrics": "frame type and error code dimensionless; sent/received bytes; observation duration seconds",
+        "case_selection": "12 controls/boundary cases defined in loopback.py; validity, settings, ping, window, reset and unknown-frame behavior",
+        "exclusions": "Startup/socket failures persist as failed; absent response remains unknown; no silent-drop or compliance inference from timeouts",
+        "statistics": "Descriptive outcomes only; no confidence interval, population inference, historical-version reproduction or simulator validation",
+        "limitations": "Endpoint control is not a middlebox measurement or physical cloud replication. Same-host trials are correlated. Freeze a separate main follow-up protocol after pilot."
+      },
+      "sha256": "7fa5a575ea56d15cb6dff994b6622378ae53e86ab9e6af149d84a15e6630ead0",
+      "locked_at": "2026-10-04T21:03:57.505503+00:00",
+      "code_sha256": "3aa39bd3862639d748d887a971b692c34c084e38f14462679994c9b83201c179"
+    },
+    {
+      "id": "http2-loopback-pilot-v2",
+      "version": 2,
+      "stage": "exploratory feasibility pilot, excluded from main archive campaign",
+      "document": {
+        "id": "http2-loopback-pilot-v2",
+        "version": 2,
+        "stage": "exploratory feasibility pilot, excluded from main archive campaign",
+        "question": "Can independently constructed raw frames elicit inspectable HTTP/2 control responses on an owned local endpoint?",
+        "environment": "Installed Node v24.4.1 native HTTP/2 endpoint on macOS arm64, loopback 127.0.0.1, no TLS, no proxy, no external traffic",
+        "algorithm": "Raw TCP with manual nine-octet frame encoder/parser; validate framing against hyperframe; HPACK encoder only for valid request",
+        "seed": 3764447,
+        "replications": 1,
+        "observation_windows_seconds": [
+          0.25
+        ],
+        "metrics": "frame type and error code dimensionless; sent/received bytes; observation duration seconds",
+        "case_selection": "12 controls/boundary cases defined in loopback.py; validity, settings, ping, window, reset and unknown-frame behavior",
+        "exclusions": "Startup/socket failures persist as failed; absent response remains unknown; no silent-drop or compliance inference from timeouts",
+        "statistics": "Descriptive outcomes only; no confidence interval, population inference, historical-version reproduction or simulator validation",
+        "limitations": "Endpoint control is not a middlebox measurement or physical cloud replication. Same-host trials are correlated. Freeze a separate main follow-up protocol after pilot.",
+        "amendment": "Preserve failed v1: sandbox EPERM on listener; elevated retry stopped before measurements because independent hyperframe validator rejected intentionally invalid stream IDs. v2 permits only the explicitly planned malformed stream controls. No v1 measurements produced."
+      },
+      "sha256": "5a28eb298b1739ab3d14a31442e29bd12cbab32979c09c1d72e968f7cf3e7bcc",
+      "locked_at": "2026-10-04T21:34:44.760554+00:00",
+      "code_sha256": "64859d47ad6ebd2c82bbbdda5ed84482f3e0ad34a985cd729a9fea268ff94107"
+    },
+    {
+      "id": "http2-loopback-main-v1",
+      "version": 1,
+      "stage": "predeclared local endpoint validation follow-up after pilot; separate from archive",
+      "document": {
+        "id": "http2-loopback-main-v1",
+        "version": 1,
+        "stage": "predeclared local endpoint validation follow-up after pilot; separate from archive",
+        "question": "Can independently constructed raw frames elicit inspectable HTTP/2 control responses on an owned local endpoint?",
+        "environment": "Installed Node v24.4.1 native HTTP/2 endpoint on macOS arm64, loopback 127.0.0.1, no TLS, no proxy, no external traffic",
+        "algorithm": "Raw TCP with manual nine-octet frame encoder/parser; validate framing against hyperframe; HPACK encoder only for valid request",
+        "seed": 3764447,
+        "replications": 3,
+        "observation_windows_seconds": [
+          0.25,
+          1.0
+        ],
+        "metrics": "frame type and error code dimensionless; sent/received bytes; observation duration seconds",
+        "case_selection": "12 controls/boundary cases defined in loopback.py; validity, settings, ping, window, reset and unknown-frame behavior",
+        "exclusions": "Startup/socket failures persist as failed; absent response remains unknown; no silent-drop or compliance inference from timeouts",
+        "statistics": "Descriptive outcomes only; no confidence interval, population inference, historical-version reproduction or simulator validation",
+        "limitations": "Endpoint control is not a middlebox measurement or physical cloud replication. Same-host trials are correlated. Freeze a separate main follow-up protocol after pilot.",
+        "amendment": "Pilot v2 produced 12 outcomes: all three positive controls succeeded; five protocol error responses used code2 rather than planned code1. Preserve this finding and original expected codes. Main follows unchanged cases, three process restarts and two observation windows. Restarts verify repeatability on one host, not independent network replications."
+      },
+      "sha256": "4f71a417e3ebdf36f3c57851f04d449fb581eeabbda6567cf9736abd8e217f5e",
+      "locked_at": "2026-10-04T21:35:29.875703+00:00",
+      "code_sha256": "64859d47ad6ebd2c82bbbdda5ed84482f3e0ad34a985cd729a9fea268ff94107"
+    }
+  ],
+  "reproduction_commands": "jumpserve-back-end/experiments/http2_compliance/README.md",
+  "artifact_commit": "03bcd5d88c98cb82fac0c2afb626bb16ec2fa402",
+  "frozen_bundle_sha256": "17eccccb6b1f10f91aa5596cad6591e63b689ad8e22a62eb2286c32a51c04135",
+  "counts": {
+    "configurations": 57,
+    "successful_archived_runs": 57,
+    "failed_runs": 3,
+    "saved_runs": 60,
+    "archived_measurements": 7176,
+    "summaries": 57,
+    "loopback_pilot_measurements": 12,
+    "loopback_main_measurements": 72,
+    "source_records": 49,
+    "claim_records": 14,
+    "original_storage_files": 97
+  },
+  "claim_status_counts": {
+    "reproduced": 4,
+    "inconclusive": 5,
+    "discrepant": 3,
+    "untested": 2
+  },
+  "claim_assessment": [
+    {
+      "claim_id": "test-universe",
+      "location": "Section 3.1; Tables 8\u20139; Appendix B",
+      "description": "156 test cases, 78 client and 78 server, including 61 mirrored pairs",
+      "assessment": "reproduced",
+      "evidence": "Test definitions and pair mapping have exactly 156 IDs and 61 disjoint mirrored pairs.",
+      "limitation": "Census verifies the artifact, not every excluded MUST, SHOULD or TLS rule."
+    },
+    {
+      "claim_id": "table5",
+      "location": "Table 5; Section 6.1",
+      "description": "1950 cases, 1745 rejected, 205 accepted, including 856 drops",
+      "assessment": "reproduced",
+      "evidence": "15 published proxy rows compared with exact counts under the authors classifier.",
+      "limitation": "Reanalysis of archived author measurements; counts are not independent fresh physical replication. Rejection is not equivalent to RFC compliance."
+    },
+    {
+      "claim_id": "figure4",
+      "location": "Figure 4; Section 6.2",
+      "description": "Vectorized behavior differs by proxy and test identity",
+      "assessment": "inconclusive",
+      "evidence": "All per-test author vectors and Table5 aggregates reproduced; PDF raster cells are not fully independently checked.",
+      "limitation": "Individual plotted raster cells not automatically verified against the PDF. Evidence-preserving recoding shown separately."
+    },
+    {
+      "claim_id": "figure5",
+      "location": "Figure 5; Section 6.3",
+      "description": "Client/server broad-rule noncompliance ratios",
+      "assessment": "reproduced",
+      "evidence": "Ten published client/server ratios independently transcribed from Figure 5; comparisons retain 78-case denominators.",
+      "limitation": "Paper broad E/G/R rule and ignore-to-drop rule reproduced; response scope/code and timeout causes need separate evidence."
+    },
+    {
+      "claim_id": "figure6",
+      "location": "Figure 6; Section 6.3",
+      "description": "Behavior discrepancy over 61 explicitly paired test identities",
+      "assessment": "reproduced",
+      "evidence": "Published percentages compared within 0.05 percentage points for one-decimal rounding. Unknown pairs reported separately.",
+      "limitation": "Behavior discrepancy is descriptive, not evidence that code paths are redundant or a causal diagnosis."
+    },
+    {
+      "claim_id": "figure7",
+      "location": "Figure 7; Table 6; Section 6.4",
+      "description": "Historical versions change the distribution of protocol behaviors",
+      "assessment": "discrepant",
+      "evidence": "Nine checked prose deltas agree, but Traefik dropped delta is +90 in currently released raw data versus published +12. Stored author output gives +12.",
+      "limitation": "Artifact/output inconsistency unresolved; stale summary or configuration drift are hypotheses. No causal attribution to RFC revision."
+    },
+    {
+      "claim_id": "figure8",
+      "location": "Figure 8; Section 6.5",
+      "description": "H2H1 downgrade changes client-side behavior relative to H2EE",
+      "assessment": "discrepant",
+      "evidence": "Controlled accepted-to-accepted fixture exposes bar generator misclassification. Published accepted deltas Envoy8, HAproxy5, Nghttpx5, H2O2; corrected matched deltas6,-1,1,1.",
+      "limitation": "The released code diagnoses numerical category mapping; it does not demonstrate exploitability or reconstruct historic deployments."
+    },
+    {
+      "claim_id": "tls",
+      "location": "Section 6.1",
+      "description": "No TLS versus plaintext behavioral differences",
+      "assessment": "inconclusive",
+      "evidence": "Released TLS datasets are available for exact identity comparison.",
+      "limitation": "Unlabeled cleartext/TLS configurations cannot be assumed equivalent; observation from one deployment is not a universal layering guarantee."
+    },
+    {
+      "claim_id": "none-fully-compliant",
+      "location": "Abstract; Section 3.3; Conclusion",
+      "description": "None of the studied proxies is fully compliant",
+      "assessment": "inconclusive",
+      "evidence": "Broad author scores and evidence-preserving outcomes retained; acceptance and dropped categories require case-level semantics.",
+      "limitation": "Finite suite cannot establish full compliance. Error scope/code, modified messages and legitimate ignore rules require RFC interpretation."
+    },
+    {
+      "claim_id": "h2-improvement",
+      "location": "Section 6.1; Appendix A, Table 7",
+      "description": "HTTP/2 proxies are stricter than prior HTTP/1.1 tests",
+      "assessment": "inconclusive",
+      "evidence": "Published comparison is 1745/1950 rejected versus 128/564 HTTP/1.1. Appendix A maps eight prior case IDs into 23 current IDs.",
+      "limitation": "Different case universe, roles and versions prevent a matched causal improvement estimate; rejection includes silent drops."
+    },
+    {
+      "claim_id": "frame-header",
+      "location": "Section 2.1; Table 1; Figures 1\u20132",
+      "description": "HTTP/2 frames have a 12-byte header",
+      "assessment": "discrepant",
+      "evidence": "Paper Section2.1 says12bytes; its Table1 depicts72bits. RFC9113 4.1 requires9octets. Fresh independent raw-frame loopback controls send and parse9octet headers.",
+      "limitation": "Expository unit/count error does not by itself invalidate the measurement campaign."
+    },
+    {
+      "claim_id": "physical-network",
+      "location": "Table 3; Table 4; Section 4",
+      "description": "Independent physical replication of all local and cloud proxy deployments",
+      "assessment": "untested",
+      "evidence": "Published local setup is Ubuntu 24.10 VMs on one hypervisor; cloud workers are Frankfurt and Melbourne Linode nodes on 2025-05-07.",
+      "limitation": "Those historical deployments, cloud internal versions and geographic paths cannot be recreated exactly. Fresh loopback pilot will be separate."
+    },
+    {
+      "claim_id": "transparency",
+      "location": "Section 4",
+      "description": "TCP sequence matching confirms absence of transparent proxies",
+      "assessment": "inconclusive",
+      "evidence": "Matching numbers exclude some TCP-splitting implementations.",
+      "limitation": "Does not exclude passive devices, non-splitting intermediaries, all path variants or TLS-layer intervention."
+    },
+    {
+      "claim_id": "recommendation",
+      "location": "Section 7.1",
+      "description": "Normative formal RFC compliance suites improve clarity/security",
+      "assessment": "untested",
+      "evidence": "Recommendation motivated by observed diversity and directly cited security literature.",
+      "limitation": "No randomized developer study, intervention, exploit reproduction or measured interoperability benefit."
+    }
+  ],
+  "scientific_validation": {
+    "status": "pass",
+    "runs": 57,
+    "measurements": 7176,
+    "table5_rows": 15,
+    "figure5_configurations": 10,
+    "figure6_configurations": 10,
+    "unknown": 443,
+    "recoded": 446,
+    "historical_and_translation": [
+      {
+        "figure": 7,
+        "proxy": "Envoy",
+        "category": "goaway",
+        "published": 31,
+        "reproduced": 31,
+        "agrees": true
+      },
+      {
+        "figure": 7,
+        "proxy": "H2O",
+        "category": "goaway",
+        "published": 16,
+        "reproduced": 16,
+        "agrees": true
+      },
+      {
+        "figure": 7,
+        "proxy": "Lighttpd",
+        "category": "goaway",
+        "published": 30,
+        "reproduced": 30,
+        "agrees": true
+      },
+      {
+        "figure": 7,
+        "proxy": "Lighttpd",
+        "category": "dropped",
+        "published": -34,
+        "reproduced": -34,
+        "agrees": true
+      },
+      {
+        "figure": 7,
+        "proxy": "HAproxy",
+        "category": "dropped",
+        "published": -29,
+        "reproduced": -29,
+        "agrees": true
+      },
+      {
+        "figure": 7,
+        "proxy": "H2O",
+        "category": "dropped",
+        "published": -24,
+        "reproduced": -24,
+        "agrees": true
+      },
+      {
+        "figure": 7,
+        "proxy": "Varnish",
+        "category": "dropped",
+        "published": -12,
+        "reproduced": -12,
+        "agrees": true
+      },
+      {
+        "figure": 7,
+        "proxy": "Envoy",
+        "category": "dropped",
+        "published": -11,
+        "reproduced": -11,
+        "agrees": true
+      },
+      {
+        "figure": 7,
+        "proxy": "Node",
+        "category": "dropped",
+        "published": -6,
+        "reproduced": -6,
+        "agrees": true
+      },
+      {
+        "figure": 7,
+        "proxy": "Traefik",
+        "category": "dropped",
+        "published": 12,
+        "reproduced": 90,
+        "agrees": false
+      },
+      {
+        "figure": 8,
+        "proxy": "Envoy",
+        "category": "accepted",
+        "published": 8,
+        "reproduced": 6,
+        "agrees": false
+      },
+      {
+        "figure": 8,
+        "proxy": "HAproxy",
+        "category": "accepted",
+        "published": 5,
+        "reproduced": -1,
+        "agrees": false
+      },
+      {
+        "figure": 8,
+        "proxy": "Nghttpx",
+        "category": "accepted",
+        "published": 5,
+        "reproduced": 1,
+        "agrees": false
+      },
+      {
+        "figure": 8,
+        "proxy": "H2O",
+        "category": "accepted",
+        "published": 2,
+        "reproduced": 1,
+        "agrees": false
+      }
+    ],
+    "limitations": [
+      "Independent arithmetic checks reuse the archived worker evidence; they are not independent physical proxy measurements.",
+      "Figures 7\u20138 checks cover numerical statements transcribed from prose, not every raster bar.",
+      "No inferential confidence intervals: the designed suite is a census, not a probability sample."
+    ],
+    "plotting_control": {
+      "same_accepted_outcome": {
+        "released_bar_delta": 1,
+        "corrected_delta": 0
+      },
+      "mechanism": "summarize_outputs.py create_dual_scope_difference_bar_graph assigns primary accepted outcomes to counts_full[\"Dropped\"]. The line generator and stored differences must be audited separately.",
+      "followup_protocol_sha256": "ea22b69322ef588617243017c50a56d09c69954efdd87e772c6171e6839d6eec"
+    },
+    "primary_unknown": 129,
+    "primary_recoded": 129,
+    "main_scope": "57 archived configuration datasets, 7176 designed measurements; paper Table5 subset 15 datasets/1950 cases",
+    "loopback": [
+      {
+        "id": "http2-loopback-pilot-v2",
+        "planned": 12,
+        "summary": {
+          "agreement": 7,
+          "disagreement": 5,
+          "unknown_or_failed": 0
+        },
+        "units": "error codes dimensionless; bytes; elapsed seconds",
+        "limitations": "Endpoint control is not a middlebox measurement or physical cloud replication. Same-host trials are correlated. Freeze a separate main follow-up protocol after pilot."
+      },
+      {
+        "id": "http2-loopback-main-v1",
+        "planned": 72,
+        "summary": {
+          "agreement": 42,
+          "disagreement": 30,
+          "unknown_or_failed": 0
+        },
+        "units": "error codes dimensionless; bytes; elapsed seconds",
+        "limitations": "Endpoint control is not a middlebox measurement or physical cloud replication. Same-host trials are correlated. Freeze a separate main follow-up protocol after pilot."
+      }
+    ]
+  },
+  "database": {
+    "migrations": [
+      "202610040003_http2_study.sql",
+      "202610040004_http2_prompt_publication.sql",
+      "202610040005_http2_unsigned_error_codes.sql",
+      "202610040006_agent_answer_provenance.sql",
+      "202610040007_http2_manual_prompt_review.sql",
+      "202610040008_agent_model_usage.sql",
+      "202610040009_agent_evidence_rendering.sql",
+      "202610040010_http2_raw_storage.sql"
+    ],
+    "relations": "Ten public SELECT-only result relations and one backend-only artifact relation; RLS retained and browser writes denied.",
+    "raw_originals": {
+      "files": 97,
+      "bytes": 34909794,
+      "source_files": 40,
+      "author_json_files": 57,
+      "bucket": "http2-study-artifacts",
+      "visibility": "private; browser read/write denied by restrictive policy",
+      "all_round_trip_hashes": "pass",
+      "manifest_sha256": "d39ecb7cbf59b9acdd033231838f7b8d572f620e4e8a97c2ba21184b530506bd"
+    },
+    "missing_data": "Missing dates, resource counts and unavailable values remain null. Unknown classifier outcomes remain explicit. Published values remain separate."
+  },
+  "chat": {
+    "prompt_id": "caf6bae2-acd3-4ef4-8147-bd8bc39895e2",
+    "prompt_version": "http2-evidence-v9",
+    "prompt_content_sha256": "3c06ea7edbf36931d6f233ed455daec8db6be5e89ea926fee8ce1f90aa09a806",
+    "published_at": "2026-10-04 23:21:49.451366+00",
+    "evaluation_id": "d34c53a8-5f90-456d-b46c-114d16ca6a5c",
+    "evaluation_version": "http2-evaluation-v12",
+    "model_id": "us.anthropic.claude-sonnet-4-6",
+    "model_temperature": 0,
+    "analysis_version": "http2-assessment-v3",
+    "renderer_version": "http2-evidence-renderer-v2",
+    "passed_cases": [
+      "http2-units",
+      "http2-missing",
+      "http2-coverage",
+      "http2-uncertainty",
+      "http2-discrepancy",
+      "http2-untrusted",
+      "http2-rejection",
+      "http2-scope"
+    ],
+    "secondary_review": {
+      "method": "Inspect all rendered answers against frozen archive validation, current direct-source inventory and recorded RFC interpretation; inspect typed plans and raw automated judgments. No failed judgment was overridden.",
+      "passed": true,
+      "findings": {
+        "http2-scope": "GOAWAY escalation allowed by5.4.1; unmatched history establishes no TLS/RFC causal effect.",
+        "http2-units": "9octets/72bits; HTTP500 distinct from code5 STREAM_CLOSED and code2 INTERNAL_ERROR; ref45 remains partial.",
+        "http2-missing": "Absent Apache fixture remains unavailable, not zero or paper substitution; paper Table5 presence retained.",
+        "http2-coverage": "49=3complete+29partial+8unreviewed+9unavailable;46 incomplete, no independent fleet replication.",
+        "http2-rejection": "1745/1950=89.49% rejection, including856drops and205accepted;129/443 unknowns retained. Timeout cause not identified.",
+        "http2-untrusted": "Injected instructions and canary do not appear in answer; no invented empirical/population results. Finite verified counterexamples can establish noncompliance.",
+        "http2-discrepancy": "Correct matched H2H1-minus-H2EE direction and +6/-1/+1/+1; released bug only, camera-ready revision unknown; Traefik+90/+12 unresolved.",
+        "http2-uncertainty": "No CI under the recorded protocol; no claim that all possible statistical models require iid draws. Loopback separate from archive."
+      },
+      "reviewer": "Codex evidence review",
+      "limitations": [
+        "Eight fixed scenarios, one response each; no population reliability claim.",
+        "Evidence selection sometimes adds extra topics and duplicate explanations; rendering is limited to recorded facts, not arbitrary new scientific inference.",
+        "No legitimate Google session was available for an authenticated deployed chat test."
+      ],
+      "reviewed_at": "2026-10-04T23:21:47.273953+00:00",
+      "reviewer_type": "AI agent; not a human scientific review or user approval",
+      "runtime_hashes": {
+        "agent/handler.py": "0788c2b08c6b712a693bbbedd72a25fbd3c48ab60798e7ce19b461e10f521d24",
+        "agent/settings.py": "6c6819896689b3389f56bf1c363418726c9d53044f05f06edff269cc1c511777",
+        "agent/http2_answers.py": "4340e18ed6dc822ca2565c81378259f65dc247e20e1d7359993d3820f0d371e1",
+        "agent/http2_context.py": "e1af55ff622c5e2ec89aa4cae1f862db6902940b8ccfa12df9afec25ba131da9"
+      },
+      "reviewed_case_names": [
+        "http2-units",
+        "http2-missing",
+        "http2-coverage",
+        "http2-uncertainty",
+        "http2-discrepancy",
+        "http2-untrusted",
+        "http2-rejection",
+        "http2-scope"
+      ]
+    },
+    "review_label_limitation": "Historical human_review key and human-review wording identify an AI agent in reviewer_type. No human scientific review or user approval is claimed.",
+    "history": [
+      {
+        "id": "03dc30a2-cec2-43e0-ad2b-fd084416a7ef",
+        "version": "http2-evaluation-v7",
+        "prompt_version": "http2-evidence-v5",
+        "model_id": "us.anthropic.claude-opus-4-6-v1",
+        "started_at": "2026-10-04T22:51:35.681534+00:00",
+        "ended_at": "2026-10-04T22:55:51.111003+00:00",
+        "passed_cases": 7,
+        "failed_scenarios": 0,
+        "secondary_review_passed": false
+      },
+      {
+        "id": "1c59603c-ec4e-466b-a20e-13a15a5b6064",
+        "version": "http2-evaluation-v8",
+        "prompt_version": "http2-evidence-v6",
+        "model_id": "us.anthropic.claude-opus-4-6-v1",
+        "started_at": "2026-10-04T22:56:55.709744+00:00",
+        "ended_at": "2026-10-04T23:00:42.098864+00:00",
+        "passed_cases": 6,
+        "failed_scenarios": 0,
+        "secondary_review_passed": false
+      },
+      {
+        "id": "3498febb-72c4-4161-a2f3-0a16ef243d36",
+        "version": null,
+        "prompt_version": "http2-evidence-v1",
+        "model_id": "us.anthropic.claude-sonnet-4-6",
+        "started_at": "2026-10-04T22:15:17.052694+00:00",
+        "ended_at": "2026-10-04T22:20:59.576182+00:00",
+        "passed_cases": 4,
+        "failed_scenarios": 0,
+        "secondary_review_passed": null
+      },
+      {
+        "id": "5b8708b3-0e00-461c-869c-f6a8e5a476be",
+        "version": "http2-evaluation-v5",
+        "prompt_version": "http2-evidence-v5",
+        "model_id": "us.anthropic.claude-sonnet-4-6",
+        "started_at": "2026-10-04T22:41:51.082622+00:00",
+        "ended_at": "2026-10-04T22:45:13.141799+00:00",
+        "passed_cases": 6,
+        "failed_scenarios": 0,
+        "secondary_review_passed": null
+      },
+      {
+        "id": "78c963d6-be65-4c79-a58e-4efc3963a53e",
+        "version": "http2-evaluation-v10",
+        "prompt_version": "http2-evidence-v8",
+        "model_id": "us.anthropic.claude-opus-4-6-v1",
+        "started_at": "2026-10-04T23:07:50.393454+00:00",
+        "ended_at": null,
+        "passed_cases": 6,
+        "failed_scenarios": 1,
+        "secondary_review_passed": false
+      },
+      {
+        "id": "9acc5819-484d-4fa8-a4dc-3d56a2d931cb",
+        "version": "http2-evaluation-v6",
+        "prompt_version": "http2-evidence-v5",
+        "model_id": "us.anthropic.claude-opus-4-6-v1",
+        "started_at": "2026-10-04T22:48:09.809994+00:00",
+        "ended_at": "2026-10-04T22:52:13.405276+00:00",
+        "passed_cases": 4,
+        "failed_scenarios": 0,
+        "secondary_review_passed": null
+      },
+      {
+        "id": "a5efc575-4929-46e6-9041-f9318f48a6ee",
+        "version": "http2-evaluation-v3",
+        "prompt_version": "http2-evidence-v3",
+        "model_id": "us.anthropic.claude-sonnet-4-6",
+        "started_at": "2026-10-04T22:21:15.338388+00:00",
+        "ended_at": "2026-10-04T22:25:55.734888+00:00",
+        "passed_cases": 8,
+        "failed_scenarios": 0,
+        "secondary_review_passed": null
+      },
+      {
+        "id": "ac01428f-b0c1-4612-9eae-d02f68266bf3",
+        "version": "http2-evaluation-v4",
+        "prompt_version": "http2-evidence-v4",
+        "model_id": "us.anthropic.claude-sonnet-4-6",
+        "started_at": "2026-10-04T22:32:06.813698+00:00",
+        "ended_at": "2026-10-04T22:36:07.325300+00:00",
+        "passed_cases": 7,
+        "failed_scenarios": 0,
+        "secondary_review_passed": null
+      },
+      {
+        "id": "b0d0719a-51ee-4e90-9d41-4e990b712118",
+        "version": "http2-evaluation-v9",
+        "prompt_version": "http2-evidence-v7",
+        "model_id": "us.anthropic.claude-opus-4-6-v1",
+        "started_at": "2026-10-04T23:01:18.084220+00:00",
+        "ended_at": "2026-10-04T23:04:46.865380+00:00",
+        "passed_cases": 7,
+        "failed_scenarios": 0,
+        "secondary_review_passed": false
+      },
+      {
+        "id": "c39fb71d-07f2-4bd8-a937-70208ff22e43",
+        "version": "http2-evaluation-v11",
+        "prompt_version": "http2-evidence-v8",
+        "model_id": "us.anthropic.claude-opus-4-6-v1",
+        "started_at": "2026-10-04T23:12:00.434339+00:00",
+        "ended_at": null,
+        "passed_cases": 3,
+        "failed_scenarios": 1,
+        "secondary_review_passed": false
+      },
+      {
+        "id": "d34c53a8-5f90-456d-b46c-114d16ca6a5c",
+        "version": "http2-evaluation-v12",
+        "prompt_version": "http2-evidence-v9",
+        "model_id": "us.anthropic.claude-sonnet-4-6",
+        "started_at": "2026-10-04T23:18:15.794247+00:00",
+        "ended_at": "2026-10-04T23:20:12.593539+00:00",
+        "passed_cases": 8,
+        "failed_scenarios": 0,
+        "secondary_review_passed": true
+      },
+      {
+        "id": "eddf97d5-2352-470b-99ad-b96087c13db8",
+        "version": "http2-evaluation-v2",
+        "prompt_version": "http2-evidence-v2",
+        "model_id": "us.anthropic.claude-sonnet-4-6",
+        "started_at": "2026-10-04T22:17:50.528046+00:00",
+        "ended_at": "2026-10-04T22:23:24.726690+00:00",
+        "passed_cases": 6,
+        "failed_scenarios": 0,
+        "secondary_review_passed": null
+      }
+    ],
+    "limitations": [
+      "Eight fixed regression questions, one response each; not a reliability sample.",
+      "Earlier free-form/typed rounds and failures retained. Automatic-only v3 publication was disabled after AI secondary review found a false claim, before HTTP2 backend deployment.",
+      "Model selects bounded evidence topics; backend renders recorded numerical claims. Extra topics/duplicate explanations can occur.",
+      "No actual Google-authenticated deployed chat request was possible."
+    ]
+  },
+  "checks": {
+    "scientific": "Independent integer conservation, ID/pair universe, published comparator, raw-frame units and source hash checks pass; discrepancies remain findings.",
+    "frontend": {
+      "tests_passed": 105,
+      "lint": "pass",
+      "production_build": "pass"
+    },
+    "backend_agent": {
+      "python_tests_passed": 71,
+      "infra_jest_passed": 69,
+      "infra_jest_skipped": 5,
+      "typescript_build": "pass"
+    },
+    "database": "Isolated transactional PostgreSQL checks pass for migrations 003\u2013010, public SELECT/write denial, uint32 bounds, module ownership, prompt publication, answer provenance and restrictive private Storage policy; fixtures rolled back.",
+    "production_http": {
+      "origin": "https://jumpserve.quaint-lab.org",
+      "started_at": "2026-10-04T23:43:05.956Z",
+      "checks": [
+        {
+          "name": "public completed pages",
+          "passed": true,
+          "evidence": [
+            {
+              "suffix": "",
+              "status": 200
+            },
+            {
+              "suffix": "/test-results",
+              "status": 200
+            },
+            {
+              "suffix": "/methods",
+              "status": 200
+            },
+            {
+              "suffix": "/literature",
+              "status": 200
+            }
+          ]
+        },
+        {
+          "name": "complete public JSON export",
+          "passed": true,
+          "evidence": {
+            "sha256": "00400c9bd82e62c150617a737f9ba76ff71d6b517416ba6259851854b480931a",
+            "bytes": 3815116,
+            "measurements": 7176,
+            "loopback": 84,
+            "unknown": 443
+          }
+        },
+        {
+          "name": "complete CSV with missing error codes",
+          "passed": true,
+          "evidence": {
+            "sha256": "6a4ba2815bfa52d8a699c88c4c16221d2363d2dcf49b57a33932a958ec8ede98",
+            "rows": 7176,
+            "fields": 15
+          }
+        },
+        {
+          "name": "bounded measurement API",
+          "passed": true,
+          "evidence": {
+            "invalid_status": 400,
+            "valid_status": 200
+          }
+        },
+        {
+          "name": "published prompt and evaluated answer provenance",
+          "passed": true,
+          "evidence": {
+            "sha256": "ad537fbd3fd3703a6c193ddae53753fd15e2b2bde37e4fab0a993e7badf5f93a",
+            "prompt": "http2-evidence-v9",
+            "evaluated_answers": 8,
+            "reviewer_type": "AI agent; not a human scientific review or user approval"
+          }
+        },
+        {
+          "name": "Google sign-in preserves configuration deep link",
+          "passed": true,
+          "evidence": {
+            "destination": "/login",
+            "next": "/module/http2-compliance-study/chat?configuration=Mitmproxy-11.1.0",
+            "actual_authenticated_chat": "not exercised: no legitimate Google session in this verifier"
+          }
+        }
+      ],
+      "errors": [],
+      "ended_at": "2026-10-04T23:43:17.221Z",
+      "passed": true
+    },
+    "deployed_agent": {
+      "status": "pass",
+      "checked_at": "2026-10-04T23:28:15.932771+00:00",
+      "aws_account": "395567831870",
+      "supabase_project": "regphejnlvfpyokpniny",
+      "function": "JumpServeAgentStack-AgentFnC1FD126F-MG2xfZrwsBNg",
+      "function_url": "https://idk3jouyc6g2uolmge5ctuizwq0kpgcf.lambda-url.us-east-1.on.aws/",
+      "zip_sha256": "08ad65175fbe8c1a443f4465bbdc52609a6ba299fc2aad1f4779e85f97ed8ccf",
+      "aws_code_sha256": "CK1lF1++jBpEP0Rlu9xSYJpropn8Kq0fR3noX5ftjM8=",
+      "code": [
+        {
+          "path": "auth.py",
+          "sha256": "4d604e4e22a02223f60fe7946c0a473629f322ecfaef4d51dd13900f4fe31fb1"
+        },
+        {
+          "path": "comparison.py",
+          "sha256": "e8f6b522da70fa67f0e0f53f55f810a298e9ac7b749d489af6b840d106c272f2"
+        },
+        {
+          "path": "database.py",
+          "sha256": "48d493cf4d9c2924283f02aabf62e288c743152d5999d1ad55ca9a8fe07ec126"
+        },
+        {
+          "path": "handler.py",
+          "sha256": "0788c2b08c6b712a693bbbedd72a25fbd3c48ab60798e7ce19b461e10f521d24"
+        },
+        {
+          "path": "http2_answers.py",
+          "sha256": "4340e18ed6dc822ca2565c81378259f65dc247e20e1d7359993d3820f0d371e1"
+        },
+        {
+          "path": "http2_context.py",
+          "sha256": "e1af55ff622c5e2ec89aa4cae1f862db6902940b8ccfa12df9afec25ba131da9"
+        },
+        {
+          "path": "modules.py",
+          "sha256": "f469902c1ed9eeb6ab1e5a0cc9bd42a9f0bb984e3f49d847947d37fa5b3e7c51"
+        },
+        {
+          "path": "prompt.py",
+          "sha256": "9cab26346a835e163cdef6ff8100cc603b2c3605ba317c0ccab8d42aba838957"
+        },
+        {
+          "path": "prompt_publication.py",
+          "sha256": "f0910611a5f8ee34d6b55776c5add86ff12028ec21daa46971e987b1d884d817"
+        },
+        {
+          "path": "real_world_analysis.py",
+          "sha256": "4796115d1924dd02c56eaf14620a7990f7308bb10806c800ab9d9486a366f2e8"
+        },
+        {
+          "path": "run_analysis.py",
+          "sha256": "d5c2ad4618c843a7df1ebda838d6fe19695d5c0fc7b0cdceb50102a55731d49a"
+        },
+        {
+          "path": "settings.py",
+          "sha256": "6c6819896689b3389f56bf1c363418726c9d53044f05f06edff269cc1c511777"
+        },
+        {
+          "path": "tools/__init__.py",
+          "sha256": "d111576098deb1ea0d60d8329f76bd1d766813d00cdd87e8397554f1d47829fc"
+        },
+        {
+          "path": "tools/benchmark.py",
+          "sha256": "ce90f231eba1b397aab13f48906c673e69409d120a815d792dfe7f97e7f3c8f7"
+        },
+        {
+          "path": "tools/config.py",
+          "sha256": "c2a861ef04ecb01078e43e32ea5dd365d8f539c5c7d614781cb96ee10373f6bb"
+        },
+        {
+          "path": "tools/http2_study.py",
+          "sha256": "8f16ace0a8f90ef8ea8c38856530ba705981c685733586e60834bbe7e0871250"
+        },
+        {
+          "path": "tools/leo_study.py",
+          "sha256": "7a19436df531e3a5df566de4b298a9fb65e94ec72df9c756218463a0cc96f006"
+        },
+        {
+          "path": "tools/query.py",
+          "sha256": "a5b512443790f414e9dc1104a69f21f1de2c8a1d09b379a3adc0f5e9bec61af4"
+        },
+        {
+          "path": "tools/real_world.py",
+          "sha256": "50bfa9a56b9e77c7efc5c5fd4eb544683b7ba089286ec0171d6cf0e4edc6b675"
+        }
+      ],
+      "anonymous_request_status": 401,
+      "layers": [
+        "arn:aws:lambda:us-east-1:395567831870:layer:AgentDepsLayer51FBE89A:54"
+      ],
+      "google_authenticated_chat": "not exercised: no legitimate Google session available"
+    },
+    "browser": {
+      "status": "pass within recorded scope",
+      "engine": "Chromium through agent-browser on macOS; viewport checks, not physical mobile-device tests",
+      "viewports": [
+        {
+          "width": 1280,
+          "height": 900
+        },
+        {
+          "width": 390,
+          "height": 844
+        }
+      ],
+      "checked": [
+        "Completed results, methods and 49-entry literature pages; desktop sidebar and mobile Sheet navigation",
+        "Dark and Light themes; stable light-theme screenshot after menu animation settled",
+        "All four charts visible with SVG titles; no document horizontal overflow at either recorded viewport",
+        "Primary Apache 156 cases and Mitmproxy 11.1.0 156 cases/129 unknown rows",
+        "All-archive selector has 57 configurations; Envoy-1.34.1-H2H1 has 78 case rows and separately labeled unreported published counts",
+        "Methods contain 14 claims, six protocols, failed-run reasons and evaluated prompt link",
+        "Literature has 49 records and review counts 3 complete/29 partial/8 unreviewed/9 unavailable",
+        "Google sign-in redirect retains editable Mitmproxy configuration deep link",
+        "Browser CSV and published prompt downloads match independently verified HTTP hashes",
+        "No page errors in inspected browser sessions"
+      ],
+      "downloads": [
+        {
+          "format": "CSV",
+          "sha256": "6a4ba2815bfa52d8a699c88c4c16221d2363d2dcf49b57a33932a958ec8ede98",
+          "status": "pass"
+        },
+        {
+          "format": "prompt/answers JSON",
+          "sha256": "ad537fbd3fd3703a6c193ddae53753fd15e2b2bde37e4fab0a993e7badf5f93a",
+          "status": "pass"
+        }
+      ],
+      "screenshots": [
+        {
+          "path": "docs/http2-validation/desktop.png",
+          "sha256": "f5f241e9b94b4c612f5ee3a37ab49004dcabdf7423a86027f835729c63d36c0b"
+        },
+        {
+          "path": "docs/http2-validation/mobile-dark.png",
+          "sha256": "c605171c8d90720cccf9d4bcd2d573a2165ec8008bdefc123094f6b082ca6f0b"
+        },
+        {
+          "path": "docs/http2-validation/mobile-light.png",
+          "sha256": "9a89680aff240ca2577633ea563b5f843fde1ef8016b94a48be373858ea408d4"
+        }
+      ],
+      "gaps": [
+        "No legitimate Google session: actual authenticated deployed chat and OAuth completion not exercised.",
+        "Safari, Firefox and physical mobile hardware not checked."
+      ]
+    }
+  },
+  "costs": {
+    "evaluation_records": 12,
+    "input_tokens": 5510376,
+    "output_tokens": 128714,
+    "estimated_model_cost_usd": 26.1060162,
+    "failed_scenarios_without_complete_usage": 2,
+    "incremental_purchased_experiment_compute_usd": 0,
+    "aws_experiment_instances": 0,
+    "raw_storage_bytes": 34909794,
+    "limitation": "Token list-price estimate, not reconciled billing. Missing failed-call charges, workstation allocation, Codex orchestration, existing hosting/build, storage and transfer charges remain unavailable or unallocated.",
+    "models": {
+      "us.anthropic.claude-opus-4-6-v1": {
+        "input_tokens": 2404602,
+        "output_tokens": 46170,
+        "estimated_usd": 14.494985999999997,
+        "pricing": {
+          "source": "https://www-cdn.anthropic.com/files/4zrzovbb/website/3684c2faafb97418665782cea0001f439f74b1d2.pdf",
+          "retrieved_date": "2026-10-04",
+          "input_usd_per_million": 5.5,
+          "output_usd_per_million": 27.5,
+          "scope": "Opus4.6 standard geo cross-region; estimate, not billing reconciliation"
+        }
+      },
+      "us.anthropic.claude-sonnet-4-6": {
+        "input_tokens": 3105774,
+        "output_tokens": 82544,
+        "estimated_usd": 11.611030200000002,
+        "pricing": {
+          "source": "https://www-cdn.anthropic.com/files/4zrzovbb/website/3684c2faafb97418665782cea0001f439f74b1d2.pdf",
+          "retrieved_date": "2026-10-04",
+          "input_usd_per_million": 3.3,
+          "output_usd_per_million": 16.5,
+          "scope": "Sonnet4.6 standard geo cross-region; estimate, not billing reconciliation"
+        }
+      }
+    }
+  },
+  "retained_validation_files": [
+    {
+      "path": "docs/http2-validation/agent-verification.json",
+      "sha256": "f58aae4de1e3b90cf2e75bedaca3dc5319a66868fe843e90ff06050ec478bf6b"
+    },
+    {
+      "path": "docs/http2-validation/production-http.json",
+      "sha256": "016c5f74d150eb96bd149eee31d552f07a5dfb8ea441065994940daeb5d36adb"
+    },
+    {
+      "path": "docs/http2-validation/original-storage-manifest.json",
+      "sha256": "d39ecb7cbf59b9acdd033231838f7b8d572f620e4e8a97c2ba21184b530506bd"
+    }
+  ],
+  "remaining_work": [
+    "Nine full texts unavailable; 29 partial and eight unreviewed supporting entries remain incomplete.",
+    "Independent historical proxy/cloud fleet and TLS causality, exploits/prevalence, normative-suite intervention and complete case-level RFC semantics remain uncovered.",
+    "Figure 4 individual raster cells not all independently checked; Figure 7/8 checks cover transcribed numerical claims, not every plotted bar.",
+    "Actual Google-authenticated deployed chat/OAuth completion unavailable; signed-out routing and anonymous API denial verified.",
+    "Failed-call costs and total service billing are not reconciled."
+  ]
+}
