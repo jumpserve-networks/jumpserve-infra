@@ -9,7 +9,7 @@ from prompt import load_active_prompt
 from run_analysis import ANALYSIS_VERSION
 from settings import MODEL_ID, MODEL_REGION, MODEL_TEMPERATURE
 from tools import MODULE_TOOLS
-from modules import CHAT_MODULES, EMULATED_MODULE, REAL_WORLD_MODULE, REAL_WORLD_ANALYSIS_VERSION
+from modules import CHAT_MODULES, EMULATED_MODULE, REAL_WORLD_MODULE, REAL_WORLD_ANALYSIS_VERSION, LEO_MODULE, LEO_ANALYSIS_VERSION
 
 logger = logging.getLogger(__name__)
 
@@ -47,7 +47,7 @@ def _save_turn(database, session_id, user_id, messages, prompt, response_text, a
         'p_session_id': session_id, 'p_user_id': user_id,
         'p_messages': _serialize_messages(messages), 'p_answer_id': answer_id,
         'p_prompt_version_id': prompt.id, 'p_model_id': MODEL_ID,
-        'p_analysis_version': REAL_WORLD_ANALYSIS_VERSION if prompt.module_id == REAL_WORLD_MODULE else ANALYSIS_VERSION,
+        'p_analysis_version': {REAL_WORLD_MODULE: REAL_WORLD_ANALYSIS_VERSION, LEO_MODULE: LEO_ANALYSIS_VERSION}.get(prompt.module_id, ANALYSIS_VERSION),
         'p_response': response_text, 'p_module_id': prompt.module_id,
     })
 

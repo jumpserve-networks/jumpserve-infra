@@ -31,6 +31,15 @@ grant all on public.agent_sessions to service_role;
 checks = (ROOT / 'test/agent_prompt_database.sql').read_text()
 module_migration = (ROOT / 'database/202609290001_real_world_agent.sql').read_text().replace('begin;\n', '', 1).rsplit('commit;', 1)[0]
 module_checks = (ROOT / 'test/real_world_agent_database.sql').read_text()
+leo_setup = """
+create schema auth;
+create function auth.uid() returns uuid language sql as 'select null::uuid';
+create function auth.jwt() returns jsonb language sql as 'select ''{}''::jsonb';
+grant usage on schema auth to anon,authenticated;
+"""
+leo_migrations = ''.join((ROOT / 'database' / name).read_text().replace('begin;\n','',1).rsplit('commit;',1)[0]
+    for name in ('202610040001_leo_study.sql','202610040002_leo_prompt_publication.sql'))
+leo_checks = (ROOT / 'test/leo_study_database.sql').read_text()
 subprocess.run([psql, url, '-X', '-v', 'ON_ERROR_STOP=1', '-q'],
-               input=setup + migration + checks + module_migration + module_checks + '\nrollback;\n', text=True, check=True)
+               input=setup + migration + checks + module_migration + module_checks + leo_setup + leo_migrations + leo_checks + '\nrollback;\n', text=True, check=True)
 print('Prompt schema tests passed (all test data rolled back)')

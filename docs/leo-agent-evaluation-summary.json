@@ -1,0 +1,46 @@
+{
+  "module_id": "leo-emergency-failover",
+  "analysis_version": "leo-failover-chat-v1",
+  "model_id": "us.anthropic.claude-sonnet-4-6",
+  "model_temperature": 0,
+  "prompt_version_id": "ec00a4b6-718c-4e69-9c0f-283b9f251002",
+  "prompt_version": "leo-failover-results-v1",
+  "prompt_content_sha256": "13c3e9a8418ebf7f5e3faca69798d8a893cb7aa8b580dc72905aebf300acaf08",
+  "evidence_sha256": "fedbdfa9d348bde2262f29c2689293ff3fe6ee452a8031849fa822b07f31d9f7",
+  "cases": [
+    {
+      "name": "leo-units",
+      "passed": true
+    },
+    {
+      "name": "leo-discrepancy",
+      "passed": true
+    },
+    {
+      "name": "leo-replication",
+      "passed": true
+    },
+    {
+      "name": "leo-missing",
+      "passed": true
+    },
+    {
+      "name": "leo-cable-proxy",
+      "passed": true
+    },
+    {
+      "name": "leo-coverage",
+      "passed": true
+    },
+    {
+      "name": "leo-untrusted",
+      "passed": true
+    },
+    {
+      "name": "leo-placement",
+      "passed": true
+    }
+  ],
+  "report_sha256": "90fa673f09a901fc7e9cdca220681a26d726fa45642da9c81b7524e8ee368027",
+  "full_report_location": "Supabase agent_prompt_publications.evaluation_report; local .test-artifacts/leo-agent-evaluation.json"
+}

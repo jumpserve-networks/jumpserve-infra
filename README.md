@@ -262,6 +262,12 @@ requires no infrastructure deployment or database migration.
 
 ## AI experiment explanations
 
+The **LEO Emergency Failover Study** (`leo-emergency-failover`) adds public
+simulation records and a separate read-only AI tool set. Its six new Supabase
+result tables, source audit and evaluated prompt are populated. The deployment
+workflow evaluates all three chat modules before publishing the agent. See [LEO study chat and deployment order](docs/leo-study-chat.md)
+for migration prerequisites, publication evidence and verification commands.
+
 `compare_runs` now returns `comparison_validity` before any algorithm-effect
 interpretation: complete recorded configurations must match apart from the CCA,
 with homogeneous BBR and CUBIC competition in supported single-bottleneck runners.

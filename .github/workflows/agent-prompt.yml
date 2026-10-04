@@ -11,6 +11,7 @@ on:
         options:
           - congestion-control-emulated
           - congestion-control-real-world
+          - leo-emergency-failover
       prompt_id:
         description: 'UUID of the database draft (or previous published version to restore)'
         required: true
@@ -35,7 +36,11 @@ jobs:
       - name: Evaluate and publish the selected version
         run: |
           python -m pip install strands-agents httpx boto3
-          python -B test/evaluate_agent.py --live --module "$PROMPT_MODULE" --prompt-id "$PROMPT_ID" --publish
+          if [ "$PROMPT_MODULE" = "leo-emergency-failover" ]; then
+            python -B test/evaluate_leo_agent.py --live --prompt-id "$PROMPT_ID" --publish
+          else
+            python -B test/evaluate_agent.py --live --module "$PROMPT_MODULE" --prompt-id "$PROMPT_ID" --publish
+          fi
         env:
           PROMPT_ID: ${{ inputs.prompt_id }}
           PROMPT_MODULE: ${{ inputs.module }}
@@ -47,6 +52,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: agent-prompt-evaluation
-          path: .test-artifacts/agent-evaluation.json
+          path: |
+            .test-artifacts/agent-evaluation.json
+            .test-artifacts/leo-agent-evaluation.json
           include-hidden-files: true
           if-no-files-found: ignore

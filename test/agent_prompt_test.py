@@ -12,7 +12,7 @@ sys.path.insert(0, str(ROOT / 'agent'))
 from prompt import PromptUnavailable, PromptVersion, load_active_prompt
 from prompt_publication import evaluation_snapshot, publish_evaluated_prompt
 from evaluate_agent import grading_payload
-from modules import EMULATED_MODULE, REAL_WORLD_MODULE
+from modules import EMULATED_MODULE, REAL_WORLD_MODULE, LEO_MODULE
 
 
 def record(version='one', identifier='00000000-0000-4000-8000-000000000001'):
@@ -80,7 +80,7 @@ class HandlerPromptTest(unittest.TestCase):
         modules['strands.models.bedrock'].BedrockModel = Mock()
         self.db = Mock()
         modules['database'].Database = Mock(return_value=self.db)
-        modules['tools'].MODULE_TOOLS = {EMULATED_MODULE: ['emulated-tool'], REAL_WORLD_MODULE: ['real-world-tool']}
+        modules['tools'].MODULE_TOOLS = {EMULATED_MODULE: ['emulated-tool'], REAL_WORLD_MODULE: ['real-world-tool'], LEO_MODULE: ['leo-read-tool']}
         spec = importlib.util.spec_from_file_location('handler_prompt_test', ROOT / 'agent/handler.py')
         self.handler = importlib.util.module_from_spec(spec)
         with patch.dict(sys.modules, modules):
@@ -170,6 +170,19 @@ class HandlerPromptTest(unittest.TestCase):
         self.assertEqual(self.handler.lambda_handler(self.request, None)['statusCode'], 503)
         self.agent_factory.assert_not_called()
         self.db.rpc.assert_not_called()
+
+    def test_leo_prompt_tools_audit_identity_and_history_are_server_owned(self):
+        self.request['body']=json.dumps({'message':'Explain Haiti','module_id':LEO_MODULE})
+        self.db.get.side_effect=[[dict(record(),module_id=LEO_MODULE)],[]]
+        response=self.handler.lambda_handler(self.request,None)
+        self.assertEqual(response['statusCode'],200)
+        self.assertEqual(self.agent_factory.call_args.kwargs['tools'],['leo-read-tool'])
+        self.assertEqual(self.db.rpc.call_args.args[1]['p_analysis_version'],'leo-failover-chat-v1')
+        self.assertEqual(self.db.rpc.call_args.args[1]['p_module_id'],LEO_MODULE)
+        self.agent_factory.reset_mock(); self.db.rpc.reset_mock()
+        self.db.get.side_effect=[[dict(record(),module_id=LEO_MODULE)],[{'messages':[],'user_id':'researcher','module_id':REAL_WORLD_MODULE}]]
+        self.assertEqual(self.handler.lambda_handler(self.request,None)['statusCode'],409)
+        self.agent_factory.assert_not_called(); self.db.rpc.assert_not_called()
 
     def test_unknown_modules_are_not_prompt_or_tool_selectors(self):
         for module in ('arbitrary-prompt', None, {}, []):

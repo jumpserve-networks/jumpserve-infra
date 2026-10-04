@@ -71,6 +71,7 @@ jobs:
           python -m pip install strands-agents httpx boto3
           python -B test/evaluate_agent.py --live --bootstrap-if-empty
           python -B test/evaluate_agent.py --live --module congestion-control-real-world --bootstrap-if-empty --output .test-artifacts/real-world-agent-evaluation.json
+          python -B test/evaluate_leo_agent.py --live
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

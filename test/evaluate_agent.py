@@ -98,7 +98,7 @@ def main():
     parser.add_argument('--live', action='store_true', help='Opt in to billed Bedrock model calls with fixture-only tools')
     parser.add_argument('--output', default='.test-artifacts/agent-evaluation.json')
     parser.add_argument('--prompt-id', type=UUID, help='Database draft or published UUID to evaluate; default is the active version')
-    parser.add_argument('--module', choices=CHAT_MODULES, default=EMULATED_MODULE, help='Module whose prompt and scientific cases to evaluate')
+    parser.add_argument('--module', choices=(EMULATED_MODULE, REAL_WORLD_MODULE), default=EMULATED_MODULE, help='Module whose prompt and scientific cases to evaluate; LEO uses evaluate_leo_agent.py')
     parser.add_argument('--publish', action='store_true', help='Activate this exact snapshot only after every case passes')
     parser.add_argument('--bootstrap-if-empty', action='store_true', help='Evaluate and publish the migration seed only when no prompt is active')
     parser.add_argument('--actor', default=os.environ.get('GITHUB_ACTOR'), help='Required audit identity when publishing')
