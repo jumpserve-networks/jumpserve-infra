@@ -2,6 +2,8 @@
 EMULATED_MODULE = 'congestion-control-emulated'
 REAL_WORLD_MODULE = 'congestion-control-real-world'
 LEO_MODULE = 'leo-emergency-failover'
-CHAT_MODULES = (EMULATED_MODULE, REAL_WORLD_MODULE, LEO_MODULE)
+HTTP2_MODULE = 'http2-compliance-study'
+CHAT_MODULES = (EMULATED_MODULE, REAL_WORLD_MODULE, LEO_MODULE, HTTP2_MODULE)
 REAL_WORLD_ANALYSIS_VERSION = 'real-world-chat-v1'
 LEO_ANALYSIS_VERSION = 'leo-failover-chat-v1'
+HTTP2_ANALYSIS_VERSION = 'http2-assessment-v3'

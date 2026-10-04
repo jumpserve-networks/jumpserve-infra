@@ -55,6 +55,7 @@ jobs:
 
       - name: Test experiment analysis and infrastructure
         run: |
+          python -m pip install pydantic==2.13.5
           npm run test:ami
           npm run test:agent:database
           npm run test:database:rls
@@ -72,6 +73,8 @@ jobs:
           python -B test/evaluate_agent.py --live --bootstrap-if-empty
           python -B test/evaluate_agent.py --live --module congestion-control-real-world --bootstrap-if-empty --output .test-artifacts/real-world-agent-evaluation.json
           python -B test/evaluate_leo_agent.py --live
+          python -m pip install -r test/http2-evaluation-requirements.txt
+          python -B test/evaluate_http2_agent.py --live
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -82,13 +85,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: agent-answer-evaluation
-          path: .test-artifacts/*agent-evaluation.json
+          path: .test-artifacts/*agent-evaluation*.json
           include-hidden-files: true
           if-no-files-found: ignore
 
       - name: Install agent Python dependencies
         run: |
-          pip install --target agent/layer/python --platform manylinux2014_x86_64 --only-binary=:all: --python-version 3.12 strands-agents httpx
+          pip install --target agent/layer/python --platform manylinux2014_x86_64 --only-binary=:all: --python-version 3.12 -r test/http2-evaluation-requirements.txt
           cd agent/layer/python && rm -rf __pycache__ */__pycache__ boto3 botocore s3transfer jmespath botocore-*.dist-info boto3-*.dist-info s3transfer-*.dist-info jmespath-*.dist-info
 
       - name: CDK Diff

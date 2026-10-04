@@ -12,7 +12,7 @@ sys.path.insert(0, str(ROOT / 'agent'))
 from prompt import PromptUnavailable, PromptVersion, load_active_prompt
 from prompt_publication import evaluation_snapshot, publish_evaluated_prompt
 from evaluate_agent import grading_payload
-from modules import EMULATED_MODULE, REAL_WORLD_MODULE, LEO_MODULE
+from modules import EMULATED_MODULE, REAL_WORLD_MODULE, LEO_MODULE, HTTP2_MODULE
 
 
 def record(version='one', identifier='00000000-0000-4000-8000-000000000001'):
@@ -80,7 +80,7 @@ class HandlerPromptTest(unittest.TestCase):
         modules['strands.models.bedrock'].BedrockModel = Mock()
         self.db = Mock()
         modules['database'].Database = Mock(return_value=self.db)
-        modules['tools'].MODULE_TOOLS = {EMULATED_MODULE: ['emulated-tool'], REAL_WORLD_MODULE: ['real-world-tool'], LEO_MODULE: ['leo-read-tool']}
+        modules['tools'].MODULE_TOOLS = {EMULATED_MODULE: ['emulated-tool'], REAL_WORLD_MODULE: ['real-world-tool'], LEO_MODULE: ['leo-read-tool'], HTTP2_MODULE: ['http2-read-tool']}
         spec = importlib.util.spec_from_file_location('handler_prompt_test', ROOT / 'agent/handler.py')
         self.handler = importlib.util.module_from_spec(spec)
         with patch.dict(sys.modules, modules):
@@ -88,6 +88,8 @@ class HandlerPromptTest(unittest.TestCase):
         self.auth_patch = patch.object(self.handler, 'authenticate', return_value=({'id': 'verified-id', 'email': 'researcher'}, 'Bearer verified-session'))
         self.auth_patch.start()
         self.addCleanup(self.auth_patch.stop)
+        self.snapshot_patch=patch.object(self.handler,'_http2_evidence',return_value={'status':'fixture'})
+        self.snapshot_patch.start();self.addCleanup(self.snapshot_patch.stop)
         self.db.get.side_effect = [[record()], []]
         self.request = {'body': json.dumps({'message': 'Explain run 2352', 'session_id': '00000000-0000-4000-8000-000000000003', 'user_id': 'forged-owner'})}
 
@@ -190,6 +192,44 @@ class HandlerPromptTest(unittest.TestCase):
             self.assertEqual(result['statusCode'], 400)
         self.db.get.assert_not_called()
         self.agent_factory.assert_not_called()
+
+    def test_http2_prompt_tools_provenance_and_cross_module_history(self):
+        self.request['body'] = json.dumps({'message': 'Explain Figure8', 'module_id': HTTP2_MODULE})
+        self.db.get.side_effect = [[dict(record(), module_id=HTTP2_MODULE)], []]
+        self.agent.return_value=types.SimpleNamespace(structured_output={'topics':['discrepancy']})
+        with patch.object(self.handler,'_render_http2_evidence',return_value='recorded evidence'):
+            response = json.loads(self.handler.lambda_handler(self.request, None)['body'])
+        self.assertEqual(self.agent_factory.call_args.kwargs['tools'], ['http2-read-tool'])
+        self.assertEqual(self.handler.BedrockModel.call_args.kwargs['model_id'], 'us.anthropic.claude-sonnet-4-6')
+        self.assertEqual(response['prompt_content_sha256'], record()['content_sha256'])
+        self.assertEqual(response['analysis_version'], 'http2-assessment-v3')
+        self.assertEqual(self.db.rpc.call_args.args[1]['p_module_id'], HTTP2_MODULE)
+        self.assertEqual(response['answer_provenance']['plan']['topics'],['discrepancy'])
+        self.assertEqual(self.db.rpc.call_args.args[1]['p_answer_provenance'],response['answer_provenance'])
+        self.agent_factory.reset_mock(); self.db.rpc.reset_mock()
+        self.db.get.side_effect = [[dict(record(), module_id=HTTP2_MODULE)], [{'user_id': 'researcher', 'module_id': LEO_MODULE, 'messages': []}]]
+        self.assertEqual(self.handler.lambda_handler(self.request, None)['statusCode'], 409)
+        self.agent_factory.assert_not_called(); self.db.rpc.assert_not_called()
+
+    def test_model_usage_preserves_absence_and_records_actual_module_price(self):
+        self.assertEqual(self.handler._usage('no-metrics',HTTP2_MODULE),(None,None,None))
+        result=types.SimpleNamespace(metrics=types.SimpleNamespace(accumulated_usage={'inputTokens':1000,'outputTokens':100}))
+        tokens,price,source=self.handler._usage(result,HTTP2_MODULE)
+        self.assertEqual(tokens['inputTokens'],1000)
+        self.assertAlmostEqual(price,0.00495)
+        self.assertEqual(source['input_usd_per_million'],3.3)
+
+    def test_http2_failed_model_call_is_saved_without_inventing_usage(self):
+        self.request['body']=json.dumps({'message':'Explain the study','module_id':HTTP2_MODULE})
+        self.db.get.side_effect=[[dict(record(),module_id=HTTP2_MODULE)],[]]
+        self.agent.side_effect=RuntimeError('sensitive model details')
+        response=self.handler.lambda_handler(self.request,None)
+        self.assertEqual(response['statusCode'],503)
+        self.assertNotIn('sensitive',response['body'])
+        payload=self.db.rpc.call_args.args[1]
+        self.assertEqual(payload['p_answer_provenance']['status'],'failed')
+        self.assertEqual(payload['p_answer_provenance']['reason'],'RuntimeError')
+        self.assertIsNone(payload['p_model_usage']);self.assertIsNone(payload['p_estimated_model_cost_usd'])
 
     def test_capability_probe_is_authenticated_and_never_calls_model_or_database(self):
         request = {'body': json.dumps({'action': 'capabilities', 'module_id': REAL_WORLD_MODULE})}

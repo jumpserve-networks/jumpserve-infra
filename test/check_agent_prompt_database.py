@@ -40,6 +40,9 @@ grant usage on schema auth to anon,authenticated;
 leo_migrations = ''.join((ROOT / 'database' / name).read_text().replace('begin;\n','',1).rsplit('commit;',1)[0]
     for name in ('202610040001_leo_study.sql','202610040002_leo_prompt_publication.sql'))
 leo_checks = (ROOT / 'test/leo_study_database.sql').read_text()
+http2_migrations = ''.join((ROOT / 'database' / name).read_text().replace('begin;\n','',1).rsplit('commit;',1)[0]
+    for name in ('202610040003_http2_study.sql','202610040004_http2_prompt_publication.sql','202610040005_http2_unsigned_error_codes.sql','202610040006_agent_answer_provenance.sql','202610040007_http2_manual_prompt_review.sql','202610040008_agent_model_usage.sql','202610040009_agent_evidence_rendering.sql'))
+http2_checks = (ROOT / 'test/http2_study_database.sql').read_text()
 subprocess.run([psql, url, '-X', '-v', 'ON_ERROR_STOP=1', '-q'],
-               input=setup + migration + checks + module_migration + module_checks + leo_setup + leo_migrations + leo_checks + '\nrollback;\n', text=True, check=True)
+               input=setup + migration + checks + module_migration + module_checks + leo_setup + leo_migrations + leo_checks + http2_migrations + http2_checks + '\nrollback;\n', text=True, check=True)
 print('Prompt schema tests passed (all test data rolled back)')
