@@ -1,0 +1,13 @@
+begin;
+alter table reliable_study_protocols alter column version set not null,alter column stage set not null,alter column document set not null,alter column sha256 set not null,alter column locked_at set not null;
+alter table reliable_study_campaigns alter column protocol_id set not null,alter column title set not null,alter column stage set not null,alter column status set not null,alter column planned_runs set not null,alter column recorded_runs set not null;
+alter table reliable_study_configurations alter column campaign_id set not null,alter column algorithm set not null,alter column skewness set not null,alter column budget_bytes set not null,alter column budget_regime set not null,alter column input_sha256 set not null;
+alter table reliable_study_runs alter column campaign_id set not null,alter column configuration_id set not null,alter column protocol_id set not null,alter column stage set not null,alter column status set not null,alter column algorithm set not null,alter column seed set not null,alter column input_sha256 set not null,alter column analysis_sha256 set not null,alter column analysis_version set not null;
+alter table reliable_study_runs add constraint reliable_clock_order check(ended_at is null or started_at is null or ended_at>=started_at);
+alter table reliable_study_measurements alter column status set not null,alter column units set not null;
+alter table reliable_study_measurements add constraint reliable_finite_value check(value is null or (value>=0 and value not in ('NaN'::numeric,'Infinity'::numeric,'-Infinity'::numeric)));
+alter table reliable_study_sources alter column citation set not null,alter column access_status set not null,alter column review_status set not null,alter column limitations set not null,alter column retrieval_attempts set not null;
+alter table reliable_study_claims alter column description set not null,alter column location set not null,alter column assessment set not null,alter column evidence set not null,alter column limitation set not null;
+alter table reliable_study_control_runs alter column status set not null,alter column payload set not null;
+notify pgrst,'reload schema';
+commit;

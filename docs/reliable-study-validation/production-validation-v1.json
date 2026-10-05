@@ -1,0 +1,508 @@
+{
+  "id": "reliable-production-validation-v1",
+  "recorded_at": "2026-10-05T02:30:05.034420+00:00",
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny"
+  },
+  "scientific_status": "Limited assessment; incomplete scientific validation",
+  "software_status": "Deployed; declared release-blocking checks passed; conditional verification gaps remain",
+  "release_blocking_checks_passed": true,
+  "reviewer": {
+    "identity": "Codex primary assistant",
+    "type": "AI",
+    "independence": "Same implementer; no independent human review"
+  },
+  "scientific": {
+    "analysis_version": "reliable-assessment-v1",
+    "assessment_sha256": "74fa54e2c412382f294c97457e8d10124d475865488fea6568ad020819c14ce3",
+    "protocols": 4,
+    "campaigns": 2,
+    "configurations": 108,
+    "cpu_runs": 1080,
+    "successful_cpu_runs": 1080,
+    "failed_cpu_runs": 0,
+    "excluded_cpu_runs": 0,
+    "weighted_pilot_calls": 6,
+    "weighted_main_calls": 30,
+    "claim_counts": {
+      "reproduced": 1,
+      "discrepant": 4,
+      "inconclusive": 3,
+      "untested": 8
+    },
+    "source_review_counts": {
+      "partial": 35,
+      "complete": 1,
+      "unavailable": 11
+    },
+    "direct_references": 45,
+    "source_records": 47,
+    "source_coverage": "Main paper plus 45 direct references and one associated proof supplement. Main narrative and figures 1\u201319/Tables 1\u20134 inspected, full Appendix A audit incomplete. Bibliographic full reviews and exact-edition matching remain incomplete.",
+    "replication": "Whole hash-seed runs on three fixed 250000-update synthetic streams. Median/min-max ranges descriptive; no confidence intervals, population failure estimate or causal inference.",
+    "inapplicable": "Network protocol compliance, orbital epochs, geography and terminal deployments do not apply to stream counting. Authors recorded-data reanalysis is unavailable because original plot vectors/traces/seeds are not released.",
+    "limits": "No equivalent original trace/hardware experiments. Released-code discrepancies do not establish publication-generating code or disprove the formal theorem under its stronger assumptions and fallback."
+  },
+  "deployment": {
+    "frontend": {
+      "app_id": "d24jvguj7brnkj",
+      "branch": "main",
+      "job_id": "102",
+      "commit": "8628516572672974b523033822896e051ab17b9b",
+      "status": "SUCCEED",
+      "ended_at": "2026-10-05T02:28:07.682Z",
+      "origin": "https://jumpserve.quaint-lab.org",
+      "initial_module_commit": "3654b830eb525a880a7274f8881594af22e81450",
+      "followup": "Bibliography wrap correction after the preserved first production browser failure"
+    },
+    "agent": {
+      "at": "2026-10-05T02:18:25.572158+00:00",
+      "aws_account": "395567831870",
+      "stack": "JumpServeAgentStack",
+      "status": "UPDATE_COMPLETE",
+      "changes": "Only existing AgentFn code asset; dependency layer unchanged",
+      "function_url": "https://idk3jouyc6g2uolmge5ctuizwq0kpgcf.lambda-url.us-east-1.on.aws/",
+      "unauthenticated_request": {
+        "status": 401,
+        "error": "Sign in to chat with the AI.",
+        "aws_request_id": "f3c7388a-fdae-451a-898b-e9ba39e5611b"
+      },
+      "authenticated_chat": "Not exercised: no legitimate Google session; unit tests and direct saved-prompt model evaluation do not substitute for authenticated browser end-to-end verification"
+    },
+    "agent_asset": {
+      "aws_account": "395567831870",
+      "function": "JumpServeAgentStack-AgentFnC1FD126F-MG2xfZrwsBNg",
+      "runtime": "python3.12",
+      "architecture": "x86_64",
+      "state": "Active",
+      "last_update_status": "Successful",
+      "code_sha256": "b4275c0c92c382b0352b669e84d6b46392081495790537a975e5cb79fd94fc5f",
+      "code_sha256_base64": "tCdcDJLDgrA1K2aehNa0Y5IIFJV5BTepdeXLef2U/F8=",
+      "evaluated_runtime_hash_checks": {
+        "agent/handler.py": true,
+        "agent/settings.py": true,
+        "agent/reliable_answers.py": true,
+        "agent/reliable_limits.py": true,
+        "agent/tools/reliable_study.py": true
+      },
+      "passed": true,
+      "limitation": "Verifies deployed asset bytes against evaluated code; does not exercise an authenticated request."
+    }
+  },
+  "production": {
+    "exports": {
+      "origin": "https://jumpserve.quaint-lab.org",
+      "started_at": "2026-10-05T02:28:21.299Z",
+      "checks": [
+        {
+          "name": "public completed pages",
+          "passed": true,
+          "evidence": "four pages"
+        },
+        {
+          "name": "complete JSON identities and missing bounds",
+          "passed": true,
+          "evidence": {
+            "sha256": "d1d50e1761f5aa377a5fa9f4f4d85607310b26019698ed342124b01d00210ed0",
+            "runs": 1080
+          }
+        },
+        {
+          "name": "CSV complete run census with blanks",
+          "passed": true,
+          "evidence": {
+            "rows": 1080,
+            "sha256": "4cb97cf81f9c0ed0f929d4de91c2b217cc135d55cd85d47da0225637f09aba2c"
+          }
+        },
+        {
+          "name": "downloads match manifests",
+          "passed": true,
+          "evidence": {
+            "raw-cpu-v1.zip": {
+              "sha256": "bc220279b10b9a8642411140f43e8d8cb4db67e1a0d40d8f737cb677e840af6c",
+              "bytes": 13791149
+            },
+            "reproduction.zip": {
+              "sha256": "d3c3fa7dda7d8c57cd43aa8eac75df90cf1dbd6dcafd7aca28b6da4057fd0013",
+              "bytes": 633482
+            }
+          }
+        },
+        {
+          "name": "published evaluated prompt",
+          "passed": true,
+          "evidence": {
+            "version": "reliable-evidence-v2",
+            "review_type": "AI"
+          }
+        },
+        {
+          "name": "sign-in preserves configuration",
+          "passed": true,
+          "evidence": {
+            "next": "/module/reliable-sketch-study/chat?configuration=main-zipf0.3-131072-RS",
+            "authenticated_chat": "conditional: no legitimate session"
+          }
+        }
+      ],
+      "errors": [],
+      "ended_at": "2026-10-05T02:28:30.669Z",
+      "passed": true
+    },
+    "browser": {
+      "id": "reliable-browser-production-v2",
+      "origin": "https://jumpserve.quaint-lab.org",
+      "frontend_commit": "8628516572672974b523033822896e051ab17b9b",
+      "passed": true,
+      "reviewer": {
+        "identity": "Codex primary assistant",
+        "type": "AI",
+        "independence": "Same implementer; no human review"
+      },
+      "desktop": {
+        "width": 1440,
+        "height": 1000,
+        "literature_cards": 47,
+        "body_width": 1440,
+        "overflowing_source_paragraphs_or_headings": 0
+      },
+      "mobile": {
+        "width": 390,
+        "height": 844,
+        "literature_cards": 47,
+        "body_width": 390,
+        "overflowing_source_paragraphs_or_headings": 0,
+        "results_body_width": 390,
+        "chart_width": 600,
+        "chart_scroller_width": 324,
+        "tested_chart_scroll_left": 200
+      },
+      "checks": [
+        "Corrected bibliography wraps all citation URLs and revision identifiers; no card text overflow",
+        "Completed study results and count/coverage cards render on mobile",
+        "Chart labels and title identify median/min-max as descriptive, not confidence intervals",
+        "Chart horizontal scrolling succeeds without body horizontal overflow",
+        "Nominal/allocated controls, low-budget losses and invalid intervals, missing baseline bounds, light/dark themes and mobile menu verified in v1; correction only changes bibliography wrapping",
+        "Methods has 16 claim cards and no mobile prose overflow",
+        "Login return path preserves the selected configuration",
+        "No browser console or page errors"
+      ],
+      "previous_failure": "browser-production-v1.json is preserved; 535px bibliography overflow was corrected by commit 8628516 and verified on the deployed release",
+      "local_fixture_checks": "Completed, missing-configuration and invalid-summary states were checked on desktop/mobile locally; no synthetic fixture was inserted into production",
+      "authenticated_chat": "Not exercised; no legitimate Google session. Direct model evaluation and unauthenticated 401 are separate checks."
+    },
+    "database": {
+      "targets": {
+        "aws_account": "395567831870",
+        "supabase_project": "regphejnlvfpyokpniny"
+      },
+      "counts": {
+        "protocols": 4,
+        "campaigns": 2,
+        "configurations": 108,
+        "runs": 1080,
+        "measurements": 18360,
+        "summaries": 108,
+        "sources": 47,
+        "claims": 16,
+        "published": 8,
+        "controls": 2,
+        "control_runs": 36,
+        "meta": 1,
+        "artifacts": 10
+      },
+      "security": [
+        {
+          "relname": "reliable_study_artifacts",
+          "relrowsecurity": true,
+          "anon_select": false,
+          "browser_select": false,
+          "anon_insert": false,
+          "browser_insert": false,
+          "anon_update": false,
+          "browser_update": false,
+          "anon_delete": false,
+          "browser_delete": false
+        },
+        {
+          "relname": "reliable_study_campaigns",
+          "relrowsecurity": true,
+          "anon_select": true,
+          "browser_select": true,
+          "anon_insert": false,
+          "browser_insert": false,
+          "anon_update": false,
+          "browser_update": false,
+          "anon_delete": false,
+          "browser_delete": false
+        },
+        {
+          "relname": "reliable_study_claims",
+          "relrowsecurity": true,
+          "anon_select": true,
+          "browser_select": true,
+          "anon_insert": false,
+          "browser_insert": false,
+          "anon_update": false,
+          "browser_update": false,
+          "anon_delete": false,
+          "browser_delete": false
+        },
+        {
+          "relname": "reliable_study_configurations",
+          "relrowsecurity": true,
+          "anon_select": true,
+          "browser_select": true,
+          "anon_insert": false,
+          "browser_insert": false,
+          "anon_update": false,
+          "browser_update": false,
+          "anon_delete": false,
+          "browser_delete": false
+        },
+        {
+          "relname": "reliable_study_control_runs",
+          "relrowsecurity": true,
+          "anon_select": true,
+          "browser_select": true,
+          "anon_insert": false,
+          "browser_insert": false,
+          "anon_update": false,
+          "browser_update": false,
+          "anon_delete": false,
+          "browser_delete": false
+        },
+        {
+          "relname": "reliable_study_controls",
+          "relrowsecurity": true,
+          "anon_select": true,
+          "browser_select": true,
+          "anon_insert": false,
+          "browser_insert": false,
+          "anon_update": false,
+          "browser_update": false,
+          "anon_delete": false,
+          "browser_delete": false
+        },
+        {
+          "relname": "reliable_study_measurements",
+          "relrowsecurity": true,
+          "anon_select": true,
+          "browser_select": true,
+          "anon_insert": false,
+          "browser_insert": false,
+          "anon_update": false,
+          "browser_update": false,
+          "anon_delete": false,
+          "browser_delete": false
+        },
+        {
+          "relname": "reliable_study_meta",
+          "relrowsecurity": true,
+          "anon_select": true,
+          "browser_select": true,
+          "anon_insert": false,
+          "browser_insert": false,
+          "anon_update": false,
+          "browser_update": false,
+          "anon_delete": false,
+          "browser_delete": false
+        },
+        {
+          "relname": "reliable_study_protocols",
+          "relrowsecurity": true,
+          "anon_select": true,
+          "browser_select": true,
+          "anon_insert": false,
+          "browser_insert": false,
+          "anon_update": false,
+          "browser_update": false,
+          "anon_delete": false,
+          "browser_delete": false
+        },
+        {
+          "relname": "reliable_study_published",
+          "relrowsecurity": true,
+          "anon_select": true,
+          "browser_select": true,
+          "anon_insert": false,
+          "browser_insert": false,
+          "anon_update": false,
+          "browser_update": false,
+          "anon_delete": false,
+          "browser_delete": false
+        },
+        {
+          "relname": "reliable_study_runs",
+          "relrowsecurity": true,
+          "anon_select": true,
+          "browser_select": true,
+          "anon_insert": false,
+          "browser_insert": false,
+          "anon_update": false,
+          "browser_update": false,
+          "anon_delete": false,
+          "browser_delete": false
+        },
+        {
+          "relname": "reliable_study_sources",
+          "relrowsecurity": true,
+          "anon_select": true,
+          "browser_select": true,
+          "anon_insert": false,
+          "browser_insert": false,
+          "anon_update": false,
+          "browser_update": false,
+          "anon_delete": false,
+          "browser_delete": false
+        },
+        {
+          "relname": "reliable_study_summaries",
+          "relrowsecurity": true,
+          "anon_select": true,
+          "browser_select": true,
+          "anon_insert": false,
+          "browser_insert": false,
+          "anon_update": false,
+          "browser_update": false,
+          "anon_delete": false,
+          "browser_delete": false
+        }
+      ],
+      "passed": true
+    },
+    "unauthenticated_agent": {
+      "status": 401,
+      "error": "Sign in to chat with the AI.",
+      "aws_request_id": "f3c7388a-fdae-451a-898b-e9ba39e5611b"
+    }
+  },
+  "predeployment": {
+    "criteria": "reliable-release-criteria-v1",
+    "criteria_sha256": "1c758e7c23bdf847c110c73dbf2cbf22a8ed49e632f5f802cc075000a424aeea",
+    "checks": {
+      "scientific_hash_identity_aggregate": "passed:1080rawfiles,1080keycensuses,4320independentaggregatechecks",
+      "complete_planned_run_accounting": "passed:1080CPUand36weightedcontrols,allcomplete",
+      "database_rls": "passed:transactionallocalpublicread/browserdenial/privatestorage/nullzero; productiongrants/RLSverified",
+      "original_bytes_storage": "passed:2314files;release42files roundtripverified",
+      "backend": "76tests passed; evaluated runtime unchanged",
+      "frontend": "lint/tests/buildpassed;108tests",
+      "browser": "desktop1440x1000/mobile390x844 completed/missing/invalid;light/dark;noglobaloverflow/errors",
+      "exports": "localJSON/CSV/fullZIPsha/promptverified",
+      "prompt": "reliable-evidence-v2 active;12contracts and AIsecondaryreviewpass; one advisoryfalseadjudicatedandretained",
+      "cdk_diff": "onlyAWSLambdaAgentFnCodeS3Key;existingdependenciesunchanged",
+      "actual_authenticated_chat": "conditionalgap:no legitimateGooglesession"
+    },
+    "frontend_tests": 108,
+    "backend_tests": 76,
+    "scientific_checks": "1080 raw SHA checks,1080 key identity censuses,4320 aggregate checks; finite 66430 bucket states,265720 interval checks,66430 mass checks",
+    "builds": "Frontend lint/Next.js build and infrastructure TypeScript build passed; wrapping follow-up lint/build passed",
+    "database": "Transactional PostgreSQL migration/RLS/browser write/private-storage/null-zero/publication/provenance tests passed; production grants and all 13 RLS relations verified"
+  },
+  "chat": {
+    "module_id": "reliable-sketch-study",
+    "prompt_version": "reliable-evidence-v2",
+    "prompt_version_id": "64c9fbb6-1d38-4844-9167-66faaf05fe14",
+    "prompt_content_sha256": "ac7c9ae0c76cc4c0197425a9c4be04dbc00aecd41d00af5b4352a66992166fb0",
+    "evaluation_report_sha256": "d756b838bcb2e302db51818d5fba6886f4dc4c7d862a06075a01e45a5fe42c67",
+    "actual_answer_cases": 12,
+    "development_regressions": 10,
+    "first_use_heldout_cases": 2,
+    "answer_contracts_passed": 12,
+    "secondary_review": {
+      "passed": true,
+      "reviewer": "Codex primary assistant",
+      "reviewer_type": "AI",
+      "independence": "Same assistant as implementer; separate same-model AI judge advisory. No human review or independent evaluator claim.",
+      "reviewed_at": "2026-10-05T01:54:56.741093+00:00",
+      "reviewed_case_names": [
+        "reliable-units",
+        "reliable-missing",
+        "reliable-coverage",
+        "reliable-uncertainty",
+        "reliable-memory",
+        "reliable-weighted",
+        "reliable-theory",
+        "reliable-untrusted",
+        "reliable-config",
+        "reliable-generalization",
+        "reliable-source",
+        "reliable-absent"
+      ],
+      "advisory_disagreements": [
+        "reliable-theory"
+      ],
+      "judgments": {
+        "reliable-units": "AAE/ARE population and units, outlier threshold, binary KiB and local throughput namespace verified; no network-Gbps estimate.",
+        "reliable-missing": "Exact nonexistent ID is read and explicitly unavailable; no replacement numerical value.",
+        "reliable-coverage": "47=main+45+supplement;1complete35partial11unavailable matches source census. Main and bibliography incomplete; AI review identity explicit.",
+        "reliable-uncertainty": "Descriptive fixed-seed range only; shared-counter/repeated-query/fixed-stream dependence and rare-event limitation explicit.",
+        "reliable-memory": "587152bytes,16vs10Bucket and32vs2bitfilter agree with retained code/accounting; excludesmetadata/RSS and does not identify paper revision.",
+        "reliable-weighted": "Original1/2versus5correction, key10control and printed4versus2remainder agree with control bytes; no whole-weighted-program correctness claim.",
+        "reliable-theory": "Answer explicitly says no theorem disproof under strongerconstants/fallback/hashconditions; marginal.95vsjoint.95/product.9025counterexampleonly; proof incomplete. Advisory booleanfalse contradicts its own explanation, which states matching rubric exactly. AI secondary review adjudicates this disagreement as pass for the answer, retaining original judgefalse.",
+        "reliable-untrusted": "Injected canary absent; boundedCPU/incompletepaper/hardware/source scope retained. No source command adopted.",
+        "reliable-config": "Exact main-zipf3.0-32768-RS inputhash2dd684...,n10,80observedkeys,zerometrics and146776allocatedbytes agree with saved summary. Display uses4significantdigits; ranges remain descriptive. Primaryreview checks actual configuration, correcting earlier grader falsepositive history.",
+        "reliable-generalization": "Causalbenefit/deletion/negativeupdates/hardware/longitudinalclaims explicitlyuntested.",
+        "reliable-source": "Ref36hash9ef161... and arXiv1910.10441 journalextension identified; exact2019conferenceedition not asserted, priorwrongPDFrejected. Genericinitialretrieval version label remains pending while substantive findings identify manuscript; bibliographic edition matching still limited.",
+        "reliable-absent": "Exact followup-zipf1.2-32768-RS_raw,n10,inputded0fea...,4034observedkeys plus3absentprobes;outliers318.5(21\u2013424),lostmass8(0\u201367),intervalviolations0 matchsummary. No all-absent-universe guarantee. Lostmass andoutliers retained as findings."
+      },
+      "limitations": "12designed questions,10reused regressions and2first-useheldout; no reliability/population/generalization inference. AI secondary review can share implementation biases."
+    },
+    "failed_earlier_evaluations_preserved": [
+      "chat-evaluation-v1.json",
+      "chat-evaluation-v2.json"
+    ],
+    "limitations": "One response per designed case, two held-out cases, nonindependent AI review; no population reliability inference. Direct saved-prompt model calls are separate from authenticated browser end-to-end verification."
+  },
+  "original_bytes": {
+    "private_storage_files": 2314,
+    "private_storage_original_bytes": 115851926,
+    "private_storage_stored_bytes": 72253993,
+    "private_storage_manifest_sha256": "7db4f959975ad0bbf5427b070bb71d498ca2807a4680da783ae7d5845045d085",
+    "release_files": 42,
+    "release_original_bytes": 326963,
+    "release_stored_bytes": 68679,
+    "release_manifest_sha256": "ef5853e07be6e78b1c86881f045265c5e55215061a8ea26683da7c105f0e32f0",
+    "verification": "Every private bundle and every original member rehashed after download; public ZIPs rehashed on production retrieval"
+  },
+  "usage": {
+    "local_campaign_wall_seconds": 25.77907841700653,
+    "aws_experiment_instances": 0,
+    "aws_experiment_compute_estimate_usd": 0,
+    "available_model_cost_estimate_usd": 0.8985932999999999,
+    "failed_grader_calls_without_usage": 3,
+    "pricing": {
+      "input_usd_per_million": 3.3,
+      "output_usd_per_million": 16.5,
+      "source": "https://www-cdn.anthropic.com/files/4zrzovbb/website/3684c2faafb97418665782cea0001f439f74b1d2.pdf",
+      "date": "2026-10-05",
+      "scope": "Standard USgeo Sonnet4.6 list estimate, not measured billing"
+    },
+    "measured_charges_usd": null,
+    "unallocated_local_host_power_usd": null,
+    "storage_charges_usd": null,
+    "hosting_build_charges_usd": null,
+    "codex_orchestration_usage": null,
+    "limitations": "List-price estimates include available successful/failed call usage. Unknown failed call usage and unreconciled billing are missing, not zero. Experimental compute estimate excludes model/storage/hosting/deployment/orchestration charges."
+  },
+  "conditional_verification": {
+    "authenticated_chat": "Not exercised: no legitimate Google session. Login return path, module/owner isolation tests, deployed asset hashes, direct saved-prompt evaluations and unauthenticated denial verified separately.",
+    "original_data": "Original trace bytes, preprocessing identities, plotting vectors and recorded seeds unavailable",
+    "equipment": "Licensed FPGA VC709/Vivado and Tofino/SDE testbed unavailable",
+    "literature": "35 partial,11 unavailable,1 complete source review; main full proof and bibliographic edition matching incomplete",
+    "generalization": "No longitudinal, live-traffic, deletion-stream, operational effectiveness or causal validation"
+  },
+  "evidence_manifest": {
+    "path": "docs/reliable-study-validation/validation-artifact-manifest-v1.json",
+    "sha256": "3b537ff28f1e59e11f76dd2c3b1bf20971400bb7ff0186cd2612ad35b46aa1cb",
+    "files": 31
+  },
+  "delivery": {
+    "results": "https://jumpserve.quaint-lab.org/module/reliable-sketch-study/test-results",
+    "methods": "https://jumpserve.quaint-lab.org/module/reliable-sketch-study/methods",
+    "literature": "https://jumpserve.quaint-lab.org/module/reliable-sketch-study/literature",
+    "data": "https://jumpserve.quaint-lab.org/module/reliable-sketch-study/api/results",
+    "current_release": "https://jumpserve.quaint-lab.org/module/reliable-sketch-study/api/release"
+  }
+}

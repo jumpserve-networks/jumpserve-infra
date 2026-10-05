@@ -77,6 +77,10 @@ do $$ begin
  if (select public from storage.buckets where id='http2-study-artifacts') then raise exception 'Original bucket became public'; end if;
 end $$;
 """
+
+reliable_migrations=''.join((ROOT/'database'/name).read_text().replace('begin;\n','',1).rsplit('commit;',1)[0] for name in ('202610050001_reliable_study.sql','202610050002_reliable_prompt_publication.sql','202610050003_reliable_prompt_seed.sql','202610050004_reliable_prompt_seed_v2.sql','202610050005_reliable_evaluation_v3.sql'))
+reliable_checks=(ROOT/'test/reliable_study_database.sql').read_text()
+
 subprocess.run([psql, url, '-X', '-v', 'ON_ERROR_STOP=1', '-q'],
-               input=setup + migration + checks + module_migration + module_checks + leo_setup + leo_migrations + leo_checks + http2_migrations + http2_checks + storage_setup + storage_migration + storage_checks + '\nrollback;\n', text=True, check=True)
+               input=setup + migration + checks + module_migration + module_checks + leo_setup + leo_migrations + leo_checks + http2_migrations + http2_checks + storage_setup + storage_migration + storage_checks + reliable_migrations + reliable_checks + (ROOT/'database/202610050006_reliable_integrity.sql').read_text().replace('begin;\n','',1).rsplit('commit;',1)[0] + (ROOT/'database/202610050007_agent_research_provenance.sql').read_text().replace('begin;\n','',1).rsplit('commit;',1)[0] + '\nrollback;\n', text=True, check=True)
 print('Prompt schema tests passed (all test data rolled back)')

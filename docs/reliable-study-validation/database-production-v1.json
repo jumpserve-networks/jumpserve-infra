@@ -1,0 +1,180 @@
+{
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny"
+  },
+  "counts": {
+    "protocols": 4,
+    "campaigns": 2,
+    "configurations": 108,
+    "runs": 1080,
+    "measurements": 18360,
+    "summaries": 108,
+    "sources": 47,
+    "claims": 16,
+    "published": 8,
+    "controls": 2,
+    "control_runs": 36,
+    "meta": 1,
+    "artifacts": 10
+  },
+  "security": [
+    {
+      "relname": "reliable_study_artifacts",
+      "relrowsecurity": true,
+      "anon_select": false,
+      "browser_select": false,
+      "anon_insert": false,
+      "browser_insert": false,
+      "anon_update": false,
+      "browser_update": false,
+      "anon_delete": false,
+      "browser_delete": false
+    },
+    {
+      "relname": "reliable_study_campaigns",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_insert": false,
+      "browser_insert": false,
+      "anon_update": false,
+      "browser_update": false,
+      "anon_delete": false,
+      "browser_delete": false
+    },
+    {
+      "relname": "reliable_study_claims",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_insert": false,
+      "browser_insert": false,
+      "anon_update": false,
+      "browser_update": false,
+      "anon_delete": false,
+      "browser_delete": false
+    },
+    {
+      "relname": "reliable_study_configurations",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_insert": false,
+      "browser_insert": false,
+      "anon_update": false,
+      "browser_update": false,
+      "anon_delete": false,
+      "browser_delete": false
+    },
+    {
+      "relname": "reliable_study_control_runs",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_insert": false,
+      "browser_insert": false,
+      "anon_update": false,
+      "browser_update": false,
+      "anon_delete": false,
+      "browser_delete": false
+    },
+    {
+      "relname": "reliable_study_controls",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_insert": false,
+      "browser_insert": false,
+      "anon_update": false,
+      "browser_update": false,
+      "anon_delete": false,
+      "browser_delete": false
+    },
+    {
+      "relname": "reliable_study_measurements",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_insert": false,
+      "browser_insert": false,
+      "anon_update": false,
+      "browser_update": false,
+      "anon_delete": false,
+      "browser_delete": false
+    },
+    {
+      "relname": "reliable_study_meta",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_insert": false,
+      "browser_insert": false,
+      "anon_update": false,
+      "browser_update": false,
+      "anon_delete": false,
+      "browser_delete": false
+    },
+    {
+      "relname": "reliable_study_protocols",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_insert": false,
+      "browser_insert": false,
+      "anon_update": false,
+      "browser_update": false,
+      "anon_delete": false,
+      "browser_delete": false
+    },
+    {
+      "relname": "reliable_study_published",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_insert": false,
+      "browser_insert": false,
+      "anon_update": false,
+      "browser_update": false,
+      "anon_delete": false,
+      "browser_delete": false
+    },
+    {
+      "relname": "reliable_study_runs",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_insert": false,
+      "browser_insert": false,
+      "anon_update": false,
+      "browser_update": false,
+      "anon_delete": false,
+      "browser_delete": false
+    },
+    {
+      "relname": "reliable_study_sources",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_insert": false,
+      "browser_insert": false,
+      "anon_update": false,
+      "browser_update": false,
+      "anon_delete": false,
+      "browser_delete": false
+    },
+    {
+      "relname": "reliable_study_summaries",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_insert": false,
+      "browser_insert": false,
+      "anon_update": false,
+      "browser_update": false,
+      "anon_delete": false,
+      "browser_delete": false
+    }
+  ],
+  "passed": true
+}

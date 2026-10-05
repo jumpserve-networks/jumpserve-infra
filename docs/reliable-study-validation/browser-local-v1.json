@@ -1,0 +1,37 @@
+{
+  "id": "reliable-browser-local-v1",
+  "reviewer": "Codex primary assistant",
+  "reviewer_type": "AI",
+  "at": "2026-10-05T01:57:04.902999+00:00",
+  "desktop": [
+    1440,
+    1000
+  ],
+  "mobile": [
+    390,
+    844
+  ],
+  "completed_results": true,
+  "low_budget_lost_mass_and_invalid_intervals": true,
+  "filtered_raw_nominal_allocated_controls": true,
+  "methods_claim_rows": 16,
+  "literature_rows": 47,
+  "baseline_missing_bounds": true,
+  "local_missing_configuration_fixture": true,
+  "local_invalid_chart_fixture": true,
+  "fixtures_removed_before_build": true,
+  "light_and_dark_views": true,
+  "source_proof_review_incomplete_visible": true,
+  "body_horizontal_overflow": false,
+  "console_errors": [],
+  "sign_in_next": "/module/reliable-sketch-study/chat?configuration=main-zipf0.3-131072-RS",
+  "authenticated_chat": "not exercised: no legitimate Google session; browser redirected to login",
+  "screenshots": [
+    "desktop-dark.png",
+    "desktop-light.png",
+    "mobile-dark.png",
+    "mobile-light.png",
+    "mobile-invalid.png"
+  ],
+  "limits": "Local server and temporary pure-component fixtures only; no production writes or synthetic authenticated identity. Need deployed verification after release."
+}

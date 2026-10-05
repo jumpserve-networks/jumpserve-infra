@@ -93,6 +93,24 @@ class HandlerPromptTest(unittest.TestCase):
         self.db.get.side_effect = [[record()], []]
         self.request = {'body': json.dumps({'message': 'Explain run 2352', 'session_id': '00000000-0000-4000-8000-000000000003', 'user_id': 'forged-owner'})}
 
+    def test_reliable_history_persistence_and_server_selected_renderer(self):
+        module='reliable-sketch-study'
+        prompt=dict(record(),module_id=module)
+        history=[{'role':'user','content':[{'text':'old question'}]}, {'role':'assistant','content':[{'text':'old answer'}]}]
+        self.db.get.side_effect=[[prompt],[{'messages':history,'user_id':'researcher','module_id':module}]]
+        self.request['body']=json.dumps({'message':'memory','module_id':module})
+        from reliable_answers import ReliableAnswerPlan
+        self.agent.return_value=types.SimpleNamespace(structured_output=ReliableAnswerPlan(topics=['memory']))
+        with patch.object(self.handler,'reliable_hooks',return_value={}), patch.object(self.handler,'get_reliable_evidence',return_value={'meta':{'analysis_version':'reliable-assessment-v1','assessment_sha256':'a'},'claims':[]}), patch.object(self.handler,'render_reliable_evidence',return_value=('recorded memory', [{'name':'get_reliable_study_results','input':{}}])):
+            result=self.handler.lambda_handler(self.request,None)
+        self.assertEqual(result['statusCode'],200)
+        self.assertEqual(self.agent_factory.call_args.kwargs['tools'],[])
+        messages=self.db.rpc.call_args.args[1]['p_messages']
+        self.assertEqual(messages[:2],history)
+        self.assertEqual(sum(m==history[0] for m in messages),1)
+        self.assertEqual(messages[-1]['content'][0]['text'],'recorded memory')
+        self.assertEqual(self.db.rpc.call_args.args[1]['p_analysis_version'],'reliable-assessment-v1')
+
     def test_answer_uses_and_records_one_snapshot_without_rereading_active_version(self):
         result = self.handler.lambda_handler(self.request, None)
         self.assertEqual(result['statusCode'], 200)

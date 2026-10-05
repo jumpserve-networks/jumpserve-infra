@@ -1,0 +1,20 @@
+{
+  "id": "reliable-browser-production-v1",
+  "origin": "https://jumpserve.quaint-lab.org",
+  "frontend_commit": "3654b830eb525a880a7274f8881594af22e81450",
+  "passed": false,
+  "reviewer": {"identity": "Codex primary assistant", "type": "AI", "independence": "Same implementer; no human review"},
+  "passed_checks": [
+    "Desktop 1440x1000 completed results, missing baseline bounds, zero and nonzero errors, low-budget loss and interval violations",
+    "Nominal/allocated campaign and budget controls; descriptive chart title and SVG viewBox",
+    "Mobile 390x844 results with chart-only horizontal scrolling, body width 390",
+    "Light/dark theme controls in desktop sidebar and mobile navigation",
+    "Mobile methods: 16 claim cards, body width 390, no overflowing paragraphs",
+    "Sign-in return path preserved the followup-zipf0.3-8192-RS configuration",
+    "No browser console or page errors"
+  ],
+  "failed_checks": [
+    {"page": "literature", "viewport_width": 390, "body_scroll_width": 535, "cause": "Long citation URL and revision identifier text overflowed source cards", "correction_commit": "8628516", "correction": "Inherited overflow-wrap:anywhere", "local_recheck": "47 source cards; body width 390; no overflowing article paragraphs or headings"}
+  ],
+  "limitations": ["No legitimate Google session; authenticated browser-to-agent request was not exercised", "Invalid/missing fixture combinations tested locally, not inserted into production records"]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "reliable-release-criteria-v1",
+  "defined_at": "2026-10-05T01:52:19.128518+00:00",
+  "blocking": [
+    "Frozen scientific input/code/protocol hashes, run accounting and independent aggregate validation",
+    "VerifiedAWS395567831870/Supabasereg phejnlvfpyokpniny targets (project string checked without spaces)",
+    "RLS public read/browser-write denial, private storage after roundtrip",
+    "Backend auth, user/module ownership, bounds, missing states, prompt publishing guards",
+    "Frozen12case actualanswer contract evaluation and AI secondary review/advisory adjudication; active published matching prompt and runtime",
+    "Frontendlint/tests/build and desktop/mobile completed/missing/invalid browser views, charts/navigation/themes/exports/signinreturn",
+    "Reviewed CDKdiff scoped to existing agent stack, no scientific equipment resources",
+    "Deployedpublicpages/downloads and unauthenticatedagentdenial verified after release"
+  ],
+  "conditional": [
+    "Actual Google-authenticated browser-to-agent request only if legitimate session available; no synthetic identity accepted as verification",
+    "Original trace numerical reproduction, full direct-source reviews, fullproof audit, FPGA/Tofino hardware and longitudinal operational validation unavailable"
+  ],
+  "scientific_status": "limited assessment; incomplete validation can be published with visible scope",
+  "checks": {},
+  "software_status": "checks in progress; deployment not yet ready"
+}
