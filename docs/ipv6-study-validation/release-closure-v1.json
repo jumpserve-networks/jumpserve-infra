@@ -1,0 +1,22 @@
+{
+  "id": "ipv6-release-closure-v1",
+  "at": "2026-10-06T14:32:37.035349+00:00",
+  "passed": true,
+  "public_response_sha256": "d821813f44dd90edbf0241b39b105cf756a0db4fe471ade557c8abcec3fdd275",
+  "report_sha256": "b9e1bfed195612f4a3c3ec4e5f1aee1aaa8520be79c5dfb4ecf3e6f38df7266b",
+  "final_frontend_commit": "ef7a53e0ebb76c2ebcb358732c693e5233426e26",
+  "infrastructure_release_commit": "9b02a2c",
+  "raw_storage_total": {
+    "files": 998,
+    "original_bytes": 305989463,
+    "stored_bytes": 163915090,
+    "round_trip_verified": true
+  },
+  "checks": [
+    "Fetched actual canonical public release response after database publication",
+    "Verified exact local immutable report SHA256",
+    "Verified Amplify104SUCCESS, published prompt14passed, release storage147files verified, and3/3/5/4 scientific labels"
+  ],
+  "limits": "No new scientific or model campaign. Private originals and release bundle have separate manifests; final closure and public response are preserved as original UTF8 database artifacts. Signed-in chat and OAuth exchange remain conditional gaps. Billing remains unreconciled.",
+  "reviewer_type": "AI implementer"
+}
