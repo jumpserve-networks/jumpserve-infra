@@ -1,0 +1,233 @@
+{
+  "id": "ipv6-production-validation-v1",
+  "recorded_at": "2026-10-06T14:29:51.550Z",
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny"
+  },
+  "protocols": [
+    "release-protocol-v1.json",
+    "release-amendment-v2.json"
+  ],
+  "software_status": "deployed and production verified",
+  "release_blocking_checks_passed": true,
+  "scientific_status": "Limited historical assessment; complete literature/paper, relative figures, packet/client data, routing, causal, operational and generalization validation incomplete",
+  "scientific": {
+    "analysis_version": "ipv6-dns-assessment-v1",
+    "assessment_version": "assessment-v2 source identity amendment; numerical v1 unchanged",
+    "assessment_sha256": "3c3532901aa4b507a61849666d925a0268c0658c0129dbfd729514df8c3a07b0",
+    "paper_version": "PuRe item_3670144_1/file_3670145;22 pages",
+    "paper_sha256": "f6378fb3de19aa8d3204f4d3a2028f95497f334862a5298aa6678ef1b816290b",
+    "claim_counts": {
+      "reproduced": 3,
+      "discrepant": 3,
+      "inconclusive": 5,
+      "untested": 4
+    },
+    "label_definitions": {
+      "reproduced": "Specified numerical or descriptive claim agrees under the explicitly tested historical configurations or finite conditions; no inference of correctness, causality or generalization.",
+      "discrepant": "A tested assertion conflicts with directly examined source text or a declared comparison; retain both values and their conditions.",
+      "inconclusive": "Relevant evidence exists, but it cannot establish the claim because of design, lineage, identity or access limits.",
+      "untested": "No appropriate check executed; a proposed check or citation is not a test."
+    },
+    "validation": {
+      "independent_checks": [],
+      "original_fold_comparisons": 1152,
+      "original_fold_disagreements": 0,
+      "status_counts": {
+        "complete": 145,
+        "failed": 2,
+        "excluded": 11
+      },
+      "published_cells": 1152,
+      "reproduced_cells": 1152,
+      "discrepant_cells": 0,
+      "control_checks": {
+        "distinct_answers_preserved": true,
+        "original_distinct_loss_demonstrated": true,
+        "mean_control": true,
+        "missing_preserved": true
+      },
+      "source_review_counts": {
+        "partial-review": 7,
+        "retrieved-unreviewed": 48,
+        "unavailable-full-text": 16,
+        "complete-review": 3
+      },
+      "source_access_counts": {
+        "full-text": 58,
+        "unavailable": 11,
+        "landing-only": 5
+      },
+      "missing_archive_days": [
+        "2025-04-21",
+        "2025-08-26"
+      ],
+      "partial_configuration": "2025-07-31no-dnssecmtu1500IPv4EDNS4096pcap case absent;80versus81valid packet days in current epoch. Not zero-imputed.",
+      "scientific_scope": "Limited historical-summary assessment; no complete paper/literature/operational validation."
+    },
+    "configurations": 144,
+    "metric_slots": 136512,
+    "protocols": 2,
+    "campaigns": 2,
+    "source_records": 74,
+    "published_context_records": 31,
+    "figure_coverage_records": 21,
+    "intervals": "Daily min/max and matched configuration differences are descriptive. No inferential confidence intervals: overlapping changing one-AS convenience panel.",
+    "experiment_types": [
+      "Historical authors' recorded-summary reanalysis",
+      "Released author folding function",
+      "Independent arithmetic sharing archived inputs",
+      "Separate finite released-code controls"
+    ],
+    "not_performed": [
+      "Fresh DNS measurements",
+      "Simulation",
+      "Full raw-pcap replay",
+      "APNIC raw-data reanalysis",
+      "Historical routing intervention",
+      "Operational or causal validation"
+    ],
+    "discrepancies": [
+      "RQ3 fragmentation direction conflicts with Section4.4 and its numbers",
+      "RFC3901 recommends at least one IPv4-reachable authoritative server; paper says two",
+      "Finite controls expose released aggregation defects; historical generating revision, prevalence and numerical impact unestablished"
+    ]
+  },
+  "frontend": {
+    "app": "d24jvguj7brnkj",
+    "branch": "main",
+    "job_id": "104",
+    "commit": "ef7a53e0ebb76c2ebcb358732c693e5233426e26",
+    "status": "SUCCEED",
+    "start": "2026-10-06T09:23:08.490000-05:00",
+    "end": "2026-10-06T09:26:42.932000-05:00",
+    "steps": [
+      {
+        "step": "BUILD",
+        "status": "SUCCEED"
+      },
+      {
+        "step": "DEPLOY",
+        "status": "SUCCEED"
+      },
+      {
+        "step": "VERIFY",
+        "status": "SUCCEED"
+      }
+    ],
+    "initial_release_job": "103SUCCEED; initial mobile readability failure retained"
+  },
+  "agent": {
+    "passed": true,
+    "report": "agent-production-v1.json",
+    "function": "JumpServeAgentStack-AgentFnC1FD126F-MG2xfZrwsBNg",
+    "code_zip_sha256": "c88cc4f3a4363b2de2afeff8a019c4ce9b1a0976141223f86ac2cf0a6a4bc07e",
+    "all_25_python_file_hashes_matched": true,
+    "anonymous_capability_status": 401,
+    "change": "Only existing code asset; dependency layer unchanged; no experiment instances"
+  },
+  "chat": {
+    "published_prompt": "ipv6-evidence-v3",
+    "prompt_id": "28edfb2a-17f9-47c0-a801-1ca7392c7404",
+    "content_sha256": "0bbdac9caf2ee375b4ecdc2c8b2ba4e81edff722baa9609aec88fc6a2e485931",
+    "actual_cases_passed": 14,
+    "case_design": "All reused development regressions; final-candidate held-out count0",
+    "primary_reviewer": {
+      "identity": "Codex primary implementer",
+      "type": "AI",
+      "independent": false
+    },
+    "advisory_evaluator": "Separate same-model AI calls; not independent or human review; disagreements retained",
+    "failed_candidates_preserved": [
+      "v1",
+      "v2"
+    ],
+    "limitations": "Passing rubric checks do not estimate population answer reliability. Signed-in production end-to-end request unverified."
+  },
+  "checks": {
+    "scientific_protocol_and_coverage": true,
+    "private_original_storage_hash_round_trip": true,
+    "database_rls_and_browser_write_denial": true,
+    "missing_null_invariants": true,
+    "rollback_only_publication_guards": 4,
+    "backend_tests": 82,
+    "frontend_tests": 109,
+    "frontend_lint": true,
+    "frontend_production_build": true,
+    "infrastructure_typescript_build": true,
+    "final_chart_followup_lint_and_build": true,
+    "http_exports": "http-production-v2.json; both archives and every member hash pass; private QA route404",
+    "browser": "ipv6-browser-production-v2"
+  },
+  "browser": {
+    "status": "passed",
+    "report": "browser-production-v2.json",
+    "matrix_checks": 12,
+    "desktop": [
+      1440,
+      1000
+    ],
+    "mobile": [
+      390,
+      844
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "pages": [
+      "results",
+      "methods",
+      "literature"
+    ],
+    "completed_data": true,
+    "packet_missingness_and_matched_counts": true,
+    "chart_one_visible_and_12_bars": true,
+    "console_errors": [],
+    "global_overflow": false,
+    "missing_invalid_states": "Verified locally; temporary QA fixture removed; production404",
+    "login_return": "Exact canonical module/configuration query preserved; OAuth exchange not exercised"
+  },
+  "persistence": {
+    "tables": 13,
+    "raw_visibility": "private service-role-only",
+    "public_results": "12 read-only RLS relations; browser writes denied",
+    "original_and_amended_raw": {
+      "files": 851,
+      "original_bytes": 294539503,
+      "stored_bytes": 156030608,
+      "round_trip_verified": true
+    },
+    "release_evidence": "Frozen separately after this report; its verified storage manifest supplements this release without changing accepted report bytes."
+  },
+  "downloads": {
+    "data": {
+      "url": "/module/ipv6-dns-study/data.zip",
+      "bytes": 2381581,
+      "sha256": "7c4db9d04a289d958d04ee5458ec5e3cf056a20e400d93e6d993a6be3d3a9b18",
+      "members": 36
+    },
+    "validation": {
+      "url": "/module/ipv6-dns-study/validation.zip",
+      "bytes": 1330649,
+      "sha256": "b6737aaaa6c68f85141f0419fc55436d5be424ee26f377e53c3664f83eef5f70",
+      "members": 43,
+      "scope": "Predeployment snapshot; later production reports retained in current release and versioned infrastructure branch"
+    }
+  },
+  "source_revisions": {
+    "backend_science": "d2dbdff1b8a942c573e8437b91dc71bfac508a2e",
+    "backend_packaging": "8efd33e59f09e0eecf454fbd39eac456371e598b",
+    "frontend": "ef7a53e0ebb76c2ebcb358732c693e5233426e26",
+    "infrastructure_core": "b5aa09066f7df2049bd89ed4fcb7cf1e370952f6",
+    "infrastructure_branch": "study/ipv6-dns-20261006",
+    "note": "Final preservation/report follow-ups committed separately on this branch; no unrelated all-stack infrastructure-main deployment."
+  },
+  "conditional_verification": {
+    "authenticated_chat": "No legitimate Google session available; actual signed-in browser-to-agent request not exercised. AWS sign-in completed and target account verified. Unit owner/module and auth-denial checks plus actual Bedrock calls do not replace this gap.",
+    "oauth_exchange": "Login return destination checked; actual Google OAuth callback exchange not exercised.",
+    "scientific_dependencies": "Historical BGP/APNIC raw/author hardware and full packet replay unavailable or outside frozen budget; no substitute invented.",
+    "billing": "Usage-v1 records80 model calls with returned usage and$1.4108589 list estimate. Charges, hosting/storage, local power and Codex orchestration allocations remain unknown."
+  }
+}
