@@ -14,6 +14,20 @@ from reliable_answers import ReliableAnswerPlan, constrain_reliable_plan, prepar
 from http2_context import prepare_http2_context
 from http2_answers import HTTP2AnswerPlan, render_http2_answer, save_rendered_message, VERSION as HTTP2_RENDERER_VERSION
 
+from modules import IPV6_MODULE, IPV6_ANALYSIS_VERSION
+from ipv6_answers import IPv6AnswerPlan, constrain_ipv6_plan, prepare_ipv6_context, render_ipv6_answer, VERSION as IPV6_RENDERER_VERSION
+
+def ipv6_hooks():
+    from ipv6_limits import IPv6Limits
+    return {"hooks":[IPv6Limits()]}
+def get_ipv6_evidence():
+    from tools.ipv6_study import get_ipv6_study_results
+    return get_ipv6_study_results()
+def render_ipv6_evidence(plan,evidence):
+    from tools.ipv6_study import get_ipv6_literature,get_ipv6_configuration
+    text,events=render_ipv6_answer(plan,evidence,get_ipv6_literature,get_ipv6_configuration)
+    return text,[{'name':'get_ipv6_study_results','input':{}}]+events
+
 logger = logging.getLogger(__name__)
 
 def reliable_hooks():
@@ -80,7 +94,7 @@ def _save_turn(database, session_id, user_id, messages, prompt, response_text, a
         'p_session_id': session_id, 'p_user_id': user_id,
         'p_messages': _serialize_messages(messages), 'p_answer_id': answer_id,
         'p_prompt_version_id': prompt.id, 'p_model_id': model_id_for_module(prompt.module_id),
-        'p_analysis_version': {REAL_WORLD_MODULE: REAL_WORLD_ANALYSIS_VERSION, LEO_MODULE: LEO_ANALYSIS_VERSION, HTTP2_MODULE: HTTP2_ANALYSIS_VERSION, RELIABLE_MODULE: RELIABLE_ANALYSIS_VERSION}.get(prompt.module_id, ANALYSIS_VERSION),
+        'p_analysis_version': {REAL_WORLD_MODULE: REAL_WORLD_ANALYSIS_VERSION, LEO_MODULE: LEO_ANALYSIS_VERSION, HTTP2_MODULE: HTTP2_ANALYSIS_VERSION, RELIABLE_MODULE: RELIABLE_ANALYSIS_VERSION, IPV6_MODULE: IPV6_ANALYSIS_VERSION}.get(prompt.module_id, ANALYSIS_VERSION),
         'p_response': response_text, 'p_module_id': prompt.module_id,
         'p_model_usage': usage[0], 'p_estimated_model_cost_usd': usage[1], 'p_pricing_provenance': usage[2],
         'p_answer_provenance': answer_provenance,
@@ -123,7 +137,7 @@ def lambda_handler(event, context):
             "body": json.dumps({"error": "message is required"}),
         }
 
-    if module_id == RELIABLE_MODULE and len(message)>4000:
+    if module_id in (RELIABLE_MODULE,IPV6_MODULE) and len(message)>4000:
         return _error(400,'Study questions are limited to4000characters')
 
     # Select a complete, immutable prompt snapshot before making any model call.
@@ -142,14 +156,14 @@ def lambda_handler(event, context):
         model_id=model_id_for_module(module_id),
         region_name=MODEL_REGION,
         temperature=MODEL_TEMPERATURE,
-        **({"max_tokens":1024} if module_id==RELIABLE_MODULE else {}),
+        **({"max_tokens":1024} if module_id in (RELIABLE_MODULE,IPV6_MODULE) else {}),
     )
 
     agent = Agent(
         model=model,
         system_prompt=prompt.text,
-        tools=[] if module_id==RELIABLE_MODULE else MODULE_TOOLS[module_id],
-        **(reliable_hooks() if module_id==RELIABLE_MODULE else {}),
+        tools=[] if module_id in (RELIABLE_MODULE,IPV6_MODULE) else MODULE_TOOLS[module_id],
+        **(ipv6_hooks() if module_id==IPV6_MODULE else reliable_hooks() if module_id==RELIABLE_MODULE else {}),
     )
 
     # Load history into the agent
@@ -159,43 +173,44 @@ def lambda_handler(event, context):
     # Run the agent
     history_length = len(agent.messages)
     answer_provenance=None
-    if module_id in (HTTP2_MODULE,RELIABLE_MODULE):
+    if module_id in (HTTP2_MODULE,RELIABLE_MODULE,IPV6_MODULE):
         try:
-            evidence=_http2_evidence() if module_id==HTTP2_MODULE else get_reliable_evidence()
-            (prepare_http2_context if module_id==HTTP2_MODULE else prepare_reliable_context)(agent,message,evidence)
-            model_history_length=len(agent.messages)-3 if module_id==RELIABLE_MODULE else history_length
+            evidence=_http2_evidence() if module_id==HTTP2_MODULE else get_ipv6_evidence() if module_id==IPV6_MODULE else get_reliable_evidence()
+            (prepare_http2_context if module_id==HTTP2_MODULE else prepare_ipv6_context if module_id==IPV6_MODULE else prepare_reliable_context)(agent,message,evidence)
+            model_history_length=len(agent.messages)-3 if module_id in (RELIABLE_MODULE,IPV6_MODULE) else history_length
         except Exception:
             return _error(503,'Study evidence is temporarily unavailable. Please try again.')
         try:
-            result = agent(authorization=bearer,structured_output_model=HTTP2AnswerPlan if module_id==HTTP2_MODULE else ReliableAnswerPlan)
+            result = agent(authorization=bearer,structured_output_model=HTTP2AnswerPlan if module_id==HTTP2_MODULE else IPv6AnswerPlan if module_id==IPV6_MODULE else ReliableAnswerPlan)
         except Exception as exc:
             failure='AI service is temporarily unavailable. Please try again.'
             save_rendered_message(agent,failure,model_history_length)
-            if module_id==RELIABLE_MODULE:agent.messages=history+agent.messages[model_history_length:]
+            if module_id in (RELIABLE_MODULE,IPV6_MODULE):agent.messages=history+agent.messages[model_history_length:]
             try:
                 _save_turn(database,session_id,user_id,agent.messages,prompt,failure,str(uuid4()),
-                           answer_provenance={'renderer_version':(HTTP2_RENDERER_VERSION if module_id==HTTP2_MODULE else RELIABLE_RENDERER_VERSION),'status':'failed','reason':type(exc).__name__})
+                           answer_provenance={'renderer_version':(HTTP2_RENDERER_VERSION if module_id==HTTP2_MODULE else IPV6_RENDERER_VERSION if module_id==IPV6_MODULE else RELIABLE_RENDERER_VERSION),'status':'failed','reason':type(exc).__name__})
             except Exception:
                 logger.error('Failed model request could not be persisted')
             return _error(503,failure)
         try:
-            plan=(HTTP2AnswerPlan if module_id==HTTP2_MODULE else ReliableAnswerPlan).model_validate(result.structured_output)
+            plan=(HTTP2AnswerPlan if module_id==HTTP2_MODULE else IPv6AnswerPlan if module_id==IPV6_MODULE else ReliableAnswerPlan).model_validate(result.structured_output)
             if module_id==RELIABLE_MODULE:plan=constrain_reliable_plan(plan,message)
-            response_text=_render_http2_evidence(plan,evidence) if module_id==HTTP2_MODULE else render_reliable_evidence(plan,evidence)
-            if module_id==RELIABLE_MODULE:
+            if module_id==IPV6_MODULE:plan=constrain_ipv6_plan(plan,message)
+            response_text=_render_http2_evidence(plan,evidence) if module_id==HTTP2_MODULE else render_ipv6_evidence(plan,evidence) if module_id==IPV6_MODULE else render_reliable_evidence(plan,evidence)
+            if module_id in (RELIABLE_MODULE,IPV6_MODULE):
                 response_text,read_events=response_text
             save_rendered_message(agent,response_text,model_history_length)
-            if module_id==RELIABLE_MODULE:agent.messages=history+agent.messages[model_history_length:]
-            answer_provenance={'renderer_version':(HTTP2_RENDERER_VERSION if module_id==HTTP2_MODULE else RELIABLE_RENDERER_VERSION),'plan':plan.model_dump(),'evidence_sha256':evidence.get('meta',{}).get('assessment_sha256'),'read_events':read_events if module_id==RELIABLE_MODULE else None}
+            if module_id in (RELIABLE_MODULE,IPV6_MODULE):agent.messages=history+agent.messages[model_history_length:]
+            answer_provenance={'renderer_version':(HTTP2_RENDERER_VERSION if module_id==HTTP2_MODULE else IPV6_RENDERER_VERSION if module_id==IPV6_MODULE else RELIABLE_RENDERER_VERSION),'plan':plan.model_dump(),'evidence_sha256':evidence.get('meta',{}).get('assessment_sha256'),'read_events':read_events if module_id in (RELIABLE_MODULE,IPV6_MODULE) else None}
         except Exception as exc:
             # Preserve a billed but unrenderable generation as a failed answer,
             # with owner/module isolation and no incidental prose displayed.
             failure='Study evidence could not be rendered. Please try again.'
             save_rendered_message(agent,failure,model_history_length)
-            if module_id==RELIABLE_MODULE:agent.messages=history+agent.messages[model_history_length:]
+            if module_id in (RELIABLE_MODULE,IPV6_MODULE):agent.messages=history+agent.messages[model_history_length:]
             try:
                 _save_turn(database,session_id,user_id,agent.messages,prompt,failure,str(uuid4()),_usage(result,module_id),
-                           {'renderer_version':(HTTP2_RENDERER_VERSION if module_id==HTTP2_MODULE else RELIABLE_RENDERER_VERSION),'status':'failed','reason':type(exc).__name__})
+                           {'renderer_version':(HTTP2_RENDERER_VERSION if module_id==HTTP2_MODULE else IPV6_RENDERER_VERSION if module_id==IPV6_MODULE else RELIABLE_RENDERER_VERSION),'status':'failed','reason':type(exc).__name__})
             except Exception:
                 logger.error('Failed rendered generation could not be persisted')
             return _error(503,'Study evidence could not be rendered. Please try again.')
@@ -212,7 +227,7 @@ def lambda_handler(event, context):
         return _error(503, 'The AI answer could not be saved. Please try again.')
 
     # Collect tool events from the result
-    tool_events = read_events if module_id==RELIABLE_MODULE else []
+    tool_events = read_events if module_id in (RELIABLE_MODULE,IPV6_MODULE) else []
     for msg in agent.messages[history_length:]:
         if msg.get("role") == "assistant" and msg.get("content"):
             for block in msg["content"]:
@@ -236,7 +251,7 @@ def lambda_handler(event, context):
             "prompt_version_id": prompt.id,
             "prompt_version": prompt.version,
             "prompt_content_sha256": prompt.content_sha256,
-            "analysis_version": {REAL_WORLD_MODULE: REAL_WORLD_ANALYSIS_VERSION, LEO_MODULE: LEO_ANALYSIS_VERSION, HTTP2_MODULE: HTTP2_ANALYSIS_VERSION, RELIABLE_MODULE: RELIABLE_ANALYSIS_VERSION}.get(module_id, ANALYSIS_VERSION),
+            "analysis_version": {REAL_WORLD_MODULE: REAL_WORLD_ANALYSIS_VERSION, LEO_MODULE: LEO_ANALYSIS_VERSION, HTTP2_MODULE: HTTP2_ANALYSIS_VERSION, RELIABLE_MODULE: RELIABLE_ANALYSIS_VERSION, IPV6_MODULE: IPV6_ANALYSIS_VERSION}.get(module_id, ANALYSIS_VERSION),
             "module_id": module_id,
             "model_id": model_id_for_module(module_id),
             "model_usage": usage[0], "estimated_model_cost_usd": usage[1],

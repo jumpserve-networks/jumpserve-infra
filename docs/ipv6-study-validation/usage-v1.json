@@ -1,0 +1,80 @@
+{
+  "id": "ipv6-usage-v1",
+  "at": "2026-10-06T14:16:02.297322+00:00",
+  "model_campaigns": [
+    {
+      "version": 1,
+      "report_sha256": "8bb34ba073d15ab097931546c417200bcca67de8472f85a6692774dc6ae0f84e",
+      "cases": 12,
+      "calls_with_returned_usage": 24,
+      "tokens": {
+        "inputTokens": 117841,
+        "outputTokens": 3068,
+        "totalTokens": 120909
+      },
+      "calls_without_available_usage": 0,
+      "estimated_model_cost_usd": 0.4394972999999999,
+      "status": "unpublished after failed primary review"
+    },
+    {
+      "version": 2,
+      "report_sha256": "8995a8bf0f6deb28902652d067d18db8b3f5cc8f0c361150318444abae4ce028",
+      "cases": 14,
+      "calls_with_returned_usage": 28,
+      "tokens": {
+        "inputTokens": 131349,
+        "outputTokens": 3138,
+        "totalTokens": 134487
+      },
+      "calls_without_available_usage": 0,
+      "estimated_model_cost_usd": 0.48522869999999996,
+      "status": "unpublished after failed primary review"
+    },
+    {
+      "version": 3,
+      "report_sha256": "e30059767eddd62b4905ca71e6a890c2869b4501dda39f3b69236384cebe74a1",
+      "cases": 14,
+      "calls_with_returned_usage": 28,
+      "tokens": {
+        "inputTokens": 129643,
+        "outputTokens": 3534,
+        "totalTokens": 133177
+      },
+      "calls_without_available_usage": 0,
+      "estimated_model_cost_usd": 0.4861329,
+      "status": "published passing development regression"
+    }
+  ],
+  "available_model_cost_estimate_usd": 1.4108588999999998,
+  "pricing": {
+    "input_usd_per_million": 3.3,
+    "output_usd_per_million": 16.5,
+    "source": "https://www-cdn.anthropic.com/files/4zrzovbb/website/3684c2faafb97418665782cea0001f439f74b1d2.pdf",
+    "date": "2026-10-05",
+    "scope": "Standard USgeo Sonnet4.6 list estimate, not measured billing"
+  },
+  "preflight_failure": {
+    "status": "failed",
+    "reason": "AWS refresh session expired before Bedrock campaign cases; resumed after user sign-in",
+    "original_failure_timestamp": null,
+    "model_calls": 0,
+    "reason_for_zero_calls": "STS identity verification occurs before model creation in evaluator; this is not zero orchestration or credential/API cost"
+  },
+  "private_raw_storage": {
+    "original_files": 851,
+    "original_bytes": 294539503,
+    "stored_bytes": 156030608,
+    "scope": "V1 originals plus newV2 source-identity amendment; excludes final release evidence"
+  },
+  "local_analysis_wall_seconds": 2.6979904159961734,
+  "daily_summary_download_bytes": 44109006,
+  "new_network_probes": 0,
+  "new_AWS_experiment_instances": 0,
+  "estimated_new_AWS_experiment_instance_compute_usd": 0,
+  "measured_billing_usd": null,
+  "storage_charges_usd": null,
+  "hosting_and_build_charges_usd": null,
+  "local_power_allocation_usd": null,
+  "Codex_orchestration_usage": null,
+  "limits": "No double count of original/reviewed report copies. List-price estimates are not measured charges. Missing charges, unavailable failed usage and unallocated costs are not zero."
+}

@@ -111,6 +111,24 @@ class HandlerPromptTest(unittest.TestCase):
         self.assertEqual(messages[-1]['content'][0]['text'],'recorded memory')
         self.assertEqual(self.db.rpc.call_args.args[1]['p_analysis_version'],'reliable-assessment-v1')
 
+    def test_ipv6_history_persistence_and_server_selected_renderer(self):
+        module='ipv6-dns-study'
+        prompt=dict(record(),module_id=module)
+        history=[{'role':'user','content':[{'text':'old question'}]}, {'role':'assistant','content':[{'text':'old answer'}]}]
+        self.db.get.side_effect=[[prompt],[{'messages':history,'user_id':'researcher','module_id':module}]]
+        self.request['body']=json.dumps({'message':'memory','module_id':module})
+        from ipv6_answers import IPv6AnswerPlan
+        self.agent.return_value=types.SimpleNamespace(structured_output=IPv6AnswerPlan(topics=['units']))
+        with patch.object(self.handler,'ipv6_hooks',return_value={}), patch.object(self.handler,'get_ipv6_evidence',return_value={'meta':{'analysis_version':'ipv6-dns-assessment-v1','assessment_sha256':'a'},'claims':[]}), patch.object(self.handler,'render_ipv6_evidence',return_value=('recorded memory', [{'name':'get_ipv6_study_results','input':{}}])):
+            result=self.handler.lambda_handler(self.request,None)
+        self.assertEqual(result['statusCode'],200)
+        self.assertEqual(self.agent_factory.call_args.kwargs['tools'],[])
+        messages=self.db.rpc.call_args.args[1]['p_messages']
+        self.assertEqual(messages[:2],history)
+        self.assertEqual(sum(m==history[0] for m in messages),1)
+        self.assertEqual(messages[-1]['content'][0]['text'],'recorded memory')
+        self.assertEqual(self.db.rpc.call_args.args[1]['p_analysis_version'],'ipv6-dns-assessment-v1')
+
     def test_answer_uses_and_records_one_snapshot_without_rereading_active_version(self):
         result = self.handler.lambda_handler(self.request, None)
         self.assertEqual(result['statusCode'], 200)

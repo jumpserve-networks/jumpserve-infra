@@ -1,0 +1,59 @@
+{
+  "id": "ipv6-http-local-v1",
+  "at": "2026-10-06T14:03:21.724449+00:00",
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny"
+  },
+  "checks": [
+    {
+      "path": "/module/ipv6-dns-study",
+      "status": 200,
+      "bytes": 87492
+    },
+    {
+      "path": "/module/ipv6-dns-study/test-results",
+      "status": 200,
+      "bytes": 2114296
+    },
+    {
+      "path": "/module/ipv6-dns-study/methods",
+      "status": 200,
+      "bytes": 280038
+    },
+    {
+      "path": "/module/ipv6-dns-study/literature",
+      "status": 200,
+      "bytes": 1198993
+    },
+    {
+      "path": "/module/ipv6-dns-study/api/data",
+      "status": 200,
+      "comparisons": 1152,
+      "sources": 74,
+      "runs": 158,
+      "assessment_sha256": "3c3532901aa4b507a61849666d925a0268c0658c0129dbfd729514df8c3a07b0"
+    },
+    {
+      "path": "/module/ipv6-dns-study/data.zip",
+      "sha256": "192493f84aea0d9638e08963c9eb18bcb20d6e5eac048566ceb17a90250c3df8",
+      "members": 36,
+      "all_member_hashes_verified": true
+    },
+    {
+      "path": "/module/ipv6-dns-study/paper-context.json",
+      "figures": 21,
+      "sha256": "0f9085e4f52de261346883b5f3843a107d929dd83a7de9d2ecedb0d926b5ed19"
+    },
+    {
+      "path": "chat sign-in return",
+      "destination": "http://127.0.0.1:3000/login?next=%2Fmodule%2Fipv6-dns-study%2Fchat%3Fconfiguration%3Ddnssec--mtu1500-v6-only-edns4096",
+      "authenticated_chat": "not exercised: no legitimate Google session"
+    },
+    {
+      "path": "temporary invalid-data fixture route",
+      "status": 404
+    }
+  ],
+  "passed": true
+}

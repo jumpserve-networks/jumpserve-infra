@@ -30,3 +30,7 @@ MODULE_TOOLS = {
 
 from tools.reliable_study import get_reliable_study_results, get_reliable_configuration, get_reliable_literature
 MODULE_TOOLS[RELIABLE_MODULE] = [get_reliable_study_results,get_reliable_configuration,get_reliable_literature]
+
+from modules import IPV6_MODULE
+from tools.ipv6_study import get_ipv6_study_results,get_ipv6_configuration,get_ipv6_literature
+MODULE_TOOLS[IPV6_MODULE] = [get_ipv6_study_results,get_ipv6_configuration,get_ipv6_literature]

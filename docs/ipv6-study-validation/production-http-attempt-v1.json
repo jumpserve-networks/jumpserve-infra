@@ -1,0 +1,18 @@
+{
+  "id": "ipv6-production-http-attempt-v1",
+  "status": "failed",
+  "recorded_at": "2026-10-06T14:18:24.291907+00:00",
+  "target": "https://jumpserve.quaint-lab.org",
+  "stage": "localPythonTLSverificationbeforeHTTPcontent",
+  "reason": "Python default certificate store could not find local issuer; browser trusted TLS and loaded deployed pages. Host failure not established.",
+  "code_sha256": "169abab53105aa4c9ab61dfb1c3174613c92a646e6fda1d775ead429a254466f",
+  "default_certificate_paths": {
+    "cafile": null,
+    "capath": null,
+    "openssl_cafile_env": "SSL_CERT_FILE",
+    "openssl_cafile": "/Library/Frameworks/Python.framework/Versions/3.13/etc/openssl/cert.pem",
+    "openssl_capath_env": "SSL_CERT_DIR",
+    "openssl_capath": "/Library/Frameworks/Python.framework/Versions/3.13/etc/openssl/certs"
+  },
+  "correction": "Use OS /etc/ssl/cert.pem trusted CA store with hostname/certificate verification still enabled; rerun fixed-target HTTP checks."
+}

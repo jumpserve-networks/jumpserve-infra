@@ -1,0 +1,137 @@
+{
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny"
+  },
+  "counts": {
+    "meta": 2,
+    "runs": 158,
+    "claims": 15,
+    "sources": 74,
+    "controls": 4,
+    "artifacts": 19,
+    "campaigns": 2,
+    "protocols": 2,
+    "published": 1152,
+    "summaries": 432,
+    "comparisons": 1152,
+    "measurements": 136512,
+    "configurations": 144
+  },
+  "security": [
+    {
+      "relname": "ipv6_study_artifacts",
+      "relrowsecurity": true,
+      "anon_select": false,
+      "browser_select": false,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "ipv6_study_campaigns",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "ipv6_study_claims",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "ipv6_study_comparisons",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "ipv6_study_configurations",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "ipv6_study_controls",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "ipv6_study_measurements",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "ipv6_study_meta",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "ipv6_study_protocols",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "ipv6_study_published",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "ipv6_study_runs",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "ipv6_study_sources",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "ipv6_study_summaries",
+      "relrowsecurity": true,
+      "anon_select": true,
+      "browser_select": true,
+      "anon_write": false,
+      "browser_write": false
+    }
+  ],
+  "bucket": [
+    {
+      "public": false
+    }
+  ],
+  "invariants": {
+    "invalid_recorded": 0,
+    "invalid_missing": 0
+  },
+  "passed": true
+}

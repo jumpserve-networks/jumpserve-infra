@@ -1,0 +1,21 @@
+{
+  "id": "ipv6-dns-release-v1",
+  "module_id": "ipv6-dns-study",
+  "targets": {"aws_account":"395567831870","supabase_project":"regphejnlvfpyokpniny"},
+  "release_blocking": [
+    "Frozen scientific protocols and all planned archive/control runs retained; comparison and coverage counts match normalized evidence; discrepancies are findings, not pass/fail criteria.",
+    "Original artifact bytes stored privately in Supabase Storage, retrieved and SHA256 verified; normalized relational records and published values stored separately.",
+    "Every new table has RLS; dedicated public evidence projections permit anonymous reads; browser INSERT/UPDATE/DELETE denied; raw artifact table and bucket private.",
+    "Backend module allowlist, authenticated user/module conversation scope, bounded read-only tools, prompt and analysis provenance, deterministic evidence rendering and failed-call accounting tested.",
+    "Only a prompt candidate passing the frozen actual-answer evaluation criteria is published; failed evaluations and publication history retained.",
+    "Frontend lint, relevant tests and production build pass. Completed and meaningful unavailable/invalid states checked in desktop/mobile browsers, light/dark, charts, exports, navigation and sign-in return paths.",
+    "Guarded target identity verification immediately before migrations, prompt publication and deployment; deployment changes limited to this feature and necessary integrations."
+  ],
+  "conditional": {
+    "authenticated_chat": "Exercise an actual request only if a legitimate Google session is available. Otherwise record that end-to-end signed-in production chat was not verified; unit/auth-denial/model-service checks do not substitute for it.",
+    "new_network_campaign": "Historical BGP routes, author hardware, Liberty Global policy and APNIC raw requests unavailable. No fresh empirical network campaign, simulations or causal/generalization validation substituted.",
+    "literature": "Incomplete direct-source access and substantive review explicitly displayed; numerical reproduction does not imply full literature review or full paper validation.",
+    "billing": "Record returned model tokens and measured byte/time usage. Billing not reconciled: estimates and unallocated/missing costs labeled separately."
+  },
+  "production_verification": ["Check Amplify build success and deployed canonical routes", "Inspect deployed desktop/mobile results and themes", "Verify public exports and file hashes", "Verify deployed backend authenticated capability behavior where legitimate session exists, and anonymous auth denial otherwise"]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "ipv6-release-amendment-v2",
+  "at": "2026-10-06T14:20:44.492708+00:00",
+  "supersedes": "production browser readability portion only; original records retained",
+  "change": "Responsive chart geometry and readable HTML legend; scientific inputs/results, prompt and evaluated backend unchanged",
+  "predeclared_followup_checks": [
+    "Frontend lint and production build",
+    "One visible chart at1440 and390px, unchanged axis units/values, readablemobilelabels and no horizontalpageoverflow",
+    "Production desktop/mobile light/dark, public methods/literature/nav/export/login checks"
+  ],
+  "reviewer_type": "AI",
+  "conditional_authenticated_chat": "Still unavailable legitimate session"
+}

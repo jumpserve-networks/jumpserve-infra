@@ -1,0 +1,32 @@
+{
+  "id": "ipv6-http-local-v1",
+  "at": "2026-10-06T14:03:00.118603+00:00",
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny"
+  },
+  "checks": [
+    {
+      "name": "missing-review",
+      "result": "rejected transaction; no publication"
+    },
+    {
+      "name": "missing-names",
+      "result": "rejected transaction; no publication"
+    },
+    {
+      "name": "omitted-case",
+      "result": "rejected transaction; no publication"
+    },
+    {
+      "name": "failed-case",
+      "result": "rejected transaction; no publication"
+    }
+  ],
+  "passed": true,
+  "prompt": {
+    "id": "28edfb2a-17f9-47c0-a801-1ca7392c7404",
+    "content_sha256": "0bbdac9caf2ee375b4ecdc2c8b2ba4e81edff722baa9609aec88fc6a2e485931",
+    "published_at": "2026-10-06 13:57:17.401573+00"
+  }
+}
