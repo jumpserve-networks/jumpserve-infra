@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "started_at": "2026-10-07T19:35:27.332136+00:00",
+  "protocol": "research-workflow-release-protocol-v1",
+  "amendment": "research-workflow-release-amendment-v2",
+  "checks": [
+    {
+      "name": "deployed resources and original Lambda byte identities",
+      "passed": false,
+      "error_type": "AssertionError",
+      "wall_seconds": 3.088980083000024
+    }
+  ],
+  "passed": false,
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independence": "Not independent"
+  },
+  "design": "Release development regressions; private synthetic numerical data, no paper assessment or held-out evaluation.",
+  "authenticated_google_request_verified": false,
+  "measured_charges_usd": null,
+  "model_usage": null,
+  "failure_type": "AssertionError",
+  "ended_at": "2026-10-07T19:35:30.421775+00:00",
+  "artifacts": []
+}

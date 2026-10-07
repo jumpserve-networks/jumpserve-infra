@@ -1,0 +1,11 @@
+{
+  "JumpServeBenchmarkStack": {
+    "BenchmarkImageId": "ami-0808d1157e26c65cb",
+    "BenchmarkImagePipelineRoleArn": "arn:aws:iam::395567831870:role/JumpServeBenchmarkImageBuilder",
+    "BenchmarkApiUrl": "https://d3o7xdethb.execute-api.us-east-1.amazonaws.com",
+    "RealWorldJobsTable": "JumpServeBenchmarkStack-RealWorldTestsJobsB46B0892-1ON1F6QD0XXNC",
+    "ResearchWorkflowApiUrl": "https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/research",
+    "BenchmarkSecurityGroupId": "sg-08c2146ece4519d74",
+    "RealWorldResultsBucket": "jumpservebenchmarkstack-realworldtestsresultsfde9b-uqd7mknd6tve"
+  }
+}

@@ -1,0 +1,32 @@
+{
+    "summary": {
+        "jobArn": "arn:aws:amplify:us-east-1:395567831870:apps/d24jvguj7brnkj/branches/main/jobs/0000000105",
+        "jobId": "105",
+        "commitId": "bc6f87abb480c966dd56b828a60f5c279d8fc83f",
+        "commitMessage": "Match the production navigation check to existing module links",
+        "commitTime": "2026-10-07T14:16:18-05:00",
+        "startTime": "2026-10-07T14:34:29.936000-05:00",
+        "status": "SUCCEED",
+        "endTime": "2026-10-07T14:37:48.436000-05:00"
+    },
+    "steps": [
+        {
+            "step": "BUILD",
+            "status": "SUCCEED",
+            "start": "2026-10-07T14:34:29.962000-05:00",
+            "end": "2026-10-07T14:37:24.025000-05:00"
+        },
+        {
+            "step": "DEPLOY",
+            "status": "SUCCEED",
+            "start": "2026-10-07T14:37:24.245000-05:00",
+            "end": "2026-10-07T14:37:48.027000-05:00"
+        },
+        {
+            "step": "VERIFY",
+            "status": "SUCCEED",
+            "start": "2026-10-07T14:37:48.274000-05:00",
+            "end": "2026-10-07T14:37:48.298000-05:00"
+        }
+    ]
+}

@@ -1,5 +1,8 @@
 # Claim queues and bounded parallel evaluation
 
+Deployed verification and remaining gaps are recorded in the
+[production release report](research-workflow-production-release-v1.md).
+
 Production hosting uses the account's shared Lambda pool of 10 invocations,
 including other functions, with no separate API/worker reservations. The global
 four/study two **queued job** limits remain enforced by PostgreSQL. See the

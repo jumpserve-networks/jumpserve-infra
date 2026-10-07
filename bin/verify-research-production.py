@@ -7,7 +7,9 @@ import json
 import os
 from pathlib import Path
 import sys
+import subprocess
 import time
+import traceback
 import urllib.error
 import urllib.request
 import uuid
@@ -54,10 +56,15 @@ def public_checks():
 
 def configuration_checks():
     import boto3
-    session=boto3.Session(profile_name='jumpserve',region_name='us-east-1')
+    # Older installed botocore cannot use the CLI's login_session provider.
+    # Export temporary credentials only into this process's memory; never print/save.
+    credentials=json.loads(subprocess.check_output(['aws','configure','export-credentials','--profile','jumpserve','--format','process'],timeout=20))
+    session=boto3.Session(aws_access_key_id=credentials['AccessKeyId'],aws_secret_access_key=credentials['SecretAccessKey'],aws_session_token=credentials['SessionToken'],region_name='us-east-1')
     assert session.client('sts').get_caller_identity()['Account']==store.ACCOUNT
     cfn=session.client('cloudformation');stack=cfn.describe_stacks(StackName='JumpServeBenchmarkStack')['Stacks'][0];assert stack['StackStatus']=='UPDATE_COMPLETE'
-    resources=cfn.list_stack_resources(StackName='JumpServeBenchmarkStack')['StackResourceSummaries']
+    inventory=cfn.get_paginator('list_stack_resources').paginate(StackName='JumpServeBenchmarkStack',PaginationConfig={'MaxItems':500}).build_full_result()
+    assert not inventory.get('NextToken'), 'Stack resource inventory was truncated'
+    resources=inventory['StackResourceSummaries']
     functions=[r for r in resources if r['LogicalResourceId'] in ('ResearchWorkflowApiE04EBDAC','ResearchWorkflowQueueWorker702E601D')]
     assert len(functions)==2
     manifest=json.loads((ROOT/'research-workflow-runtime.json').read_text())
@@ -151,6 +158,8 @@ try:
     report['passed']=True
 except Exception as error:
     report['failure_type']=type(error).__name__
+    site=traceback.extract_tb(error.__traceback__)[-1]
+    report['failure_site']=dict(file=site.filename,line=site.lineno,function=site.name)
 finally:
     report['ended_at']=workflow.now()
     report['artifacts']=[dict(path=str(p.relative_to(ROOT)),sha256=workflow.digest(p.read_bytes()),byte_count=p.stat().st_size) for p in sorted(DIRECTORY.iterdir()) if p.is_file()]

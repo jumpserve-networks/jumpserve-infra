@@ -1,0 +1,2863 @@
+{
+    "Resources": {
+        "BenchmarkInstanceSG6368283B": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "Security group for ephemeral benchmark EC2 instances",
+                "SecurityGroupEgress": [
+                    {
+                        "CidrIp": "0.0.0.0/0",
+                        "Description": "Allow all outbound traffic by default",
+                        "IpProtocol": "-1"
+                    }
+                ],
+                "VpcId": "vpc-0513ad61ccb535a10"
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkInstanceSG/Resource"
+            }
+        },
+        "BenchmarkInstanceRole1DECDFC6": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "ec2.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "ManagedPolicyArns": [
+                    {
+                        "Fn::Join": [
+                            "",
+                            [
+                                "arn:",
+                                {
+                                    "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/AmazonSSMManagedInstanceCore"
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkInstanceRole/Resource"
+            }
+        },
+        "BenchmarkInstanceRoleDefaultPolicy75CC5B20": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "ec2:TerminateInstances",
+                            "Condition": {
+                                "StringEquals": {
+                                    "aws:ResourceTag/Project": "JumpServe"
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        },
+                        {
+                            "Action": [
+                                "secretsmanager:BatchGetSecretValue",
+                                "secretsmanager:GetSecretValue"
+                            ],
+                            "Effect": "Deny",
+                            "Resource": "*"
+                        },
+                        {
+                            "Action": [
+                                "logs:CreateLogGroup",
+                                "logs:CreateLogStream",
+                                "logs:DescribeLogStreams",
+                                "logs:PutLogEvents"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:logs:*:*:log-group:/jumpserve/benchmark*"
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "PolicyName": "BenchmarkInstanceRoleDefaultPolicy75CC5B20",
+                "Roles": [
+                    {
+                        "Ref": "BenchmarkInstanceRole1DECDFC6"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkInstanceRole/DefaultPolicy/Resource"
+            }
+        },
+        "BenchmarkInstanceProfile": {
+            "Type": "AWS::IAM::InstanceProfile",
+            "Properties": {
+                "Roles": [
+                    {
+                        "Ref": "BenchmarkInstanceRole1DECDFC6"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkInstanceProfile"
+            }
+        },
+        "LaunchBenchmarkFnServiceRole57CF9504": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "ManagedPolicyArns": [
+                    {
+                        "Fn::Join": [
+                            "",
+                            [
+                                "arn:",
+                                {
+                                    "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/LaunchBenchmarkFn/ServiceRole/Resource"
+            }
+        },
+        "LaunchBenchmarkFnServiceRoleDefaultPolicyC8D71087": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": [
+                                "secretsmanager:DescribeSecret",
+                                "secretsmanager:GetSecretValue"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:secretsmanager:us-east-1:395567831870:secret:jumpserve/supabase-service-key-??????"
+                        },
+                        {
+                            "Action": [
+                                "ec2:CreateTags",
+                                "ec2:DescribeInstances",
+                                "ec2:DescribeSecurityGroups",
+                                "ec2:DescribeSubnets",
+                                "ec2:RunInstances"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        },
+                        {
+                            "Action": "iam:PassRole",
+                            "Effect": "Allow",
+                            "Resource": {
+                                "Fn::GetAtt": [
+                                    "BenchmarkInstanceRole1DECDFC6",
+                                    "Arn"
+                                ]
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "PolicyName": "LaunchBenchmarkFnServiceRoleDefaultPolicyC8D71087",
+                "Roles": [
+                    {
+                        "Ref": "LaunchBenchmarkFnServiceRole57CF9504"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/LaunchBenchmarkFn/ServiceRole/DefaultPolicy/Resource"
+            }
+        },
+        "LaunchBenchmarkFn5833EFAD": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Code": {
+                    "S3Bucket": "cdk-hnb659fds-assets-395567831870-us-east-1",
+                    "S3Key": "88d6ac810a121a1ffd248b63928b05d6ce3f80b8caaaa18f12b9f075b839d257.zip"
+                },
+                "Environment": {
+                    "Variables": {
+                        "SUPABASE_URL": "https://regphejnlvfpyokpniny.supabase.co",
+                        "SUPABASE_ANON_KEY": "sb_publishable_6A6cCQnpFexhV_HB_6YizQ_-YB8Ftxc",
+                        "SUPABASE_SECRET_ARN": "arn:aws:secretsmanager:us-east-1:395567831870:secret:jumpserve/supabase-service-key",
+                        "AMI_ID": {
+                            "Fn::If": [
+                                "UseBenchmarkAmi",
+                                {
+                                    "Ref": "BenchmarkAmiId"
+                                },
+                                {
+                                    "Ref": "SsmParameterValueawsservicecanonicalubuntuserver2204stablecurrentamd64hvmebsgp2amiidC96584B6F00A464EAD1953AFF4B05118Parameter"
+                                }
+                            ]
+                        },
+                        "BENCHMARK_IMAGE_MODE": {
+                            "Fn::If": [
+                                "UseBenchmarkAmi",
+                                "prebaked",
+                                "base"
+                            ]
+                        },
+                        "SECURITY_GROUP_ID": {
+                            "Fn::GetAtt": [
+                                "BenchmarkInstanceSG6368283B",
+                                "GroupId"
+                            ]
+                        },
+                        "SUBNET_ID": "subnet-034d7a034aaa1c49b",
+                        "INSTANCE_PROFILE_ARN": {
+                            "Fn::GetAtt": [
+                                "BenchmarkInstanceProfile",
+                                "Arn"
+                            ]
+                        },
+                        "BENCHMARK_INGEST_URL": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Fn::GetAtt": [
+                                            "BenchmarkApiE2E79BA0",
+                                            "ApiEndpoint"
+                                        ]
+                                    },
+                                    "/benchmarks/ingest"
+                                ]
+                            ]
+                        }
+                    }
+                },
+                "Handler": "index.handler",
+                "MemorySize": 256,
+                "Role": {
+                    "Fn::GetAtt": [
+                        "LaunchBenchmarkFnServiceRole57CF9504",
+                        "Arn"
+                    ]
+                },
+                "Runtime": "nodejs22.x",
+                "Timeout": 30
+            },
+            "DependsOn": [
+                "LaunchBenchmarkFnServiceRoleDefaultPolicyC8D71087",
+                "LaunchBenchmarkFnServiceRole57CF9504"
+            ],
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/LaunchBenchmarkFn/Resource",
+                "aws:asset:path": "asset.88d6ac810a121a1ffd248b63928b05d6ce3f80b8caaaa18f12b9f075b839d257",
+                "aws:asset:is-bundled": true,
+                "aws:asset:property": "Code"
+            }
+        },
+        "LaunchBenchmarkFnLogGroup28D08994": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+                "LogGroupName": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "/aws/lambda/",
+                            {
+                                "Ref": "LaunchBenchmarkFn5833EFAD"
+                            }
+                        ]
+                    ]
+                },
+                "RetentionInDays": 731
+            },
+            "UpdateReplacePolicy": "Retain",
+            "DeletionPolicy": "Retain",
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/LaunchBenchmarkFn/LogGroup/Resource"
+            }
+        },
+        "GitHubActionsOidc": {
+            "Type": "AWS::IAM::OIDCProvider",
+            "Properties": {
+                "ClientIdList": [
+                    "sts.amazonaws.com"
+                ],
+                "Url": "https://token.actions.githubusercontent.com"
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/GitHubActionsOidc"
+            }
+        },
+        "BenchmarkImagePipelineRoleCAA30BA5": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRoleWithWebIdentity",
+                            "Condition": {
+                                "StringEquals": {
+                                    "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
+                                    "token.actions.githubusercontent.com:sub": "repo:jumpserve-networks/jumpserve-back-end:ref:refs/heads/main"
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Federated": {
+                                    "Fn::GetAtt": [
+                                        "GitHubActionsOidc",
+                                        "Arn"
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "MaxSessionDuration": 7200,
+                "RoleName": "JumpServeBenchmarkImageBuilder"
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkImagePipelineRole/Resource"
+            }
+        },
+        "BenchmarkImagePipelineRoleDefaultPolicy50ABBE90": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": [
+                                "ec2:DescribeImages",
+                                "ec2:DescribeInstances",
+                                "ssm:DescribeInstanceInformation",
+                                "ssm:ListCommandInvocations"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        },
+                        {
+                            "Action": [
+                                "ec2:CreateImage",
+                                "ec2:RunInstances"
+                            ],
+                            "Condition": {
+                                "StringEquals": {
+                                    "aws:RequestedRegion": "us-east-1"
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        },
+                        {
+                            "Action": "ec2:CreateTags",
+                            "Condition": {
+                                "StringEquals": {
+                                    "ec2:CreateAction": [
+                                        "RunInstances",
+                                        "CreateImage"
+                                    ]
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": [
+                                "arn:aws:ec2:us-east-1:395567831870:*",
+                                "arn:aws:ec2:us-east-1::image/*",
+                                "arn:aws:ec2:us-east-1::snapshot/*"
+                            ]
+                        },
+                        {
+                            "Action": "ec2:TerminateInstances",
+                            "Condition": {
+                                "StringEquals": {
+                                    "ec2:ResourceTag/Project": "JumpServe"
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:ec2:us-east-1:395567831870:instance/*"
+                        },
+                        {
+                            "Action": [
+                                "iam:CreateRole",
+                                "iam:DeleteRole",
+                                "iam:GetRole"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:iam::395567831870:role/JumpServeAmiBuilder-*"
+                        },
+                        {
+                            "Action": [
+                                "iam:AddRoleToInstanceProfile",
+                                "iam:CreateInstanceProfile",
+                                "iam:DeleteInstanceProfile",
+                                "iam:GetInstanceProfile",
+                                "iam:RemoveRoleFromInstanceProfile"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:iam::395567831870:instance-profile/JumpServeAmiBuilder-*"
+                        },
+                        {
+                            "Action": [
+                                "iam:AttachRolePolicy",
+                                "iam:DetachRolePolicy"
+                            ],
+                            "Condition": {
+                                "ArnEquals": {
+                                    "iam:PolicyARN": "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:iam::395567831870:role/JumpServeAmiBuilder-*"
+                        },
+                        {
+                            "Action": "iam:PassRole",
+                            "Condition": {
+                                "StringEquals": {
+                                    "iam:PassedToService": "ec2.amazonaws.com"
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": [
+                                "arn:aws:iam::395567831870:role/JumpServeAmiBuilder-*",
+                                {
+                                    "Fn::GetAtt": [
+                                        "BenchmarkInstanceRole1DECDFC6",
+                                        "Arn"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "Action": "ssm:SendCommand",
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:ssm:us-east-1::document/AWS-RunShellScript"
+                        },
+                        {
+                            "Action": "ssm:SendCommand",
+                            "Condition": {
+                                "StringEquals": {
+                                    "ssm:resourceTag/Project": "JumpServe"
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:ec2:us-east-1:395567831870:instance/*"
+                        },
+                        {
+                            "Action": "ssm:GetParameter",
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:ssm:us-east-1::parameter/aws/service/canonical/ubuntu/server/22.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+                        },
+                        {
+                            "Action": [
+                                "lambda:GetFunctionConfiguration",
+                                "lambda:InvokeFunction"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": {
+                                "Fn::GetAtt": [
+                                    "LaunchBenchmarkFn5833EFAD",
+                                    "Arn"
+                                ]
+                            }
+                        },
+                        {
+                            "Action": "logs:GetLogEvents",
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:logs:us-east-1:395567831870:log-group:/jumpserve/benchmark:*"
+                        },
+                        {
+                            "Action": [
+                                "cloudformation:DescribeStacks",
+                                "cloudformation:UpdateStack"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:cloudformation:us-east-1:395567831870:stack/JumpServeBenchmarkStack/*"
+                        },
+                        {
+                            "Action": "iam:PassRole",
+                            "Condition": {
+                                "StringEquals": {
+                                    "iam:PassedToService": "cloudformation.amazonaws.com"
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:iam::395567831870:role/cdk-hnb659fds-cfn-exec-role-395567831870-us-east-1"
+                        },
+                        {
+                            "Action": [
+                                "secretsmanager:DescribeSecret",
+                                "secretsmanager:GetSecretValue"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:secretsmanager:us-east-1:395567831870:secret:jumpserve/supabase-service-key-??????"
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "PolicyName": "BenchmarkImagePipelineRoleDefaultPolicy50ABBE90",
+                "Roles": [
+                    {
+                        "Ref": "BenchmarkImagePipelineRoleCAA30BA5"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkImagePipelineRole/DefaultPolicy/Resource"
+            }
+        },
+        "CleanupBenchmarksFnServiceRoleABB0C33B": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "ManagedPolicyArns": [
+                    {
+                        "Fn::Join": [
+                            "",
+                            [
+                                "arn:",
+                                {
+                                    "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/CleanupBenchmarksFn/ServiceRole/Resource"
+            }
+        },
+        "CleanupBenchmarksFnServiceRoleDefaultPolicy67AD5157": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": [
+                                "secretsmanager:DescribeSecret",
+                                "secretsmanager:GetSecretValue"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:secretsmanager:us-east-1:395567831870:secret:jumpserve/supabase-service-key-??????"
+                        },
+                        {
+                            "Action": [
+                                "ec2:DescribeInstances",
+                                "ec2:TerminateInstances"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "PolicyName": "CleanupBenchmarksFnServiceRoleDefaultPolicy67AD5157",
+                "Roles": [
+                    {
+                        "Ref": "CleanupBenchmarksFnServiceRoleABB0C33B"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/CleanupBenchmarksFn/ServiceRole/DefaultPolicy/Resource"
+            }
+        },
+        "CleanupBenchmarksFn7EFF200E": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Code": {
+                    "S3Bucket": "cdk-hnb659fds-assets-395567831870-us-east-1",
+                    "S3Key": "423b990e77cd4b5c52fd90f565022de4aa27354a2c628a4ce44b7ffde8be4917.zip"
+                },
+                "Environment": {
+                    "Variables": {
+                        "SUPABASE_URL": "https://regphejnlvfpyokpniny.supabase.co",
+                        "SUPABASE_ANON_KEY": "sb_publishable_6A6cCQnpFexhV_HB_6YizQ_-YB8Ftxc",
+                        "SUPABASE_SECRET_ARN": "arn:aws:secretsmanager:us-east-1:395567831870:secret:jumpserve/supabase-service-key"
+                    }
+                },
+                "Handler": "index.handler",
+                "MemorySize": 256,
+                "Role": {
+                    "Fn::GetAtt": [
+                        "CleanupBenchmarksFnServiceRoleABB0C33B",
+                        "Arn"
+                    ]
+                },
+                "Runtime": "nodejs22.x",
+                "Timeout": 60
+            },
+            "DependsOn": [
+                "CleanupBenchmarksFnServiceRoleDefaultPolicy67AD5157",
+                "CleanupBenchmarksFnServiceRoleABB0C33B"
+            ],
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/CleanupBenchmarksFn/Resource",
+                "aws:asset:path": "asset.423b990e77cd4b5c52fd90f565022de4aa27354a2c628a4ce44b7ffde8be4917",
+                "aws:asset:is-bundled": true,
+                "aws:asset:property": "Code"
+            }
+        },
+        "CleanupBenchmarksFnLogGroupBEE76B9E": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+                "LogGroupName": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "/aws/lambda/",
+                            {
+                                "Ref": "CleanupBenchmarksFn7EFF200E"
+                            }
+                        ]
+                    ]
+                },
+                "RetentionInDays": 731
+            },
+            "UpdateReplacePolicy": "Retain",
+            "DeletionPolicy": "Retain",
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/CleanupBenchmarksFn/LogGroup/Resource"
+            }
+        },
+        "CleanupSchedule42CE35AB": {
+            "Type": "AWS::Events::Rule",
+            "Properties": {
+                "ScheduleExpression": "rate(15 minutes)",
+                "State": "ENABLED",
+                "Targets": [
+                    {
+                        "Arn": {
+                            "Fn::GetAtt": [
+                                "CleanupBenchmarksFn7EFF200E",
+                                "Arn"
+                            ]
+                        },
+                        "Id": "Target0"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/CleanupSchedule/Resource"
+            }
+        },
+        "CleanupScheduleAllowEventRuleJumpServeBenchmarkStackCleanupBenchmarksFn3F12247B69452E08": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "CleanupBenchmarksFn7EFF200E",
+                        "Arn"
+                    ]
+                },
+                "Principal": "events.amazonaws.com",
+                "SourceArn": {
+                    "Fn::GetAtt": [
+                        "CleanupSchedule42CE35AB",
+                        "Arn"
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/CleanupSchedule/AllowEventRuleJumpServeBenchmarkStackCleanupBenchmarksFn3F12247B"
+            }
+        },
+        "CancelBenchmarkFnServiceRole0D061B44": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "ManagedPolicyArns": [
+                    {
+                        "Fn::Join": [
+                            "",
+                            [
+                                "arn:",
+                                {
+                                    "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/CancelBenchmarkFn/ServiceRole/Resource"
+            }
+        },
+        "CancelBenchmarkFnServiceRoleDefaultPolicyB383CC9F": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": [
+                                "secretsmanager:DescribeSecret",
+                                "secretsmanager:GetSecretValue"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:secretsmanager:us-east-1:395567831870:secret:jumpserve/supabase-service-key-??????"
+                        },
+                        {
+                            "Action": "ec2:TerminateInstances",
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "PolicyName": "CancelBenchmarkFnServiceRoleDefaultPolicyB383CC9F",
+                "Roles": [
+                    {
+                        "Ref": "CancelBenchmarkFnServiceRole0D061B44"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/CancelBenchmarkFn/ServiceRole/DefaultPolicy/Resource"
+            }
+        },
+        "CancelBenchmarkFnECDF48C2": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Code": {
+                    "S3Bucket": "cdk-hnb659fds-assets-395567831870-us-east-1",
+                    "S3Key": "2c46329d499533557b97927b800cac5710af7d68f8688ae6f039f50f483565d8.zip"
+                },
+                "Environment": {
+                    "Variables": {
+                        "SUPABASE_URL": "https://regphejnlvfpyokpniny.supabase.co",
+                        "SUPABASE_ANON_KEY": "sb_publishable_6A6cCQnpFexhV_HB_6YizQ_-YB8Ftxc",
+                        "SUPABASE_SECRET_ARN": "arn:aws:secretsmanager:us-east-1:395567831870:secret:jumpserve/supabase-service-key"
+                    }
+                },
+                "Handler": "index.handler",
+                "MemorySize": 256,
+                "Role": {
+                    "Fn::GetAtt": [
+                        "CancelBenchmarkFnServiceRole0D061B44",
+                        "Arn"
+                    ]
+                },
+                "Runtime": "nodejs22.x",
+                "Timeout": 15
+            },
+            "DependsOn": [
+                "CancelBenchmarkFnServiceRoleDefaultPolicyB383CC9F",
+                "CancelBenchmarkFnServiceRole0D061B44"
+            ],
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/CancelBenchmarkFn/Resource",
+                "aws:asset:path": "asset.2c46329d499533557b97927b800cac5710af7d68f8688ae6f039f50f483565d8",
+                "aws:asset:is-bundled": true,
+                "aws:asset:property": "Code"
+            }
+        },
+        "CancelBenchmarkFnLogGroup1A37331D": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+                "LogGroupName": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "/aws/lambda/",
+                            {
+                                "Ref": "CancelBenchmarkFnECDF48C2"
+                            }
+                        ]
+                    ]
+                },
+                "RetentionInDays": 731
+            },
+            "UpdateReplacePolicy": "Retain",
+            "DeletionPolicy": "Retain",
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/CancelBenchmarkFn/LogGroup/Resource"
+            }
+        },
+        "GetBenchmarkLogsFnServiceRole639FBD3B": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "ManagedPolicyArns": [
+                    {
+                        "Fn::Join": [
+                            "",
+                            [
+                                "arn:",
+                                {
+                                    "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/GetBenchmarkLogsFn/ServiceRole/Resource"
+            }
+        },
+        "GetBenchmarkLogsFnServiceRoleDefaultPolicy6FCBCF65": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": [
+                                "logs:DescribeLogStreams",
+                                "logs:GetLogEvents"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:logs:*:*:log-group:/jumpserve/benchmark*"
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "PolicyName": "GetBenchmarkLogsFnServiceRoleDefaultPolicy6FCBCF65",
+                "Roles": [
+                    {
+                        "Ref": "GetBenchmarkLogsFnServiceRole639FBD3B"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/GetBenchmarkLogsFn/ServiceRole/DefaultPolicy/Resource"
+            }
+        },
+        "GetBenchmarkLogsFn32648C19": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Code": {
+                    "S3Bucket": "cdk-hnb659fds-assets-395567831870-us-east-1",
+                    "S3Key": "4169dc3e731614ce8d8fad52d3b4b1b4e597cb48bb869d8a613fab68473a66a7.zip"
+                },
+                "Handler": "index.handler",
+                "MemorySize": 256,
+                "Role": {
+                    "Fn::GetAtt": [
+                        "GetBenchmarkLogsFnServiceRole639FBD3B",
+                        "Arn"
+                    ]
+                },
+                "Runtime": "nodejs22.x",
+                "Timeout": 15
+            },
+            "DependsOn": [
+                "GetBenchmarkLogsFnServiceRoleDefaultPolicy6FCBCF65",
+                "GetBenchmarkLogsFnServiceRole639FBD3B"
+            ],
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/GetBenchmarkLogsFn/Resource",
+                "aws:asset:path": "asset.4169dc3e731614ce8d8fad52d3b4b1b4e597cb48bb869d8a613fab68473a66a7",
+                "aws:asset:is-bundled": true,
+                "aws:asset:property": "Code"
+            }
+        },
+        "GetBenchmarkLogsFnLogGroup2B595765": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+                "LogGroupName": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "/aws/lambda/",
+                            {
+                                "Ref": "GetBenchmarkLogsFn32648C19"
+                            }
+                        ]
+                    ]
+                },
+                "RetentionInDays": 731
+            },
+            "UpdateReplacePolicy": "Retain",
+            "DeletionPolicy": "Retain",
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/GetBenchmarkLogsFn/LogGroup/Resource"
+            }
+        },
+        "BenchmarkApiE2E79BA0": {
+            "Type": "AWS::ApiGatewayV2::Api",
+            "Properties": {
+                "CorsConfiguration": {
+                    "AllowHeaders": [
+                        "Content-Type",
+                        "Authorization"
+                    ],
+                    "AllowMethods": [
+                        "GET",
+                        "POST",
+                        "OPTIONS"
+                    ],
+                    "AllowOrigins": [
+                        "*"
+                    ]
+                },
+                "Name": "JumpServeBenchmarkApi",
+                "ProtocolType": "HTTP"
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/Resource"
+            }
+        },
+        "BenchmarkApiDefaultStageDBE18212": {
+            "Type": "AWS::ApiGatewayV2::Stage",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "AutoDeploy": true,
+                "StageName": "$default"
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/DefaultStage/Resource"
+            }
+        },
+        "BenchmarkApiPOSTbenchmarksLaunchBenchmarkIntegrationD9B51622": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "IntegrationType": "AWS_PROXY",
+                "IntegrationUri": {
+                    "Fn::GetAtt": [
+                        "LaunchBenchmarkFn5833EFAD",
+                        "Arn"
+                    ]
+                },
+                "PayloadFormatVersion": "2.0"
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/POST--benchmarks/LaunchBenchmarkIntegration/Resource"
+            }
+        },
+        "BenchmarkApiPOSTbenchmarksLaunchBenchmarkIntegrationPermissionF70E116C": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "LaunchBenchmarkFn5833EFAD",
+                        "Arn"
+                    ]
+                },
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "arn:aws:execute-api:us-east-1:395567831870:",
+                            {
+                                "Ref": "BenchmarkApiE2E79BA0"
+                            },
+                            "/*/*/benchmarks"
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/POST--benchmarks/LaunchBenchmarkIntegration-Permission"
+            }
+        },
+        "BenchmarkApiPOSTbenchmarksA25C28E0": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "AuthorizationType": "NONE",
+                "RouteKey": "POST /benchmarks",
+                "Target": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "integrations/",
+                            {
+                                "Ref": "BenchmarkApiPOSTbenchmarksLaunchBenchmarkIntegrationD9B51622"
+                            }
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/POST--benchmarks/Resource"
+            }
+        },
+        "BenchmarkApiPOSTbenchmarksingestBenchmarkIngestIntegration832DE14C": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "IntegrationType": "AWS_PROXY",
+                "IntegrationUri": {
+                    "Fn::GetAtt": [
+                        "BenchmarkIngestFnCEEB5EF1",
+                        "Arn"
+                    ]
+                },
+                "PayloadFormatVersion": "2.0"
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/POST--benchmarks--ingest/BenchmarkIngestIntegration/Resource"
+            }
+        },
+        "BenchmarkApiPOSTbenchmarksingestBenchmarkIngestIntegrationPermission557D03D4": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "BenchmarkIngestFnCEEB5EF1",
+                        "Arn"
+                    ]
+                },
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "arn:aws:execute-api:us-east-1:395567831870:",
+                            {
+                                "Ref": "BenchmarkApiE2E79BA0"
+                            },
+                            "/*/*/benchmarks/ingest"
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/POST--benchmarks--ingest/BenchmarkIngestIntegration-Permission"
+            }
+        },
+        "BenchmarkApiPOSTbenchmarksingest1F96C564": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "AuthorizationType": "NONE",
+                "RouteKey": "POST /benchmarks/ingest",
+                "Target": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "integrations/",
+                            {
+                                "Ref": "BenchmarkApiPOSTbenchmarksingestBenchmarkIngestIntegration832DE14C"
+                            }
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/POST--benchmarks--ingest/Resource"
+            }
+        },
+        "BenchmarkApiPOSTbenchmarkscancelCancelBenchmarkIntegration000F0019": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "IntegrationType": "AWS_PROXY",
+                "IntegrationUri": {
+                    "Fn::GetAtt": [
+                        "CancelBenchmarkFnECDF48C2",
+                        "Arn"
+                    ]
+                },
+                "PayloadFormatVersion": "2.0"
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/POST--benchmarks--cancel/CancelBenchmarkIntegration/Resource"
+            }
+        },
+        "BenchmarkApiPOSTbenchmarkscancelCancelBenchmarkIntegrationPermission0B6616B1": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "CancelBenchmarkFnECDF48C2",
+                        "Arn"
+                    ]
+                },
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "arn:aws:execute-api:us-east-1:395567831870:",
+                            {
+                                "Ref": "BenchmarkApiE2E79BA0"
+                            },
+                            "/*/*/benchmarks/cancel"
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/POST--benchmarks--cancel/CancelBenchmarkIntegration-Permission"
+            }
+        },
+        "BenchmarkApiPOSTbenchmarkscancelDD23BFB3": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "AuthorizationType": "NONE",
+                "RouteKey": "POST /benchmarks/cancel",
+                "Target": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "integrations/",
+                            {
+                                "Ref": "BenchmarkApiPOSTbenchmarkscancelCancelBenchmarkIntegration000F0019"
+                            }
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/POST--benchmarks--cancel/Resource"
+            }
+        },
+        "BenchmarkApiGETbenchmarkslogsGetBenchmarkLogsIntegrationC85A1F0B": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "IntegrationType": "AWS_PROXY",
+                "IntegrationUri": {
+                    "Fn::GetAtt": [
+                        "GetBenchmarkLogsFn32648C19",
+                        "Arn"
+                    ]
+                },
+                "PayloadFormatVersion": "2.0"
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--benchmarks--logs/GetBenchmarkLogsIntegration/Resource"
+            }
+        },
+        "BenchmarkApiGETbenchmarkslogsGetBenchmarkLogsIntegrationPermission42BF54C0": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "GetBenchmarkLogsFn32648C19",
+                        "Arn"
+                    ]
+                },
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "arn:aws:execute-api:us-east-1:395567831870:",
+                            {
+                                "Ref": "BenchmarkApiE2E79BA0"
+                            },
+                            "/*/*/benchmarks/logs"
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--benchmarks--logs/GetBenchmarkLogsIntegration-Permission"
+            }
+        },
+        "BenchmarkApiGETbenchmarkslogs567EF809": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "AuthorizationType": "NONE",
+                "RouteKey": "GET /benchmarks/logs",
+                "Target": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "integrations/",
+                            {
+                                "Ref": "BenchmarkApiGETbenchmarkslogsGetBenchmarkLogsIntegrationC85A1F0B"
+                            }
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--benchmarks--logs/Resource"
+            }
+        },
+        "BenchmarkApiGETrealworldregionsRealWorldIntegration6767E782": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "IntegrationType": "AWS_PROXY",
+                "IntegrationUri": {
+                    "Fn::GetAtt": [
+                        "RealWorldTestsApiBB989716",
+                        "Arn"
+                    ]
+                },
+                "PayloadFormatVersion": "2.0"
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--real-world--regions/RealWorldIntegration/Resource"
+            }
+        },
+        "BenchmarkApiGETrealworldregionsRealWorldIntegrationPermission9BBDBEF7": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "RealWorldTestsApiBB989716",
+                        "Arn"
+                    ]
+                },
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "arn:aws:execute-api:us-east-1:395567831870:",
+                            {
+                                "Ref": "BenchmarkApiE2E79BA0"
+                            },
+                            "/*/*/real-world/regions"
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--real-world--regions/RealWorldIntegration-Permission"
+            }
+        },
+        "BenchmarkApiGETrealworldregions68A25ADA": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "AuthorizationType": "NONE",
+                "RouteKey": "GET /real-world/regions",
+                "Target": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "integrations/",
+                            {
+                                "Ref": "BenchmarkApiGETrealworldregionsRealWorldIntegration6767E782"
+                            }
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--real-world--regions/Resource"
+            }
+        },
+        "BenchmarkApiGETrealworldlocationsRealWorldIntegrationPermission45BECC2F": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "RealWorldTestsApiBB989716",
+                        "Arn"
+                    ]
+                },
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "arn:aws:execute-api:us-east-1:395567831870:",
+                            {
+                                "Ref": "BenchmarkApiE2E79BA0"
+                            },
+                            "/*/*/real-world/locations"
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--real-world--locations/RealWorldIntegration-Permission"
+            }
+        },
+        "BenchmarkApiGETrealworldlocationsC76EE9EB": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "AuthorizationType": "NONE",
+                "RouteKey": "GET /real-world/locations",
+                "Target": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "integrations/",
+                            {
+                                "Ref": "BenchmarkApiGETrealworldregionsRealWorldIntegration6767E782"
+                            }
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--real-world--locations/Resource"
+            }
+        },
+        "BenchmarkApiGETrealworldtestsRealWorldIntegrationPermission3945762F": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "RealWorldTestsApiBB989716",
+                        "Arn"
+                    ]
+                },
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "arn:aws:execute-api:us-east-1:395567831870:",
+                            {
+                                "Ref": "BenchmarkApiE2E79BA0"
+                            },
+                            "/*/*/real-world/tests"
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--real-world--tests/RealWorldIntegration-Permission"
+            }
+        },
+        "BenchmarkApiGETrealworldtestsD12E3764": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "AuthorizationType": "NONE",
+                "RouteKey": "GET /real-world/tests",
+                "Target": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "integrations/",
+                            {
+                                "Ref": "BenchmarkApiGETrealworldregionsRealWorldIntegration6767E782"
+                            }
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--real-world--tests/Resource"
+            }
+        },
+        "BenchmarkApiGETrealworldtestsjobIdRealWorldIntegrationPermissionEC151B2E": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "RealWorldTestsApiBB989716",
+                        "Arn"
+                    ]
+                },
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "arn:aws:execute-api:us-east-1:395567831870:",
+                            {
+                                "Ref": "BenchmarkApiE2E79BA0"
+                            },
+                            "/*/*/real-world/tests/{jobId}"
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--real-world--tests--{jobId}/RealWorldIntegration-Permission"
+            }
+        },
+        "BenchmarkApiGETrealworldtestsjobIdAAA38D95": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "AuthorizationType": "NONE",
+                "RouteKey": "GET /real-world/tests/{jobId}",
+                "Target": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "integrations/",
+                            {
+                                "Ref": "BenchmarkApiGETrealworldregionsRealWorldIntegration6767E782"
+                            }
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--real-world--tests--{jobId}/Resource"
+            }
+        },
+        "BenchmarkApiGETrealworldtestsjobIdartifactsRealWorldIntegrationPermission26D4EE73": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "RealWorldTestsApiBB989716",
+                        "Arn"
+                    ]
+                },
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "arn:aws:execute-api:us-east-1:395567831870:",
+                            {
+                                "Ref": "BenchmarkApiE2E79BA0"
+                            },
+                            "/*/*/real-world/tests/{jobId}/artifacts"
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--real-world--tests--{jobId}--artifacts/RealWorldIntegration-Permission"
+            }
+        },
+        "BenchmarkApiGETrealworldtestsjobIdartifactsAA1C4CDD": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "AuthorizationType": "NONE",
+                "RouteKey": "GET /real-world/tests/{jobId}/artifacts",
+                "Target": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "integrations/",
+                            {
+                                "Ref": "BenchmarkApiGETrealworldregionsRealWorldIntegration6767E782"
+                            }
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--real-world--tests--{jobId}--artifacts/Resource"
+            }
+        },
+        "BenchmarkApiGETrealworldreportsRealWorldIntegrationPermissionAB53C207": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "RealWorldTestsApiBB989716",
+                        "Arn"
+                    ]
+                },
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "arn:aws:execute-api:us-east-1:395567831870:",
+                            {
+                                "Ref": "BenchmarkApiE2E79BA0"
+                            },
+                            "/*/*/real-world/reports"
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--real-world--reports/RealWorldIntegration-Permission"
+            }
+        },
+        "BenchmarkApiGETrealworldreports55903284": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "AuthorizationType": "NONE",
+                "RouteKey": "GET /real-world/reports",
+                "Target": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "integrations/",
+                            {
+                                "Ref": "BenchmarkApiGETrealworldregionsRealWorldIntegration6767E782"
+                            }
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--real-world--reports/Resource"
+            }
+        },
+        "BenchmarkApiGETrealworldreportsjobIdRealWorldIntegrationPermission553A96D0": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "RealWorldTestsApiBB989716",
+                        "Arn"
+                    ]
+                },
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "arn:aws:execute-api:us-east-1:395567831870:",
+                            {
+                                "Ref": "BenchmarkApiE2E79BA0"
+                            },
+                            "/*/*/real-world/reports/{jobId}"
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--real-world--reports--{jobId}/RealWorldIntegration-Permission"
+            }
+        },
+        "BenchmarkApiGETrealworldreportsjobIdC3618483": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "AuthorizationType": "NONE",
+                "RouteKey": "GET /real-world/reports/{jobId}",
+                "Target": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "integrations/",
+                            {
+                                "Ref": "BenchmarkApiGETrealworldregionsRealWorldIntegration6767E782"
+                            }
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--real-world--reports--{jobId}/Resource"
+            }
+        },
+        "BenchmarkApiGETrealworldreportsjobIdartifactsRealWorldIntegrationPermissionC66B6140": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "RealWorldTestsApiBB989716",
+                        "Arn"
+                    ]
+                },
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "arn:aws:execute-api:us-east-1:395567831870:",
+                            {
+                                "Ref": "BenchmarkApiE2E79BA0"
+                            },
+                            "/*/*/real-world/reports/{jobId}/artifacts"
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--real-world--reports--{jobId}--artifacts/RealWorldIntegration-Permission"
+            }
+        },
+        "BenchmarkApiGETrealworldreportsjobIdartifactsB160C71B": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "AuthorizationType": "NONE",
+                "RouteKey": "GET /real-world/reports/{jobId}/artifacts",
+                "Target": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "integrations/",
+                            {
+                                "Ref": "BenchmarkApiGETrealworldregionsRealWorldIntegration6767E782"
+                            }
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/GET--real-world--reports--{jobId}--artifacts/Resource"
+            }
+        },
+        "BenchmarkApiPOSTrealworldtestsRealWorldIntegrationPermission57867833": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "RealWorldTestsApiBB989716",
+                        "Arn"
+                    ]
+                },
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "arn:aws:execute-api:us-east-1:395567831870:",
+                            {
+                                "Ref": "BenchmarkApiE2E79BA0"
+                            },
+                            "/*/*/real-world/tests"
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/POST--real-world--tests/RealWorldIntegration-Permission"
+            }
+        },
+        "BenchmarkApiPOSTrealworldtestsC9E3DFF1": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "AuthorizationType": "NONE",
+                "RouteKey": "POST /real-world/tests",
+                "Target": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "integrations/",
+                            {
+                                "Ref": "BenchmarkApiGETrealworldregionsRealWorldIntegration6767E782"
+                            }
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/POST--real-world--tests/Resource"
+            }
+        },
+        "BenchmarkApiPOSTrealworldtestsjobIdcancelRealWorldIntegrationPermission564724A5": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "RealWorldTestsApiBB989716",
+                        "Arn"
+                    ]
+                },
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "arn:aws:execute-api:us-east-1:395567831870:",
+                            {
+                                "Ref": "BenchmarkApiE2E79BA0"
+                            },
+                            "/*/*/real-world/tests/{jobId}/cancel"
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/POST--real-world--tests--{jobId}--cancel/RealWorldIntegration-Permission"
+            }
+        },
+        "BenchmarkApiPOSTrealworldtestsjobIdcancel0CA07045": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "BenchmarkApiE2E79BA0"
+                },
+                "AuthorizationType": "NONE",
+                "RouteKey": "POST /real-world/tests/{jobId}/cancel",
+                "Target": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "integrations/",
+                            {
+                                "Ref": "BenchmarkApiGETrealworldregionsRealWorldIntegration6767E782"
+                            }
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkApi/POST--real-world--tests--{jobId}--cancel/Resource"
+            }
+        },
+        "BenchmarkIngestFnServiceRole70C0F7D6": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "ManagedPolicyArns": [
+                    {
+                        "Fn::Join": [
+                            "",
+                            [
+                                "arn:",
+                                {
+                                    "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkIngestFn/ServiceRole/Resource"
+            }
+        },
+        "BenchmarkIngestFnServiceRoleDefaultPolicy2FF43DE2": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": [
+                                "secretsmanager:DescribeSecret",
+                                "secretsmanager:GetSecretValue"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:secretsmanager:us-east-1:395567831870:secret:jumpserve/supabase-service-key-??????"
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "PolicyName": "BenchmarkIngestFnServiceRoleDefaultPolicy2FF43DE2",
+                "Roles": [
+                    {
+                        "Ref": "BenchmarkIngestFnServiceRole70C0F7D6"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkIngestFn/ServiceRole/DefaultPolicy/Resource"
+            }
+        },
+        "BenchmarkIngestFnCEEB5EF1": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Code": {
+                    "S3Bucket": "cdk-hnb659fds-assets-395567831870-us-east-1",
+                    "S3Key": "a2f2878e7e2d363d831d891283cee4c4265f137d163031266e2d922a069a1845.zip"
+                },
+                "Environment": {
+                    "Variables": {
+                        "SUPABASE_URL": "https://regphejnlvfpyokpniny.supabase.co",
+                        "SUPABASE_SECRET_ARN": "arn:aws:secretsmanager:us-east-1:395567831870:secret:jumpserve/supabase-service-key"
+                    }
+                },
+                "Handler": "index.handler",
+                "MemorySize": 512,
+                "Role": {
+                    "Fn::GetAtt": [
+                        "BenchmarkIngestFnServiceRole70C0F7D6",
+                        "Arn"
+                    ]
+                },
+                "Runtime": "nodejs22.x",
+                "Timeout": 60
+            },
+            "DependsOn": [
+                "BenchmarkIngestFnServiceRoleDefaultPolicy2FF43DE2",
+                "BenchmarkIngestFnServiceRole70C0F7D6"
+            ],
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkIngestFn/Resource",
+                "aws:asset:path": "asset.a2f2878e7e2d363d831d891283cee4c4265f137d163031266e2d922a069a1845",
+                "aws:asset:is-bundled": true,
+                "aws:asset:property": "Code"
+            }
+        },
+        "BenchmarkIngestFnLogGroup0171D1E0": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+                "LogGroupName": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "/aws/lambda/",
+                            {
+                                "Ref": "BenchmarkIngestFnCEEB5EF1"
+                            }
+                        ]
+                    ]
+                },
+                "RetentionInDays": 731
+            },
+            "UpdateReplacePolicy": "Retain",
+            "DeletionPolicy": "Retain",
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/BenchmarkIngestFn/LogGroup/Resource"
+            }
+        },
+        "RealWorldTestsJobsB46B0892": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+                "AttributeDefinitions": [
+                    {
+                        "AttributeName": "job_id",
+                        "AttributeType": "S"
+                    },
+                    {
+                        "AttributeName": "owner",
+                        "AttributeType": "S"
+                    },
+                    {
+                        "AttributeName": "created_at",
+                        "AttributeType": "N"
+                    },
+                    {
+                        "AttributeName": "active",
+                        "AttributeType": "S"
+                    },
+                    {
+                        "AttributeName": "deadline",
+                        "AttributeType": "N"
+                    },
+                    {
+                        "AttributeName": "schema_version",
+                        "AttributeType": "N"
+                    }
+                ],
+                "BillingMode": "PAY_PER_REQUEST",
+                "GlobalSecondaryIndexes": [
+                    {
+                        "IndexName": "owner-created",
+                        "KeySchema": [
+                            {
+                                "AttributeName": "owner",
+                                "KeyType": "HASH"
+                            },
+                            {
+                                "AttributeName": "created_at",
+                                "KeyType": "RANGE"
+                            }
+                        ],
+                        "Projection": {
+                            "ProjectionType": "ALL"
+                        }
+                    },
+                    {
+                        "IndexName": "active-deadline",
+                        "KeySchema": [
+                            {
+                                "AttributeName": "active",
+                                "KeyType": "HASH"
+                            },
+                            {
+                                "AttributeName": "deadline",
+                                "KeyType": "RANGE"
+                            }
+                        ],
+                        "Projection": {
+                            "ProjectionType": "ALL"
+                        }
+                    },
+                    {
+                        "IndexName": "reports-created",
+                        "KeySchema": [
+                            {
+                                "AttributeName": "schema_version",
+                                "KeyType": "HASH"
+                            },
+                            {
+                                "AttributeName": "created_at",
+                                "KeyType": "RANGE"
+                            }
+                        ],
+                        "Projection": {
+                            "ProjectionType": "ALL"
+                        }
+                    }
+                ],
+                "KeySchema": [
+                    {
+                        "AttributeName": "job_id",
+                        "KeyType": "HASH"
+                    }
+                ],
+                "PointInTimeRecoverySpecification": {
+                    "PointInTimeRecoveryEnabled": true
+                }
+            },
+            "UpdateReplacePolicy": "Retain",
+            "DeletionPolicy": "RetainExceptOnCreate",
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/Jobs/Resource"
+            }
+        },
+        "RealWorldTestsResultsFDE9BB48": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+                "BucketEncryption": {
+                    "ServerSideEncryptionConfiguration": [
+                        {
+                            "ServerSideEncryptionByDefault": {
+                                "SSEAlgorithm": "AES256"
+                            }
+                        }
+                    ]
+                },
+                "PublicAccessBlockConfiguration": {
+                    "BlockPublicAcls": true,
+                    "BlockPublicPolicy": true,
+                    "IgnorePublicAcls": true,
+                    "RestrictPublicBuckets": true
+                },
+                "VersioningConfiguration": {
+                    "Status": "Enabled"
+                }
+            },
+            "UpdateReplacePolicy": "Retain",
+            "DeletionPolicy": "RetainExceptOnCreate",
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/Results/Resource"
+            }
+        },
+        "RealWorldTestsResultsPolicyEEC6F6AC": {
+            "Type": "AWS::S3::BucketPolicy",
+            "Properties": {
+                "Bucket": {
+                    "Ref": "RealWorldTestsResultsFDE9BB48"
+                },
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "s3:*",
+                            "Condition": {
+                                "Bool": {
+                                    "aws:SecureTransport": "false"
+                                }
+                            },
+                            "Effect": "Deny",
+                            "Principal": {
+                                "AWS": "*"
+                            },
+                            "Resource": [
+                                {
+                                    "Fn::GetAtt": [
+                                        "RealWorldTestsResultsFDE9BB48",
+                                        "Arn"
+                                    ]
+                                },
+                                {
+                                    "Fn::Join": [
+                                        "",
+                                        [
+                                            {
+                                                "Fn::GetAtt": [
+                                                    "RealWorldTestsResultsFDE9BB48",
+                                                    "Arn"
+                                                ]
+                                            },
+                                            "/*"
+                                        ]
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/Results/Policy/Resource"
+            }
+        },
+        "RealWorldTestsInstanceRoleAE563B91": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "ec2.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "ManagedPolicyArns": [
+                    {
+                        "Fn::Join": [
+                            "",
+                            [
+                                "arn:",
+                                {
+                                    "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/AmazonSSMManagedInstanceCore"
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/InstanceRole/Resource"
+            }
+        },
+        "RealWorldTestsInstanceProfile846F7D65": {
+            "Type": "AWS::IAM::InstanceProfile",
+            "Properties": {
+                "Roles": [
+                    {
+                        "Ref": "RealWorldTestsInstanceRoleAE563B91"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/InstanceProfile"
+            }
+        },
+        "RealWorldTestsWorkerRole23734274": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "ManagedPolicyArns": [
+                    {
+                        "Fn::Join": [
+                            "",
+                            [
+                                "arn:",
+                                {
+                                    "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/WorkerRole/Resource"
+            }
+        },
+        "RealWorldTestsWorkerRoleDefaultPolicy1D749215": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": [
+                                "ec2:CreateInternetGateway",
+                                "ec2:CreateRouteTable",
+                                "ec2:CreateSecurityGroup",
+                                "ec2:CreateSubnet",
+                                "ec2:CreateVpc",
+                                "ec2:Describe*",
+                                "ssm:DescribeInstanceInformation",
+                                "ssm:GetCommandInvocation"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        },
+                        {
+                            "Action": "ssm:GetParameter",
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:ssm:*::parameter/aws/service/canonical/ubuntu/server/24.04/stable/current/amd64/hvm/ebs-gp3/ami-id"
+                        },
+                        {
+                            "Action": "iam:PassRole",
+                            "Condition": {
+                                "StringEquals": {
+                                    "iam:PassedToService": "ec2.amazonaws.com"
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": {
+                                "Fn::GetAtt": [
+                                    "RealWorldTestsInstanceRoleAE563B91",
+                                    "Arn"
+                                ]
+                            }
+                        },
+                        {
+                            "Action": "ec2:RunInstances",
+                            "Effect": "Allow",
+                            "Resource": [
+                                "arn:aws:ec2:*:395567831870:network-interface/*",
+                                "arn:aws:ec2:*:395567831870:volume/*",
+                                "arn:aws:ec2:*::image/*"
+                            ]
+                        },
+                        {
+                            "Action": "ec2:RunInstances",
+                            "Condition": {
+                                "StringEquals": {
+                                    "ec2:InstanceType": [
+                                        "t3.small",
+                                        "t3.medium",
+                                        "t3.large"
+                                    ]
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:ec2:*:395567831870:instance/*"
+                        },
+                        {
+                            "Action": "ec2:RunInstances",
+                            "Condition": {
+                                "StringEquals": {
+                                    "ec2:ResourceTag/Project": "JumpServeRealWorld"
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": [
+                                "arn:aws:ec2:*:395567831870:security-group/*",
+                                "arn:aws:ec2:*:395567831870:subnet/*"
+                            ]
+                        },
+                        {
+                            "Action": "ec2:CreateTags",
+                            "Condition": {
+                                "StringEquals": {
+                                    "ec2:CreateAction": [
+                                        "CreateVpc",
+                                        "CreateSubnet",
+                                        "CreateInternetGateway",
+                                        "CreateSecurityGroup",
+                                        "CreateRouteTable",
+                                        "RunInstances"
+                                    ]
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        },
+                        {
+                            "Action": [
+                                "ec2:AssociateRouteTable",
+                                "ec2:AttachInternetGateway",
+                                "ec2:AuthorizeSecurityGroupIngress",
+                                "ec2:CreateRoute",
+                                "ec2:DeleteInternetGateway",
+                                "ec2:DeleteRouteTable",
+                                "ec2:DeleteSecurityGroup",
+                                "ec2:DeleteSubnet",
+                                "ec2:DeleteVpc",
+                                "ec2:DetachInternetGateway",
+                                "ec2:DisassociateRouteTable",
+                                "ec2:ModifyVpcAttribute",
+                                "ec2:TerminateInstances"
+                            ],
+                            "Condition": {
+                                "StringEquals": {
+                                    "ec2:ResourceTag/Project": "JumpServeRealWorld"
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        },
+                        {
+                            "Action": "ssm:SendCommand",
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:ssm:*::document/AWS-RunShellScript"
+                        },
+                        {
+                            "Action": "ssm:SendCommand",
+                            "Condition": {
+                                "StringEquals": {
+                                    "ssm:resourceTag/Project": "JumpServeRealWorld"
+                                }
+                            },
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:ec2:*:395567831870:instance/*"
+                        },
+                        {
+                            "Action": [
+                                "secretsmanager:DescribeSecret",
+                                "secretsmanager:GetSecretValue"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:secretsmanager:us-east-1:395567831870:secret:jumpserve/supabase-service-key-??????"
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "PolicyName": "RealWorldTestsWorkerRoleDefaultPolicy1D749215",
+                "Roles": [
+                    {
+                        "Ref": "RealWorldTestsWorkerRole23734274"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/WorkerRole/DefaultPolicy/Resource"
+            }
+        },
+        "RealWorldTestsWorkerC4BD4E71": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Code": {
+                    "S3Bucket": "cdk-hnb659fds-assets-395567831870-us-east-1",
+                    "S3Key": "0906237bac0d56ab3a91dca2601bb82fc2bca32f972697bb264fa3f053fa7057.zip"
+                },
+                "Environment": {
+                    "Variables": {
+                        "SUPABASE_URL": "https://regphejnlvfpyokpniny.supabase.co",
+                        "SUPABASE_SECRET_ARN": "arn:aws:secretsmanager:us-east-1:395567831870:secret:jumpserve/supabase-service-key",
+                        "INSTANCE_PROFILE_ARN": {
+                            "Fn::GetAtt": [
+                                "RealWorldTestsInstanceProfile846F7D65",
+                                "Arn"
+                            ]
+                        },
+                        "RUNTIME_REVISION": "d5be5bd239cf586a0df63ee99192ae412d184870"
+                    }
+                },
+                "Handler": "controller.handler",
+                "MemorySize": 512,
+                "Role": {
+                    "Fn::GetAtt": [
+                        "RealWorldTestsWorkerRole23734274",
+                        "Arn"
+                    ]
+                },
+                "Runtime": "python3.12",
+                "Timeout": 240
+            },
+            "DependsOn": [
+                "RealWorldTestsWorkerRoleDefaultPolicy1D749215",
+                "RealWorldTestsWorkerRole23734274"
+            ],
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/Worker/Resource",
+                "aws:asset:path": "asset.0906237bac0d56ab3a91dca2601bb82fc2bca32f972697bb264fa3f053fa7057",
+                "aws:asset:is-bundled": false,
+                "aws:asset:property": "Code"
+            }
+        },
+        "RealWorldTestsWorkerLogGroup11C01D85": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+                "LogGroupName": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "/aws/lambda/",
+                            {
+                                "Ref": "RealWorldTestsWorkerC4BD4E71"
+                            }
+                        ]
+                    ]
+                },
+                "RetentionInDays": 731
+            },
+            "UpdateReplacePolicy": "Retain",
+            "DeletionPolicy": "Retain",
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/Worker/LogGroup/Resource"
+            }
+        },
+        "RealWorldTestsReaperA7B004E4": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Code": {
+                    "S3Bucket": "cdk-hnb659fds-assets-395567831870-us-east-1",
+                    "S3Key": "0906237bac0d56ab3a91dca2601bb82fc2bca32f972697bb264fa3f053fa7057.zip"
+                },
+                "Environment": {
+                    "Variables": {
+                        "SUPABASE_URL": "https://regphejnlvfpyokpniny.supabase.co",
+                        "SUPABASE_SECRET_ARN": "arn:aws:secretsmanager:us-east-1:395567831870:secret:jumpserve/supabase-service-key",
+                        "INSTANCE_PROFILE_ARN": {
+                            "Fn::GetAtt": [
+                                "RealWorldTestsInstanceProfile846F7D65",
+                                "Arn"
+                            ]
+                        },
+                        "RUNTIME_REVISION": "d5be5bd239cf586a0df63ee99192ae412d184870"
+                    }
+                },
+                "Handler": "controller.reap",
+                "MemorySize": 512,
+                "Role": {
+                    "Fn::GetAtt": [
+                        "RealWorldTestsWorkerRole23734274",
+                        "Arn"
+                    ]
+                },
+                "Runtime": "python3.12",
+                "Timeout": 240
+            },
+            "DependsOn": [
+                "RealWorldTestsWorkerRoleDefaultPolicy1D749215",
+                "RealWorldTestsWorkerRole23734274"
+            ],
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/Reaper/Resource",
+                "aws:asset:path": "asset.0906237bac0d56ab3a91dca2601bb82fc2bca32f972697bb264fa3f053fa7057",
+                "aws:asset:is-bundled": false,
+                "aws:asset:property": "Code"
+            }
+        },
+        "RealWorldTestsReaperLogGroupA99C731D": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+                "LogGroupName": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "/aws/lambda/",
+                            {
+                                "Ref": "RealWorldTestsReaperA7B004E4"
+                            }
+                        ]
+                    ]
+                },
+                "RetentionInDays": 731
+            },
+            "UpdateReplacePolicy": "Retain",
+            "DeletionPolicy": "Retain",
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/Reaper/LogGroup/Resource"
+            }
+        },
+        "RealWorldTestsReapScheduleF2E1073A": {
+            "Type": "AWS::Events::Rule",
+            "Properties": {
+                "ScheduleExpression": "rate(5 minutes)",
+                "State": "ENABLED",
+                "Targets": [
+                    {
+                        "Arn": {
+                            "Fn::GetAtt": [
+                                "RealWorldTestsReaperA7B004E4",
+                                "Arn"
+                            ]
+                        },
+                        "Id": "Target0"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/ReapSchedule/Resource"
+            }
+        },
+        "RealWorldTestsReapScheduleAllowEventRuleJumpServeBenchmarkStackRealWorldTestsReaper41D8C023A0997A6B": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "RealWorldTestsReaperA7B004E4",
+                        "Arn"
+                    ]
+                },
+                "Principal": "events.amazonaws.com",
+                "SourceArn": {
+                    "Fn::GetAtt": [
+                        "RealWorldTestsReapScheduleF2E1073A",
+                        "Arn"
+                    ]
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/ReapSchedule/AllowEventRuleJumpServeBenchmarkStackRealWorldTestsReaper41D8C023"
+            }
+        },
+        "RealWorldTestsLifecycleRole0B78C51B": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "states.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/Lifecycle/Role/Resource"
+            }
+        },
+        "RealWorldTestsLifecycleRoleDefaultPolicyB5924656": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "lambda:InvokeFunction",
+                            "Effect": "Allow",
+                            "Resource": [
+                                {
+                                    "Fn::GetAtt": [
+                                        "RealWorldTestsWorkerC4BD4E71",
+                                        "Arn"
+                                    ]
+                                },
+                                {
+                                    "Fn::Join": [
+                                        "",
+                                        [
+                                            {
+                                                "Fn::GetAtt": [
+                                                    "RealWorldTestsWorkerC4BD4E71",
+                                                    "Arn"
+                                                ]
+                                            },
+                                            ":*"
+                                        ]
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "PolicyName": "RealWorldTestsLifecycleRoleDefaultPolicyB5924656",
+                "Roles": [
+                    {
+                        "Ref": "RealWorldTestsLifecycleRole0B78C51B"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/Lifecycle/Role/DefaultPolicy/Resource"
+            }
+        },
+        "RealWorldTestsLifecycleA0B63629": {
+            "Type": "AWS::StepFunctions::StateMachine",
+            "Properties": {
+                "DefinitionString": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "{\"StartAt\":\"Advance test\",\"States\":{\"Advance test\":{\"Next\":\"Resources cleaned?\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ClientExecutionTimeoutException\",\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2},{\"ErrorEquals\":[\"States.ALL\"],\"IntervalSeconds\":10,\"MaxAttempts\":3}],\"Catch\":[{\"ErrorEquals\":[\"States.ALL\"],\"ResultPath\":\"$.workflow_error\",\"Next\":\"Clean up interrupted test\"}],\"Type\":\"Task\",\"Resource\":\"",
+                            {
+                                "Fn::GetAtt": [
+                                    "RealWorldTestsWorkerC4BD4E71",
+                                    "Arn"
+                                ]
+                            },
+                            "\"},\"Wait for machines\":{\"Type\":\"Wait\",\"Seconds\":15,\"Next\":\"Advance test\"},\"Resources cleaned?\":{\"Type\":\"Choice\",\"Choices\":[{\"Variable\":\"$.finished\",\"BooleanEquals\":true,\"Next\":\"Finished\"}],\"Default\":\"Wait for machines\"},\"Clean up interrupted test\":{\"Next\":\"Resources cleaned?\",\"Retry\":[{\"ErrorEquals\":[\"Lambda.ClientExecutionTimeoutException\",\"Lambda.ServiceException\",\"Lambda.AWSLambdaException\",\"Lambda.SdkClientException\"],\"IntervalSeconds\":2,\"MaxAttempts\":6,\"BackoffRate\":2}],\"Type\":\"Task\",\"Resource\":\"",
+                            {
+                                "Fn::GetAtt": [
+                                    "RealWorldTestsWorkerC4BD4E71",
+                                    "Arn"
+                                ]
+                            },
+                            "\",\"Parameters\":{\"job_id.$\":\"$.job_id\",\"force_cleanup\":true}},\"Finished\":{\"Type\":\"Succeed\"}},\"TimeoutSeconds\":7200}"
+                        ]
+                    ]
+                },
+                "RoleArn": {
+                    "Fn::GetAtt": [
+                        "RealWorldTestsLifecycleRole0B78C51B",
+                        "Arn"
+                    ]
+                }
+            },
+            "DependsOn": [
+                "RealWorldTestsLifecycleRoleDefaultPolicyB5924656",
+                "RealWorldTestsLifecycleRole0B78C51B"
+            ],
+            "UpdateReplacePolicy": "Delete",
+            "DeletionPolicy": "Delete",
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/Lifecycle/Resource"
+            }
+        },
+        "RealWorldTestsApiServiceRole8C206499": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "ManagedPolicyArns": [
+                    {
+                        "Fn::Join": [
+                            "",
+                            [
+                                "arn:",
+                                {
+                                    "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/Api/ServiceRole/Resource"
+            }
+        },
+        "RealWorldTestsApiServiceRoleDefaultPolicy31597F57": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": [
+                                "secretsmanager:DescribeSecret",
+                                "secretsmanager:GetSecretValue"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "arn:aws:secretsmanager:us-east-1:395567831870:secret:jumpserve/supabase-service-key-??????"
+                        },
+                        {
+                            "Action": "states:StartExecution",
+                            "Effect": "Allow",
+                            "Resource": {
+                                "Ref": "RealWorldTestsLifecycleA0B63629"
+                            }
+                        },
+                        {
+                            "Action": [
+                                "ec2:DescribeAvailabilityZones",
+                                "ec2:DescribeInstanceTypeOfferings",
+                                "ec2:DescribeRegions"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": "*"
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "PolicyName": "RealWorldTestsApiServiceRoleDefaultPolicy31597F57",
+                "Roles": [
+                    {
+                        "Ref": "RealWorldTestsApiServiceRole8C206499"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/Api/ServiceRole/DefaultPolicy/Resource"
+            }
+        },
+        "RealWorldTestsApiBB989716": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Code": {
+                    "S3Bucket": "cdk-hnb659fds-assets-395567831870-us-east-1",
+                    "S3Key": "0906237bac0d56ab3a91dca2601bb82fc2bca32f972697bb264fa3f053fa7057.zip"
+                },
+                "Environment": {
+                    "Variables": {
+                        "SUPABASE_URL": "https://regphejnlvfpyokpniny.supabase.co",
+                        "SUPABASE_SECRET_ARN": "arn:aws:secretsmanager:us-east-1:395567831870:secret:jumpserve/supabase-service-key",
+                        "INSTANCE_PROFILE_ARN": {
+                            "Fn::GetAtt": [
+                                "RealWorldTestsInstanceProfile846F7D65",
+                                "Arn"
+                            ]
+                        },
+                        "RUNTIME_REVISION": "d5be5bd239cf586a0df63ee99192ae412d184870",
+                        "SUPABASE_ANON_KEY": "sb_publishable_6A6cCQnpFexhV_HB_6YizQ_-YB8Ftxc",
+                        "STATE_MACHINE_ARN": {
+                            "Ref": "RealWorldTestsLifecycleA0B63629"
+                        }
+                    }
+                },
+                "Handler": "api.handler",
+                "MemorySize": 512,
+                "Role": {
+                    "Fn::GetAtt": [
+                        "RealWorldTestsApiServiceRole8C206499",
+                        "Arn"
+                    ]
+                },
+                "Runtime": "python3.12",
+                "Timeout": 29
+            },
+            "DependsOn": [
+                "RealWorldTestsApiServiceRoleDefaultPolicy31597F57",
+                "RealWorldTestsApiServiceRole8C206499"
+            ],
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/Api/Resource",
+                "aws:asset:path": "asset.0906237bac0d56ab3a91dca2601bb82fc2bca32f972697bb264fa3f053fa7057",
+                "aws:asset:is-bundled": false,
+                "aws:asset:property": "Code"
+            }
+        },
+        "RealWorldTestsApiLogGroupC9F7AE66": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+                "LogGroupName": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "/aws/lambda/",
+                            {
+                                "Ref": "RealWorldTestsApiBB989716"
+                            }
+                        ]
+                    ]
+                },
+                "RetentionInDays": 731
+            },
+            "UpdateReplacePolicy": "Retain",
+            "DeletionPolicy": "Retain",
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/RealWorldTests/Api/LogGroup/Resource"
+            }
+        },
+        "CDKMetadata": {
+            "Type": "AWS::CDK::Metadata",
+            "Properties": {
+                "Analytics": "v2:deflate64:H4sIAAAAAAAA/+1abW/jNgz+LeePg+IdWgwD+s1Nc12wtpfFGYYhCAJZYlI1smToJa0n+L8Pku20ub6txfWSrgYSWCYpUSRlPabog/jgl1/jz5/wte4RuupxlsUuNZis0Bi0tIrANPopQk/8Zwhf67kDchC7FIhVzJSnStpi6qJ1QaKjIEdBE8UKw6RoKJhzeZ1w/tWaTFpBoyOjLFQz1F+IrXEqxHAeu7HkMHUR1trmQI/L6MhFhWKCsALzhBBphWmHDjK+Q0I2GisU5VjgJdCR5Iww0NHR1G3RykQ1srMKuQhTOpE1w4veJbZ673GNweRyKDgTsOF5Jz3PfIWyV3T50d57K0c97ZPHuEpyuMA5NJbm+CYFrZkUJ1bhu2vz1W76v66brkvXZV+7fNzNrjNw/w3sTHiJCd3b3TvZdLsuu4epbmPeRR4RMlRvFqrJIUFulU2k59ybw30ypanBBnIQRm+p/c/kj6W2I+974N7N+Ps30Icmv5t18yJyQIkaIHxrKLTBgsBIyQXj4Elfhyf9kZJrRkFViOM8o3guJIUrHV+EyxcrAnJOXQTCqLIB1kssKAfV3CkrDNscafmmtC0E55BLVabsn5YNYs2UFH6iDSWzgnImlh7I4caAEpifS2q5R+YasImk0LTdY78dTnDnE3jEQ7t1SeePt/HHC63/YWr3L+S7jPcM6cM51hqMjhN/QfowdseWrMAcY/1oUWuGapmpizIuyWpkM85IQghovZkOUWVbyEoP5+fJRXI6OAmchVQE0vSsrmWhaA3KVxeAtgQFuVzf5hORAoOZ6EnRswXFBnpS9ShwMBDVCFJPp5lVk2+4KAu3TZJ0K1bzWyyJXX8hWggJaAQqZ6Hcge4gyyZw3zlIKiBq8xRgSgd3JVr/z96Q2Rn2IsN2Zc0rmbMKcbnUsTuTy7bczJvmpsTnh9g3Ynhe20lXCNb+pTF2YxvK25pcgt/I2hhitQSjtwLkO4yw8dveN8cZQfj2tfS7jVWfeFgOFcIFW2ID17hcH8TuN2OKpGDPfSLw9OcD/YVICob8WKnBy7A3118B+LtAH0trHt2zn9fghxgKA8u6yPvQQLP6JX0jU5/xWAMVoqXAuaRZ7CY4C0EqsDLMS/0O4QBM3JaUTVn4ZuohMWPco9R5/biOkr/no8F4Ph788ecgnUQoKiQTZigmLIcxELkGVaYFELZgpClGu4dkBsJPo/1e4mWYUgf3lMsM8xSIFBSrcigo3IRjOOZbd5bqm8sHtwe3VkgbKBYNLum5wXql47OAZEOxlivYFojdX5gZ1L+UjABKLSEAFIU07ByTSyZ8oCgsmAiROpa0fGBf3Bz1+fzvwTPAe4x2aW70VFUAV6xwDgaUv+lLQYNaFF4+/EJmYhmSPmsKayrk87z4Sv+8Pvgc+9+nK81Yr9nA43F9/ReqXiEcniMAAA=="
+            },
+            "Metadata": {
+                "aws:cdk:path": "JumpServeBenchmarkStack/CDKMetadata/Default"
+            }
+        }
+    },
+    "Parameters": {
+        "BenchmarkAmiId": {
+            "Type": "String",
+            "Default": "",
+            "AllowedPattern": "^(|ami-([0-9a-f]{8}|[0-9a-f]{17}))$",
+            "Description": "Private AMI created by ami/build.py; empty uses Ubuntu with installation at boot"
+        },
+        "SsmParameterValueawsservicecanonicalubuntuserver2204stablecurrentamd64hvmebsgp2amiidC96584B6F00A464EAD1953AFF4B05118Parameter": {
+            "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+            "Default": "/aws/service/canonical/ubuntu/server/22.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+        },
+        "BootstrapVersion": {
+            "Type": "AWS::SSM::Parameter::Value<String>",
+            "Default": "/cdk-bootstrap/hnb659fds/version",
+            "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+        }
+    },
+    "Conditions": {
+        "UseBenchmarkAmi": {
+            "Fn::Not": [
+                {
+                    "Fn::Equals": [
+                        {
+                            "Ref": "BenchmarkAmiId"
+                        },
+                        ""
+                    ]
+                }
+            ]
+        }
+    },
+    "Outputs": {
+        "BenchmarkImagePipelineRoleArn": {
+            "Value": {
+                "Fn::GetAtt": [
+                    "BenchmarkImagePipelineRoleCAA30BA5",
+                    "Arn"
+                ]
+            }
+        },
+        "RealWorldResultsBucket": {
+            "Value": {
+                "Ref": "RealWorldTestsResultsFDE9BB48"
+            }
+        },
+        "RealWorldJobsTable": {
+            "Value": {
+                "Ref": "RealWorldTestsJobsB46B0892"
+            }
+        },
+        "BenchmarkApiUrl": {
+            "Description": "Benchmark API Gateway URL",
+            "Value": {
+                "Fn::GetAtt": [
+                    "BenchmarkApiE2E79BA0",
+                    "ApiEndpoint"
+                ]
+            }
+        },
+        "BenchmarkSecurityGroupId": {
+            "Description": "Security group for benchmark instances",
+            "Value": {
+                "Fn::GetAtt": [
+                    "BenchmarkInstanceSG6368283B",
+                    "GroupId"
+                ]
+            }
+        },
+        "BenchmarkImageId": {
+            "Description": "AMI used for new benchmark instances",
+            "Value": {
+                "Fn::If": [
+                    "UseBenchmarkAmi",
+                    {
+                        "Ref": "BenchmarkAmiId"
+                    },
+                    {
+                        "Ref": "SsmParameterValueawsservicecanonicalubuntuserver2204stablecurrentamd64hvmebsgp2amiidC96584B6F00A464EAD1953AFF4B05118Parameter"
+                    }
+                ]
+            }
+        }
+    },
+    "Rules": {
+        "CheckBootstrapVersion": {
+            "Assertions": [
+                {
+                    "Assert": {
+                        "Fn::Not": [
+                            {
+                                "Fn::Contains": [
+                                    [
+                                        "1",
+                                        "2",
+                                        "3",
+                                        "4",
+                                        "5"
+                                    ],
+                                    {
+                                        "Ref": "BootstrapVersion"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+                }
+            ]
+        }
+    }
+}

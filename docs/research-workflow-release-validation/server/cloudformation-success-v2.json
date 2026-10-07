@@ -1,0 +1,802 @@
+[
+    {
+        "Id": "a935dda0-c283-11f1-a07a-0e02d3d50dcd",
+        "Resource": "JumpServeBenchmarkStack",
+        "Type": "AWS::CloudFormation::Stack",
+        "Status": "UPDATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:56.035000+00:00"
+    },
+    {
+        "Id": "a885c780-c283-11f1-9c2a-12ffeb60f833",
+        "Resource": "JumpServeBenchmarkStack",
+        "Type": "AWS::CloudFormation::Stack",
+        "Status": "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:16:54.900000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueuePollAllowEventRuleJumpServeBenchmarkStackResearchWorkflowQueueWorkerDD2E7DD771A9A7E5-CREATE_COMPLETE-2026-10-07T19:16:52.553Z",
+        "Resource": "ResearchWorkflowQueuePollAllowEventRuleJumpServeBenchmarkStackResearchWorkflowQueueWorkerDD2E7DD771A9A7E5",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:52.553000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueuePollAllowEventRuleJumpServeBenchmarkStackResearchWorkflowQueueWorkerDD2E7DD771A9A7E5-CREATE_IN_PROGRESS-2026-10-07T19:16:52.018Z",
+        "Resource": "ResearchWorkflowQueuePollAllowEventRuleJumpServeBenchmarkStackResearchWorkflowQueueWorkerDD2E7DD771A9A7E5",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:16:52.018000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueuePollAllowEventRuleJumpServeBenchmarkStackResearchWorkflowQueueWorkerDD2E7DD771A9A7E5-CREATE_IN_PROGRESS-2026-10-07T19:16:51.227Z",
+        "Resource": "ResearchWorkflowQueuePollAllowEventRuleJumpServeBenchmarkStackResearchWorkflowQueueWorkerDD2E7DD771A9A7E5",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:16:51.227000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueuePoll49F7FA3B-CREATE_COMPLETE-2026-10-07T19:16:50.518Z",
+        "Resource": "ResearchWorkflowQueuePoll49F7FA3B",
+        "Type": "AWS::Events::Rule",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:50.518000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermission186C1D79-CREATE_COMPLETE-2026-10-07T19:16:12.770Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermission186C1D79",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:12.770000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermission186C1D79-CREATE_IN_PROGRESS-2026-10-07T19:16:12.298Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermission186C1D79",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:16:12.298000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowApiLogGroup640C45EA-CREATE_COMPLETE-2026-10-07T19:16:06.857Z",
+        "Resource": "ResearchWorkflowApiLogGroup640C45EA",
+        "Type": "AWS::Logs::LogGroup",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:06.857000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdqueueactionsResearchWorkflowIntegrationPermission1174F416-CREATE_COMPLETE-2026-10-07T19:16:03.423Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdqueueactionsResearchWorkflowIntegrationPermission1174F416",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:03.423000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdprotocolsResearchWorkflowIntegrationPermission6C561B92-CREATE_COMPLETE-2026-10-07T19:16:03.298Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdprotocolsResearchWorkflowIntegrationPermission6C561B92",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:03.298000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdrecordsResearchWorkflowIntegrationPermission1B3A864E-CREATE_COMPLETE-2026-10-07T19:16:03.283Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdrecordsResearchWorkflowIntegrationPermission1B3A864E",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:03.283000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchstudiesResearchWorkflowIntegrationPermissionC73D5AD8-CREATE_COMPLETE-2026-10-07T19:16:03.060Z",
+        "Resource": "BenchmarkApiGETresearchstudiesResearchWorkflowIntegrationPermissionC73D5AD8",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:03.060000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdqueueactionsResearchWorkflowIntegrationPermission1174F416-CREATE_IN_PROGRESS-2026-10-07T19:16:02.938Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdqueueactionsResearchWorkflowIntegrationPermission1174F416",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:16:02.938000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdprotocolsResearchWorkflowIntegrationPermission6C561B92-CREATE_IN_PROGRESS-2026-10-07T19:16:02.756Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdprotocolsResearchWorkflowIntegrationPermission6C561B92",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:16:02.756000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdrecordsResearchWorkflowIntegrationPermission1B3A864E-CREATE_IN_PROGRESS-2026-10-07T19:16:02.704Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdrecordsResearchWorkflowIntegrationPermission1B3A864E",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:16:02.704000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchstudiesResearchWorkflowIntegrationPermissionC73D5AD8-CREATE_IN_PROGRESS-2026-10-07T19:16:02.568Z",
+        "Resource": "BenchmarkApiGETresearchstudiesResearchWorkflowIntegrationPermissionC73D5AD8",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:16:02.568000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdprotocols60FC7808-CREATE_COMPLETE-2026-10-07T19:16:02.028Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdprotocols60FC7808",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:02.028000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudies3ADF7B43-CREATE_COMPLETE-2026-10-07T19:16:01.881Z",
+        "Resource": "BenchmarkApiPOSTresearchstudies3ADF7B43",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:01.881000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdprotocols60FC7808-CREATE_IN_PROGRESS-2026-10-07T19:16:01.288Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdprotocols60FC7808",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:16:01.288000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudies3ADF7B43-CREATE_IN_PROGRESS-2026-10-07T19:16:01.279Z",
+        "Resource": "BenchmarkApiPOSTresearchstudies3ADF7B43",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:16:01.279000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdqueue6C948D7E-CREATE_COMPLETE-2026-10-07T19:16:00.858Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdqueue6C948D7E",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:00.858000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdpublish5CB0323E-CREATE_COMPLETE-2026-10-07T19:16:00.745Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdpublish5CB0323E",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:00.745000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdrecordsB1E70928-CREATE_COMPLETE-2026-10-07T19:16:00.684Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdrecordsB1E70928",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:00.684000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchstudiesE9C7241A-CREATE_COMPLETE-2026-10-07T19:16:00.667Z",
+        "Resource": "BenchmarkApiGETresearchstudiesE9C7241A",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:00.667000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchcapabilitiesE53A290C-CREATE_COMPLETE-2026-10-07T19:16:00.616Z",
+        "Resource": "BenchmarkApiGETresearchcapabilitiesE53A290C",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:00.616000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchstudiesstudyIdDBED4732-CREATE_COMPLETE-2026-10-07T19:16:00.608Z",
+        "Resource": "BenchmarkApiGETresearchstudiesstudyIdDBED4732",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:00.608000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdqueueactions86100889-CREATE_COMPLETE-2026-10-07T19:16:00.580Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdqueueactions86100889",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:00.580000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchstudiesstudyIdqueueC964316E-CREATE_COMPLETE-2026-10-07T19:16:00.560Z",
+        "Resource": "BenchmarkApiGETresearchstudiesstudyIdqueueC964316E",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:00.560000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdrunsA58EB3DB-CREATE_COMPLETE-2026-10-07T19:16:00.522Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdrunsA58EB3DB",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:16:00.522000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdqueue6C948D7E-CREATE_IN_PROGRESS-2026-10-07T19:16:00.292Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdqueue6C948D7E",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:16:00.292000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdpublish5CB0323E-CREATE_IN_PROGRESS-2026-10-07T19:16:00.113Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdpublish5CB0323E",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:16:00.113000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdrecordsB1E70928-CREATE_IN_PROGRESS-2026-10-07T19:16:00.085Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdrecordsB1E70928",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:16:00.085000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchstudiesE9C7241A-CREATE_IN_PROGRESS-2026-10-07T19:16:00.062Z",
+        "Resource": "BenchmarkApiGETresearchstudiesE9C7241A",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:16:00.062000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchstudiesstudyIdDBED4732-CREATE_IN_PROGRESS-2026-10-07T19:16:00.017Z",
+        "Resource": "BenchmarkApiGETresearchstudiesstudyIdDBED4732",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:16:00.017000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdqueueactions86100889-CREATE_IN_PROGRESS-2026-10-07T19:16:00.008Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdqueueactions86100889",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:16:00.008000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchcapabilitiesE53A290C-CREATE_IN_PROGRESS-2026-10-07T19:16:00.008Z",
+        "Resource": "BenchmarkApiGETresearchcapabilitiesE53A290C",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:16:00.008000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchstudiesstudyIdqueueC964316E-CREATE_IN_PROGRESS-2026-10-07T19:15:59.994Z",
+        "Resource": "BenchmarkApiGETresearchstudiesstudyIdqueueC964316E",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:15:59.994000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdrunsA58EB3DB-CREATE_IN_PROGRESS-2026-10-07T19:15:59.983Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdrunsA58EB3DB",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:15:59.983000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdqueue6C948D7E-CREATE_IN_PROGRESS-2026-10-07T19:15:59.185Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdqueue6C948D7E",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:59.185000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdrecordsB1E70928-CREATE_IN_PROGRESS-2026-10-07T19:15:59.172Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdrecordsB1E70928",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:59.172000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdqueueactions86100889-CREATE_IN_PROGRESS-2026-10-07T19:15:59.160Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdqueueactions86100889",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:59.160000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdpublish5CB0323E-CREATE_IN_PROGRESS-2026-10-07T19:15:59.160Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdpublish5CB0323E",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:59.160000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdrunsA58EB3DB-CREATE_IN_PROGRESS-2026-10-07T19:15:59.144Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdrunsA58EB3DB",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:59.144000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchstudiesstudyIdDBED4732-CREATE_IN_PROGRESS-2026-10-07T19:15:59.136Z",
+        "Resource": "BenchmarkApiGETresearchstudiesstudyIdDBED4732",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:59.136000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchstudiesstudyIdqueueC964316E-CREATE_IN_PROGRESS-2026-10-07T19:15:59.131Z",
+        "Resource": "BenchmarkApiGETresearchstudiesstudyIdqueueC964316E",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:59.131000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchcapabilitiesE53A290C-CREATE_IN_PROGRESS-2026-10-07T19:15:59.128Z",
+        "Resource": "BenchmarkApiGETresearchcapabilitiesE53A290C",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:59.128000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdprotocols60FC7808-CREATE_IN_PROGRESS-2026-10-07T19:15:59.122Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdprotocols60FC7808",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:59.122000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudies3ADF7B43-CREATE_IN_PROGRESS-2026-10-07T19:15:59.111Z",
+        "Resource": "BenchmarkApiPOSTresearchstudies3ADF7B43",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:59.111000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchstudiesE9C7241A-CREATE_IN_PROGRESS-2026-10-07T19:15:59.105Z",
+        "Resource": "BenchmarkApiGETresearchstudiesE9C7241A",
+        "Type": "AWS::ApiGatewayV2::Route",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:59.105000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermissionA15C6778-CREATE_COMPLETE-2026-10-07T19:15:58.966Z",
+        "Resource": "BenchmarkApiGETresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermissionA15C6778",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:15:58.966000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdpublishResearchWorkflowIntegrationPermission0FFD424F-CREATE_COMPLETE-2026-10-07T19:15:58.815Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdpublishResearchWorkflowIntegrationPermission0FFD424F",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:15:58.815000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegrationPermissionA0DE747F-CREATE_COMPLETE-2026-10-07T19:15:58.765Z",
+        "Resource": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegrationPermissionA0DE747F",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:15:58.765000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueueWorkerLogGroup7580A36A-CREATE_COMPLETE-2026-10-07T19:15:58.665Z",
+        "Resource": "ResearchWorkflowQueueWorkerLogGroup7580A36A",
+        "Type": "AWS::Logs::LogGroup",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:15:58.665000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesResearchWorkflowIntegrationPermission3977E87F-CREATE_COMPLETE-2026-10-07T19:15:58.640Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesResearchWorkflowIntegrationPermission3977E87F",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:15:58.640000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50-CREATE_COMPLETE-2026-10-07T19:15:58.605Z",
+        "Resource": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50",
+        "Type": "AWS::ApiGatewayV2::Integration",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:15:58.605000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchstudiesstudyIdResearchWorkflowIntegrationPermission74A7B67F-CREATE_COMPLETE-2026-10-07T19:15:58.568Z",
+        "Resource": "BenchmarkApiGETresearchstudiesstudyIdResearchWorkflowIntegrationPermission74A7B67F",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:15:58.568000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdrunsResearchWorkflowIntegrationPermissionBEC3A01A-CREATE_COMPLETE-2026-10-07T19:15:58.495Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdrunsResearchWorkflowIntegrationPermissionBEC3A01A",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:15:58.495000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermissionA15C6778-CREATE_IN_PROGRESS-2026-10-07T19:15:58.440Z",
+        "Resource": "BenchmarkApiGETresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermissionA15C6778",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:15:58.440000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdpublishResearchWorkflowIntegrationPermission0FFD424F-CREATE_IN_PROGRESS-2026-10-07T19:15:58.341Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdpublishResearchWorkflowIntegrationPermission0FFD424F",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:15:58.341000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegrationPermissionA0DE747F-CREATE_IN_PROGRESS-2026-10-07T19:15:58.297Z",
+        "Resource": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegrationPermissionA0DE747F",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:15:58.297000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesResearchWorkflowIntegrationPermission3977E87F-CREATE_IN_PROGRESS-2026-10-07T19:15:58.151Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesResearchWorkflowIntegrationPermission3977E87F",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:15:58.151000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchstudiesstudyIdResearchWorkflowIntegrationPermission74A7B67F-CREATE_IN_PROGRESS-2026-10-07T19:15:58.093Z",
+        "Resource": "BenchmarkApiGETresearchstudiesstudyIdResearchWorkflowIntegrationPermission74A7B67F",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:15:58.093000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50-CREATE_IN_PROGRESS-2026-10-07T19:15:58.049Z",
+        "Resource": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50",
+        "Type": "AWS::ApiGatewayV2::Integration",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:15:58.049000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdrunsResearchWorkflowIntegrationPermissionBEC3A01A-CREATE_IN_PROGRESS-2026-10-07T19:15:57.966Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdrunsResearchWorkflowIntegrationPermissionBEC3A01A",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:15:57.966000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowApiLogGroup640C45EA-CREATE_IN_PROGRESS-2026-10-07T19:15:57.863Z",
+        "Resource": "ResearchWorkflowApiLogGroup640C45EA",
+        "Type": "AWS::Logs::LogGroup",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:15:57.863000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesResearchWorkflowIntegrationPermission3977E87F-CREATE_IN_PROGRESS-2026-10-07T19:15:57.238Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesResearchWorkflowIntegrationPermission3977E87F",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:57.238000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdprotocolsResearchWorkflowIntegrationPermission6C561B92-CREATE_IN_PROGRESS-2026-10-07T19:15:57.228Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdprotocolsResearchWorkflowIntegrationPermission6C561B92",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:57.228000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdrecordsResearchWorkflowIntegrationPermission1B3A864E-CREATE_IN_PROGRESS-2026-10-07T19:15:57.225Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdrecordsResearchWorkflowIntegrationPermission1B3A864E",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:57.225000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegrationPermissionA0DE747F-CREATE_IN_PROGRESS-2026-10-07T19:15:57.221Z",
+        "Resource": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegrationPermissionA0DE747F",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:57.221000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermissionA15C6778-CREATE_IN_PROGRESS-2026-10-07T19:15:57.220Z",
+        "Resource": "BenchmarkApiGETresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermissionA15C6778",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:57.220000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermission186C1D79-CREATE_IN_PROGRESS-2026-10-07T19:15:57.219Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermission186C1D79",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:57.219000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50-CREATE_IN_PROGRESS-2026-10-07T19:15:57.219Z",
+        "Resource": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50",
+        "Type": "AWS::ApiGatewayV2::Integration",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:57.219000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchstudiesstudyIdResearchWorkflowIntegrationPermission74A7B67F-CREATE_IN_PROGRESS-2026-10-07T19:15:57.216Z",
+        "Resource": "BenchmarkApiGETresearchstudiesstudyIdResearchWorkflowIntegrationPermission74A7B67F",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:57.216000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiGETresearchstudiesResearchWorkflowIntegrationPermissionC73D5AD8-CREATE_IN_PROGRESS-2026-10-07T19:15:57.211Z",
+        "Resource": "BenchmarkApiGETresearchstudiesResearchWorkflowIntegrationPermissionC73D5AD8",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:57.211000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdqueueactionsResearchWorkflowIntegrationPermission1174F416-CREATE_IN_PROGRESS-2026-10-07T19:15:57.199Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdqueueactionsResearchWorkflowIntegrationPermission1174F416",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:57.199000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdrunsResearchWorkflowIntegrationPermissionBEC3A01A-CREATE_IN_PROGRESS-2026-10-07T19:15:57.197Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdrunsResearchWorkflowIntegrationPermissionBEC3A01A",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:57.197000+00:00"
+    },
+    {
+        "Id": "BenchmarkApiPOSTresearchstudiesstudyIdpublishResearchWorkflowIntegrationPermission0FFD424F-CREATE_IN_PROGRESS-2026-10-07T19:15:57.192Z",
+        "Resource": "BenchmarkApiPOSTresearchstudiesstudyIdpublishResearchWorkflowIntegrationPermission0FFD424F",
+        "Type": "AWS::Lambda::Permission",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:57.192000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowApiLogGroup640C45EA-CREATE_IN_PROGRESS-2026-10-07T19:15:57.163Z",
+        "Resource": "ResearchWorkflowApiLogGroup640C45EA",
+        "Type": "AWS::Logs::LogGroup",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:57.163000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowApiE04EBDAC-CREATE_COMPLETE-2026-10-07T19:15:56.630Z",
+        "Resource": "ResearchWorkflowApiE04EBDAC",
+        "Type": "AWS::Lambda::Function",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:15:56.630000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueueWorkerEventInvokeConfig6F5A9ACA-CREATE_COMPLETE-2026-10-07T19:15:50.244Z",
+        "Resource": "ResearchWorkflowQueueWorkerEventInvokeConfig6F5A9ACA",
+        "Type": "AWS::Lambda::EventInvokeConfig",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:15:50.244000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueueWorkerEventInvokeConfig6F5A9ACA-CREATE_IN_PROGRESS-2026-10-07T19:15:49.670Z",
+        "Resource": "ResearchWorkflowQueueWorkerEventInvokeConfig6F5A9ACA",
+        "Type": "AWS::Lambda::EventInvokeConfig",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:15:49.670000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueueWorkerLogGroup7580A36A-CREATE_IN_PROGRESS-2026-10-07T19:15:49.614Z",
+        "Resource": "ResearchWorkflowQueueWorkerLogGroup7580A36A",
+        "Type": "AWS::Logs::LogGroup",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:15:49.614000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueuePoll49F7FA3B-CREATE_IN_PROGRESS-2026-10-07T19:15:49.489Z",
+        "Resource": "ResearchWorkflowQueuePoll49F7FA3B",
+        "Type": "AWS::Events::Rule",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:15:49.489000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueueWorkerEventInvokeConfig6F5A9ACA-CREATE_IN_PROGRESS-2026-10-07T19:15:48.698Z",
+        "Resource": "ResearchWorkflowQueueWorkerEventInvokeConfig6F5A9ACA",
+        "Type": "AWS::Lambda::EventInvokeConfig",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:48.698000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueueWorkerLogGroup7580A36A-CREATE_IN_PROGRESS-2026-10-07T19:15:48.676Z",
+        "Resource": "ResearchWorkflowQueueWorkerLogGroup7580A36A",
+        "Type": "AWS::Logs::LogGroup",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:48.676000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueuePoll49F7FA3B-CREATE_IN_PROGRESS-2026-10-07T19:15:48.647Z",
+        "Resource": "ResearchWorkflowQueuePoll49F7FA3B",
+        "Type": "AWS::Events::Rule",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:48.647000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueueWorker702E601D-CREATE_COMPLETE-2026-10-07T19:15:48.062Z",
+        "Resource": "ResearchWorkflowQueueWorker702E601D",
+        "Type": "AWS::Lambda::Function",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:15:48.062000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueueWorker702E601D-CREATE_IN_PROGRESS-2026-10-07T19:15:41.935Z",
+        "Resource": "ResearchWorkflowQueueWorker702E601D",
+        "Type": "AWS::Lambda::Function",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:15:41.935000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowApiE04EBDAC-CREATE_IN_PROGRESS-2026-10-07T19:15:41.225Z",
+        "Resource": "ResearchWorkflowApiE04EBDAC",
+        "Type": "AWS::Lambda::Function",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:15:41.225000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowApiE04EBDAC-CREATE_IN_PROGRESS-2026-10-07T19:15:39.196Z",
+        "Resource": "ResearchWorkflowApiE04EBDAC",
+        "Type": "AWS::Lambda::Function",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:39.196000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueueWorker702E601D-CREATE_IN_PROGRESS-2026-10-07T19:15:39.017Z",
+        "Resource": "ResearchWorkflowQueueWorker702E601D",
+        "Type": "AWS::Lambda::Function",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:39.017000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowApiServiceRoleDefaultPolicy378FDA82-CREATE_COMPLETE-2026-10-07T19:15:38.330Z",
+        "Resource": "ResearchWorkflowApiServiceRoleDefaultPolicy378FDA82",
+        "Type": "AWS::IAM::Policy",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:15:38.330000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueueWorkerServiceRoleDefaultPolicy41AC3B22-CREATE_COMPLETE-2026-10-07T19:15:38.210Z",
+        "Resource": "ResearchWorkflowQueueWorkerServiceRoleDefaultPolicy41AC3B22",
+        "Type": "AWS::IAM::Policy",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:15:38.210000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowApiServiceRoleDefaultPolicy378FDA82-CREATE_IN_PROGRESS-2026-10-07T19:15:22.790Z",
+        "Resource": "ResearchWorkflowApiServiceRoleDefaultPolicy378FDA82",
+        "Type": "AWS::IAM::Policy",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:15:22.790000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueueWorkerServiceRoleDefaultPolicy41AC3B22-CREATE_IN_PROGRESS-2026-10-07T19:15:22.665Z",
+        "Resource": "ResearchWorkflowQueueWorkerServiceRoleDefaultPolicy41AC3B22",
+        "Type": "AWS::IAM::Policy",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": "Resource creation Initiated",
+        "At": "2026-10-07T19:15:22.665000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowApiServiceRoleDefaultPolicy378FDA82-CREATE_IN_PROGRESS-2026-10-07T19:15:21.985Z",
+        "Resource": "ResearchWorkflowApiServiceRoleDefaultPolicy378FDA82",
+        "Type": "AWS::IAM::Policy",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:21.985000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueueWorkerServiceRoleDefaultPolicy41AC3B22-CREATE_IN_PROGRESS-2026-10-07T19:15:21.929Z",
+        "Resource": "ResearchWorkflowQueueWorkerServiceRoleDefaultPolicy41AC3B22",
+        "Type": "AWS::IAM::Policy",
+        "Status": "CREATE_IN_PROGRESS",
+        "Reason": null,
+        "At": "2026-10-07T19:15:21.929000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowApiServiceRole4DB8FBBC-CREATE_COMPLETE-2026-10-07T19:15:21.478Z",
+        "Resource": "ResearchWorkflowApiServiceRole4DB8FBBC",
+        "Type": "AWS::IAM::Role",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:15:21.478000+00:00"
+    },
+    {
+        "Id": "ResearchWorkflowQueueWorkerServiceRole210417A9-CREATE_COMPLETE-2026-10-07T19:15:21.408Z",
+        "Resource": "ResearchWorkflowQueueWorkerServiceRole210417A9",
+        "Type": "AWS::IAM::Role",
+        "Status": "CREATE_COMPLETE",
+        "Reason": null,
+        "At": "2026-10-07T19:15:21.408000+00:00"
+    }
+]

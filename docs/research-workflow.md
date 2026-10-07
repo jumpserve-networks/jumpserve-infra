@@ -1,5 +1,9 @@
 # Research workflow: architecture, verification and release
 
+The [2026-10-07 production release](research-workflow-production-release-v1.md)
+records the deployed module, migration receipts, real scheduled controls,
+desktop/mobile checks, shared-pool hosting amendment and remaining conditional gaps.
+
 The subsequent [claim queue implementation](research-queue.md) adds dependency-aware
 campaign scheduling and bounded workers, private operational tables and per-claim
 progress. Its [protocol](research-queue-protocol-v1.md) and
