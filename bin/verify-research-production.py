@@ -22,8 +22,9 @@ DIRECTORY = ROOT/'.test-artifacts/research-release'/STAMP
 DIRECTORY.mkdir(parents=True, exist_ok=False)
 sys.path.insert(0, str(ROOT.parent/'jumpserve-back-end/research_workflow'))
 import scheduler, store, workflow, preparation
-PREPARATION_RELEASE = sys.argv[1:] == ['--preparation']
-if sys.argv[1:] and not PREPARATION_RELEASE: raise SystemExit('Only --preparation is supported.')
+PREPARATION_FOLLOWUP = sys.argv[1:] == ['--preparation-followup']
+PREPARATION_RELEASE = sys.argv[1:] == ['--preparation'] or PREPARATION_FOLLOWUP
+if sys.argv[1:] and not PREPARATION_RELEASE: raise SystemExit('Only --preparation or --preparation-followup is supported.')
 spec = importlib.util.spec_from_file_location('research_database', ROOT/'bin/research-workflow-database.py')
 database = importlib.util.module_from_spec(spec); spec.loader.exec_module(database)
 report = dict(version=1, started_at=workflow.now(), protocol='research-workflow-release-protocol-v1',
@@ -34,6 +35,7 @@ report = dict(version=1, started_at=workflow.now(), protocol='research-workflow-
 if PREPARATION_RELEASE:
     report['protocol']='research-preparation-production-protocol-v1'
     report['design']='Production preparation and scheduled archived-value rechecks in a private operator fixture; not a Google session or independent scientific validation.'
+if PREPARATION_FOLLOWUP:report['amendment']='research-preparation-production-amendment-v2'
 
 def check(name, action):
     tick=time.monotonic()
@@ -165,24 +167,42 @@ def preparation_fixture():
     existing='76c70fd9-0217-464e-8c26-0a47832409a3'
     kinds=('sources','claims','protocols','configurations','campaigns','claim_checks','runs','queue_jobs','prepared_plans')
     def coverage(study_id):return {kind:len(store.rows(kind,{'study_id':'eq.'+study_id})) for kind in kinds}
-    before=coverage(existing);report['existing_user_workspace']=dict(study_id=existing,before=before)
-    actor=str(uuid.uuid4());study_id=str(uuid.uuid4())
+    tick=time.monotonic()
+    if PREPARATION_FOLLOWUP:
+        previous=ROOT/'.test-artifacts/research-release/20261007T221548717353Z/production-server-report.json'
+        original=previous.read_bytes();baseline=json.loads(original)
+        assert baseline['protocol']=='research-preparation-production-protocol-v1' and not baseline['passed']
+        study_id=baseline['preparation_fixture']['study_id'];before=baseline['existing_user_workspace']['before']
+        owners=store.rows('study_owners',{'study_id':'eq.'+study_id,'limit':1});assert len(owners)==1
+        actor=owners[0]['owner_id']
+        retained=store.rows('prepared_plans',{'study_id':'eq.'+study_id});assert len(retained)==1
+        value=preparation.compiled(study_id,retained[0])
+        frozen=store.rows('protocols',{'study_id':'eq.'+study_id});assessments=store.rows('assessments',{'study_id':'eq.'+study_id})
+        for kind,rows in [('protocols',frozen),('assessments',assessments)]:
+            expected={entry['record']['id']:entry['record'] for entry in value['records'] if entry['kind']==kind}
+            assert {row['id'] for row in rows}==set(expected)
+            keys=['document','sha256'] if kind=='protocols' else workflow.FIELDS[kind]
+            assert all(row[key]==expected[row['id']][key] for row in rows for key in keys)
+        report['followup_of']=dict(path=str(previous.relative_to(ROOT)),sha256=workflow.digest(original),experiment_repeated=False,production_writes=False)
+    else:
+        before=coverage(existing);actor=str(uuid.uuid4());study_id=str(uuid.uuid4())
+        store.rpc('research_create_study',dict(p_actor=actor,p_id=study_id,p_document=workflow.paper_details(dict(title='Private preparation release copy of IPv6 archive '+STAMP,paper_url='https://pure.mpg.de/pubman/item/item_3670144_1',domain='Networking',scope='Private production preparation regression; archived evidence only; no new claim assessment.',origin_module=None))))
+        study=store.rows('studies',{'id':'eq.'+study_id,'limit':1})[0]
+        initial=preparation.status(study)
+        assert initial['available_plan']['automatic_jobs']==6 and initial['available_plan']['manual_jobs']==14
+        result=preparation.prepare(study,actor,dict(action='prepare',request_id=str(uuid.uuid4())))
+        frozen=store.rows('protocols',{'study_id':'eq.'+study_id});assessments=store.rows('assessments',{'study_id':'eq.'+study_id})
+        jobs=result['prepared']['jobs'];assert len(jobs)==20
+        replay=preparation.prepare(study,actor,dict(action='prepare',request_id=str(uuid.uuid4())))
+        assert replay['replayed'] and replay['prepared']['id']==result['prepared']['id']
+        def enqueue(job):return preparation.enqueue(study,actor,dict(action='enqueue',prepared_id=result['prepared']['id'],job_id=job['id']))
+        for job in jobs[:2]:enqueue(job)
+        partial=preparation.status(study)['prepared'][0];assert partial['queued_jobs']==2 and partial['status']=='partially-queued'
+        (DIRECTORY/'preparation-partial-status.json').write_bytes(workflow.canonical(partial))
+        for job in partial['jobs']:
+            if job['status']=='not-queued':enqueue(job)
+    report['existing_user_workspace']=dict(study_id=existing,before=before)
     report['preparation_fixture']=dict(study_id=study_id,actor_identity_kind='Generated trusted operator fixture, not a Google account',published=False)
-    store.rpc('research_create_study',dict(p_actor=actor,p_id=study_id,p_document=workflow.paper_details(dict(title='Private preparation release copy of IPv6 archive '+STAMP,paper_url='https://pure.mpg.de/pubman/item/item_3670144_1',domain='Networking',scope='Private production preparation regression; archived evidence only; no new claim assessment.',origin_module=None))))
-    study=store.rows('studies',{'id':'eq.'+study_id,'limit':1})[0]
-    tick=time.monotonic();initial=preparation.status(study)
-    assert initial['available_plan']['automatic_jobs']==6 and initial['available_plan']['manual_jobs']==14
-    result=preparation.prepare(study,actor,dict(action='prepare',request_id=str(uuid.uuid4())))
-    frozen=store.rows('protocols',{'study_id':'eq.'+study_id});assessments=store.rows('assessments',{'study_id':'eq.'+study_id})
-    jobs=result['prepared']['jobs'];assert len(jobs)==20
-    replay=preparation.prepare(study,actor,dict(action='prepare',request_id=str(uuid.uuid4())))
-    assert replay['replayed'] and replay['prepared']['id']==result['prepared']['id']
-    def enqueue(job):return preparation.enqueue(study,actor,dict(action='enqueue',prepared_id=result['prepared']['id'],job_id=job['id']))
-    for job in jobs[:2]:enqueue(job)
-    partial=preparation.status(study)['prepared'][0];assert partial['queued_jobs']==2 and partial['status']=='partially-queued'
-    (DIRECTORY/'preparation-partial-status.json').write_bytes(workflow.canonical(partial))
-    for job in partial['jobs']:
-        if job['status']=='not-queued':enqueue(job)
     deadline=time.monotonic()+240
     while time.monotonic()<deadline:
         snapshot=scheduler.snapshot(study_id,actor)
@@ -210,7 +230,7 @@ def preparation_fixture():
     assert http('/studies/'+study_id)[0]==404 and http('/studies/'+study_id+'/prepare')[0]==401
     verified=[]
     for index,artifact in enumerate(store.rows('artifacts',{'study_id':'eq.'+study_id})):
-        raw=store.artifact_bytes(study_id,artifact['id']);assert workflow.digest(raw)==artifact['sha256'] and len(raw)==artifact['byte_count']
+        raw=store.artifact_bytes(study_id,artifact['id'],maximum=4_000_000);assert workflow.digest(raw)==artifact['sha256'] and len(raw)==artifact['byte_count']
         (DIRECTORY/('preparation-artifact-'+str(index)+'.bin')).write_bytes(raw)
         verified.append(dict(id=artifact['id'],sha256=artifact['sha256'],byte_count=len(raw),retrieved_hash_verified=True))
     for name,rows in [('preparation-runs',runs),('preparation-measurements',measurements),('preparation-published-values',published)]:
@@ -223,7 +243,7 @@ try:
     if sys.platform=='darwin':os.environ.setdefault('SSL_CERT_FILE','/etc/ssl/cert.pem')
     check('deployed resources and original Lambda byte identities',configuration_checks)
     check('public API and unauthorized request denial',public_checks)
-    check('scheduled private controls and remote original-byte hash verification',scheduled_fixture)
+    if not PREPARATION_FOLLOWUP:check('scheduled private controls and remote original-byte hash verification',scheduled_fixture)
     if PREPARATION_RELEASE:check('registered preparation, interrupted/resumed queue and six scheduled archived panels',preparation_fixture)
     report['passed']=True
 except Exception as error:
