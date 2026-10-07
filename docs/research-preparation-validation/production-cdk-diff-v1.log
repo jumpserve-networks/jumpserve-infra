@@ -1,0 +1,73 @@
+
+> jumpserve-infra@0.1.0 cdk:benchmark
+> cdk --app "npx ts-node --prefer-ts-exts bin/benchmark.ts" diff JumpServeBenchmarkStack --profile jumpserve --no-change-set
+
+Bundling asset JumpServeBenchmarkStack/LaunchBenchmarkFn/Code/Stage...
+
+  ...4831287107aa9aba9b49df137fc1f0d1c2e6b819998e7d3-building/index.js  18.5kb
+
+⚡ Done in 13ms
+Bundling asset JumpServeBenchmarkStack/CleanupBenchmarksFn/Code/Stage...
+
+  ...d16cd323a31972a39648a8a53af30eb93276a13f081377e2-building/index.js  4.7kb
+
+⚡ Done in 2ms
+Bundling asset JumpServeBenchmarkStack/CancelBenchmarkFn/Code/Stage...
+
+  ...ee63b73a77228644b7da13ecc6c60aeee495964c65d77a75-building/index.js  6.0kb
+
+⚡ Done in 1ms
+Bundling asset JumpServeBenchmarkStack/GetBenchmarkLogsFn/Code/Stage...
+
+  ...9c0cc5141b3f85c48896e834b6a134fde7bb9da21ab0649d-building/index.js  3.1kb
+
+⚡ Done in 2ms
+Bundling asset JumpServeBenchmarkStack/BenchmarkIngestFn/Code/Stage...
+
+  ...593190c7862f90f901e8bbdb45b071136dd26f602bdcfae2-building/index.js  4.1kb
+
+⚡ Done in 2ms
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-lookup-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+Lookup role arn:aws:iam::395567831870:role/cdk-hnb659fds-lookup-role-395567831870-us-east-1 was not assumed. Proceeding with default credentials.
+Stack JumpServeBenchmarkStack
+IAM Statement Changes
+┌───┬─────────────────────────────┬────────┬───────────────────────┬──────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│   │ Resource                    │ Effect │ Action                │ Principal                        │ Condition                                                                                                              │
+├───┼─────────────────────────────┼────────┼───────────────────────┼──────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ + │ ${ResearchWorkflow/Api.Arn} │ Allow  │ lambda:InvokeFunction │ Service:apigateway.amazonaws.com │ "ArnLike": {                                                                                                           │
+│   │                             │        │                       │                                  │   "AWS:SourceArn": "arn:aws:execute-api:us-east-1:395567831870:${BenchmarkApi}/*/*/research/studies/{studyId}/prepare" │
+│   │                             │        │                       │                                  │ }                                                                                                                      │
+│ + │ ${ResearchWorkflow/Api.Arn} │ Allow  │ lambda:InvokeFunction │ Service:apigateway.amazonaws.com │ "ArnLike": {                                                                                                           │
+│   │                             │        │                       │                                  │   "AWS:SourceArn": "arn:aws:execute-api:us-east-1:395567831870:${BenchmarkApi}/*/*/research/studies/{studyId}/prepare" │
+│   │                             │        │                       │                                  │ }                                                                                                                      │
+└───┴─────────────────────────────┴────────┴───────────────────────┴──────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+(NOTE: There may be security-related changes not in this list. See https://github.com/aws/aws-cdk/issues/1299)
+
+Resources
+[+] AWS::Lambda::Permission BenchmarkApi/GET--research--studies--{studyId}--prepare/ResearchWorkflowIntegration-Permission BenchmarkApiGETresearchstudiesstudyIdprepareResearchWorkflowIntegrationPermission2FD96DB4
+[+] AWS::ApiGatewayV2::Route BenchmarkApi/GET--research--studies--{studyId}--prepare BenchmarkApiGETresearchstudiesstudyIdprepareA56F730D
+[+] AWS::Lambda::Permission BenchmarkApi/POST--research--studies--{studyId}--prepare/ResearchWorkflowIntegration-Permission BenchmarkApiPOSTresearchstudiesstudyIdprepareResearchWorkflowIntegrationPermissionD762F976
+[+] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--prepare BenchmarkApiPOSTresearchstudiesstudyIdprepare738F1EEE
+[~] AWS::Lambda::Function ResearchWorkflow/Api ResearchWorkflowApiE04EBDAC
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] c624614cb89c9d35d3653bfad2aceb9e19aa8310146d0831e9e6cd451edbb647.zip
+ │       └─ [+] 060bb6c62338fe1b878829a9a7ed87a54d10297487ceab19e700e9e2bef48641.zip
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.c624614cb89c9d35d3653bfad2aceb9e19aa8310146d0831e9e6cd451edbb647
+         └─ [+] asset.060bb6c62338fe1b878829a9a7ed87a54d10297487ceab19e700e9e2bef48641
+[~] AWS::Lambda::Function ResearchWorkflow/QueueWorker ResearchWorkflowQueueWorker702E601D
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] c624614cb89c9d35d3653bfad2aceb9e19aa8310146d0831e9e6cd451edbb647.zip
+ │       └─ [+] 060bb6c62338fe1b878829a9a7ed87a54d10297487ceab19e700e9e2bef48641.zip
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.c624614cb89c9d35d3653bfad2aceb9e19aa8310146d0831e9e6cd451edbb647
+         └─ [+] asset.060bb6c62338fe1b878829a9a7ed87a54d10297487ceab19e700e9e2bef48641
+
+
+
+✨  Number of stacks with differences: 1
+

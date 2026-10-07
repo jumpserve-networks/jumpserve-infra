@@ -1,0 +1,32 @@
+{
+    "summary": {
+        "jobArn": "arn:aws:amplify:us-east-1:395567831870:apps/d24jvguj7brnkj/branches/main/jobs/0000000106",
+        "jobId": "106",
+        "commitId": "849a33891ba30adfcabe9cfc2858cae61e8b7885",
+        "commitMessage": "Prepare paper campaigns and resume claim queue creation from the workspace\n\nConnect signed-in paper intake and existing workspaces to retained source-grounded preparation plans. Show exact planned and queued coverage, stop on failed requests, resume only absent jobs, and preserve study links after partial success. Keep numerical rechecks, manual domain tasks and scientific review distinct.\n\nVerified 126 frontend regressions, lint and production build, desktop/mobile light/dark intake pages, and actual preparation components with interrupted enqueue recovery. Companion backend and isolated PostgreSQL checks retain six archived panels and fourteen manual tasks without new scientific claim labels. Unrelated staged PDFs are excluded.",
+        "commitTime": "2026-10-07T17:14:18-05:00",
+        "startTime": "2026-10-07T17:14:53.842000-05:00",
+        "status": "SUCCEED",
+        "endTime": "2026-10-07T17:18:24.401000-05:00"
+    },
+    "steps": [
+        {
+            "stepName": "BUILD",
+            "status": "SUCCEED",
+            "startTime": "2026-10-07T17:14:53.880000-05:00",
+            "endTime": "2026-10-07T17:17:58.908000-05:00"
+        },
+        {
+            "stepName": "DEPLOY",
+            "status": "SUCCEED",
+            "startTime": "2026-10-07T17:17:59.139000-05:00",
+            "endTime": "2026-10-07T17:18:24.013000-05:00"
+        },
+        {
+            "stepName": "VERIFY",
+            "status": "SUCCEED",
+            "startTime": "2026-10-07T17:18:24.259000-05:00",
+            "endTime": "2026-10-07T17:18:24.279000-05:00"
+        }
+    ]
+}

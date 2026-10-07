@@ -1,0 +1,260 @@
+{
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres"
+  },
+  "passed": true,
+  "security": [
+    {
+      "relname": "research_studies",
+      "relrowsecurity": true,
+      "anon_read": true,
+      "browser_read": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_study_owners",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "browser_read": false,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_sources",
+      "relrowsecurity": true,
+      "anon_read": true,
+      "browser_read": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_claims",
+      "relrowsecurity": true,
+      "anon_read": true,
+      "browser_read": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_protocols",
+      "relrowsecurity": true,
+      "anon_read": true,
+      "browser_read": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_configurations",
+      "relrowsecurity": true,
+      "anon_read": true,
+      "browser_read": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_campaigns",
+      "relrowsecurity": true,
+      "anon_read": true,
+      "browser_read": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_claim_checks",
+      "relrowsecurity": true,
+      "anon_read": true,
+      "browser_read": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_runs",
+      "relrowsecurity": true,
+      "anon_read": true,
+      "browser_read": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_published_values",
+      "relrowsecurity": true,
+      "anon_read": true,
+      "browser_read": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_measurements",
+      "relrowsecurity": true,
+      "anon_read": true,
+      "browser_read": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_queue_jobs",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "browser_read": false,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_prepared_plans",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "browser_read": false,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_summaries",
+      "relrowsecurity": true,
+      "anon_read": true,
+      "browser_read": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_assessments",
+      "relrowsecurity": true,
+      "anon_read": true,
+      "browser_read": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_gaps",
+      "relrowsecurity": true,
+      "anon_read": true,
+      "browser_read": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_reviews",
+      "relrowsecurity": true,
+      "anon_read": true,
+      "browser_read": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_publications",
+      "relrowsecurity": true,
+      "anon_read": true,
+      "browser_read": true,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_queue_events",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "browser_read": false,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_artifacts",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "browser_read": false,
+      "anon_write": false,
+      "browser_write": false
+    },
+    {
+      "relname": "research_audit_events",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "browser_read": false,
+      "anon_write": false,
+      "browser_write": false
+    }
+  ],
+  "bucket": [
+    {
+      "public": false
+    }
+  ],
+  "private_policy": [
+    {
+      "permissive": "RESTRICTIVE",
+      "roles": "{anon,authenticated}",
+      "cmd": "ALL"
+    }
+  ],
+  "rpc": [
+    {
+      "proname": "research_append",
+      "anon_execute": false,
+      "browser_execute": false
+    },
+    {
+      "proname": "research_append_bundle",
+      "anon_execute": false,
+      "browser_execute": false
+    },
+    {
+      "proname": "research_create_study",
+      "anon_execute": false,
+      "browser_execute": false
+    },
+    {
+      "proname": "research_evidence_manifest",
+      "anon_execute": false,
+      "browser_execute": false
+    },
+    {
+      "proname": "research_publish",
+      "anon_execute": false,
+      "browser_execute": false
+    }
+  ],
+  "queue_rpc": [
+    {
+      "proname": "research_queue_action",
+      "anon_execute": false,
+      "browser_execute": false
+    },
+    {
+      "proname": "research_queue_claim",
+      "anon_execute": false,
+      "browser_execute": false
+    },
+    {
+      "proname": "research_queue_enqueue",
+      "anon_execute": false,
+      "browser_execute": false
+    },
+    {
+      "proname": "research_queue_finish",
+      "anon_execute": false,
+      "browser_execute": false
+    },
+    {
+      "proname": "research_queue_snapshot",
+      "anon_execute": false,
+      "browser_execute": false
+    }
+  ],
+  "preparation_rpc": [
+    {
+      "proname": "research_prepare_plan",
+      "anon_execute": false,
+      "browser_execute": false
+    }
+  ],
+  "local_migration_sha256": "d97983192c89e40886d613e5a2ee4548e52a0e5d66a397ccaab134f3efacb6d3",
+  "local_queue_migration_sha256": "49f0f761aba55bc7771968b30048c34a7db4996947503b558b3eaac599577d63",
+  "local_preparation_migration_sha256": "e3e6b75ced1c98e494551c7500825080bc141a2594263cd8840f082bd383d906",
+  "deployed_migration_original_bytes_verified": false,
+  "limitation": "Catalog/grant verification does not recover or hash the originally executed SQL. Save the apply receipt and versioned migration bytes.",
+  "migration_applied_by_this_call": false,
+  "queue_migration_applied_by_this_call": false,
+  "preparation_migration_applied_by_this_call": true,
+  "created_at": "2026-10-07T22:14:36.590830+00:00"
+}

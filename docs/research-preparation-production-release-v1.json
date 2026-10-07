@@ -1,0 +1,1537 @@
+{
+  "version": 1,
+  "created_at": "2026-10-07T22:23:41.795082+00:00",
+  "authorization": "Fresh explicit request: Oh, please deploy to production",
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "stack_id": "arn:aws:cloudformation:us-east-1:395567831870:stack/JumpServeBenchmarkStack/de161ef0-5ab8-11f1-afd0-12c10299888f",
+    "frontend": "https://jumpserve.quaint-lab.org"
+  },
+  "protocol_sha256": {
+    "research-preparation-protocol-v1.md": "a5153ce489cf02875a4e61c04ae5800eafe9ed39517051d22053eaba2deff78c",
+    "research-preparation-production-protocol-v1.md": "c0d7e8e8e8c29cf2b0786a01f19df6ff066f71054c691bba5df6b0fdb9274639",
+    "research-preparation-production-amendment-v2.md": "63ef9c93a16a3677c90b4d13cf76ddf93734d8d4ba85eb94170acf202d64afa1"
+  },
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independence": "Not independent; exposed development and release regressions"
+  },
+  "software": {
+    "status": "Deployed and verified within declared conditional limits",
+    "release_blockers_passed": true,
+    "frontend_revision": "849a33891ba30adfcabe9cfc2858cae61e8b7885",
+    "amplify_job_id": "106",
+    "backend_revision": "f2a57dab86a248423bfc1a18d2114c43b8126090",
+    "infrastructure_application_revision": "599805d",
+    "infrastructure_verifier_revision": "05d162d",
+    "frontend_verifier_revision": "2f994db",
+    "infrastructure_branch": "release/research-workflow-20261007",
+    "backend_branch": "release/research-preparation-20261007",
+    "local_checks": {
+      "backend_tests": 60,
+      "frontend_tests": 126,
+      "infrastructure_tests_passed": 79,
+      "infrastructure_tests_skipped": 5,
+      "final_research_asset_tests": 10,
+      "database_groups": 12,
+      "component_browser_groups": 3,
+      "public_app_browser_groups": 2,
+      "frontend_lint": "passed",
+      "frontend_build": "passed",
+      "infrastructure_build": "passed"
+    },
+    "production_checks": {
+      "security_relations": 21,
+      "service_only_rpcs": 11,
+      "lambda_archives": 2,
+      "runtime_hashes_per_archive": 8,
+      "browser_groups": 6,
+      "scheduled_synthetic_runs": 2,
+      "scheduled_archived_runs": 6,
+      "manual_tasks_preserved": 14,
+      "stored_artifacts_hash_verified": 18,
+      "google_authenticated_request": false
+    },
+    "benchmark_ami": "ami-0808d1157e26c65cb",
+    "concurrency": "Shared AWS pool 10; database queued-job caps global 4/study 2"
+  },
+  "scientific": {
+    "scope": "Archived numerical rechecks under exposed 0.0051 percentage-point tolerance; no independent reproduction or new network measurements",
+    "matched_cells": 1152,
+    "numerical_agreement_cells": 1152,
+    "claims_upgraded": 0,
+    "previous_labels": {
+      "reproduced": 3,
+      "discrepant": 3,
+      "inconclusive": 5,
+      "untested": 4
+    },
+    "private_fixture_assessments_imported": 15,
+    "private_fixture_assessments_changed": 0,
+    "publication": false,
+    "limitation": "Numerical cell agreement is not correctness, causality, compliance, generalizability or a resolution of all paper claims; source metadata import does not retrieve or fully review every referenced text"
+  },
+  "existing_user_workspace": {
+    "study_id": "76c70fd9-0217-464e-8c26-0a47832409a3",
+    "before": {
+      "sources": 0,
+      "claims": 0,
+      "protocols": 0,
+      "configurations": 0,
+      "campaigns": 0,
+      "claim_checks": 0,
+      "runs": 0,
+      "queue_jobs": 0,
+      "prepared_plans": 0
+    },
+    "after": {
+      "sources": 0,
+      "claims": 0,
+      "protocols": 0,
+      "configurations": 0,
+      "campaigns": 0,
+      "claim_checks": 0,
+      "runs": 0,
+      "queue_jobs": 0,
+      "prepared_plans": 0
+    }
+  },
+  "usage": {
+    "version": 1,
+    "created_at": "2026-10-07T22:23:35.320816+00:00",
+    "targets": {
+      "aws_account": "395567831870",
+      "supabase_project": "regphejnlvfpyokpniny",
+      "stack_id": "arn:aws:cloudformation:us-east-1:395567831870:stack/JumpServeBenchmarkStack/de161ef0-5ab8-11f1-afd0-12c10299888f",
+      "frontend": "https://jumpserve.quaint-lab.org"
+    },
+    "window": {
+      "start_epoch_ms": 1791411348726,
+      "end_epoch_ms": 1791411813578
+    },
+    "bounds": {
+      "functions": 2,
+      "streams_per_function": 3,
+      "events_per_stream": 200,
+      "pages_per_stream": 1
+    },
+    "cloudwatch": [
+      {
+        "group": "/aws/lambda/JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+        "status": "sampled",
+        "streams": [
+          {
+            "name": "2026/10/07/[$LATEST]d5dc2c24925042bab5b3241a327c51c3",
+            "returned_events": 129,
+            "pagination_exhausted": false
+          },
+          {
+            "name": "2026/10/07/[$LATEST]878a108408db4dbeb8dc5511a6436ba2",
+            "returned_events": 0,
+            "pagination_exhausted": false
+          },
+          {
+            "name": "2026/10/07/[$LATEST]d301ea8fe576461aa1dcc0a0f02a2e52",
+            "returned_events": 0,
+            "pagination_exhausted": false
+          }
+        ],
+        "report_samples": [
+          {
+            "timestamp_epoch_ms": 1791411352166,
+            "message": "REPORT RequestId: 4064ab80-35f9-4876-9ded-c05c3b2ae25c\tDuration: 293.22 ms\tBilled Duration: 294 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 293.22,
+            "billed_duration_ms": 294.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411354917,
+            "message": "REPORT RequestId: 6b5e09bc-c395-408c-b05a-c4b2ed06f8b0\tDuration: 1.54 ms\tBilled Duration: 2 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 1.54,
+            "billed_duration_ms": 2.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411355241,
+            "message": "REPORT RequestId: 40d2ca83-8831-4026-be9a-6c2eed6ad479\tDuration: 112.68 ms\tBilled Duration: 113 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 112.68,
+            "billed_duration_ms": 113.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411355573,
+            "message": "REPORT RequestId: 8ac9f5b0-f82d-4251-8b8a-29cee7d18d58\tDuration: 80.67 ms\tBilled Duration: 81 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 80.67,
+            "billed_duration_ms": 81.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411355777,
+            "message": "REPORT RequestId: db033d71-5867-475c-83de-94b76d7ddf15\tDuration: 1.73 ms\tBilled Duration: 2 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 1.73,
+            "billed_duration_ms": 2.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411356017,
+            "message": "REPORT RequestId: c7d88136-6754-412d-a2a0-f32c2030ec66\tDuration: 1.50 ms\tBilled Duration: 2 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 1.5,
+            "billed_duration_ms": 2.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411356306,
+            "message": "REPORT RequestId: 3c678f5b-2a37-450f-8632-dd53252679c4\tDuration: 1.67 ms\tBilled Duration: 2 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 1.67,
+            "billed_duration_ms": 2.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411356589,
+            "message": "REPORT RequestId: 5d2c9e4c-fbdf-463f-a4c9-26dafa84cd4c\tDuration: 1.46 ms\tBilled Duration: 2 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 1.46,
+            "billed_duration_ms": 2.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411356792,
+            "message": "REPORT RequestId: e7d2f93c-8030-4627-87ca-35de42352294\tDuration: 1.52 ms\tBilled Duration: 2 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 1.52,
+            "billed_duration_ms": 2.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411357180,
+            "message": "REPORT RequestId: dac5e3c6-71a7-4a62-ba9f-2e620cd14bf1\tDuration: 122.35 ms\tBilled Duration: 123 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 122.35,
+            "billed_duration_ms": 123.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411357369,
+            "message": "REPORT RequestId: dd5fcd89-de33-4bba-b551-f7f4deaee8ca\tDuration: 1.54 ms\tBilled Duration: 2 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 1.54,
+            "billed_duration_ms": 2.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411357744,
+            "message": "REPORT RequestId: 07d35074-70c3-4d24-bd8b-bfb94939b539\tDuration: 107.21 ms\tBilled Duration: 108 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 107.21,
+            "billed_duration_ms": 108.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411357938,
+            "message": "REPORT RequestId: f62f242f-71cc-4172-8c19-2047ce4ae66b\tDuration: 1.89 ms\tBilled Duration: 2 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 1.89,
+            "billed_duration_ms": 2.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411358263,
+            "message": "REPORT RequestId: e0bf9f65-7512-428d-a56d-03f7150cc215\tDuration: 81.24 ms\tBilled Duration: 82 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 81.24,
+            "billed_duration_ms": 82.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411362542,
+            "message": "REPORT RequestId: b043aa21-06bd-4aa8-94e5-2caaa236febb\tDuration: 186.84 ms\tBilled Duration: 187 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 186.84,
+            "billed_duration_ms": 187.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411373059,
+            "message": "REPORT RequestId: 1eb9ad49-b3a9-440c-9c83-5bcd113bbbe2\tDuration: 329.58 ms\tBilled Duration: 330 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 329.58,
+            "billed_duration_ms": 330.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411384262,
+            "message": "REPORT RequestId: 4ac2c85d-c9d8-429f-99c5-9c8f707f24ed\tDuration: 226.94 ms\tBilled Duration: 227 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 226.94,
+            "billed_duration_ms": 227.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411395458,
+            "message": "REPORT RequestId: ccf08a83-6e07-4e81-b3dc-ed0731c7404d\tDuration: 400.22 ms\tBilled Duration: 401 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 400.22,
+            "billed_duration_ms": 401.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411398292,
+            "message": "REPORT RequestId: 19de3100-ae08-44cb-bb6a-64932da7c804\tDuration: 62.04 ms\tBilled Duration: 63 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 62.04,
+            "billed_duration_ms": 63.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411398550,
+            "message": "REPORT RequestId: 5258cac7-6c4f-4c6d-b0b1-9448aebed03f\tDuration: 1.63 ms\tBilled Duration: 2 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 1.63,
+            "billed_duration_ms": 2.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411406427,
+            "message": "REPORT RequestId: e250ec85-c908-498c-99a7-c1febd7886c3\tDuration: 355.30 ms\tBilled Duration: 356 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 355.3,
+            "billed_duration_ms": 356.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411417271,
+            "message": "REPORT RequestId: 04299a03-466c-4739-98d3-7afbf1dca11c\tDuration: 220.84 ms\tBilled Duration: 221 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 220.84,
+            "billed_duration_ms": 221.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411428298,
+            "message": "REPORT RequestId: 48a3e7cf-98cd-4e8e-a6bd-75067f287db2\tDuration: 236.37 ms\tBilled Duration: 237 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 236.37,
+            "billed_duration_ms": 237.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411439277,
+            "message": "REPORT RequestId: 75e0ff4c-bd9f-46fb-993c-9daee61ab07e\tDuration: 237.60 ms\tBilled Duration: 238 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 237.6,
+            "billed_duration_ms": 238.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411450333,
+            "message": "REPORT RequestId: 6fe4aea2-5c08-4db3-b9ec-7c44096c591a\tDuration: 269.75 ms\tBilled Duration: 270 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 269.75,
+            "billed_duration_ms": 270.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411461337,
+            "message": "REPORT RequestId: 8c550360-a6b1-4524-bd38-f57e78e5ccad\tDuration: 283.41 ms\tBilled Duration: 284 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 283.41,
+            "billed_duration_ms": 284.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411472276,
+            "message": "REPORT RequestId: e0fd5346-da71-49ad-a0dc-a460ee5446c4\tDuration: 240.96 ms\tBilled Duration: 241 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 240.96,
+            "billed_duration_ms": 241.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411483277,
+            "message": "REPORT RequestId: da704928-48be-4df7-a630-e57b13e70b58\tDuration: 232.38 ms\tBilled Duration: 233 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 232.38,
+            "billed_duration_ms": 233.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411494269,
+            "message": "REPORT RequestId: 9b293bca-f689-4ff6-a6ea-f244dfb825a7\tDuration: 213.34 ms\tBilled Duration: 214 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 213.34,
+            "billed_duration_ms": 214.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411505302,
+            "message": "REPORT RequestId: 0a39ccb9-c9c3-4e59-a752-76257c075fa2\tDuration: 231.25 ms\tBilled Duration: 232 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 231.25,
+            "billed_duration_ms": 232.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411516276,
+            "message": "REPORT RequestId: 03ad3437-e14a-4591-8724-3e5dd3844869\tDuration: 227.41 ms\tBilled Duration: 228 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 227.41,
+            "billed_duration_ms": 228.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411527507,
+            "message": "REPORT RequestId: f497141f-9971-4e26-8c6a-64949cbe5c8b\tDuration: 440.54 ms\tBilled Duration: 441 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 440.54,
+            "billed_duration_ms": 441.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411538336,
+            "message": "REPORT RequestId: cbcd5100-ff67-4aed-9b6e-8c5c32026204\tDuration: 278.87 ms\tBilled Duration: 279 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 278.87,
+            "billed_duration_ms": 279.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411549321,
+            "message": "REPORT RequestId: 202c8cd2-313f-4d2f-8bd8-7bc6e7ba8a85\tDuration: 262.59 ms\tBilled Duration: 263 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 262.59,
+            "billed_duration_ms": 263.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411558631,
+            "message": "REPORT RequestId: d4f1d193-ed74-4a55-a6be-fc2fc2c372be\tDuration: 91.59 ms\tBilled Duration: 92 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 91.59,
+            "billed_duration_ms": 92.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411560303,
+            "message": "REPORT RequestId: e43ae75f-8dbf-4d73-a492-c99caa14083f\tDuration: 238.95 ms\tBilled Duration: 239 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 238.95,
+            "billed_duration_ms": 239.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411564764,
+            "message": "REPORT RequestId: 62006681-9f45-40aa-8c53-37c61b1ad4b7\tDuration: 76.57 ms\tBilled Duration: 77 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 76.57,
+            "billed_duration_ms": 77.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411565447,
+            "message": "REPORT RequestId: ea0716ba-0e1a-4f87-bae4-5e84fef31489\tDuration: 81.33 ms\tBilled Duration: 82 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 81.33,
+            "billed_duration_ms": 82.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411571315,
+            "message": "REPORT RequestId: d779c863-8373-410f-b32d-b726c41bfc66\tDuration: 254.96 ms\tBilled Duration: 255 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 254.96,
+            "billed_duration_ms": 255.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411574507,
+            "message": "REPORT RequestId: 663d5ccb-f2a0-4a2d-97e9-aad5601ad123\tDuration: 91.50 ms\tBilled Duration: 92 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 91.5,
+            "billed_duration_ms": 92.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411574836,
+            "message": "REPORT RequestId: 30a81b57-b442-450b-9e5d-cb592a57ea13\tDuration: 1.49 ms\tBilled Duration: 2 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 1.49,
+            "billed_duration_ms": 2.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411582278,
+            "message": "REPORT RequestId: 772eda6c-32e9-4402-8596-f3ad2664e113\tDuration: 225.50 ms\tBilled Duration: 226 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 225.5,
+            "billed_duration_ms": 226.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411593722,
+            "message": "REPORT RequestId: a70b1608-5efa-4bf6-bd25-d7aca7dfec45\tDuration: 650.66 ms\tBilled Duration: 651 ms\tMemory Size: 512 MB\tMax Memory Used: 94 MB\t\n",
+            "duration_ms": 650.66,
+            "billed_duration_ms": 651.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 94.0
+          }
+        ],
+        "error_type": null
+      },
+      {
+        "group": "/aws/lambda/JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+        "status": "sampled",
+        "streams": [
+          {
+            "name": "2026/10/07/[$LATEST]e305be1b467f43288170185d7ec6d6a5",
+            "returned_events": 29,
+            "pagination_exhausted": false
+          },
+          {
+            "name": "2026/10/07/[$LATEST]d94f0c4d915d466a87e9235fdcdc43c3",
+            "returned_events": 0,
+            "pagination_exhausted": false
+          },
+          {
+            "name": "2026/10/07/[$LATEST]80f239d73c824a66a0fa7510f924f9b8",
+            "returned_events": 0,
+            "pagination_exhausted": false
+          }
+        ],
+        "report_samples": [
+          {
+            "timestamp_epoch_ms": 1791411392363,
+            "message": "REPORT RequestId: cd895a24-efba-46f6-97d7-58af8ae0e840\tDuration: 3902.66 ms\tBilled Duration: 4059 ms\tMemory Size: 512 MB\tMax Memory Used: 102 MB\tInit Duration: 155.56 ms\t\n",
+            "duration_ms": 3902.66,
+            "billed_duration_ms": 4059.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 102.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411450650,
+            "message": "REPORT RequestId: 9e9dd964-1bfd-4d5d-a390-33a31c2b6f2c\tDuration: 2288.83 ms\tBilled Duration: 2289 ms\tMemory Size: 512 MB\tMax Memory Used: 106 MB\t\n",
+            "duration_ms": 2288.83,
+            "billed_duration_ms": 2289.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 106.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411511322,
+            "message": "REPORT RequestId: c94f18e3-bf09-4b52-b693-c8752ab35273\tDuration: 3071.50 ms\tBilled Duration: 3072 ms\tMemory Size: 512 MB\tMax Memory Used: 106 MB\t\n",
+            "duration_ms": 3071.5,
+            "billed_duration_ms": 3072.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 106.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411570916,
+            "message": "REPORT RequestId: b74d74d9-6da5-4efd-9c05-99a497bc0c1e\tDuration: 2642.84 ms\tBilled Duration: 2643 ms\tMemory Size: 512 MB\tMax Memory Used: 107 MB\t\n",
+            "duration_ms": 2642.84,
+            "billed_duration_ms": 2643.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 107.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411628693,
+            "message": "REPORT RequestId: b77c4320-39c8-44a5-92d8-2fc407172f34\tDuration: 357.25 ms\tBilled Duration: 358 ms\tMemory Size: 512 MB\tMax Memory Used: 107 MB\t\n",
+            "duration_ms": 357.25,
+            "billed_duration_ms": 358.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 107.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411688287,
+            "message": "REPORT RequestId: a4510084-9265-4b9a-96ad-8e72cf4da2ce\tDuration: 120.61 ms\tBilled Duration: 121 ms\tMemory Size: 512 MB\tMax Memory Used: 107 MB\t\n",
+            "duration_ms": 120.61,
+            "billed_duration_ms": 121.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 107.0
+          },
+          {
+            "timestamp_epoch_ms": 1791411748413,
+            "message": "REPORT RequestId: 99aa0efa-8bdb-45a2-952e-256ce24a17ba\tDuration: 193.41 ms\tBilled Duration: 194 ms\tMemory Size: 512 MB\tMax Memory Used: 107 MB\t\n",
+            "duration_ms": 193.41,
+            "billed_duration_ms": 194.0,
+            "memory_size_mb": 512.0,
+            "max_memory_used_mb": 107.0
+          }
+        ],
+        "error_type": null
+      }
+    ],
+    "run_usage": [
+      {
+        "id": "423e172e-f8ef-5c6b-a0ee-0882443cabd3",
+        "requested_resources": {
+          "cost_basis": "Local or API hosting costs are unallocated; missing charges are not zero. No experiment instances or model calls are requested.",
+          "estimated_cost_usd": null,
+          "max_input_bytes": 256000,
+          "max_observations": 192,
+          "wall_seconds": 10
+        },
+        "actual_resources": {
+          "execution": "bounded arithmetic",
+          "experiment_instances": 0,
+          "hosting_configured_memory_mb": 512,
+          "hosting_measured_peak_memory_bytes": null
+        },
+        "usage": {
+          "estimated_charges_usd": null,
+          "input_bytes": 123739,
+          "measured_charges_usd": null,
+          "model_usage": null,
+          "wall_seconds": 0.03858889600000737
+        }
+      },
+      {
+        "id": "60e46962-17c6-53ae-85e8-72d0db0d128f",
+        "requested_resources": {
+          "cost_basis": "Local or API hosting costs are unallocated; missing charges are not zero. No experiment instances or model calls are requested.",
+          "estimated_cost_usd": null,
+          "max_input_bytes": 256000,
+          "max_observations": 192,
+          "wall_seconds": 10
+        },
+        "actual_resources": {
+          "execution": "bounded arithmetic",
+          "experiment_instances": 0,
+          "hosting_configured_memory_mb": 512,
+          "hosting_measured_peak_memory_bytes": null
+        },
+        "usage": {
+          "estimated_charges_usd": null,
+          "input_bytes": 123565,
+          "measured_charges_usd": null,
+          "model_usage": null,
+          "wall_seconds": 0.05708552199999417
+        }
+      },
+      {
+        "id": "65851a59-46d7-599c-aaaa-d190f1ffd3e5",
+        "requested_resources": {
+          "cost_basis": "Local or API hosting costs are unallocated; missing charges are not zero. No experiment instances or model calls are requested.",
+          "estimated_cost_usd": null,
+          "max_input_bytes": 256000,
+          "max_observations": 192,
+          "wall_seconds": 10
+        },
+        "actual_resources": {
+          "execution": "bounded arithmetic",
+          "experiment_instances": 0,
+          "hosting_configured_memory_mb": 512,
+          "hosting_measured_peak_memory_bytes": null
+        },
+        "usage": {
+          "estimated_charges_usd": null,
+          "input_bytes": 123750,
+          "measured_charges_usd": null,
+          "model_usage": null,
+          "wall_seconds": 0.02908484499999986
+        }
+      },
+      {
+        "id": "fd43166c-bb97-5cff-86d6-bc41a498937b",
+        "requested_resources": {
+          "cost_basis": "Local or API hosting costs are unallocated; missing charges are not zero. No experiment instances or model calls are requested.",
+          "estimated_cost_usd": null,
+          "max_input_bytes": 256000,
+          "max_observations": 192,
+          "wall_seconds": 10
+        },
+        "actual_resources": {
+          "execution": "bounded arithmetic",
+          "experiment_instances": 0,
+          "hosting_configured_memory_mb": 512,
+          "hosting_measured_peak_memory_bytes": null
+        },
+        "usage": {
+          "estimated_charges_usd": null,
+          "input_bytes": 123556,
+          "measured_charges_usd": null,
+          "model_usage": null,
+          "wall_seconds": 0.07507503900001211
+        }
+      },
+      {
+        "id": "c8f7e76b-6fb3-5dbd-a85e-de3d7f4a07f3",
+        "requested_resources": {
+          "cost_basis": "Local or API hosting costs are unallocated; missing charges are not zero. No experiment instances or model calls are requested.",
+          "estimated_cost_usd": null,
+          "max_input_bytes": 256000,
+          "max_observations": 192,
+          "wall_seconds": 10
+        },
+        "actual_resources": {
+          "execution": "bounded arithmetic",
+          "experiment_instances": 0,
+          "hosting_configured_memory_mb": 512,
+          "hosting_measured_peak_memory_bytes": null
+        },
+        "usage": {
+          "estimated_charges_usd": null,
+          "input_bytes": 124557,
+          "measured_charges_usd": null,
+          "model_usage": null,
+          "wall_seconds": 0.04144462200000021
+        }
+      },
+      {
+        "id": "8c85b829-655e-5bb5-b8ce-bed65759fc46",
+        "requested_resources": {
+          "cost_basis": "Local or API hosting costs are unallocated; missing charges are not zero. No experiment instances or model calls are requested.",
+          "estimated_cost_usd": null,
+          "max_input_bytes": 256000,
+          "max_observations": 192,
+          "wall_seconds": 10
+        },
+        "actual_resources": {
+          "execution": "bounded arithmetic",
+          "experiment_instances": 0,
+          "hosting_configured_memory_mb": 512,
+          "hosting_measured_peak_memory_bytes": null
+        },
+        "usage": {
+          "estimated_charges_usd": null,
+          "input_bytes": 124402,
+          "measured_charges_usd": null,
+          "model_usage": null,
+          "wall_seconds": 0.03754337899999882
+        }
+      }
+    ],
+    "original_artifact_payload_bytes": 5435004,
+    "original_artifacts": 18,
+    "experiment_ec2_requested": false,
+    "bedrock_evaluations_requested": false,
+    "measured_charges_usd": null,
+    "estimated_charges_usd": null,
+    "model_usage": null,
+    "unallocated_costs": [
+      "AWS Lambda/API/CloudWatch/asset storage",
+      "Supabase database/storage/egress",
+      "Amplify build/hosting",
+      "Codex and documentation retrieval"
+    ],
+    "limitations": [
+      "Bounded CloudWatch samples are not complete invocation accounting and can omit delayed events or older streams",
+      "Lambda memory reports describe the execution environment, not a measured per-job peak",
+      "Logical original payload bytes exclude database indexes, audit records, replicas and storage overhead",
+      "Preparation audit follow-up reused existing runs and made no production writes",
+      "Missing usage or charges are not zero"
+    ],
+    "documentation": [
+      "https://docs.aws.amazon.com/boto3/latest/reference/services/logs/client/describe_log_streams.html",
+      "https://docs.aws.amazon.com/boto3/latest/reference/services/logs/client/get_log_events.html"
+    ]
+  },
+  "conditional_gaps": [
+    "Legitimate Google owner preparation/enqueue request, cross-owner HTTP request and provider round trip; no session was available",
+    "Completed generic-study production charts/CSV/JSON await genuine reviewed publication; isolated completed/missing/invalid data checks passed",
+    "Live expired-lease recovery remains conditional; prior isolated PostgreSQL fencing checks passed",
+    "Generic AI extraction/chat remains disabled pending separately evaluated prompts and domain integrations"
+  ],
+  "preserved_failures": [
+    {
+      "report": ".test-artifacts/research-release/20261007T221548717353Z/production-server-report.json",
+      "reason": "Verifier applied 256 KB input bound to larger preparation artifacts; corrected read-only audit reused all retained runs without runtime changes"
+    },
+    {
+      "kind": "Sandbox endpoint status check",
+      "reason": "One CloudFormation endpoint connection failed; elevated read-only check confirmed UPDATE_COMPLETE"
+    },
+    {
+      "kind": "Ad hoc local inspection",
+      "reason": "Relative sibling path and a screenshot timestamp inferred with a one-millisecond offset did not resolve; corrected to resolved repository path and enumerated artifact paths before successful inspection"
+    }
+  ],
+  "changed_since_local_validation": [
+    {
+      "repository": "jumpserve-infra",
+      "path": "research-workflow-runtime.json",
+      "previous_sha256": "ec4df3d1cfde2e568aa775f6e7bfadb38d3dfcdc8f93e24545cf150b3fdbfe33",
+      "current_sha256": "6d1d430a5fa88ed10329203c2e98679b5c00bff629c547caf90aa5110d5da823"
+    }
+  ],
+  "application_source_sha256": [
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/api.py",
+      "sha256": "bc587c133b3cf132578bc55403cb1770f3d59e19f5e99cac7abda8c6be87356b",
+      "bytes": 11820
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/store.py",
+      "sha256": "63b2488798a8b1253d98d4abc1350918ca703103518da76807b93a5ff8da47e2",
+      "bytes": 8926
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/preparation.py",
+      "sha256": "f23424b4c73974ffda48e356cd19c2d0dd8877beb668d94380e7bb00da5a5f90",
+      "bytes": 19418
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/build_ipv6_plan.py",
+      "sha256": "7d4231364b2455d5f3b0956279e7428d875d3629ae56a28e04a003465d623d8f",
+      "bytes": 11368
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/plans/ipv6-archive-v1.json",
+      "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "bytes": 1452605
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/cli.py",
+      "sha256": "53f31d70d6d9db27ffc9b7e9bcfb496207071740a770ade3705b5d5ac5d8ff55",
+      "bytes": 18442
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/tests/test_preparation.py",
+      "sha256": "29e826c7cd974e6d98fb982e097ab8cbc40442156c37cd3c956a0de94bb13472",
+      "bytes": 10195
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/tests/test_store.py",
+      "sha256": "20f92d623c55548a691777ca748f723518d5c1c7ef7be6f994f36ed6d806226f",
+      "bytes": 3800
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "database/202610070003_research_preparation.sql",
+      "sha256": "e3e6b75ced1c98e494551c7500825080bc141a2594263cd8840f082bd383d906",
+      "bytes": 6061
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "bin/prepare-research-runtime.py",
+      "sha256": "f8bb5548210e8793539b7688808b6bb424c32931dd36cde680f4b3df1850a193",
+      "bytes": 1566
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "bin/research-workflow-database.py",
+      "sha256": "768b334b90a2889b0873ae94586c7fcf68bc553c94464634a7a5020b28bde8bd",
+      "bytes": 8601
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "lib/research-workflow.ts",
+      "sha256": "03979d2d804d333e893405503390f13cc0776043d68717add18150fb43980eab",
+      "bytes": 4823
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "research-workflow-runtime.json",
+      "sha256": "6d1d430a5fa88ed10329203c2e98679b5c00bff629c547caf90aa5110d5da823",
+      "bytes": 917
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "test/research-workflow.test.ts",
+      "sha256": "52094b26e4e1d6c11f2438779559a7a1640f4393b33d650f16555dd55808f987",
+      "bytes": 4078
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "test/check_research_queue_database.py",
+      "sha256": "027ab11ac07bad0e09e90bfd00fd89983e73931ae2e4d2e8c961b5bfea36003e",
+      "bytes": 26073
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "docs/research-preparation-protocol-v1.md",
+      "sha256": "a5153ce489cf02875a4e61c04ae5800eafe9ed39517051d22053eaba2deff78c",
+      "bytes": 4117
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "app/components/research-workflow/paper-preparation.tsx",
+      "sha256": "8983c77e341743d8f9f3825f8dc34c9f48b8ad0b34da912f5d94aca3674141a3",
+      "bytes": 6100
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "app/components/research-workflow/preparation.tsx",
+      "sha256": "d01326e052d4c6b1ff7a30f2eaa452a7c760290645d24fe8e02ae90f1b1fa18d",
+      "bytes": 2126
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "app/components/research-workflow/workspace.tsx",
+      "sha256": "7b66b6e11c24527e70e95bbea233608a1830128f3492ad5a0fac1915f64c5bc6",
+      "bytes": 26518
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "lib/research-preparation.ts",
+      "sha256": "9386f7756e634022fdea21e708d409586fca357b513b9ee8b81137b6815c7974",
+      "bytes": 4260
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "lib/research-workflow-api.ts",
+      "sha256": "9839647415174978710fae71fdf5c5566c84064b76ad2fd90ba3b1744ef2a345",
+      "bytes": 1673
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "lib/research-workflow.ts",
+      "sha256": "6d579de469d31ee8297c1a5171806e659b01a23954ffa27a44612338efa60758",
+      "bytes": 7318
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "lib/test-modules.ts",
+      "sha256": "8f3e4a6d83af7b962b93c41c2f252f7868b07b09281d989917f70a993d098d0f",
+      "bytes": 12640
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "app/module/research-verification/new-study/page.tsx",
+      "sha256": "bc7962d34debd2a83f956c3e459aedf1e5cb082a174b03d039363b07b4df97a9",
+      "bytes": 710
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "scripts/verify-research-preparation.mjs",
+      "sha256": "40277f6b17fca20a2b09c307aa326253a153d45b0b14a798673004f23e3ef3a5",
+      "bytes": 9721
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "scripts/verify-research-workflow.mjs",
+      "sha256": "df74c8ffa23e02e523b0645e3451cc856db4e1508025e283507dd90910373565",
+      "bytes": 16506
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "tests/research-preparation.test.mjs",
+      "sha256": "faad904a0d3bee652e83406e42624812fe27426fe62079dab8d8537d9db489d1",
+      "bytes": 3057
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "tests/research-workflow.test.mjs",
+      "sha256": "4cead89e6d5a63301f8d90d0c7a03aaa5187a7f6694d4a14893934d8c60f24b4",
+      "bytes": 4751
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "package.json",
+      "sha256": "a8724eecb2ea12a778ecc7647113adc472737bdb490bbfe08b8f4f26c541ac09",
+      "bytes": 1288
+    }
+  ],
+  "artifact_manifest": [
+    {
+      "origin": ".test-artifacts/research-release/20261007T221548717353Z/api-lambda.zip",
+      "sha256": "56b9a0f929f084462637681c728fafc8ae149a6e5b0d8c7c4cd889764823e87a",
+      "byte_count": 187510,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T221548717353Z/capabilities.json",
+      "sha256": "e2862a86b0846637a4be634681cfd2e2eb7eb38440cf68929ab7c55b7e92f09a",
+      "byte_count": 1146,
+      "repository_bytes_retained": true,
+      "path": "docs/research-preparation-validation/production-server-initial-v1/capabilities.json",
+      "copy_hash_verified": true
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T221548717353Z/fixture-definition.json",
+      "sha256": "a703ce6e4bdd14edc0cb8dec6b96b980f20d2052631de3cc0951ebef63e9b60c",
+      "byte_count": 215,
+      "repository_bytes_retained": true,
+      "path": "docs/research-preparation-validation/production-server-initial-v1/fixture-definition.json",
+      "copy_hash_verified": true
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T221548717353Z/fixture-input-0.json",
+      "sha256": "ba8920a3bef71edd0dda4b0595a60611ee7124a3b264df4e5259cb731eca64ec",
+      "byte_count": 902,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T221548717353Z/fixture-input-1.json",
+      "sha256": "52c8bef9d7d83e88884ea1f6aabe298df851ee0cdc1b35261f45962773b03855",
+      "byte_count": 751,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T221548717353Z/preparation-partial-status.json",
+      "sha256": "530a0ede53d18f7146fe9ea5d6fe5350c98a734b7f8c572935853d2808a5fb6a",
+      "byte_count": 5159,
+      "repository_bytes_retained": true,
+      "path": "docs/research-preparation-validation/production-server-initial-v1/preparation-partial-status.json",
+      "copy_hash_verified": true
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T221548717353Z/preparation-queue-snapshot.json",
+      "sha256": "611494b0c22c2c20f386be1fe89c653e2ccc45681bf196a3bd53fe46469f9654",
+      "byte_count": 38051,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T221548717353Z/private-queue-snapshot.json",
+      "sha256": "dcee603bef8d0c077e6c5d2dff37ba2dea75e4471b1623f61fcccb8a681a4a15",
+      "byte_count": 5516,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T221548717353Z/production-server-report.json",
+      "sha256": "55cc404a7509b0db5b2d60b4e3315c491567bf85df6b11fb45c39d3bc69bfb4b",
+      "byte_count": 12572,
+      "repository_bytes_retained": true,
+      "path": "docs/research-preparation-validation/production-server-initial-v1/production-server-report.json",
+      "copy_hash_verified": true
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T221548717353Z/recorded-measurements.json",
+      "sha256": "414099c03c4353668cf65dba5e94d95474458546ed07c51e8b82a7683c660944",
+      "byte_count": 2642,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T221548717353Z/recorded-runs.json",
+      "sha256": "fe6a2678685efa227d25a4ac516fca6cd93cf02260d259028b21584b5c45aa69",
+      "byte_count": 3797,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T221548717353Z/retrieved-artifact-0.bin",
+      "sha256": "ba8920a3bef71edd0dda4b0595a60611ee7124a3b264df4e5259cb731eca64ec",
+      "byte_count": 902,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T221548717353Z/retrieved-artifact-1.bin",
+      "sha256": "52c8bef9d7d83e88884ea1f6aabe298df851ee0cdc1b35261f45962773b03855",
+      "byte_count": 751,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T221548717353Z/retrieved-artifact-2.bin",
+      "sha256": "58da03744226e4cd20fccce5a3a38f2a08307d642310884323136d6dd94da1a7",
+      "byte_count": 4547,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T221548717353Z/retrieved-artifact-3.bin",
+      "sha256": "003fb99f1c6666c3233fd102f0afedbdc582f32cb194da1da639070070e1df6d",
+      "byte_count": 4752,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T221548717353Z/worker-lambda.zip",
+      "sha256": "56b9a0f929f084462637681c728fafc8ae149a6e5b0d8c7c4cd889764823e87a",
+      "byte_count": 187510,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/api-lambda.zip",
+      "sha256": "56b9a0f929f084462637681c728fafc8ae149a6e5b0d8c7c4cd889764823e87a",
+      "byte_count": 187510,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/capabilities.json",
+      "sha256": "e2862a86b0846637a4be634681cfd2e2eb7eb38440cf68929ab7c55b7e92f09a",
+      "byte_count": 1146,
+      "repository_bytes_retained": true,
+      "path": "docs/research-preparation-validation/production-server-followup-v2/capabilities.json",
+      "copy_hash_verified": true
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/preparation-artifact-0.bin",
+      "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "byte_count": 1452605,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/preparation-artifact-1.bin",
+      "sha256": "a20d2bb4cd1ec02719c23a7f2a91b6357f0061566452b668318e59dba0930f86",
+      "byte_count": 1481437,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/preparation-artifact-10.bin",
+      "sha256": "78af7eb281ece43f041de8aea2167f99676628cf6f7ee28971aabcbddb082583",
+      "byte_count": 291011,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/preparation-artifact-11.bin",
+      "sha256": "031ed6893d91960c2ff01b08f318efee1f5ac37fb14d513ca5c5027f9443809a",
+      "byte_count": 289926,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/preparation-artifact-12.bin",
+      "sha256": "388ad421967601434920de2c6eaa0b4096e423b1287c7505733bf59099942701",
+      "byte_count": 292713,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/preparation-artifact-13.bin",
+      "sha256": "7990187742bcbd6fea655acf46dcab43232b3b417e77e7284886814d8722a05e",
+      "byte_count": 291834,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/preparation-artifact-2.bin",
+      "sha256": "335a5f9764553f03cad3a04f9a39d97c3c409b36f851aba8e2911f4b2679cd74",
+      "byte_count": 123739,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/preparation-artifact-3.bin",
+      "sha256": "2f71ccd663b6190c1d416eca3fc893519b1361d96b8d9b5a346ab6e986869070",
+      "byte_count": 123565,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/preparation-artifact-4.bin",
+      "sha256": "24bf6bb89e3a24608d0d29435bc631cfee0a4bd9870072b2c7268763b73277ec",
+      "byte_count": 123750,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/preparation-artifact-5.bin",
+      "sha256": "fbadd630839c65db64997cea591d064deeaeeba17e258977109d1be6d53b2a5b",
+      "byte_count": 123556,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/preparation-artifact-6.bin",
+      "sha256": "4c125b09ccc171140f6e275ed28b81d4e488de8f706e94f2d211045c3d69124a",
+      "byte_count": 124557,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/preparation-artifact-7.bin",
+      "sha256": "92d39b76643c985a2493488e61e4bba00a6b507d67c3d023cc134771af53d558",
+      "byte_count": 124402,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/preparation-artifact-8.bin",
+      "sha256": "4d4682f2d55cda5da8f742fb64dcbb453b41d7dafaedbed7b3904961ddf6aecc",
+      "byte_count": 290935,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/preparation-artifact-9.bin",
+      "sha256": "76314a41c321737d180d7bfc4137959d6578e83cc6de3c3902a753314558cc36",
+      "byte_count": 290022,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/preparation-measurements.json",
+      "sha256": "6bd839d89de243209240205d36cbcb6d8abc4a161cd8af7ebf4a0d1425d0684e",
+      "byte_count": 911016,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/preparation-published-values.json",
+      "sha256": "55edef367a58cfa82fae1512160f191b4603c019e5ef1953c27242ecb3c12bc5",
+      "byte_count": 663967,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/preparation-queue-snapshot.json",
+      "sha256": "611494b0c22c2c20f386be1fe89c653e2ccc45681bf196a3bd53fe46469f9654",
+      "byte_count": 38051,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/preparation-runs.json",
+      "sha256": "a2eddd8286ffd3eacd369ac84e3241a567624740181deeaf3f1ffc12990bf2c6",
+      "byte_count": 11153,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/production-server-report.json",
+      "sha256": "89c34e42fbc09ad489704b9e252da423d63adfbc0b2998e273282923d8a32c25",
+      "byte_count": 16335,
+      "repository_bytes_retained": true,
+      "path": "docs/research-preparation-validation/production-server-followup-v2/production-server-report.json",
+      "copy_hash_verified": true
+    },
+    {
+      "origin": ".test-artifacts/research-release/20261007T222058320533Z/worker-lambda.zip",
+      "sha256": "56b9a0f929f084462637681c728fafc8ae149a6e5b0d8c7c4cd889764823e87a",
+      "byte_count": 187510,
+      "repository_bytes_retained": false
+    },
+    {
+      "origin": ".test-artifacts/research-production/2026-10-07T22-19-14.502Z/browser-report.json",
+      "path": "docs/research-preparation-validation/production-browser-v1/browser-report.json",
+      "sha256": "4a7212fc1d1a7fd58d739dee57476af2dcaec93f21501c6743d6df3551bed0e3",
+      "byte_count": 3095,
+      "repository_bytes_retained": true,
+      "copy_hash_verified": true
+    },
+    {
+      "origin": ".test-artifacts/research-production/2026-10-07T22-19-14.502Z/desktop-empty-results.png",
+      "path": "docs/research-preparation-validation/production-browser-v1/desktop-empty-results.png",
+      "sha256": "22fc7a7892c80bdaf2db4c8e4957f0e4f98dceedae36b83568b6933eddfcb149",
+      "byte_count": 71399,
+      "repository_bytes_retained": true,
+      "copy_hash_verified": true
+    },
+    {
+      "origin": ".test-artifacts/research-production/2026-10-07T22-19-14.502Z/desktop-methods.png",
+      "path": "docs/research-preparation-validation/production-browser-v1/desktop-methods.png",
+      "sha256": "693b2493e573501e18837420af65ef98a8e478de28f5e8d3a6c04564319ab24b",
+      "byte_count": 676465,
+      "repository_bytes_retained": true,
+      "copy_hash_verified": true
+    },
+    {
+      "origin": ".test-artifacts/research-production/2026-10-07T22-19-14.502Z/existing-ipv6-mobile.png",
+      "path": "docs/research-preparation-validation/production-browser-v1/existing-ipv6-mobile.png",
+      "sha256": "4ab8e25063b43d16f32c3fd87a3989a4a7e5b14b07b6bae9c8929ec216f729f5",
+      "byte_count": 249353,
+      "repository_bytes_retained": true,
+      "copy_hash_verified": true
+    },
+    {
+      "origin": ".test-artifacts/research-production/2026-10-07T22-19-14.502Z/new-study-preparation-guidance.png",
+      "path": "docs/research-preparation-validation/production-browser-v1/new-study-preparation-guidance.png",
+      "sha256": "51bca580905f9d46091223a668e6644a4c217e029b75e04e15e4ca180625869c",
+      "byte_count": 156317,
+      "repository_bytes_retained": true,
+      "copy_hash_verified": true
+    },
+    {
+      "origin": ".test-artifacts/research-production/2026-10-07T22-19-14.502Z/queue-1365-dark.png",
+      "path": "docs/research-preparation-validation/production-browser-v1/queue-1365-dark.png",
+      "sha256": "9d6d26f5aefe2718dfaeee73fdfd0fda1b6b24fa23c5615487526cec3b489939",
+      "byte_count": 310067,
+      "repository_bytes_retained": true,
+      "copy_hash_verified": true
+    },
+    {
+      "origin": ".test-artifacts/research-production/2026-10-07T22-19-14.502Z/queue-1365-light.png",
+      "path": "docs/research-preparation-validation/production-browser-v1/queue-1365-light.png",
+      "sha256": "f4c40a098571513d578b520cef67263f52cdbe91a94c5325ee750edae6553930",
+      "byte_count": 311987,
+      "repository_bytes_retained": true,
+      "copy_hash_verified": true
+    },
+    {
+      "origin": ".test-artifacts/research-production/2026-10-07T22-19-14.502Z/queue-390-dark.png",
+      "path": "docs/research-preparation-validation/production-browser-v1/queue-390-dark.png",
+      "sha256": "96967b2451d4274a13e2475f80ce4b56251d009dfc1c6a6e977cea6610e336d5",
+      "byte_count": 310853,
+      "repository_bytes_retained": true,
+      "copy_hash_verified": true
+    },
+    {
+      "origin": ".test-artifacts/research-production/2026-10-07T22-19-14.502Z/queue-390-light.png",
+      "path": "docs/research-preparation-validation/production-browser-v1/queue-390-light.png",
+      "sha256": "eb3c9a19e7883a0b290096f61c16ffe57ca3c4c0f1e93f25ad25e420178c2569",
+      "byte_count": 316577,
+      "repository_bytes_retained": true,
+      "copy_hash_verified": true
+    },
+    {
+      "origin": ".test-artifacts/research-production/2026-10-07T22-19-14.502Z/teaching-queue-download.json",
+      "path": "docs/research-preparation-validation/production-browser-v1/teaching-queue-download.json",
+      "sha256": "cc491de69f8db2e99ac7438d6a83ec28fa611cd6f8bfbf561b864a2abf13ff5e",
+      "byte_count": 6879,
+      "repository_bytes_retained": true,
+      "copy_hash_verified": true
+    },
+    {
+      "path": "docs/research-preparation-validation/production-amplify-build-observation-v1.json",
+      "sha256": "3cac6430b37211971bf7c193668c64e95d3f00ffae9a7968e8729ffc253604c1",
+      "byte_count": 1624,
+      "repository_bytes_retained": true
+    },
+    {
+      "path": "docs/research-preparation-validation/production-amplify-build-observation-v2.json",
+      "sha256": "0c82130748bbf31f59f0f33f2dd8b0b326fca63ae283144568a6254b538ba44e",
+      "byte_count": 1829,
+      "repository_bytes_retained": true
+    },
+    {
+      "path": "docs/research-preparation-validation/production-amplify-job-106-v1.json",
+      "sha256": "0c82130748bbf31f59f0f33f2dd8b0b326fca63ae283144568a6254b538ba44e",
+      "byte_count": 1829,
+      "repository_bytes_retained": true
+    },
+    {
+      "path": "docs/research-preparation-validation/production-before-v1.json",
+      "sha256": "3c6c5fbca924d71568cdc6aa19742546a057dc7ad3f691dbed99de16b25623cc",
+      "byte_count": 1861,
+      "repository_bytes_retained": true
+    },
+    {
+      "path": "docs/research-preparation-validation/production-cdk-deploy-v1.log",
+      "sha256": "6140d9b969b8c97c6ecd92cc44fb5dee9e338cb6c9971dcc337392daf1638ce7",
+      "byte_count": 9451,
+      "repository_bytes_retained": true
+    },
+    {
+      "path": "docs/research-preparation-validation/production-cdk-diff-v1.log",
+      "sha256": "72968bf36190e29e8628d219cace11e27dfbe578c63eef0fe436278fa5cee1b6",
+      "byte_count": 7042,
+      "repository_bytes_retained": true
+    },
+    {
+      "path": "docs/research-preparation-validation/production-cdk-outputs-v1.json",
+      "sha256": "bc9d35791d5a4b4f0a2e46bdec9529051339a6e55a63a502eb602f21ac09f47c",
+      "byte_count": 614,
+      "repository_bytes_retained": true
+    },
+    {
+      "path": "docs/research-preparation-validation/production-migration-v1.json",
+      "sha256": "5a9f0caacaf19e6f64b9dc599495891aef01cfc9557346fe3fc1dcd96cb13a2d",
+      "byte_count": 6436,
+      "repository_bytes_retained": true
+    },
+    {
+      "path": "docs/research-preparation-validation/production-security-v1.json",
+      "sha256": "dcd95b7b01ebb574987f2ea3f2d58e663397ba47ff55846fe7c2571ca4c73b29",
+      "byte_count": 6437,
+      "repository_bytes_retained": true
+    },
+    {
+      "path": "docs/research-preparation-validation/production-usage-v1.json",
+      "sha256": "b79acbfb9a53c7ecbeb2bb449b77a66b109950ce0f6167cff0afc2b154803843",
+      "byte_count": 27269,
+      "repository_bytes_retained": true
+    }
+  ],
+  "private_stored_originals": [
+    {
+      "id": "45b8f3a4-1d18-5129-a3c8-3df8b64dac8a",
+      "sha256": "ba8920a3bef71edd0dda4b0595a60611ee7124a3b264df4e5259cb731eca64ec",
+      "byte_count": 902,
+      "retrieved_hash_verified": true,
+      "study_id": "90e41e4b-fe05-4e0a-9768-e817c4a4f5a9",
+      "bucket": "research-workflow-raw",
+      "storage_path": "90e41e4b-fe05-4e0a-9768-e817c4a4f5a9/ba8920a3bef71edd0dda4b0595a60611ee7124a3b264df4e5259cb731eca64ec",
+      "access": "Private backend-only; not publicly downloadable",
+      "origin": "Operator release fixture"
+    },
+    {
+      "id": "9c6740c7-faa0-5340-ad77-7c7026ffd1fa",
+      "sha256": "52c8bef9d7d83e88884ea1f6aabe298df851ee0cdc1b35261f45962773b03855",
+      "byte_count": 751,
+      "retrieved_hash_verified": true,
+      "study_id": "90e41e4b-fe05-4e0a-9768-e817c4a4f5a9",
+      "bucket": "research-workflow-raw",
+      "storage_path": "90e41e4b-fe05-4e0a-9768-e817c4a4f5a9/52c8bef9d7d83e88884ea1f6aabe298df851ee0cdc1b35261f45962773b03855",
+      "access": "Private backend-only; not publicly downloadable",
+      "origin": "Operator release fixture"
+    },
+    {
+      "id": "b0a59b40-37e3-5b4a-b994-e1b88f8c0257",
+      "sha256": "58da03744226e4cd20fccce5a3a38f2a08307d642310884323136d6dd94da1a7",
+      "byte_count": 4547,
+      "retrieved_hash_verified": true,
+      "study_id": "90e41e4b-fe05-4e0a-9768-e817c4a4f5a9",
+      "bucket": "research-workflow-raw",
+      "storage_path": "90e41e4b-fe05-4e0a-9768-e817c4a4f5a9/58da03744226e4cd20fccce5a3a38f2a08307d642310884323136d6dd94da1a7",
+      "access": "Private backend-only; not publicly downloadable",
+      "origin": "Operator release fixture"
+    },
+    {
+      "id": "9ee1006a-accc-52fd-9f19-a85a654674a7",
+      "sha256": "003fb99f1c6666c3233fd102f0afedbdc582f32cb194da1da639070070e1df6d",
+      "byte_count": 4752,
+      "retrieved_hash_verified": true,
+      "study_id": "90e41e4b-fe05-4e0a-9768-e817c4a4f5a9",
+      "bucket": "research-workflow-raw",
+      "storage_path": "90e41e4b-fe05-4e0a-9768-e817c4a4f5a9/003fb99f1c6666c3233fd102f0afedbdc582f32cb194da1da639070070e1df6d",
+      "access": "Private backend-only; not publicly downloadable",
+      "origin": "Operator release fixture"
+    },
+    {
+      "id": "15cdf7a1-4d0b-5070-a69b-f94bc02bca53",
+      "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "byte_count": 1452605,
+      "retrieved_hash_verified": true,
+      "study_id": "45cf0455-e1e4-45a9-be66-a6ff871689db",
+      "bucket": "research-workflow-raw",
+      "storage_path": "45cf0455-e1e4-45a9-be66-a6ff871689db/6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "access": "Private backend-only; not publicly downloadable",
+      "origin": "Operator release fixture"
+    },
+    {
+      "id": "98636cbe-82d3-5a47-9106-654ba3fb9c26",
+      "sha256": "a20d2bb4cd1ec02719c23a7f2a91b6357f0061566452b668318e59dba0930f86",
+      "byte_count": 1481437,
+      "retrieved_hash_verified": true,
+      "study_id": "45cf0455-e1e4-45a9-be66-a6ff871689db",
+      "bucket": "research-workflow-raw",
+      "storage_path": "45cf0455-e1e4-45a9-be66-a6ff871689db/a20d2bb4cd1ec02719c23a7f2a91b6357f0061566452b668318e59dba0930f86",
+      "access": "Private backend-only; not publicly downloadable",
+      "origin": "Operator release fixture"
+    },
+    {
+      "id": "87b74048-e6ed-5611-84ec-baa18b5347df",
+      "sha256": "335a5f9764553f03cad3a04f9a39d97c3c409b36f851aba8e2911f4b2679cd74",
+      "byte_count": 123739,
+      "retrieved_hash_verified": true,
+      "study_id": "45cf0455-e1e4-45a9-be66-a6ff871689db",
+      "bucket": "research-workflow-raw",
+      "storage_path": "45cf0455-e1e4-45a9-be66-a6ff871689db/335a5f9764553f03cad3a04f9a39d97c3c409b36f851aba8e2911f4b2679cd74",
+      "access": "Private backend-only; not publicly downloadable",
+      "origin": "Operator release fixture"
+    },
+    {
+      "id": "8fe80b24-aef6-5fda-93e2-53c0748d576a",
+      "sha256": "2f71ccd663b6190c1d416eca3fc893519b1361d96b8d9b5a346ab6e986869070",
+      "byte_count": 123565,
+      "retrieved_hash_verified": true,
+      "study_id": "45cf0455-e1e4-45a9-be66-a6ff871689db",
+      "bucket": "research-workflow-raw",
+      "storage_path": "45cf0455-e1e4-45a9-be66-a6ff871689db/2f71ccd663b6190c1d416eca3fc893519b1361d96b8d9b5a346ab6e986869070",
+      "access": "Private backend-only; not publicly downloadable",
+      "origin": "Operator release fixture"
+    },
+    {
+      "id": "32b0a9f1-d20e-52e4-9b08-ebd8fee887b1",
+      "sha256": "24bf6bb89e3a24608d0d29435bc631cfee0a4bd9870072b2c7268763b73277ec",
+      "byte_count": 123750,
+      "retrieved_hash_verified": true,
+      "study_id": "45cf0455-e1e4-45a9-be66-a6ff871689db",
+      "bucket": "research-workflow-raw",
+      "storage_path": "45cf0455-e1e4-45a9-be66-a6ff871689db/24bf6bb89e3a24608d0d29435bc631cfee0a4bd9870072b2c7268763b73277ec",
+      "access": "Private backend-only; not publicly downloadable",
+      "origin": "Operator release fixture"
+    },
+    {
+      "id": "e60ebbb1-e16c-5c36-8fde-7d02abdaa3c4",
+      "sha256": "fbadd630839c65db64997cea591d064deeaeeba17e258977109d1be6d53b2a5b",
+      "byte_count": 123556,
+      "retrieved_hash_verified": true,
+      "study_id": "45cf0455-e1e4-45a9-be66-a6ff871689db",
+      "bucket": "research-workflow-raw",
+      "storage_path": "45cf0455-e1e4-45a9-be66-a6ff871689db/fbadd630839c65db64997cea591d064deeaeeba17e258977109d1be6d53b2a5b",
+      "access": "Private backend-only; not publicly downloadable",
+      "origin": "Operator release fixture"
+    },
+    {
+      "id": "d109f424-c0ef-5885-ba96-a834167fc6de",
+      "sha256": "4c125b09ccc171140f6e275ed28b81d4e488de8f706e94f2d211045c3d69124a",
+      "byte_count": 124557,
+      "retrieved_hash_verified": true,
+      "study_id": "45cf0455-e1e4-45a9-be66-a6ff871689db",
+      "bucket": "research-workflow-raw",
+      "storage_path": "45cf0455-e1e4-45a9-be66-a6ff871689db/4c125b09ccc171140f6e275ed28b81d4e488de8f706e94f2d211045c3d69124a",
+      "access": "Private backend-only; not publicly downloadable",
+      "origin": "Operator release fixture"
+    },
+    {
+      "id": "8c47b709-cbc5-5718-bf50-9e5d2e3d0611",
+      "sha256": "92d39b76643c985a2493488e61e4bba00a6b507d67c3d023cc134771af53d558",
+      "byte_count": 124402,
+      "retrieved_hash_verified": true,
+      "study_id": "45cf0455-e1e4-45a9-be66-a6ff871689db",
+      "bucket": "research-workflow-raw",
+      "storage_path": "45cf0455-e1e4-45a9-be66-a6ff871689db/92d39b76643c985a2493488e61e4bba00a6b507d67c3d023cc134771af53d558",
+      "access": "Private backend-only; not publicly downloadable",
+      "origin": "Operator release fixture"
+    },
+    {
+      "id": "da31230d-3363-520b-b062-6d0e20b0c6ab",
+      "sha256": "4d4682f2d55cda5da8f742fb64dcbb453b41d7dafaedbed7b3904961ddf6aecc",
+      "byte_count": 290935,
+      "retrieved_hash_verified": true,
+      "study_id": "45cf0455-e1e4-45a9-be66-a6ff871689db",
+      "bucket": "research-workflow-raw",
+      "storage_path": "45cf0455-e1e4-45a9-be66-a6ff871689db/4d4682f2d55cda5da8f742fb64dcbb453b41d7dafaedbed7b3904961ddf6aecc",
+      "access": "Private backend-only; not publicly downloadable",
+      "origin": "Operator release fixture"
+    },
+    {
+      "id": "262f0c4a-51b8-5a7a-95b8-6e30f57e18d7",
+      "sha256": "76314a41c321737d180d7bfc4137959d6578e83cc6de3c3902a753314558cc36",
+      "byte_count": 290022,
+      "retrieved_hash_verified": true,
+      "study_id": "45cf0455-e1e4-45a9-be66-a6ff871689db",
+      "bucket": "research-workflow-raw",
+      "storage_path": "45cf0455-e1e4-45a9-be66-a6ff871689db/76314a41c321737d180d7bfc4137959d6578e83cc6de3c3902a753314558cc36",
+      "access": "Private backend-only; not publicly downloadable",
+      "origin": "Operator release fixture"
+    },
+    {
+      "id": "e2f6608b-a3db-5322-8853-dd6cd81c7c06",
+      "sha256": "78af7eb281ece43f041de8aea2167f99676628cf6f7ee28971aabcbddb082583",
+      "byte_count": 291011,
+      "retrieved_hash_verified": true,
+      "study_id": "45cf0455-e1e4-45a9-be66-a6ff871689db",
+      "bucket": "research-workflow-raw",
+      "storage_path": "45cf0455-e1e4-45a9-be66-a6ff871689db/78af7eb281ece43f041de8aea2167f99676628cf6f7ee28971aabcbddb082583",
+      "access": "Private backend-only; not publicly downloadable",
+      "origin": "Operator release fixture"
+    },
+    {
+      "id": "f4bb9d89-8940-5fd9-bab9-5481067ee6e4",
+      "sha256": "031ed6893d91960c2ff01b08f318efee1f5ac37fb14d513ca5c5027f9443809a",
+      "byte_count": 289926,
+      "retrieved_hash_verified": true,
+      "study_id": "45cf0455-e1e4-45a9-be66-a6ff871689db",
+      "bucket": "research-workflow-raw",
+      "storage_path": "45cf0455-e1e4-45a9-be66-a6ff871689db/031ed6893d91960c2ff01b08f318efee1f5ac37fb14d513ca5c5027f9443809a",
+      "access": "Private backend-only; not publicly downloadable",
+      "origin": "Operator release fixture"
+    },
+    {
+      "id": "7e747b0a-d8ea-570b-a4fd-627ba1852506",
+      "sha256": "388ad421967601434920de2c6eaa0b4096e423b1287c7505733bf59099942701",
+      "byte_count": 292713,
+      "retrieved_hash_verified": true,
+      "study_id": "45cf0455-e1e4-45a9-be66-a6ff871689db",
+      "bucket": "research-workflow-raw",
+      "storage_path": "45cf0455-e1e4-45a9-be66-a6ff871689db/388ad421967601434920de2c6eaa0b4096e423b1287c7505733bf59099942701",
+      "access": "Private backend-only; not publicly downloadable",
+      "origin": "Operator release fixture"
+    },
+    {
+      "id": "2c228b58-9c0b-50d8-abab-0a75fda35a90",
+      "sha256": "7990187742bcbd6fea655acf46dcab43232b3b417e77e7284886814d8722a05e",
+      "byte_count": 291834,
+      "retrieved_hash_verified": true,
+      "study_id": "45cf0455-e1e4-45a9-be66-a6ff871689db",
+      "bucket": "research-workflow-raw",
+      "storage_path": "45cf0455-e1e4-45a9-be66-a6ff871689db/7990187742bcbd6fea655acf46dcab43232b3b417e77e7284886814d8722a05e",
+      "access": "Private backend-only; not publicly downloadable",
+      "origin": "Operator release fixture"
+    }
+  ],
+  "reproduction_commands": {
+    "runtime": "python3 -B bin/prepare-research-runtime.py",
+    "database": "python3 -B bin/research-workflow-database.py --preparation --output NEW_VERSIONED_REPORT",
+    "browser": "npm run verify:research:production -- --preparation",
+    "retained_fixture_read_only": "python3 -B bin/verify-research-production.py --preparation-followup",
+    "usage": "python3 -B bin/collect-research-preparation-usage.py (refuses replacing this capture)",
+    "new_fixture": "python3 -B bin/verify-research-production.py --preparation (production writes require a new explicit authorization)"
+  },
+  "limitations": [
+    "Migration hashes identify submitted bytes and apply receipt; catalog verification cannot recover originally executed SQL",
+    "Raw fixture payloads and Lambda archives remain in local ignored artifact directories; fixture originals are also retained privately in Supabase and have retrieved-byte hashes",
+    "CLI response snapshots are serialized evidence, not original HTTP transport bytes",
+    "Review is by the implementing AI; no human or independent review is asserted",
+    "Observed cell counts are a fixed archived census; no inferential confidence intervals are justified",
+    "Unallocated and missing usage/charges must not be treated as zero"
+  ]
+}

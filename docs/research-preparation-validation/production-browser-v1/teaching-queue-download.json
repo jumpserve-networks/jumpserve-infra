@@ -1,0 +1,198 @@
+{
+  "version": "research-queue-v1",
+  "study_id": "00000000-0000-4000-8000-000000000001",
+  "access": "owner-private",
+  "workers_enabled": false,
+  "jobs": [
+    {
+      "id": "00000000-0000-4000-8000-000000000070",
+      "study_id": "00000000-0000-4000-8000-000000000001",
+      "campaign_id": "00000000-0000-4000-8000-000000000030",
+      "execution_mode": "automatic",
+      "priority": 1,
+      "status": "running",
+      "reason": "Illustrative numerical execution",
+      "readiness": "running",
+      "blockers": [],
+      "dependencies": [],
+      "exclusive_resources": [
+        "machine:example-host"
+      ],
+      "followup_of": null,
+      "run_id": null,
+      "run_status": null,
+      "created_at": "2026-10-07T00:00:00Z",
+      "updated_at": "2026-10-07T00:00:00Z",
+      "definition_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "lease_until": "2026-10-07T00:10:00Z"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000071",
+      "study_id": "00000000-0000-4000-8000-000000000001",
+      "campaign_id": "00000000-0000-4000-8000-000000000031",
+      "execution_mode": "manual",
+      "priority": 2,
+      "status": "manual",
+      "reason": "Equipment and an intervention design are required",
+      "readiness": "blocked",
+      "blockers": [
+        "Automatic execution is inapplicable; a domain operator is required."
+      ],
+      "dependencies": [
+        {
+          "job_id": "00000000-0000-4000-8000-000000000070",
+          "requirement": "reviewed-evidence"
+        }
+      ],
+      "exclusive_resources": [],
+      "followup_of": null,
+      "run_id": null,
+      "run_status": null,
+      "created_at": "2026-10-07T00:00:00Z",
+      "updated_at": "2026-10-07T00:00:00Z",
+      "definition_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "lease_until": null
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000072",
+      "study_id": "00000000-0000-4000-8000-000000000001",
+      "campaign_id": "00000000-0000-4000-8000-000000000032",
+      "execution_mode": "manual",
+      "priority": 3,
+      "status": "manual",
+      "reason": "Primary normative text needs substantive examination",
+      "readiness": "blocked",
+      "blockers": [
+        "Automatic execution is inapplicable; a domain operator is required."
+      ],
+      "dependencies": [],
+      "exclusive_resources": [],
+      "followup_of": null,
+      "run_id": null,
+      "run_status": null,
+      "created_at": "2026-10-07T00:00:00Z",
+      "updated_at": "2026-10-07T00:00:00Z",
+      "definition_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "lease_until": null
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000073",
+      "study_id": "00000000-0000-4000-8000-000000000001",
+      "campaign_id": "00000000-0000-4000-8000-000000000033",
+      "execution_mode": "automatic",
+      "priority": 4,
+      "status": "awaiting-review",
+      "reason": "Recorded discrepancy needs claim-specific review",
+      "readiness": "awaiting-review",
+      "blockers": [],
+      "dependencies": [],
+      "exclusive_resources": [],
+      "followup_of": null,
+      "run_id": "00000000-0000-4000-8000-000000000090",
+      "run_status": "complete",
+      "created_at": "2026-10-07T00:00:00Z",
+      "updated_at": "2026-10-07T00:00:00Z",
+      "definition_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "lease_until": null
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000074",
+      "study_id": "00000000-0000-4000-8000-000000000001",
+      "campaign_id": "00000000-0000-4000-8000-000000000034",
+      "execution_mode": "automatic",
+      "priority": 5,
+      "status": "expired",
+      "reason": "Lease expired; outcome uncertain, no automatic retry",
+      "readiness": "expired",
+      "blockers": [],
+      "dependencies": [],
+      "exclusive_resources": [],
+      "followup_of": null,
+      "run_id": null,
+      "run_status": null,
+      "created_at": "2026-10-07T00:00:00Z",
+      "updated_at": "2026-10-07T00:00:00Z",
+      "definition_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "lease_until": null
+    }
+  ],
+  "events": [
+    {
+      "id": "00000000-0000-4000-8000-000000000100",
+      "study_id": "00000000-0000-4000-8000-000000000001",
+      "job_id": "00000000-0000-4000-8000-000000000070",
+      "event": "illustration",
+      "status": "running",
+      "reason": "Illustrative numerical execution",
+      "details": {
+        "data_origin": "software-fixture",
+        "measured_charges_usd": null
+      },
+      "created_at": "2026-10-07T00:00:00Z"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000101",
+      "study_id": "00000000-0000-4000-8000-000000000001",
+      "job_id": "00000000-0000-4000-8000-000000000071",
+      "event": "illustration",
+      "status": "manual",
+      "reason": "Equipment and an intervention design are required",
+      "details": {
+        "data_origin": "software-fixture",
+        "measured_charges_usd": null
+      },
+      "created_at": "2026-10-07T00:00:00Z"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000102",
+      "study_id": "00000000-0000-4000-8000-000000000001",
+      "job_id": "00000000-0000-4000-8000-000000000072",
+      "event": "illustration",
+      "status": "manual",
+      "reason": "Primary normative text needs substantive examination",
+      "details": {
+        "data_origin": "software-fixture",
+        "measured_charges_usd": null
+      },
+      "created_at": "2026-10-07T00:00:00Z"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000103",
+      "study_id": "00000000-0000-4000-8000-000000000001",
+      "job_id": "00000000-0000-4000-8000-000000000073",
+      "event": "illustration",
+      "status": "awaiting-review",
+      "reason": "Recorded discrepancy needs claim-specific review",
+      "details": {
+        "data_origin": "software-fixture",
+        "measured_charges_usd": null
+      },
+      "created_at": "2026-10-07T00:00:00Z"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000104",
+      "study_id": "00000000-0000-4000-8000-000000000001",
+      "job_id": "00000000-0000-4000-8000-000000000074",
+      "event": "illustration",
+      "status": "expired",
+      "reason": "Lease expired; outcome uncertain, no automatic retry",
+      "details": {
+        "data_origin": "software-fixture",
+        "measured_charges_usd": null
+      },
+      "created_at": "2026-10-07T00:00:00Z"
+    }
+  ],
+  "limits": {
+    "global_jobs": 4,
+    "study_jobs": 2,
+    "invocation_jobs": 2,
+    "lease_seconds": 600,
+    "automatic_retries": 0
+  },
+  "coverage": {
+    "jobs": 5,
+    "events": 5
+  },
+  "limitations": "All rows, identities and timestamps in this example are synthetic illustrations. No experiment was executed and no independent review is asserted."
+}
