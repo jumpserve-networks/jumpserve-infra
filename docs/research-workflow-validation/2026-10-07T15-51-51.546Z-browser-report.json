@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "started_at": "2026-10-07T15:51:51.546Z",
+  "origin": "http://localhost:3004",
+  "design": "Development checks; actual public backend and isolated Postgres anon RLS via test-only SQL transport. Synthetic numerical/review fixtures are not scientific validation.",
+  "reviewer": {
+    "identity": "Primary Codex implementer",
+    "type": "AI",
+    "independence": "Not independent"
+  },
+  "checks": [
+    {
+      "name": "public module navigation and study listing",
+      "passed": true,
+      "evidence": {
+        "studies": 2
+      }
+    },
+    {
+      "name": "real IPv6 imported claim coverage and nine gaps",
+      "passed": true,
+      "evidence": {
+        "sources": 74,
+        "claims": 15,
+        "reproduced": 3,
+        "discrepant": 3,
+        "inconclusive": 5,
+        "untested": 4,
+        "gaps": 9,
+        "scientific_labels_changed": false
+      }
+    },
+    {
+      "name": "literature versions hashes omissions and protocol limits",
+      "passed": true,
+      "evidence": {
+        "literature_records": 74,
+        "import_is_register_only": true
+      }
+    },
+    {
+      "name": "synthetic numerical states plots and configuration filter",
+      "passed": true,
+      "evidence": {
+        "planned": 6,
+        "unexpected": 1,
+        "non_recorded": 5,
+        "chart": "Descriptive unconnected points, no confidence interval",
+        "filtered_rows": 1
+      }
+    },
+    {
+      "name": "complete public exports preserve null zero identity and privacy",
+      "passed": true,
+      "evidence": {
+        "json_sha256": "4495375e36868ffba40984d1beb921325811d9525df205c89205d20bc917eca0",
+        "json_bytes": 398599,
+        "csv_sha256": "bb640fb3d050b293a80c5eb93b234d63f96cab0b27fe562b85a77e191db5bc9e",
+        "measurements": 7,
+        "download_sha_verified": true,
+        "private_records_exposed": false
+      }
+    }
+  ],
+  "errors": [
+    {
+      "name": "desktop dark theme and bounded horizontal layout",
+      "reason": "locator.waitFor: Error: strict mode violation: locator('[data-slot=\"select-content\"]') resolved to 2 elements:\n    1) <div tabindex=\"-1\" data-closed=\"\" data-side=\"top\" data-align=\"center\" role=\"presentation\" data-base-ui-focusable=\"\" data-align-trigger=\"true\" data-slot=\"select-content\" class=\"relative isolate z-50 max-h-[min(20rem,var(--available-height))] w-(--anchor-width) max-w-(--available-width) min-w-36 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-md bg-popover text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100 data-[align-trigger=true]:animate-none data-[side=b…>…</div> aka locator('div').filter({ hasText: 'All configurationsAB' }).nth(2)\n    2) <div tabindex=\"-1\" data-closed=\"\" data-side=\"top\" data-align=\"start\" role=\"presentation\" data-ending-style=\"\" data-base-ui-focusable=\"\" data-slot=\"select-content\" data-align-trigger=\"false\" class=\"relative isolate z-50 max-h-[min(20rem,var(--available-height))] w-(--anchor-width) max-w-(--available-width) min-w-36 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-md bg-popover text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100 data-[align-trigger=true]:anim…>…</div> aka locator('div').filter({ hasText: 'Dark ModeLight ModeSystem' }).nth(2)\n\nCall log:\n\u001b[2m  - waiting for locator('[data-slot=\"select-content\"]') to be hidden\u001b[22m\n"
+    }
+  ],
+  "browser_errors": [],
+  "conditional_gaps": [
+    "No legitimate Google session or authenticated owner/chat request",
+    "No production deployment or remote Supabase Storage verification"
+  ],
+  "ended_at": "2026-10-07T15:51:58.248Z",
+  "passed": false
+}

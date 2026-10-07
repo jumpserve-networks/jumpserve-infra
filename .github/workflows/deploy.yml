@@ -46,6 +46,22 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Read pinned research runtime revision
+        id: research-runtime
+        run: echo "revision=$(python3 -c 'import json; print(json.load(open("research-workflow-runtime.json"))["source_revision"])')" >> "$GITHUB_OUTPUT"
+
+      - name: Check out research runtime
+        uses: actions/checkout@v4
+        with:
+          repository: jumpserve-networks/jumpserve-back-end
+          ref: ${{ steps.research-runtime.outputs.revision }}
+          path: .runtime-research
+
+      - name: Verify research runtime bytes and regressions
+        run: |
+          python3 -B bin/prepare-research-runtime.py --backend .runtime-research
+          python3 -B -m unittest discover -s .runtime-research/research_workflow/tests -v
+
       - name: Test real-world runtime
         run: |
           python -m pip install -r .runtime-backend/real_world/requirements-test.txt

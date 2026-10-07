@@ -1,0 +1,80 @@
+
+> jumpserve-front-end@0.1.0 build
+> next build
+
+▲ Next.js 16.1.6 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 2.6s
+  Running TypeScript ...
+  Collecting page data using 13 workers ...
+  Generating static pages using 13 workers (0/12) ...
+  Generating static pages using 13 workers (3/12) 
+  Generating static pages using 13 workers (6/12) 
+  Generating static pages using 13 workers (9/12) 
+✓ Generating static pages using 13 workers (12/12) in 141.9ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ○ /_not-found
+├ ƒ /auth/callback
+├ ○ /icon.png
+├ ƒ /login
+├ ƒ /module/[moduleId]
+├ ƒ /module/congestion-control-emulated/aggregate-graphs
+├ ƒ /module/congestion-control-emulated/api/parent-runs
+├ ƒ /module/congestion-control-emulated/benchmarks
+├ ƒ /module/congestion-control-emulated/benchmarks/[jobId]
+├ ƒ /module/congestion-control-emulated/chat
+├ ƒ /module/congestion-control-emulated/parent-run/[id]
+├ ƒ /module/congestion-control-emulated/test-lookup
+├ ƒ /module/congestion-control-real-world/chat
+├ ƒ /module/congestion-control-real-world/run-a-test
+├ ƒ /module/congestion-control-real-world/run-a-test/[jobId]
+├ ○ /module/congestion-control-real-world/test-results
+├ ƒ /module/congestion-control-real-world/test-results/[jobId]
+├ ƒ /module/http2-compliance-study/api/measurements
+├ ƒ /module/http2-compliance-study/api/results
+├ ƒ /module/http2-compliance-study/chat
+├ ƒ /module/http2-compliance-study/literature
+├ ƒ /module/http2-compliance-study/methods
+├ ƒ /module/http2-compliance-study/test-results
+├ ƒ /module/ipv6-dns-study/api/data
+├ ƒ /module/ipv6-dns-study/api/release
+├ ƒ /module/ipv6-dns-study/chat
+├ ƒ /module/ipv6-dns-study/literature
+├ ƒ /module/ipv6-dns-study/methods
+├ ƒ /module/ipv6-dns-study/test-results
+├ ƒ /module/leo-emergency-failover/api/results
+├ ƒ /module/leo-emergency-failover/chat
+├ ƒ /module/leo-emergency-failover/literature
+├ ƒ /module/leo-emergency-failover/methods
+├ ƒ /module/leo-emergency-failover/test-results
+├ ƒ /module/propagation-delay-study/data
+├ ƒ /module/propagation-delay-study/literature
+├ ƒ /module/propagation-delay-study/methods
+├ ƒ /module/propagation-delay-study/test-results
+├ ƒ /module/propagation-delay-study/test-results/[trialId]
+├ ƒ /module/propagation-delay-study/test-results/[trialId]/data
+├ ƒ /module/reliable-sketch-study/api/release
+├ ƒ /module/reliable-sketch-study/api/results
+├ ƒ /module/reliable-sketch-study/chat
+├ ƒ /module/reliable-sketch-study/literature
+├ ƒ /module/reliable-sketch-study/methods
+├ ƒ /module/reliable-sketch-study/test-results
+├ ƒ /module/research-verification/api/studies/[studyId]/export
+├ ○ /module/research-verification/methods
+├ ƒ /module/research-verification/new-study
+├ ƒ /module/research-verification/studies/[studyId]
+├ ƒ /module/research-verification/test-results
+├ ƒ /module/research-verification/workspace
+└ ƒ /module/research-verification/workspace/[studyId]
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

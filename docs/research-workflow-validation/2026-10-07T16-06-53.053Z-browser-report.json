@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "started_at": "2026-10-07T16:06:53.053Z",
+  "origin": "http://localhost:3004",
+  "design": "Development checks; actual public backend and isolated Postgres anon RLS via test-only SQL transport. Synthetic numerical/review fixtures are not scientific validation.",
+  "reviewer": {
+    "identity": "Primary Codex implementer",
+    "type": "AI",
+    "independence": "Not independent"
+  },
+  "checks": [
+    {
+      "name": "public module navigation and study listing",
+      "passed": true,
+      "evidence": {
+        "studies": 2
+      }
+    },
+    {
+      "name": "real IPv6 imported claim coverage and nine gaps",
+      "passed": true,
+      "evidence": {
+        "sources": 74,
+        "claims": 15,
+        "reproduced": 3,
+        "discrepant": 3,
+        "inconclusive": 5,
+        "untested": 4,
+        "gaps": 9,
+        "scientific_labels_changed": false
+      }
+    },
+    {
+      "name": "literature versions hashes omissions and protocol limits",
+      "passed": true,
+      "evidence": {
+        "literature_records": 74,
+        "import_is_register_only": true
+      }
+    },
+    {
+      "name": "synthetic numerical states plots and configuration filter",
+      "passed": true,
+      "evidence": {
+        "planned": 6,
+        "unexpected": 1,
+        "non_recorded": 5,
+        "chart": "Descriptive unconnected points, no confidence interval",
+        "filtered_rows": 1
+      }
+    },
+    {
+      "name": "complete public exports preserve null zero identity and privacy",
+      "passed": true,
+      "evidence": {
+        "json_sha256": "4495375e36868ffba40984d1beb921325811d9525df205c89205d20bc917eca0",
+        "json_bytes": 398599,
+        "csv_sha256": "bb640fb3d050b293a80c5eb93b234d63f96cab0b27fe562b85a77e191db5bc9e",
+        "measurements": 7,
+        "download_sha_verified": true,
+        "private_records_exposed": false
+      }
+    },
+    {
+      "name": "desktop dark theme and bounded horizontal layout",
+      "passed": true,
+      "evidence": {
+        "viewport": {
+          "width": 1365,
+          "height": 900
+        },
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "mobile navigation themes tables and exports",
+      "passed": true,
+      "evidence": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "body_overflow": false
+      }
+    },
+    {
+      "name": "missing invalid and unavailable results do not become zero coverage",
+      "passed": true,
+      "evidence": {
+        "states": [
+          "missing",
+          "invalid snapshot (injected transport fixture)",
+          "unavailable (injected transport fixture)"
+        ],
+        "zero_fill": false
+      }
+    },
+    {
+      "name": "sign-in return paths preserve owner study view",
+      "passed": true,
+      "evidence": {
+        "google_flow": "Return paths checked; actual provider sign-in and owner writes conditional"
+      }
+    }
+  ],
+  "errors": [],
+  "browser_errors": [],
+  "conditional_gaps": [
+    "No legitimate Google session or authenticated owner/chat request",
+    "No production deployment or remote Supabase Storage verification"
+  ],
+  "ended_at": "2026-10-07T16:07:06.219Z",
+  "passed": true
+}

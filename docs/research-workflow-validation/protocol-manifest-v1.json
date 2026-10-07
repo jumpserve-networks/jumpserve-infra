@@ -1,0 +1,20 @@
+[
+  {
+    "path": "docs/research-workflow-implementation-v1.md",
+    "bytes": 3510,
+    "sha256": "fa53d2b4d8ff8addfbd5b5b642d35d00ae14474c382e0f8b2d129a46950fc8d9",
+    "review_status": "AI implementer scope/protocol review; not independent scientific validation"
+  },
+  {
+    "path": "docs/research-workflow-amendment-v2.md",
+    "bytes": 1220,
+    "sha256": "f753f26a16e15a1dd7adbdb8467a733b473b57bc0fd1832fb62f9e45e20706a8",
+    "review_status": "AI implementer scope/protocol review; not independent scientific validation"
+  },
+  {
+    "path": "docs/research-workflow-amendment-v3.md",
+    "bytes": 1351,
+    "sha256": "01391da7dbc1c87bfbccac390098642a5e4626d7fa9c26fc3c443cef40835f35",
+    "review_status": "AI implementer scope/protocol review; not independent scientific validation"
+  }
+]

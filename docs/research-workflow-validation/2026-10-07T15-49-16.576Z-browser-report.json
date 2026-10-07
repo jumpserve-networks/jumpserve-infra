@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "started_at": "2026-10-07T15:49:16.576Z",
+  "origin": "http://localhost:3004",
+  "design": "Development checks; actual public backend and isolated Postgres anon RLS via test-only SQL transport. Synthetic numerical/review fixtures are not scientific validation.",
+  "reviewer": {
+    "identity": "Primary Codex implementer",
+    "type": "AI",
+    "independence": "Not independent"
+  },
+  "checks": [
+    {
+      "name": "public module navigation and study listing",
+      "passed": true,
+      "evidence": {
+        "studies": 2
+      }
+    },
+    {
+      "name": "real IPv6 imported claim coverage and nine gaps",
+      "passed": true,
+      "evidence": {
+        "sources": 74,
+        "claims": 15,
+        "reproduced": 3,
+        "discrepant": 3,
+        "inconclusive": 5,
+        "untested": 4,
+        "gaps": 9,
+        "scientific_labels_changed": false
+      }
+    },
+    {
+      "name": "literature versions hashes omissions and protocol limits",
+      "passed": true,
+      "evidence": {
+        "literature_records": 74,
+        "import_is_register_only": true
+      }
+    }
+  ],
+  "errors": [
+    {
+      "name": "synthetic numerical states plots and configuration filter",
+      "reason": "locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-slot=\"select-content\"]') to be detached\u001b[22m\n\u001b[2m    - locator resolved to visible <div tabindex=\"-1\" data-closed=\"\" data-side=\"none\" data-align=\"center\" role=\"presentation\" data-ending-style=\"\" data-base-ui-focusable=\"\" data-align-trigger=\"true\" data-slot=\"select-content\" class=\"relative isolate z-50 max-h-[min(20rem,var(--available-height))] w-(--anchor-width) max-w-(--available-width) min-w-36 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-md bg-popover text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100 data-[align-trigger=true]:ani…>…</div>\u001b[22m\n\u001b[2m    33 × locator resolved to hidden <div tabindex=\"-1\" data-closed=\"\" data-side=\"top\" data-align=\"center\" role=\"presentation\" data-base-ui-focusable=\"\" data-align-trigger=\"true\" data-slot=\"select-content\" class=\"relative isolate z-50 max-h-[min(20rem,var(--available-height))] w-(--anchor-width) max-w-(--available-width) min-w-36 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-md bg-popover text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100 data-[align-trigger=true]:animate-none data-[side=b…>…</div>\u001b[22m\n"
+    }
+  ],
+  "browser_errors": [],
+  "conditional_gaps": [
+    "No legitimate Google session or authenticated owner/chat request",
+    "No production deployment or remote Supabase Storage verification"
+  ],
+  "ended_at": "2026-10-07T15:49:40.025Z",
+  "passed": false
+}

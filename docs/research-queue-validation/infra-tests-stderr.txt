@@ -1,0 +1,31 @@
+Bundling asset TestBenchmarkStack/LaunchBenchmarkFn/Code/Stage...
+
+  ...4909627b5e8119b4ef212bef67d89f1e504423b4b6c0c67-building/index.js  18.5kb
+
+⚡ Done in 14ms
+Bundling asset TestBenchmarkStack/CleanupBenchmarksFn/Code/Stage...
+
+  ...76b5ac1a9e272e68dba72b3de3392df08519f5571fc96424-building/index.js  4.7kb
+
+⚡ Done in 2ms
+Bundling asset TestBenchmarkStack/CancelBenchmarkFn/Code/Stage...
+
+  ...d042aec7380b379816f47293eea6296a32e091f5ae95acd4-building/index.js  6.0kb
+
+⚡ Done in 1ms
+Bundling asset TestBenchmarkStack/GetBenchmarkLogsFn/Code/Stage...
+
+  ...a224b72402e0b8f4186b8339b272bc32848c46be6f80b661-building/index.js  3.1kb
+
+⚡ Done in 2ms
+Bundling asset TestBenchmarkStack/BenchmarkIngestFn/Code/Stage...
+
+  ...554a27ef7d3f2e5855fbd188627aba7da9afe85ad28ffc9f-building/index.js  4.1kb
+
+⚡ Done in 2ms
+
+Test Suites: 1 skipped, 9 passed, 9 of 10 total
+Tests:       5 skipped, 78 passed, 83 total
+Snapshots:   0 total
+Time:        2.446 s
+Ran all test suites.

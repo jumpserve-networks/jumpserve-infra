@@ -1,0 +1,210 @@
+{
+  "version": 2,
+  "created_at": "2026-10-07T17:12:03.566905+00:00",
+  "supersedes_report": "research-queue-validation-v1.json",
+  "original_report_sha256": "053a1852a58438d11cb9cb85d0b868d2457ece789c68d163bd8607f7cfb89875",
+  "original_report_preserved": true,
+  "followup_document": "research-queue-build-followup-v2.md",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independence": "Not independent"
+  },
+  "design": "Development regressions; no held-out or human scientific review. No paper claims are strengthened.",
+  "followup": {
+    "name": "frontend-build-network-followup",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "cwd": "/Users/Shared/allstar/jumpserve-front-end",
+    "exit_code": 0,
+    "exit_code_provenance": "exec_command completion observed by primary Codex AI",
+    "wall_seconds": null,
+    "wall_time_limitation": "Full process wall time not captured; missing is not zero.",
+    "passed": true,
+    "original_artifact": {
+      "path": "docs/research-queue-validation/queue-build-followup-v2.log",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-workflow/queue-build-followup-v2.log",
+      "sha256": "24a2afcd86dcacc7199ca1ad21b458f393c1d335ec1cc17a1491d0c5d3936ae2",
+      "byte_count": 3236,
+      "retrieved_hash_verified": true
+    }
+  },
+  "prior_checks_reused": "Previously passed checks on unchanged implementation bytes; no extra scientific evidence or independent validation.",
+  "implementation": [
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/intake.py",
+      "byte_count": 9573,
+      "sha256": "33439e19ffbc1f398ce8870818c9da8a4541557ea302188d5c01172c3ab434ef"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/worker.py",
+      "byte_count": 4552,
+      "sha256": "8d94bc9e5f6b326065c925932be24b09676f87d0b727bd4fba6bb490f0c7ae6a"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/store.py",
+      "byte_count": 8448,
+      "sha256": "bde519e60a63ac6ff942e6d6749300a2d151cfccf33594299cf1f3756ea549e6"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/runner.py",
+      "byte_count": 11980,
+      "sha256": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/server.py",
+      "byte_count": 1833,
+      "sha256": "543d154571782905cf71bc6ede3ec83773ff0214a08b559308477f154e5d96e5"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/importer.py",
+      "byte_count": 4860,
+      "sha256": "9f47e47eb5f8e8649ec804c8a83773bb58315b4b86f69dc7e6d53f8880dc6be9"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/bridge.py",
+      "byte_count": 5150,
+      "sha256": "9de373ef18cd4b275664df720178a37f3986247fc1ce8f365e752b296a0cbf3c"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/api.py",
+      "byte_count": 10800,
+      "sha256": "ef83d2b52544799ca2518d299a9bd6d569b7d90f794c9ac0ee71ddcdf2f3e772"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/cli.py",
+      "byte_count": 15366,
+      "sha256": "207e0d9f45724333fdc5e29f40a2e242a3fb12237e8f31d45db3bc0ff2ada00b"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/scheduler.py",
+      "byte_count": 8321,
+      "sha256": "1a6ded589085e298eb587a45975086078c2fe5b4bbecfdd07dccc7f0187c1465"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/workflow.py",
+      "byte_count": 19257,
+      "sha256": "e357beeab05c5dc60d0d1354826d771026895afd8bd1ee91b68f7896d2c8713c"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/tests/test_scheduler.py",
+      "byte_count": 8548,
+      "sha256": "2144627cfc8d292e8f37b85cb8e4c1b4376e9de91035fb29816bb241f405d85b"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-infra/database/202610070002_research_queue.sql",
+      "byte_count": 19781,
+      "sha256": "49f0f761aba55bc7771968b30048c34a7db4996947503b558b3eaac599577d63"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-infra/lib/research-workflow.ts",
+      "byte_count": 4462,
+      "sha256": "f3bc6e2bf286718509c3de309cd8d794853bf6fa0802c8df7edc2a34dbc86c73"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-infra/bin/research-workflow-database.py",
+      "byte_count": 6077,
+      "sha256": "d009ec907ff9b3a195c09f7540108970dfea865972e2eae40c230e6190618a2b"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-infra/test/check_research_queue_database.py",
+      "byte_count": 19372,
+      "sha256": "ccdcc87465c9a64fdb902b6f63ca1a7141e1dbd8ca7a0c7fa6bb10b640ef7cac"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-infra/test/research-workflow.test.ts",
+      "byte_count": 3044,
+      "sha256": "4a15ccef7d383d3285199ea862aefb958580aede5dc0903fca363927fa2d85b7"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-front-end/lib/research-queue.ts",
+      "byte_count": 4909,
+      "sha256": "8b309231f36589aecdd5749f5baaf929667521ea77c5f88339cf543296e17c13"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-front-end/lib/research-queue-example.ts",
+      "byte_count": 4141,
+      "sha256": "9197e8a61a2fc924aad5d7f3fca65831c594f27d6376ec590792c9b7f9c48208"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-front-end/app/components/research-workflow/claim-queue.tsx",
+      "byte_count": 20851,
+      "sha256": "c52f32f4055d6be7a7fc7015d40b9789b13f48d3b98e8f8e2b97698dec3efa6c"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-front-end/app/components/research-workflow/queue-example.tsx",
+      "byte_count": 1450,
+      "sha256": "7d8576453be0078fcadf200831cbb31ff1249c44e9248e1f989c5270fe932802"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-front-end/app/components/research-workflow/workspace.tsx",
+      "byte_count": 24604,
+      "sha256": "acf0d37252cfb158ae1f9c1ad743c4ace8c30d69cff1112f1acd795b5c2857e9"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-front-end/app/module/research-verification/methods/page.tsx",
+      "byte_count": 5883,
+      "sha256": "3e2055917ccb7d4d6cc1a3fa002bb27b36acffcd290bdeaba79ac60a635e4993"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-front-end/tests/research-queue.test.mjs",
+      "byte_count": 2866,
+      "sha256": "e5c0e5e6b445e9648ce7a7e1474f4ed4a7b6beaa024277dbf56bb2719be4c9d5"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-front-end/scripts/verify-research-workflow.mjs",
+      "byte_count": 13869,
+      "sha256": "47c4871dae44ae63c34ec502285437334a296e2d816dd6ea1f4fb884e9d68d75"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-infra/bin/research-queue-validation.py",
+      "byte_count": 7374,
+      "sha256": "c899af6bea24cb7f57fd5238560dc13b915e79d64124de2686b28e192f38240f"
+    }
+  ],
+  "implementation_hashes_reverified": 26,
+  "previous_artifact_hashes_reverified": 48,
+  "release": {
+    "production_deployed": false,
+    "remote_migrations_applied": false,
+    "conditional_gaps": [
+      "Legitimate Google-authenticated owner enqueue/review/cancel and remote owner-isolation request",
+      "Remote Supabase Storage round-trip original-byte hashes",
+      "Scheduled AWS worker invocation and deployed end-to-end verification"
+    ],
+    "local_blockers_passed": true,
+    "scientific_coverage": "No new paper evaluation. Original IPv6 register remains 3 reproduced, 3 discrepant, 5 inconclusive, 4 untested under its original conditions.",
+    "readiness": "Local release-blocking checks passed; production and conditional live checks pending."
+  },
+  "usage": {
+    "measured_charges_usd": null,
+    "estimated_charges_usd": null,
+    "model_usage": null,
+    "experiment_instances_launched": 0,
+    "limitations": "Local hosting/storage/Codex usage unallocated; missing usage is not zero cost. Synthetic worker fixtures make no model or experiment-instance calls."
+  },
+  "test_counts": {
+    "backend": 46,
+    "frontend": 120,
+    "infra_passed": 78,
+    "infra_skipped": 5,
+    "database_groups": 9,
+    "browser_checks": 11
+  },
+  "skipped_checks": "Five existing benchmark CLI cases lack JUMPSERVE_BACKEND_CHECKOUT; not queue cases.",
+  "visual_review": {
+    "reviewer": {
+      "identity": "Primary Codex AI implementer",
+      "type": "AI",
+      "independence": "Not independent"
+    },
+    "artifacts": [
+      "2026-10-07T17-09-17.505Z-desktop-queue-example.png",
+      "2026-10-07T17-09-17.505Z-mobile-queue-dark.png"
+    ],
+    "judgment": "Shared display examined; mobile table uses horizontal scrolling. Authenticated owner controls remain conditional."
+  }
+}

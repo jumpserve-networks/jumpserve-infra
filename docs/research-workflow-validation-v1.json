@@ -1,0 +1,593 @@
+{
+  "version": 1,
+  "recorded_at": "2026-10-07T16:13:14.370177+00:00",
+  "implementation_status": "Implemented and locally verified; not deployed",
+  "protocols": [
+    "docs/research-workflow-implementation-v1.md",
+    "docs/research-workflow-amendment-v2.md",
+    "docs/research-workflow-amendment-v3.md"
+  ],
+  "reviewer": {
+    "identity": "Primary Codex assistant",
+    "type": "AI",
+    "independence": "Implementer; not independent; no human review asserted",
+    "expertise": "Software implementation; no specialist scientific review asserted"
+  },
+  "design": "Development regressions and reused fixtures; not independent held-out science or model validation.",
+  "local_release_blockers": {
+    "backend": {
+      "passed": true,
+      "command": "python3 -B -m unittest discover -s research_workflow/tests -v",
+      "tests": 34,
+      "wall_seconds": 0.068
+    },
+    "frontend": {
+      "passed": true,
+      "tests": 117,
+      "test_command": "npm test",
+      "lint_command": "npm run lint",
+      "lint_exit_code": 0,
+      "build_command": "NEXT_PUBLIC_RESEARCH_WORKFLOW_API_URL=http://127.0.0.1:4102 npm run build",
+      "build_exit_code": 0,
+      "compile_seconds": 2.6,
+      "limitation": "Fixture origin embedded for local verification; rebuild with production API origin before release. Standalone original-byte test/lint stdout was not retained; successful results are in execution history."
+    },
+    "infrastructure": {
+      "passed": true,
+      "build_command": "npm run build",
+      "build_exit_code": 0,
+      "test_command": "npm test -- --runInBand",
+      "passed_tests": 77,
+      "skipped_tests": 5,
+      "seconds": 2.671,
+      "skip_reason": "Existing benchmark CLI cases require JUMPSERVE_BACKEND_CHECKOUT; this optional environment was unset. Separate from research workflow checks.",
+      "runtime_manifest": "research-workflow-runtime.json",
+      "deployment_flag": "Boolean true or exact CLI string true; defaults off"
+    },
+    "database": {
+      "passed": true,
+      "engine": "PostgreSQL 17",
+      "isolated_database": "jumpserve_research_workflow_test",
+      "migration": "database/202610070001_research_workflow.sql",
+      "check_groups": 12,
+      "relations": 18,
+      "rolled_back": true,
+      "limitation": "Actual local SQL/RLS with modeled Supabase storage tables; not live Supabase Storage API verification."
+    },
+    "browser": {
+      "passed": true,
+      "checks": 9,
+      "command": "npm run verify:research",
+      "playwright": "1.62.1",
+      "browser": "Installed Google Chrome",
+      "viewports": [
+        {
+          "width": 1365,
+          "height": 900
+        },
+        {
+          "width": 390,
+          "height": 844
+        }
+      ],
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "console_errors": [],
+      "report": "docs/research-workflow-validation/2026-10-07T16-06-53.053Z-browser-report.json",
+      "transport": "Actual public api.handler + store.snapshot; only persistence transport replaced by isolated Postgres role anon. Invalid/unavailable transport responses explicitly injected.",
+      "visual_inspection": "Settled desktop/mobile screenshots inspected by AI implementer; not human review."
+    },
+    "provenance": {
+      "passed": true,
+      "copied_artifact_hashes_verified": true,
+      "runtime_files_verified": true,
+      "example_payload_output_hash_verified": true,
+      "public_exports_exclude_private_artifacts_owners_audit_actors": true
+    }
+  },
+  "scientific_coverage": {
+    "new_paper_experiments": false,
+    "original_ipv6_assessment_sha256": "3c3532901aa4b507a61849666d925a0268c0658c0129dbfd729514df8c3a07b0",
+    "imported_sources": 74,
+    "claims": 15,
+    "preserved_labels": {
+      "reproduced": 3,
+      "discrepant": 3,
+      "inconclusive": 5,
+      "untested": 4
+    },
+    "current_gap_records": 9,
+    "new_shared_measurements_for_ipv6": 0,
+    "assessment_changes": "None; register import does not strengthen or resolve findings.",
+    "test_data": "Synthetic numerical and review fixtures, not new paper evidence.",
+    "method_scope": "Registered matched-numeric-v1 arithmetic; other domains need appropriate implementations or documented external campaigns and substantive review.",
+    "ai_scope": "Existing study chats linked; no generic prompt/candidate/tools evaluated or published."
+  },
+  "conditional_verification_gaps": [
+    "Production schema/API/frontend deployment not requested or performed this turn.",
+    "AWS account and Supabase project are guarded in code/configuration. Live target identity checks occur before an authorized production change; not performed this turn.",
+    "No legitimate Google browser session: actual owner intake/write/run/publication and authenticated chat requests unverified. Auth/ownership development cases use mocked auth responses.",
+    "No remote Supabase Storage upload/retrieval; actual remote artifact hash checks and deployed latency/timeouts unverified.",
+    "Storage outages or Lambda termination cannot guarantee durable failed-run recording; preserve original requests and retry identical IDs.",
+    "No independent/human domain review or held-out/model-answer evaluation.",
+    "Existing dependency advisories remain: npm audit lists 29 entries (1 low,6 moderate,20 high,2 critical). All affected package paths are unchanged from baseline; new Playwright packages have no listed advisory. This is not a complete security assessment."
+  ],
+  "failure_history": [
+    {
+      "case": "Initial SQL qualification",
+      "result": "Variable naming corrected before successful SQL checks.",
+      "original_stdout_sha256": null
+    },
+    {
+      "case": "Initial frontend lint",
+      "result": "Eight native select/table violations corrected to shared components.",
+      "original_stdout_sha256": null
+    },
+    {
+      "case": "Browser environment and readiness",
+      "result": "Sandbox launch, wrong label, dev overlay, network-idle and kept-mounted popup assumptions failed. Timestamped original-byte reports retained; corrected verifier passes."
+    },
+    {
+      "case": "Browser fixture seeding",
+      "result": "Empty sourced claims and object-valued evidence rejected by SQL; corrected isolated fixtures preserve interrupted records and new synthetic reviews. Never production publication.",
+      "original_stdout_sha256": null
+    },
+    {
+      "case": "PDF output directory",
+      "result": "Initial attempt failed before an audit could be saved; handling corrected. Actual 22-page extraction succeeded.",
+      "original_stdout_sha256": null
+    },
+    {
+      "case": "Artifact replay fixture",
+      "result": "Different study path correctly rejected; fixture corrected to original study. Final backend suite passes.",
+      "original_stdout_sha256": null
+    },
+    {
+      "case": "Validation receipt generation",
+      "result": "Initial in-memory draft had an unmatched parenthesis and did not execute. This purpose-specific generator validates receipts and preserves original copies.",
+      "original_stdout_sha256": null
+    }
+  ],
+  "usage": {
+    "measured_example_usage": {
+      "estimated_charges_usd": null,
+      "input_bytes": 1232,
+      "measured_charges_usd": null,
+      "model_usage": null,
+      "wall_seconds": 0.00029654198442585766
+    },
+    "pdf_text_extraction": {
+      "original_bytes": 2183602,
+      "pages": 22,
+      "wall_seconds": 3.8934384579770267,
+      "parser": "pypdf 6.19.0",
+      "substantive_review": "retrieved-unreviewed"
+    },
+    "final_browser_wall_seconds": 13.166,
+    "preserved_public_validation_artifact_bytes": 872050,
+    "private_local_artifact_bytes": 151171,
+    "measured_charges_usd": null,
+    "estimated_charges_usd": null,
+    "codex_model_usage": null,
+    "model_evaluation_calls": 0,
+    "new_aws_experiment_instances": 0,
+    "unallocated_costs": "Local compute/storage, Codex usage and incidental hosting requests not billed/reconciled. Missing charges are not zero."
+  },
+  "artifacts": [
+    {
+      "path": "docs/research-workflow-validation/2026-10-07T15-42-16.328Z-browser-report.json",
+      "original_path": "jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T15-42-16.328Z-browser-report.json",
+      "sha256": "04894cc71150188218091f08d148cdd2897595be1de330b511674acaf8c26fd8",
+      "bytes": 5117,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/2026-10-07T15-43-08.192Z-browser-report.json",
+      "original_path": "jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T15-43-08.192Z-browser-report.json",
+      "sha256": "0863e6611b52d0e0ec184305d1da832b0c42729f022dea316a3d45b69eb63b2e",
+      "bytes": 949,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/2026-10-07T15-44-00.979Z-browser-report.json",
+      "original_path": "jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T15-44-00.979Z-browser-report.json",
+      "sha256": "1392b7dae908f61ad0528e85b18e8579524b8de16f172a22fcd194d6d17ebe43",
+      "bytes": 4528,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/2026-10-07T15-46-44.229Z-browser-report.json",
+      "original_path": "jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T15-46-44.229Z-browser-report.json",
+      "sha256": "0a13ad6d6a3de12d8422434d4567d5c8ba51c7a5aae26ce9e2be5cc14fe84fbc",
+      "bytes": 1158,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/2026-10-07T15-48-06.936Z-browser-report.json",
+      "original_path": "jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T15-48-06.936Z-browser-report.json",
+      "sha256": "101dd8bce990bdb0a62523ffde8f212b7c8e22b44ba38f344d60b379e8bdb734",
+      "bytes": 3266,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/2026-10-07T15-49-16.576Z-browser-report.json",
+      "original_path": "jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T15-49-16.576Z-browser-report.json",
+      "sha256": "2f19b5f3f791d2bd42586005e3617020ad083775c155f802b8739454ed893e26",
+      "bytes": 2825,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/2026-10-07T15-51-51.546Z-browser-report.json",
+      "original_path": "jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T15-51-51.546Z-browser-report.json",
+      "sha256": "9b5972fdc15f198103760955c1d6bc877610237c766a29b6af1532b49b2d33c7",
+      "bytes": 3712,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/2026-10-07T15-52-56.191Z-browser-report.json",
+      "original_path": "jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T15-52-56.191Z-browser-report.json",
+      "sha256": "696ee974a4850d65f68e58ff06979f87e3970ebefa3e137659b679a31bd60fc9",
+      "bytes": 3266,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/2026-10-07T16-06-53.053Z-browser-report.json",
+      "original_path": "jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T16-06-53.053Z-browser-report.json",
+      "sha256": "8884e67c9dd6fb6c5738d7064cdf98c0ff639f300de227338425a0db5db51891",
+      "bytes": 3266,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/database-final-v1.json",
+      "original_path": "jumpserve-infra/.test-artifacts/research-workflow-database-final.json",
+      "sha256": "f46edfc7623ce679c3b55edcca45eb0eea5f437685a11f4bdaeab667547e2d13",
+      "bytes": 603,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/infra-tests-final-v1.txt",
+      "original_path": "jumpserve-infra/.test-artifacts/research-workflow-infra-final-tests.txt",
+      "sha256": "097e36903e4cee5b919fa90cb6b99cdaa60aabe31fd11de8e7ea41e478e41807",
+      "bytes": 1025,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/frontend-build-final-v1.txt",
+      "original_path": "jumpserve-front-end/.test-artifacts/research-workflow/frontend-final-build.txt",
+      "sha256": "4110efbac433932a3f9c3c69f2c020809dd7030bf2074c8b7871d958ce945e36",
+      "bytes": 3236,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/npm-audit-v1.json",
+      "original_path": "jumpserve-front-end/.test-artifacts/research-workflow/npm-audit-v1.json",
+      "sha256": "65dc12b071c200ceed0c1a521f29afae35c23f70f3d73507beb62cb6537f8db5",
+      "bytes": 55414,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/backend-tests-final-v1.txt",
+      "original_path": "jumpserve-back-end/.test-artifacts/research-workflow/backend-final-tests.txt",
+      "sha256": "5e4583c6a1599c95c52c17791ff391913cb40e96539cc355efc36e0e1b0eaa9d",
+      "bytes": 5096,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/workflow-example-protocol-v1.json",
+      "original_path": "jumpserve-back-end/.test-artifacts/research-workflow/workflow-example-protocol-v1.json",
+      "sha256": "862840525a6700b55ecfed30e054bc1c46a1c02f9ed16284cb065bfec73c5ffa",
+      "bytes": 2805,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/workflow-example-frozen-v1.json",
+      "original_path": "jumpserve-back-end/.test-artifacts/research-workflow/workflow-example-frozen-v1.json",
+      "sha256": "06fe7571367b4a374afec500c3d948d9896a860e1a3dff92106735a393992328",
+      "bytes": 2766,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/workflow-example-results-v1.json",
+      "original_path": "jumpserve-back-end/.test-artifacts/research-workflow/workflow-example-results-v1.json",
+      "sha256": "f837462b8b91680226645a6ef3b2601738ec265b101acaf4d495e00a280f8aa6",
+      "bytes": 5349,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/workflow-example-results-v2.json",
+      "original_path": "jumpserve-back-end/.test-artifacts/research-workflow/workflow-example-results-v2.json",
+      "sha256": "6aacd61ebb05a3ff4c3effc5e9fa36473b7d7e7af180ee3921f71b17e17234aa",
+      "bytes": 5548,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/ipv6-register-public-fixture-v1.json",
+      "original_path": "jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T16-06-53.053Z-ipv6-public.json",
+      "sha256": "4495375e36868ffba40984d1beb921325811d9525df205c89205d20bc917eca0",
+      "bytes": 398599,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/desktop-comparisons-dark.png",
+      "original_path": "jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T16-06-53.053Z-desktop-comparisons-dark.png",
+      "sha256": "1ac25cc02ec2b08c0139b8541f05988008ee2da911d349296abdfb7e915c6bbd",
+      "bytes": 114452,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/mobile-plot-light.png",
+      "original_path": "jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T16-06-53.053Z-mobile-plot-light.png",
+      "sha256": "ff4625aae6f024d5acc220a4f609bef18b8e0c7800bc905aeff26636462e8f5b",
+      "bytes": 15272,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/mobile-comparisons-dark.png",
+      "original_path": "jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T16-06-53.053Z-mobile-comparisons-dark.png",
+      "sha256": "635a7c7c929b05ec477e16dd09db2d1e87bc8d1fd32004ac1f3654ec94515556",
+      "bytes": 55858,
+      "round_trip_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-validation/desktop-ipv6-gaps.png",
+      "original_path": "jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T16-06-53.053Z-desktop-ipv6-gaps.png",
+      "sha256": "85b8f298f8b94c2ad1955e595c9a692e362491a9d77fabd8489b6783b472e0dd",
+      "bytes": 177940,
+      "round_trip_hash_verified": true
+    }
+  ],
+  "private_artifacts": [
+    {
+      "path": "jumpserve-back-end/.test-artifacts/research-workflow/workflow-paper-text-v1.json",
+      "sha256": "55096cbf8deb60f6465c3cd123df2bbc81f677232b26896ef5ce4c7d305615b8",
+      "bytes": 151171,
+      "visibility": "Ignored local unreviewed text packet; not included in public report files"
+    }
+  ],
+  "implementation_byte_manifest": [
+    {
+      "path": "jumpserve-back-end/research_workflow/README.md",
+      "sha256": "e49cbfd3340acdb3e7c30ddff833cae565bcada5cca88705667d0734b7b92d82",
+      "bytes": 11356
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/api.py",
+      "sha256": "d52c5dd022ee25fbf976aa73e2a5265187740ceb8ac6ff059953319524c8a05b",
+      "bytes": 10185
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/bridge.py",
+      "sha256": "9de373ef18cd4b275664df720178a37f3986247fc1ce8f365e752b296a0cbf3c",
+      "bytes": 5150
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/cli.py",
+      "sha256": "207e0d9f45724333fdc5e29f40a2e242a3fb12237e8f31d45db3bc0ff2ada00b",
+      "bytes": 15366
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/examples/matched-numeric-v1/campaign.json",
+      "sha256": "797b24b2b4fb3ac82c75d145ac8121b154f5f5c7cdf7cd9063c65c300f14d08b",
+      "bytes": 388
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/examples/matched-numeric-v1/configurations.json",
+      "sha256": "13d7f1fa2c52fc81f1553ad6db2246fcf37e3eb20d1d0769ae5979c4cefc8281",
+      "bytes": 178
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/examples/matched-numeric-v1/input.json",
+      "sha256": "e0edadfa9c83a6e95777a13728652b53c6a90af8eee866a3472bcff87b3588a7",
+      "bytes": 1232
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/importer.py",
+      "sha256": "9f47e47eb5f8e8649ec804c8a83773bb58315b4b86f69dc7e6d53f8880dc6be9",
+      "bytes": 4860
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/intake.py",
+      "sha256": "33439e19ffbc1f398ce8870818c9da8a4541557ea302188d5c01172c3ab434ef",
+      "bytes": 9573
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/requirements-cli.txt",
+      "sha256": "5d5e9967e924c50d8063fabdc70447a0819d8854a53b6d341fa694f4239d8e8b",
+      "bytes": 175
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/runner.py",
+      "sha256": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+      "bytes": 11980
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/server.py",
+      "sha256": "543d154571782905cf71bc6ede3ec83773ff0214a08b559308477f154e5d96e5",
+      "bytes": 1833
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/store.py",
+      "sha256": "44d99737425cfa9e16b8b74090e738cddbe3ab5ea0f1d936f383fd73be8b6e66",
+      "bytes": 7146
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/tests/test_importer.py",
+      "sha256": "c1a6606a8162037b990dc73537bc1f38bdbe6bf0c31a01c3df413bc5b0fe64e2",
+      "bytes": 4639
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/tests/test_store.py",
+      "sha256": "525c9be2d9dd9d560787e0121080c9bd2a099d99e84dc491dc6ba0abf207a2dc",
+      "bytes": 3119
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/tests/test_workflow.py",
+      "sha256": "37ca0a1021fdd593b4ce50c46d12d273750065b04b87b0096c8efae5077a01f3",
+      "bytes": 14609
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/workflow.py",
+      "sha256": "cc55def28940e3dfd6edfcafba6f298c535ca028d48a5f4fa35a38a609604eca",
+      "bytes": 19228
+    },
+    {
+      "path": "jumpserve-front-end/app/components/research-workflow/comparisons.tsx",
+      "sha256": "f7d450cda6b51303de910349af85843ca3fcfee89cbbc6f49b9aba0494298e30",
+      "bytes": 5257
+    },
+    {
+      "path": "jumpserve-front-end/app/components/research-workflow/header.tsx",
+      "sha256": "4cf07f9bd77da172d71d47edcd787aff97d16e7948e392abed44c21ca8d35a01",
+      "bytes": 921
+    },
+    {
+      "path": "jumpserve-front-end/app/components/research-workflow/observations.tsx",
+      "sha256": "65edcccfd79a0ac02f88c0ab5c8c057282367cfff31cb9b683ef8f8d13d6d0d6",
+      "bytes": 3675
+    },
+    {
+      "path": "jumpserve-front-end/app/components/research-workflow/select.tsx",
+      "sha256": "91af9ae4f77e3d22221d8e280f8622c46b1a2015bf55b4bf7d9b96498588f745",
+      "bytes": 696
+    },
+    {
+      "path": "jumpserve-front-end/app/components/research-workflow/study-panel.tsx",
+      "sha256": "be99ee4406264b07b30d696406eed0ebf1ec8243d731cad56f1afc18035c9f09",
+      "bytes": 13359
+    },
+    {
+      "path": "jumpserve-front-end/app/components/research-workflow/workspace.tsx",
+      "sha256": "88fe8d6df53d9deb88a6569fdee8f55422c9752283e8e19ccd2453f8de5c979c",
+      "bytes": 24466
+    },
+    {
+      "path": "jumpserve-front-end/app/module/research-verification/api/studies/[studyId]/export/route.ts",
+      "sha256": "804bccda0edf4da55fb8009d8d6493106bad22b661d897cf748781ebcc7d40e6",
+      "bytes": 1028
+    },
+    {
+      "path": "jumpserve-front-end/app/module/research-verification/methods/page.tsx",
+      "sha256": "ff9093ba41c3cd716db02d27dd92a3e500b2fcce6d800ab6eabb46a288c20900",
+      "bytes": 5017
+    },
+    {
+      "path": "jumpserve-front-end/app/module/research-verification/new-study/page.tsx",
+      "sha256": "a5dfdcce6257a9f3bf0cbc3e9995e0776ac5e44db18808e8c7cedee00a5fa1d7",
+      "bytes": 689
+    },
+    {
+      "path": "jumpserve-front-end/app/module/research-verification/studies/[studyId]/page.tsx",
+      "sha256": "276c14ad78033a77622c3d61ab285a6b2f2fe6af4559989a1bfdbb59338d6c32",
+      "bytes": 1478
+    },
+    {
+      "path": "jumpserve-front-end/app/module/research-verification/test-results/page.tsx",
+      "sha256": "0a918e7da8e41ba679fe5048188cc0d68e5111866e0461b372eb8c8a656b19d3",
+      "bytes": 1932
+    },
+    {
+      "path": "jumpserve-front-end/app/module/research-verification/workspace/[studyId]/page.tsx",
+      "sha256": "258015cf8426d0da02ffcf738e5c84b04ef9559c64120ddbd719703bab45ac04",
+      "bytes": 1188
+    },
+    {
+      "path": "jumpserve-front-end/app/module/research-verification/workspace/page.tsx",
+      "sha256": "06085e235aeb04783de1043033d222d7cbd3869ded5ee278a9d5f05eab0755a8",
+      "bytes": 667
+    },
+    {
+      "path": "jumpserve-front-end/lib/research-workflow-api.ts",
+      "sha256": "aae3eac297826b7272e5a81fa08e1ffcf55d6ee68984d2674001b3a64aa436fc",
+      "bytes": 1048
+    },
+    {
+      "path": "jumpserve-front-end/lib/research-workflow-server.ts",
+      "sha256": "a98e3197c36dea638be8d907aee96d76292b7c2f769c6f71441846b55025ef0a",
+      "bytes": 2047
+    },
+    {
+      "path": "jumpserve-front-end/lib/research-workflow.ts",
+      "sha256": "3a5e9bcb6bc215e4bb8838eb8e8527c6c9c8ac5d33662ebd99e3d4e02d3d3c3d",
+      "bytes": 5352
+    },
+    {
+      "path": "jumpserve-front-end/lib/test-modules.ts",
+      "sha256": "0cc9fcbe9c73ff37451fa6833d3de6d966bf6148b05d4c109e770c1ae3a62c52",
+      "bytes": 12616
+    },
+    {
+      "path": "jumpserve-front-end/package-lock.json",
+      "sha256": "2f6c365d34902d806db9a4914db9d74cb31a6c28983dc0b9abe1c941b500103b",
+      "bytes": 410161
+    },
+    {
+      "path": "jumpserve-front-end/package.json",
+      "sha256": "d5b574d0b214c832b2eab8948a2a28811c793d226457950c13edd567793ae7a1",
+      "bytes": 1124
+    },
+    {
+      "path": "jumpserve-front-end/scripts/verify-research-workflow.mjs",
+      "sha256": "9b174289935f79342ef071de41ae7ed5fb42518a2d4a107b13ee5c51d7ead339",
+      "bytes": 10652
+    },
+    {
+      "path": "jumpserve-front-end/tests/research-workflow.test.mjs",
+      "sha256": "3ac84bd09515edc00424383e4e073aaf80349894b7ce3526c5459f84a6e239e2",
+      "bytes": 3615
+    },
+    {
+      "path": "jumpserve-infra/bin/prepare-research-runtime.py",
+      "sha256": "1105111c47caf10c9578b2dfbcd53b67f411508d1eb180419863f409e557d41f",
+      "bytes": 1165
+    },
+    {
+      "path": "jumpserve-infra/bin/research-workflow-database.py",
+      "sha256": "6997e6191c34eaa61597a2d246b094b294ad7917654968b71c9114f52ee07d58",
+      "bytes": 4436
+    },
+    {
+      "path": "jumpserve-infra/bin/research-workflow-validation.py",
+      "sha256": "2da15a0187c50520a380b10938a2347b4859198310b3fc8015023a7cf6f9e16c",
+      "bytes": 12439
+    },
+    {
+      "path": "jumpserve-infra/database/202610070001_research_workflow.sql",
+      "sha256": "d97983192c89e40886d613e5a2ee4548e52a0e5d66a397ccaab134f3efacb6d3",
+      "bytes": 25049
+    },
+    {
+      "path": "jumpserve-infra/lib/benchmark-orchestrator-stack.ts",
+      "sha256": "5f722dd31d69d601e4a0cbc01410eab0cd705717238a7a9c10f18d34cd66ec94",
+      "bytes": 10712
+    },
+    {
+      "path": "jumpserve-infra/lib/research-workflow.ts",
+      "sha256": "f7b8c90c73cd240f2d42810b3af1db254218153b3a902dcf54d5017dde92ca4d",
+      "bytes": 3238
+    },
+    {
+      "path": "jumpserve-infra/research-workflow-runtime.json",
+      "sha256": "f94c975006aa8dc8bfee69fc162f74779e2cbf59989fc4c3203da2d88ebc94fd",
+      "bytes": 560
+    },
+    {
+      "path": "jumpserve-infra/test/check_research_workflow_database.py",
+      "sha256": "8f0788778cd1ff5468339179b3d2d0ce5ae59ad5ff440a2a81189c18de79a2a6",
+      "bytes": 8872
+    },
+    {
+      "path": "jumpserve-infra/test/research-workflow.test.ts",
+      "sha256": "fbb9044007ecf95b7b3d136bf8bd838a65285df745d62759a0f2a6b610ebce57",
+      "bytes": 1731
+    },
+    {
+      "path": "jumpserve-infra/test/serve_research_workflow_fixture.py",
+      "sha256": "2ebdf0ef8f69863304f6bc1d849ea28bc019719e4b97ad3f1a95ce9aab8f8c08",
+      "bytes": 12125
+    }
+  ],
+  "release_status": "Local checks pass under documented fixtures. Production awaits explicit authorization and conditional checks. Scientific coverage remains limited.",
+  "cleanup": "Only workflow test services stopped; isolated Postgres/evidence files retained. User-staged PDFs unchanged."
+}
