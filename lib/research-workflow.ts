@@ -21,7 +21,7 @@ export class ResearchWorkflow extends Construct {
     const runtime = process.env.RESEARCH_WORKFLOW_RUNTIME_PATH ?? path.join(__dirname, '..', '.runtime-backend', 'research_workflow');
     const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'research-workflow-runtime.json'), 'utf8')) as { files: Record<string, string> };
     for (const [file, sha256] of Object.entries(manifest.files)) {
-      if (!/^[a-z_]+\.py$/.test(file) || !fs.existsSync(path.join(runtime, file)) || createHash('sha256').update(fs.readFileSync(path.join(runtime, file))).digest('hex') !== sha256) {
+      if (!/^(?:[a-z_]+\.py|plans\/[a-z0-9-]+\.json)$/.test(file) || !fs.existsSync(path.join(runtime, file)) || createHash('sha256').update(fs.readFileSync(path.join(runtime, file))).digest('hex') !== sha256) {
         throw new Error('Research runtime is absent or differs from the manifest. Run bin/prepare-research-runtime.py with the documented backend checkout.');
       }
     }
@@ -40,8 +40,8 @@ export class ResearchWorkflow extends Construct {
     });
     secret.grantRead(fn);
     const integration = new HttpLambdaIntegration('ResearchWorkflowIntegration', fn);
-    for (const route of ['/research/capabilities', '/research/studies', '/research/studies/{studyId}', '/research/studies/{studyId}/queue']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.GET], integration });
-    for (const route of ['/research/studies', '/research/studies/{studyId}/records', '/research/studies/{studyId}/protocols', '/research/studies/{studyId}/runs', '/research/studies/{studyId}/publish', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/queue-actions']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.POST], integration });
+    for (const route of ['/research/capabilities', '/research/studies', '/research/studies/{studyId}', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/prepare']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.GET], integration });
+    for (const route of ['/research/studies', '/research/studies/{studyId}/records', '/research/studies/{studyId}/protocols', '/research/studies/{studyId}/runs', '/research/studies/{studyId}/publish', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/queue-actions', '/research/studies/{studyId}/prepare']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.POST], integration });
     if (queueEnabled) {
       const worker = new lambda.Function(this, 'QueueWorker', {
         code: lambda.Code.fromAsset(runtime), handler: 'worker.handler', runtime: lambda.Runtime.PYTHON_3_12,

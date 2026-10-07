@@ -21,7 +21,8 @@ test('research API has bounded resources, explicit routes and no experiment or m
   const template = Template.fromStack(stack);
   template.resourceCountIs('AWS::Lambda::Function', 1);
   template.hasResourceProperties('AWS::Lambda::Function', { Handler: 'api.handler', Timeout: 29, MemorySize: 512, ReservedConcurrentExecutions: 4, Environment: { Variables: Match.objectLike({ SUPABASE_URL: 'https://regphejnlvfpyokpniny.supabase.co' }) } });
-  for (const endpoint of ['records', 'protocols', 'runs', 'publish', 'queue', 'queue-actions']) template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: `POST /research/studies/{studyId}/${endpoint}` });
+  for (const endpoint of ['records', 'protocols', 'runs', 'publish', 'queue', 'queue-actions', 'prepare']) template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: `POST /research/studies/{studyId}/${endpoint}` });
+  template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'GET /research/studies/{studyId}/prepare' });
   template.resourceCountIs('AWS::Events::Rule', 0);
   const policies = JSON.stringify(template.findResources('AWS::IAM::Policy'));
   expect(policies).toContain('secretsmanager:GetSecretValue');

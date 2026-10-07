@@ -20,7 +20,7 @@ import uuid
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT.parent/'jumpserve-back-end/research_workflow'))
-import api, runner, scheduler, store, worker, workflow
+import api, preparation, runner, scheduler, store, worker, workflow
 PSQL='/opt/homebrew/opt/postgresql@17/bin/psql'
 ORIGIN='postgresql://michael@127.0.0.1:54477/'
 STAMP=dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
@@ -28,7 +28,7 @@ DATABASE='jumpserve_research_queue_test_'+STAMP.lower()
 DIRECTORY=ROOT/'.test-artifacts/research-queue'/STAMP
 DIRECTORY.mkdir(parents=True,exist_ok=False)
 ACTOR=str(uuid.uuid4()); OTHER=str(uuid.uuid4()); files={}; file_lock=threading.Lock()
-report=dict(protocol='research-queue-protocol-v1',amendment='research-queue-amendment-v2',
+report=dict(protocol='research-queue-protocol-v1',amendment='research-queue-amendment-v2',preparation_protocol='research-preparation-protocol-v1',
  database=DATABASE,started_at=dt.datetime.now(dt.timezone.utc).isoformat(),checks=[],
  reviewer=dict(identity='Primary Codex AI implementer',type='AI',independence='Not independent'),
  design='Synthetic software development regressions, not scientific or held-out validation.',
@@ -53,7 +53,8 @@ def rpc(name,payload):
       'research_queue_claim':dict(p_worker='uuid'),
       'research_queue_finish':dict(p_job='uuid',p_token='uuid',p_records='jsonb',p_run='uuid',p_error='text',p_usage='jsonb'),
       'research_queue_action':dict(p_study='uuid',p_actor='uuid',p_job='uuid',p_id='uuid',p_action='text',p_reason='text',p_assessments='jsonb',p_run='uuid'),
-      'research_queue_snapshot':dict(p_study='uuid',p_actor='uuid')}
+      'research_queue_snapshot':dict(p_study='uuid',p_actor='uuid'),
+      'research_prepare_plan':dict(p_study='uuid',p_actor='uuid',p_id='uuid',p_request='uuid',p_plan='jsonb',p_records='jsonb')}
     if name not in signatures or set(payload)!=set(signatures[name]):raise ValueError('Unsupported fixture RPC')
     arguments=[]
     for key,kind in signatures[name].items():
@@ -69,7 +70,7 @@ def transport(path,method='GET',body=None,public=False,raw=False):
         if not raw and method!='POST':raise store.StoreError('Raw fixture access required')
         with file_lock:
             if method=='POST':
-                if path in files:raise store.StoreError('Original bytes already present')
+                if path in files:raise store.StoreError('Research persistence request failed (HTTP 409)')
                 files[path]=body
                 target=DIRECTORY/('raw-'+hashlib.sha256(path.encode()).hexdigest())
                 target.write_bytes(body);return None
@@ -79,7 +80,7 @@ def transport(path,method='GET',body=None,public=False,raw=False):
         return rpc(parsed.path.removeprefix('/rest/v1/rpc/'),body)
     if method!='GET' or body is not None:raise ValueError('Unexpected transport mutation')
     table=parsed.path.removeprefix('/rest/v1/')
-    allowed=['research_'+k for k in (*workflow.FIELDS,'studies','study_owners','queue_jobs','queue_events')]
+    allowed=['research_'+k for k in (*workflow.FIELDS,'studies','study_owners','queue_jobs','queue_events','prepared_plans')]
     if table not in allowed:raise ValueError('Unsupported relation')
     params=dict(urllib.parse.parse_qsl(parsed.query));columns=params.pop('select').split(',')
     if any(not c.replace('_','').isalnum() for c in columns):raise ValueError('Unsafe projection')
@@ -146,15 +147,16 @@ grant usage on schema public to anon,authenticated,service_role;
 create schema storage; create table storage.buckets(id text primary key,name text,public boolean); create table storage.objects(id int primary key,bucket_id text); alter table storage.objects enable row level security;
 grant usage on schema storage to anon,authenticated,service_role; grant all on storage.objects to service_role;""")
     report['migration_sha256']={}
-    for name in ('202610070001_research_workflow.sql','202610070002_research_queue.sql'):
+    for name in ('202610070001_research_workflow.sql','202610070002_research_queue.sql','202610070003_research_preparation.sql'):
         raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     store.request=transport
     def security():
         for role in ('anon','authenticated'):
-            results=json.loads(query("select json_agg(t) from (select c.relname,c.relrowsecurity,has_table_privilege(current_user,c.oid,'SELECT,INSERT,UPDATE,DELETE') access from pg_class c where c.relname in ('research_queue_jobs','research_queue_events')) t",role=role))
-            assert len(results)==2 and all(r['relrowsecurity'] and not r['access'] for r in results)
+            results=json.loads(query("select json_agg(t) from (select c.relname,c.relrowsecurity,has_table_privilege(current_user,c.oid,'SELECT,INSERT,UPDATE,DELETE') access from pg_class c where c.relname in ('research_queue_jobs','research_queue_events','research_prepared_plans')) t",role=role))
+            assert len(results)==3 and all(r['relrowsecurity'] and not r['access'] for r in results)
             rejects(lambda:query("select public.research_queue_claim('"+str(uuid.uuid4())+"')",role=role))
-        return dict(private_tables=2,browser_writes=False,browser_rpc=False)
+            assert query("select has_function_privilege(current_user,'public.research_prepare_plan(uuid,uuid,uuid,uuid,jsonb,jsonb)','EXECUTE')",role=role)=='f'
+        return dict(private_tables=3,browser_writes=False,browser_rpc=False)
     check('queue RLS and browser read/write/RPC denial',security)
     def concurrent():
         fixtures=[make_study() for _ in range(3)]
@@ -224,6 +226,66 @@ grant usage on schema storage to anon,authenticated,service_role; grant all on s
         rejects(lambda:enqueue(f,[dict(job_id=str(uuid.uuid4()),requirement='complete-run')]))
         drain();return dict(cross_study_rejected=True,unknown_predecessor_rejected=True,cycles_prevented='immutable dependencies reference existing jobs only')
     check('unknown/cross-study dependencies rejected and cycles prevented',graph)
+    def preparation_flow():
+        study_id=str(uuid.uuid4())
+        paper=dict(title='IPv6 archived recheck development campaign',paper_url='https://pure.mpg.de/pubman/item/item_3670144_1',domain='Networking',scope='Exposed archived numerical cells and follow-up preparation only',origin_module=None)
+        study=store.rpc('research_create_study',dict(p_actor=ACTOR,p_id=study_id,p_document=paper))
+        body=dict(action='prepare',request_id=str(uuid.uuid4()))
+        def prepare_api(data=None,actor=ACTOR):
+            event=dict(rawPath='/research/studies/'+study_id+'/prepare',requestContext={'http':{'method':'POST' if data is not None else 'GET'}},body=json.dumps(data) if data is not None else None)
+            return api.dispatch(event,actor)
+        result=prepare_api(body); prepared=result['prepared']
+        assert prepared['planned_jobs']==20 and prepared['queued_jobs']==0
+        assert preparation.prepare(study,ACTOR,body)['replayed']
+        metadata=store.rows('prepared_plans',{'study_id':'eq.'+study_id})[0]
+        original=store.artifact_bytes(study_id,metadata['original_artifact_id'],maximum=1500000)
+        _,registered=preparation.registered(study);assert original==registered
+        compiled=preparation.compiled(study_id,metadata)
+        for job in compiled['jobs'][:2]:prepare_api(dict(action='enqueue',prepared_id=prepared['id'],job_id=job['id']))
+        partial=prepare_api()['prepared'][0];assert partial['queued_jobs']==2 and partial['status']=='partially-queued'
+        # Resume the entire retained plan; the two original jobs replay, and all
+        # later jobs are created once without refreezing any protocol.
+        for job in compiled['jobs']:prepare_api(dict(action='enqueue',prepared_id=prepared['id'],job_id=job['id']))
+        complete=prepare_api()['prepared'][0];assert complete['queued_jobs']==20
+        outcomes=[]
+        while True:
+            active=claim()
+            if active is None:break
+            assert active['study_id']==study_id
+            outcomes.append(worker.execute_job(active))
+        assert len(outcomes)==6 and all(o['status']=='awaiting-review' for o in outcomes)
+        def count(kind):return int(query('select count(*) from research_'+kind+' where study_id='+sql_text(study_id)))
+        assert count('sources')==74 and count('claims')==15 and count('configurations')==144
+        assert count('protocols')==20 and count('campaigns')==20 and count('claim_checks')==20
+        assert count('runs')==6 and count('published_values')==1152 and count('measurements')==1152 and count('assessments')==15
+        assert query("select count(*) from research_measurements where study_id="+sql_text(study_id)+" and (status<>'recorded' or value is null)")=='0'
+        assert query("select count(*) from research_measurements where study_id="+sql_text(study_id)+" and details->>'label'<>'reproduced'")=='0'
+        assert query("select count(*) from research_queue_jobs where study_id="+sql_text(study_id)+" and status='manual'")=='14'
+        rejects(lambda:query('update research_prepared_plans set plan_id=plan_id where id='+sql_text(prepared['id'])))
+        rejects(lambda:rpc('research_prepare_plan',dict(p_study=study_id,p_actor=OTHER,p_id=prepared['id'],p_request=str(uuid.uuid4()),p_plan=metadata,p_records=[])))
+        frozen=[(p['id'],p['sha256'],p['frozen_at']) for p in store.rows('protocols',{'study_id':'eq.'+study_id})]
+        assert preparation.prepare(study,ACTOR,body)['replayed']
+        assert frozen==[(p['id'],p['sha256'],p['frozen_at']) for p in store.rows('protocols',{'study_id':'eq.'+study_id})]
+        evidence=dict(study_id=study_id,prepared_id=prepared['id'],manifest_sha256=workflow.digest(original),original_bytes=len(original),jobs=20,automatic_runs=6,manual_tasks=14,matched_cells=1152,assessments_before_and_after=15,prior_exposure='Previously examined archive',new_measurements=False,archived_numerical_agreement=True,protocols_unchanged_on_resume=True)
+        drain();return evidence
+    check('paper preparation to campaigns, interrupted/resumed enqueueing and six actual workers',preparation_flow)
+    def atomic_preparation():
+        f=make_study();id_=str(uuid.uuid4()); record=dict(kind='configurations',record=dict(id=str(uuid.uuid4()),identity='must-rollback',details={},input_versions=[],requested_resources={}))
+        bad=dict(plan_id='invalid-plan',manifest_sha256='a'*64,original_artifact_id=str(uuid.uuid4()),compiled_artifact_id=str(uuid.uuid4()),jobs=[dict(id=str(uuid.uuid4()),campaign_id=f['campaign']['id'],title='Missing originals',execution_mode='manual')],provenance={})
+        rejects(lambda:rpc('research_prepare_plan',dict(p_study=f['study'],p_actor=ACTOR,p_id=id_,p_request=str(uuid.uuid4()),p_plan=bad,p_records=[record])))
+        assert query('select count(*) from research_configurations where id='+sql_text(record['record']['id']))=='0'
+        return dict(invalid_originals_rejected=True,record_bundle_rolled_back=True)
+    check('invalid preparation transaction rolls back its appended records',atomic_preparation)
+    def concurrent_preparation():
+        sid=str(uuid.uuid4());study=store.rpc('research_create_study',dict(p_actor=ACTOR,p_id=sid,p_document=dict(title='Concurrent software fixture',paper_url='https://pure.mpg.de/pubman/item/item_3670144_1',domain='Software development',scope='No independent validation',origin_module=None)))
+        with ThreadPoolExecutor(max_workers=2) as pool:results=list(pool.map(lambda _:preparation.prepare(study,ACTOR,dict(action='prepare',request_id=str(uuid.uuid4()))),range(2)))
+        assert results[0]['prepared']==results[1]['prepared']
+        assert query('select count(*) from research_prepared_plans where study_id='+sql_text(sid))=='1'
+        assert query('select count(*) from research_campaigns where study_id='+sql_text(sid))=='20'
+        artifacts=store.rows('artifacts',{'study_id':'eq.'+sid})
+        for a in artifacts:store.artifact_bytes(sid,a['id'],maximum=4000000)
+        return dict(concurrent_clients=2,prepared_plans=1,campaigns=20,first_saved_protocols_preserved=True,attempt_artifacts_verified=len(artifacts))
+    check('concurrent preparation atomically retains one immutable plan',concurrent_preparation)
     report['passed']=True
 except Exception as error:
     report['passed']=False;report['error']=str(error);report['traceback']=traceback.format_exc();print(report['traceback'],file=sys.stderr)

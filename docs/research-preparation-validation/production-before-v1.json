@@ -1,0 +1,91 @@
+{
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres"
+  },
+  "created_at": "2026-10-07T22:12:22.839788+00:00",
+  "read_only": true,
+  "relations": [
+    {
+      "relname": "research_artifacts",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_assessments",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_audit_events",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_campaigns",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_claim_checks",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_claims",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_configurations",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_gaps",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_measurements",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_protocols",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_publications",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_published_values",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_queue_events",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_queue_jobs",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_reviews",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_runs",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_sources",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_studies",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_study_owners",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "research_summaries",
+      "relrowsecurity": true
+    }
+  ]
+}

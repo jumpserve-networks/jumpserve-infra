@@ -1,13 +1,15 @@
 {
-  "version": 3,
-  "source_revision": "d932544e0138d7449f23c5f6ee666a30b845fc1b",
-  "revision_status": "committed production release; exact original-byte hashes retained from validated version 2",
+  "version": 4,
+  "source_revision": "f2a57dab86a248423bfc1a18d2114c43b8126090",
+  "revision_status": "committed production candidate; each declared file pins exact bytes from source_revision",
   "files": {
-    "api.py": "ef83d2b52544799ca2518d299a9bd6d569b7d90f794c9ac0ee71ddcdf2f3e772",
+    "api.py": "bc587c133b3cf132578bc55403cb1770f3d59e19f5e99cac7abda8c6be87356b",
     "workflow.py": "e357beeab05c5dc60d0d1354826d771026895afd8bd1ee91b68f7896d2c8713c",
     "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
-    "store.py": "bde519e60a63ac6ff942e6d6749300a2d151cfccf33594299cf1f3756ea549e6",
+    "store.py": "63b2488798a8b1253d98d4abc1350918ca703103518da76807b93a5ff8da47e2",
     "scheduler.py": "1a6ded589085e298eb587a45975086078c2fe5b4bbecfdd07dccc7f0187c1465",
-    "worker.py": "8d94bc9e5f6b326065c925932be24b09676f87d0b727bd4fba6bb490f0c7ae6a"
+    "worker.py": "8d94bc9e5f6b326065c925932be24b09676f87d0b727bd4fba6bb490f0c7ae6a",
+    "preparation.py": "f23424b4c73974ffda48e356cd19c2d0dd8877beb668d94380e7bb00da5a5f90",
+    "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3"
   }
 }

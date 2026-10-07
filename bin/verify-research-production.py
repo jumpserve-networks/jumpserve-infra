@@ -21,7 +21,9 @@ STAMP = dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
 DIRECTORY = ROOT/'.test-artifacts/research-release'/STAMP
 DIRECTORY.mkdir(parents=True, exist_ok=False)
 sys.path.insert(0, str(ROOT.parent/'jumpserve-back-end/research_workflow'))
-import scheduler, store, workflow
+import scheduler, store, workflow, preparation
+PREPARATION_RELEASE = sys.argv[1:] == ['--preparation']
+if sys.argv[1:] and not PREPARATION_RELEASE: raise SystemExit('Only --preparation is supported.')
 spec = importlib.util.spec_from_file_location('research_database', ROOT/'bin/research-workflow-database.py')
 database = importlib.util.module_from_spec(spec); spec.loader.exec_module(database)
 report = dict(version=1, started_at=workflow.now(), protocol='research-workflow-release-protocol-v1',
@@ -29,6 +31,9 @@ report = dict(version=1, started_at=workflow.now(), protocol='research-workflow-
  reviewer=dict(identity='Primary Codex AI implementer', type='AI', independence='Not independent'),
  design='Release development regressions; private synthetic numerical data, no paper assessment or held-out evaluation.',
  authenticated_google_request_verified=False, measured_charges_usd=None, model_usage=None)
+if PREPARATION_RELEASE:
+    report['protocol']='research-preparation-production-protocol-v1'
+    report['design']='Production preparation and scheduled archived-value rechecks in a private operator fixture; not a Google session or independent scientific validation.'
 
 def check(name, action):
     tick=time.monotonic()
@@ -52,6 +57,12 @@ def public_checks():
     missing=str(uuid.uuid4());assert http('/studies/'+missing)[0]==404
     for path,method in [('/studies?mine=1','GET'),('/studies','POST'),('/studies/'+missing+'/queue','GET'),('/studies/'+missing+'/queue','POST'),('/studies/'+missing+'/publish','POST')]:assert http(path,method)[0]==401
     assert http('/studies','POST','deliberately-invalid-release-test-token')[0]==401
+    if PREPARATION_RELEASE:
+        assert cap['preparation']['version']==preparation.VERSION
+        assert cap['preparation']['source_grounded_plans'] and not cap['preparation']['automatic_claim_extraction']
+        for method in ('GET','POST'):
+            assert http('/studies/'+missing+'/prepare',method)[0]==401
+            assert http('/studies/'+missing+'/prepare',method,'deliberately-invalid-release-test-token')[0]==401
     return dict(capabilities=cap,public_studies=len(data['studies']),unauthenticated_operations_denied=5,forged_bearer_denied=True)
 
 def configuration_checks():
@@ -150,11 +161,70 @@ def scheduled_fixture():
     worker_ids={event['details']['worker_id'] for event in snapshot['events'] if event['event']=='claimed'}
     return dict(jobs=len(jobs),statuses=['awaiting-review','awaiting-review'],run_statuses=['complete','partial'],measurements=4,missing=1,recorded_zero=1,assessments_created=0,published=False,artifacts=verified,claiming_invocations=len(worker_ids),trigger='Existing one-minute EventBridge schedule; no direct worker invocation',scope='Actual scheduled worker, database and remote original-byte round trips; service-operator setup, not authenticated Google actions')
 
+def preparation_fixture():
+    existing='76c70fd9-0217-464e-8c26-0a47832409a3'
+    kinds=('sources','claims','protocols','configurations','campaigns','claim_checks','runs','queue_jobs','prepared_plans')
+    def coverage(study_id):return {kind:len(store.rows(kind,{'study_id':'eq.'+study_id})) for kind in kinds}
+    before=coverage(existing);report['existing_user_workspace']=dict(study_id=existing,before=before)
+    actor=str(uuid.uuid4());study_id=str(uuid.uuid4())
+    report['preparation_fixture']=dict(study_id=study_id,actor_identity_kind='Generated trusted operator fixture, not a Google account',published=False)
+    store.rpc('research_create_study',dict(p_actor=actor,p_id=study_id,p_document=workflow.paper_details(dict(title='Private preparation release copy of IPv6 archive '+STAMP,paper_url='https://pure.mpg.de/pubman/item/item_3670144_1',domain='Networking',scope='Private production preparation regression; archived evidence only; no new claim assessment.',origin_module=None))))
+    study=store.rows('studies',{'id':'eq.'+study_id,'limit':1})[0]
+    tick=time.monotonic();initial=preparation.status(study)
+    assert initial['available_plan']['automatic_jobs']==6 and initial['available_plan']['manual_jobs']==14
+    result=preparation.prepare(study,actor,dict(action='prepare',request_id=str(uuid.uuid4())))
+    frozen=store.rows('protocols',{'study_id':'eq.'+study_id});assessments=store.rows('assessments',{'study_id':'eq.'+study_id})
+    jobs=result['prepared']['jobs'];assert len(jobs)==20
+    replay=preparation.prepare(study,actor,dict(action='prepare',request_id=str(uuid.uuid4())))
+    assert replay['replayed'] and replay['prepared']['id']==result['prepared']['id']
+    def enqueue(job):return preparation.enqueue(study,actor,dict(action='enqueue',prepared_id=result['prepared']['id'],job_id=job['id']))
+    for job in jobs[:2]:enqueue(job)
+    partial=preparation.status(study)['prepared'][0];assert partial['queued_jobs']==2 and partial['status']=='partially-queued'
+    (DIRECTORY/'preparation-partial-status.json').write_bytes(workflow.canonical(partial))
+    for job in partial['jobs']:
+        if job['status']=='not-queued':enqueue(job)
+    deadline=time.monotonic()+240
+    while time.monotonic()<deadline:
+        snapshot=scheduler.snapshot(study_id,actor)
+        automatic=[job for job in snapshot['jobs'] if job['execution_mode']=='automatic']
+        if len(automatic)==6 and all(job['status'] in ('awaiting-review','failed','expired') for job in automatic):break
+        time.sleep(5)
+    (DIRECTORY/'preparation-queue-snapshot.json').write_bytes(workflow.canonical(snapshot))
+    assert len(snapshot['jobs'])==20 and len(automatic)==6
+    assert all(job['status']=='awaiting-review' for job in automatic)
+    manual=[job for job in snapshot['jobs'] if job['execution_mode']=='manual'];assert len(manual)==14 and all(job['status']=='manual' for job in manual)
+    assert len(store.rows('prepared_plans',{'study_id':'eq.'+study_id}))==1
+    assert store.rows('protocols',{'study_id':'eq.'+study_id})==frozen
+    assert store.rows('assessments',{'study_id':'eq.'+study_id})==assessments and len(assessments)==15
+    runs=store.rows('runs',{'study_id':'eq.'+study_id});assert len(runs)==6 and all(r['status']=='complete' for r in runs)
+    def cells(kind):
+        first=store.rows(kind,{'study_id':'eq.'+study_id,'limit':1000})
+        second=store.rows(kind,{'study_id':'eq.'+study_id,'limit':1000,'offset':1000})
+        assert len(second)<1000, 'Production fixture coverage exceeds two bounded pages'
+        return first+second
+    measurements=cells('measurements')
+    published=cells('published_values')
+    assert len(measurements)==len(published)==1152 and all(m['status']=='recorded' for m in measurements)
+    assert {m['published_id'] for m in measurements}=={p['id'] for p in published}
+    assert not store.rows('publications',{'study_id':'eq.'+study_id}) and not store.rows('studies',{'id':'eq.'+study_id},public=True)
+    assert http('/studies/'+study_id)[0]==404 and http('/studies/'+study_id+'/prepare')[0]==401
+    verified=[]
+    for index,artifact in enumerate(store.rows('artifacts',{'study_id':'eq.'+study_id})):
+        raw=store.artifact_bytes(study_id,artifact['id']);assert workflow.digest(raw)==artifact['sha256'] and len(raw)==artifact['byte_count']
+        (DIRECTORY/('preparation-artifact-'+str(index)+'.bin')).write_bytes(raw)
+        verified.append(dict(id=artifact['id'],sha256=artifact['sha256'],byte_count=len(raw),retrieved_hash_verified=True))
+    for name,rows in [('preparation-runs',runs),('preparation-measurements',measurements),('preparation-published-values',published)]:
+        (DIRECTORY/(name+'.json')).write_bytes(workflow.canonical(rows))
+    after=coverage(existing);report['existing_user_workspace']['after']=after;assert before==after
+    counts={label:sum(m['details']['label']==label for m in measurements) for label in ('reproduced','discrepant','inconclusive')}
+    return dict(study_id=study_id,jobs=20,automatic_runs=6,manual_tasks=14,cells=1152,numerical_cell_labels=counts,artifacts=verified,assessments_imported=15,assessments_changed=0,publication=False,user_workspace_unchanged=True,wall_seconds=time.monotonic()-tick,trigger='Existing EventBridge schedule',authenticated_google_request=False,limitation='Rechecking previously exposed archived means; not independent reproduction or new empirical measurements.')
+
 try:
     if sys.platform=='darwin':os.environ.setdefault('SSL_CERT_FILE','/etc/ssl/cert.pem')
     check('deployed resources and original Lambda byte identities',configuration_checks)
     check('public API and unauthorized request denial',public_checks)
     check('scheduled private controls and remote original-byte hash verification',scheduled_fixture)
+    if PREPARATION_RELEASE:check('registered preparation, interrupted/resumed queue and six scheduled archived panels',preparation_fixture)
     report['passed']=True
 except Exception as error:
     report['failure_type']=type(error).__name__

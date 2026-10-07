@@ -1,0 +1,727 @@
+{
+  "version": 1,
+  "recorded_at": "2026-10-07T22:06:22.431602+00:00",
+  "protocol": "research-preparation-protocol-v1",
+  "reports": [
+    {
+      "path": "docs/research-preparation-validation/20261007T214527901937Z-database-report.json",
+      "sha256": "6aacee68172c91ed0af195af837e189bd2b1a81d4f670563e5e4a115f58411e8"
+    },
+    {
+      "path": "docs/research-preparation-validation/20261007T215044297418Z-database-report.json",
+      "sha256": "16b3e202d9f1aa34f63146bf37582779d6c9885b573283f848bf5399662b0ee4"
+    },
+    {
+      "path": "docs/research-preparation-validation/20261007T215837950627Z-database-report.json",
+      "sha256": "95b68548e837766b1c69649817245606dfcdca4e6942d4f6438b5067bdc6901e"
+    },
+    {
+      "path": "docs/research-preparation-validation/20261007T220303451030Z-database-report.json",
+      "sha256": "8fac55d62f9a72b641fb678014578d9c12d186de1b8c511157794b2cbc5ba123"
+    },
+    {
+      "path": "docs/research-preparation-validation/2026-10-07T21-52-13.215Z-browser-report.json",
+      "sha256": "b6bafdcd22c189154dc80d5de85a2a4b34cd7b4c411596eb5f4cb485ee975951"
+    },
+    {
+      "path": "docs/research-preparation-validation/2026-10-07T21-57-19.375Z-browser-report.json",
+      "sha256": "3cc563e2656f5af44ea9bf0f85ac0efeb2a22c77347721407cf3b4714a796d9d"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-0b185b6b02fbdb758e06f95056061ac3133d6f311ee3218750575d553c7d6198",
+      "sha256": "812fb343572355f4bc9f7d37f85c98a100affe907f551e8dbf42e68133661320",
+      "byte_count": 123750,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-0b1a67c4032063385eb4b100d2023f426d35fe324189400f2066037c74b39636",
+      "sha256": "cd5e1735d4c9b1c099abf643a88eb7af8c53fe23b0ca6dcf3f1ed983eb106ea9",
+      "byte_count": 289927,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-1b571211a42930da29131290943f696f24c2b59586c9135572d7cbed0ad8c8b8",
+      "sha256": "af12774ca858774adc8f0af8117b5102ac9fd2037bb485cb67ab5f3d952cda17",
+      "byte_count": 124402,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-1d7893088baf1178fd07d6dd839557b117dfb81a49b97022e6932b188387fe8a",
+      "sha256": "a3d0168264871a115b6452765de4eb784ad763c154aa4821a42d4a09864bd67e",
+      "byte_count": 290023,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-30b4020eaa3b4ac05570140caa251946d6d7f24210e641eddbffbe9b93a4aa02",
+      "sha256": "375e6f896e03d9509d19213e60548936303d14ebefa8954f073758375437d31c",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-32fc0a2729a680a958f8b10d808683a394c5c49d0eebf84f1ce9ea22c1aebf69",
+      "sha256": "0d5053593e54fdd8616eccb72d4ff5873388a1844577adbf0563e2177fce5c1f",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-576eac59971eaec472552be4d1164a9cffc442934e55092a14d5c0ab76eb46b1",
+      "sha256": "0c79458994079c7b486ac9508885d9c8a05dc421a01672aa2302a672f75ff327",
+      "byte_count": 291012,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-6578a2f7079a6e412024c500cdb6c616b4623ab981b4d67663dd091f3d0e62b4",
+      "sha256": "c79adcd6839a00c2e87fd1d57f52136d9c40756139f455484d079ae8e4b2d83c",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-6bf43fc94781f067af404585cf46fc3014e0d1f8c786c7f8ca6929cc67258bad",
+      "sha256": "4aede954110b9ebc595e592575423145bb3e2dc6a82f26a1137381b389401686",
+      "byte_count": 123739,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-6cab16f42c9c12a3fdc82a82e3550224e2f96a11a0aab71f3835dd41ebc08111",
+      "sha256": "6c484e5a3b35bf1028b68170019458b387292047bc727ab4629bfc03c0bca92d",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-84df52cb439fe0a9b39e4b05b746b5eef86168ab4f65121b2c8b568b32d03765",
+      "sha256": "1d1714112ce8c3134c97686e788391974e717be01a341deb15a38e864c7f446e",
+      "byte_count": 292714,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-8a56da045fa571504295ff05ea073120dac1bbfe049613159f4121568bc1ffa9",
+      "sha256": "8019d7df2006b4676d788cd92599356ed541c69496daa3dc5a054abc118aede2",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-90ded314731d2684fa3d311e1396c2efc978046fc50b892a79bb4c432981eed5",
+      "sha256": "53adc589a404093636d81575bf83953bc2164a0e1279849c524a9d56ffd44209",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-9c126ba0fb2cfe19edb5da2efe1f22115df2b80e8c962d110536564880451c75",
+      "sha256": "6b483b9d8185d4fdc488538968850b5192964a43a02c3eef7f70978778781187",
+      "byte_count": 1481437,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-a0c49b4309d209e738db81d3ceb718f34b994dac6b0562b407d879a4a571bdbc",
+      "sha256": "ba79ba22c500d71df2b6b4e3bc6711c518f13d85dd63fa1b8b7e3e32418af5bc",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-a685c958914596fd490773861c0cabe216ff37fe6c405079d9b71d0723d96a91",
+      "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "byte_count": 1452605,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-b191c89107b128e316bfb520d54161a1797c8b8ec83a68d950587255889d5817",
+      "sha256": "38e68a0a2c95ce7cdebcc035500566da91f6d7993b87caf80240fb5ae1c6aee4",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-b4a3f8f59b4f19d76bf9291ec7b54b63db7fa0cdcb8b40d07039166316f1a387",
+      "sha256": "944c1a6a82ff64f5b7df90bc67d3ca9d009b56703ac54f768a2e8bd83b3e9d18",
+      "byte_count": 3393,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-c686f0db53ac6bfb71260c001d0d95565035f2969af6a6f0af0962d72dec892d",
+      "sha256": "cafbb69592a914a3392dab8cc6751dde3f08e71e05ea1bb9fbe1a279beecb1bb",
+      "byte_count": 291835,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-d97f8e58d2139b3e94b91d6d513f6cb057655573c71d77be5a373e1ce2819a6c",
+      "sha256": "af5bf30546cd2f7c6617189dc42f0058c24556a88b14472787a56eb8c07117bc",
+      "byte_count": 123565,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-dec4a3a28ed786dfbbd8c93b852ab0bf1dd14677ac092186ff8b3ecb97f43799",
+      "sha256": "9972714265f2de2262817c77931aba8d06ed5f9ca98b5fa90138275bf03f1ed0",
+      "byte_count": 123556,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-df494d7f6d084ee6142267942270ed3e3b71608ff38df3d2068b327dabef4db8",
+      "sha256": "b1561960f95fc0569bad0e5c48943c8e9d43292e7b26982f5ade9a51853abd39",
+      "byte_count": 3394,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-f396bdf1298b0c1a355d0f493602832f7564d9f55f3c174d02e599d80a70f766",
+      "sha256": "ab66baf64e5800744e4ef75ac8d0d4810dd1029b3ec8ccbabe4be8ed92681234",
+      "byte_count": 290936,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-f5dc782b2dcd45c1a471d257bac164db4a0c4e20e297b43aad9740baa85763df",
+      "sha256": "a14d5f25e06053a42099dcf35cb078d969e3b31f118b75ab4010997100d36d98",
+      "byte_count": 124557,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-f8e3af06277b9bcf9f29440127e2a96380cd70a790b000962ae269c650f268ea",
+      "sha256": "ba325f5bb0389863b2eaeb3e46efc833c48a20589e077feeffc50135363a5dcc",
+      "byte_count": 1481437,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-f9b6b8755927afca74ec3953d7d40efb0fbec636ca1b0b519e6ee91f5aa9779f",
+      "sha256": "6c63d8fdf00331f583454167e1f832b56fc0df6a0d75b17e80a8c240fdde92c7",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-fb860842052f09fe049e17670b05b3ca6795478263faaa9350ec4a8bd5f7279c",
+      "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "byte_count": 1452605,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T214527901937Z/raw-ffb58083346fdb95c827b72d5899ccd30066639bd73b5d2caec1dd90bfda5568",
+      "sha256": "f2a734518e6c58ff9d0c5b20e3402b4d9c381e8560bdff5a17b78be8388c3d0d",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-0d40569e7e58a610c88ef88f2004e69b61eeaaa638fefb1410d547cf230ba0af",
+      "sha256": "5e2095a18257ed763ed3fb9616cc62f454c6c6eef0b3ccbd2211b46f00b73666",
+      "byte_count": 123565,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-22e6a9b4725b7f1331b028ba10801bca933550dcdd61844da30663b7b79e2bf5",
+      "sha256": "d183b2e38a2e7ce4ac2049995c4c8c2a15da84d73f74be8af551efe4f8ca4a0c",
+      "byte_count": 292715,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-2d46a042aaf549db4a325813836e9a4bbbbc40618c11e8562ac1d89ea247ad35",
+      "sha256": "be99e26a512f0b1214d8c9c9caf3b261fb96fc8616241c014e6ae83021785b37",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-429e3efb78f0a476aad9210c148319f2044078fd04877c9156357f761c74a21b",
+      "sha256": "fc1c11e532c8676087b5827da5fa262406d8c6a1d17a25f566ec132108f466d3",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-5e178f16b2ed3ace542b927e84a899de36c854a20705795fd30dcca9f7e09ad7",
+      "sha256": "18deac3540139a795b2b6a1bf53a3fd4c954c7c04789ff887f69015270486b70",
+      "byte_count": 124402,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-70112b8b88dcd2e16f33d02379e23451dc3b9dc170fe87e3d6eb8a2f63dc351a",
+      "sha256": "61c2051f03512dd6452475b07e9d5ba78e9e235f4b1abc1584e481673d8ac780",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-77ae5828b102849a8b97805d28405ccc25ad3aca4b190e22930f47e462861315",
+      "sha256": "284d6c707b16a0f7451fe74dd23f675449e6a0c4d7631a5b891a3112dfd31703",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-7a55ef7451a9f726f0a83d6402dd08004ac281c5da3d3fa707d1a80cbe8d6548",
+      "sha256": "17d711d59ea5d3eed262073482a754c51264b17a2ddeb47456dbe9ee05bba812",
+      "byte_count": 3392,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-8ac69085657740c385425521a8562502e16fd9a9ef02533431dde6ca8e95d4a2",
+      "sha256": "0fec0736678bcfe6fec941cc8e64f52e60666d151d08514d8a2fbaee3381aab8",
+      "byte_count": 1481437,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-91ceeb312b87627a34e0cdcf8a5c09b27e89b9e04a4574e76f870a0ef2c4ec9f",
+      "sha256": "0adc5946d220d2f4952b8d818d2c94f7c5295fa4fcbd5173a49474bb1cd08189",
+      "byte_count": 290936,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-9bb14f640a268a7328d31deb6917e4dab8e99c271707cb1120d329bf56ed2a00",
+      "sha256": "e017952c587be07d6dcc2a3eb53ef72be30aadd33d3af861f0d12e75cf6236f9",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-a0d6a12e38b8971faf0a91d6415d3500b342b91450c9c381b7b9cb077cafade2",
+      "sha256": "85238cadadac017cf1d534d0bac7a5a1742b302e5fa7449cdf58d7ef861f9f23",
+      "byte_count": 290023,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-a418df752c1b99bd3b24b61c0145b31e8efbc3b9543b2171cd574d91d8d5298b",
+      "sha256": "b119bffd05615357b5803e2e3ec7a0442928624dbff7e7ad8485f0f9b308febf",
+      "byte_count": 291834,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-a6e92154bb9c188d4b3f66586f11fd91e9ed5756d9a337a70a53b84b5f6af367",
+      "sha256": "5b4fa909f2f191fda3e9359d5e5da6925f546cfbad7719b7fe57c3d716f804e5",
+      "byte_count": 291013,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-a819b8cd9954f37e9c8fc296f1076ff96632d78714bc6eff98d2eb4196854614",
+      "sha256": "82fd468b26dfc5db15e421b9008ad2cba6f9b823e17e3e8e6674c890532e7724",
+      "byte_count": 123556,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-ab16c897440ea108ba6914dc28732bd6c1b55c2473d221396b09bdfa0c22ea41",
+      "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "byte_count": 1452605,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-ae02584d82a532817a7855a11710bd03e5389fa489a08990e09b087e81120e6c",
+      "sha256": "ee950b9ba6e9aef1ad82cb53810553eea5792a97f99de91353c89b9ed8c1573f",
+      "byte_count": 3393,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-b02617b72056f28df4cfb9c2dc9293cce637726cb21840c9386a8715ca07afb3",
+      "sha256": "70c0c9069b138e1df58905d18c590a8309b78bf6e9fbbe914175c3f46dc65a70",
+      "byte_count": 1481437,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-b1da3f95e5bbaabbea5ec10ab97eddeae60bed321f559790fc63cc938b32b991",
+      "sha256": "73d1c602bbd2fc8fd488310143d7fa4e4e3239d1b8aebef279bd033499d0956b",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-b57ffd9eeae5f7c89282c8b5b91674a07b487802d59b6ac9d35b947e1d7b8065",
+      "sha256": "e98cefcdde922f0c45075f99f2bf0ffe7b35a9b17474fcfc8529ffa838d8495b",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-bf6877be55fedc0522240b10188a7930ef415bfc67d188236df4c5f0b133b386",
+      "sha256": "dd95da84e2ee6fcb80c45065052fdc7b8b7b3599b87042161e7a19598225b2e6",
+      "byte_count": 123750,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-d12e518aca1494436a60f76f89d9a5bd56364e0c2cd09909042e03f6e512b4cf",
+      "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "byte_count": 1452605,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-d47f1d0211e95b0fd99e5154d986b30e78bf8dc113daa0c769b68886e50e65e3",
+      "sha256": "88b7a41049e5d6092b2787beac194f6cd99ef60aca9567e345773e2ca4f46208",
+      "byte_count": 124557,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-db9af4c779826aabb2535b932f33ff97d39b85cfeffede6a87d4d1da6f4d4375",
+      "sha256": "6307d9d90acb626577ea364a7de5e44e8be5bbc4ecabebdbd51cab2f206bbf5b",
+      "byte_count": 1481437,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-e12a9261175d832c86f48bec106c244c17a1ce6e9844fd62d6e01c4d8a6c5416",
+      "sha256": "5e552b7b887d55068398f873f37c55b800d38009d7baedaf8c40260920effa41",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-e4c163f879f0d742cb8d900df259df5557a20d2224de27a2471f3080fd84796e",
+      "sha256": "393679346eb1f7b53027dfdc0a3f7a8cac91f9a879eba84fb2c8dd0d8bff1864",
+      "byte_count": 123739,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-e76e625217f7896461ec6fc00ab6040ba4da5352cf4cdfeb191ebd3fe66fe47b",
+      "sha256": "2492021bcb92321d850dac1f8ead8e45d2e30ea18afd59e3256d1c6a0d5fd9bb",
+      "byte_count": 289927,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-f2649ceb55b47c1dab4feb8b63fe35baa49dda1b3ea08d2af5bc4921d69051e1",
+      "sha256": "b856f7319f3247b955221784883e1b8879e21e9a9f87a70807fd7569e11c933d",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215044297418Z/raw-f39a2fa7750feb1a4640aac1be1fb86c4be40202d70b707941fcdb44c7756719",
+      "sha256": "f6f60016c71df0291f325ab57b3b4d660e47e7057b3df9543430f83d2fa18937",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-0568e87e3e2d2dfe43a2ff88a2e9932ab9e61c9f9e51ffcd935200eaebcf4420",
+      "sha256": "55194792134fbe960430041381935ca808f4c0ccfa6caadda874bf1b33baa63d",
+      "byte_count": 291835,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-07af1692355513ceacc087007399618a6df7f61b430687034b10fad95efe78d3",
+      "sha256": "55f152a0245e4cfe8a7810def7ade0a81fa5265f7c6e5aee38a28394e9c5f5a4",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-11ad5e8f0e6b1148e8c788c9558e5894882d86104071c1d2e553d9bcd02617f5",
+      "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "byte_count": 1452605,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-1906f9a0790fe896a6557e4863356400367b44f5c883f714bfa41775e1c6e850",
+      "sha256": "89a0e51eaa60e5a176253c4292771b8fb696258e6efc158aba2bf9f720263a52",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-191a4ad69937d401971c25e389c37f6dbe1a332454c76bfd3db205b16088f9c2",
+      "sha256": "d20841891c3dc61757c0d732357e0cacacac2edbdd6a69533c8e8b325c5962b1",
+      "byte_count": 124557,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-32a1b6f15ace3a3510c937bcef7e5cbbda16997cf7ee5134afd484303fa0f4e5",
+      "sha256": "bf67150e3b4ce24502618ea4117b75a2110baee278f503560d526003c32609c0",
+      "byte_count": 291013,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-3bb03068ff885c581aef6e90040fc8c76ccd065b5044f136ae1ca6e22fc7414d",
+      "sha256": "714112246064ced8fcc5353e5a78b4deccd66f8883fbdd0dacc69b6069cb69b6",
+      "byte_count": 124402,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-561723f1d0fb55ea85274356fc8647b421f1fac5e997e6af0fb10453fded73be",
+      "sha256": "a7576597c5e30222802853ff0c029810a676b5dbecf47667a48bfb3fca9e2d03",
+      "byte_count": 1481437,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-595673a50bd29db03a477c4aafe00fb1849e7bb09eebf6304e6d1bbcde3eddf8",
+      "sha256": "6d9b599886e3f8c97bb9c331754181f3a938b5c373bebf448c5615ede665cea5",
+      "byte_count": 289928,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-5a6e1508e83530ece4fa19e55f6a602cb709a787edde052e81508d08b8cf9570",
+      "sha256": "284da9b508e4b39733f950b26de29199d536e23feea4767bc6601a9bf0b43205",
+      "byte_count": 1481437,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-6b2ffc1a4e5d53da8208aff824f3f16472f3e19b04122fc6a45e57afff245ca1",
+      "sha256": "ee8a0bea6998827c1fc480703fc73929531be2039c9bf1a0cbd715fa3703fb8a",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-6b6303946407f91bc46542926a6f8bc4a1fe33dba273dd7196a2350c43cd67d9",
+      "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "byte_count": 1452605,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-78e97817a7a396ab21d65bfa191bed08655354634b2c86e7c06647deba642a5c",
+      "sha256": "36128d40ba086e2c05da48e7785903ac8a5b4bd42022095a8e6acba406ef1204",
+      "byte_count": 292714,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-80868cbb09893c315791d7d79a4e260c58e67ead5a56b475742847633c0dc0ad",
+      "sha256": "319c84844529ca6b353781e42cdfa9bd3a29e5f69b36727c5752821f262fa11e",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-87afc89c9bbfcdcd63e6e9a4441b075b8347bdec28f6268abd36f5c661ef2b51",
+      "sha256": "9f85927885c1332b7263ee321d4e8a870aa368f2783df79edb86deeb0c3719fc",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-8b3378e0db6e3e19d92c1c9181448d161fed6fa3fe0e20f0fe15c2641a513523",
+      "sha256": "736403f68d6899e71530d42b9f45053b133e504ccfaca72795043a5394dd2927",
+      "byte_count": 1481437,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-9173e8a29b7a8fb128ac759b17118a2c6b67ecfb404dd4ee2914ceb45e7a6907",
+      "sha256": "d2fe6e5b8f197bcb383f52ce16ced49dc68c45b3ac4416a570453713e0e6bc68",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-96a2f867a5f651a572e3226ee8cc54addda2197b31864290a4f1295246829b8d",
+      "sha256": "33478cae349336bbd1645fbcbe3cfe2b22811a82110301e541185b5ce42d8111",
+      "byte_count": 123750,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-9dcbeaed504cde1b555854ed986aa646f538b13ccd0e4417f90d680254ff442f",
+      "sha256": "c55497b957f0a5e083a57a8d02172b5d29a656d05d1fc3454a51bf8a54ee6de4",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-9e88684cf7cfc3941d2bfe987d87e766ef3e4c04c31709fae442158a1157aaf6",
+      "sha256": "861a0e27f72f660466874d77158e195f3aab41b7e76402470b3cb2f4f5426b1b",
+      "byte_count": 3391,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-a43f7bbf4b4a56d0dbd4d44156bf0d699479d439a1110fd6ce3416856929f95f",
+      "sha256": "d0228e3cafb87088bcaf4e22eb445ba89a813e856a6c11608ba8f29d8a2f59e6",
+      "byte_count": 290022,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-c1d4642a0fd2fe3a664036caab61c73819b2154e891bc7fad139ee4bd2a0c49a",
+      "sha256": "2f278ed183c7b8cdf3af0bbfc3f6069042a8788b7e9924a48b4632f8eb6b8a07",
+      "byte_count": 123739,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-d1159e40f7c5d1d5e8efe46c611c0178ed16ee31e5a37681212c72f0cca774b3",
+      "sha256": "b6d70ce4f26147248c3c54f81b3abdc1609512c78496182c3ca7587cae6fc9ea",
+      "byte_count": 3392,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-d3453d50799393da773dcb171c4a72d90776443409e50652e279299f90a80157",
+      "sha256": "af9617f3884803df77fd47880477d3394ca2b0992307a0254257539b3a5973b5",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-e734c473fc6b8e50184ff107b14fae7dd9b457373f75407e6310d0b1da208688",
+      "sha256": "45dac97d2a859bd7d6b9680b1d3adb0a2ea4c140061aa4b14a7166d84e5327f7",
+      "byte_count": 290936,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-eba1f40cea1a61beb12a549e2c2713ee54fc3614a174ff9b52e55b0b9e26f5f1",
+      "sha256": "fec1d2ca25cbfd6b7574efddcd0492e0914c56e77db0ec3231c3d4924eae8504",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-f0cf26c9f9752ea49bba8587ae3267cc3b19a1ff4ac6131d7067a77f754162f2",
+      "sha256": "0ff5534bc28afda5bfc10761dbc6b38ecc2667620a3c698caa22add08fa1f9ff",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-f755ff1817be312db8e59714cd85eb92ec6d8cd0943c81bbdc97f7cc60384149",
+      "sha256": "36b872c1757193a0c9e53f664f766d994711e07d7c853c4d2f1e786395e5900d",
+      "byte_count": 123556,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T215837950627Z/raw-fbf75a331292852a6a766d3ab03113392d7d6930a2ab31696dfcab0f24502be8",
+      "sha256": "269f2ee6f736e8154fc95552bf7c0e1e0148c983a97696db16d8cfed887bdf0d",
+      "byte_count": 123565,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-057158d0e1d792572b795e8a10936fcaf28754298953aefd4099c7a615e0e891",
+      "sha256": "065bb76c8a854ef30aeba7cbde04687b8975a92a1a976a8e728040bcf39b1537",
+      "byte_count": 290936,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-05b9ca20e5e4c3b1015b164b279bf5872493562cc133da86eb9f93a40131a8e3",
+      "sha256": "60802b624fdd97977f74fdaec5b8df12a6829096afd32fabeb79b0c04b4f246e",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-05d4c46207103ce97ed5a7b2ecb7f1e3aa94ec8e8a65532704dc40c395c8ab2d",
+      "sha256": "2f92c5289214cab14391691ba66c3f4b19e4f4c011763930dae0118eb9c19061",
+      "byte_count": 292715,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-23b4b23e76454018c10d52a2f0891f85f1b1b10b4a38b5de76712e40cd374579",
+      "sha256": "fed03ad0b1ddeccfa4a244c966183110dc309810158b84cec41d783475eca755",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-2a16a7547832913f2aba2360233017ee9f8cad33464d253477c954334b2f8927",
+      "sha256": "acbe3c96d81995b9bd5d584a8e1c236a4adce6be711cd3235030785af14cf4cf",
+      "byte_count": 1481437,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-3300fc78c96b5d282acd58e520a44c86702c8025709b3f0e0be5fc860c6cd60d",
+      "sha256": "3e2394501290d981632a3f752a33fdc707d619ff27dc4f0c562cf0ec266a19fa",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-47504afcb1c6e4ea2a6fbb0be8f2754008a9cac7ca43f066e29ad6639fdb6f60",
+      "sha256": "6814314388e67ea884e6d5c19c83708bbedcd9ee25a2286cbdcda73df3eb87f7",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-4ea3c00080d54fed537d975f68a784a3e7db64da8a2fb323c1fcc3a041652714",
+      "sha256": "6b1e5dbe63001d4b4ccc062b87b32fca3dbbe891271cc840ff6b55a440f4def5",
+      "byte_count": 124402,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-50b076992b5310992b35cc99a1d9330fb4a6b1d79b20e098b4b0218e699f3d55",
+      "sha256": "54833f58c28f96dc5690444e255a93e855fed14ddacb184517c9bb953dd56aa8",
+      "byte_count": 290024,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-56fefb62e2be71318895e1a86f82e5ee5c325c7ad2f9dd22e8b26738e6b7adb5",
+      "sha256": "3b1eae119cac9f16243abe34d20ecd09f76419692f1dfd551c48b5b2e33bac8c",
+      "byte_count": 3393,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-57750d24b6bd8e0730e39eb7568dfc80e4981201d5add72089db09326aef10d1",
+      "sha256": "96382cba79e4e77a957d31653b7e57a6d174e26e4c74bfc712522fe126f33c3c",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-5da02e30397024b76a62041f7d66fd2faa66aa56f871b75e64522332b991ff6b",
+      "sha256": "409d41dd4a23e61af4fbe15d820316d1d276f39bf90b5efdb1064e5bf4e75957",
+      "byte_count": 123565,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-5dda6b98118d341f76eadfa444789c696d6c7e66bcf9dec5f1e4b66d6ee7c88e",
+      "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "byte_count": 1452605,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-6013de722c1aee4284e916f85ce5e4ed9420fd73b6ff573b89fdc8446a9b0b95",
+      "sha256": "0c90bf8830994b3af2d0165268f3a1cdd22f99e91673fa55aca6c1fe0289b79c",
+      "byte_count": 291012,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-637154e84c0dc17c7724495305afd558d6cec9bc23c5ab7f86f0c0077f188a15",
+      "sha256": "c88971e2f6c82dc10b1ee1110f40250ad054d74ef136562ed06b400e9061d09b",
+      "byte_count": 123739,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-6f2256213959dde8abd3a8333fdae48d0d479924364d1319e952e4f7ed811e9f",
+      "sha256": "77f14d3f2efc722316d761315e5d3462f17a0abcc9f7f9d6d5cb52356420c068",
+      "byte_count": 291836,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-9fec60b0f1b0c87a2d42f8a394045bab28d774cc2f58b28df764aff13654f522",
+      "sha256": "2a40a9ac1be2e9c2ef426c76bf0aa03b8013c01342ef0fc014651a67e39ff09c",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-a13713a81b4cf4df460d6e178e25ae39aa921f2011f006cebf5679d1bf1b965b",
+      "sha256": "4d083720fa42c506e6b4ba8d8e97da8629c6ccacea21a85a78aa05a79a1bb415",
+      "byte_count": 1481437,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-ae59808b729aede47a845f7b5c77253188f0efecd18fd676fb974b7c04707363",
+      "sha256": "2ea0f422cb39ee926bc182a3a21d7510b0982e8bebba5bd3c45f5b6e4af69caf",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-b3aef7f5ef4b8db94c49e307e104672373aa3fc8121b447dd786551092b8c3fc",
+      "sha256": "cac3b1b153827d9425b73a23ce3fc34aa1c0e4f4d73d2ea3fdfa393eefbe2e39",
+      "byte_count": 289927,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-bae850b85783f797ea6d31ee163e2b9094b2376ce004654588554c1f6278fe4c",
+      "sha256": "ce18a18b984f2728054edfa6329013b06982770fa8d15d073bf11f9d53275070",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-bb6a4e8d61ad90ccf359f90e13d5f31e8babd139a8db308d44e052af509e2484",
+      "sha256": "c8331ac570f69765f09c42e5220e06889a8201baeaa32d4e4e091e486da5d1c2",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-bbbbf597cd50e811c66d2c0445693425410aace5d4dc789b0c2bb761a149188f",
+      "sha256": "83332928a23db47e44d096922855366cad80d475048f600dac7a8f391eb36df7",
+      "byte_count": 123556,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-c61bf8a8a73beae9e9d5c0dbcef3b6bbe19b80a6eb615cffeb5c6b45d90d99fe",
+      "sha256": "bb75abb2f836a5d501001dcbeeca2116a680fef71790f324aa9320ed8a0b77d9",
+      "byte_count": 123750,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-cba6784cef156491b2cdfaf5ca1291168735a3fa0479abbb3fdf88f025536ae2",
+      "sha256": "141e751e9d7436df1a46d19e20936626fd1b0d90e541516b3c0aaf00d70f3d58",
+      "byte_count": 3393,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-cdd1bb4d35512391340633d74f9140bf0db9d0f7bec55b61e5b5dbf1e2eb5d9e",
+      "sha256": "f4b670e8329c14bc1dc43d4558f4c105595db776f363035ee1227eca5979367d",
+      "byte_count": 439,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-cefb7d1ca17d7bd26d7116b6c29d9594361ed7d50fb5129cb769176b31dc855f",
+      "sha256": "642efc4f9b5bcf4f1de04b31a06cce6aa706dce2ee7285cf884d6cccd2ff8077",
+      "byte_count": 1481437,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-d38df011b62e77e952fa1e6005a0672eea6433f382b87b3221b27f09068062d9",
+      "sha256": "77f6b7f541531b7d366818ed8139899443b09dbe24eb509db261f8ae3d359e3e",
+      "byte_count": 124557,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    },
+    {
+      "path": ".test-artifacts/research-queue/20261007T220303451030Z/raw-ea4187fc514d7907ab92768f7e693bc921ecae85b7dd8d786cfc10ebf144d0f2",
+      "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "byte_count": 1452605,
+      "origin": "Local Storage transport fixture; not remote Supabase or new literature retrieval"
+    }
+  ],
+  "raw_bytes_sum": 37921417,
+  "storage_basis": "Measured local retained file bytes including repeated development campaigns; not allocated cloud storage charges",
+  "measured_charges_usd": null,
+  "limitation": "Original local files retained under .test-artifacts; report hashes verified after copying. See artifact records in each retained isolated database for transformation and study/run identity; cleanup cancels remaining fixture jobs after asserted checkpoints."
+}
