@@ -5,7 +5,7 @@ ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('research_admin',ROOT/'bin/research-workflow-database.py');db=importlib.util.module_from_spec(spec);spec.loader.exec_module(db)
 admin=db.admin
 MODULE='research-verification';CANDIDATE='e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8'
-MIGRATIONS=('202610120001_research_ideas.sql','202610120002_research_idea_prompt.sql','202610120003_research_idea_prompt_seed.sql','202610120004_research_idea_prompt_seed_v2.sql')
+MIGRATIONS=('202610120001_research_ideas.sql','202610120002_research_idea_prompt.sql','202610120003_research_idea_prompt_seed.sql','202610120004_research_idea_prompt_seed_v2.sql','202610130001_research_idea_review_roles.sql')
 PRIVATE=('research_idea_packets','research_idea_sessions','research_idea_runs','research_idea_readiness','research_idea_campaign_links')
 OPEN=urllib.request.build_opener(urllib.request.HTTPSHandler(context=ssl.create_default_context(cafile='/etc/ssl/cert.pem' if sys.platform=='darwin' else None)))
 def stamp():return dt.datetime.now(dt.timezone.utc).isoformat()

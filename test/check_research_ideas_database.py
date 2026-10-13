@@ -132,7 +132,7 @@ grant usage on schema storage to anon,authenticated,service_role; grant all on s
 create table public.agent_sessions(id uuid primary key,user_id text not null,messages jsonb not null default '[]',created_at timestamptz default now(),updated_at timestamptz default now());
 grant all on public.agent_sessions to service_role;""")
     report['migration_sha256']={}
-    for name in ('202609200001_agent_prompts.sql','202609290001_real_world_agent.sql','202610040009_agent_evidence_rendering.sql','202610050104_ipv6_publication_review_guard.sql','202610070001_research_workflow.sql','202610070002_research_queue.sql','202610070003_research_preparation.sql','202610120001_research_ideas.sql','202610120002_research_idea_prompt.sql','202610120003_research_idea_prompt_seed.sql','202610120004_research_idea_prompt_seed_v2.sql'):
+    for name in ('202609200001_agent_prompts.sql','202609290001_real_world_agent.sql','202610040009_agent_evidence_rendering.sql','202610050104_ipv6_publication_review_guard.sql','202610070001_research_workflow.sql','202610070002_research_queue.sql','202610070003_research_preparation.sql','202610120001_research_ideas.sql','202610120002_research_idea_prompt.sql','202610120003_research_idea_prompt_seed.sql','202610120004_research_idea_prompt_seed_v2.sql','202610130001_research_idea_review_roles.sql'):
         raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     report['bootstrap_limit']='Legacy agent_sessions base table synthesized; listed prompt/research migrations executed as original files. Historical study-table migrations outside this feature are not replayed.'
     store.request=transport
@@ -203,6 +203,16 @@ if __name__=='__main__':
         check('model request scope replay history and terminal preservation',scopes)
         c,_=begin('comprehension');c=finish(c);k,_=begin();k=finish(k)
         acceptance=dict(action='accept',request_id=uid(),packet_id=selected['id'],comprehension_run_id=c['id'],critic_run_id=k['id'],reason='Explicit software-fixture owner acceptance, not scientific validation')
+        def roles():
+            duplicate=dict(acceptance,request_id=uid(),critic_run_id=c['id'])
+            # Controlled old-schema counterexample rolls back all changes. The
+            # same comprehension invocation satisfied both identifiers before
+            # the additive constraint; it cannot pass the released gate.
+            sql="begin; alter table research_idea_readiness drop constraint research_idea_distinct_review_roles; select research_accept_idea_plan("+','.join([sql_text(study)+'::uuid',sql_text(ACTOR)+'::uuid',sql_text(duplicate['request_id'])+'::uuid',sql_text(selected['id'])+'::uuid',sql_text(c['id'])+'::uuid',sql_text(c['id'])+'::uuid',sql_text('Controlled old-schema counterexample; software fixture only')])+"); rollback;"
+            assert '"decision": "ready"' in query(sql)
+            rejects(lambda:ideas.accept(study,ACTOR,duplicate))
+            return dict(old_schema_counterexample='One comprehension invocation admitted as both roles; rolled back',new_gate='Duplicate invocation IDs refused',independent_scientific_review=False)
+        check('both fresh review roles need distinct model invocations',roles)
         decision=ideas.accept(study,ACTOR,acceptance)
         assert ideas.status(study)['ready']
         s=json.loads(query('select row_to_json(s) from research_studies s where id='+sql_text(study)))

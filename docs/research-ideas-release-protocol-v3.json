@@ -1,0 +1,65 @@
+{
+  "id": "research-ideas-release-protocol-v3",
+  "declared_on": "2026-10-13",
+  "authorization": "User explicitly requested merge to main and production deployment.",
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "amplify_app": "d24jvguj7brnkj",
+    "site": "https://jumpserve.quaint-lab.org"
+  },
+  "release_blockers": [
+    "Exact evaluated prompt/runtime hashes and eight reviewed v2 development answers",
+    "Scoped clean backend/frontend/infrastructure tests and builds",
+    "Isolated Postgres migration/RLS/readiness tests",
+    "Existing browser component/API/database regression checks",
+    "Production target identity verification before writes",
+    "Additive migrations preserve scientific records and existing chat pointers",
+    "Only reviewed v2 prompt publishes, with original evaluations retained privately and hashes verified after retrieval",
+    "CDK diff contains no experiment-instance, AMI, unrelated-stack or database data changes",
+    "Frontend runtime dependency audit reports zero critical/high advisories after the same-major security update",
+    "Duplicate review-role references rejected by the isolated actual database check"
+  ],
+  "deployment_order": [
+    "Commit and merge backend source and pin its committed revision",
+    "Apply four original additive migrations plus the separate review-role constraint migration",
+    "Archive original model outputs/protocols and publish exact evaluated v2 prompt",
+    "Merge infrastructure and deploy only JumpServeBenchmarkStack and JumpServeAgentStack",
+    "Merge frontend and release Amplify main",
+    "Verify deployed source hashes, public capabilities/navigation, desktop/mobile themes, privacy denials and sign-in return paths"
+  ],
+  "ci_scope": "Manual scoped release follows declared blockers. Merge commits use [skip ci] to avoid unrelated benchmark AMI rebuilding and all-stack deployments; no protected required status checks are bypassed. Source commits and precise merge/deployment receipts are retained.",
+  "conditional_checks": [
+    "Legitimate Google-authenticated owner planning/fresh review request; no session will be fabricated",
+    "Deployed cross-owner write denial requires two legitimate sessions",
+    "Independent human/domain review and held-out ideas"
+  ],
+  "scientific_scope": "No new research hypothesis is tested. Planning recommendations are model outputs; domain jobs remain manual. Development regressions are not independent scientific validation.",
+  "resources": {
+    "new_model_evaluation_calls": 0,
+    "evaluation_basis": "Reuse exact eight passed actual v2 answers only if prompt/runtime hashes match",
+    "deployment_stacks": 2,
+    "private_evaluation_archive_bytes_limit": 2000000,
+    "billing": "Retain available AWS/Storage/Amplify usage. Missing measured or estimated charges stay null."
+  },
+  "rollback": "Retain migrations, datasets and publication history. Restore prior Lambda code or disable the idea prompt/UI through a recorded authorized release; never drop scientific data.",
+  "prior_evidence": "docs/research-ideas-validation-v1.json",
+  "security_amendment": {
+    "reason": "Clean npm install exposed previously installed Next.js critical AVIF image-processing advisories and other runtime advisories",
+    "original_audit": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/frontend-audit.json",
+    "target": "Next.js and eslint-config-next 16.3.8; retain runtime audit and repeat frontend tests/build/browser checks",
+    "sources": [
+      "https://github.com/advisories/GHSA-2xp9-vwfh-vxw4",
+      "https://github.com/advisories/GHSA-cjq9-62q9-8jv4"
+    ],
+    "scientific_effect": "No AI runtime/prompt or scientific data change; original eight-answer evaluation remains hash-matched."
+  },
+  "amends": "research-ideas-release-protocol-v2",
+  "review_role_amendment": {
+    "reason": "Code inspection and a controlled old-schema counterexample found that the same comprehension run could be submitted as both roles. This feature had not yet been deployed.",
+    "correction": "Add a versioned SQL constraint requiring distinct comprehension/critic invocation IDs; preserve all original migrations.",
+    "check": "Actual old-schema acceptance is tested in a rolled-back isolated transaction; duplicate references must fail with the new constraint.",
+    "new_migration": "202610130001_research_idea_review_roles.sql",
+    "scientific_independence": "Different invocations do not establish independent scientific reviewers."
+  }
+}
