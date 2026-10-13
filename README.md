@@ -467,6 +467,54 @@ in source control or AMI snapshots.
 
 ## Development
 
+The unpublished research idea feature is a **local candidate**, with no production
+migrations or prompt publication performed. Its protocol is
+`docs/research-ideas-protocol-v1.json`; `docs/research-ideas-amendment-v2.json`
+preserves the first prompt's actual-answer failures and declares the revised
+response channel and reused development evaluation cases. The channel formats
+one answer; it cannot execute code, retrieve sources or change a scientific claim.
+
+Run the scoped checks:
+
+```sh
+npm run test:agent
+npm run test:research:ideas
+npm run build
+npm test -- --runInBand
+python3 -B bin/prepare-research-runtime.py
+python3 -B test/serve_research_ideas_fixture.py
+```
+
+The database checks require a task-owned loopback PostgreSQL 17 cluster on 54477
+and create uniquely named `jumpserve_research_ideas_test_*` databases. They retain
+failures and original-byte hashes. The browser fixture binds only 127.0.0.1:4103;
+run `npm run verify:research:ideas` in the frontend while it is active. Its
+authentication/provider responses and local Storage transport are synthetic.
+The actual API/agent/SQL implementations are used. It does not verify production
+Google authentication or remote Supabase Storage.
+
+`python3 -B test/evaluate_research_ideas.py --live` is a separately billed, bounded
+eight-call development campaign for the v2 draft, after AWS account/project
+verification. It preserves provider response bytes, output/context hashes,
+tokens, failed calls and missing costs. It does not publish a prompt. All eight
+answers need recorded substantive inspection, identified honestly as AI or human,
+under the frozen rubric. Reused cases are not held-out validation. The exact v2
+reviewed report is linked by `docs/research-ideas-validation-v1.json`.
+
+Release requires a new explicit deployment instruction. After local blockers pass:
+verify AWS **395567831870** and Supabase **regphejnlvfpyokpniny**, apply
+`202610120001_research_ideas.sql`, `202610120002_research_idea_prompt.sql`, and
+the two draft seed migrations `202610120003`/`202610120004` in order, retaining
+receipts. Publish only the exact evaluated v2 candidate through the existing
+`publish_agent_prompt` RPC with its reviewed report and expected active pointer.
+The v1 candidate remains unpublished; its failed evidence is preserved. Stage
+the hash-pinned backend, release the research API/agent, then rebuild/release the
+frontend using real endpoint origins. Verify the deployed owner flow, cross-owner
+denial, remote raw-byte retrieval, mobile/desktop views, themes, exports and
+sign-in return paths. Unavailable legitimate-session checks remain conditional.
+Preserve schema/data on rollback; disable the UI/prompt through an authorized
+release rather than deleting evidence.
+
 ```bash
 npm ci
 npm run build

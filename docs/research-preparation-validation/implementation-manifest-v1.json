@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "recorded_at": "2026-10-07T22:07:40.634314+00:00",
+  "protocol": "research-preparation-protocol-v1",
+  "reviewer": {
+    "identity": "Primary Codex implementer",
+    "type": "AI",
+    "independence": "Not independent"
+  },
+  "design": "Exposed development regressions; no held-out or human validation",
+  "local_checks": {
+    "backend_tests": 60,
+    "frontend_tests": 126,
+    "infrastructure_tests_passed": 79,
+    "infrastructure_tests_skipped": 5,
+    "final_research_asset_tests": 10,
+    "database_groups": 12,
+    "component_browser_groups": 3,
+    "public_app_browser_groups": 2,
+    "frontend_lint": "passed",
+    "frontend_build": "passed",
+    "infrastructure_build": "passed"
+  },
+  "skip_reason": "Existing benchmark CLI contract tests require an optional external executable",
+  "scientific_result": {
+    "scope": "Retained IPv6 numerical means versus transcribed published absolute panel values",
+    "panels": 6,
+    "matched_cells": 1152,
+    "automatic_claim_upgrades": false,
+    "new_empirical_measurements": false,
+    "independent_reproduction": false,
+    "manual_preparation_tasks": 14,
+    "claims_planned": 15
+  },
+  "release": {
+    "local_implementation": "complete",
+    "production_deployed": false,
+    "production_workspace_changed": false,
+    "conditional_gaps": [
+      "Actual Google-authenticated owner browser/API request",
+      "Remote private Supabase Storage round-trip",
+      "Deployed worker scheduling and API/frontend checks",
+      "Fresh deployment instruction and committed backend revision pin"
+    ]
+  },
+  "files": [
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/api.py",
+      "sha256": "bc587c133b3cf132578bc55403cb1770f3d59e19f5e99cac7abda8c6be87356b",
+      "bytes": 11820
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/store.py",
+      "sha256": "63b2488798a8b1253d98d4abc1350918ca703103518da76807b93a5ff8da47e2",
+      "bytes": 8926
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/preparation.py",
+      "sha256": "f23424b4c73974ffda48e356cd19c2d0dd8877beb668d94380e7bb00da5a5f90",
+      "bytes": 19418
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/build_ipv6_plan.py",
+      "sha256": "7d4231364b2455d5f3b0956279e7428d875d3629ae56a28e04a003465d623d8f",
+      "bytes": 11368
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/plans/ipv6-archive-v1.json",
+      "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "bytes": 1452605
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/cli.py",
+      "sha256": "53f31d70d6d9db27ffc9b7e9bcfb496207071740a770ade3705b5d5ac5d8ff55",
+      "bytes": 18442
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/tests/test_preparation.py",
+      "sha256": "29e826c7cd974e6d98fb982e097ab8cbc40442156c37cd3c956a0de94bb13472",
+      "bytes": 10195
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/tests/test_store.py",
+      "sha256": "20f92d623c55548a691777ca748f723518d5c1c7ef7be6f994f36ed6d806226f",
+      "bytes": 3800
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "database/202610070003_research_preparation.sql",
+      "sha256": "e3e6b75ced1c98e494551c7500825080bc141a2594263cd8840f082bd383d906",
+      "bytes": 6061
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "bin/prepare-research-runtime.py",
+      "sha256": "f8bb5548210e8793539b7688808b6bb424c32931dd36cde680f4b3df1850a193",
+      "bytes": 1566
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "bin/research-workflow-database.py",
+      "sha256": "768b334b90a2889b0873ae94586c7fcf68bc553c94464634a7a5020b28bde8bd",
+      "bytes": 8601
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "lib/research-workflow.ts",
+      "sha256": "03979d2d804d333e893405503390f13cc0776043d68717add18150fb43980eab",
+      "bytes": 4823
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "research-workflow-runtime.json",
+      "sha256": "ec4df3d1cfde2e568aa775f6e7bfadb38d3dfcdc8f93e24545cf150b3fdbfe33",
+      "bytes": 967
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "test/research-workflow.test.ts",
+      "sha256": "52094b26e4e1d6c11f2438779559a7a1640f4393b33d650f16555dd55808f987",
+      "bytes": 4078
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "test/check_research_queue_database.py",
+      "sha256": "027ab11ac07bad0e09e90bfd00fd89983e73931ae2e4d2e8c961b5bfea36003e",
+      "bytes": 26073
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "docs/research-preparation-protocol-v1.md",
+      "sha256": "a5153ce489cf02875a4e61c04ae5800eafe9ed39517051d22053eaba2deff78c",
+      "bytes": 4117
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "app/components/research-workflow/paper-preparation.tsx",
+      "sha256": "8983c77e341743d8f9f3825f8dc34c9f48b8ad0b34da912f5d94aca3674141a3",
+      "bytes": 6100
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "app/components/research-workflow/preparation.tsx",
+      "sha256": "d01326e052d4c6b1ff7a30f2eaa452a7c760290645d24fe8e02ae90f1b1fa18d",
+      "bytes": 2126
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "app/components/research-workflow/workspace.tsx",
+      "sha256": "7b66b6e11c24527e70e95bbea233608a1830128f3492ad5a0fac1915f64c5bc6",
+      "bytes": 26518
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "lib/research-preparation.ts",
+      "sha256": "9386f7756e634022fdea21e708d409586fca357b513b9ee8b81137b6815c7974",
+      "bytes": 4260
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "lib/research-workflow-api.ts",
+      "sha256": "9839647415174978710fae71fdf5c5566c84064b76ad2fd90ba3b1744ef2a345",
+      "bytes": 1673
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "lib/research-workflow.ts",
+      "sha256": "6d579de469d31ee8297c1a5171806e659b01a23954ffa27a44612338efa60758",
+      "bytes": 7318
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "lib/test-modules.ts",
+      "sha256": "8f3e4a6d83af7b962b93c41c2f252f7868b07b09281d989917f70a993d098d0f",
+      "bytes": 12640
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "app/module/research-verification/new-study/page.tsx",
+      "sha256": "bc7962d34debd2a83f956c3e459aedf1e5cb082a174b03d039363b07b4df97a9",
+      "bytes": 710
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "scripts/verify-research-preparation.mjs",
+      "sha256": "40277f6b17fca20a2b09c307aa326253a153d45b0b14a798673004f23e3ef3a5",
+      "bytes": 9721
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "scripts/verify-research-workflow.mjs",
+      "sha256": "df74c8ffa23e02e523b0645e3451cc856db4e1508025e283507dd90910373565",
+      "bytes": 16506
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "tests/research-preparation.test.mjs",
+      "sha256": "faad904a0d3bee652e83406e42624812fe27426fe62079dab8d8537d9db489d1",
+      "bytes": 3057
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "tests/research-workflow.test.mjs",
+      "sha256": "4cead89e6d5a63301f8d90d0c7a03aaa5187a7f6694d4a14893934d8c60f24b4",
+      "bytes": 4751
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "package.json",
+      "sha256": "a8724eecb2ea12a778ecc7647113adc472737bdb490bbfe08b8f4f26c541ac09",
+      "bytes": 1288
+    }
+  ],
+  "costs": {
+    "measured_charges_usd": null,
+    "allocated_storage_charges_usd": null,
+    "model_usage": null,
+    "basis": "Local development compute/storage and assistant usage unallocated; missing usage is not zero"
+  }
+}

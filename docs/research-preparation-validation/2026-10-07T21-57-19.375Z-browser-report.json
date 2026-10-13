@@ -1,0 +1,58 @@
+{
+  "protocol": "research-preparation-protocol-v1",
+  "started_at": "2026-10-07T21:57:19.376Z",
+  "design": "Exposed development component regression; actual React component and queue helper, synthetic bounded transport. No Google session, database, production request or scientific validation.",
+  "reviewer": {
+    "identity": "Primary Codex implementer",
+    "type": "AI",
+    "independence": "Not independent"
+  },
+  "checks": [
+    {
+      "name": "actual component preserves interrupted queue progress and resumes only missing jobs",
+      "passed": true,
+      "evidence": {
+        "requests": [
+          "prepare",
+          "enqueue:a",
+          "enqueue:b failed",
+          "enqueue:b resumed"
+        ],
+        "job_definitions": 2,
+        "automatic_runs_executed": 0,
+        "google_authenticated": false
+      }
+    },
+    {
+      "name": "owner preparation controls fit desktop and mobile in both themes",
+      "passed": true,
+      "evidence": {
+        "viewports": [
+          1365,
+          390
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "source": "Actual component with software fixture data"
+      }
+    },
+    {
+      "name": "unknown paper and invalid uploads cannot silently start jobs",
+      "passed": true,
+      "evidence": {
+        "missing_plan": "explicit",
+        "oversized_upload": "refused before transport",
+        "invalid_schema": "simulated backend refusal shown",
+        "invented_jobs": 0
+      }
+    }
+  ],
+  "errors": [],
+  "browser_errors": [],
+  "measured_charges_usd": null,
+  "model_usage": null,
+  "passed": true,
+  "ended_at": "2026-10-07T21:57:20.589Z"
+}

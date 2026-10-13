@@ -1,0 +1,885 @@
+{
+  "version": "http2-original-byte-storage-v1",
+  "stored_at": "2026-10-04T23:43:08.392372+00:00",
+  "project": "regphejnlvfpyokpniny",
+  "visibility": "private, service-role only",
+  "files": [
+    {
+      "id": "source-0",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-0/0624b02908d973efd875b908995107a9fee78cbf4320a31dcd14b15e33c5fa35.pdf",
+      "sha256": "0624b02908d973efd875b908995107a9fee78cbf4320a31dcd14b15e33c5fa35",
+      "bytes": 3659240,
+      "original_path": "sources/main-paper.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-2",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-2/6a67e8d7fdfa7b5272fc55f8fba62b266f932031c7f39e29c52f83e129bc2967.txt",
+      "sha256": "6a67e8d7fdfa7b5272fc55f8fba62b266f932031c7f39e29c52f83e129bc2967",
+      "bytes": 209580,
+      "original_path": "sources/ref-02.txt",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-3",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-3/c5be3efab2a6e70123ee3829f2c5da16339ceb45999f784544cdfe8c14955954.txt",
+      "sha256": "c5be3efab2a6e70123ee3829f2c5da16339ceb45999f784544cdfe8c14955954",
+      "bytes": 110207,
+      "original_path": "sources/ref-03.txt",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-4",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-4/af3b27024f0939a8e4c03921e6df6a615c87cd103a2f5f0431e8420e68dd3e06.web",
+      "sha256": "af3b27024f0939a8e4c03921e6df6a615c87cd103a2f5f0431e8420e68dd3e06",
+      "bytes": 2549,
+      "original_path": "sources/ref-04.web",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-6",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-6/9270b007d63a3ece77ad94ba3f33ced4e7c730a8ad122d37e94c284a7337e2f5.pdf",
+      "sha256": "9270b007d63a3ece77ad94ba3f33ced4e7c730a8ad122d37e94c284a7337e2f5",
+      "bytes": 1037140,
+      "original_path": "sources/ref-06.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-8",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-8/6b84555c88eeebcf5d2b2e1d9d7b58630abc97ab877b2cf62dee4cd635db34e4.txt",
+      "sha256": "6b84555c88eeebcf5d2b2e1d9d7b58630abc97ab877b2cf62dee4cd635db34e4",
+      "bytes": 155206,
+      "original_path": "sources/ref-08.txt",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-9",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-9/eb627ed25147d0bce7c42e7e5d27e130ee1461ea9640d8e8b45b365c6839c420.pdf",
+      "sha256": "eb627ed25147d0bce7c42e7e5d27e130ee1461ea9640d8e8b45b365c6839c420",
+      "bytes": 679957,
+      "original_path": "sources/ref-09.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-10",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-10/3c2ceb7bfc84cd34720f4a5271338ab9d8280d34bdd1eb250c64306202f2ed8b.txt",
+      "sha256": "3c2ceb7bfc84cd34720f4a5271338ab9d8280d34bdd1eb250c64306202f2ed8b",
+      "bytes": 4723,
+      "original_path": "sources/ref-10.txt",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-11",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-11/bd20d7e62e2afe4dfe7c9297e5529cd3472980cb5d9f1e5297483c219f2eee44.txt",
+      "sha256": "bd20d7e62e2afe4dfe7c9297e5529cd3472980cb5d9f1e5297483c219f2eee44",
+      "bytes": 62329,
+      "original_path": "sources/ref-11.txt",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-12",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-12/ef4eef5eabca766e3166f45159f5d843b636829235b41db499869781b47da4fa.pdf",
+      "sha256": "ef4eef5eabca766e3166f45159f5d843b636829235b41db499869781b47da4fa",
+      "bytes": 1302308,
+      "original_path": "sources/ref-12.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-14",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-14/6aa0c35698b15fe99e75bf86f615f339d40ea301a975f4c063298c520b38b667.web",
+      "sha256": "6aa0c35698b15fe99e75bf86f615f339d40ea301a975f4c063298c520b38b667",
+      "bytes": 6940,
+      "original_path": "sources/ref-14.web",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-15",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-15/1d084238ae6692d1e3322fa0850dbb9596812332d92b76d9a815c5ed9b600dea.txt",
+      "sha256": "1d084238ae6692d1e3322fa0850dbb9596812332d92b76d9a815c5ed9b600dea",
+      "bytes": 90647,
+      "original_path": "sources/ref-15.txt",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-16",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-16/21c1cdce6ab0e5509b04d84a28000836c7a087cf786efe6f04877ebfff47232a.txt",
+      "sha256": "21c1cdce6ab0e5509b04d84a28000836c7a087cf786efe6f04877ebfff47232a",
+      "bytes": 502941,
+      "original_path": "sources/ref-16.txt",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-17",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-17/b0df254ddd697c0cacf7d6aaac26e640097db107728f8e56ebdfdd50da7eb572.pdf",
+      "sha256": "b0df254ddd697c0cacf7d6aaac26e640097db107728f8e56ebdfdd50da7eb572",
+      "bytes": 1547093,
+      "original_path": "sources/ref-17.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-18",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-18/b7efcb3cc5821c5fe19adb01656d99eafba0a9688e8292cb894a00e081397966.pdf",
+      "sha256": "b7efcb3cc5821c5fe19adb01656d99eafba0a9688e8292cb894a00e081397966",
+      "bytes": 1118476,
+      "original_path": "sources/ref-18.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-19",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-19/1415d08961ee80ba4870a792a361c318724adc226d62646f298cf111cee3eb5a.web",
+      "sha256": "1415d08961ee80ba4870a792a361c318724adc226d62646f298cf111cee3eb5a",
+      "bytes": 5410,
+      "original_path": "sources/ref-19.web",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-21",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-21/32eee447b9b8aa36bda0a6b7c6c26048d0103b260650f5fe294da60c6b8ff299.pdf",
+      "sha256": "32eee447b9b8aa36bda0a6b7c6c26048d0103b260650f5fe294da60c6b8ff299",
+      "bytes": 174009,
+      "original_path": "sources/ref-21.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-22",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-22/633cdade2f58ba72cd5696b6bcdfdbdfe1f3fc59015064e52c403e61d307ee15.pdf",
+      "sha256": "633cdade2f58ba72cd5696b6bcdfdbdfe1f3fc59015064e52c403e61d307ee15",
+      "bytes": 1189458,
+      "original_path": "sources/ref-22.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-23",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-23/833aaf33817492c4e2139faecf3e6d2a7bf92b174cf0182db3f0d39745573471.web",
+      "sha256": "833aaf33817492c4e2139faecf3e6d2a7bf92b174cf0182db3f0d39745573471",
+      "bytes": 3426,
+      "original_path": "sources/ref-23.web",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-24",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-24/bc0f5605866244bc2a26c7537081c0e486b37a8a8739cec38fc8035f6d07b0c1.pdf",
+      "sha256": "bc0f5605866244bc2a26c7537081c0e486b37a8a8739cec38fc8035f6d07b0c1",
+      "bytes": 671440,
+      "original_path": "sources/ref-24.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-25",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-25/137d122a9c5b86415e3691628f62c69ab43f0ac40285f5b27c0d219e8f2ff583.pdf",
+      "sha256": "137d122a9c5b86415e3691628f62c69ab43f0ac40285f5b27c0d219e8f2ff583",
+      "bytes": 983278,
+      "original_path": "sources/ref-25.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-26",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-26/093372154d479b74abe1046f447e8db0c1fcd2861f0c5bf56da352e0b80ca745.pdf",
+      "sha256": "093372154d479b74abe1046f447e8db0c1fcd2861f0c5bf56da352e0b80ca745",
+      "bytes": 1584851,
+      "original_path": "sources/ref-26.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-27",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-27/52bbdff460e654816b7e8e6fab9382195c46d49652c48a991757e0624f024489.pdf",
+      "sha256": "52bbdff460e654816b7e8e6fab9382195c46d49652c48a991757e0624f024489",
+      "bytes": 380795,
+      "original_path": "sources/ref-27.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-28",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-28/ed54a5549612825ad57162febe65f8cb32d4a0f39605497f70579c838eef9a1a.web",
+      "sha256": "ed54a5549612825ad57162febe65f8cb32d4a0f39605497f70579c838eef9a1a",
+      "bytes": 73882,
+      "original_path": "sources/ref-28.web",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-29",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-29/b40e6bf42f9eb6640021509763fbb984679c393cf9597bd65658f4c30e3ab887.web",
+      "sha256": "b40e6bf42f9eb6640021509763fbb984679c393cf9597bd65658f4c30e3ab887",
+      "bytes": 85623,
+      "original_path": "sources/ref-29.web",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-30",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-30/8098c86d1f1394c34b07fd0946d4243c3c44da4d7dfc82e22df809d14f4752b6.pdf",
+      "sha256": "8098c86d1f1394c34b07fd0946d4243c3c44da4d7dfc82e22df809d14f4752b6",
+      "bytes": 4489519,
+      "original_path": "sources/ref-30.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-31",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-31/f57a76fdb3114be9bf47314172abdb3f9a59153607fab113497e5934baa9aeed.web",
+      "sha256": "f57a76fdb3114be9bf47314172abdb3f9a59153607fab113497e5934baa9aeed",
+      "bytes": 298863,
+      "original_path": "sources/ref-31.web",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-32",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-32/8a2ce3925438bb90c62d6576081e4a947aa1aebc73e113de942d17e6df2d6cb5.pdf",
+      "sha256": "8a2ce3925438bb90c62d6576081e4a947aa1aebc73e113de942d17e6df2d6cb5",
+      "bytes": 412310,
+      "original_path": "sources/ref-32.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-33",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-33/b99406811e3e0f71865af5bf80bf3aba44aa927d91b4d07985761b8f9d8b6d1a.pdf",
+      "sha256": "b99406811e3e0f71865af5bf80bf3aba44aa927d91b4d07985761b8f9d8b6d1a",
+      "bytes": 504746,
+      "original_path": "sources/ref-33.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-34",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-34/4f909aa14278ef9dd39cca3ae6d9cf3e195d78e41d646d51778a08839b9081cb.pdf",
+      "sha256": "4f909aa14278ef9dd39cca3ae6d9cf3e195d78e41d646d51778a08839b9081cb",
+      "bytes": 555749,
+      "original_path": "sources/ref-34.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-35",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-35/713da2cc08731fa203db9ce0993f0dcf3149a7e74c9a2aec9dbda1930b152d06.web",
+      "sha256": "713da2cc08731fa203db9ce0993f0dcf3149a7e74c9a2aec9dbda1930b152d06",
+      "bytes": 22634,
+      "original_path": "sources/ref-35.web",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-38",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-38/2239d7f8fb839b69ae2e928e685559b11376888269f131512197a0e3bacf7f7a.txt",
+      "sha256": "2239d7f8fb839b69ae2e928e685559b11376888269f131512197a0e3bacf7f7a",
+      "bytes": 117827,
+      "original_path": "sources/ref-38.txt",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-41",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-41/5f96fe555e093a5742002071f2f01a808c9cb6806a3173cb9b051f455304eec0.pdf",
+      "sha256": "5f96fe555e093a5742002071f2f01a808c9cb6806a3173cb9b051f455304eec0",
+      "bytes": 574319,
+      "original_path": "sources/ref-41.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-42",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-42/3204a1a562d9d3b72ba112f20caddfd34991d6e1e39939ace6a3e7c016519768.pdf",
+      "sha256": "3204a1a562d9d3b72ba112f20caddfd34991d6e1e39939ace6a3e7c016519768",
+      "bytes": 37816,
+      "original_path": "sources/ref-42.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-43",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-43/c23933b702e12acdcbbac3d3435603e7bd8f171919576e0b55c8c7101d1a7d02.pdf",
+      "sha256": "c23933b702e12acdcbbac3d3435603e7bd8f171919576e0b55c8c7101d1a7d02",
+      "bytes": 1700448,
+      "original_path": "sources/ref-43.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-44",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-44/2e8a0b4ed83685eaa6c021bfb70f9cc0dc68d7c975c81ee09c79659d7489f2ef.pdf",
+      "sha256": "2e8a0b4ed83685eaa6c021bfb70f9cc0dc68d7c975c81ee09c79659d7489f2ef",
+      "bytes": 2766397,
+      "original_path": "sources/ref-44.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-45",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-45/a00ef91b64e111a282e77ec66980f5242e77c0bb5e33e0927e3b6757080506de.txt",
+      "sha256": "a00ef91b64e111a282e77ec66980f5242e77c0bb5e33e0927e3b6757080506de",
+      "bytes": 191811,
+      "original_path": "sources/ref-45.txt",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-46",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-46/3a1f58aabb035236326474f7beb361ae32c02a83e7f581345f81989c02187f61.web",
+      "sha256": "3a1f58aabb035236326474f7beb361ae32c02a83e7f581345f81989c02187f61",
+      "bytes": 1774,
+      "original_path": "sources/ref-46.web",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-47",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-47/5bc39c361bdea0b553bcf804533da739e8331a28723991d7f17ca93cee19bfc4.pdf",
+      "sha256": "5bc39c361bdea0b553bcf804533da739e8331a28723991d7f17ca93cee19bfc4",
+      "bytes": 151455,
+      "original_path": "sources/ref-47.pdf",
+      "round_trip": "pass"
+    },
+    {
+      "id": "source-48",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/source-48/7885d878ea01dcbad5ba99f9ef7060de17fa821241495686126af8dbd4861edd.web",
+      "sha256": "7885d878ea01dcbad5ba99f9ef7060de17fa821241495686126af8dbd4861edd",
+      "bytes": 11275,
+      "original_path": "sources/ref-48.web",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-000",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-000/07c68c55438a2587d6367fa02690c21cdae0ba733235a02d72d2c71ddf290549.json",
+      "sha256": "07c68c55438a2587d6367fa02690c21cdae0ba733235a02d72d2c71ddf290549",
+      "bytes": 184252,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Apache-2.4.43/test_results_07_Sep_13_50.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-001",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-001/c1d2b09a5418d2602a818167dbe34f8bedba6563924c144ff7efdf978ef6bb61.json",
+      "sha256": "c1d2b09a5418d2602a818167dbe34f8bedba6563924c144ff7efdf978ef6bb61",
+      "bytes": 142127,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Apache-2.4.53/reordered_test_results_25_Apr_14_43.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-002",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-002/7c34824f6d7d1cf68db2794b5b94141f5f8dcaded7deebe8330d2b47aeb0e434.json",
+      "sha256": "7c34824f6d7d1cf68db2794b5b94141f5f8dcaded7deebe8330d2b47aeb0e434",
+      "bytes": 180693,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Apache-2.4.62/reordered_test_results_08_Mar_05_26.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-003",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-003/99e3d2a3bef1c071ce099053f778c2ad102321b5172d28e7498349a8af9f5f91.json",
+      "sha256": "99e3d2a3bef1c071ce099053f778c2ad102321b5172d28e7498349a8af9f5f91",
+      "bytes": 184027,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Apache-2.4.63/test_results_15_May_11_16.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-004",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-004/04574c5915a69e08178cccda7389afc4fc365bead7d58c14172482007fa97fc8.json",
+      "sha256": "04574c5915a69e08178cccda7389afc4fc365bead7d58c14172482007fa97fc8",
+      "bytes": 67129,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Apache-2.4.63-H2H1/reordered_test_results_28_Apr_13_54.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-005",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-005/bc6816b4371d9605e97ead88ad87fa19ae9e678e30e5492e635e285df895b077.json",
+      "sha256": "bc6816b4371d9605e97ead88ad87fa19ae9e678e30e5492e635e285df895b077",
+      "bytes": 72190,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Azure-AG/reordered_test_results_23_Mar_00_50.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-006",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-006/7945a5b80441b753ab2c855af735148c075f3340dc119014ea0a6b0d09a2ebe1.json",
+      "sha256": "7945a5b80441b753ab2c855af735148c075f3340dc119014ea0a6b0d09a2ebe1",
+      "bytes": 177933,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Caddy-2.9.1/reordered_test_results_08_Mar_06_26.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-007",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-007/73cda278d072ee64146fabf510aa22b6e41fd1e3713acf89895a68a658517f7e.json",
+      "sha256": "73cda278d072ee64146fabf510aa22b6e41fd1e3713acf89895a68a658517f7e",
+      "bytes": 239420,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Cloudflare/reordered_test_results_07_May_14_40.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-008",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-008/706c09017b806098e7a850d359473e1158b26dcb79b5d98c3cf297f6c62d4840.json",
+      "sha256": "706c09017b806098e7a850d359473e1158b26dcb79b5d98c3cf297f6c62d4840",
+      "bytes": 67581,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Cloudflare-H2H1/reordered_test_results_02_May_14_08.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-009",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-009/0a99843b621ecbb32066f4128a482f573ff325f424f775cace8e2490a8db0069.json",
+      "sha256": "0a99843b621ecbb32066f4128a482f573ff325f424f775cace8e2490a8db0069",
+      "bytes": 184996,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Envoy-1.15.0/test_results_07_Sep_19_37.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-010",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-010/d56a70936b4f92e1f1f8404af052e2b106635d0e41cb16af0fb82056fbc681d7.json",
+      "sha256": "d56a70936b4f92e1f1f8404af052e2b106635d0e41cb16af0fb82056fbc681d7",
+      "bytes": 184159,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Envoy-1.21.2/reordered_test_results_02_May_17_08.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-011",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-011/ea5e114b4115be50f68053900da9250aeaf3cb9d398d3d0190023cf49fb531bf.json",
+      "sha256": "ea5e114b4115be50f68053900da9250aeaf3cb9d398d3d0190023cf49fb531bf",
+      "bytes": 176720,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Envoy-1.32.2/reordered_test_results_08_Mar_21_38.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-012",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-012/e44cc0785cc7ca7bd5eebe1c4600067b747cdbcbf67cdad2544105f5e55c940d.json",
+      "sha256": "e44cc0785cc7ca7bd5eebe1c4600067b747cdbcbf67cdad2544105f5e55c940d",
+      "bytes": 69133,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Envoy-1.32.2-H2H1/reordered_test_results_29_Apr_16_11.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-013",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-013/a831a823ee7daaab8159ce82b4e55dc759f8519dcee9c7019ac72e994544c3eb.json",
+      "sha256": "a831a823ee7daaab8159ce82b4e55dc759f8519dcee9c7019ac72e994544c3eb",
+      "bytes": 186566,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Envoy-1.34.1/test_results_15_May_15_04.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-014",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-014/02902816a657c50d179dd02ba352896131b1840f48d3bb5e397439a842451fd4.json",
+      "sha256": "02902816a657c50d179dd02ba352896131b1840f48d3bb5e397439a842451fd4",
+      "bytes": 69565,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Envoy-1.34.1-H2H1/test_results_15_May_16_04.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-015",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-015/bca18f3a536b10ac9e69966a48dbb68f3b49af2e92bdc9fb5ed4495c1987efb9.json",
+      "sha256": "bca18f3a536b10ac9e69966a48dbb68f3b49af2e92bdc9fb5ed4495c1987efb9",
+      "bytes": 67614,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Fastly/reordered_test_results_07_May_16_06.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-016",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-016/497a9af604e1bd5f865e568b90d48bb35a22774bca2fb8c553d97ff645891871.json",
+      "sha256": "497a9af604e1bd5f865e568b90d48bb35a22774bca2fb8c553d97ff645891871",
+      "bytes": 151440,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/H2O-0a9ddbd/test_results_08_Sep_21_26.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-017",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-017/9382d830ea50c475a47b96005dd464ba907cf11860d59fdeaaeb5484366960c5.json",
+      "sha256": "9382d830ea50c475a47b96005dd464ba907cf11860d59fdeaaeb5484366960c5",
+      "bytes": 151426,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/H2O-26b116e95/reordered_test_results_11_Mar_23_13.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-018",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-018/4648a7e48eec217fd81282a7d9c4bf86baefb6a24adfd2dfe64b64b235dfcce0.json",
+      "sha256": "4648a7e48eec217fd81282a7d9c4bf86baefb6a24adfd2dfe64b64b235dfcce0",
+      "bytes": 67273,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/H2O-26b116e95-H2H1/reordered_test_results_02_May_20_15.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-019",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-019/b21eeb53a454f1bc301b8e8524264830be1c874d5ba7bbda6891be1ac8da3f75.json",
+      "sha256": "b21eeb53a454f1bc301b8e8524264830be1c874d5ba7bbda6891be1ac8da3f75",
+      "bytes": 150458,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/H2O-cf59e67c3/reordered_test_results_25_Apr_19_53.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-020",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-020/f85aa0f61ebe543ea69856234c7b4184e9ce1fa9968c2b4285f4c0b85ea9848a.json",
+      "sha256": "f85aa0f61ebe543ea69856234c7b4184e9ce1fa9968c2b4285f4c0b85ea9848a",
+      "bytes": 119879,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/HAproxy-2.2.0/test_results_04_Sep_19_34.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-021",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-021/931e08e610d86e7d89f12d5bc447e619ea685495ad1af7d9a3db389cda544df7.json",
+      "sha256": "931e08e610d86e7d89f12d5bc447e619ea685495ad1af7d9a3db389cda544df7",
+      "bytes": 177822,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/HAproxy-2.6.0/reordered_test_results_24_Apr_22_03.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-022",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-022/67fd29622d53b7c7e31296ebb9c832ee4e93af2d56b429b50f47626600c59a40.json",
+      "sha256": "67fd29622d53b7c7e31296ebb9c832ee4e93af2d56b429b50f47626600c59a40",
+      "bytes": 163774,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/HAproxy-2.9.10/reordered_test_results_08_Mar_07_28.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-023",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-023/ad8231887100e92f8906b5b50d5b6d587a571137aee7bf33dfd723c26722df61.json",
+      "sha256": "ad8231887100e92f8906b5b50d5b6d587a571137aee7bf33dfd723c26722df61",
+      "bytes": 66720,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/HAproxy-2.9.10-H2H1/reordered_test_results_28_Apr_20_31.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-024",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-024/9ec0baeceab1211cdc6fccbecc61ae201fe3d1e9c2f6009ca0ae33c247ce96c1.json",
+      "sha256": "9ec0baeceab1211cdc6fccbecc61ae201fe3d1e9c2f6009ca0ae33c247ce96c1",
+      "bytes": 167462,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/HAproxy-3.2.0/reordered_test_results_13_May_12_00.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-025",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-025/dde64a4f84aac9df39d61b89a20f72149411b54911f52ee3cec350ba822267ea.json",
+      "sha256": "dde64a4f84aac9df39d61b89a20f72149411b54911f52ee3cec350ba822267ea",
+      "bytes": 66548,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/HAproxy-3.2.0-H2H1/test_results_15_May_10_16.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-026",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-026/3c9ed0b3e444a2947f78ebb48c480d9b6b7343de365f1d89ea01cb4e88b75ed2.json",
+      "sha256": "3c9ed0b3e444a2947f78ebb48c480d9b6b7343de365f1d89ea01cb4e88b75ed2",
+      "bytes": 46490,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Lighttpd-1.4.55/test_results_08_Sep_20_04.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-027",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-027/be4a82564b1b741bbfc9c8b4f6e06ed0fedbe73baabc97ee5f3342e713ef9a37.json",
+      "sha256": "be4a82564b1b741bbfc9c8b4f6e06ed0fedbe73baabc97ee5f3342e713ef9a37",
+      "bytes": 72993,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Lighttpd-1.4.64/reordered_test_results_25_Apr_16_30.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-028",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-028/be8fc201f0666228fe67c690330324a0970f1225bb05bc036ea8fce7629a957f.json",
+      "sha256": "be8fc201f0666228fe67c690330324a0970f1225bb05bc036ea8fce7629a957f",
+      "bytes": 67203,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Lighttpd-1.4.76/reordered_test_results_25_Mar_23_39.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-029",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-029/3f3c5902371804365faf8890042445f6b4afa1288bb0d5ca80217bd4b250805d.json",
+      "sha256": "3f3c5902371804365faf8890042445f6b4afa1288bb0d5ca80217bd4b250805d",
+      "bytes": 180978,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Mitmproxy-11.1.0/reordered_test_results_16_Mar_16_24.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-030",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-030/12828f3a2af436f9376a7806e87f3cf61fe4f3018255a487ca5f16c32ff4f081.json",
+      "sha256": "12828f3a2af436f9376a7806e87f3cf61fe4f3018255a487ca5f16c32ff4f081",
+      "bytes": 193445,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Nghttpx-1.41.0/test_results_08_Sep_14_43.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-031",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-031/194b2a61ecfc711206cd39140189154fa7a676b031ced6664b3c39c9f3c50509.json",
+      "sha256": "194b2a61ecfc711206cd39140189154fa7a676b031ced6664b3c39c9f3c50509",
+      "bytes": 192334,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Nghttpx-1.47.0/reordered_test_results_24_Apr_18_25.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-032",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-032/ccd1550baaa3278b2946e7ca94026aead4e4009cc2df99e397359e5b2c08c3eb.json",
+      "sha256": "ccd1550baaa3278b2946e7ca94026aead4e4009cc2df99e397359e5b2c08c3eb",
+      "bytes": 183128,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Nghttpx-1.62.1/reordered_test_results_08_Mar_08_28.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-033",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-033/2d9f617ceb6f1bcf381d57003e22125dad5a2b6952ae2c6da7addd655ba3a2d0.json",
+      "sha256": "2d9f617ceb6f1bcf381d57003e22125dad5a2b6952ae2c6da7addd655ba3a2d0",
+      "bytes": 68007,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Nghttpx-1.62.1-H2H1/reordered_test_results_29_Apr_12_02.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-034",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-034/8c451f6b67eec3d0a8142906096d7c7c5f32f72d526ab43afd7395e3a406f3e7.json",
+      "sha256": "8c451f6b67eec3d0a8142906096d7c7c5f32f72d526ab43afd7395e3a406f3e7",
+      "bytes": 44193,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Nginx-1.18.0/test_results_08_Sep_16_49.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-035",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-035/fc56e74a23aad3665f8e96061f418c4d9ec041a9a41329e7282e05d268fe1ad7.json",
+      "sha256": "fc56e74a23aad3665f8e96061f418c4d9ec041a9a41329e7282e05d268fe1ad7",
+      "bytes": 69592,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Nginx-1.22.0/reordered_test_results_25_Apr_19_00.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-036",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-036/fc56e74a23aad3665f8e96061f418c4d9ec041a9a41329e7282e05d268fe1ad7.json",
+      "sha256": "fc56e74a23aad3665f8e96061f418c4d9ec041a9a41329e7282e05d268fe1ad7",
+      "bytes": 69592,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Nginx-1.26.0/reordered_test_results_25_Mar_16_51.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-037",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-037/6001a3ed0b8476d33e9864d567e8abdb3b15375ffc7345caae4a98238732c551.json",
+      "sha256": "6001a3ed0b8476d33e9864d567e8abdb3b15375ffc7345caae4a98238732c551",
+      "bytes": 69602,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Nginx-1.28.0/test_results_15_May_12_15.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-038",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-038/04143a0696e6322e3a5ce9a1c1b4fa426a4dbd0334c59d7ac7995681800c7498.json",
+      "sha256": "04143a0696e6322e3a5ce9a1c1b4fa426a4dbd0334c59d7ac7995681800c7498",
+      "bytes": 163657,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Node-14.19.3/reordered_test_results_23_Apr_16_34.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-039",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-039/a4455255d4d186d0020fea50e524a27e0705f74f588501afa495c8b8d88dd2a4.json",
+      "sha256": "a4455255d4d186d0020fea50e524a27e0705f74f588501afa495c8b8d88dd2a4",
+      "bytes": 138582,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Node-14.7.0/test_results_04_Sep_14_48.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-040",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-040/996d097c783103384cb74ddcc22933f7d0630ba82c1c7efe881e9ff440bab83e.json",
+      "sha256": "996d097c783103384cb74ddcc22933f7d0630ba82c1c7efe881e9ff440bab83e",
+      "bytes": 158865,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Node-20.16.0/reordered_test_results_08_Mar_19_06.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-041",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-041/a95d2469cef5a04c82556d9306043c10a82ff767cd2c1e9e15ad71effa7dac92.json",
+      "sha256": "a95d2469cef5a04c82556d9306043c10a82ff767cd2c1e9e15ad71effa7dac92",
+      "bytes": 66454,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Node-20.16.0-H2H1/reordered_test_results_03_May_17_07.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-042",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-042/91ab1679f664ad8c4077558d5e5c6258a3d8d967b849f60b28ea5d59abdaca86.json",
+      "sha256": "91ab1679f664ad8c4077558d5e5c6258a3d8d967b849f60b28ea5d59abdaca86",
+      "bytes": 150019,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Retest-Traefik-3.3.5/test_results_15_Sep_10_57.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-043",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-043/1c31eaaf725bf72989bbf7d56c54097e82418ffe4525fb345cf05bcc636e4a80.json",
+      "sha256": "1c31eaaf725bf72989bbf7d56c54097e82418ffe4525fb345cf05bcc636e4a80",
+      "bytes": 181439,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/TLS-Apache-2.4.63/test_results_16_Sep_12_41.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-044",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-044/80036c17b4fae22d97bc33e4e6ca1950cbc9fc5f0e7bd9dad367e5d75024ca56.json",
+      "sha256": "80036c17b4fae22d97bc33e4e6ca1950cbc9fc5f0e7bd9dad367e5d75024ca56",
+      "bytes": 182205,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/TLS-Caddy-2.9.1/test_results_14_Sep_17_45.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-045",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-045/fbc87ca0d326f15d5d2f3dea4056b08f096a00a0be6a4badf844f933d2c28ec8.json",
+      "sha256": "fbc87ca0d326f15d5d2f3dea4056b08f096a00a0be6a4badf844f933d2c28ec8",
+      "bytes": 184023,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/TLS-Envoy-1.34.1/test_results_17_Sep_10_37.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-046",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-046/81f21f72cf492614444fa21742699df3bb68cd3ede7c4b640cae9c0b27edcc7f.json",
+      "sha256": "81f21f72cf492614444fa21742699df3bb68cd3ede7c4b640cae9c0b27edcc7f",
+      "bytes": 167872,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/TLS-HAproxy-3.2.0/test_results_14_Sep_12_18.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-047",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-047/8d0b14f06c57ae431fe79e55c6a4b6438bc30988f0faba40d4cc345c59fa059a.json",
+      "sha256": "8d0b14f06c57ae431fe79e55c6a4b6438bc30988f0faba40d4cc345c59fa059a",
+      "bytes": 191990,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/TLS-Nghttpx-1.62.1/test_results_15_Sep_09_04.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-048",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-048/3609716d8b75d0132110172bbab1ceee29a40687f5b2db7007b7cc97050cf18c.json",
+      "sha256": "3609716d8b75d0132110172bbab1ceee29a40687f5b2db7007b7cc97050cf18c",
+      "bytes": 146097,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/TLS-Node-20.16.0/test_results_16_Sep_13_40.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-049",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-049/05e29863d73f3cbbd1dbb5e7b0228d2ceca884da9b28199485e57feb008e1067.json",
+      "sha256": "05e29863d73f3cbbd1dbb5e7b0228d2ceca884da9b28199485e57feb008e1067",
+      "bytes": 186062,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/TLS-Traefik-3.3.5/test_results_14_Sep_14_08.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-050",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-050/c3895bb6d71ebaef444e03b60e3713bd9cd65affe088e30b0edfb21f1d466a77.json",
+      "sha256": "c3895bb6d71ebaef444e03b60e3713bd9cd65affe088e30b0edfb21f1d466a77",
+      "bytes": 190013,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Traefik-2.2.8/test_results_07_Sep_17_14.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-051",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-051/0dc4ae8f7e16eacddd81e151d0a810b7688e96776061e9cda52b66e0957848ce.json",
+      "sha256": "0dc4ae8f7e16eacddd81e151d0a810b7688e96776061e9cda52b66e0957848ce",
+      "bytes": 141329,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Traefik-2.6.2/reordered_test_results_18_Apr_15_22.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-052",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-052/018b72be60fa56274f88df3062f80c384b0d0b1366d7d860002c7159c1f94ea0.json",
+      "sha256": "018b72be60fa56274f88df3062f80c384b0d0b1366d7d860002c7159c1f94ea0",
+      "bytes": 141594,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Traefik-3.3.5/reordered_test_results_16_Apr_15_01.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-053",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-053/512bd269bb1544c9f07aab236e3457592b775baab0c1866ed0e742ff1d35f57c.json",
+      "sha256": "512bd269bb1544c9f07aab236e3457592b775baab0c1866ed0e742ff1d35f57c",
+      "bytes": 66375,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Traefik-3.3.5-H2H1/reordered_test_results_03_May_18_32.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-054",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-054/a11366028b822a25d6be8cd728746b54deead1b698b09c57689703366714d01f.json",
+      "sha256": "a11366028b822a25d6be8cd728746b54deead1b698b09c57689703366714d01f",
+      "bytes": 44963,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Varnish-6.4.0/test_results_08_Sep_13_50.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-055",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-055/ca57702f949bd5207328b8cd486d4c36aad4b3db7f6fa6822b948bd21aa857d2.json",
+      "sha256": "ca57702f949bd5207328b8cd486d4c36aad4b3db7f6fa6822b948bd21aa857d2",
+      "bytes": 67103,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Varnish-7.1.0/reordered_test_results_23_Apr_14_17.json",
+      "round_trip": "pass"
+    },
+    {
+      "id": "archive-056",
+      "bucket": "http2-study-artifacts",
+      "object_path": "http2-compliance-artifact-v2/archive-056/e3f7b64bc9e1247b7bbce45974c588330aa181dbcf8866ce0b22453fc4437fd6.json",
+      "sha256": "e3f7b64bc9e1247b7bbce45974c588330aa181dbcf8866ce0b22453fc4437fd6",
+      "bytes": 68237,
+      "original_path": "sources/HTTP2-Compliance-Tests/results/Varnish-7.7.0/reordered_test_results_23_Apr_12_30.json",
+      "round_trip": "pass"
+    }
+  ],
+  "total_bytes": 34909794,
+  "source_files": 40,
+  "author_json_files": 57,
+  "limitation": "Storage charges and transfer requests are not reconciled billing. Unavailable full texts remain unavailable."
+}

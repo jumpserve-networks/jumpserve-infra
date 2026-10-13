@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "source_revision": "8efd33e59f09e0eecf454fbd39eac456371e598b",
+  "revision_status": "working-tree implementation on this base revision; file hashes are authoritative until committed",
+  "files": {
+    "api.py": "d52c5dd022ee25fbf976aa73e2a5265187740ceb8ac6ff059953319524c8a05b",
+    "workflow.py": "cc55def28940e3dfd6edfcafba6f298c535ca028d48a5f4fa35a38a609604eca",
+    "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+    "store.py": "44d99737425cfa9e16b8b74090e738cddbe3ab5ea0f1d936f383fd73be8b6e66"
+  }
+}

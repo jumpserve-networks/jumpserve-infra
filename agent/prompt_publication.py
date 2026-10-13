@@ -1,9 +1,9 @@
 """Evaluation and publication helpers shared by CI and prompt administration."""
 from prompt import PromptVersion
-from modules import EMULATED_MODULE, REAL_WORLD_MODULE, LEO_MODULE
+from modules import EMULATED_MODULE, REAL_WORLD_MODULE, LEO_MODULE, HTTP2_MODULE
 
 BOOTSTRAP_ID = 'cabbe18a-cc70-482c-8883-81b515639e42'
-BOOTSTRAP_IDS = {EMULATED_MODULE: BOOTSTRAP_ID, REAL_WORLD_MODULE: 'e78456f8-6582-4f69-8b44-d56d2c782352', LEO_MODULE: 'ec00a4b6-718c-4e69-9c0f-283b9f251002'}
+BOOTSTRAP_IDS = {EMULATED_MODULE: BOOTSTRAP_ID, REAL_WORLD_MODULE: 'e78456f8-6582-4f69-8b44-d56d2c782352', LEO_MODULE: 'ec00a4b6-718c-4e69-9c0f-283b9f251002', HTTP2_MODULE: 'caf6bae2-acd3-4ef4-8147-bd8bc39895e2'}
 
 
 def evaluation_snapshot(database, prompt_id=None, bootstrap_if_empty=False, module_id=EMULATED_MODULE):

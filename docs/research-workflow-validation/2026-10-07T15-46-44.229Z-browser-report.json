@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "started_at": "2026-10-07T15:46:44.230Z",
+  "origin": "http://localhost:3004",
+  "design": "Development checks; actual public backend and isolated Postgres anon RLS via test-only SQL transport. Synthetic numerical/review fixtures are not scientific validation.",
+  "reviewer": {
+    "identity": "Primary Codex implementer",
+    "type": "AI",
+    "independence": "Not independent"
+  },
+  "checks": [
+    {
+      "name": "public module navigation and study listing",
+      "passed": true,
+      "evidence": {
+        "studies": 2
+      }
+    }
+  ],
+  "errors": [
+    {
+      "name": "real IPv6 imported claim coverage and nine gaps",
+      "reason": "page.goto: Timeout 60000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3004/module/research-verification/studies/953f20a3-3fd8-4fb4-8844-5d4d72690e01\", waiting until \"networkidle\"\u001b[22m\n"
+    }
+  ],
+  "browser_errors": [],
+  "conditional_gaps": [
+    "No legitimate Google session or authenticated owner/chat request",
+    "No production deployment or remote Supabase Storage verification"
+  ],
+  "ended_at": "2026-10-07T15:47:46.693Z",
+  "passed": false
+}

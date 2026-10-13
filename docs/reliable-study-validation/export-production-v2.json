@@ -1,0 +1,60 @@
+{
+  "origin": "https://jumpserve.quaint-lab.org",
+  "started_at": "2026-10-05T02:28:21.299Z",
+  "checks": [
+    {
+      "name": "public completed pages",
+      "passed": true,
+      "evidence": "four pages"
+    },
+    {
+      "name": "complete JSON identities and missing bounds",
+      "passed": true,
+      "evidence": {
+        "sha256": "d1d50e1761f5aa377a5fa9f4f4d85607310b26019698ed342124b01d00210ed0",
+        "runs": 1080
+      }
+    },
+    {
+      "name": "CSV complete run census with blanks",
+      "passed": true,
+      "evidence": {
+        "rows": 1080,
+        "sha256": "4cb97cf81f9c0ed0f929d4de91c2b217cc135d55cd85d47da0225637f09aba2c"
+      }
+    },
+    {
+      "name": "downloads match manifests",
+      "passed": true,
+      "evidence": {
+        "raw-cpu-v1.zip": {
+          "sha256": "bc220279b10b9a8642411140f43e8d8cb4db67e1a0d40d8f737cb677e840af6c",
+          "bytes": 13791149
+        },
+        "reproduction.zip": {
+          "sha256": "d3c3fa7dda7d8c57cd43aa8eac75df90cf1dbd6dcafd7aca28b6da4057fd0013",
+          "bytes": 633482
+        }
+      }
+    },
+    {
+      "name": "published evaluated prompt",
+      "passed": true,
+      "evidence": {
+        "version": "reliable-evidence-v2",
+        "review_type": "AI"
+      }
+    },
+    {
+      "name": "sign-in preserves configuration",
+      "passed": true,
+      "evidence": {
+        "next": "/module/reliable-sketch-study/chat?configuration=main-zipf0.3-131072-RS",
+        "authenticated_chat": "conditional: no legitimate session"
+      }
+    }
+  ],
+  "errors": [],
+  "ended_at": "2026-10-05T02:28:30.669Z",
+  "passed": true
+}

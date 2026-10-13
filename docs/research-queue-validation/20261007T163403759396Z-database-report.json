@@ -1,0 +1,25 @@
+{
+  "protocol": "research-queue-protocol-v1",
+  "amendment": "research-queue-amendment-v2",
+  "database": "jumpserve_research_queue_test_20261007t163403759396z",
+  "started_at": "2026-10-07T16:34:03.759819+00:00",
+  "checks": [],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independence": "Not independent"
+  },
+  "design": "Synthetic software development regressions, not scientific or held-out validation.",
+  "conditional_gaps": [
+    "Remote Supabase Storage",
+    "Real Google-authenticated owner request",
+    "Scheduled workers deployed in AWS"
+  ],
+  "measured_charges_usd": null,
+  "model_usage": null,
+  "passed": false,
+  "error": "psql: error: connection to server at \"127.0.0.1\", port 54477 failed: Operation not permitted\n\tIs the server running on that host and accepting TCP/IP connections?",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/Shared/allstar/jumpserve-infra/test/check_research_queue_database.py\", line 140, in <module>\n    query('create database '+DATABASE,'postgres')\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/Shared/allstar/jumpserve-infra/test/check_research_queue_database.py\", line 44, in query\n    if result.returncode:raise RuntimeError(result.stderr.strip())\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: psql: error: connection to server at \"127.0.0.1\", port 54477 failed: Operation not permitted\n\tIs the server running on that host and accepting TCP/IP connections?\n",
+  "ended_at": "2026-10-07T16:34:03.809282+00:00",
+  "retained_database": true
+}

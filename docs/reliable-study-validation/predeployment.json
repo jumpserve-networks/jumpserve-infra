@@ -1,0 +1,35 @@
+{
+  "id": "reliable-release-criteria-v1",
+  "defined_at": "2026-10-05T01:52:19.128518+00:00",
+  "blocking": [
+    "Frozen scientific input/code/protocol hashes, run accounting and independent aggregate validation",
+    "Verified AWS395567831870 and Supabase regphejnlvfpyokpniny targets",
+    "RLS public read/browser-write denial, private storage after roundtrip",
+    "Backend auth, user/module ownership, bounds, missing states, prompt publishing guards",
+    "Frozen12case actualanswer contract evaluation and AI secondary review/advisory adjudication; active published matching prompt and runtime",
+    "Frontendlint/tests/build and desktop/mobile completed/missing/invalid browser views, charts/navigation/themes/exports/signinreturn",
+    "Reviewed CDKdiff scoped to existing agent stack, no scientific equipment resources",
+    "Deployedpublicpages/downloads and unauthenticatedagentdenial verified after release"
+  ],
+  "conditional": [
+    "Actual Google-authenticated browser-to-agent request only if legitimate session available; no synthetic identity accepted as verification",
+    "Original trace numerical reproduction, full direct-source reviews, fullproof audit, FPGA/Tofino hardware and longitudinal operational validation unavailable"
+  ],
+  "scientific_status": "limited assessment; incomplete validation can be published with visible scope",
+  "checks": {
+    "scientific_hash_identity_aggregate": "passed:1080rawfiles,1080keycensuses,4320independentaggregatechecks",
+    "complete_planned_run_accounting": "passed:1080CPUand36weightedcontrols,allcomplete",
+    "database_rls": "passed:transactionallocalpublicread/browserdenial/privatestorage/nullzero; productiongrants/RLSverified",
+    "original_bytes_storage": "passed:2314files;release42files roundtripverified",
+    "backend": "76tests passed; evaluated runtime unchanged",
+    "frontend": "lint/tests/buildpassed;108tests",
+    "browser": "desktop1440x1000/mobile390x844 completed/missing/invalid;light/dark;noglobaloverflow/errors",
+    "exports": "localJSON/CSV/fullZIPsha/promptverified",
+    "prompt": "reliable-evidence-v2 active;12contracts and AIsecondaryreviewpass; one advisoryfalseadjudicatedandretained",
+    "cdk_diff": "onlyAWSLambdaAgentFnCodeS3Key;existingdependenciesunchanged",
+    "actual_authenticated_chat": "conditionalgap:no legitimateGooglesession"
+  },
+  "software_status": "predeployment checks passed; productionverification must follow release",
+  "release_blocking_checks_passed": true,
+  "recorded_at": "2026-10-05T02:16:21.870383+00:00"
+}

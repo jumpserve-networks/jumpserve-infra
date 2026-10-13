@@ -1,0 +1,148 @@
+{
+  "id": "ipv6-storage-assessment-v2",
+  "at": "2026-10-06T13:36:16.687925+00:00",
+  "project": "regphejnlvfpyokpniny",
+  "visibility": "private service-role-only",
+  "original_files": [
+    {
+      "path": "evidence/source-identity-screen-v1.json",
+      "sha256": "080fca370e0565a8779489a55217315169cc8a46e182001c1521700f57347657",
+      "bytes": 12449
+    },
+    {
+      "path": "evidence/source-retrieval-v4.json",
+      "sha256": "7b8a7c4319d0cd2756ec7ab9899c23a30812c3fec2a010968b6b3161ce02376c",
+      "bytes": 300306
+    },
+    {
+      "path": "raw/literature/18-4.bin",
+      "sha256": "bc14b1261d072e361ff2855d95a0c9aad0e2054267d99337163dd920d9bab42c",
+      "bytes": 14044
+    },
+    {
+      "path": "raw/literature/18-5.bin",
+      "sha256": "cb37db1dd88729470ce170381a9d52a549f3316e08b4b3ed64526f31a02aef8d",
+      "bytes": 480776
+    },
+    {
+      "path": "raw/literature/49-3.bin",
+      "sha256": "5de3fd5f1add51b18b1ccefa50769d0e813ce6fc26258c04bca2e2ebea484259",
+      "bytes": 19609
+    },
+    {
+      "path": "raw/literature/49-4.bin",
+      "sha256": "98db36f5d41fe44b67fdb4c41146c3d3f8343b58ec5d323f2a364c8c5df3b095",
+      "bytes": 650399
+    },
+    {
+      "path": "evidence/assessment-v2.json",
+      "sha256": "3c3532901aa4b507a61849666d925a0268c0658c0129dbfd729514df8c3a07b0",
+      "bytes": 47380160
+    }
+  ],
+  "bundles": [
+    {
+      "id": "assessment-v2-raw-bundle-0",
+      "sha256": "7be6bcf1dffbf1e44f5ffab5b644c82e36bab6c3a23b5d26a15d9cabc8ea4d00",
+      "byte_count": 1754729,
+      "manifest": [
+        {
+          "original_path": "evidence/source-identity-screen-v1.json",
+          "offset": 0,
+          "bytes": 12449,
+          "sha256": "080fca370e0565a8779489a55217315169cc8a46e182001c1521700f57347657",
+          "archive_name": "evidence/source-identity-screen-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/source-retrieval-v4.json",
+          "offset": 0,
+          "bytes": 300306,
+          "sha256": "7b8a7c4319d0cd2756ec7ab9899c23a30812c3fec2a010968b6b3161ce02376c",
+          "archive_name": "evidence/source-retrieval-v4.json.chunk-0"
+        },
+        {
+          "original_path": "raw/literature/18-4.bin",
+          "offset": 0,
+          "bytes": 14044,
+          "sha256": "bc14b1261d072e361ff2855d95a0c9aad0e2054267d99337163dd920d9bab42c",
+          "archive_name": "raw/literature/18-4.bin.chunk-0"
+        },
+        {
+          "original_path": "raw/literature/18-5.bin",
+          "offset": 0,
+          "bytes": 480776,
+          "sha256": "cb37db1dd88729470ce170381a9d52a549f3316e08b4b3ed64526f31a02aef8d",
+          "archive_name": "raw/literature/18-5.bin.chunk-0"
+        },
+        {
+          "original_path": "raw/literature/49-3.bin",
+          "offset": 0,
+          "bytes": 19609,
+          "sha256": "5de3fd5f1add51b18b1ccefa50769d0e813ce6fc26258c04bca2e2ebea484259",
+          "archive_name": "raw/literature/49-3.bin.chunk-0"
+        },
+        {
+          "original_path": "raw/literature/49-4.bin",
+          "offset": 0,
+          "bytes": 650399,
+          "sha256": "98db36f5d41fe44b67fdb4c41146c3d3f8343b58ec5d323f2a364c8c5df3b095",
+          "archive_name": "raw/literature/49-4.bin.chunk-0"
+        },
+        {
+          "original_path": "evidence/assessment-v2.json",
+          "offset": 0,
+          "bytes": 16000000,
+          "sha256": "679991dda28f112c2b99797634852110e2f33c864fe6697d1052ce8ed8781698",
+          "archive_name": "evidence/assessment-v2.json.chunk-0"
+        }
+      ],
+      "storage_path": "assessment-v2/bundle-0-7be6bcf1dffbf1e44f5ffab5b644c82e36bab6c3a23b5d26a15d9cabc8ea4d00.tar.gz",
+      "payload": {
+        "chunk_round_trip_verified": true
+      }
+    },
+    {
+      "id": "assessment-v2-raw-bundle-1",
+      "sha256": "a3fdde2ca53d7e5e269c9f184346dcd5987aced7064d81844c8e5840f6b61bd8",
+      "byte_count": 758799,
+      "manifest": [
+        {
+          "original_path": "evidence/assessment-v2.json",
+          "offset": 16000000,
+          "bytes": 16000000,
+          "sha256": "7328011c8b7c4c7f6fe8701d9e4698cb824df48b39a21387d487e81b2ce1e9b0",
+          "archive_name": "evidence/assessment-v2.json.chunk-16000000"
+        }
+      ],
+      "storage_path": "assessment-v2/bundle-1-a3fdde2ca53d7e5e269c9f184346dcd5987aced7064d81844c8e5840f6b61bd8.tar.gz",
+      "payload": {
+        "chunk_round_trip_verified": true
+      }
+    },
+    {
+      "id": "assessment-v2-raw-bundle-2",
+      "sha256": "edf28e38bf8bc848f309e41bc1fb96e1639214afc37969d5b50f4e528d64c9db",
+      "byte_count": 860063,
+      "manifest": [
+        {
+          "original_path": "evidence/assessment-v2.json",
+          "offset": 32000000,
+          "bytes": 15380160,
+          "sha256": "20909e05e7c034531469df74f00a381acff7a71a2be6af0cbe7b8eee15940a82",
+          "archive_name": "evidence/assessment-v2.json.chunk-32000000"
+        }
+      ],
+      "storage_path": "assessment-v2/bundle-2-edf28e38bf8bc848f309e41bc1fb96e1639214afc37969d5b50f4e528d64c9db.tar.gz",
+      "payload": {
+        "chunk_round_trip_verified": true
+      }
+    }
+  ],
+  "files": 7,
+  "original_bytes": 48857743,
+  "stored_bytes": 3373591,
+  "assessment_sha256": "3c3532901aa4b507a61849666d925a0268c0658c0129dbfd729514df8c3a07b0",
+  "round_trip_verified": true,
+  "charges_usd": null,
+  "limitations": "Storage/transfer requests and charges not reconciled. No copyrighted full source redistribution."
+}

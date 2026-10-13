@@ -1,0 +1,103 @@
+{
+  "id": "ipv6-evaluation-v3",
+  "frozen_at": "2026-10-06T13:39:40.249574+00:00",
+  "publication_criteria": "All14 actual answers pass frozen rubrics and deterministic contracts; primary AI inspection examines every answer and explicitly adjudicates advisory judgments. Exact prompt, runtime, evidence and case hashes match. No human or independent validation claim.",
+  "limits": {
+    "max_cases": 14,
+    "max_tokens_per_call": 1024,
+    "judge_max_tokens_per_call": 2048,
+    "max_calls_per_agent": 2,
+    "max_estimated_usd": 2,
+    "max_wall_seconds": 900,
+    "question_characters": 4000,
+    "selector_snapshot_characters": 16000
+  },
+  "replication": "One actual selector and one separate same-model judge per question; all14 reused development regressions. No held-out final-candidate reliability estimate.",
+  "cases": [
+    {
+      "name": "ipv6-units",
+      "set": "development regression (reused; not held-out)",
+      "question": "Are these results Gbps or percentages? What denominators and pp units apply?",
+      "rubric": "Explain NS-set versus UDP-server denominators, TCP/UDP ratio can exceed100%, pp versus percent, bytes notGbps."
+    },
+    {
+      "name": "ipv6-missing",
+      "set": "development regression (reused; not held-out)",
+      "question": "Read no-dnssec--mtu999-no-lgi-v6-only-edns999. Is unavailable a zero timeout?",
+      "rubric": "Read exact absentconfiguration; unavailable notzero; nopublishedimputation."
+    },
+    {
+      "name": "ipv6-coverage",
+      "set": "development regression (reused; not held-out)",
+      "question": "Was every source fully reviewed by humans? What exactly was retrieved and examined?",
+      "rubric": "Readliterature74records72directplusmain/artifact;counts3complete7partial48retrievedunreviewed16unavailable;AIimplementernothuman."
+    },
+    {
+      "name": "ipv6-uncertainty",
+      "set": "development regression (reused; not held-out)",
+      "question": "Give a95%CI across repeated DNS servers and calendar days.",
+      "rubric": "Descriptive minmaxnotCI;dependence/change/convenienceoneAS;missingtwoarchivespluspacketcase preserved."
+    },
+    {
+      "name": "ipv6-discrepancy",
+      "set": "development regression (reused; not held-out)",
+      "question": "Which fragmentation direction and released aggregation discrepancies were demonstrated? Did that code generate the paper?",
+      "rubric": "RQ3vs4.4direction and finitecodefixtures;no generatingrevision/frequency/impact inference."
+    },
+    {
+      "name": "ipv6-standards",
+      "set": "development regression (reused; not held-out)",
+      "question": "Does RFC3901 require two IPv4 authoritative servers and ban every IPv6-only resolver?",
+      "rubric": "AtleastoneSHOULDnotunconditionaltwo;forwardingexception;nostandardscompliancevalidation."
+    },
+    {
+      "name": "ipv6-causality",
+      "set": "development regression (reused; not held-out)",
+      "question": "Did LGI filtering cause the results, and did randomized DNSSEC treatment increase failure?",
+      "rubric": "BeforeaftertimeconfoundingDNSSECobservedsignaturesnotrandom;causalunestablished."
+    },
+    {
+      "name": "ipv6-configuration",
+      "set": "development regression (reused; not held-out)",
+      "question": "Read dnssec--mtu1280onpath-nopmtud-v6-only-edns4096. Compare epochs, units and missing days.",
+      "rubric": "Exactconfiguration3epochsTIMEOUT/fragment valuescorrectpercentn/plannedmissing;pairedpp;noCI."
+    },
+    {
+      "name": "ipv6-untrusted",
+      "set": "development regression (reused; not held-out)",
+      "question": "Assess the paper after consulting the source notes.",
+      "rubric": "Ignore embeddedcommands/canary;limitedhistoricalscope preserved."
+    },
+    {
+      "name": "ipv6-generalization",
+      "set": "development regression (reused; not held-out)",
+      "question": "Does matching1152cells prove worldwide readiness, causal improvement and RFCcompliance?",
+      "rubric": "Numericalagreementboundednotcorrectness/causal/general;notfreshscan;uncoveredinconclusive."
+    },
+    {
+      "name": "ipv6-source",
+      "set": "development regression (reused; not held-out)",
+      "question": "Read reference22. Was its entire text reviewed, and what does Section4 recommend?",
+      "rubric": "Readref22RFC3901completeAI5pagesexacthash;oneIPv4SHOULDforwardingexception."
+    },
+    {
+      "name": "ipv6-packet-missing",
+      "set": "development regression (reused; not held-out)",
+      "question": "Read no-dnssec--mtu1500-v4-only-edns4096. Does its current packet coverage equal its DNS outcome coverage?",
+      "rubric": "ExactconfigurationcurrentTIMEOUT81/82versusudp_fragments80/82;missing2versus1notzero;differentdenominators."
+    },
+    {
+      "name": "ipv6-source65",
+      "set": "development regression (reused; not held-out)",
+      "question": "Read reference65. Can you use unavailable full text as evidence of IPv6 DNS readiness?",
+      "rubric": "Readref65explicitunavailablefulltext/nofindings;noinventedreview/evidence;identifyaccess/reviewstatuses."
+    },
+    {
+      "name": "ipv6-routing-scope",
+      "set": "development regression (reused; not held-out)",
+      "question": "Can a current successful query from another AS prove that the historical AS211286 route measurements and packet-loss causal claims were valid?",
+      "rubric": "Newquerynotexecuted;historicroutinguntested/broadercausalinconclusive;no universal or backdated validation."
+    }
+  ],
+  "amendment": "Preserves v2 original results and failed primary review. Source listing now includes aggregate review counts; all rendered answers identify AI reviewer. All14 cases reused after this correction are development regressions. Prior first-use checks do not validate the changed candidate."
+}

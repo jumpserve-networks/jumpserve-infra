@@ -1,0 +1,17 @@
+{
+  "id": "ipv6-browser-production-v1",
+  "at": "2026-10-06T14:20:44.491476+00:00",
+  "origin": "https://jumpserve.quaint-lab.org",
+  "frontend_commit": "2ace33b2f5db86e748b52ed67f51de497fddb378",
+  "status": "failed mobile readability check",
+  "observed": "Actual completed data1152cells/12rows, public pages and hashes correct, desktop1440x1000 light/dark and mobile390x844 light render without global overflow or console errors. Mobile SVG scales labels to roughly5px, below readable size; screenshot retained.",
+  "screenshots": [
+    "production-desktop-initial.png",
+    "production-desktop-light.png",
+    "production-mobile-light.png",
+    "production-mobile-chart.png"
+  ],
+  "correction": "CSS-selected340px mobile chart and680px desktop chart, same values/scale, HTML legend; exactly one visible chart. Compact PMTUD label corrected before final release.",
+  "reviewer_type": "AI",
+  "authenticated_chat": "No legitimate Google session; not exercised"
+}

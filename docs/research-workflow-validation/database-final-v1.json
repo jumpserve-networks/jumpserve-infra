@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "database": "jumpserve_research_workflow_test",
+  "rolled_back": true,
+  "original_assessment_sha256": "3c3532901aa4b507a61849666d925a0268c0658c0129dbfd729514df8c3a07b0",
+  "imported_sources": 74,
+  "original_claims": 15,
+  "evidence_gaps": 9,
+  "checks": [
+    "draft privacy",
+    "public snapshot",
+    "future draft privacy",
+    "RLS with default restrictive policy",
+    "browser write denial",
+    "private storage",
+    "RPC authorization",
+    "owner isolation",
+    "immutable evidence",
+    "review gate",
+    "unresolved claim gate",
+    "stale review rejection"
+  ]
+}

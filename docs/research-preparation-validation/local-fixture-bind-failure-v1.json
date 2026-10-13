@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "command": "npm run verify:research:preparation",
+  "passed": false,
+  "exact_started_at": null,
+  "status": "environment-blocked before browser assertions",
+  "observed_stderr": "Error: listen EPERM: operation not permitted 127.0.0.1\nEmitted 'error' event on Server instance\ncode: 'EPERM', syscall: 'listen', address: '127.0.0.1'",
+  "limitation": "The initial verifier had an unhandled listen-error event and did not automatically save a timestamped report. This retrospective record preserves the observed failure; the missing original timestamp is not inferred.",
+  "correction": "Requested approved elevated execution for this purpose-specific local browser test. Added a handled listen-error path so future environment failures retain their reports. The elevated rerun passed three exposed development cases.",
+  "reviewer": {"identity": "Primary Codex implementer", "type": "AI", "independence": "Not independent"},
+  "measured_charges_usd": null,
+  "model_usage": null
+}

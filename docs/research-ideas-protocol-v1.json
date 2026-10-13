@@ -1,0 +1,36 @@
+{
+  "id": "research-ideas-protocol-v1",
+  "version": 1,
+  "declared_on": "2026-10-12",
+  "objective": "Provide an authenticated unpublished-idea flow using context-rich planning, self-contained versioned packets, fresh comprehension and critic calls, explicit readiness, frozen protocols and recorded campaign tasks. No invented paper URL, published measurement or claim validation.",
+  "implementation": {
+    "frontend": "new-idea intake and idea workspace within research-verification; shared navigation/authentication and existing experiment workspace",
+    "backend": "research_workflow/ideas.py; idea study intake, versioned packets, readiness and source-grounded campaign preparation",
+    "agent": "existing authenticated Agent Lambda and agent_sessions/prompt persistence; dedicated action with study ownership, bounded planning history and zero-history reviews",
+    "database": "additive migration: study origin type plus private packet, AI run, session, readiness and campaign-link relations; existing versioned prompt tables",
+    "infrastructure": "add research idea API routes; preserve research worker limits and absence of model/experiment permissions on the research API"
+  },
+  "invariants": [
+    "Paper studies still require HTTPS paper URLs. Idea studies have a null paper_url and explicit study_kind=idea.",
+    "All idea requests verify the Google-authenticated owner. Conversations are scoped by user, module and study; review requests reject session/history overrides.",
+    "Packets are immutable, hashed UTF-8 JSON with version and predecessor; stale concurrent saves are rejected and replayed requests preserve original bytes.",
+    "Planning history stays bounded and persisted. Comprehension and critic receive only the selected packet and a published server-selected prompt, no planning conversation or earlier verdict.",
+    "Missing/invalid inputs, unit ambiguity, dependence, alternative explanations, novelty and injection attempts remain explicit. No AI output executes code, probes networks, promotes claims or publishes results.",
+    "Readiness requires both valid fresh reviews of the exact current packet, no blocking findings, a structurally complete candidate protocol and an explicit owner acceptance; it is not scientific validation or independent review.",
+    "Preparing a campaign preserves the unpublished proposal as its real source, its hypothesis, frozen protocol and explicit claim mapping. Experimental work uses manual domain tasks unless a separately registered applicable adapter exists.",
+    "Model calls retain successful, provider-failed and invalid-output attempts, exact returned content hashes, prompt/model/context provenance, usage when available and missing charges as missing. Ambiguous calls do not automatically rerun.",
+    "RLS remains enabled; idea planning, session mappings and actor identities remain private; browser writes and direct privileged RPCs are denied. Public assessments retain the existing scientific/software publication gates."
+  ],
+  "development_evaluation": {
+    "cases": ["idea-planning", "idea-comprehension", "idea-critic", "idea-missing", "idea-novelty", "idea-untrusted", "idea-clear-plan", "idea-scope"],
+    "pass_criteria": "Every actual answer has the declared JSON schema, stays within task scope, preserves absent information, uses units and dependence correctly, avoids unsupported novelty/result claims, rejects embedded instructions and identifies each case's specified critical issue. Preserve failures; no publication on partial pass.",
+    "reviewer": {"identity": "Primary Codex AI implementer", "type": "AI", "independent": false},
+    "held_out": "No held-out or human validation is asserted. These declared cases are development regressions; new reserved papers/ideas and specialist review remain conditional follow-ups.",
+    "limits": {"maximum_candidate_calls": 8, "max_output_tokens_per_call": 2048, "maximum_campaign_seconds": 600, "automatic_retries": 0},
+    "costs": "Record provider token usage and wall time. Charges, orchestration costs or unsuccessful-call usage unavailable are missing, not zero."
+  },
+  "release_blockers": ["Backend ownership/schema/idempotence tests", "Isolated Postgres RLS, stale revision, review/current-hash and atomic campaign tests", "Agent fresh-context, task/prompt/session ownership, failure persistence and bounded-input tests", "Actual candidate answer development evaluation before prompt publication", "Frontend tests/lint/build and desktop/mobile light/dark browser flow with clearly labeled synthetic auth/model fixtures"],
+  "conditional_checks": ["Legitimate Google session and authenticated live owner flow", "Production migrations, prompt publication and deployment require a new explicit deployment request", "Independent domain/human review and reserved-idea validation"],
+  "sources": ["https://drensin.medium.com/elephants-goldfish-and-the-new-golden-age-of-software-engineering-c33641a48874"],
+  "scope_limits": "Adaptation of an engineering experience report. This implementation does not establish better research accuracy, scientific novelty or a reduced rate of inconclusive findings."
+}

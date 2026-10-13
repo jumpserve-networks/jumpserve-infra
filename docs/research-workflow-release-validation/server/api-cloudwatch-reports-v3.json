@@ -1,0 +1,14 @@
+[
+    {
+        "at": 1791402316420,
+        "message": "REPORT RequestId: 82099e22-64c3-4929-a491-7897df51f152\tDuration: 361.81 ms\tBilled Duration: 505 ms\tMemory Size: 512 MB\tMax Memory Used: 56 MB\tInit Duration: 142.42 ms\t\n"
+    },
+    {
+        "at": 1791402320056,
+        "message": "REPORT RequestId: b895c376-d0d0-4bc4-ac21-ced97d94416f\tDuration: 100.59 ms\tBilled Duration: 101 ms\tMemory Size: 512 MB\tMax Memory Used: 56 MB\t\n"
+    },
+    {
+        "at": 1791402320870,
+        "message": "REPORT RequestId: 72d098f2-043c-4714-b148-c9af0959bd1f\tDuration: 117.90 ms\tBilled Duration: 118 ms\tMemory Size: 512 MB\tMax Memory Used: 56 MB\t\n"
+    }
+]

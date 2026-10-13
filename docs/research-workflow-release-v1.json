@@ -1,0 +1,699 @@
+{
+  "version": 1,
+  "created_at": "2026-10-07T19:57:14.518523+00:00",
+  "authorization": "Current explicit production deployment request; no standing future deployment authority",
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres"
+  },
+  "frontend": "https://jumpserve.quaint-lab.org/module/research-verification",
+  "protocols": {
+    "research-workflow-release-protocol-v1.md": "faf125be0f00f85d26c4b2b05173ff3ffcaf037a78628d84fb57fef27c499e01",
+    "research-workflow-release-amendment-v2.md": "d350903469e10b1f1b7f170339c1983509a475e3529b800acc0b3e4019782bf2"
+  },
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independence": "Not independent"
+  },
+  "design": "Development and production software checks; no new paper experiment, held-out evaluation or human review",
+  "software": {
+    "status": "deployed",
+    "release_blockers_passed": true,
+    "amplify_job_id": "105",
+    "frontend_revision": "bc6f87abb480c966dd56b828a60f5c279d8fc83f",
+    "backend_revision": "d932544e0138d7449f23c5f6ee666a30b845fc1b",
+    "infrastructure_application_revision": "1addd11a7b34bacfad6d6ae340b379a8a49f0702",
+    "infrastructure_source_branch": "release/research-workflow-20261007",
+    "frontend_verifier_branch": "release/research-verification-evidence-20261007",
+    "frontend_verifier_revision": "8779e6c53674e086b888227433fc044704ad8507",
+    "configuration": "researchReservedConcurrencyEnabled=false; shared AWS Lambda pool=10; PostgreSQL queued-job caps global=4/study=2",
+    "local_checks": {
+      "backend_tests": 46,
+      "frontend_tests": 120,
+      "infrastructure_tests": 84,
+      "lint": "passed",
+      "frontend_build": "passed",
+      "infrastructure_build": "passed",
+      "isolated_database_and_browser": "Prior successful exact-byte development evidence reused"
+    },
+    "production_checks": {
+      "database_relations": 20,
+      "server_groups": 3,
+      "browser_groups": 5,
+      "scheduled_jobs": 2,
+      "scheduled_claiming_invocations": 1,
+      "stored_originals_retrieved_and_hash_verified": 4,
+      "google_authenticated_owner_request": false
+    }
+  },
+  "scientific": {
+    "status": "No new paper assessment",
+    "claims_upgraded": 0,
+    "public_generic_studies": 0,
+    "synthetic_fixture_published": false,
+    "existing_ipv6_labels": {
+      "reproduced": 3,
+      "discrepant": 3,
+      "inconclusive": 5,
+      "untested": 4
+    },
+    "limitation": "Original assessment conditions apply; deployment and synthetic controls do not strengthen these labels. Generic AI chat is disabled."
+  },
+  "conditional_gaps": [
+    "Legitimate Google-owner intake/enqueue/review/cancel and cross-owner requests",
+    "Actual Google provider round trip",
+    "Live expired-lease recovery; local actual PostgreSQL fencing passed",
+    "Completed generic-study production charts/CSV/JSON require a genuine reviewed publication; isolated completed and invalid data checks passed"
+  ],
+  "preserved_failures": [
+    "CloudFormation v1 quota failure and complete rollback",
+    "AWS quota request for 16 rejected: desired value must exceed default 1000; no quota increase or support case",
+    "Local verifier SDK credentials and incomplete first-page resource inventory",
+    "Production browser intake-link selector mismatch",
+    "Two captured Git build logs normalized initially; original-byte checkout preservation corrected",
+    "Filtered CloudWatch captures empty; bounded direct stream retrieval recovered REPORT records"
+  ],
+  "available_usage": {
+    "api": {
+      "captured_reports": 3,
+      "samples": [
+        {
+          "at": 1791402316420,
+          "duration_ms": 361.81,
+          "billed_duration_ms": 505.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 56.0
+        },
+        {
+          "at": 1791402320056,
+          "duration_ms": 100.59,
+          "billed_duration_ms": 101.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 56.0
+        },
+        {
+          "at": 1791402320870,
+          "duration_ms": 117.9,
+          "billed_duration_ms": 118.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 56.0
+        }
+      ],
+      "scope": "Bounded single log-stream capture of the latest 100 raw events; not all release invocations, charges or independent performance replications. Maximum memory is Lambda-reported execution-environment usage, not measured per-job peak."
+    },
+    "worker": {
+      "captured_reports": 25,
+      "samples": [
+        {
+          "at": 1791401128564,
+          "duration_ms": 241.28,
+          "billed_duration_ms": 242.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791401188326,
+          "duration_ms": 149.14,
+          "billed_duration_ms": 150.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791401248421,
+          "duration_ms": 159.77,
+          "billed_duration_ms": 160.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791401308481,
+          "duration_ms": 147.64,
+          "billed_duration_ms": 148.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791401368378,
+          "duration_ms": 202.21,
+          "billed_duration_ms": 203.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791401428541,
+          "duration_ms": 184.57,
+          "billed_duration_ms": 185.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791401488356,
+          "duration_ms": 207.5,
+          "billed_duration_ms": 208.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791401548387,
+          "duration_ms": 132.53,
+          "billed_duration_ms": 133.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791401609012,
+          "duration_ms": 692.11,
+          "billed_duration_ms": 693.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791401668392,
+          "duration_ms": 208.51,
+          "billed_duration_ms": 209.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791401728463,
+          "duration_ms": 198.61,
+          "billed_duration_ms": 199.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791401788459,
+          "duration_ms": 165.51,
+          "billed_duration_ms": 166.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791401848317,
+          "duration_ms": 140.51,
+          "billed_duration_ms": 141.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791401910017,
+          "duration_ms": 1725.97,
+          "billed_duration_ms": 1726.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791401968732,
+          "duration_ms": 433.22,
+          "billed_duration_ms": 434.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791402028436,
+          "duration_ms": 255.85,
+          "billed_duration_ms": 256.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791402088537,
+          "duration_ms": 304.51,
+          "billed_duration_ms": 305.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791402148538,
+          "duration_ms": 133.85,
+          "billed_duration_ms": 134.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791402208848,
+          "duration_ms": 617.15,
+          "billed_duration_ms": 618.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791402268493,
+          "duration_ms": 176.94,
+          "billed_duration_ms": 177.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791402328316,
+          "duration_ms": 130.15,
+          "billed_duration_ms": 131.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791402388797,
+          "duration_ms": 462.04,
+          "billed_duration_ms": 463.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791402449117,
+          "duration_ms": 944.1,
+          "billed_duration_ms": 945.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791402508411,
+          "duration_ms": 174.84,
+          "billed_duration_ms": 175.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        },
+        {
+          "at": 1791402568542,
+          "duration_ms": 255.11,
+          "billed_duration_ms": 256.0,
+          "configured_memory_mb": 512.0,
+          "max_memory_used_mb": 103.0
+        }
+      ],
+      "scope": "Bounded single log-stream capture of the latest 100 raw events; not all release invocations, charges or independent performance replications. Maximum memory is Lambda-reported execution-environment usage, not measured per-job peak."
+    },
+    "version": 2,
+    "supersedes": "available-usage-v1.json",
+    "correction": "Empty filtered captures did not establish missing logs. Bounded direct log-stream retrieval recovered REPORT records; originals retained.",
+    "measured_charges_usd": null,
+    "estimated_charges_usd": null,
+    "unallocated_costs": "AWS billing, Supabase database/storage overhead, Amplify hosting and Codex model charges are unallocated. Missing is not zero.",
+    "model_usage": null,
+    "original_supabase_artifact_bytes": 10951,
+    "original_supabase_artifact_count": 4,
+    "iam_inline_actions_verified": true
+  },
+  "reproduction_commands": {
+    "database": "python3 -B bin/research-workflow-database.py --queue --output NEW_REPORT",
+    "runtime": "python3 -B bin/prepare-research-runtime.py",
+    "public_browser": "npm run verify:research:production",
+    "server": "python3 -B bin/verify-research-production.py (authorized production operator only; creates a private software fixture)",
+    "limits": "Commands perform bounded software checks, not universal paper verification; future production mutations need explicit authorization."
+  },
+  "evidence_source_hashes": {
+    "cdk.json": "da5025e83ef97cec4adde495c8db9dee7322e48d2d459d2fedf18056e946a716",
+    "lib/research-workflow.ts": "08c473b49ab9f7481c59cb85f5ad2c16f4c9714b8c6d191164c9152b9dd9855b",
+    "bin/verify-research-production.py": "03a91631357e685b437d0a07fe35546c8a05e451dfa956fcddda042bbeeaaeec",
+    "bin/research-workflow-database.py": "76cfb81f938cd50225a963383d9c40f01292e02a0b654a6b8c1242f53b94d7f9",
+    "research-workflow-runtime.json": "3666917097706846b1699c8bc42acfa6734e9ba608bd4d0fdb4ef1e2d5a49b97",
+    ".github/workflows/deploy.yml": "f878592f175ec2323a58b6f90e27ebe8865106de9bcbd23a06b25d6690b7850c",
+    "frontend/scripts/verify-research-production.mjs": "5cf8ac4f94f9222fa6f11287e4f3aa7028f074191199e3466a4a3582bbfa722a"
+  },
+  "changed_since_local_validation": [
+    "/Users/Shared/allstar/jumpserve-infra/lib/research-workflow.ts",
+    "/Users/Shared/allstar/jumpserve-infra/bin/research-workflow-database.py",
+    "/Users/Shared/allstar/jumpserve-infra/test/research-workflow.test.ts"
+  ],
+  "artifact_manifest": [
+    {
+      "path": "docs/research-workflow-release-validation/server/20261007T193404483070Z/production-server-report.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/20261007T193404483070Z/production-server-report.json",
+      "sha256": "0cafd1638287ec3509117652152f7b90efa1e07ff26717a016075231374b33f0",
+      "byte_count": 875,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/20261007T193527325658Z/production-server-report.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/20261007T193527325658Z/production-server-report.json",
+      "sha256": "f8d735e9508fbeb1d131fe19dd39d7deccbff2866f45e77df9cc20a93ac716e5",
+      "byte_count": 867,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/20261007T193619546342Z/production-server-report.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/20261007T193619546342Z/production-server-report.json",
+      "sha256": "2e8014a6f9166616d478e4edcafcfda589e012f6a6ba117dbd8b4463c4206161",
+      "byte_count": 1035,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/20261007T193726747891Z/api-lambda.zip",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/20261007T193726747891Z/api-lambda.zip",
+      "sha256": "58016ca9a8d1566f338323d63164979746e7db8fcd987c95c703fa35593b346e",
+      "byte_count": 24287,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/20261007T193726747891Z/capabilities.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/20261007T193726747891Z/capabilities.json",
+      "sha256": "3d055acfa3c9d19cf3b879ad1f8ae046b1774cf99cdfc0f3b2e8a4913782a6f3",
+      "byte_count": 1001,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/20261007T193726747891Z/fixture-definition.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/20261007T193726747891Z/fixture-definition.json",
+      "sha256": "3212d7d9ff03fd83c5c0a212ba7c731a2aba8aa60498c2416ace68ca1e57cd6c",
+      "byte_count": 215,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/20261007T193726747891Z/fixture-input-0.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/20261007T193726747891Z/fixture-input-0.json",
+      "sha256": "a8314c22c2bd2910027bca0b9b3bb93c3e73e13a7c7919d5ea2d6d1995e1ac6b",
+      "byte_count": 902,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/20261007T193726747891Z/fixture-input-1.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/20261007T193726747891Z/fixture-input-1.json",
+      "sha256": "8ca0929b56eb1ed7e0518251cb1f31a5dc6f4350cc0a98c3bbc424f1f6aaf47b",
+      "byte_count": 751,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/20261007T193726747891Z/private-queue-snapshot.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/20261007T193726747891Z/private-queue-snapshot.json",
+      "sha256": "2539d17169c30d2297baf27b554f94cd04711c945173ee997f04380126ca1e88",
+      "byte_count": 5517,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/20261007T193726747891Z/production-server-report.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/20261007T193726747891Z/production-server-report.json",
+      "sha256": "5aa13ee1abcf528bbf80868b3d9991b35a163eb6a22e8c69aa4500ac97bee19d",
+      "byte_count": 10504,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/20261007T193726747891Z/recorded-measurements.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/20261007T193726747891Z/recorded-measurements.json",
+      "sha256": "a1b72aa501b7cbff2140aa3ff8b55253fbf7adc84c5b0990cb98a9e04131c265",
+      "byte_count": 2640,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/20261007T193726747891Z/recorded-runs.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/20261007T193726747891Z/recorded-runs.json",
+      "sha256": "489be3d0f28f2d58b41604487a80bf14ffc908274cf12768b5227a37d5ac0ac2",
+      "byte_count": 3795,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/20261007T193726747891Z/retrieved-artifact-0.bin",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/20261007T193726747891Z/retrieved-artifact-0.bin",
+      "sha256": "a8314c22c2bd2910027bca0b9b3bb93c3e73e13a7c7919d5ea2d6d1995e1ac6b",
+      "byte_count": 902,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/20261007T193726747891Z/retrieved-artifact-1.bin",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/20261007T193726747891Z/retrieved-artifact-1.bin",
+      "sha256": "8ca0929b56eb1ed7e0518251cb1f31a5dc6f4350cc0a98c3bbc424f1f6aaf47b",
+      "byte_count": 751,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/20261007T193726747891Z/retrieved-artifact-2.bin",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/20261007T193726747891Z/retrieved-artifact-2.bin",
+      "sha256": "0f987a69306d272f4d802fd06e1f846f5fe8922592924f8fe315a80cde8d3289",
+      "byte_count": 4751,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/20261007T193726747891Z/retrieved-artifact-3.bin",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/20261007T193726747891Z/retrieved-artifact-3.bin",
+      "sha256": "c0eb18039b164d53978fc2ceefebc2c93b6f629ac4774c3c4db2d0d9f1007ac3",
+      "byte_count": 4547,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/20261007T193726747891Z/worker-lambda.zip",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/20261007T193726747891Z/worker-lambda.zip",
+      "sha256": "58016ca9a8d1566f338323d63164979746e7db8fcd987c95c703fa35593b346e",
+      "byte_count": 24287,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/amplify-job-105.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/amplify-job-105.json",
+      "sha256": "154db2f9d413705c44f2196f930596a707c4e3c96b538354e6e21e93096142c1",
+      "byte_count": 1112,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/api-cloudwatch-reports-v2.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/api-cloudwatch-reports-v2.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "byte_count": 3,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/api-cloudwatch-reports-v3.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/api-cloudwatch-reports-v3.json",
+      "sha256": "98de3a111dec83b8734d94c82ea29a6600d1a6befb25503b264caf88e8d97c52",
+      "byte_count": 668,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/api-cloudwatch-reports.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/api-cloudwatch-reports.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "byte_count": 3,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/api-inline-policy.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/api-inline-policy.json",
+      "sha256": "468da68f14cdd9687415ba75441a634cd3ba4bddb20dfdfad071a03bc78d49cf",
+      "byte_count": 362,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/available-usage-v1.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/available-usage-v1.json",
+      "sha256": "14b4aa2ab9a70324d70480a2177c4e7a874d21f8f1bcb0fcaf14ab103ec0c347",
+      "byte_count": 697,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/available-usage-v2.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/available-usage-v2.json",
+      "sha256": "6ec6109785d3de3b312cb5b4a540db2745d5e71439b0d926ff6daac36f699112",
+      "byte_count": 6503,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/cdk-deploy-v2.log",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/cdk-deploy-v2.log",
+      "sha256": "5793aaf69a45c7681b4c67d2feb105fdfd07e8115b1a5f63226f6fc7d9439b31",
+      "byte_count": 29765,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/cdk-diff-v2.log",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/cdk-diff-v2.log",
+      "sha256": "30f754d98336cd67aa13e6832cd6f1543510af2918122646c86e667de87bea6d",
+      "byte_count": 29809,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/cdk-outputs-v1.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/cdk-outputs-v1.json",
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "byte_count": 3,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/cdk-outputs-v2.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/cdk-outputs-v2.json",
+      "sha256": "bc9d35791d5a4b4f0a2e46bdec9529051339a6e55a63a502eb602f21ac09f47c",
+      "byte_count": 614,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/cloudformation-failed-v1.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/cloudformation-failed-v1.json",
+      "sha256": "b1f799e0c04a058727ba0bc198603013ed8412ce22f16f0684f824f9daa24e09",
+      "byte_count": 29199,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/cloudformation-success-v2.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/cloudformation-success-v2.json",
+      "sha256": "9bb432cd67e904e24e41e1f3bba2a84e741275a2e4f039927c811d67a646ab3d",
+      "byte_count": 38200,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/database-apply-base-v1.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/database-apply-base-v1.json",
+      "sha256": "9b71f13c67d3193cb4ac8569b7eca7b2b26de1935ba203377b7d6db7b589a326",
+      "byte_count": 4902,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/database-apply-queue-v1.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/database-apply-queue-v1.json",
+      "sha256": "9a0253a6f7f9eb5a72f45b8de6a490246b876ef0fcf870822410d9a440162e8e",
+      "byte_count": 5933,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/database-inspection-v1.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/database-inspection-v1.json",
+      "sha256": "fe7d3ebb5d0740cadf49e098bb0c2acf7873ed1d646a15fd4b97efcf07c72d7f",
+      "byte_count": 225,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/database-postdeploy-v1.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/database-postdeploy-v1.json",
+      "sha256": "141bf0c42f4b0a07e0bebcfa3506b62f31a6a71b038b54fbb7d2a2587b70be5f",
+      "byte_count": 5934,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/template-before.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/template-before.json",
+      "sha256": "81dc5adcfd805f0d925ba35aa433ce95c1443bfeb82d2122f8a1569c78299c20",
+      "byte_count": 117019,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/template-comparison-v1.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/template-comparison-v1.json",
+      "sha256": "a0329ab3b9f5b188f2918713c3b40bf3350b9c293b8f21b9749e29fd13374467",
+      "byte_count": 2671,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/template-comparison-v2.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/template-comparison-v2.json",
+      "sha256": "a1d92f8bad06b262d089b479763fe135d29c37bb4e949b281aaed4486c8e75a9",
+      "byte_count": 2863,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/worker-cloudwatch-reports-v2.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/worker-cloudwatch-reports-v2.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "byte_count": 3,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/worker-cloudwatch-reports-v3.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/worker-cloudwatch-reports-v3.json",
+      "sha256": "7ade9ce958a4a3f1d2cbe2b97f62424c37d6fd221bdc648fbb0fbfe340918e8e",
+      "byte_count": 5355,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/worker-cloudwatch-reports.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/worker-cloudwatch-reports.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "byte_count": 3,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/server/worker-inline-policy.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-release/worker-inline-policy.json",
+      "sha256": "468da68f14cdd9687415ba75441a634cd3ba4bddb20dfdfad071a03bc78d49cf",
+      "byte_count": 362,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/browser/2026-10-07T19-42-57.855Z/browser-report.json",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-production/2026-10-07T19-42-57.855Z/browser-report.json",
+      "sha256": "c0e72964a9b94c7dc14d0b13bce984d05e646cfec9bf7910bc3369863da6f9b6",
+      "byte_count": 1225,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/browser/2026-10-07T19-45-13.798Z/browser-report.json",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-production/2026-10-07T19-45-13.798Z/browser-report.json",
+      "sha256": "f7fcf24f57f53b12f128daac15a6f68a76927f5a11eaaab915be327863815b83",
+      "byte_count": 2715,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/browser/2026-10-07T19-45-13.798Z/desktop-empty-results.png",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-production/2026-10-07T19-45-13.798Z/desktop-empty-results.png",
+      "sha256": "e27824805e596a1a016b8a16dd6239af2511098b20068a366c7d9de4dc4b85e3",
+      "byte_count": 71397,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/browser/2026-10-07T19-45-13.798Z/desktop-methods.png",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-production/2026-10-07T19-45-13.798Z/desktop-methods.png",
+      "sha256": "f5098aa4f55bd4b97df444a3b49c0d80503319cfad95804ee46c10cce307f726",
+      "byte_count": 677596,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/browser/2026-10-07T19-45-13.798Z/existing-ipv6-mobile.png",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-production/2026-10-07T19-45-13.798Z/existing-ipv6-mobile.png",
+      "sha256": "4ab8e25063b43d16f32c3fd87a3989a4a7e5b14b07b6bae9c8929ec216f729f5",
+      "byte_count": 249353,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/browser/2026-10-07T19-45-13.798Z/queue-1365-dark.png",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-production/2026-10-07T19-45-13.798Z/queue-1365-dark.png",
+      "sha256": "a697df72941b7efc2a8bcd60cf10169f4812153248826453139d7db73b02348a",
+      "byte_count": 310100,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/browser/2026-10-07T19-45-13.798Z/queue-1365-light.png",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-production/2026-10-07T19-45-13.798Z/queue-1365-light.png",
+      "sha256": "f4c40a098571513d578b520cef67263f52cdbe91a94c5325ee750edae6553930",
+      "byte_count": 311987,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/browser/2026-10-07T19-45-13.798Z/queue-390-dark.png",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-production/2026-10-07T19-45-13.798Z/queue-390-dark.png",
+      "sha256": "96967b2451d4274a13e2475f80ce4b56251d009dfc1c6a6e977cea6610e336d5",
+      "byte_count": 310853,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/browser/2026-10-07T19-45-13.798Z/queue-390-light.png",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-production/2026-10-07T19-45-13.798Z/queue-390-light.png",
+      "sha256": "eb3c9a19e7883a0b290096f61c16ffe57ca3c4c0f1e93f25ad25e420178c2569",
+      "byte_count": 316577,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/browser/2026-10-07T19-45-13.798Z/teaching-queue-download.json",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-production/2026-10-07T19-45-13.798Z/teaching-queue-download.json",
+      "sha256": "cc491de69f8db2e99ac7438d6a83ec28fa611cd6f8bfbf561b864a2abf13ff5e",
+      "byte_count": 6879,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/research-workflow-release-protocol-v1.md",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/docs/research-workflow-release-protocol-v1.md",
+      "sha256": "faf125be0f00f85d26c4b2b05173ff3ffcaf037a78628d84fb57fef27c499e01",
+      "byte_count": 4128,
+      "copy_retrieval_hash_verified": true
+    },
+    {
+      "path": "docs/research-workflow-release-validation/research-workflow-release-amendment-v2.md",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/docs/research-workflow-release-amendment-v2.md",
+      "sha256": "d350903469e10b1f1b7f170339c1983509a475e3529b800acc0b3e4019782bf2",
+      "byte_count": 2145,
+      "copy_retrieval_hash_verified": true
+    }
+  ],
+  "limitations": [
+    "Original SQL server bytes are not recoverable from catalog verification; submitted migration hashes and apply receipts are preserved",
+    "Intermediate failed verifier outputs are retained, but not every intermediate uncommitted verifier source revision was snapshotted",
+    "CLI snapshots are serialized response evidence, not original HTTP transport captures",
+    "AWS/Supabase/Amplify/Codex charges are unallocated; missing is not zero",
+    "Use the pinned infrastructure release branch for subsequent infrastructure synthesis; pre-release main does not define this research feature"
+  ]
+}

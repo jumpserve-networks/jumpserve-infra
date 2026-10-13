@@ -1,0 +1,174 @@
+
+> jumpserve-infra@0.1.0 cdk:benchmark
+> cdk --app "npx ts-node --prefer-ts-exts bin/benchmark.ts" deploy JumpServeBenchmarkStack --profile jumpserve --require-approval never --outputs-file .test-artifacts/research-release/cdk-outputs-v2.json
+
+Bundling asset JumpServeBenchmarkStack/LaunchBenchmarkFn/Code/Stage...
+
+  ...4831287107aa9aba9b49df137fc1f0d1c2e6b819998e7d3-building/index.js  18.5kb
+
+⚡ Done in 1ms
+Bundling asset JumpServeBenchmarkStack/CleanupBenchmarksFn/Code/Stage...
+
+  ...d16cd323a31972a39648a8a53af30eb93276a13f081377e2-building/index.js  4.7kb
+
+⚡ Done in 1ms
+Bundling asset JumpServeBenchmarkStack/CancelBenchmarkFn/Code/Stage...
+
+  ...ee63b73a77228644b7da13ecc6c60aeee495964c65d77a75-building/index.js  6.0kb
+
+⚡ Done in 1ms
+Bundling asset JumpServeBenchmarkStack/GetBenchmarkLogsFn/Code/Stage...
+
+  ...9c0cc5141b3f85c48896e834b6a134fde7bb9da21ab0649d-building/index.js  3.1kb
+
+⚡ Done in 1ms
+Bundling asset JumpServeBenchmarkStack/BenchmarkIngestFn/Code/Stage...
+
+  ...593190c7862f90f901e8bbdb45b071136dd26f602bdcfae2-building/index.js  4.1kb
+
+⚡ Done in 1ms
+
+✨  Synthesis time: 3.46s
+
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-file-publishing-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-file-publishing-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-file-publishing-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-file-publishing-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-file-publishing-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-file-publishing-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-file-publishing-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-file-publishing-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-deploy-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+JumpServeBenchmarkStack: start: Building JumpServeBenchmarkStack Template
+JumpServeBenchmarkStack: success: Built JumpServeBenchmarkStack Template
+JumpServeBenchmarkStack: start: Publishing JumpServeBenchmarkStack Template (395567831870-us-east-1-476271b4)
+JumpServeBenchmarkStack: success: Published JumpServeBenchmarkStack Template (395567831870-us-east-1-476271b4)
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-deploy-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+JumpServeBenchmarkStack: creating CloudFormation changeset...
+Changeset arn:aws:cloudformation:us-east-1:395567831870:changeSet/cdk-deploy-change-set/b78b7e56-156b-4946-80d4-c09c08fe8337 created and waiting in review for manual execution (--no-execute)
+JumpServeBenchmarkStack: deploying... [1/1]
+JumpServeBenchmarkStack |  0/37 | 2:14:59 PM | UPDATE_IN_PROGRESS   | AWS::CloudFormation::Stack       | JumpServeBenchmarkStack User Initiated
+JumpServeBenchmarkStack |  0/37 | 2:15:04 PM | CREATE_IN_PROGRESS   | AWS::IAM::Role                   | ResearchWorkflow/Api/ServiceRole (ResearchWorkflowApiServiceRole4DB8FBBC) 
+JumpServeBenchmarkStack |  0/37 | 2:15:04 PM | CREATE_IN_PROGRESS   | AWS::IAM::Role                   | ResearchWorkflow/QueueWorker/ServiceRole (ResearchWorkflowQueueWorkerServiceRole210417A9) 
+JumpServeBenchmarkStack |  0/37 | 2:15:04 PM | UPDATE_IN_PROGRESS   | AWS::CDK::Metadata               | CDKMetadata/Default (CDKMetadata) 
+JumpServeBenchmarkStack |  0/37 | 2:15:05 PM | CREATE_IN_PROGRESS   | AWS::IAM::Role                   | ResearchWorkflow/Api/ServiceRole (ResearchWorkflowApiServiceRole4DB8FBBC) Resource creation Initiated
+JumpServeBenchmarkStack |  0/37 | 2:15:05 PM | CREATE_IN_PROGRESS   | AWS::IAM::Role                   | ResearchWorkflow/QueueWorker/ServiceRole (ResearchWorkflowQueueWorkerServiceRole210417A9) Resource creation Initiated
+JumpServeBenchmarkStack |  1/37 | 2:15:05 PM | UPDATE_COMPLETE      | AWS::CDK::Metadata               | CDKMetadata/Default (CDKMetadata) 
+JumpServeBenchmarkStack |  2/37 | 2:15:21 PM | CREATE_COMPLETE      | AWS::IAM::Role                   | ResearchWorkflow/QueueWorker/ServiceRole (ResearchWorkflowQueueWorkerServiceRole210417A9) 
+JumpServeBenchmarkStack |  3/37 | 2:15:21 PM | CREATE_COMPLETE      | AWS::IAM::Role                   | ResearchWorkflow/Api/ServiceRole (ResearchWorkflowApiServiceRole4DB8FBBC) 
+JumpServeBenchmarkStack |  3/37 | 2:15:21 PM | CREATE_IN_PROGRESS   | AWS::IAM::Policy                 | ResearchWorkflow/QueueWorker/ServiceRole/DefaultPolicy (ResearchWorkflowQueueWorkerServiceRoleDefaultPolicy41AC3B22) 
+JumpServeBenchmarkStack |  3/37 | 2:15:21 PM | CREATE_IN_PROGRESS   | AWS::IAM::Policy                 | ResearchWorkflow/Api/ServiceRole/DefaultPolicy (ResearchWorkflowApiServiceRoleDefaultPolicy378FDA82) 
+JumpServeBenchmarkStack |  3/37 | 2:15:22 PM | CREATE_IN_PROGRESS   | AWS::IAM::Policy                 | ResearchWorkflow/QueueWorker/ServiceRole/DefaultPolicy (ResearchWorkflowQueueWorkerServiceRoleDefaultPolicy41AC3B22) Resource creation Initiated
+JumpServeBenchmarkStack |  3/37 | 2:15:22 PM | CREATE_IN_PROGRESS   | AWS::IAM::Policy                 | ResearchWorkflow/Api/ServiceRole/DefaultPolicy (ResearchWorkflowApiServiceRoleDefaultPolicy378FDA82) Resource creation Initiated
+JumpServeBenchmarkStack |  4/37 | 2:15:38 PM | CREATE_COMPLETE      | AWS::IAM::Policy                 | ResearchWorkflow/QueueWorker/ServiceRole/DefaultPolicy (ResearchWorkflowQueueWorkerServiceRoleDefaultPolicy41AC3B22) 
+JumpServeBenchmarkStack |  5/37 | 2:15:38 PM | CREATE_COMPLETE      | AWS::IAM::Policy                 | ResearchWorkflow/Api/ServiceRole/DefaultPolicy (ResearchWorkflowApiServiceRoleDefaultPolicy378FDA82) 
+JumpServeBenchmarkStack |  5/37 | 2:15:39 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Function            | ResearchWorkflow/QueueWorker (ResearchWorkflowQueueWorker702E601D) 
+JumpServeBenchmarkStack |  5/37 | 2:15:39 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Function            | ResearchWorkflow/Api (ResearchWorkflowApiE04EBDAC) 
+JumpServeBenchmarkStack |  5/37 | 2:15:41 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Function            | ResearchWorkflow/Api (ResearchWorkflowApiE04EBDAC) Resource creation Initiated
+JumpServeBenchmarkStack |  5/37 | 2:15:41 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Function            | ResearchWorkflow/QueueWorker (ResearchWorkflowQueueWorker702E601D) Resource creation Initiated
+JumpServeBenchmarkStack |  6/37 | 2:15:48 PM | CREATE_COMPLETE      | AWS::Lambda::Function            | ResearchWorkflow/QueueWorker (ResearchWorkflowQueueWorker702E601D) 
+JumpServeBenchmarkStack |  6/37 | 2:15:48 PM | CREATE_IN_PROGRESS   | AWS::Events::Rule                | ResearchWorkflow/QueuePoll (ResearchWorkflowQueuePoll49F7FA3B) 
+JumpServeBenchmarkStack |  6/37 | 2:15:48 PM | CREATE_IN_PROGRESS   | AWS::Logs::LogGroup              | ResearchWorkflow/QueueWorker/LogGroup (ResearchWorkflowQueueWorkerLogGroup7580A36A) 
+JumpServeBenchmarkStack |  6/37 | 2:15:48 PM | CREATE_IN_PROGRESS   | AWS::Lambda::EventInvokeConfig   | ResearchWorkflow/QueueWorker/EventInvokeConfig (ResearchWorkflowQueueWorkerEventInvokeConfig6F5A9ACA) 
+JumpServeBenchmarkStack |  6/37 | 2:15:49 PM | CREATE_IN_PROGRESS   | AWS::Events::Rule                | ResearchWorkflow/QueuePoll (ResearchWorkflowQueuePoll49F7FA3B) Resource creation Initiated
+JumpServeBenchmarkStack |  6/37 | 2:15:49 PM | CREATE_IN_PROGRESS   | AWS::Logs::LogGroup              | ResearchWorkflow/QueueWorker/LogGroup (ResearchWorkflowQueueWorkerLogGroup7580A36A) Resource creation Initiated
+JumpServeBenchmarkStack |  6/37 | 2:15:49 PM | CREATE_IN_PROGRESS   | AWS::Lambda::EventInvokeConfig   | ResearchWorkflow/QueueWorker/EventInvokeConfig (ResearchWorkflowQueueWorkerEventInvokeConfig6F5A9ACA) Resource creation Initiated
+JumpServeBenchmarkStack |  7/37 | 2:15:50 PM | CREATE_COMPLETE      | AWS::Lambda::EventInvokeConfig   | ResearchWorkflow/QueueWorker/EventInvokeConfig (ResearchWorkflowQueueWorkerEventInvokeConfig6F5A9ACA) 
+JumpServeBenchmarkStack |  8/37 | 2:15:56 PM | CREATE_COMPLETE      | AWS::Lambda::Function            | ResearchWorkflow/Api (ResearchWorkflowApiE04EBDAC) 
+JumpServeBenchmarkStack |  8/37 | 2:15:57 PM | CREATE_IN_PROGRESS   | AWS::Logs::LogGroup              | ResearchWorkflow/Api/LogGroup (ResearchWorkflowApiLogGroup640C45EA) 
+JumpServeBenchmarkStack |  8/37 | 2:15:57 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies--{studyId}--publish/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesstudyIdpublishResearchWorkflowIntegrationPermission0FFD424F) 
+JumpServeBenchmarkStack |  8/37 | 2:15:57 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies--{studyId}--runs/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesstudyIdrunsResearchWorkflowIntegrationPermissionBEC3A01A) 
+JumpServeBenchmarkStack |  8/37 | 2:15:57 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies--{studyId}--queue-actions/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesstudyIdqueueactionsResearchWorkflowIntegrationPermission1174F416) 
+JumpServeBenchmarkStack |  8/37 | 2:15:57 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/GET--research--studies/ResearchWorkflowIntegration-Permission (BenchmarkApiGETresearchstudiesResearchWorkflowIntegrationPermissionC73D5AD8) 
+JumpServeBenchmarkStack |  8/37 | 2:15:57 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/GET--research--studies--{studyId}/ResearchWorkflowIntegration-Permission (BenchmarkApiGETresearchstudiesstudyIdResearchWorkflowIntegrationPermission74A7B67F) 
+JumpServeBenchmarkStack |  8/37 | 2:15:57 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies--{studyId}--queue/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermission186C1D79) 
+JumpServeBenchmarkStack |  8/37 | 2:15:57 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Integration   | BenchmarkApi/GET--research--capabilities/ResearchWorkflowIntegration (BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50) 
+JumpServeBenchmarkStack |  8/37 | 2:15:57 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/GET--research--studies--{studyId}--queue/ResearchWorkflowIntegration-Permission (BenchmarkApiGETresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermissionA15C6778) 
+JumpServeBenchmarkStack |  8/37 | 2:15:57 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/GET--research--capabilities/ResearchWorkflowIntegration-Permission (BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegrationPermissionA0DE747F) 
+JumpServeBenchmarkStack |  8/37 | 2:15:57 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies--{studyId}--records/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesstudyIdrecordsResearchWorkflowIntegrationPermission1B3A864E) 
+JumpServeBenchmarkStack |  8/37 | 2:15:57 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies--{studyId}--protocols/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesstudyIdprotocolsResearchWorkflowIntegrationPermission6C561B92) 
+JumpServeBenchmarkStack |  8/37 | 2:15:57 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesResearchWorkflowIntegrationPermission3977E87F) 
+JumpServeBenchmarkStack |  8/37 | 2:15:57 PM | CREATE_IN_PROGRESS   | AWS::Logs::LogGroup              | ResearchWorkflow/Api/LogGroup (ResearchWorkflowApiLogGroup640C45EA) Resource creation Initiated
+JumpServeBenchmarkStack |  8/37 | 2:15:57 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies--{studyId}--runs/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesstudyIdrunsResearchWorkflowIntegrationPermissionBEC3A01A) Resource creation Initiated
+JumpServeBenchmarkStack |  8/37 | 2:15:58 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Integration   | BenchmarkApi/GET--research--capabilities/ResearchWorkflowIntegration (BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50) Resource creation Initiated
+JumpServeBenchmarkStack |  8/37 | 2:15:58 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/GET--research--studies--{studyId}/ResearchWorkflowIntegration-Permission (BenchmarkApiGETresearchstudiesstudyIdResearchWorkflowIntegrationPermission74A7B67F) Resource creation Initiated
+JumpServeBenchmarkStack |  8/37 | 2:15:58 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesResearchWorkflowIntegrationPermission3977E87F) Resource creation Initiated
+JumpServeBenchmarkStack |  8/37 | 2:15:58 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/GET--research--capabilities/ResearchWorkflowIntegration-Permission (BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegrationPermissionA0DE747F) Resource creation Initiated
+JumpServeBenchmarkStack |  8/37 | 2:15:58 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies--{studyId}--publish/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesstudyIdpublishResearchWorkflowIntegrationPermission0FFD424F) Resource creation Initiated
+JumpServeBenchmarkStack |  8/37 | 2:15:58 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/GET--research--studies--{studyId}--queue/ResearchWorkflowIntegration-Permission (BenchmarkApiGETresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermissionA15C6778) Resource creation Initiated
+JumpServeBenchmarkStack |  9/37 | 2:15:58 PM | CREATE_COMPLETE      | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies--{studyId}--runs/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesstudyIdrunsResearchWorkflowIntegrationPermissionBEC3A01A) 
+JumpServeBenchmarkStack | 10/37 | 2:15:58 PM | CREATE_COMPLETE      | AWS::Lambda::Permission          | BenchmarkApi/GET--research--studies--{studyId}/ResearchWorkflowIntegration-Permission (BenchmarkApiGETresearchstudiesstudyIdResearchWorkflowIntegrationPermission74A7B67F) 
+JumpServeBenchmarkStack | 11/37 | 2:15:58 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Integration   | BenchmarkApi/GET--research--capabilities/ResearchWorkflowIntegration (BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50) 
+JumpServeBenchmarkStack | 12/37 | 2:15:58 PM | CREATE_COMPLETE      | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesResearchWorkflowIntegrationPermission3977E87F) 
+JumpServeBenchmarkStack | 13/37 | 2:15:58 PM | CREATE_COMPLETE      | AWS::Logs::LogGroup              | ResearchWorkflow/QueueWorker/LogGroup (ResearchWorkflowQueueWorkerLogGroup7580A36A) 
+JumpServeBenchmarkStack | 14/37 | 2:15:58 PM | CREATE_COMPLETE      | AWS::Lambda::Permission          | BenchmarkApi/GET--research--capabilities/ResearchWorkflowIntegration-Permission (BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegrationPermissionA0DE747F) 
+JumpServeBenchmarkStack | 15/37 | 2:15:58 PM | CREATE_COMPLETE      | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies--{studyId}--publish/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesstudyIdpublishResearchWorkflowIntegrationPermission0FFD424F) 
+JumpServeBenchmarkStack | 16/37 | 2:15:58 PM | CREATE_COMPLETE      | AWS::Lambda::Permission          | BenchmarkApi/GET--research--studies--{studyId}--queue/ResearchWorkflowIntegration-Permission (BenchmarkApiGETresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermissionA15C6778) 
+JumpServeBenchmarkStack | 16/37 | 2:15:59 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/GET--research--studies (BenchmarkApiGETresearchstudiesE9C7241A) 
+JumpServeBenchmarkStack | 16/37 | 2:15:59 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies (BenchmarkApiPOSTresearchstudies3ADF7B43) 
+JumpServeBenchmarkStack | 16/37 | 2:15:59 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies--{studyId}--protocols (BenchmarkApiPOSTresearchstudiesstudyIdprotocols60FC7808) 
+JumpServeBenchmarkStack | 16/37 | 2:15:59 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/GET--research--capabilities (BenchmarkApiGETresearchcapabilitiesE53A290C) 
+JumpServeBenchmarkStack | 16/37 | 2:15:59 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/GET--research--studies--{studyId}--queue (BenchmarkApiGETresearchstudiesstudyIdqueueC964316E) 
+JumpServeBenchmarkStack | 16/37 | 2:15:59 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/GET--research--studies--{studyId} (BenchmarkApiGETresearchstudiesstudyIdDBED4732) 
+JumpServeBenchmarkStack | 16/37 | 2:15:59 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies--{studyId}--runs (BenchmarkApiPOSTresearchstudiesstudyIdrunsA58EB3DB) 
+JumpServeBenchmarkStack | 16/37 | 2:15:59 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies--{studyId}--queue-actions (BenchmarkApiPOSTresearchstudiesstudyIdqueueactions86100889) 
+JumpServeBenchmarkStack | 16/37 | 2:15:59 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies--{studyId}--publish (BenchmarkApiPOSTresearchstudiesstudyIdpublish5CB0323E) 
+JumpServeBenchmarkStack | 16/37 | 2:15:59 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies--{studyId}--records (BenchmarkApiPOSTresearchstudiesstudyIdrecordsB1E70928) 
+JumpServeBenchmarkStack | 16/37 | 2:15:59 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies--{studyId}--queue (BenchmarkApiPOSTresearchstudiesstudyIdqueue6C948D7E) 
+JumpServeBenchmarkStack | 16/37 | 2:15:59 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies--{studyId}--runs (BenchmarkApiPOSTresearchstudiesstudyIdrunsA58EB3DB) Resource creation Initiated
+JumpServeBenchmarkStack | 16/37 | 2:15:59 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/GET--research--studies--{studyId}--queue (BenchmarkApiGETresearchstudiesstudyIdqueueC964316E) Resource creation Initiated
+JumpServeBenchmarkStack | 16/37 | 2:16:00 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies--{studyId}--queue-actions (BenchmarkApiPOSTresearchstudiesstudyIdqueueactions86100889) Resource creation Initiated
+JumpServeBenchmarkStack | 16/37 | 2:16:00 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/GET--research--capabilities (BenchmarkApiGETresearchcapabilitiesE53A290C) Resource creation Initiated
+JumpServeBenchmarkStack | 16/37 | 2:16:00 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/GET--research--studies--{studyId} (BenchmarkApiGETresearchstudiesstudyIdDBED4732) Resource creation Initiated
+JumpServeBenchmarkStack | 16/37 | 2:16:00 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/GET--research--studies (BenchmarkApiGETresearchstudiesE9C7241A) Resource creation Initiated
+JumpServeBenchmarkStack | 16/37 | 2:16:00 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies--{studyId}--records (BenchmarkApiPOSTresearchstudiesstudyIdrecordsB1E70928) Resource creation Initiated
+JumpServeBenchmarkStack | 16/37 | 2:16:00 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies--{studyId}--publish (BenchmarkApiPOSTresearchstudiesstudyIdpublish5CB0323E) Resource creation Initiated
+JumpServeBenchmarkStack | 16/37 | 2:16:00 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies--{studyId}--queue (BenchmarkApiPOSTresearchstudiesstudyIdqueue6C948D7E) Resource creation Initiated
+JumpServeBenchmarkStack | 17/37 | 2:16:00 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies--{studyId}--runs (BenchmarkApiPOSTresearchstudiesstudyIdrunsA58EB3DB) 
+JumpServeBenchmarkStack | 18/37 | 2:16:00 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Route         | BenchmarkApi/GET--research--studies--{studyId}--queue (BenchmarkApiGETresearchstudiesstudyIdqueueC964316E) 
+JumpServeBenchmarkStack | 19/37 | 2:16:00 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies--{studyId}--queue-actions (BenchmarkApiPOSTresearchstudiesstudyIdqueueactions86100889) 
+JumpServeBenchmarkStack | 20/37 | 2:16:00 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Route         | BenchmarkApi/GET--research--studies--{studyId} (BenchmarkApiGETresearchstudiesstudyIdDBED4732) 
+JumpServeBenchmarkStack | 21/37 | 2:16:00 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Route         | BenchmarkApi/GET--research--capabilities (BenchmarkApiGETresearchcapabilitiesE53A290C) 
+JumpServeBenchmarkStack | 22/37 | 2:16:00 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Route         | BenchmarkApi/GET--research--studies (BenchmarkApiGETresearchstudiesE9C7241A) 
+JumpServeBenchmarkStack | 23/37 | 2:16:00 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies--{studyId}--records (BenchmarkApiPOSTresearchstudiesstudyIdrecordsB1E70928) 
+JumpServeBenchmarkStack | 24/37 | 2:16:00 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies--{studyId}--publish (BenchmarkApiPOSTresearchstudiesstudyIdpublish5CB0323E) 
+JumpServeBenchmarkStack | 25/37 | 2:16:00 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies--{studyId}--queue (BenchmarkApiPOSTresearchstudiesstudyIdqueue6C948D7E) 
+JumpServeBenchmarkStack | 25/37 | 2:16:01 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies (BenchmarkApiPOSTresearchstudies3ADF7B43) Resource creation Initiated
+JumpServeBenchmarkStack | 25/37 | 2:16:01 PM | CREATE_IN_PROGRESS   | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies--{studyId}--protocols (BenchmarkApiPOSTresearchstudiesstudyIdprotocols60FC7808) Resource creation Initiated
+JumpServeBenchmarkStack | 26/37 | 2:16:01 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies (BenchmarkApiPOSTresearchstudies3ADF7B43) 
+JumpServeBenchmarkStack | 27/37 | 2:16:02 PM | CREATE_COMPLETE      | AWS::ApiGatewayV2::Route         | BenchmarkApi/POST--research--studies--{studyId}--protocols (BenchmarkApiPOSTresearchstudiesstudyIdprotocols60FC7808) 
+JumpServeBenchmarkStack | 27/37 | 2:16:02 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/GET--research--studies/ResearchWorkflowIntegration-Permission (BenchmarkApiGETresearchstudiesResearchWorkflowIntegrationPermissionC73D5AD8) Resource creation Initiated
+JumpServeBenchmarkStack | 27/37 | 2:16:02 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies--{studyId}--records/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesstudyIdrecordsResearchWorkflowIntegrationPermission1B3A864E) Resource creation Initiated
+JumpServeBenchmarkStack | 27/37 | 2:16:02 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies--{studyId}--protocols/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesstudyIdprotocolsResearchWorkflowIntegrationPermission6C561B92) Resource creation Initiated
+JumpServeBenchmarkStack | 27/37 | 2:16:02 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies--{studyId}--queue-actions/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesstudyIdqueueactionsResearchWorkflowIntegrationPermission1174F416) Resource creation Initiated
+JumpServeBenchmarkStack | 28/37 | 2:16:03 PM | CREATE_COMPLETE      | AWS::Lambda::Permission          | BenchmarkApi/GET--research--studies/ResearchWorkflowIntegration-Permission (BenchmarkApiGETresearchstudiesResearchWorkflowIntegrationPermissionC73D5AD8) 
+JumpServeBenchmarkStack | 29/37 | 2:16:03 PM | CREATE_COMPLETE      | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies--{studyId}--records/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesstudyIdrecordsResearchWorkflowIntegrationPermission1B3A864E) 
+JumpServeBenchmarkStack | 30/37 | 2:16:03 PM | CREATE_COMPLETE      | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies--{studyId}--protocols/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesstudyIdprotocolsResearchWorkflowIntegrationPermission6C561B92) 
+JumpServeBenchmarkStack | 31/37 | 2:16:03 PM | CREATE_COMPLETE      | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies--{studyId}--queue-actions/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesstudyIdqueueactionsResearchWorkflowIntegrationPermission1174F416) 
+JumpServeBenchmarkStack | 32/37 | 2:16:06 PM | CREATE_COMPLETE      | AWS::Logs::LogGroup              | ResearchWorkflow/Api/LogGroup (ResearchWorkflowApiLogGroup640C45EA) 
+JumpServeBenchmarkStack | 32/37 | 2:16:12 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies--{studyId}--queue/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermission186C1D79) Resource creation Initiated
+JumpServeBenchmarkStack | 33/37 | 2:16:12 PM | CREATE_COMPLETE      | AWS::Lambda::Permission          | BenchmarkApi/POST--research--studies--{studyId}--queue/ResearchWorkflowIntegration-Permission (BenchmarkApiPOSTresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermission186C1D79) 
+JumpServeBenchmarkStack | 34/37 | 2:16:50 PM | CREATE_COMPLETE      | AWS::Events::Rule                | ResearchWorkflow/QueuePoll (ResearchWorkflowQueuePoll49F7FA3B) 
+JumpServeBenchmarkStack | 34/37 | 2:16:51 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | ResearchWorkflow/QueuePoll/AllowEventRuleJumpServeBenchmarkStackResearchWorkflowQueueWorkerDD2E7DD7 (ResearchWorkflowQueuePollAllowEventRuleJumpServeBenchmarkStackResearchWorkflowQueueWorkerDD2E7DD771A9A7E5) 
+JumpServeBenchmarkStack | 34/37 | 2:16:52 PM | CREATE_IN_PROGRESS   | AWS::Lambda::Permission          | ResearchWorkflow/QueuePoll/AllowEventRuleJumpServeBenchmarkStackResearchWorkflowQueueWorkerDD2E7DD7 (ResearchWorkflowQueuePollAllowEventRuleJumpServeBenchmarkStackResearchWorkflowQueueWorkerDD2E7DD771A9A7E5) Resource creation Initiated
+JumpServeBenchmarkStack | 35/37 | 2:16:52 PM | CREATE_COMPLETE      | AWS::Lambda::Permission          | ResearchWorkflow/QueuePoll/AllowEventRuleJumpServeBenchmarkStackResearchWorkflowQueueWorkerDD2E7DD7 (ResearchWorkflowQueuePollAllowEventRuleJumpServeBenchmarkStackResearchWorkflowQueueWorkerDD2E7DD771A9A7E5) 
+JumpServeBenchmarkStack | 36/37 | 2:16:54 PM | UPDATE_COMPLETE_CLEA | AWS::CloudFormation::Stack       | JumpServeBenchmarkStack 
+JumpServeBenchmarkStack | 37/37 | 2:16:56 PM | UPDATE_COMPLETE      | AWS::CloudFormation::Stack       | JumpServeBenchmarkStack 
+
+ ✅  JumpServeBenchmarkStack
+
+✨  Deployment time: 123.02s
+
+Outputs:
+JumpServeBenchmarkStack.BenchmarkApiUrl = https://d3o7xdethb.execute-api.us-east-1.amazonaws.com
+JumpServeBenchmarkStack.BenchmarkImageId = ami-0808d1157e26c65cb
+JumpServeBenchmarkStack.BenchmarkImagePipelineRoleArn = arn:aws:iam::395567831870:role/JumpServeBenchmarkImageBuilder
+JumpServeBenchmarkStack.BenchmarkSecurityGroupId = sg-08c2146ece4519d74
+JumpServeBenchmarkStack.RealWorldJobsTable = JumpServeBenchmarkStack-RealWorldTestsJobsB46B0892-1ON1F6QD0XXNC
+JumpServeBenchmarkStack.RealWorldResultsBucket = jumpservebenchmarkstack-realworldtestsresultsfde9b-uqd7mknd6tve
+JumpServeBenchmarkStack.ResearchWorkflowApiUrl = https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/research
+Stack ARN:
+arn:aws:cloudformation:us-east-1:395567831870:stack/JumpServeBenchmarkStack/de161ef0-5ab8-11f1-afd0-12c10299888f
+
+✨  Total time: 126.47s
+

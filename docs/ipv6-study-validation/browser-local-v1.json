@@ -1,0 +1,51 @@
+{
+  "id": "ipv6-browser-local-v1",
+  "at": "2026-10-06T14:07:51.805252+00:00",
+  "reviewer": {
+    "identity": "Codex primary implementer",
+    "type": "AI",
+    "independence": "No human or independent review"
+  },
+  "origin": "http://127.0.0.1:3000",
+  "viewports": {
+    "desktop": [
+      1440,
+      1000
+    ],
+    "mobile": [
+      390,
+      844
+    ]
+  },
+  "completed": {
+    "results": "Actual stored1152comparisons/144configurations; TIMEOUT and packet bars and 12 equivalent rows inspected",
+    "controls": "EpochpreLGI\u219221/21,providerLGI,EDNS512\u2192not compared; mobile cohortno-dnssec/fragment metric\u2192IPv4packet80/82 versusIPv6/DNS81/82",
+    "methods": "15claimrecords,lockedprotocols,failedemptydurationcontrol",
+    "literature": "74records; reviewdefinition,partial/notreviewed/unavailable and rejectedidentitycorrections visible",
+    "themes": "Desktop and mobile light/dark inspected through the shared theme control",
+    "navigation": "Overview/results/methods/literature/chat reached through shared paths; direct result configuration link preserved in login next query",
+    "exports": "HTTP200 API/data, ZIP and everymemberhash verified separately",
+    "console_errors": [],
+    "global_horizontal_overflow": "none on completed results/methods; initial literature overflow retained, corrected min-width/wrapping verified390px"
+  },
+  "missing_state": {
+    "screenshots": [
+      "desktop-unavailable.png",
+      "mobile-unavailable.png"
+    ],
+    "conditions": "Actual temporary metadata-unavailable state during source amendment; explicit unavailable notice, no substitutedzero"
+  },
+  "invalid_state": {
+    "screenshots": [
+      "desktop-invalid.png",
+      "mobile-invalid.png"
+    ],
+    "conditions": "Temporary pure-component QA route rendered cloned statistics with NaN mean/null ranges,n0/invalid1; no DB writes. Desktop/mobile show invalid/missing and no drawable valid bars. Route removed and404verified. Fixture is not scientific data."
+  },
+  "authenticated_chat": "Not exercised: no legitimate Google session. Actual local auth-required navigation preserves configuration query; no message sent.",
+  "react_review": {
+    "pass": true,
+    "checks": "Hooks unconditional, stable keys, namedcontrols,finitebarvalues,single-stringSVGtitle,sharedBaseUIcomponents,LinkButtonnativeButtonfalse,globaltheme,serverreadqueries,publicprojection,noservicekeyinbrowser"
+  },
+  "software_development_failures_retained": "Initial mobile bibliography overflow and transient unavailable screenshots retained; new frontend provenance test failed due incomplete fixture fields, corrected before release; early publication test called wrong function, corrected to exact rollback-only expected SQLERRM checks."
+}

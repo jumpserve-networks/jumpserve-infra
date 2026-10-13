@@ -1,0 +1,250 @@
+{
+  "version": 1,
+  "started_at": "2026-10-07T19:37:26.751957+00:00",
+  "protocol": "research-workflow-release-protocol-v1",
+  "amendment": "research-workflow-release-amendment-v2",
+  "checks": [
+    {
+      "name": "deployed resources and original Lambda byte identities",
+      "passed": true,
+      "evidence": {
+        "functions": [
+          {
+            "name": "JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+            "handler": "api.handler",
+            "memory_mb": 512,
+            "timeout_seconds": 29,
+            "reserved_concurrency": null,
+            "code_sha256": "WAFsqajRVm8zgyPWMWSXl0bn24/NmHyVxwP6NVk7NG4=",
+            "zip_original_sha256": "58016ca9a8d1566f338323d63164979746e7db8fcd987c95c703fa35593b346e",
+            "runtime_file_hashes": {
+              "api.py": "ef83d2b52544799ca2518d299a9bd6d569b7d90f794c9ac0ee71ddcdf2f3e772",
+              "workflow.py": "e357beeab05c5dc60d0d1354826d771026895afd8bd1ee91b68f7896d2c8713c",
+              "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+              "store.py": "bde519e60a63ac6ff942e6d6749300a2d151cfccf33594299cf1f3756ea549e6",
+              "scheduler.py": "1a6ded589085e298eb587a45975086078c2fe5b4bbecfdd07dccc7f0187c1465",
+              "worker.py": "8d94bc9e5f6b326065c925932be24b09676f87d0b727bd4fba6bb490f0c7ae6a"
+            }
+          },
+          {
+            "name": "JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+            "handler": "worker.handler",
+            "memory_mb": 512,
+            "timeout_seconds": 180,
+            "reserved_concurrency": null,
+            "code_sha256": "WAFsqajRVm8zgyPWMWSXl0bn24/NmHyVxwP6NVk7NG4=",
+            "zip_original_sha256": "58016ca9a8d1566f338323d63164979746e7db8fcd987c95c703fa35593b346e",
+            "runtime_file_hashes": {
+              "api.py": "ef83d2b52544799ca2518d299a9bd6d569b7d90f794c9ac0ee71ddcdf2f3e772",
+              "workflow.py": "e357beeab05c5dc60d0d1354826d771026895afd8bd1ee91b68f7896d2c8713c",
+              "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+              "store.py": "bde519e60a63ac6ff942e6d6749300a2d151cfccf33594299cf1f3756ea549e6",
+              "scheduler.py": "1a6ded589085e298eb587a45975086078c2fe5b4bbecfdd07dccc7f0187c1465",
+              "worker.py": "8d94bc9e5f6b326065c925932be24b09676f87d0b727bd4fba6bb490f0c7ae6a"
+            }
+          }
+        ],
+        "schedule": {
+          "name": "JumpServeBenchmarkStack-ResearchWorkflowQueuePoll49-grIao71uqz6k",
+          "state": "ENABLED",
+          "expression": "rate(1 minute)",
+          "retry_policy": {
+            "MaximumRetryAttempts": 0,
+            "MaximumEventAgeInSeconds": 60
+          }
+        },
+        "account_concurrency": 10,
+        "unreserved_pool": 10,
+        "scope": "Shared hosting pool includes other functions; database queued-work limits are separate."
+      },
+      "wall_seconds": 6.293497415999809
+    },
+    {
+      "name": "public API and unauthorized request denial",
+      "passed": true,
+      "evidence": {
+        "capabilities": {
+          "version": "research-workflow-v1",
+          "adapters": [
+            "matched-numeric-v1"
+          ],
+          "queue": {
+            "version": "research-queue-v1",
+            "limits": {
+              "global_jobs": 4,
+              "study_jobs": 2,
+              "invocation_jobs": 2,
+              "lease_seconds": 600,
+              "input_bytes": 256000,
+              "observations": 1000,
+              "algorithm_wall_seconds": 10,
+              "study_queue_jobs": 1000,
+              "automatic_retries": 0
+            },
+            "workers_enabled": true,
+            "claim_labels_automatic": false
+          },
+          "body_bytes": 512000,
+          "interactive_observations": 1000,
+          "interactive_wall_seconds": 10,
+          "labels": {
+            "reproduced": "The declared check meets its criterion under the recorded conditions; broader validity is not implied.",
+            "discrepant": "Examined evidence conflicts with the claim or declared criterion; comparability limits remain explicit.",
+            "inconclusive": "Relevant evidence was examined but cannot resolve the claim within the declared scope.",
+            "untested": "No adequate check has been completed; a plan or citation is not a test."
+          },
+          "arbitrary_code_execution": false,
+          "generic_ai_prompt": "not enabled; requires independent module evaluation and publication"
+        },
+        "public_studies": 0,
+        "unauthenticated_operations_denied": 5,
+        "forged_bearer_denied": true
+      },
+      "wall_seconds": 4.0656615829993825
+    },
+    {
+      "name": "scheduled private controls and remote original-byte hash verification",
+      "passed": true,
+      "evidence": {
+        "jobs": 2,
+        "statuses": [
+          "awaiting-review",
+          "awaiting-review"
+        ],
+        "run_statuses": [
+          "complete",
+          "partial"
+        ],
+        "measurements": 4,
+        "missing": 1,
+        "recorded_zero": 1,
+        "assessments_created": 0,
+        "published": false,
+        "artifacts": [
+          {
+            "id": "393f8771-600c-5258-8fdd-c10bb55d0bd3",
+            "sha256": "a8314c22c2bd2910027bca0b9b3bb93c3e73e13a7c7919d5ea2d6d1995e1ac6b",
+            "byte_count": 902,
+            "retrieved_hash_verified": true
+          },
+          {
+            "id": "1a1d7268-b069-5ca4-8e0a-14917b3448df",
+            "sha256": "8ca0929b56eb1ed7e0518251cb1f31a5dc6f4350cc0a98c3bbc424f1f6aaf47b",
+            "byte_count": 751,
+            "retrieved_hash_verified": true
+          },
+          {
+            "id": "1bfb048e-9f30-5a0d-9b11-c04d85c731f8",
+            "sha256": "0f987a69306d272f4d802fd06e1f846f5fe8922592924f8fe315a80cde8d3289",
+            "byte_count": 4751,
+            "retrieved_hash_verified": true
+          },
+          {
+            "id": "bf6cfdb5-dc6c-5ee1-a5aa-2a861687f8b2",
+            "sha256": "c0eb18039b164d53978fc2ceefebc2c93b6f629ac4774c3c4db2d0d9f1007ac3",
+            "byte_count": 4547,
+            "retrieved_hash_verified": true
+          }
+        ],
+        "claiming_invocations": 1,
+        "trigger": "Existing one-minute EventBridge schedule; no direct worker invocation",
+        "scope": "Actual scheduled worker, database and remote original-byte round trips; service-operator setup, not authenticated Google actions"
+      },
+      "wall_seconds": 58.92385045799983
+    }
+  ],
+  "passed": true,
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independence": "Not independent"
+  },
+  "design": "Release development regressions; private synthetic numerical data, no paper assessment or held-out evaluation.",
+  "authenticated_google_request_verified": false,
+  "measured_charges_usd": null,
+  "model_usage": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "stack_id": "arn:aws:cloudformation:us-east-1:395567831870:stack/JumpServeBenchmarkStack/de161ef0-5ab8-11f1-afd0-12c10299888f",
+    "frontend": "https://jumpserve.quaint-lab.org"
+  },
+  "private_fixture": {
+    "study_id": "278e43a8-d86a-466f-a995-3cf9aa07f35c",
+    "actor_identity_kind": "Generated trusted operator fixture identity; not an authenticated user",
+    "data_origin": "synthetic software release fixture",
+    "published": false,
+    "job_ids": [
+      "2c22f146-fb8f-4ff1-96cd-0449a16fbad9",
+      "d807f998-03e6-47bc-ba8c-f1537008f6f5"
+    ]
+  },
+  "ended_at": "2026-10-07T19:38:36.036123+00:00",
+  "artifacts": [
+    {
+      "path": ".test-artifacts/research-release/20261007T193726747891Z/api-lambda.zip",
+      "sha256": "58016ca9a8d1566f338323d63164979746e7db8fcd987c95c703fa35593b346e",
+      "byte_count": 24287
+    },
+    {
+      "path": ".test-artifacts/research-release/20261007T193726747891Z/capabilities.json",
+      "sha256": "3d055acfa3c9d19cf3b879ad1f8ae046b1774cf99cdfc0f3b2e8a4913782a6f3",
+      "byte_count": 1001
+    },
+    {
+      "path": ".test-artifacts/research-release/20261007T193726747891Z/fixture-definition.json",
+      "sha256": "3212d7d9ff03fd83c5c0a212ba7c731a2aba8aa60498c2416ace68ca1e57cd6c",
+      "byte_count": 215
+    },
+    {
+      "path": ".test-artifacts/research-release/20261007T193726747891Z/fixture-input-0.json",
+      "sha256": "a8314c22c2bd2910027bca0b9b3bb93c3e73e13a7c7919d5ea2d6d1995e1ac6b",
+      "byte_count": 902
+    },
+    {
+      "path": ".test-artifacts/research-release/20261007T193726747891Z/fixture-input-1.json",
+      "sha256": "8ca0929b56eb1ed7e0518251cb1f31a5dc6f4350cc0a98c3bbc424f1f6aaf47b",
+      "byte_count": 751
+    },
+    {
+      "path": ".test-artifacts/research-release/20261007T193726747891Z/private-queue-snapshot.json",
+      "sha256": "2539d17169c30d2297baf27b554f94cd04711c945173ee997f04380126ca1e88",
+      "byte_count": 5517
+    },
+    {
+      "path": ".test-artifacts/research-release/20261007T193726747891Z/recorded-measurements.json",
+      "sha256": "a1b72aa501b7cbff2140aa3ff8b55253fbf7adc84c5b0990cb98a9e04131c265",
+      "byte_count": 2640
+    },
+    {
+      "path": ".test-artifacts/research-release/20261007T193726747891Z/recorded-runs.json",
+      "sha256": "489be3d0f28f2d58b41604487a80bf14ffc908274cf12768b5227a37d5ac0ac2",
+      "byte_count": 3795
+    },
+    {
+      "path": ".test-artifacts/research-release/20261007T193726747891Z/retrieved-artifact-0.bin",
+      "sha256": "a8314c22c2bd2910027bca0b9b3bb93c3e73e13a7c7919d5ea2d6d1995e1ac6b",
+      "byte_count": 902
+    },
+    {
+      "path": ".test-artifacts/research-release/20261007T193726747891Z/retrieved-artifact-1.bin",
+      "sha256": "8ca0929b56eb1ed7e0518251cb1f31a5dc6f4350cc0a98c3bbc424f1f6aaf47b",
+      "byte_count": 751
+    },
+    {
+      "path": ".test-artifacts/research-release/20261007T193726747891Z/retrieved-artifact-2.bin",
+      "sha256": "0f987a69306d272f4d802fd06e1f846f5fe8922592924f8fe315a80cde8d3289",
+      "byte_count": 4751
+    },
+    {
+      "path": ".test-artifacts/research-release/20261007T193726747891Z/retrieved-artifact-3.bin",
+      "sha256": "c0eb18039b164d53978fc2ceefebc2c93b6f629ac4774c3c4db2d0d9f1007ac3",
+      "byte_count": 4547
+    },
+    {
+      "path": ".test-artifacts/research-release/20261007T193726747891Z/worker-lambda.zip",
+      "sha256": "58016ca9a8d1566f338323d63164979746e7db8fcd987c95c703fa35593b346e",
+      "byte_count": 24287
+    }
+  ]
+}

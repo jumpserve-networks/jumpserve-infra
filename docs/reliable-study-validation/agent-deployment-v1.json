@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-05T02:18:25.572158+00:00",
+  "aws_account": "395567831870",
+  "stack": "JumpServeAgentStack",
+  "status": "UPDATE_COMPLETE",
+  "changes": "Only existing AgentFn code asset; dependency layer unchanged",
+  "function_url": "https://idk3jouyc6g2uolmge5ctuizwq0kpgcf.lambda-url.us-east-1.on.aws/",
+  "unauthenticated_request": {
+    "status": 401,
+    "error": "Sign in to chat with the AI.",
+    "aws_request_id": "f3c7388a-fdae-451a-898b-e9ba39e5611b"
+  },
+  "authenticated_chat": "Not exercised: no legitimate Google session; unit tests and direct saved-prompt model evaluation do not substitute for authenticated browser end-to-end verification"
+}

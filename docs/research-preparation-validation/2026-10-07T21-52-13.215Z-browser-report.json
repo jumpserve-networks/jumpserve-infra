@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "started_at": "2026-10-07T21:52:13.215Z",
+  "origin": "http://localhost:3004",
+  "design": "Development browser checks of the actual preparation display on a labeled synthetic empty-study example and real sign-in return paths. No database fixture, owner identity, API mutation or scientific assessment is simulated.",
+  "reviewer": {
+    "identity": "Primary Codex implementer",
+    "type": "AI",
+    "independence": "Not independent"
+  },
+  "checks": [
+    {
+      "name": "unprepared study explains why no jobs start",
+      "passed": true,
+      "evidence": {
+        "origin": "Synthetic teaching fixture with the actual preparation display; not an authenticated owner request",
+        "claims": 0,
+        "jobs": 0,
+        "missing_setup_steps": 6,
+        "viewports": [
+          1365,
+          390
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "owner_preparation_not_verified_by_this_case": true
+      }
+    },
+    {
+      "name": "sign-in return paths preserve owner study view",
+      "passed": true,
+      "evidence": {
+        "google_flow": "Return paths checked; actual provider sign-in and owner writes conditional"
+      }
+    }
+  ],
+  "errors": [],
+  "browser_errors": [],
+  "conditional_gaps": [
+    "No legitimate Google session or authenticated owner/chat request",
+    "No production deployment or remote Supabase Storage verification"
+  ],
+  "ended_at": "2026-10-07T21:52:16.968Z",
+  "passed": true
+}

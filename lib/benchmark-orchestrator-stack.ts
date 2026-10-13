@@ -12,6 +12,7 @@ import { Construct } from 'constructs';
 import * as path from 'path';
 import { addBenchmarkImagePipelineRole } from './benchmark-image-pipeline';
 import { RealWorldTests } from './real-world-tests';
+import { ResearchWorkflow, researchWorkflowIsEnabled } from './research-workflow';
 
 export class BenchmarkOrchestratorStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -263,6 +264,8 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
     });
 
     new RealWorldTests(this, 'RealWorldTests', httpApi);
+    const researchWorkflowEnabled = this.node.tryGetContext('researchWorkflowEnabled');
+    if (researchWorkflowIsEnabled(researchWorkflowEnabled)) new ResearchWorkflow(this, 'ResearchWorkflow', httpApi);
 
     new cdk.CfnOutput(this, 'BenchmarkApiUrl', {
       value: httpApi.apiEndpoint,

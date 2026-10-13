@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "reviewer": { "identity": "Primary Codex AI implementer", "type": "AI", "independent": false },
+  "scope": "Post-verification release evidence capture; not experiments or deployed application code",
+  "attempts": [
+    { "operation": "Initial bounded usage capture", "status": "failed", "reason": "Sandbox AWS STS DNS resolution failed with EndpointConnectionError before a usage report was written", "exact_failure_timestamp": null, "followup": "Rerun the same purpose-specific read-only command with elevated network access" },
+    { "operation": "Initial release report assembly", "status": "failed", "reason": "The dependent usage capture had failed; FileNotFoundError while loading production-usage-v1.json. Evidence copies were made, but no final release report was written", "exact_failure_timestamp": null, "followup": "Load required usage before copying; verify identical existing copies instead of replacing bytes; retain the same successful source reports" }
+  ],
+  "limitations": "This record is retrospective. Exact failure times were not captured. Original tool outputs retain the exception traces. Missing usage was never recorded as zero and failed assembly did not change production data."
+}

@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "started_at": "2026-10-07T19:45:13.799Z",
+  "origin": "https://jumpserve.quaint-lab.org",
+  "protocol": "research-workflow-release-protocol-v1",
+  "amendment": "research-workflow-release-amendment-v2",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independence": "Not independent"
+  },
+  "design": "Public production release regressions; synthetic queue example remains explicitly instructional.",
+  "checks": [
+    {
+      "name": "production navigation and meaningful empty publication state",
+      "passed": true,
+      "evidence": {
+        "published_studies": 0,
+        "empty_is_not_zero_claims": true
+      },
+      "wall_seconds": 2.252
+    },
+    {
+      "name": "deployed methods queue example separate scientific and execution states",
+      "passed": true,
+      "evidence": {
+        "claims": 6,
+        "jobs": 5,
+        "origin": "Synthetic teaching example; no live owner queue",
+        "download_sha256": "cc491de69f8db2e99ac7438d6a83ec28fa611cd6f8bfbf561b864a2abf13ff5e"
+      },
+      "wall_seconds": 0.477
+    },
+    {
+      "name": "desktop and mobile themes navigation bounded layout and empty/unavailable examples",
+      "passed": true,
+      "evidence": {
+        "viewports": [
+          "1365x900",
+          "390x844"
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "queue_states": [
+          "mixed",
+          "empty",
+          "unavailable"
+        ],
+        "body_horizontal_overflow": false
+      },
+      "wall_seconds": 2.493
+    },
+    {
+      "name": "production missing study and export do not fabricate results",
+      "passed": true,
+      "evidence": {
+        "missing_study_html_status": 200,
+        "missing_export_status": 404,
+        "claim_coverage": "Unavailable, not zero"
+      },
+      "wall_seconds": 1.391
+    },
+    {
+      "name": "sign-in return paths and existing completed IPv6 module remain available",
+      "passed": true,
+      "evidence": {
+        "return_paths": 3,
+        "google_provider_and_owner_actions": "Conditional; no authenticated session",
+        "existing_ipv6_results": "Available; scientific coverage unchanged"
+      },
+      "wall_seconds": 3.62
+    }
+  ],
+  "errors": [],
+  "browser_errors": [],
+  "conditional_gaps": [
+    "No legitimate Google session; owner writes, cross-owner requests and provider round trip are unverified",
+    "Generic completed-study production chart/export awaits a genuine reviewed publication; completed/missing/invalid charts and exports have isolated fixture evidence"
+  ],
+  "measured_charges_usd": null,
+  "model_usage": null,
+  "ended_at": "2026-10-07T19:45:24.785Z",
+  "passed": true
+}

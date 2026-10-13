@@ -1,0 +1,10 @@
+{
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres"
+  },
+  "created_at": "2026-10-07T18:55:51.473424+00:00",
+  "read_only": true,
+  "relations": []
+}

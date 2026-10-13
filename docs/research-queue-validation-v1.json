@@ -1,0 +1,831 @@
+{
+  "version": 1,
+  "started_at": "2026-10-07T17:09:51.085058+00:00",
+  "protocol": "research-queue-protocol-v1.md",
+  "amendment": "research-queue-amendment-v2.md",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independence": "Not independent"
+  },
+  "design": "Development regressions; no held-out or human scientific review. No paper claims are strengthened.",
+  "commands": [
+    {
+      "name": "backend-tests",
+      "cwd": "/Users/Shared/allstar/jumpserve-back-end",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "research_workflow/tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.3061467080260627,
+      "passed": true
+    },
+    {
+      "name": "frontend-tests",
+      "cwd": "/Users/Shared/allstar/jumpserve-front-end",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 1.1233004170062486,
+      "passed": true
+    },
+    {
+      "name": "frontend-lint",
+      "cwd": "/Users/Shared/allstar/jumpserve-front-end",
+      "command": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 6.039041040989105,
+      "passed": true
+    },
+    {
+      "name": "frontend-build",
+      "cwd": "/Users/Shared/allstar/jumpserve-front-end",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 1,
+      "wall_seconds": 18.314722625014838,
+      "passed": false
+    },
+    {
+      "name": "runtime-staging",
+      "cwd": "/Users/Shared/allstar/jumpserve-infra",
+      "command": [
+        "python3",
+        "-B",
+        "bin/prepare-research-runtime.py"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.04549195899744518,
+      "passed": true
+    },
+    {
+      "name": "infra-build",
+      "cwd": "/Users/Shared/allstar/jumpserve-infra",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 3.0080156670010183,
+      "passed": true
+    },
+    {
+      "name": "infra-tests",
+      "cwd": "/Users/Shared/allstar/jumpserve-infra",
+      "command": [
+        "npm",
+        "test",
+        "--",
+        "--runInBand"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 2.837894458003575,
+      "passed": true
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/research-queue-validation/backend-tests-stdout.txt",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue-release/20261007T170951084582Z/backend-tests-stdout.txt",
+      "byte_count": 883,
+      "sha256": "60b26d8078eebe5c08f725e48a2ce472627a69d1e41e8f606f787218af5e1c26",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/backend-tests-stderr.txt",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue-release/20261007T170951084582Z/backend-tests-stderr.txt",
+      "byte_count": 6820,
+      "sha256": "b8c2d53ea30314568e63b37d147bddcf2928702e014e9cf712e65cb87dde67cd",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/frontend-tests-stdout.txt",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue-release/20261007T170951084582Z/frontend-tests-stdout.txt",
+      "byte_count": 18584,
+      "sha256": "9f46912d79345057c39fa937d4b02752c884ca6ffee3304b4f5fb22e28409562",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/frontend-tests-stderr.txt",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue-release/20261007T170951084582Z/frontend-tests-stderr.txt",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/frontend-lint-stdout.txt",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue-release/20261007T170951084582Z/frontend-lint-stdout.txt",
+      "byte_count": 44,
+      "sha256": "e3e93b7374f72ce7b0e8624b2acbd645c68df5b708f575c7af24a5caf69caf37",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/frontend-lint-stderr.txt",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue-release/20261007T170951084582Z/frontend-lint-stderr.txt",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/frontend-build-stdout.txt",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue-release/20261007T170951084582Z/frontend-build-stdout.txt",
+      "byte_count": 153,
+      "sha256": "0a16d6d183c03c3520ac6906369df44b91fabcf8910b4b91e290fd2aa240918b",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/frontend-build-stderr.txt",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue-release/20261007T170951084582Z/frontend-build-stderr.txt",
+      "byte_count": 839,
+      "sha256": "4cff7d0b494974fded970b672e3d021e45579c4beaa0f36bbb39bc16407a866d",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/runtime-staging-stdout.txt",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue-release/20261007T170951084582Z/runtime-staging-stdout.txt",
+      "byte_count": 282,
+      "sha256": "2813970e17ca6bc6ba3b35fa4444a9133a1c0a83663cb6e5e8e248dc3f0cf164",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/runtime-staging-stderr.txt",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue-release/20261007T170951084582Z/runtime-staging-stderr.txt",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/infra-build-stdout.txt",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue-release/20261007T170951084582Z/infra-build-stdout.txt",
+      "byte_count": 38,
+      "sha256": "20a797e92f8024034fdbd347cd8cd342383b44ea365d9434010da577a5f2d62b",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/infra-build-stderr.txt",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue-release/20261007T170951084582Z/infra-build-stderr.txt",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/infra-tests-stdout.txt",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue-release/20261007T170951084582Z/infra-tests-stdout.txt",
+      "byte_count": 50,
+      "sha256": "986cc125f5e8a51b849a4685beb55d79299a711c64bd4e3fd5bd674ba138c595",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/infra-tests-stderr.txt",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue-release/20261007T170951084582Z/infra-tests-stderr.txt",
+      "byte_count": 975,
+      "sha256": "cbd444655b22316cbdcf639725c607750906bf1ab6f55235841d73cd280b19c3",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/20261007T163403759396Z-database-report.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue/20261007T163403759396Z/database-report.json",
+      "byte_count": 1628,
+      "sha256": "2d3a4792366812fec25ff5b4af38ce57387aef17712600746407d86c2f48fc4a",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/20261007T163438969839Z-database-report.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue/20261007T163438969839Z/database-report.json",
+      "byte_count": 5320,
+      "sha256": "4bdfabc9e9ddbbd8441a72c89d90a4d7bfe391a0d2127660a831645e433cf695",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/20261007T163455018175Z-database-report.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue/20261007T163455018175Z/database-report.json",
+      "byte_count": 3765,
+      "sha256": "5018535045d78067c729889131ad5561ec2d89f1dd38635023dbf6536f7a83f0",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/2026-10-07T16-59-05.933Z-browser-report.json",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T16-59-05.933Z-browser-report.json",
+      "byte_count": 5117,
+      "sha256": "cc183100f1e2a096c36b22b7b8a0323dbcf19ee8e8cd5f81bb88df93bcc86ae8",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/2026-10-07T17-08-22.757Z-browser-report.json",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T17-08-22.757Z-browser-report.json",
+      "byte_count": 4375,
+      "sha256": "617742f9f4036809900e3868deef5847b8c0b63f7c39f49ae17465728eeb5585",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/2026-10-07T17-09-17.505Z-browser-report.json",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T17-09-17.505Z-browser-report.json",
+      "byte_count": 4247,
+      "sha256": "7c81610acbe2fa321ee5d51d6d72b3cd5d73ede5bbaaae63755f6884dd07f945",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/20261007T163455018175Z-completed-discrepant-queue.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue/20261007T163455018175Z/completed-discrepant-queue.json",
+      "byte_count": 7651,
+      "sha256": "9ced69f93d2acc6361415833737bd802e8dd15b536bc0932ed96a7873947d0a9",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/20261007T163455018175Z-raw-0a0592636d34f956ca050eb3c2f908a9966cdf7fe329b757b9cc10d0c387fe03",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue/20261007T163455018175Z/raw-0a0592636d34f956ca050eb3c2f908a9966cdf7fe329b757b9cc10d0c387fe03",
+      "byte_count": 3392,
+      "sha256": "9f3b2a6972d89734c9b331b5e2c988521a9b6771b0309a8d5ae6a593e35e5344",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/20261007T163455018175Z-raw-4004c54a16944d5a3aea058fd59b61adbf89d326e5156feeb1f72af6c7c93d65",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue/20261007T163455018175Z/raw-4004c54a16944d5a3aea058fd59b61adbf89d326e5156feeb1f72af6c7c93d65",
+      "byte_count": 439,
+      "sha256": "13f4041f037f7e6090f7180b0a25733d0b4a6da765f1a59b48069e33f49cb34c",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/20261007T163455018175Z-raw-57ac7a3588ef12958ef2148ae7ce4beed504e885330750c1ff8f82110d50ffa9",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue/20261007T163455018175Z/raw-57ac7a3588ef12958ef2148ae7ce4beed504e885330750c1ff8f82110d50ffa9",
+      "byte_count": 439,
+      "sha256": "ffb7856865eb6fd3d05cf258b20777ddafe9be24eccf815ba7cb77ba5b452279",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/20261007T163455018175Z-raw-6b02f073327856c860e4aad23b1f16ceff5bfaa08ffc6e5e7712a4a99a134b1a",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue/20261007T163455018175Z/raw-6b02f073327856c860e4aad23b1f16ceff5bfaa08ffc6e5e7712a4a99a134b1a",
+      "byte_count": 439,
+      "sha256": "27bcc254417dea2630538c3bcaacbf268b26d362d844e9c5e0f26766847358dd",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/20261007T163455018175Z-raw-6d96bde47fc7a4cfca28682b005f357b4d1709c4f60360b1a261eb4ef3f8c4f0",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue/20261007T163455018175Z/raw-6d96bde47fc7a4cfca28682b005f357b4d1709c4f60360b1a261eb4ef3f8c4f0",
+      "byte_count": 439,
+      "sha256": "44d754308114b4b86cb4bfa61d1d2233191175ca7ac632d8f4849f7ade16d7c9",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/20261007T163455018175Z-raw-792b7d6dfae3aabd8aa0e447632dd4a9a1a09182d785f64b8e6cc9f2e4f864a6",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue/20261007T163455018175Z/raw-792b7d6dfae3aabd8aa0e447632dd4a9a1a09182d785f64b8e6cc9f2e4f864a6",
+      "byte_count": 3393,
+      "sha256": "59309a54d34a63109adaeda35b9a44bd8eaf38672236aeea8f74bd67a267adcb",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/20261007T163455018175Z-raw-877919054dde24acd1b3037773924fb448870b9b384fa48c48629a7b992ad930",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue/20261007T163455018175Z/raw-877919054dde24acd1b3037773924fb448870b9b384fa48c48629a7b992ad930",
+      "byte_count": 439,
+      "sha256": "9ad78f1991feafa9646c0b5a475d5ba8a5485a411bad6154a8a27134daa34419",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/20261007T163455018175Z-raw-aabd7ce0b5b92969a71ea687d8ccde8dcdf6bc4fe47a32fc53b235ef10dd66eb",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue/20261007T163455018175Z/raw-aabd7ce0b5b92969a71ea687d8ccde8dcdf6bc4fe47a32fc53b235ef10dd66eb",
+      "byte_count": 439,
+      "sha256": "7b5078c41cc0aab53f274dc48da795e9058c6631abfb234f8f7dba16b2d18475",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/20261007T163455018175Z-raw-b5c089a46119fe835c16a33e77c10fb44a2eca25c3cd72a7142e4187320d1ee9",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue/20261007T163455018175Z/raw-b5c089a46119fe835c16a33e77c10fb44a2eca25c3cd72a7142e4187320d1ee9",
+      "byte_count": 439,
+      "sha256": "46a6e300acd75476612e0f85750f51363815a9f0e35fd641ebc2eeca6fe7b58e",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/20261007T163455018175Z-raw-ba85804e3944f7304b6ff0ef59ad7b9f3f778866084dc935dbf9a42caa4b42e2",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue/20261007T163455018175Z/raw-ba85804e3944f7304b6ff0ef59ad7b9f3f778866084dc935dbf9a42caa4b42e2",
+      "byte_count": 439,
+      "sha256": "e1c7285d30d0f4d95fb8f31425eaae90c37b73239ed5f53cf36a27b73399b7bf",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/20261007T163455018175Z-raw-d4b3f554fedab14905e6d449e5a1f148c67def2525ca725a3f9869c1abf06c0f",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue/20261007T163455018175Z/raw-d4b3f554fedab14905e6d449e5a1f148c67def2525ca725a3f9869c1abf06c0f",
+      "byte_count": 439,
+      "sha256": "8e65cc9ee9d1ccc91c75834b937401ca7a840cee1eea0e20f1a1de73beec7c13",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/20261007T163455018175Z-raw-deebb0e1089554920a210d90f04a2da0a5d92029d66b8d36b52a1c097a23abb6",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue/20261007T163455018175Z/raw-deebb0e1089554920a210d90f04a2da0a5d92029d66b8d36b52a1c097a23abb6",
+      "byte_count": 439,
+      "sha256": "e287b28dc7cd07b5c4129c21d10ff4a11b1475cc9b3e46ed2c9dea1d2051ad03",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/2026-10-07T17-09-17.505Z-desktop-comparisons-dark.png",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T17-09-17.505Z-desktop-comparisons-dark.png",
+      "byte_count": 118451,
+      "sha256": "aed143ce677d578374eaa2dc1de565a68e79e0d9fba1465a75f26dfc581355ca",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/2026-10-07T17-09-17.505Z-desktop-comparisons-light.png",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T17-09-17.505Z-desktop-comparisons-light.png",
+      "byte_count": 146309,
+      "sha256": "70cdfc6beb981a8284b3199a1b8001c2c60a83d08de677dd92a045b127d76da7",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/2026-10-07T17-09-17.505Z-desktop-ipv6-gaps.png",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T17-09-17.505Z-desktop-ipv6-gaps.png",
+      "byte_count": 177940,
+      "sha256": "85b8f298f8b94c2ad1955e595c9a692e362491a9d77fabd8489b6783b472e0dd",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/2026-10-07T17-09-17.505Z-desktop-plot-dark.png",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T17-09-17.505Z-desktop-plot-dark.png",
+      "byte_count": 17961,
+      "sha256": "c730787b22ca30046739937add763831ae8addd8ac38d11e0a8e4fc715c7558e",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/2026-10-07T17-09-17.505Z-desktop-queue-example.png",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T17-09-17.505Z-desktop-queue-example.png",
+      "byte_count": 673375,
+      "sha256": "2c8a48fa5cafd06d6d58c988143e827c50773351958f5e3a9dd61bd80aeabf34",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/2026-10-07T17-09-17.505Z-ipv6-public.json",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T17-09-17.505Z-ipv6-public.json",
+      "byte_count": 398599,
+      "sha256": "4495375e36868ffba40984d1beb921325811d9525df205c89205d20bc917eca0",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/2026-10-07T17-09-17.505Z-mobile-comparisons-dark.png",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T17-09-17.505Z-mobile-comparisons-dark.png",
+      "byte_count": 47252,
+      "sha256": "d4aaddc4715d258fae92be85a77604cda79d9307b9a399bdf1197807f28d7fe3",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/2026-10-07T17-09-17.505Z-mobile-comparisons-light.png",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T17-09-17.505Z-mobile-comparisons-light.png",
+      "byte_count": 64022,
+      "sha256": "de1413a1b78187a91fd7d7480d112046e8fa04a6c53562472bd26eb560521cb6",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/2026-10-07T17-09-17.505Z-mobile-plot-dark.png",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T17-09-17.505Z-mobile-plot-dark.png",
+      "byte_count": 17630,
+      "sha256": "610b1d546d3c560b75140d68e60711cc3f9cac454e7f132a67496ae6aea224aa",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/2026-10-07T17-09-17.505Z-mobile-plot-light.png",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T17-09-17.505Z-mobile-plot-light.png",
+      "byte_count": 15272,
+      "sha256": "ff4625aae6f024d5acc220a4f609bef18b8e0c7800bc905aeff26636462e8f5b",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/2026-10-07T17-09-17.505Z-mobile-queue-dark.png",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T17-09-17.505Z-mobile-queue-dark.png",
+      "byte_count": 242813,
+      "sha256": "8362fb9195ac0ba1bd2787496d36d217c75744cd835772f46e8e16c3dc141e4c",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/2026-10-07T17-09-17.505Z-mobile-queue-light.png",
+      "origin": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T17-09-17.505Z-mobile-queue-light.png",
+      "byte_count": 248294,
+      "sha256": "7f2b4e435cea9b6d300a46fe4da0c2d10346a2bf7a83c3729823fbd8b4831541",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/frozen-research-queue-protocol-v1.md",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/docs/research-queue-protocol-v1.md",
+      "byte_count": 3720,
+      "sha256": "1d569373af8db7c496e6f6903843f4ad8ed135509f635a363272853a8ce1e713",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/frozen-research-queue-amendment-v2.md",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/docs/research-queue-amendment-v2.md",
+      "byte_count": 959,
+      "sha256": "5cdca914b86cf58d3b7c73cfd41b50a0d9d07e5927d3fb7b4322dc700ebb6cbb",
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/research-queue-validation/runtime-manifest-v2.json",
+      "origin": "/Users/Shared/allstar/jumpserve-infra/research-workflow-runtime.json",
+      "byte_count": 733,
+      "sha256": "b23e1dc23e24b9581d9512ae30bca18798a6dd27c57621c91905bd7c7e478989",
+      "retrieved_hash_verified": true
+    }
+  ],
+  "implementation": [
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/intake.py",
+      "byte_count": 9573,
+      "sha256": "33439e19ffbc1f398ce8870818c9da8a4541557ea302188d5c01172c3ab434ef"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/worker.py",
+      "byte_count": 4552,
+      "sha256": "8d94bc9e5f6b326065c925932be24b09676f87d0b727bd4fba6bb490f0c7ae6a"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/store.py",
+      "byte_count": 8448,
+      "sha256": "bde519e60a63ac6ff942e6d6749300a2d151cfccf33594299cf1f3756ea549e6"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/runner.py",
+      "byte_count": 11980,
+      "sha256": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/server.py",
+      "byte_count": 1833,
+      "sha256": "543d154571782905cf71bc6ede3ec83773ff0214a08b559308477f154e5d96e5"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/importer.py",
+      "byte_count": 4860,
+      "sha256": "9f47e47eb5f8e8649ec804c8a83773bb58315b4b86f69dc7e6d53f8880dc6be9"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/bridge.py",
+      "byte_count": 5150,
+      "sha256": "9de373ef18cd4b275664df720178a37f3986247fc1ce8f365e752b296a0cbf3c"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/api.py",
+      "byte_count": 10800,
+      "sha256": "ef83d2b52544799ca2518d299a9bd6d569b7d90f794c9ac0ee71ddcdf2f3e772"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/cli.py",
+      "byte_count": 15366,
+      "sha256": "207e0d9f45724333fdc5e29f40a2e242a3fb12237e8f31d45db3bc0ff2ada00b"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/scheduler.py",
+      "byte_count": 8321,
+      "sha256": "1a6ded589085e298eb587a45975086078c2fe5b4bbecfdd07dccc7f0187c1465"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/workflow.py",
+      "byte_count": 19257,
+      "sha256": "e357beeab05c5dc60d0d1354826d771026895afd8bd1ee91b68f7896d2c8713c"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-back-end/research_workflow/tests/test_scheduler.py",
+      "byte_count": 8548,
+      "sha256": "2144627cfc8d292e8f37b85cb8e4c1b4376e9de91035fb29816bb241f405d85b"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-infra/database/202610070002_research_queue.sql",
+      "byte_count": 19781,
+      "sha256": "49f0f761aba55bc7771968b30048c34a7db4996947503b558b3eaac599577d63"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-infra/lib/research-workflow.ts",
+      "byte_count": 4462,
+      "sha256": "f3bc6e2bf286718509c3de309cd8d794853bf6fa0802c8df7edc2a34dbc86c73"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-infra/bin/research-workflow-database.py",
+      "byte_count": 6077,
+      "sha256": "d009ec907ff9b3a195c09f7540108970dfea865972e2eae40c230e6190618a2b"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-infra/test/check_research_queue_database.py",
+      "byte_count": 19372,
+      "sha256": "ccdcc87465c9a64fdb902b6f63ca1a7141e1dbd8ca7a0c7fa6bb10b640ef7cac"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-infra/test/research-workflow.test.ts",
+      "byte_count": 3044,
+      "sha256": "4a15ccef7d383d3285199ea862aefb958580aede5dc0903fca363927fa2d85b7"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-front-end/lib/research-queue.ts",
+      "byte_count": 4909,
+      "sha256": "8b309231f36589aecdd5749f5baaf929667521ea77c5f88339cf543296e17c13"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-front-end/lib/research-queue-example.ts",
+      "byte_count": 4141,
+      "sha256": "9197e8a61a2fc924aad5d7f3fca65831c594f27d6376ec590792c9b7f9c48208"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-front-end/app/components/research-workflow/claim-queue.tsx",
+      "byte_count": 20851,
+      "sha256": "c52f32f4055d6be7a7fc7015d40b9789b13f48d3b98e8f8e2b97698dec3efa6c"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-front-end/app/components/research-workflow/queue-example.tsx",
+      "byte_count": 1450,
+      "sha256": "7d8576453be0078fcadf200831cbb31ff1249c44e9248e1f989c5270fe932802"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-front-end/app/components/research-workflow/workspace.tsx",
+      "byte_count": 24604,
+      "sha256": "acf0d37252cfb158ae1f9c1ad743c4ace8c30d69cff1112f1acd795b5c2857e9"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-front-end/app/module/research-verification/methods/page.tsx",
+      "byte_count": 5883,
+      "sha256": "3e2055917ccb7d4d6cc1a3fa002bb27b36acffcd290bdeaba79ac60a635e4993"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-front-end/tests/research-queue.test.mjs",
+      "byte_count": 2866,
+      "sha256": "e5c0e5e6b445e9648ce7a7e1474f4ed4a7b6beaa024277dbf56bb2719be4c9d5"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-front-end/scripts/verify-research-workflow.mjs",
+      "byte_count": 13869,
+      "sha256": "47c4871dae44ae63c34ec502285437334a296e2d816dd6ea1f4fb884e9d68d75"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-infra/bin/research-queue-validation.py",
+      "byte_count": 7374,
+      "sha256": "c899af6bea24cb7f57fd5238560dc13b915e79d64124de2686b28e192f38240f"
+    }
+  ],
+  "release": {
+    "production_deployed": false,
+    "remote_migrations_applied": false,
+    "conditional_gaps": [
+      "Legitimate Google-authenticated owner enqueue/review/cancel and remote owner-isolation request",
+      "Remote Supabase Storage round-trip original-byte hashes",
+      "Scheduled AWS worker invocation and deployed end-to-end verification"
+    ],
+    "local_blockers_passed": false,
+    "scientific_coverage": "No new paper evaluation. Original IPv6 register remains 3 reproduced, 3 discrepant, 5 inconclusive, 4 untested under its original conditions."
+  },
+  "usage": {
+    "measured_charges_usd": null,
+    "estimated_charges_usd": null,
+    "model_usage": null,
+    "experiment_instances_launched": 0,
+    "limitations": "Local hosting/storage/Codex usage unallocated; missing usage is not zero cost. Synthetic worker fixtures make no model or experiment-instance calls."
+  },
+  "database_campaign": {
+    "passed": true,
+    "report": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue/20261007T163455018175Z/database-report.json",
+    "checks": [
+      {
+        "name": "queue RLS and browser read/write/RPC denial",
+        "passed": true,
+        "wall_seconds": 0.07272479200037196,
+        "evidence": {
+          "private_tables": 2,
+          "browser_writes": false,
+          "browser_rpc": false
+        }
+      },
+      {
+        "name": "eight simultaneous claim clients enforce global and study caps",
+        "passed": true,
+        "wall_seconds": 1.4616723750077654,
+        "evidence": {
+          "clients": 8,
+          "distinct_active_jobs": 4,
+          "global_cap": 4,
+          "study_cap": 2
+        }
+      },
+      {
+        "name": "shared resources serialize jobs across different studies",
+        "passed": true,
+        "wall_seconds": 0.4321267500054091,
+        "evidence": {
+          "shared_resource": "machine:shared",
+          "overlap": false
+        }
+      },
+      {
+        "name": "dependencies, original persistence, discrepancy and claim review gates",
+        "passed": true,
+        "wall_seconds": 0.8796380840067286,
+        "evidence": {
+          "complete_run_unlocks": true,
+          "review_requires_assessment": true,
+          "scientific_discrepancy_is_failure": false,
+          "assessment_automatic": false,
+          "original_observation_identity": "day-1"
+        }
+      },
+      {
+        "name": "cancellation, immutable definitions/history and owner isolation",
+        "passed": true,
+        "wall_seconds": 0.27737137497751974,
+        "evidence": {
+          "cancelled": true,
+          "definitions_immutable": true,
+          "history_immutable": true,
+          "owner_isolation": true
+        }
+      },
+      {
+        "name": "expired leases fence stale completions without automatic retries",
+        "passed": true,
+        "wall_seconds": 0.35580241700517945,
+        "evidence": {
+          "expired": true,
+          "stale_completion_refused": true,
+          "automatic_retry": false
+        }
+      },
+      {
+        "name": "missing original artifact preserves failed attempt and missing costs",
+        "passed": true,
+        "wall_seconds": 0.3027098339807708,
+        "evidence": {
+          "failed_attempt_preserved": true,
+          "missing_charges": null
+        }
+      },
+      {
+        "name": "manual work attaches an existing domain run without invented execution",
+        "passed": true,
+        "wall_seconds": 0.15660687498166226,
+        "evidence": {
+          "manual_execution_inapplicable": true,
+          "recorded_run_attached": true,
+          "automatic_scientific_assessment": false
+        }
+      },
+      {
+        "name": "unknown/cross-study dependencies rejected and cycles prevented",
+        "passed": true,
+        "wall_seconds": 0.4058243339823093,
+        "evidence": {
+          "cross_study_rejected": true,
+          "unknown_predecessor_rejected": true,
+          "cycles_prevented": "immutable dependencies reference existing jobs only"
+        }
+      }
+    ],
+    "database": "jumpserve_research_queue_test_20261007t163455018175z",
+    "local_storage_transport": true
+  },
+  "browser_campaign": {
+    "passed": true,
+    "report": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-workflow/2026-10-07T17-09-17.505Z-browser-report.json",
+    "checks": [
+      {
+        "name": "public module navigation and study listing",
+        "passed": true,
+        "evidence": {
+          "studies": 2
+        }
+      },
+      {
+        "name": "real IPv6 imported claim coverage and nine gaps",
+        "passed": true,
+        "evidence": {
+          "sources": 74,
+          "claims": 15,
+          "reproduced": 3,
+          "discrepant": 3,
+          "inconclusive": 5,
+          "untested": 4,
+          "gaps": 9,
+          "scientific_labels_changed": false
+        }
+      },
+      {
+        "name": "literature versions hashes omissions and protocol limits",
+        "passed": true,
+        "evidence": {
+          "literature_records": 74,
+          "import_is_register_only": true
+        }
+      },
+      {
+        "name": "synthetic numerical states plots and configuration filter",
+        "passed": true,
+        "evidence": {
+          "planned": 6,
+          "unexpected": 1,
+          "non_recorded": 5,
+          "chart": "Descriptive unconnected points, no confidence interval",
+          "filtered_rows": 1
+        }
+      },
+      {
+        "name": "complete public exports preserve null zero identity and privacy",
+        "passed": true,
+        "evidence": {
+          "json_sha256": "4495375e36868ffba40984d1beb921325811d9525df205c89205d20bc917eca0",
+          "json_bytes": 398599,
+          "csv_sha256": "bb640fb3d050b293a80c5eb93b234d63f96cab0b27fe562b85a77e191db5bc9e",
+          "measurements": 7,
+          "download_sha_verified": true,
+          "private_records_exposed": false
+        }
+      },
+      {
+        "name": "desktop dark theme and bounded horizontal layout",
+        "passed": true,
+        "evidence": {
+          "viewport": {
+            "width": 1365,
+            "height": 900
+          },
+          "theme": "dark"
+        }
+      },
+      {
+        "name": "mobile navigation themes tables and exports",
+        "passed": true,
+        "evidence": {
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "themes": [
+            "light",
+            "dark"
+          ],
+          "body_overflow": false
+        }
+      },
+      {
+        "name": "missing invalid and unavailable results do not become zero coverage",
+        "passed": true,
+        "evidence": {
+          "states": [
+            "missing",
+            "invalid snapshot (injected transport fixture)",
+            "unavailable (injected transport fixture)"
+          ],
+          "zero_fill": false
+        }
+      },
+      {
+        "name": "sign-in return paths preserve owner study view",
+        "passed": true,
+        "evidence": {
+          "google_flow": "Return paths checked; actual provider sign-in and owner writes conditional"
+        }
+      },
+      {
+        "name": "claim queue teaching fixture preserves separate assessments dependencies and event export",
+        "passed": true,
+        "evidence": {
+          "origin": "Synthetic teaching fixture; same queue display component, no authenticated owner request",
+          "claims": 6,
+          "jobs": 5,
+          "scientific_assessments_untested": 6,
+          "download_sha256": "cc491de69f8db2e99ac7438d6a83ec28fa611cd6f8bfbf561b864a2abf13ff5e",
+          "live_workers": false
+        }
+      },
+      {
+        "name": "mobile queue empty and unavailable states remain distinct in light and dark themes",
+        "passed": true,
+        "evidence": {
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "states": [
+            "mixed",
+            "empty",
+            "unavailable"
+          ],
+          "themes": [
+            "light",
+            "dark"
+          ],
+          "authenticated_owner_controls": "conditional; legitimate session unavailable"
+        }
+      }
+    ],
+    "conditional_gaps": [
+      "No legitimate Google session or authenticated owner/chat request",
+      "No production deployment or remote Supabase Storage verification"
+    ]
+  },
+  "ended_at": "2026-10-07T17:10:22.779377+00:00"
+}

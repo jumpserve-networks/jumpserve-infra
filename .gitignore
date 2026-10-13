@@ -14,3 +14,4 @@ agent/layer
 .venv/
 __pycache__/
 .runtime-backend/
+.runtime-research/

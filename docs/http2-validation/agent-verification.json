@@ -1,0 +1,93 @@
+{
+  "status": "pass",
+  "checked_at": "2026-10-04T23:28:15.932771+00:00",
+  "aws_account": "395567831870",
+  "supabase_project": "regphejnlvfpyokpniny",
+  "function": "JumpServeAgentStack-AgentFnC1FD126F-MG2xfZrwsBNg",
+  "function_url": "https://idk3jouyc6g2uolmge5ctuizwq0kpgcf.lambda-url.us-east-1.on.aws/",
+  "zip_sha256": "08ad65175fbe8c1a443f4465bbdc52609a6ba299fc2aad1f4779e85f97ed8ccf",
+  "aws_code_sha256": "CK1lF1++jBpEP0Rlu9xSYJpropn8Kq0fR3noX5ftjM8=",
+  "code": [
+    {
+      "path": "auth.py",
+      "sha256": "4d604e4e22a02223f60fe7946c0a473629f322ecfaef4d51dd13900f4fe31fb1"
+    },
+    {
+      "path": "comparison.py",
+      "sha256": "e8f6b522da70fa67f0e0f53f55f810a298e9ac7b749d489af6b840d106c272f2"
+    },
+    {
+      "path": "database.py",
+      "sha256": "48d493cf4d9c2924283f02aabf62e288c743152d5999d1ad55ca9a8fe07ec126"
+    },
+    {
+      "path": "handler.py",
+      "sha256": "0788c2b08c6b712a693bbbedd72a25fbd3c48ab60798e7ce19b461e10f521d24"
+    },
+    {
+      "path": "http2_answers.py",
+      "sha256": "4340e18ed6dc822ca2565c81378259f65dc247e20e1d7359993d3820f0d371e1"
+    },
+    {
+      "path": "http2_context.py",
+      "sha256": "e1af55ff622c5e2ec89aa4cae1f862db6902940b8ccfa12df9afec25ba131da9"
+    },
+    {
+      "path": "modules.py",
+      "sha256": "f469902c1ed9eeb6ab1e5a0cc9bd42a9f0bb984e3f49d847947d37fa5b3e7c51"
+    },
+    {
+      "path": "prompt.py",
+      "sha256": "9cab26346a835e163cdef6ff8100cc603b2c3605ba317c0ccab8d42aba838957"
+    },
+    {
+      "path": "prompt_publication.py",
+      "sha256": "f0910611a5f8ee34d6b55776c5add86ff12028ec21daa46971e987b1d884d817"
+    },
+    {
+      "path": "real_world_analysis.py",
+      "sha256": "4796115d1924dd02c56eaf14620a7990f7308bb10806c800ab9d9486a366f2e8"
+    },
+    {
+      "path": "run_analysis.py",
+      "sha256": "d5c2ad4618c843a7df1ebda838d6fe19695d5c0fc7b0cdceb50102a55731d49a"
+    },
+    {
+      "path": "settings.py",
+      "sha256": "6c6819896689b3389f56bf1c363418726c9d53044f05f06edff269cc1c511777"
+    },
+    {
+      "path": "tools/__init__.py",
+      "sha256": "d111576098deb1ea0d60d8329f76bd1d766813d00cdd87e8397554f1d47829fc"
+    },
+    {
+      "path": "tools/benchmark.py",
+      "sha256": "ce90f231eba1b397aab13f48906c673e69409d120a815d792dfe7f97e7f3c8f7"
+    },
+    {
+      "path": "tools/config.py",
+      "sha256": "c2a861ef04ecb01078e43e32ea5dd365d8f539c5c7d614781cb96ee10373f6bb"
+    },
+    {
+      "path": "tools/http2_study.py",
+      "sha256": "8f16ace0a8f90ef8ea8c38856530ba705981c685733586e60834bbe7e0871250"
+    },
+    {
+      "path": "tools/leo_study.py",
+      "sha256": "7a19436df531e3a5df566de4b298a9fb65e94ec72df9c756218463a0cc96f006"
+    },
+    {
+      "path": "tools/query.py",
+      "sha256": "a5b512443790f414e9dc1104a69f21f1de2c8a1d09b379a3adc0f5e9bec61af4"
+    },
+    {
+      "path": "tools/real_world.py",
+      "sha256": "50bfa9a56b9e77c7efc5c5fd4eb544683b7ba089286ec0171d6cf0e4edc6b675"
+    }
+  ],
+  "anonymous_request_status": 401,
+  "layers": [
+    "arn:aws:lambda:us-east-1:395567831870:layer:AgentDepsLayer51FBE89A:54"
+  ],
+  "google_authenticated_chat": "not exercised: no legitimate Google session available"
+}

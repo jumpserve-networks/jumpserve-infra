@@ -1,0 +1,243 @@
+{
+  "id": "ipv6-browser-production-v2",
+  "at": "2026-10-06T14:29:03.873Z",
+  "origin": "https://jumpserve.quaint-lab.org",
+  "frontend_commit": "ef7a53e0ebb76c2ebcb358732c693e5233426e26",
+  "status": "passed",
+  "reviewer": {
+    "identity": "Codex primary implementer",
+    "type": "AI",
+    "independence": "No human or independent review"
+  },
+  "matrix": [
+    {
+      "url": "https://jumpserve.quaint-lab.org/module/ipv6-dns-study/test-results",
+      "width": 390,
+      "height": 844,
+      "dark": true,
+      "overflow": false,
+      "heading": "DNS over IPv6: results and evidence limits",
+      "articles": 0,
+      "claimHeadings": 0,
+      "charts": [
+        {
+          "box": "0 0 340 280",
+          "width": 308,
+          "bars": 12,
+          "firstFontPixels": 9.964705882352941
+        }
+      ],
+      "tableRows": 12,
+      "sourceSummary": false,
+      "cellSummary": true
+    },
+    {
+      "url": "https://jumpserve.quaint-lab.org/module/ipv6-dns-study/methods",
+      "width": 390,
+      "height": 844,
+      "dark": true,
+      "overflow": false,
+      "heading": "Methods, protocols and claim coverage",
+      "articles": 15,
+      "claimHeadings": 15,
+      "charts": [],
+      "tableRows": 0,
+      "sourceSummary": false,
+      "cellSummary": false
+    },
+    {
+      "url": "https://jumpserve.quaint-lab.org/module/ipv6-dns-study/literature",
+      "width": 390,
+      "height": 844,
+      "dark": true,
+      "overflow": false,
+      "heading": "Literature and source inventory",
+      "articles": 74,
+      "claimHeadings": 0,
+      "charts": [],
+      "tableRows": 0,
+      "sourceSummary": true,
+      "cellSummary": false
+    },
+    {
+      "url": "https://jumpserve.quaint-lab.org/module/ipv6-dns-study/test-results",
+      "width": 1440,
+      "height": 1000,
+      "dark": true,
+      "overflow": false,
+      "heading": "DNS over IPv6: results and evidence limits",
+      "articles": 0,
+      "claimHeadings": 0,
+      "charts": [
+        {
+          "box": "0 0 680 280",
+          "width": 1102,
+          "bars": 12,
+          "firstFontPixels": 17.826470588235296
+        }
+      ],
+      "tableRows": 12,
+      "sourceSummary": false,
+      "cellSummary": true
+    },
+    {
+      "url": "https://jumpserve.quaint-lab.org/module/ipv6-dns-study/methods",
+      "width": 1440,
+      "height": 1000,
+      "dark": true,
+      "overflow": false,
+      "heading": "Methods, protocols and claim coverage",
+      "articles": 15,
+      "claimHeadings": 15,
+      "charts": [],
+      "tableRows": 0,
+      "sourceSummary": false,
+      "cellSummary": false
+    },
+    {
+      "url": "https://jumpserve.quaint-lab.org/module/ipv6-dns-study/literature",
+      "width": 1440,
+      "height": 1000,
+      "dark": true,
+      "overflow": false,
+      "heading": "Literature and source inventory",
+      "articles": 74,
+      "claimHeadings": 0,
+      "charts": [],
+      "tableRows": 0,
+      "sourceSummary": true,
+      "cellSummary": false
+    },
+    {
+      "url": "https://jumpserve.quaint-lab.org/module/ipv6-dns-study/test-results",
+      "width": 1440,
+      "height": 1000,
+      "dark": false,
+      "overflow": false,
+      "heading": "DNS over IPv6: results and evidence limits",
+      "articles": 0,
+      "claimHeadings": 0,
+      "charts": [
+        {
+          "box": "0 0 680 280",
+          "width": 1102,
+          "bars": 12,
+          "firstFontPixels": 17.826470588235296
+        }
+      ],
+      "tableRows": 12,
+      "sourceSummary": false,
+      "cellSummary": true
+    },
+    {
+      "url": "https://jumpserve.quaint-lab.org/module/ipv6-dns-study/methods",
+      "width": 1440,
+      "height": 1000,
+      "dark": false,
+      "overflow": false,
+      "heading": "Methods, protocols and claim coverage",
+      "articles": 15,
+      "claimHeadings": 15,
+      "charts": [],
+      "tableRows": 0,
+      "sourceSummary": false,
+      "cellSummary": false
+    },
+    {
+      "url": "https://jumpserve.quaint-lab.org/module/ipv6-dns-study/literature",
+      "width": 1440,
+      "height": 1000,
+      "dark": false,
+      "overflow": false,
+      "heading": "Literature and source inventory",
+      "articles": 74,
+      "claimHeadings": 0,
+      "charts": [],
+      "tableRows": 0,
+      "sourceSummary": true,
+      "cellSummary": false
+    },
+    {
+      "url": "https://jumpserve.quaint-lab.org/module/ipv6-dns-study/test-results",
+      "width": 390,
+      "height": 844,
+      "dark": false,
+      "overflow": false,
+      "heading": "DNS over IPv6: results and evidence limits",
+      "articles": 0,
+      "claimHeadings": 0,
+      "charts": [
+        {
+          "box": "0 0 340 280",
+          "width": 308,
+          "bars": 12,
+          "firstFontPixels": 9.964705882352941
+        }
+      ],
+      "tableRows": 12,
+      "sourceSummary": false,
+      "cellSummary": true
+    },
+    {
+      "url": "https://jumpserve.quaint-lab.org/module/ipv6-dns-study/methods",
+      "width": 390,
+      "height": 844,
+      "dark": false,
+      "overflow": false,
+      "heading": "Methods, protocols and claim coverage",
+      "articles": 15,
+      "claimHeadings": 15,
+      "charts": [],
+      "tableRows": 0,
+      "sourceSummary": false,
+      "cellSummary": false
+    },
+    {
+      "url": "https://jumpserve.quaint-lab.org/module/ipv6-dns-study/literature",
+      "width": 390,
+      "height": 844,
+      "dark": false,
+      "overflow": false,
+      "heading": "Literature and source inventory",
+      "articles": 74,
+      "claimHeadings": 0,
+      "charts": [],
+      "tableRows": 0,
+      "sourceSummary": true,
+      "cellSummary": false
+    }
+  ],
+  "packet_configuration": {
+    "url": "https://jumpserve.quaint-lab.org/module/ipv6-dns-study/test-results",
+    "selected": [
+      "Dark Mode▼",
+      "Jun 25–Sep 14 · current▼",
+      "no-dnssec▼",
+      "no-lgi▼",
+      "4096▼",
+      "udp fragments▼"
+    ],
+    "rows": [
+      "1500 · baseline\nv4-only\t0.0732\t0.07\t0.00321\t0.0602–0.0898\t80 / 82\t2 / 0\t0.0732\t0.0732\nn=80\tinapplicable",
+      "1500 · baseline\nv6-only\t0.4369\t0.44\t-0.00306\t0.385–0.5098\t81 / 82\t1 / 0\t0.437\t0.4369\nn=81\t0.3635; n=80",
+      "1500 · baseline\nds\t0.1095\tnot compared\tnot compared\t0.0956–0.1211\t81 / 82\t1 / 0\t0.1095\t0.1095\nn=81\tinapplicable"
+    ],
+    "overflow": false
+  },
+  "navigation": {
+    "module_home": "Public home opened; Test Results button reached results",
+    "legacy": "/modules/ipv6-dns-study/test-results?retained=coverage redirected to /module/ipv6-dns-study/test-results?retained=coverage",
+    "login": "Direct result configuration chat URL reached canonical /login with exact module/configuration next query; no OAuth exchange or message sent"
+  },
+  "missing_invalid": {
+    "environment": "Local only",
+    "report": "browser-local-v1.json",
+    "unavailable": "Actual temporary metadata-unavailable state; explicit unavailable notice",
+    "invalid": "Cloned NaN/null/n0/invalid1 component fixture; no DB writes; fixture removed and production404 checked"
+  },
+  "visual_review": "Final mobile light/dark charts visually inspected with settled shared navigation; labels about9.96px and HTMLlegend12px; desktop/mobile screenshot and DOM matrix checks. All12 recorded bars retained. Tables scroll within their container; no global overflow.",
+  "console_errors": [],
+  "previous_failure": "browser-production-v1.json retained; mobile labels roughly5px corrected by release-amendment-v2.json",
+  "transition_capture": "production-mobile-chart-dark-v2.png retains the navigation closing animation; production-mobile-chart-dark-settled-v2.png is the settled reviewed chart.",
+  "authenticated_chat": "Not exercised: no legitimate Google session available"
+}

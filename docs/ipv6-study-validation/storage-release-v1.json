@@ -1,0 +1,1792 @@
+{
+  "id": "ipv6-storage-release-v1",
+  "at": "2026-10-06T14:30:14.317787+00:00",
+  "project": "regphejnlvfpyokpniny",
+  "visibility": "private service-role-only",
+  "original_files": [
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/.gitignore",
+      "sha256": "a9d613eb370093da677f62e8ed64af0344ccf61227209ef83ca8816df83200e6",
+      "bytes": 110
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/README.md",
+      "sha256": "8b112d038111a7d3582adc06644d32dd9c4ef946008e75583ae13cb455435a64",
+      "bytes": 7124
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/analyze.py",
+      "sha256": "4d0039a23d46346921164ce5e907fbb8025fffa37ce44c208bfcd218a9583817",
+      "bytes": 13210
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/assessment.py",
+      "sha256": "d3eeddc29852eecc3b2f0847ffbb5960403a01cf3e7cbeb70d7b0ff18dd235a1",
+      "bytes": 24098
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/bootstrap.py",
+      "sha256": "b179439811f8f3287480a1db929e8b215f228d45cf6c8b47d14cc486f8c12636",
+      "bytes": 1833
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/controls.py",
+      "sha256": "2770a6ac051cbb6c30702908a56ee8fae23510cbc70cb39190869b45a1bbee55",
+      "bytes": 4822
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/corrected.py",
+      "sha256": "5036eef957f3b38a79493187420f145657e2af966e8b6abc425da9e1534e40e2",
+      "bytes": 1337
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/archive-retrieval-v1.json",
+      "sha256": "9702eb2f119e977112938639afe63abcc7d6a0ea07c47f7e0be79be75085dbb8",
+      "bytes": 389972
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/archive-retrieval-v2.json",
+      "sha256": "938dd295f0999a2d1bb27c6720581e11cbb27459cf696e2747ab5d0ebfa774f9",
+      "bytes": 779280
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/author-members-v1.json",
+      "sha256": "edb053d040b26fdad037299b959ded2179fc1f93f7c65d0453fdacdb4b8fcda7",
+      "bytes": 131340
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/controls-v1.json",
+      "sha256": "3b46f6076f36cec6428769a95a9cb38a56518f50a858f8b7afc9645b0a347d76",
+      "bytes": 5535
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/main-identity.json",
+      "sha256": "d67f0cb872446575fec50849f0176937132653e8d3e2453bd319b4526c715612",
+      "bytes": 844
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/paper-context-v1.json",
+      "sha256": "0f9085e4f52de261346883b5f3843a107d929dd83a7de9d2ecedb0d926b5ed19",
+      "bytes": 20968
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/scientific-validation-v1.json",
+      "sha256": "934375c8bc39b3e3d0bf05c8bd2578dbcdcb24dc2d6967324a4172ddf62d6a5b",
+      "bytes": 1312
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/source-identity-screen-v1.json",
+      "sha256": "080fca370e0565a8779489a55217315169cc8a46e182001c1521700f57347657",
+      "bytes": 12449
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/source-retrieval-v1.json",
+      "sha256": "c762c14302872b7e22ca2f32681992d05b92669074e5f9a94c5536c0fe3bc458",
+      "bytes": 220534
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/source-retrieval-v2.json",
+      "sha256": "9cedd456903794471a4a789b6e4a79db7ca7c5a2c06879e65d48cbd21b41fb7f",
+      "bytes": 277567
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/source-retrieval-v3.json",
+      "sha256": "d1e28cbbb7ab8e7b48ea68c7883eaddee1a3ab92a8dc6485fde8a9716a3383e8",
+      "bytes": 291527
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/source-retrieval-v4.json",
+      "sha256": "7b8a7c4319d0cd2756ec7ab9899c23a30812c3fec2a010968b6b3161ce02376c",
+      "bytes": 300306
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/source-seeds-v1.json",
+      "sha256": "550a983c4120f44d8a69b664779ca3a3e694e5205f6fd7e6bdd592f791e29f12",
+      "bytes": 53831
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/export.py",
+      "sha256": "364e79e0319ed630f1025cec37c854da9e5094fad0dbd945bb5dfedd8d2326df",
+      "bytes": 2161
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/prepare.py",
+      "sha256": "6048e23377c9dbfe77606b84f857f4a5541077d0ed1fd3217b8f0d82b83f2362",
+      "bytes": 9195
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/protocols/archive-amendment-v2.json",
+      "sha256": "4aa3e79572839d06fecae0a572bdc84ce099d4b77cc88a3db385f1628b430640",
+      "bytes": 596
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/protocols/ipv6-dns-archive-v1.json",
+      "sha256": "aa1397cd733e2b513ea8fd549613906481fbd1a57b3d686e366ea3fc46a7ef08",
+      "bytes": 5919
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/protocols/ipv6-dns-archive-v1.lock.json",
+      "sha256": "7492185fa65087bd39f0b9ace076f41ed7f4a6f06760b2fd37321bf3454101e6",
+      "bytes": 165
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/protocols/ipv6-dns-controls-v1.json",
+      "sha256": "a4eb469b510a2d6985b4f37d970a15ed1d6d68b3cc24b50d1393d1f43cb476a8",
+      "bytes": 2487
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/protocols/ipv6-dns-controls-v1.lock.json",
+      "sha256": "0edab5c951030ae4ea55894ffec254b3531713cadf19503551372ffe7e7e85bc",
+      "bytes": 166
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/retrieve.py",
+      "sha256": "cbfa81165cf5545e9d2426c7ae7f676937fd8eff0e36199413649658609a1b8a",
+      "bytes": 3864
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/sources.py",
+      "sha256": "a1c51bf103d8910fd4e44c2fc780dbb2c0618c2fc609d2fe542fafd71b5b66e9",
+      "bytes": 11875
+    },
+    {
+      "path": "evidence/release-v1/experiments/experiments/ipv6_dns/verify.py",
+      "sha256": "cf2fc41f384f0cbd1f7b51a22f5d492a89284da4787c9e531603f97dcd600e40",
+      "bytes": 2854
+    },
+    {
+      "path": "evidence/release-v1/frontend/app/components/chat-panel.tsx",
+      "sha256": "18ebdf89365aa92b4b7b6723ff7cf076249fc30d2f02746794546a177b2d2de8",
+      "bytes": 26095
+    },
+    {
+      "path": "evidence/release-v1/frontend/app/components/ipv6-study/dashboard.tsx",
+      "sha256": "183f86b3e3a052551be9e6cd392ec0fe41af07031b22f57cf5cd0a5411517fa1",
+      "bytes": 9822
+    },
+    {
+      "path": "evidence/release-v1/frontend/app/components/ipv6-study/header.tsx",
+      "sha256": "a41eb009a6f0f518f3932e395a2bc867e88649c2bddf8b3c216939de52259931",
+      "bytes": 1032
+    },
+    {
+      "path": "evidence/release-v1/frontend/app/module/ipv6-dns-study/api/data/route.ts",
+      "sha256": "b51c8f573ad9e858051a8e325ba4e0abee2b9bb134a0fd784b3994bea2cb2404",
+      "bytes": 500
+    },
+    {
+      "path": "evidence/release-v1/frontend/app/module/ipv6-dns-study/api/release/route.ts",
+      "sha256": "bc301db25808badfdb6f5b94e591468a97f6fea75c76a185fb0fa1074c4944bc",
+      "bytes": 741
+    },
+    {
+      "path": "evidence/release-v1/frontend/app/module/ipv6-dns-study/chat/page.tsx",
+      "sha256": "651acd452e2c8ae8ac92ce96b9bf1b2004634f9887c0953c716c5d4dede0480b",
+      "bytes": 1267
+    },
+    {
+      "path": "evidence/release-v1/frontend/app/module/ipv6-dns-study/literature/page.tsx",
+      "sha256": "3fe6c6a1f607884121f4a8efdfbf9ed621a6c4834bed258ff577f04112655f1a",
+      "bytes": 2194
+    },
+    {
+      "path": "evidence/release-v1/frontend/app/module/ipv6-dns-study/methods/page.tsx",
+      "sha256": "7b4afa488fb2bee28cefe79600c20fcdd0b76582b7dabd1fe369cc459ebca1d1",
+      "bytes": 5731
+    },
+    {
+      "path": "evidence/release-v1/frontend/app/module/ipv6-dns-study/test-results/page.tsx",
+      "sha256": "b2bd5184f01796ac9b8ca48961e9f56907d65124b32768cd579e00cd84cd0feb",
+      "bytes": 744
+    },
+    {
+      "path": "evidence/release-v1/frontend/lib/agent-api.ts",
+      "sha256": "4e38abe37eadb85629c4c63f3b9db15941e4099ded4efdedfe8a8e34ae69e8fe",
+      "bytes": 4986
+    },
+    {
+      "path": "evidence/release-v1/frontend/lib/ipv6-study-server.ts",
+      "sha256": "31e5e8cf140b766e89b6098e3eabba43d176f974bc244c036b06a696a934ec87",
+      "bytes": 2575
+    },
+    {
+      "path": "evidence/release-v1/frontend/lib/ipv6-study.ts",
+      "sha256": "216655090280b11b55abebff1ac1b11ea790e8a81ef00f7e3c19241412a77a52",
+      "bytes": 2731
+    },
+    {
+      "path": "evidence/release-v1/frontend/lib/test-modules.ts",
+      "sha256": "da4a79f401ec01f04ef527f039a2ba522e260fcb3606ac786045c60b24d2c563",
+      "bytes": 11223
+    },
+    {
+      "path": "evidence/release-v1/frontend/public/module/ipv6-dns-study/data.zip",
+      "sha256": "7c4db9d04a289d958d04ee5458ec5e3cf056a20e400d93e6d993a6be3d3a9b18",
+      "bytes": 2381581
+    },
+    {
+      "path": "evidence/release-v1/frontend/public/module/ipv6-dns-study/download-manifest.json",
+      "sha256": "37bcbbbb60e335717689414f362d141d01898e3904fb8b01f10ceb15ffbe85ff",
+      "bytes": 127
+    },
+    {
+      "path": "evidence/release-v1/frontend/public/module/ipv6-dns-study/paper-context.json",
+      "sha256": "0f9085e4f52de261346883b5f3843a107d929dd83a7de9d2ecedb0d926b5ed19",
+      "bytes": 20968
+    },
+    {
+      "path": "evidence/release-v1/frontend/public/module/ipv6-dns-study/validation-manifest.json",
+      "sha256": "7d5d1099052712a42183875d20cfa8abf59bbe7d9f329e4e32d4d73cc50a0ed8",
+      "bytes": 262
+    },
+    {
+      "path": "evidence/release-v1/frontend/public/module/ipv6-dns-study/validation.zip",
+      "sha256": "b6737aaaa6c68f85141f0419fc55436d5be424ee26f377e53c3664f83eef5f70",
+      "bytes": 1330649
+    },
+    {
+      "path": "evidence/release-v1/frontend/tests/agent-api.test.mjs",
+      "sha256": "36fdf9ff375bfafabffcdd6c2a56a4fcfc67b948151c2d393e7275c2758a2b5b",
+      "bytes": 10094
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/agent/handler.py",
+      "sha256": "b0fbbe847db2042eb018403cc2f3d5a9d9890beaf491957c7d93b36454107245",
+      "bytes": 14527
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/agent/ipv6_answers.py",
+      "sha256": "292082d2ddcbbda0e12066420513e0b2055e93cba999e577736ce07e9efafa74",
+      "bytes": 9481
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/agent/ipv6_limits.py",
+      "sha256": "53ad7ef43e23e98636021bd5b10523ca9f94c5983af1b652f63161f5293087e7",
+      "bytes": 419
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/agent/modules.py",
+      "sha256": "72ae07b347d6a5160c75a86f4fcac1778636daeec0dbf38930f4f403d53caf4c",
+      "bytes": 692
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/agent/tools/__init__.py",
+      "sha256": "a3c2054e693f9e1c53922ecf22d7ff6dd2d7dc9f714c5776f6c5ea7ebb4bb782",
+      "bytes": 1716
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/agent/tools/ipv6_study.py",
+      "sha256": "5a9d2dd22d1eeb90af59aa9e140b3e21b65246d1d2c31f3f1f58c2588e631d02",
+      "bytes": 3119
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/bin/deploy-ipv6-agent.py",
+      "sha256": "198d07bc4410f63b9f0eb813d16b80db5cd390e138569de1f1d3d24a663343cb",
+      "bytes": 2511
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/bin/export-ipv6-release.py",
+      "sha256": "1476ee6ed744aa737b0a42d36ff8c6e62767799a6e76b71a8613576f1a12b8ff",
+      "bytes": 2471
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/bin/export-ipv6-validation.py",
+      "sha256": "cd9902966f388c2383e9d1377ca175cb1b633caf620e698d90f57a81f61986f7",
+      "bytes": 1658
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/bin/ipv6-raw-storage.py",
+      "sha256": "2b88dadd79849e33075c3567538204338eaa8c3d19e6e9a1828d1680bf13076d",
+      "bytes": 5770
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/bin/ipv6-study-database.py",
+      "sha256": "f2d1f8d90363f863a00d255c82e85daf440101bab91884d41d191e1aaa8e83bd",
+      "bytes": 13978
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/bin/verify-ipv6-agent.py",
+      "sha256": "9906bf8ee63ecc0295442db0b615d3b686d93b1eb6ecb7e76b746fc3bff4fee5",
+      "bytes": 3266
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/bin/verify-ipv6-feature.py",
+      "sha256": "fcae6fbb1d27235963c14799f3e5e96d6a70c95df49021441cb3faa3ce008cfb",
+      "bytes": 6098
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/database/202610050101_ipv6_dns_study.sql",
+      "sha256": "4c387997ae2bc79e961b288f6b2aaf09b401ee9e13ae2d3b8d6ebe64c479f216",
+      "bytes": 7908
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/database/202610050102_ipv6_prompt_publication.sql",
+      "sha256": "3a7b4b00edd8ebcd5c5522862a7075a3a5d57601e37b8895d0f2dbfcc3c7a264",
+      "bytes": 6064
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/database/202610050103_ipv6_evaluation_v2.sql",
+      "sha256": "50f2a3a3d93046360df30cc4d6fc14697c009c49c477176f11d7bce880a339e4",
+      "bytes": 6101
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/database/202610050104_ipv6_publication_review_guard.sql",
+      "sha256": "bd4d000f5a34661c0026194b498e0cefaf12353b79cc7ea436736431768ef36d",
+      "bytes": 6189
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/database/seed-ipv6-agent-prompt-v1.json",
+      "sha256": "817c6091775f5c1b355756719c38914211cbe964827358e10e51bbd9d81a0d5f",
+      "bytes": 1883
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/database/seed-ipv6-agent-prompt-v2.json",
+      "sha256": "19c0f516c58208567df7f640ab73ce69c0589a606b71810625212800c3aab3d4",
+      "bytes": 2164
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/database/seed-ipv6-agent-prompt-v3.json",
+      "sha256": "52408e605f9ddd8f24949c284d78b6d78599cec842cde9786433aada71147b01",
+      "bytes": 2287
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-chat.md",
+      "sha256": "ca1802ec52715a407cef9632900bc47492be284b96df42dc3d78317a5bad196c",
+      "bytes": 5916
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/agent-outputs.json",
+      "sha256": "8b4540006ee3d15d879733f2fe8e46b97fe34e52cc9019bf10f6db38910a3813",
+      "bytes": 131
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/agent-production-v1.json",
+      "sha256": "852ba23126aeee8a4dd7dbb0fd07c5b79de3cb30f3e6a25b381e5d5d10866761",
+      "bytes": 3938
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/browser-local-v1.json",
+      "sha256": "1151393bf5d21a58e2badb7efcfe09a7d602740ad5bfda5ea24f216c0dced5ec",
+      "bytes": 2749
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/browser-production-v1.json",
+      "sha256": "3672aba2dda4ee5e3ba9a8f2fae87d6fb421f4ea899fea16b3d5e0ec6ac397a6",
+      "bytes": 966
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/browser-production-v2.json",
+      "sha256": "ae08c9096c1d52c9002e72b79e39ace11650c6ae0dbcd88f0d012a6170b7a739",
+      "bytes": 7733
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v1-original.json",
+      "sha256": "8bb34ba073d15ab097931546c417200bcca67de8472f85a6692774dc6ae0f84e",
+      "bytes": 64063
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v1-reviewed.json",
+      "sha256": "04adee93ee5b865b542bfb3afcba2f35e84aeaa17388a60d66c8cb3e944e5e74",
+      "bytes": 68905
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v1.json",
+      "sha256": "8bb34ba073d15ab097931546c417200bcca67de8472f85a6692774dc6ae0f84e",
+      "bytes": 64063
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v2-reviewed.json",
+      "sha256": "bad7e3e31859be2c274eb6995b23f82535fd301a8ef011220ccd3378fbe46cfe",
+      "bytes": 86858
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v2.json",
+      "sha256": "8995a8bf0f6deb28902652d067d18db8b3f5cc8f0c361150318444abae4ce028",
+      "bytes": 81029
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v3-original.json",
+      "sha256": "598a2e8370064ac6745ce046792795db8a27885f61de114c6f9c78a194f21b69",
+      "bytes": 75514
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v3-reviewed.json",
+      "sha256": "e30059767eddd62b4905ca71e6a890c2869b4501dda39f3b69236384cebe74a1",
+      "bytes": 81737
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v3.json",
+      "sha256": "e30059767eddd62b4905ca71e6a890c2869b4501dda39f3b69236384cebe74a1",
+      "bytes": 81737
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/database-validation-v1.json",
+      "sha256": "8a34aa08633a56646722c4ebcc3ac9e3d0117e55db373d241c3ba10ea287d7fd",
+      "bytes": 3120
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/desktop-dark.png",
+      "sha256": "9ad228af892df81d165f7715c844bdf85c47deb1a74edeebd1e3cebcabcc0c05",
+      "bytes": 136797
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/desktop-initial.png",
+      "sha256": "e2502c88db17349438b3d69df017678877ed078e96501de07dcce28383995a85",
+      "bytes": 125581
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/desktop-invalid.png",
+      "sha256": "b5f8afd5acdc9d56643ce63fb2047d034bf62dceeaa81026c5f942adf89065e9",
+      "bytes": 183410
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/desktop-light.png",
+      "sha256": "1b6f734879d361ded6d72b639ab65d81b19d9661de7675e87772b31d285b02df",
+      "bytes": 136354
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/desktop-unavailable.png",
+      "sha256": "4343acd28cddcfe27c740284fdc5282f037e4b097d9b3415afb46ee25222d5b0",
+      "bytes": 61387
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/http-local-v1.json",
+      "sha256": "ce8c4292f6e2e8d8dd9fb735b030f6da9848802cd2eacd8cb7e705b454913f14",
+      "bytes": 1613
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/http-local-v2.json",
+      "sha256": "9e0d941a4a8b09023084b753dba8353b64f698d5f8a8c1e61b24ca5dbd3f8f1a",
+      "bytes": 1613
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/http-local-v3.json",
+      "sha256": "4c620a5edb00f1189c45a334414d52c5df9c1a99e561ff4305797e78137756c0",
+      "bytes": 2052
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/http-production-v1.json",
+      "sha256": "c39f3fbe8c3d3569bdf30a21570452f73c533699871aa057d6691b00eb8b1420",
+      "bytes": 2067
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/http-production-v2.json",
+      "sha256": "699ea183930f38053f3d51ab44aaca132e1a27c0ac06f26a1ef382ec01e4a71b",
+      "bytes": 2067
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-chart-compact-label-fixed.png",
+      "sha256": "2b0c34b1c1768ccaaa2177022d7221d5216d2d107a03a1ea1cdc77cec85f6cf1",
+      "bytes": 47490
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-chart-compact-local.png",
+      "sha256": "b51bf6b919f0f18633c6300f9be04fed0b99a0bf79df727ebb974e71462ac578",
+      "bytes": 47486
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-chart.png",
+      "sha256": "02aa9800ff63b220c2dab4910d057bcc45df267663f16a263b14fe53c65a8318",
+      "bytes": 63644
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-dark.png",
+      "sha256": "f356ab95ad0a1b0d1e24bcaebf8e958541b2c4346752c7babcc8e00137ab96e8",
+      "bytes": 49712
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-invalid.png",
+      "sha256": "b262da547336bae34c71b9b03bca91e1fbe65cdd6bbd9495cd11fe442efd1c9f",
+      "bytes": 81290
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-light.png",
+      "sha256": "c2adcd4357a58c620aa24ef414d1cfbb2d7c0d242832559be869e8b0a59eec4b",
+      "bytes": 94614
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-literature-fixed.png",
+      "sha256": "0cc9d4edcddd0afa7d85d92d9523753b066786acdf2841203e595df9c96330f3",
+      "bytes": 97494
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-literature.png",
+      "sha256": "2c9d02fa31bd7d4d578f7fad79f50a7b8fc8578fa59febfb273cc270680c6442",
+      "bytes": 97687
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-unavailable.png",
+      "sha256": "9937a660c2050d52823a50e18fea1520d67a7afe21901a8cd4e7b668b2b64fb9",
+      "bytes": 45084
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/predeployment.json",
+      "sha256": "aac553d5a3aa414b721b275d1bd4d151cecda633df870d4633ba0a53d38ff663",
+      "bytes": 1367
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-initial.png",
+      "sha256": "45c98102be24e3b29a14cc3cf6abbec0838bcda11d2db30df475b5dd86451a68",
+      "bytes": 135921
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-light.png",
+      "sha256": "13ae74796375fd3995334cf27191cd4051743e156b2ff66d1d42a4c85b71fcc8",
+      "bytes": 136904
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-literature-dark-v2.png",
+      "sha256": "41fce976bc978fe420386598ac6aa301b7b6e609f860d449c302232a23aedb28",
+      "bytes": 235664
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-literature-light-v2.png",
+      "sha256": "ff147b4f8091bec94f3a12ddcfc6aeecf5d60d2abc113d378373aa011a906814",
+      "bytes": 235655
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-methods-dark-v2.png",
+      "sha256": "002facca29b243cdc16f5d545745f9d0948bb0ad23ab309a586919c96ac2b67a",
+      "bytes": 194458
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-methods-light-v2.png",
+      "sha256": "c7db065d488553fcc4981ab880915d33891e7bb08254af6d72e85df67c6ea287",
+      "bytes": 194350
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-results-dark-v2.png",
+      "sha256": "5c7d0d243da8ea2ff153b5c7597371f595ee101b56a0ee2a9bfa82e8d85484ed",
+      "bytes": 135409
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-results-light-v2.png",
+      "sha256": "54f736a2c725ead1c41f081b3ffd24a6df07ca009b2dc7607797eb0c9c810fc8",
+      "bytes": 134628
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-http-attempt-v1.json",
+      "sha256": "64b13b5a1be13dd431f77402d959a09523331e4ee35f2da23933cd35daa80e62",
+      "bytes": 966
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-chart-dark-settled-v2.png",
+      "sha256": "3e4a014a6a8503b771119d74eef86f364a7508665e9dfd1333357bf15c94ca4e",
+      "bytes": 46143
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-chart-dark-v2.png",
+      "sha256": "f301b024dc7116012760f38e1acc47c4a1527818c590213dfe61c2eb8a187179",
+      "bytes": 70173
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-chart-light-v2.png",
+      "sha256": "706d2c302f1df8a5db2dbad32f612ffba3a3736d3067721a7756325fa1e3cd5b",
+      "bytes": 45816
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-chart.png",
+      "sha256": "c801df006b74f62b3826c74314325ecac9d7e0cf5fc51a547a3c936c0c86ae04",
+      "bytes": 47442
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-light.png",
+      "sha256": "91dd0dfc60e9001c5f4137d7a1df8eeae76a2b907502e0ed6d41d9b7b9f422d8",
+      "bytes": 92375
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-literature-dark-v2.png",
+      "sha256": "5460086bb020aaad62d0ae92b76c8c8118ac5b55994f735b70227c305fcebc7b",
+      "bytes": 94779
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-literature-dark.png",
+      "sha256": "10f87f7e0ba4c9ea89d9b90cee3071b994a2cc65512648e826248093d29e6fe5",
+      "bytes": 94864
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-literature-light-v2.png",
+      "sha256": "7c00466ea9a034b8ea0858506d0d2cb5b1dce197431b7f0095a2ab0e4c2979a4",
+      "bytes": 95440
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-login-return.png",
+      "sha256": "7d8537802e09b5a771873234687c630203ea4c73b1879899109fcb0aa7bfd347",
+      "bytes": 15105
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-methods-dark-v2.png",
+      "sha256": "4348d4dfed4d2c8e7f8b8865d24b25a4b982cd41459f9f5368bbe8ac3dd941d5",
+      "bytes": 98510
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-methods-dark.png",
+      "sha256": "4348d4dfed4d2c8e7f8b8865d24b25a4b982cd41459f9f5368bbe8ac3dd941d5",
+      "bytes": 98510
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-methods-light-v2.png",
+      "sha256": "9c55c844e5e1e06d939b8c8f4785412239de677e85cc9d73ef7705cb47775d3a",
+      "bytes": 100216
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-packet-coverage-v2.png",
+      "sha256": "89ae20f7088e1206be90886258001a94ec4255647c6cf14a6ba68458902e7901",
+      "bytes": 47766
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-results-dark-v2.png",
+      "sha256": "5f3fed01d11b08a1805b70f2e86e59d3f3e335ca4ed03aae20b04fbf1fa33bdd",
+      "bytes": 93114
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-results-light-v2.png",
+      "sha256": "813a8670398540a159ba8f5a17966316cdc2d27dd24f21b43ce2a2b390c3c6ab",
+      "bytes": 92338
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-validation-v1.json",
+      "sha256": "b9e1bfed195612f4a3c3ec4e5f1aee1aaa8520be79c5dfb4ecf3e6f38df7266b",
+      "bytes": 9499
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/publication-guards-v1.json",
+      "sha256": "c973134832d646bcc307f3cb984912cee95ae80de1c9be49b848eed87d8a8b43",
+      "bytes": 820
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/release-amendment-v2.json",
+      "sha256": "8dcb563b27d7ac6182d9feda18050723fefe9ab6f577f1227915ea53264ff0b2",
+      "bytes": 706
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/release-protocol-v1.json",
+      "sha256": "48fb6d86c5ec74683d888a5f7503c6150a77883ab0e418fe782d3ca1f20c05ad",
+      "bytes": 2628
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/storage-assessment-v1.json",
+      "sha256": "83bfdc0fa6aee6199494d1dbe1ab680d6728f99d85898adfcbb3123dc5c2a829",
+      "bytes": 406031
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/storage-assessment-v2.json",
+      "sha256": "31c78b82c678426e53d67579c957441d78f9caa5654e5964bad8fe32c7b44c50",
+      "bytes": 5411
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/usage-v1.json",
+      "sha256": "1f6254691e08e37b6f0771c4125b7eb084601018a9543ee6bf4ff8a3c7f67062",
+      "bytes": 3004
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/test/agent_ipv6_answers_test.py",
+      "sha256": "f8f1b84b9c2eaf11dcaecccae35eb81313f100c6ebcf00256d5682e0962110c7",
+      "bytes": 2679
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/test/agent_prompt_test.py",
+      "sha256": "cd3ec591d69b7a7ebcedb2841f60483be96a8db858a1fcce3d334fcac52c2602",
+      "bytes": 19199
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/test/evaluate_ipv6_agent_v1.py",
+      "sha256": "ac746cb4d3b53bbda4a5ca9862960dba3fd7535f87d0ea0d46691bfe0bc2e39d",
+      "bytes": 7198
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/test/evaluate_ipv6_agent_v2.py",
+      "sha256": "5a5e804858595fb4f24c932a316582bbefa3e2bf949ecab940f29b484c544f63",
+      "bytes": 7205
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/test/evaluate_ipv6_agent_v3.py",
+      "sha256": "113824a6c5b58114f599ce0ead9083c3388c273df3458eb5a4651e06b3a98780",
+      "bytes": 7229
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/test/ipv6-evaluation-cases-v1.json",
+      "sha256": "bee66884b440f9548e1a18b2f54f4c36281cf369116a76c271b2dc548771c302",
+      "bytes": 4437
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/test/ipv6-evaluation-cases-v1.lock.json",
+      "sha256": "981b19bc27e3c5639e0a0cc3b0e5d99f2a8ac6dfdfd59574787838b2eab4f2e9",
+      "bytes": 134
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/test/ipv6-evaluation-cases-v2.json",
+      "sha256": "8be133169a672fc59d01fc7afc9b239bc2d252c0d65d0f1e119455e973d065e5",
+      "bytes": 6030
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/test/ipv6-evaluation-cases-v2.lock.json",
+      "sha256": "e0e16d72f55e8db2c9f08b57ac968f07acf70177bc5ff622d1a7a879f7adc527",
+      "bytes": 134
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/test/ipv6-evaluation-cases-v3.json",
+      "sha256": "75483ad4797441fe4d7daa365f3989e25e3e624c33450c2fd6451226a69803b7",
+      "bytes": 5773
+    },
+    {
+      "path": "evidence/release-v1/infrastructure/test/ipv6-evaluation-cases-v3.lock.json",
+      "sha256": "b8c86b8324c90da71b897acc63c970988f1d8ee9f33c5864b9ba97363ea26b17",
+      "bytes": 177
+    },
+    {
+      "path": "evidence/release-v1/manifest.json",
+      "sha256": "a9f02275ff72212c52f35ec7ce104937786984483b2056c67f38097df207d6e1",
+      "bytes": 28947
+    }
+  ],
+  "bundles": [
+    {
+      "id": "release-v1-raw-bundle-0",
+      "sha256": "d003d9598b0400c61d87c148735fb6bdfa3c238863eaaa70b972478f12d4280b",
+      "byte_count": 7884482,
+      "manifest": [
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/.gitignore",
+          "offset": 0,
+          "bytes": 110,
+          "sha256": "a9d613eb370093da677f62e8ed64af0344ccf61227209ef83ca8816df83200e6",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/.gitignore.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/README.md",
+          "offset": 0,
+          "bytes": 7124,
+          "sha256": "8b112d038111a7d3582adc06644d32dd9c4ef946008e75583ae13cb455435a64",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/README.md.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/analyze.py",
+          "offset": 0,
+          "bytes": 13210,
+          "sha256": "4d0039a23d46346921164ce5e907fbb8025fffa37ce44c208bfcd218a9583817",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/analyze.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/assessment.py",
+          "offset": 0,
+          "bytes": 24098,
+          "sha256": "d3eeddc29852eecc3b2f0847ffbb5960403a01cf3e7cbeb70d7b0ff18dd235a1",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/assessment.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/bootstrap.py",
+          "offset": 0,
+          "bytes": 1833,
+          "sha256": "b179439811f8f3287480a1db929e8b215f228d45cf6c8b47d14cc486f8c12636",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/bootstrap.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/controls.py",
+          "offset": 0,
+          "bytes": 4822,
+          "sha256": "2770a6ac051cbb6c30702908a56ee8fae23510cbc70cb39190869b45a1bbee55",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/controls.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/corrected.py",
+          "offset": 0,
+          "bytes": 1337,
+          "sha256": "5036eef957f3b38a79493187420f145657e2af966e8b6abc425da9e1534e40e2",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/corrected.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/archive-retrieval-v1.json",
+          "offset": 0,
+          "bytes": 389972,
+          "sha256": "9702eb2f119e977112938639afe63abcc7d6a0ea07c47f7e0be79be75085dbb8",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/archive-retrieval-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/archive-retrieval-v2.json",
+          "offset": 0,
+          "bytes": 779280,
+          "sha256": "938dd295f0999a2d1bb27c6720581e11cbb27459cf696e2747ab5d0ebfa774f9",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/archive-retrieval-v2.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/author-members-v1.json",
+          "offset": 0,
+          "bytes": 131340,
+          "sha256": "edb053d040b26fdad037299b959ded2179fc1f93f7c65d0453fdacdb4b8fcda7",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/author-members-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/controls-v1.json",
+          "offset": 0,
+          "bytes": 5535,
+          "sha256": "3b46f6076f36cec6428769a95a9cb38a56518f50a858f8b7afc9645b0a347d76",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/controls-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/main-identity.json",
+          "offset": 0,
+          "bytes": 844,
+          "sha256": "d67f0cb872446575fec50849f0176937132653e8d3e2453bd319b4526c715612",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/main-identity.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/paper-context-v1.json",
+          "offset": 0,
+          "bytes": 20968,
+          "sha256": "0f9085e4f52de261346883b5f3843a107d929dd83a7de9d2ecedb0d926b5ed19",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/paper-context-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/scientific-validation-v1.json",
+          "offset": 0,
+          "bytes": 1312,
+          "sha256": "934375c8bc39b3e3d0bf05c8bd2578dbcdcb24dc2d6967324a4172ddf62d6a5b",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/scientific-validation-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/source-identity-screen-v1.json",
+          "offset": 0,
+          "bytes": 12449,
+          "sha256": "080fca370e0565a8779489a55217315169cc8a46e182001c1521700f57347657",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/source-identity-screen-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/source-retrieval-v1.json",
+          "offset": 0,
+          "bytes": 220534,
+          "sha256": "c762c14302872b7e22ca2f32681992d05b92669074e5f9a94c5536c0fe3bc458",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/source-retrieval-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/source-retrieval-v2.json",
+          "offset": 0,
+          "bytes": 277567,
+          "sha256": "9cedd456903794471a4a789b6e4a79db7ca7c5a2c06879e65d48cbd21b41fb7f",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/source-retrieval-v2.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/source-retrieval-v3.json",
+          "offset": 0,
+          "bytes": 291527,
+          "sha256": "d1e28cbbb7ab8e7b48ea68c7883eaddee1a3ab92a8dc6485fde8a9716a3383e8",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/source-retrieval-v3.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/source-retrieval-v4.json",
+          "offset": 0,
+          "bytes": 300306,
+          "sha256": "7b8a7c4319d0cd2756ec7ab9899c23a30812c3fec2a010968b6b3161ce02376c",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/source-retrieval-v4.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/source-seeds-v1.json",
+          "offset": 0,
+          "bytes": 53831,
+          "sha256": "550a983c4120f44d8a69b664779ca3a3e694e5205f6fd7e6bdd592f791e29f12",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/evidence/source-seeds-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/export.py",
+          "offset": 0,
+          "bytes": 2161,
+          "sha256": "364e79e0319ed630f1025cec37c854da9e5094fad0dbd945bb5dfedd8d2326df",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/export.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/prepare.py",
+          "offset": 0,
+          "bytes": 9195,
+          "sha256": "6048e23377c9dbfe77606b84f857f4a5541077d0ed1fd3217b8f0d82b83f2362",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/prepare.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/protocols/archive-amendment-v2.json",
+          "offset": 0,
+          "bytes": 596,
+          "sha256": "4aa3e79572839d06fecae0a572bdc84ce099d4b77cc88a3db385f1628b430640",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/protocols/archive-amendment-v2.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/protocols/ipv6-dns-archive-v1.json",
+          "offset": 0,
+          "bytes": 5919,
+          "sha256": "aa1397cd733e2b513ea8fd549613906481fbd1a57b3d686e366ea3fc46a7ef08",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/protocols/ipv6-dns-archive-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/protocols/ipv6-dns-archive-v1.lock.json",
+          "offset": 0,
+          "bytes": 165,
+          "sha256": "7492185fa65087bd39f0b9ace076f41ed7f4a6f06760b2fd37321bf3454101e6",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/protocols/ipv6-dns-archive-v1.lock.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/protocols/ipv6-dns-controls-v1.json",
+          "offset": 0,
+          "bytes": 2487,
+          "sha256": "a4eb469b510a2d6985b4f37d970a15ed1d6d68b3cc24b50d1393d1f43cb476a8",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/protocols/ipv6-dns-controls-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/protocols/ipv6-dns-controls-v1.lock.json",
+          "offset": 0,
+          "bytes": 166,
+          "sha256": "0edab5c951030ae4ea55894ffec254b3531713cadf19503551372ffe7e7e85bc",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/protocols/ipv6-dns-controls-v1.lock.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/retrieve.py",
+          "offset": 0,
+          "bytes": 3864,
+          "sha256": "cbfa81165cf5545e9d2426c7ae7f676937fd8eff0e36199413649658609a1b8a",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/retrieve.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/sources.py",
+          "offset": 0,
+          "bytes": 11875,
+          "sha256": "a1c51bf103d8910fd4e44c2fc780dbb2c0618c2fc609d2fe542fafd71b5b66e9",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/sources.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/experiments/experiments/ipv6_dns/verify.py",
+          "offset": 0,
+          "bytes": 2854,
+          "sha256": "cf2fc41f384f0cbd1f7b51a22f5d492a89284da4787c9e531603f97dcd600e40",
+          "archive_name": "evidence/release-v1/experiments/experiments/ipv6_dns/verify.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/app/components/chat-panel.tsx",
+          "offset": 0,
+          "bytes": 26095,
+          "sha256": "18ebdf89365aa92b4b7b6723ff7cf076249fc30d2f02746794546a177b2d2de8",
+          "archive_name": "evidence/release-v1/frontend/app/components/chat-panel.tsx.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/app/components/ipv6-study/dashboard.tsx",
+          "offset": 0,
+          "bytes": 9822,
+          "sha256": "183f86b3e3a052551be9e6cd392ec0fe41af07031b22f57cf5cd0a5411517fa1",
+          "archive_name": "evidence/release-v1/frontend/app/components/ipv6-study/dashboard.tsx.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/app/components/ipv6-study/header.tsx",
+          "offset": 0,
+          "bytes": 1032,
+          "sha256": "a41eb009a6f0f518f3932e395a2bc867e88649c2bddf8b3c216939de52259931",
+          "archive_name": "evidence/release-v1/frontend/app/components/ipv6-study/header.tsx.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/app/module/ipv6-dns-study/api/data/route.ts",
+          "offset": 0,
+          "bytes": 500,
+          "sha256": "b51c8f573ad9e858051a8e325ba4e0abee2b9bb134a0fd784b3994bea2cb2404",
+          "archive_name": "evidence/release-v1/frontend/app/module/ipv6-dns-study/api/data/route.ts.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/app/module/ipv6-dns-study/api/release/route.ts",
+          "offset": 0,
+          "bytes": 741,
+          "sha256": "bc301db25808badfdb6f5b94e591468a97f6fea75c76a185fb0fa1074c4944bc",
+          "archive_name": "evidence/release-v1/frontend/app/module/ipv6-dns-study/api/release/route.ts.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/app/module/ipv6-dns-study/chat/page.tsx",
+          "offset": 0,
+          "bytes": 1267,
+          "sha256": "651acd452e2c8ae8ac92ce96b9bf1b2004634f9887c0953c716c5d4dede0480b",
+          "archive_name": "evidence/release-v1/frontend/app/module/ipv6-dns-study/chat/page.tsx.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/app/module/ipv6-dns-study/literature/page.tsx",
+          "offset": 0,
+          "bytes": 2194,
+          "sha256": "3fe6c6a1f607884121f4a8efdfbf9ed621a6c4834bed258ff577f04112655f1a",
+          "archive_name": "evidence/release-v1/frontend/app/module/ipv6-dns-study/literature/page.tsx.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/app/module/ipv6-dns-study/methods/page.tsx",
+          "offset": 0,
+          "bytes": 5731,
+          "sha256": "7b4afa488fb2bee28cefe79600c20fcdd0b76582b7dabd1fe369cc459ebca1d1",
+          "archive_name": "evidence/release-v1/frontend/app/module/ipv6-dns-study/methods/page.tsx.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/app/module/ipv6-dns-study/test-results/page.tsx",
+          "offset": 0,
+          "bytes": 744,
+          "sha256": "b2bd5184f01796ac9b8ca48961e9f56907d65124b32768cd579e00cd84cd0feb",
+          "archive_name": "evidence/release-v1/frontend/app/module/ipv6-dns-study/test-results/page.tsx.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/lib/agent-api.ts",
+          "offset": 0,
+          "bytes": 4986,
+          "sha256": "4e38abe37eadb85629c4c63f3b9db15941e4099ded4efdedfe8a8e34ae69e8fe",
+          "archive_name": "evidence/release-v1/frontend/lib/agent-api.ts.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/lib/ipv6-study-server.ts",
+          "offset": 0,
+          "bytes": 2575,
+          "sha256": "31e5e8cf140b766e89b6098e3eabba43d176f974bc244c036b06a696a934ec87",
+          "archive_name": "evidence/release-v1/frontend/lib/ipv6-study-server.ts.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/lib/ipv6-study.ts",
+          "offset": 0,
+          "bytes": 2731,
+          "sha256": "216655090280b11b55abebff1ac1b11ea790e8a81ef00f7e3c19241412a77a52",
+          "archive_name": "evidence/release-v1/frontend/lib/ipv6-study.ts.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/lib/test-modules.ts",
+          "offset": 0,
+          "bytes": 11223,
+          "sha256": "da4a79f401ec01f04ef527f039a2ba522e260fcb3606ac786045c60b24d2c563",
+          "archive_name": "evidence/release-v1/frontend/lib/test-modules.ts.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/public/module/ipv6-dns-study/data.zip",
+          "offset": 0,
+          "bytes": 2381581,
+          "sha256": "7c4db9d04a289d958d04ee5458ec5e3cf056a20e400d93e6d993a6be3d3a9b18",
+          "archive_name": "evidence/release-v1/frontend/public/module/ipv6-dns-study/data.zip.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/public/module/ipv6-dns-study/download-manifest.json",
+          "offset": 0,
+          "bytes": 127,
+          "sha256": "37bcbbbb60e335717689414f362d141d01898e3904fb8b01f10ceb15ffbe85ff",
+          "archive_name": "evidence/release-v1/frontend/public/module/ipv6-dns-study/download-manifest.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/public/module/ipv6-dns-study/paper-context.json",
+          "offset": 0,
+          "bytes": 20968,
+          "sha256": "0f9085e4f52de261346883b5f3843a107d929dd83a7de9d2ecedb0d926b5ed19",
+          "archive_name": "evidence/release-v1/frontend/public/module/ipv6-dns-study/paper-context.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/public/module/ipv6-dns-study/validation-manifest.json",
+          "offset": 0,
+          "bytes": 262,
+          "sha256": "7d5d1099052712a42183875d20cfa8abf59bbe7d9f329e4e32d4d73cc50a0ed8",
+          "archive_name": "evidence/release-v1/frontend/public/module/ipv6-dns-study/validation-manifest.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/public/module/ipv6-dns-study/validation.zip",
+          "offset": 0,
+          "bytes": 1330649,
+          "sha256": "b6737aaaa6c68f85141f0419fc55436d5be424ee26f377e53c3664f83eef5f70",
+          "archive_name": "evidence/release-v1/frontend/public/module/ipv6-dns-study/validation.zip.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/frontend/tests/agent-api.test.mjs",
+          "offset": 0,
+          "bytes": 10094,
+          "sha256": "36fdf9ff375bfafabffcdd6c2a56a4fcfc67b948151c2d393e7275c2758a2b5b",
+          "archive_name": "evidence/release-v1/frontend/tests/agent-api.test.mjs.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/agent/handler.py",
+          "offset": 0,
+          "bytes": 14527,
+          "sha256": "b0fbbe847db2042eb018403cc2f3d5a9d9890beaf491957c7d93b36454107245",
+          "archive_name": "evidence/release-v1/infrastructure/agent/handler.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/agent/ipv6_answers.py",
+          "offset": 0,
+          "bytes": 9481,
+          "sha256": "292082d2ddcbbda0e12066420513e0b2055e93cba999e577736ce07e9efafa74",
+          "archive_name": "evidence/release-v1/infrastructure/agent/ipv6_answers.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/agent/ipv6_limits.py",
+          "offset": 0,
+          "bytes": 419,
+          "sha256": "53ad7ef43e23e98636021bd5b10523ca9f94c5983af1b652f63161f5293087e7",
+          "archive_name": "evidence/release-v1/infrastructure/agent/ipv6_limits.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/agent/modules.py",
+          "offset": 0,
+          "bytes": 692,
+          "sha256": "72ae07b347d6a5160c75a86f4fcac1778636daeec0dbf38930f4f403d53caf4c",
+          "archive_name": "evidence/release-v1/infrastructure/agent/modules.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/agent/tools/__init__.py",
+          "offset": 0,
+          "bytes": 1716,
+          "sha256": "a3c2054e693f9e1c53922ecf22d7ff6dd2d7dc9f714c5776f6c5ea7ebb4bb782",
+          "archive_name": "evidence/release-v1/infrastructure/agent/tools/__init__.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/agent/tools/ipv6_study.py",
+          "offset": 0,
+          "bytes": 3119,
+          "sha256": "5a9d2dd22d1eeb90af59aa9e140b3e21b65246d1d2c31f3f1f58c2588e631d02",
+          "archive_name": "evidence/release-v1/infrastructure/agent/tools/ipv6_study.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/bin/deploy-ipv6-agent.py",
+          "offset": 0,
+          "bytes": 2511,
+          "sha256": "198d07bc4410f63b9f0eb813d16b80db5cd390e138569de1f1d3d24a663343cb",
+          "archive_name": "evidence/release-v1/infrastructure/bin/deploy-ipv6-agent.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/bin/export-ipv6-release.py",
+          "offset": 0,
+          "bytes": 2471,
+          "sha256": "1476ee6ed744aa737b0a42d36ff8c6e62767799a6e76b71a8613576f1a12b8ff",
+          "archive_name": "evidence/release-v1/infrastructure/bin/export-ipv6-release.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/bin/export-ipv6-validation.py",
+          "offset": 0,
+          "bytes": 1658,
+          "sha256": "cd9902966f388c2383e9d1377ca175cb1b633caf620e698d90f57a81f61986f7",
+          "archive_name": "evidence/release-v1/infrastructure/bin/export-ipv6-validation.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/bin/ipv6-raw-storage.py",
+          "offset": 0,
+          "bytes": 5770,
+          "sha256": "2b88dadd79849e33075c3567538204338eaa8c3d19e6e9a1828d1680bf13076d",
+          "archive_name": "evidence/release-v1/infrastructure/bin/ipv6-raw-storage.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/bin/ipv6-study-database.py",
+          "offset": 0,
+          "bytes": 13978,
+          "sha256": "f2d1f8d90363f863a00d255c82e85daf440101bab91884d41d191e1aaa8e83bd",
+          "archive_name": "evidence/release-v1/infrastructure/bin/ipv6-study-database.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/bin/verify-ipv6-agent.py",
+          "offset": 0,
+          "bytes": 3266,
+          "sha256": "9906bf8ee63ecc0295442db0b615d3b686d93b1eb6ecb7e76b746fc3bff4fee5",
+          "archive_name": "evidence/release-v1/infrastructure/bin/verify-ipv6-agent.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/bin/verify-ipv6-feature.py",
+          "offset": 0,
+          "bytes": 6098,
+          "sha256": "fcae6fbb1d27235963c14799f3e5e96d6a70c95df49021441cb3faa3ce008cfb",
+          "archive_name": "evidence/release-v1/infrastructure/bin/verify-ipv6-feature.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/database/202610050101_ipv6_dns_study.sql",
+          "offset": 0,
+          "bytes": 7908,
+          "sha256": "4c387997ae2bc79e961b288f6b2aaf09b401ee9e13ae2d3b8d6ebe64c479f216",
+          "archive_name": "evidence/release-v1/infrastructure/database/202610050101_ipv6_dns_study.sql.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/database/202610050102_ipv6_prompt_publication.sql",
+          "offset": 0,
+          "bytes": 6064,
+          "sha256": "3a7b4b00edd8ebcd5c5522862a7075a3a5d57601e37b8895d0f2dbfcc3c7a264",
+          "archive_name": "evidence/release-v1/infrastructure/database/202610050102_ipv6_prompt_publication.sql.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/database/202610050103_ipv6_evaluation_v2.sql",
+          "offset": 0,
+          "bytes": 6101,
+          "sha256": "50f2a3a3d93046360df30cc4d6fc14697c009c49c477176f11d7bce880a339e4",
+          "archive_name": "evidence/release-v1/infrastructure/database/202610050103_ipv6_evaluation_v2.sql.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/database/202610050104_ipv6_publication_review_guard.sql",
+          "offset": 0,
+          "bytes": 6189,
+          "sha256": "bd4d000f5a34661c0026194b498e0cefaf12353b79cc7ea436736431768ef36d",
+          "archive_name": "evidence/release-v1/infrastructure/database/202610050104_ipv6_publication_review_guard.sql.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/database/seed-ipv6-agent-prompt-v1.json",
+          "offset": 0,
+          "bytes": 1883,
+          "sha256": "817c6091775f5c1b355756719c38914211cbe964827358e10e51bbd9d81a0d5f",
+          "archive_name": "evidence/release-v1/infrastructure/database/seed-ipv6-agent-prompt-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/database/seed-ipv6-agent-prompt-v2.json",
+          "offset": 0,
+          "bytes": 2164,
+          "sha256": "19c0f516c58208567df7f640ab73ce69c0589a606b71810625212800c3aab3d4",
+          "archive_name": "evidence/release-v1/infrastructure/database/seed-ipv6-agent-prompt-v2.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/database/seed-ipv6-agent-prompt-v3.json",
+          "offset": 0,
+          "bytes": 2287,
+          "sha256": "52408e605f9ddd8f24949c284d78b6d78599cec842cde9786433aada71147b01",
+          "archive_name": "evidence/release-v1/infrastructure/database/seed-ipv6-agent-prompt-v3.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-chat.md",
+          "offset": 0,
+          "bytes": 5916,
+          "sha256": "ca1802ec52715a407cef9632900bc47492be284b96df42dc3d78317a5bad196c",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-chat.md.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/agent-outputs.json",
+          "offset": 0,
+          "bytes": 131,
+          "sha256": "8b4540006ee3d15d879733f2fe8e46b97fe34e52cc9019bf10f6db38910a3813",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/agent-outputs.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/agent-production-v1.json",
+          "offset": 0,
+          "bytes": 3938,
+          "sha256": "852ba23126aeee8a4dd7dbb0fd07c5b79de3cb30f3e6a25b381e5d5d10866761",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/agent-production-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/browser-local-v1.json",
+          "offset": 0,
+          "bytes": 2749,
+          "sha256": "1151393bf5d21a58e2badb7efcfe09a7d602740ad5bfda5ea24f216c0dced5ec",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/browser-local-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/browser-production-v1.json",
+          "offset": 0,
+          "bytes": 966,
+          "sha256": "3672aba2dda4ee5e3ba9a8f2fae87d6fb421f4ea899fea16b3d5e0ec6ac397a6",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/browser-production-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/browser-production-v2.json",
+          "offset": 0,
+          "bytes": 7733,
+          "sha256": "ae08c9096c1d52c9002e72b79e39ace11650c6ae0dbcd88f0d012a6170b7a739",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/browser-production-v2.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v1-original.json",
+          "offset": 0,
+          "bytes": 64063,
+          "sha256": "8bb34ba073d15ab097931546c417200bcca67de8472f85a6692774dc6ae0f84e",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v1-original.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v1-reviewed.json",
+          "offset": 0,
+          "bytes": 68905,
+          "sha256": "04adee93ee5b865b542bfb3afcba2f35e84aeaa17388a60d66c8cb3e944e5e74",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v1-reviewed.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v1.json",
+          "offset": 0,
+          "bytes": 64063,
+          "sha256": "8bb34ba073d15ab097931546c417200bcca67de8472f85a6692774dc6ae0f84e",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v2-reviewed.json",
+          "offset": 0,
+          "bytes": 86858,
+          "sha256": "bad7e3e31859be2c274eb6995b23f82535fd301a8ef011220ccd3378fbe46cfe",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v2-reviewed.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v2.json",
+          "offset": 0,
+          "bytes": 81029,
+          "sha256": "8995a8bf0f6deb28902652d067d18db8b3f5cc8f0c361150318444abae4ce028",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v2.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v3-original.json",
+          "offset": 0,
+          "bytes": 75514,
+          "sha256": "598a2e8370064ac6745ce046792795db8a27885f61de114c6f9c78a194f21b69",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v3-original.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v3-reviewed.json",
+          "offset": 0,
+          "bytes": 81737,
+          "sha256": "e30059767eddd62b4905ca71e6a890c2869b4501dda39f3b69236384cebe74a1",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v3-reviewed.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v3.json",
+          "offset": 0,
+          "bytes": 81737,
+          "sha256": "e30059767eddd62b4905ca71e6a890c2869b4501dda39f3b69236384cebe74a1",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/chat-evaluation-v3.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/database-validation-v1.json",
+          "offset": 0,
+          "bytes": 3120,
+          "sha256": "8a34aa08633a56646722c4ebcc3ac9e3d0117e55db373d241c3ba10ea287d7fd",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/database-validation-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/desktop-dark.png",
+          "offset": 0,
+          "bytes": 136797,
+          "sha256": "9ad228af892df81d165f7715c844bdf85c47deb1a74edeebd1e3cebcabcc0c05",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/desktop-dark.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/desktop-initial.png",
+          "offset": 0,
+          "bytes": 125581,
+          "sha256": "e2502c88db17349438b3d69df017678877ed078e96501de07dcce28383995a85",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/desktop-initial.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/desktop-invalid.png",
+          "offset": 0,
+          "bytes": 183410,
+          "sha256": "b5f8afd5acdc9d56643ce63fb2047d034bf62dceeaa81026c5f942adf89065e9",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/desktop-invalid.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/desktop-light.png",
+          "offset": 0,
+          "bytes": 136354,
+          "sha256": "1b6f734879d361ded6d72b639ab65d81b19d9661de7675e87772b31d285b02df",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/desktop-light.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/desktop-unavailable.png",
+          "offset": 0,
+          "bytes": 61387,
+          "sha256": "4343acd28cddcfe27c740284fdc5282f037e4b097d9b3415afb46ee25222d5b0",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/desktop-unavailable.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/http-local-v1.json",
+          "offset": 0,
+          "bytes": 1613,
+          "sha256": "ce8c4292f6e2e8d8dd9fb735b030f6da9848802cd2eacd8cb7e705b454913f14",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/http-local-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/http-local-v2.json",
+          "offset": 0,
+          "bytes": 1613,
+          "sha256": "9e0d941a4a8b09023084b753dba8353b64f698d5f8a8c1e61b24ca5dbd3f8f1a",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/http-local-v2.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/http-local-v3.json",
+          "offset": 0,
+          "bytes": 2052,
+          "sha256": "4c620a5edb00f1189c45a334414d52c5df9c1a99e561ff4305797e78137756c0",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/http-local-v3.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/http-production-v1.json",
+          "offset": 0,
+          "bytes": 2067,
+          "sha256": "c39f3fbe8c3d3569bdf30a21570452f73c533699871aa057d6691b00eb8b1420",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/http-production-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/http-production-v2.json",
+          "offset": 0,
+          "bytes": 2067,
+          "sha256": "699ea183930f38053f3d51ab44aaca132e1a27c0ac06f26a1ef382ec01e4a71b",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/http-production-v2.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-chart-compact-label-fixed.png",
+          "offset": 0,
+          "bytes": 47490,
+          "sha256": "2b0c34b1c1768ccaaa2177022d7221d5216d2d107a03a1ea1cdc77cec85f6cf1",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-chart-compact-label-fixed.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-chart-compact-local.png",
+          "offset": 0,
+          "bytes": 47486,
+          "sha256": "b51bf6b919f0f18633c6300f9be04fed0b99a0bf79df727ebb974e71462ac578",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-chart-compact-local.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-chart.png",
+          "offset": 0,
+          "bytes": 63644,
+          "sha256": "02aa9800ff63b220c2dab4910d057bcc45df267663f16a263b14fe53c65a8318",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-chart.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-dark.png",
+          "offset": 0,
+          "bytes": 49712,
+          "sha256": "f356ab95ad0a1b0d1e24bcaebf8e958541b2c4346752c7babcc8e00137ab96e8",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-dark.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-invalid.png",
+          "offset": 0,
+          "bytes": 81290,
+          "sha256": "b262da547336bae34c71b9b03bca91e1fbe65cdd6bbd9495cd11fe442efd1c9f",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-invalid.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-light.png",
+          "offset": 0,
+          "bytes": 94614,
+          "sha256": "c2adcd4357a58c620aa24ef414d1cfbb2d7c0d242832559be869e8b0a59eec4b",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-light.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-literature-fixed.png",
+          "offset": 0,
+          "bytes": 97494,
+          "sha256": "0cc9d4edcddd0afa7d85d92d9523753b066786acdf2841203e595df9c96330f3",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-literature-fixed.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-literature.png",
+          "offset": 0,
+          "bytes": 97687,
+          "sha256": "2c9d02fa31bd7d4d578f7fad79f50a7b8fc8578fa59febfb273cc270680c6442",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-literature.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-unavailable.png",
+          "offset": 0,
+          "bytes": 45084,
+          "sha256": "9937a660c2050d52823a50e18fea1520d67a7afe21901a8cd4e7b668b2b64fb9",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/mobile-unavailable.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/predeployment.json",
+          "offset": 0,
+          "bytes": 1367,
+          "sha256": "aac553d5a3aa414b721b275d1bd4d151cecda633df870d4633ba0a53d38ff663",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/predeployment.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-initial.png",
+          "offset": 0,
+          "bytes": 135921,
+          "sha256": "45c98102be24e3b29a14cc3cf6abbec0838bcda11d2db30df475b5dd86451a68",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-initial.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-light.png",
+          "offset": 0,
+          "bytes": 136904,
+          "sha256": "13ae74796375fd3995334cf27191cd4051743e156b2ff66d1d42a4c85b71fcc8",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-light.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-literature-dark-v2.png",
+          "offset": 0,
+          "bytes": 235664,
+          "sha256": "41fce976bc978fe420386598ac6aa301b7b6e609f860d449c302232a23aedb28",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-literature-dark-v2.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-literature-light-v2.png",
+          "offset": 0,
+          "bytes": 235655,
+          "sha256": "ff147b4f8091bec94f3a12ddcfc6aeecf5d60d2abc113d378373aa011a906814",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-literature-light-v2.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-methods-dark-v2.png",
+          "offset": 0,
+          "bytes": 194458,
+          "sha256": "002facca29b243cdc16f5d545745f9d0948bb0ad23ab309a586919c96ac2b67a",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-methods-dark-v2.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-methods-light-v2.png",
+          "offset": 0,
+          "bytes": 194350,
+          "sha256": "c7db065d488553fcc4981ab880915d33891e7bb08254af6d72e85df67c6ea287",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-methods-light-v2.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-results-dark-v2.png",
+          "offset": 0,
+          "bytes": 135409,
+          "sha256": "5c7d0d243da8ea2ff153b5c7597371f595ee101b56a0ee2a9bfa82e8d85484ed",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-results-dark-v2.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-results-light-v2.png",
+          "offset": 0,
+          "bytes": 134628,
+          "sha256": "54f736a2c725ead1c41f081b3ffd24a6df07ca009b2dc7607797eb0c9c810fc8",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-desktop-results-light-v2.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-http-attempt-v1.json",
+          "offset": 0,
+          "bytes": 966,
+          "sha256": "64b13b5a1be13dd431f77402d959a09523331e4ee35f2da23933cd35daa80e62",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-http-attempt-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-chart-dark-settled-v2.png",
+          "offset": 0,
+          "bytes": 46143,
+          "sha256": "3e4a014a6a8503b771119d74eef86f364a7508665e9dfd1333357bf15c94ca4e",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-chart-dark-settled-v2.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-chart-dark-v2.png",
+          "offset": 0,
+          "bytes": 70173,
+          "sha256": "f301b024dc7116012760f38e1acc47c4a1527818c590213dfe61c2eb8a187179",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-chart-dark-v2.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-chart-light-v2.png",
+          "offset": 0,
+          "bytes": 45816,
+          "sha256": "706d2c302f1df8a5db2dbad32f612ffba3a3736d3067721a7756325fa1e3cd5b",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-chart-light-v2.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-chart.png",
+          "offset": 0,
+          "bytes": 47442,
+          "sha256": "c801df006b74f62b3826c74314325ecac9d7e0cf5fc51a547a3c936c0c86ae04",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-chart.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-light.png",
+          "offset": 0,
+          "bytes": 92375,
+          "sha256": "91dd0dfc60e9001c5f4137d7a1df8eeae76a2b907502e0ed6d41d9b7b9f422d8",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-light.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-literature-dark-v2.png",
+          "offset": 0,
+          "bytes": 94779,
+          "sha256": "5460086bb020aaad62d0ae92b76c8c8118ac5b55994f735b70227c305fcebc7b",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-literature-dark-v2.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-literature-dark.png",
+          "offset": 0,
+          "bytes": 94864,
+          "sha256": "10f87f7e0ba4c9ea89d9b90cee3071b994a2cc65512648e826248093d29e6fe5",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-literature-dark.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-literature-light-v2.png",
+          "offset": 0,
+          "bytes": 95440,
+          "sha256": "7c00466ea9a034b8ea0858506d0d2cb5b1dce197431b7f0095a2ab0e4c2979a4",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-literature-light-v2.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-login-return.png",
+          "offset": 0,
+          "bytes": 15105,
+          "sha256": "7d8537802e09b5a771873234687c630203ea4c73b1879899109fcb0aa7bfd347",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-login-return.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-methods-dark-v2.png",
+          "offset": 0,
+          "bytes": 98510,
+          "sha256": "4348d4dfed4d2c8e7f8b8865d24b25a4b982cd41459f9f5368bbe8ac3dd941d5",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-methods-dark-v2.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-methods-dark.png",
+          "offset": 0,
+          "bytes": 98510,
+          "sha256": "4348d4dfed4d2c8e7f8b8865d24b25a4b982cd41459f9f5368bbe8ac3dd941d5",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-methods-dark.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-methods-light-v2.png",
+          "offset": 0,
+          "bytes": 100216,
+          "sha256": "9c55c844e5e1e06d939b8c8f4785412239de677e85cc9d73ef7705cb47775d3a",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-methods-light-v2.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-packet-coverage-v2.png",
+          "offset": 0,
+          "bytes": 47766,
+          "sha256": "89ae20f7088e1206be90886258001a94ec4255647c6cf14a6ba68458902e7901",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-packet-coverage-v2.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-results-dark-v2.png",
+          "offset": 0,
+          "bytes": 93114,
+          "sha256": "5f3fed01d11b08a1805b70f2e86e59d3f3e335ca4ed03aae20b04fbf1fa33bdd",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-results-dark-v2.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-results-light-v2.png",
+          "offset": 0,
+          "bytes": 92338,
+          "sha256": "813a8670398540a159ba8f5a17966316cdc2d27dd24f21b43ce2a2b390c3c6ab",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-mobile-results-light-v2.png.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-validation-v1.json",
+          "offset": 0,
+          "bytes": 9499,
+          "sha256": "b9e1bfed195612f4a3c3ec4e5f1aee1aaa8520be79c5dfb4ecf3e6f38df7266b",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/production-validation-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/publication-guards-v1.json",
+          "offset": 0,
+          "bytes": 820,
+          "sha256": "c973134832d646bcc307f3cb984912cee95ae80de1c9be49b848eed87d8a8b43",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/publication-guards-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/release-amendment-v2.json",
+          "offset": 0,
+          "bytes": 706,
+          "sha256": "8dcb563b27d7ac6182d9feda18050723fefe9ab6f577f1227915ea53264ff0b2",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/release-amendment-v2.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/release-protocol-v1.json",
+          "offset": 0,
+          "bytes": 2628,
+          "sha256": "48fb6d86c5ec74683d888a5f7503c6150a77883ab0e418fe782d3ca1f20c05ad",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/release-protocol-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/storage-assessment-v1.json",
+          "offset": 0,
+          "bytes": 406031,
+          "sha256": "83bfdc0fa6aee6199494d1dbe1ab680d6728f99d85898adfcbb3123dc5c2a829",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/storage-assessment-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/storage-assessment-v2.json",
+          "offset": 0,
+          "bytes": 5411,
+          "sha256": "31c78b82c678426e53d67579c957441d78f9caa5654e5964bad8fe32c7b44c50",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/storage-assessment-v2.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/usage-v1.json",
+          "offset": 0,
+          "bytes": 3004,
+          "sha256": "1f6254691e08e37b6f0771c4125b7eb084601018a9543ee6bf4ff8a3c7f67062",
+          "archive_name": "evidence/release-v1/infrastructure/docs/ipv6-study-validation/usage-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/test/agent_ipv6_answers_test.py",
+          "offset": 0,
+          "bytes": 2679,
+          "sha256": "f8f1b84b9c2eaf11dcaecccae35eb81313f100c6ebcf00256d5682e0962110c7",
+          "archive_name": "evidence/release-v1/infrastructure/test/agent_ipv6_answers_test.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/test/agent_prompt_test.py",
+          "offset": 0,
+          "bytes": 19199,
+          "sha256": "cd3ec591d69b7a7ebcedb2841f60483be96a8db858a1fcce3d334fcac52c2602",
+          "archive_name": "evidence/release-v1/infrastructure/test/agent_prompt_test.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/test/evaluate_ipv6_agent_v1.py",
+          "offset": 0,
+          "bytes": 7198,
+          "sha256": "ac746cb4d3b53bbda4a5ca9862960dba3fd7535f87d0ea0d46691bfe0bc2e39d",
+          "archive_name": "evidence/release-v1/infrastructure/test/evaluate_ipv6_agent_v1.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/test/evaluate_ipv6_agent_v2.py",
+          "offset": 0,
+          "bytes": 7205,
+          "sha256": "5a5e804858595fb4f24c932a316582bbefa3e2bf949ecab940f29b484c544f63",
+          "archive_name": "evidence/release-v1/infrastructure/test/evaluate_ipv6_agent_v2.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/test/evaluate_ipv6_agent_v3.py",
+          "offset": 0,
+          "bytes": 7229,
+          "sha256": "113824a6c5b58114f599ce0ead9083c3388c273df3458eb5a4651e06b3a98780",
+          "archive_name": "evidence/release-v1/infrastructure/test/evaluate_ipv6_agent_v3.py.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/test/ipv6-evaluation-cases-v1.json",
+          "offset": 0,
+          "bytes": 4437,
+          "sha256": "bee66884b440f9548e1a18b2f54f4c36281cf369116a76c271b2dc548771c302",
+          "archive_name": "evidence/release-v1/infrastructure/test/ipv6-evaluation-cases-v1.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/test/ipv6-evaluation-cases-v1.lock.json",
+          "offset": 0,
+          "bytes": 134,
+          "sha256": "981b19bc27e3c5639e0a0cc3b0e5d99f2a8ac6dfdfd59574787838b2eab4f2e9",
+          "archive_name": "evidence/release-v1/infrastructure/test/ipv6-evaluation-cases-v1.lock.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/test/ipv6-evaluation-cases-v2.json",
+          "offset": 0,
+          "bytes": 6030,
+          "sha256": "8be133169a672fc59d01fc7afc9b239bc2d252c0d65d0f1e119455e973d065e5",
+          "archive_name": "evidence/release-v1/infrastructure/test/ipv6-evaluation-cases-v2.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/test/ipv6-evaluation-cases-v2.lock.json",
+          "offset": 0,
+          "bytes": 134,
+          "sha256": "e0e16d72f55e8db2c9f08b57ac968f07acf70177bc5ff622d1a7a879f7adc527",
+          "archive_name": "evidence/release-v1/infrastructure/test/ipv6-evaluation-cases-v2.lock.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/test/ipv6-evaluation-cases-v3.json",
+          "offset": 0,
+          "bytes": 5773,
+          "sha256": "75483ad4797441fe4d7daa365f3989e25e3e624c33450c2fd6451226a69803b7",
+          "archive_name": "evidence/release-v1/infrastructure/test/ipv6-evaluation-cases-v3.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/infrastructure/test/ipv6-evaluation-cases-v3.lock.json",
+          "offset": 0,
+          "bytes": 177,
+          "sha256": "b8c86b8324c90da71b897acc63c970988f1d8ee9f33c5864b9ba97363ea26b17",
+          "archive_name": "evidence/release-v1/infrastructure/test/ipv6-evaluation-cases-v3.lock.json.chunk-0"
+        },
+        {
+          "original_path": "evidence/release-v1/manifest.json",
+          "offset": 0,
+          "bytes": 28947,
+          "sha256": "a9f02275ff72212c52f35ec7ce104937786984483b2056c67f38097df207d6e1",
+          "archive_name": "evidence/release-v1/manifest.json.chunk-0"
+        }
+      ],
+      "storage_path": "release-v1/bundle-0-d003d9598b0400c61d87c148735fb6bdfa3c238863eaaa70b972478f12d4280b.tar.gz",
+      "payload": {
+        "chunk_round_trip_verified": true
+      }
+    }
+  ],
+  "files": 147,
+  "original_bytes": 11449960,
+  "stored_bytes": 7884482,
+  "assessment_sha256": "bd5b1a3eafc329f4d9bdd20333c7cfb2b5f0f909079450fbd9e9ffec5e7d1a0f",
+  "round_trip_verified": true,
+  "charges_usd": null,
+  "limitations": "Storage/transfer requests and charges not reconciled. No copyrighted full source redistribution."
+}

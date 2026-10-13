@@ -1,0 +1,16 @@
+{
+  "version": 5,
+  "source_revision": "f2a57dab86a248423bfc1a18d2114c43b8126090",
+  "revision_status": "Local working-tree candidate; includes retained pre-existing workflow validation fix. Each file pins exact bytes, not asserted to match the base revision.",
+  "files": {
+    "api.py": "bd5610b86e96801f3ab072dd63786d44e23fc3658b8b980f39ca47437ec0e146",
+    "workflow.py": "6f9dcb1a12b5302534b601f29af2b6773e1033ab87f412d657b5b47df3d5fa78",
+    "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+    "store.py": "a7a1be36bf915ed8074a6314f1bb12f59b29441a71d4c746b064ee3b8f4dbeaf",
+    "scheduler.py": "1a6ded589085e298eb587a45975086078c2fe5b4bbecfdd07dccc7f0187c1465",
+    "worker.py": "8d94bc9e5f6b326065c925932be24b09676f87d0b727bd4fba6bb490f0c7ae6a",
+    "preparation.py": "f23424b4c73974ffda48e356cd19c2d0dd8877beb668d94380e7bb00da5a5f90",
+    "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+    "ideas.py": "0c77d709d3f56711b6874c51e09fb31871db3e3a0886941ffc0f2cfd1182ddf4"
+  }
+}

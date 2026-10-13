@@ -1,0 +1,14 @@
+{
+  "id": "research-ideas-release-protocol-v1",
+  "declared_on": "2026-10-13",
+  "authorization": "User explicitly requested merge to main and production deployment.",
+  "targets": {"aws_account": "395567831870", "supabase_project": "regphejnlvfpyokpniny", "amplify_app": "d24jvguj7brnkj", "site": "https://jumpserve.quaint-lab.org"},
+  "release_blockers": ["Exact evaluated prompt/runtime hashes and eight reviewed v2 development answers", "Scoped clean backend/frontend/infrastructure tests and builds", "Isolated Postgres migration/RLS/readiness tests", "Existing browser component/API/database regression checks", "Production target identity verification before writes", "Additive migrations preserve scientific records and existing chat pointers", "Only reviewed v2 prompt publishes, with original evaluations retained privately and hashes verified after retrieval", "CDK diff contains no experiment-instance, AMI, unrelated-stack or database data changes"],
+  "deployment_order": ["Commit and merge backend source and pin its committed revision", "Apply four additive idea/prompt migrations", "Archive original model outputs/protocols and publish exact evaluated v2 prompt", "Merge infrastructure and deploy only JumpServeBenchmarkStack and JumpServeAgentStack", "Merge frontend and release Amplify main", "Verify deployed source hashes, public capabilities/navigation, desktop/mobile themes, privacy denials and sign-in return paths"],
+  "ci_scope": "Manual scoped release follows declared blockers. Merge commits use [skip ci] to avoid unrelated benchmark AMI rebuilding and all-stack deployments; no protected required status checks are bypassed. Source commits and precise merge/deployment receipts are retained.",
+  "conditional_checks": ["Legitimate Google-authenticated owner planning/fresh review request; no session will be fabricated", "Deployed cross-owner write denial requires two legitimate sessions", "Independent human/domain review and held-out ideas"],
+  "scientific_scope": "No new research hypothesis is tested. Planning recommendations are model outputs; domain jobs remain manual. Development regressions are not independent scientific validation.",
+  "resources": {"new_model_evaluation_calls": 0, "evaluation_basis": "Reuse exact eight passed actual v2 answers only if prompt/runtime hashes match", "deployment_stacks": 2, "private_evaluation_archive_bytes_limit": 2000000, "billing": "Retain available AWS/Storage/Amplify usage. Missing measured or estimated charges stay null."},
+  "rollback": "Retain migrations, datasets and publication history. Restore prior Lambda code or disable the idea prompt/UI through a recorded authorized release; never drop scientific data.",
+  "prior_evidence": "docs/research-ideas-validation-v1.json"
+}

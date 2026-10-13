@@ -1,0 +1,22 @@
+{
+  "id": "reliable-browser-production-v2",
+  "origin": "https://jumpserve.quaint-lab.org",
+  "frontend_commit": "8628516572672974b523033822896e051ab17b9b",
+  "passed": true,
+  "reviewer": {"identity": "Codex primary assistant", "type": "AI", "independence": "Same implementer; no human review"},
+  "desktop": {"width": 1440, "height": 1000, "literature_cards": 47, "body_width": 1440, "overflowing_source_paragraphs_or_headings": 0},
+  "mobile": {"width": 390, "height": 844, "literature_cards": 47, "body_width": 390, "overflowing_source_paragraphs_or_headings": 0, "results_body_width": 390, "chart_width": 600, "chart_scroller_width": 324, "tested_chart_scroll_left": 200},
+  "checks": [
+    "Corrected bibliography wraps all citation URLs and revision identifiers; no card text overflow",
+    "Completed study results and count/coverage cards render on mobile",
+    "Chart labels and title identify median/min-max as descriptive, not confidence intervals",
+    "Chart horizontal scrolling succeeds without body horizontal overflow",
+    "Nominal/allocated controls, low-budget losses and invalid intervals, missing baseline bounds, light/dark themes and mobile menu verified in v1; correction only changes bibliography wrapping",
+    "Methods has 16 claim cards and no mobile prose overflow",
+    "Login return path preserves the selected configuration",
+    "No browser console or page errors"
+  ],
+  "previous_failure": "browser-production-v1.json is preserved; 535px bibliography overflow was corrected by commit 8628516 and verified on the deployed release",
+  "local_fixture_checks": "Completed, missing-configuration and invalid-summary states were checked on desktop/mobile locally; no synthetic fixture was inserted into production",
+  "authenticated_chat": "Not exercised; no legitimate Google session. Direct model evaluation and unauthenticated 401 are separate checks."
+}

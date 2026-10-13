@@ -1,0 +1,10 @@
+{
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny"
+  },
+  "release": "reliable-production-validation-v1",
+  "sha256": "130cdeb6251c524fc404412fe9df0b0bc02e78d4529c456d28cdfe1c99018cc1",
+  "original_bytes_round_trip_verified": true,
+  "authenticated_chat": "Not exercised: no legitimate Google session. Login return path, module/owner isolation tests, deployed asset hashes, direct saved-prompt evaluations and unauthenticated denial verified separately."
+}

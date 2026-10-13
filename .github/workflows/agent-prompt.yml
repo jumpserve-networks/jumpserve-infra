@@ -12,6 +12,7 @@ on:
           - congestion-control-emulated
           - congestion-control-real-world
           - leo-emergency-failover
+          - http2-compliance-study
       prompt_id:
         description: 'UUID of the database draft (or previous published version to restore)'
         required: true
@@ -32,11 +33,16 @@ jobs:
         with:
           python-version: '3.12'
       - name: Test prompt loading and analysis
-        run: python -B -m unittest discover -s test -p 'agent*_test.py' -v
-      - name: Evaluate and publish the selected version
+        run: |
+          python -m pip install pydantic==2.13.5
+          python -B -m unittest discover -s test -p 'agent*_test.py' -v
+      - name: Evaluate selected version; HTTP2 publication requires recorded manual review
         run: |
           python -m pip install strands-agents httpx boto3
-          if [ "$PROMPT_MODULE" = "leo-emergency-failover" ]; then
+          if [ "$PROMPT_MODULE" = "http2-compliance-study" ]; then
+            python -m pip install -r test/http2-evaluation-requirements.txt
+            python -B test/evaluate_http2_agent.py --live --prompt-id "$PROMPT_ID"
+          elif [ "$PROMPT_MODULE" = "leo-emergency-failover" ]; then
             python -B test/evaluate_leo_agent.py --live --prompt-id "$PROMPT_ID" --publish
           else
             python -B test/evaluate_agent.py --live --module "$PROMPT_MODULE" --prompt-id "$PROMPT_ID" --publish
@@ -55,5 +61,6 @@ jobs:
           path: |
             .test-artifacts/agent-evaluation.json
             .test-artifacts/leo-agent-evaluation.json
+            .test-artifacts/http2-agent-evaluation*.json
           include-hidden-files: true
           if-no-files-found: ignore

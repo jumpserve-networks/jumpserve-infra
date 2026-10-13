@@ -1,0 +1,19 @@
+{
+  "aws_account": "395567831870",
+  "function": "JumpServeAgentStack-AgentFnC1FD126F-MG2xfZrwsBNg",
+  "runtime": "python3.12",
+  "architecture": "x86_64",
+  "state": "Active",
+  "last_update_status": "Successful",
+  "code_sha256": "b4275c0c92c382b0352b669e84d6b46392081495790537a975e5cb79fd94fc5f",
+  "code_sha256_base64": "tCdcDJLDgrA1K2aehNa0Y5IIFJV5BTepdeXLef2U/F8=",
+  "evaluated_runtime_hash_checks": {
+    "agent/handler.py": true,
+    "agent/settings.py": true,
+    "agent/reliable_answers.py": true,
+    "agent/reliable_limits.py": true,
+    "agent/tools/reliable_study.py": true
+  },
+  "passed": true,
+  "limitation": "Verifies deployed asset bytes against evaluated code; does not exercise an authenticated request."
+}

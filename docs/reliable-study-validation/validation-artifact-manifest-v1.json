@@ -1,0 +1,161 @@
+{
+  "id": "reliable-validation-artifacts-v1",
+  "files": [
+    {
+      "path": "docs/reliable-study-validation/README.md",
+      "sha256": "d5e5dc83b62a3582b152f63e9f0b56b139ba76146b6752a1c606fe6de84f98b3",
+      "bytes": 3962
+    },
+    {
+      "path": "docs/reliable-study-validation/agent-deployment-v1.json",
+      "sha256": "79cb342d4854fc326c42d5d50052c5d11ae7823adc4efa5a1f546cd5d92b2014",
+      "bytes": 666
+    },
+    {
+      "path": "docs/reliable-study-validation/agent-outputs.json",
+      "sha256": "8b4540006ee3d15d879733f2fe8e46b97fe34e52cc9019bf10f6db38910a3813",
+      "bytes": 131
+    },
+    {
+      "path": "docs/reliable-study-validation/browser-local-v1.json",
+      "sha256": "43a1cc8680de9cc0980ba027e1b8afe3b112d11db61b81335cd99f635f2c355f",
+      "bytes": 1227
+    },
+    {
+      "path": "docs/reliable-study-validation/browser-production-v1.json",
+      "sha256": "ae7c9bedc6d006458818c3877ae56214f55acbbaf8d72140c3f64189e26ecb19",
+      "bytes": 1480
+    },
+    {
+      "path": "docs/reliable-study-validation/browser-production-v2.json",
+      "sha256": "fe62dbe1cca538419f76f0b5c5153a9ebdb74de8622d26fd3cb2142f1a4ee613",
+      "bytes": 1889
+    },
+    {
+      "path": "docs/reliable-study-validation/chat-evaluation-v1.json",
+      "sha256": "1feba87f2c033cee1752f64e03f4ee7fe6119aae9954ae6818f204dfbea86f93",
+      "bytes": 55041
+    },
+    {
+      "path": "docs/reliable-study-validation/chat-evaluation-v2.json",
+      "sha256": "ca0315afe2fc0de2aafb2e1b1ebce39f7065eae4c3250680963beab7a60b6659",
+      "bytes": 41235
+    },
+    {
+      "path": "docs/reliable-study-validation/chat-evaluation-v3.json",
+      "sha256": "d756b838bcb2e302db51818d5fba6886f4dc4c7d862a06075a01e45a5fe42c67",
+      "bytes": 50160
+    },
+    {
+      "path": "docs/reliable-study-validation/database-production-v1.json",
+      "sha256": "d120bd25ce621fce18f989beb72040143e1fff0991ffb2dbe18a3d6e1b06f2c5",
+      "bytes": 4601
+    },
+    {
+      "path": "docs/reliable-study-validation/deployed-agent-hashes-v1.json",
+      "sha256": "07b429900afd97ebb44114fb3523b921f16730718ef4f0342ffe050437e82d39",
+      "bytes": 730
+    },
+    {
+      "path": "docs/reliable-study-validation/desktop-dark.png",
+      "sha256": "d38547180afd689da18d9b18c8a3e1b8573664c17630d18919b15cc13d9f811e",
+      "bytes": 121148
+    },
+    {
+      "path": "docs/reliable-study-validation/desktop-light.png",
+      "sha256": "92df76d3a9418bab26c9fd816aed81c5cf5e5c2bd3740508264aade76b8941a9",
+      "bytes": 152423
+    },
+    {
+      "path": "docs/reliable-study-validation/export-local-v1.json",
+      "sha256": "7081810d32db79c867a04e0dbb243eedbf351e862d57293fd0799b3bf207606a",
+      "bytes": 1601
+    },
+    {
+      "path": "docs/reliable-study-validation/export-production-v1.json",
+      "sha256": "9fa4e3c03701cc2728f4a0edaa26ea19439750e8c53d1fa305b994b9c4cc12af",
+      "bytes": 1612
+    },
+    {
+      "path": "docs/reliable-study-validation/export-production-v2.json",
+      "sha256": "e21ac33dd02ff7621fecc24b2dd800db2a9750b3f56a71e3f6a376903ac377b8",
+      "bytes": 1612
+    },
+    {
+      "path": "docs/reliable-study-validation/mobile-dark.png",
+      "sha256": "94c283d2046df466a4b69db1fec4ad61e2e7ac1ab027387e8f332d5e5ffd598b",
+      "bytes": 70665
+    },
+    {
+      "path": "docs/reliable-study-validation/mobile-invalid.png",
+      "sha256": "3b85cc333786d7c859c3582b09e5f7e5377f0bdb2828bea3e24c300406af7131",
+      "bytes": 73345
+    },
+    {
+      "path": "docs/reliable-study-validation/mobile-light.png",
+      "sha256": "fabd066a9792a006106a213892e25f16bb8640a1efd056a71f652c82d6d0aa03",
+      "bytes": 71954
+    },
+    {
+      "path": "docs/reliable-study-validation/predeployment.json",
+      "sha256": "df891941c7cc83ca0cc112218e401500cfacdf1883ccc6dd2117e5811b894d88",
+      "bytes": 2547
+    },
+    {
+      "path": "docs/reliable-study-validation/production-desktop-dark.png",
+      "sha256": "6cc2a93230ad4b563672e16c2d16f75c210884de280afa6588de7c9de6e170cd",
+      "bytes": 155530
+    },
+    {
+      "path": "docs/reliable-study-validation/production-desktop-light.png",
+      "sha256": "e29bf250bfdd8461424439a2714788b882094016578d24f589e3de0d10b5a9e1",
+      "bytes": 151368
+    },
+    {
+      "path": "docs/reliable-study-validation/production-mobile-chart.png",
+      "sha256": "4b9c2f976273e78e4869814ade77a7339d6adf26b6d598278be0e5bb1f16282e",
+      "bytes": 63317
+    },
+    {
+      "path": "docs/reliable-study-validation/production-mobile-dark.png",
+      "sha256": "07bed55b2a29216ab334af2579d43eb5591287e3326c0c6f359bf09b2c321fdd",
+      "bytes": 69521
+    },
+    {
+      "path": "docs/reliable-study-validation/production-mobile-light-fixed.png",
+      "sha256": "1ad38e4844fc7fe0739a9186939f4ed67acb48cdf231af5cce40cd589e847a75",
+      "bytes": 70274
+    },
+    {
+      "path": "docs/reliable-study-validation/production-mobile-light.png",
+      "sha256": "875aa67329ae7c93c91e31f337bf6e2ff8fd4a23b816b5663bc5844cd4422f59",
+      "bytes": 121852
+    },
+    {
+      "path": "docs/reliable-study-validation/production-mobile-literature-fixed.png",
+      "sha256": "8bf4a4821254d1fbf3a7451873cc9293e251ef0b948e961a27d4855004fa2891",
+      "bytes": 94167
+    },
+    {
+      "path": "docs/reliable-study-validation/production-mobile-literature.png",
+      "sha256": "8bf4a4821254d1fbf3a7451873cc9293e251ef0b948e961a27d4855004fa2891",
+      "bytes": 94167
+    },
+    {
+      "path": "docs/reliable-study-validation/release-criteria-v1.json",
+      "sha256": "1c758e7c23bdf847c110c73dbf2cbf22a8ed49e632f5f802cc075000a424aeea",
+      "bytes": 1484
+    },
+    {
+      "path": "docs/reliable-study-validation/release-storage-manifest.json",
+      "sha256": "ef5853e07be6e78b1c86881f045265c5e55215061a8ea26683da7c105f0e32f0",
+      "bytes": 9938
+    },
+    {
+      "path": "docs/reliable-study-validation/storage-manifest.json",
+      "sha256": "7db4f959975ad0bbf5427b070bb71d498ca2807a4680da783ae7d5845045d085",
+      "bytes": 584955
+    }
+  ],
+  "limitations": "Local versioned evidence files; the private production report preserves original UTF-8 bytes separately."
+}

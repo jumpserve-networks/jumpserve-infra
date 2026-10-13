@@ -1,0 +1,17 @@
+{
+  "api": {
+    "captured_reports": 0,
+    "samples": [],
+    "scope": "Bounded available CloudWatch REPORT capture, not all release charges or independent performance replications"
+  },
+  "worker": {
+    "captured_reports": 0,
+    "samples": [],
+    "scope": "Bounded available CloudWatch REPORT capture, not all release charges or independent performance replications"
+  },
+  "measured_charges_usd": null,
+  "estimated_charges_usd": null,
+  "unallocated_costs": "CloudWatch reporting is bounded usage; AWS billing, Supabase storage/database overhead, Amplify hosting and Codex model charges are unallocated. Missing is not zero.",
+  "model_usage": null,
+  "iam_inline_actions_verified": true
+}

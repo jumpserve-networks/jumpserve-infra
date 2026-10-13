@@ -1,0 +1,136 @@
+
+> jumpserve-infra@0.1.0 cdk:benchmark
+> cdk --app "npx ts-node --prefer-ts-exts bin/benchmark.ts" diff JumpServeBenchmarkStack --profile jumpserve --no-change-set
+
+Bundling asset JumpServeBenchmarkStack/LaunchBenchmarkFn/Code/Stage...
+
+  ...4831287107aa9aba9b49df137fc1f0d1c2e6b819998e7d3-building/index.js  18.5kb
+
+⚡ Done in 2ms
+Bundling asset JumpServeBenchmarkStack/CleanupBenchmarksFn/Code/Stage...
+
+  ...d16cd323a31972a39648a8a53af30eb93276a13f081377e2-building/index.js  4.7kb
+
+⚡ Done in 1ms
+Bundling asset JumpServeBenchmarkStack/CancelBenchmarkFn/Code/Stage...
+
+  ...ee63b73a77228644b7da13ecc6c60aeee495964c65d77a75-building/index.js  6.0kb
+
+⚡ Done in 1ms
+Bundling asset JumpServeBenchmarkStack/GetBenchmarkLogsFn/Code/Stage...
+
+  ...9c0cc5141b3f85c48896e834b6a134fde7bb9da21ab0649d-building/index.js  3.1kb
+
+⚡ Done in 1ms
+Bundling asset JumpServeBenchmarkStack/BenchmarkIngestFn/Code/Stage...
+
+  ...593190c7862f90f901e8bbdb45b071136dd26f602bdcfae2-building/index.js  4.1kb
+
+⚡ Done in 1ms
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-lookup-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+Lookup role arn:aws:iam::395567831870:role/cdk-hnb659fds-lookup-role-395567831870-us-east-1 was not assumed. Proceeding with default credentials.
+Stack JumpServeBenchmarkStack
+IAM Statement Changes
+┌───┬────────────────────────────────────────────────────────────────────────────────────────────┬────────┬───────────────────────────────┬─────────────────────────────────────────────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│   │ Resource                                                                                   │ Effect │ Action                        │ Principal                                       │ Condition                                                                                                                    │
+├───┼────────────────────────────────────────────────────────────────────────────────────────────┼────────┼───────────────────────────────┼─────────────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ + │ ${ResearchWorkflow/Api.Arn}                                                                │ Allow  │ lambda:InvokeFunction         │ Service:apigateway.amazonaws.com                │ "ArnLike": {                                                                                                                 │
+│   │                                                                                            │        │                               │                                                 │   "AWS:SourceArn": "arn:aws:execute-api:us-east-1:395567831870:${BenchmarkApi}/*/*/research/capabilities"                    │
+│   │                                                                                            │        │                               │                                                 │ }                                                                                                                            │
+│ + │ ${ResearchWorkflow/Api.Arn}                                                                │ Allow  │ lambda:InvokeFunction         │ Service:apigateway.amazonaws.com                │ "ArnLike": {                                                                                                                 │
+│   │                                                                                            │        │                               │                                                 │   "AWS:SourceArn": "arn:aws:execute-api:us-east-1:395567831870:${BenchmarkApi}/*/*/research/studies"                         │
+│   │                                                                                            │        │                               │                                                 │ }                                                                                                                            │
+│ + │ ${ResearchWorkflow/Api.Arn}                                                                │ Allow  │ lambda:InvokeFunction         │ Service:apigateway.amazonaws.com                │ "ArnLike": {                                                                                                                 │
+│   │                                                                                            │        │                               │                                                 │   "AWS:SourceArn": "arn:aws:execute-api:us-east-1:395567831870:${BenchmarkApi}/*/*/research/studies/{studyId}"               │
+│   │                                                                                            │        │                               │                                                 │ }                                                                                                                            │
+│ + │ ${ResearchWorkflow/Api.Arn}                                                                │ Allow  │ lambda:InvokeFunction         │ Service:apigateway.amazonaws.com                │ "ArnLike": {                                                                                                                 │
+│   │                                                                                            │        │                               │                                                 │   "AWS:SourceArn": "arn:aws:execute-api:us-east-1:395567831870:${BenchmarkApi}/*/*/research/studies/{studyId}/queue"         │
+│   │                                                                                            │        │                               │                                                 │ }                                                                                                                            │
+│ + │ ${ResearchWorkflow/Api.Arn}                                                                │ Allow  │ lambda:InvokeFunction         │ Service:apigateway.amazonaws.com                │ "ArnLike": {                                                                                                                 │
+│   │                                                                                            │        │                               │                                                 │   "AWS:SourceArn": "arn:aws:execute-api:us-east-1:395567831870:${BenchmarkApi}/*/*/research/studies"                         │
+│   │                                                                                            │        │                               │                                                 │ }                                                                                                                            │
+│ + │ ${ResearchWorkflow/Api.Arn}                                                                │ Allow  │ lambda:InvokeFunction         │ Service:apigateway.amazonaws.com                │ "ArnLike": {                                                                                                                 │
+│   │                                                                                            │        │                               │                                                 │   "AWS:SourceArn": "arn:aws:execute-api:us-east-1:395567831870:${BenchmarkApi}/*/*/research/studies/{studyId}/records"       │
+│   │                                                                                            │        │                               │                                                 │ }                                                                                                                            │
+│ + │ ${ResearchWorkflow/Api.Arn}                                                                │ Allow  │ lambda:InvokeFunction         │ Service:apigateway.amazonaws.com                │ "ArnLike": {                                                                                                                 │
+│   │                                                                                            │        │                               │                                                 │   "AWS:SourceArn": "arn:aws:execute-api:us-east-1:395567831870:${BenchmarkApi}/*/*/research/studies/{studyId}/protocols"     │
+│   │                                                                                            │        │                               │                                                 │ }                                                                                                                            │
+│ + │ ${ResearchWorkflow/Api.Arn}                                                                │ Allow  │ lambda:InvokeFunction         │ Service:apigateway.amazonaws.com                │ "ArnLike": {                                                                                                                 │
+│   │                                                                                            │        │                               │                                                 │   "AWS:SourceArn": "arn:aws:execute-api:us-east-1:395567831870:${BenchmarkApi}/*/*/research/studies/{studyId}/runs"          │
+│   │                                                                                            │        │                               │                                                 │ }                                                                                                                            │
+│ + │ ${ResearchWorkflow/Api.Arn}                                                                │ Allow  │ lambda:InvokeFunction         │ Service:apigateway.amazonaws.com                │ "ArnLike": {                                                                                                                 │
+│   │                                                                                            │        │                               │                                                 │   "AWS:SourceArn": "arn:aws:execute-api:us-east-1:395567831870:${BenchmarkApi}/*/*/research/studies/{studyId}/publish"       │
+│   │                                                                                            │        │                               │                                                 │ }                                                                                                                            │
+│ + │ ${ResearchWorkflow/Api.Arn}                                                                │ Allow  │ lambda:InvokeFunction         │ Service:apigateway.amazonaws.com                │ "ArnLike": {                                                                                                                 │
+│   │                                                                                            │        │                               │                                                 │   "AWS:SourceArn": "arn:aws:execute-api:us-east-1:395567831870:${BenchmarkApi}/*/*/research/studies/{studyId}/queue"         │
+│   │                                                                                            │        │                               │                                                 │ }                                                                                                                            │
+│ + │ ${ResearchWorkflow/Api.Arn}                                                                │ Allow  │ lambda:InvokeFunction         │ Service:apigateway.amazonaws.com                │ "ArnLike": {                                                                                                                 │
+│   │                                                                                            │        │                               │                                                 │   "AWS:SourceArn": "arn:aws:execute-api:us-east-1:395567831870:${BenchmarkApi}/*/*/research/studies/{studyId}/queue-actions" │
+│   │                                                                                            │        │                               │                                                 │ }                                                                                                                            │
+├───┼────────────────────────────────────────────────────────────────────────────────────────────┼────────┼───────────────────────────────┼─────────────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ + │ ${ResearchWorkflow/Api/ServiceRole.Arn}                                                    │ Allow  │ sts:AssumeRole                │ Service:lambda.amazonaws.com                    │                                                                                                                              │
+├───┼────────────────────────────────────────────────────────────────────────────────────────────┼────────┼───────────────────────────────┼─────────────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ + │ ${ResearchWorkflow/QueueWorker.Arn}                                                        │ Allow  │ lambda:InvokeFunction         │ Service:events.amazonaws.com                    │ "ArnLike": {                                                                                                                 │
+│   │                                                                                            │        │                               │                                                 │   "AWS:SourceArn": "${ResearchWorkflow/QueuePoll.Arn}"                                                                       │
+│   │                                                                                            │        │                               │                                                 │ }                                                                                                                            │
+├───┼────────────────────────────────────────────────────────────────────────────────────────────┼────────┼───────────────────────────────┼─────────────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ + │ ${ResearchWorkflow/QueueWorker/ServiceRole.Arn}                                            │ Allow  │ sts:AssumeRole                │ Service:lambda.amazonaws.com                    │                                                                                                                              │
+├───┼────────────────────────────────────────────────────────────────────────────────────────────┼────────┼───────────────────────────────┼─────────────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ + │ arn:aws:secretsmanager:us-east-1:395567831870:secret:jumpserve/supabase-service-key-?????? │ Allow  │ secretsmanager:DescribeSecret │ AWS:${ResearchWorkflow/Api/ServiceRole}         │                                                                                                                              │
+│   │                                                                                            │        │ secretsmanager:GetSecretValue │                                                 │                                                                                                                              │
+│ + │ arn:aws:secretsmanager:us-east-1:395567831870:secret:jumpserve/supabase-service-key-?????? │ Allow  │ secretsmanager:DescribeSecret │ AWS:${ResearchWorkflow/QueueWorker/ServiceRole} │                                                                                                                              │
+│   │                                                                                            │        │ secretsmanager:GetSecretValue │                                                 │                                                                                                                              │
+└───┴────────────────────────────────────────────────────────────────────────────────────────────┴────────┴───────────────────────────────┴─────────────────────────────────────────────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+IAM Policy Changes
+┌───┬─────────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────┐
+│   │ Resource                                    │ Managed Policy ARN                                                             │
+├───┼─────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│ + │ ${ResearchWorkflow/Api/ServiceRole}         │ arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole │
+├───┼─────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│ + │ ${ResearchWorkflow/QueueWorker/ServiceRole} │ arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole │
+└───┴─────────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────┘
+(NOTE: There may be security-related changes not in this list. See https://github.com/aws/aws-cdk/issues/1299)
+
+Resources
+[+] AWS::ApiGatewayV2::Integration BenchmarkApi/GET--research--capabilities/ResearchWorkflowIntegration BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50
+[+] AWS::Lambda::Permission BenchmarkApi/GET--research--capabilities/ResearchWorkflowIntegration-Permission BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegrationPermissionA0DE747F
+[+] AWS::ApiGatewayV2::Route BenchmarkApi/GET--research--capabilities BenchmarkApiGETresearchcapabilitiesE53A290C
+[+] AWS::Lambda::Permission BenchmarkApi/GET--research--studies/ResearchWorkflowIntegration-Permission BenchmarkApiGETresearchstudiesResearchWorkflowIntegrationPermissionC73D5AD8
+[+] AWS::ApiGatewayV2::Route BenchmarkApi/GET--research--studies BenchmarkApiGETresearchstudiesE9C7241A
+[+] AWS::Lambda::Permission BenchmarkApi/GET--research--studies--{studyId}/ResearchWorkflowIntegration-Permission BenchmarkApiGETresearchstudiesstudyIdResearchWorkflowIntegrationPermission74A7B67F
+[+] AWS::ApiGatewayV2::Route BenchmarkApi/GET--research--studies--{studyId} BenchmarkApiGETresearchstudiesstudyIdDBED4732
+[+] AWS::Lambda::Permission BenchmarkApi/GET--research--studies--{studyId}--queue/ResearchWorkflowIntegration-Permission BenchmarkApiGETresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermissionA15C6778
+[+] AWS::ApiGatewayV2::Route BenchmarkApi/GET--research--studies--{studyId}--queue BenchmarkApiGETresearchstudiesstudyIdqueueC964316E
+[+] AWS::Lambda::Permission BenchmarkApi/POST--research--studies/ResearchWorkflowIntegration-Permission BenchmarkApiPOSTresearchstudiesResearchWorkflowIntegrationPermission3977E87F
+[+] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies BenchmarkApiPOSTresearchstudies3ADF7B43
+[+] AWS::Lambda::Permission BenchmarkApi/POST--research--studies--{studyId}--records/ResearchWorkflowIntegration-Permission BenchmarkApiPOSTresearchstudiesstudyIdrecordsResearchWorkflowIntegrationPermission1B3A864E
+[+] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--records BenchmarkApiPOSTresearchstudiesstudyIdrecordsB1E70928
+[+] AWS::Lambda::Permission BenchmarkApi/POST--research--studies--{studyId}--protocols/ResearchWorkflowIntegration-Permission BenchmarkApiPOSTresearchstudiesstudyIdprotocolsResearchWorkflowIntegrationPermission6C561B92
+[+] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--protocols BenchmarkApiPOSTresearchstudiesstudyIdprotocols60FC7808
+[+] AWS::Lambda::Permission BenchmarkApi/POST--research--studies--{studyId}--runs/ResearchWorkflowIntegration-Permission BenchmarkApiPOSTresearchstudiesstudyIdrunsResearchWorkflowIntegrationPermissionBEC3A01A
+[+] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--runs BenchmarkApiPOSTresearchstudiesstudyIdrunsA58EB3DB
+[+] AWS::Lambda::Permission BenchmarkApi/POST--research--studies--{studyId}--publish/ResearchWorkflowIntegration-Permission BenchmarkApiPOSTresearchstudiesstudyIdpublishResearchWorkflowIntegrationPermission0FFD424F
+[+] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--publish BenchmarkApiPOSTresearchstudiesstudyIdpublish5CB0323E
+[+] AWS::Lambda::Permission BenchmarkApi/POST--research--studies--{studyId}--queue/ResearchWorkflowIntegration-Permission BenchmarkApiPOSTresearchstudiesstudyIdqueueResearchWorkflowIntegrationPermission186C1D79
+[+] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--queue BenchmarkApiPOSTresearchstudiesstudyIdqueue6C948D7E
+[+] AWS::Lambda::Permission BenchmarkApi/POST--research--studies--{studyId}--queue-actions/ResearchWorkflowIntegration-Permission BenchmarkApiPOSTresearchstudiesstudyIdqueueactionsResearchWorkflowIntegrationPermission1174F416
+[+] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--queue-actions BenchmarkApiPOSTresearchstudiesstudyIdqueueactions86100889
+[+] AWS::IAM::Role ResearchWorkflow/Api/ServiceRole ResearchWorkflowApiServiceRole4DB8FBBC
+[+] AWS::IAM::Policy ResearchWorkflow/Api/ServiceRole/DefaultPolicy ResearchWorkflowApiServiceRoleDefaultPolicy378FDA82
+[+] AWS::Lambda::Function ResearchWorkflow/Api ResearchWorkflowApiE04EBDAC
+[+] AWS::Logs::LogGroup ResearchWorkflow/Api/LogGroup ResearchWorkflowApiLogGroup640C45EA
+[+] AWS::IAM::Role ResearchWorkflow/QueueWorker/ServiceRole ResearchWorkflowQueueWorkerServiceRole210417A9
+[+] AWS::IAM::Policy ResearchWorkflow/QueueWorker/ServiceRole/DefaultPolicy ResearchWorkflowQueueWorkerServiceRoleDefaultPolicy41AC3B22
+[+] AWS::Lambda::Function ResearchWorkflow/QueueWorker ResearchWorkflowQueueWorker702E601D
+[+] AWS::Logs::LogGroup ResearchWorkflow/QueueWorker/LogGroup ResearchWorkflowQueueWorkerLogGroup7580A36A
+[+] AWS::Lambda::EventInvokeConfig ResearchWorkflow/QueueWorker/EventInvokeConfig ResearchWorkflowQueueWorkerEventInvokeConfig6F5A9ACA
+[+] AWS::Events::Rule ResearchWorkflow/QueuePoll ResearchWorkflowQueuePoll49F7FA3B
+[+] AWS::Lambda::Permission ResearchWorkflow/QueuePoll/AllowEventRuleJumpServeBenchmarkStackResearchWorkflowQueueWorkerDD2E7DD7 ResearchWorkflowQueuePollAllowEventRuleJumpServeBenchmarkStackResearchWorkflowQueueWorkerDD2E7DD771A9A7E5
+
+Outputs
+[+] Output ResearchWorkflowApiUrl ResearchWorkflowApiUrl: {"Description":"Research workflow shares the benchmark API origin.","Value":{"Fn::Join":["",[{"Fn::GetAtt":["BenchmarkApiE2E79BA0","ApiEndpoint"]},"/research"]]}}
+
+
+
+✨  Number of stacks with differences: 1
+

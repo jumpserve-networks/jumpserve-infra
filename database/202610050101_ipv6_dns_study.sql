@@ -1,0 +1,40 @@
+begin;
+create table public.ipv6_study_protocols(id text primary key,version integer not null check(version>0),stage text not null,document jsonb not null,sha256 text not null check(sha256 ~ '^[a-f0-9]{64}$'),locked_at timestamptz not null);
+create table public.ipv6_study_campaigns(id text primary key,protocol_id text not null references ipv6_study_protocols(id),title text not null,stage text not null,status text not null check(status in ('complete','partial','failed','excluded')),planned_runs integer not null,recorded_runs integer not null,experiment_type text not null,limitations jsonb not null,provenance jsonb not null,usage jsonb not null,check(recorded_runs between 0 and  planned_runs));
+create table public.ipv6_study_configurations(id text primary key,case_id text not null,cohort text not null check(cohort in ('dnssec','no-dnssec')),mtu text not null,upstream text not null check(upstream in ('lgi','no-lgi')),family text not null check(family in ('v4-only','v6-only','ds')),edns_bytes integer not null check(edns_bytes in (512,1232,4096)),details jsonb not null,requested_resources jsonb not null,actual_resources jsonb not null,unique(case_id,cohort));
+create table public.ipv6_study_runs(id text primary key,protocol_id text not null references ipv6_study_protocols(id),stage text not null,epoch text,status text not null check(status in ('complete','failed','excluded','invalid','partial')),reason text,original_execution_date date,started_at timestamptz,ended_at timestamptz,analysis_version text not null,analysis_sha256 text not null,raw_sha256 jsonb not null,source_urls jsonb not null,requested_resources jsonb not null,actual_resources jsonb not null,check(status='complete' or reason is not null),check(ended_at is null or started_at is null or ended_at>=started_at));
+create table public.ipv6_study_measurements(run_id text not null references ipv6_study_runs(id),configuration_id text not null references ipv6_study_configurations(id),metric text not null,numerator numeric,denominator numeric,value numeric,status text not null check(status in ('recorded','missing','invalid','ambiguous','excluded')),reason text,units text not null,primary key(run_id,configuration_id,metric),check((status='recorded' and value is not null and denominator>0) or (status<>'recorded' and value is null and reason is not null)),check(value is null or (value>=0 and value not in ('NaN'::numeric,'Infinity'::numeric,'-Infinity'::numeric))));
+create table public.ipv6_study_summaries(id text primary key,configuration_id text not null references ipv6_study_configurations(id),epoch text not null check(epoch in ('tcp-error','pre-lgi','current')),statistics jsonb not null,interval_kind text not null check(interval_kind='descriptive'),unique(configuration_id,epoch));
+create table public.ipv6_study_sources(reference_number integer primary key check(reference_number between 0 and 73),citation text not null,doi text,kind text not null,role text not null,source_url text,retrieved_url text,access_status text not null,review_status text not null check(review_status in ('complete-review','partial-review','retrieved-unreviewed','unavailable-full-text')),retrieved_version text,sha256 text,byte_count bigint,pages integer,findings text,limitations text not null,retrieval_attempts jsonb not null,reviewer jsonb not null,check(sha256 is null or sha256 ~ '^[a-f0-9]{64}$'));
+create table public.ipv6_study_claims(id text primary key,location text not null,description text not null,assessment text not null check(assessment in ('reproduced','discrepant','inconclusive','untested')),evidence text not null,limitation text not null,proposed_check text not null,required_inputs text not null,feasibility text not null);
+create table public.ipv6_study_published(id text primary key,source_number integer not null references ipv6_study_sources(reference_number),location text not null,configuration_id text references ipv6_study_configurations(id),epoch text,metric text not null,value numeric,units text not null,extraction text not null,paper_sha256 text not null);
+create table public.ipv6_study_comparisons(id text primary key,published_id text not null references ipv6_study_published(id),configuration_id text not null references ipv6_study_configurations(id),epoch text not null,metric text not null,reproduced numeric,published numeric,difference_pp numeric,assessment text not null check(assessment in ('reproduced','discrepant','inconclusive','untested')),valid_days integer not null,planned_days integer not null);
+create table public.ipv6_study_controls(id text primary key,protocol_id text not null references ipv6_study_protocols(id),stage text not null,status text not null,reason text,raw_sha256 text,payload jsonb not null,check(status='complete' or reason is not null));
+create table public.ipv6_study_meta(id text primary key,analysis_version text not null,assessment_sha256 text not null,review_definition text not null,label_definitions jsonb not null,validation jsonb not null,counts jsonb not null,provenance jsonb not null,costs jsonb not null);
+create table public.ipv6_study_artifacts(id text primary key,sha256 text not null,byte_count bigint not null check(byte_count>=0),manifest jsonb not null,storage_path text,payload jsonb not null);
+create index ipv6_measurement_configuration_date on ipv6_study_measurements(configuration_id,run_id);
+create index ipv6_comparison_configuration on ipv6_study_comparisons(configuration_id,epoch);
+do $$ declare t text; begin
+ foreach t in array array['protocols','campaigns','configurations','runs','measurements','summaries','sources','claims','published','comparisons','controls','meta','artifacts'] loop
+  execute format('alter table public.%I enable row level security','ipv6_study_'||t);
+  execute format('revoke all on public.%I from anon,authenticated','ipv6_study_'||t);
+  execute format('grant all on public.%I to service_role','ipv6_study_'||t);
+  if t<>'artifacts' then
+   execute format('grant select on public.%I to anon,authenticated','ipv6_study_'||t);
+   execute format('drop policy if exists jumpserve_require_signed_in_user on public.%I','ipv6_study_'||t);
+   execute format('create policy ipv6_public_read on public.%I for select to anon,authenticated using(true)','ipv6_study_'||t);
+   execute format('create policy ipv6_deny_browser_writes on public.%I as restrictive for all to anon,authenticated using(true) with check(false)','ipv6_study_'||t);
+  end if;
+ end loop;
+end $$;
+insert into storage.buckets(id,name,public) values('ipv6-study-raw','ipv6-study-raw',false);
+create policy ipv6_private_raw on storage.objects as restrictive for all to anon,authenticated using(bucket_id<>'ipv6-study-raw') with check(bucket_id<>'ipv6-study-raw');
+alter table public.agent_prompt_versions drop constraint agent_prompt_versions_module_id_check;
+alter table public.agent_prompt_versions add constraint agent_prompt_versions_module_id_check check(module_id in ('congestion-control-emulated','congestion-control-real-world','leo-emergency-failover','http2-compliance-study','reliable-sketch-study','ipv6-dns-study'));
+alter table public.agent_prompt_settings drop constraint agent_prompt_settings_module_id_check;
+alter table public.agent_prompt_settings add constraint agent_prompt_settings_module_id_check check(module_id in ('congestion-control-emulated','congestion-control-real-world','leo-emergency-failover','http2-compliance-study','reliable-sketch-study','ipv6-dns-study'));
+alter table public.agent_sessions drop constraint agent_sessions_module_id_check;
+alter table public.agent_sessions add constraint agent_sessions_module_id_check check(module_id in ('congestion-control-emulated','congestion-control-real-world','leo-emergency-failover','http2-compliance-study','reliable-sketch-study','ipv6-dns-study'));
+insert into agent_prompt_settings(module_id) values('ipv6-dns-study');
+notify pgrst,'reload schema';
+commit;

@@ -1,0 +1,32 @@
+{
+  "id": "ipv6-predeployment-v1",
+  "recorded_at": "2026-10-06T14:08:20.340784+00:00",
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny"
+  },
+  "protocol": "release-protocol-v1.json",
+  "scientific_status": "Limited historical assessment; full literature, relative figures, packet/client data, routing and causal/generalization validation incomplete",
+  "software_status": "Ready for scoped agent and frontend deployment; production verification pending",
+  "checks": {
+    "scientific": true,
+    "stored_originals": true,
+    "database": true,
+    "publication_guards": true,
+    "actual_answer_review": true,
+    "frontend_lint": true,
+    "frontend_tests": 109,
+    "frontend_production_build": true,
+    "backend_tests": 82,
+    "infra_typescript_build": true,
+    "browser": true,
+    "http_exports": true,
+    "cdk_diff": "Only existing AgentFnCodeS3Key changes; no layer or instance changes"
+  },
+  "release_blocking_checks_passed": true,
+  "conditional_verification": {
+    "google_authenticated_chat": "No legitimate session available; actual signed-in browser-to-agent request not exercised",
+    "network_equipment": "No fresh DNS measurement or historical routing experiment",
+    "billing": "Measured returned tokens/bytes/time; charges unreconciled and orchestration/storage/hosting costs unknown"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "started_at": "2026-10-07T19:42:57.856Z",
+  "origin": "https://jumpserve.quaint-lab.org",
+  "protocol": "research-workflow-release-protocol-v1",
+  "amendment": "research-workflow-release-amendment-v2",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independence": "Not independent"
+  },
+  "design": "Public production release regressions; synthetic queue example remains explicitly instructional.",
+  "checks": [],
+  "errors": [
+    {
+      "name": "production navigation and meaningful empty publication state",
+      "reason": "locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'Assess a paper', exact: true }).first() to be visible\u001b[22m\n"
+    }
+  ],
+  "browser_errors": [],
+  "conditional_gaps": [
+    "No legitimate Google session; owner writes, cross-owner requests and provider round trip are unverified",
+    "Generic completed-study production chart/export awaits a genuine reviewed publication; completed/missing/invalid charts and exports have isolated fixture evidence"
+  ],
+  "measured_charges_usd": null,
+  "model_usage": null,
+  "ended_at": "2026-10-07T19:43:17.532Z",
+  "passed": false
+}
