@@ -1,0 +1,9 @@
+{
+  "mode": "diff",
+  "started_at": "2026-10-13T14:42:49.280493+00:00",
+  "status": "failed",
+  "authorization": "User requested merge to main and production deployment on 2026-10-13",
+  "measured_charges_usd": null,
+  "reason": "Command '['aws', 'sts', 'get-caller-identity', '--profile', 'jumpserve']' returned non-zero exit status 255.",
+  "ended_at": "2026-10-13T14:42:51.789407+00:00"
+}

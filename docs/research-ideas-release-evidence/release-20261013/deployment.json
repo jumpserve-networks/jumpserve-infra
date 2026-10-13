@@ -1,0 +1,25 @@
+{
+  "mode": "deploy",
+  "started_at": "2026-10-13T15:54:10.753118+00:00",
+  "status": "complete",
+  "authorization": "User requested merge to main and production deployment on 2026-10-13",
+  "measured_charges_usd": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "command": [
+    "npx",
+    "cdk",
+    "deploy",
+    "JumpServeBenchmarkStack",
+    "JumpServeAgentStack",
+    "--require-approval",
+    "never",
+    "--outputs-file",
+    "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/release/20261013T155410752771Z/outputs.json"
+  ],
+  "ended_at": "2026-10-13T15:55:37.240825+00:00"
+}

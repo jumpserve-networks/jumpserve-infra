@@ -1,0 +1,2887 @@
+{
+  "add": [],
+  "added": 0,
+  "audited": 160,
+  "change": [
+    {
+      "from": {
+        "name": "ws",
+        "version": "8.19.0",
+        "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ws"
+      },
+      "to": {
+        "name": "ws",
+        "version": "8.22.0",
+        "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ws"
+      }
+    },
+    {
+      "from": {
+        "name": "source-map-js",
+        "version": "1.2.1",
+        "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/source-map-js"
+      },
+      "to": {
+        "name": "source-map-js",
+        "version": "1.2.2",
+        "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/source-map-js"
+      }
+    },
+    {
+      "from": {
+        "name": "baseline-browser-mapping",
+        "version": "2.10.0",
+        "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/baseline-browser-mapping"
+      },
+      "to": {
+        "name": "baseline-browser-mapping",
+        "version": "2.11.28",
+        "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/baseline-browser-mapping"
+      }
+    },
+    {
+      "from": {
+        "name": "@tailwindcss/typography",
+        "version": "0.5.19",
+        "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@tailwindcss/typography"
+      },
+      "to": {
+        "name": "@tailwindcss/typography",
+        "version": "0.5.20",
+        "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@tailwindcss/typography"
+      }
+    }
+  ],
+  "changed": 4,
+  "funding": 94,
+  "remove": [
+    {
+      "name": "zod-validation-error",
+      "version": "4.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/zod-validation-error"
+    },
+    {
+      "name": "zod-to-json-schema",
+      "version": "3.25.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/zod-to-json-schema"
+    },
+    {
+      "name": "zod",
+      "version": "4.3.6",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/zod"
+    },
+    {
+      "name": "yoctocolors",
+      "version": "2.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/yoctocolors"
+    },
+    {
+      "name": "yocto-spinner",
+      "version": "1.2.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/yocto-spinner"
+    },
+    {
+      "name": "yocto-queue",
+      "version": "0.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/yocto-queue"
+    },
+    {
+      "name": "yallist",
+      "version": "3.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/yallist"
+    },
+    {
+      "name": "wsl-utils",
+      "version": "1.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/wsl-utils"
+    },
+    {
+      "name": "powershell-utils",
+      "version": "0.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/wsl-utils/node_modules/powershell-utils"
+    },
+    {
+      "name": "wrappy",
+      "version": "1.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/wrappy"
+    },
+    {
+      "name": "word-wrap",
+      "version": "1.2.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/word-wrap"
+    },
+    {
+      "name": "which-typed-array",
+      "version": "1.1.20",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/which-typed-array"
+    },
+    {
+      "name": "which-collection",
+      "version": "1.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/which-collection"
+    },
+    {
+      "name": "which-builtin-type",
+      "version": "1.2.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/which-builtin-type"
+    },
+    {
+      "name": "which-boxed-primitive",
+      "version": "1.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/which-boxed-primitive"
+    },
+    {
+      "name": "which",
+      "version": "2.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/which"
+    },
+    {
+      "name": "vary",
+      "version": "1.1.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/vary"
+    },
+    {
+      "name": "validate-npm-package-name",
+      "version": "7.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/validate-npm-package-name"
+    },
+    {
+      "name": "uri-js",
+      "version": "4.4.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/uri-js"
+    },
+    {
+      "name": "update-browserslist-db",
+      "version": "1.2.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/update-browserslist-db"
+    },
+    {
+      "name": "unrs-resolver",
+      "version": "1.11.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/unrs-resolver"
+    },
+    {
+      "name": "unpipe",
+      "version": "1.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/unpipe"
+    },
+    {
+      "name": "universalify",
+      "version": "2.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/universalify"
+    },
+    {
+      "name": "unicorn-magic",
+      "version": "0.3.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/unicorn-magic"
+    },
+    {
+      "name": "undici",
+      "version": "7.29.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/undici"
+    },
+    {
+      "name": "unbox-primitive",
+      "version": "1.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/unbox-primitive"
+    },
+    {
+      "name": "typescript-eslint",
+      "version": "8.56.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/typescript-eslint"
+    },
+    {
+      "name": "typescript",
+      "version": "5.9.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/typescript"
+    },
+    {
+      "name": "typed-array-length",
+      "version": "1.0.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/typed-array-length"
+    },
+    {
+      "name": "typed-array-byte-offset",
+      "version": "1.0.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/typed-array-byte-offset"
+    },
+    {
+      "name": "typed-array-byte-length",
+      "version": "1.0.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/typed-array-byte-length"
+    },
+    {
+      "name": "typed-array-buffer",
+      "version": "1.0.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/typed-array-buffer"
+    },
+    {
+      "name": "type-is",
+      "version": "2.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/type-is"
+    },
+    {
+      "name": "content-type",
+      "version": "2.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/type-is/node_modules/content-type"
+    },
+    {
+      "name": "type-check",
+      "version": "0.4.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/type-check"
+    },
+    {
+      "name": "tsconfig-paths",
+      "version": "3.15.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/tsconfig-paths"
+    },
+    {
+      "name": "json5",
+      "version": "1.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/tsconfig-paths/node_modules/json5"
+    },
+    {
+      "name": "ts-morph",
+      "version": "26.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ts-morph"
+    },
+    {
+      "name": "ts-api-utils",
+      "version": "2.4.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ts-api-utils"
+    },
+    {
+      "name": "toidentifier",
+      "version": "1.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/toidentifier"
+    },
+    {
+      "name": "to-regex-range",
+      "version": "5.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/to-regex-range"
+    },
+    {
+      "name": "tinyglobby",
+      "version": "0.2.15",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/tinyglobby"
+    },
+    {
+      "name": "picomatch",
+      "version": "4.0.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/tinyglobby/node_modules/picomatch"
+    },
+    {
+      "name": "fdir",
+      "version": "6.5.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/tinyglobby/node_modules/fdir"
+    },
+    {
+      "name": "tiny-invariant",
+      "version": "1.3.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/tiny-invariant"
+    },
+    {
+      "name": "tapable",
+      "version": "2.3.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/tapable"
+    },
+    {
+      "name": "systeminformation",
+      "version": "5.33.10",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/systeminformation"
+    },
+    {
+      "name": "supports-preserve-symlinks-flag",
+      "version": "1.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/supports-preserve-symlinks-flag"
+    },
+    {
+      "name": "supports-color",
+      "version": "7.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/supports-color"
+    },
+    {
+      "name": "strip-json-comments",
+      "version": "3.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/strip-json-comments"
+    },
+    {
+      "name": "strip-final-newline",
+      "version": "4.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/strip-final-newline"
+    },
+    {
+      "name": "strip-bom",
+      "version": "3.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/strip-bom"
+    },
+    {
+      "name": "strip-ansi",
+      "version": "6.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/strip-ansi"
+    },
+    {
+      "name": "stringify-object",
+      "version": "5.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/stringify-object"
+    },
+    {
+      "name": "is-obj",
+      "version": "3.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/stringify-object/node_modules/is-obj"
+    },
+    {
+      "name": "string.prototype.trimstart",
+      "version": "1.0.8",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/string.prototype.trimstart"
+    },
+    {
+      "name": "string.prototype.trimend",
+      "version": "1.0.9",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/string.prototype.trimend"
+    },
+    {
+      "name": "string.prototype.trim",
+      "version": "1.2.10",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/string.prototype.trim"
+    },
+    {
+      "name": "string.prototype.repeat",
+      "version": "1.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/string.prototype.repeat"
+    },
+    {
+      "name": "string.prototype.matchall",
+      "version": "4.0.12",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/string.prototype.matchall"
+    },
+    {
+      "name": "string.prototype.includes",
+      "version": "2.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/string.prototype.includes"
+    },
+    {
+      "name": "string-width",
+      "version": "7.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/string-width"
+    },
+    {
+      "name": "strip-ansi",
+      "version": "7.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/string-width/node_modules/strip-ansi"
+    },
+    {
+      "name": "emoji-regex",
+      "version": "10.6.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/string-width/node_modules/emoji-regex"
+    },
+    {
+      "name": "ansi-regex",
+      "version": "6.3.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/string-width/node_modules/ansi-regex"
+    },
+    {
+      "name": "stop-iteration-iterator",
+      "version": "1.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/stop-iteration-iterator"
+    },
+    {
+      "name": "stdin-discarder",
+      "version": "0.2.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/stdin-discarder"
+    },
+    {
+      "name": "statuses",
+      "version": "2.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/statuses"
+    },
+    {
+      "name": "stable-hash",
+      "version": "0.0.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/stable-hash"
+    },
+    {
+      "name": "source-map",
+      "version": "0.6.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/source-map"
+    },
+    {
+      "name": "socks",
+      "version": "2.8.10",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/socks"
+    },
+    {
+      "name": "smart-buffer",
+      "version": "4.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/smart-buffer"
+    },
+    {
+      "name": "sisteransi",
+      "version": "1.0.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/sisteransi"
+    },
+    {
+      "name": "signal-exit",
+      "version": "4.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/signal-exit"
+    },
+    {
+      "name": "side-channel-weakmap",
+      "version": "1.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/side-channel-weakmap"
+    },
+    {
+      "name": "side-channel-map",
+      "version": "1.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/side-channel-map"
+    },
+    {
+      "name": "side-channel-list",
+      "version": "1.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/side-channel-list"
+    },
+    {
+      "name": "side-channel",
+      "version": "1.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/side-channel"
+    },
+    {
+      "name": "shebang-regex",
+      "version": "3.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/shebang-regex"
+    },
+    {
+      "name": "shebang-command",
+      "version": "2.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/shebang-command"
+    },
+    {
+      "name": "shadcn",
+      "version": "4.21.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/shadcn"
+    },
+    {
+      "name": "zod",
+      "version": "3.25.76",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/shadcn/node_modules/zod"
+    },
+    {
+      "name": "tsconfig-paths",
+      "version": "4.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/shadcn/node_modules/tsconfig-paths"
+    },
+    {
+      "name": "postcss-selector-parser",
+      "version": "7.1.6",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/shadcn/node_modules/postcss-selector-parser"
+    },
+    {
+      "name": "glob-parent",
+      "version": "5.1.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/shadcn/node_modules/glob-parent"
+    },
+    {
+      "name": "fast-glob",
+      "version": "3.3.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/shadcn/node_modules/fast-glob"
+    },
+    {
+      "name": "cn",
+      "version": "0.2.6",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/shadcn/node_modules/cn"
+    },
+    {
+      "name": "setprototypeof",
+      "version": "1.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/setprototypeof"
+    },
+    {
+      "name": "set-proto",
+      "version": "1.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/set-proto"
+    },
+    {
+      "name": "set-function-name",
+      "version": "2.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/set-function-name"
+    },
+    {
+      "name": "set-function-length",
+      "version": "1.2.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/set-function-length"
+    },
+    {
+      "name": "serve-static",
+      "version": "2.2.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/serve-static"
+    },
+    {
+      "name": "send",
+      "version": "1.2.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/send"
+    },
+    {
+      "name": "semver",
+      "version": "6.3.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/semver"
+    },
+    {
+      "name": "safer-buffer",
+      "version": "2.1.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/safer-buffer"
+    },
+    {
+      "name": "safe-regex-test",
+      "version": "1.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/safe-regex-test"
+    },
+    {
+      "name": "safe-push-apply",
+      "version": "1.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/safe-push-apply"
+    },
+    {
+      "name": "safe-array-concat",
+      "version": "1.1.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/safe-array-concat"
+    },
+    {
+      "name": "run-parallel",
+      "version": "1.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/run-parallel"
+    },
+    {
+      "name": "run-applescript",
+      "version": "7.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/run-applescript"
+    },
+    {
+      "name": "router",
+      "version": "2.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/router"
+    },
+    {
+      "name": "reusify",
+      "version": "1.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/reusify"
+    },
+    {
+      "name": "restore-cursor",
+      "version": "5.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/restore-cursor"
+    },
+    {
+      "name": "onetime",
+      "version": "7.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/restore-cursor/node_modules/onetime"
+    },
+    {
+      "name": "resolve-pkg-maps",
+      "version": "1.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/resolve-pkg-maps"
+    },
+    {
+      "name": "resolve-from",
+      "version": "4.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/resolve-from"
+    },
+    {
+      "name": "resolve",
+      "version": "1.22.11",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/resolve"
+    },
+    {
+      "name": "require-from-string",
+      "version": "2.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/require-from-string"
+    },
+    {
+      "name": "regexp.prototype.flags",
+      "version": "1.5.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/regexp.prototype.flags"
+    },
+    {
+      "name": "reflect.getprototypeof",
+      "version": "1.0.10",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/reflect.getprototypeof"
+    },
+    {
+      "name": "recast",
+      "version": "0.23.21",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/recast"
+    },
+    {
+      "name": "react-is",
+      "version": "16.13.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/react-is"
+    },
+    {
+      "name": "raw-body",
+      "version": "3.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/raw-body"
+    },
+    {
+      "name": "range-parser",
+      "version": "1.3.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/range-parser"
+    },
+    {
+      "name": "queue-microtask",
+      "version": "1.2.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/queue-microtask"
+    },
+    {
+      "name": "qs",
+      "version": "6.16.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/qs"
+    },
+    {
+      "name": "punycode",
+      "version": "2.3.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/punycode"
+    },
+    {
+      "name": "proxy-addr",
+      "version": "2.0.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/proxy-addr"
+    },
+    {
+      "name": "prop-types",
+      "version": "15.8.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/prop-types"
+    },
+    {
+      "name": "prompts",
+      "version": "2.4.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/prompts"
+    },
+    {
+      "name": "kleur",
+      "version": "3.0.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/prompts/node_modules/kleur"
+    },
+    {
+      "name": "pretty-ms",
+      "version": "9.3.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/pretty-ms"
+    },
+    {
+      "name": "prelude-ls",
+      "version": "1.2.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/prelude-ls"
+    },
+    {
+      "name": "powershell-utils",
+      "version": "0.2.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/powershell-utils"
+    },
+    {
+      "name": "possible-typed-array-names",
+      "version": "1.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/possible-typed-array-names"
+    },
+    {
+      "name": "playwright-core",
+      "version": "1.62.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/playwright-core"
+    },
+    {
+      "name": "playwright",
+      "version": "1.62.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/playwright"
+    },
+    {
+      "name": "pkg-up",
+      "version": "3.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/pkg-up"
+    },
+    {
+      "name": "path-exists",
+      "version": "3.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/pkg-up/node_modules/path-exists"
+    },
+    {
+      "name": "p-locate",
+      "version": "3.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/pkg-up/node_modules/p-locate"
+    },
+    {
+      "name": "p-limit",
+      "version": "2.3.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/pkg-up/node_modules/p-limit"
+    },
+    {
+      "name": "locate-path",
+      "version": "3.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/pkg-up/node_modules/locate-path"
+    },
+    {
+      "name": "find-up",
+      "version": "3.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/pkg-up/node_modules/find-up"
+    },
+    {
+      "name": "pkce-challenge",
+      "version": "5.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/pkce-challenge"
+    },
+    {
+      "name": "picomatch",
+      "version": "2.3.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/picomatch"
+    },
+    {
+      "name": "path-to-regexp",
+      "version": "8.4.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/path-to-regexp"
+    },
+    {
+      "name": "path-parse",
+      "version": "1.0.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/path-parse"
+    },
+    {
+      "name": "path-key",
+      "version": "3.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/path-key"
+    },
+    {
+      "name": "path-exists",
+      "version": "4.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/path-exists"
+    },
+    {
+      "name": "path-browserify",
+      "version": "1.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/path-browserify"
+    },
+    {
+      "name": "parseurl",
+      "version": "1.3.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/parseurl"
+    },
+    {
+      "name": "parse-ms",
+      "version": "4.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/parse-ms"
+    },
+    {
+      "name": "parse-json",
+      "version": "5.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/parse-json"
+    },
+    {
+      "name": "parent-module",
+      "version": "1.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/parent-module"
+    },
+    {
+      "name": "p-try",
+      "version": "2.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/p-try"
+    },
+    {
+      "name": "p-locate",
+      "version": "5.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/p-locate"
+    },
+    {
+      "name": "p-limit",
+      "version": "3.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/p-limit"
+    },
+    {
+      "name": "own-keys",
+      "version": "1.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/own-keys"
+    },
+    {
+      "name": "ora",
+      "version": "8.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ora"
+    },
+    {
+      "name": "strip-ansi",
+      "version": "7.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ora/node_modules/strip-ansi"
+    },
+    {
+      "name": "chalk",
+      "version": "5.6.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ora/node_modules/chalk"
+    },
+    {
+      "name": "ansi-regex",
+      "version": "6.3.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ora/node_modules/ansi-regex"
+    },
+    {
+      "name": "optionator",
+      "version": "0.9.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/optionator"
+    },
+    {
+      "name": "open",
+      "version": "11.0.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/open"
+    },
+    {
+      "name": "onetime",
+      "version": "5.1.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/onetime"
+    },
+    {
+      "name": "mimic-fn",
+      "version": "2.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/onetime/node_modules/mimic-fn"
+    },
+    {
+      "name": "once",
+      "version": "1.4.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/once"
+    },
+    {
+      "name": "on-finished",
+      "version": "2.4.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/on-finished"
+    },
+    {
+      "name": "object.values",
+      "version": "1.2.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/object.values"
+    },
+    {
+      "name": "object.groupby",
+      "version": "1.0.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/object.groupby"
+    },
+    {
+      "name": "object.fromentries",
+      "version": "2.0.8",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/object.fromentries"
+    },
+    {
+      "name": "object.entries",
+      "version": "1.1.9",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/object.entries"
+    },
+    {
+      "name": "object.assign",
+      "version": "4.1.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/object.assign"
+    },
+    {
+      "name": "object-treeify",
+      "version": "1.1.33",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/object-treeify"
+    },
+    {
+      "name": "object-keys",
+      "version": "1.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/object-keys"
+    },
+    {
+      "name": "object-inspect",
+      "version": "1.13.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/object-inspect"
+    },
+    {
+      "name": "object-assign",
+      "version": "4.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/object-assign"
+    },
+    {
+      "name": "npm-run-path",
+      "version": "6.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/npm-run-path"
+    },
+    {
+      "name": "path-key",
+      "version": "4.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/npm-run-path/node_modules/path-key"
+    },
+    {
+      "name": "node-releases",
+      "version": "2.0.27",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/node-releases"
+    },
+    {
+      "name": "node-exports-info",
+      "version": "1.6.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/node-exports-info"
+    },
+    {
+      "name": "negotiator",
+      "version": "1.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/negotiator"
+    },
+    {
+      "name": "content-type",
+      "version": "2.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/negotiator/node_modules/content-type"
+    },
+    {
+      "name": "natural-compare",
+      "version": "1.4.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/natural-compare"
+    },
+    {
+      "name": "napi-postinstall",
+      "version": "0.3.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/napi-postinstall"
+    },
+    {
+      "name": "minimist",
+      "version": "1.2.8",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/minimist"
+    },
+    {
+      "name": "minimatch",
+      "version": "3.1.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/minimatch"
+    },
+    {
+      "name": "mimic-function",
+      "version": "5.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/mimic-function"
+    },
+    {
+      "name": "mimic-fn",
+      "version": "3.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/mimic-fn"
+    },
+    {
+      "name": "mime-types",
+      "version": "3.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/mime-types"
+    },
+    {
+      "name": "mime-db",
+      "version": "1.54.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/mime-db"
+    },
+    {
+      "name": "micromatch",
+      "version": "4.0.8",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/micromatch"
+    },
+    {
+      "name": "merge2",
+      "version": "1.4.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/merge2"
+    },
+    {
+      "name": "merge-stream",
+      "version": "2.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/merge-stream"
+    },
+    {
+      "name": "merge-descriptors",
+      "version": "2.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/merge-descriptors"
+    },
+    {
+      "name": "media-typer",
+      "version": "1.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/media-typer"
+    },
+    {
+      "name": "math-intrinsics",
+      "version": "1.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/math-intrinsics"
+    },
+    {
+      "name": "magic-string",
+      "version": "0.30.21",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/magic-string"
+    },
+    {
+      "name": "lru-cache",
+      "version": "5.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/lru-cache"
+    },
+    {
+      "name": "loose-envify",
+      "version": "1.4.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/loose-envify"
+    },
+    {
+      "name": "log-symbols",
+      "version": "6.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/log-symbols"
+    },
+    {
+      "name": "is-unicode-supported",
+      "version": "1.3.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/log-symbols/node_modules/is-unicode-supported"
+    },
+    {
+      "name": "chalk",
+      "version": "5.6.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/log-symbols/node_modules/chalk"
+    },
+    {
+      "name": "lodash.merge",
+      "version": "4.6.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/lodash.merge"
+    },
+    {
+      "name": "locate-path",
+      "version": "6.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/locate-path"
+    },
+    {
+      "name": "lines-and-columns",
+      "version": "1.2.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/lines-and-columns"
+    },
+    {
+      "name": "lightningcss-darwin-arm64",
+      "version": "1.31.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/lightningcss-darwin-arm64"
+    },
+    {
+      "name": "lightningcss",
+      "version": "1.31.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/lightningcss"
+    },
+    {
+      "name": "levn",
+      "version": "0.4.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/levn"
+    },
+    {
+      "name": "language-tags",
+      "version": "1.0.9",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/language-tags"
+    },
+    {
+      "name": "language-subtag-registry",
+      "version": "0.3.23",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/language-subtag-registry"
+    },
+    {
+      "name": "kleur",
+      "version": "4.1.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/kleur"
+    },
+    {
+      "name": "keyv",
+      "version": "4.5.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/keyv"
+    },
+    {
+      "name": "jsx-ast-utils",
+      "version": "3.3.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/jsx-ast-utils"
+    },
+    {
+      "name": "jsonfile",
+      "version": "6.2.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/jsonfile"
+    },
+    {
+      "name": "json5",
+      "version": "2.2.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/json5"
+    },
+    {
+      "name": "json-stable-stringify-without-jsonify",
+      "version": "1.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/json-stable-stringify-without-jsonify"
+    },
+    {
+      "name": "json-schema-typed",
+      "version": "8.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/json-schema-typed"
+    },
+    {
+      "name": "json-schema-traverse",
+      "version": "0.4.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/json-schema-traverse"
+    },
+    {
+      "name": "json-parse-even-better-errors",
+      "version": "2.3.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/json-parse-even-better-errors"
+    },
+    {
+      "name": "json-buffer",
+      "version": "3.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/json-buffer"
+    },
+    {
+      "name": "jsesc",
+      "version": "3.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/jsesc"
+    },
+    {
+      "name": "js-yaml",
+      "version": "4.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/js-yaml"
+    },
+    {
+      "name": "js-tokens",
+      "version": "4.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/js-tokens"
+    },
+    {
+      "name": "jose",
+      "version": "6.2.12",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/jose"
+    },
+    {
+      "name": "jiti",
+      "version": "2.6.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/jiti"
+    },
+    {
+      "name": "iterator.prototype",
+      "version": "1.1.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/iterator.prototype"
+    },
+    {
+      "name": "isexe",
+      "version": "2.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/isexe"
+    },
+    {
+      "name": "isarray",
+      "version": "2.0.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/isarray"
+    },
+    {
+      "name": "is-wsl",
+      "version": "3.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-wsl"
+    },
+    {
+      "name": "is-weakset",
+      "version": "2.0.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-weakset"
+    },
+    {
+      "name": "is-weakref",
+      "version": "1.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-weakref"
+    },
+    {
+      "name": "is-weakmap",
+      "version": "2.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-weakmap"
+    },
+    {
+      "name": "is-unicode-supported",
+      "version": "2.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-unicode-supported"
+    },
+    {
+      "name": "is-typed-array",
+      "version": "1.1.15",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-typed-array"
+    },
+    {
+      "name": "is-symbol",
+      "version": "1.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-symbol"
+    },
+    {
+      "name": "is-string",
+      "version": "1.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-string"
+    },
+    {
+      "name": "is-stream",
+      "version": "4.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-stream"
+    },
+    {
+      "name": "is-shared-array-buffer",
+      "version": "1.0.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-shared-array-buffer"
+    },
+    {
+      "name": "is-set",
+      "version": "2.0.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-set"
+    },
+    {
+      "name": "is-regexp",
+      "version": "3.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-regexp"
+    },
+    {
+      "name": "is-regex",
+      "version": "1.2.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-regex"
+    },
+    {
+      "name": "is-promise",
+      "version": "4.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-promise"
+    },
+    {
+      "name": "is-obj",
+      "version": "2.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-obj"
+    },
+    {
+      "name": "is-number-object",
+      "version": "1.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-number-object"
+    },
+    {
+      "name": "is-number",
+      "version": "7.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-number"
+    },
+    {
+      "name": "is-negative-zero",
+      "version": "2.0.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-negative-zero"
+    },
+    {
+      "name": "is-map",
+      "version": "2.0.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-map"
+    },
+    {
+      "name": "is-interactive",
+      "version": "2.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-interactive"
+    },
+    {
+      "name": "is-inside-container",
+      "version": "1.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-inside-container"
+    },
+    {
+      "name": "is-in-ssh",
+      "version": "1.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-in-ssh"
+    },
+    {
+      "name": "is-glob",
+      "version": "4.0.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-glob"
+    },
+    {
+      "name": "is-generator-function",
+      "version": "1.1.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-generator-function"
+    },
+    {
+      "name": "is-finalizationregistry",
+      "version": "1.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-finalizationregistry"
+    },
+    {
+      "name": "is-extglob",
+      "version": "2.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-extglob"
+    },
+    {
+      "name": "is-docker",
+      "version": "3.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-docker"
+    },
+    {
+      "name": "is-date-object",
+      "version": "1.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-date-object"
+    },
+    {
+      "name": "is-data-view",
+      "version": "1.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-data-view"
+    },
+    {
+      "name": "is-core-module",
+      "version": "2.16.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-core-module"
+    },
+    {
+      "name": "is-callable",
+      "version": "1.2.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-callable"
+    },
+    {
+      "name": "is-bun-module",
+      "version": "2.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-bun-module"
+    },
+    {
+      "name": "semver",
+      "version": "7.7.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-bun-module/node_modules/semver"
+    },
+    {
+      "name": "is-boolean-object",
+      "version": "1.2.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-boolean-object"
+    },
+    {
+      "name": "is-bigint",
+      "version": "1.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-bigint"
+    },
+    {
+      "name": "is-async-function",
+      "version": "2.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-async-function"
+    },
+    {
+      "name": "is-arrayish",
+      "version": "0.2.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-arrayish"
+    },
+    {
+      "name": "is-array-buffer",
+      "version": "3.0.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/is-array-buffer"
+    },
+    {
+      "name": "ipaddr.js",
+      "version": "1.9.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ipaddr.js"
+    },
+    {
+      "name": "ip-address",
+      "version": "10.7.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ip-address"
+    },
+    {
+      "name": "internal-slot",
+      "version": "1.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/internal-slot"
+    },
+    {
+      "name": "inherits",
+      "version": "2.0.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/inherits"
+    },
+    {
+      "name": "imurmurhash",
+      "version": "0.1.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/imurmurhash"
+    },
+    {
+      "name": "import-fresh",
+      "version": "3.3.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/import-fresh"
+    },
+    {
+      "name": "ignore",
+      "version": "5.3.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ignore"
+    },
+    {
+      "name": "iconv-lite",
+      "version": "0.7.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/iconv-lite"
+    },
+    {
+      "name": "human-signals",
+      "version": "8.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/human-signals"
+    },
+    {
+      "name": "http-errors",
+      "version": "2.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/http-errors"
+    },
+    {
+      "name": "hono",
+      "version": "4.13.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/hono"
+    },
+    {
+      "name": "hermes-parser",
+      "version": "0.25.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/hermes-parser"
+    },
+    {
+      "name": "hermes-estree",
+      "version": "0.25.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/hermes-estree"
+    },
+    {
+      "name": "hasown",
+      "version": "2.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/hasown"
+    },
+    {
+      "name": "has-tostringtag",
+      "version": "1.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/has-tostringtag"
+    },
+    {
+      "name": "has-symbols",
+      "version": "1.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/has-symbols"
+    },
+    {
+      "name": "has-proto",
+      "version": "1.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/has-proto"
+    },
+    {
+      "name": "has-property-descriptors",
+      "version": "1.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/has-property-descriptors"
+    },
+    {
+      "name": "has-flag",
+      "version": "4.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/has-flag"
+    },
+    {
+      "name": "has-bigints",
+      "version": "1.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/has-bigints"
+    },
+    {
+      "name": "graceful-fs",
+      "version": "4.2.11",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/graceful-fs"
+    },
+    {
+      "name": "gopd",
+      "version": "1.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/gopd"
+    },
+    {
+      "name": "globalthis",
+      "version": "1.0.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/globalthis"
+    },
+    {
+      "name": "globals",
+      "version": "14.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/globals"
+    },
+    {
+      "name": "glob-parent",
+      "version": "6.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/glob-parent"
+    },
+    {
+      "name": "get-tsconfig",
+      "version": "4.13.6",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/get-tsconfig"
+    },
+    {
+      "name": "get-symbol-description",
+      "version": "1.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/get-symbol-description"
+    },
+    {
+      "name": "get-stream",
+      "version": "9.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/get-stream"
+    },
+    {
+      "name": "get-proto",
+      "version": "1.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/get-proto"
+    },
+    {
+      "name": "get-own-enumerable-keys",
+      "version": "1.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/get-own-enumerable-keys"
+    },
+    {
+      "name": "get-intrinsic",
+      "version": "1.3.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/get-intrinsic"
+    },
+    {
+      "name": "get-east-asian-width",
+      "version": "1.6.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/get-east-asian-width"
+    },
+    {
+      "name": "gensync",
+      "version": "1.0.0-beta.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/gensync"
+    },
+    {
+      "name": "generator-function",
+      "version": "2.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/generator-function"
+    },
+    {
+      "name": "fuzzysort",
+      "version": "3.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/fuzzysort"
+    },
+    {
+      "name": "functions-have-names",
+      "version": "1.2.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/functions-have-names"
+    },
+    {
+      "name": "function.prototype.name",
+      "version": "1.1.8",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/function.prototype.name"
+    },
+    {
+      "name": "function-bind",
+      "version": "1.1.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/function-bind"
+    },
+    {
+      "name": "fsevents",
+      "version": "2.3.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/fsevents"
+    },
+    {
+      "name": "fs-extra",
+      "version": "11.4.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/fs-extra"
+    },
+    {
+      "name": "fresh",
+      "version": "2.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/fresh"
+    },
+    {
+      "name": "forwarded",
+      "version": "0.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/forwarded"
+    },
+    {
+      "name": "for-each",
+      "version": "0.3.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/for-each"
+    },
+    {
+      "name": "flatted",
+      "version": "3.3.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/flatted"
+    },
+    {
+      "name": "flat-cache",
+      "version": "4.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/flat-cache"
+    },
+    {
+      "name": "find-up",
+      "version": "5.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/find-up"
+    },
+    {
+      "name": "finalhandler",
+      "version": "2.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/finalhandler"
+    },
+    {
+      "name": "fill-range",
+      "version": "7.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/fill-range"
+    },
+    {
+      "name": "file-entry-cache",
+      "version": "8.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/file-entry-cache"
+    },
+    {
+      "name": "figures",
+      "version": "6.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/figures"
+    },
+    {
+      "name": "fastq",
+      "version": "1.20.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/fastq"
+    },
+    {
+      "name": "fast-uri",
+      "version": "3.1.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/fast-uri"
+    },
+    {
+      "name": "fast-levenshtein",
+      "version": "2.0.6",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/fast-levenshtein"
+    },
+    {
+      "name": "fast-json-stable-stringify",
+      "version": "2.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/fast-json-stable-stringify"
+    },
+    {
+      "name": "fast-glob",
+      "version": "3.3.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/fast-glob"
+    },
+    {
+      "name": "glob-parent",
+      "version": "5.1.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/fast-glob/node_modules/glob-parent"
+    },
+    {
+      "name": "fast-deep-equal",
+      "version": "3.1.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/fast-deep-equal"
+    },
+    {
+      "name": "express-rate-limit",
+      "version": "8.7.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/express-rate-limit"
+    },
+    {
+      "name": "express",
+      "version": "5.2.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/express"
+    },
+    {
+      "name": "cookie",
+      "version": "0.7.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/express/node_modules/cookie"
+    },
+    {
+      "name": "execa",
+      "version": "9.6.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/execa"
+    },
+    {
+      "name": "eventsource-parser",
+      "version": "3.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/eventsource-parser"
+    },
+    {
+      "name": "eventsource",
+      "version": "3.0.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/eventsource"
+    },
+    {
+      "name": "etag",
+      "version": "1.8.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/etag"
+    },
+    {
+      "name": "esutils",
+      "version": "2.0.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/esutils"
+    },
+    {
+      "name": "estraverse",
+      "version": "5.3.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/estraverse"
+    },
+    {
+      "name": "esrecurse",
+      "version": "4.3.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/esrecurse"
+    },
+    {
+      "name": "esquery",
+      "version": "1.7.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/esquery"
+    },
+    {
+      "name": "esprima",
+      "version": "4.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/esprima"
+    },
+    {
+      "name": "espree",
+      "version": "10.4.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/espree"
+    },
+    {
+      "name": "eslint-visitor-keys",
+      "version": "4.2.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/eslint-visitor-keys"
+    },
+    {
+      "name": "eslint-scope",
+      "version": "8.4.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/eslint-scope"
+    },
+    {
+      "name": "eslint-plugin-react-hooks",
+      "version": "7.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/eslint-plugin-react-hooks"
+    },
+    {
+      "name": "eslint-plugin-react",
+      "version": "7.37.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/eslint-plugin-react"
+    },
+    {
+      "name": "resolve",
+      "version": "2.0.0-next.6",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/eslint-plugin-react/node_modules/resolve"
+    },
+    {
+      "name": "eslint-plugin-jsx-a11y",
+      "version": "6.10.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/eslint-plugin-jsx-a11y"
+    },
+    {
+      "name": "eslint-plugin-import",
+      "version": "2.32.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/eslint-plugin-import"
+    },
+    {
+      "name": "debug",
+      "version": "3.2.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/eslint-plugin-import/node_modules/debug"
+    },
+    {
+      "name": "eslint-module-utils",
+      "version": "2.12.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/eslint-module-utils"
+    },
+    {
+      "name": "debug",
+      "version": "3.2.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/eslint-module-utils/node_modules/debug"
+    },
+    {
+      "name": "eslint-import-resolver-typescript",
+      "version": "3.10.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/eslint-import-resolver-typescript"
+    },
+    {
+      "name": "eslint-import-resolver-node",
+      "version": "0.3.9",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/eslint-import-resolver-node"
+    },
+    {
+      "name": "debug",
+      "version": "3.2.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/eslint-import-resolver-node/node_modules/debug"
+    },
+    {
+      "name": "eslint-config-next",
+      "version": "16.3.8",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/eslint-config-next"
+    },
+    {
+      "name": "globals",
+      "version": "16.4.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/eslint-config-next/node_modules/globals"
+    },
+    {
+      "name": "eslint",
+      "version": "9.39.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/eslint"
+    },
+    {
+      "name": "escape-string-regexp",
+      "version": "4.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/escape-string-regexp"
+    },
+    {
+      "name": "escape-html",
+      "version": "1.0.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/escape-html"
+    },
+    {
+      "name": "escalade",
+      "version": "3.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/escalade"
+    },
+    {
+      "name": "es-to-primitive",
+      "version": "1.3.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/es-to-primitive"
+    },
+    {
+      "name": "es-shim-unscopables",
+      "version": "1.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/es-shim-unscopables"
+    },
+    {
+      "name": "es-set-tostringtag",
+      "version": "2.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/es-set-tostringtag"
+    },
+    {
+      "name": "es-object-atoms",
+      "version": "1.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/es-object-atoms"
+    },
+    {
+      "name": "es-iterator-helpers",
+      "version": "1.2.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/es-iterator-helpers"
+    },
+    {
+      "name": "es-errors",
+      "version": "1.3.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/es-errors"
+    },
+    {
+      "name": "es-define-property",
+      "version": "1.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/es-define-property"
+    },
+    {
+      "name": "es-abstract",
+      "version": "1.24.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/es-abstract"
+    },
+    {
+      "name": "error-ex",
+      "version": "1.3.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/error-ex"
+    },
+    {
+      "name": "env-paths",
+      "version": "2.2.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/env-paths"
+    },
+    {
+      "name": "enquirer",
+      "version": "2.4.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/enquirer"
+    },
+    {
+      "name": "enhanced-resolve",
+      "version": "5.19.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/enhanced-resolve"
+    },
+    {
+      "name": "encodeurl",
+      "version": "2.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/encodeurl"
+    },
+    {
+      "name": "emoji-regex",
+      "version": "9.2.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/emoji-regex"
+    },
+    {
+      "name": "electron-to-chromium",
+      "version": "1.5.302",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/electron-to-chromium"
+    },
+    {
+      "name": "ee-first",
+      "version": "1.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ee-first"
+    },
+    {
+      "name": "dunder-proto",
+      "version": "1.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/dunder-proto"
+    },
+    {
+      "name": "dotenv",
+      "version": "17.4.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/dotenv"
+    },
+    {
+      "name": "dot-prop",
+      "version": "6.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/dot-prop"
+    },
+    {
+      "name": "doctrine",
+      "version": "2.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/doctrine"
+    },
+    {
+      "name": "diff",
+      "version": "8.0.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/diff"
+    },
+    {
+      "name": "depd",
+      "version": "2.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/depd"
+    },
+    {
+      "name": "define-properties",
+      "version": "1.2.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/define-properties"
+    },
+    {
+      "name": "define-lazy-prop",
+      "version": "3.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/define-lazy-prop"
+    },
+    {
+      "name": "define-data-property",
+      "version": "1.1.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/define-data-property"
+    },
+    {
+      "name": "default-browser-id",
+      "version": "5.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/default-browser-id"
+    },
+    {
+      "name": "default-browser",
+      "version": "5.5.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/default-browser"
+    },
+    {
+      "name": "deepmerge",
+      "version": "4.3.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/deepmerge"
+    },
+    {
+      "name": "deep-is",
+      "version": "0.1.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/deep-is"
+    },
+    {
+      "name": "dedent",
+      "version": "1.7.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/dedent"
+    },
+    {
+      "name": "debounce-fn",
+      "version": "4.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/debounce-fn"
+    },
+    {
+      "name": "data-view-byte-offset",
+      "version": "1.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/data-view-byte-offset"
+    },
+    {
+      "name": "data-view-byte-length",
+      "version": "1.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/data-view-byte-length"
+    },
+    {
+      "name": "data-view-buffer",
+      "version": "1.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/data-view-buffer"
+    },
+    {
+      "name": "damerau-levenshtein",
+      "version": "1.0.8",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/damerau-levenshtein"
+    },
+    {
+      "name": "cross-spawn",
+      "version": "7.0.6",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/cross-spawn"
+    },
+    {
+      "name": "cosmiconfig",
+      "version": "9.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/cosmiconfig"
+    },
+    {
+      "name": "cors",
+      "version": "2.8.6",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/cors"
+    },
+    {
+      "name": "cookie-signature",
+      "version": "1.2.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/cookie-signature"
+    },
+    {
+      "name": "convert-source-map",
+      "version": "2.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/convert-source-map"
+    },
+    {
+      "name": "content-type",
+      "version": "1.0.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/content-type"
+    },
+    {
+      "name": "content-disposition",
+      "version": "1.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/content-disposition"
+    },
+    {
+      "name": "conf",
+      "version": "10.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/conf"
+    },
+    {
+      "name": "semver",
+      "version": "7.8.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/conf/node_modules/semver"
+    },
+    {
+      "name": "json-schema-typed",
+      "version": "7.0.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/conf/node_modules/json-schema-typed"
+    },
+    {
+      "name": "json-schema-traverse",
+      "version": "1.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/conf/node_modules/json-schema-traverse"
+    },
+    {
+      "name": "ajv-formats",
+      "version": "2.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/conf/node_modules/ajv-formats"
+    },
+    {
+      "name": "ajv",
+      "version": "8.20.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/conf/node_modules/ajv"
+    },
+    {
+      "name": "concat-map",
+      "version": "0.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/concat-map"
+    },
+    {
+      "name": "commander",
+      "version": "14.0.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/commander"
+    },
+    {
+      "name": "color-name",
+      "version": "1.1.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/color-name"
+    },
+    {
+      "name": "color-convert",
+      "version": "2.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/color-convert"
+    },
+    {
+      "name": "code-block-writer",
+      "version": "13.0.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/code-block-writer"
+    },
+    {
+      "name": "cli-spinners",
+      "version": "2.9.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/cli-spinners"
+    },
+    {
+      "name": "cli-cursor",
+      "version": "5.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/cli-cursor"
+    },
+    {
+      "name": "chalk",
+      "version": "4.1.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/chalk"
+    },
+    {
+      "name": "callsites",
+      "version": "3.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/callsites"
+    },
+    {
+      "name": "call-bound",
+      "version": "1.0.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/call-bound"
+    },
+    {
+      "name": "call-bind-apply-helpers",
+      "version": "1.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/call-bind-apply-helpers"
+    },
+    {
+      "name": "call-bind",
+      "version": "1.0.8",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/call-bind"
+    },
+    {
+      "name": "bytes",
+      "version": "3.1.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/bytes"
+    },
+    {
+      "name": "bundle-name",
+      "version": "4.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/bundle-name"
+    },
+    {
+      "name": "browserslist",
+      "version": "4.28.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/browserslist"
+    },
+    {
+      "name": "braces",
+      "version": "3.0.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/braces"
+    },
+    {
+      "name": "brace-expansion",
+      "version": "1.1.12",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/brace-expansion"
+    },
+    {
+      "name": "body-parser",
+      "version": "2.3.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/body-parser"
+    },
+    {
+      "name": "content-type",
+      "version": "2.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/body-parser/node_modules/content-type"
+    },
+    {
+      "name": "balanced-match",
+      "version": "1.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/balanced-match"
+    },
+    {
+      "name": "axobject-query",
+      "version": "4.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/axobject-query"
+    },
+    {
+      "name": "axe-core",
+      "version": "4.11.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/axe-core"
+    },
+    {
+      "name": "available-typed-arrays",
+      "version": "1.0.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/available-typed-arrays"
+    },
+    {
+      "name": "atomically",
+      "version": "1.7.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/atomically"
+    },
+    {
+      "name": "async-function",
+      "version": "1.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/async-function"
+    },
+    {
+      "name": "ast-types-flow",
+      "version": "0.0.8",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ast-types-flow"
+    },
+    {
+      "name": "ast-types",
+      "version": "0.16.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ast-types"
+    },
+    {
+      "name": "arraybuffer.prototype.slice",
+      "version": "1.0.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/arraybuffer.prototype.slice"
+    },
+    {
+      "name": "array.prototype.tosorted",
+      "version": "1.1.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/array.prototype.tosorted"
+    },
+    {
+      "name": "array.prototype.flatmap",
+      "version": "1.3.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/array.prototype.flatmap"
+    },
+    {
+      "name": "array.prototype.flat",
+      "version": "1.3.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/array.prototype.flat"
+    },
+    {
+      "name": "array.prototype.findlastindex",
+      "version": "1.2.6",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/array.prototype.findlastindex"
+    },
+    {
+      "name": "array.prototype.findlast",
+      "version": "1.2.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/array.prototype.findlast"
+    },
+    {
+      "name": "array-includes",
+      "version": "3.1.9",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/array-includes"
+    },
+    {
+      "name": "array-buffer-byte-length",
+      "version": "1.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/array-buffer-byte-length"
+    },
+    {
+      "name": "aria-query",
+      "version": "5.3.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/aria-query"
+    },
+    {
+      "name": "argparse",
+      "version": "2.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/argparse"
+    },
+    {
+      "name": "ansi-styles",
+      "version": "4.3.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ansi-styles"
+    },
+    {
+      "name": "ansi-regex",
+      "version": "5.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ansi-regex"
+    },
+    {
+      "name": "ansi-colors",
+      "version": "4.1.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ansi-colors"
+    },
+    {
+      "name": "ajv-formats",
+      "version": "3.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ajv-formats"
+    },
+    {
+      "name": "json-schema-traverse",
+      "version": "1.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ajv-formats/node_modules/json-schema-traverse"
+    },
+    {
+      "name": "ajv",
+      "version": "8.20.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ajv-formats/node_modules/ajv"
+    },
+    {
+      "name": "ajv",
+      "version": "6.14.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/ajv"
+    },
+    {
+      "name": "acorn-jsx",
+      "version": "5.3.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/acorn-jsx"
+    },
+    {
+      "name": "acorn",
+      "version": "8.16.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/acorn"
+    },
+    {
+      "name": "accepts",
+      "version": "2.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/accepts"
+    },
+    {
+      "name": "@unrs/resolver-binding-darwin-arm64",
+      "version": "1.11.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@unrs/resolver-binding-darwin-arm64"
+    },
+    {
+      "name": "@typescript-eslint/visitor-keys",
+      "version": "8.56.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@typescript-eslint/visitor-keys"
+    },
+    {
+      "name": "eslint-visitor-keys",
+      "version": "5.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@typescript-eslint/visitor-keys/node_modules/eslint-visitor-keys"
+    },
+    {
+      "name": "@typescript-eslint/utils",
+      "version": "8.56.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@typescript-eslint/utils"
+    },
+    {
+      "name": "@typescript-eslint/typescript-estree",
+      "version": "8.56.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@typescript-eslint/typescript-estree"
+    },
+    {
+      "name": "semver",
+      "version": "7.7.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@typescript-eslint/typescript-estree/node_modules/semver"
+    },
+    {
+      "name": "minimatch",
+      "version": "9.0.6",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@typescript-eslint/typescript-estree/node_modules/minimatch"
+    },
+    {
+      "name": "brace-expansion",
+      "version": "5.0.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@typescript-eslint/typescript-estree/node_modules/brace-expansion"
+    },
+    {
+      "name": "balanced-match",
+      "version": "4.0.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@typescript-eslint/typescript-estree/node_modules/balanced-match"
+    },
+    {
+      "name": "@typescript-eslint/types",
+      "version": "8.56.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@typescript-eslint/types"
+    },
+    {
+      "name": "@typescript-eslint/type-utils",
+      "version": "8.56.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@typescript-eslint/type-utils"
+    },
+    {
+      "name": "@typescript-eslint/tsconfig-utils",
+      "version": "8.56.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@typescript-eslint/tsconfig-utils"
+    },
+    {
+      "name": "@typescript-eslint/scope-manager",
+      "version": "8.56.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@typescript-eslint/scope-manager"
+    },
+    {
+      "name": "@typescript-eslint/project-service",
+      "version": "8.56.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@typescript-eslint/project-service"
+    },
+    {
+      "name": "@typescript-eslint/parser",
+      "version": "8.56.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@typescript-eslint/parser"
+    },
+    {
+      "name": "@typescript-eslint/eslint-plugin",
+      "version": "8.56.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@typescript-eslint/eslint-plugin"
+    },
+    {
+      "name": "ignore",
+      "version": "7.0.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@typescript-eslint/eslint-plugin/node_modules/ignore"
+    },
+    {
+      "name": "@types/validate-npm-package-name",
+      "version": "4.0.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@types/validate-npm-package-name"
+    },
+    {
+      "name": "@types/react-dom",
+      "version": "19.2.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@types/react-dom"
+    },
+    {
+      "name": "@types/json5",
+      "version": "0.0.29",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@types/json5"
+    },
+    {
+      "name": "@types/json-schema",
+      "version": "7.0.15",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@types/json-schema"
+    },
+    {
+      "name": "@ts-morph/common",
+      "version": "0.27.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@ts-morph/common"
+    },
+    {
+      "name": "minimatch",
+      "version": "10.2.6",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@ts-morph/common/node_modules/minimatch"
+    },
+    {
+      "name": "glob-parent",
+      "version": "5.1.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@ts-morph/common/node_modules/glob-parent"
+    },
+    {
+      "name": "fast-glob",
+      "version": "3.3.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@ts-morph/common/node_modules/fast-glob"
+    },
+    {
+      "name": "brace-expansion",
+      "version": "5.0.12",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@ts-morph/common/node_modules/brace-expansion"
+    },
+    {
+      "name": "balanced-match",
+      "version": "4.0.4",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@ts-morph/common/node_modules/balanced-match"
+    },
+    {
+      "name": "@tailwindcss/postcss",
+      "version": "4.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@tailwindcss/postcss"
+    },
+    {
+      "name": "@tailwindcss/oxide-darwin-arm64",
+      "version": "4.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@tailwindcss/oxide-darwin-arm64"
+    },
+    {
+      "name": "@tailwindcss/oxide",
+      "version": "4.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@tailwindcss/oxide"
+    },
+    {
+      "name": "@tailwindcss/node",
+      "version": "4.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@tailwindcss/node"
+    },
+    {
+      "name": "@sindresorhus/merge-streams",
+      "version": "4.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@sindresorhus/merge-streams"
+    },
+    {
+      "name": "@sec-ant/readable-stream",
+      "version": "0.4.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@sec-ant/readable-stream"
+    },
+    {
+      "name": "@rtsao/scc",
+      "version": "1.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@rtsao/scc"
+    },
+    {
+      "name": "@nolyfill/is-core-module",
+      "version": "1.0.39",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@nolyfill/is-core-module"
+    },
+    {
+      "name": "@nodelib/fs.walk",
+      "version": "1.2.8",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@nodelib/fs.walk"
+    },
+    {
+      "name": "@nodelib/fs.stat",
+      "version": "2.0.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@nodelib/fs.stat"
+    },
+    {
+      "name": "@nodelib/fs.scandir",
+      "version": "2.1.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@nodelib/fs.scandir"
+    },
+    {
+      "name": "@next/eslint-plugin-next",
+      "version": "16.3.8",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@next/eslint-plugin-next"
+    },
+    {
+      "name": "@modelcontextprotocol/sdk",
+      "version": "1.30.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@modelcontextprotocol/sdk"
+    },
+    {
+      "name": "json-schema-traverse",
+      "version": "1.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@modelcontextprotocol/sdk/node_modules/json-schema-traverse"
+    },
+    {
+      "name": "ajv",
+      "version": "8.20.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@modelcontextprotocol/sdk/node_modules/ajv"
+    },
+    {
+      "name": "@jridgewell/trace-mapping",
+      "version": "0.3.31",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@jridgewell/trace-mapping"
+    },
+    {
+      "name": "@jridgewell/sourcemap-codec",
+      "version": "1.5.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@jridgewell/sourcemap-codec"
+    },
+    {
+      "name": "@jridgewell/resolve-uri",
+      "version": "3.1.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@jridgewell/resolve-uri"
+    },
+    {
+      "name": "@jridgewell/remapping",
+      "version": "2.3.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@jridgewell/remapping"
+    },
+    {
+      "name": "@jridgewell/gen-mapping",
+      "version": "0.3.13",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@jridgewell/gen-mapping"
+    },
+    {
+      "name": "@humanwhocodes/retry",
+      "version": "0.4.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@humanwhocodes/retry"
+    },
+    {
+      "name": "@humanwhocodes/module-importer",
+      "version": "1.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@humanwhocodes/module-importer"
+    },
+    {
+      "name": "@humanfs/node",
+      "version": "0.16.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@humanfs/node"
+    },
+    {
+      "name": "@humanfs/core",
+      "version": "0.19.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@humanfs/core"
+    },
+    {
+      "name": "@hono/node-server",
+      "version": "2.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@hono/node-server"
+    },
+    {
+      "name": "@eslint/plugin-kit",
+      "version": "0.4.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@eslint/plugin-kit"
+    },
+    {
+      "name": "@eslint/object-schema",
+      "version": "2.1.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@eslint/object-schema"
+    },
+    {
+      "name": "@eslint/js",
+      "version": "9.39.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@eslint/js"
+    },
+    {
+      "name": "@eslint/eslintrc",
+      "version": "3.3.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@eslint/eslintrc"
+    },
+    {
+      "name": "@eslint/core",
+      "version": "0.17.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@eslint/core"
+    },
+    {
+      "name": "@eslint/config-helpers",
+      "version": "0.4.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@eslint/config-helpers"
+    },
+    {
+      "name": "@eslint/config-array",
+      "version": "0.21.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@eslint/config-array"
+    },
+    {
+      "name": "@eslint-community/regexpp",
+      "version": "4.12.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@eslint-community/regexpp"
+    },
+    {
+      "name": "@eslint-community/eslint-utils",
+      "version": "4.9.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@eslint-community/eslint-utils"
+    },
+    {
+      "name": "eslint-visitor-keys",
+      "version": "3.4.3",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@eslint-community/eslint-utils/node_modules/eslint-visitor-keys"
+    },
+    {
+      "name": "@dotenvx/primitives",
+      "version": "0.8.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@dotenvx/primitives"
+    },
+    {
+      "name": "@dotenvx/dotenvx",
+      "version": "1.75.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@dotenvx/dotenvx"
+    },
+    {
+      "name": "which",
+      "version": "4.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@dotenvx/dotenvx/node_modules/which"
+    },
+    {
+      "name": "strip-final-newline",
+      "version": "2.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@dotenvx/dotenvx/node_modules/strip-final-newline"
+    },
+    {
+      "name": "signal-exit",
+      "version": "3.0.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@dotenvx/dotenvx/node_modules/signal-exit"
+    },
+    {
+      "name": "picomatch",
+      "version": "4.0.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@dotenvx/dotenvx/node_modules/picomatch"
+    },
+    {
+      "name": "open",
+      "version": "8.4.2",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@dotenvx/dotenvx/node_modules/open"
+    },
+    {
+      "name": "npm-run-path",
+      "version": "4.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@dotenvx/dotenvx/node_modules/npm-run-path"
+    },
+    {
+      "name": "isexe",
+      "version": "3.1.5",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@dotenvx/dotenvx/node_modules/isexe"
+    },
+    {
+      "name": "is-wsl",
+      "version": "2.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@dotenvx/dotenvx/node_modules/is-wsl"
+    },
+    {
+      "name": "is-stream",
+      "version": "2.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@dotenvx/dotenvx/node_modules/is-stream"
+    },
+    {
+      "name": "is-docker",
+      "version": "2.2.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@dotenvx/dotenvx/node_modules/is-docker"
+    },
+    {
+      "name": "human-signals",
+      "version": "2.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@dotenvx/dotenvx/node_modules/human-signals"
+    },
+    {
+      "name": "get-stream",
+      "version": "6.0.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@dotenvx/dotenvx/node_modules/get-stream"
+    },
+    {
+      "name": "fdir",
+      "version": "6.5.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@dotenvx/dotenvx/node_modules/fdir"
+    },
+    {
+      "name": "execa",
+      "version": "5.1.1",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@dotenvx/dotenvx/node_modules/execa"
+    },
+    {
+      "name": "define-lazy-prop",
+      "version": "2.0.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@dotenvx/dotenvx/node_modules/define-lazy-prop"
+    },
+    {
+      "name": "commander",
+      "version": "11.1.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@dotenvx/dotenvx/node_modules/commander"
+    },
+    {
+      "name": "@babel/types",
+      "version": "7.29.8",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/types"
+    },
+    {
+      "name": "@babel/traverse",
+      "version": "7.29.8",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/traverse"
+    },
+    {
+      "name": "@babel/template",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/template"
+    },
+    {
+      "name": "@babel/preset-typescript",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/preset-typescript"
+    },
+    {
+      "name": "@babel/plugin-transform-typescript",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/plugin-transform-typescript"
+    },
+    {
+      "name": "@babel/plugin-transform-modules-commonjs",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/plugin-transform-modules-commonjs"
+    },
+    {
+      "name": "@babel/plugin-syntax-typescript",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/plugin-syntax-typescript"
+    },
+    {
+      "name": "@babel/plugin-syntax-jsx",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/plugin-syntax-jsx"
+    },
+    {
+      "name": "@babel/parser",
+      "version": "7.29.8",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/parser"
+    },
+    {
+      "name": "@babel/helpers",
+      "version": "7.28.6",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/helpers"
+    },
+    {
+      "name": "@babel/helper-validator-option",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/helper-validator-option"
+    },
+    {
+      "name": "@babel/helper-validator-identifier",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/helper-validator-identifier"
+    },
+    {
+      "name": "@babel/helper-string-parser",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/helper-string-parser"
+    },
+    {
+      "name": "@babel/helper-skip-transparent-expression-wrappers",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/helper-skip-transparent-expression-wrappers"
+    },
+    {
+      "name": "@babel/helper-replace-supers",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/helper-replace-supers"
+    },
+    {
+      "name": "@babel/helper-plugin-utils",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/helper-plugin-utils"
+    },
+    {
+      "name": "@babel/helper-optimise-call-expression",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/helper-optimise-call-expression"
+    },
+    {
+      "name": "@babel/helper-module-transforms",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/helper-module-transforms"
+    },
+    {
+      "name": "@babel/helper-module-imports",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/helper-module-imports"
+    },
+    {
+      "name": "@babel/helper-member-expression-to-functions",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/helper-member-expression-to-functions"
+    },
+    {
+      "name": "@babel/helper-globals",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/helper-globals"
+    },
+    {
+      "name": "@babel/helper-create-class-features-plugin",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/helper-create-class-features-plugin"
+    },
+    {
+      "name": "@babel/helper-compilation-targets",
+      "version": "7.28.6",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/helper-compilation-targets"
+    },
+    {
+      "name": "@babel/helper-annotate-as-pure",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/helper-annotate-as-pure"
+    },
+    {
+      "name": "@babel/generator",
+      "version": "7.29.8",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/generator"
+    },
+    {
+      "name": "@babel/core",
+      "version": "7.29.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/core"
+    },
+    {
+      "name": "@babel/compat-data",
+      "version": "7.29.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/compat-data"
+    },
+    {
+      "name": "@babel/code-frame",
+      "version": "7.29.7",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@babel/code-frame"
+    },
+    {
+      "name": "@alloc/quick-lru",
+      "version": "5.2.0",
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/node_modules/@alloc/quick-lru"
+    }
+  ],
+  "removed": 550,
+  "audit": {
+    "auditReportVersion": 2,
+    "vulnerabilities": {
+      "@tailwindcss/typography": {
+        "name": "@tailwindcss/typography",
+        "severity": "moderate",
+        "isDirect": true,
+        "via": [
+          "postcss-selector-parser"
+        ],
+        "effects": [],
+        "range": "<=0.0.0-insiders.fda8ce5 || >=0.5.5",
+        "nodes": [
+          "node_modules/@tailwindcss/typography"
+        ],
+        "fixAvailable": {
+          "name": "@tailwindcss/typography",
+          "version": "0.5.4",
+          "isSemVerMajor": true
+        }
+      },
+      "postcss-selector-parser": {
+        "name": "postcss-selector-parser",
+        "severity": "moderate",
+        "isDirect": false,
+        "via": [
+          {
+            "source": 1241232,
+            "name": "postcss-selector-parser",
+            "dependency": "postcss-selector-parser",
+            "title": "PostCSS: Quadratic complexity in flat selector parsing allows CPU exhaustion",
+            "url": "https://github.com/advisories/GHSA-rj75-hqrm-r3gf",
+            "severity": "moderate",
+            "cwe": [
+              "CWE-400",
+              "CWE-407"
+            ],
+            "cvss": {
+              "score": 5.9,
+              "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            },
+            "range": "<7.1.6"
+          }
+        ],
+        "effects": [
+          "@tailwindcss/typography"
+        ],
+        "range": "<7.1.6",
+        "nodes": [
+          "node_modules/postcss-selector-parser"
+        ],
+        "fixAvailable": {
+          "name": "@tailwindcss/typography",
+          "version": "0.5.4",
+          "isSemVerMajor": true
+        }
+      }
+    },
+    "metadata": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 2,
+        "high": 0,
+        "critical": 0,
+        "total": 2
+      },
+      "dependencies": {
+        "prod": 152,
+        "dev": 0,
+        "optional": 8,
+        "peer": 0,
+        "peerOptional": 0,
+        "total": 159
+      }
+    }
+  }
+}

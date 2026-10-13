@@ -1,0 +1,188 @@
+{
+  "started_at": "2026-10-13T16:01:37.573835+00:00",
+  "checks": [
+    {
+      "name": "deployed Lambda original ZIP and source hashes",
+      "function": "JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+      "passed": true,
+      "source_files": 9,
+      "zip_sha256": "8e155c65726947427cbf92c04f7727ff48819f4ed5d9a8e47576d07a792d3122",
+      "memory_mb": 512,
+      "timeout_seconds": 29
+    },
+    {
+      "name": "deployed Lambda original ZIP and source hashes",
+      "function": "JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+      "passed": true,
+      "source_files": 9,
+      "zip_sha256": "8e155c65726947427cbf92c04f7727ff48819f4ed5d9a8e47576d07a792d3122",
+      "memory_mb": 512,
+      "timeout_seconds": 180
+    },
+    {
+      "name": "deployed Lambda original ZIP and source hashes",
+      "function": "JumpServeAgentStack-AgentFnC1FD126F-MG2xfZrwsBNg",
+      "passed": true,
+      "source_files": 5,
+      "zip_sha256": "c879df52d7e4e09f0f2154eb6ed712a4a8b88bf060cbe62b43a1608c565cf4a5",
+      "memory_mb": 1024,
+      "timeout_seconds": 120
+    },
+    {
+      "name": "distinct review-role database constraint",
+      "passed": true,
+      "definition": "CHECK ((comprehension_run_id <> critic_run_id))"
+    },
+    {
+      "name": "public idea capability",
+      "passed": true,
+      "capability": {
+        "version": "research-ideas-v1",
+        "paper_required": false,
+        "packet_bytes": 24000
+      }
+    },
+    {
+      "name": "anonymous private/model request denial",
+      "passed": true,
+      "status": 401,
+      "method": "GET",
+      "endpoint": "https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/research/studies/0e06a34c-63f2-49c5-80a7-0571d90e2b0f/idea"
+    },
+    {
+      "name": "anonymous private/model request denial",
+      "passed": true,
+      "status": 401,
+      "method": "POST",
+      "endpoint": "https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/research/studies/5e8c01e8-c5ad-4944-868e-8412c3dfa660/idea"
+    },
+    {
+      "name": "anonymous private/model request denial",
+      "passed": true,
+      "status": 401,
+      "method": "POST",
+      "endpoint": "https://idk3jouyc6g2uolmge5ctuizwq0kpgcf.lambda-url.us-east-1.on.aws/"
+    }
+  ],
+  "conditional_gaps": [
+    "Legitimate Google owner request and deployed cross-owner write denial require available authenticated sessions",
+    "Independent human/held-out scientific review"
+  ],
+  "new_model_calls": 0,
+  "measured_charges_usd": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "database": {
+    "passed": true,
+    "security": [
+      {
+        "relname": "research_idea_campaign_links",
+        "relrowsecurity": true,
+        "anon_access": false,
+        "browser_access": false
+      },
+      {
+        "relname": "research_idea_packets",
+        "relrowsecurity": true,
+        "anon_access": false,
+        "browser_access": false
+      },
+      {
+        "relname": "research_idea_readiness",
+        "relrowsecurity": true,
+        "anon_access": false,
+        "browser_access": false
+      },
+      {
+        "relname": "research_idea_runs",
+        "relrowsecurity": true,
+        "anon_access": false,
+        "browser_access": false
+      },
+      {
+        "relname": "research_idea_sessions",
+        "relrowsecurity": true,
+        "anon_access": false,
+        "browser_access": false
+      }
+    ],
+    "rpc": [
+      {
+        "proname": "research_accept_idea_plan",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_begin_idea_run",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_finish_idea_run",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_idea_owner",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_idea_ready",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_prepare_idea_campaign",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_save_idea_packet",
+        "anon_execute": false,
+        "browser_execute": false
+      }
+    ],
+    "private_originals": [
+      {
+        "public": false
+      }
+    ],
+    "pointers": [
+      {
+        "module_id": "congestion-control-emulated",
+        "active_version_id": "cabbe18a-cc70-482c-8883-81b515639e42"
+      },
+      {
+        "module_id": "congestion-control-real-world",
+        "active_version_id": "e78456f8-6582-4f69-8b44-d56d2c782352"
+      },
+      {
+        "module_id": "http2-compliance-study",
+        "active_version_id": "caf6bae2-acd3-4ef4-8147-bd8bc39895e2"
+      },
+      {
+        "module_id": "ipv6-dns-study",
+        "active_version_id": "28edfb2a-17f9-47c0-a801-1ca7392c7404"
+      },
+      {
+        "module_id": "leo-emergency-failover",
+        "active_version_id": "ec00a4b6-718c-4e69-9c0f-283b9f251002"
+      },
+      {
+        "module_id": "reliable-sketch-study",
+        "active_version_id": "64c9fbb6-1d38-4844-9167-66faaf05fe14"
+      },
+      {
+        "module_id": "research-verification",
+        "active_version_id": "e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8"
+      }
+    ]
+  },
+  "passed": true,
+  "ended_at": "2026-10-13T16:01:51.984899+00:00"
+}

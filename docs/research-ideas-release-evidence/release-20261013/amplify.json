@@ -1,0 +1,32 @@
+{
+    "summary": {
+        "jobArn": "arn:aws:amplify:us-east-1:395567831870:apps/d24jvguj7brnkj/branches/main/jobs/0000000109",
+        "jobId": "109",
+        "commitId": "edc7e4bf47735a08bde2207337bc75b9594bfecb",
+        "commitMessage": "Patch the frontend runtime before publishing research ideas\n\nUpgrade Next.js and its ESLint configuration to 16.3.8 and refresh compatible transitive dependencies. The production dependency audit has zero critical/high advisories; retain the remaining build-time selector-parser advisories in the release report. Recheck the frontend build, existing tests and the idea browser flow.",
+        "commitTime": "2026-10-13T10:46:06-05:00",
+        "startTime": "2026-10-13T11:01:39.727000-05:00",
+        "status": "SUCCEED",
+        "endTime": "2026-10-13T11:04:32.003000-05:00"
+    },
+    "steps": [
+        {
+            "name": "BUILD",
+            "status": "SUCCEED",
+            "startTime": "2026-10-13T11:01:39.765000-05:00",
+            "endTime": "2026-10-13T11:04:06.981000-05:00"
+        },
+        {
+            "name": "DEPLOY",
+            "status": "SUCCEED",
+            "startTime": "2026-10-13T11:04:07.216000-05:00",
+            "endTime": "2026-10-13T11:04:31.551000-05:00"
+        },
+        {
+            "name": "VERIFY",
+            "status": "SUCCEED",
+            "startTime": "2026-10-13T11:04:31.816000-05:00",
+            "endTime": "2026-10-13T11:04:31.851000-05:00"
+        }
+    ]
+}

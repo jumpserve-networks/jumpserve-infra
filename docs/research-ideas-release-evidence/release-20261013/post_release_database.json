@@ -1,0 +1,121 @@
+{
+  "mode": "verify",
+  "started_at": "2026-10-13T16:14:39.451084+00:00",
+  "status": "complete",
+  "authorization": "User requested merge to main and production deployment on 2026-10-13",
+  "measured_charges_usd": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "verification": {
+    "passed": true,
+    "security": [
+      {
+        "relname": "research_idea_campaign_links",
+        "relrowsecurity": true,
+        "anon_access": false,
+        "browser_access": false
+      },
+      {
+        "relname": "research_idea_packets",
+        "relrowsecurity": true,
+        "anon_access": false,
+        "browser_access": false
+      },
+      {
+        "relname": "research_idea_readiness",
+        "relrowsecurity": true,
+        "anon_access": false,
+        "browser_access": false
+      },
+      {
+        "relname": "research_idea_runs",
+        "relrowsecurity": true,
+        "anon_access": false,
+        "browser_access": false
+      },
+      {
+        "relname": "research_idea_sessions",
+        "relrowsecurity": true,
+        "anon_access": false,
+        "browser_access": false
+      }
+    ],
+    "rpc": [
+      {
+        "proname": "research_accept_idea_plan",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_begin_idea_run",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_finish_idea_run",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_idea_owner",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_idea_ready",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_prepare_idea_campaign",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_save_idea_packet",
+        "anon_execute": false,
+        "browser_execute": false
+      }
+    ],
+    "private_originals": [
+      {
+        "public": false
+      }
+    ],
+    "pointers": [
+      {
+        "module_id": "congestion-control-emulated",
+        "active_version_id": "cabbe18a-cc70-482c-8883-81b515639e42"
+      },
+      {
+        "module_id": "congestion-control-real-world",
+        "active_version_id": "e78456f8-6582-4f69-8b44-d56d2c782352"
+      },
+      {
+        "module_id": "http2-compliance-study",
+        "active_version_id": "caf6bae2-acd3-4ef4-8147-bd8bc39895e2"
+      },
+      {
+        "module_id": "ipv6-dns-study",
+        "active_version_id": "28edfb2a-17f9-47c0-a801-1ca7392c7404"
+      },
+      {
+        "module_id": "leo-emergency-failover",
+        "active_version_id": "ec00a4b6-718c-4e69-9c0f-283b9f251002"
+      },
+      {
+        "module_id": "reliable-sketch-study",
+        "active_version_id": "64c9fbb6-1d38-4844-9167-66faaf05fe14"
+      },
+      {
+        "module_id": "research-verification",
+        "active_version_id": "e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8"
+      }
+    ]
+  },
+  "ended_at": "2026-10-13T16:14:44.580182+00:00"
+}

@@ -1,0 +1,22 @@
+{
+  "mode": "diff",
+  "started_at": "2026-10-13T15:04:49.637066+00:00",
+  "status": "complete",
+  "authorization": "User requested merge to main and production deployment on 2026-10-13",
+  "measured_charges_usd": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "command": [
+    "npx",
+    "cdk",
+    "diff",
+    "JumpServeBenchmarkStack",
+    "JumpServeAgentStack",
+    "--no-change-set"
+  ],
+  "ended_at": "2026-10-13T15:05:02.414080+00:00"
+}

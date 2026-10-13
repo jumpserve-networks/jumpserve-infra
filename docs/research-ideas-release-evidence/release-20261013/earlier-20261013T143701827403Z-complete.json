@@ -1,0 +1,177 @@
+{
+  "mode": "inspect",
+  "started_at": "2026-10-13T14:37:01.827621+00:00",
+  "status": "complete",
+  "authorization": "User requested merge to main and production deployment on 2026-10-13",
+  "measured_charges_usd": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "inspection": {
+    "relations": [
+      {
+        "relname": "research_artifacts",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_assessments",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_audit_events",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_campaigns",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_claim_checks",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_claims",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_configurations",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_gaps",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_measurements",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_prepared_plans",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_protocols",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_publications",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_published_values",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_queue_events",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_queue_jobs",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_reviews",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_runs",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_sources",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_studies",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_study_owners",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_summaries",
+        "relrowsecurity": true
+      }
+    ],
+    "columns": [
+      {
+        "column_name": "id",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "title",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "paper_url",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "domain",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "scope",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "origin_module",
+        "is_nullable": "YES"
+      },
+      {
+        "column_name": "created_at",
+        "is_nullable": "NO"
+      }
+    ],
+    "pointers": [
+      {
+        "module_id": "congestion-control-emulated",
+        "active_version_id": "cabbe18a-cc70-482c-8883-81b515639e42"
+      },
+      {
+        "module_id": "congestion-control-real-world",
+        "active_version_id": "e78456f8-6582-4f69-8b44-d56d2c782352"
+      },
+      {
+        "module_id": "http2-compliance-study",
+        "active_version_id": "caf6bae2-acd3-4ef4-8147-bd8bc39895e2"
+      },
+      {
+        "module_id": "ipv6-dns-study",
+        "active_version_id": "28edfb2a-17f9-47c0-a801-1ca7392c7404"
+      },
+      {
+        "module_id": "leo-emergency-failover",
+        "active_version_id": "ec00a4b6-718c-4e69-9c0f-283b9f251002"
+      },
+      {
+        "module_id": "reliable-sketch-study",
+        "active_version_id": "64c9fbb6-1d38-4844-9167-66faaf05fe14"
+      }
+    ],
+    "publication_guard": [
+      {
+        "definition": "CREATE OR REPLACE FUNCTION public.publish_agent_prompt(p_version_id uuid, p_expected_active_version_id uuid, p_expected_content_sha256 text, p_report jsonb, p_actor text, p_module_id text DEFAULT 'congestion-control-emulated'::text)\n RETURNS uuid\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare\n    current_id uuid;\n    candidate public.agent_prompt_versions;\n    required_cases text[] := array['2352', '2352-rephrased', 'correct-prior-error',\n        'cubic-control', 'bbr-version-control', 'inconsistent-measurements',\n        'unsupported-metrics', 'missing-client-data'];\nbegin\n    select active_version_id into current_id from public.agent_prompt_settings\n        where module_id=p_module_id for update;\n    if not found then raise exception 'Missing prompt settings'; end if;\n    if current_id is distinct from p_expected_active_version_id then\n        raise exception 'Active prompt changed during evaluation; review and retry';\n    end if;\n    if p_module_id = 'congestion-control-real-world' then\n        required_cases := array['real-world-metrics','real-world-missing-data','real-world-unmatched',\n            'real-world-matched','real-world-replication','real-world-bbr-version',\n            'real-world-stale','real-world-untrusted-notes'];\n    end if;\n    if p_module_id = 'leo-emergency-failover' then\n        required_cases := array['leo-units','leo-discrepancy','leo-replication','leo-missing','leo-cable-proxy','leo-coverage','leo-untrusted','leo-placement'];\n    end if;\n    if p_module_id = 'http2-compliance-study' then\n        required_cases := array['http2-units','http2-missing','http2-coverage','http2-uncertainty','http2-discrepancy','http2-untrusted','http2-rejection','http2-scope'];\n    end if;\n    if p_module_id='reliable-sketch-study' then\n        required_cases:=array['reliable-units','reliable-missing','reliable-coverage','reliable-uncertainty','reliable-memory','reliable-weighted','reliable-theory','reliable-untrusted','reliable-config','reliable-generalization','reliable-source','reliable-absent'];\n    end if;\n    if p_module_id='ipv6-dns-study' then\n        required_cases:=array['ipv6-units','ipv6-missing','ipv6-coverage','ipv6-uncertainty','ipv6-discrepancy','ipv6-standards','ipv6-causality','ipv6-configuration','ipv6-untrusted','ipv6-generalization','ipv6-source','ipv6-packet-missing','ipv6-source65','ipv6-routing-scope'];\n    end if;\n    select * into strict candidate from public.agent_prompt_versions where id = p_version_id for update;\n    if candidate.module_id <> p_module_id then raise exception 'Prompt module mismatch'; end if;\n    if p_module_id <> 'congestion-control-emulated' and p_report->>'module_id' is distinct from p_module_id then\n        raise exception 'Evaluation module mismatch';\n    end if;\n    if candidate.content_sha256 is distinct from p_expected_content_sha256\n        or p_report->>'prompt_content_sha256' is distinct from candidate.content_sha256\n        or p_report->>'prompt_version_id' is distinct from candidate.id::text\n        or p_report->>'prompt_version' is distinct from candidate.version then\n        raise exception 'Evaluation does not match the candidate prompt';\n    end if;\n    if coalesce(btrim(p_actor), '') = '' or coalesce(p_report->>'model_id', '') = ''\n        or coalesce(p_report->>'analysis_version', '') = '' then\n        raise exception 'Publication requires actor, model and analysis metadata';\n    end if;\n    if jsonb_typeof(p_report->'cases') is distinct from 'array' then\n        raise exception 'Missing evaluation cases';\n    end if;\n    if jsonb_array_length(p_report->'cases') <> cardinality(required_cases)\n        or exists (select 1 from unnest(required_cases) name where\n            (select count(*) from jsonb_array_elements(p_report->'cases') c\n             where c->>'name' = name and c->'passed' = 'true'::jsonb) <> 1) then\n        raise exception 'All required answer evaluations must pass';\n    end if;\n    if p_module_id = 'http2-compliance-study' and (\n        p_report->'human_review'->'passed' is distinct from 'true'::jsonb\n        or coalesce(btrim(p_report->'human_review'->>'reviewer'),'') = ''\n        or jsonb_typeof(p_report->'human_review'->'reviewed_case_names') is distinct from 'array'\n        or exists (select 1 from unnest(required_cases) name where not\n            (p_report->'human_review'->'reviewed_case_names') ? name)\n    ) then\n        raise exception 'Manual HTTP2 answer review must pass for all required cases';\n    end if;\n    if p_module_id='reliable-sketch-study' and (\n      p_report->'secondary_review'->'passed' is distinct from 'true'::jsonb\n      or p_report->'secondary_review'->>'reviewer_type' is distinct from 'AI'\n      or coalesce(p_report->'secondary_review'->>'reviewer','')=''\n      or coalesce(p_report->>'cases_sha256','')=''\n      or exists(select 1 from unnest(required_cases) name where not (p_report->'secondary_review'->'reviewed_case_names') ? name)\n    ) then raise exception 'All ReliableSketch answer reviews must pass'; end if;\n    if p_module_id='ipv6-dns-study' and (\n      p_report->'secondary_review'->'passed' is distinct from 'true'::jsonb\n      or p_report->'secondary_review'->>'reviewer_type' is distinct from 'AI'\n      or coalesce(p_report->'secondary_review'->>'reviewer','')=''\n      or coalesce(p_report->>'cases_sha256','')=''\n      or jsonb_typeof(p_report->'secondary_review'->'cases') is distinct from 'array'\n      or exists(select 1 from unnest(required_cases) name where not coalesce((p_report->'secondary_review'->'cases') ? name,false))\n    ) then raise exception 'All IPv6 answer reviews must pass'; end if;\n    if candidate.published_at is null then\n        update public.agent_prompt_versions set published_at = now(), updated_by = p_actor where id = p_version_id;\n    end if;\n    insert into public.agent_prompt_publications\n        (prompt_version_id, previous_version_id, published_by, evaluation_report)\n        values (p_version_id, current_id, p_actor, p_report);\n    update public.agent_prompt_settings set active_version_id = p_version_id, updated_at = now() where module_id=p_module_id;\n    return p_version_id;\nend;\n$function$\n"
+      }
+    ],
+    "scientific_counts": [
+      {
+        "relation": "research_measurements",
+        "count": 7144
+      },
+      {
+        "relation": "research_published_values",
+        "count": 5093
+      },
+      {
+        "relation": "research_assessments",
+        "count": 102
+      }
+    ]
+  },
+  "ended_at": "2026-10-13T14:37:09.906854+00:00"
+}

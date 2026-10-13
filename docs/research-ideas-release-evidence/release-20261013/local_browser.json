@@ -1,0 +1,121 @@
+{
+  "protocol": "research-ideas-protocol-v1",
+  "amendment": "research-ideas-amendment-v2",
+  "started_at": "2026-10-13T15:40:02.835Z",
+  "database": "jumpserve_research_ideas_test_20261013t154001236632z",
+  "design": "Synthetic auth/provider; actual component/API/agent/isolated PostgreSQL",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "checks": [
+    {
+      "name": "idea intake needs no paper and preserves genuinely unknown fields",
+      "passed": true,
+      "evidence": {
+        "study_id": "b5afddbc-4a8d-44eb-a5a4-81f0aefdc414",
+        "paper_url": null,
+        "missing_hypothesis": "empty",
+        "scientific_runs": 0
+      }
+    },
+    {
+      "name": "planning is retained and does not approve an incomplete plan",
+      "passed": true,
+      "evidence": {
+        "retained_attempts": 1,
+        "ready": false,
+        "context_policy": "bounded-planning-history"
+      }
+    },
+    {
+      "name": "invalid candidate JSON is visible and cannot save a new packet",
+      "passed": true,
+      "evidence": {
+        "versions": 1,
+        "invalid_json": "shown",
+        "saved": false
+      }
+    },
+    {
+      "name": "material revisions save a new self-contained packet before fresh reviews",
+      "passed": true,
+      "evidence": {
+        "version": 2,
+        "reviews_of_old_packet_preserved": true
+      }
+    },
+    {
+      "name": "failed provider attempt remains recorded and requires explicit follow-up",
+      "passed": true,
+      "evidence": {
+        "failed_attempts": 1,
+        "fresh_context_calls": 3,
+        "scientific_runs": 0
+      }
+    },
+    {
+      "name": "explicit owner acceptance freezes protocol and queues one resumable manual task",
+      "passed": true,
+      "evidence": {
+        "queued_jobs": 1,
+        "execution_mode": "manual",
+        "measurements": 0,
+        "resume_idempotent": true
+      }
+    },
+    {
+      "name": "planning download preserves original packet bytes and hashes",
+      "passed": true,
+      "evidence": {
+        "packets": 2,
+        "failed_attempt_preserved": true,
+        "hashes_verified_by_actual_download_handler": true
+      }
+    },
+    {
+      "name": "an unavailable request shows an error and explicit recovery preserves saved data",
+      "passed": true,
+      "evidence": {
+        "failure_origin": "Deliberate browser transport fixture",
+        "retained_versions": 2,
+        "recovery": "Explicit owner click; no model retry"
+      }
+    },
+    {
+      "name": "desktop/mobile light/dark plans fit the viewport and show evidence limitations",
+      "passed": true,
+      "evidence": {
+        "viewports": [
+          1365,
+          390
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "textarea_color": "foreground in both themes"
+      }
+    },
+    {
+      "name": "actual Next.js navigation and unauthenticated idea sign-in return paths",
+      "passed": true,
+      "evidence": {
+        "source": "Actual local Next.js routes; new cookie-free browser context",
+        "google_session": false,
+        "return_paths": 2
+      }
+    }
+  ],
+  "browser_errors": [],
+  "conditional_gaps": [
+    "Legitimate Google-authenticated request",
+    "Remote Supabase Storage",
+    "Production deployment",
+    "Independent or held-out scientific review"
+  ],
+  "measured_charges_usd": null,
+  "passed": true,
+  "ended_at": "2026-10-13T15:40:21.226Z"
+}

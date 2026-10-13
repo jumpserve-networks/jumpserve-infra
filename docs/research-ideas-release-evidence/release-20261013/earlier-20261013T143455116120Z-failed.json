@@ -1,0 +1,9 @@
+{
+  "mode": "inspect",
+  "started_at": "2026-10-13T14:34:55.116509+00:00",
+  "status": "failed",
+  "authorization": "User requested merge to main and production deployment on 2026-10-13",
+  "measured_charges_usd": null,
+  "reason": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)>",
+  "ended_at": "2026-10-13T14:34:57.309875+00:00"
+}

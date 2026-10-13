@@ -467,8 +467,13 @@ in source control or AMI snapshots.
 
 ## Development
 
-The unpublished research idea feature is a **local candidate**, with no production
-migrations or prompt publication performed. Its protocol is
+The unpublished research idea feature was **deployed to production on 2026-10-13**.
+`docs/research-ideas-production-release-v1.json` records the exact runtime revisions,
+five additive migrations, evaluated v2 prompt publication, private original-byte
+archive, Amplify job 109, and deployed browser/API/database checks. Legitimate
+Google owner and cross-owner requests remain conditional; planning readiness does
+not establish scientific validity. The original local validation report remains
+unchanged as historical evidence. Its protocol is
 `docs/research-ideas-protocol-v1.json`; `docs/research-ideas-amendment-v2.json`
 preserves the first prompt's actual-answer failures and declares the revised
 response channel and reused development evaluation cases. The channel formats
@@ -504,8 +509,12 @@ reviewed report is linked by `docs/research-ideas-validation-v1.json`.
 Release requires a new explicit deployment instruction. After local blockers pass:
 verify AWS **395567831870** and Supabase **regphejnlvfpyokpniny**, apply
 `202610120001_research_ideas.sql`, `202610120002_research_idea_prompt.sql`, and
-the two draft seed migrations `202610120003`/`202610120004` in order, retaining
-receipts. Publish only the exact evaluated v2 candidate through the existing
+the two draft seed migrations `202610120003`/`202610120004`, and the additive
+`202610130001_research_idea_review_roles.sql` constraint in order, retaining
+receipts. The last migration refuses one invocation selected for both review
+roles. Different invocations still share models/sources and are not independent
+scientific reviewers. Follow `docs/research-ideas-release-protocol-v3.json` for the
+declared release checks. Publish only the exact evaluated v2 candidate through the existing
 `publish_agent_prompt` RPC with its reviewed report and expected active pointer.
 The v1 candidate remains unpublished; its failed evidence is preserved. Stage
 the hash-pinned backend, release the research API/agent, then rebuild/release the
@@ -514,6 +523,12 @@ denial, remote raw-byte retrieval, mobile/desktop views, themes, exports and
 sign-in return paths. Unavailable legitimate-session checks remain conditional.
 Preserve schema/data on rollback; disable the UI/prompt through an authorized
 release rather than deleting evidence.
+
+Read-only deployed checks are repeatable with
+`python3 -B bin/verify-research-ideas-production.py` in this repository and
+`node scripts/verify-research-ideas-production.mjs` in the frontend. They verify
+the fixed production targets and preserve failed reports. They do not fabricate
+Google sessions, run research experiments, or invoke the model.
 
 ```bash
 npm ci

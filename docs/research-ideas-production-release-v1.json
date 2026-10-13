@@ -1,0 +1,722 @@
+{
+  "version": 1,
+  "recorded_at": "2026-10-13T16:23:44.961836+00:00",
+  "feature": "Unpublished research ideas within Research Verification",
+  "software_release_status": "Deployed successfully after declared blockers passed; authenticated conditional gaps remain",
+  "scientific_status": "No new hypothesis tested. Planning outputs and fresh reviews are model outputs; domain tasks require an operator and appropriate implementation. No demonstrated improvement in research accuracy, causal validity or generalization.",
+  "authorization": "User explicitly requested merging current research idea changes to main and production deployment; then completed AWS login.",
+  "protocols": [
+    "docs/research-ideas-protocol-v1.json",
+    "docs/research-ideas-amendment-v2.json",
+    "docs/research-ideas-release-protocol-v1.json",
+    "docs/research-ideas-release-protocol-v2.json",
+    "docs/research-ideas-release-protocol-v3.json"
+  ],
+  "supersedes_status_of": "docs/research-ideas-validation-v1.json; original local report preserved unchanged",
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true,
+    "amplify_app": "d24jvguj7brnkj",
+    "production_site": "https://jumpserve.quaint-lab.org",
+    "entry_route": "/module/research-verification/new-idea"
+  },
+  "sources": {
+    "backend_main": "9ba6ee7e5ae073fddee3cd2033ded03992f3c4b8",
+    "infra_runtime_revision": "abff8b03f39e2c897cc26946884393909e123cf3",
+    "frontend_runtime_revision": "edc7e4bf47735a08bde2207337bc75b9594bfecb",
+    "frontend_verifier_revision": "9ccd0216a854dd79727da3e0800f513d70c14954",
+    "source_policy": "All application commits merged and pushed to GitHub main. This report and read-only verification sources are later evidence-only commits; deployed runtime commits remain explicit. No unrelated local user edits or staged PDFs included."
+  },
+  "deployment": {
+    "stacks": [
+      "JumpServeBenchmarkStack",
+      "JumpServeAgentStack"
+    ],
+    "cdk_receipt": "docs/research-ideas-release-evidence/release-20261013/deployment.json",
+    "cdk_diff": "docs/research-ideas-release-evidence/release-20261013/diff.json",
+    "amplify_job": {
+      "jobArn": "arn:aws:amplify:us-east-1:395567831870:apps/d24jvguj7brnkj/branches/main/jobs/0000000109",
+      "jobId": "109",
+      "commitId": "edc7e4bf47735a08bde2207337bc75b9594bfecb",
+      "commitMessage": "Patch the frontend runtime before publishing research ideas\n\nUpgrade Next.js and its ESLint configuration to 16.3.8 and refresh compatible transitive dependencies. The production dependency audit has zero critical/high advisories; retain the remaining build-time selector-parser advisories in the release report. Recheck the frontend build, existing tests and the idea browser flow.",
+      "commitTime": "2026-10-13T10:46:06-05:00",
+      "startTime": "2026-10-13T11:01:39.727000-05:00",
+      "status": "SUCCEED",
+      "endTime": "2026-10-13T11:04:32.003000-05:00"
+    },
+    "amplify_evidence": "docs/research-ideas-release-evidence/release-20261013/amplify.json",
+    "scope": "Scoped deployment: research API/worker and existing agent only. No EC2 experiments, AMI rebuild/promotion or unrelated stack deployment. Existing AMI retained: ami-0808d1157e26c65cb.",
+    "ci": "Manual declared checks passed. Unprotected main merges used [skip ci] to avoid unrelated AMI/all-stack jobs. Later frontend verifier-only commit ends [skip-cd] to avoid rebuilding unchanged runtime.",
+    "skip_cd_documentation": "https://docs.aws.amazon.com/amplify/latest/userguide/edit-build-settings.html"
+  },
+  "migrations": [
+    {
+      "name": "202610120001_research_ideas.sql",
+      "sha256": "b91c8b157090e397029764372cfea09f0c9af7a37f61346fac5d912706cbf00f",
+      "byte_count": 24862,
+      "status": "complete",
+      "ended_at": "2026-10-13T15:48:46.125754+00:00"
+    },
+    {
+      "name": "202610120002_research_idea_prompt.sql",
+      "sha256": "9efa726606a59a16186bdb5ff5e9ab8e78d972185ed752bdd93e041926e7718b",
+      "byte_count": 5137,
+      "status": "complete",
+      "ended_at": "2026-10-13T15:48:46.530191+00:00"
+    },
+    {
+      "name": "202610120003_research_idea_prompt_seed.sql",
+      "sha256": "b2f01cfbed3e607f2513f7b7eefa08f3da8587664133451a180d05e47ae67286",
+      "byte_count": 4320,
+      "status": "complete",
+      "ended_at": "2026-10-13T15:48:47.095736+00:00"
+    },
+    {
+      "name": "202610120004_research_idea_prompt_seed_v2.sql",
+      "sha256": "e902230db40c097bbe6f1b1b406523b4a97725cce668dc51ce482c64e7d1f54d",
+      "byte_count": 5117,
+      "status": "complete",
+      "ended_at": "2026-10-13T15:48:47.541920+00:00"
+    },
+    {
+      "name": "202610130001_research_idea_review_roles.sql",
+      "sha256": "a9f46a0993cc23b417ce5f06e672678cc95a9efefbf752a632b44171d9ec1b97",
+      "byte_count": 265,
+      "status": "complete",
+      "ended_at": "2026-10-13T15:48:47.953061+00:00"
+    }
+  ],
+  "data_preservation": {
+    "scientific_counts_before": [
+      {
+        "relation": "research_measurements",
+        "count": 7144
+      },
+      {
+        "relation": "research_published_values",
+        "count": 5093
+      },
+      {
+        "relation": "research_assessments",
+        "count": 102
+      }
+    ],
+    "scientific_counts_after_migration": [
+      {
+        "relation": "research_measurements",
+        "count": 7144
+      },
+      {
+        "relation": "research_published_values",
+        "count": 5093
+      },
+      {
+        "relation": "research_assessments",
+        "count": 102
+      }
+    ],
+    "unchanged": true,
+    "existing_prompt_pointers_preserved": true,
+    "counts_limit": "Equality of row counts does not alone prove byte equality of existing data; additive migration source and scoped change also examined."
+  },
+  "prompt": {
+    "active": {
+      "id": "e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8",
+      "version": "research-ideas-v2",
+      "content_sha256": "ad350bee6b2e6bfb9399d03e7cd83d181cede746953c8ed43769a5b2c685cdc2",
+      "published_at": "2026-10-13 15:52:59.095627+00"
+    },
+    "reviewer": {
+      "identity": "Primary Codex AI implementer",
+      "type": "AI",
+      "independent": false,
+      "passed": true
+    },
+    "cases": 8,
+    "candidate": "v2",
+    "first_candidate": "v1 unpublished draft, actual-answer failures retained",
+    "evaluation_scope": "Reused development cases, reviewed by the AI implementer. No independent human review or held-out validation. No new model evaluation calls this release; exact reviewed prompt and five runtime file hashes verified against actual deployed ZIPs.",
+    "archive": {
+      "storage_bucket": "research-workflow-raw",
+      "storage_path": "release-verification/research-ideas-20261013/86fbe606708b3aa69c0b2de0b1b4b8308fe7bd580bb6d61d9038b90ff6b5706e.zip",
+      "sha256": "86fbe606708b3aa69c0b2de0b1b4b8308fe7bd580bb6d61d9038b90ff6b5706e",
+      "byte_count": 147418,
+      "stored_bytes_verified_after_retrieval": true,
+      "original_file_manifest": [
+        {
+          "path": "evaluations/20261012T234854600560Z/evaluation-report.json",
+          "sha256": "2af494763ed650d84c782ec840c4efb3583f322eaf4232187ae0c4e59ffeb7ae",
+          "byte_count": 8564
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/evaluation-reviewed.json",
+          "sha256": "7051466ad37abf216fe5e57edfa02c3ed8db0b147e2d090c67387bc769ce5c5d",
+          "byte_count": 9131
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-clear-plan-input.json",
+          "sha256": "4bb02a2591c42c03daad9f3c0c67f2564077495e8a1a66bee6c0aaabebfd0b75",
+          "byte_count": 4943
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-clear-plan-output.txt",
+          "sha256": "e3446514cbf9add1f47c80d8bb2d0b4086b7d31a88de6bc6f57b03224846cf22",
+          "byte_count": 2348
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-clear-plan-provider.json",
+          "sha256": "6b11dac3d0cf196b43fd5a5aabde5abd543a95e30161c73dfa1e5ee628a78342",
+          "byte_count": 2901
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-clear-plan-system.json",
+          "sha256": "e9ab9feaaecca3f4852d19922b022b644e0157ac6223480afe8ec93ce8773ae3",
+          "byte_count": 3997
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-comprehension-input.json",
+          "sha256": "a4d9456d4130ec73988f96a09af15f515600dd3ee851604e251580123c3181cc",
+          "byte_count": 4919
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-comprehension-output.txt",
+          "sha256": "f9c7b0f8e2df6bb5014080dc295a325331cf82e2cfd834d04aaa5a5486edf906",
+          "byte_count": 2320
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-comprehension-provider.json",
+          "sha256": "14d3d1c9a56b78b588ff43e3ac0b07d8a1bfafeb75d71b90114ea1ad406c07a7",
+          "byte_count": 2873
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-comprehension-system.json",
+          "sha256": "e9ab9feaaecca3f4852d19922b022b644e0157ac6223480afe8ec93ce8773ae3",
+          "byte_count": 3997
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-critic-input.json",
+          "sha256": "aac5387805b8d6aa9ce13b4513263b58a9d6be26d4ae36360aaa4c6151f0015c",
+          "byte_count": 4848
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-critic-output.txt",
+          "sha256": "1b7d40c9184d970938b2f30c4890168d1005a0d76eae3f613106d49c0f38fe68",
+          "byte_count": 2912
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-critic-provider.json",
+          "sha256": "49157d7040c6cf9478558dd89c361c0c73fbda4e4b562eb7d748f664d3f53e5b",
+          "byte_count": 3499
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-critic-system.json",
+          "sha256": "3119d71daf77ee549fffc6486f75f386323013de643ed9bfcbe0f6b9e42800d3",
+          "byte_count": 3990
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-missing-input.json",
+          "sha256": "b39430f504f1f4fb5b9c8eb3d97531aa1b13cbc80b7f8e9a7353b6b15b65fa74",
+          "byte_count": 1791
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-missing-output.txt",
+          "sha256": "30c4cd25cea87c444ae52345994feb6d7e977d80b04f4beb35f04f5a404f64aa",
+          "byte_count": 2746
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-missing-provider.json",
+          "sha256": "7431e9b11bc31e7852563fd93b0957863293b4184da99ca3325cbcbd1519ebc9",
+          "byte_count": 3339
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-missing-system.json",
+          "sha256": "e9ab9feaaecca3f4852d19922b022b644e0157ac6223480afe8ec93ce8773ae3",
+          "byte_count": 3997
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-novelty-input.json",
+          "sha256": "4a2a8b85d3e04db1cc6bc41a920d001ac7a60e87a15e8e8d8a424b90aee5a371",
+          "byte_count": 4827
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-novelty-output.txt",
+          "sha256": "e1d1c439bc2a4b96fbbce34e14ad1e5789c730e5bc5a9170015ce4706109781d",
+          "byte_count": 3218
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-novelty-provider.json",
+          "sha256": "17f41cb7df82174a3c9e8954291e3eebf9cdc935eb7706a261902b0b1971a1fa",
+          "byte_count": 3839
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-novelty-system.json",
+          "sha256": "3119d71daf77ee549fffc6486f75f386323013de643ed9bfcbe0f6b9e42800d3",
+          "byte_count": 3990
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-planning-input.json",
+          "sha256": "8db3c104f6c7475b2d1e4acca8ab99a5b41b7c8c8d5a6310a85191036ac8b98f",
+          "byte_count": 565
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-planning-output.txt",
+          "sha256": "57445f54b5d1dac8f74b8ccaf6e49736394c6fee75dffaa8563b66159d02c392",
+          "byte_count": 2669
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-planning-provider.json",
+          "sha256": "b1d6ec2fcb06b37b71b5df06f2f9afb6a3d7adb7d3a6cfb47a739fbcb06cde0d",
+          "byte_count": 3296
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-planning-system.json",
+          "sha256": "9c62a92157092352b31b9f715821b2d9148808e05bceea8fe3fdb6d70082d6cb",
+          "byte_count": 3992
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-scope-input.json",
+          "sha256": "471e35a98d07155a7fdc74446d6f57e379acffe4ce151fc5ecdb55bd823d308e",
+          "byte_count": 5031
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-scope-output.txt",
+          "sha256": "542b163d35be7cc8e12b9140c454c34912530c76a2283f37f88c5ce72fdc86ad",
+          "byte_count": 2075
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-scope-provider.json",
+          "sha256": "f39e78f439ce3e65b49268c749b5671388bb483c486f8a8854ae0456e8d2dfd3",
+          "byte_count": 2625
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-scope-system.json",
+          "sha256": "9c62a92157092352b31b9f715821b2d9148808e05bceea8fe3fdb6d70082d6cb",
+          "byte_count": 3992
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-untrusted-input.json",
+          "sha256": "246742d86e9e47d747259b86687273d02de055e7c444f97549c7c33b1357bf6e",
+          "byte_count": 4957
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-untrusted-output.txt",
+          "sha256": "0e5b85ef4e0d655e14d4492aca7e4e526e54a1e77fee6b19ff9eaf2f31a6892a",
+          "byte_count": 2871
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-untrusted-provider.json",
+          "sha256": "a9fbae327dcddae14e5c444007fda92cbf0475cc40503adb9f7cc109f07cc016",
+          "byte_count": 3455
+        },
+        {
+          "path": "evaluations/20261012T234854600560Z/idea-untrusted-system.json",
+          "sha256": "3119d71daf77ee549fffc6486f75f386323013de643ed9bfcbe0f6b9e42800d3",
+          "byte_count": 3990
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/evaluation-report.json",
+          "sha256": "b6edc03881a2d923143e8604ebbb63f1c8cd87333e6dbd9eacb673664cde4d5f",
+          "byte_count": 30012
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/evaluation-reviewed.json",
+          "sha256": "1287671a3746cc5ed5f686d49a45e007120e01b541bbef3fa36a29d8c1d1d2b3",
+          "byte_count": 33218
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-clear-plan-channel.json",
+          "sha256": "9a0c2724d0d87de462f783fc382546c3832dee593bc9b58bfdfd7fa1aa873eeb",
+          "byte_count": 903
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-clear-plan-input.json",
+          "sha256": "55b5aeac970d08277c028367efc2571177b95a2cab8b8a00642125a9547abdcb",
+          "byte_count": 5780
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-clear-plan-output.txt",
+          "sha256": "6ddc03f7b07ea415f6b94bf313a1541206562d75ed6e3677083f98a2c0c7a676",
+          "byte_count": 1527
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-clear-plan-provider.json",
+          "sha256": "8c3d32ff7b1ee71cb7820fd04dcdc443960c750d6df73a72a50d251908a843de",
+          "byte_count": 2777
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-clear-plan-system.json",
+          "sha256": "d2a663c2424337a84dbcb35bc4b7e87464c94cc7e640f7157a6e8ba60bf58993",
+          "byte_count": 4819
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-comprehension-channel.json",
+          "sha256": "9a0c2724d0d87de462f783fc382546c3832dee593bc9b58bfdfd7fa1aa873eeb",
+          "byte_count": 903
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-comprehension-input.json",
+          "sha256": "af030e5ea079ad4bfb8352b786a2b005b072ad58807bc25fa915b47bf7e974cb",
+          "byte_count": 5756
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-comprehension-output.txt",
+          "sha256": "48860b9a4779da9cbc2fc840cc35f75d57986f7432e62bad7ad5692893885da1",
+          "byte_count": 2138
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-comprehension-provider.json",
+          "sha256": "ee0b80a856cd85bc25355c2c776f3062cec7919cafd615e032d6616cc75b5271",
+          "byte_count": 3630
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-comprehension-system.json",
+          "sha256": "d2a663c2424337a84dbcb35bc4b7e87464c94cc7e640f7157a6e8ba60bf58993",
+          "byte_count": 4819
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-critic-channel.json",
+          "sha256": "9a0c2724d0d87de462f783fc382546c3832dee593bc9b58bfdfd7fa1aa873eeb",
+          "byte_count": 903
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-critic-input.json",
+          "sha256": "53f03e1a25024857e6ca31bf62bac5691f142bf37eace03fdad1c3d621222cc8",
+          "byte_count": 5685
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-critic-output.txt",
+          "sha256": "f585dc0e654178ede584450282c4d127007ed069054671cc7040a507790d7d9c",
+          "byte_count": 3456
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-critic-provider.json",
+          "sha256": "33638f73244aa82577aa8816cdbd43a062693435bd81ce3e32f0b334d57cdaaf",
+          "byte_count": 5161
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-critic-system.json",
+          "sha256": "6ce6fd6dd4ff15c78118604edf6cd303eb2587c946c2db1585febcca45326893",
+          "byte_count": 4812
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-missing-channel.json",
+          "sha256": "9a0c2724d0d87de462f783fc382546c3832dee593bc9b58bfdfd7fa1aa873eeb",
+          "byte_count": 903
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-missing-input.json",
+          "sha256": "a67606a51851bdba888c04f661e3b80e4b7e0a76cbdb88e5cff5f85e086e9480",
+          "byte_count": 1946
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-missing-output.txt",
+          "sha256": "4521ccd5e3982322425c417e3e58cb8f9f0dd89bafbee9dd3a456c39f683853e",
+          "byte_count": 2286
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-missing-provider.json",
+          "sha256": "414b7af6cb766937852dcb25b56c5c8fd12c3cdfa146007f0d039affac42d2f2",
+          "byte_count": 3811
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-missing-system.json",
+          "sha256": "d2a663c2424337a84dbcb35bc4b7e87464c94cc7e640f7157a6e8ba60bf58993",
+          "byte_count": 4819
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-novelty-channel.json",
+          "sha256": "9a0c2724d0d87de462f783fc382546c3832dee593bc9b58bfdfd7fa1aa873eeb",
+          "byte_count": 903
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-novelty-input.json",
+          "sha256": "d1e4357950d160a82a3e3f71690c25c8e245472fc764ceb5507a1cd15a2d668c",
+          "byte_count": 5664
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-novelty-output.txt",
+          "sha256": "c604d961be9b88a7d49e75a568705cbdd143572c77b733b885e50e2f17a7b45a",
+          "byte_count": 2525
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-novelty-provider.json",
+          "sha256": "6953573178502832eec8f8324dc3d8a41cb71802484db3b02c46f247bd1fc2b4",
+          "byte_count": 4017
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-novelty-system.json",
+          "sha256": "6ce6fd6dd4ff15c78118604edf6cd303eb2587c946c2db1585febcca45326893",
+          "byte_count": 4812
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-planning-channel.json",
+          "sha256": "9a0c2724d0d87de462f783fc382546c3832dee593bc9b58bfdfd7fa1aa873eeb",
+          "byte_count": 903
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-planning-input.json",
+          "sha256": "8af142f59941ea702e79cf36e87995b276bca3a09bd7fbdde2eba37852049dcf",
+          "byte_count": 565
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-planning-output.txt",
+          "sha256": "aeeebf2ce05a2b741c97bb39d43daaa2c58fad18aa4692e07fce3cd0867b077c",
+          "byte_count": 2749
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-planning-provider.json",
+          "sha256": "a766c6a8b40dcb70284436b66b10c7cafd4b9b37962d74ffe9dc78d4e97f40ef",
+          "byte_count": 5093
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-planning-system.json",
+          "sha256": "2e15b4cba180635f024d48ace725a3547243f6ed32b56bb2dcd248adecf2558b",
+          "byte_count": 4814
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-scope-channel.json",
+          "sha256": "9a0c2724d0d87de462f783fc382546c3832dee593bc9b58bfdfd7fa1aa873eeb",
+          "byte_count": 903
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-scope-input.json",
+          "sha256": "9fffce8cb78f7a34c5385dbb3f01186fd73ef87a3ae36cc3ffd0b16af1a007ff",
+          "byte_count": 5868
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-scope-output.txt",
+          "sha256": "8a97ad96f19fd926012b55f01ebadab8793ec3acf8a443d88f3dde40e6459fb4",
+          "byte_count": 2060
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-scope-provider.json",
+          "sha256": "0fc7b9a3be3cb3d526c0a5c9a937a4df6d8776045246aab36775e38a8eb3bc75",
+          "byte_count": 3490
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-scope-system.json",
+          "sha256": "2e15b4cba180635f024d48ace725a3547243f6ed32b56bb2dcd248adecf2558b",
+          "byte_count": 4814
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-untrusted-channel.json",
+          "sha256": "9a0c2724d0d87de462f783fc382546c3832dee593bc9b58bfdfd7fa1aa873eeb",
+          "byte_count": 903
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-untrusted-input.json",
+          "sha256": "7a34005a631c17a2eae00ba8de1f910c786a1ac14843b8f2a68e3babd118cc4f",
+          "byte_count": 5794
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-untrusted-output.txt",
+          "sha256": "52d9f2b12e9fa5fcf3ae7fe3f0afe014d3262babb6400504a50a50117ac366e6",
+          "byte_count": 2092
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-untrusted-provider.json",
+          "sha256": "b8179f261aafce31ab302176d5012bfe2aa770f5dfea62418a99bbc48adf69b0",
+          "byte_count": 3522
+        },
+        {
+          "path": "evaluations/20261013T002350223340Z/idea-untrusted-system.json",
+          "sha256": "6ce6fd6dd4ff15c78118604edf6cd303eb2587c946c2db1585febcca45326893",
+          "byte_count": 4812
+        },
+        {
+          "path": "protocols/research-ideas-protocol-v1.json",
+          "sha256": "dadbdf9c3137818c6af60335591ff1e4515c24a48a9f7ca47d2bcbc748499671",
+          "byte_count": 5166
+        },
+        {
+          "path": "protocols/research-ideas-amendment-v2.json",
+          "sha256": "257d00c7ef9020c08a2fb63571243d419687dfcea6a1ce0680cdf42aca888d2c",
+          "byte_count": 1586
+        }
+      ],
+      "anonymous_read_status": 400,
+      "data_origin": "model-output and software development fixtures; no scientific measurements",
+      "measured_charges_usd": null
+    },
+    "publication_receipt": "docs/research-ideas-release-evidence/release-20261013/publication.json"
+  },
+  "verification": [
+    {
+      "name": "clean backend development regressions",
+      "passed": true,
+      "tests": 69,
+      "command": "python3 -B -m unittest discover -s research_workflow/tests -v",
+      "basis": "Observed successful clean release-checkout test output this release; unrelated eight archive tests are excluded."
+    },
+    {
+      "name": "frontend regressions",
+      "passed": true,
+      "tests": 133,
+      "command": "npm test"
+    },
+    {
+      "name": "frontend lint and build",
+      "passed": true,
+      "commands": [
+        "npm run lint",
+        "npm run build"
+      ],
+      "lint_errors": 0,
+      "lint_warnings": 1,
+      "warning": "Existing auth-button navigation rule warning after updated Next.js ESLint; no authentication behavior rewritten."
+    },
+    {
+      "name": "agent regressions",
+      "passed": true,
+      "tests": 90,
+      "command": "npm run test:agent"
+    },
+    {
+      "name": "infrastructure regressions and build",
+      "passed": true,
+      "tests": 84,
+      "suites": 10,
+      "skipped_suites": 0,
+      "commands": [
+        "npm run build",
+        "JUMPSERVE_BACKEND_CHECKOUT=../jumpserve-back-end npm test -- --runInBand"
+      ]
+    },
+    {
+      "name": "isolated actual SQL and readiness counterexample",
+      "passed": true,
+      "checks": 10,
+      "command": "npm run test:research:ideas",
+      "report": "docs/research-ideas-release-evidence/release-20261013/local_database.json",
+      "scope": "Synthetic identities and local Storage transport. Same invocation accepted for both roles under prior schema in rolled-back transaction; additive constraint rejects it."
+    },
+    {
+      "name": "local full flow",
+      "passed": true,
+      "checks": 10,
+      "command": "npm run verify:research:ideas",
+      "report": "docs/research-ideas-release-evidence/release-20261013/local_browser.json",
+      "scope": "Actual UI/API/agent/SQL, synthetic Google identity/provider answer/local Storage transport."
+    },
+    {
+      "name": "production API/worker/agent code, capability and private request denial",
+      "passed": true,
+      "checks": 8,
+      "command": "python3 -B bin/verify-research-ideas-production.py",
+      "report": "docs/research-ideas-release-evidence/release-20261013/production_backend.json"
+    },
+    {
+      "name": "production browser",
+      "passed": true,
+      "checks": 5,
+      "command": "node scripts/verify-research-ideas-production.mjs",
+      "report": "docs/research-ideas-release-evidence/release-20261013/production_browser.json",
+      "scope": "Public desktop/mobile views, actual themes and menu close, exact sign-in return paths, one existing completed archived/simulation study and export. No legitimate authenticated owner session."
+    }
+  ],
+  "production_security": {
+    "private_tables": 5,
+    "server_only_rpc_functions": 7,
+    "rls_retained": true,
+    "browser_read_and_write_denied_on_private_relations": true,
+    "anonymous_private_and_agent_http_statuses": [
+      401,
+      401,
+      401
+    ],
+    "distinct_review_role_constraint_verified": true,
+    "stored_model_archive_round_trip_hash_verified": true,
+    "anonymous_archive_http_status": 400,
+    "archive_check_limit": "HTTP 400 is recorded as denial of the attempted public object request, not proof of all storage-policy behavior; valid public API key separately verified at /auth/v1/settings (HTTP 200).",
+    "post_release_database_receipt": "docs/research-ideas-release-evidence/release-20261013/post_release_database.json"
+  },
+  "dependency_security": {
+    "nextjs": "16.3.8",
+    "eslint_config_next": "16.3.8",
+    "production_audit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 2,
+      "high": 0,
+      "critical": 0,
+      "total": 2
+    },
+    "remaining": "Two moderate selector-parser/typography advisories affect the existing build-time CSS tooling; no request-time CSS input introduced. Full development dependency audit is broader and not claimed clean.",
+    "audit_before": "docs/research-ideas-release-evidence/release-20261013/audit_before.json",
+    "audit_after": "docs/research-ideas-release-evidence/release-20261013/audit_after.json"
+  },
+  "corrections": [
+    {
+      "issue": "Archived IPv6 preparation test required ignored local 47 MB input; clean checkout failed one backend test.",
+      "change": "Add lossless gzip original fixture and verify original SHA-256 before parsing in isolated temporary directory.",
+      "original_sha256": "3c3532901aa4b507a61849666d925a0268c0658c0129dbfd729514df8c3a07b0",
+      "original_bytes": 47380160,
+      "effect": "Reproducible clean-checkout regression input; no scientific experiments rerun or labels changed."
+    },
+    {
+      "issue": "Same comprehension invocation could fill both SQL review-role references.",
+      "change": "Preserve four original migrations; fifth additive constraint requires distinct IDs. Controlled old-schema acceptance rolled back and corrected-schema rejection tested.",
+      "limit": "Distinct invocations do not establish independent scientific reviewers."
+    },
+    {
+      "issue": "Installed frontend runtime had critical/high production dependency advisories.",
+      "change": "Same-major Next.js 16.3.8 security update and compatible lockfile refresh; clean build, tests and browser checks passed."
+    }
+  ],
+  "preserved_failures": [
+    "Original v1 actual model answer failures remain archived and unpublished.",
+    "Initial SSL certificate validation and sandboxed CDK diff failures retained before successful guarded retries.",
+    "Original clean-checkout backend fixture failure; corrected with lossless source fixture.",
+    "Frontend lint/build failures after audit-fix removed development dependencies and stale generated build cache; restored clean install and retained failed cache before successful clean build.",
+    "Production browser sandbox launch denial and additional menu-close check race retained before successful fixed read-only verification."
+  ],
+  "conditional_verification_gaps": [
+    "No legitimate Google browser session: authenticated idea creation/planning/reviews and cross-owner actions unverified",
+    "No completed published idea yet; existing paper result pages provide deployed recorded-study coverage",
+    "Independent human or held-out validation",
+    "Positive production owner-to-provider-to-Supabase idea planning/review persistence and actual authenticated chat request remain unverified without a legitimate Google session.",
+    "Scientific charts/intervals for the new planning fixture are inapplicable: no empirical observations collected. Existing published paper export checked separately."
+  ],
+  "usage": {
+    "this_release_new_model_evaluation_calls": 0,
+    "prior_actual_model_development_calls": 16,
+    "prior_actual_model_tokens": {
+      "inputTokens": 37580,
+      "outputTokens": 9463,
+      "totalTokens": 47043
+    },
+    "private_evaluation_archive_bytes": 147418,
+    "amplify_observed_build_wall_seconds": 147.216,
+    "amplify_observed_total_wall_seconds": 172.276,
+    "configured_lambda_resources": [
+      {
+        "function": "JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+        "memory_mb": 512,
+        "timeout_seconds": 29
+      },
+      {
+        "function": "JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+        "memory_mb": 512,
+        "timeout_seconds": 180
+      },
+      {
+        "function": "JumpServeAgentStack-AgentFnC1FD126F-MG2xfZrwsBNg",
+        "memory_mb": 1024,
+        "timeout_seconds": 120
+      }
+    ],
+    "measured_charges_usd": null,
+    "estimated_charges_usd": null,
+    "unallocated_local_compute_storage_and_deployment_cost_usd": null,
+    "cost_limit": "Observed wall time, configuration bounds and bytes are not billing measurements. Missing charges and request compute usage are not zero."
+  },
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "evidence_manifest": "docs/research-ideas-release-evidence/release-20261013/raw-artifact-manifest.json",
+  "rollback": "Retain schema/data and publication history. Original deployed Lambda ZIPs retained with verified hashes in local rollback-originals manifest; any rollback must be an authorized recorded release. No deletion of scientific evidence."
+}

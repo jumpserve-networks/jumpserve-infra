@@ -1,0 +1,344 @@
+{
+  "version": 1,
+  "recorded_at": "2026-10-13T16:23:44.961008+00:00",
+  "original_bytes": true,
+  "retention": "Repository copies are durable source evidence; other absolute paths are retained local artifacts. Original model evaluations separately persisted privately in Supabase Storage with publication provenance. Hash verification does not establish scientific correctness or complete review.",
+  "artifacts": [
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/release/20261013T154840531788Z/receipt.json",
+      "sha256": "067a03cfd5fa08e6a2b0a16208b901e96e74eb318fc93732544a097c883347a7",
+      "byte_count": 14765,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/migrations.json"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/release/20261013T155253780203Z/receipt.json",
+      "sha256": "398fafd729b69a7ecd7227d96d3c2d5d718e19e7ad12c6091e2d2c21b99ed2bd",
+      "byte_count": 18737,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/publication.json"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/release/20261013T155410752771Z/receipt.json",
+      "sha256": "70273622287a33f63be0ebe8254045f033e749ab24eb828f61d3e8f7702aa151",
+      "byte_count": 789,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/deployment.json"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/release/20261013T153650921184Z/receipt.json",
+      "sha256": "f0f44d193ed1aabd1faa3f9da42e07e450e62341582c90918eab7daf9888264b",
+      "byte_count": 582,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/diff.json"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/release/20261013T161439450829Z/receipt.json",
+      "sha256": "d3a335cd5367fba5c204d6cc264afb12acb0f30847794d50e6bc72e2175aa13a",
+      "byte_count": 3236,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/post_release_database.json"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/production/20261013T160137573497Z/validation-report.json",
+      "sha256": "4d6b2e29481bdb86fd92301503f60ecab3d50546465d9cc16968d0b820c199df",
+      "byte_count": 5526,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/production_backend.json"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-13T16-20-58.819Z/validation-report.json",
+      "sha256": "26bb4dcb1caf713f2b1b04b5463fd2f0d82bbf0c5118765bc41cf8ff754ae3da",
+      "byte_count": 2049,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/production_browser.json"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/database/20261013T154350963997Z/validation-report.json",
+      "sha256": "f633aa7af1ddd4e8348ae96565186978a7a38691470e5910d4f96ce1a4a19f16",
+      "byte_count": 5709,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/local_database.json"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/browser/2026-10-13T15-40-02.834Z/validation-report.json",
+      "sha256": "b778b0f1e6915d8dd365d254fff83414c2c4a864c6f0062d949b7ceff349aebf",
+      "byte_count": 3468,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/local_browser.json"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/release/amplify-job-109.json",
+      "sha256": "38776522c795b5c60bb785154d1cc057e308e9c634609816d9e1e3c92cc9001c",
+      "byte_count": 1458,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/amplify.json"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/frontend-audit.json",
+      "sha256": "a81bdd270b7c7d0a37177ec8349106ca194a762a474c15c784ff35b69ee17e3d",
+      "byte_count": 29711,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/audit_before.json"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/frontend-audit-after.json",
+      "sha256": "8be8245d8be98b9fc479d4a3fcbcbeed4c48c97dfed843aafa8a69de5d287329",
+      "byte_count": 1881,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/audit_after.json"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/frontend-audit-fix.json",
+      "sha256": "10b63ec4c7a1f85003c8e7ba985c34f4e47e647a94474ce9f433c2e0282393a7",
+      "byte_count": 117139,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/audit_fix.json"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/release/20261013T143455116120Z/receipt.json",
+      "sha256": "951c09ef20f9817e74c953deec0148451ca61abdadccc9cc2beb2c5b759e4985",
+      "byte_count": 415,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/earlier-20261013T143455116120Z-failed.json"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/release/20261013T143701827403Z/receipt.json",
+      "sha256": "9432e6d4dabdf04d63d4a507b901d85e6290e1b7bf0825cdbeca208483b66e6b",
+      "byte_count": 10422,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/earlier-20261013T143701827403Z-complete.json"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/release/20261013T144249280110Z/receipt.json",
+      "sha256": "80ca252cefa9cc07832c8dc128a94813d276154803c3176bdbd1fd3d8bb19715",
+      "byte_count": 392,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/earlier-20261013T144249280110Z-failed.json"
+    },
+    {
+      "path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/release/20261013T150449636842Z/receipt.json",
+      "sha256": "4ba453ee5e12ab22f0c015074bb2844474d527eb8e02e2bb39af518252c8946a",
+      "byte_count": 582,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/earlier-20261013T150449636842Z-complete.json"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-13T16-10-36.391Z/validation-report.json",
+      "sha256": "00edd21cbd0726bfbdb06a11a04830d28bac65d3af27c28dae66cc6a8a895a39",
+      "byte_count": 2049,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/browser-2026-10-13T16-10-36.391Z.json"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-13T16-19-58.480Z/validation-report.json",
+      "sha256": "7a27aa6e4df5fc8d1bed2f98f4352574e29d4afaf39662570d0603d1853e042d",
+      "byte_count": 5035,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/browser-2026-10-13T16-19-58.480Z.json"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-13T16-20-22.501Z/validation-report.json",
+      "sha256": "f63599ffc455b3c812d91b0abcf85998c73b5d2a4c3a1e9a1b32b4191d928358",
+      "byte_count": 2440,
+      "scope": "local raw release artifact",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/browser-2026-10-13T16-20-22.501Z.json"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-13T16-20-58.819Z/1365-Dark-Mode.png",
+      "sha256": "5eaf366bd1ea834e0e54408175492405930756b65628d6a84d7b6b93db0e8c23",
+      "byte_count": 203749,
+      "scope": "public production screenshot",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/1365-Dark-Mode.png"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-13T16-20-58.819Z/1365-Light-Mode.png",
+      "sha256": "d7f9578ff69e0d7686ead796ec91674a64640fde894b65b60adb6381449d07a7",
+      "byte_count": 175432,
+      "scope": "public production screenshot",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/1365-Light-Mode.png"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-13T16-20-58.819Z/390-Dark-Mode.png",
+      "sha256": "439596297a4a898f3a820544503116f3b00ce3146bfb8b2884a12c037744eec0",
+      "byte_count": 94368,
+      "scope": "public production screenshot",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/390-Dark-Mode.png"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-13T16-20-58.819Z/390-Light-Mode.png",
+      "sha256": "049531df5bdc79c78e1db80de2499f4760f563a7b211f748010200d7a2cf1ee1",
+      "byte_count": 69202,
+      "scope": "public production screenshot",
+      "repository_copy": "docs/research-ideas-release-evidence/release-20261013/390-Light-Mode.png"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/release/20261013T153650921184Z/cdk.log",
+      "sha256": "05f1e4246f205dad3b1d77b39364579e8c9980bf7c09772ab0eca581f72f2544",
+      "byte_count": 7499,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/release/20261013T155253780203Z/evaluation-artifacts.zip",
+      "sha256": "86fbe606708b3aa69c0b2de0b1b4b8308fe7bd580bb6d61d9038b90ff6b5706e",
+      "byte_count": 147418,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/release/20261013T155410752771Z/cdk.log",
+      "sha256": "8c362ac259388ca60e8dedd48afd435c88deb06bf253eaa16e2eb35627f158fc",
+      "byte_count": 11575,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/release/20261013T155410752771Z/outputs.json",
+      "sha256": "421c4177a77f841e7c6d0a5ab7ebd2d261e61ab85f83b096d76a1376bfb0b428",
+      "byte_count": 742,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/release/rollback-originals/JumpServeAgentStack-AgentFnC1FD126F-MG2xfZrwsBNg.zip",
+      "sha256": "c88cc4f3a4363b2de2afeff8a019c4ce9b1a0976141223f86ac2cf0a6a4bc07e",
+      "byte_count": 14298021,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/release/rollback-originals/JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X.zip",
+      "sha256": "56b9a0f929f084462637681c728fafc8ae149a6e5b0d8c7c4cd889764823e87a",
+      "byte_count": 187510,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/release/rollback-originals/JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP.zip",
+      "sha256": "56b9a0f929f084462637681c728fafc8ae149a6e5b0d8c7c4cd889764823e87a",
+      "byte_count": 187510,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/release/rollback-originals/manifest.json",
+      "sha256": "9e2178a15f63a305ff2d447dd0cca7f2b06e3118388f7ffe0f067c44afb9b845",
+      "byte_count": 821,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/production/20261013T160137573497Z/JumpServeAgentStack-AgentFnC1FD126F-MG2xfZrwsBNg.zip",
+      "sha256": "c879df52d7e4e09f0f2154eb6ed712a4a8b88bf060cbe62b43a1608c565cf4a5",
+      "byte_count": 14302963,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/production/20261013T160137573497Z/JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X.zip",
+      "sha256": "8e155c65726947427cbf92c04f7727ff48819f4ed5d9a8e47576d07a792d3122",
+      "byte_count": 192746,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/production/20261013T160137573497Z/JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP.zip",
+      "sha256": "8e155c65726947427cbf92c04f7727ff48819f4ed5d9a8e47576d07a792d3122",
+      "byte_count": 192746,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/database/20261013T154001236632Z/raw-163b12bb647f8fde04b986c03fba8b15de5210884f46f7907fbd1617ea677b93",
+      "sha256": "11667b9e1b63d242273265af89666a5b4f1afcb4e23d2f004f7518cb1500f290",
+      "byte_count": 4469,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-infra/.test-artifacts/research-ideas/database/20261013T154350963997Z/raw-faa4749b416eb7e3242bd5955b6cda3d98bd7bc0171015792d7c3f594c6f1ea8",
+      "sha256": "11667b9e1b63d242273265af89666a5b4f1afcb4e23d2f004f7518cb1500f290",
+      "byte_count": 4469,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/browser/2026-10-13T15-40-02.834Z/1365-dark.png",
+      "sha256": "2a7c0426b4c4a146c8373fdaa73f02783ecb003c6fc12e09317912f0c40ef824",
+      "byte_count": 176958,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/browser/2026-10-13T15-40-02.834Z/1365-light.png",
+      "sha256": "2a7c0426b4c4a146c8373fdaa73f02783ecb003c6fc12e09317912f0c40ef824",
+      "byte_count": 176958,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/browser/2026-10-13T15-40-02.834Z/390-dark.png",
+      "sha256": "f4f21b538cd670cf3dcbcad426023d4f2e539d3de3f0a8b569c72d4670f71448",
+      "byte_count": 92326,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/browser/2026-10-13T15-40-02.834Z/390-light.png",
+      "sha256": "d8bdd75b3a03af7901b2b31981c41848bea571a4784f27036852b057cd46b0bb",
+      "byte_count": 88328,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/browser/2026-10-13T15-40-02.834Z/planning-history.json",
+      "sha256": "a1bbfff2fab6ff24a9dbe2361865e531c83756a242e18f5e602c582b018919f3",
+      "byte_count": 42500,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-13T16-10-36.391Z/1365-Dark-Mode.png",
+      "sha256": "757fd032fc34dbb4d00ede2550e56cb7e6502a0237f6eca8a4c1e19643f83638",
+      "byte_count": 207749,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-13T16-10-36.391Z/1365-Light-Mode.png",
+      "sha256": "87c78b2ef88dff77ac1e53fcd24543600f79adbab92fa6ab9c977f4f69d818a6",
+      "byte_count": 180418,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-13T16-10-36.391Z/390-Dark-Mode.png",
+      "sha256": "0f66f088175106614458a120b6c61a975c9398dad0600c5450b99a1ac744aa99",
+      "byte_count": 83298,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-13T16-10-36.391Z/390-Light-Mode.png",
+      "sha256": "824b47211a087f717f18fff76c65279ea3983b2eb6e4415b524f22c7994523a7",
+      "byte_count": 95728,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-13T16-10-36.391Z/recorded-study-export.json",
+      "sha256": "934c0bbb17534eebc561e544496664f62ad53afd853b7b80197d1481da295729",
+      "byte_count": 501919,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-13T16-20-22.501Z/1365-Dark-Mode.png",
+      "sha256": "d5c1870ccaef32db62db6d4419d2d191e6bf1dfe6529ece4ba0ed38af36b9905",
+      "byte_count": 202375,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-13T16-20-22.501Z/1365-Light-Mode.png",
+      "sha256": "72b18332ec415d5425eb9b8daa69ebace06c0ae99a66c84d21821165343d8835",
+      "byte_count": 193250,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-13T16-20-22.501Z/failure.html",
+      "sha256": "e4c267146ffd1aa2e6fd1d4035c1ab639dec7f5cd38a9bbc6320dc258bbb44d9",
+      "byte_count": 70635,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-13T16-20-22.501Z/failure.png",
+      "sha256": "e84e96b727efcc94285c2861901c7aed31a108a45a8c8c059794aaa96a310e5a",
+      "byte_count": 94846,
+      "scope": "local raw release artifact"
+    },
+    {
+      "path": "/private/tmp/jumpserve-ai-analysis/research-ideas-release-20261013/jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-13T16-20-58.819Z/recorded-study-export.json",
+      "sha256": "934c0bbb17534eebc561e544496664f62ad53afd853b7b80197d1481da295729",
+      "byte_count": 501919,
+      "scope": "local raw release artifact"
+    }
+  ]
+}
