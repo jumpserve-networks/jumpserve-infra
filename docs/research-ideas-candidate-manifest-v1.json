@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "scope": "Uncommitted working-tree candidate; listed hashes pin exact bytes. Pre-existing user changes remain separate; workflow.py includes an existing validation correction.",
+  "files": {
+    "jumpserve-front-end": {
+      "app/components/public-landing-page.tsx": "d95546c0c3e6ed1497223c39df52d5c877bebd931a1880303d1c94ad2ed16228",
+      "app/components/research-workflow/header.tsx": "f7feb21a97ea1ff76b5ddd21af229012a20b9ed6fee45de68565d649f98cbc92",
+      "app/components/research-workflow/workspace.tsx": "2d3848b4126d3aeea143b1c68773c15eb66e8b5a5904918ad42b55d9262047b6",
+      "app/components/research-workflow/idea-workspace.tsx": "84bcd0ae1b2838d7512bfcaecddddbbc971fce33765f0db9b76cbcaac9c45df2",
+      "app/components/research-workflow/study-panel.tsx": "75adcf59add49522d1d8ca351bf7c36c7d0606844ce03b1e000d5e83411cd22a",
+      "app/module/research-verification/new-idea/page.tsx": "c6714630e890aa89fff86c9d14a4baa779077a4d628059befe793ff162b29a97",
+      "app/module/research-verification/ideas/[studyId]/page.tsx": "1dceaab379d395ed98aa0146de7f62482ec5ce81bd2fd5c17274ac14ec6e945d",
+      "app/module/research-verification/methods/page.tsx": "c86f7a7cda696ae48a13b8932ef5bd6156ceacab372b10c8281707068680bb94",
+      "lib/research-ideas.ts": "43cc1318e01c28ac707351bcd6b1faff6c1d982f17f2784f5be63b0a5bc290cd",
+      "lib/research-idea-api.ts": "a66bfea5f73efdefcf6aead584902d85d8353c1265fe08d11d8d51a214fc5d4a",
+      "lib/research-workflow.ts": "3c9459863e73fa6da80e449360a3665682bf6a9d86b9eff9781b5bee9a3c2eed",
+      "lib/test-modules.ts": "33bf7cb53dbb20926a8f48bfbe3ab3aaaad85968bb414985a6de831dba3bf201",
+      "scripts/verify-research-ideas.mjs": "f55a37bd8952e6ffe9cb3cf02ae64038d5640a0eb1aec41e1705751a92a3113a",
+      "tests/research-ideas.test.mjs": "39c0ca35ee2b0423702550c4b59ff2871166b7f24b3bb54b7f8387ef47a90bdb",
+      "package.json": "76480bb05989ac275f19a73a9c1c5c1c6ba6e3b7a7c14854bfe54ecaf204afc6",
+      "README.md": "f9f7835ede1b58b83fc1e3ba31b4a8a12f3d5123489fbdc8c65f3b67dcc632fb"
+    },
+    "jumpserve-back-end": {
+      "research_workflow/ideas.py": "0c77d709d3f56711b6874c51e09fb31871db3e3a0886941ffc0f2cfd1182ddf4",
+      "research_workflow/api.py": "bd5610b86e96801f3ab072dd63786d44e23fc3658b8b980f39ca47437ec0e146",
+      "research_workflow/store.py": "a7a1be36bf915ed8074a6314f1bb12f59b29441a71d4c746b064ee3b8f4dbeaf",
+      "research_workflow/workflow.py": "6f9dcb1a12b5302534b601f29af2b6773e1033ab87f412d657b5b47df3d5fa78",
+      "research_workflow/tests/test_ideas.py": "7056287aa097c7c080faa0e2631d9d2fa848dde9f98693e2fa5d870285eea25d",
+      "research_workflow/README.md": "8ac5482832f1ccd9205edf7cee7acbb89987afb6a59621ccf24157aa3a21c070"
+    },
+    "jumpserve-infra": {
+      "agent/research_ideas.py": "be17d7cd790923e996331dcc2e76345048181f76babf8b836d0d7f4d0c9e706e",
+      "agent/handler.py": "f44f1530c9151317e44feba267ad10ed6aa536c3a830d53c76e921c038d7eb60",
+      "agent/modules.py": "639a02174548cea3e667408413a57eed4deb8f58429c2af4c13e139d8aa9e686",
+      "agent/prompt.py": "087ab68481bb971e554a7c275158d77a945bf46019cfe2b30c47d84fdcdc24c8",
+      "agent/settings.py": "6c6819896689b3389f56bf1c363418726c9d53044f05f06edff269cc1c511777",
+      "lib/research-workflow.ts": "00787cbb822093f1aecc469ef766ab6969af1acf8c641c303691d6d2de97fe3a",
+      "research-workflow-runtime.json": "3f573ba66d9f04fb7b57a4efb97c9a6a0cf258223cc9f01c1b96ad90a5530e75",
+      "database/202610120001_research_ideas.sql": "b91c8b157090e397029764372cfea09f0c9af7a37f61346fac5d912706cbf00f",
+      "database/202610120002_research_idea_prompt.sql": "9efa726606a59a16186bdb5ff5e9ab8e78d972185ed752bdd93e041926e7718b",
+      "database/202610120003_research_idea_prompt_seed.sql": "b2f01cfbed3e607f2513f7b7eefa08f3da8587664133451a180d05e47ae67286",
+      "database/202610120004_research_idea_prompt_seed_v2.sql": "e902230db40c097bbe6f1b1b406523b4a97725cce668dc51ce482c64e7d1f54d",
+      "database/seed-research-ideas-prompt-v1.json": "b55ce8d426c45be55294145837362090dd2b2007ee9f3427cedd5591bdead586",
+      "database/seed-research-ideas-prompt-v2.json": "7f6d3b502dd7a2323bb8414e8d89b8d9728dcace95c4d6a6b7351d1ba5949e5d",
+      "docs/research-ideas-protocol-v1.json": "dadbdf9c3137818c6af60335591ff1e4515c24a48a9f7ca47d2bcbc748499671",
+      "docs/research-ideas-amendment-v2.json": "257d00c7ef9020c08a2fb63571243d419687dfcea6a1ce0680cdf42aca888d2c",
+      "test/check_research_ideas_database.py": "14a86a7fbbf54face150584944b0ef81befbbf6c4b17b986ba048b2fdb9c9904",
+      "test/evaluate_research_ideas.py": "b9ae089bf589fe81e078f218e14cba36e1d9f4156807394c59701aa437327da7",
+      "test/serve_research_ideas_fixture.py": "dc926f6b88a445facf9080301c29316847f10f38ea3c875ffa70dc49376d8888",
+      "test/agent_ideas_test.py": "53cf7391a5c35e9b093aeb23dbad7c18944f446005d489082736734ae8625b86",
+      "test/research-workflow.test.ts": "f3093b1cb5c1761fc68eb2e91b0c4451f054c15d0587e84165bd2087adb6310e",
+      "package.json": "333f487cccf1a2da00ba63fa7e2935b94eec4109a70aefecaa4a4862944e7f76",
+      "README.md": "007ef300da4912061862578b4eb343da02c108c0f3a8e2974e4f8075adfd5e45"
+    }
+  }
+}

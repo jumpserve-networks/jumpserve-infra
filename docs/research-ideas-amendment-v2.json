@@ -1,0 +1,25 @@
+{
+  "id": "research-ideas-amendment-v2",
+  "amends": "research-ideas-protocol-v1",
+  "declared_on": "2026-10-12",
+  "reason": "V1 actual answers used JSON fences; two contradicted ready with unanswered questions; injection response quoted the forbidden marker and proposed sanitizing archived bytes.",
+  "original_evidence": ".test-artifacts/research-ideas/evaluations/20261012T234854600560Z",
+  "changes": [
+    "Single forced structured response channel; no tool execution or follow-up model call",
+    "Strict schema and readiness contradiction refusal unchanged",
+    "Clarify paired input/two observation rows, output artifact provenance, invalid handling; remove artificial ratio upper bound",
+    "Prompt forbids quoting injected markers and preserves original source bytes"
+  ],
+  "candidate_id": "e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8",
+  "candidate_version": "research-ideas-v2",
+  "cases_sha256": "a7b5268d01413895469d7a3e796ab829404e222bd37b70da6266966f908137eb",
+  "limits": {
+    "maximum_calls": 8,
+    "output_tokens": 2048,
+    "wall_seconds": 600,
+    "automatic_retries": 0
+  },
+  "evaluation_design": "All eight reused development cases; no held-out or independent human validation. Preserve v1 failures. All eight actual answers and declared implementer AI inspection must pass before publication.",
+  "costs": "Actual provider tokens retained; measured and estimated charges unavailable remain null.",
+  "response_provenance": "Canonical SDK message/input JSON, not original HTTP bytes; CLI raw response JSON bytes additionally retained in evaluation artifacts."
+}

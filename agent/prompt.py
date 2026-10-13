@@ -2,7 +2,7 @@
 from dataclasses import dataclass
 import hashlib
 from uuid import UUID
-from modules import EMULATED_MODULE, CHAT_MODULES
+from modules import EMULATED_MODULE, PROMPT_MODULES
 
 
 class PromptUnavailable(RuntimeError):
@@ -30,7 +30,7 @@ class PromptVersion:
                 raise ValueError('Empty prompt field')
             UUID(values['id'])
             values['module_id'] = record.get('module_id', EMULATED_MODULE)
-            if values['module_id'] not in CHAT_MODULES:
+            if values['module_id'] not in PROMPT_MODULES:
                 raise ValueError('Unsupported prompt module')
             digest = hashlib.sha256((values['system_prompt'] + '\n\n' + values['research_context']).encode()).hexdigest()
             if record.get('content_sha256') != digest:

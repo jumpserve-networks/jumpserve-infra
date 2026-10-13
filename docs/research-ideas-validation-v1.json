@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "recorded_at": "2026-10-13T03:12:01.443315+00:00",
+  "feature": "Unpublished research ideas within Research Verification",
+  "software_status": "Local release blockers passed; production not deployed",
+  "scientific_status": "No research hypothesis evaluated and no improvement in scientific accuracy demonstrated. Model planning/review outputs and software fixtures only.",
+  "entry_route": "/module/research-verification/new-idea",
+  "idea_route": "/module/research-verification/ideas/{studyId}",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "checks": [
+    {
+      "name": "frontend",
+      "status": "pass",
+      "commands": [
+        "npm test",
+        "npm run lint",
+        "npm run build"
+      ],
+      "tests": 133
+    },
+    {
+      "name": "backend",
+      "status": "pass",
+      "command": "python3 -B -m unittest discover -s research_workflow/tests -v",
+      "tests": 77
+    },
+    {
+      "name": "agent",
+      "status": "pass",
+      "command": "npm run test:agent",
+      "tests": 90
+    },
+    {
+      "name": "infrastructure",
+      "status": "pass",
+      "commands": [
+        "npm run build",
+        "JUMPSERVE_BACKEND_CHECKOUT=/Users/Shared/allstar/jumpserve-back-end npm test -- --runInBand"
+      ],
+      "tests": 84
+    },
+    {
+      "name": "database",
+      "status": "pass",
+      "command": "npm run test:research:ideas",
+      "checks": 9,
+      "report": ".test-artifacts/research-ideas/database/20261013T025321744700Z/validation-report.json"
+    },
+    {
+      "name": "browser",
+      "status": "pass",
+      "command": "npm run verify:research:ideas",
+      "checks": 10,
+      "report": "../jumpserve-front-end/.test-artifacts/research-ideas/browser/2026-10-13T03-06-12.942Z/validation-report.json"
+    },
+    {
+      "name": "actual model development answers",
+      "status": "pass for v2; v1 failed retained",
+      "cases_per_candidate": 8,
+      "candidate_count": 2,
+      "passed_candidate_id": "e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8",
+      "review_report": ".test-artifacts/research-ideas/evaluations/20261013T002350223340Z/evaluation-reviewed.json"
+    }
+  ],
+  "coverage_limits": [
+    "Candidate protocol entry uses structured JSON and existing schema/resource limits (10,000 observations, 10 MB input, 300 seconds); unsupported requirements need a domain-specific protocol/adapter amendment, not invented values.",
+    "Domain tasks are manual; preparation/queueing produces no empirical data or scientific assessment.",
+    "Fresh invocations share models and supplied sources; independence is not established.",
+    "All model cases are reused/exposed development cases; no held-out or human validation.",
+    "Database baseline agent_sessions/Storage transport are local fixtures; actual listed migrations, API, agent and relational guards were exercised.",
+    "Auth identity and browser provider are synthetic; local Next.js cookie-free sign-in redirects were verified.",
+    "Scientific result charts are inapplicable to this planning fixture because no scientific observations were collected."
+  ],
+  "conditional_gaps": [
+    "Legitimate Google-authenticated owner chat and cross-owner deployed requests",
+    "Production Supabase migrations and prompt publication",
+    "Remote Supabase Storage original-byte round trip",
+    "Deployed frontend/API/agent verification",
+    "Independent specialist/human review and held-out ideas"
+  ],
+  "production": {
+    "database_changed": false,
+    "prompt_published": false,
+    "application_deployed": false,
+    "authorization": "A new explicit deployment instruction is required by AGENTS.md; earlier deployment requests are not standing authorization."
+  },
+  "usage": {
+    "actual_model_calls": 16,
+    "tokens": {
+      "inputTokens": 37580,
+      "outputTokens": 9463,
+      "totalTokens": 47043
+    },
+    "max_output_tokens_per_call": 2048,
+    "automatic_model_retries": 0,
+    "measured_model_charges_usd": null,
+    "estimated_model_cost_usd": null,
+    "unallocated_compute_and_storage_cost_usd": null,
+    "cost_basis": "Provider tokens/wall times retained; billing/orchestration/local-compute charges unavailable are missing, not zero. Synthetic fixture token counts are excluded.",
+    "retained_artifact_bytes": 3460011
+  },
+  "evidence": {
+    "protocol": "docs/research-ideas-protocol-v1.json",
+    "amendment": "docs/research-ideas-amendment-v2.json",
+    "candidate_manifest": "docs/research-ideas-candidate-manifest-v1.json",
+    "raw_manifest": "docs/research-ideas-artifact-manifest-v2.json"
+  },
+  "preserved_failures": [
+    "V1: eight provider calls succeeded, eight strict text-JSON schema checks failed; additional ready/questions contradictions and quoted injection marker documented.",
+    "Database: sandbox connection failure and test UUID transport parsing failure retained; migrations subsequently passed.",
+    "Browser: fixture lte transport limitation, selector/label failures and checks made before color transitions settled retained; corrected checks subsequently passed.",
+    "Blocked STS sandbox preflight is recorded retrospectively with unknown original timestamp, before any model call."
+  ],
+  "postgres_setup": [
+    "/opt/homebrew/opt/postgresql@17/bin/initdb -D /private/tmp/jumpserve-ideas-pg17 -A trust --no-locale -E UTF8",
+    "/opt/homebrew/opt/postgresql@17/bin/pg_ctl -D /private/tmp/jumpserve-ideas-pg17 -l /private/tmp/jumpserve-ideas-pg17/server.log -o '-h 127.0.0.1 -p 54477 -k /private/tmp/jumpserve-ideas-pg17' start"
+  ],
+  "release_order": "New explicit authorization; verify AWS 395567831870/Supabase regphejnlvfpyokpniny; apply four additive migrations with receipts; publish exact evaluated v2 report/candidate via guarded existing RPC; stage pinned runtime; release API/agent before frontend; perform conditional deployed checks. No live fixture origin may enter a production build."
+}

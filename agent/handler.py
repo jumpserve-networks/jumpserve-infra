@@ -123,12 +123,22 @@ def lambda_handler(event, context):
     except (ValueError, TypeError, AttributeError):
         return _error(400, 'Invalid request or session ID')
     message = body.get("message", "")
+    if body.get('action') == 'idea':
+        from research_ideas import handle
+        try:
+            result = handle(body, user, Database())
+            return {'statusCode': 200, 'headers': {'Content-Type': 'application/json', 'Cache-Control': 'no-store'}, 'body': json.dumps(result)}
+        except AuthError as error: return _error(error.status, str(error))
+        except (ValueError, TypeError, KeyError, AttributeError) as error: return _error(400, str(error))
+        except Exception as error:
+            logger.error('Idea model request unavailable (%s)', type(error).__name__)
+            return _error(503, 'Idea AI or persistence is unavailable. Inspect retained attempts before requesting another call; no answer is confirmed saved.')
     module_id = body.get('module_id', EMULATED_MODULE)
     if not isinstance(module_id, str) or module_id not in CHAT_MODULES:
         return _error(400, 'Unsupported chat module')
     if body.get('action') == 'capabilities':
         return {'statusCode': 200, 'headers': {'Content-Type': 'application/json'},
-                'body': json.dumps({'modules': list(CHAT_MODULES)})}
+                'body': json.dumps({'modules': list(CHAT_MODULES), 'research_ideas': {'version': 'research-ideas-v1', 'tasks': ['planning','comprehension','critic'], 'requires_published_prompt': True}})}
 
     if not isinstance(message, str) or not message.strip():
         return {

@@ -40,8 +40,8 @@ export class ResearchWorkflow extends Construct {
     });
     secret.grantRead(fn);
     const integration = new HttpLambdaIntegration('ResearchWorkflowIntegration', fn);
-    for (const route of ['/research/capabilities', '/research/studies', '/research/studies/{studyId}', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/prepare']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.GET], integration });
-    for (const route of ['/research/studies', '/research/studies/{studyId}/records', '/research/studies/{studyId}/protocols', '/research/studies/{studyId}/runs', '/research/studies/{studyId}/publish', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/queue-actions', '/research/studies/{studyId}/prepare']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.POST], integration });
+    for (const route of ['/research/capabilities', '/research/studies', '/research/studies/{studyId}', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/prepare', '/research/studies/{studyId}/idea']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.GET], integration });
+    for (const route of ['/research/studies', '/research/studies/{studyId}/records', '/research/studies/{studyId}/protocols', '/research/studies/{studyId}/runs', '/research/studies/{studyId}/publish', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/queue-actions', '/research/studies/{studyId}/prepare', '/research/studies/{studyId}/idea']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.POST], integration });
     if (queueEnabled) {
       const worker = new lambda.Function(this, 'QueueWorker', {
         code: lambda.Code.fromAsset(runtime), handler: 'worker.handler', runtime: lambda.Runtime.PYTHON_3_12,

@@ -17,7 +17,9 @@
     "test:database:ingest": "python3 -B test/check_benchmark_ingest_database.py",
     "test:research:database": "python3 -B test/check_research_workflow_database.py",
     "test:research:queue": "python3 -B test/check_research_queue_database.py",
-    "test:research:browser-fixture": "python3 -B test/serve_research_workflow_fixture.py"
+    "test:research:browser-fixture": "python3 -B test/serve_research_workflow_fixture.py",
+    "test:research:ideas": "python3 -B test/check_research_ideas_database.py",
+    "test:research:ideas:browser-fixture": "python3 -B test/serve_research_ideas_fixture.py"
   },
   "devDependencies": {
     "@aws-sdk/client-cloudwatch-logs": "^3.1132.0",
