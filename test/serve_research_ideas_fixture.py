@@ -64,6 +64,8 @@ def invoke(system,messages):
         failed_critic.add(context['packet_id']);raise TimeoutError('Deliberate synthetic provider failure')
     missing=f.ideas.completeness(doc)
     output=dict(summary='Synthetic AI response for software flow verification; no experiment executed.',questions=['Complete the missing plan fields.'] if missing else [],findings=[],verdict='needs-clarification' if missing else 'ready')
+    if task=='critic' and (doc.get('protocol') or {}).get('dependence')=='SOFTWARE-FIXTURE-BLOCKING-DEPENDENCE':
+        output=dict(summary='Synthetic critical review fixture: dependence needs a correction.',questions=['How will related observations be handled?'],findings=[dict(severity='blocking',field='dependence',message='Explicit software fixture blocker; revise the dependence declaration before readiness.')],verdict='needs-clarification')
     return dict(output=dict(message=dict(role='assistant',content=[dict(toolUse=dict(toolUseId='fixture',name=agent.RESPONSE_CHANNEL,input=output))])),stopReason='tool_use',usage=dict(inputTokens=10,outputTokens=20))
 
 class Handler(BaseHTTPRequestHandler):
