@@ -1,0 +1,10 @@
+{
+  "id": "guided-network-release-amendment-v3",
+  "amends": "guided-network-release-amendment-v2",
+  "declared_on": "2026-10-14",
+  "original_failure": "Operational success check v2 stopped in record validation before enqueue or EC2 launch because source.reviewer requires an independence text field. The helper supplied independent:false instead.",
+  "preservation": "Retain its receipt, private study and original package bytes. This is a failed verifier setup, not a failed cloud experiment or scientific finding. Queue polling was restored.",
+  "correction": "Use the existing typed reviewer independence text in source records. Mark subsequent operational studies and package versions v3, leaving earlier records untouched.",
+  "unchanged": "Original hypotheses, pass criteria and maximum three actual EC2 hosts remain unchanged. No host or model was started by the failed setup. No automatic experiment replay.",
+  "reviewer": {"identity": "Primary Codex AI implementer", "type": "AI", "independent": false}
+}
