@@ -7,11 +7,34 @@ from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 import sys
 import urllib.parse
+import os
+from unittest.mock import patch
 import check_research_ideas_database as f
 f.bootstrap()
 sys.path.insert(0,str(f.ROOT/'agent'))
 import research_ideas as agent
 from research_idea_fixtures import packet
+import network_execution,worker
+import check_network_execution_database as network_fixture
+original_advance=network_execution.advance
+def diagnostic_advance(*args):
+    try:return original_advance(*args)
+    except Exception:
+        import traceback
+        traceback.print_exc()
+        raise
+network_execution.advance=diagnostic_advance
+# Only the fixed known development package can run locally through this fixture.
+# No arbitrary uploaded program, container, production endpoint or AWS call.
+os.environ['NETWORK_PACKAGE_FUNCTION']='arn:aws:lambda:us-east-1:395567831870:function:local-browser-fixture'
+os.environ['NETWORK_EMULATED_FUNCTION']='arn:aws:lambda:us-east-1:395567831870:function:local-browser-fixture-emulated'
+os.environ['NETWORK_REAL_WORLD_FUNCTION']='arn:aws:lambda:us-east-1:395567831870:function:local-browser-fixture-real-world'
+os.environ['RESEARCH_QUEUE_WORKERS_ENABLED']='true'
+network_requests=[]
+def fixed_network_provider(spec,job,action):
+    if spec['runner']!='custom-package-v1' or spec['config']['package'].get('sha256')!=f.workflow.digest(network_fixture.SOURCE.read_bytes()) or spec['config']['parameters']!={'url':'http://127.0.0.1:4103/fixture-network-target','requests':3} or spec['config']['arguments']!=[]:
+        raise ValueError('This local fixture executes only the fixed reviewed development HTTP package and endpoint.')
+    return network_fixture.provider(spec,job,action)
 prompt='e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8'
 # The isolated test publishes a synthetic SQL declaration only. This is not
 # passed-off actual model evaluation and cannot affect any remote pointer.
@@ -41,6 +64,8 @@ def invoke(system,messages):
         failed_critic.add(context['packet_id']);raise TimeoutError('Deliberate synthetic provider failure')
     missing=f.ideas.completeness(doc)
     output=dict(summary='Synthetic AI response for software flow verification; no experiment executed.',questions=['Complete the missing plan fields.'] if missing else [],findings=[],verdict='needs-clarification' if missing else 'ready')
+    if task=='critic' and (doc.get('protocol') or {}).get('dependence')=='SOFTWARE-FIXTURE-BLOCKING-DEPENDENCE':
+        output=dict(summary='Synthetic critical review fixture: dependence needs a correction.',questions=['How will related observations be handled?'],findings=[dict(severity='blocking',field='dependence',message='Explicit software fixture blocker; revise the dependence declaration before readiness.')],verdict='needs-clarification')
     return dict(output=dict(message=dict(role='assistant',content=[dict(toolUse=dict(toolUseId='fixture',name=agent.RESPONSE_CHANNEL,input=output))])),stopReason='tool_use',usage=dict(inputTokens=10,outputTokens=20))
 
 class Handler(BaseHTTPRequestHandler):
@@ -52,12 +77,15 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):self.process('POST')
     def process(self,method):
         parsed=urllib.parse.urlsplit(self.path)
-        if parsed.path=='/fixture-metadata':return self.respond(200,dict(actor=f.ACTOR,database=f.DATABASE,packet=packet(),design='Synthetic auth/provider; actual component/API/agent/isolated PostgreSQL'))
+        if parsed.path=='/fixture-metadata':return self.respond(200,dict(actor=f.ACTOR,database=f.DATABASE,packet=packet(),network_package_source=network_fixture.SOURCE.read_text(),network_requests=len(network_requests),design='Synthetic auth/provider/AWS; actual component/API/agent/isolated PostgreSQL and fixed local HTTP package'))
+        if parsed.path=='/fixture-network-target' and method=='GET':network_requests.append(self.path);return self.respond(200,dict(fixture='actual loopback HTTP response'))
         if self.headers.get('Authorization')!='Bearer explicit-software-fixture':return self.respond(401,dict(error='Synthetic fixture sign-in required'))
         raw=self.rfile.read(int(self.headers.get('Content-Length','0'))).decode() if method=='POST' else '{}'
         if len(raw.encode())>512000:return self.respond(413,dict(error='Fixture request too large'))
         try:
-            if parsed.path=='/idea-model':
+            if parsed.path=='/fixture-network-poll' and method=='POST':
+                with patch.object(network_execution,'invoke',side_effect=fixed_network_provider):result=worker.handler({'source':'fixed local development poll'})
+            elif parsed.path=='/idea-model':
                 data=json.loads(raw)
                 if data.get('action')=='capabilities':return self.respond(200,dict(research_ideas=dict(version=agent.VERSION)))
                 result=agent.handle(data,dict(id=f.ACTOR,email='software-fixture@example.invalid'),Database(),invoke)

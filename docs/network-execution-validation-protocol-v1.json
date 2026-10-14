@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "declared_on": "2026-10-13",
+  "purpose": "Verify automatic networking execution from a saved research protocol through durable dispatch and persisted observations.",
+  "scope": ["Existing emulated runner", "Existing EC2 real-world runner", "Versioned Python packages", "Public digest-pinned container packages"],
+  "pass_criteria": [
+    "Frozen configuration, replication, resource and package identities cannot be changed during enqueue or dispatch",
+    "One launch authorization per invocation; duplicate requests and lost acknowledgements never replay an experiment",
+    "Owner isolation, private table RLS, browser RPC denial and job-specific output capabilities",
+    "Successful, failed and missing observations retain original available bytes and explicit statuses",
+    "Actual loopback HTTP package runs produce observations and are persisted through actual isolated Postgres queue RPCs",
+    "Wall, output and network limits, cancellation and independent cleanup paths are enforced or explicitly identified as conditional",
+    "No automatic scientific assessment or unsupported statistical interval",
+    "Frontend exposes executable specification, immutable package upload, configuration compilation and resumable queue fanout",
+    "Existing numeric, idea, emulated and real-world regressions remain passing"
+  ],
+  "fixtures": "Use task-owned local PostgreSQL and HTTP servers. Auth identity, private Storage transport and AWS responses are software fixtures. Actual loopback network timings are development measurements, not validation of the CDN research hypothesis.",
+  "conditional_checks": ["Actual authenticated Google browser action", "AWS VM allocation and independent cleanup", "Multi-region EC2 experiment", "Digest-pinned Docker image execution when Docker is available", "Mullvad VPN and controlled CDN origin credentials/deployments"],
+  "resource_limits": {"cloud_experiments_this_local_campaign": 0, "model_calls": 0, "local_http_requests_per_case": 20, "local_package_wall_seconds": 10, "local_output_bytes": 3000000},
+  "reviewer": {"identity": "Primary Codex AI implementer", "type": "AI", "independent": false},
+  "deployment": "No production changes authorized in this turn. A new explicit deployment request is required by repository instructions. Verify AWS account 395567831870 and Supabase project regphejnlvfpyokpniny before any production changes.",
+  "scientific_limits": "Running a test and agreeing with a recorded value do not establish correctness, geographic specificity, causal attribution or generalization. Arbitrary tests still need an applicable executable package and equipment.",
+  "missing_usage": "Costs and unallocated usage remain missing; configured bounds are not measured charges."
+}

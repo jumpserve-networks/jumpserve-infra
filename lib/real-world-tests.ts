@@ -15,6 +15,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 
 export class RealWorldTests extends Construct {
+  readonly apiFunction: lambda.IFunction;
   constructor(scope: Construct, id: string, httpApi: api.HttpApi) {
     super(scope, id);
     const runtimePath = process.env.REAL_WORLD_RUNTIME_PATH ?? path.join(__dirname, '..', '.runtime-backend', 'real_world');
@@ -100,6 +101,7 @@ export class RealWorldTests extends Construct {
     const service = new lambda.Function(this, 'Api', { code, handler: 'api.handler', runtime: lambda.Runtime.PYTHON_3_12,
       timeout: cdk.Duration.seconds(29), memorySize: 512, environment: { ...environment,
         SUPABASE_URL: this.node.tryGetContext('supabaseUrl'), SUPABASE_ANON_KEY: this.node.tryGetContext('supabaseAnonKey') ?? '', STATE_MACHINE_ARN: machine.stateMachineArn } });
+    this.apiFunction = service;
     supabaseSecret.grantRead(service);
     machine.grantStartExecution(service);
     service.addToRolePolicy(new iam.PolicyStatement({ actions: ['ec2:DescribeRegions', 'ec2:DescribeAvailabilityZones', 'ec2:DescribeInstanceTypeOfferings'], resources: ['*'] }));

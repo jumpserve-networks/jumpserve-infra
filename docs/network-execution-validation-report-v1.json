@@ -1,0 +1,170 @@
+{
+  "version": 1,
+  "created_at": "2026-10-14T16:26:32.544627+00:00",
+  "protocol": "network-execution-validation-protocol-v1.json",
+  "protocol_sha256": "ae324fe048b85cc5e0a8bac16cea4aa3f8cf6ea1a9bcc22652d91ddfed6ae7a1",
+  "branch": "feature/network-execution-20261013",
+  "revisions": {
+    "jumpserve-back-end": "5c2d2ccb14b6d6e0431b8cc131f719181dc18c7b",
+    "jumpserve-front-end": "9d4d8a4744f18498925971d0e7e929ae00e4aa79",
+    "jumpserve-infra": "b681845a2afe123b3b9dfd48df6fc8a1141082f0"
+  },
+  "infrastructure_revision_note": "Recorded infrastructure revision is the base for this local candidate; its feature commit follows this report.",
+  "implemented": [
+    "Automatic configuration-by-replication fanout after reviewed protocol freeze",
+    "Existing emulated and multi-machine real-world runners",
+    "Private versioned Python scripts and public digest-pinned containers",
+    "Same-study hash-verified private input files and original configuration text",
+    "One launch authorization, lost-acknowledgement recovery, cancellation and independent cleanup",
+    "Supabase runs, measurements and declared coverage with original bytes separately preserved",
+    "Empirical data origin and execution environment, inapplicable published references and pending scientific assessment"
+  ],
+  "tests": {
+    "research_workflow": {
+      "command": "python3 -B -m unittest discover -s research_workflow/tests -v",
+      "passed": 88,
+      "checkout": "Clean archive of committed backend revision; excludes eight unrelated local archive tests"
+    },
+    "real_world": {
+      "command": "python3 -B -m unittest discover -s real_world/tests -v",
+      "passed": 67
+    },
+    "infrastructure": {
+      "command": "JUMPSERVE_BACKEND_CHECKOUT=/Users/Shared/allstar/jumpserve-back-end npm test -- --runInBand",
+      "passed": 88,
+      "suites": 11,
+      "skipped": 0
+    },
+    "frontend": {
+      "command": "npm test",
+      "passed": 137,
+      "skipped": 0
+    },
+    "builds": {
+      "infrastructure": "TypeScript passed",
+      "frontend": "Next 16.3.8 production build and TypeScript passed in isolated dependency checkout"
+    },
+    "lint": {
+      "errors": 0,
+      "warnings": 1,
+      "warning": "Pre-existing unused readFile import in scripts/verify-research-ideas-production.mjs"
+    },
+    "campaign_reports": [
+      {
+        "path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/network-execution/browser/2026-10-14T16-22-51.549Z/validation-report.json",
+        "sha256": "56875ce368abfbe4b7798a61de0859e1a7ae732e5a4aa73c74642a3def9261e6",
+        "checks": 7,
+        "passed": true
+      },
+      {
+        "path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/network-execution/database/20261014T162056877414Z/validation-report.json",
+        "sha256": "97cb83e0066f197d8a18e72b654ee87506b1dabfb5032b5e30fc0a733bd628b6",
+        "checks": 7,
+        "passed": true
+      },
+      {
+        "path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261014T155554793045Z/validation-report.json",
+        "sha256": "2717c08b839bb3eca89a4ec4a3ab6ecf18b46c92d911dde3879cb698d80dac37",
+        "checks": 10,
+        "passed": true
+      },
+      {
+        "path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-queue/20261014T161547962164Z/database-report.json",
+        "sha256": "6778d1e59064e48d4db9ad75ed58df0a2975b4a35eaa98893a7d9c8ec020acd6",
+        "checks": 12,
+        "passed": true
+      },
+      {
+        "path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-ideas/browser/2026-10-14T16-16-22.945Z/validation-report.json",
+        "sha256": "645e8dcb114a5d9a4d6847ddea0379f62a6c76a0e1a9480b79d04f3ddf4a5d48",
+        "checks": 10,
+        "passed": true
+      }
+    ]
+  },
+  "main_development_campaign": {
+    "browser_invocations": 2,
+    "actual_http_requests": 6,
+    "measurement_rows": 6,
+    "scientific_assessments": 0,
+    "origin": "Actual loopback HTTP; synthetic authentication, AI reviews, private Storage transport and AWS dispatch",
+    "cloud_instances": 0,
+    "raw_hash_checks": true,
+    "missing_state": "Clearly labelled synthetic rendering variant; actual stored observations unchanged"
+  },
+  "corrections_and_preserved_failures": [
+    "Explicit accessible textarea names fix labels after source upload",
+    "Compiler rejects declared observations exceeding the frozen budget; invalid executor output creates a failed run with retained original bytes",
+    "Browser checks compare matched campaign request deltas rather than cumulative fixture counters",
+    "Legacy queue regression now replays relevant original current-schema migrations; old failed report retained",
+    "Boto3 bootstrap supplied as plaintext: installed botocore encoding behavior and independent deadline script checked"
+  ],
+  "review": {
+    "evaluator": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false,
+    "human_review": false,
+    "cases": "Exposed development regressions, not held-out validation; synthetic review responses are not actual model evaluations"
+  },
+  "scientific_coverage": {
+    "cdn_hypothesis": "untested in this campaign",
+    "general_networking_effectiveness": "inconclusive pending real cloud and equipment verification",
+    "intervals": "None; requests, receiver summaries and time samples are not independent invocations",
+    "scope": "Executable implementations and available equipment are required; source inspection and proofs remain manual",
+    "limits": [
+      "Custom runner is one isolated us-east-1 host; custom distributed topologies and hardware require runner extensions",
+      "Output/network counters sampled every 50 ms may overshoot; unavailable counters remain null; counts are not billed traffic",
+      "Built-in runners do not enforce the custom network byte threshold",
+      "Python uses finite host capacity; containers add 1 CPU, 1 GiB and 256 PID limits",
+      "Image digest and actual AMI identity do not archive dependency or image-layer bytes",
+      "HTTP development example measures request start through response headers, not TCP RTT, exact TTFB or CDN demand inference",
+      "Controlled CDN objects, ground-truth demand assignments, external VPN vantages and origin credentials were not supplied or executed"
+    ]
+  },
+  "release": {
+    "local_checks": "passed",
+    "production_deployed": false,
+    "production_changes": 0,
+    "network_execution_default": false,
+    "release_blocking_before_enablement": [
+      "Fresh explicit deployment request under frontend AGENTS.md",
+      "Verify AWS account 395567831870 and Supabase project regphejnlvfpyokpniny before changes",
+      "Apply additive migration before deploying matching pinned runtimes",
+      "Actual VM bootstrap, raw output ingest, deadline termination and independent cleanup; keep custom execution disabled until passed",
+      "Verify deployed API ownership boundaries, results and frontend after authorized rollout"
+    ],
+    "conditional_checks": [
+      "Legitimate Google-authenticated request",
+      "Remote Supabase Storage roundtrip",
+      "Real EC2 multi-region allocation and cleanup",
+      "Digest-pinned Docker execution and namespaces",
+      "Mullvad/VPN and controlled CDN origin credentials"
+    ]
+  },
+  "usage": {
+    "new_actual_model_calls": 0,
+    "cloud_experiments": 0,
+    "measured_charges_usd": null,
+    "estimated_charges_usd": null,
+    "local_artifact_storage_bytes": 4898443,
+    "storage_scope": "Manifest only; excludes PostgreSQL, dependencies, build outputs and other artifacts",
+    "local_cpu_seconds": null,
+    "coding_model_usage": null,
+    "unallocated_costs": null,
+    "note": "No actual cloud/model calls occurred in this campaign; missing costs and unallocated usage are not zero."
+  },
+  "artifacts": {
+    "manifest": "network-execution-artifact-manifest-v1.json",
+    "manifest_sha256": "99994878969d86f4db28355f8040fdac3f0fc94052bec45761fdebb9a54e3d78",
+    "original_protocol_preserved": true,
+    "successes_and_failures_preserved": true,
+    "migration_sha256": "2fca154107dd146a80c0fb7248fe6b6e78db017f1ef2bd1810b12ba6f69e0851",
+    "runtime_manifest_sha256": "43e0d47db93116d9121700a5ac5ef785b0d7e81d8afd8767757abedd4977dc34",
+    "real_world_manifest_sha256": "69536be9e39eefa36a8a04e3e0b51131efe4e44a9b4cfeaf3473704bdaa2ea38",
+    "private_storage_transport": "Original bytes written to local fixture files, hashed and retrieved; not remote Supabase Storage"
+  },
+  "reproduction_docs": [
+    "jumpserve-back-end/research_workflow/README.md",
+    "jumpserve-infra/README.md"
+  ]
+}

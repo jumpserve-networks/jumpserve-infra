@@ -1,0 +1,2948 @@
+{
+  "version": 1,
+  "created_at": "2026-10-14T16:25:34.952395+00:00",
+  "hash_algorithm": "SHA-256",
+  "verification": "Read every retained file twice and compared hashes; this verifies byte identity, not scientific correctness or review completeness.",
+  "artifacts": [
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T001902414481Z/validation-report.json",
+      "byte_count": 972,
+      "sha256": "1efc955e9223bfd26acd3d0b08d5e505c46e843acc6139493f70f7aafbfd236b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141432780469Z/validation-report.json",
+      "byte_count": 3272,
+      "sha256": "06283cfd2ca0c6e8e776f313fcdba28fdf0c909f657ecb972d29968c8400f5cd",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141647023267Z/b78b1038-4679-5689-bf82-2c8f02ad5b36/output.json",
+      "byte_count": 956,
+      "sha256": "ac39cfa22b8e82da228a8fecadb9fb6d42c3d6d351ff6aa611c1b07a58208ddd",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141647023267Z/b78b1038-4679-5689-bf82-2c8f02ad5b36/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141647023267Z/b78b1038-4679-5689-bf82-2c8f02ad5b36/runtime-receipt.json",
+      "byte_count": 386,
+      "sha256": "d124ac338eadebeb98db64662e00c659fcb4c87a907bd4cb519a0d03dae50c23",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141647023267Z/b78b1038-4679-5689-bf82-2c8f02ad5b36/spec.json",
+      "byte_count": 617,
+      "sha256": "7e55748d12b98b89ec2cb81fa4917ecfcf128c4d7f85cc2508177d1f10f2acc4",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141647023267Z/b78b1038-4679-5689-bf82-2c8f02ad5b36/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141647023267Z/b78b1038-4679-5689-bf82-2c8f02ad5b36/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141647023267Z/validation-report.json",
+      "byte_count": 4130,
+      "sha256": "fcc14292f486c4dbc45790b2ef26c8fb22b2f6dc432fbc3c3b1ffa207f6d4e3c",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141911123232Z/8baa251c-e933-549f-b300-3c69bee311e0/output.json",
+      "byte_count": 958,
+      "sha256": "b6ae499f3e1fd42fb1ab6c77d6eebcc22c71d5725198796fca81bcfa9c692f28",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141911123232Z/8baa251c-e933-549f-b300-3c69bee311e0/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141911123232Z/8baa251c-e933-549f-b300-3c69bee311e0/runtime-receipt.json",
+      "byte_count": 384,
+      "sha256": "ebd6ec099ebac801b4dc7b36212475e2c857908533b589d3bc81bb406a9c6f75",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141911123232Z/8baa251c-e933-549f-b300-3c69bee311e0/spec.json",
+      "byte_count": 617,
+      "sha256": "f2e142cb108ad2acc65bdf8fee618b530eeef9c4c0f1b59a28ec2f3cc3967c68",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141911123232Z/8baa251c-e933-549f-b300-3c69bee311e0/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141911123232Z/8baa251c-e933-549f-b300-3c69bee311e0/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141911123232Z/bc798367-45fb-5f25-90ab-f763b5aa5603/package.py",
+      "byte_count": 86,
+      "sha256": "b2e7d8bed18be4fd291f208500b2a4983233da09eee1bdb9a8773298dd8d647e",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141911123232Z/bc798367-45fb-5f25-90ab-f763b5aa5603/runtime-receipt.json",
+      "byte_count": 385,
+      "sha256": "48bc11cebcbec3be4355c3d473ec676427d2d1ffb63b8c180dacdd40ed4491b7",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141911123232Z/bc798367-45fb-5f25-90ab-f763b5aa5603/spec.json",
+      "byte_count": 617,
+      "sha256": "b610fa8ab76b4cfdde5818c3952380867a6e87c26cb0edd5f60c755d4cdb68e8",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141911123232Z/bc798367-45fb-5f25-90ab-f763b5aa5603/stderr.bin",
+      "byte_count": 297,
+      "sha256": "21ca1ffcc2b0ed618d7f1545fc5e8d885f7e05d348aeca6a355d05e417e4f603",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141911123232Z/bc798367-45fb-5f25-90ab-f763b5aa5603/stdout.bin",
+      "byte_count": 24,
+      "sha256": "d1913fce9e508107d18ad38aed7a8485bb2e08f29fb0028d12e604b2a8359b4b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T141911123232Z/validation-report.json",
+      "byte_count": 6137,
+      "sha256": "4e44bf38c13842c75f67b4d6aa2ff4a5c275a627feecd818aeedeb166cd14d95",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T145443489813Z/56fd0958-9f60-5941-941b-5d58922a841d/output.json",
+      "byte_count": 958,
+      "sha256": "370b489500b0bec7537b75f8d682f96e1e13fa76f2f8746fe571741371f42cbc",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T145443489813Z/56fd0958-9f60-5941-941b-5d58922a841d/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T145443489813Z/56fd0958-9f60-5941-941b-5d58922a841d/runtime-receipt.json",
+      "byte_count": 366,
+      "sha256": "df1e728b7989a45bedfcf32ec025b5a178eb337313a62c32167af3396219bd41",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T145443489813Z/56fd0958-9f60-5941-941b-5d58922a841d/spec.json",
+      "byte_count": 615,
+      "sha256": "ce4c0d5a185adc8f234c478939438d4cda0e6f7d75387a531fefa08fe0e15115",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T145443489813Z/56fd0958-9f60-5941-941b-5d58922a841d/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T145443489813Z/56fd0958-9f60-5941-941b-5d58922a841d/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T145443489813Z/eb06f590-7f09-5001-989c-16d1cfc6a6f8/output.json",
+      "byte_count": 958,
+      "sha256": "4a1d43a3b3792c0b58b1c0dfc6c52b7c51c5c532d690e26c75ccf838cf929cb4",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T145443489813Z/eb06f590-7f09-5001-989c-16d1cfc6a6f8/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T145443489813Z/eb06f590-7f09-5001-989c-16d1cfc6a6f8/runtime-receipt.json",
+      "byte_count": 367,
+      "sha256": "f6bc6d63618f8511a56b2bdadd4d3d7da55a272dcdad30fdf1b7edc9e79d0ab9",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T145443489813Z/eb06f590-7f09-5001-989c-16d1cfc6a6f8/spec.json",
+      "byte_count": 615,
+      "sha256": "ba79632720c0da7541887be1dc05a5f54d46f05a97795e87f34ae32deb896c1c",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T145443489813Z/eb06f590-7f09-5001-989c-16d1cfc6a6f8/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T145443489813Z/eb06f590-7f09-5001-989c-16d1cfc6a6f8/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154828735188Z/146e500d-8b75-5e41-bc8d-89ee454dc29d/package.py",
+      "byte_count": 86,
+      "sha256": "b2e7d8bed18be4fd291f208500b2a4983233da09eee1bdb9a8773298dd8d647e",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154828735188Z/146e500d-8b75-5e41-bc8d-89ee454dc29d/runtime-receipt.json",
+      "byte_count": 850,
+      "sha256": "8abe946a05bf3130aa488a5c8dc9d02a887ae780254b56d21fb37e75f6aa8c7f",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154828735188Z/146e500d-8b75-5e41-bc8d-89ee454dc29d/spec.json",
+      "byte_count": 617,
+      "sha256": "27a6fccf4949e2485449034ab397b24eddabdbe64d264cb2d3cac4ec681d97ef",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154828735188Z/146e500d-8b75-5e41-bc8d-89ee454dc29d/stderr.bin",
+      "byte_count": 297,
+      "sha256": "acd5ab3203284933f448b23883bcf55486a260abd266b27b883b26bb372949a6",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154828735188Z/146e500d-8b75-5e41-bc8d-89ee454dc29d/stdout.bin",
+      "byte_count": 24,
+      "sha256": "d1913fce9e508107d18ad38aed7a8485bb2e08f29fb0028d12e604b2a8359b4b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154828735188Z/21f9517a-a489-586c-85db-846d81350d42/output.json",
+      "byte_count": 958,
+      "sha256": "37cd23152303c54ea33b0e239180edca48c4ab0cd6c958006575d185beecc903",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154828735188Z/21f9517a-a489-586c-85db-846d81350d42/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154828735188Z/21f9517a-a489-586c-85db-846d81350d42/runtime-receipt.json",
+      "byte_count": 851,
+      "sha256": "1f99a46c41a38deb9af5d484b4ff1082d8939b759b1c04010c9f4da20346d1ef",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154828735188Z/21f9517a-a489-586c-85db-846d81350d42/spec.json",
+      "byte_count": 617,
+      "sha256": "f2b48fc831a6247b5ec6f0613cce03a3a5a007069d702398e5c7e204e85aac6b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154828735188Z/21f9517a-a489-586c-85db-846d81350d42/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154828735188Z/21f9517a-a489-586c-85db-846d81350d42/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154828735188Z/validation-report.json",
+      "byte_count": 6138,
+      "sha256": "0f306a8413a15dcdbf53768566ba64a09fda57031b75c641664df541af1f1dea",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154829855967Z/0a1be97b-8875-56a3-87d2-2d8f199a25ba/output.json",
+      "byte_count": 958,
+      "sha256": "3435fa91ae027a2293efde83d224fcbf832d6b6ff302ffcda36b0fc1a6e6f67a",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154829855967Z/0a1be97b-8875-56a3-87d2-2d8f199a25ba/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154829855967Z/0a1be97b-8875-56a3-87d2-2d8f199a25ba/runtime-receipt.json",
+      "byte_count": 832,
+      "sha256": "ab4c80c72933c0a3c523f7dcf606db4e646d710e7d1ecac2b289d5ab8ed3fc9b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154829855967Z/0a1be97b-8875-56a3-87d2-2d8f199a25ba/spec.json",
+      "byte_count": 615,
+      "sha256": "28cbd7fe9af086927b6869d47173d3b2631a0172108364b517f710c6172e89b1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154829855967Z/0a1be97b-8875-56a3-87d2-2d8f199a25ba/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154829855967Z/0a1be97b-8875-56a3-87d2-2d8f199a25ba/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154829855967Z/8e73480a-9e88-53d9-9565-c64e77d1285e/output.json",
+      "byte_count": 956,
+      "sha256": "e701a3e75c13601f85e5db83a15ad677bfa8fb1d3ab613677b99105fa0f3f2a8",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154829855967Z/8e73480a-9e88-53d9-9565-c64e77d1285e/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154829855967Z/8e73480a-9e88-53d9-9565-c64e77d1285e/runtime-receipt.json",
+      "byte_count": 830,
+      "sha256": "abdad40288b4db8c2b8756b828bdffde62255aa67c5fcd039f4deeed5a268f75",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154829855967Z/8e73480a-9e88-53d9-9565-c64e77d1285e/spec.json",
+      "byte_count": 615,
+      "sha256": "844050722d4641a7f55454e74db2992767ce7b2d14b8397d1f748b9c59ef4074",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154829855967Z/8e73480a-9e88-53d9-9565-c64e77d1285e/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154829855967Z/8e73480a-9e88-53d9-9565-c64e77d1285e/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154948099307Z/6b888050-788c-53c1-ae3b-3b71592bfca5/output.json",
+      "byte_count": 958,
+      "sha256": "7d3f34168df7c8bda918550b490a693367984469392c5ce521e988ea5437573a",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154948099307Z/6b888050-788c-53c1-ae3b-3b71592bfca5/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154948099307Z/6b888050-788c-53c1-ae3b-3b71592bfca5/runtime-receipt.json",
+      "byte_count": 832,
+      "sha256": "0cf552491b5398c07c0ff8eff1be69a84a794bca200456c82688b000494e3e40",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154948099307Z/6b888050-788c-53c1-ae3b-3b71592bfca5/spec.json",
+      "byte_count": 615,
+      "sha256": "a849951559ff15cfbd27b389ea4f0dd69cecd55520031ec7b61b5918119216b9",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154948099307Z/6b888050-788c-53c1-ae3b-3b71592bfca5/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154948099307Z/6b888050-788c-53c1-ae3b-3b71592bfca5/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154948099307Z/dc663b38-bfbf-5c0f-9b9b-e79838cc3520/output.json",
+      "byte_count": 958,
+      "sha256": "8ad3214ae02424e4b1fd59ac08a69f241e3d904cc494362169c74478c6302558",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154948099307Z/dc663b38-bfbf-5c0f-9b9b-e79838cc3520/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154948099307Z/dc663b38-bfbf-5c0f-9b9b-e79838cc3520/runtime-receipt.json",
+      "byte_count": 832,
+      "sha256": "c4911c601949a9206950f0cf69e72fbcf1b2b7e506867b76ac1099429530d167",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154948099307Z/dc663b38-bfbf-5c0f-9b9b-e79838cc3520/spec.json",
+      "byte_count": 615,
+      "sha256": "ffa9bcb181b8b51208eaba41e14b6442eeaa2b776ee4e455dd94c47980a7fc9a",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154948099307Z/dc663b38-bfbf-5c0f-9b9b-e79838cc3520/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T154948099307Z/dc663b38-bfbf-5c0f-9b9b-e79838cc3520/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/7f4e861d-b587-5fdd-bb72-3d73c66442d0/output.json",
+      "byte_count": 955,
+      "sha256": "e6dd362cdb539f160db0fc16ce4b04d3e0b1f2c7527803d1ab557d685ac7e2db",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/7f4e861d-b587-5fdd-bb72-3d73c66442d0/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/7f4e861d-b587-5fdd-bb72-3d73c66442d0/runtime-receipt.json",
+      "byte_count": 832,
+      "sha256": "e1da11d02a8c01952a6a883663b4ae2b664acbd50bc7658d7feebd7485d3a01e",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/7f4e861d-b587-5fdd-bb72-3d73c66442d0/spec.json",
+      "byte_count": 615,
+      "sha256": "629a109da2f18b8bde8b28fa5d109b269502067495fbce9aa0c2009612eb4f55",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/7f4e861d-b587-5fdd-bb72-3d73c66442d0/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/7f4e861d-b587-5fdd-bb72-3d73c66442d0/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/925b22e6-f149-5a36-9fd1-6a0e1a60aad7/output.json",
+      "byte_count": 958,
+      "sha256": "a3573dec559a221f979f6b016bd95a28443ff79c06a6d70cd93495c1601c3dac",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/925b22e6-f149-5a36-9fd1-6a0e1a60aad7/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/925b22e6-f149-5a36-9fd1-6a0e1a60aad7/runtime-receipt.json",
+      "byte_count": 832,
+      "sha256": "d1622202414381c1653a853cdb145ba20821b106658688b7ee1fbd78f92c5265",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/925b22e6-f149-5a36-9fd1-6a0e1a60aad7/spec.json",
+      "byte_count": 615,
+      "sha256": "09dc6b3cb167e0a6df6cc255e39d8b1d8c9f316e559b122d8d90b89a2c0b6549",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/925b22e6-f149-5a36-9fd1-6a0e1a60aad7/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/925b22e6-f149-5a36-9fd1-6a0e1a60aad7/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/930d3c37-02de-5af5-bf3e-d84e5d180b08/output.json",
+      "byte_count": 958,
+      "sha256": "7b75eaa129a6113461fc437f555015efde1d42d9765a4248f117fa55c2ea7a62",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/930d3c37-02de-5af5-bf3e-d84e5d180b08/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/930d3c37-02de-5af5-bf3e-d84e5d180b08/runtime-receipt.json",
+      "byte_count": 832,
+      "sha256": "fe3f4da54531dc847672a78c1ad386b04660c43e99dd3bba2d6b07c8224343f2",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/930d3c37-02de-5af5-bf3e-d84e5d180b08/spec.json",
+      "byte_count": 615,
+      "sha256": "21b5eedbf2ffa5c93cf65feea0c3eb99d209cd4373f801ca9dbbd4953cc1997f",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/930d3c37-02de-5af5-bf3e-d84e5d180b08/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/930d3c37-02de-5af5-bf3e-d84e5d180b08/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/d6281307-95c4-5606-98b4-5c7b34bd3b9e/output.json",
+      "byte_count": 957,
+      "sha256": "729093043c8509f915415c8f68c330ab3fe9f91d14f5d0ff1d78d8d1b60d3f7d",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/d6281307-95c4-5606-98b4-5c7b34bd3b9e/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/d6281307-95c4-5606-98b4-5c7b34bd3b9e/runtime-receipt.json",
+      "byte_count": 832,
+      "sha256": "dc8e4b06927f872282d7c4ada81fb41acefa7e321f1234c684b4494a0a112dae",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/d6281307-95c4-5606-98b4-5c7b34bd3b9e/spec.json",
+      "byte_count": 615,
+      "sha256": "1472143291767545272d856f7173acd4487da8b2448c8a21ef5e268709f268b2",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/d6281307-95c4-5606-98b4-5c7b34bd3b9e/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155137760677Z/d6281307-95c4-5606-98b4-5c7b34bd3b9e/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155304092811Z/3395dbda-a980-56a7-95af-d14a1a8dbaaf/output.json",
+      "byte_count": 955,
+      "sha256": "a3846bd3b12c56b12735e85ae3dd9cf9d778aa0f99d41e96eda551a92dd3cb32",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155304092811Z/3395dbda-a980-56a7-95af-d14a1a8dbaaf/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155304092811Z/3395dbda-a980-56a7-95af-d14a1a8dbaaf/runtime-receipt.json",
+      "byte_count": 850,
+      "sha256": "5b5976eb39e81084318cb87f1d25678a7be7591ecf79f48c81b1ccfafd865a95",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155304092811Z/3395dbda-a980-56a7-95af-d14a1a8dbaaf/spec.json",
+      "byte_count": 617,
+      "sha256": "07329f36a38d478d491ac6984b86e3e349f050429b34474a6959282a63329a7f",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155304092811Z/3395dbda-a980-56a7-95af-d14a1a8dbaaf/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155304092811Z/3395dbda-a980-56a7-95af-d14a1a8dbaaf/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155304092811Z/3949998d-5ece-5457-bc80-d990aa6b2167/package.py",
+      "byte_count": 86,
+      "sha256": "b2e7d8bed18be4fd291f208500b2a4983233da09eee1bdb9a8773298dd8d647e",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155304092811Z/3949998d-5ece-5457-bc80-d990aa6b2167/runtime-receipt.json",
+      "byte_count": 851,
+      "sha256": "b34b18da783bfa4e062df403522783b97be81f911629cb967a57a64be2df21ce",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155304092811Z/3949998d-5ece-5457-bc80-d990aa6b2167/spec.json",
+      "byte_count": 617,
+      "sha256": "b147d372faa003ceca8c3532722765b7606f9b5bc03c1a2737ae82383a048284",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155304092811Z/3949998d-5ece-5457-bc80-d990aa6b2167/stderr.bin",
+      "byte_count": 297,
+      "sha256": "60c7651c3c1debf95d1e25979edf71a957adaa364d7849c333e20ca28cf3e2f7",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155304092811Z/3949998d-5ece-5457-bc80-d990aa6b2167/stdout.bin",
+      "byte_count": 24,
+      "sha256": "d1913fce9e508107d18ad38aed7a8485bb2e08f29fb0028d12e604b2a8359b4b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T155304092811Z/validation-report.json",
+      "byte_count": 6440,
+      "sha256": "9e7cdeffc1da84742c00b79c09cb45d99312bdeddf7fca49b09d5e2c4d23f50d",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/69ab74aa-3cf8-5912-ad12-54665695899f/output.json",
+      "byte_count": 958,
+      "sha256": "c35a8f044303a68158dab1e6e89e392b8f3ad27a62ac85e51a6299e473134350",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/69ab74aa-3cf8-5912-ad12-54665695899f/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/69ab74aa-3cf8-5912-ad12-54665695899f/runtime-receipt.json",
+      "byte_count": 831,
+      "sha256": "e014c230ffba963f4545fe4927d6a32e9911b6151dc1d2cf4a39d9464dc977b5",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/69ab74aa-3cf8-5912-ad12-54665695899f/spec.json",
+      "byte_count": 615,
+      "sha256": "9710311832eec592c2ef5ec14451ede4378be9cfa32b2099ea6ced24adfd04e4",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/69ab74aa-3cf8-5912-ad12-54665695899f/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/69ab74aa-3cf8-5912-ad12-54665695899f/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/807f9f7a-8557-5341-8f7a-73a61ca7a141/output.json",
+      "byte_count": 954,
+      "sha256": "8e5dee98e933bb691cbe13f6aff5e5db558efc8393085b903e4b9ec5e29b3d9d",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/807f9f7a-8557-5341-8f7a-73a61ca7a141/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/807f9f7a-8557-5341-8f7a-73a61ca7a141/runtime-receipt.json",
+      "byte_count": 830,
+      "sha256": "533cd310638c2383cf55af3e986242bb1bf2c34da533d8478c57041fe05b5077",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/807f9f7a-8557-5341-8f7a-73a61ca7a141/spec.json",
+      "byte_count": 615,
+      "sha256": "ad3000a4efd4ea8553267490efd9439c6610b4a832d80011f006f994d41dfef3",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/807f9f7a-8557-5341-8f7a-73a61ca7a141/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/807f9f7a-8557-5341-8f7a-73a61ca7a141/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/d92a2f4d-9e67-5f28-83ff-249ee5eca50a/output.json",
+      "byte_count": 957,
+      "sha256": "7e5f1d2e5baf849bcb80c5cb7469ccd40139c51b0d35c0f92dea51bd73a160f2",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/d92a2f4d-9e67-5f28-83ff-249ee5eca50a/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/d92a2f4d-9e67-5f28-83ff-249ee5eca50a/runtime-receipt.json",
+      "byte_count": 832,
+      "sha256": "9d1c66a2d66ce4ebe6bf5763e27d9436326256a326905736e4a25dc71562601f",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/d92a2f4d-9e67-5f28-83ff-249ee5eca50a/spec.json",
+      "byte_count": 615,
+      "sha256": "37614cd008d6cf91bc651df35b775e2350d192e70970b3d1d682fff99dead694",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/d92a2f4d-9e67-5f28-83ff-249ee5eca50a/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/d92a2f4d-9e67-5f28-83ff-249ee5eca50a/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/e941f150-bbd0-5433-951f-956941450c6e/output.json",
+      "byte_count": 958,
+      "sha256": "8cb36ddd47d417f42a4795996358c12bc3bd82e87dea35336d221ecb723569b9",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/e941f150-bbd0-5433-951f-956941450c6e/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/e941f150-bbd0-5433-951f-956941450c6e/runtime-receipt.json",
+      "byte_count": 831,
+      "sha256": "f5b1f058d6e531b270b3a3d38470552528628618d6261d2c1d1d105cfeda1fb9",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/e941f150-bbd0-5433-951f-956941450c6e/spec.json",
+      "byte_count": 615,
+      "sha256": "96d4ec55f3bba6819f17636e8d8fd7ceca395b52b77e61e621c27f70e8e91dd4",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/e941f150-bbd0-5433-951f-956941450c6e/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/e941f150-bbd0-5433-951f-956941450c6e/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/ec6b58a9-3470-5a9b-b278-777ee331cf35/output.json",
+      "byte_count": 958,
+      "sha256": "f41302233e0ff9a544fffdd0c5fe1c66373db96e8d0fa69f69458d6e355580c5",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/ec6b58a9-3470-5a9b-b278-777ee331cf35/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/ec6b58a9-3470-5a9b-b278-777ee331cf35/runtime-receipt.json",
+      "byte_count": 832,
+      "sha256": "f6c86dee58be9c3efb119e2333e29622bfe29431adf81d6e5cc3a2dc719fdf43",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/ec6b58a9-3470-5a9b-b278-777ee331cf35/spec.json",
+      "byte_count": 615,
+      "sha256": "afa5e064d650cca5caed859217653960bcdb7da42a43b5e15b2aae841a07717b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/ec6b58a9-3470-5a9b-b278-777ee331cf35/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/ec6b58a9-3470-5a9b-b278-777ee331cf35/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/ed95b80a-3d8e-55fb-8ec5-4d7124d7e13e/output.json",
+      "byte_count": 958,
+      "sha256": "3a10b75ecc348ea88c6ec47ddfbf2203fd52e1a5a2006021ab6d337322f7275d",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/ed95b80a-3d8e-55fb-8ec5-4d7124d7e13e/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/ed95b80a-3d8e-55fb-8ec5-4d7124d7e13e/runtime-receipt.json",
+      "byte_count": 832,
+      "sha256": "fa272e137e01afb187a15532b1fd8e404d2a99d088078b2d0c980919ccd0852b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/ed95b80a-3d8e-55fb-8ec5-4d7124d7e13e/spec.json",
+      "byte_count": 615,
+      "sha256": "c7ba0cb2b37da0a5429e6f9480b3001d0eef28e742fadf18ea055173b37f7e18",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/ed95b80a-3d8e-55fb-8ec5-4d7124d7e13e/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T161832006353Z/ed95b80a-3d8e-55fb-8ec5-4d7124d7e13e/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T162056877414Z/0b76be5b-1367-5639-bcdc-c6bbcfa79c95/package.py",
+      "byte_count": 86,
+      "sha256": "b2e7d8bed18be4fd291f208500b2a4983233da09eee1bdb9a8773298dd8d647e",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T162056877414Z/0b76be5b-1367-5639-bcdc-c6bbcfa79c95/runtime-receipt.json",
+      "byte_count": 850,
+      "sha256": "62c99d29a3a0f16a4c570c84c2eed3c9a4e358bb6e777eb98a6d768c2ab7dc3b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T162056877414Z/0b76be5b-1367-5639-bcdc-c6bbcfa79c95/spec.json",
+      "byte_count": 617,
+      "sha256": "cfbed4370b95510ab5e57b1e503bd00941db48b2d6120fae729c6b5fc7cdb43f",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T162056877414Z/0b76be5b-1367-5639-bcdc-c6bbcfa79c95/stderr.bin",
+      "byte_count": 297,
+      "sha256": "c62ee10dc222da28c1c1b9e5cc6f23f4e149dd23fc0e3ad319b8fc1366ca57df",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T162056877414Z/0b76be5b-1367-5639-bcdc-c6bbcfa79c95/stdout.bin",
+      "byte_count": 24,
+      "sha256": "d1913fce9e508107d18ad38aed7a8485bb2e08f29fb0028d12e604b2a8359b4b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T162056877414Z/834e94f0-2bf1-54df-89e2-998124a6c01a/output.json",
+      "byte_count": 958,
+      "sha256": "66ddd2ccc18b2794eac4818f16355ce1bc909c35f1fdc9cf0a88fa4a06ef03ac",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T162056877414Z/834e94f0-2bf1-54df-89e2-998124a6c01a/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T162056877414Z/834e94f0-2bf1-54df-89e2-998124a6c01a/runtime-receipt.json",
+      "byte_count": 850,
+      "sha256": "18688cd2c50e95c59d9aaca707c8c90e0bd39f73f3c4161fd4725ef64ea45c0e",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T162056877414Z/834e94f0-2bf1-54df-89e2-998124a6c01a/spec.json",
+      "byte_count": 617,
+      "sha256": "e076cbc69b7e85ed6913b7a1d6cc8a7b15a3b3cbe9919ac7fd0b9fbd62dfe017",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T162056877414Z/834e94f0-2bf1-54df-89e2-998124a6c01a/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T162056877414Z/834e94f0-2bf1-54df-89e2-998124a6c01a/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/network-execution/database/20261014T162056877414Z/validation-report.json",
+      "byte_count": 6438,
+      "sha256": "97cb83e0066f197d8a18e72b654ee87506b1dabfb5032b5e30fc0a733bd628b6",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141432780469Z/raw-e7fcccc4cba41b76242d4fd740d209006c50c2ca71be599aff147e6ea8714627",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141647023267Z/raw-13dd20f6363c7e53719a7f3a93c8610e034e7bb95bb92846d09cf6d70c4b1f16",
+      "byte_count": 956,
+      "sha256": "ac39cfa22b8e82da228a8fecadb9fb6d42c3d6d351ff6aa611c1b07a58208ddd",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141647023267Z/raw-1ccb31913bd19b5dbea39f0ea14ebd3dce0108dddc3353133d79b6a49fef417b",
+      "byte_count": 891,
+      "sha256": "63c464395caa1dfa81cddf24173d8cf604865de05f7014ce79b70566312fddfe",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141647023267Z/raw-21fb132ebe139e5d97bd568212ef1c4ced0113f0b38b199bf7d4af0a8a4c2ac0",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141647023267Z/raw-29ade4e78cb09028ce2af11c3377ae4b067818716348b76d3d77ea012b2c7b61",
+      "byte_count": 617,
+      "sha256": "7e55748d12b98b89ec2cb81fa4917ecfcf128c4d7f85cc2508177d1f10f2acc4",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141647023267Z/raw-44806d3beb7c1630ab0d1401fdf5a39fa4fdc7651d3274318075a9072ddb7d39",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141647023267Z/raw-5f37efcddc76ce59332861137146cb2fa25c5fd5db33ec17d1276a3be4c1d314",
+      "byte_count": 4349,
+      "sha256": "461033a617f087ba6d309c51d8113585de93316db37ffca7ec954de355c583bd",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141647023267Z/raw-d8b2ece46e3071b4738334cb665f905af25a84c0182c71285c2814b580a9947b",
+      "byte_count": 386,
+      "sha256": "d124ac338eadebeb98db64662e00c659fcb4c87a907bd4cb519a0d03dae50c23",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141647023267Z/raw-f262239fdee725c89b8e4e86d3b3973a95dbbaad9d8daa421b05490d59974037",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-00e9d207455b221b9230a27f7d16673741d7f5eba9268740ece946b5b7943e93",
+      "byte_count": 958,
+      "sha256": "b6ae499f3e1fd42fb1ab6c77d6eebcc22c71d5725198796fca81bcfa9c692f28",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-09bb1f14b49e14dc867c5f69bc05d9c2c0b2fb96b30df1a15b31b9614c550533",
+      "byte_count": 617,
+      "sha256": "9a4b2e8f15782903106748fc68cbf84d2d07cd938dfa279e2a69a5e53b9dcc7e",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-0cfe099900e2e7ef8e1299b22e8a971aa3d30309a910c8f0a2a852aae70d66f5",
+      "byte_count": 297,
+      "sha256": "21ca1ffcc2b0ed618d7f1545fc5e8d885f7e05d348aeca6a355d05e417e4f603",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-17ebefb4acec28c0095d4432fb6746413f0e962112de35030f3d3016ae373e30",
+      "byte_count": 893,
+      "sha256": "95b917924cee7cf3f04ec7680069a00fcddad953b6d4e618e6da6f1733ec3db7",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-23086dfed853bba4556ccd2f09599d598f7a0aca9a38ef2dd2a9deb90b6d58c6",
+      "byte_count": 24,
+      "sha256": "d1913fce9e508107d18ad38aed7a8485bb2e08f29fb0028d12e604b2a8359b4b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-345faae876452df4da5c72c2e10ce4b08dc50b45dad9c5755513fc7f6bbe88bc",
+      "byte_count": 4358,
+      "sha256": "0db2e2a1e84b1a506c27b56134eeed474c56001af8a3e0c6ce31957df9cb5ac3",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-36c2a4539d55aa957043396be40939a4b40329d4d2aaf1e90a889dcf68f85496",
+      "byte_count": 385,
+      "sha256": "48bc11cebcbec3be4355c3d473ec676427d2d1ffb63b8c180dacdd40ed4491b7",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-3fb97d5af351964de3b2e6dd791a07edaf5730a94f0948ab9a8cf137b3b52cd9",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-4c903e3943001d6cc21318b3f1539a8654ed92435968c69d10e3a867acc7f2e7",
+      "byte_count": 384,
+      "sha256": "ebd6ec099ebac801b4dc7b36212475e2c857908533b589d3bc81bb406a9c6f75",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-4fe18d56b64f0dcf8691290177b390e6bef3322faaf2b9dba932d32380ee2934",
+      "byte_count": 617,
+      "sha256": "3f5bf0a94fbde42e3f2a151c3e9a4f368ed0407752fbfb9fd3ff6ba508b97458",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-5cc9ee0f4037fc4ab952a1b59023396477891823e1531e270dce969272a3f3c0",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-61db8ec1844f4585ab60c0ceefe841f16b454a9f212db0db78bb6f18eaa37ba9",
+      "byte_count": 86,
+      "sha256": "b2e7d8bed18be4fd291f208500b2a4983233da09eee1bdb9a8773298dd8d647e",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-7770f5e10e52ecfbe2338b361883163bc4e36d0acd69bb46d6f0ca8e9f0ce8c7",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-788d1ddb95775785fb0f9cc913ae91e97d8b2f6e9f218a658a221775be137f89",
+      "byte_count": 4358,
+      "sha256": "6649e2f6df0824e7ebbce8e6228e04bad16e6f0bb5ed5c2d95bfb609deb5069d",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-9861ff483d63e9f823ab29f3e564b7fe628df0095ecb08d35590a61a125c8c4c",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-9d8b20c7a488111a7b27864c030b5176bde564c803d333d4ec072e727033c598",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-a8404a7714784808ebdfd4a5c0c91d80442b5416fe2022574d5265795480b50e",
+      "byte_count": 4358,
+      "sha256": "93a7dd7310d3bad3fbbad31bb4342e22d9a786cc66585f7fecaa5dd01fb37833",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-ad976d5c99dcbf8f03bcb85c0a15fb7533fd8cd9a4c3d4b4142f988c14f552ff",
+      "byte_count": 157,
+      "sha256": "adb1a714ca2ae737f67ddca09db10065ab0aec54072e884b8466c5b2558d5cea",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-d95ba17ffba2fc0a6140552f6df37643c564628357b74feba0fe5b55b8bdc5f6",
+      "byte_count": 617,
+      "sha256": "f2e142cb108ad2acc65bdf8fee618b530eeef9c4c0f1b59a28ec2f3cc3967c68",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-e8a0afa3e0c192d24e83f92c3cfbcdf6bb20991f62a0815eb2a902c7b9300143",
+      "byte_count": 4358,
+      "sha256": "72d5073f79020a364d4a60b6a39aa7bcb3ad1a333bed1002077f7f6cdb086284",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-ecd8e628414a9db140258954c8a023d85da34f2e71fce7595f2ad9873fcbedc6",
+      "byte_count": 193,
+      "sha256": "ea32b7f8d44c44541a45e185b2d7359fb2cd396a404cb9b0ee9b641d317477eb",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T141911123232Z/raw-f411f20a5e579c3c0426e2e0abd26fd7dd9342bb5f3bfa415d9ad8f13bc973eb",
+      "byte_count": 617,
+      "sha256": "b610fa8ab76b4cfdde5818c3952380867a6e87c26cb0edd5f60c755d4cdb68e8",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T145443489813Z/raw-085db41ae5de05cdcc57c3364fa71d5c2510f1d6ca176b91238c9051f6c270fd",
+      "byte_count": 355,
+      "sha256": "39d7f018b405468d085a5ef58c38812a56ef0be7370973d3536ce4907e9d5255",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T145443489813Z/raw-1244bf235537e54c05182d92426081278b054cd2049f37a8e339814b6474335a",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T145443489813Z/raw-13f277ad96f21c15445624c61dff9b4693e805f01282af46ae41b9abc1f5f623",
+      "byte_count": 366,
+      "sha256": "df1e728b7989a45bedfcf32ec025b5a178eb337313a62c32167af3396219bd41",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T145443489813Z/raw-332077f93503f47d80051e2d1216ee8a5b4b939abc4149af2958cee81ce9386e",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T145443489813Z/raw-4ef2006f00355eaaee26906c07175425352219b85216c51e64927e863343cddd",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T145443489813Z/raw-4fa39f6bb7641b22588bb5504a2e6c50bf011b4bec36099c3e4b22c98faf4de2",
+      "byte_count": 893,
+      "sha256": "63401a40dc10a0ddf6a5daebf4e4a05d184ccc0a024e7aaba3b78b276d1fcb62",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T145443489813Z/raw-6f59a9651a8ab2620a3e785c4d153a0da01aa33295fec645a9c92516fd5261d1",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T145443489813Z/raw-783b63fd227c215b8eaeb2566a9bfcda6f20688768e95cabbc55b54d074ce497",
+      "byte_count": 615,
+      "sha256": "ba79632720c0da7541887be1dc05a5f54d46f05a97795e87f34ae32deb896c1c",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T145443489813Z/raw-b9423a54c9673d886e66d4473105a60ae3f148cf6bd262293ca49aafda6cca94",
+      "byte_count": 615,
+      "sha256": "ce4c0d5a185adc8f234c478939438d4cda0e6f7d75387a531fefa08fe0e15115",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T145443489813Z/raw-bb51f802dc3e3f2642faa1e74437d76a7323c75d8e0164affd10eb723acca872",
+      "byte_count": 367,
+      "sha256": "f6bc6d63618f8511a56b2bdadd4d3d7da55a272dcdad30fdf1b7edc9e79d0ab9",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T145443489813Z/raw-c7d4d8cce6fab0d3ab4041b2dce0c585b815d785373cd5d1618b8e40e96e7e12",
+      "byte_count": 958,
+      "sha256": "4a1d43a3b3792c0b58b1c0dfc6c52b7c51c5c532d690e26c75ccf838cf929cb4",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T145443489813Z/raw-c86e49b041bae9bfe51b0be59d0b6310197e62770fc958e259235b5ffcfc0f3b",
+      "byte_count": 958,
+      "sha256": "370b489500b0bec7537b75f8d682f96e1e13fa76f2f8746fe571741371f42cbc",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T145443489813Z/raw-d832ad2fe17f236ac633dd8b7f9dc8ed4bd0e505766c29852d20531fbd63c35a",
+      "byte_count": 5139,
+      "sha256": "9f8b049ed273f9da55a28ae5285379512904f42693d3fecaaf7b38b25436a953",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T145443489813Z/raw-fbab36278d50a31a300e05d32497acc34dd342f7031ac1256dfd8a6e8769766f",
+      "byte_count": 893,
+      "sha256": "302c9a0effa2a341dd222fc99eab438f1f804b92f3b759bbe0dfc62d3b44f253",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-151e04cfb2343bfab8822034d6ee58c34e2249164cd080053c2ffee11c5e9a83",
+      "byte_count": 850,
+      "sha256": "8abe946a05bf3130aa488a5c8dc9d02a887ae780254b56d21fb37e75f6aa8c7f",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-21ce8ba14305c58e640b9f2155c7b24d6f833beac81f1bf24ddb9b0568221427",
+      "byte_count": 617,
+      "sha256": "f2b48fc831a6247b5ec6f0613cce03a3a5a007069d702398e5c7e204e85aac6b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-300a342b263f8f22ab832816bdd6fc8e2f5d1362cc34cad662afafe00e1d01f7",
+      "byte_count": 4358,
+      "sha256": "15e3646e0dcd909689ca476171175af0e015a93bf7dee5686b43d4f3636f8fbe",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-3cc83ab9e6efc865d30a2fbee8ca8f8514b5c32c7bdf92827d269e041f70ca3e",
+      "byte_count": 193,
+      "sha256": "ea32b7f8d44c44541a45e185b2d7359fb2cd396a404cb9b0ee9b641d317477eb",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-3f9c56217f7e7d8f3eeec4a6a8c9c11df80bbf0fcdedef19d49f3eb7913e3afc",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-401b3b8e93b50b2b43eb062dc9aa47ebe6d34074fae47fb0dc8b45fe343c5c49",
+      "byte_count": 86,
+      "sha256": "b2e7d8bed18be4fd291f208500b2a4983233da09eee1bdb9a8773298dd8d647e",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-4042860fc8629d02f9c0d3f2ab3c074b75648ab262d49445c71703ec5fbb6998",
+      "byte_count": 4358,
+      "sha256": "d5946d5da70bf31fabfaa318a0220da844acf343c66883f4397b63cd8b5468c8",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-63b15ead81013d960f5db087d4d65e02d07b9b82bc6a2f3f02e28427b6c69c5f",
+      "byte_count": 617,
+      "sha256": "0280203668220196d6065ffb05a3c40aff2571efc5d33389937308888603fc54",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-6bec342a6581d334362b7568fc7033557e5701a3029c6960562a40b6571f6c82",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-7c32bf90f550b83c7808ca66200581e32c5141a5c663d36387f73891e5815e0a",
+      "byte_count": 24,
+      "sha256": "d1913fce9e508107d18ad38aed7a8485bb2e08f29fb0028d12e604b2a8359b4b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-8c5dbd2a727ce6d952c2f74b075ff3ec053dc362be7c483c39a8d24109e49e41",
+      "byte_count": 297,
+      "sha256": "acd5ab3203284933f448b23883bcf55486a260abd266b27b883b26bb372949a6",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-8e81b3653262e67b0205bb82e867fd238c7851da7625af9a22f3c108b0762215",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-91959384847e7f1a8b8b3cafb8b52f8f1f44856bf7c23eab7b438dab8ba594c4",
+      "byte_count": 851,
+      "sha256": "1f99a46c41a38deb9af5d484b4ff1082d8939b759b1c04010c9f4da20346d1ef",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-a1c52a55b2aef6b58b7f4ad0ec6001abcf803aa0e082b76ff9fbef294fca7ec6",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-b5881cf64aadd5f5b29291ddaf0ca1e5d502e18caaf35539d16767ab6a2e61b5",
+      "byte_count": 157,
+      "sha256": "adb1a714ca2ae737f67ddca09db10065ab0aec54072e884b8466c5b2558d5cea",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-bc98c80b4821ede57b99a8f82cec4bb2d0002a9cf590bd36eb3aa509a81554b0",
+      "byte_count": 617,
+      "sha256": "ac2cce81df67e4819262946d55f7bf9f983861c4e26e325f8ad7a8184864faee",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-c0ab0d0bf7f2846c8b9cab51950d098c797d18d5096116d2f34b16a522be580e",
+      "byte_count": 4358,
+      "sha256": "a0d3d3dc65d74062443a5a9b5eb06fbe95f9409c873c156559247f1e52fa982f",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-c47872a1e5c6dfba89e94299fb6df5a0487c8d232cd6f4b6ac64d33be6e95779",
+      "byte_count": 893,
+      "sha256": "e7c073a883c09969f8c4bef7af2f56390a0cc128eb7966b9b8f401eb860277a0",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-d80b10efa5bd0599d3cdd6ab9692c0f95800a0a0b2a32d0e3b03f729be3b4422",
+      "byte_count": 617,
+      "sha256": "27a6fccf4949e2485449034ab397b24eddabdbe64d264cb2d3cac4ec681d97ef",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-d8aab61b43904bd3b623f5bea5bf486b5e0df050ecc7b1ead4a610bc23af79f7",
+      "byte_count": 958,
+      "sha256": "37cd23152303c54ea33b0e239180edca48c4ab0cd6c958006575d185beecc903",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-e0e15d1939ceae1fef0d9e90e0944a62839f5bd5b0a09b17bba3abdba213d31f",
+      "byte_count": 4358,
+      "sha256": "5780b6cf9e6b0b7e8eccba6c74518a0f8ddba0a0fe24201d56cabc637297cd11",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154828735188Z/raw-f929cd8875289553afb35d4920f333531ef7ac43ca85c196b704192d46c61e49",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154829855967Z/raw-0030a0c924853b0e8664a575392bd38ce19e9f4e20907d416d88b1be1c1123d5",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154829855967Z/raw-3f465d8395dbfc986c5050b224fdf4779f2e8020e3e0c9581a31541b0d3771d3",
+      "byte_count": 893,
+      "sha256": "189567ecfefbebc464ee465343953d957ce9c10c5fac9959f475bb23b499eef5",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154829855967Z/raw-4ea213b6af2af427e4d0ef754f6a3fe0f9267f9d855a5ff0cc78deeabefeea11",
+      "byte_count": 5139,
+      "sha256": "053f76ea224755252e8667a5ef6e61992a2efa60c69fb66919157ab70e2a39b1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154829855967Z/raw-6edf16e6d231efc84d1f451b1f3e203f618b7f1492247261d031d5b7c520c03d",
+      "byte_count": 891,
+      "sha256": "51dfffb3d8f940d77d3a2624287595d7657e831dd6bd7446b5795c7f074f1c0b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154829855967Z/raw-7079138679760ec1b0af9c3e3f5d1928ca0691664d68bf5e7a153a91993898da",
+      "byte_count": 830,
+      "sha256": "abdad40288b4db8c2b8756b828bdffde62255aa67c5fcd039f4deeed5a268f75",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154829855967Z/raw-8ec1d48d0f353b53f57e8258f25f8ec5981d14823462094de4a56cef99f92cd2",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154829855967Z/raw-96411d2058b1b289fa6b5676beb0d46a9f328022ef577bf85999befc3d63c906",
+      "byte_count": 615,
+      "sha256": "844050722d4641a7f55454e74db2992767ce7b2d14b8397d1f748b9c59ef4074",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154829855967Z/raw-98a4887f2b089a2251d2448189d4e511c70445e183f94d84d6287f38358ee2d8",
+      "byte_count": 355,
+      "sha256": "f9d74cc9c8bac8cea25281abb051c050aab32c2be67333936d8c2718531c1eab",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154829855967Z/raw-ad7283cfffe3aa8ce98401bf1f3183aca3b7eca9a3ab06aba139f7cb2cce70d1",
+      "byte_count": 958,
+      "sha256": "3435fa91ae027a2293efde83d224fcbf832d6b6ff302ffcda36b0fc1a6e6f67a",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154829855967Z/raw-bea0f0296811cd14bed9d775410ae990ac69183f0507b4e5a0528f2a9b59d5a2",
+      "byte_count": 615,
+      "sha256": "28cbd7fe9af086927b6869d47173d3b2631a0172108364b517f710c6172e89b1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154829855967Z/raw-bffd8a222d76c50cd8650e56bfce71fb2554d0bf1c536dbd78a6134cb62c9027",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154829855967Z/raw-d5e6e8ed026890118bb4d39c7ba66d5824c304af107dc6184f5111f8ad1805f2",
+      "byte_count": 956,
+      "sha256": "e701a3e75c13601f85e5db83a15ad677bfa8fb1d3ab613677b99105fa0f3f2a8",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154829855967Z/raw-f8753f386be9ffb190af29aec66a88923d04bb41bde8bc793365c9c4b2c127b4",
+      "byte_count": 832,
+      "sha256": "ab4c80c72933c0a3c523f7dcf606db4e646d710e7d1ecac2b289d5ab8ed3fc9b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154948099307Z/raw-2a1ef5307a90400b0b604adc8d3057a321e12876037b5ce5890bcd47b48d0e83",
+      "byte_count": 355,
+      "sha256": "4c94f9caeadbb303736b8e3529cab38ae69569539b56741cb3959e20f3a4f8e0",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154948099307Z/raw-3332273f5dc3814170e48fa761389ac6b61153330b2d59fd9f166772d1e89d9b",
+      "byte_count": 958,
+      "sha256": "7d3f34168df7c8bda918550b490a693367984469392c5ce521e988ea5437573a",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154948099307Z/raw-4bd250ec6ae6e26a719c73b42736071f70a6f1684ba9221ab40b76a8dc92159b",
+      "byte_count": 615,
+      "sha256": "a849951559ff15cfbd27b389ea4f0dd69cecd55520031ec7b61b5918119216b9",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154948099307Z/raw-54b8be0b268b10450ff558b2ca44a474e73c8c56044ac0492dab4492ed819b7e",
+      "byte_count": 832,
+      "sha256": "c4911c601949a9206950f0cf69e72fbcf1b2b7e506867b76ac1099429530d167",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154948099307Z/raw-5c0fc68bb1bf3ffa420501aafe90ba78ee3188e924407c5168be60f46ef77b64",
+      "byte_count": 5139,
+      "sha256": "2fb7cf7395ef1d5afc2b451862e4ab615b4c4d6673f98296ba8c5c8386808521",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154948099307Z/raw-66ef1ce4a2bab33de3f9033a9a7bf25a96cab9d9e46c51482133fb31f029c615",
+      "byte_count": 832,
+      "sha256": "0cf552491b5398c07c0ff8eff1be69a84a794bca200456c82688b000494e3e40",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154948099307Z/raw-a5367c850c6079900f1e3d3fa34ae51e0b4d9b60580161a0691d94fba9eee98c",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154948099307Z/raw-b31a13979689bed237421896338f0b4d38eab4fd756597119c2a9640f1a21c7d",
+      "byte_count": 615,
+      "sha256": "ffa9bcb181b8b51208eaba41e14b6442eeaa2b776ee4e455dd94c47980a7fc9a",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154948099307Z/raw-bbfcff116d20184064e2911a1c4fbc5772402fd5ba81dfaabada2d43cff11f65",
+      "byte_count": 893,
+      "sha256": "e5114bd0cf7004cb768e02d3595143dc9a7acad9c7a7a400463ac9d25f24fc19",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154948099307Z/raw-bffdd441fd3397390b4fae08a588622e2d487cd9492d83889d0c22cc816bd0c8",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154948099307Z/raw-e164e803470de8f9634dc4a5d48bd62ddc3a8ee85a990efe17845389c31eb95d",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154948099307Z/raw-e688cb4812549208105b4b0130618d1b7aa5d1d6762024fe914ebbaf7f7b9720",
+      "byte_count": 893,
+      "sha256": "f1ee6c925eae8153f2b1f5c8de782da352f48c4583b8f556c8723dbc8785eb3d",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T154948099307Z/raw-ff3c3e576f9df58de66efbd5d0e9b704164fc68d101ec483eccc9d811fdc43e9",
+      "byte_count": 958,
+      "sha256": "8ad3214ae02424e4b1fd59ac08a69f241e3d904cc494362169c74478c6302558",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-00e99f17bb02a55ed363d9594a2d2179a1e52bb5e5338f0c75ac621d0391dbd0",
+      "byte_count": 832,
+      "sha256": "e1da11d02a8c01952a6a883663b4ae2b664acbd50bc7658d7feebd7485d3a01e",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-08fefb580a5a8153f9be23f62b1807209d7e35b0ebebf27dd491860b94adb146",
+      "byte_count": 957,
+      "sha256": "729093043c8509f915415c8f68c330ab3fe9f91d14f5d0ff1d78d8d1b60d3f7d",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-110b28130f307e1fccf310b61ae356b46f984f57273deb7a99d4e873000cf99e",
+      "byte_count": 958,
+      "sha256": "a3573dec559a221f979f6b016bd95a28443ff79c06a6d70cd93495c1601c3dac",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-1198a7011eb42b26a02b7de2ab80fc6bb463999104311b7fafb328d2c3446e87",
+      "byte_count": 615,
+      "sha256": "629a109da2f18b8bde8b28fa5d109b269502067495fbce9aa0c2009612eb4f55",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-1f5a87b32df997c3c9dac8cf9e8a36751c6a4debbd2666cdf6d67371cd824474",
+      "byte_count": 832,
+      "sha256": "dc8e4b06927f872282d7c4ada81fb41acefa7e321f1234c684b4494a0a112dae",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-2210916a859db4cc22b70b0fca8df10edf00e568bca9d2ea1442c356db632e93",
+      "byte_count": 5139,
+      "sha256": "62d9b9ab63875e805dfefc98c459a19992e5c56d76bfddf12030313b09ad4535",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-258220290c8be804e431e8ed37db6647398137567f050754d16f678c30ec6156",
+      "byte_count": 893,
+      "sha256": "bc314d82782a3f4d9d2b2198e64eff583fea4272ae299ec91186f20cb8e147d5",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-38edc5ac357162b3b21c0e31c73e98776b71e1cd314d166d02c612e7c509505b",
+      "byte_count": 355,
+      "sha256": "b98926cfceb9b56bc04213a063c0821b8c23304c9ce1976421623d6299e7e61f",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-4e37f67fba6f505e12ab42a488f49743dc464dd30cf6b9a7aa65806e6a940bee",
+      "byte_count": 615,
+      "sha256": "09dc6b3cb167e0a6df6cc255e39d8b1d8c9f316e559b122d8d90b89a2c0b6549",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-57e86d1552c0926cb1b502088ad18c4af504780cddb91b3636ccea00896286df",
+      "byte_count": 893,
+      "sha256": "6f19fde602c925aa4fd6e6f39e08ed4bee53ea7a73d2479e7919cef743391aea",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-644586208099b0d340f6018c11e21160d14791374f28f16410a1bc121ca904fc",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-65a0e630387bf43d7192265c8c20accf2f60145c00b66b8c6f3f9331daf4ff4f",
+      "byte_count": 892,
+      "sha256": "3e1a0b6c4a20a3bdbba8e43a31000af8223672d17797cadaeff9f3b7d2aa02b0",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-6a44babc349db2873c0cdec918f889e200834e7508c0abd1e3a7bd025beb1d4e",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-712b7f7c419a6b129aba9bea23207c8dea06cab21c28abde8e7b00c26806498d",
+      "byte_count": 615,
+      "sha256": "1472143291767545272d856f7173acd4487da8b2448c8a21ef5e268709f268b2",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-71467b8490faccc417626e7c8af153906199a176fda58316b18dcc09701b7357",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-93ed7a03a6197281ddebb0b67d266d69244d73f54a4d02f8e64eabde4b7a797d",
+      "byte_count": 4469,
+      "sha256": "11667b9e1b63d242273265af89666a5b4f1afcb4e23d2f004f7518cb1500f290",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-93f4e08cf8d7a5df320480e320c64e02abf3c6e767a9ba3d1f1ffd526b087bf1",
+      "byte_count": 832,
+      "sha256": "fe3f4da54531dc847672a78c1ad386b04660c43e99dd3bba2d6b07c8224343f2",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-a8cd5f3a35f32781cfa6ed3ea8653004b31112acb64e64d31ef2347e82570646",
+      "byte_count": 5139,
+      "sha256": "cc076346e351b0249b666b9c9edfa75f84e829b19d414014e728c7f0b1f191b7",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-aa686b925a350bbc9cff01605edc2e896baa3421c29f123158790919e60e4de5",
+      "byte_count": 832,
+      "sha256": "d1622202414381c1653a853cdb145ba20821b106658688b7ee1fbd78f92c5265",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-b7d7d97d66016770ff2526147f5e6bbb5ca84851c36407d70a5e6b3730ca6e5b",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-c1d6ea62470be28d6caa678d5c16de183e49fb961b9fa0ced7d90d7cdcf5ae56",
+      "byte_count": 958,
+      "sha256": "7b75eaa129a6113461fc437f555015efde1d42d9765a4248f117fa55c2ea7a62",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-d5b34777f4986bfccea0a4907af3883d71a273372ac86512054c9904a6b8a3a7",
+      "byte_count": 615,
+      "sha256": "21b5eedbf2ffa5c93cf65feea0c3eb99d209cd4373f801ca9dbbd4953cc1997f",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-d729c339066ff990902fd02d5df66115610bbb62d6eb278844966ac97b1ca6b0",
+      "byte_count": 955,
+      "sha256": "e6dd362cdb539f160db0fc16ce4b04d3e0b1f2c7527803d1ab557d685ac7e2db",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-d7e22d312c55eef1abf0f5b2b8f35cd49bfc56ee8fa6b4a3dc1c43b91752c409",
+      "byte_count": 890,
+      "sha256": "e0d3708ff627fa795cce9fa13f03a9071606ab51d38e33d06029ff7dce13858c",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-e22275546f761a021a68edf5a995902a5e55051b258e7b8367de39f00d01ceaf",
+      "byte_count": 355,
+      "sha256": "ace3392086880539e26036e4d154b511ff9e1139a6cc6d3ce5f090e88302d2d5",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-eda653ddc67087e0876077bbaa6a6d0deb3b68c51cd5f750a23516a8fc14ee42",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155137760677Z/raw-ee6be21f03fc25a30d16d6490dd5d9c8c9d39848a7163eb0aac3ee5b0a57879a",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-045b411dbb7da870a6bbae723907d963cecebad56bbfb9a8964b4f49f9bdebe9",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-0d6c9279533ee85c7acb036f5dd23d3baae6ebc9019ad8217709e06ab49edba8",
+      "byte_count": 4358,
+      "sha256": "b0cc96cc67e276c0f4d4197ba49eb3c149ad6d811ddd8ffdd0a6c6c128d8c21f",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-1a7947d0e16eb3c3b2859a43ef3908263ae68ac30ee44bb0d92adf11e4a4f694",
+      "byte_count": 297,
+      "sha256": "60c7651c3c1debf95d1e25979edf71a957adaa364d7849c333e20ca28cf3e2f7",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-278cc68f547248f9f90485d95ff0ac24ceda97ddca48e4233c7741292e376438",
+      "byte_count": 617,
+      "sha256": "07329f36a38d478d491ac6984b86e3e349f050429b34474a6959282a63329a7f",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-325352a9b211466c768bd2b3ed8a016b81c0510a339e2f78a4e6b430a65c54e6",
+      "byte_count": 4358,
+      "sha256": "702d68418364bf3122138e0abd9e2ec36909db7111578da5a130561604d87359",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-3b9fffb333cf1fb6c51096b88773ec430cf6840b98ed5b2e060c2512152c7b3e",
+      "byte_count": 617,
+      "sha256": "b147d372faa003ceca8c3532722765b7606f9b5bc03c1a2737ae82383a048284",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-4604050ab9a805e905e675df3f4e3633e371f1641966816ba388252605e00a53",
+      "byte_count": 955,
+      "sha256": "a3846bd3b12c56b12735e85ae3dd9cf9d778aa0f99d41e96eda551a92dd3cb32",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-4b1bce2ee11baa2cbe636e6311e1e6c2b343d2d9962255eadf34c7d606c47b0f",
+      "byte_count": 4358,
+      "sha256": "1b6cb9978233836204dc6ec58fc1db0b25b38c8f2ffbbd0220b93bf46e2974ff",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-58f9eb55a85e29e83e6f198ed2e4bba78675dcabe319873dc56334481642cd13",
+      "byte_count": 86,
+      "sha256": "b2e7d8bed18be4fd291f208500b2a4983233da09eee1bdb9a8773298dd8d647e",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-694c7ec50c149c6afdd30f232454798bb893a0f294ff6edfd30d669e6923cf0c",
+      "byte_count": 4358,
+      "sha256": "6133500e834f10baf44c8af14a34131c34828fc53dba3e5b6a103a972f9692c4",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-8293d9193f9e62833d344c32f7a8941769fe256c510da877b97e204122e77d80",
+      "byte_count": 193,
+      "sha256": "ea32b7f8d44c44541a45e185b2d7359fb2cd396a404cb9b0ee9b641d317477eb",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-931b56911748160abc87f2ca00fed9df7c447534c26eb5bfe56568bef6eaf18c",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-9611014a7744848c507217b226805c22995f2ea303a81be1fdadbede9d9ca7e6",
+      "byte_count": 24,
+      "sha256": "d1913fce9e508107d18ad38aed7a8485bb2e08f29fb0028d12e604b2a8359b4b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-a5c78e658ed92a9712d51f2d4750d8d0ae5ea71f918bbb9ebf95843f9829e584",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-b63b6feea36af2d0d912d80e47c5a6980168ca9b75cc77b607ff437fd48f7bb5",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-bbc499b1195825311056e61a4d05e0f407ebd5102150c1356ada73a74215f0f5",
+      "byte_count": 851,
+      "sha256": "b34b18da783bfa4e062df403522783b97be81f911629cb967a57a64be2df21ce",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-bccddd8cd69be81acd4f6cc288a924d79a8cc0dc17bb4cbb851b5e54e9d97e09",
+      "byte_count": 850,
+      "sha256": "5b5976eb39e81084318cb87f1d25678a7be7591ecf79f48c81b1ccfafd865a95",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-c0a0a44aefd0cbad6f5f4e0de25b49c13267bc035e0636e47bd2cf4cf86dcf58",
+      "byte_count": 890,
+      "sha256": "4a0985890751e90d1097e2ad4dc749ad0ba0ee5354b2dc3afc4b049e557803a2",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-db8fcb33697578e49f48eb480072b8c93253a434e6afb1d3867905e796601863",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-dbdab0f83c6177bafedbd8774a4c51957f1e73b98edd283b7c223e99b876f42c",
+      "byte_count": 617,
+      "sha256": "96160436ec0871f124958a527f81f9b653a892860d3cd998032e5a59dd1d4dd2",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-e02556f802f129550c17fc95a67f2add85eb711fefc033669fed4d2feef0952a",
+      "byte_count": 4358,
+      "sha256": "2ed3fd60b872fdc5eaed3d2961ecde203c420efd368353d7c6e0cae632dc1ae6",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-e183dd727f87a98ac30c3fe8ee3d19d4c9a7d9d7ed27da7352aaa83dd3f04ab3",
+      "byte_count": 617,
+      "sha256": "1b117d297c64e02b9331253e2bec04f329a1622830906e2c30250ae754a964a3",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-eb6bc7803e424a648d93f6c7ef42d15d2951cdd10764755ed8059ea9e6d1777e",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-ee46fd912f4f570d9096dcd6de168fb6002f272d261e7e4ff33ffb4c0d55ac64",
+      "byte_count": 157,
+      "sha256": "adb1a714ca2ae737f67ddca09db10065ab0aec54072e884b8466c5b2558d5cea",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T155304092811Z/raw-f01e381a37db472199bcf157c5116da6831c4b8bc8e7dc9af900bd7e6c893e14",
+      "byte_count": 617,
+      "sha256": "31ef7c5421f821e0424e6d00f0600131eb0ef7fe4f0c19aaf521c71a038cf542",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-08f9c4a9b4bd8ef830c5518a5d0eb33ccbc0f321cb4af0ea4f20c4d2fa5ca76a",
+      "byte_count": 958,
+      "sha256": "8cb36ddd47d417f42a4795996358c12bc3bd82e87dea35336d221ecb723569b9",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-0b9c1c6f12d8dc5419ccac3a9b521768d5ad744b732df1c5a85e0b4e92341db9",
+      "byte_count": 615,
+      "sha256": "afa5e064d650cca5caed859217653960bcdb7da42a43b5e15b2aae841a07717b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-0e341241c336d83d8fdb1fcd6e5539e884ff7fc0cd1889338390647e4bb32fbb",
+      "byte_count": 5139,
+      "sha256": "bded94e7f2d56411f5423e706eb42ffaaab74aea2096c51b8cdeb8426ae9a643",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-1210aa169a0e9874e0e3f262f2417a2fb87e0b757c93e881be107a555f4b5267",
+      "byte_count": 831,
+      "sha256": "f5b1f058d6e531b270b3a3d38470552528628618d6261d2c1d1d105cfeda1fb9",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-186d93fa6cba1812148d389065eeb17c60543a27de0751942afab63caa5fbb6f",
+      "byte_count": 958,
+      "sha256": "3a10b75ecc348ea88c6ec47ddfbf2203fd52e1a5a2006021ab6d337322f7275d",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-255d1587a5e9b66a6ce1c777290c5e1cc668ba4ce611df353d63185a3cb1a9e5",
+      "byte_count": 5139,
+      "sha256": "5d087c4696ad311fc59bbcbc51326614e368dae03ca459eccf2357c8a6e15968",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-2570f6cf0019128ce47f3c198e33f6fc84a85d746e1264c90c1662e1708c03e2",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-2a1e4bc5dbbc882e68e5317d3f3af11171449809ebfebee5155d85b3a7e83b18",
+      "byte_count": 893,
+      "sha256": "c0eb0b28d27884f131f5f3b08fe34ecb9e3b56e4885872f8b89096dfc9dccf4a",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-2c4209389bd79e2e446e7a1a54df5c678025edbdcffc1481985aac9e8b13e8d9",
+      "byte_count": 958,
+      "sha256": "f41302233e0ff9a544fffdd0c5fe1c66373db96e8d0fa69f69458d6e355580c5",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-31da941adc09ad393856bdd906856d62b0307e5300226f2110d436a47d50cc23",
+      "byte_count": 355,
+      "sha256": "900637bfbf3c828d8f3a1486cefd2bebb0b8689cd4eadf089a99cc6e732433ce",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-4c9a55e610e92802ad231b5b12866e555e7f76ee4ea05089bbb54874ce43130f",
+      "byte_count": 893,
+      "sha256": "77c120f0b7a4d862458c288aaf154d1c84fc6bf9e787ba0a98610736dae6c3b9",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-4d5cd21f53299ce7d96ed4460d4a09e5113752ac0bc08ec792405af369951010",
+      "byte_count": 615,
+      "sha256": "37614cd008d6cf91bc651df35b775e2350d192e70970b3d1d682fff99dead694",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-5e8c4313d4951320977465f24cc53e8209429254055bf867a82e7abe8d55cfd9",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-5f685c03ce27ce484ee4b509d10ebf0080908a6077d1adcf5ae25a03e087f4b4",
+      "byte_count": 615,
+      "sha256": "c7ba0cb2b37da0a5429e6f9480b3001d0eef28e742fadf18ea055173b37f7e18",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-614499a0c1a0c1e9d5c1fc08e0dc6c2518337ed89f426c011d83f0d132f9036b",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-667370365d77d651d61896487849b62b9c262dba5ae7de3f37b83d87e68e4596",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-67936e0030e0f77c93fc0ef5d9b95c9dce4d0ff0ad8572578b51bed20b778fb6",
+      "byte_count": 830,
+      "sha256": "533cd310638c2383cf55af3e986242bb1bf2c34da533d8478c57041fe05b5077",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-72f29e9bee43c14abcbcffcf0c64eb0efbde5a86ed3db9e751b6afa96fcffa1d",
+      "byte_count": 832,
+      "sha256": "9d1c66a2d66ce4ebe6bf5763e27d9436326256a326905736e4a25dc71562601f",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-8b51d6def036999c48c6378d55df3bf2baa71cc46fe61da718dc4bdc747693f6",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-97ffba58ed85f85f412f99dd13d600e3f16bcd855a1c6745afbb2cd9d0db3957",
+      "byte_count": 355,
+      "sha256": "469a8070a673a8014c58d8bd6ed82325d24d964b599ae840812d12cd2487be54",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-98f1fc43f16baebe4aa76e45657c4504899c054adc3a3021bf2d97e19de377cf",
+      "byte_count": 615,
+      "sha256": "96d4ec55f3bba6819f17636e8d8fd7ceca395b52b77e61e621c27f70e8e91dd4",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-9ed3cc537ed7e25ff5f95ed7382e62e1eb84168c1307741d712b16e9f26c39e2",
+      "byte_count": 958,
+      "sha256": "c35a8f044303a68158dab1e6e89e392b8f3ad27a62ac85e51a6299e473134350",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-9f746146569557beb7e082e905b901fb6ccf020b96937441d5cf46625f91ea1e",
+      "byte_count": 893,
+      "sha256": "bef659655739853325415dd6659a77f54018d13e7c9ca8b0a99d4f867caccfe6",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-9fa9ab39f284c8694fb7ac733a4dd2a7213ad1d173b4a2d3adf89a48d4293a52",
+      "byte_count": 889,
+      "sha256": "7c2c942878b52440c74e51e24f8ab8454e58005ac3dcfc0ea8f639b76f73dd48",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-a12d05bc1e54bd0bf3adb53b51f8eb07f6d039e14a60b5a530de62dc703038b8",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-aeeb04148a1dc7f47ec17ea75f5d55d2e64ebc8a7d239f0563e0a5c11f4782b9",
+      "byte_count": 615,
+      "sha256": "9710311832eec592c2ef5ec14451ede4378be9cfa32b2099ea6ced24adfd04e4",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-b94f10da141170339b0ccfb43fbfa5b8a55683f5e86cab71147c52479a69cc1a",
+      "byte_count": 615,
+      "sha256": "ad3000a4efd4ea8553267490efd9439c6610b4a832d80011f006f994d41dfef3",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-bb10cbbc5b39b23a44cac3a1a6ed39ba77750d0482353f028618a39cd3253c8c",
+      "byte_count": 893,
+      "sha256": "6c5ef635d9d6cb0410a9040ba0f60e2a7e931afec2076bf47f5b8bbf8391de70",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-bc8806c20148b45af28710758e694f12e1b3251c1f7b04e7c9ee966fead8bac0",
+      "byte_count": 831,
+      "sha256": "e014c230ffba963f4545fe4927d6a32e9911b6151dc1d2cf4a39d9464dc977b5",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-c5fb5c42304c0f4e6be1361d25428b11d14feb49156d48e1264ce6c64d5854fd",
+      "byte_count": 957,
+      "sha256": "7e5f1d2e5baf849bcb80c5cb7469ccd40139c51b0d35c0f92dea51bd73a160f2",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-c97256cbcf084b1f1a44401d27b3bf1adf7481c1c654a616d4859ca7a23f32ad",
+      "byte_count": 954,
+      "sha256": "8e5dee98e933bb691cbe13f6aff5e5db558efc8393085b903e4b9ec5e29b3d9d",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-d2f5cf339e676272c7bc931a80ae0d35f81b3417e21e02b68d15d8f566e8fd4e",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-d5257a330649baf14d11417bd3a9cb073913e064da5630001089ed962367cbb7",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-dbc8f0702138dda4ce23f4846681233348eacadf90338bb53687acf5f10e46de",
+      "byte_count": 832,
+      "sha256": "f6c86dee58be9c3efb119e2333e29622bfe29431adf81d6e5cc3a2dc719fdf43",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-dbe2fc2c919e30ff732c8e9080fc8d64c15514bbfa042ce1506a64a43b52011b",
+      "byte_count": 892,
+      "sha256": "e2d1b6307627bd8a6d34e85c87cc077e82aa74fac1bc7b842aa56c01968c2bb0",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-dfc8909b873c7aad72c12e3a0c325ddb4ce29c68e1eaa40fd562ade667d1ee06",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-ed700a96bf225066c8e7ecf21d01029562cd11f5f479c571ba4b0863f450c307",
+      "byte_count": 355,
+      "sha256": "b65df55231040aac211bf9fc2e47e19a75e0b052c8a8fb1153b75facebf60987",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-f4ff77e1194fd226f0d460629fb5e65c2ba69236e946ea8b47b0222a2ad31cbc",
+      "byte_count": 5139,
+      "sha256": "ad9e33ad58ed9055e3a5b5e5d9d416ba276edf65631b08daa29cfb77418c263e",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T161832006353Z/raw-fc2b01871cde90b3101eaee9cb13f990bc855aae047f5595555813bc127c0070",
+      "byte_count": 832,
+      "sha256": "fa272e137e01afb187a15532b1fd8e404d2a99d088078b2d0c980919ccd0852b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-145741ccff4c1bdaddb430e7920afab14684af854feecb59a4f4af5194ea9311",
+      "byte_count": 850,
+      "sha256": "18688cd2c50e95c59d9aaca707c8c90e0bd39f73f3c4161fd4725ef64ea45c0e",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-18715bf07162c230e75d716eb997a6ca5e7e96fd44f18c16c9997869c2f5b2bc",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-20e2782e8feea55d441301e1a2d5820da444ab3209bad34e29cfa1dfb3f85e50",
+      "byte_count": 4358,
+      "sha256": "2b76bb81e8131edecc8043138900b3d571454da3e3f001a9b613264861d80acb",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-26b39a277f002eebb454a68338a69507f631421b1fd661c5dc17b24a8ad00e78",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-341c241b65bfd843f51e0501a5f37a6356b4b4d0c75bb6b34860ef801efe6fb5",
+      "byte_count": 617,
+      "sha256": "9ba7ecec894a98bbcf1cecb15d60b1172fe2929e98533bdf45bc97e0e5b45ef0",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-381cfddc034589018c96e4a2cc7c6bd8c8430b07bb99dd922a7be78aef27a611",
+      "byte_count": 4358,
+      "sha256": "ab801d360ef8fa3829395ab92d77e63270fc90061178c5497b45ee61335a67e9",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-3c49d6aa651a0a6f1562bdd9ff0c521bf7a8d9f0733d057d67b0733b2c785696",
+      "byte_count": 958,
+      "sha256": "66ddd2ccc18b2794eac4818f16355ce1bc909c35f1fdc9cf0a88fa4a06ef03ac",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-45d8c4f954ba6510b83a7b3b440ce13bcd62681612ee2eedb29392d6b4d7a088",
+      "byte_count": 617,
+      "sha256": "e076cbc69b7e85ed6913b7a1d6cc8a7b15a3b3cbe9919ac7fd0b9fbd62dfe017",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-46711f7e4abfdf06beae6ac56e1613f97b2f195d251781fd7d5744e1274fb7f4",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-4cdaaf55418d7f398c53f293205d359efe1f6ad93d4e5f715ac1ad9857a1afd5",
+      "byte_count": 297,
+      "sha256": "c62ee10dc222da28c1c1b9e5cc6f23f4e149dd23fc0e3ad319b8fc1366ca57df",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-4efdedd70f6228b613b035b70d4866b884129a2087a87a41951f49fa38524e96",
+      "byte_count": 617,
+      "sha256": "5d6cd67d00e9ff53da06b750e62381c1f000424520d7aa344ee53cb6a2e926c0",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-56c6ee711cae587c2219c66c2d47abdcf461cb8d01348dab46271cb3c79e659c",
+      "byte_count": 617,
+      "sha256": "cfbed4370b95510ab5e57b1e503bd00941db48b2d6120fae729c6b5fc7cdb43f",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-9fe7ae032b42dda10038db807fbd0afe7a52c2789f3a958317896280dde4b492",
+      "byte_count": 157,
+      "sha256": "adb1a714ca2ae737f67ddca09db10065ab0aec54072e884b8466c5b2558d5cea",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-a75750dea1c12a75a3e7d62e91c314e47ade4794dee50e7acb575d286e3b1d79",
+      "byte_count": 4358,
+      "sha256": "575106dab0716de6a13f67fb7397fd940c127a19b95af9592ea14dcada8e71af",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-ad1a870a1b2a79e942918add3b10c59017ca3b0f4a16ca25753aea2d4c9b78f0",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-b1a97eb94f7577590ca97b2f2fca335080bb145dc0b61d1287ea1c475a2bc020",
+      "byte_count": 617,
+      "sha256": "a7ab1ee196540a8e527892ba8f06cbfb68cac73f57fd7dc2b295ff45e949671d",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-b7755af462fdf858ef64c47c31039bf5a6f6d9e623d58b58872a9449e2b15ed0",
+      "byte_count": 893,
+      "sha256": "5e0f3409a6ee34a32dff37dd2f489da708526f662d566b120f502d70c389b1f0",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-b7b66ca792afb0bd88e4ade91de58462eb587454c5880b9150b75b79d2d64b9c",
+      "byte_count": 4358,
+      "sha256": "959efed29d93b13e073ab9d143e40b09faef5954c4c2ece3f832f74ad44acabe",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-c4b5cc9f679af2d4f079278d9f74aad00a138d20a567eb1087346034f7ff08b9",
+      "byte_count": 4358,
+      "sha256": "ebc1783078e0937c5faf65775849b0113cb1ca69aeb088b93b658f74a19c9a81",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-c7107ff002616cbec4bfb011453be5cca28a38e6736273395a4ac5f1086145a4",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-d720a17eb3f9b80a6d04197cd8e5f1a03e07c932d28b53a7fb49f82a3edf72fc",
+      "byte_count": 850,
+      "sha256": "62c99d29a3a0f16a4c570c84c2eed3c9a4e358bb6e777eb98a6d768c2ab7dc3b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-e642331dc2126b2955e826a2e797024ac2ffb443472b83737536377d93eae731",
+      "byte_count": 193,
+      "sha256": "ea32b7f8d44c44541a45e185b2d7359fb2cd396a404cb9b0ee9b641d317477eb",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-f00f9572c1f0144e21d856b38922f2c561ccc41c93be3949d9d7d11cd0eb4497",
+      "byte_count": 86,
+      "sha256": "b2e7d8bed18be4fd291f208500b2a4983233da09eee1bdb9a8773298dd8d647e",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-f4fe936ed1810b3804aadcedb5776f83f5c3b10b4d25ec500e8e9985af1ca9f0",
+      "byte_count": 24,
+      "sha256": "d1913fce9e508107d18ad38aed7a8485bb2e08f29fb0028d12e604b2a8359b4b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261014T162056877414Z/raw-f847df235ecf0f8e4a4b2c55822503cbca90d84d2344c5fd038d25fd18a19d87",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-36-03.116Z/failure.html",
+      "byte_count": 213811,
+      "sha256": "7fcac7f1979047e6cd361fdfd8576cc9302274178ebafbb07507741417f4edee",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-36-03.116Z/failure.png",
+      "byte_count": 142733,
+      "sha256": "cf26177e0481b58d74aaba093bc4910517c2dc24975b779b7b70226a1fca8ed8",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-36-03.116Z/validation-report.json",
+      "byte_count": 1132,
+      "sha256": "c1de35c6727d83e89b4db0dcefc30bf9d9afcb0056463cdde0713c3053aa31d9",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-47-37.354Z/failure.html",
+      "byte_count": 229658,
+      "sha256": "8f2b11b023dd1ff107b6d917d7a643a8f0beaa79dedc37c6b3e1ab7559b79fc0",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-47-37.354Z/failure.png",
+      "byte_count": 120049,
+      "sha256": "90329aae54e0e6682553fff17c2ff1c456f7d33bed4b22622380282c8386203e",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-47-37.354Z/validation-report.json",
+      "byte_count": 1647,
+      "sha256": "eb0996a11eeca217938abc9c128bfedb758eed6cfaaa73a1ab56dfbd13c07a4e",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-48-49.208Z/failure.html",
+      "byte_count": 229656,
+      "sha256": "d05db34cf5b7e809e7d85ea811f17e38c895e58a3e08afac7d103530747ea893",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-48-49.208Z/failure.png",
+      "byte_count": 119404,
+      "sha256": "3a6efb2833d198eadac30f08b97acb2b4b7dd186f665f542865fc7d4bff4f395",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-48-49.208Z/validation-report.json",
+      "byte_count": 1647,
+      "sha256": "7b7bc10d7460a722a73946c3a50d7d79b960c31fa069b41a209f2ad2e481237a",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-49-49.368Z/failure.html",
+      "byte_count": 229659,
+      "sha256": "e2cea36b705982172b8d8d7c4b9f25057609f3d79defa723d5cd94bf277dea96",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-49-49.368Z/failure.png",
+      "byte_count": 119747,
+      "sha256": "d53c24115cd3c8ca058927d064846403dfb73f9c6ba04a1a2e2d36c991b8b05c",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-49-49.368Z/validation-report.json",
+      "byte_count": 1838,
+      "sha256": "91d0d1ab2e468431f8541f34529b3a99caa8a65a5116a11ff67a85c890ea4f1a",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-49-49.368Z/worker-poll.json",
+      "byte_count": 354,
+      "sha256": "d9aeb1ee5cc9c8f4be1a12df5dcca0efe6693713651ac2daced6af18d675e376",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-51-48.556Z/1365-dark.png",
+      "byte_count": 110206,
+      "sha256": "446039375f98a8dc3705b31e79e9502590fd1ec20858b9300ba3c0debcd965eb",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-51-48.556Z/1365-light.png",
+      "byte_count": 128775,
+      "sha256": "3f71c55bde915674bcd0163da619b63b052baa65de8ab1d3223f4cc3b1ab5641",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-51-48.556Z/390-dark.png",
+      "byte_count": 75248,
+      "sha256": "53186265a5ea083650b1dc5fef38732007fd4840340a14a685b011ab1861d356",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-51-48.556Z/390-light.png",
+      "byte_count": 80075,
+      "sha256": "c708de1b6f143c54bdb2c1cd092bad261fce7f66285aa1db25cbf78b858840a4",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-51-48.556Z/actual-local-snapshot.json",
+      "byte_count": 28158,
+      "sha256": "22ab26544bf7c55ad659e12ca51b0167b8ef3051351ec0f0dc3dc93e321b9a2f",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-51-48.556Z/planning-history.json",
+      "byte_count": 42351,
+      "sha256": "c56d9e87366bd0f674990c83fb0fbdc4df376911947bd6a3395ae11cb1c1763d",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-51-48.556Z/validation-report.json",
+      "byte_count": 2427,
+      "sha256": "e7cd53ac702ea9dfed22e34ced34e92a1b681583745a92c5918d4970cd92b990",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T15-51-48.556Z/worker-poll.json",
+      "byte_count": 370,
+      "sha256": "bccb95dd382a91736216c24db7b39195104173ff163c6dacfc4aa8d1aa2ed9a8",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-17-59.602Z/failure.html",
+      "byte_count": 235539,
+      "sha256": "060fb426e3cf5356942bc09e74cdf6e5428c3cbae454ab34627e470134855a72",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-17-59.602Z/failure.png",
+      "byte_count": 119528,
+      "sha256": "e89f680026f36e7f37ba6c7841315b4b369a43c53bf43e2e553ae53016320e9e",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-17-59.602Z/validation-report.json",
+      "byte_count": 1586,
+      "sha256": "946ebabb5fdeff24519d04fc2e6068cc2e818b4c531bd159554429ea72ceadc1",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-17-59.602Z/worker-poll.json",
+      "byte_count": 369,
+      "sha256": "3e8e9ed03d9c82d59b8d0ec1f19e0b847c43e2bc3e29e500ea4089325d5c8080",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-18-33.262Z/1365-dark.png",
+      "byte_count": 110206,
+      "sha256": "446039375f98a8dc3705b31e79e9502590fd1ec20858b9300ba3c0debcd965eb",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-18-33.262Z/1365-light.png",
+      "byte_count": 128775,
+      "sha256": "3f71c55bde915674bcd0163da619b63b052baa65de8ab1d3223f4cc3b1ab5641",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-18-33.262Z/390-dark.png",
+      "byte_count": 76061,
+      "sha256": "a64a974f28f360411c238472db7475e070ccb2e83474fc8f5ed328ac76ff767a",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-18-33.262Z/390-light.png",
+      "byte_count": 80277,
+      "sha256": "be564466fcff0994d06d3426e872d6bab79ff9c290e72c6d7e1378d2024e9f87",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-18-33.262Z/actual-local-snapshot.json",
+      "byte_count": 28340,
+      "sha256": "528407f1c9114412abbb64ee9b506d0352ef5cfb7923bec7043d46747211c4be",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-18-33.262Z/missing-render-fixture-390.png",
+      "byte_count": 71506,
+      "sha256": "fab9c72c322ed0b8846e8fe9f097c6636e210283293857cba84b908aec17ba3d",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-18-33.262Z/planning-history.json",
+      "byte_count": 42349,
+      "sha256": "42e3a59964e2e5eae184b1abe038f57a2d4fc5a40e5b3603d59b55659b79604b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-18-33.262Z/results-1365.png",
+      "byte_count": 127073,
+      "sha256": "7f75fc14ef026fb316d2d6f38a63624cd085d090a65ff4f7f7cc6cc44b528d92",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-18-33.262Z/results-390.png",
+      "byte_count": 74078,
+      "sha256": "1103d707be59b6e4b2791796bdb7e2da76811a0411d1f00d8a74e6246deeaaf5",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-18-33.262Z/validation-report.json",
+      "byte_count": 2903,
+      "sha256": "1fcc7799a2f37d5ac4aefdae693c66f1337d210dafd2f0d68902504029cc29de",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-18-33.262Z/worker-poll.json",
+      "byte_count": 370,
+      "sha256": "8bd695266a4ea2164f1972af79c9a54dc3fd868f966abeb93d08af1186e77340",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-20-57.018Z/1365-dark.png",
+      "byte_count": 118782,
+      "sha256": "e757f704985ae3083d5f65e43bc92d5525a859c83400dd848397201b0cae7767",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-20-57.018Z/1365-light.png",
+      "byte_count": 148761,
+      "sha256": "290585f8a930734fe5272a5a277a10542d98644b92348341b9b08f2b17cc1edc",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-20-57.018Z/390-dark.png",
+      "byte_count": 78617,
+      "sha256": "c1ec05025212e7dd25cae5cb6b2dc30306d3a002479bd747968efb10bbd5801b",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-20-57.018Z/390-light.png",
+      "byte_count": 84183,
+      "sha256": "2686787ef5f1153b56516040d8e40c6b71f6286c1ee7248de7ce061632ed93b3",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-20-57.018Z/actual-local-snapshot.json",
+      "byte_count": 28344,
+      "sha256": "646601810d8964463a1f2c1bd49f9bb906ebf689bb00c3d2f1c8fd51501eb89a",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-20-57.018Z/missing-render-fixture-390.png",
+      "byte_count": 71506,
+      "sha256": "fab9c72c322ed0b8846e8fe9f097c6636e210283293857cba84b908aec17ba3d",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-20-57.018Z/planning-history.json",
+      "byte_count": 42349,
+      "sha256": "74f8ac7c18537662771f12922fa81f298f9826b783eb4a3335dadeb89e37b0ff",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-20-57.018Z/results-1365.png",
+      "byte_count": 117871,
+      "sha256": "847bc1f58d30ebda34a20d4a9777aa4791dcc7a965453ec2cf361956ab9d8334",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-20-57.018Z/results-390.png",
+      "byte_count": 74078,
+      "sha256": "1103d707be59b6e4b2791796bdb7e2da76811a0411d1f00d8a74e6246deeaaf5",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-20-57.018Z/validation-report.json",
+      "byte_count": 2903,
+      "sha256": "f20c0d279a7d8fb2b850b8703e9a29649dd03c92e3ed783e1c4a72adbac60c7c",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-20-57.018Z/worker-poll.json",
+      "byte_count": 370,
+      "sha256": "37422716dfbc1653ccc39f424adedeec52b935972021854de2d3f80ad3e77c3f",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-22-51.549Z/1365-dark.png",
+      "byte_count": 118710,
+      "sha256": "dcdfa141858e963c6230b8059d8b4b14dedfa7cd9c8e1067c785d4980d38e0f6",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-22-51.549Z/1365-light.png",
+      "byte_count": 149117,
+      "sha256": "ab6067f6597b6b3e7619695948cb60a9c371071f18f1cb251adcbf8e63969cd4",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-22-51.549Z/390-dark.png",
+      "byte_count": 78682,
+      "sha256": "c987d532d41f1ada567331719c7fd301118f86bd95eacf01585a833be8f3a046",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-22-51.549Z/390-light.png",
+      "byte_count": 84122,
+      "sha256": "ceeff83b3f4aba22fb2f0678e4cfcd53642a1046ca16e58ea2ec96ebbf2dab02",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-22-51.549Z/actual-local-snapshot.json",
+      "byte_count": 28343,
+      "sha256": "243e2119a9fa1b2caff7e29800afa1c762b1e94fbc7c18d1c0b9fd0d7d797d4f",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-22-51.549Z/missing-render-fixture-390.png",
+      "byte_count": 71506,
+      "sha256": "fab9c72c322ed0b8846e8fe9f097c6636e210283293857cba84b908aec17ba3d",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-22-51.549Z/planning-history.json",
+      "byte_count": 42347,
+      "sha256": "0587068786a9776f456e7913912641efc5abcda98cbd8a81693d165a13cf3aaf",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-22-51.549Z/results-1365.png",
+      "byte_count": 119062,
+      "sha256": "6d85ffca17f29f662ca9a27681b86597d799493364e1b449b212cc2d69c8ac0a",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-22-51.549Z/results-390.png",
+      "byte_count": 71506,
+      "sha256": "fab9c72c322ed0b8846e8fe9f097c6636e210283293857cba84b908aec17ba3d",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-22-51.549Z/validation-report.json",
+      "byte_count": 2903,
+      "sha256": "56875ce368abfbe4b7798a61de0859e1a7ae732e5a4aa73c74642a3def9261e6",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/network-execution/browser/2026-10-14T16-22-51.549Z/worker-poll.json",
+      "byte_count": 370,
+      "sha256": "31d2a7e6e494b30215c2d4aa00bbe25341a08b50fd6bddab4230efb7f4a8ad60",
+      "scope": "Original local test artifact bytes; synthetic identities/cloud transport, real loopback observations where labelled"
+    }
+  ]
+}

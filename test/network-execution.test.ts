@@ -1,0 +1,34 @@
+import * as cdk from 'aws-cdk-lib';
+import * as api from 'aws-cdk-lib/aws-apigatewayv2';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import { Template, Match } from 'aws-cdk-lib/assertions';
+import { ResearchWorkflow } from '../lib/research-workflow';
+import { networkEnvelope } from '../lambda/shared/research-network';
+
+test('API Gateway bodies cannot select the private IAM networking envelope',()=>{
+ const body={source:'jumpserve.network-execution',job_id:'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',action:'launch'};
+ expect(networkEnvelope(body)).toEqual(body);
+ expect(networkEnvelope({...body,requestContext:{http:{method:'POST'}}})).toBeNull();
+ expect(()=>networkEnvelope({...body,owner_id:'forged'})).toThrow();
+ expect(()=>networkEnvelope({...body,action:'execute-shell'})).toThrow();
+});
+test('network workers invoke only registered functions; custom hosts receive no IAM profile',()=>{
+ const app=new cdk.App({context:{supabaseUrl:'https://regphejnlvfpyokpniny.supabase.co',researchQueueEnabled:true,networkExecutionEnabled:true}});
+ const stack=new cdk.Stack(app,'NetworkExecution',{env:{account:'395567831870',region:'us-east-1'}});
+ const vpc=new ec2.Vpc(stack,'ExistingVpc',{natGateways:0,maxAzs:1});
+ const emulated=new lambda.Function(stack,'Emulated',{runtime:lambda.Runtime.NODEJS_22_X,handler:'index.handler',code:lambda.Code.fromInline('exports.handler=async()=>({});')});
+ const realWorld=new lambda.Function(stack,'RealWorld',{runtime:lambda.Runtime.PYTHON_3_12,handler:'index.handler',code:lambda.Code.fromInline('def handler(event,context): return {}')});
+ new ResearchWorkflow(stack,'Research',new api.HttpApi(stack,'Api'),{emulated,realWorld,vpc});
+ const t=Template.fromStack(stack);
+ t.hasResourceProperties('AWS::Lambda::Function',{Handler:'network_package.handler',Timeout:60});
+ t.hasResourceProperties('AWS::Lambda::Function',{Handler:'network_package.reap',Timeout:120});
+ t.hasResourceProperties('AWS::Lambda::Function',{Handler:'network_package.ingest',Timeout:29});
+ t.hasResourceProperties('AWS::ApiGatewayV2::Route',{RouteKey:'POST /research/studies/{studyId}/network'});
+ t.hasResourceProperties('AWS::ApiGatewayV2::Route',{RouteKey:'POST /research/network-ingest'});
+ t.hasResourceProperties('AWS::Lambda::Function',{Handler:'worker.handler',Environment:{Variables:Match.objectLike({NETWORK_EMULATED_FUNCTION:Match.anyValue(),NETWORK_REAL_WORLD_FUNCTION:Match.anyValue(),NETWORK_PACKAGE_FUNCTION:Match.anyValue()})}});
+ t.resourceCountIs('AWS::EC2::Instance',0);t.resourceCountIs('AWS::IAM::InstanceProfile',0);
+ const policies=JSON.stringify(t.findResources('AWS::IAM::Policy'));
+ expect(policies).toContain('lambda:InvokeFunction');expect(policies).toContain('ec2:ResourceTag/Project');
+ expect(policies).not.toContain('iam:PassRole');expect(policies).not.toContain('bedrock:');
+});
