@@ -1,0 +1,147 @@
+{
+  "protocol": "docs/guided-network-release-protocol-v1.json",
+  "mode": "backup",
+  "status": "complete",
+  "started_at": "2026-10-14T19:56:35.158382+00:00",
+  "measured_charges_usd": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "before": {
+    "network_exists": true,
+    "scientific_counts": [
+      {
+        "kind": "measurements",
+        "count": 7144
+      },
+      {
+        "kind": "published_values",
+        "count": 5093
+      },
+      {
+        "kind": "assessments",
+        "count": 102
+      }
+    ],
+    "pointers": [
+      {
+        "module_id": "congestion-control-emulated",
+        "active_version_id": "cabbe18a-cc70-482c-8883-81b515639e42"
+      },
+      {
+        "module_id": "congestion-control-real-world",
+        "active_version_id": "e78456f8-6582-4f69-8b44-d56d2c782352"
+      },
+      {
+        "module_id": "http2-compliance-study",
+        "active_version_id": "caf6bae2-acd3-4ef4-8147-bd8bc39895e2"
+      },
+      {
+        "module_id": "ipv6-dns-study",
+        "active_version_id": "28edfb2a-17f9-47c0-a801-1ca7392c7404"
+      },
+      {
+        "module_id": "leo-emergency-failover",
+        "active_version_id": "ec00a4b6-718c-4e69-9c0f-283b9f251002"
+      },
+      {
+        "module_id": "reliable-sketch-study",
+        "active_version_id": "64c9fbb6-1d38-4844-9167-66faaf05fe14"
+      },
+      {
+        "module_id": "research-verification",
+        "active_version_id": "e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8"
+      }
+    ],
+    "active_queue_jobs": [],
+    "benchmark_stack": {
+      "status": "UPDATE_COMPLETE",
+      "parameters": [
+        {
+          "ParameterKey": "BootstrapVersion",
+          "ParameterValue": "/cdk-bootstrap/hnb659fds/version",
+          "ResolvedValue": "31"
+        },
+        {
+          "ParameterKey": "SsmParameterValueawsservicecanonicalubuntuserver2204stablecurrentamd64hvmebsgp2amiidC96584B6F00A464EAD1953AFF4B05118Parameter",
+          "ParameterValue": "/aws/service/canonical/ubuntu/server/22.04/stable/current/amd64/hvm/ebs-gp2/ami-id",
+          "ResolvedValue": "ami-062944a84867f2386"
+        },
+        {
+          "ParameterKey": "BenchmarkAmiId",
+          "ParameterValue": "ami-0808d1157e26c65cb"
+        }
+      ],
+      "outputs": [
+        {
+          "OutputKey": "BenchmarkImageId",
+          "OutputValue": "ami-0808d1157e26c65cb",
+          "Description": "AMI used for new benchmark instances"
+        },
+        {
+          "OutputKey": "BenchmarkImagePipelineRoleArn",
+          "OutputValue": "arn:aws:iam::395567831870:role/JumpServeBenchmarkImageBuilder"
+        },
+        {
+          "OutputKey": "BenchmarkApiUrl",
+          "OutputValue": "https://d3o7xdethb.execute-api.us-east-1.amazonaws.com",
+          "Description": "Benchmark API Gateway URL"
+        },
+        {
+          "OutputKey": "RealWorldJobsTable",
+          "OutputValue": "JumpServeBenchmarkStack-RealWorldTestsJobsB46B0892-1ON1F6QD0XXNC"
+        },
+        {
+          "OutputKey": "ResearchWorkflowApiUrl",
+          "OutputValue": "https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/research",
+          "Description": "Research workflow shares the benchmark API origin."
+        },
+        {
+          "OutputKey": "BenchmarkSecurityGroupId",
+          "OutputValue": "sg-08c2146ece4519d74",
+          "Description": "Security group for benchmark instances"
+        },
+        {
+          "OutputKey": "RealWorldResultsBucket",
+          "OutputValue": "jumpservebenchmarkstack-realworldtestsresultsfde9b-uqd7mknd6tve"
+        }
+      ]
+    }
+  },
+  "original_functions": [
+    {
+      "function": "JumpServeBenchmarkStack-LaunchBenchmarkFn5833EFAD-L6HWyzv2tgwl",
+      "zip_sha256": "25bd74c60183211ca1bbe24eca8c7ebc570ca94450fddc009fbdb7fde728560c",
+      "handler": "index.handler"
+    },
+    {
+      "function": "JumpServeBenchmarkStack-RealWorldTestsApiBB989716-nGjfRWxEktKX",
+      "zip_sha256": "84106e69a6ad3ffb64a9df97249947a9f61e563f9fac0d5f3162834015b8af94",
+      "handler": "api.handler"
+    },
+    {
+      "function": "JumpServeBenchmarkStack-RealWorldTestsReaperA7B004-4kaopWgl65wF",
+      "zip_sha256": "84106e69a6ad3ffb64a9df97249947a9f61e563f9fac0d5f3162834015b8af94",
+      "handler": "controller.reap"
+    },
+    {
+      "function": "JumpServeBenchmarkStack-RealWorldTestsWorkerC4BD4E-3H9bVpQCDkYq",
+      "zip_sha256": "84106e69a6ad3ffb64a9df97249947a9f61e563f9fac0d5f3162834015b8af94",
+      "handler": "controller.handler"
+    },
+    {
+      "function": "JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+      "zip_sha256": "8e155c65726947427cbf92c04f7727ff48819f4ed5d9a8e47576d07a792d3122",
+      "handler": "api.handler"
+    },
+    {
+      "function": "JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+      "zip_sha256": "8e155c65726947427cbf92c04f7727ff48819f4ed5d9a8e47576d07a792d3122",
+      "handler": "worker.handler"
+    }
+  ],
+  "ended_at": "2026-10-14T19:56:48.246681+00:00"
+}

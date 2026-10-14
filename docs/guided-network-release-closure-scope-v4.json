@@ -1,0 +1,13 @@
+{
+  "id": "guided-network-release-closure-scope-v4",
+  "amends": "guided-network-release-amendment-v3",
+  "declared_on": "2026-10-14",
+  "outcome": "Release the guided interface and registered built-in networking. Keep custom-package queue admission disabled because its production operational campaign did not reach VM execution.",
+  "preserved_failures": ["v2 source reviewer metadata validation failed before enqueue", "v3 source bundle request returned HTTP 500 before enqueue"],
+  "investigation": "The idea protocol trigger selects the current idea packet and requires two fresh reviews and recorded readiness. The administrative setup created no idea packet or model reviews. This is consistent with the rejection; the sanitized HTTP 500 alone does not establish its SQL cause. No readiness gate is removed, bypassed or satisfied with fabricated model output.",
+  "unperformed_checks": ["Actual custom VM boot", "Remote package output ingestion", "Host wall deadline termination", "Independent cancellation cleanup on a real host", "Multi-region built-in experiment", "Legitimate Google-authenticated guided conversation"],
+  "release_rule": "The original requirement to leave custom packages disabled when operational verification is incomplete remains in force. This is a limited software release, not full production validation of every runner or a scientific finding.",
+  "browser_followup": "Keep the original failed theme-menu check. A read-only follow-up using route network-idle readiness passed desktop/mobile light/dark interaction and exports. Timing sensitivity is observed; no conclusive application defect or hydration mechanism is inferred from these two runs.",
+  "usage": {"new_ec2_instances": 0, "new_application_model_calls": 0, "measured_charges_usd": null},
+  "reviewer": {"identity": "Primary Codex AI implementer", "type": "AI", "independent": false}
+}

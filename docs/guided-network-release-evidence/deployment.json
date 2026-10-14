@@ -1,0 +1,30 @@
+{
+  "protocol": "docs/guided-network-release-protocol-v1.json",
+  "mode": "deploy-disabled",
+  "status": "complete",
+  "started_at": "2026-10-14T20:01:03.485896+00:00",
+  "measured_charges_usd": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "command": [
+    "npx",
+    "cdk",
+    "deploy",
+    "JumpServeBenchmarkStack",
+    "--app",
+    "npx ts-node --prefer-ts-exts bin/benchmark.ts",
+    "-c",
+    "networkExecutionEnabled=true",
+    "-c",
+    "networkPackagesEnabled=false",
+    "--require-approval",
+    "never",
+    "--outputs-file",
+    "/private/tmp/jumpserve-guided-release-20261014/jumpserve-infra/.test-artifacts/guided-network/release/20261014T200103485649Z/outputs.json"
+  ],
+  "ended_at": "2026-10-14T20:03:39.681880+00:00"
+}

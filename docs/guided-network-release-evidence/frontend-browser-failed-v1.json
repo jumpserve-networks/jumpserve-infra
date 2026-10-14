@@ -1,0 +1,45 @@
+{
+  "started_at": "2026-10-14T22:27:41.223Z",
+  "origin": "https://jumpserve.quaint-lab.org",
+  "checks": [
+    {
+      "name": "deployed homepage links to unpublished idea intake",
+      "passed": true,
+      "evidence": {
+        "href": "/module/research-verification/new-idea"
+      }
+    },
+    {
+      "name": "cookie-free idea routes preserve exact sign-in return paths",
+      "passed": true,
+      "evidence": {
+        "paths": 2,
+        "authenticated": false
+      }
+    },
+    {
+      "name": "deployed methods describe fresh reviews and scientific limits",
+      "passed": true,
+      "evidence": {
+        "scientific_validation": "Separate from planning readiness",
+        "networking_execution": "Registered runners or versioned packages; other domains require an applicable implementation"
+      }
+    }
+  ],
+  "browser_errors": [],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "conditional_gaps": [
+    "No legitimate Google browser session: authenticated idea creation/planning/reviews and cross-owner actions unverified",
+    "No completed published idea yet; existing paper result pages provide deployed recorded-study coverage",
+    "Independent human or held-out validation"
+  ],
+  "new_model_calls": 0,
+  "measured_charges_usd": null,
+  "passed": false,
+  "error": "locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('option', { name: 'Dark Mode', exact: true })\u001b[22m\n",
+  "ended_at": "2026-10-14T22:28:09.490Z"
+}

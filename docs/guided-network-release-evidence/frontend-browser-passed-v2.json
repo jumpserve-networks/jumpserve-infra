@@ -1,0 +1,69 @@
+{
+  "started_at": "2026-10-14T22:30:23.398Z",
+  "origin": "https://jumpserve.quaint-lab.org",
+  "checks": [
+    {
+      "name": "deployed homepage links to unpublished idea intake",
+      "passed": true,
+      "evidence": {
+        "href": "/module/research-verification/new-idea"
+      }
+    },
+    {
+      "name": "cookie-free idea routes preserve exact sign-in return paths",
+      "passed": true,
+      "evidence": {
+        "paths": 2,
+        "authenticated": false
+      }
+    },
+    {
+      "name": "deployed methods describe fresh reviews and scientific limits",
+      "passed": true,
+      "evidence": {
+        "scientific_validation": "Separate from planning readiness",
+        "networking_execution": "Registered runners or versioned packages; other domains require an applicable implementation"
+      }
+    },
+    {
+      "name": "desktop/mobile navigation and themes expose the idea entry point",
+      "passed": true,
+      "evidence": {
+        "viewports": [
+          1365,
+          390
+        ],
+        "themes": [
+          "dark",
+          "light"
+        ]
+      }
+    },
+    {
+      "name": "existing completed paper assessments remain publicly readable and exportable",
+      "passed": true,
+      "evidence": {
+        "published_studies": 5,
+        "checked_study": "a0c13133-7f02-5aae-93d0-43fb1332e0ad",
+        "measurement_rows": 36,
+        "export_sha256": "934c0bbb17534eebc561e544496664f62ad53afd853b7b80197d1481da295729",
+        "scope": "Existing archived/simulation assessments, no experiments rerun"
+      }
+    }
+  ],
+  "browser_errors": [],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "conditional_gaps": [
+    "No legitimate Google browser session: authenticated idea creation/planning/reviews and cross-owner actions unverified",
+    "No completed published idea yet; existing paper result pages provide deployed recorded-study coverage",
+    "Independent human or held-out validation"
+  ],
+  "new_model_calls": 0,
+  "measured_charges_usd": null,
+  "passed": true,
+  "ended_at": "2026-10-14T22:30:38.763Z"
+}

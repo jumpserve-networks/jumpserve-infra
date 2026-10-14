@@ -1,0 +1,27 @@
+{
+  "protocol": "docs/guided-network-release-protocol-v1.json",
+  "mode": "diff",
+  "status": "complete",
+  "started_at": "2026-10-14T19:55:21.841601+00:00",
+  "measured_charges_usd": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "command": [
+    "npx",
+    "cdk",
+    "diff",
+    "JumpServeBenchmarkStack",
+    "--app",
+    "npx ts-node --prefer-ts-exts bin/benchmark.ts",
+    "-c",
+    "networkExecutionEnabled=true",
+    "-c",
+    "networkPackagesEnabled=false",
+    "--no-change-set"
+  ],
+  "ended_at": "2026-10-14T19:55:34.311451+00:00"
+}

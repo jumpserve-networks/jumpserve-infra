@@ -1,7 +1,7 @@
 """Fixed-target networking release; receipts preserve failed and successful actions."""
 import argparse, base64, datetime as dt, hashlib, importlib.util, io, json, os
 from pathlib import Path
-import subprocess, urllib.error, urllib.request, zipfile
+import subprocess, urllib.error, urllib.request, zipfile, uuid
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('previous_release', ROOT/'bin/research-ideas-release.py')
@@ -29,6 +29,17 @@ def verify():
     active=admin.query("select active_version_id from agent_prompt_settings where module_id='research-verification'")
     if active!=[{'active_version_id':previous.CANDIDATE}]: raise RuntimeError('Previously evaluated idea prompt differs')
     return dict(passed=True,table=rows,rpc=rpc,prompt_unchanged=True)
+
+def require_package_evidence():
+    revision=json.loads((ROOT/'research-workflow-runtime.json').read_text())['source_revision']
+    passed={}
+    for path in sorted((ROOT/'.test-artifacts/guided-network/operational').glob('*/receipt.json')):
+        value=json.loads(path.read_text())
+        if value.get('status')=='passed' and value.get('runtime_source_revision')==revision:
+            passed[value.get('case')]=str(path.relative_to(ROOT))
+    if not {'success','deadline','cancellation'}<=passed.keys():
+        raise RuntimeError('Custom package admission is blocked: matching startup/ingest, deadline and independent cancellation evidence is incomplete. Preserve failed checks; do not bypass reviewed-plan gates.')
+    return passed
 def deployed(directory):
     expected=json.loads((ROOT/'research-workflow-runtime.json').read_text())['files']
     resources=aws('cloudformation','list-stack-resources','--stack-name','JumpServeBenchmarkStack')['StackResourceSummaries']
@@ -58,9 +69,68 @@ def deployed(directory):
         denials.append(dict(path=path,status=status))
     return dict(runtime=report,capabilities=capabilities,anonymous_denials=denials,database=verify())
 
+def archive(directory):
+    # Fixed release evidence only. No env files, credential caches, cookies or
+    # arbitrary user-selected paths are accepted by this command.
+    frontend=ROOT.parent/'jumpserve-front-end'
+    entries=[]
+    for base,prefix,patterns in [
+        (ROOT,'infrastructure',['docs/guided-network-release-*.json','research-workflow-runtime.json','real-world-runtime.json','.release-*.log','.test-artifacts/guided-network/release/*/*','.test-artifacts/guided-network/operational/*/*','.test-artifacts/network-execution/database/**/*','.test-artifacts/research-ideas/production/**/*']),
+        (frontend,'frontend',['docs/idea-guided-interface-*.json','.release-*.log','.release-runtime-audit.json','.test-artifacts/idea-guide/browser/2026-10-14T20-01-40.014Z/*','.test-artifacts/research-ideas/production/2026-10-14T22-*/*'])]:
+        seen=set()
+        for pattern in patterns:
+            for path in sorted(base.glob(pattern)):
+                if not path.is_file() or path in seen or directory in path.parents: continue
+                if prefix=='infrastructure' and '/release/' in str(path):
+                    receipt=path.parent/'receipt.json'
+                    if receipt.exists() and json.loads(receipt.read_text()).get('mode')=='archive': continue
+                seen.add(path);entries.append((prefix+'/'+str(path.relative_to(base)),path.read_bytes()))
+    # Preserve the exact failed-verifier and verification-source revisions too.
+    for revision,name in [('3afe6a8','bin/check-network-package-production.py'),('b2a18ba','bin/check-network-package-production.py')]:
+        raw=subprocess.check_output(['git','show',revision+':'+name],cwd=ROOT)
+        entries.append(('source-revisions/'+revision+'/'+name,raw))
+    entries.append(('source-revisions/current-archiver.py',Path(__file__).read_bytes()))
+    entries.append(('source-revisions/current-production-browser.mjs',(frontend/'scripts/verify-research-ideas-production.mjs').read_bytes()))
+    manifest=[dict(path=name,bytes=len(raw),sha256=sha(raw),container='separate-original' if len(raw)>10_000_000 else 'main-zip') for name,raw in entries]
+    (directory/'raw-artifact-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+    output=io.BytesIO()
+    with zipfile.ZipFile(output,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as bundle:
+        for name,raw in [(name,raw) for name,raw in entries if len(raw)<=10_000_000]+[('manifest.json',(json.dumps(manifest,indent=2)+'\n').encode())]:
+            item=zipfile.ZipInfo(name,date_time=(1980,1,1,0,0,0));item.compress_type=zipfile.ZIP_DEFLATED;bundle.writestr(item,raw)
+    raw=output.getvalue()
+    large=[(name,data) for name,data in entries if len(data)>10_000_000]
+    if len(raw)>15_000_000 or any(len(data)>15_000_000 for _,data in large) or len(raw)+sum(len(data) for _,data in large)>20_000_000: raise RuntimeError('Release archive exceeds amended per-object or total storage bound')
+    (directory/'raw-evidence.zip').write_bytes(raw)
+    import sys
+    sys.path.insert(0,str(ROOT.parent/'jumpserve-back-end/research_workflow'))
+    import store,workflow
+    os.environ.update(SUPABASE_URL='https://regphejnlvfpyokpniny.supabase.co',SUPABASE_SERVICE_ROLE_KEY=aws('secretsmanager','get-secret-value','--secret-id','jumpserve/supabase-service-key')['SecretString'],SSL_CERT_FILE='/etc/ssl/cert.pem')
+    actor=str(uuid.uuid5(uuid.NAMESPACE_URL,'jumpserve:service-only:guided-network-release:2026-10-14:v2'))
+    study=str(uuid.uuid5(uuid.NAMESPACE_URL,'jumpserve:guided-network-release-evidence:2026-10-14:v1'))
+    identifier=str(uuid.uuid5(uuid.UUID(study),'raw-release-archive-v2'))
+    store.rpc('research_create_study',dict(p_actor=actor,p_id=study,p_document=workflow.paper_details(dict(title='Private production release evidence: guided networking 2026-10-14',domain='Software release evidence',scope='Private deployment evidence only; no scientific claim, Google session or model review is asserted.',study_kind='idea',paper_url=None))))
+    separate=[]
+    for name,data in large:
+        item_id=str(uuid.uuid5(uuid.UUID(study),'separate-original:'+sha(data)))
+        item=store.artifact(study,actor,data,item_id,'application/zip',dict(kind='original-deployed-runtime',original_archive_path=name,transformation='none; original deployed ZIP bytes'))
+        store.append(study,actor,'artifacts',item)
+        if store.artifact_bytes(study,item_id,maximum=15_000_000)!=data: raise RuntimeError('Separate original ZIP retrieval differs')
+        separate.append(dict(path=name,artifact_id=item_id,storage_path=item['storage_path'],bytes=len(data),sha256=sha(data),retrieved_hash_verified=True))
+    record=store.artifact(study,actor,raw,identifier,'application/zip',dict(kind='production-release-evidence',protocol='guided-network-release-protocol-v1',closure_scope='guided-network-release-closure-scope-v4',archive_amendment='guided-network-release-archive-amendment-v5',separate_originals=separate,original_files=len(entries),transformation='ZIP container of original bytes with per-file manifest; large unchanged original referenced as a separate private artifact'))
+    store.append(study,actor,'artifacts',record)
+    restored=store.artifact_bytes(study,identifier,maximum=15_000_000)
+    if restored!=raw: raise RuntimeError('Release archive retrieval differs')
+    public=json.loads((ROOT/'cdk.json').read_text())['context']['supabaseAnonKey']
+    request=urllib.request.Request('https://regphejnlvfpyokpniny.supabase.co/storage/v1/object/research-workflow-raw/'+record['storage_path'],headers={'apikey':public,'Authorization':'Bearer '+public})
+    try:
+        with previous.OPEN.open(request,timeout=20) as response: status=response.status
+    except urllib.error.HTTPError as error: status=error.code
+    if status==200: raise RuntimeError('Private evidence was anonymously readable')
+    return dict(study_id=study,artifact_id=identifier,storage_bucket=store.BUCKET,storage_path=record['storage_path'],sha256=sha(raw),bytes=len(raw),files=len(entries),separate_originals=separate,total_stored_bytes=len(raw)+sum(item['bytes'] for item in separate),retrieved_hash_verified=True,anonymous_status=status)
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('mode',choices=['inspect','backup','migrate','diff','deploy-disabled','deploy-enabled','verify'])
+    parser.add_argument('mode',choices=['inspect','backup','migrate','diff','deploy-disabled','deploy-enabled','verify','archive'])
     args=parser.parse_args()
     directory=ROOT/'.test-artifacts/guided-network/release'/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');directory.mkdir(parents=True,exist_ok=False)
     report=dict(protocol='docs/guided-network-release-protocol-v1.json',mode=args.mode,status='running',started_at=stamp(),measured_charges_usd=None)
@@ -89,8 +159,10 @@ def main():
             report['verification']=verify();after=inspect();report['after']=after
             if before['scientific_counts']!=after['scientific_counts'] or before['pointers']!=after['pointers']: raise RuntimeError('Scientific counts or prompt pointers changed during migration; inspect concurrent changes')
         elif args.mode=='verify': report['verification']=deployed(directory)
+        elif args.mode=='archive': report['archive']=archive(directory)
         else:
             if args.mode.startswith('deploy'): verify()
+            if args.mode=='deploy-enabled': report['operational_evidence']=require_package_evidence();save()
             credentials=aws('configure','export-credentials','--format','process')
             env=dict(os.environ,AWS_ACCESS_KEY_ID=credentials['AccessKeyId'],AWS_SECRET_ACCESS_KEY=credentials['SecretAccessKey'],AWS_SESSION_TOKEN=credentials['SessionToken'],AWS_DEFAULT_REGION='us-east-1');env.pop('AWS_PROFILE',None)
             command=['npx','cdk','diff' if args.mode=='diff' else 'deploy','JumpServeBenchmarkStack','--app','npx ts-node --prefer-ts-exts bin/benchmark.ts','-c','networkExecutionEnabled=true','-c','networkPackagesEnabled='+str(args.mode=='deploy-enabled').lower()]

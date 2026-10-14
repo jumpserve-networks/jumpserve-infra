@@ -1,0 +1,255 @@
+{
+  "version": 1,
+  "date": "2026-10-14",
+  "software_status": "Guided interface and built-in networking deployed; custom-package admission deliberately disabled",
+  "scientific_status": "No paper claim reassessed, no production scientific measurement and no scientific generalization established.",
+  "authorization": "User explicitly requested merge to main and production deployment; AWS session renewed.",
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "project_identity_verified": true,
+    "site": "https://jumpserve.quaint-lab.org"
+  },
+  "protocols": [
+    {
+      "path": "docs/guided-network-release-amendment-v2.json",
+      "sha256": "c9bce4b6a9119a0c9112eebc3ced6cf6c7e81dc4ce6040e856d183ca31da99f4"
+    },
+    {
+      "path": "docs/guided-network-release-amendment-v3.json",
+      "sha256": "2517815e2b94063dbad3b29b19d6483547cbf6507c8d64c637d5be317500978c"
+    },
+    {
+      "path": "docs/guided-network-release-archive-amendment-v5.json",
+      "sha256": "09fea8c1455172ac6a7dd2170b2efb42a58419ceb587eefe9ecf8100689345a2"
+    },
+    {
+      "path": "docs/guided-network-release-closure-scope-v4.json",
+      "sha256": "bd7a6255d9373811ba9e6560177844a3204b1f0ffc085200e613f3ed3c73e837"
+    },
+    {
+      "path": "docs/guided-network-release-protocol-v1.json",
+      "sha256": "00267c6c49f7b2b5d7e3ae1a47ec5a4f88f89cc2672ff7280b1b997bef940f66"
+    }
+  ],
+  "revisions": {
+    "frontend_runtime": "b34f7edd3d69987a1d1ec1d2b180174b7e9f499d",
+    "frontend_verification": "f91a93eedc9d2224f7ec56539e01cb82fcd1953b",
+    "backend_main": "a2e7bd8942b13c773fcad59a78171e2383cab5dd",
+    "infrastructure_runtime": "3afe6a8",
+    "runtime_source_revision": "a2e7bd8942b13c773fcad59a78171e2383cab5dd",
+    "note": "Later infrastructure/reporting and frontend verifier-only commits do not change deployed application bytes. Main merge receipts identify exact runtime revisions; local user work is excluded."
+  },
+  "deployment": {
+    "amplify_app": "d24jvguj7brnkj",
+    "amplify_job": "110",
+    "status": "SUCCEED",
+    "stacks": [
+      "JumpServeBenchmarkStack"
+    ],
+    "benchmark_ami_retained": "ami-0808d1157e26c65cb",
+    "agent_stack_changed": false,
+    "migration": "database/202610130002_network_execution.sql",
+    "prompts_republished": false
+  },
+  "checks": {
+    "frontend_unit_tests": 148,
+    "backend_research_tests": 89,
+    "backend_real_world_tests": 67,
+    "infrastructure_tests": 89,
+    "total_unit_tests": 393,
+    "network_database_cases": 7,
+    "guided_local_browser_cases": 9,
+    "production_browser_cases": 5,
+    "frontend_build": "Next 16.3.8 passed",
+    "infrastructure_build": "passed",
+    "lint": "zero errors; two preexisting warnings in clean locked dependency environment, then verifier unused-import warning removed",
+    "runtime_dependency_audit": {
+      "high": 0,
+      "critical": 0,
+      "moderate": 2,
+      "note": "Existing typography/selector-parser build-tool path; full development audit not claimed clean"
+    },
+    "deployed_networking_functions": 5,
+    "source_files_checked_per_networking_function": 13,
+    "existing_published_idea_prompt_runtime": "hash matched",
+    "migration_scientific_counts_unchanged": true,
+    "prompt_pointers_unchanged": true
+  },
+  "operational": {
+    "custom_enabled": false,
+    "built_in_runners_enabled": true,
+    "setup_attempts": 2,
+    "vm_runs": 0,
+    "model_calls": 0,
+    "interpretation": "Both custom verification setups failed before enqueue/VM execution. No claim about actual guest effectiveness, termination or ingestion is inferred. Source inspection identifies required readiness guards; sanitized HTTP 500 does not establish its exact SQL cause.",
+    "followup": "Use a genuinely reviewed current packet and preserve actual review output before a bounded VM campaign. Do not bypass or fabricate readiness. require_package_evidence blocks deploy-enabled without matching passed evidence."
+  },
+  "browser_scope": {
+    "viewport_widths": [
+      1365,
+      390
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "actual_google_session": false,
+    "idea_guidance": "Local actual component/API/Postgres flow with synthetic auth/provider and six real loopback HTTP measurements",
+    "production_scope": "Public entry points, methods, theme/navigation, exact unauthenticated sign-in returns; one of five published studies checked with 36 measurement rows and export hash",
+    "initial_theme_failure": "Retained; follow-up using network-idle readiness passed. Mechanism unproven, no application fix asserted."
+  },
+  "privacy": {
+    "rls_enabled": true,
+    "browser_writes_denied": true,
+    "anonymous_privileged_actions_denied": true,
+    "raw_storage_private": true,
+    "service_only_archive_actor": true,
+    "no_google_identity_fabricated": true
+  },
+  "evidence_archive": {
+    "study_id": "480b5a7a-0db0-5fbd-982d-8063e0140bd4",
+    "artifact_id": "0e2fc5c9-d3de-5b45-bb43-462ac066fb78",
+    "storage_bucket": "research-workflow-raw",
+    "storage_path": "480b5a7a-0db0-5fbd-982d-8063e0140bd4/5b7cfeec0586a03cb8f1dbf83630e90a26b22d79296e4b5ae90541b016e64ec0",
+    "sha256": "5b7cfeec0586a03cb8f1dbf83630e90a26b22d79296e4b5ae90541b016e64ec0",
+    "bytes": 3885987,
+    "files": 98,
+    "separate_originals": [
+      {
+        "path": "infrastructure/.test-artifacts/research-ideas/production/20261014T222614982274Z/JumpServeAgentStack-AgentFnC1FD126F-MG2xfZrwsBNg.zip",
+        "artifact_id": "4d26f09e-67be-532a-b4ce-fb6d3ce2fe31",
+        "storage_path": "480b5a7a-0db0-5fbd-982d-8063e0140bd4/c879df52d7e4e09f0f2154eb6ed712a4a8b88bf060cbe62b43a1608c565cf4a5",
+        "bytes": 14302963,
+        "sha256": "c879df52d7e4e09f0f2154eb6ed712a4a8b88bf060cbe62b43a1608c565cf4a5",
+        "retrieved_hash_verified": true
+      }
+    ],
+    "total_stored_bytes": 18188950,
+    "retrieved_hash_verified": true,
+    "anonymous_status": 400
+  },
+  "conditional_gaps": [
+    "Actual Google-authenticated guided planning, AI and owner execution request; production cross-owner positive/negative flow",
+    "Actual published-model coaching answers in the new interface; unchanged evaluated backend prompt reused",
+    "Custom VM boot, output ingest, wall deadline and independent cleanup; custom admission disabled",
+    "Multi-region emulated/real-world networking and Docker packages",
+    "VPN, controlled commercial CDN origins and independent observers",
+    "Independent human or held-out scientific validation"
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false,
+    "human_review": false
+  },
+  "costs": {
+    "new_experiment_instances": 0,
+    "new_application_model_calls": 0,
+    "measured_charges_usd": null,
+    "estimated_actual_charges_usd": null,
+    "stored_evidence_bytes": 18188950,
+    "billing_note": "Byte counts and deployment/build wall times are observed usage, not charges. Hosting, database, storage, deployment and coding-model charges remain unallocated."
+  },
+  "failures_preserved": [
+    "Frontend clean build initially rejected an external node_modules symlink; locked dependencies were installed and build passed",
+    "Operational v2 reviewer metadata validation",
+    "Operational v3 bundle request HTTP 500 before enqueue",
+    "Initial production theme-menu timeout",
+    "Initial archive size bound"
+  ],
+  "readiness": {
+    "released": true,
+    "complete_validation": false,
+    "custom_package_release_blocker": "Not passed; runner disabled",
+    "scientific_validation": "Not established",
+    "rollback": "Original deployed ZIPs retained and hashed in the private evidence archive; additive schema and all scientific evidence remain retained."
+  },
+  "evidence_files": [
+    {
+      "path": "docs/guided-network-release-evidence/targets-before.json",
+      "bytes": 1700,
+      "sha256": "8d582b96ff6c3922ec83dc3c2b654ad869bce8e9e30ef313d1f288494de79c30"
+    },
+    {
+      "path": "docs/guided-network-release-evidence/migration.json",
+      "bytes": 4127,
+      "sha256": "5a406d3d0f6dc797cce7c8a0cfd07bbd7dff74abe1c4721550e4efeccfbf10e4"
+    },
+    {
+      "path": "docs/guided-network-release-evidence/diff.json",
+      "bytes": 684,
+      "sha256": "2faad48dad39378520f1b09474396522861d51bf5c1ff50b0a84f4de29a1eee1"
+    },
+    {
+      "path": "docs/guided-network-release-evidence/rollback-originals-manifest.json",
+      "bytes": 5073,
+      "sha256": "5fe548d19ff99952fca994be7945fb801dd58ef649e3dca311f6f4be6611dea4"
+    },
+    {
+      "path": "docs/guided-network-release-evidence/deployment.json",
+      "bytes": 880,
+      "sha256": "480e5cb5d44aa23fdc06f53c51a241013bf3f5d1fba0b546b8d19b99d79ff314"
+    },
+    {
+      "path": "docs/guided-network-release-evidence/deployed-runtime-verification.json",
+      "bytes": 6331,
+      "sha256": "b1ecc67fdb47958fcbb2f7bb39ac5885d705ce508c7cf77f5fda135d7416aab6"
+    },
+    {
+      "path": "docs/guided-network-release-evidence/existing-prompt-runtime-verification.json",
+      "bytes": 5528,
+      "sha256": "61f2d838f0882974c833a2071aa84fdc2b64f273893780ed76903632f5977c47"
+    },
+    {
+      "path": "docs/guided-network-release-evidence/failed-operational-v2.json",
+      "bytes": 753,
+      "sha256": "2edfd5c72a8ab4e1c1bc390e1b76fa49d231ed653e4b07f3db6b1e07f74184df"
+    },
+    {
+      "path": "docs/guided-network-release-evidence/failed-operational-v3.json",
+      "bytes": 819,
+      "sha256": "4d0cc46203871679dba3ee9d7b26048643ad559d8398d82fcfdd9768014d5ae0"
+    },
+    {
+      "path": "docs/guided-network-release-evidence/failed-archive-v1.json",
+      "bytes": 488,
+      "sha256": "6bd520fbeb48896e125ae3e3dc5252e99309f5dd5f8a464f56d308a53172489c"
+    },
+    {
+      "path": "docs/guided-network-release-evidence/failed-archive-v1-manifest.json",
+      "bytes": 20717,
+      "sha256": "b28c9ff04a495133a1a9ee93164db61faecd1d0755e6c37494e7e4edf70b03eb"
+    },
+    {
+      "path": "docs/guided-network-release-evidence/private-storage-archive-v2.json",
+      "bytes": 1499,
+      "sha256": "5169d921f7219644a3bad744d70cef104181ff49ded416247d3f3dc4a7f82dc4"
+    },
+    {
+      "path": "docs/guided-network-release-evidence/raw-artifact-manifest-v2.json",
+      "bytes": 24474,
+      "sha256": "bfdea1f28a3372601d1f48c153200ed2affea0ce6d059fbcd7a2947041f7f2b5"
+    },
+    {
+      "path": "docs/guided-network-release-evidence/frontend-browser-failed-v1.json",
+      "bytes": 1553,
+      "sha256": "9eab86feda6c742ad051cf2b8507fabd5899a3f5fbf3c2dce5ecba8f80adadad"
+    },
+    {
+      "path": "docs/guided-network-release-evidence/frontend-browser-passed-v2.json",
+      "bytes": 2128,
+      "sha256": "7b1632e7b7a516b28deeb147b02b0a95668f7586483fe3a42fdc3d2a0532a0a2"
+    },
+    {
+      "path": "docs/guided-network-release-evidence/guided-local-browser.json",
+      "bytes": 3743,
+      "sha256": "ab5d6828434824bfcb554a422a3dcc330fe924cb55b57dabdb55f6a761af1eef"
+    },
+    {
+      "path": "docs/guided-network-release-evidence/network-local-database.json",
+      "bytes": 6439,
+      "sha256": "dbfad2dc025caf6e6dcceeb94624d42e93b7dd85ccfa4522712066d0e00c4bfb"
+    }
+  ]
+}

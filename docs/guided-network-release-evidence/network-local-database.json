@@ -1,0 +1,166 @@
+{
+  "protocol": "docs/network-execution-validation-protocol-v1.json",
+  "started_at": "2026-10-14T19:55:46.736937+00:00",
+  "database": "jumpserve_research_ideas_test_20261014t195546728892z",
+  "checks": [
+    {
+      "name": "private networking RLS and browser RPC denial",
+      "passed": true,
+      "evidence": {
+        "private_rls": true,
+        "browser_access": false
+      },
+      "wall_seconds": 0.1306537080090493
+    },
+    {
+      "name": "frozen networking identity and long-lived queue lease",
+      "passed": true,
+      "evidence": {
+        "stale_lease_refused": true,
+        "changed_replication_refused": true,
+        "lease_covers_long_test": true
+      },
+      "wall_seconds": 0.07352229201933369
+    },
+    {
+      "name": "actual HTTP package dispatch persists original bytes and measurements",
+      "passed": true,
+      "evidence": {
+        "actual_http_requests": 3,
+        "measurement_rows": 3,
+        "job_status": "awaiting-review",
+        "hypothesis_assessments": 0,
+        "measured_charges_usd": null
+      },
+      "wall_seconds": 0.8177873750100844
+    },
+    {
+      "name": "failed packages retain their original output and terminal run",
+      "passed": true,
+      "evidence": {
+        "run_status": "failed",
+        "stderr_retained": true,
+        "fabricated_measurements": 0
+      },
+      "wall_seconds": 1.1328478750074282
+    },
+    {
+      "name": "owner cancellation prevents launch and keeps excluded run evidence",
+      "passed": true,
+      "evidence": {
+        "cross_owner_denied": true,
+        "launch_after_cancel_refused": true,
+        "job_status": "cancelled"
+      },
+      "wall_seconds": 0.9715059999725781
+    },
+    {
+      "name": "eight simultaneous requests authorize one launch without replay",
+      "passed": true,
+      "evidence": {
+        "simultaneous_clients": 8,
+        "launch_authorizations": 1,
+        "cross_runner_denied": true
+      },
+      "wall_seconds": 0.7060366250225343
+    },
+    {
+      "name": "expired launch keeps shared resources reserved until cleanup is known",
+      "passed": true,
+      "evidence": {
+        "expired_attempt_retained": true,
+        "unconfirmed_cleanup_preserves_resource_reservation": true
+      },
+      "wall_seconds": 0.5686111249960959
+    }
+  ],
+  "new_model_calls": 0,
+  "cloud_experiments": 0,
+  "measured_charges_usd": null,
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "scope": "Actual local API/queue SQL and package HTTP measurements; synthetic Google identity, Storage transport and AWS dispatch.",
+  "conditional_gaps": [
+    "Legitimate Google session",
+    "AWS VM and independent cleanup",
+    "Docker execution",
+    "Mullvad/CDN origin credentials"
+  ],
+  "migration_sha256": {
+    "202609200001_agent_prompts.sql": "7468b857ae542b5597077981ecd433c7662a5bb1f8f477e34d490c5f36cd849b",
+    "202609290001_real_world_agent.sql": "fb7b7556fc1f516e67e6334d0aaa5b21c0939e955f42d2e0abdd3bddc6fb373f",
+    "202610040009_agent_evidence_rendering.sql": "034b7fc766addee69474e86919b5062cf56b6e72502a658f9c4fae7533d5555e",
+    "202610050104_ipv6_publication_review_guard.sql": "bd4d000f5a34661c0026194b498e0cefaf12353b79cc7ea436736431768ef36d",
+    "202610070001_research_workflow.sql": "d97983192c89e40886d613e5a2ee4548e52a0e5d66a397ccaab134f3efacb6d3",
+    "202610070002_research_queue.sql": "49f0f761aba55bc7771968b30048c34a7db4996947503b558b3eaac599577d63",
+    "202610070003_research_preparation.sql": "e3e6b75ced1c98e494551c7500825080bc141a2594263cd8840f082bd383d906",
+    "202610120001_research_ideas.sql": "b91c8b157090e397029764372cfea09f0c9af7a37f61346fac5d912706cbf00f",
+    "202610120002_research_idea_prompt.sql": "9efa726606a59a16186bdb5ff5e9ab8e78d972185ed752bdd93e041926e7718b",
+    "202610120003_research_idea_prompt_seed.sql": "b2f01cfbed3e607f2513f7b7eefa08f3da8587664133451a180d05e47ae67286",
+    "202610120004_research_idea_prompt_seed_v2.sql": "e902230db40c097bbe6f1b1b406523b4a97725cce668dc51ce482c64e7d1f54d",
+    "202610130001_research_idea_review_roles.sql": "a9f46a0993cc23b417ce5f06e672678cc95a9efefbf752a632b44171d9ec1b97",
+    "202610130002_network_execution.sql": "2fca154107dd146a80c0fb7248fe6b6e78db017f1ef2bd1810b12ba6f69e0851"
+  },
+  "passed": true,
+  "ended_at": "2026-10-14T19:55:52.699093+00:00",
+  "raw_artifacts": [
+    {
+      "path": "76e38ae1-6969-5ca2-bc22-8cabe3629f88/package.py",
+      "byte_count": 86,
+      "sha256": "b2e7d8bed18be4fd291f208500b2a4983233da09eee1bdb9a8773298dd8d647e"
+    },
+    {
+      "path": "76e38ae1-6969-5ca2-bc22-8cabe3629f88/spec.json",
+      "byte_count": 617,
+      "sha256": "418ac936fedb2efa0785771d7129b02f09a508231ed0c0cfd389de562b99683e"
+    },
+    {
+      "path": "76e38ae1-6969-5ca2-bc22-8cabe3629f88/stdout.bin",
+      "byte_count": 24,
+      "sha256": "d1913fce9e508107d18ad38aed7a8485bb2e08f29fb0028d12e604b2a8359b4b"
+    },
+    {
+      "path": "76e38ae1-6969-5ca2-bc22-8cabe3629f88/stderr.bin",
+      "byte_count": 322,
+      "sha256": "ee8fdb79b2e71c95e0e88286f18add29e69c0add03308e5b166e040ebc323014"
+    },
+    {
+      "path": "76e38ae1-6969-5ca2-bc22-8cabe3629f88/runtime-receipt.json",
+      "byte_count": 850,
+      "sha256": "17d3643051575f2f63ec836e3d3d5ff6866e40265f65049d4f45ba0c53a02daf"
+    },
+    {
+      "path": "464b84ca-c33f-5ec2-a6cb-18feff23f719/package.py",
+      "byte_count": 1800,
+      "sha256": "3f52c7919d7cc3e32b4e988f75b3268e531bd2784e7e4f96b03ff859c29eb6d1"
+    },
+    {
+      "path": "464b84ca-c33f-5ec2-a6cb-18feff23f719/spec.json",
+      "byte_count": 617,
+      "sha256": "6fecb0fd7d50f3bc03554b9dafd4419786011ef64b226b9de84b0f8243e04efa"
+    },
+    {
+      "path": "464b84ca-c33f-5ec2-a6cb-18feff23f719/stdout.bin",
+      "byte_count": 22,
+      "sha256": "28e6b325fef6998cdd7a2f646bc4ab9ab4bba9a2e8324da2d5e5f26ba8c05433"
+    },
+    {
+      "path": "464b84ca-c33f-5ec2-a6cb-18feff23f719/output.json",
+      "byte_count": 957,
+      "sha256": "c09ca44f31ba89bef2f48af3eca81c360fd7d5250cfd5214ecf0ea5dfd865294"
+    },
+    {
+      "path": "464b84ca-c33f-5ec2-a6cb-18feff23f719/stderr.bin",
+      "byte_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "464b84ca-c33f-5ec2-a6cb-18feff23f719/runtime-receipt.json",
+      "byte_count": 849,
+      "sha256": "d6679f24aa42a2f9e5797353e06f0eeb2751f5621e7f3305d764de6190ac8b28"
+    }
+  ]
+}

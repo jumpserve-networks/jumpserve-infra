@@ -1,0 +1,36 @@
+{
+  "protocol": "docs/guided-network-release-protocol-v1.json",
+  "mode": "archive",
+  "status": "complete",
+  "started_at": "2026-10-14T22:34:46.647743+00:00",
+  "measured_charges_usd": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "archive": {
+    "study_id": "480b5a7a-0db0-5fbd-982d-8063e0140bd4",
+    "artifact_id": "0e2fc5c9-d3de-5b45-bb43-462ac066fb78",
+    "storage_bucket": "research-workflow-raw",
+    "storage_path": "480b5a7a-0db0-5fbd-982d-8063e0140bd4/5b7cfeec0586a03cb8f1dbf83630e90a26b22d79296e4b5ae90541b016e64ec0",
+    "sha256": "5b7cfeec0586a03cb8f1dbf83630e90a26b22d79296e4b5ae90541b016e64ec0",
+    "bytes": 3885987,
+    "files": 98,
+    "separate_originals": [
+      {
+        "path": "infrastructure/.test-artifacts/research-ideas/production/20261014T222614982274Z/JumpServeAgentStack-AgentFnC1FD126F-MG2xfZrwsBNg.zip",
+        "artifact_id": "4d26f09e-67be-532a-b4ce-fb6d3ce2fe31",
+        "storage_path": "480b5a7a-0db0-5fbd-982d-8063e0140bd4/c879df52d7e4e09f0f2154eb6ed712a4a8b88bf060cbe62b43a1608c565cf4a5",
+        "bytes": 14302963,
+        "sha256": "c879df52d7e4e09f0f2154eb6ed712a4a8b88bf060cbe62b43a1608c565cf4a5",
+        "retrieved_hash_verified": true
+      }
+    ],
+    "total_stored_bytes": 18188950,
+    "retrieved_hash_verified": true,
+    "anonymous_status": 400
+  },
+  "ended_at": "2026-10-14T22:35:05.636988+00:00"
+}

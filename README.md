@@ -658,3 +658,14 @@ overshoot; built-in runners do not enforce the custom network byte threshold.
 Missing charges and unallocated compute/model usage remain unknown. No production
 change is authorized by this implementation turn; a new deployment request is
 required before merging/pushing main, enabling flags or applying this migration.
+
+The guided interface and built-in networking integration were released on
+2026-10-14. `networkExecutionEnabled=true` enables the registered emulated and
+real-world adapters. `networkPackagesEnabled=false` keeps custom-package queue
+admission disabled: the private production verifier stopped before VM execution,
+and boot, ingestion, wall-deadline and independent cleanup checks remain open.
+The private executor infrastructure is provisioned; this does not establish that
+the guest lifecycle works. Preserve the failed setup receipts and use the normal
+reviewed-plan gates for a later operational campaign. Do not fabricate reviews or
+remove readiness checks to enable packages. See
+`docs/guided-network-release-closure-scope-v4.json` and the production release report.

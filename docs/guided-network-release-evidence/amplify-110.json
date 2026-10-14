@@ -1,0 +1,32 @@
+{
+    "summary": {
+        "jobArn": "arn:aws:amplify:us-east-1:395567831870:apps/d24jvguj7brnkj/branches/main/jobs/0000000110",
+        "jobId": "110",
+        "commitId": "b34f7edd3d69987a1d1ec1d2b180174b7e9f499d",
+        "commitMessage": "Verify deployed registered networking methods accurately [skip ci]\n\nKeep production browser checks read-only and record that registered networking runners and versioned packages can execute jobs. Other domains still need an applicable implementation. Remove an unused verifier import; no application behavior or prompt change.",
+        "commitTime": "2026-10-14T15:03:41-05:00",
+        "startTime": "2026-10-14T17:12:01.558000-05:00",
+        "status": "SUCCEED",
+        "endTime": "2026-10-14T17:14:41.173000-05:00"
+    },
+    "steps": [
+        {
+            "stepName": "BUILD",
+            "status": "SUCCEED",
+            "startTime": "2026-10-14T17:12:01.595000-05:00",
+            "endTime": "2026-10-14T17:14:16.473000-05:00"
+        },
+        {
+            "stepName": "DEPLOY",
+            "status": "SUCCEED",
+            "startTime": "2026-10-14T17:14:16.755000-05:00",
+            "endTime": "2026-10-14T17:14:40.673000-05:00"
+        },
+        {
+            "stepName": "VERIFY",
+            "status": "SUCCEED",
+            "startTime": "2026-10-14T17:14:40.992000-05:00",
+            "endTime": "2026-10-14T17:14:41.017000-05:00"
+        }
+    ]
+}

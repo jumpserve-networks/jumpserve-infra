@@ -1,0 +1,158 @@
+{
+  "protocol": "docs/guided-network-release-protocol-v1.json",
+  "mode": "migrate",
+  "status": "complete",
+  "started_at": "2026-10-14T19:56:07.584234+00:00",
+  "measured_charges_usd": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "before": {
+    "network_exists": false,
+    "scientific_counts": [
+      {
+        "kind": "measurements",
+        "count": 7144
+      },
+      {
+        "kind": "published_values",
+        "count": 5093
+      },
+      {
+        "kind": "assessments",
+        "count": 102
+      }
+    ],
+    "pointers": [
+      {
+        "module_id": "congestion-control-emulated",
+        "active_version_id": "cabbe18a-cc70-482c-8883-81b515639e42"
+      },
+      {
+        "module_id": "congestion-control-real-world",
+        "active_version_id": "e78456f8-6582-4f69-8b44-d56d2c782352"
+      },
+      {
+        "module_id": "http2-compliance-study",
+        "active_version_id": "caf6bae2-acd3-4ef4-8147-bd8bc39895e2"
+      },
+      {
+        "module_id": "ipv6-dns-study",
+        "active_version_id": "28edfb2a-17f9-47c0-a801-1ca7392c7404"
+      },
+      {
+        "module_id": "leo-emergency-failover",
+        "active_version_id": "ec00a4b6-718c-4e69-9c0f-283b9f251002"
+      },
+      {
+        "module_id": "reliable-sketch-study",
+        "active_version_id": "64c9fbb6-1d38-4844-9167-66faaf05fe14"
+      },
+      {
+        "module_id": "research-verification",
+        "active_version_id": "e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8"
+      }
+    ],
+    "active_queue_jobs": []
+  },
+  "migration": {
+    "path": "202610130002_network_execution.sql",
+    "sha256": "2fca154107dd146a80c0fb7248fe6b6e78db017f1ef2bd1810b12ba6f69e0851",
+    "bytes": 24426
+  },
+  "verification": {
+    "passed": true,
+    "table": [
+      {
+        "relrowsecurity": true,
+        "anon_access": false,
+        "browser_access": false
+      }
+    ],
+    "rpc": [
+      {
+        "proname": "research_network_begin",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_network_cancel",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_network_launch",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_network_pending",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_network_token",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_network_update",
+        "anon_execute": false,
+        "browser_execute": false
+      }
+    ],
+    "prompt_unchanged": true
+  },
+  "after": {
+    "network_exists": true,
+    "scientific_counts": [
+      {
+        "kind": "measurements",
+        "count": 7144
+      },
+      {
+        "kind": "published_values",
+        "count": 5093
+      },
+      {
+        "kind": "assessments",
+        "count": 102
+      }
+    ],
+    "pointers": [
+      {
+        "module_id": "congestion-control-emulated",
+        "active_version_id": "cabbe18a-cc70-482c-8883-81b515639e42"
+      },
+      {
+        "module_id": "congestion-control-real-world",
+        "active_version_id": "e78456f8-6582-4f69-8b44-d56d2c782352"
+      },
+      {
+        "module_id": "http2-compliance-study",
+        "active_version_id": "caf6bae2-acd3-4ef4-8147-bd8bc39895e2"
+      },
+      {
+        "module_id": "ipv6-dns-study",
+        "active_version_id": "28edfb2a-17f9-47c0-a801-1ca7392c7404"
+      },
+      {
+        "module_id": "leo-emergency-failover",
+        "active_version_id": "ec00a4b6-718c-4e69-9c0f-283b9f251002"
+      },
+      {
+        "module_id": "reliable-sketch-study",
+        "active_version_id": "64c9fbb6-1d38-4844-9167-66faaf05fe14"
+      },
+      {
+        "module_id": "research-verification",
+        "active_version_id": "e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8"
+      }
+    ],
+    "active_queue_jobs": []
+  },
+  "ended_at": "2026-10-14T19:56:16.943900+00:00"
+}

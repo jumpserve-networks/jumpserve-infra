@@ -1,0 +1,8 @@
+{
+  "id": "guided-network-release-archive-amendment-v5",
+  "amends": "guided-network-release-closure-scope-v4",
+  "declared_on": "2026-10-14",
+  "failure": "The first archive attempt exceeded its 15 MB object bound before any Storage upload. Most bytes are the unchanged deployed AI Lambda ZIP, about 14.3 MB.",
+  "correction": "Preserve that original ZIP as its own private content-addressed artifact. Store the remaining evidence in a ZIP with a manifest referencing the separate original. Keep each object below 15 MB and total uploaded evidence below 20 MB; retrieve and hash both objects.",
+  "unchanged": "No runtime, prompt, scientific records or custom-package enablement changes. Retain the original failed archive receipt and file manifest."
+}

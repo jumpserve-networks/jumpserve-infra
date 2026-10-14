@@ -1,0 +1,15 @@
+{
+  "protocol": "docs/guided-network-release-protocol-v1.json",
+  "mode": "archive",
+  "status": "failed",
+  "started_at": "2026-10-14T22:32:48.237981+00:00",
+  "measured_charges_usd": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "reason": "Release archive exceeds declared 15 MB storage bound",
+  "ended_at": "2026-10-14T22:32:50.070567+00:00"
+}

@@ -1,0 +1,192 @@
+{
+  "protocol": "docs/guided-network-release-protocol-v1.json",
+  "mode": "verify",
+  "status": "complete",
+  "started_at": "2026-10-14T20:04:02.002364+00:00",
+  "measured_charges_usd": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "verification": {
+    "runtime": [
+      {
+        "function": "JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+        "handler": "api.handler",
+        "zip_sha256": "7cb7812dd1cfb2bca4757ea23579e6224ea5c41ff724e1ed83986bba7109d723",
+        "source_files": 13,
+        "memory_mb": 512,
+        "timeout_seconds": 29,
+        "custom_admission": false
+      },
+      {
+        "function": "JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt",
+        "handler": "network_package.handler",
+        "zip_sha256": "7cb7812dd1cfb2bca4757ea23579e6224ea5c41ff724e1ed83986bba7109d723",
+        "source_files": 13,
+        "memory_mb": 512,
+        "timeout_seconds": 60,
+        "custom_admission": false
+      },
+      {
+        "function": "JumpServeBenchmarkStack-ResearchWorkflowPackageIng-kAAtKeB693oF",
+        "handler": "network_package.ingest",
+        "zip_sha256": "7cb7812dd1cfb2bca4757ea23579e6224ea5c41ff724e1ed83986bba7109d723",
+        "source_files": 13,
+        "memory_mb": 512,
+        "timeout_seconds": 29,
+        "custom_admission": false
+      },
+      {
+        "function": "JumpServeBenchmarkStack-ResearchWorkflowPackageRea-Vy8KadbHwEL9",
+        "handler": "network_package.reap",
+        "zip_sha256": "7cb7812dd1cfb2bca4757ea23579e6224ea5c41ff724e1ed83986bba7109d723",
+        "source_files": 13,
+        "memory_mb": 256,
+        "timeout_seconds": 120,
+        "custom_admission": false
+      },
+      {
+        "function": "JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+        "handler": "worker.handler",
+        "zip_sha256": "7cb7812dd1cfb2bca4757ea23579e6224ea5c41ff724e1ed83986bba7109d723",
+        "source_files": 13,
+        "memory_mb": 512,
+        "timeout_seconds": 180,
+        "custom_admission": false
+      }
+    ],
+    "capabilities": {
+      "version": "research-workflow-v1",
+      "ideas": {
+        "version": "research-ideas-v1",
+        "paper_required": false,
+        "packet_bytes": 24000
+      },
+      "networking": {
+        "version": "network-execution-v1",
+        "runners": [
+          {
+            "id": "emulated-netem-v1",
+            "name": "Emulated networking",
+            "mode": "emulated",
+            "module": "congestion-control-emulated",
+            "maximum_instances": 1,
+            "enabled": true
+          },
+          {
+            "id": "real-world-iperf-v1",
+            "name": "Real-world networking",
+            "mode": "real-world",
+            "module": "congestion-control-real-world",
+            "maximum_instances": 18,
+            "enabled": true
+          },
+          {
+            "id": "custom-package-v1",
+            "name": "Versioned experiment package",
+            "mode": "package",
+            "module": "research-verification",
+            "maximum_instances": 1,
+            "enabled": false
+          }
+        ],
+        "max_jobs": 32,
+        "package_contract": "network-observations-v1",
+        "limitations": "Executable configurations and versioned packages are required. Actual observations do not automatically validate a hypothesis. Missing charges remain unknown."
+      },
+      "adapters": [
+        "matched-numeric-v1"
+      ],
+      "preparation": {
+        "version": "research-preparation-v1",
+        "source_grounded_plans": true,
+        "automatic_claim_extraction": false,
+        "uploaded_plan_bytes": 250000
+      },
+      "queue": {
+        "version": "research-queue-v1",
+        "limits": {
+          "global_jobs": 4,
+          "study_jobs": 2,
+          "invocation_jobs": 2,
+          "lease_seconds": 600,
+          "input_bytes": 256000,
+          "observations": 1000,
+          "algorithm_wall_seconds": 10,
+          "study_queue_jobs": 1000,
+          "automatic_retries": 0
+        },
+        "workers_enabled": true,
+        "claim_labels_automatic": false
+      },
+      "body_bytes": 512000,
+      "interactive_observations": 1000,
+      "interactive_wall_seconds": 10,
+      "labels": {
+        "reproduced": "The declared check meets its criterion under the recorded conditions; broader validity is not implied.",
+        "discrepant": "Examined evidence conflicts with the claim or declared criterion; comparability limits remain explicit.",
+        "inconclusive": "Relevant evidence was examined but cannot resolve the claim within the declared scope.",
+        "untested": "No adequate check has been completed; a plan or citation is not a test."
+      },
+      "arbitrary_code_execution": false,
+      "generic_ai_prompt": "not enabled; requires independent module evaluation and publication"
+    },
+    "anonymous_denials": [
+      {
+        "path": "/network-ingest",
+        "status": 401
+      },
+      {
+        "path": "/studies/00000000-0000-4000-8000-000000000000/network",
+        "status": 401
+      }
+    ],
+    "database": {
+      "passed": true,
+      "table": [
+        {
+          "relrowsecurity": true,
+          "anon_access": false,
+          "browser_access": false
+        }
+      ],
+      "rpc": [
+        {
+          "proname": "research_network_begin",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_network_cancel",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_network_launch",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_network_pending",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_network_token",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_network_update",
+          "anon_execute": false,
+          "browser_execute": false
+        }
+      ],
+      "prompt_unchanged": true
+    }
+  },
+  "ended_at": "2026-10-14T20:04:19.970396+00:00"
+}

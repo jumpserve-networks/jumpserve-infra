@@ -1,0 +1,122 @@
+{
+  "protocol": "idea-guided-interface-protocol-v1",
+  "amendment": null,
+  "started_at": "2026-10-14T20:01:40.018Z",
+  "database": "jumpserve_research_ideas_test_20261014t200126648850z",
+  "design": "Synthetic auth/provider/AWS; actual component/API/agent/isolated PostgreSQL and fixed local HTTP package",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "checks": [
+    {
+      "name": "guide resumes saved information and hides later actions until required details are recorded",
+      "passed": true,
+      "evidence": {
+        "saved_question_reused": true,
+        "initial_unknowns_preserved": true,
+        "launch_controls_visible": false
+      }
+    },
+    {
+      "name": "AI coaching preserves the unsaved answer and replays an uncertain request without another model invocation",
+      "passed": true,
+      "evidence": {
+        "requests": 2,
+        "retained_model_attempts": 1,
+        "same_request_id": true,
+        "automatic_fact_application": false,
+        "actual_model_calls": 0
+      }
+    },
+    {
+      "name": "lost save acknowledgement reuses the exact original answer and creates one version",
+      "passed": true,
+      "evidence": {
+        "versions": 2,
+        "same_save_identity": true,
+        "original_answer_retained": true
+      }
+    },
+    {
+      "name": "plain-language questions save complete methods without requiring protocol JSON",
+      "passed": true,
+      "evidence": {
+        "plain_language_methods": true,
+        "explicit_applicability": true,
+        "observation_budget": 3,
+        "ready": false,
+        "versions": 25
+      }
+    },
+    {
+      "name": "normal metric and package controls compile and save the actual executable setup",
+      "passed": true,
+      "evidence": {
+        "runner": "custom-package-v1",
+        "planned_invocations": 2,
+        "invalid_parameters_blocked": true,
+        "no_raw_protocol_json": true
+      }
+    },
+    {
+      "name": "failed and critical reviews block approval and guide the user to a substantive correction",
+      "passed": true,
+      "evidence": {
+        "failed_attempts_preserved": 2,
+        "critical_attempt_preserved": true,
+        "correction_saved": true,
+        "readiness_requires_owner": true
+      }
+    },
+    {
+      "name": "explicit approval freezes the reviewed plan and queues actual local measurements",
+      "passed": true,
+      "evidence": {
+        "invocations": 2,
+        "actual_loopback_requests": 6,
+        "measurements": 6,
+        "scientific_assessments": 0,
+        "aws_instances": 0,
+        "disabled_workers_blocked_queue": true
+      }
+    },
+    {
+      "name": "existing answers, history and explicit missing information remain available after reload on mobile and desktop",
+      "passed": true,
+      "evidence": {
+        "versions": 27,
+        "failed_and_critical_reviews_preserved": true,
+        "viewports": [
+          1365,
+          390
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ]
+      }
+    },
+    {
+      "name": "a concurrent revision cannot discard an open answer or reuse older readiness",
+      "passed": true,
+      "evidence": {
+        "draft_preserved_on_conflict": true,
+        "newer_version_invalidates_old_reviews": true,
+        "discard_requires_explicit_user_action": true
+      }
+    }
+  ],
+  "browser_errors": [],
+  "conditional_gaps": [
+    "Legitimate Google-authenticated request",
+    "Remote Supabase Storage",
+    "Production deployment",
+    "Independent or held-out scientific review"
+  ],
+  "measured_charges_usd": null,
+  "stylesheet_directory": ".next/static/chunks",
+  "passed": true,
+  "ended_at": "2026-10-14T20:02:24.737Z"
+}

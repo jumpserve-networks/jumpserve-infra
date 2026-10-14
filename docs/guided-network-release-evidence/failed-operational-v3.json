@@ -1,0 +1,23 @@
+{
+  "protocol": "guided-network-release-amendment-v3",
+  "case": "success",
+  "started_at": "2026-10-14T22:13:02.070178+00:00",
+  "status": "failed",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "authentication": "Service administration, no Google session or fabricated model reviews",
+  "measured_charges_usd": null,
+  "observations": [],
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "reason": "Research persistence request failed (HTTP 500); preserve original inputs and retry using the same record ID. Storage is not confirmed.",
+  "queue_poll_restored": true,
+  "ended_at": "2026-10-14T22:13:10.224088+00:00"
+}
