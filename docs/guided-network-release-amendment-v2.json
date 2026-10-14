@@ -1,0 +1,11 @@
+{
+  "id": "guided-network-release-amendment-v2",
+  "amends": "guided-network-release-protocol-v1",
+  "declared_on": "2026-10-14",
+  "preflight_finding": "Source inspection found that the independent package reaper selected expired deadlines only. Cancellation before the deadline depended on queue workers.",
+  "correction": "Include cancelled nonterminal custom jobs in the independent cleanup query. A focused regression and the full backend suite passed before cloud checks; no published scientific result is attributed to this defect.",
+  "operational_controls": "Pause the existing queue-poll EventBridge rule only when no queued/running production jobs exist; keep the independent reaper schedule enabled. Use a deterministic service-only release actor, explicitly not a Google identity, and private operational studies with no fabricated model reviews. Restore queue polling in all terminal paths.",
+  "deadline_interpretation": "Measure terminal host state relative to its saved deadline. A terminated host proves host cleanup; it does not identify whether the guest timer, runtime sampler or independent reaper acted first. Preserve unavailable runtime receipts as missing.",
+  "resource_bounds": "Original three-host maximum and per-host 900-second ceiling are unchanged. Normal/deadline cases use 300 seconds, cancellation uses 900 seconds. No automatic retries or model calls. Failure leaves custom admission disabled.",
+  "conditional_gap": "Admin service operational checks do not establish a legitimate Google browser action or live model answer quality."
+}

@@ -34,6 +34,7 @@ export class ResearchWorkflow extends Construct {
     const reservationContext = this.node.tryGetContext('researchReservedConcurrencyEnabled');
     const reserveConcurrency = reservationContext !== false && reservationContext !== 'false';
     const networkingEnabled = Boolean(executors) && researchWorkflowIsEnabled(this.node.tryGetContext('networkExecutionEnabled'));
+    const packagesEnabled = networkingEnabled && researchWorkflowIsEnabled(this.node.tryGetContext('networkPackagesEnabled'));
     const networkingEnvironment: Record<string,string> = {};
     let packageExecutor: lambda.Function | undefined;
     if (networkingEnabled && executors) {
@@ -59,7 +60,9 @@ export class ResearchWorkflow extends Construct {
       new events.Rule(this,'PackageDeadlineCleanup',{schedule:events.Schedule.rate(cdk.Duration.minutes(1)),targets:[new targets.LambdaFunction(reaper,{retryAttempts:0})]});
       networkingEnvironment.NETWORK_EMULATED_FUNCTION=executors.emulated.functionArn;
       networkingEnvironment.NETWORK_REAL_WORLD_FUNCTION=executors.realWorld.functionArn;
-      networkingEnvironment.NETWORK_PACKAGE_FUNCTION=packageExecutor.functionArn;
+      // Provision private executors for operational checks before admitting
+      // submitted packages through the public authenticated queue.
+      if (packagesEnabled) networkingEnvironment.NETWORK_PACKAGE_FUNCTION=packageExecutor.functionArn;
       executors.emulated.addToRolePolicy(new iam.PolicyStatement({actions:['ec2:DescribeInstances'],resources:['*']}));
       executors.emulated.addToRolePolicy(new iam.PolicyStatement({actions:['ec2:TerminateInstances'],resources:[cdk.Stack.of(this).formatArn({service:'ec2',resource:'instance',resourceName:'*',arnFormat:cdk.ArnFormat.SLASH_RESOURCE_NAME})],conditions:{StringEquals:{'ec2:ResourceTag/Project':'JumpServe'}}}));
     }

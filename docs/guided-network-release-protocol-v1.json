@@ -1,0 +1,23 @@
+{
+  "id": "guided-network-release-protocol-v1",
+  "declared_on": "2026-10-14",
+  "authorization": "User explicitly requested merging the current guided idea and networking changes into main and deploying production.",
+  "targets": {"aws_account": "395567831870", "region": "us-east-1", "supabase_project": "regphejnlvfpyokpniny", "amplify_app": "d24jvguj7brnkj", "site": "https://jumpserve.quaint-lab.org"},
+  "release_blockers": [
+    "Verify AWS caller and actual Supabase management project identity before mutations",
+    "Clean main-based merge excludes unrelated local research work and staged PDFs",
+    "Matching pinned backend bytes, frontend build/unit/lint, backend and infrastructure regressions, database security assertions",
+    "Additive network migration precedes matching worker and launcher runtimes; preserve scientific records and active prompt pointers",
+    "Scoped CDK diff retains benchmark AMI, existing result stores and unrelated stacks",
+    "Custom packages remain disabled until actual guest startup, original output ingestion, deadline termination and independent cleanup checks pass",
+    "Existing idea prompt and runtime remain matched to the previously published evaluation; no new prompt publication",
+    "Verify deployed source hashes, public capability and result reads, anonymous privileged-action denial, browser navigation/themes/exports/sign-in returns"
+  ],
+  "deployment_order": ["Pin and merge backend main without rebuilding unrelated AMI", "Apply and verify network migration", "Deploy BenchmarkStack with built-in networking enabled and custom package admission disabled", "Run bounded private operational checks", "Enable custom package admission only if all operational checks pass", "Release frontend main through Amplify", "Verify deployed pages and APIs"],
+  "conditional_checks": ["Legitimate Google owner/browser AI request when a session is available", "Multi-region real-world campaign", "Docker images", "VPN and controlled commercial CDN campaign", "Independent human or held-out scientific review"],
+  "operational_campaign": {"scope": "Release-owned private operational records and EC2 instances, explicitly separate from paper assessments and owner research ideas. Admin service actions are recorded; no Google session or model output is fabricated.", "questions": ["Can a Python package boot, emit three loopback HTTP timing observations, ingest original bytes and terminate?", "Does the frozen wall deadline stop an overlong package?", "Can the independent reaper terminate a cancelled package host while its guest deadline is still in the future?"], "criteria": "Exact identities, original output hashes and units/counts; terminal instance and recorded reasons. Timing ranges are descriptive; no uncertainty interval or scientific assessment.", "max_instances": 3, "max_wall_seconds_per_instance": 900, "poll_seconds": 10, "max_model_calls": 0, "automatic_experiment_retries": 0, "stopping_rule": "Stop a failed case at its declared bound, preserve failure, terminate task-owned instances, and leave custom admission disabled. Any correction requires a separate versioned follow-up."},
+  "resources": {"stacks": ["JumpServeBenchmarkStack"], "new_model_evaluations": 0, "estimated_ec2_budget_usd": 2, "estimate_basis": "Conservative execution budget, not measured charges; excludes unallocated deployment/storage usage", "measured_charges_usd": null},
+  "reviewer": {"identity": "Primary Codex AI implementer", "type": "AI", "independent": false},
+  "ci": "Scoped manually verified merge commits use skip-ci to avoid unrelated all-stack and AMI workflows. Required protected branch checks are not bypassed.",
+  "rollback": "Retain additive schema and research evidence. Restore retained Lambda bytes or disable runner flags through a recorded deployment; retain original publication history."
+}

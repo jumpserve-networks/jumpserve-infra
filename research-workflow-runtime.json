@@ -1,7 +1,7 @@
 {
   "version": 7,
-  "source_revision": "5c2d2ccb14b6d6e0431b8cc131f719181dc18c7b",
-  "revision_status": "Committed feature branch; local development validation, cloud checks pending; not deployed",
+  "source_revision": "a2e7bd8942b13c773fcad59a78171e2383cab5dd",
+  "revision_status": "Merged main-based release; operational checks pending",
   "files": {
     "api.py": "f0ad9b2fe2a0e39d9b97f4b5414eb11c657d7a66b4b15ee43ed18d6495708eb7",
     "workflow.py": "03ebd6c328dc8d9428992c44d07c468e4639576853d32b92cb0e801a8727c75d",
@@ -14,7 +14,7 @@
     "ideas.py": "a1082ba1d48e6557f120eec614b4c840679b5f12ae4b7d5870db61f4b23d588e",
     "network_spec.py": "884857f8680eb73ae7b8f43de484c3bd59d0f2441b66e117e49a347191a31e7c",
     "network_execution.py": "9e61b6c4a2d1e16f0c931e9902d824bfd38174108749739655cfae197ffa5577",
-    "network_package.py": "537a3f296bc8aceebf3a72046ec2083dc1b171a3e891e287fadc8ae3942eace7",
+    "network_package.py": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
     "package_runtime.py": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37"
   }
 }
