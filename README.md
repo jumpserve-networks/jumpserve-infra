@@ -594,3 +594,67 @@ The backend revision in `real-world-runtime.json` includes the versioned report
 analyzer and its offline regression tests. CI installs its test dependencies,
 checks access control, unit conversions, data quality, and scientific eligibility,
 then deploys the report routes with the existing AWS control plane.
+
+## Research networking execution
+
+The additive migration `database/202610130002_network_execution.sql` introduces
+private, RLS-protected execution control and service-only RPCs. Public evidence
+continues through reviewed research snapshots; browser writes and private source,
+credentials and ingest capabilities remain denied. Migration must precede the
+matching worker, emulated launcher and real-world API runtimes. Preserve earlier
+migrations and runtime revisions. `networkExecutionEnabled=true` explicitly enables
+registered runners; it defaults off. Research queue enablement is a separate flag.
+
+Before an authorized release, verify account **395567831870** and Supabase project
+**regphejnlvfpyokpniny**, pin both runtime manifests to their committed backend
+revision, stage the research runtime with `python3 -B bin/prepare-research-runtime.py`,
+and stage the real-world checkout as documented above. The custom runner gets a
+dedicated public subnet/VPC, a no-ingress security group, one standard-credit
+`t3.medium`, no IAM profile and a disabled metadata endpoint. Its independent
+minute cleanup schedule remains active when research queue polling is disabled.
+The saved deadline also installs guest shutdown before package installation.
+Do not enable custom packages without verifying actual VM boot, output ingest,
+wall-limit termination and independent reaper cleanup. Keep this runner disabled
+if those release checks cannot be completed.
+
+Each frozen configuration × replication is one invocation, at most 32 per campaign.
+Global/study concurrency and declared exclusive resource locks remain enforced.
+Atomic launch authorization prevents automatic replay after lost acknowledgements;
+tag lookup recovers the original machine identity. Unconfirmed expired networking
+attempts retain reservations until cleanup is established, requiring explicit
+operator reconciliation if result persistence lost its lease. Successful execution
+leaves scientific assessment pending. Built-in measurement traces stay in their
+original module repositories and are linked to research run provenance.
+
+Local commands, run from the indicated repository:
+
+```sh
+# jumpserve-back-end
+python3 -B -m unittest discover -s research_workflow/tests -v
+python3 -B -m unittest discover -s real_world/tests -v
+# jumpserve-infra; task-owned PostgreSQL fixture must be available
+npm run build
+JUMPSERVE_BACKEND_CHECKOUT=../jumpserve-back-end npm test -- --runInBand
+python3 -B test/check_network_execution_database.py
+python3 -B test/check_research_queue_database.py
+python3 -B test/check_research_ideas_database.py
+python3 -B test/serve_research_ideas_fixture.py
+# jumpserve-front-end; browser fixture on loopback 4103
+npm test
+npm run lint
+npm run build
+node scripts/verify-network-execution.mjs
+node scripts/verify-research-ideas.mjs
+```
+
+The frozen validation protocol is `docs/network-execution-validation-protocol-v1.json`.
+Tests use actual local HTTP measurements/Postgres with synthetic authentication,
+Storage/cloud dispatch and review responses. These are development checks reviewed
+by the AI implementer, not actual Google/Bedrock evaluation, independent review or
+CDN scientific validation. Google sign-in, remote Storage, real EC2 allocation,
+distributed execution, Docker packages and VPN/origin equipment are conditional
+until verified with legitimate sessions and inputs. Sampling thresholds can
+overshoot; built-in runners do not enforce the custom network byte threshold.
+Missing charges and unallocated compute/model usage remain unknown. No production
+change is authorized by this implementation turn; a new deployment request is
+required before merging/pushing main, enabling flags or applying this migration.

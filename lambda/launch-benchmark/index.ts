@@ -1,10 +1,13 @@
 import { AuthError, requireUser } from '../shared/auth';
+import { networkEnvelope, networkRpc } from '../shared/research-network';
 import { randomBytes, createHash } from 'node:crypto';
 import { buildUserData, type BenchmarkConfig } from './user-data';
 import {
   EC2Client,
   RunInstancesCommand,
   CreateTagsCommand,
+  TerminateInstancesCommand,
+  DescribeInstancesCommand,
 } from '@aws-sdk/client-ec2';
 import {
   SecretsManagerClient,
@@ -128,6 +131,51 @@ export const handler = async (event: any) => {
   }
 
   try {
+    const networking = networkEnvelope(event);
+    let network: any = null;
+    let networkKey: string | undefined;
+    if (networking) {
+      networkKey = (await sm.send(new GetSecretValueCommand({SecretId:process.env.SUPABASE_SECRET_ARN!}))).SecretString!;
+      network = await networkRpc(networkKey,'research_network_launch',{p_job:networking.job_id,p_runner:'emulated-netem-v1',p_claim:networking.action==='launch'});
+      const launchClaimed = Boolean(network && networking.action==='launch');
+      if (!network && networking.action==='launch') network = await networkRpc(networkKey,'research_network_launch',{p_job:networking.job_id,p_runner:'emulated-netem-v1',p_claim:false});
+      if (!network) throw new AuthError(404,'Saved networking invocation not found.');
+      const rows = await supabaseRequest('GET',`benchmark_jobs?id=eq.${networking.job_id}&select=id,status,parent_run_id,ec2_instance_id,created_at,updated_at,error_message`,undefined,networkKey);
+      const prior = rows[0];
+      if (!launchClaimed || prior) {
+        const expired = new Date(network.deadline).getTime()<=Date.now();
+        // Recover the instance identity if the RunInstances response or DB patch
+        // was lost. Never issue another launch to resolve an acknowledgement.
+        const machines = await ec2.send(new DescribeInstancesCommand(prior?.ec2_instance_id ? {InstanceIds:[prior.ec2_instance_id]} : {
+          Filters:[{Name:'tag:Project',Values:['JumpServe']},{Name:'tag:BenchmarkJobId',Values:[networking.job_id]}],
+        }));
+        const found = machines.Reservations?.flatMap(group=>group.Instances??[])??[];
+        if (found.length>1) throw new Error('Multiple machines found for one immutable networking invocation.');
+        const machine=found[0], state=machine?.State?.Name;
+        if (prior && !prior.ec2_instance_id && machine?.InstanceId) {
+          prior.ec2_instance_id=machine.InstanceId;
+          await supabaseRequest('PATCH',`benchmark_jobs?id=eq.${prior.id}`,{ec2_instance_id:machine.InstanceId},networkKey);
+        }
+        if ((networking.action==='cancel'||expired) && machine?.InstanceId && !['shutting-down','terminated'].includes(state??'')) {
+          await ec2.send(new TerminateInstancesCommand({InstanceIds:[machine.InstanceId]}));
+          if (prior && !['completed','failed','cancelled'].includes(prior.status)) {
+            prior.status=networking.action==='cancel'?'cancelled':'failed';
+            prior.updated_at=new Date().toISOString();
+            await supabaseRequest('PATCH',`benchmark_jobs?id=eq.${prior.id}`,{status:prior.status,updated_at:prior.updated_at},networkKey);
+          }
+        }
+        let status = networking.action==='cancel' ? 'cancelled' : prior?.status ?? 'launch-unconfirmed';
+        if (!prior && new Date(network.deadline).getTime()<=Date.now()) status='failed';
+        if (machine && state!=='terminated' && ['completed','failed','cancelled'].includes(status)) status='cleaning';
+        let output: any = undefined;
+        if (status==='completed' && prior.parent_run_id) {
+          const clients = await supabaseRequest('GET',`emulated_runs?emulated_parent_run_id=eq.${prior.parent_run_id}&select=id,client_number,flow_completion_time_ms`,undefined,networkKey);
+          output={version:'network-observations-v1',observations:clients.map((client:any)=>({observation_key:`client-${client.client_number}`,metric:'flow_completion_time_ms',units:'ms',value:client.flow_completion_time_ms===null?null:Number(client.flow_completion_time_ms),status:client.flow_completion_time_ms===null?'missing':'recorded',reason:client.flow_completion_time_ms===null?'Completion time unavailable.':null,metadata:{emulated_run_id:client.id,parent_run_id:prior.parent_run_id}})),provenance:{module:'congestion-control-emulated',parent_run_id:prior.parent_run_id,source:'Recorded emulated_runs; per-second samples remain in their original relational store.'},usage:{measured_charges_usd:null}};
+        }
+        return {statusCode:200,headers:corsHeaders,body:JSON.stringify({status,started_at:prior?.created_at??network.started_at,ended_at:['completed','failed','cancelled'].includes(status)?prior?.updated_at??new Date().toISOString():null,external_job_id:networking.job_id,reason:prior?.error_message??(status==='failed'?'Launch or completion was not confirmed before its deadline.':null),resources:{instance_id:machine?.InstanceId??prior?.ec2_instance_id??null,instance_type:machine?.InstanceType??null,image_id:machine?.ImageId??null,network_bytes:null,network_byte_threshold_enforced:false},output})};
+      }
+      event = {source:'jumpserve.ami-verification',body:JSON.stringify({config:network.spec.config})};
+    }
     // This function has no Function URL. API Gateway always supplies requestContext;
     // the exact operator envelope below is reachable only through IAM-authorized
     // Lambda Invoke (or locally, where AWS credentials authorize privileged calls).
@@ -138,7 +186,7 @@ export const handler = async (event: any) => {
       : await requireUser(event);
     const body = JSON.parse(event.body || '{}');
     const config: BenchmarkConfig = body.config;
-    const requestedBy = user.email || user.id;
+    const requestedBy = network?.owner_id ?? user.email ?? user.id;
 
     if (!config) {
       return {
@@ -180,6 +228,7 @@ export const handler = async (event: any) => {
 
     // Insert job row
     const [job] = await supabaseRequest('POST', 'benchmark_jobs', {
+      ...(networking ? {id:networking.job_id} : {}),
       status: 'launching',
       config,
       requested_by: requestedBy,
@@ -193,10 +242,15 @@ export const handler = async (event: any) => {
       job_id: jobId,
       token_hash: createHash('sha256').update(jobToken).digest('hex'),
     }, supabaseKey);
-    const userData = buildUserData(config, jobId, jobToken);
+    let userData = buildUserData(config, jobId, jobToken);
+    if (network) {
+      const remaining = Math.max(1, Math.floor((new Date(network.deadline).getTime()-Date.now())/1000));
+      userData=Buffer.from(Buffer.from(userData,'base64').toString().replace('#!/bin/bash\n',`#!/bin/bash\nsystemd-run --unit jumpserve-research-deadline --on-active=${remaining}s /sbin/shutdown -h now\n`)).toString('base64');
+    }
 
     const runResult = await ec2.send(new RunInstancesCommand({
       ImageId: process.env.AMI_ID!,
+      ...(networking ? {ClientToken:networking.job_id} : {}),
       InstanceType: 't3.medium',
       InstanceInitiatedShutdownBehavior: 'terminate',
       MetadataOptions: { HttpTokens: 'required', HttpEndpoint: 'enabled' },

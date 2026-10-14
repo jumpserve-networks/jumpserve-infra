@@ -2,6 +2,7 @@ process.env.BENCHMARK_INGEST_URL = 'https://example.test/benchmarks/ingest';
 import { EC2Client, RunInstancesCommand } from '@aws-sdk/client-ec2';
 import { SecretsManagerClient } from '@aws-sdk/client-secrets-manager';
 import * as auth from '../lambda/shared/auth';
+import * as network from '../lambda/shared/research-network';
 import { handler } from '../lambda/launch-benchmark';
 
 beforeEach(() => jest.spyOn(auth, 'requireUser').mockResolvedValue({ id: 'user-id', email: 'verified@example.test' }));
@@ -99,4 +100,46 @@ test('IAM-only image verification retains the privileged local runner path', asy
   expect(response.statusCode).toBe(400);
   expect(verify).not.toHaveBeenCalled();
   verify.mockRestore();
+});
+
+test('saved launch replays locate the original machine by tags and await termination',async()=>{
+ const id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+ jest.spyOn(SecretsManagerClient.prototype,'send').mockResolvedValue({SecretString:'test-key'} as never);
+ const rpc=jest.spyOn(network,'networkRpc').mockResolvedValue(null as never);
+ rpc.mockResolvedValueOnce(null as never).mockResolvedValueOnce({owner_id:'saved-owner',started_at:'2026-01-01T00:00:00Z',deadline:'2020-01-01T00:00:00Z',spec:{config:multiConfig}} as never);
+ const calls:any[]=[];
+ jest.spyOn(EC2Client.prototype,'send').mockImplementation(async(command:any)=>{
+  calls.push(command);if(command.constructor.name==='RunInstancesCommand')throw new Error('Replay must not launch');
+  return {Reservations:[{Instances:[{InstanceId:'i-original',State:{Name:'running'}}]}]} as never;
+ });
+ const patches:any[]=[];
+ jest.spyOn(globalThis,'fetch').mockImplementation(async(_url,options)=>{
+  if(options?.method==='GET')return Response.json([{id,status:'launching',ec2_instance_id:null}]);
+  patches.push(JSON.parse(options?.body as string));return new Response(null,{status:204});
+ });
+ const response=await handler({source:'jumpserve.network-execution',job_id:id,action:'launch'});
+ expect(JSON.parse(response.body).status).toBe('cleaning');
+ expect(calls[0].input.Filters).toContainEqual({Name:'tag:BenchmarkJobId',Values:[id]});
+ expect(calls.some(c=>c.constructor.name==='TerminateInstancesCommand')).toBe(true);
+ expect(calls.some(c=>c.constructor.name==='RunInstancesCommand')).toBe(false);
+ expect(patches).toContainEqual({ec2_instance_id:'i-original'});
+ expect(auth.requireUser).not.toHaveBeenCalled();
+});
+
+test('saved launch uses frozen owner, stable request and independent wall timer',async()=>{
+ const id='bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb';
+ jest.spyOn(SecretsManagerClient.prototype,'send').mockResolvedValue({SecretString:'test-key'} as never);
+ jest.spyOn(network,'networkRpc').mockResolvedValue({owner_id:'saved-owner',deadline:new Date(Date.now()+600000).toISOString(),spec:{config:multiConfig}} as never);
+ const send=jest.spyOn(EC2Client.prototype,'send').mockResolvedValue({Instances:[{InstanceId:'i-original'}]} as never);
+ let inserted:any;
+ jest.spyOn(globalThis,'fetch').mockImplementation(async(url,options)=>{
+  if(options?.method==='GET')return Response.json([]);
+  if(options?.method==='POST'){if(String(url).endsWith('/benchmark_jobs'))inserted=JSON.parse(options.body as string);return Response.json([{id}]);}
+  return new Response(null,{status:204});
+ });
+ const response=await handler({source:'jumpserve.network-execution',job_id:id,action:'launch'});
+ expect(response.statusCode).toBe(200);expect(inserted.requested_by).toBe('saved-owner');expect(inserted.config).toEqual(multiConfig);
+ const command=send.mock.calls.find(c=>(c[0] as any).constructor.name==='RunInstancesCommand')![0] as RunInstancesCommand;
+ expect(command.input.ClientToken).toBe(id);expect(Buffer.from(command.input.UserData!,'base64').toString()).toContain('jumpserve-research-deadline');
+ expect(auth.requireUser).not.toHaveBeenCalled();
 });

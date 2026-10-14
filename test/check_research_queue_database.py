@@ -51,6 +51,7 @@ def rpc(name,payload):
       'research_append_bundle':dict(p_study='uuid',p_actor='uuid',p_records='jsonb'),
       'research_queue_enqueue':dict(p_study='uuid',p_actor='uuid',p_id='uuid',p_request='jsonb',p_sha256='text'),
       'research_queue_claim':dict(p_worker='uuid'),
+      'research_network_pending':{},
       'research_queue_finish':dict(p_job='uuid',p_token='uuid',p_records='jsonb',p_run='uuid',p_error='text',p_usage='jsonb'),
       'research_queue_action':dict(p_study='uuid',p_actor='uuid',p_job='uuid',p_id='uuid',p_action='text',p_reason='text',p_assessments='jsonb',p_run='uuid'),
       'research_queue_snapshot':dict(p_study='uuid',p_actor='uuid'),
@@ -145,11 +146,14 @@ do $$ begin create role authenticated; exception when duplicate_object then null
 do $$ begin create role service_role bypassrls; exception when duplicate_object then null; end $$;
 grant usage on schema public to anon,authenticated,service_role;
 create schema storage; create table storage.buckets(id text primary key,name text,public boolean); create table storage.objects(id int primary key,bucket_id text); alter table storage.objects enable row level security;
-grant usage on schema storage to anon,authenticated,service_role; grant all on storage.objects to service_role;""")
+grant usage on schema storage to anon,authenticated,service_role; grant all on storage.objects to service_role;
+create table public.agent_sessions(id uuid primary key,user_id text not null,messages jsonb not null default '[]',created_at timestamptz default now(),updated_at timestamptz default now());
+grant all on public.agent_sessions to service_role;""")
     report['migration_sha256']={}
-    for name in ('202610070001_research_workflow.sql','202610070002_research_queue.sql','202610070003_research_preparation.sql'):
+    for name in ('202609200001_agent_prompts.sql','202609290001_real_world_agent.sql','202610040009_agent_evidence_rendering.sql','202610050104_ipv6_publication_review_guard.sql','202610070001_research_workflow.sql','202610070002_research_queue.sql','202610070003_research_preparation.sql','202610120001_research_ideas.sql','202610120002_research_idea_prompt.sql','202610120003_research_idea_prompt_seed.sql','202610120004_research_idea_prompt_seed_v2.sql','202610130001_research_idea_review_roles.sql','202610130002_network_execution.sql'):
         raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     store.request=transport
+    worker.network_execution.pending=lambda:[]
     def security():
         for role in ('anon','authenticated'):
             results=json.loads(query("select json_agg(t) from (select c.relname,c.relrowsecurity,has_table_privilege(current_user,c.oid,'SELECT,INSERT,UPDATE,DELETE') access from pg_class c where c.relname in ('research_queue_jobs','research_queue_events','research_prepared_plans')) t",role=role))

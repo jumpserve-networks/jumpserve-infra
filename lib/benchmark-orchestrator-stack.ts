@@ -263,9 +263,9 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
       ),
     });
 
-    new RealWorldTests(this, 'RealWorldTests', httpApi);
+    const realWorld = new RealWorldTests(this, 'RealWorldTests', httpApi);
     const researchWorkflowEnabled = this.node.tryGetContext('researchWorkflowEnabled');
-    if (researchWorkflowIsEnabled(researchWorkflowEnabled)) new ResearchWorkflow(this, 'ResearchWorkflow', httpApi);
+    if (researchWorkflowIsEnabled(researchWorkflowEnabled)) new ResearchWorkflow(this, 'ResearchWorkflow', httpApi, {emulated:launchFn,realWorld:realWorld.apiFunction,vpc});
 
     new cdk.CfnOutput(this, 'BenchmarkApiUrl', {
       value: httpApi.apiEndpoint,

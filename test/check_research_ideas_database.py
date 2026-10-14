@@ -60,6 +60,12 @@ def rpc(name,payload):
       'research_finish_idea_run':dict(p_study='uuid',p_actor='uuid',p_id='uuid',p_status='text',p_reason='text',p_raw='text',p_output='jsonb',p_usage='jsonb',p_provenance='jsonb',p_messages='jsonb'),
       'research_accept_idea_plan':dict(p_study='uuid',p_actor='uuid',p_id='uuid',p_packet='uuid',p_comprehension='uuid',p_critic='uuid',p_reason='text'),
       'research_prepare_idea_campaign':dict(p_study='uuid',p_actor='uuid',p_id='uuid',p_packet='uuid',p_request='jsonb',p_records='jsonb',p_campaign='uuid',p_protocol='uuid'),
+      'research_network_begin':dict(p_job='uuid',p_token='uuid',p_spec='jsonb',p_sha='text'),
+      'research_network_pending':{},
+      'research_network_launch':dict(p_job='uuid',p_runner='text',p_claim='boolean'),
+      'research_network_update':dict(p_job='uuid',p_phase='text',p_data='jsonb',p_ingest_hash='text'),
+      'research_network_cancel':dict(p_study='uuid',p_actor='uuid',p_job='uuid',p_id='uuid',p_reason='text'),
+      'research_network_token':dict(p_job='uuid',p_hash='text'),
       'publish_agent_prompt':dict(p_version_id='uuid',p_expected_active_version_id='uuid',p_expected_content_sha256='text',p_report='jsonb',p_actor='text',p_module_id='text')}
     if name not in signatures or set(payload)!=set(signatures[name]):raise ValueError('Unsupported fixture RPC')
     arguments=[]
@@ -99,7 +105,7 @@ def transport(path,method='GET',body=None,public=False,raw=False):
             ordering.append(column+' '+direction)
     predicates=[]
     for column,value in params.items():
-        if column not in ('id','study_id','owner_id','created_at','packet_id','task'):raise ValueError('Unsafe filter')
+        if column not in ('id','study_id','owner_id','created_at','packet_id','task','run_id','campaign_id','protocol_id'):raise ValueError('Unsafe filter')
         operator,argument=value.split('.',1)
         if operator=='eq':predicates.append(column+'='+sql_text(argument))
         elif operator=='lte' and column=='created_at':predicates.append(column+'<='+sql_text(argument))
@@ -134,6 +140,7 @@ grant all on public.agent_sessions to service_role;""")
     report['migration_sha256']={}
     for name in ('202609200001_agent_prompts.sql','202609290001_real_world_agent.sql','202610040009_agent_evidence_rendering.sql','202610050104_ipv6_publication_review_guard.sql','202610070001_research_workflow.sql','202610070002_research_queue.sql','202610070003_research_preparation.sql','202610120001_research_ideas.sql','202610120002_research_idea_prompt.sql','202610120003_research_idea_prompt_seed.sql','202610120004_research_idea_prompt_seed_v2.sql','202610130001_research_idea_review_roles.sql'):
         raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
+    name='202610130002_network_execution.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     report['bootstrap_limit']='Legacy agent_sessions base table synthesized; listed prompt/research migrations executed as original files. Historical study-table migrations outside this feature are not replayed.'
     store.request=transport
 
