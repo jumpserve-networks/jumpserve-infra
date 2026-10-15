@@ -1,0 +1,24 @@
+{
+  "protocol": "idea-interview-production-release-v1",
+  "mode": "diff",
+  "status": "failed",
+  "started_at": "2026-10-15T03:51:48.103756+00:00",
+  "measured_charges_usd": null,
+  "new_model_calls": 0,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "command": [
+    "npx",
+    "cdk",
+    "diff",
+    "JumpServeAgentStack",
+    "--exclusively",
+    "--no-change-set"
+  ],
+  "reason": "Scoped CDK diff failed; inspect retained log",
+  "ended_at": "2026-10-15T03:51:58.963479+00:00"
+}

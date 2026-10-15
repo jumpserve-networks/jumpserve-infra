@@ -1,0 +1,31 @@
+{
+  "protocol": "idea-interview-production-release-v1",
+  "mode": "archive-release",
+  "status": "complete",
+  "started_at": "2026-10-15T04:02:08.894038+00:00",
+  "measured_charges_usd": null,
+  "new_model_calls": 0,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "release_archive": {
+    "objects": [
+      {
+        "original_path": "docs/idea-interview-release-evidence-v1.tar.gz",
+        "bucket": "research-workflow-raw",
+        "path": "release-verification/idea-interview-20261015/4dbf3359038d74a07d3b97f2b3d9b04eab2dd198ecf50232e4829ad6008ce9c8/idea-interview-release-evidence-v1.tar.gz",
+        "sha256": "4dbf3359038d74a07d3b97f2b3d9b04eab2dd198ecf50232e4829ad6008ce9c8",
+        "bytes": 659613,
+        "retrieved_hash_verified": true,
+        "anonymous_status": 400
+      }
+    ],
+    "total_bytes": 659613,
+    "retrieved_original_hashes_verified": true,
+    "measured_charges_usd": null
+  },
+  "ended_at": "2026-10-15T04:02:17.284942+00:00"
+}

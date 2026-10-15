@@ -1,0 +1,21 @@
+{
+  "protocol": "idea-interview-production-release-v1",
+  "mode": "prepare-layer",
+  "status": "complete",
+  "started_at": "2026-10-15T03:51:16.864217+00:00",
+  "measured_charges_usd": null,
+  "new_model_calls": 0,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "dependency_layer": {
+    "arn": "arn:aws:lambda:us-east-1:395567831870:layer:AgentDepsLayer51FBE89A:54",
+    "zip_sha256": "a3b05f4527aa3b4f82ba17ae6dde97bae494bd15ab99e347de19d09166006bdf",
+    "bytes": 19284158,
+    "original_bytes_verified": true
+  },
+  "ended_at": "2026-10-15T03:51:34.064626+00:00"
+}

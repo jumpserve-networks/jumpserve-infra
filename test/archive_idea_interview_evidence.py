@@ -12,10 +12,47 @@ FRONT = ROOT.parent / 'jumpserve-front-end'
 
 def digest(raw): return hashlib.sha256(raw).hexdigest()
 
+def write_bundle(files, destination):
+    manifest = [dict(path=name, sha256=digest(raw), bytes=len(raw)) for name, raw in sorted(files.items())]
+    files['manifest.json'] = (json.dumps(manifest, indent=2)+'\n').encode()
+    with destination.open('wb') as stream, gzip.GzipFile(filename='', mode='wb', fileobj=stream, mtime=0) as zipped, tarfile.open(fileobj=zipped, mode='w') as archive:
+        for name, raw in sorted(files.items()):
+            info = tarfile.TarInfo(name); info.size = len(raw); info.mode = 0o644
+            archive.addfile(info, io.BytesIO(raw))
+    with tarfile.open(destination, 'r:gz') as archive:
+        restored = json.load(archive.extractfile('manifest.json'))
+        for item in restored:
+            raw = archive.extractfile(item['path']).read()
+            assert len(raw) == item['bytes'] and digest(raw) == item['sha256'], item['path']
+    print(json.dumps(dict(path=str(destination), sha256=digest(destination.read_bytes()), bytes=destination.stat().st_size,
+        original_files=len(manifest), original_bytes=sum(item['bytes'] for item in manifest), retrieved_hashes_verified=True)))
+
+def release_bundle():
+    destination = ROOT/'docs/idea-interview-release-evidence-v1.tar.gz'
+    if destination.exists(): raise RuntimeError('Preserve the released archive; use a versioned amendment instead of overwriting it')
+    files = {}
+    for path in sorted((ROOT/'docs/idea-interview-release-evidence').rglob('*')):
+        if path.is_file(): files['release/'+str(path.relative_to(ROOT/'docs/idea-interview-release-evidence'))] = path.read_bytes()
+    for name in ('bin/idea-interview-release.py', 'bin/agent.ts', 'test/archive_idea_interview_evidence.py', 'docs/idea-interview-release-protocol-v1.json'):
+        files['source/infra/'+name] = (ROOT/name).read_bytes()
+    files['source/frontend/verify-research-ideas-production.mjs'] = (FRONT/'scripts/verify-research-ideas-production.mjs').read_bytes()
+    clean = Path('/private/tmp/jumpserve-idea-interview-release-20261015')
+    for path in sorted((clean/'jumpserve-front-end/.test-artifacts/research-ideas/production/2026-10-15T03-59-32.878Z').glob('*')):
+        if path.is_file(): files['production-browser/'+path.name] = path.read_bytes()
+    for path in sorted((clean/'jumpserve-infra/.test-artifacts/idea-interview/release').glob('*/deployed-guide-client.js')):
+        files['frontend-bundle/'+path.name] = path.read_bytes()
+    if 'production-browser/validation-report.json' not in files or 'frontend-bundle/deployed-guide-client.js' not in files:
+        raise RuntimeError('Completed production/browser evidence missing')
+    write_bundle(files, destination)
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--source-review', action='store_true', help='Archive the v9-v11 source correction separately; preserve the original interview bundle.')
-    source_review = parser.parse_args().source_review
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument('--source-review', action='store_true', help='Archive the v9-v11 source correction separately; preserve the original interview bundle.')
+    mode.add_argument('--release', action='store_true', help='Archive fixed production receipts, public browser checks and downloaded guide bytes separately.')
+    args = parser.parse_args()
+    if args.release: return release_bundle()
+    source_review = args.source_review
     versions = {'research-ideas-v'+str(n) for n in (range(9, 12) if source_review else range(3, 9))}
     files = {}
     def add_tree(directory, prefix):
@@ -66,19 +103,7 @@ def main():
         for name in names: files['logs/'+prefix+'/'+name] = (root/'.test-artifacts'/name).read_bytes()
     build = Path('/private/tmp/jumpserve-guided-release-20261014/jumpserve-front-end/.test-artifacts')/(log_version+'-build.log')
     files['logs/frontend/build.log'] = build.read_bytes()
-    manifest = [dict(path=name, sha256=digest(raw), bytes=len(raw)) for name, raw in sorted(files.items())]
-    files['manifest.json'] = (json.dumps(manifest, indent=2)+'\n').encode()
     destination = ROOT/'docs'/('idea-review-source-fidelity-evidence-v1.tar.gz' if source_review else 'idea-interview-evidence-v1.tar.gz')
-    with destination.open('wb') as stream, gzip.GzipFile(filename='', mode='wb', fileobj=stream, mtime=0) as zipped, tarfile.open(fileobj=zipped, mode='w') as archive:
-        for name, raw in sorted(files.items()):
-            info = tarfile.TarInfo(name); info.size = len(raw); info.mode = 0o644
-            archive.addfile(info, io.BytesIO(raw))
-    with tarfile.open(destination, 'r:gz') as archive:
-        restored = json.load(archive.extractfile('manifest.json'))
-        for item in restored:
-            raw = archive.extractfile(item['path']).read()
-            assert len(raw) == item['bytes'] and digest(raw) == item['sha256'], item['path']
-    print(json.dumps(dict(path=str(destination), sha256=digest(destination.read_bytes()), bytes=destination.stat().st_size,
-        original_files=len(manifest), original_bytes=sum(item['bytes'] for item in manifest), retrieved_hashes_verified=True)))
+    write_bundle(files, destination)
 
 if __name__ == '__main__': main()

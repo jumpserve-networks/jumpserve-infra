@@ -1,0 +1,675 @@
+{
+  "id": "idea-interview-production-release-v1",
+  "generated_at": "2026-10-15T04:03:37.001731+00:00",
+  "authorization": "User requested publication and production deployment of these current changes.",
+  "status": "Published and deployed; declared release blockers passed with recorded conditional gaps",
+  "released": true,
+  "complete_validation": false,
+  "release_blocking_checks_passed": true,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "site": "https://jumpserve.quaint-lab.org",
+  "protocol": "docs/idea-interview-release-protocol-v1.json",
+  "prompt": {
+    "id": "ba16759e-ff38-4491-ae21-5766261e710b",
+    "version": "research-ideas-v11",
+    "content_sha256": "24129ede61c03fa2f50e381f21e87af76e0464b0849a4de211b46e920fd743ba",
+    "published_at": "2026-10-15 03:55:27.75789+00"
+  },
+  "source_control": {
+    "frontend_main": "9d8198017fb2983e2deea9e819bfaa3bcdb02694",
+    "infra_at_agent_deployment": "a7eedec741cb3d41a0b4b8d5fae2d43698144def",
+    "backend_unchanged_pin": "a2e7bd8942b13c773fcad59a78171e2383cab5dd",
+    "note": "Exact deployed runtime file and client-byte hashes are authoritative. Later commits contain release tooling/docs/evidence; separately staged PDFs and unrelated work were excluded."
+  },
+  "migrations": [
+    {
+      "name": "202610140001_idea_interview_prompt.sql",
+      "sha256": "94aa9f3317bec4938d2b4a7fed6d8555170285279e1ce67bb57bf64546a5b71b",
+      "bytes": 10401,
+      "status": "complete",
+      "ended_at": "2026-10-15T03:52:51.665989+00:00"
+    },
+    {
+      "name": "202610140002_idea_interview_prompt_v4.sql",
+      "sha256": "d35fd0e2f43db55330c064664d0bec38a9dea61c0910945e549132b8ae7c88a7",
+      "bytes": 12125,
+      "status": "complete",
+      "ended_at": "2026-10-15T03:52:52.024849+00:00"
+    },
+    {
+      "name": "202610140003_idea_interview_prompt_v5.sql",
+      "sha256": "3f318da16db4c0622f7b98a5365bb97d551be31e39d1e555aa93fa381b052f49",
+      "bytes": 13276,
+      "status": "complete",
+      "ended_at": "2026-10-15T03:52:52.524003+00:00"
+    },
+    {
+      "name": "202610140004_idea_interview_prompt_v6.sql",
+      "sha256": "7af34f10601d252179a759b851236940e5f2eb3a416f46a8848b381ebac8a67f",
+      "bytes": 11626,
+      "status": "complete",
+      "ended_at": "2026-10-15T03:52:53.036278+00:00"
+    },
+    {
+      "name": "202610140005_idea_interview_prompt_v7.sql",
+      "sha256": "ab010bea1076af1b157a673d62275ce7d9fa021b67c8a753a8293c2f1bade394",
+      "bytes": 12486,
+      "status": "complete",
+      "ended_at": "2026-10-15T03:52:53.529394+00:00"
+    },
+    {
+      "name": "202610140006_idea_interview_prompt_v8.sql",
+      "sha256": "3c0cbd7f42b38efebc717d2a5238b00b56469cefbbda03a189f92a17009303d1",
+      "bytes": 13200,
+      "status": "complete",
+      "ended_at": "2026-10-15T03:52:54.112794+00:00"
+    },
+    {
+      "name": "202610140007_idea_review_sources_v9.sql",
+      "sha256": "b07d0048bcef80e271d93f245f5f869a34e5620c82ccf4f5dee76e1bedc40a23",
+      "bytes": 15937,
+      "status": "complete",
+      "ended_at": "2026-10-15T03:52:54.623921+00:00"
+    },
+    {
+      "name": "202610140008_idea_review_sources_v10.sql",
+      "sha256": "4c6aca6ed15f1b76913f905414a98eaf67e50ba14c1d22a5e44dc90b5ed39779",
+      "bytes": 17204,
+      "status": "complete",
+      "ended_at": "2026-10-15T03:52:55.135636+00:00"
+    },
+    {
+      "name": "202610140009_idea_review_sources_v11.sql",
+      "sha256": "99cd12fdc5bc90a639e4eabe4726d9711781df7a38a9a9825be7550f43e19bbf",
+      "bytes": 15859,
+      "status": "complete",
+      "ended_at": "2026-10-15T03:52:55.615756+00:00"
+    }
+  ],
+  "preservation": {
+    "scientific_counts_before": [
+      {
+        "relation": "research_measurements",
+        "count": 7144
+      },
+      {
+        "relation": "research_published_values",
+        "count": 5093
+      },
+      {
+        "relation": "research_assessments",
+        "count": 102
+      }
+    ],
+    "scientific_counts_after": [
+      {
+        "relation": "research_measurements",
+        "count": 7144
+      },
+      {
+        "relation": "research_published_values",
+        "count": 5093
+      },
+      {
+        "relation": "research_assessments",
+        "count": 102
+      }
+    ],
+    "active_pointers_unchanged_during_migration": true,
+    "other_module_prompt_pointers_preserved_at_publication": true,
+    "original_failed_candidates_and_evaluations_preserved": true,
+    "local_validation_reports_preserved_as_historical": true,
+    "private_bucket_and_rls": {
+      "passed": true,
+      "security": [
+        {
+          "relname": "research_idea_campaign_links",
+          "relrowsecurity": true,
+          "anon_access": false,
+          "browser_access": false
+        },
+        {
+          "relname": "research_idea_packets",
+          "relrowsecurity": true,
+          "anon_access": false,
+          "browser_access": false
+        },
+        {
+          "relname": "research_idea_readiness",
+          "relrowsecurity": true,
+          "anon_access": false,
+          "browser_access": false
+        },
+        {
+          "relname": "research_idea_runs",
+          "relrowsecurity": true,
+          "anon_access": false,
+          "browser_access": false
+        },
+        {
+          "relname": "research_idea_sessions",
+          "relrowsecurity": true,
+          "anon_access": false,
+          "browser_access": false
+        }
+      ],
+      "rpc": [
+        {
+          "proname": "research_accept_idea_plan",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_begin_idea_run",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_finish_idea_run",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_idea_owner",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_idea_ready",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_prepare_idea_campaign",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_save_idea_packet",
+          "anon_execute": false,
+          "browser_execute": false
+        }
+      ],
+      "private_originals": [
+        {
+          "public": false
+        }
+      ],
+      "pointers": [
+        {
+          "module_id": "congestion-control-emulated",
+          "active_version_id": "cabbe18a-cc70-482c-8883-81b515639e42"
+        },
+        {
+          "module_id": "congestion-control-real-world",
+          "active_version_id": "e78456f8-6582-4f69-8b44-d56d2c782352"
+        },
+        {
+          "module_id": "http2-compliance-study",
+          "active_version_id": "caf6bae2-acd3-4ef4-8147-bd8bc39895e2"
+        },
+        {
+          "module_id": "ipv6-dns-study",
+          "active_version_id": "28edfb2a-17f9-47c0-a801-1ca7392c7404"
+        },
+        {
+          "module_id": "leo-emergency-failover",
+          "active_version_id": "ec00a4b6-718c-4e69-9c0f-283b9f251002"
+        },
+        {
+          "module_id": "reliable-sketch-study",
+          "active_version_id": "64c9fbb6-1d38-4844-9167-66faaf05fe14"
+        },
+        {
+          "module_id": "research-verification",
+          "active_version_id": "ba16759e-ff38-4491-ae21-5766261e710b"
+        }
+      ]
+    }
+  },
+  "agent": {
+    "function": "JumpServeAgentStack-AgentFnC1FD126F-MG2xfZrwsBNg",
+    "zip_sha256": "c6b66c7abc7638d3fd7a47eea88ad9a9fa72b1676f78ef2d44336f6a1613c768",
+    "runtime_hashes": {
+      "agent/research_ideas.py": "eda137049c5a8061c8b04c9ad0c0d45282958f9865ac614826adf3543d49bfd2",
+      "agent/idea_interview.py": "d454aaf2a2fcbc0b857e90706d152ee9c86c86ef98a0d2b3760af3f85fd05ccb",
+      "agent/idea_review.py": "4725154f1796e913b42ab612cd4dd138c3b2e3cd16b00e75a458cc4cde92bf51",
+      "agent/handler.py": "76aad08e58b1557134efc1837f4e3109ba5cec28913533ced9bb7fba7c439196",
+      "agent/prompt.py": "087ab68481bb971e554a7c275158d77a945bf46019cfe2b30c47d84fdcdc24c8",
+      "agent/modules.py": "639a02174548cea3e667408413a57eed4deb8f58429c2af4c13e139d8aa9e686",
+      "agent/settings.py": "6c6819896689b3389f56bf1c363418726c9d53044f05f06edff269cc1c511777"
+    },
+    "layers": [
+      {
+        "Arn": "arn:aws:lambda:us-east-1:395567831870:layer:AgentDepsLayer51FBE89A:54",
+        "CodeSize": 19284158
+      }
+    ],
+    "memory_mb": 1024,
+    "timeout_seconds": 120,
+    "last_modified": "2026-10-15T03:53:53.000+0000",
+    "scope": "CDK diff updated only AgentFn Code and associated asset metadata; no dependency-layer, IAM, benchmark, AMI or experiment-instance update",
+    "source_hashes_verified_after_download": true
+  },
+  "frontend": {
+    "summary": {
+      "jobArn": "arn:aws:amplify:us-east-1:395567831870:apps/d24jvguj7brnkj/branches/main/jobs/0000000111",
+      "jobId": "111",
+      "commitId": "HEAD",
+      "commitTime": "2026-10-14T22:56:01.349000-05:00",
+      "startTime": "2026-10-14T22:56:01.607000-05:00",
+      "status": "SUCCEED",
+      "endTime": "2026-10-14T22:58:34.206000-05:00"
+    },
+    "steps": [
+      {
+        "stepName": "BUILD",
+        "status": "SUCCEED",
+        "startTime": "2026-10-14T22:56:01.624000-05:00",
+        "endTime": "2026-10-14T22:58:09.521000-05:00"
+      },
+      {
+        "stepName": "DEPLOY",
+        "status": "SUCCEED",
+        "startTime": "2026-10-14T22:58:09.759000-05:00",
+        "endTime": "2026-10-14T22:58:33.807000-05:00"
+      },
+      {
+        "stepName": "VERIFY",
+        "status": "SUCCEED",
+        "startTime": "2026-10-14T22:58:34.054000-05:00",
+        "endTime": "2026-10-14T22:58:34.072000-05:00"
+      }
+    ],
+    "build_log": {
+      "sha256": "00a1af03c7e15dbfbe4b3db1727830667dc85eea9a2873a3d6341c0924c9ecc3",
+      "bytes": 10030,
+      "commit_ids": [],
+      "original_scope": "Original downloaded build log; retained privately, no signed log URL published"
+    },
+    "guide_source_client": {
+      "url": "https://jumpserve.quaint-lab.org/_next/static/chunks/0pfi-y7em57tb.js",
+      "sha256": "197ae22a1e3cf45ddce1770ff38b55c96338865194d7c04905af77b55568c4b5",
+      "bytes": 90906,
+      "clean_build_bytes_match": true,
+      "authenticated_rendering_verified": false
+    },
+    "expected_remote_main": "9d8198017fb2983e2deea9e819bfaa3bcdb02694",
+    "commit_identity_limit": "Amplify manual release reports commitId=HEAD and build logs contain no full resolved commit. Remote main was verified at launch; the actual new guide/source client bytes match the clean build of the committed revision exactly.",
+    "effective_public_environment_verified": {
+      "site_url": "https://jumpserve.quaint-lab.org",
+      "supabase_url": "https://regphejnlvfpyokpniny.supabase.co",
+      "agent_url": "https://idk3jouyc6g2uolmge5ctuizwq0kpgcf.lambda-url.us-east-1.on.aws/",
+      "api_url": "https://d3o7xdethb.execute-api.us-east-1.amazonaws.com"
+    }
+  },
+  "local_release_checks": {
+    "frontend_units": {
+      "passed": 156,
+      "failed": 0
+    },
+    "agent_units": {
+      "passed": 101,
+      "failed": 0
+    },
+    "frontend_lint": "passed",
+    "clean_next_build": {
+      "passed": true,
+      "next": "16.3.8"
+    },
+    "infra_typescript_build": "passed",
+    "isolated_database": {
+      "passed": true,
+      "checks": 11,
+      "original_report": "docs/idea-interview-release-evidence/database-20261015T034900669488Z.json"
+    },
+    "reused_exact_implementation_browser_checks": {
+      "source": 4,
+      "interview": 7,
+      "guided": 9,
+      "evidence": "docs/idea-review-source-fidelity-evidence-v1.tar.gz",
+      "scope": "Actual components/API/agent/Postgres; synthetic auth/provider/cloud; fixed loopback software measurements"
+    },
+    "runtime_dependency_audit": {
+      "high": 0,
+      "critical": 0,
+      "moderate": 2,
+      "note": "Moderate postcss-selector-parser advisory via @tailwindcss/typography remains; release criterion was zero high/critical, not a clean audit."
+    }
+  },
+  "actual_answer_acceptance": {
+    "candidate": "research-ideas-v11",
+    "cases_passed": 21,
+    "cases_total": 21,
+    "report_sha256": "665ece1d8a3c8b21f8d3261958528d6f5f51b8010c4ae8684745b75ba53c84bf",
+    "source": "docs/idea-review-source-fidelity-validation-v1.json",
+    "reviewer": {
+      "identity": "Primary Codex AI implementer",
+      "type": "AI",
+      "independent": false,
+      "human": false
+    },
+    "limit": "Reused/tuned development cases, no held-out or independent validation. Source copying is mechanical; scientific judgments and future interview wording remain fallible.",
+    "new_model_evaluation_calls_for_this_release": 0
+  },
+  "production_checks": {
+    "backend_privacy_and_capabilities": {
+      "capabilities": {
+        "version": "research-workflow-v1",
+        "ideas": {
+          "version": "research-ideas-v1",
+          "paper_required": false,
+          "packet_bytes": 24000
+        },
+        "networking": {
+          "version": "network-execution-v1",
+          "runners": [
+            {
+              "id": "emulated-netem-v1",
+              "name": "Emulated networking",
+              "mode": "emulated",
+              "module": "congestion-control-emulated",
+              "maximum_instances": 1,
+              "enabled": true
+            },
+            {
+              "id": "real-world-iperf-v1",
+              "name": "Real-world networking",
+              "mode": "real-world",
+              "module": "congestion-control-real-world",
+              "maximum_instances": 18,
+              "enabled": true
+            },
+            {
+              "id": "custom-package-v1",
+              "name": "Versioned experiment package",
+              "mode": "package",
+              "module": "research-verification",
+              "maximum_instances": 1,
+              "enabled": false
+            }
+          ],
+          "max_jobs": 32,
+          "package_contract": "network-observations-v1",
+          "limitations": "Executable configurations and versioned packages are required. Actual observations do not automatically validate a hypothesis. Missing charges remain unknown."
+        },
+        "adapters": [
+          "matched-numeric-v1"
+        ],
+        "preparation": {
+          "version": "research-preparation-v1",
+          "source_grounded_plans": true,
+          "automatic_claim_extraction": false,
+          "uploaded_plan_bytes": 250000
+        },
+        "queue": {
+          "version": "research-queue-v1",
+          "limits": {
+            "global_jobs": 4,
+            "study_jobs": 2,
+            "invocation_jobs": 2,
+            "lease_seconds": 600,
+            "input_bytes": 256000,
+            "observations": 1000,
+            "algorithm_wall_seconds": 10,
+            "study_queue_jobs": 1000,
+            "automatic_retries": 0
+          },
+          "workers_enabled": true,
+          "claim_labels_automatic": false
+        },
+        "body_bytes": 512000,
+        "interactive_observations": 1000,
+        "interactive_wall_seconds": 10,
+        "labels": {
+          "reproduced": "The declared check meets its criterion under the recorded conditions; broader validity is not implied.",
+          "discrepant": "Examined evidence conflicts with the claim or declared criterion; comparability limits remain explicit.",
+          "inconclusive": "Relevant evidence was examined but cannot resolve the claim within the declared scope.",
+          "untested": "No adequate check has been completed; a plan or citation is not a test."
+        },
+        "arbitrary_code_execution": false,
+        "generic_ai_prompt": "not enabled; requires independent module evaluation and publication"
+      },
+      "anonymous_denials": [
+        {
+          "endpoint": "https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/research/studies/00000000-0000-4000-8000-000000000000/idea",
+          "method": "GET",
+          "status": 401
+        },
+        {
+          "endpoint": "https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/research/studies/00000000-0000-4000-8000-000000000000/idea",
+          "method": "POST",
+          "status": 401
+        },
+        {
+          "endpoint": "https://idk3jouyc6g2uolmge5ctuizwq0kpgcf.lambda-url.us-east-1.on.aws/",
+          "method": "POST",
+          "status": 401
+        },
+        {
+          "endpoint": "https://idk3jouyc6g2uolmge5ctuizwq0kpgcf.lambda-url.us-east-1.on.aws/",
+          "method": "POST",
+          "status": 401
+        }
+      ],
+      "authenticated_requests": 0,
+      "new_model_calls": 0
+    },
+    "browser": {
+      "started_at": "2026-10-15T03:59:32.879Z",
+      "origin": "https://jumpserve.quaint-lab.org",
+      "checks": [
+        {
+          "name": "deployed homepage links to unpublished idea intake",
+          "passed": true,
+          "evidence": {
+            "href": "/module/research-verification/new-idea"
+          }
+        },
+        {
+          "name": "cookie-free idea routes preserve exact sign-in return paths",
+          "passed": true,
+          "evidence": {
+            "paths": 2,
+            "authenticated": false
+          }
+        },
+        {
+          "name": "deployed methods describe fresh reviews and scientific limits",
+          "passed": true,
+          "evidence": {
+            "scientific_validation": "Separate from planning readiness",
+            "networking_execution": "Registered runners or versioned packages; other domains require an applicable implementation"
+          }
+        },
+        {
+          "name": "desktop/mobile navigation and themes expose the idea entry point",
+          "passed": true,
+          "evidence": {
+            "viewports": [
+              1365,
+              390
+            ],
+            "themes": [
+              "dark",
+              "light"
+            ]
+          }
+        },
+        {
+          "name": "existing completed paper assessments remain publicly readable and exportable",
+          "passed": true,
+          "evidence": {
+            "published_studies": 5,
+            "checked_study": "a0c13133-7f02-5aae-93d0-43fb1332e0ad",
+            "measurement_rows": 36,
+            "export_sha256": "934c0bbb17534eebc561e544496664f62ad53afd853b7b80197d1481da295729",
+            "scope": "Existing archived/simulation assessments, no experiments rerun"
+          }
+        }
+      ],
+      "browser_errors": [],
+      "reviewer": {
+        "identity": "Primary Codex AI implementer",
+        "type": "AI",
+        "independent": false
+      },
+      "conditional_gaps": [
+        "No legitimate Google browser session: authenticated idea creation/planning/reviews and cross-owner actions unverified",
+        "No completed published idea yet; existing paper result pages provide deployed recorded-study coverage",
+        "Independent human or held-out validation"
+      ],
+      "new_model_calls": 0,
+      "measured_charges_usd": null,
+      "passed": true,
+      "ended_at": "2026-10-15T03:59:51.288Z"
+    },
+    "browser_report_sha256": "c97807ec2eed9323db12ed7432d6237272e00cce97cdb71131c56b93018cc6c8",
+    "authenticated_rendering_or_model_request_verified": false,
+    "google_session_observation": "The available browser redirected the existing idea URL to sign-in; no legitimate authenticated session was available or fabricated."
+  },
+  "evidence": {
+    "original_evaluation_storage": {
+      "objects": [
+        {
+          "original_path": "docs/idea-interview-evidence-v1.tar.gz",
+          "bucket": "research-workflow-raw",
+          "path": "release-verification/idea-interview-20261015/126aa8e51db2cb18cb974b5cf41be7186f413949656b3d91d06ebfe1d0ddbcb3/idea-interview-evidence-v1.tar.gz",
+          "sha256": "126aa8e51db2cb18cb974b5cf41be7186f413949656b3d91d06ebfe1d0ddbcb3",
+          "bytes": 5890086,
+          "retrieved_hash_verified": true,
+          "anonymous_status": 400
+        },
+        {
+          "original_path": "docs/idea-review-source-fidelity-evidence-v1.tar.gz",
+          "bucket": "research-workflow-raw",
+          "path": "release-verification/idea-interview-20261015/f8cf834bf516bbb8a72b471d9afad79274033e99159859d2b3e30a2daae1bc1d/idea-review-source-fidelity-evidence-v1.tar.gz",
+          "sha256": "f8cf834bf516bbb8a72b471d9afad79274033e99159859d2b3e30a2daae1bc1d",
+          "bytes": 3597330,
+          "retrieved_hash_verified": true,
+          "anonymous_status": 400
+        },
+        {
+          "original_path": "docs/idea-interview-validation-v1.json",
+          "bucket": "research-workflow-raw",
+          "path": "release-verification/idea-interview-20261015/72851b1e665a7b081f87d7265bf2e76c72ac8d643a115a2b8e04d51e5be3cd79/idea-interview-validation-v1.json",
+          "sha256": "72851b1e665a7b081f87d7265bf2e76c72ac8d643a115a2b8e04d51e5be3cd79",
+          "bytes": 9187,
+          "retrieved_hash_verified": true,
+          "anonymous_status": 400
+        },
+        {
+          "original_path": "docs/idea-review-source-fidelity-validation-v1.json",
+          "bucket": "research-workflow-raw",
+          "path": "release-verification/idea-interview-20261015/231a972c1b0e279b21d3cbcc87fe17400aeb0062871333802310a4b10ee918b6/idea-review-source-fidelity-validation-v1.json",
+          "sha256": "231a972c1b0e279b21d3cbcc87fe17400aeb0062871333802310a4b10ee918b6",
+          "bytes": 10766,
+          "retrieved_hash_verified": true,
+          "anonymous_status": 400
+        },
+        {
+          "original_path": "docs/idea-interview-release-protocol-v1.json",
+          "bucket": "research-workflow-raw",
+          "path": "release-verification/idea-interview-20261015/8efb517d07c2a30e64794bca671c8145b28260fc2be6415f9da79edec19ad79d/idea-interview-release-protocol-v1.json",
+          "sha256": "8efb517d07c2a30e64794bca671c8145b28260fc2be6415f9da79edec19ad79d",
+          "bytes": 3945,
+          "retrieved_hash_verified": true,
+          "anonymous_status": 400
+        }
+      ],
+      "total_bytes": 9511314,
+      "retrieved_original_hashes_verified": true,
+      "measured_charges_usd": null
+    },
+    "release_archive": {
+      "objects": [
+        {
+          "original_path": "docs/idea-interview-release-evidence-v1.tar.gz",
+          "bucket": "research-workflow-raw",
+          "path": "release-verification/idea-interview-20261015/4dbf3359038d74a07d3b97f2b3d9b04eab2dd198ecf50232e4829ad6008ce9c8/idea-interview-release-evidence-v1.tar.gz",
+          "sha256": "4dbf3359038d74a07d3b97f2b3d9b04eab2dd198ecf50232e4829ad6008ce9c8",
+          "bytes": 659613,
+          "retrieved_hash_verified": true,
+          "anonymous_status": 400
+        }
+      ],
+      "total_bytes": 659613,
+      "retrieved_original_hashes_verified": true,
+      "measured_charges_usd": null
+    },
+    "local_release_archive": {
+      "path": "docs/idea-interview-release-evidence-v1.tar.gz",
+      "sha256": "4dbf3359038d74a07d3b97f2b3d9b04eab2dd198ecf50232e4829ad6008ce9c8",
+      "bytes": 659613,
+      "files": 30,
+      "all_original_hashes_verified_after_readback": true
+    },
+    "public_receipt_inventory": "docs/idea-interview-release-evidence/manifest.json",
+    "final_storage_receipt": "docs/idea-interview-release-storage-v1.json",
+    "snapshot_note": "The release archive freezes receipts/browser/assets before its own upload. The final upload receipt and this report are later records and are not recursively included in that archive.",
+    "private_exclusions": "Raw private build logs, signed URLs, credentials and downloaded Lambda ZIPs were excluded from the shareable release bundle. ZIP hashes and rollback locations are recorded."
+  },
+  "rollback": {
+    "function": "JumpServeAgentStack-AgentFnC1FD126F-MG2xfZrwsBNg",
+    "zip_sha256": "c879df52d7e4e09f0f2154eb6ed712a4a8b88bf060cbe62b43a1608c565cf4a5",
+    "active": [
+      {
+        "id": "e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8",
+        "version": "research-ideas-v2",
+        "content_sha256": "ad350bee6b2e6bfb9399d03e7cd83d181cede746953c8ed43769a5b2c685cdc2",
+        "published_at": "2026-10-13 15:52:59.095627+00"
+      }
+    ],
+    "previous_zip_already_archived_privately": {
+      "bucket": "research-workflow-raw",
+      "path": "480b5a7a-0db0-5fbd-982d-8063e0140bd4/c879df52d7e4e09f0f2154eb6ed712a4a8b88bf060cbe62b43a1608c565cf4a5",
+      "evidence": "docs/guided-network-release-evidence/private-storage-archive-v2.json",
+      "matching_predeployment_download_hash": true,
+      "remote_object_not_retrieved_again_in_this_release": true
+    },
+    "policy": "Retain data, additive schema and publication history; record a guarded rollback if required."
+  },
+  "failures_retained": [
+    "Sandbox blocked the initial AWS inspection and local PostgreSQL connection; elevated purpose-specific reruns passed.",
+    "Existing boto3 layer helper could not find the native AWS login credentials; fixed-target CLI restoration retained identical deployed dependencies.",
+    "Initial all-app CDK synthesis required unrelated real-world assets; a dedicated Agent entry point passed and produced a Code-only diff."
+  ],
+  "conditional_gaps": [
+    "Legitimate Google-authenticated coaching/fresh review request and provider-to-Supabase persisted answer roundtrip in production.",
+    "Actual protected new workspace rendering with an authenticated session; the deployed bundle and public sign-in boundaries were verified.",
+    "Cross-owner authenticated denial requires two legitimate sessions.",
+    "Independent human/domain and held-out answer review.",
+    "Custom networking package operational checks remain incomplete; custom admission stays disabled. Other previous networking scope limits remain unchanged."
+  ],
+  "scientific_scope": "No new scientific claims or hypotheses were tested in this release. Existing measurements/assessments were preserved; software readiness is separate from scientific validity.",
+  "resources": {
+    "new_model_calls": 0,
+    "authenticated_smoke_calls": 0,
+    "new_experiment_instances": 0,
+    "private_objects_uploaded": 6,
+    "private_stored_bytes": 10170927,
+    "requested_private_artifact_byte_limit": 16000000,
+    "agent_memory_mb": 1024,
+    "agent_timeout_seconds": 120,
+    "amplify_jobs_started": 1,
+    "measured_charges_usd": null,
+    "estimated_charges_usd": null,
+    "unallocated_costs": "Build, deployment, hosting, storage, local compute/database and coding-model costs are unknown, not zero. The original model usage remains in the preserved evaluation reports."
+  },
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false,
+    "human": false
+  },
+  "verification_commands": [
+    "python3 -B bin/idea-interview-release.py verify",
+    "python3 -B bin/idea-interview-release.py frontend-status",
+    "node scripts/verify-research-ideas-production.mjs"
+  ]
+}

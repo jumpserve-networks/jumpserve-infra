@@ -1,0 +1,51 @@
+{
+  "protocol": "idea-interview-production-release-v1",
+  "mode": "frontend-status",
+  "status": "complete",
+  "started_at": "2026-10-15T03:58:15.164550+00:00",
+  "measured_charges_usd": null,
+  "new_model_calls": 0,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "frontend": {
+    "summary": {
+      "jobArn": "arn:aws:amplify:us-east-1:395567831870:apps/d24jvguj7brnkj/branches/main/jobs/0000000111",
+      "jobId": "111",
+      "commitId": "HEAD",
+      "commitTime": "2026-10-14T22:56:01.349000-05:00",
+      "startTime": "2026-10-14T22:56:01.607000-05:00",
+      "status": "RUNNING"
+    },
+    "steps": [
+      {
+        "stepName": "BUILD",
+        "status": "SUCCEED",
+        "startTime": "2026-10-14T22:56:01.624000-05:00",
+        "endTime": "2026-10-14T22:58:09.521000-05:00"
+      },
+      {
+        "stepName": "DEPLOY",
+        "status": "RUNNING",
+        "startTime": "2026-10-14T22:58:09.759000-05:00",
+        "endTime": null
+      },
+      {
+        "stepName": "VERIFY",
+        "status": "PENDING",
+        "startTime": null,
+        "endTime": null
+      }
+    ],
+    "build_log": {
+      "sha256": "00a1af03c7e15dbfbe4b3db1727830667dc85eea9a2873a3d6341c0924c9ecc3",
+      "bytes": 10030,
+      "commit_ids": [],
+      "original_scope": "Original downloaded build log; retained privately, no signed log URL published"
+    }
+  },
+  "ended_at": "2026-10-15T03:58:17.641714+00:00"
+}

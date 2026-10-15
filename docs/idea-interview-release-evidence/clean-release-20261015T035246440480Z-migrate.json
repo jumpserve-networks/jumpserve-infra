@@ -1,0 +1,585 @@
+{
+  "protocol": "idea-interview-production-release-v1",
+  "mode": "migrate",
+  "status": "complete",
+  "started_at": "2026-10-15T03:52:46.440684+00:00",
+  "measured_charges_usd": null,
+  "new_model_calls": 0,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "before": {
+    "relations": [
+      {
+        "relname": "research_artifacts",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_assessments",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_audit_events",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_campaigns",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_claim_checks",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_claims",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_configurations",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_gaps",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_campaign_links",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_packets",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_readiness",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_runs",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_sessions",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_measurements",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_network_executions",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_prepared_plans",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_protocols",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_publications",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_published_values",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_queue_events",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_queue_jobs",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_reviews",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_runs",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_sources",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_studies",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_study_owners",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_summaries",
+        "relrowsecurity": true
+      }
+    ],
+    "columns": [
+      {
+        "column_name": "id",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "title",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "paper_url",
+        "is_nullable": "YES"
+      },
+      {
+        "column_name": "domain",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "scope",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "origin_module",
+        "is_nullable": "YES"
+      },
+      {
+        "column_name": "created_at",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "study_kind",
+        "is_nullable": "NO"
+      }
+    ],
+    "pointers": [
+      {
+        "module_id": "congestion-control-emulated",
+        "active_version_id": "cabbe18a-cc70-482c-8883-81b515639e42"
+      },
+      {
+        "module_id": "congestion-control-real-world",
+        "active_version_id": "e78456f8-6582-4f69-8b44-d56d2c782352"
+      },
+      {
+        "module_id": "http2-compliance-study",
+        "active_version_id": "caf6bae2-acd3-4ef4-8147-bd8bc39895e2"
+      },
+      {
+        "module_id": "ipv6-dns-study",
+        "active_version_id": "28edfb2a-17f9-47c0-a801-1ca7392c7404"
+      },
+      {
+        "module_id": "leo-emergency-failover",
+        "active_version_id": "ec00a4b6-718c-4e69-9c0f-283b9f251002"
+      },
+      {
+        "module_id": "reliable-sketch-study",
+        "active_version_id": "64c9fbb6-1d38-4844-9167-66faaf05fe14"
+      },
+      {
+        "module_id": "research-verification",
+        "active_version_id": "e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8"
+      }
+    ],
+    "publication_guard": [
+      {
+        "definition": "CREATE OR REPLACE FUNCTION public.publish_agent_prompt(p_version_id uuid, p_expected_active_version_id uuid, p_expected_content_sha256 text, p_report jsonb, p_actor text, p_module_id text DEFAULT 'congestion-control-emulated'::text)\n RETURNS uuid\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare current_id uuid; candidate public.agent_prompt_versions; required text[]=array['idea-planning','idea-comprehension','idea-critic','idea-missing','idea-novelty','idea-untrusted','idea-clear-plan','idea-scope']; begin\n if p_module_id<>'research-verification' then\n  return public.publish_agent_prompt_before_research_ideas(p_version_id,p_expected_active_version_id,p_expected_content_sha256,p_report,p_actor,p_module_id);\n end if;\n select active_version_id into current_id from public.agent_prompt_settings where module_id=p_module_id for update;\n if not found or current_id is distinct from p_expected_active_version_id then raise exception 'Idea prompt pointer changed'; end if;\n select * into strict candidate from public.agent_prompt_versions where id=p_version_id for update;\n if candidate.module_id<>p_module_id or candidate.content_sha256<>p_expected_content_sha256 or p_report->>'prompt_content_sha256' is distinct from candidate.content_sha256\n  or p_report->>'prompt_version_id' is distinct from candidate.id::text or p_report->>'prompt_version' is distinct from candidate.version\n  or p_report->>'module_id' is distinct from p_module_id or p_report->>'analysis_version' is distinct from 'research-ideas-v1'\n  or p_report->>'evaluation_kind' is distinct from 'actual-model-development' or coalesce(btrim(p_report->>'model_id'),'')='' or coalesce(btrim(p_actor),'')=''\n  or coalesce(p_report->>'cases_sha256','') !~ '^[a-f0-9]{64}$' then raise exception 'Exact candidate and actual-answer evaluation provenance required'; end if;\n if jsonb_typeof(p_report->'cases') is distinct from 'array' then raise exception 'Evaluation cases required'; end if;\n if jsonb_array_length(p_report->'cases')<>cardinality(required) or exists(select 1 from unnest(required) name where\n  (select count(*) from jsonb_array_elements(p_report->'cases') c where c->>'name'=name and c->'passed'='true'::jsonb and c->>'status'='complete' and c->>'output_sha256' ~ '^[a-f0-9]{64}$')<>1) then raise exception 'Every declared actual-answer development case must pass'; end if;\n if coalesce(p_report->'reviewer'->>'type','') not in ('human','AI') or coalesce(btrim(p_report->'reviewer'->>'identity'),'')='' or\n  jsonb_typeof(p_report->'reviewer'->'independent') is distinct from 'boolean' or p_report->'reviewer'->'passed' is distinct from 'true'::jsonb then raise exception 'Declared answer review and independence required; AI review is not human review'; end if;\n if candidate.published_at is null then update public.agent_prompt_versions set published_at=clock_timestamp(),updated_by=p_actor where id=p_version_id; end if;\n insert into public.agent_prompt_publications(prompt_version_id,previous_version_id,published_by,evaluation_report) values(p_version_id,current_id,p_actor,p_report);\n update public.agent_prompt_settings set active_version_id=p_version_id,updated_at=clock_timestamp() where module_id=p_module_id;\n return p_version_id;\nend $function$\n"
+      }
+    ],
+    "scientific_counts": [
+      {
+        "relation": "research_measurements",
+        "count": 7144
+      },
+      {
+        "relation": "research_published_values",
+        "count": 5093
+      },
+      {
+        "relation": "research_assessments",
+        "count": 102
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "name": "202610140001_idea_interview_prompt.sql",
+      "sha256": "94aa9f3317bec4938d2b4a7fed6d8555170285279e1ce67bb57bf64546a5b71b",
+      "bytes": 10401,
+      "status": "complete",
+      "ended_at": "2026-10-15T03:52:51.665989+00:00"
+    },
+    {
+      "name": "202610140002_idea_interview_prompt_v4.sql",
+      "sha256": "d35fd0e2f43db55330c064664d0bec38a9dea61c0910945e549132b8ae7c88a7",
+      "bytes": 12125,
+      "status": "complete",
+      "ended_at": "2026-10-15T03:52:52.024849+00:00"
+    },
+    {
+      "name": "202610140003_idea_interview_prompt_v5.sql",
+      "sha256": "3f318da16db4c0622f7b98a5365bb97d551be31e39d1e555aa93fa381b052f49",
+      "bytes": 13276,
+      "status": "complete",
+      "ended_at": "2026-10-15T03:52:52.524003+00:00"
+    },
+    {
+      "name": "202610140004_idea_interview_prompt_v6.sql",
+      "sha256": "7af34f10601d252179a759b851236940e5f2eb3a416f46a8848b381ebac8a67f",
+      "bytes": 11626,
+      "status": "complete",
+      "ended_at": "2026-10-15T03:52:53.036278+00:00"
+    },
+    {
+      "name": "202610140005_idea_interview_prompt_v7.sql",
+      "sha256": "ab010bea1076af1b157a673d62275ce7d9fa021b67c8a753a8293c2f1bade394",
+      "bytes": 12486,
+      "status": "complete",
+      "ended_at": "2026-10-15T03:52:53.529394+00:00"
+    },
+    {
+      "name": "202610140006_idea_interview_prompt_v8.sql",
+      "sha256": "3c0cbd7f42b38efebc717d2a5238b00b56469cefbbda03a189f92a17009303d1",
+      "bytes": 13200,
+      "status": "complete",
+      "ended_at": "2026-10-15T03:52:54.112794+00:00"
+    },
+    {
+      "name": "202610140007_idea_review_sources_v9.sql",
+      "sha256": "b07d0048bcef80e271d93f245f5f869a34e5620c82ccf4f5dee76e1bedc40a23",
+      "bytes": 15937,
+      "status": "complete",
+      "ended_at": "2026-10-15T03:52:54.623921+00:00"
+    },
+    {
+      "name": "202610140008_idea_review_sources_v10.sql",
+      "sha256": "4c6aca6ed15f1b76913f905414a98eaf67e50ba14c1d22a5e44dc90b5ed39779",
+      "bytes": 17204,
+      "status": "complete",
+      "ended_at": "2026-10-15T03:52:55.135636+00:00"
+    },
+    {
+      "name": "202610140009_idea_review_sources_v11.sql",
+      "sha256": "99cd12fdc5bc90a639e4eabe4726d9711781df7a38a9a9825be7550f43e19bbf",
+      "bytes": 15859,
+      "status": "complete",
+      "ended_at": "2026-10-15T03:52:55.615756+00:00"
+    }
+  ],
+  "after": {
+    "relations": [
+      {
+        "relname": "research_artifacts",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_assessments",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_audit_events",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_campaigns",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_claim_checks",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_claims",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_configurations",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_gaps",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_campaign_links",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_packets",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_readiness",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_runs",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_sessions",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_measurements",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_network_executions",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_prepared_plans",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_protocols",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_publications",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_published_values",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_queue_events",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_queue_jobs",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_reviews",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_runs",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_sources",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_studies",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_study_owners",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_summaries",
+        "relrowsecurity": true
+      }
+    ],
+    "columns": [
+      {
+        "column_name": "id",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "title",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "paper_url",
+        "is_nullable": "YES"
+      },
+      {
+        "column_name": "domain",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "scope",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "origin_module",
+        "is_nullable": "YES"
+      },
+      {
+        "column_name": "created_at",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "study_kind",
+        "is_nullable": "NO"
+      }
+    ],
+    "pointers": [
+      {
+        "module_id": "congestion-control-emulated",
+        "active_version_id": "cabbe18a-cc70-482c-8883-81b515639e42"
+      },
+      {
+        "module_id": "congestion-control-real-world",
+        "active_version_id": "e78456f8-6582-4f69-8b44-d56d2c782352"
+      },
+      {
+        "module_id": "http2-compliance-study",
+        "active_version_id": "caf6bae2-acd3-4ef4-8147-bd8bc39895e2"
+      },
+      {
+        "module_id": "ipv6-dns-study",
+        "active_version_id": "28edfb2a-17f9-47c0-a801-1ca7392c7404"
+      },
+      {
+        "module_id": "leo-emergency-failover",
+        "active_version_id": "ec00a4b6-718c-4e69-9c0f-283b9f251002"
+      },
+      {
+        "module_id": "reliable-sketch-study",
+        "active_version_id": "64c9fbb6-1d38-4844-9167-66faaf05fe14"
+      },
+      {
+        "module_id": "research-verification",
+        "active_version_id": "e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8"
+      }
+    ],
+    "publication_guard": [
+      {
+        "definition": "CREATE OR REPLACE FUNCTION public.publish_agent_prompt(p_version_id uuid, p_expected_active_version_id uuid, p_expected_content_sha256 text, p_report jsonb, p_actor text, p_module_id text DEFAULT 'congestion-control-emulated'::text)\n RETURNS uuid\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare current_id uuid; candidate public.agent_prompt_versions; required text[]=array['idea-planning','idea-comprehension','idea-critic','idea-missing','idea-novelty','idea-untrusted','idea-clear-plan','idea-scope']; begin\n if p_module_id<>'research-verification' then\n  return public.publish_agent_prompt_before_research_ideas(p_version_id,p_expected_active_version_id,p_expected_content_sha256,p_report,p_actor,p_module_id);\n end if;\n select active_version_id into current_id from public.agent_prompt_settings where module_id=p_module_id for update;\n if not found or current_id is distinct from p_expected_active_version_id then raise exception 'Idea prompt pointer changed'; end if;\n select * into strict candidate from public.agent_prompt_versions where id=p_version_id for update;\n if candidate.version in ('research-ideas-v3','research-ideas-v4','research-ideas-v5','research-ideas-v6','research-ideas-v7','research-ideas-v8','research-ideas-v9','research-ideas-v10','research-ideas-v11') then required:=required || array['interview-cdn','interview-congestion','interview-known','interview-vague','interview-unknown','interview-untrusted','interview-pilot','interview-complete']; end if;\n if candidate.version in ('research-ideas-v9','research-ideas-v10','research-ideas-v11') then required:=required || array['review-complete-critic','review-controls-only','review-statistics-only','review-consistent-percent','review-untrusted-metadata']; end if;\n if candidate.module_id<>p_module_id or candidate.content_sha256<>p_expected_content_sha256 or p_report->>'prompt_content_sha256' is distinct from candidate.content_sha256\n  or p_report->>'prompt_version_id' is distinct from candidate.id::text or p_report->>'prompt_version' is distinct from candidate.version\n  or p_report->>'module_id' is distinct from p_module_id or p_report->>'analysis_version' is distinct from 'research-ideas-v1'\n  or p_report->>'evaluation_kind' is distinct from 'actual-model-development' or coalesce(btrim(p_report->>'model_id'),'')='' or coalesce(btrim(p_actor),'')=''\n  or coalesce(p_report->>'cases_sha256','') !~ '^[a-f0-9]{64}$' then raise exception 'Exact candidate and actual-answer evaluation provenance required'; end if;\n if jsonb_typeof(p_report->'cases') is distinct from 'array' then raise exception 'Evaluation cases required'; end if;\n if jsonb_array_length(p_report->'cases')<>cardinality(required) or exists(select 1 from unnest(required) name where\n  (select count(*) from jsonb_array_elements(p_report->'cases') c where c->>'name'=name and c->'passed'='true'::jsonb and c->>'status'='complete' and c->>'output_sha256' ~ '^[a-f0-9]{64}$')<>1) then raise exception 'Every declared actual-answer development case must pass'; end if;\n if candidate.version in ('research-ideas-v10','research-ideas-v11') and exists(select 1 from jsonb_array_elements(p_report->'cases') c where coalesce(c->>'rendered_sha256','') !~ '^[a-f0-9]{64}$') then raise exception 'Exact server-rendered answer hashes required'; end if;\n if coalesce(p_report->'reviewer'->>'type','') not in ('human','AI') or coalesce(btrim(p_report->'reviewer'->>'identity'),'')='' or\n  jsonb_typeof(p_report->'reviewer'->'independent') is distinct from 'boolean' or p_report->'reviewer'->'passed' is distinct from 'true'::jsonb then raise exception 'Declared answer review and independence required; AI review is not human review'; end if;\n if candidate.published_at is null then update public.agent_prompt_versions set published_at=clock_timestamp(),updated_by=p_actor where id=p_version_id; end if;\n insert into public.agent_prompt_publications(prompt_version_id,previous_version_id,published_by,evaluation_report) values(p_version_id,current_id,p_actor,p_report);\n update public.agent_prompt_settings set active_version_id=p_version_id,updated_at=clock_timestamp() where module_id=p_module_id;\n return p_version_id;\nend $function$\n"
+      }
+    ],
+    "scientific_counts": [
+      {
+        "relation": "research_measurements",
+        "count": 7144
+      },
+      {
+        "relation": "research_published_values",
+        "count": 5093
+      },
+      {
+        "relation": "research_assessments",
+        "count": 102
+      }
+    ]
+  },
+  "security": {
+    "passed": true,
+    "security": [
+      {
+        "relname": "research_idea_campaign_links",
+        "relrowsecurity": true,
+        "anon_access": false,
+        "browser_access": false
+      },
+      {
+        "relname": "research_idea_packets",
+        "relrowsecurity": true,
+        "anon_access": false,
+        "browser_access": false
+      },
+      {
+        "relname": "research_idea_readiness",
+        "relrowsecurity": true,
+        "anon_access": false,
+        "browser_access": false
+      },
+      {
+        "relname": "research_idea_runs",
+        "relrowsecurity": true,
+        "anon_access": false,
+        "browser_access": false
+      },
+      {
+        "relname": "research_idea_sessions",
+        "relrowsecurity": true,
+        "anon_access": false,
+        "browser_access": false
+      }
+    ],
+    "rpc": [
+      {
+        "proname": "research_accept_idea_plan",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_begin_idea_run",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_finish_idea_run",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_idea_owner",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_idea_ready",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_prepare_idea_campaign",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_save_idea_packet",
+        "anon_execute": false,
+        "browser_execute": false
+      }
+    ],
+    "private_originals": [
+      {
+        "public": false
+      }
+    ],
+    "pointers": [
+      {
+        "module_id": "congestion-control-emulated",
+        "active_version_id": "cabbe18a-cc70-482c-8883-81b515639e42"
+      },
+      {
+        "module_id": "congestion-control-real-world",
+        "active_version_id": "e78456f8-6582-4f69-8b44-d56d2c782352"
+      },
+      {
+        "module_id": "http2-compliance-study",
+        "active_version_id": "caf6bae2-acd3-4ef4-8147-bd8bc39895e2"
+      },
+      {
+        "module_id": "ipv6-dns-study",
+        "active_version_id": "28edfb2a-17f9-47c0-a801-1ca7392c7404"
+      },
+      {
+        "module_id": "leo-emergency-failover",
+        "active_version_id": "ec00a4b6-718c-4e69-9c0f-283b9f251002"
+      },
+      {
+        "module_id": "reliable-sketch-study",
+        "active_version_id": "64c9fbb6-1d38-4844-9167-66faaf05fe14"
+      },
+      {
+        "module_id": "research-verification",
+        "active_version_id": "e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8"
+      }
+    ]
+  },
+  "candidate": [
+    {
+      "id": "ba16759e-ff38-4491-ae21-5766261e710b",
+      "version": "research-ideas-v11",
+      "content_sha256": "24129ede61c03fa2f50e381f21e87af76e0464b0849a4de211b46e920fd743ba",
+      "published_at": null
+    }
+  ],
+  "ended_at": "2026-10-15T03:53:00.723461+00:00"
+}

@@ -1,0 +1,10 @@
+{
+  "protocol": "idea-interview-production-release-v1",
+  "mode": "inspect",
+  "status": "failed",
+  "started_at": "2026-10-15T03:48:24.189750+00:00",
+  "measured_charges_usd": null,
+  "new_model_calls": 0,
+  "reason": "Command '['aws', 'sts', 'get-caller-identity', '--profile', 'jumpserve']' returned non-zero exit status 255.",
+  "ended_at": "2026-10-15T03:48:26.180637+00:00"
+}

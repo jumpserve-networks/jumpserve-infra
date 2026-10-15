@@ -467,6 +467,13 @@ in source control or AMI snapshots.
 
 ## Development
 
+The idea-specific conversation and source-faithful review update was released on
+2026-10-15 with the evaluated **research-ideas-v11** prompt and Amplify job **111**.
+See [the release report](docs/idea-interview-production-release-v1.json) and
+[review methods](docs/idea-review-source-fidelity.md). Authenticated production
+coaching remains unverified without a legitimate session; the released software
+does not establish scientific validity or independent AI-review accuracy.
+
 The unpublished research idea feature was **deployed to production on 2026-10-13**.
 `docs/research-ideas-production-release-v1.json` records the exact runtime revisions,
 five additive migrations, evaluated v2 prompt publication, private original-byte

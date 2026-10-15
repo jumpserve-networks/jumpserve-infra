@@ -1,0 +1,15 @@
+/private/tmp/jumpserve-idea-interview-release-20261015/jumpserve-infra/lib/real-world-tests.ts:24
+      throw new Error('Fetch the pinned backend runtime (see README) or set REAL_WORLD_RUNTIME_PATH to jumpserve-back-end/real_world.');
+            ^
+Error: Fetch the pinned backend runtime (see README) or set REAL_WORLD_RUNTIME_PATH to jumpserve-back-end/real_world.
+    at new RealWorldTests (/private/tmp/jumpserve-idea-interview-release-20261015/jumpserve-infra/lib/real-world-tests.ts:24:13)
+    at new BenchmarkOrchestratorStack (/private/tmp/jumpserve-idea-interview-release-20261015/jumpserve-infra/lib/benchmark-orchestrator-stack.ts:266:23)
+    at Object.<anonymous> (/private/tmp/jumpserve-idea-interview-release-20261015/jumpserve-infra/bin/jumpserve-infra.ts:15:1)
+    at Module._compile (node:internal/modules/cjs/loader:1692:14)
+    at Module.m._compile (/private/tmp/jumpserve-idea-interview-release-20261015/jumpserve-infra/node_modules/ts-node/src/index.ts:1618:23)
+    at node:internal/modules/cjs/loader:1824:10
+    at Object.require.extensions.<computed> [as .ts] (/private/tmp/jumpserve-idea-interview-release-20261015/jumpserve-infra/node_modules/ts-node/src/index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1427:32)
+    at Module._load (node:internal/modules/cjs/loader:1250:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+npx ts-node --prefer-ts-exts bin/jumpserve-infra.ts: Subprocess exited with error 1

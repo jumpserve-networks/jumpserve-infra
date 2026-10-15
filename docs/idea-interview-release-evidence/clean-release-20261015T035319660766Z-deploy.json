@@ -1,0 +1,177 @@
+{
+  "protocol": "idea-interview-production-release-v1",
+  "mode": "deploy",
+  "status": "complete",
+  "started_at": "2026-10-15T03:53:19.661003+00:00",
+  "measured_charges_usd": null,
+  "new_model_calls": 0,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "rollback": {
+    "function": "JumpServeAgentStack-AgentFnC1FD126F-MG2xfZrwsBNg",
+    "zip_sha256": "c879df52d7e4e09f0f2154eb6ed712a4a8b88bf060cbe62b43a1608c565cf4a5",
+    "active": [
+      {
+        "id": "e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8",
+        "version": "research-ideas-v2",
+        "content_sha256": "ad350bee6b2e6bfb9399d03e7cd83d181cede746953c8ed43769a5b2c685cdc2",
+        "published_at": "2026-10-13 15:52:59.095627+00"
+      }
+    ]
+  },
+  "command": [
+    "npx",
+    "cdk",
+    "deploy",
+    "JumpServeAgentStack",
+    "--app",
+    "npx ts-node --prefer-ts-exts bin/agent.ts",
+    "--exclusively",
+    "--require-approval",
+    "never",
+    "--outputs-file",
+    "/private/tmp/jumpserve-idea-interview-release-20261015/jumpserve-infra/.test-artifacts/idea-interview/release/20261015T035319660766Z/outputs.json"
+  ],
+  "verification": {
+    "function": "JumpServeAgentStack-AgentFnC1FD126F-MG2xfZrwsBNg",
+    "zip_sha256": "c6b66c7abc7638d3fd7a47eea88ad9a9fa72b1676f78ef2d44336f6a1613c768",
+    "runtime_hashes": {
+      "agent/research_ideas.py": "eda137049c5a8061c8b04c9ad0c0d45282958f9865ac614826adf3543d49bfd2",
+      "agent/idea_interview.py": "d454aaf2a2fcbc0b857e90706d152ee9c86c86ef98a0d2b3760af3f85fd05ccb",
+      "agent/idea_review.py": "4725154f1796e913b42ab612cd4dd138c3b2e3cd16b00e75a458cc4cde92bf51",
+      "agent/handler.py": "76aad08e58b1557134efc1837f4e3109ba5cec28913533ced9bb7fba7c439196",
+      "agent/prompt.py": "087ab68481bb971e554a7c275158d77a945bf46019cfe2b30c47d84fdcdc24c8",
+      "agent/modules.py": "639a02174548cea3e667408413a57eed4deb8f58429c2af4c13e139d8aa9e686",
+      "agent/settings.py": "6c6819896689b3389f56bf1c363418726c9d53044f05f06edff269cc1c511777"
+    },
+    "layers": [
+      {
+        "Arn": "arn:aws:lambda:us-east-1:395567831870:layer:AgentDepsLayer51FBE89A:54",
+        "CodeSize": 19284158
+      }
+    ],
+    "memory_mb": 1024,
+    "timeout_seconds": 120,
+    "last_modified": "2026-10-15T03:53:53.000+0000",
+    "active": [
+      {
+        "id": "e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8",
+        "version": "research-ideas-v2",
+        "content_sha256": "ad350bee6b2e6bfb9399d03e7cd83d181cede746953c8ed43769a5b2c685cdc2",
+        "published_at": "2026-10-13 15:52:59.095627+00"
+      }
+    ],
+    "security": {
+      "passed": true,
+      "security": [
+        {
+          "relname": "research_idea_campaign_links",
+          "relrowsecurity": true,
+          "anon_access": false,
+          "browser_access": false
+        },
+        {
+          "relname": "research_idea_packets",
+          "relrowsecurity": true,
+          "anon_access": false,
+          "browser_access": false
+        },
+        {
+          "relname": "research_idea_readiness",
+          "relrowsecurity": true,
+          "anon_access": false,
+          "browser_access": false
+        },
+        {
+          "relname": "research_idea_runs",
+          "relrowsecurity": true,
+          "anon_access": false,
+          "browser_access": false
+        },
+        {
+          "relname": "research_idea_sessions",
+          "relrowsecurity": true,
+          "anon_access": false,
+          "browser_access": false
+        }
+      ],
+      "rpc": [
+        {
+          "proname": "research_accept_idea_plan",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_begin_idea_run",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_finish_idea_run",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_idea_owner",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_idea_ready",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_prepare_idea_campaign",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_save_idea_packet",
+          "anon_execute": false,
+          "browser_execute": false
+        }
+      ],
+      "private_originals": [
+        {
+          "public": false
+        }
+      ],
+      "pointers": [
+        {
+          "module_id": "congestion-control-emulated",
+          "active_version_id": "cabbe18a-cc70-482c-8883-81b515639e42"
+        },
+        {
+          "module_id": "congestion-control-real-world",
+          "active_version_id": "e78456f8-6582-4f69-8b44-d56d2c782352"
+        },
+        {
+          "module_id": "http2-compliance-study",
+          "active_version_id": "caf6bae2-acd3-4ef4-8147-bd8bc39895e2"
+        },
+        {
+          "module_id": "ipv6-dns-study",
+          "active_version_id": "28edfb2a-17f9-47c0-a801-1ca7392c7404"
+        },
+        {
+          "module_id": "leo-emergency-failover",
+          "active_version_id": "ec00a4b6-718c-4e69-9c0f-283b9f251002"
+        },
+        {
+          "module_id": "reliable-sketch-study",
+          "active_version_id": "64c9fbb6-1d38-4844-9167-66faaf05fe14"
+        },
+        {
+          "module_id": "research-verification",
+          "active_version_id": "e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8"
+        }
+      ]
+    }
+  },
+  "ended_at": "2026-10-15T03:54:20.268707+00:00"
+}

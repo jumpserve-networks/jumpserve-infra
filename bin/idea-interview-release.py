@@ -12,6 +12,7 @@ import io
 import json
 import os
 from pathlib import Path
+import re
 import subprocess
 import tarfile
 import urllib.error
@@ -93,13 +94,13 @@ def deployed(directory, require_candidate=False):
                 layers=config.get('Layers', []), memory_mb=config['MemorySize'], timeout_seconds=config['Timeout'],
                 last_modified=config['LastModified'], active=active(), security=previous.verify())
 
-def archive_evidence():
+def archive_evidence(names=EVIDENCE):
     report = evaluated()
     key = aws('secretsmanager', 'get-secret-value', '--secret-id', 'jumpserve/supabase-service-key')['SecretString']
     base = 'https://regphejnlvfpyokpniny.supabase.co/storage/v1/object/research-workflow-raw/'
     public = json.loads((ROOT/'cdk.json').read_text())['context']['supabaseAnonKey']
     objects = []; total = 0
-    for name in EVIDENCE:
+    for name in names:
         raw = (ROOT/name).read_bytes(); total += len(raw)
         if total > 16_000_000: raise RuntimeError('Declared evidence storage budget exceeded')
         path = 'release-verification/idea-interview-20261015/'+sha(raw)+'/'+Path(name).name
@@ -140,7 +141,7 @@ def public_checks():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('mode', choices=('inspect', 'prepare-layer', 'migrate', 'diff', 'deploy', 'publish', 'verify'))
+    parser.add_argument('mode', choices=('inspect', 'prepare-layer', 'migrate', 'diff', 'deploy', 'publish', 'verify', 'frontend-status', 'archive-release'))
     args = parser.parse_args()
     directory = ROOT/'.test-artifacts/idea-interview/release'/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
     directory.mkdir(parents=True, exist_ok=False)
@@ -214,6 +215,36 @@ def main():
             after = pointers()
             if [r for r in before if r['module_id'] != 'research-verification'] != [r for r in after if r['module_id'] != 'research-verification']: raise RuntimeError('Unrelated prompt pointer changed')
             receipt['other_module_pointers_preserved'] = True
+        elif args.mode == 'archive-release':
+            if active()[0]['id'] != CANDIDATE: raise RuntimeError('Expected published candidate before release-evidence archive')
+            path = ROOT/'docs/idea-interview-release-evidence-v1.tar.gz'
+            with tarfile.open(path, 'r:gz') as archive:
+                for item in json.load(archive.extractfile('manifest.json')):
+                    raw = archive.extractfile(item['path']).read()
+                    if sha(raw) != item['sha256'] or len(raw) != item['bytes']: raise RuntimeError('Original release evidence hash differs')
+            receipt['release_archive'] = archive_evidence(('docs/idea-interview-release-evidence-v1.tar.gz',))
+        elif args.mode == 'frontend-status':
+            job = aws('amplify', 'get-job', '--app-id', 'd24jvguj7brnkj', '--branch-name', 'main', '--job-id', '111')['job']
+            receipt['frontend'] = dict(summary=job['summary'], steps=[{k: step.get(k) for k in ('stepName', 'status', 'startTime', 'endTime')} for step in job['steps']])
+            for step in job['steps']:
+                if step['stepName'] != 'BUILD' or not step.get('logUrl'): continue
+                with previous.OPEN.open(step['logUrl'], timeout=30) as response: raw = response.read(10_000_001)
+                if len(raw) > 10_000_000: raise RuntimeError('Build log exceeds the declared local collection bound')
+                path = directory/'amplify-build-private.log'; path.write_bytes(raw); path.chmod(0o600)
+                commits = sorted(set(re.findall(r'(?<![a-f0-9])[a-f0-9]{40}(?![a-f0-9])', raw.decode(errors='replace'))))
+                receipt['frontend']['build_log'] = dict(sha256=sha(raw), bytes=len(raw), commit_ids=commits, original_scope='Original downloaded build log; retained privately, no signed log URL published')
+            if job['summary']['status'] == 'SUCCEED':
+                # Manual Amplify releases can report commitId=HEAD. Verify the
+                # new client implementation itself against the clean build.
+                chunks = ROOT.parent/'jumpserve-front-end/.next/static/chunks'
+                candidates = [path for path in chunks.glob('*.js') if b'Recorded declarations' in path.read_bytes() and b'Planning conversation history' in path.read_bytes()]
+                if len(candidates) != 1: raise RuntimeError('Expected one clean-build guide/source client chunk')
+                source = candidates[0]; expected = source.read_bytes()
+                url = 'https://jumpserve.quaint-lab.org/_next/static/chunks/'+source.name
+                with previous.OPEN.open(url, timeout=30) as response: raw = response.read(5_000_001)
+                if len(raw) > 5_000_000 or raw != expected: raise RuntimeError('Deployed guide client chunk differs from the clean build')
+                (directory/'deployed-guide-client.js').write_bytes(raw)
+                receipt['frontend']['guide_source_client'] = dict(url=url, sha256=sha(raw), bytes=len(raw), clean_build_bytes_match=True, authenticated_rendering_verified=False)
         else:
             receipt['verification'] = deployed(directory, require_candidate=True)
             receipt['public_checks'] = public_checks()
