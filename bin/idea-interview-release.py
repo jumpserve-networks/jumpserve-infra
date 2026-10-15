@@ -119,6 +119,25 @@ def archive_evidence():
         objects.append(dict(original_path=name, bucket='research-workflow-raw', path=path, sha256=sha(raw), bytes=len(raw), retrieved_hash_verified=True, anonymous_status=status))
     return dict(objects=objects, total_bytes=total, retrieved_original_hashes_verified=True, measured_charges_usd=None)
 
+def public_checks():
+    api = 'https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/research'
+    agent = 'https://idk3jouyc6g2uolmge5ctuizwq0kpgcf.lambda-url.us-east-1.on.aws/'
+    with previous.OPEN.open(api+'/capabilities', timeout=20) as response: capabilities = json.load(response)
+    if capabilities['ideas'] != dict(version='research-ideas-v1', paper_required=False, packet_bytes=24000): raise RuntimeError('Public idea capability differs')
+    packages = [runner for runner in capabilities['networking']['runners'] if runner['id'] == 'custom-package-v1']
+    if len(packages) != 1 or packages[0]['enabled'] is not False: raise RuntimeError('Custom networking package admission must stay disabled')
+    denied = []
+    study = '00000000-0000-4000-8000-000000000000'
+    for endpoint, payload in ((api+'/studies/'+study+'/idea', None), (api+'/studies/'+study+'/idea', dict(action='save')), (agent, dict(action='idea', interview_version='idea-interview-v1')), (agent, dict(action='capabilities'))):
+        request = urllib.request.Request(endpoint, data=json.dumps(payload).encode() if payload is not None else None, headers={'Content-Type': 'application/json'})
+        status = 200
+        try:
+            with previous.OPEN.open(request, timeout=20) as response: response.read(1)
+        except urllib.error.HTTPError as error: status = error.code
+        if status not in (401, 403): raise RuntimeError('Anonymous private/model request not denied')
+        denied.append(dict(endpoint=endpoint, method='POST' if payload is not None else 'GET', status=status))
+    return dict(capabilities=capabilities, anonymous_denials=denied, authenticated_requests=0, new_model_calls=0)
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('mode', choices=('inspect', 'prepare-layer', 'migrate', 'diff', 'deploy', 'publish', 'verify'))
@@ -195,7 +214,9 @@ def main():
             after = pointers()
             if [r for r in before if r['module_id'] != 'research-verification'] != [r for r in after if r['module_id'] != 'research-verification']: raise RuntimeError('Unrelated prompt pointer changed')
             receipt['other_module_pointers_preserved'] = True
-        else: receipt['verification'] = deployed(directory, require_candidate=True)
+        else:
+            receipt['verification'] = deployed(directory, require_candidate=True)
+            receipt['public_checks'] = public_checks()
         receipt['status'] = 'complete'
     except Exception as error:
         receipt.update(status='failed', reason=str(error)); raise
