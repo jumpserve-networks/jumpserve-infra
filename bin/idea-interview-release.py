@@ -177,7 +177,7 @@ def main():
             credentials = aws('configure', 'export-credentials', '--format', 'process')
             env = dict(os.environ, AWS_ACCESS_KEY_ID=credentials['AccessKeyId'], AWS_SECRET_ACCESS_KEY=credentials['SecretAccessKey'], AWS_SESSION_TOKEN=credentials['SessionToken'], AWS_DEFAULT_REGION='us-east-1')
             env.pop('AWS_PROFILE', None)
-            command = ['npx', 'cdk', args.mode, 'JumpServeAgentStack', '--exclusively']
+            command = ['npx', 'cdk', args.mode, 'JumpServeAgentStack', '--app', 'npx ts-node --prefer-ts-exts bin/agent.ts', '--exclusively']
             command += ['--no-change-set'] if args.mode == 'diff' else ['--require-approval', 'never', '--outputs-file', str(directory/'outputs.json')]
             receipt['command'] = command; save()
             with (directory/'cdk.log').open('w') as stream: result = subprocess.run(command, cwd=ROOT, env=env, stdout=stream, stderr=subprocess.STDOUT)
