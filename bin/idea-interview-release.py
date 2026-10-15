@@ -121,7 +121,7 @@ def archive_evidence():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('mode', choices=('inspect', 'migrate', 'diff', 'deploy', 'publish', 'verify'))
+    parser.add_argument('mode', choices=('inspect', 'prepare-layer', 'migrate', 'diff', 'deploy', 'publish', 'verify'))
     args = parser.parse_args()
     directory = ROOT/'.test-artifacts/idea-interview/release'/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
     directory.mkdir(parents=True, exist_ok=False)
@@ -133,6 +133,24 @@ def main():
         if args.mode == 'inspect':
             receipt['inspection'] = previous.inspect()
             receipt['candidates'] = admin.query("select id,version,content_sha256,published_at from agent_prompt_versions where module_id='research-verification' order by created_at")
+        elif args.mode == 'prepare-layer':
+            # Native AWS login is supported by the CLI even when the locally
+            # installed boto3 credential chain cannot read that login session.
+            config = aws('lambda', 'get-function-configuration', '--function-name', function())
+            layers = config.get('Layers', [])
+            if len(layers) != 1: raise RuntimeError('Unexpected deployed layer set')
+            layer = aws('lambda', 'get-layer-version-by-arn', '--arn', layers[0]['Arn'])
+            with previous.OPEN.open(layer['Content']['Location'], timeout=45) as response: raw = response.read()
+            if base64.b64encode(hashlib.sha256(raw).digest()).decode() != layer['Content']['CodeSha256']: raise RuntimeError('Dependency layer ZIP checksum differs')
+            destination = ROOT/'agent/layer'
+            if destination.exists() and any(destination.iterdir()): raise RuntimeError('Restore only into an empty clean-release layer directory')
+            destination.mkdir(parents=True, exist_ok=True)
+            with zipfile.ZipFile(io.BytesIO(raw)) as archive:
+                for entry in archive.infolist():
+                    path = Path(entry.filename)
+                    if path.is_absolute() or '..' in path.parts: raise RuntimeError('Invalid dependency layer path')
+                archive.extractall(destination)
+            receipt['dependency_layer'] = dict(arn=layers[0]['Arn'], zip_sha256=sha(raw), bytes=len(raw), original_bytes_verified=True)
         elif args.mode == 'migrate':
             before = previous.inspect(); receipt['before'] = before; receipt['migrations'] = []; save()
             if active()[0]['id'] != PRIOR: raise RuntimeError('Inspect unexpected existing prompt before migration')
