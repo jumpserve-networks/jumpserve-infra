@@ -10,6 +10,8 @@ from uuid import UUID
 from auth import AuthError
 from prompt import load_active_prompt
 from settings import MODEL_ID, MODEL_REGION
+import idea_interview
+import idea_review
 
 MODULE = "research-verification"
 VERSION = "research-ideas-v1"
@@ -61,13 +63,13 @@ def validate_output(raw, task):
     if result["verdict"] == "ready" and (result["questions"] or any(f["severity"]=="blocking" for f in result["findings"])): raise ValueError("Outstanding questions or blockers cannot be ready")
     return result
 
-def invoke_model(system, messages):
+def invoke_model(system, messages, *, interview=False, source_review=False):
     import boto3
     from botocore.config import Config
     client = boto3.client("bedrock-runtime", region_name=MODEL_REGION,
         config=Config(connect_timeout=5, read_timeout=55, retries={"total_max_attempts":1,"mode":"standard"}))
     return client.converse(modelId=MODEL_ID, system=[{"text":system}], messages=messages,
-        inferenceConfig={"maxTokens":MAX_OUTPUT_TOKENS,"temperature":0}, toolConfig=response_channel())
+        inferenceConfig={"maxTokens":MAX_OUTPUT_TOKENS,"temperature":0}, toolConfig=idea_review.response_channel() if source_review else idea_interview.response_channel() if interview else response_channel())
 
 def owner(database, study_id, actor):
     if database.url != "https://regphejnlvfpyokpniny.supabase.co": raise AuthError(503,"Idea research target is misconfigured.")
@@ -76,12 +78,18 @@ def owner(database, study_id, actor):
     if not studies or studies[0]["study_kind"] != "idea": raise AuthError(404,"Idea study not found.")
 
 def handle(body, user, database, invoke=invoke_model):
-    allowed = {"action","request_id","study_id","packet_id","task","session_id","message"}
+    allowed = {"action","request_id","study_id","packet_id","task","session_id","message","interview_version","preferred_field"}
     if set(body)-allowed: raise ValueError("Unsupported idea model request; prompts, history and tools are selected by the server.")
     study_id, packet_id, request_id = (uid(body.get(key)) for key in ("study_id","packet_id","request_id"))
     actor = uid(user["id"])
     task = body.get("task")
     if task not in TASKS: raise ValueError("Choose planning, comprehension or critic.")
+    interview = body.get("interview_version")
+    preferred = body.get("preferred_field")
+    if "interview_version" in body and (task != "planning" or interview != idea_interview.VERSION):
+        raise ValueError("Unsupported interview version or task")
+    if "preferred_field" in body and (not interview or preferred not in idea_interview.FIELDS):
+        raise ValueError("Choose an allowed interview field")
     session_id = uid(body.get("session_id")) if body.get("session_id") else None
     message = body.get("message", "")
     if task == "planning":
@@ -103,35 +111,62 @@ def handle(body, user, database, invoke=invoke_model):
             history = database.get("agent_sessions", {"id":"eq."+session_id,"select":"messages","limit":1})[0]["messages"]
         if not isinstance(history,list) or len(history)>22: raise ValueError("Planning history exceeds its turn budget; preserve your brief and start a new session.")
     prompt = load_active_prompt(database, MODULE)
+    if interview and prompt.version != idea_interview.PROMPT_VERSION:
+        raise AuthError(503,"The conversational guide needs its evaluated research-ideas-v11 prompt. Use the checklist meanwhile.")
+    source_review = task in ("comprehension", "critic") and prompt.version == idea_review.PROMPT_VERSION
+    suffix = task+". Classify issues through submit_idea_issues; source declarations are supplied by the server." if source_review else "planning interview. Submit exactly one tailored question through submit_idea_question." if interview else task+". Submit exactly one structured review through submit_idea_review."
+    system = idea_interview.system_text(prompt, bool(interview), task)+"\n\nTrusted task selected by the backend: "+suffix
     context = dict(task=task, packet_id=packet_id, packet_version=packet["version"], packet_sha256=packet["sha256"], packet=packet["document"], user_message=message)
+    if task != "planning": context.pop("user_message")
+    if interview:
+        context["interview"] = dict(version=interview, preferred_field=preferred, allowed_fields=list(idea_interview.FIELDS))
+    if source_review:
+        context["review_sources"] = dict(version=idea_review.VERSION, available_paths=list(idea_review.fields(packet["document"])))
     messages = history + [{"role":"user","content":[{"text":canonical(context).decode()}]}]
+    omitted_history = 0
+    while interview and history and len(canonical(messages)) > MAX_CONTEXT_BYTES:
+        history = history[2:]; omitted_history += 2
+        messages = history + [{"role":"user","content":[{"text":canonical(context).decode()}]}]
     if len(canonical(messages))>MAX_CONTEXT_BYTES: raise ValueError("Idea context exceeds 24 KB; save a concise brief and start a new planning session.")
     provenance = dict(analysis_version=VERSION, task=task, packet_sha256=packet["sha256"], prompt_sha256=prompt.content_sha256,
         context_policy="bounded-planning-history" if task=="planning" else "fresh-packet-only", history_messages=len(history),
         context_sha256=sha(canonical(messages)), context_messages=messages, max_output_tokens=MAX_OUTPUT_TOKENS, automatic_retries=0,
         reviewer=dict(identity=MODEL_ID,type="AI",independence="Separate model invocation; shared model and packet, independent scientific review not asserted"),
         read_events=[dict(name="read_owner_idea_packet",packet_id=packet_id,study_id=study_id)], original_response_scope="Exact returned model text, not original HTTP response bytes")
+    provenance["effective_system_sha256"] = sha(system.encode())
+    provenance["effective_system"] = system
+    if interview:
+        provenance["interview"] = dict(version=interview, field=None, owner_message=message)
+        provenance["omitted_history_messages"] = omitted_history
     attempt = database.rpc("research_begin_idea_run", dict(p_study=study_id,p_actor=actor,p_user=user_id,p_id=request_id,p_packet=packet_id,p_task=task,
         p_session=session_id,p_prompt=prompt.id,p_model=MODEL_ID,p_request=body,p_provenance=provenance))
     if attempt.get("replayed"): return dict(run=attempt,replayed=True,analysis_version=VERSION)
-    started=time.monotonic(); raw=None; output=None; status="failed"; reason=None; tokens=None; stop=None; provider_message=None
+    started=time.monotonic(); raw=None; output=None; status="failed"; reason=None; tokens=None; stop=None; provider_message=None; question=None; grounding=None
     try:
-        response=invoke(prompt.text+"\n\nTrusted task selected by the backend: "+task+". Submit exactly one structured review through submit_idea_review.", messages)
+        response=invoke(system, messages, source_review=True) if source_review else invoke(system, messages, interview=True) if interview else invoke(system, messages)
         tokens=response.get("usage"); stop=response.get("stopReason")
         provider_message=response["output"]["message"]
         raw=canonical(provider_message).decode()
         blocks=provider_message["content"]
         if blocks and all(set(block)=={"text"} for block in blocks):
             raw="".join(block["text"] for block in blocks)
-        output=parse_response(response,task); status="complete"
+        if source_review:
+            output, grounding=idea_review.parse(response, packet["document"], task, packet["sha256"])
+            validate_output(canonical(output).decode(), task)
+        elif interview:
+            question=idea_interview.parse(response, preferred)
+            output=dict(summary=question["summary"], questions=[question["question"]], findings=[], verdict="needs-clarification")
+        else: output=parse_response(response,task)
+        status="complete"
     except (ValueError,KeyError,TypeError,json.JSONDecodeError) as error:
         status="invalid-output"; reason=str(error)
     except Exception as error:
         status="failed"; reason="Model call failed ("+type(error).__name__+"). No automatic retry; retain this attempt and explicitly request a follow-up if appropriate."
     usage=dict(tokens=tokens,wall_seconds=time.monotonic()-started,measured_charges_usd=None,estimated_model_cost_usd=None,
         cost_basis="Provider usage retained when available; billing and orchestration charges unallocated, not zero.")
-    finished=dict(stop_reason=stop,tool_events=[dict(name=RESPONSE_CHANNEL,executed=False,role="response-formatting")] if status=="complete" else [],data_origin="model-output",provider_message=provider_message,
+    finished=dict(stop_reason=stop,tool_events=[dict(name=idea_review.CHANNEL if source_review else idea_interview.CHANNEL if interview else RESPONSE_CHANNEL,executed=False,role="response-formatting")] if status=="complete" else [],data_origin="model-output",provider_message=provider_message,
         raw_response_scope="Exact returned text for text replies; canonical SDK message JSON for non-text replies. Original HTTP bytes unavailable.")
+    if grounding and status == "complete": finished["tool_events"][0]["source_evidence"] = grounding
     updated = None
     if task=="planning" and status=="complete":
         updated=history+[{"role":"user","content":[{"text":message}]},{"role":"assistant","content":[{"text":canonical(output).decode()}]}]

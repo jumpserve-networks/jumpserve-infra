@@ -1,0 +1,30 @@
+{
+  "id": "idea-interview-production-release-v1",
+  "declared_on": "2026-10-15",
+  "authorization": "User explicitly requested publication and production deployment of the evaluated conversational guide and source-faithful reviews.",
+  "targets": { "aws_account": "395567831870", "region": "us-east-1", "supabase_project": "regphejnlvfpyokpniny", "amplify_app": "d24jvguj7brnkj", "branch": "main", "site": "https://jumpserve.quaint-lab.org" },
+  "candidate": { "id": "ba16759e-ff38-4491-ae21-5766261e710b", "version": "research-ideas-v11", "content_sha256": "24129ede61c03fa2f50e381f21e87af76e0464b0849a4de211b46e920fd743ba", "expected_previous_id": "e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8" },
+  "release_blockers": [
+    "Exact candidate, 21 passed actual-model development cases, rendered/original answer hashes, and evaluated runtime hashes match preserved evidence.",
+    "Frontend and agent unit suites, lint, TypeScript/build and isolated database gates pass; reuse hash-matched completed browser campaigns for the exact implementation.",
+    "Verify production AWS and Supabase project identities before writes.",
+    "Nine additive draft/publication-guard migrations preserve research data, private RLS/browser denial and every active prompt pointer.",
+    "Review scoped Agent stack diff: only declared agent code changes, retain deployed dependencies and configuration, no benchmark/AMI/instance changes.",
+    "Deploy compatible agent before changing the existing prompt pointer; verify deployed ZIP and evaluated runtime file hashes.",
+    "Archive original successful and failed evaluations privately, retrieve them and verify original hashes before guarded publication.",
+    "Publish exact v11 through the existing compare-and-swap RPC; preserve earlier failures, prior prompt and publication history.",
+    "Release only scoped frontend changes; preserve separately staged PDFs and unrelated work. Runtime dependency audit has no high/critical advisories.",
+    "Verify public production routes, sign-in return paths, anonymous write/model denial, capabilities, desktop/mobile themes, existing result exports, active candidate and deployed file hashes."
+  ],
+  "order": ["Inspect targets and freeze evidence", "Commit scoped sources to main with unrelated CI skipped", "Migrate drafts/guards", "Deploy and verify compatible Agent stack", "Archive and verify evidence", "Publish exact candidate", "Release Amplify frontend", "Verify production and record outcomes"],
+  "conditional_checks": [
+    "Actual Google-authenticated coaching/review and persistence require a legitimate available session; never fabricate one.",
+    "Cross-owner authenticated denial requires two legitimate sessions.",
+    "Independent, held-out and human answer review remain unavailable."
+  ],
+  "resources": { "new_model_evaluation_calls": 0, "authenticated_smoke_maximum_calls_if_session_available": 3, "new_experiment_instances": 0, "deployment_stacks": 1, "private_artifact_total_bytes_limit": 16000000, "billing": "Retain tokens and observed bytes/times where available. Missing charges, local compute and unallocated costs remain unknown, not zero." },
+  "scientific_scope": "Software and AI review behavior only; no new research hypothesis is assessed. Development cases reviewed by the AI implementer are neither human nor independent validation.",
+  "ci_scope": "Scoped source commits use [skip ci] [skip-cd] to prevent unrelated all-stack/AMI jobs and premature frontend builds. No required protected checks are bypassed. Start one explicit Amplify release after publication.",
+  "rollback": "Preserve old deployed ZIP, prior prompt and publication history. Restore the prior code and prompt via a recorded guarded release if necessary; do not drop schema or delete research evidence.",
+  "retained_limits": "Custom networking package admission remains disabled. This release does not claim production validation of every networking runner."
+}

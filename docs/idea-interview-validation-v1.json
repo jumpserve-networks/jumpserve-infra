@@ -1,0 +1,233 @@
+{
+  "feature": "Idea-specific conversational research planning",
+  "generated_at": "2026-10-15T00:01:42.896744+00:00",
+  "implementation_status": "Implemented and verified locally; not deployed",
+  "release_ready": false,
+  "prompt_status": "Final bounded candidate research-ideas-v8 remains a draft; publication blocked by an actual-answer source-fidelity failure.",
+  "scope": {
+    "scientific_assessment": "Inapplicable: this is interface/agent development, not a research-claim reproduction.",
+    "actual_models": "Native Bedrock Converse with exact saved system/messages/schema; not Google-authenticated application requests.",
+    "local_flow": "Actual UI/API/agent/Postgres; synthetic auth/provider/cloud and fixed loopback HTTP package.",
+    "production_writes": false
+  },
+  "checks": {
+    "frontend_units": {
+      "passed": 152,
+      "failed": 0,
+      "log": "frontend/.test-artifacts/idea-interview-tests.log"
+    },
+    "agent_units": {
+      "passed": 94,
+      "failed": 0,
+      "log": "infra/.test-artifacts/idea-interview-agent.log"
+    },
+    "frontend_lint": "passed",
+    "production_build": {
+      "status": "passed",
+      "next_version": "16.3.8",
+      "path": "/private/tmp/jumpserve-guided-release-20261014/jumpserve-front-end/.test-artifacts/idea-interview-build.log"
+    },
+    "database": {
+      "passed": true,
+      "checks": 11,
+      "path": ".test-artifacts/research-ideas/database/20261014T235646466950Z/validation-report.json"
+    },
+    "interview_browser": {
+      "passed": true,
+      "checks": 7,
+      "path": ".test-artifacts/idea-interview/browser/2026-10-14T23-57-15.047Z/validation-report.json",
+      "viewports": [
+        1365,
+        390
+      ],
+      "themes": [
+        "light",
+        "dark"
+      ]
+    },
+    "guided_regression": {
+      "passed": true,
+      "checks": 9,
+      "path": ".test-artifacts/idea-guide/browser/2026-10-14T23-57-29.459Z/validation-report.json",
+      "local_invocations": 2,
+      "actual_loopback_requests": 6,
+      "measurements": 6,
+      "scientific_assessments": 0
+    }
+  },
+  "final_actual_answer_evaluation": {
+    "prompt_version": "research-ideas-v8",
+    "schema_complete": 16,
+    "interview_rubrics_passed": 8,
+    "interview_rubrics_total": 8,
+    "review_rubrics_passed": 7,
+    "review_rubrics_total": 8,
+    "publication_eligible": false,
+    "blocking_case": "idea-critic",
+    "blocker": "The answer flags invalid dependence but repeatedly attributes the opposite declaration to protocol.statistics. The frozen input explicitly instructs invalid independent bootstrap repetitions. Correct recommendation alone does not excuse misreporting source content."
+  },
+  "limitations": [
+    "All model cases were reused/exposed to prompt tuning. No pooled pass rate is independent validation.",
+    "Single AI implementer review; no human or independent reviewer.",
+    "No legitimate Google-authenticated request, production migration, prompt publication, deployed browser flow or remote Supabase persistence roundtrip verified for these changes.",
+    "Original provider artifacts are AWS CLI/SDK JSON and returned model content, not raw HTTP response bytes.",
+    "Earlier evaluator source revisions were not separately snapshotted; exact system/messages/schema/provider originals and agent-runtime snapshots are preserved.",
+    "The final declared model-campaign stopping rule was honored. No prompt candidate was published."
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "campaigns": [
+    {
+      "prompt_version": "research-ideas-v3",
+      "path": ".test-artifacts/research-ideas/evaluations/20261014T233827364725Z/evaluation-report.json",
+      "sha256": "9e1a1b6ea499400ee5bd50ee7e667eacebf06a225b87b56477427ff2f7f3fc3c",
+      "calls": 16,
+      "provider_complete": 16,
+      "effective_failed_cases": [
+        "idea-untrusted",
+        "interview-congestion",
+        "interview-untrusted",
+        "interview-pilot",
+        "interview-complete"
+      ],
+      "publication_eligible": false,
+      "reviewer": {
+        "identity": "Primary Codex AI implementer",
+        "type": "AI",
+        "independent": false,
+        "passed": false
+      }
+    },
+    {
+      "prompt_version": "research-ideas-v4",
+      "path": ".test-artifacts/research-ideas/evaluations/20261014T234411234124Z/evaluation-report.json",
+      "sha256": "d77f9f36491f64af08c5c29c1615036396a2af7cd32f261b0742a7ba41e69a5f",
+      "calls": 16,
+      "provider_complete": 16,
+      "effective_failed_cases": [
+        "idea-comprehension",
+        "idea-untrusted"
+      ],
+      "publication_eligible": false,
+      "reviewer": {
+        "identity": "Primary Codex AI implementer",
+        "type": "AI",
+        "independent": false,
+        "passed": false
+      }
+    },
+    {
+      "prompt_version": "research-ideas-v5",
+      "path": ".test-artifacts/research-ideas/evaluations/20261014T234653886225Z/evaluation-report.json",
+      "sha256": "80fab24f499bb5c4d19ccfad6691bdf6e6fa65f308b82c929ddee13c8736be1c",
+      "calls": 16,
+      "provider_complete": 16,
+      "effective_failed_cases": [
+        "idea-untrusted",
+        "idea-clear-plan",
+        "interview-cdn"
+      ],
+      "publication_eligible": false,
+      "reviewer": {
+        "identity": "Primary Codex AI implementer",
+        "type": "AI",
+        "independent": false,
+        "passed": false
+      }
+    },
+    {
+      "prompt_version": "research-ideas-v6",
+      "path": ".test-artifacts/research-ideas/evaluations/20261014T235006330270Z/evaluation-report.json",
+      "sha256": "21378cbfdb70d1ac14e1256e94620d431958a63211748115d1f6f3a376c0f3b0",
+      "calls": 16,
+      "provider_complete": 16,
+      "effective_failed_cases": [
+        "idea-untrusted",
+        "interview-congestion"
+      ],
+      "publication_eligible": false,
+      "reviewer": {
+        "identity": "Primary Codex AI implementer",
+        "type": "AI",
+        "independent": false,
+        "passed": false
+      }
+    },
+    {
+      "prompt_version": "research-ideas-v7",
+      "path": ".test-artifacts/research-ideas/evaluations/20261014T235246008673Z/evaluation-report.json",
+      "sha256": "bed7f4f2cc519d50f0ca2c3cbd709547e8a2c4a05a5b7aa416c1b55212fbcebf",
+      "calls": 16,
+      "provider_complete": 16,
+      "effective_failed_cases": [
+        "idea-missing",
+        "idea-novelty"
+      ],
+      "publication_eligible": false,
+      "reviewer": {
+        "identity": "Primary Codex AI implementer",
+        "type": "AI",
+        "independent": false,
+        "passed": false
+      }
+    },
+    {
+      "prompt_version": "research-ideas-v8",
+      "path": ".test-artifacts/research-ideas/evaluations/20261014T235547956747Z/evaluation-report.json",
+      "sha256": "f9dd097614f012b3285b326234fc47c518fe36fa12dd415f1f3c3ba603c738b0",
+      "calls": 16,
+      "provider_complete": 16,
+      "effective_failed_cases": [
+        "idea-critic"
+      ],
+      "publication_eligible": false,
+      "reviewer": {
+        "identity": "Primary Codex AI implementer",
+        "type": "AI",
+        "independent": false,
+        "passed": false
+      }
+    }
+  ],
+  "resources": {
+    "model_calls": 96,
+    "provider_reported_input_tokens": 280515,
+    "provider_reported_output_tokens": 33376,
+    "usage_kind": "Provider-reported token counts, not measured monetary charges",
+    "measured_charges_usd": null,
+    "estimated_model_cost_usd": null,
+    "unallocated_costs": "Model billing, local compute/database and orchestration costs are unknown, not zero",
+    "evidence_original_bytes": 9615973,
+    "evidence_compressed_bytes": 5890086
+  },
+  "evidence_bundle": {
+    "path": "docs/idea-interview-evidence-v1.tar.gz",
+    "sha256": "126aa8e51db2cb18cb974b5cf41be7186f413949656b3d91d06ebfe1d0ddbcb3",
+    "files": 628,
+    "all_original_hashes_verified_after_archive_readback": true
+  },
+  "verified_targets": {
+    "aws_account": "395567831870",
+    "aws_region": "us-east-1",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "supabase_verification": "Repository target checked for each model campaign; no remote Supabase mutations."
+  },
+  "retained_failures": [
+    "Original browser failure from trying to modify immutable request provenance; fixed by reading validated routing from preserved provider output, without relaxing SQL guard.",
+    "All six draft candidates and all 96 actual model responses, including substantive failures and later review addenda."
+  ],
+  "next_release_requirements": [
+    "Resolve and evaluate the remaining review source-fidelity blocker under a new declared follow-up protocol.",
+    "Publish only a candidate meeting all unchanged criteria.",
+    "Obtain an explicit deployment request, verify target account/project again, then follow docs/idea-interview.md release order.",
+    "Verify the deployed Google-authenticated conversation and persistence with a legitimate session."
+  ],
+  "source_bases": {
+    "jumpserve-front-end": "f91a93eedc9d2224f7ec56539e01cb82fcd1953b",
+    "jumpserve-back-end": "a2e7bd8942b13c773fcad59a78171e2383cab5dd",
+    "jumpserve-infra": "619820e4e0604048e4a5404e3c9834ad54d5062e"
+  }
+}

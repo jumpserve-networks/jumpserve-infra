@@ -138,7 +138,7 @@ def lambda_handler(event, context):
         return _error(400, 'Unsupported chat module')
     if body.get('action') == 'capabilities':
         return {'statusCode': 200, 'headers': {'Content-Type': 'application/json'},
-                'body': json.dumps({'modules': list(CHAT_MODULES), 'research_ideas': {'version': 'research-ideas-v1', 'tasks': ['planning','comprehension','critic'], 'requires_published_prompt': True}})}
+                'body': json.dumps({'modules': list(CHAT_MODULES), 'research_ideas': {'version': 'research-ideas-v1', 'interview_version': 'idea-interview-v1', 'tasks': ['planning','comprehension','critic'], 'requires_published_prompt': True}})}
 
     if not isinstance(message, str) or not message.strip():
         return {

@@ -1,0 +1,199 @@
+{
+  "feature": "Source-faithful research idea review",
+  "generated_at": "2026-10-15T03:38:27.682754+00:00",
+  "implementation_status": "Accuracy blocker fixed and verified locally",
+  "local_acceptance_passed": true,
+  "production_released": false,
+  "prompt_published": false,
+  "prompt_publication_eligible": true,
+  "candidate": {
+    "version": "research-ideas-v11",
+    "id": "ba16759e-ff38-4491-ae21-5766261e710b",
+    "content_sha256": "24129ede61c03fa2f50e381f21e87af76e0464b0849a4de211b46e920fd743ba",
+    "seed_original_sha256": "b12dde1bdd9a1236a45170f587b6a45ceab54ceb882ec2d3ccbea2142f831baa",
+    "runtime_matches_evaluated_hashes": true,
+    "status": "Unpublished draft; production pointer unchanged"
+  },
+  "correction": {
+    "original_failure": "The v8 critic correctly rejected invalid independence but attributed a valid independence disclaimer to protocol.statistics, whose recorded value instructed invalid independent bootstrap repetitions.",
+    "mechanism": "The model classifies issues and cites enumerated packet paths. The backend copies the exact saved values and renders review text from versioned templates. The frontend compares displayed evidence with the matching saved packet and rejects mismatches.",
+    "field_hashes": "SHA-256 of canonical JSON transformations, not original field bytes",
+    "packet_hashes": "SHA-256 of original saved packet bytes",
+    "remaining_limit": "Mechanical source fidelity does not establish the correctness of an AI issue classification, scientific validity, causality or execution readiness."
+  },
+  "protocols": [
+    "docs/idea-review-source-fidelity-protocol-v1.md",
+    "docs/idea-review-source-fidelity-amendment-v2.md",
+    "docs/idea-review-source-fidelity-amendment-v3.md"
+  ],
+  "scope": {
+    "scientific_assessment": "Inapplicable: this change verifies software and AI review behavior, not a research paper or CDN hypothesis.",
+    "actual_models": "Native Bedrock Converse, exact system/messages/schema and server-rendered answers; no Google-authenticated application request",
+    "local_flow": "Actual components, API, agent and isolated Postgres; explicitly synthetic auth, model and cloud boundaries",
+    "network_execution": "Six fixed loopback HTTP requests in two package invocations; six saved measurements and zero scientific assessments",
+    "production_writes": false
+  },
+  "checks": {
+    "frontend_units": {
+      "passed": 156,
+      "failed": 0,
+      "log": "logs/frontend/idea-review-tests.log"
+    },
+    "agent_units": {
+      "passed": 101,
+      "failed": 0,
+      "log": "logs/infra/idea-review-agent.log"
+    },
+    "frontend_lint": "Passed, including final browser-report metadata correction",
+    "typescript": "Passed: npx tsc --noEmit",
+    "build": {
+      "passed": true,
+      "next_version": "16.3.8",
+      "log": "logs/frontend/build.log",
+      "environment": "Existing isolated release checkout; user development server left running"
+    },
+    "database": {
+      "passed": true,
+      "checks": 11,
+      "path": "database/20261015T032346498584Z/validation-report.json",
+      "coverage": "RLS/browser-write denial, immutable original packets and history, distinct review invocations, readiness and queue gates, all 21 publication cases and original/rendered hashes",
+      "limit": "Synthetic SQL contracts; legacy session base table synthesized and feature migrations replayed, not every historical study migration"
+    },
+    "source_browser": {
+      "passed": true,
+      "checks": 4,
+      "path": "source-browser/2026-10-15T03-36-25.063Z/validation-report.json",
+      "coverage": "Original statistics in both views, deliberate altered response rejected, refresh recovery, desktop/mobile and light/dark themes"
+    },
+    "interview_browser": {
+      "passed": true,
+      "checks": 7,
+      "path": "interview-browser/2026-10-15T03-30-08.530Z/validation-report.json"
+    },
+    "guided_browser": {
+      "passed": true,
+      "checks": 9,
+      "path": "guided-browser/2026-10-15T03-32-04.775Z/validation-report.json"
+    },
+    "git_diff_check": "Passed in frontend and infrastructure repositories"
+  },
+  "actual_answer_evaluation": {
+    "report": "evaluations/20261015T032302556316Z/evaluation-report.json",
+    "report_sha256": "665ece1d8a3c8b21f8d3261958528d6f5f51b8010c4ae8684745b75ba53c84bf",
+    "model_id": "us.anthropic.claude-sonnet-4-6",
+    "cases_sha256": "be8a2e65e530727197badc9ec4d9a2e3687af1e36779e9c8df81d542f1117625",
+    "cases": 21,
+    "provider_complete": 21,
+    "structural_and_substantive_passed": 21,
+    "publication_eligible": true,
+    "kind": "Exposed, reused and tuned development cases; no inferential accuracy estimate or confidence interval is justified",
+    "source_checks": "Separate path traversal matched original packet values and canonical hashes; shares the packet input with the renderer",
+    "reviewer": {
+      "identity": "Primary Codex AI implementer",
+      "type": "AI",
+      "independent": false,
+      "human": false
+    },
+    "caveat": "The BBR interview repeats known bandwidth alongside unresolved queue/loss conditions. It meets the declared rubric but does not establish that every future question avoids repetition."
+  },
+  "campaigns": [
+    {
+      "version": "research-ideas-v9",
+      "report": "evaluations/20261015T031111652196Z/evaluation-report.json",
+      "sha256": "75604bbe0fd12c1a177a97059416f399c7877b3bd61d26352cea9d6fe9a87961",
+      "calls": 21,
+      "provider_complete": 19,
+      "publication_eligible": false,
+      "effective_failed_cases": [
+        "idea-novelty",
+        "idea-clear-plan",
+        "review-complete-critic",
+        "review-controls-only",
+        "review-statistics-only",
+        "review-untrusted-metadata"
+      ],
+      "finding": "Exact source values preserved, but a schema without warning severity created false blockers. Two provider CLI failures lack retained diagnostics; their cause is unknown."
+    },
+    {
+      "version": "research-ideas-v10",
+      "report": "evaluations/20261015T031605809438Z/evaluation-report.json",
+      "sha256": "166b470d53810536b2dfd21f825815a0023da6da41382342cd59bbac1c61fb62",
+      "calls": 21,
+      "provider_complete": 21,
+      "publication_eligible": false,
+      "effective_failed_cases": [
+        "idea-critic",
+        "idea-scope",
+        "interview-cdn"
+      ],
+      "finding": "Exact source values and ready-plan controls passed; actual answers still mislabeled an experimental method as an instruction to the reviewer, re-asked recorded resources and bundled metrics into a conditions question."
+    },
+    {
+      "version": "research-ideas-v11",
+      "report": "evaluations/20261015T032302556316Z/evaluation-report.json",
+      "sha256": "665ece1d8a3c8b21f8d3261958528d6f5f51b8010c4ae8684745b75ba53c84bf",
+      "calls": 21,
+      "provider_complete": 21,
+      "publication_eligible": true,
+      "effective_failed_cases": []
+    }
+  ],
+  "retained_history": {
+    "previous_validation": "docs/idea-interview-validation-v1.json",
+    "previous_evidence_sha256": "126aa8e51db2cb18cb974b5cf41be7186f413949656b3d91d06ebfe1d0ddbcb3",
+    "previous_bundle_hash_reverified": true,
+    "original_failed_v8_result_preserved": true,
+    "browser_failures": "Both initial source-browser harness failures retained: a strict locator matched hidden and visible copies; a refresh control was in a closed history panel. Harness scoping/opening was corrected. No product defect established by these two failures.",
+    "metadata_followup": "A successful source-browser run was retained and followed by a repeat with the correct source-review amendment label; no model calls repeated. Other shared harness reports retain their original generic amendment field and are linked here to the applicable source-review protocol."
+  },
+  "resources": {
+    "model_calls": 63,
+    "provider_complete": 61,
+    "calls_with_missing_usage": 2,
+    "known_provider_input_tokens": 183302,
+    "known_provider_output_tokens": 9274,
+    "limits_per_campaign": {
+      "maximum_calls": 21,
+      "output_tokens_per_call": 2048,
+      "research_message_bytes": 24000,
+      "wall_seconds": 1200,
+      "automatic_retries": 0
+    },
+    "followup_pacing_seconds": 3,
+    "usage_kind": "Provider-reported counts for completed calls, not measured monetary charges",
+    "measured_charges_usd": null,
+    "estimated_model_cost_usd": null,
+    "unallocated_costs": "Model billing, local compute/database/storage and orchestration costs are unknown, not zero",
+    "evidence_original_bytes": 6853740,
+    "evidence_compressed_bytes": 3597330,
+    "maximum_saved_research_message_bytes": 6663,
+    "context_verification": "All 63 original serialized message files checked after retrieval against the 24,000-byte declared bound; system/schema are stored separately. Backend enforces this bound before invocation; the live evaluator used fixed frozen inputs without a separate preflight byte-size guard."
+  },
+  "evidence_bundle": {
+    "path": "docs/idea-review-source-fidelity-evidence-v1.tar.gz",
+    "sha256": "f8cf834bf516bbb8a72b471d9afad79274033e99159859d2b3e30a2daae1bc1d",
+    "files": 506,
+    "manifest": "manifest.json inside archive",
+    "all_original_hashes_verified_after_archive_readback": true,
+    "raw_scope": "Original saved system/messages/schema, provider CLI/SDK JSON and returned model content, runtime snapshots and rendered answers; not raw HTTP response bytes",
+    "private_exclusions": "Raw provider failure diagnostics excluded from shareable bundle; available hashes and bounded error classifications retained"
+  },
+  "verified_targets": {
+    "aws_account": "395567831870",
+    "aws_region": "us-east-1",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "supabase_verification": "Repository target checked for each actual-model campaign; no remote Supabase mutations"
+  },
+  "source_bases": {
+    "jumpserve-front-end": "f91a93eedc9d2224f7ec56539e01cb82fcd1953b",
+    "jumpserve-back-end": "a2e7bd8942b13c773fcad59a78171e2383cab5dd",
+    "jumpserve-infra": "619820e4e0604048e4a5404e3c9834ad54d5062e"
+  },
+  "remaining_release_requirements": [
+    "An explicit deployment request is required by AGENTS.md for these current changes.",
+    "Verify AWS/Supabase targets again; apply additive migrations and deploy the compatible agent while retaining the active old prompt.",
+    "Publish only the exact eligible v11 candidate and evidence, then release the frontend according to docs/idea-review-source-fidelity.md.",
+    "Verify a legitimate Google-authenticated conversation and remote Supabase persistence with the deployed feature. Neither was exercised in this local fix.",
+    "Independent, held-out and human review remain unavailable and must not be claimed."
+  ]
+}

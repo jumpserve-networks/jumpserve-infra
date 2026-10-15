@@ -35,12 +35,14 @@ def fixed_network_provider(spec,job,action):
     if spec['runner']!='custom-package-v1' or spec['config']['package'].get('sha256')!=f.workflow.digest(network_fixture.SOURCE.read_bytes()) or spec['config']['parameters']!={'url':'http://127.0.0.1:4103/fixture-network-target','requests':3} or spec['config']['arguments']!=[]:
         raise ValueError('This local fixture executes only the fixed reviewed development HTTP package and endpoint.')
     return network_fixture.provider(spec,job,action)
-prompt='e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8'
+prompt='ba16759e-ff38-4491-ae21-5766261e710b'
 # The isolated test publishes a synthetic SQL declaration only. This is not
 # passed-off actual model evaluation and cannot affect any remote pointer.
 names=['idea-planning','idea-comprehension','idea-critic','idea-missing','idea-novelty','idea-untrusted','idea-clear-plan','idea-scope']
+names += ['interview-'+name for name in ('cdn','congestion','known','vague','unknown','untrusted','pilot','complete')]
+names += ['review-complete-critic','review-controls-only','review-statistics-only','review-consistent-percent','review-untrusted-metadata']
 hash_value=f.query('select content_sha256 from agent_prompt_versions where id='+f.sql_text(prompt))
-declaration=dict(evaluation_kind='actual-model-development',module_id='research-verification',analysis_version='research-ideas-v1',prompt_version_id=prompt,prompt_version='research-ideas-v2',prompt_content_sha256=hash_value,model_id='synthetic-browser-provider',cases_sha256='a'*64,cases=[dict(name=n,status='complete',passed=True,output_sha256='b'*64) for n in names],reviewer=dict(identity='Synthetic browser fixture, not actual evaluation',type='AI',independent=False,passed=True))
+declaration=dict(evaluation_kind='actual-model-development',module_id='research-verification',analysis_version='research-ideas-v1',prompt_version_id=prompt,prompt_version='research-ideas-v11',prompt_content_sha256=hash_value,model_id='synthetic-browser-provider',cases_sha256='a'*64,cases=[dict(name=n,status='complete',passed=True,output_sha256='b'*64,rendered_sha256='c'*64) for n in names],reviewer=dict(identity='Synthetic browser fixture, not actual evaluation',type='AI',independent=False,passed=True))
 f.rpc('publish_agent_prompt',dict(p_version_id=prompt,p_expected_active_version_id=None,p_expected_content_sha256=hash_value,p_report=declaration,p_actor='Software fixture',p_module_id='research-verification'))
 class Database:
     url='https://regphejnlvfpyokpniny.supabase.co'
@@ -58,7 +60,7 @@ class Database:
     def rpc(self,name,payload):return f.rpc(name,payload)
 failed_critic=set()
 
-def invoke(system,messages):
+def invoke(system,messages,**options):
     context=json.loads(messages[-1]['content'][0]['text']);task=context['task'];doc=context['packet']
     if task=='critic' and context['packet_id'] not in failed_critic:
         failed_critic.add(context['packet_id']);raise TimeoutError('Deliberate synthetic provider failure')
@@ -66,7 +68,23 @@ def invoke(system,messages):
     output=dict(summary='Synthetic AI response for software flow verification; no experiment executed.',questions=['Complete the missing plan fields.'] if missing else [],findings=[],verdict='needs-clarification' if missing else 'ready')
     if task=='critic' and (doc.get('protocol') or {}).get('dependence')=='SOFTWARE-FIXTURE-BLOCKING-DEPENDENCE':
         output=dict(summary='Synthetic critical review fixture: dependence needs a correction.',questions=['How will related observations be handled?'],findings=[dict(severity='blocking',field='dependence',message='Explicit software fixture blocker; revise the dependence declaration before readiness.')],verdict='needs-clarification')
-    return dict(output=dict(message=dict(role='assistant',content=[dict(toolUse=dict(toolUseId='fixture',name=agent.RESPONSE_CHANNEL,input=output))])),stopReason='tool_use',usage=dict(inputTokens=10,outputTokens=20))
+    channel=agent.RESPONSE_CHANNEL
+    if options.get('source_review'):
+        issues=[]
+        if missing:issues=[dict(code='clarification',severity='blocking',references=['/protocol'])]
+        if task=='critic' and (doc.get('protocol') or {}).get('dependence')=='SOFTWARE-FIXTURE-BLOCKING-DEPENDENCE':
+            issues=[dict(code='dependence',severity='blocking',references=['/protocol/dependence'])]
+        if task=='critic' and (doc.get('protocol') or {}).get('statistics')=='Bootstrap 100 repeats of the same deterministic input as independent samples to claim a population confidence interval.':
+            issues=[dict(code='dependence',severity='blocking',references=['/protocol/statistics','/protocol/replication_unit'])]
+        output=dict(issues=issues);channel=agent.idea_review.CHANNEL
+    if options.get('interview'):
+        focus=context['interview'].get('preferred_field') or ('design' if doc.get('conditions') else 'conditions')
+        question='For your CDN header-and-timing study, which providers, probe region and recent-request window will you test?' if focus=='conditions' else 'For those CDN objects and that window, how will you assign zero versus one prior request while keeping the probe identical?'
+        if 'Question for the guide:' in context['user_message']:question='For your CDN comparison, could you use owner-controlled test objects and randomized zero-versus-one request assignments?'
+        if 'SOFTWARE-FIXTURE-INVALID-INTERVIEW' in context['user_message']:focus='execute'
+        output=dict(summary='Synthetic tailored response for software verification; not an actual model assessment.',question=question,field=focus)
+        channel=agent.idea_interview.CHANNEL
+    return dict(output=dict(message=dict(role='assistant',content=[dict(toolUse=dict(toolUseId='fixture',name=channel,input=output))])),stopReason='tool_use',usage=dict(inputTokens=10,outputTokens=20))
 
 class Handler(BaseHTTPRequestHandler):
     def log_message(self,*args):pass
@@ -87,7 +105,7 @@ class Handler(BaseHTTPRequestHandler):
                 with patch.object(network_execution,'invoke',side_effect=fixed_network_provider):result=worker.handler({'source':'fixed local development poll'})
             elif parsed.path=='/idea-model':
                 data=json.loads(raw)
-                if data.get('action')=='capabilities':return self.respond(200,dict(research_ideas=dict(version=agent.VERSION)))
+                if data.get('action')=='capabilities':return self.respond(200,dict(research_ideas=dict(version=agent.VERSION,interview_version=agent.idea_interview.VERSION)))
                 result=agent.handle(data,dict(id=f.ACTOR,email='software-fixture@example.invalid'),Database(),invoke)
             else:
                 event=dict(rawPath=parsed.path,body=raw,requestContext=dict(http=dict(method=method)),queryStringParameters=dict(urllib.parse.parse_qsl(parsed.query)))

@@ -138,7 +138,7 @@ grant usage on schema storage to anon,authenticated,service_role; grant all on s
 create table public.agent_sessions(id uuid primary key,user_id text not null,messages jsonb not null default '[]',created_at timestamptz default now(),updated_at timestamptz default now());
 grant all on public.agent_sessions to service_role;""")
     report['migration_sha256']={}
-    for name in ('202609200001_agent_prompts.sql','202609290001_real_world_agent.sql','202610040009_agent_evidence_rendering.sql','202610050104_ipv6_publication_review_guard.sql','202610070001_research_workflow.sql','202610070002_research_queue.sql','202610070003_research_preparation.sql','202610120001_research_ideas.sql','202610120002_research_idea_prompt.sql','202610120003_research_idea_prompt_seed.sql','202610120004_research_idea_prompt_seed_v2.sql','202610130001_research_idea_review_roles.sql'):
+    for name in ('202609200001_agent_prompts.sql','202609290001_real_world_agent.sql','202610040009_agent_evidence_rendering.sql','202610050104_ipv6_publication_review_guard.sql','202610070001_research_workflow.sql','202610070002_research_queue.sql','202610070003_research_preparation.sql','202610120001_research_ideas.sql','202610120002_research_idea_prompt.sql','202610120003_research_idea_prompt_seed.sql','202610120004_research_idea_prompt_seed_v2.sql','202610130001_research_idea_review_roles.sql','202610140001_idea_interview_prompt.sql','202610140002_idea_interview_prompt_v4.sql','202610140003_idea_interview_prompt_v5.sql','202610140004_idea_interview_prompt_v6.sql','202610140005_idea_interview_prompt_v7.sql','202610140006_idea_interview_prompt_v8.sql','202610140007_idea_review_sources_v9.sql','202610140008_idea_review_sources_v10.sql','202610140009_idea_review_sources_v11.sql'):
         raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     name='202610130002_network_execution.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     report['bootstrap_limit']='Legacy agent_sessions base table synthesized; listed prompt/research migrations executed as original files. Historical study-table migrations outside this feature are not replayed.'
@@ -247,6 +247,31 @@ if __name__=='__main__':
         revised=ideas.save(study,ACTOR,dict(body,request_id=uid(),supersedes_id=selected['id'],document=dict(value,question='Changed exact-input wording; new reviews required'),reason='Software-fixture revised plan'))
         check('revisions retain previous packet reviews and invalidate current readiness',lambda: dict(versions=len(ideas.status(study)['packets']),ready=ideas.status(study)['ready'],old_review_count=len(ideas.status(study)['runs'])))
         assert revised['version']==2 and not ideas.status(study)['ready']
+        def interview_publication():
+            previous=prompt
+            for version,candidate in [('v3','9f62d4b8-8eed-45c4-9c74-f1a964c5c217'),('v4','11439f38-79d5-47ba-8278-b26ad5811667'),('v5','4ab45b43-7f7d-4942-ac10-dc6a828b9c27'),('v6','82cc0c9e-9ad0-44d0-9dda-66757ccf536c'),('v7','782b9c80-120a-4196-956b-100282aa811b'),('v8','fc6d637f-0d6b-405c-a626-471a075efba0'),('v9','7d25f214-12cd-44b9-89d2-e37eb02c8bad'),('v10','9d024ab6-6dad-4cba-ae1b-33b616c857c8'),('v11','ba16759e-ff38-4491-ae21-5766261e710b')]:
+                h=query('select content_sha256 from agent_prompt_versions where id='+sql_text(candidate))
+                seed=json.loads((ROOT/('database/seed-research-ideas-prompt-'+version+'.json')).read_text())
+                assert h==hashlib.sha256((seed['system_prompt']+'\n\n'+seed['research_context']).encode()).hexdigest()
+                report_next=dict(declaration,prompt_version_id=candidate,prompt_version='research-ideas-'+version,prompt_content_sha256=h)
+                payload=dict(pub,p_version_id=candidate,p_expected_active_version_id=previous,p_expected_content_sha256=h,p_report=report_next)
+                rejects(lambda:rpc('publish_agent_prompt',payload))
+                extra=[dict(name='interview-'+n,status='complete',passed=True,output_sha256='b'*64) for n in ('cdn','congestion','known','vague','unknown','untrusted','pilot','complete')]
+                report_next=dict(report_next,cases=declaration['cases']+extra)
+                if version in ('v9','v10','v11'):
+                    rejects(lambda:rpc('publish_agent_prompt',dict(payload,p_report=report_next)))
+                    names=['review-complete-critic','review-controls-only','review-statistics-only','review-consistent-percent','review-untrusted-metadata']
+                    report_next=dict(report_next,cases=report_next['cases']+[dict(name=n,status='complete',passed=True,output_sha256='b'*64) for n in names])
+                    if version in ('v10','v11'):
+                        rejects(lambda:rpc('publish_agent_prompt',dict(payload,p_report=report_next)))
+                        report_next['cases']=[dict(c,rendered_sha256='c'*64) for c in report_next['cases']]
+                payload=dict(payload,p_report=report_next)
+                bad=json.loads(json.dumps(report_next));bad['cases'][-1]['passed']=False
+                rejects(lambda:rpc('publish_agent_prompt',dict(payload,p_report=bad)))
+                assert rpc('publish_agent_prompt',payload)==candidate
+                previous=candidate
+            return dict(required_cases_up_to=21,candidates_checked=9,source_perturbations_required=True,rendered_hashes_required=True,seed_and_database_hashes_match=True,old_eight_cases_insufficient=True,failed_interview_refused=True,evidence='Synthetic SQL contract test only; no actual-model pass asserted')
+        check('interview publication requires original reviews and all eight additional cases',interview_publication)
         report['passed']=True
     except Exception as error:
         report['passed']=False;report['error']=str(error);traceback.print_exc()

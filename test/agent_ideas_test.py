@@ -49,7 +49,7 @@ class IdeaAgent(unittest.TestCase):
             seen=[]
             result=ideas.handle(request(task),USER,db,lambda system,messages:(seen.append((system,messages)) or response()))
             self.assertEqual(result['run']['status'],'complete');self.assertEqual(len(seen[0][1]),1)
-            self.assertNotIn('PRIVATE_PLANNING_CANARY',json.dumps(seen));self.assertFalse(any(path=='agent_sessions' for path,_ in db.calls))
+            self.assertNotIn('user_message',json.loads(seen[0][1][0]['content'][0]['text']));self.assertNotIn('PRIVATE_PLANNING_CANARY',json.dumps(seen));self.assertFalse(any(path=='agent_sessions' for path,_ in db.calls))
             begin=db.rpc_calls[0][1];self.assertEqual(begin['p_provenance']['history_messages'],0);self.assertIsNone(begin['p_session'])
     def test_planning_history_is_owner_and_study_scoped_and_retained(self):
         db=FakeDatabase();db.history=[{'role':'user','content':[{'text':'Earlier question'}]},{'role':'assistant','content':[{'text':'Earlier response'}]}]
