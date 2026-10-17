@@ -17,10 +17,11 @@ import time
 import traceback
 import urllib.parse
 import uuid
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT.parent/'jumpserve-back-end/research_workflow'))
-import api, preparation, runner, scheduler, store, worker, workflow
+import api, gap_queue, preparation, runner, scheduler, store, worker, workflow
 PSQL='/opt/homebrew/opt/postgresql@17/bin/psql'
 ORIGIN='postgresql://michael@127.0.0.1:54477/'
 STAMP=dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
@@ -96,8 +97,12 @@ def transport(path,method='GET',body=None,public=False,raw=False):
     for column,value in params.items():
         if column not in ('id','study_id','owner_id','created_at'):raise ValueError('Unsafe filter')
         operator,argument=value.split('.',1)
-        if operator!='eq':raise ValueError('Unsupported filter')
-        predicates.append(column+'='+sql_text(argument))
+        if operator == 'in' and argument.startswith('(') and argument.endswith(')'):
+            values=[str(uuid.UUID(v)) for v in argument[1:-1].split(',')]
+            predicates.append(column+' in ('+','.join(sql_text(v) for v in values)+')')
+        elif operator in ('eq','lte'):
+            predicates.append(column+('=' if operator=='eq' else '<=')+sql_text(argument))
+        else: raise ValueError('Unsupported filter')
     where=' where '+' and '.join(predicates) if predicates else ''
     order_sql=' order by '+','.join(ordering) if ordering else ''
     return json.loads(query("select coalesce(json_agg(t),'[]'::json) from (select "+','.join(columns)+' from public.'+table+where+order_sql+f' limit {limit} offset {offset}) t',role='anon' if public else 'service_role'))
@@ -140,7 +145,7 @@ def rejects(callback):
     raise AssertionError('Expected operation rejection')
 
 try:
-    query('create database '+DATABASE,'postgres')
+    query('create database '+DATABASE+" with template template0 encoding 'UTF8'",'postgres')
     query("""do $$ begin create role anon; exception when duplicate_object then null; end $$;
 do $$ begin create role authenticated; exception when duplicate_object then null; end $$;
 do $$ begin create role service_role bypassrls; exception when duplicate_object then null; end $$;
@@ -290,6 +295,63 @@ grant all on public.agent_sessions to service_role;""")
         for a in artifacts:store.artifact_bytes(sid,a['id'],maximum=4000000)
         return dict(concurrent_clients=2,prepared_plans=1,campaigns=20,first_saved_protocols_preserved=True,attempt_artifacts_verified=len(artifacts))
     check('concurrent preparation atomically retains one immutable plan',concurrent_preparation)
+    def gap_queue_flow():
+        sid=str(uuid.uuid4())
+        paper=dict(title='Gap queue development fixture',paper_url='https://pure.mpg.de/pubman/item/item_3670144_1',domain='Software verification',scope='Previously exposed archive; verifies software handoff only.',origin_module=None)
+        source=store.rpc('research_create_study',dict(p_actor=ACTOR,p_id=sid,p_document=paper))
+        preparation.prepare(source,ACTOR,dict(action='prepare',request_id=str(uuid.uuid4())))
+        snapshot=store.snapshot(sid,owner=True)
+        gap=snapshot['records']['gaps'][0]
+        preview=gap_queue.preview(sid,ACTOR,gap['id']);assert preview['choices']
+        selected=preview['choices'][0]
+        body=dict(request_id=str(uuid.uuid4()),gap_id=gap['id'],gap_sha256=preview['gap_sha256'],plan_sha256=preview['plan_sha256'],key=selected['key'],action='create-followup')
+        first=gap_queue.enqueue(sid,ACTOR,body)
+        assert gap_queue.enqueue(sid,ACTOR,dict(body,request_id=str(uuid.uuid4())))==first
+        target=store.rows('studies',{'id':'eq.'+first['study_id']})[0]
+        preparation.prepare(target,ACTOR,dict(action='prepare',request_id=str(uuid.uuid4())))
+        result=gap_queue.enqueue(sid,ACTOR,dict(body,action='enqueue'))
+        assert result['complete'] and len(result['queued_job_ids'])==1
+        assert gap_queue.enqueue(sid,ACTOR,dict(body,action='enqueue'))==result
+        queue=scheduler.snapshot(target['id'],ACTOR)
+        assert queue['coverage']['jobs']==1 and queue['coverage']['events']==1
+        assert store.snapshot(sid,owner=True)==snapshot
+        overview=scheduler.overview(ACTOR)
+        assert any(j['id']==result['job_id'] and j['campaign_title']==selected['title'] for j in overview['jobs'])
+        assert scheduler.overview(OTHER)['coverage']==dict(studies=0,jobs=0)
+        rejects(lambda:gap_queue.preview(sid,OTHER,gap['id']))
+        for artifact in store.rows('artifacts',{'study_id':'eq.'+target['id']}):store.artifact_bytes(target['id'],artifact['id'],maximum=4000000)
+        (DIRECTORY/'gap-queue-overview.json').write_bytes(workflow.canonical(overview))
+        drain()
+        return dict(source_study=sid,followup_study=target['id'],selected_job=result['job_id'],queued_jobs=1,preserved_events=1,duplicate_submission_creates_jobs=False,original_evidence_unchanged=True,other_owner_jobs=0,new_measurements=False)
+    check('gap selection to private follow-up and owner queue with idempotent replay',gap_queue_flow)
+    def immediate_start():
+        f=make_study(); futures=[]
+        target='arn:aws:lambda:us-east-1:395567831870:function:LocalDispatchFixture'
+        with ThreadPoolExecutor(max_workers=1) as pool:
+            def invoke(arn):
+                assert arn==target
+                futures.append(pool.submit(worker.handler,{'invocation':'synthetic async transport; actual DB capacity gates'}))
+                return {'StatusCode':202}
+            with patch.dict(os.environ,RESEARCH_QUEUE_WORKERS_ENABLED='true',RESEARCH_QUEUE_WORKER_FUNCTION=target),patch.object(scheduler,'invoke_worker',side_effect=invoke):
+                j,_=enqueue(f)
+                assert futures
+                for future in futures:future.result(timeout=20)
+        job=scheduler.snapshot(f['study'],ACTOR)['jobs'][0]
+        assert job['id']==j['id'] and job['status']=='awaiting-review'
+        # A new notification cannot bypass a completely occupied global pool.
+        held=[]
+        for _ in range(4):
+            slot=make_study();enqueue(slot);running=claim();assert running is not None;held.append(running)
+        waiting=make_study()
+        with patch.dict(os.environ,RESEARCH_QUEUE_WORKERS_ENABLED='true',RESEARCH_QUEUE_WORKER_FUNCTION=target),patch.object(scheduler,'invoke_worker',return_value={'StatusCode':202}):
+            queued,_=enqueue(waiting)
+        idle=worker.handler({'invocation':'synthetic immediate notification under full capacity'})
+        assert all(o['status']=='idle' for o in idle['outcomes'])
+        assert scheduler.snapshot(waiting['study'],ACTOR)['jobs'][0]['status']=='queued'
+        for running in held:fail(running)
+        drain()
+        return dict(asynchronous_dispatch='Synthetic transport; no AWS call',actual_execution_status=job['status'],full_capacity_job_status='queued',global_capacity=4,duplicate_executions=False)
+    check('immediate notification executes recorded work while full capacity retains queued jobs',immediate_start)
     report['passed']=True
 except Exception as error:
     report['passed']=False;report['error']=str(error);report['traceback']=traceback.format_exc();print(report['traceback'],file=sys.stderr)

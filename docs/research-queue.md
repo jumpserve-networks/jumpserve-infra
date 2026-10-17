@@ -1,5 +1,22 @@
 # Claim queues and bounded parallel evaluation
 
+The queue UI adds `/research-verification/experiment-queue`, with
+an owner-only `GET /research/queue` overview and authenticated GET/POST
+`/research/studies/{studyId}/gap-experiments` selection endpoints. Deploy the
+updated hash-verified runtime and API routes before the frontend. The API also
+needs `RESEARCH_QUEUE_WORKER_FUNCTION` and an invocation grant scoped to that
+worker for prompt dispatch after enqueue. Scheduled polling remains the fallback;
+all database capacity/dependency/resource gates remain enforced. No additional
+database migration is required. The current registered plan is
+IPv6; unmatched sources/claims require domain preparation. See
+`jumpserve-front-end/docs/experiment-queue.md` for the protocol and verification
+limits. The October 17 release protocol and its resulting deployment evidence live
+in `jumpserve-front-end/docs/research-pathways-production-release-protocol-v1.json`
+and the corresponding release report. Historical records below refer to earlier
+versions. `python3 -B bin/research-queue-release.py inspect|diff|deploy|verify`
+provides fixed-target release receipts; it never submits scientific jobs or
+changes prompts, schema or publications.
+
 Deployed verification and remaining gaps are recorded in the
 [production release report](research-workflow-production-release-v1.md).
 

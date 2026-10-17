@@ -1,13 +1,13 @@
 {
-  "version": 7,
-  "source_revision": "a2e7bd8942b13c773fcad59a78171e2383cab5dd",
-  "revision_status": "Merged main-based release; operational checks pending",
+  "version": 11,
+  "source_revision": "62f58791028a236e38b77beb2f8f8610123db270",
+  "revision_status": "Committed main release candidate; queue overview, gap launching and durable worker notification. Deployment receipts record actual release status.",
   "files": {
-    "api.py": "f0ad9b2fe2a0e39d9b97f4b5414eb11c657d7a66b4b15ee43ed18d6495708eb7",
+    "api.py": "aeb50bf4906a8ed4d58ec41bd7cd05d8e19c76f09db60b3dff4671c8aa82be7f",
     "workflow.py": "03ebd6c328dc8d9428992c44d07c468e4639576853d32b92cb0e801a8727c75d",
     "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
     "store.py": "172e803b2991011a0b26c751da940f482bd9be496b8de2921daa0bf77d169d35",
-    "scheduler.py": "9f3e7333348c3475a20f61a88c9e047db3561a85bc69e366e82f5bd4d425bc1f",
+    "scheduler.py": "0f7a253fc8bd2db7d6255efe31b7ce19dd2e2e773699f5806fd166f45fcc9714",
     "worker.py": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
     "preparation.py": "f23424b4c73974ffda48e356cd19c2d0dd8877beb668d94380e7bb00da5a5f90",
     "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
@@ -15,6 +15,7 @@
     "network_spec.py": "884857f8680eb73ae7b8f43de484c3bd59d0f2441b66e117e49a347191a31e7c",
     "network_execution.py": "9e61b6c4a2d1e16f0c931e9902d824bfd38174108749739655cfae197ffa5577",
     "network_package.py": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
-    "package_runtime.py": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37"
+    "package_runtime.py": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
+    "gap_queue.py": "90bd0a01a9dc9b25575d6f2ac6b478a34e940829231132585a3eb1c93c7c841a"
   }
 }

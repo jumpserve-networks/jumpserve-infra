@@ -27,7 +27,7 @@ def main():
    report['checks'].append(dict(name=name,result='rejected transaction; no publication'))
   report['prompt']=row[0]
  else:
-  origin='https://jumpserve.quaint-lab.org' if a.production else 'http://127.0.0.1:3000'
+  origin='https://jumpserve.quaint-lab.org' if a.production else 'http://127.0.0.1:6001'
   for suffix in ('','/test-results','/methods','/literature'):
    status,headers,raw,url=fetch(origin+PATH+suffix);assert status==200 and b'IPv6' in raw
    report['checks'].append(dict(path=PATH+suffix,status=status,bytes=len(raw)))

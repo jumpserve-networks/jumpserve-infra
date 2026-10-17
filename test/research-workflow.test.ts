@@ -21,9 +21,11 @@ test('research API has bounded resources, explicit routes and no experiment or m
   const template = Template.fromStack(stack);
   template.resourceCountIs('AWS::Lambda::Function', 1);
   template.hasResourceProperties('AWS::Lambda::Function', { Handler: 'api.handler', Timeout: 29, MemorySize: 512, ReservedConcurrentExecutions: 4, Environment: { Variables: Match.objectLike({ SUPABASE_URL: 'https://regphejnlvfpyokpniny.supabase.co' }) } });
-  for (const endpoint of ['records', 'protocols', 'runs', 'publish', 'queue', 'queue-actions', 'prepare', 'idea']) template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: `POST /research/studies/{studyId}/${endpoint}` });
+  for (const endpoint of ['records', 'protocols', 'runs', 'publish', 'queue', 'queue-actions', 'prepare', 'idea', 'gap-experiments']) template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: `POST /research/studies/{studyId}/${endpoint}` });
   template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'GET /research/studies/{studyId}/idea' });
   template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'GET /research/studies/{studyId}/prepare' });
+  template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'GET /research/queue' });
+  template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'GET /research/studies/{studyId}/gap-experiments' });
   template.resourceCountIs('AWS::Events::Rule', 0);
   const policies = JSON.stringify(template.findResources('AWS::IAM::Policy'));
   expect(policies).toContain('secretsmanager:GetSecretValue');
@@ -38,6 +40,10 @@ test('explicit queue flag provisions two bounded workers and one-minute poll wit
   template.hasResourceProperties('AWS::Lambda::Function', { Handler: 'worker.handler', Timeout: 180, MemorySize: 512, ReservedConcurrentExecutions: 2 });
   template.hasResourceProperties('AWS::Events::Rule', { ScheduleExpression: 'rate(1 minute)', Targets: Match.arrayWith([Match.objectLike({ RetryPolicy: { MaximumEventAgeInSeconds: 60, MaximumRetryAttempts: 0 } })]) });
   template.hasResourceProperties('AWS::Lambda::EventInvokeConfig', { MaximumRetryAttempts: 0, MaximumEventAgeInSeconds: 60 });
+  template.hasResourceProperties('AWS::Lambda::Function', { Handler: 'api.handler', Environment: { Variables: Match.objectLike({ RESEARCH_QUEUE_WORKER_FUNCTION: Match.anyValue() }) } });
+  const workerId = Object.keys(template.findResources('AWS::Lambda::Function')).find(id => template.toJSON().Resources[id].Properties.Handler === 'worker.handler');
+  template.hasResourceProperties('AWS::IAM::Policy', { PolicyDocument: { Statement: Match.arrayWith([Match.objectLike({ Action: 'lambda:InvokeFunction', Resource: Match.anyValue() })]) } });
+  expect(JSON.stringify(template.findResources('AWS::IAM::Policy'))).toContain(workerId);
   const policies = JSON.stringify(template.findResources('AWS::IAM::Policy'));
   for (const action of ['ec2:', 'bedrock:', 'states:', 'ssm:', 's3:']) expect(policies).not.toContain(action);
 });

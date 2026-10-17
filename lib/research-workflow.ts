@@ -75,8 +75,8 @@ export class ResearchWorkflow extends Construct {
     });
     secret.grantRead(fn);
     const integration = new HttpLambdaIntegration('ResearchWorkflowIntegration', fn);
-    for (const route of ['/research/capabilities', '/research/studies', '/research/studies/{studyId}', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/prepare', '/research/studies/{studyId}/idea']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.GET], integration });
-    for (const route of ['/research/studies', '/research/studies/{studyId}/records', '/research/studies/{studyId}/protocols', '/research/studies/{studyId}/runs', '/research/studies/{studyId}/publish', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/queue-actions', '/research/studies/{studyId}/prepare', '/research/studies/{studyId}/idea','/research/studies/{studyId}/network']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.POST], integration });
+    for (const route of ['/research/capabilities', '/research/queue', '/research/studies', '/research/studies/{studyId}', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/prepare', '/research/studies/{studyId}/idea', '/research/studies/{studyId}/gap-experiments']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.GET], integration });
+    for (const route of ['/research/studies', '/research/studies/{studyId}/records', '/research/studies/{studyId}/protocols', '/research/studies/{studyId}/runs', '/research/studies/{studyId}/publish', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/queue-actions', '/research/studies/{studyId}/prepare', '/research/studies/{studyId}/idea','/research/studies/{studyId}/network', '/research/studies/{studyId}/gap-experiments']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.POST], integration });
     if (queueEnabled) {
       const worker = new lambda.Function(this, 'QueueWorker', {
         code: lambda.Code.fromAsset(runtime), handler: 'worker.handler', runtime: lambda.Runtime.PYTHON_3_12,
@@ -86,6 +86,8 @@ export class ResearchWorkflow extends Construct {
         description: 'Two bounded queue slots per invocation; fenced Supabase leases, no automatic experiment retries.',
       });
       secret.grantRead(worker);
+      fn.addEnvironment('RESEARCH_QUEUE_WORKER_FUNCTION', worker.functionArn);
+      worker.grantInvoke(fn);
       if (networkingEnabled && executors && packageExecutor) for (const target of [executors.emulated,executors.realWorld,packageExecutor]) target.grantInvoke(worker);
       new events.Rule(this, 'QueuePoll', {
         schedule: events.Schedule.rate(cdk.Duration.minutes(1)),
