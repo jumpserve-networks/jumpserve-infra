@@ -1,0 +1,8 @@
+..................................................................................................................................................
+----------------------------------------------------------------------
+Ran 146 tests in 2.331s
+
+OK
+{"version": "research-queue-v1", "slots": 2, "outcomes": [{"status": "idle"}, {"status": "idle"}], "wall_seconds": 0.00023920799139887094, "measured_charges_usd": null, "model_usage": null}
+{"version": "research-queue-v1", "slots": 2, "outcomes": [{"job_id": "414b739b-12d0-44e6-968f-da2ed8541649", "status": "completion-unconfirmed", "error_type": "StoreError"}, {"job_id": "414b739b-12d0-44e6-968f-da2ed8541649", "status": "completion-unconfirmed", "error_type": "StoreError"}], "wall_seconds": 0.00011995801469311118, "measured_charges_usd": null, "model_usage": null}
+{"version": "research-queue-v1", "slots": 2, "outcomes": [{"job_id": "99831072-e8e2-418f-a821-653567e47366", "status": "awaiting-review"}, {"job_id": "c63f954d-0566-46ec-ba98-72d5ec535261", "status": "awaiting-review"}], "wall_seconds": 0.00019337504636496305, "measured_charges_usd": null, "model_usage": null}

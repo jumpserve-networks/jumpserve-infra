@@ -1,0 +1,55 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_A9apPfIcMHKAlp2x745A3F",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "blocked",
+                            "reason": "missing-required-inputs",
+                            "blockers": [
+                                {
+                                    "kind": "missing-data",
+                                    "detail": "missing-source-data",
+                                    "required_input": "The authors' dataset or archived measurement artifact for 'configuration A' is absent. What is the exact specification of configuration A (topology, workload, parameters) and where is the original measurement data that produced the 12 ms completion-time claim?"
+                                },
+                                {
+                                    "kind": "missing-data",
+                                    "detail": "missing-configuration",
+                                    "required_input": "No registered check exists for this claim and no concrete parameter specification (e.g., flow size, link capacity, RTT, queue size, number of flows, protocol) has been supplied. What are the exact experimental parameters needed to reproduce the 12 ms flow completion time under configuration A?"
+                                },
+                                {
+                                    "kind": "design",
+                                    "detail": "missing-design-specification",
+                                    "required_input": "The source is described as a 'synthetic evaluation context, not scientific evidence' with only partial review and a placeholder hash. Is there an actual peer-reviewed source paper with verifiable experimental methodology behind this claim?"
+                                }
+                            ],
+                            "claims": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3404,
+        "outputTokens": 411,
+        "totalTokens": 3815,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 7444
+    }
+}

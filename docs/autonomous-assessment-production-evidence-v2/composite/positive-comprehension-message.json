@@ -1,0 +1,1 @@
+{"content":[{"toolUse":{"input":{"action":"review","assessment_label":null,"blockers":[],"check_id":null,"claims":[],"coverage_complete":true,"evidence_ids":[],"proposal":null,"ready":true,"reason":"ready-within-scope"},"name":"submit_assessment_step","toolUseId":"tooluse_LFBT1DQCfEVxOKWgZHbOh1","type":"tool_use"}}],"role":"assistant"}

@@ -1,0 +1,60 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_SeBOkg6VQq7oSiDbT3dqlx",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "review",
+                            "reason": "unresolved-method",
+                            "blockers": [
+                                {
+                                    "kind": "design",
+                                    "detail": "insufficient-scope",
+                                    "required_input": "The claim asserts causal improvement across all real Internet paths in every region, but the candidate evidence comes from a single emulated host with two flows under one condition and no treatment contrast. What justified experimental design (multiple real-world paths, regions, treatment/control comparisons, and sample size rationale) would be needed to support a universal causal claim of this scope?"
+                                },
+                                {
+                                    "kind": "design",
+                                    "detail": "unsupported-inference",
+                                    "required_input": "A causal claim requires a treatment contrast (algorithm present vs. absent) with controlled confounds. The candidate has no treatment contrast. What counterfactual or control condition was used to attribute the observed flow completion times to the algorithm rather than to other factors?"
+                                },
+                                {
+                                    "kind": "equipment",
+                                    "detail": "unavailable-equipment",
+                                    "required_input": "Establishing the claim over 'all real Internet paths in every region' requires measurement infrastructure across diverse real-world network paths and geographic regions. The candidate uses only a single emulated-netem setup. What real-world multi-region measurement infrastructure and path diversity would be required?"
+                                },
+                                {
+                                    "kind": "design",
+                                    "detail": "invalid-source-grounding",
+                                    "required_input": "The source is described as a synthetic text-only evaluation packet with no real paper reviewed and partial review status. The source SHA256 is a placeholder. What actual peer-reviewed or pre-print source grounds this universal causal claim?"
+                                }
+                            ],
+                            "claims": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": false,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3404,
+        "outputTokens": 506,
+        "totalTokens": 3910,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 8873
+    }
+}

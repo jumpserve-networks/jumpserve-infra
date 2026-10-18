@@ -1,7 +1,7 @@
 {
-  "version": 21,
-  "source_revision": "3edec50faf6e24885690b0ce7af37b4f38b7dd3b",
-  "revision_status": "Exact clean committed main revision; v5 issue catalog, matched evidence gates, bounded autonomous defaults.",
+  "version": 22,
+  "source_revision": "6b909cc09d8b89fa89b5068b26363cf3c6eaf73f",
+  "revision_status": "Exact committed main: phase-bound model decisions and separately locked retained-context integration; original evaluations and implementation profiles preserved.",
   "files": {
     "api.py": "feb505052c3ba743ea9fa2fe429cf5d51e7b80cf3fe72fb76ad0ba8123799855",
     "workflow.py": "03ebd6c328dc8d9428992c44d07c468e4639576853d32b92cb0e801a8727c75d",
@@ -19,8 +19,8 @@
     "gap_queue.py": "90bd0a01a9dc9b25575d6f2ac6b478a34e940829231132585a3eb1c93c7c841a",
     "claim_design.py": "c79c04b519286d145738cbcc5585203b6199342937e018c712d31550e8132870",
     "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
-    "autonomy.py": "3d1fd5dc331b75b02b3982a750ca2b0caaebcba2a2d81f607f40a353fdbee09b",
-    "autonomy_model.py": "1e9a295d3e3759966de3fea97b8b92fe1ca470d9efb03955138c91cfec2fc2b6",
+    "autonomy.py": "ce5ce2737afec01ada86d9639c88b3e7b94743bb422cf6b2d030a72aace7e38b",
+    "autonomy_model.py": "158feca665ba216d7e66ecbdb023a2ad15937369f044e1b84c9b4325895246ea",
     "autonomy_sources.py": "4f26059b9b4b3baa511c995735ac39af14f01a6e5f957a9d0c72b544ec693474",
     "intake.py": "7ac9610b72ce9d1a2ddf86bb7328c1caa25c3e43abe3e4882de2d8e7f88689dd",
     "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b"

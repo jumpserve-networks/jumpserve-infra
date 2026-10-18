@@ -1,0 +1,70 @@
+{
+  "protocol": "autonomous-assessment-production-protocol-v1",
+  "study_id": "efed5f05-422a-4ca2-a1b7-07b209607d9c",
+  "authenticated": true,
+  "session_source": "Existing legitimate Google session in connected Chrome; no token extracted or fabricated",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false,
+    "human": false
+  },
+  "checks": [
+    {
+      "name": "Production form shows immutable defaults and submits once to the owner queue",
+      "passed": true
+    },
+    {
+      "name": "Queue displays 15 claim tasks, actual progress and explicit context/review blockers",
+      "passed": true
+    },
+    {
+      "name": "Actual turn history displays original prompt, Opus model, request hash, coded response and unknown measured charge",
+      "passed": true
+    },
+    {
+      "name": "1365px desktop and 390px emulated mobile fit in light and dark themes without horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "Anonymous /experiment-queue alias preserves study query through canonical sign-in return path",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "1365-dark.png",
+      "sha256": "a14a765a5afc6716c07eafa078d5c42e1761f1570a7355a721901c2afe77f684",
+      "bytes": 1385106,
+      "privacy": "Private: captures can include user identity in a sticky header; not committed publicly",
+      "provenance": "Original Chrome DevTools image content, base64 transport decoded without image editing"
+    },
+    {
+      "name": "1365-light.png",
+      "sha256": "2a5f4054102f7032dbdb020d2ed65e5a66323fdda264c9151d682cd47497d9f0",
+      "bytes": 1374635,
+      "privacy": "Private: captures can include user identity in a sticky header; not committed publicly",
+      "provenance": "Original Chrome DevTools image content, base64 transport decoded without image editing"
+    },
+    {
+      "name": "390-dark.png",
+      "sha256": "fcfbab6f4c17001ff4ed87b5916dd81a9423139f770cbd7d17cbfe20c120871a",
+      "bytes": 519678,
+      "privacy": "Private: captures can include user identity in a sticky header; not committed publicly",
+      "provenance": "Original Chrome DevTools image content, base64 transport decoded without image editing"
+    },
+    {
+      "name": "390-light.png",
+      "sha256": "9cf4a482c7adb796ce19738bc3c435fbc0388a6f7dc57a5f0cae6590408fca18",
+      "bytes": 596509,
+      "privacy": "Private: captures can include user identity in a sticky header; not committed publicly",
+      "provenance": "Original Chrome DevTools image content, base64 transport decoded without image editing"
+    }
+  ],
+  "limitations": [
+    "No new scientific/networking campaign or cloud acquisition",
+    "Viewport/screenshot checks are AI visual inspection, not human review",
+    "Completed and invalid software states additionally use the explicitly synthetic local browser campaign"
+  ],
+  "checked_at": "2026-10-18T22:31:22.892454+00:00"
+}

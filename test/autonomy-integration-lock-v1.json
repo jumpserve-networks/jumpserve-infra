@@ -1,0 +1,18 @@
+{
+  "protocol": "autonomous-assessment-production-amendment-v9",
+  "files": {
+    "autonomy.py": "ce5ce2737afec01ada86d9639c88b3e7b94743bb422cf6b2d030a72aace7e38b",
+    "autonomy_model.py": "158feca665ba216d7e66ecbdb023a2ad15937369f044e1b84c9b4325895246ea",
+    "autonomy_sources.py": "4f26059b9b4b3baa511c995735ac39af14f01a6e5f957a9d0c72b544ec693474",
+    "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b"
+  },
+  "model_evaluation_input_sha256": {
+    "autonomy.py": "91558757e68801089190b70ca93a40c33d22b3f387acbfb232ca51a8e7f26cb9",
+    "autonomy_model.py": "158feca665ba216d7e66ecbdb023a2ad15937369f044e1b84c9b4325895246ea",
+    "autonomy_sources.py": "4f26059b9b4b3baa511c995735ac39af14f01a6e5f957a9d0c72b544ec693474",
+    "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b"
+  },
+  "integration_inputs_sha256": "3cc934d0f08afd6b8214972e9ed47adf5a47efa2c6530691bc2edba0519e0dcc",
+  "original_manifest_sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+  "base_response_channel_sha256": "d8beedd8e3c6fc8852456e6cc4a7946fb999b77a58ca71a3e4178ff25b9195cc"
+}

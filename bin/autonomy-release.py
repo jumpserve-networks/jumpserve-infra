@@ -5,9 +5,9 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('autonomy_queue_release',ROOT/'bin/research-queue-release.py');queue=importlib.util.module_from_spec(spec);spec.loader.exec_module(queue)
 guard=queue.guard;admin=guard.admin;aws=queue.aws
-MODULE='research-autonomy';CANDIDATE='cc0c5299-e41d-588f-9d00-cf4d817bf72b'
+MODULE='research-autonomy';CANDIDATE='83e26515-7b18-5730-9473-f34555a1a1b4'
 PRIVATE={'research_autonomy_'+n for n in ('workflows','tasks','turns','job_commitments','events')}
-MIGRATIONS=('202610180002_autonomous_assessments.sql','202610180003_autonomy_prompt_candidate.sql','202610180004_autonomy_publication_guard.sql','202610180005_autonomy_prompt_v2.sql','202610180006_autonomy_v2_publication_guard.sql','202610180007_autonomy_prompt_v3.sql','202610180008_autonomy_v3_publication_guard.sql','202610180009_autonomy_prompt_v4.sql','202610180010_autonomy_v4_publication_guard.sql','202610180011_autonomy_prompt_v5.sql','202610180012_autonomy_v5_publication_guard.sql','202610180013_autonomy_provider_recovery_guard.sql')
+MIGRATIONS=('202610180002_autonomous_assessments.sql','202610180003_autonomy_prompt_candidate.sql','202610180004_autonomy_publication_guard.sql','202610180005_autonomy_prompt_v2.sql','202610180006_autonomy_v2_publication_guard.sql','202610180007_autonomy_prompt_v3.sql','202610180008_autonomy_v3_publication_guard.sql','202610180009_autonomy_prompt_v4.sql','202610180010_autonomy_v4_publication_guard.sql','202610180011_autonomy_prompt_v5.sql','202610180012_autonomy_v5_publication_guard.sql','202610180013_autonomy_provider_recovery_guard.sql','202610180014_autonomy_prompt_v6.sql','202610180015_autonomy_phase_publication_guard.sql','202610180016_autonomy_context_integration_guard.sql')
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def stamp():return dt.datetime.now(dt.timezone.utc).isoformat()
 def pointers():return admin.query('select module_id,active_version_id from agent_prompt_settings order by module_id')
@@ -19,32 +19,34 @@ def security():
  if len(funcs)!=2 or any(r['anon_execute'] or r['browser_execute'] for r in funcs):raise RuntimeError('Autonomous service-only RPC permissions differ')
  result['autonomy_functions']=funcs;return result
 def reviewed():
- paths=[p for p in (ROOT/'.test-artifacts/autonomy-evaluation').glob('*/evaluation-reviewed.json') if json.loads(p.read_bytes())['prompt_version_id']==CANDIDATE and json.loads(p.read_bytes())['reviewer']['passed'] is True]
- if len(paths)!=1:raise RuntimeError('Exactly one passing reviewed candidate campaign is required')
- report=json.loads(paths[0].read_bytes());lock=json.loads((ROOT/'test/autonomy-implementation-lock-v5.json').read_bytes())
- if report['prompt_version_id']!=CANDIDATE or report['live_provider_calls']!=19 or report['prior_live_provider_calls']!=14 or report['prior_failed_provider_calls']!=5 or report['new_provider_calls']!=5 or report['reused_answer_count']!=9 or report['reviewer']['passed'] is not True or len(report['cases'])!=14 or not all(c['passed'] and c['status']=='complete' and c['raw_answer_reviewed'] and c['rendered_answer_reviewed'] and all(c['deterministic_checks'].values()) for c in report['cases']):raise RuntimeError('Actual-answer publication criteria failed')
- source=ROOT/report['recovery_source_report'];original=json.loads(source.read_bytes())
- if sha(source.read_bytes())!=report['recovery_source_sha256'] or original['prompt_version_id']!=CANDIDATE or original['live_provider_calls']!=14:raise RuntimeError('Original recovery campaign differs')
- if sum(c['answer_provenance']=='reused-completed-answer' for c in report['cases'])!=9 or sum(c['answer_provenance']=='new-provider-call' for c in report['cases'])!=5:raise RuntimeError('Recovery answer accounting differs')
+ paths=[p for p in (ROOT/'.test-artifacts/autonomy-evaluation').glob('*/evaluation-reviewed.json') if json.loads(p.read_bytes())['prompt_version_id']==CANDIDATE and json.loads(p.read_bytes())['reviewer']['passed'] is True and json.loads(p.read_bytes()).get('report_kind')=='composite-model-and-context-integration']
+ if len(paths)!=1:raise RuntimeError('Exactly one passing reviewed v6 campaign is required')
+ report=json.loads(paths[0].read_bytes());lock=json.loads((ROOT/'test/autonomy-implementation-lock-v6.json').read_bytes())
+ integration_lock=json.loads((ROOT/'test/autonomy-integration-lock-v1.json').read_bytes())
+ expected={c['name'] for c in json.loads((ROOT/'test/autonomy-evaluation-cases-v2.json').read_bytes())['cases']+json.loads((ROOT/'test/autonomy-integration-inputs-v1.json').read_bytes())['cases']}
+ if report['live_provider_calls']!=18 or report['model_evaluation_live_provider_calls']!=16 or report['integration_live_provider_calls']!=2 or len(report['cases'])!=18 or {c['name'] for c in report['cases']}!=expected or report.get('release_amendment')!='autonomous-assessment-production-amendment-v9' or not all(c['passed'] and c['status']=='complete' and c['raw_answer_reviewed'] and c['rendered_answer_reviewed'] and all(c['deterministic_checks'].values()) for c in report['cases']):raise RuntimeError('All eighteen component answer criteria must pass')
+ for key in ('cases_sha256','request_manifest_sha256','response_channel_sha256'):
+  if report[key]!=lock[key]:raise RuntimeError('Frozen evaluation manifest differs')
  for name,digest in lock['files'].items():
-  if report['input_sha256'].get(name)!=digest or sha((ROOT.parent/'jumpserve-back-end/research_workflow'/name).read_bytes())!=digest:raise RuntimeError('Reviewed implementation differs')
+  if report['input_sha256'].get(name)!=digest or report['released_input_sha256'].get(name)!=integration_lock['files'][name] or sha((ROOT.parent/'jumpserve-back-end/research_workflow'/name).read_bytes())!=integration_lock['files'][name]:raise RuntimeError('Reviewed implementation differs')
+ for key in ('model_evaluation','integration_evaluation'):
+  if sha((ROOT/report[key+'_report']).read_bytes())!=report[key+'_report_sha256']:raise RuntimeError('Original component report differs')
  for c in report['cases']:
   raw=(paths[0].parent/(c['name']+'-provider.json')).read_bytes()
   if sha(raw)!=c['provider_response_sha256']:raise RuntimeError('Original provider bytes differ')
-  old=next(x for x in original['cases'] if x['name']==c['name'])
-  if c['answer_provenance']=='reused-completed-answer':
-   if old['status']!='complete' or raw!=(source.parent/(c['name']+'-provider.json')).read_bytes():raise RuntimeError('Reused answer differs')
-  elif old['status']!='failed' or (source.parent/(c['name']+'-provider.json')).read_bytes()!=b'':raise RuntimeError('Only unanswered failed calls may be recovered')
   message=json.dumps(json.loads(raw)['output']['message'],sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode()
-  if sha(message)!=c['output_sha256']:raise RuntimeError('Original message differs')
- seed=json.loads((ROOT/'database/seed-autonomy-v5.json').read_bytes())
+  if sha(message)!=c['output_sha256'] or sha((paths[0].parent/(c['name']+'-request.json')).read_bytes())!=c['request_sha256']:raise RuntimeError('Original message or request differs')
+ seed=json.loads((ROOT/'database/seed-autonomy-v6.json').read_bytes())
  if sha((seed['system_prompt']+'\n\n'+seed['research_context']).encode())!=report['prompt_content_sha256']:raise RuntimeError('Reviewed prompt differs')
  return report
 def bundle(directory):
  entries=[]
- for base in (ROOT/'.test-artifacts/autonomy-evaluation',ROOT/'docs/autonomous-assessment-validation-v1',ROOT/'docs/autonomous-assessment-production-evidence-v1'):
+ for base in (ROOT/'.test-artifacts/autonomy-evaluation',ROOT/'docs/autonomous-assessment-validation-v1',ROOT/'docs/autonomous-assessment-production-evidence-v1',ROOT/'.test-artifacts/autonomy-integration'):
   entries.extend(p for p in base.rglob('*') if p.is_file())
- entries.extend(ROOT/'docs'/n for n in ('autonomous-assessment-production-protocol-v1.md','autonomous-assessment-production-amendment-v2.md','autonomous-assessment-production-amendment-v3.md','autonomous-assessment-production-amendment-v4.md','autonomous-assessment-production-amendment-v5.md','autonomous-assessment-production-amendment-v6.md','autonomous-assessment-protocol-v1.md','autonomous-assessments.md','autonomous-assessment-validation-v1.md','autonomous-assessment-validation-v1.json'))
+ entries.extend(ROOT/'docs'/n for n in ('autonomous-assessment-production-protocol-v1.md','autonomous-assessment-production-amendment-v2.md','autonomous-assessment-production-amendment-v3.md','autonomous-assessment-production-amendment-v4.md','autonomous-assessment-production-amendment-v5.md','autonomous-assessment-production-amendment-v6.md','autonomous-assessment-production-amendment-v7.md','autonomous-assessment-production-amendment-v8.md','autonomous-assessment-production-amendment-v9.md','autonomous-assessment-protocol-v1.md','autonomous-assessments.md','autonomous-assessment-validation-v1.md','autonomous-assessment-validation-v1.json'))
+ entries.extend(p for p in (ROOT/'.test-artifacts/autonomy-release').glob('*/*') if p.is_file() and p.name in ('receipt.json','cdk.log','outputs.json'))
+ entries.extend(p for p in (ROOT/'.test-artifacts/autonomy-positive-control').rglob('*') if p.is_file())
+ entries.extend(p for p in (ROOT/'.test-artifacts/autonomy-production-browser').glob('*') if p.suffix in ('.png','.json'))
  entries.extend(ROOT/'database'/n for n in MIGRATIONS)
  manifest=[];buffer=io.BytesIO()
  with zipfile.ZipFile(buffer,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as archive:
@@ -84,6 +86,18 @@ def functions(directory,expected=False):
  return out
 def verify(directory):
  result=dict(security=security(),functions=functions(directory,True))
+ worker=next(f for f in result['functions'] if f['logical_id'].startswith('ResearchWorkflowAutonomyWorker'))
+ if len(worker['layers'])!=1:raise RuntimeError('Expected exactly one pinned PDF layer')
+ layer=aws('lambda','get-layer-version-by-arn','--arn',worker['layers'][0]['Arn'])
+ with guard.OPEN.open(layer['Content']['Location'],timeout=30) as response:raw=response.read(2000001)
+ if base64.b64encode(hashlib.sha256(raw).digest()).decode()!=layer['Content']['CodeSha256']:raise RuntimeError('Deployed layer ZIP hash differs')
+ lock=json.loads((ROOT/'autonomy-pdf-runtime.json').read_bytes())
+ with zipfile.ZipFile(io.BytesIO(raw)) as archive:
+  if archive.read('manifest.json')!=(ROOT/'.runtime-autonomy-python/manifest.json').read_bytes():raise RuntimeError('Deployed layer provenance manifest differs')
+  files={n.removeprefix('python/'):sha(archive.read(n)) for n in archive.namelist() if not n.endswith('/') and n!='manifest.json'}
+  if files!=lock['files']:raise RuntimeError('Deployed PDF layer files differ from the original-byte dependency lock')
+ (directory/'deployed-pdf-layer.zip').write_bytes(raw)
+ result['pdf_layer']=dict(arn=worker['layers'][0]['Arn'],zip_sha256=sha(raw),files=len(files),original_wheel_sha256=lock['sha256'],all_file_hashes_verified=True)
  active=admin.query("select v.id,v.content_sha256,v.published_at from agent_prompt_settings s join agent_prompt_versions v on v.id=s.active_version_id where s.module_id='research-autonomy'")
  if len(active)!=1 or active[0]['id']!=CANDIDATE or active[0]['content_sha256']!=reviewed()['prompt_content_sha256']:raise RuntimeError('Evaluated autonomous prompt is not active')
  with guard.OPEN.open(queue.BASE+'/capabilities',timeout=30) as response:capability=json.load(response)
@@ -101,15 +115,35 @@ def verify(directory):
  if rule['State']!='ENABLED' or rule['ScheduleExpression']!='rate(1 minute)':raise RuntimeError('Controller schedule differs')
  result['schedule']={k:rule[k] for k in ('Name','State','ScheduleExpression')};return result
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=('inspect','migrate','publish','diff','deploy','verify','archive','frontend-release','frontend-status'));a=p.parse_args()
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=('inspect','migrate','publish','diff','deploy','verify','archive','frontend-release','frontend-status','hold','unhold','correct'));a=p.parse_args()
  directory=ROOT/'.test-artifacts/autonomy-release'/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');directory.mkdir(parents=True,exist_ok=False)
  receipt=dict(protocol='autonomous-assessment-production-protocol-v1',mode=a.mode,status='running',started_at=stamp(),measured_charges_usd=None,authorization='Current explicit user request to merge main and deploy this release',new_experiment_instances=0)
  def save():(directory/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
  save()
  try:
   receipt['targets']=guard.target();receipt['prompt_pointers_before']=before=pointers();save()
-  if a.mode=='inspect':
+  if a.mode in ('hold','unhold'):
+   resources=aws('cloudformation','list-stack-resources','--stack-name',queue.STACK)['StackResourceSummaries']
+   rules=[r['PhysicalResourceId'] for r in resources if r['ResourceType']=='AWS::Events::Rule' and r['LogicalResourceId'].startswith('ResearchWorkflowAutonomyPoll')]
+   apis=[r['PhysicalResourceId'] for r in resources if r['ResourceType']=='AWS::Lambda::Function' and r['LogicalResourceId'].startswith('ResearchWorkflowApi')]
+   if len(rules)!=1 or len(apis)!=1:raise RuntimeError('Autonomous admission/schedule inventory differs')
+   if a.mode=='unhold':
+    reviewed()
+    if next(r['active_version_id'] for r in before if r['module_id']==MODULE)!=CANDIDATE:raise RuntimeError('Passing exact candidate must be active before removing admission hold')
+   config=aws('lambda','get-function-configuration','--function-name',apis[0]);environment=dict(config['Environment']['Variables']);receipt['previous_admission_flag']=environment.get('RESEARCH_AUTONOMY_ENABLED');environment['RESEARCH_AUTONOMY_ENABLED']='true' if a.mode=='unhold' else 'false'
+   if a.mode=='hold':subprocess.run(['aws','events','disable-rule','--name',rules[0],'--profile','jumpserve','--region','us-east-1'],check=True,timeout=60)
+   try:result=aws('lambda','update-function-configuration','--function-name',apis[0],'--environment',json.dumps(dict(Variables=environment)))
+   except Exception:raise RuntimeError('Admission flag update failed; environment omitted from diagnostics') from None
+   if a.mode=='unhold':subprocess.run(['aws','events','enable-rule','--name',rules[0],'--profile','jumpserve','--region','us-east-1'],check=True,timeout=60)
+   receipt['admission_update']=dict(function=apis[0],last_update_status=result.get('LastUpdateStatus'),enabled=a.mode=='unhold',rule=rules[0])
+  elif a.mode=='inspect':
    receipt['inspection']=guard.inspect();receipt['rollback_functions']=functions(directory)
+  elif a.mode=='correct':
+   if admin.query("select id from agent_prompt_versions where id="+admin.literal(CANDIDATE)+"::uuid"):raise RuntimeError('Corrective candidate already seeded; inspect prior receipt')
+   receipt['migrations']=[]
+   for name in MIGRATIONS[-3:]:
+    raw=(ROOT/'database'/name).read_bytes();entry=dict(name=name,sha256=sha(raw),status='running');receipt['migrations'].append(entry);save();admin.query(raw.decode(),read_only=False);entry['status']='complete';save()
+   receipt['security']=security()
   elif a.mode=='migrate':
    if admin.query("select to_regclass('public.research_autonomy_workflows') present")[0]['present'] is not None:raise RuntimeError('Autonomy migrations partly/already applied; inspect retained receipts')
    receipt['migrations']=[]
@@ -120,9 +154,9 @@ def main():
   elif a.mode=='publish':
    report=reviewed();receipt['original_evidence']=bundle(directory);report['release_artifacts']=receipt['original_evidence'];save()
    active=next(r['active_version_id'] for r in before if r['module_id']==MODULE)
-   if active not in (None,CANDIDATE):raise RuntimeError('Unexpected autonomous prompt is active')
-   if active is None:
-    args=[admin.literal(CANDIDATE)+'::uuid','null::uuid',admin.literal(report['prompt_content_sha256']),admin.literal(json.dumps(report))+'::jsonb',admin.literal('Codex AI implementer; user-authorized production release'),admin.literal(MODULE)]
+   if active not in (None,'cc0c5299-e41d-588f-9d00-cf4d817bf72b',CANDIDATE):raise RuntimeError('Unexpected autonomous prompt is active')
+   if active!=CANDIDATE:
+    args=[admin.literal(CANDIDATE)+'::uuid',admin.literal(active)+'::uuid' if active else 'null::uuid',admin.literal(report['prompt_content_sha256']),admin.literal(json.dumps(report))+'::jsonb',admin.literal('Codex AI implementer; user-authorized production release'),admin.literal(MODULE)]
     receipt['publication']=admin.query('select publish_agent_prompt('+','.join(args)+')',read_only=False)
    receipt['pointers_after']=pointers()
   elif a.mode in ('diff','deploy'):

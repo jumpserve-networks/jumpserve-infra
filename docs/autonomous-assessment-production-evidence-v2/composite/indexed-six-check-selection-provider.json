@@ -1,0 +1,39 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_1SDs50tgxw1YCNsCoskcKM",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "choose-check",
+                            "reason": "retained-check",
+                            "blockers": [],
+                            "claims": [],
+                            "check_id": "6b32f6d1-06cf-5c38-8065-9c420377c2f0",
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 27520,
+        "outputTokens": 224,
+        "totalTokens": 27744,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 4442
+    }
+}

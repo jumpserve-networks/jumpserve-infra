@@ -1,0 +1,1 @@
+{"content":[{"toolUse":{"input":{"action":"assess","assessment_label":"inconclusive","blockers":[],"check_id":null,"claims":[],"coverage_complete":false,"evidence_ids":["m0","missing"],"proposal":null,"ready":null,"reason":"evidence-incomplete"},"name":"submit_assessment_step","toolUseId":"tooluse_VFdONcCNvMEDbpy0uYzCeQ","type":"tool_use"}}],"role":"assistant"}

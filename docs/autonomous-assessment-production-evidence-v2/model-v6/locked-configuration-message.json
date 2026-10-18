@@ -1,0 +1,1 @@
+{"content":[{"toolUse":{"input":{"action":"choose-check","assessment_label":null,"blockers":[],"check_id":"3fc305f6-51dc-5f2f-84bc-1c6646762869","claims":[],"coverage_complete":false,"evidence_ids":[],"proposal":null,"ready":null,"reason":"retained-check"},"name":"submit_assessment_step","toolUseId":"tooluse_eTS0YUjzifBDEZYQOrpZ1l","type":"tool_use"}}],"role":"assistant"}

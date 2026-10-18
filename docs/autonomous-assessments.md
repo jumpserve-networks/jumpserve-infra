@@ -110,7 +110,7 @@ source/auth/provider/Storage boundaries. It is not a real model or cloud experim
 ## Production activation
 
 The current explicit release request authorizes this activation. Migrations
-`202610180003` through `202610180013` preserve each candidate and additive
+`202610180003` through `202610180016` preserve each candidate and additive
 publication guard in the existing Supabase prompt tables. They do not themselves
 publish or activate a candidate. Fourteen development cases, their full input
 contexts, pass criteria, schema and implementation hashes are locked under `test/`.
@@ -121,13 +121,23 @@ evaluation. Evaluator/reviewer identities and AI/human status must be recorded.
 Release operations verify AWS 395567831870 and Supabase
 regphejnlvfpyokpniny, pass the declared local checks, perform and retain actual
 candidate answer evaluation/review, apply migrations in order and publish only a
-passing exact candidate. Runtime version 21 pins backend commit
-`3edec50faf6e24885690b0ce7af37b4f38b7dd3b`. The v5 prompt uses versioned typed
-issue codes and Opus 4.6. Earlier failed candidates remain retained. The final
-fourteen passing development answers comprise nine reused completed answers and
-five provider-only recoveries after throttling: nineteen v5 provider calls,
-including five failed calls with unknown charges. See the original release
-protocol and amendments v2–v6; AI inspection is neither human nor independent.
+passing exact candidate. Runtime version 22 pins backend commit
+`6b909cc09d8b89fa89b5068b26363cf3c6eaf73f`. The v6 prompt uses versioned typed
+issue codes, per-phase schemas and Opus 4.6. The first production positive control
+exposed wrong-phase responses and an oversized selection context after the v5
+fourteen-case campaign passed. That publication and all original failures remain.
+The corrective evidence combines sixteen frozen saved-context model cases and
+two separately frozen actual-builder integration cases. Component source hashes
+remain separate; the integration lock pins the released context builder. Every
+candidate is preserved, including five original throttled calls with unknown
+charges. See release amendments v2–v9; none of these exposed development cases
+is held-out, independent or human validation.
+
+Selection indexes preserve every retained check/configuration identity and full
+protocol hash. Fresh reviews receive the full selected conditions. Wrong-phase
+answers remain invalid numbered turns and get specific protocol-error feedback;
+unknown provider outcomes are not replayed. Neither indexing nor correction
+changes a scientific condition or establishes complete claim coverage.
 Set `researchAutonomyEnabled=true` only with the durable queue enabled, stage the
 verified PDF layer, deploy API/controller before the frontend, then verify a real
 Google-authenticated request and private Storage round trip. Approve and validate

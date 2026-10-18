@@ -1,0 +1,93 @@
+
+> jumpserve-front-end@0.1.0 build
+> next build
+
+▲ Next.js 16.3.8 (Turbopack)
+- Environments: .env.local
+✓ Running next.config.ts took 16ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 1224ms
+  Running TypeScript ...
+  Finished TypeScript in 1201ms ...
+  Collecting page data using 13 workers ...
+  Generating static pages using 13 workers (0/13) ...
+  Generating static pages using 13 workers (3/13) 
+  Generating static pages using 13 workers (6/13) 
+  Generating static pages using 13 workers (9/13) 
+✓ Generating static pages using 13 workers (13/13) in 196ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ○ /_not-found
+├ ƒ /[moduleId]
+├ ƒ /auth/callback
+├ ƒ /congestion-control-emulated/aggregate-graphs
+├ ƒ /congestion-control-emulated/api/parent-runs
+├ ƒ /congestion-control-emulated/benchmarks
+├ ƒ /congestion-control-emulated/benchmarks/[jobId]
+├ ƒ /congestion-control-emulated/chat
+├ ƒ /congestion-control-emulated/parent-run/[id]
+├ ƒ /congestion-control-emulated/test-lookup
+├ ƒ /congestion-control-real-world/chat
+├ ƒ /congestion-control-real-world/run-a-test
+├ ƒ /congestion-control-real-world/run-a-test/[jobId]
+├ ○ /congestion-control-real-world/test-results
+├ ƒ /congestion-control-real-world/test-results/[jobId]
+├ ƒ /http2-compliance-study/api/measurements
+├ ƒ /http2-compliance-study/api/results
+├ ƒ /http2-compliance-study/chat
+├ ƒ /http2-compliance-study/literature
+├ ƒ /http2-compliance-study/methods
+├ ƒ /http2-compliance-study/test-results
+├ ○ /icon.png
+├ ƒ /ipv6-dns-study/api/data
+├ ƒ /ipv6-dns-study/api/release
+├ ƒ /ipv6-dns-study/chat
+├ ƒ /ipv6-dns-study/literature
+├ ƒ /ipv6-dns-study/methods
+├ ƒ /ipv6-dns-study/test-results
+├ ƒ /leo-emergency-failover/api/results
+├ ƒ /leo-emergency-failover/chat
+├ ƒ /leo-emergency-failover/literature
+├ ƒ /leo-emergency-failover/methods
+├ ƒ /leo-emergency-failover/test-results
+├ ƒ /login
+├ ƒ /propagation-delay-study/data
+├ ƒ /propagation-delay-study/literature
+├ ƒ /propagation-delay-study/methods
+├ ƒ /propagation-delay-study/test-results
+├ ƒ /propagation-delay-study/test-results/[trialId]
+├ ƒ /propagation-delay-study/test-results/[trialId]/data
+├ ƒ /reliable-sketch-study/api/release
+├ ƒ /reliable-sketch-study/api/results
+├ ƒ /reliable-sketch-study/chat
+├ ƒ /reliable-sketch-study/literature
+├ ƒ /reliable-sketch-study/methods
+├ ƒ /reliable-sketch-study/test-results
+├ ƒ /research-ideas/api/studies/[studyId]/export
+├ ƒ /research-ideas/ideas/[studyId]
+├ ○ /research-ideas/methods
+├ ƒ /research-ideas/new-idea
+├ ƒ /research-ideas/studies/[studyId]
+├ ƒ /research-ideas/test-results
+├ ƒ /research-ideas/workspace
+├ ƒ /research-ideas/workspace/[studyId]
+├ ƒ /research-verification/api/studies/[studyId]/export
+├ ƒ /research-verification/design-claim/[studyId]/[claimId]
+├ ƒ /research-verification/experiment-design/[studyId]
+├ ƒ /research-verification/experiment-queue
+├ ○ /research-verification/methods
+├ ƒ /research-verification/new-study
+├ ƒ /research-verification/studies/[studyId]
+├ ƒ /research-verification/test-results
+├ ƒ /research-verification/workspace
+└ ƒ /research-verification/workspace/[studyId]
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

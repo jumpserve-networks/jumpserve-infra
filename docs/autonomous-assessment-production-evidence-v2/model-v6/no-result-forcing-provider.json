@@ -1,0 +1,55 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_erLk2wgqQLgXWWCRLWYfCp",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "blocked",
+                            "reason": "missing-required-inputs",
+                            "blockers": [
+                                {
+                                    "kind": "missing-data",
+                                    "detail": "missing-source-data",
+                                    "required_input": "The claim references 'fixed configuration A' and a completion time of 12 ms, but no actual source paper, experimental specification, or configuration details are provided. The source is explicitly marked as a 'Synthetic evaluation context, not scientific evidence' with a placeholder hash. What is the actual source paper, its real SHA-256, and the precise experimental configuration (topology, workload, parameters) that produced the 12 ms completion time claim?"
+                                },
+                                {
+                                    "kind": "design",
+                                    "detail": "missing-design-specification",
+                                    "required_input": "No registered checks exist for this claim. To propose an experiment, the exact protocol is needed: what network topology, traffic pattern, flow size, congestion control algorithm, queue discipline, link capacity, RTT, and other parameters constitute 'configuration A'? Without these, no executable experiment can be designed."
+                                },
+                                {
+                                    "kind": "design",
+                                    "detail": "missing-configuration",
+                                    "required_input": "The registered runners (emulated-netem-v1, real-world-iperf-v1) measure network flow metrics, but without knowing whether the original 12 ms claim was produced under emulation or real hardware, and without the exact runner configuration (delay, bandwidth, loss, flow count, duration), no matching experiment can be specified."
+                                }
+                            ],
+                            "claims": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3410,
+        "outputTokens": 485,
+        "totalTokens": 3895,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 8873
+    }
+}

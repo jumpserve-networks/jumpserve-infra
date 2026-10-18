@@ -1,0 +1,92 @@
+
+> jumpserve-infra@0.1.0 cdk:benchmark
+> cdk --app "npx ts-node --prefer-ts-exts bin/benchmark.ts" diff JumpServeBenchmarkStack -c researchAutonomyEnabled=true --no-change-set
+
+Bundling asset JumpServeBenchmarkStack/LaunchBenchmarkFn/Code/Stage...
+
+  ...4831287107aa9aba9b49df137fc1f0d1c2e6b819998e7d3-building/index.js  24.8kb
+
+⚡ Done in 2ms
+Bundling asset JumpServeBenchmarkStack/CleanupBenchmarksFn/Code/Stage...
+
+  ...d16cd323a31972a39648a8a53af30eb93276a13f081377e2-building/index.js  4.7kb
+
+⚡ Done in 1ms
+Bundling asset JumpServeBenchmarkStack/CancelBenchmarkFn/Code/Stage...
+
+  ...ee63b73a77228644b7da13ecc6c60aeee495964c65d77a75-building/index.js  6.0kb
+
+⚡ Done in 1ms
+Bundling asset JumpServeBenchmarkStack/GetBenchmarkLogsFn/Code/Stage...
+
+  ...9c0cc5141b3f85c48896e834b6a134fde7bb9da21ab0649d-building/index.js  3.1kb
+
+⚡ Done in 1ms
+Bundling asset JumpServeBenchmarkStack/BenchmarkIngestFn/Code/Stage...
+
+  ...593190c7862f90f901e8bbdb45b071136dd26f602bdcfae2-building/index.js  4.1kb
+
+⚡ Done in 2ms
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-lookup-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+Lookup role arn:aws:iam::395567831870:role/cdk-hnb659fds-lookup-role-395567831870-us-east-1 was not assumed. Proceeding with default credentials.
+Stack JumpServeBenchmarkStack
+Resources
+[~] AWS::Lambda::Function ResearchWorkflow/PackageExecutor ResearchWorkflowPackageExecutor32D08CE2
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c.zip
+ │       └─ [+] 9ef96fc884b17142b5f686b239f0acd23cf58147ad0d8c3c1868057750d5be53.zip
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c
+         └─ [+] asset.9ef96fc884b17142b5f686b239f0acd23cf58147ad0d8c3c1868057750d5be53
+[~] AWS::Lambda::Function ResearchWorkflow/PackageReaper ResearchWorkflowPackageReaperED8C6D40
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c.zip
+ │       └─ [+] 9ef96fc884b17142b5f686b239f0acd23cf58147ad0d8c3c1868057750d5be53.zip
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c
+         └─ [+] asset.9ef96fc884b17142b5f686b239f0acd23cf58147ad0d8c3c1868057750d5be53
+[~] AWS::Lambda::Function ResearchWorkflow/PackageIngest ResearchWorkflowPackageIngestAA97237D
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c.zip
+ │       └─ [+] 9ef96fc884b17142b5f686b239f0acd23cf58147ad0d8c3c1868057750d5be53.zip
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c
+         └─ [+] asset.9ef96fc884b17142b5f686b239f0acd23cf58147ad0d8c3c1868057750d5be53
+[~] AWS::Lambda::Function ResearchWorkflow/Api ResearchWorkflowApiE04EBDAC
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c.zip
+ │       └─ [+] 9ef96fc884b17142b5f686b239f0acd23cf58147ad0d8c3c1868057750d5be53.zip
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c
+         └─ [+] asset.9ef96fc884b17142b5f686b239f0acd23cf58147ad0d8c3c1868057750d5be53
+[~] AWS::Lambda::Function ResearchWorkflow/QueueWorker ResearchWorkflowQueueWorker702E601D
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c.zip
+ │       └─ [+] 9ef96fc884b17142b5f686b239f0acd23cf58147ad0d8c3c1868057750d5be53.zip
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c
+         └─ [+] asset.9ef96fc884b17142b5f686b239f0acd23cf58147ad0d8c3c1868057750d5be53
+[~] AWS::Lambda::Function ResearchWorkflow/AutonomyWorker ResearchWorkflowAutonomyWorker1BCFF82C
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c.zip
+ │       └─ [+] 9ef96fc884b17142b5f686b239f0acd23cf58147ad0d8c3c1868057750d5be53.zip
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c
+         └─ [+] asset.9ef96fc884b17142b5f686b239f0acd23cf58147ad0d8c3c1868057750d5be53
+
+
+
+✨  Number of stacks with differences: 1
+

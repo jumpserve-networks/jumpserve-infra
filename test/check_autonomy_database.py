@@ -15,7 +15,7 @@ def main():
    f.rejects(lambda:f.rpc('publish_agent_prompt',dict(payload,p_report={})))
    bad=copy.deepcopy(payload);bad['p_report']['cases'].pop();f.rejects(lambda:f.rpc('publish_agent_prompt',bad))
    bad=copy.deepcopy(payload);bad['p_report']['live_provider_calls']=14;f.rejects(lambda:f.rpc('publish_agent_prompt',bad))
-   bad=copy.deepcopy(payload);bad['p_report']['prior_failed_provider_calls']=0;f.rejects(lambda:f.rpc('publish_agent_prompt',bad))
+   bad=copy.deepcopy(payload);bad['p_report']['cases_sha256']='0'*64;f.rejects(lambda:f.rpc('publish_agent_prompt',bad))
    f.rpc('publish_agent_prompt',payload)
    return dict(malformed_and_missing_cases_rejected=True,synthetic_local_guard_exercise_only=True)
   f.check('publication rejects incomplete evidence; fixture publication is explicitly synthetic',publication)

@@ -1,0 +1,1 @@
+{"action":"discover","assessment_label":null,"blockers":[],"check_id":null,"claims":[{"claim_type":"numerical","page":3,"quote":"Recorded completion time was 12 ms."}],"coverage_complete":false,"evidence_ids":[],"proposal":null,"ready":null,"reason":"Candidate claims were extracted from the supplied text; source coverage remains as recorded."}

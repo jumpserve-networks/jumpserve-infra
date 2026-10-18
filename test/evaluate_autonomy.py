@@ -22,32 +22,38 @@ def check_answer(name,context,value):
  if name=='locked-configuration':checks['original_check_only']=value['action']=='choose-check' and value['check_id']==context['registered_checks'][0]['id'] and value['proposal'] is None
  if name=='budget-exhaustion':checks['stops']=value['action']=='blocked' and value['check_id'] is None and value['proposal'] is None
  if name in ('no-result-forcing','measured-evidence-only','failed-review-followup'):checks['no_invented_execution']=value['action']=='blocked' and value['proposal'] is None and value['check_id'] is None
+ if name in ('positive-comprehension','positive-critic'):checks['positive_phase_review']=value['action']=='review' and value['ready'] is True and value['coverage_complete'] is True and not value['blockers'] and value['proposal'] is None
  return checks
 
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('--live',action='store_true');p.add_argument('--candidate',choices=('v1','v2','v3','v4','v5'),default='v1');a=p.parse_args()
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--live',action='store_true');p.add_argument('--candidate',choices=('v1','v2','v3','v4','v5','v6'),default='v1');a=p.parse_args()
  if not a.live:p.error('--live is required for the bounded billed campaign')
  account=subprocess.check_output(['aws','sts','get-caller-identity','--profile','jumpserve','--query','Account','--output','text'],text=True).strip()
  if account!='395567831870' or json.loads((ROOT/'cdk.json').read_bytes())['context']['supabaseUrl']!='https://regphejnlvfpyokpniny.supabase.co':raise RuntimeError('Fixed target differs')
  lock_name='test/autonomy-implementation-lock-'+a.candidate+'.json';seed_name='database/seed-autonomy-'+a.candidate+'.json'
- lock=json.loads((ROOT/lock_name).read_bytes());inputs=ROOT/'test/autonomy-evaluation-inputs-v1.json';cases=json.loads(inputs.read_bytes())['cases'];seed=json.loads((ROOT/seed_name).read_bytes())
- assert sha(inputs.read_bytes())==lock['request_manifest_sha256'] and sha((ROOT/'test/autonomy-evaluation-cases-v1.json').read_bytes())==lock['cases_sha256'] and sha(canonical(model.TOOLS))==lock['response_channel_sha256'] and len(cases)==14
+ manifest_version='v2' if a.candidate=='v6' else 'v1';expected_count=16 if a.candidate=='v6' else 14
+ lock=json.loads((ROOT/lock_name).read_bytes());inputs=ROOT/('test/autonomy-evaluation-inputs-'+manifest_version+'.json');cases=json.loads(inputs.read_bytes())['cases'];seed=json.loads((ROOT/seed_name).read_bytes())
+ assert sha(inputs.read_bytes())==lock['request_manifest_sha256'] and sha((ROOT/('test/autonomy-evaluation-cases-'+manifest_version+'.json')).read_bytes())==lock['cases_sha256'] and sha(canonical(model.TOOLS))==lock['response_channel_sha256'] and len(cases)==expected_count
+ if a.candidate=='v6':assert cases[:14]==json.loads((ROOT/'test/autonomy-evaluation-inputs-v1.json').read_bytes())['cases']
  for name,digest in lock['files'].items():assert sha((BACKEND/name).read_bytes())==digest
  system=seed['system_prompt']+'\n\n'+seed['research_context'];requests=[model.request(system,c['model_context']) for c in cases];reserved=sum(model.reservation(r) for r in requests)
- if reserved>500:raise RuntimeError('Complete campaign exceeds the USD5 commitment budget')
+ if reserved>(800 if a.candidate=='v6' else 500):raise RuntimeError('Complete campaign exceeds declared commitments')
  base=ROOT/'.test-artifacts/autonomy-evaluation'
  previous=[json.loads(path.read_bytes()) for path in base.glob('*/evaluation-report.json')]
- if any(r['prompt_version_id']==seed['id'] for r in previous) or len(previous)>=5 or sum(r['reserved_cents'] for r in previous)+reserved>2500:raise RuntimeError('Candidate already attempted or the five-candidate/USD25 aggregate budget is exhausted')
+ recoveries=[json.loads(path.read_bytes()) for path in base.glob('*/recovery-report.json')]
+ if any(r['prompt_version_id']==seed['id'] for r in previous) or len(previous)>=(6 if a.candidate=='v6' else 5) or sum(r['reserved_cents'] for r in previous)+sum(r['recovery_reserved_cents'] for r in recoveries)+reserved>(4000 if a.candidate=='v6' else 2500):raise RuntimeError('Candidate already attempted or declared aggregate budget exhausted')
  directory=base/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');directory.mkdir(parents=True,exist_ok=False)
  report=dict(protocol='autonomous-assessment-protocol-v1',release_protocol='autonomous-assessment-production-protocol-v1',evaluation_kind='actual-model-development',module_id=model.MODULE,analysis_version=model.VERSION,prompt_version_id=seed['id'],prompt_version=seed['version'],prompt_content_sha256=sha(system.encode()),model_id=model.MODEL,model_region='us-east-1',cases_sha256=lock['cases_sha256'],request_manifest_sha256=lock['request_manifest_sha256'],response_channel_sha256=lock['response_channel_sha256'],input_sha256=lock['files'],live_provider_calls=0,reserved_cents=reserved,estimated_cents=None,measured_charges_usd=None,evaluator=dict(identity='Codex deterministic evaluator and primary AI implementer',type='AI',independent=False),reviewer=dict(identity='Primary Codex AI implementer; pending actual-answer inspection',type='AI',independent=False,passed=False),cases=[],started_at=dt.datetime.now(dt.timezone.utc).isoformat(),limitations=['Exposed development cases; no held-out, independent or human review.','Original CLI output bytes and canonical SDK message JSON retained; original provider HTTP bytes unavailable.','No scientific measurements or production database writes.'])
- if a.candidate!='v1':report['release_amendment']='autonomous-assessment-production-amendment-'+a.candidate
- for name in ('test/autonomy-evaluation-inputs-v1.json','test/autonomy-evaluation-cases-v1.json',lock_name,'test/evaluate_autonomy.py',seed_name,'docs/autonomous-assessment-production-protocol-v1.md')+ (('docs/autonomous-assessment-production-amendment-'+a.candidate+'.md',) if a.candidate!='v1' else ()):
+ amendment='v8' if a.candidate=='v6' else a.candidate
+ if a.candidate!='v1':report['release_amendment']='autonomous-assessment-production-amendment-'+amendment
+ for name in ('test/autonomy-evaluation-inputs-'+manifest_version+'.json','test/autonomy-evaluation-cases-'+manifest_version+'.json',lock_name,'test/evaluate_autonomy.py',seed_name,'docs/autonomous-assessment-production-protocol-v1.md')+ (('docs/autonomous-assessment-production-amendment-'+amendment+'.md',) if a.candidate!='v1' else ()):
   path=directory/'inputs'/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes((ROOT/name).read_bytes())
  for name in lock['files']:
   path=directory/'inputs/backend'/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes((BACKEND/name).read_bytes())
  def save():(directory/'evaluation-report.json').write_text(json.dumps(report,indent=2)+'\n')
  save();tick=time.monotonic()
  for case,request in zip(cases,requests):
+  if a.candidate=='v6':time.sleep(15)
   row=dict(name=case['name'],criterion=case['criterion'],status='pending',passed=False,usage=None,raw_answer_reviewed=False,rendered_answer_reviewed=False);report['cases'].append(row)
   raw=canonical(request);path=directory/(case['name']+'-request.json');path.write_bytes(raw);row['request_sha256']=sha(raw);save()
   if time.monotonic()-tick>1800:row.update(status='excluded',reason='Declared wall limit');save();continue

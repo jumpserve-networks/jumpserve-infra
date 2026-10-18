@@ -1,0 +1,45 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_1ax2D7Qh1v8t8VdoaGx1CX",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "discover",
+                            "reason": "text-extracted",
+                            "blockers": [],
+                            "claims": [
+                                {
+                                    "page": 3,
+                                    "quote": "Recorded completion time was 12 ms.",
+                                    "claim_type": "numerical"
+                                }
+                            ],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3427,
+        "outputTokens": 222,
+        "totalTokens": 3649,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 2502
+    }
+}

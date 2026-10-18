@@ -1,0 +1,2281 @@
+{
+  "protocol": "autonomous-assessment-production-amendment-v9",
+  "origin": "Actual source-bound compiled IPv6 manifest and controller context builder; deterministic lookup fixture, no new research measurements",
+  "cases": [
+    {
+      "name": "indexed-six-check-selection",
+      "criterion": "Select one exact retained automatic check from all six indexed candidates, without a new proposal or weakened condition.",
+      "model_context": {
+        "task": "planning",
+        "initial_prompt": "Operational verification of retained archived numerical checks only, under original frozen conditions and complete recorded coverage. No new network measurements or broader validation.",
+        "claim": {
+          "id": "5bd8ba39-d78b-54d2-8242-d84ec1036e1c",
+          "source_id": "ee1aae7b-d7d8-5f9f-a5ba-bd0a75e5d48d",
+          "location": "Figures13\u201315a/b,PDFpp17\u201319",
+          "description": "Published absolute folded metrics",
+          "claim_type": "numerical",
+          "scope": {
+            "conditions_and_limits": "145 complete days across three epochs; source observations correlated. Original per-zone/packet parser behavior is shared upstream evidence, not independently validated.",
+            "origin_assessment_sha256": "3c3532901aa4b507a61849666d925a0268c0658c0129dbfd729514df8c3a07b0",
+            "origin_claim_id": "folded-cells"
+          },
+          "metrics": [],
+          "priority": 3
+        },
+        "source": {
+          "id": "ee1aae7b-d7d8-5f9f-a5ba-bd0a75e5d48d",
+          "citation": "Tobias Fiebig and Anja Feldmann. How I learned to stop worrying and love IPv6: Measuring the Internet\u2019s Readiness for DNS over IPv6. IMC2025,22pages. DOI10.1145/3730567.3764439.",
+          "source_url": "https://pure.mpg.de/pubman/item/item_3670144_1/component/file_3670145/main.pdf",
+          "retrieved_url": "https://pure.mpg.de/rest/items/item_3670144_1/component/file_3670145/content",
+          "kind": "main research paper",
+          "role": "Published claims and numerical reference; exact requested preprint version.",
+          "retrieved_version": "PuRe item_3670144_1/file_3670145 main.pdf,22pages; PDF created2025-09-16,modified2025-09-17. No separate supplement listed; AppendicesA/B are embedded.",
+          "sha256": "f6378fb3de19aa8d3204f4d3a2028f95497f334862a5298aa6678ef1b816290b",
+          "byte_count": 2183602,
+          "access_status": "imported:full-text",
+          "review_status": "partial-review",
+          "review_definition": "Complete review means substantive examination of the entire retrieved work, including methods, results, limitations, references, figures, tables and appendices, with explicit reading notes. It does not mean rederivation or validation. Partial review names examined and unexamined content. Retrieved-unreviewed means bytes verified but no substantive content assessment. Unavailable-full-text means no lawful full work retrieved through recorded attempts. All reviews here are AI inspection by the implementer, not human or independent review.",
+          "examined": "All narrative sections 1\u20138, references 1\u201372, Table 1, AppendixAethics and AppendixBfigure captions/axes examined. Rendered Figures 1\u201321 inspected. Absolute cells of Figures 13 a/b,14 a/b,15 a/b transcribed and checked against summaries:1,152 rounded cells agree. Conditions: three fixed epochs, matching MTU/upstream/family/EDNS/cohort; archived reanalysis only.",
+          "unexamined": "Dense relative heatmap cells in Figures 9\u201312,13 c/d,14 c/d,15 c/d,16 and every point in time-series Figures 3\u20138/17\u201321 not individually verified. Figure 7 packet-size distributions and full raw-pcap provenance not reproduced. Main review remains partial despite all-page inspection and absolute-cell checks.",
+          "retrieval_attempts": [
+            {
+              "reason": "Initial curl attempts denied by public landing redirect; exact attempt time not captured.",
+              "status": 403,
+              "timestamp": null,
+              "url": "https://pure.mpg.de/pubman/item/item_3670144_1/component/file_3670145/main.pdf"
+            },
+            {
+              "reason": "Normal browser redirect exposed original REST resource; curl retained original PDF bytes. Filemtime is not asserted as retrieval time.",
+              "status": 200,
+              "timestamp": null,
+              "url": "https://pure.mpg.de/rest/items/item_3670144_1/component/file_3670145/content"
+            }
+          ],
+          "reviewer": {
+            "identity": "Codex primary assistant",
+            "independence": "Study implementer; no human review",
+            "type": "AI"
+          },
+          "findings": "All narrative sections 1\u20138, references 1\u201372, Table 1, AppendixAethics and AppendixBfigure captions/axes examined. Rendered Figures 1\u201321 inspected. Absolute cells of Figures 13 a/b,14 a/b,15 a/b transcribed and checked against summaries:1,152 rounded cells agree. Conditions: three fixed epochs, matching MTU/upstream/family/EDNS/cohort; archived reanalysis only.",
+          "limitations": "Dense relative heatmap cells in Figures 9\u201312,13 c/d,14 c/d,15 c/d,16 and every point in time-series Figures 3\u20138/17\u201321 not individually verified. Figure 7 packet-size distributions and full raw-pcap provenance not reproduced. Main review remains partial despite all-page inspection and absolute-cell checks."
+        },
+        "attempt_number": 1,
+        "limits": {
+          "maximum_spend_usd": 100,
+          "elapsed_days": 7,
+          "attempts_per_claim": 25,
+          "parallel_claims_per_paper": 2,
+          "global_parallel_claims": 4
+        },
+        "source_coverage": "Recorded source metadata and supplied text only; retrieval is not complete review.",
+        "registered_checks": [
+          {
+            "id": "6b32f6d1-06cf-5c38-8065-9c420377c2f0",
+            "title": "Archived numerical recheck: Figure 13a",
+            "execution_mode": "automatic",
+            "campaign": {
+              "id": "996f8745-d280-54b9-a3ba-73fae14591ec",
+              "protocol_id": "55eaee72-8ef0-5d13-880d-f2d2eb3cd5b4",
+              "followup_of": null,
+              "title": "Archived numerical recheck: Figure 13a",
+              "stage": "retrospective-import",
+              "experiment_type": "reanalysis",
+              "adapter": "matched-numeric-v1",
+              "planned_units": 192,
+              "coverage_limits": "Only the 192 reviewed absolute panel cells and retained archived means. Original per-query/packet parsing, relative figures, causality, generalization and current Internet conditions remain uncovered. TCP fallback is a TCP/UDP ratio; other packet metrics use observed UDP server identities, while TIMEOUT/SERVFAIL use NS-set outcomes."
+            },
+            "protocol": {
+              "algorithms": [
+                "matched-numeric-v1; exact Decimal absolute differences"
+              ],
+              "configurations": [
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280-nopmtud-lgi-v4-only-edns1232",
+                  "details_sha256": "583c86539bde8c39a112df78e530a1a41c66eb2e48fe5ae1f2c23d5a4517cb92"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280-nopmtud-lgi-v4-only-edns4096",
+                  "details_sha256": "7e33a9c9fe64a9c155b69365ce448760a8752108cd554367fd84a56be3aee115"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280-nopmtud-v4-only-edns1232",
+                  "details_sha256": "485b2977068ed4f34826f97130ad6b4b4ba67f12501b4c50100051269e752def"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280-nopmtud-v4-only-edns4096",
+                  "details_sha256": "49b89488b0dd39616e31f392823e873b386e7902c441559a214024b2f1f8981c"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280-pmtud-lgi-v4-only-edns1232",
+                  "details_sha256": "7cac1c9ae85e1d7c2edf854f65c9601752a49f897bbcaebb269ea7ac022bb194"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280-pmtud-lgi-v4-only-edns4096",
+                  "details_sha256": "7a85d7d1550f6c1f7fb2eee461c4d31fe5436c7f997d65524231c41399b7c22c"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280-pmtud-v4-only-edns1232",
+                  "details_sha256": "32d24959efa10912124120d3d82fe996f345fa037ab5ae18eecca7bbcd73a4a7"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280-pmtud-v4-only-edns4096",
+                  "details_sha256": "b1fcbce3883de0ee2bddaf960d8a5b8ccea4e4114911e2a5befc0bd7e00032f1"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns1232",
+                  "details_sha256": "24ea408d7847b218342e1ca10605736543456cb223adea54b0fbda3f1a23c71e"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns4096",
+                  "details_sha256": "8a36e0dba607c672f5f43c28088b9220a5b57f79196b99efe95d6e331a5ed9e8"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280onpath-nopmtud-v4-only-edns1232",
+                  "details_sha256": "56c892c00b46932f5941a19b8be3db5b16c99123b2c0eef586750b21f209b530"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280onpath-nopmtud-v4-only-edns4096",
+                  "details_sha256": "b2b590d12695fe48c777769fc576f4aefc78cefb14d012bd001aaa8e77a091c3"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1500-lgi-v4-only-edns1232",
+                  "details_sha256": "d1486f710947ef18e5b2f139cb1feae082d9008acccb0df0c9f0a5bba708f4ad"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1500-lgi-v4-only-edns4096",
+                  "details_sha256": "7bbf9ffd4a89226c9207203c71dd1a101e94ed4fd75432228869ff7c6bf0e801"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1500-v4-only-edns1232",
+                  "details_sha256": "d0abcdb452b3049fcb244c384677f95726f4df70caf94b9dd79003743fca9145"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1500-v4-only-edns4096",
+                  "details_sha256": "419d697921f2d70035d760ef8e48e7a73cb16f3b4ccb0505af0b89d4ee0b0830"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280-nopmtud-lgi-v4-only-edns1232",
+                  "details_sha256": "c2aa69347b298f1a6cb4cff2308cf4aa8adfa9a16ed03150a5417b96827d4fda"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280-nopmtud-lgi-v4-only-edns4096",
+                  "details_sha256": "e48813c3e0ade26abc05682a7b80c1b6613db2ee306454a10ee8df1c0a588e82"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280-nopmtud-v4-only-edns1232",
+                  "details_sha256": "f50c983b9cf15165361c74a4b13e7e62f0231d4ae943fe9a0b9ecb2776382d15"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280-nopmtud-v4-only-edns4096",
+                  "details_sha256": "32662d7354c25ecf33570d13a991f4d55eb94f6a36789b8ee97abc2821aac0f9"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280-pmtud-lgi-v4-only-edns1232",
+                  "details_sha256": "ed5a1acf3d46b8fb94b3b778705f2af8e0d1eb024a55a082892534db1e61b8cc"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280-pmtud-lgi-v4-only-edns4096",
+                  "details_sha256": "039037013cd3c539557b8d3159f06ccc334c7339e010b1fe7376cc09c19deefe"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280-pmtud-v4-only-edns1232",
+                  "details_sha256": "5c56fa348cc7542351ac474f9cf7fd704f2dc44db6dca80f9f18ab12afcfac55"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280-pmtud-v4-only-edns4096",
+                  "details_sha256": "12d50b52d4167bc2e93b4be2cf66ea449bead968d10683bb30ec07de71ac8a86"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns1232",
+                  "details_sha256": "a35e7d76904ab7e28ab5ccc88d252868406234e1f607844a51c43a8764b1da91"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns4096",
+                  "details_sha256": "6efe0be21d2d46eb0117163d7792e2aec8e905042051548048f8e4bbf5ac12eb"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280onpath-nopmtud-v4-only-edns1232",
+                  "details_sha256": "70e954a7aa4679485e23c1f0d7cf26be874201d7f295af089a5042d9e6440564"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280onpath-nopmtud-v4-only-edns4096",
+                  "details_sha256": "ef8d2f8a513f54983cd047ac292633d182750de5dc3d026b83c8027b1bba6f2b"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1500-lgi-v4-only-edns1232",
+                  "details_sha256": "acfa68cebc0a70fb3a0e161441fbcb1cb50771f31b849f7fced00b704622cfa2"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1500-lgi-v4-only-edns4096",
+                  "details_sha256": "ad98e5ac6a7f838a34f658270de004e60e8daa62dd8c61a21b170efc215bb9e7"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1500-v4-only-edns1232",
+                  "details_sha256": "917f38772e9dc664e1b3b4227601bb5c5887969886069aa80ef3292760334885"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1500-v4-only-edns4096",
+                  "details_sha256": "21463aa248c74ff894f168742fc6784f679183df415585b7f1f727ecce7b984b"
+                }
+              ],
+              "controls": [
+                "Exact observation/configuration/metric/units matching",
+                "No zero imputation",
+                "Unique observation keys"
+              ],
+              "coverage_limits": "Only the 192 reviewed absolute panel cells and retained archived means. Original per-query/packet parsing, relative figures, causality, generalization and current Internet conditions remain uncovered. TCP fallback is a TCP/UDP ratio; other packet metrics use observed UDP server identities, while TIMEOUT/SERVFAIL use NS-set outcomes.",
+              "data_origin": "archived-data",
+              "dates_or_epochs": "Use the explicit identities and epochs in the input; no present-day substitution.",
+              "dependence": "Dependencies may exist; no independent replications or population inference are asserted.",
+              "exclusions": "Unmatched observations are excluded and recorded; duplicates, unit mismatches and changed inputs fail the run.",
+              "hypotheses": "Numerical agreement is checked separately from correctness, causality and generalization.",
+              "input_versions": [
+                {
+                  "identity": "matched-input.json",
+                  "sha256": "374017eba78cb578a5510b4fbbe831154f855cb06f9e9c57468d25b7ac39cd23"
+                },
+                {
+                  "identity": "prior-assessment-v2.json; source of recorded means",
+                  "sha256": "3c3532901aa4b507a61849666d925a0268c0658c0129dbfd729514df8c3a07b0"
+                },
+                {
+                  "identity": "reviewed PuRe main.pdf",
+                  "sha256": "f6378fb3de19aa8d3204f4d3a2028f95497f334862a5298aa6678ef1b816290b"
+                }
+              ],
+              "metrics": [
+                {
+                  "name": "SERVFAIL",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "TIMEOUT",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "edns0_fallback",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "tcp_fallback",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "udp_fragments",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "udp_packet_too_big",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                }
+              ],
+              "missing_data": "Absent expected observations remain missing. Invalid and ambiguous values remain distinct from recorded zero.",
+              "prior_exposure": "All retained values and the original numerical agreement were inspected in the earlier assessment. This is an exposed-data numerical recheck, not held-out validation or new raw-data reanalysis.",
+              "questions": [
+                "Do the retained archived-summary values for Figure 13a still match its separately transcribed published cells within 0.0051 percentage points?"
+              ],
+              "replication_unit": "The explicitly identified observation; no independence is inferred between observations.",
+              "resource_limits": {
+                "cost_basis": "Local or API hosting costs are unallocated; missing charges are not zero. No experiment instances or model calls are requested.",
+                "estimated_cost_usd": null,
+                "max_input_bytes": 256000,
+                "max_observations": 192,
+                "wall_seconds": 10
+              },
+              "sample_size_rationale": "Census of the supplied published comparison cells, with unexpected observations preserved as exclusions.",
+              "seeds": {
+                "applicable": false,
+                "rationale": "Deterministic census; no randomized algorithm."
+              },
+              "sensitivity": {
+                "applicable": false,
+                "rationale": "This campaign checks one fixed declared tolerance; amended tolerances require separate protocols."
+              },
+              "statistics": "Exact Decimal absolute differences of the supplied percentages; differences are percentage points. No inferential intervals or independent replication inferred.",
+              "stopping_rule": "Stop on an input identity, schema, configuration, units or budget violation; preserve the failed attempt.",
+              "preparation": {
+                "version": "research-preparation-v1",
+                "original_manifest_sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+                "original_manifest_plan_id": "ipv6-archive-v1",
+                "input_transformation": "Source identifiers rebound to this study; numerical values, units and observation identities preserved."
+              }
+            },
+            "protocol_reference": {
+              "id": "55eaee72-8ef0-5d13-880d-f2d2eb3cd5b4",
+              "document_sha256": "5c0652111b8c740b71c26b2a58fa5e6c9a1ab774b69b188c255ded7491f4d77f",
+              "view": "selection-index; full configuration details retained for the selected fresh review"
+            },
+            "retained_input_inventory": {
+              "sha256": "374017eba78cb578a5510b4fbbe831154f855cb06f9e9c57468d25b7ac39cd23",
+              "byte_count": 123739,
+              "provenance": "Computed from the hash-verified compiled original; counts describe archived input records, not new measurements.",
+              "counts": {
+                "published": {
+                  "recorded": 192,
+                  "missing": 0,
+                  "invalid": 0,
+                  "ambiguous": 0
+                },
+                "observed": {
+                  "recorded": 192,
+                  "missing": 0,
+                  "invalid": 0,
+                  "ambiguous": 0
+                }
+              }
+            }
+          },
+          {
+            "id": "9eea53db-e7f2-5620-8a53-a63c52a64f4b",
+            "title": "Archived numerical recheck: Figure 13b",
+            "execution_mode": "automatic",
+            "campaign": {
+              "id": "dddc5127-eb6d-562b-a38b-1d0a33bdcfb3",
+              "protocol_id": "c5205474-079e-5ee4-853b-e4be6f3ea480",
+              "followup_of": null,
+              "title": "Archived numerical recheck: Figure 13b",
+              "stage": "retrospective-import",
+              "experiment_type": "reanalysis",
+              "adapter": "matched-numeric-v1",
+              "planned_units": 192,
+              "coverage_limits": "Only the 192 reviewed absolute panel cells and retained archived means. Original per-query/packet parsing, relative figures, causality, generalization and current Internet conditions remain uncovered. TCP fallback is a TCP/UDP ratio; other packet metrics use observed UDP server identities, while TIMEOUT/SERVFAIL use NS-set outcomes."
+            },
+            "protocol": {
+              "algorithms": [
+                "matched-numeric-v1; exact Decimal absolute differences"
+              ],
+              "configurations": [
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280-nopmtud-lgi-v6-only-edns1232",
+                  "details_sha256": "7200230c5557a4ffaa14043f5f1cc99a4ba623086d685bffdeadf165a6723182"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280-nopmtud-lgi-v6-only-edns4096",
+                  "details_sha256": "56daefe830470c97a71882286f21b939f9f3eaaa5e0f373e1ce1a510935121bf"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280-nopmtud-v6-only-edns1232",
+                  "details_sha256": "2b9b22eb44ad174aea0b80b1df66a8aa594703ab39d8496287545240f146af88"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280-nopmtud-v6-only-edns4096",
+                  "details_sha256": "ac581939e7769f5f60f7b4439a83f85192fc1abaacd8f787f21c1a43c53af9b1"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280-pmtud-lgi-v6-only-edns1232",
+                  "details_sha256": "19f188a4086eb221edf484309b144f2154149b29b82eb4cf12dd7c296f55852a"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280-pmtud-lgi-v6-only-edns4096",
+                  "details_sha256": "7a49ed28c4ca40773a9e9e4cafe001e8192f59eb5e42d782e30edb0e672e79c2"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280-pmtud-v6-only-edns1232",
+                  "details_sha256": "23a60dfc62267ef3275dd412b34effc03674187d5541b504113ab849c26f2106"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280-pmtud-v6-only-edns4096",
+                  "details_sha256": "87f73394f0dc6f5a54d2d4ec6a4d631c24784afd23e8d348be348f00f965cdae"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280onpath-nopmtud-lgi-v6-only-edns1232",
+                  "details_sha256": "5cdcbf68d772846fbab23abe9aac3a84a070e0b1480a43c847b9d8137748d6fb"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280onpath-nopmtud-lgi-v6-only-edns4096",
+                  "details_sha256": "bdc9f9929c95865336775470c9fece5120aecb6b803e78936a731a2d29a82177"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280onpath-nopmtud-v6-only-edns1232",
+                  "details_sha256": "aa7b5a3e85d91ca24ddd8e3acce7955bbebf37385fc5a63c8e04cd0dd861644b"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1280onpath-nopmtud-v6-only-edns4096",
+                  "details_sha256": "ebeea222e5324acf6c4024ad4bd3e7f1d8182f01549ea36ee90a5da51f3d85b9"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1500-lgi-v6-only-edns1232",
+                  "details_sha256": "c5bc47addc5709ef7a9b11aadbcc584048f5652eff56b9e5fd48ddbddb476d6c"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1500-lgi-v6-only-edns4096",
+                  "details_sha256": "004a6965542775b9e918b209bc213fd1b0c56aa172131f715648380a3e979881"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1500-v6-only-edns1232",
+                  "details_sha256": "648a7407e5724952fe4b42dd054fcf15b32f09e1d850cad56cfd121502550077"
+                },
+                {
+                  "identity": "pre-lgi:dnssec--mtu1500-v6-only-edns4096",
+                  "details_sha256": "95f9a39a4ae4ab0e7b0154d6e9ced3931d1ed7f6bb2516fbdcfdcf0d29d63d6c"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280-nopmtud-lgi-v6-only-edns1232",
+                  "details_sha256": "cf737e246be3dbe495e689fda83e3627115dafffc05256c6998b18656e6ce814"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280-nopmtud-lgi-v6-only-edns4096",
+                  "details_sha256": "583eb130196cdbfc5b6973f8885191773e1e71dfd13ca1289168d4afd2326fb6"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280-nopmtud-v6-only-edns1232",
+                  "details_sha256": "305ca686426d1145234d9819a1af39cbe45c627d0982714f5acbda7294d86bc7"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280-nopmtud-v6-only-edns4096",
+                  "details_sha256": "ba98679618cbd7180cc5f9d3f90c53af986d20b58962127456cfd190a006ede8"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280-pmtud-lgi-v6-only-edns1232",
+                  "details_sha256": "782427deaf522a7faeafb7df26b32a6d908ed9f41779c6d22663465168a30c51"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280-pmtud-lgi-v6-only-edns4096",
+                  "details_sha256": "7d31c242fec4bd193992147627ac9adb47cf97986172ddfa70255b5cc1adb78b"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280-pmtud-v6-only-edns1232",
+                  "details_sha256": "836972288c32dd2e2d37306caa0dcbbdc61bde0af8ed98af16c309c19695ca93"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280-pmtud-v6-only-edns4096",
+                  "details_sha256": "6407b37a06a881720de93719e0b20aead8a32637fde343694b5950745d24ab64"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280onpath-nopmtud-lgi-v6-only-edns1232",
+                  "details_sha256": "1132b72da23d051ecfe19d9189d8bbf2cdca830893f3d58242770c8bafaf1d8b"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280onpath-nopmtud-lgi-v6-only-edns4096",
+                  "details_sha256": "60e4d8292955ef8920d35a57231e4d4769943e0431ebc564d0065af2342ab27f"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280onpath-nopmtud-v6-only-edns1232",
+                  "details_sha256": "d5096da09e7458886ca7b1dd91d33e9103f7aab3d78e050fc453b2812e48d737"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1280onpath-nopmtud-v6-only-edns4096",
+                  "details_sha256": "dabf7ec2ff0213ac8a840316b21632e288cecca61b7ea8e378d6403dd0753695"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1500-lgi-v6-only-edns1232",
+                  "details_sha256": "e5b75abea5f340d36df1b8731f4ec7844608136db1c55a4909d9777fbd120e89"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1500-lgi-v6-only-edns4096",
+                  "details_sha256": "c1d4bb7e84d617047ffacc550316a4e2ec2a26bad1f7d8565b9efcbe5e89ed75"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1500-v6-only-edns1232",
+                  "details_sha256": "b76f176e0d082b3829b978aec8116cde32ec7f11d299f285d0fde0e16bb5b418"
+                },
+                {
+                  "identity": "pre-lgi:no-dnssec--mtu1500-v6-only-edns4096",
+                  "details_sha256": "38e3405f6bc6f7a03d953e78bf3ec8e7fa0f2c6f1b1eab1be0b42438ecc52ca6"
+                }
+              ],
+              "controls": [
+                "Exact observation/configuration/metric/units matching",
+                "No zero imputation",
+                "Unique observation keys"
+              ],
+              "coverage_limits": "Only the 192 reviewed absolute panel cells and retained archived means. Original per-query/packet parsing, relative figures, causality, generalization and current Internet conditions remain uncovered. TCP fallback is a TCP/UDP ratio; other packet metrics use observed UDP server identities, while TIMEOUT/SERVFAIL use NS-set outcomes.",
+              "data_origin": "archived-data",
+              "dates_or_epochs": "Use the explicit identities and epochs in the input; no present-day substitution.",
+              "dependence": "Dependencies may exist; no independent replications or population inference are asserted.",
+              "exclusions": "Unmatched observations are excluded and recorded; duplicates, unit mismatches and changed inputs fail the run.",
+              "hypotheses": "Numerical agreement is checked separately from correctness, causality and generalization.",
+              "input_versions": [
+                {
+                  "identity": "matched-input.json",
+                  "sha256": "6d9bc082d81292c135cb84103217f6851ab8291af750d28cbc1c0036dcd269d8"
+                },
+                {
+                  "identity": "prior-assessment-v2.json; source of recorded means",
+                  "sha256": "3c3532901aa4b507a61849666d925a0268c0658c0129dbfd729514df8c3a07b0"
+                },
+                {
+                  "identity": "reviewed PuRe main.pdf",
+                  "sha256": "f6378fb3de19aa8d3204f4d3a2028f95497f334862a5298aa6678ef1b816290b"
+                }
+              ],
+              "metrics": [
+                {
+                  "name": "SERVFAIL",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "TIMEOUT",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "edns0_fallback",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "tcp_fallback",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "udp_fragments",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "udp_packet_too_big",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                }
+              ],
+              "missing_data": "Absent expected observations remain missing. Invalid and ambiguous values remain distinct from recorded zero.",
+              "prior_exposure": "All retained values and the original numerical agreement were inspected in the earlier assessment. This is an exposed-data numerical recheck, not held-out validation or new raw-data reanalysis.",
+              "questions": [
+                "Do the retained archived-summary values for Figure 13b still match its separately transcribed published cells within 0.0051 percentage points?"
+              ],
+              "replication_unit": "The explicitly identified observation; no independence is inferred between observations.",
+              "resource_limits": {
+                "cost_basis": "Local or API hosting costs are unallocated; missing charges are not zero. No experiment instances or model calls are requested.",
+                "estimated_cost_usd": null,
+                "max_input_bytes": 256000,
+                "max_observations": 192,
+                "wall_seconds": 10
+              },
+              "sample_size_rationale": "Census of the supplied published comparison cells, with unexpected observations preserved as exclusions.",
+              "seeds": {
+                "applicable": false,
+                "rationale": "Deterministic census; no randomized algorithm."
+              },
+              "sensitivity": {
+                "applicable": false,
+                "rationale": "This campaign checks one fixed declared tolerance; amended tolerances require separate protocols."
+              },
+              "statistics": "Exact Decimal absolute differences of the supplied percentages; differences are percentage points. No inferential intervals or independent replication inferred.",
+              "stopping_rule": "Stop on an input identity, schema, configuration, units or budget violation; preserve the failed attempt.",
+              "preparation": {
+                "version": "research-preparation-v1",
+                "original_manifest_sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+                "original_manifest_plan_id": "ipv6-archive-v1",
+                "input_transformation": "Source identifiers rebound to this study; numerical values, units and observation identities preserved."
+              }
+            },
+            "protocol_reference": {
+              "id": "c5205474-079e-5ee4-853b-e4be6f3ea480",
+              "document_sha256": "31c2e67df2c5730b0e7ac86d33af6c5f2a7203adddb94b17ce69c4db23782db3",
+              "view": "selection-index; full configuration details retained for the selected fresh review"
+            },
+            "retained_input_inventory": {
+              "sha256": "6d9bc082d81292c135cb84103217f6851ab8291af750d28cbc1c0036dcd269d8",
+              "byte_count": 123565,
+              "provenance": "Computed from the hash-verified compiled original; counts describe archived input records, not new measurements.",
+              "counts": {
+                "published": {
+                  "recorded": 192,
+                  "missing": 0,
+                  "invalid": 0,
+                  "ambiguous": 0
+                },
+                "observed": {
+                  "recorded": 192,
+                  "missing": 0,
+                  "invalid": 0,
+                  "ambiguous": 0
+                }
+              }
+            }
+          },
+          {
+            "id": "adad58df-8d42-59cd-978c-ea0d1f349943",
+            "title": "Archived numerical recheck: Figure 14a",
+            "execution_mode": "automatic",
+            "campaign": {
+              "id": "12bc7c10-c1d7-560d-8e2d-472808eac8a1",
+              "protocol_id": "8c86168b-5ebf-5229-a83b-a6ef5ebe36d0",
+              "followup_of": null,
+              "title": "Archived numerical recheck: Figure 14a",
+              "stage": "retrospective-import",
+              "experiment_type": "reanalysis",
+              "adapter": "matched-numeric-v1",
+              "planned_units": 192,
+              "coverage_limits": "Only the 192 reviewed absolute panel cells and retained archived means. Original per-query/packet parsing, relative figures, causality, generalization and current Internet conditions remain uncovered. TCP fallback is a TCP/UDP ratio; other packet metrics use observed UDP server identities, while TIMEOUT/SERVFAIL use NS-set outcomes."
+            },
+            "protocol": {
+              "algorithms": [
+                "matched-numeric-v1; exact Decimal absolute differences"
+              ],
+              "configurations": [
+                {
+                  "identity": "current:dnssec--mtu1280-nopmtud-lgi-v4-only-edns1232",
+                  "details_sha256": "7f6058d92d95ff85cf7eff555aeefe3e8daa8f902f25421499b2f08916af3258"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280-nopmtud-lgi-v4-only-edns4096",
+                  "details_sha256": "e96ced8283ba15d4ad0037dc10a17a7ec8762bcb6115a5af4b86e217ba8af499"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280-nopmtud-v4-only-edns1232",
+                  "details_sha256": "b6ac8a5edf374c01d853341cfb206bed1b0cc6453fe12428bc8e90a81dcffcaf"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280-nopmtud-v4-only-edns4096",
+                  "details_sha256": "10f37d5c74f8f11dd1feb8d6f4df5366ddf50e824d69c2240fca1449b25121a6"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280-pmtud-lgi-v4-only-edns1232",
+                  "details_sha256": "abb75cda5cc7dc3995062c862a9ca60156d814945d3ef0baf0f415ee45605485"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280-pmtud-lgi-v4-only-edns4096",
+                  "details_sha256": "af3da241a311937128e4e9bd6ef5147668a707ef105926b872b93bf68915d43c"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280-pmtud-v4-only-edns1232",
+                  "details_sha256": "a95a71d6be1d26baedd568730172f9a41bbcb55a063add714167af2112230a95"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280-pmtud-v4-only-edns4096",
+                  "details_sha256": "9bd929ae3beb641c93bbdc588d956d33d42cf22eeaf830ae505a1ee8cb07122e"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns1232",
+                  "details_sha256": "0c68a21722e31674f308630fcce6c9e97729c25fe35fe9169c3cf87013bee95a"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns4096",
+                  "details_sha256": "e2920ed9e161f39265093f52c655fc4c899c15874a1297591c7e36bd05c5f9d0"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280onpath-nopmtud-v4-only-edns1232",
+                  "details_sha256": "cc6998047bb72dd9d5f80c6c752fc20c8fe26d7703dea0617f1031a48fc66593"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280onpath-nopmtud-v4-only-edns4096",
+                  "details_sha256": "4afbe17587601c05e2ffbb58b0b971f6a83151072246eb3c186231412c7bbcaf"
+                },
+                {
+                  "identity": "current:dnssec--mtu1500-lgi-v4-only-edns1232",
+                  "details_sha256": "44ca68001a6fcad4079192d328f9145e2cd32868e3bed2dea4fb8a02d9b2f96d"
+                },
+                {
+                  "identity": "current:dnssec--mtu1500-lgi-v4-only-edns4096",
+                  "details_sha256": "9c448bca4d9064ab74169bb501ead1c2d81be7727d7d568cfb553060afb75417"
+                },
+                {
+                  "identity": "current:dnssec--mtu1500-v4-only-edns1232",
+                  "details_sha256": "5d1cfd6b5ce93ff13cc039b5ab22648d9a1d0e293d802bbcbed986c735c1d348"
+                },
+                {
+                  "identity": "current:dnssec--mtu1500-v4-only-edns4096",
+                  "details_sha256": "5f86bb3192899a75e05d7106bec18aabd605ed16464f1b52e838721d9e1e0b58"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280-nopmtud-lgi-v4-only-edns1232",
+                  "details_sha256": "b8ea164d0b41adfa801617c0b844c0e7c31d619cf693335b2687d80c61c455f2"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280-nopmtud-lgi-v4-only-edns4096",
+                  "details_sha256": "0d3f73c4b889f1275a9046ca6047365c137ca7cd05c8be11a1a1ae7e92ad430e"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280-nopmtud-v4-only-edns1232",
+                  "details_sha256": "aa83c4c58653bd28eda531fcce97c84915c42c11bea15b26aabdae8337d84ab3"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280-nopmtud-v4-only-edns4096",
+                  "details_sha256": "bffd350322a8807260f44f97a2f26d1691954ae39e9f1a267517dbb93718ec87"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280-pmtud-lgi-v4-only-edns1232",
+                  "details_sha256": "d6d3155d5cde04542687add4dd6cdf6e5afbe7b065c4226ebde03d5ca3610952"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280-pmtud-lgi-v4-only-edns4096",
+                  "details_sha256": "09f4dd41a8a9f02d532f907d61edd961284ab2a09cf7f8fa2d5ee1f9eae17da1"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280-pmtud-v4-only-edns1232",
+                  "details_sha256": "d79ca7dae9de853d8bf6ee2ff7e8e4a55b3c008b778ed5fb967a54bf62f91731"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280-pmtud-v4-only-edns4096",
+                  "details_sha256": "d3e512f455196654cf435646f88cf0d4eac566590dc2de0572dee0c2aedb30d6"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns1232",
+                  "details_sha256": "b6a51f2c3fda4de25088d8625ad0044089d708c9b68b79fade04e44f4d344e61"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns4096",
+                  "details_sha256": "58fd9c908f6b5f0b415758dbc1b2f20abf30893e613ed800e2fdf16d740efa0f"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280onpath-nopmtud-v4-only-edns1232",
+                  "details_sha256": "3338d9bbb80d30f63a2e3b96aee26d2e7e2579a204a1578c4cfc82f15873888e"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280onpath-nopmtud-v4-only-edns4096",
+                  "details_sha256": "6a68bcc8c96deecea051bf4795191dc3e7bc73464928a1d138a70bd11317c16a"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1500-lgi-v4-only-edns1232",
+                  "details_sha256": "d1043ff9b519d5499798bae193133523853b78e5258065a441251bb8ddfaafc3"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1500-lgi-v4-only-edns4096",
+                  "details_sha256": "4ea8402dfff6860b4af89ba19ab9501a1edfd7e247f9adb5ee530d0a0fec1d77"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1500-v4-only-edns1232",
+                  "details_sha256": "f251e964f9e53e6d61a6e3aedde668f3f0504f01b18f6f435da71c5983c37d47"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1500-v4-only-edns4096",
+                  "details_sha256": "1d684f2627c77d9982cabe1692ca29f01424a12c7a26fe282722d8509da3fc1d"
+                }
+              ],
+              "controls": [
+                "Exact observation/configuration/metric/units matching",
+                "No zero imputation",
+                "Unique observation keys"
+              ],
+              "coverage_limits": "Only the 192 reviewed absolute panel cells and retained archived means. Original per-query/packet parsing, relative figures, causality, generalization and current Internet conditions remain uncovered. TCP fallback is a TCP/UDP ratio; other packet metrics use observed UDP server identities, while TIMEOUT/SERVFAIL use NS-set outcomes.",
+              "data_origin": "archived-data",
+              "dates_or_epochs": "Use the explicit identities and epochs in the input; no present-day substitution.",
+              "dependence": "Dependencies may exist; no independent replications or population inference are asserted.",
+              "exclusions": "Unmatched observations are excluded and recorded; duplicates, unit mismatches and changed inputs fail the run.",
+              "hypotheses": "Numerical agreement is checked separately from correctness, causality and generalization.",
+              "input_versions": [
+                {
+                  "identity": "matched-input.json",
+                  "sha256": "150ae18ab99f6a5af6c376a43ef5b6f6a28fe13d022e3fc9017f47e82fc32ba9"
+                },
+                {
+                  "identity": "prior-assessment-v2.json; source of recorded means",
+                  "sha256": "3c3532901aa4b507a61849666d925a0268c0658c0129dbfd729514df8c3a07b0"
+                },
+                {
+                  "identity": "reviewed PuRe main.pdf",
+                  "sha256": "f6378fb3de19aa8d3204f4d3a2028f95497f334862a5298aa6678ef1b816290b"
+                }
+              ],
+              "metrics": [
+                {
+                  "name": "SERVFAIL",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "TIMEOUT",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "edns0_fallback",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "tcp_fallback",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "udp_fragments",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "udp_packet_too_big",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                }
+              ],
+              "missing_data": "Absent expected observations remain missing. Invalid and ambiguous values remain distinct from recorded zero.",
+              "prior_exposure": "All retained values and the original numerical agreement were inspected in the earlier assessment. This is an exposed-data numerical recheck, not held-out validation or new raw-data reanalysis.",
+              "questions": [
+                "Do the retained archived-summary values for Figure 14a still match its separately transcribed published cells within 0.0051 percentage points?"
+              ],
+              "replication_unit": "The explicitly identified observation; no independence is inferred between observations.",
+              "resource_limits": {
+                "cost_basis": "Local or API hosting costs are unallocated; missing charges are not zero. No experiment instances or model calls are requested.",
+                "estimated_cost_usd": null,
+                "max_input_bytes": 256000,
+                "max_observations": 192,
+                "wall_seconds": 10
+              },
+              "sample_size_rationale": "Census of the supplied published comparison cells, with unexpected observations preserved as exclusions.",
+              "seeds": {
+                "applicable": false,
+                "rationale": "Deterministic census; no randomized algorithm."
+              },
+              "sensitivity": {
+                "applicable": false,
+                "rationale": "This campaign checks one fixed declared tolerance; amended tolerances require separate protocols."
+              },
+              "statistics": "Exact Decimal absolute differences of the supplied percentages; differences are percentage points. No inferential intervals or independent replication inferred.",
+              "stopping_rule": "Stop on an input identity, schema, configuration, units or budget violation; preserve the failed attempt.",
+              "preparation": {
+                "version": "research-preparation-v1",
+                "original_manifest_sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+                "original_manifest_plan_id": "ipv6-archive-v1",
+                "input_transformation": "Source identifiers rebound to this study; numerical values, units and observation identities preserved."
+              }
+            },
+            "protocol_reference": {
+              "id": "8c86168b-5ebf-5229-a83b-a6ef5ebe36d0",
+              "document_sha256": "f5c32f8b7fe46b3e59969ad9ed92f9d7a506c829be7c8a6bf34facb545c22967",
+              "view": "selection-index; full configuration details retained for the selected fresh review"
+            },
+            "retained_input_inventory": {
+              "sha256": "150ae18ab99f6a5af6c376a43ef5b6f6a28fe13d022e3fc9017f47e82fc32ba9",
+              "byte_count": 123750,
+              "provenance": "Computed from the hash-verified compiled original; counts describe archived input records, not new measurements.",
+              "counts": {
+                "published": {
+                  "recorded": 192,
+                  "missing": 0,
+                  "invalid": 0,
+                  "ambiguous": 0
+                },
+                "observed": {
+                  "recorded": 192,
+                  "missing": 0,
+                  "invalid": 0,
+                  "ambiguous": 0
+                }
+              }
+            }
+          },
+          {
+            "id": "9f34ace0-8b69-5ae0-ab5f-50d074f30656",
+            "title": "Archived numerical recheck: Figure 14b",
+            "execution_mode": "automatic",
+            "campaign": {
+              "id": "d5f7b47f-a94d-5b8b-9810-bdb1382881b4",
+              "protocol_id": "48baedba-0bba-5aa6-9814-3143956beb48",
+              "followup_of": null,
+              "title": "Archived numerical recheck: Figure 14b",
+              "stage": "retrospective-import",
+              "experiment_type": "reanalysis",
+              "adapter": "matched-numeric-v1",
+              "planned_units": 192,
+              "coverage_limits": "Only the 192 reviewed absolute panel cells and retained archived means. Original per-query/packet parsing, relative figures, causality, generalization and current Internet conditions remain uncovered. TCP fallback is a TCP/UDP ratio; other packet metrics use observed UDP server identities, while TIMEOUT/SERVFAIL use NS-set outcomes."
+            },
+            "protocol": {
+              "algorithms": [
+                "matched-numeric-v1; exact Decimal absolute differences"
+              ],
+              "configurations": [
+                {
+                  "identity": "current:dnssec--mtu1280-nopmtud-lgi-v6-only-edns1232",
+                  "details_sha256": "004304125fb905c429ce589ea7e77690addd038e6f20fd8a555dc6663f663af3"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280-nopmtud-lgi-v6-only-edns4096",
+                  "details_sha256": "987a9c9dabf0b7e112b5a75d4c989afbeae07abdef31566b2ee076e231ea68e4"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280-nopmtud-v6-only-edns1232",
+                  "details_sha256": "4f5a4326fbfdb07fede979baf17351db5ad5b1ba5f1d46d69b09aaa4692b3f40"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280-nopmtud-v6-only-edns4096",
+                  "details_sha256": "531b5b3dff9b84ea0af49fbe219a4ba611f8062ede4902d3f1df5a09c4525bd9"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280-pmtud-lgi-v6-only-edns1232",
+                  "details_sha256": "873b8d1e6c8e174d118065447f29cbb5b0b1e6ca03844d82ab7b4f6838298a7b"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280-pmtud-lgi-v6-only-edns4096",
+                  "details_sha256": "1cba246f864d62355168bdacb594f7691591077979eec3f6cb8413840e1a302e"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280-pmtud-v6-only-edns1232",
+                  "details_sha256": "89259c92eabd3ea8e4bc900cd8a6cfde5eb6626f2f32e8b4e1e2d5aa176bd04e"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280-pmtud-v6-only-edns4096",
+                  "details_sha256": "a5c63631f0485bc9b2ae4325f9bd48d0e372a933505f3e391a629f7f40ed8caa"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280onpath-nopmtud-lgi-v6-only-edns1232",
+                  "details_sha256": "cc08889ddbbd1b23338e8a0b9ec3eaebdf20093818f23d4996d009a31b030092"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280onpath-nopmtud-lgi-v6-only-edns4096",
+                  "details_sha256": "333399db6c144b57baffd05cd87a5ddebb223b35fbf6024cd2877e665774b17b"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280onpath-nopmtud-v6-only-edns1232",
+                  "details_sha256": "7ce791a7e1ee55a6adc3725dfee5ddc11cea1fd0f6e94345cfbf3862d686991f"
+                },
+                {
+                  "identity": "current:dnssec--mtu1280onpath-nopmtud-v6-only-edns4096",
+                  "details_sha256": "0e4ff71f5320041fd56c6ab01df80d6b7a24bc5dafa4e77c8882b3f59ae897b4"
+                },
+                {
+                  "identity": "current:dnssec--mtu1500-lgi-v6-only-edns1232",
+                  "details_sha256": "94045d4bd71ea69e586e4f9724ebf4f462bdf91a3a9de7138131190be112dc35"
+                },
+                {
+                  "identity": "current:dnssec--mtu1500-lgi-v6-only-edns4096",
+                  "details_sha256": "1f6f885e3b72ca53547b8e0e60c24e01e90b6b2256102ab7a2853e127117f319"
+                },
+                {
+                  "identity": "current:dnssec--mtu1500-v6-only-edns1232",
+                  "details_sha256": "f2f43a681e946adf8718b04af91c61408125f41761ee145c9173ace387a75d49"
+                },
+                {
+                  "identity": "current:dnssec--mtu1500-v6-only-edns4096",
+                  "details_sha256": "3fe5c84fa45e06fb30433a8758a566d4f8751be1db87b028c9eb49eb7c184fc6"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280-nopmtud-lgi-v6-only-edns1232",
+                  "details_sha256": "41c6814e6e27a8affc4a952e78184932d1a45d2d4372d33e8a3d0dad4bf94374"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280-nopmtud-lgi-v6-only-edns4096",
+                  "details_sha256": "1280e01e634bc380ac1256fc5afd88db3b22b20b474b318569f8138ce20a000b"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280-nopmtud-v6-only-edns1232",
+                  "details_sha256": "51f103adf30ef8b7d3525d8a5b0630d7ca4e99f46327edd1d6ab3fb697e2ffac"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280-nopmtud-v6-only-edns4096",
+                  "details_sha256": "f3ff63408efbb1414efecd02fdd8be91765220231a066700d2a5e056fbe3dbe5"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280-pmtud-lgi-v6-only-edns1232",
+                  "details_sha256": "08b10c81814a3a185d1a6d9039da9738aacb3aec3c83e00498116947479287e1"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280-pmtud-lgi-v6-only-edns4096",
+                  "details_sha256": "ad19d366164beb2a9f62967629a952058360639b8b8bf2729a235c81a0e0e22d"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280-pmtud-v6-only-edns1232",
+                  "details_sha256": "b4fc50d546d730ee1899206ecc154a2e40a07d22866adb42eaec6b1ba218ae3c"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280-pmtud-v6-only-edns4096",
+                  "details_sha256": "2eead58d1593bbc12816138b444b3cf212a914c051457d1edca00064aa6908db"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280onpath-nopmtud-lgi-v6-only-edns1232",
+                  "details_sha256": "4ea0f0cb5ee0a16c16635138f0f356710ecc07218fb931aa14327587c0c066f3"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280onpath-nopmtud-lgi-v6-only-edns4096",
+                  "details_sha256": "8ace55daa7e8f387cb330923ab17438975e4a09b31996c17ca70eb102395e667"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280onpath-nopmtud-v6-only-edns1232",
+                  "details_sha256": "97b76af871955c33bf2d34ade63d75e4db3b5c779e545ec1a9d74f4faa33b78f"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1280onpath-nopmtud-v6-only-edns4096",
+                  "details_sha256": "a66a74547f03dedb04a55225167081fb8f48e7e5574371eb8b2aa63e4ccdeb7b"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1500-lgi-v6-only-edns1232",
+                  "details_sha256": "3df3d5bd687cf78d246a1ced6e972a32721213093b414c8876b8ed272a998430"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1500-lgi-v6-only-edns4096",
+                  "details_sha256": "0e29ec06cf8603c6b02683b2588943ec4eeab05bf636436bbe89655d604dfef4"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1500-v6-only-edns1232",
+                  "details_sha256": "d8453f89f5e1648b360fd6ddc8f729c65b1b1cb5845a870fd4d4149b7da8c18b"
+                },
+                {
+                  "identity": "current:no-dnssec--mtu1500-v6-only-edns4096",
+                  "details_sha256": "c2fb5ac5641fa2b88f231f4c86a895f557e036efe990588ed6bb8cf752cc7c9b"
+                }
+              ],
+              "controls": [
+                "Exact observation/configuration/metric/units matching",
+                "No zero imputation",
+                "Unique observation keys"
+              ],
+              "coverage_limits": "Only the 192 reviewed absolute panel cells and retained archived means. Original per-query/packet parsing, relative figures, causality, generalization and current Internet conditions remain uncovered. TCP fallback is a TCP/UDP ratio; other packet metrics use observed UDP server identities, while TIMEOUT/SERVFAIL use NS-set outcomes.",
+              "data_origin": "archived-data",
+              "dates_or_epochs": "Use the explicit identities and epochs in the input; no present-day substitution.",
+              "dependence": "Dependencies may exist; no independent replications or population inference are asserted.",
+              "exclusions": "Unmatched observations are excluded and recorded; duplicates, unit mismatches and changed inputs fail the run.",
+              "hypotheses": "Numerical agreement is checked separately from correctness, causality and generalization.",
+              "input_versions": [
+                {
+                  "identity": "matched-input.json",
+                  "sha256": "607fc516e3ee9ff221a11e48bedf0a79c6cc8cff4a95fc0d6c22a339b80db85d"
+                },
+                {
+                  "identity": "prior-assessment-v2.json; source of recorded means",
+                  "sha256": "3c3532901aa4b507a61849666d925a0268c0658c0129dbfd729514df8c3a07b0"
+                },
+                {
+                  "identity": "reviewed PuRe main.pdf",
+                  "sha256": "f6378fb3de19aa8d3204f4d3a2028f95497f334862a5298aa6678ef1b816290b"
+                }
+              ],
+              "metrics": [
+                {
+                  "name": "SERVFAIL",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "TIMEOUT",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "edns0_fallback",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "tcp_fallback",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "udp_fragments",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "udp_packet_too_big",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                }
+              ],
+              "missing_data": "Absent expected observations remain missing. Invalid and ambiguous values remain distinct from recorded zero.",
+              "prior_exposure": "All retained values and the original numerical agreement were inspected in the earlier assessment. This is an exposed-data numerical recheck, not held-out validation or new raw-data reanalysis.",
+              "questions": [
+                "Do the retained archived-summary values for Figure 14b still match its separately transcribed published cells within 0.0051 percentage points?"
+              ],
+              "replication_unit": "The explicitly identified observation; no independence is inferred between observations.",
+              "resource_limits": {
+                "cost_basis": "Local or API hosting costs are unallocated; missing charges are not zero. No experiment instances or model calls are requested.",
+                "estimated_cost_usd": null,
+                "max_input_bytes": 256000,
+                "max_observations": 192,
+                "wall_seconds": 10
+              },
+              "sample_size_rationale": "Census of the supplied published comparison cells, with unexpected observations preserved as exclusions.",
+              "seeds": {
+                "applicable": false,
+                "rationale": "Deterministic census; no randomized algorithm."
+              },
+              "sensitivity": {
+                "applicable": false,
+                "rationale": "This campaign checks one fixed declared tolerance; amended tolerances require separate protocols."
+              },
+              "statistics": "Exact Decimal absolute differences of the supplied percentages; differences are percentage points. No inferential intervals or independent replication inferred.",
+              "stopping_rule": "Stop on an input identity, schema, configuration, units or budget violation; preserve the failed attempt.",
+              "preparation": {
+                "version": "research-preparation-v1",
+                "original_manifest_sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+                "original_manifest_plan_id": "ipv6-archive-v1",
+                "input_transformation": "Source identifiers rebound to this study; numerical values, units and observation identities preserved."
+              }
+            },
+            "protocol_reference": {
+              "id": "48baedba-0bba-5aa6-9814-3143956beb48",
+              "document_sha256": "5b652f7af7a4b93e7107beb2797dadfdf475a25b5a888cf043ad31199dac6b4b",
+              "view": "selection-index; full configuration details retained for the selected fresh review"
+            },
+            "retained_input_inventory": {
+              "sha256": "607fc516e3ee9ff221a11e48bedf0a79c6cc8cff4a95fc0d6c22a339b80db85d",
+              "byte_count": 123556,
+              "provenance": "Computed from the hash-verified compiled original; counts describe archived input records, not new measurements.",
+              "counts": {
+                "published": {
+                  "recorded": 192,
+                  "missing": 0,
+                  "invalid": 0,
+                  "ambiguous": 0
+                },
+                "observed": {
+                  "recorded": 192,
+                  "missing": 0,
+                  "invalid": 0,
+                  "ambiguous": 0
+                }
+              }
+            }
+          },
+          {
+            "id": "d99974ed-08d0-5a10-b895-5bad44494549",
+            "title": "Archived numerical recheck: Figure 15a",
+            "execution_mode": "automatic",
+            "campaign": {
+              "id": "edade6e0-dbd9-5c95-943e-78d5c3c57f16",
+              "protocol_id": "324124d9-0dd9-5685-ba0f-27bd387f08ef",
+              "followup_of": null,
+              "title": "Archived numerical recheck: Figure 15a",
+              "stage": "retrospective-import",
+              "experiment_type": "reanalysis",
+              "adapter": "matched-numeric-v1",
+              "planned_units": 192,
+              "coverage_limits": "Only the 192 reviewed absolute panel cells and retained archived means. Original per-query/packet parsing, relative figures, causality, generalization and current Internet conditions remain uncovered. TCP fallback is a TCP/UDP ratio; other packet metrics use observed UDP server identities, while TIMEOUT/SERVFAIL use NS-set outcomes."
+            },
+            "protocol": {
+              "algorithms": [
+                "matched-numeric-v1; exact Decimal absolute differences"
+              ],
+              "configurations": [
+                {
+                  "identity": "tcp-error:dnssec--mtu1280-nopmtud-lgi-v4-only-edns1232",
+                  "details_sha256": "61ed6df1efb6f7e95fcba7c2940e929400aa78c809e47afa3b9b376beb9231c4"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280-nopmtud-lgi-v4-only-edns4096",
+                  "details_sha256": "42dd67b177b858ba074e05753a90151011ae0cd0265f4fc2c5c2313c2a06af38"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280-nopmtud-v4-only-edns1232",
+                  "details_sha256": "5eb5fbda897cdc779f5501134fc3ec8d951e72dd1ce3f4c03a29494dc4771bb0"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280-nopmtud-v4-only-edns4096",
+                  "details_sha256": "bafd96d72213369184f27714f1dba2f27ac2f102a20e02435e45c753032064ed"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280-pmtud-lgi-v4-only-edns1232",
+                  "details_sha256": "3a9e00c3fc351d16864491569a2aeb6ee578987f54b99e04c8ebbe2832ce7bc5"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280-pmtud-lgi-v4-only-edns4096",
+                  "details_sha256": "d7b048b436bd02d72aa81cb3bfac0cce3f5b1d181ae7738704e00ed168e7fa48"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280-pmtud-v4-only-edns1232",
+                  "details_sha256": "358ae4f220d7bb335262c97cc063a9754c8b2167a09bb177a066ba34e84627af"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280-pmtud-v4-only-edns4096",
+                  "details_sha256": "70f02f9b20c65d379c4d4679f9d8cf30a3bd76abeff0df9e1c1da7e870635747"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns1232",
+                  "details_sha256": "610954941e3bb85509178690fe068e99c1e940a573951ff2a441ded41c3b81b3"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns4096",
+                  "details_sha256": "6509c3db96179c0ee21adcf98c935865b8fbbc3ea7aea2f899a6f56e28e426bd"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280onpath-nopmtud-v4-only-edns1232",
+                  "details_sha256": "37b9b154230b60521500d940dceac7ef4200148d0f30e13831abb2cd3ed31cab"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280onpath-nopmtud-v4-only-edns4096",
+                  "details_sha256": "495d15f1c02f4cee6c5b80fac2779f118bcb5bf8453889c5dd377d65af585233"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1500-lgi-v4-only-edns1232",
+                  "details_sha256": "24ecfbe2341e80546645783c2b3ffb6eda7180074baf2fbc0f597ea9314b9e21"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1500-lgi-v4-only-edns4096",
+                  "details_sha256": "2b151a218ec9a9cb2c6535f23ca4477b63ac44018ace22a92787d9f41fd41458"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1500-v4-only-edns1232",
+                  "details_sha256": "98249ea36fa083bb580a730c9aa81bc51de3f797eeee869e9e72c925d97f2728"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1500-v4-only-edns4096",
+                  "details_sha256": "1421ac2857325b2a539f61ad1d3ea9f4b9768b52ef57d7d29a74673d04fb2a7a"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280-nopmtud-lgi-v4-only-edns1232",
+                  "details_sha256": "64be9bad114b0b9bbfd9d519e152260460c35891188f71602629fb4f41a1f8cc"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280-nopmtud-lgi-v4-only-edns4096",
+                  "details_sha256": "0cd91c4344ac32f30ba4d4ae14552dd22ef0dd0bed0e93bb70cb041003e15800"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280-nopmtud-v4-only-edns1232",
+                  "details_sha256": "bfbde2477cf2c4c43365cbb97a2ef85a0c2465aa87974d3cf5edf40c44026bb3"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280-nopmtud-v4-only-edns4096",
+                  "details_sha256": "90d9652859fc3bfb7982364436739ad06709f6f85202af0bf756b4e4e412e0c3"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280-pmtud-lgi-v4-only-edns1232",
+                  "details_sha256": "6d7671ed94ea81117825b899ad467bbc7522c946944a6351a3da479c0cefb448"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280-pmtud-lgi-v4-only-edns4096",
+                  "details_sha256": "6b2d40c0ed145a7d9b35cdd6ded794b34f0d312fde03657d5c74ed4328d35ce5"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280-pmtud-v4-only-edns1232",
+                  "details_sha256": "887e7555c30d9605e8659d445b12ef44263a2798b978d425b85ecc744242a24c"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280-pmtud-v4-only-edns4096",
+                  "details_sha256": "fdc7b0b2b53a3a3f34f685d8e5636f55259640991eec2ca7a4756d6b3bb6bf88"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns1232",
+                  "details_sha256": "d276b00dd40679d7fbde4eb9140c84b562f89b5ff1f37f155d9261dd76e0d9f3"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns4096",
+                  "details_sha256": "c11520c7b6bc8262d1027d513536a1f42815b0821dd9470c460483afa92c0d0e"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280onpath-nopmtud-v4-only-edns1232",
+                  "details_sha256": "b10191521a66b2b68e8da49346a652aba13d535bcbd7c1cfa066119505fee988"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280onpath-nopmtud-v4-only-edns4096",
+                  "details_sha256": "4e7f5a3daaec103f12ffce370788fd066f840f63c6256eb13219afb1786472dd"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1500-lgi-v4-only-edns1232",
+                  "details_sha256": "73a80f0b24595509febc1a23dd2115e9bc4b9b88d21cfdb05af31965382cbc0d"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1500-lgi-v4-only-edns4096",
+                  "details_sha256": "8a427dc7df778776e3a6e5235e48a15a8da8953d88576e22ce8b8ca74a3baa35"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1500-v4-only-edns1232",
+                  "details_sha256": "02ff32abb35650bae1375368cf4f2511aaf99d7a3e20de5c381b20344b140bbc"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1500-v4-only-edns4096",
+                  "details_sha256": "cf7f15090498e72243dfe1065fcf43d99586e735ed215270d5ec5baeb77da10d"
+                }
+              ],
+              "controls": [
+                "Exact observation/configuration/metric/units matching",
+                "No zero imputation",
+                "Unique observation keys"
+              ],
+              "coverage_limits": "Only the 192 reviewed absolute panel cells and retained archived means. Original per-query/packet parsing, relative figures, causality, generalization and current Internet conditions remain uncovered. TCP fallback is a TCP/UDP ratio; other packet metrics use observed UDP server identities, while TIMEOUT/SERVFAIL use NS-set outcomes.",
+              "data_origin": "archived-data",
+              "dates_or_epochs": "Use the explicit identities and epochs in the input; no present-day substitution.",
+              "dependence": "Dependencies may exist; no independent replications or population inference are asserted.",
+              "exclusions": "Unmatched observations are excluded and recorded; duplicates, unit mismatches and changed inputs fail the run.",
+              "hypotheses": "Numerical agreement is checked separately from correctness, causality and generalization.",
+              "input_versions": [
+                {
+                  "identity": "matched-input.json",
+                  "sha256": "f1523a7bba3b325d47dd8eceb1fdc3dc2e04a7cfadc2b92caf6232c45f1a0732"
+                },
+                {
+                  "identity": "prior-assessment-v2.json; source of recorded means",
+                  "sha256": "3c3532901aa4b507a61849666d925a0268c0658c0129dbfd729514df8c3a07b0"
+                },
+                {
+                  "identity": "reviewed PuRe main.pdf",
+                  "sha256": "f6378fb3de19aa8d3204f4d3a2028f95497f334862a5298aa6678ef1b816290b"
+                }
+              ],
+              "metrics": [
+                {
+                  "name": "SERVFAIL",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "TIMEOUT",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "edns0_fallback",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "tcp_fallback",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "udp_fragments",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "udp_packet_too_big",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                }
+              ],
+              "missing_data": "Absent expected observations remain missing. Invalid and ambiguous values remain distinct from recorded zero.",
+              "prior_exposure": "All retained values and the original numerical agreement were inspected in the earlier assessment. This is an exposed-data numerical recheck, not held-out validation or new raw-data reanalysis.",
+              "questions": [
+                "Do the retained archived-summary values for Figure 15a still match its separately transcribed published cells within 0.0051 percentage points?"
+              ],
+              "replication_unit": "The explicitly identified observation; no independence is inferred between observations.",
+              "resource_limits": {
+                "cost_basis": "Local or API hosting costs are unallocated; missing charges are not zero. No experiment instances or model calls are requested.",
+                "estimated_cost_usd": null,
+                "max_input_bytes": 256000,
+                "max_observations": 192,
+                "wall_seconds": 10
+              },
+              "sample_size_rationale": "Census of the supplied published comparison cells, with unexpected observations preserved as exclusions.",
+              "seeds": {
+                "applicable": false,
+                "rationale": "Deterministic census; no randomized algorithm."
+              },
+              "sensitivity": {
+                "applicable": false,
+                "rationale": "This campaign checks one fixed declared tolerance; amended tolerances require separate protocols."
+              },
+              "statistics": "Exact Decimal absolute differences of the supplied percentages; differences are percentage points. No inferential intervals or independent replication inferred.",
+              "stopping_rule": "Stop on an input identity, schema, configuration, units or budget violation; preserve the failed attempt.",
+              "preparation": {
+                "version": "research-preparation-v1",
+                "original_manifest_sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+                "original_manifest_plan_id": "ipv6-archive-v1",
+                "input_transformation": "Source identifiers rebound to this study; numerical values, units and observation identities preserved."
+              }
+            },
+            "protocol_reference": {
+              "id": "324124d9-0dd9-5685-ba0f-27bd387f08ef",
+              "document_sha256": "cccb758ff716ba38d3cdc03cf2c832f52ee6b34538df9639f1404d4e2e2eb852",
+              "view": "selection-index; full configuration details retained for the selected fresh review"
+            },
+            "retained_input_inventory": {
+              "sha256": "f1523a7bba3b325d47dd8eceb1fdc3dc2e04a7cfadc2b92caf6232c45f1a0732",
+              "byte_count": 124557,
+              "provenance": "Computed from the hash-verified compiled original; counts describe archived input records, not new measurements.",
+              "counts": {
+                "published": {
+                  "recorded": 192,
+                  "missing": 0,
+                  "invalid": 0,
+                  "ambiguous": 0
+                },
+                "observed": {
+                  "recorded": 192,
+                  "missing": 0,
+                  "invalid": 0,
+                  "ambiguous": 0
+                }
+              }
+            }
+          },
+          {
+            "id": "f7153d15-309f-50af-9371-be4ff20df879",
+            "title": "Archived numerical recheck: Figure 15b",
+            "execution_mode": "automatic",
+            "campaign": {
+              "id": "949ec1d5-be11-5c6d-81c2-382a5a73307d",
+              "protocol_id": "6ad50b18-1a47-50ac-99c0-03ae2a3e5790",
+              "followup_of": null,
+              "title": "Archived numerical recheck: Figure 15b",
+              "stage": "retrospective-import",
+              "experiment_type": "reanalysis",
+              "adapter": "matched-numeric-v1",
+              "planned_units": 192,
+              "coverage_limits": "Only the 192 reviewed absolute panel cells and retained archived means. Original per-query/packet parsing, relative figures, causality, generalization and current Internet conditions remain uncovered. TCP fallback is a TCP/UDP ratio; other packet metrics use observed UDP server identities, while TIMEOUT/SERVFAIL use NS-set outcomes."
+            },
+            "protocol": {
+              "algorithms": [
+                "matched-numeric-v1; exact Decimal absolute differences"
+              ],
+              "configurations": [
+                {
+                  "identity": "tcp-error:dnssec--mtu1280-nopmtud-lgi-v6-only-edns1232",
+                  "details_sha256": "e54f60ba4c79efbe8e1559539394e0325ad1a27bdd6be1815c8e12d934e488a8"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280-nopmtud-lgi-v6-only-edns4096",
+                  "details_sha256": "6eedb60a83718d7d219e1c5d46241f5cea8eba03ba300b9d68e4b94166bae205"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280-nopmtud-v6-only-edns1232",
+                  "details_sha256": "f71d3a2743655ac5ff6e81d0338a8dae9a0221b611c003fa0c158a96e4150f9d"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280-nopmtud-v6-only-edns4096",
+                  "details_sha256": "7b6cf0621fa9780794f43a35cd252acdb14ff0fb4290374852dd8ab6a781a658"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280-pmtud-lgi-v6-only-edns1232",
+                  "details_sha256": "ef21e8022a686dd98afb539b0fec415471131956d3ea65f2d196f9aa29e2ce3e"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280-pmtud-lgi-v6-only-edns4096",
+                  "details_sha256": "ae5943a172819f8b43354f120669968cca2bd50488ce8b1e6c75e10780cd2fc4"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280-pmtud-v6-only-edns1232",
+                  "details_sha256": "8c2cc627696867addcf31f65aad777c4a610525dd85b0b2deddc0f8de16552fd"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280-pmtud-v6-only-edns4096",
+                  "details_sha256": "b0c874970aa694a0786404b84aa66d62277eb1fd8a80cae333bd860edaccc348"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280onpath-nopmtud-lgi-v6-only-edns1232",
+                  "details_sha256": "138177bd9df66aff77434da1fb677de4dd885742fafaa2d4684ba6ca802785a8"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280onpath-nopmtud-lgi-v6-only-edns4096",
+                  "details_sha256": "fb0173db632a370ab37ed20c025da0e0e1408af06011ad6ddd496d99c30335a7"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280onpath-nopmtud-v6-only-edns1232",
+                  "details_sha256": "8d77bf20041d9e6c0995c349c708f6831a615fd455151f5a0ba3996d1830a52f"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1280onpath-nopmtud-v6-only-edns4096",
+                  "details_sha256": "f930029b16060915c8550beceffcacd06ecfe9e1a31c82a59791389d2ccd8d44"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1500-lgi-v6-only-edns1232",
+                  "details_sha256": "e27635ce705f4e43e232470f1cd7ce724927f05c35ab8ca2f88b9ba36b097d3b"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1500-lgi-v6-only-edns4096",
+                  "details_sha256": "96f874a7fa088f8918a5e10f26d7c8c9c8100d0909bebdf561d75eb9c8ab585c"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1500-v6-only-edns1232",
+                  "details_sha256": "092ba2c83b6ca95a20320f8060d8b3d80ef0dd3a96ad5d3bda287cfd7e42ed95"
+                },
+                {
+                  "identity": "tcp-error:dnssec--mtu1500-v6-only-edns4096",
+                  "details_sha256": "83266970857c95a1c6202eb5c939f63c1699bd3ace8e74ef2750cd3e07e716d5"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280-nopmtud-lgi-v6-only-edns1232",
+                  "details_sha256": "2c4f1fd9528a9d84e70fbb4ff64c027f0001aaaddc780808b8869f9deb7cd6db"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280-nopmtud-lgi-v6-only-edns4096",
+                  "details_sha256": "2f8ca5e1dc104c435c5a44da4fcd879b489d31fa6a90df99fe34e0a43ef5e115"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280-nopmtud-v6-only-edns1232",
+                  "details_sha256": "32f23ecc2211185d8d8f4f23d90e5a6e9612a073d0d70700896ee94c5c15c834"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280-nopmtud-v6-only-edns4096",
+                  "details_sha256": "d338251dd85135f52f091d0d32e62b513e5796266d77d9109f95e3b7cd11304d"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280-pmtud-lgi-v6-only-edns1232",
+                  "details_sha256": "977b39364317a4c1d6391807b82ea1be18a6054cb4180e878471a7736dcb005f"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280-pmtud-lgi-v6-only-edns4096",
+                  "details_sha256": "91b9569a21653e420040d919dc2c8d61977263ce1bbfe019e9d67dd2a4b6f6f5"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280-pmtud-v6-only-edns1232",
+                  "details_sha256": "82fb67833be795e772ac2c9ad77307baa65deaf3fc709dbcb2b18d978a4d0252"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280-pmtud-v6-only-edns4096",
+                  "details_sha256": "075477660c9986c9dfcf8139a559ef059f4f1227455f8db7c88cf993ac51fae9"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280onpath-nopmtud-lgi-v6-only-edns1232",
+                  "details_sha256": "ba8a0f878a8dc86119f16dbc470c0b60e573a35792c76dc7c057b933e64df654"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280onpath-nopmtud-lgi-v6-only-edns4096",
+                  "details_sha256": "0b0d462216e31a62d39959c47cc005295f1696e68dfe2c6b87593209b40f4eea"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280onpath-nopmtud-v6-only-edns1232",
+                  "details_sha256": "e6809f3e78ddf29403215d8d3cdc6da1484d4984c7be0e3df579843bb8376837"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1280onpath-nopmtud-v6-only-edns4096",
+                  "details_sha256": "c7c25cbd2f5ef1e777e091a98a834dc97fe0e9eeffbdc3de28db482fa1a128c6"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1500-lgi-v6-only-edns1232",
+                  "details_sha256": "0caf50217f0eb7099a2eea0313bd1ccf841a68e139e8875816f0c1de4af54a11"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1500-lgi-v6-only-edns4096",
+                  "details_sha256": "7257225305dbfcd4b97b21760100d5d6710a2d3ead9ceaa1364ba994af821dbf"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1500-v6-only-edns1232",
+                  "details_sha256": "998f731d1c2ed2fda34b5cd5be49c6e5b489eb4f22897ce68072a1c6e813aab6"
+                },
+                {
+                  "identity": "tcp-error:no-dnssec--mtu1500-v6-only-edns4096",
+                  "details_sha256": "875d33b38b856ca8d7c114fd4c2b1d8ff2d03177d483da56b45fda31590fc607"
+                }
+              ],
+              "controls": [
+                "Exact observation/configuration/metric/units matching",
+                "No zero imputation",
+                "Unique observation keys"
+              ],
+              "coverage_limits": "Only the 192 reviewed absolute panel cells and retained archived means. Original per-query/packet parsing, relative figures, causality, generalization and current Internet conditions remain uncovered. TCP fallback is a TCP/UDP ratio; other packet metrics use observed UDP server identities, while TIMEOUT/SERVFAIL use NS-set outcomes.",
+              "data_origin": "archived-data",
+              "dates_or_epochs": "Use the explicit identities and epochs in the input; no present-day substitution.",
+              "dependence": "Dependencies may exist; no independent replications or population inference are asserted.",
+              "exclusions": "Unmatched observations are excluded and recorded; duplicates, unit mismatches and changed inputs fail the run.",
+              "hypotheses": "Numerical agreement is checked separately from correctness, causality and generalization.",
+              "input_versions": [
+                {
+                  "identity": "matched-input.json",
+                  "sha256": "ddb4b7153c3345d5f204cb16b4e514483e7a2f27724f7da41ea6875759b4d4fc"
+                },
+                {
+                  "identity": "prior-assessment-v2.json; source of recorded means",
+                  "sha256": "3c3532901aa4b507a61849666d925a0268c0658c0129dbfd729514df8c3a07b0"
+                },
+                {
+                  "identity": "reviewed PuRe main.pdf",
+                  "sha256": "f6378fb3de19aa8d3204f4d3a2028f95497f334862a5298aa6678ef1b816290b"
+                }
+              ],
+              "metrics": [
+                {
+                  "name": "SERVFAIL",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "TIMEOUT",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "edns0_fallback",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "tcp_fallback",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "udp_fragments",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                },
+                {
+                  "name": "udp_packet_too_big",
+                  "tolerance_absolute": 0.0051,
+                  "units": "percent"
+                }
+              ],
+              "missing_data": "Absent expected observations remain missing. Invalid and ambiguous values remain distinct from recorded zero.",
+              "prior_exposure": "All retained values and the original numerical agreement were inspected in the earlier assessment. This is an exposed-data numerical recheck, not held-out validation or new raw-data reanalysis.",
+              "questions": [
+                "Do the retained archived-summary values for Figure 15b still match its separately transcribed published cells within 0.0051 percentage points?"
+              ],
+              "replication_unit": "The explicitly identified observation; no independence is inferred between observations.",
+              "resource_limits": {
+                "cost_basis": "Local or API hosting costs are unallocated; missing charges are not zero. No experiment instances or model calls are requested.",
+                "estimated_cost_usd": null,
+                "max_input_bytes": 256000,
+                "max_observations": 192,
+                "wall_seconds": 10
+              },
+              "sample_size_rationale": "Census of the supplied published comparison cells, with unexpected observations preserved as exclusions.",
+              "seeds": {
+                "applicable": false,
+                "rationale": "Deterministic census; no randomized algorithm."
+              },
+              "sensitivity": {
+                "applicable": false,
+                "rationale": "This campaign checks one fixed declared tolerance; amended tolerances require separate protocols."
+              },
+              "statistics": "Exact Decimal absolute differences of the supplied percentages; differences are percentage points. No inferential intervals or independent replication inferred.",
+              "stopping_rule": "Stop on an input identity, schema, configuration, units or budget violation; preserve the failed attempt.",
+              "preparation": {
+                "version": "research-preparation-v1",
+                "original_manifest_sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+                "original_manifest_plan_id": "ipv6-archive-v1",
+                "input_transformation": "Source identifiers rebound to this study; numerical values, units and observation identities preserved."
+              }
+            },
+            "protocol_reference": {
+              "id": "6ad50b18-1a47-50ac-99c0-03ae2a3e5790",
+              "document_sha256": "62eda7eab5527939c5c73eda20c573ae577d6c7301c9f583df81230f4b81a43e",
+              "view": "selection-index; full configuration details retained for the selected fresh review"
+            },
+            "retained_input_inventory": {
+              "sha256": "ddb4b7153c3345d5f204cb16b4e514483e7a2f27724f7da41ea6875759b4d4fc",
+              "byte_count": 124402,
+              "provenance": "Computed from the hash-verified compiled original; counts describe archived input records, not new measurements.",
+              "counts": {
+                "published": {
+                  "recorded": 192,
+                  "missing": 0,
+                  "invalid": 0,
+                  "ambiguous": 0
+                },
+                "observed": {
+                  "recorded": 192,
+                  "missing": 0,
+                  "invalid": 0,
+                  "ambiguous": 0
+                }
+              }
+            }
+          }
+        ],
+        "registered_runners": [
+          "emulated-netem-v1",
+          "real-world-iperf-v1",
+          "custom-package-v1"
+        ],
+        "previous_feedback": null,
+        "remaining_commitment_cents": 9500,
+        "deadline_at": "2026-10-25T00:00:00Z",
+        "prior_attempts": []
+      }
+    },
+    {
+      "name": "full-selected-protocol-review",
+      "criterion": "Return an explicit phase-correct review or concrete external blocker; preserve full selected configuration details and never claim one figure covers the whole six-figure claim without evidence.",
+      "model_context": {
+        "task": "comprehension",
+        "initial_prompt": "Operational verification of retained archived numerical checks only, under original frozen conditions and complete recorded coverage. No new network measurements or broader validation.",
+        "claim": {
+          "id": "5bd8ba39-d78b-54d2-8242-d84ec1036e1c",
+          "source_id": "ee1aae7b-d7d8-5f9f-a5ba-bd0a75e5d48d",
+          "location": "Figures13\u201315a/b,PDFpp17\u201319",
+          "description": "Published absolute folded metrics",
+          "claim_type": "numerical",
+          "scope": {
+            "conditions_and_limits": "145 complete days across three epochs; source observations correlated. Original per-zone/packet parser behavior is shared upstream evidence, not independently validated.",
+            "origin_assessment_sha256": "3c3532901aa4b507a61849666d925a0268c0658c0129dbfd729514df8c3a07b0",
+            "origin_claim_id": "folded-cells"
+          },
+          "metrics": [],
+          "priority": 3
+        },
+        "source": {
+          "id": "ee1aae7b-d7d8-5f9f-a5ba-bd0a75e5d48d",
+          "citation": "Tobias Fiebig and Anja Feldmann. How I learned to stop worrying and love IPv6: Measuring the Internet\u2019s Readiness for DNS over IPv6. IMC2025,22pages. DOI10.1145/3730567.3764439.",
+          "source_url": "https://pure.mpg.de/pubman/item/item_3670144_1/component/file_3670145/main.pdf",
+          "retrieved_url": "https://pure.mpg.de/rest/items/item_3670144_1/component/file_3670145/content",
+          "kind": "main research paper",
+          "role": "Published claims and numerical reference; exact requested preprint version.",
+          "retrieved_version": "PuRe item_3670144_1/file_3670145 main.pdf,22pages; PDF created2025-09-16,modified2025-09-17. No separate supplement listed; AppendicesA/B are embedded.",
+          "sha256": "f6378fb3de19aa8d3204f4d3a2028f95497f334862a5298aa6678ef1b816290b",
+          "byte_count": 2183602,
+          "access_status": "imported:full-text",
+          "review_status": "partial-review",
+          "review_definition": "Complete review means substantive examination of the entire retrieved work, including methods, results, limitations, references, figures, tables and appendices, with explicit reading notes. It does not mean rederivation or validation. Partial review names examined and unexamined content. Retrieved-unreviewed means bytes verified but no substantive content assessment. Unavailable-full-text means no lawful full work retrieved through recorded attempts. All reviews here are AI inspection by the implementer, not human or independent review.",
+          "examined": "All narrative sections 1\u20138, references 1\u201372, Table 1, AppendixAethics and AppendixBfigure captions/axes examined. Rendered Figures 1\u201321 inspected. Absolute cells of Figures 13 a/b,14 a/b,15 a/b transcribed and checked against summaries:1,152 rounded cells agree. Conditions: three fixed epochs, matching MTU/upstream/family/EDNS/cohort; archived reanalysis only.",
+          "unexamined": "Dense relative heatmap cells in Figures 9\u201312,13 c/d,14 c/d,15 c/d,16 and every point in time-series Figures 3\u20138/17\u201321 not individually verified. Figure 7 packet-size distributions and full raw-pcap provenance not reproduced. Main review remains partial despite all-page inspection and absolute-cell checks.",
+          "retrieval_attempts": [
+            {
+              "reason": "Initial curl attempts denied by public landing redirect; exact attempt time not captured.",
+              "status": 403,
+              "timestamp": null,
+              "url": "https://pure.mpg.de/pubman/item/item_3670144_1/component/file_3670145/main.pdf"
+            },
+            {
+              "reason": "Normal browser redirect exposed original REST resource; curl retained original PDF bytes. Filemtime is not asserted as retrieval time.",
+              "status": 200,
+              "timestamp": null,
+              "url": "https://pure.mpg.de/rest/items/item_3670144_1/component/file_3670145/content"
+            }
+          ],
+          "reviewer": {
+            "identity": "Codex primary assistant",
+            "independence": "Study implementer; no human review",
+            "type": "AI"
+          },
+          "findings": "All narrative sections 1\u20138, references 1\u201372, Table 1, AppendixAethics and AppendixBfigure captions/axes examined. Rendered Figures 1\u201321 inspected. Absolute cells of Figures 13 a/b,14 a/b,15 a/b transcribed and checked against summaries:1,152 rounded cells agree. Conditions: three fixed epochs, matching MTU/upstream/family/EDNS/cohort; archived reanalysis only.",
+          "limitations": "Dense relative heatmap cells in Figures 9\u201312,13 c/d,14 c/d,15 c/d,16 and every point in time-series Figures 3\u20138/17\u201321 not individually verified. Figure 7 packet-size distributions and full raw-pcap provenance not reproduced. Main review remains partial despite all-page inspection and absolute-cell checks."
+        },
+        "limits": {
+          "maximum_spend_usd": 100,
+          "elapsed_days": 7,
+          "attempts_per_claim": 25,
+          "parallel_claims_per_paper": 2,
+          "global_parallel_claims": 4
+        },
+        "source_coverage": "Recorded source metadata and supplied text only; retrieval is not complete review.",
+        "registered_checks": [],
+        "registered_runners": [
+          "emulated-netem-v1",
+          "real-world-iperf-v1",
+          "custom-package-v1"
+        ],
+        "remaining_commitment_cents": 9500,
+        "deadline_at": "2026-10-25T00:00:00Z",
+        "candidate": {
+          "registered_job_id": "6b32f6d1-06cf-5c38-8065-9c420377c2f0",
+          "campaign": {
+            "id": "996f8745-d280-54b9-a3ba-73fae14591ec",
+            "protocol_id": "55eaee72-8ef0-5d13-880d-f2d2eb3cd5b4",
+            "followup_of": null,
+            "title": "Archived numerical recheck: Figure 13a",
+            "stage": "retrospective-import",
+            "experiment_type": "reanalysis",
+            "adapter": "matched-numeric-v1",
+            "planned_units": 192,
+            "coverage_limits": "Only the 192 reviewed absolute panel cells and retained archived means. Original per-query/packet parsing, relative figures, causality, generalization and current Internet conditions remain uncovered. TCP fallback is a TCP/UDP ratio; other packet metrics use observed UDP server identities, while TIMEOUT/SERVFAIL use NS-set outcomes."
+          },
+          "protocol": {
+            "algorithms": [
+              "matched-numeric-v1; exact Decimal absolute differences"
+            ],
+            "configurations": [
+              {
+                "details": {
+                  "cohort": "dnssec",
+                  "configuration_identity": "dnssec--mtu1280-nopmtud-lgi-v4-only-edns1232",
+                  "edns_bytes": 1232,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280-nopmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "lgi"
+                },
+                "identity": "pre-lgi:dnssec--mtu1280-nopmtud-lgi-v4-only-edns1232"
+              },
+              {
+                "details": {
+                  "cohort": "dnssec",
+                  "configuration_identity": "dnssec--mtu1280-nopmtud-lgi-v4-only-edns4096",
+                  "edns_bytes": 4096,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280-nopmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "lgi"
+                },
+                "identity": "pre-lgi:dnssec--mtu1280-nopmtud-lgi-v4-only-edns4096"
+              },
+              {
+                "details": {
+                  "cohort": "dnssec",
+                  "configuration_identity": "dnssec--mtu1280-nopmtud-v4-only-edns1232",
+                  "edns_bytes": 1232,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280-nopmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "no-lgi"
+                },
+                "identity": "pre-lgi:dnssec--mtu1280-nopmtud-v4-only-edns1232"
+              },
+              {
+                "details": {
+                  "cohort": "dnssec",
+                  "configuration_identity": "dnssec--mtu1280-nopmtud-v4-only-edns4096",
+                  "edns_bytes": 4096,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280-nopmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "no-lgi"
+                },
+                "identity": "pre-lgi:dnssec--mtu1280-nopmtud-v4-only-edns4096"
+              },
+              {
+                "details": {
+                  "cohort": "dnssec",
+                  "configuration_identity": "dnssec--mtu1280-pmtud-lgi-v4-only-edns1232",
+                  "edns_bytes": 1232,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280-pmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "lgi"
+                },
+                "identity": "pre-lgi:dnssec--mtu1280-pmtud-lgi-v4-only-edns1232"
+              },
+              {
+                "details": {
+                  "cohort": "dnssec",
+                  "configuration_identity": "dnssec--mtu1280-pmtud-lgi-v4-only-edns4096",
+                  "edns_bytes": 4096,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280-pmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "lgi"
+                },
+                "identity": "pre-lgi:dnssec--mtu1280-pmtud-lgi-v4-only-edns4096"
+              },
+              {
+                "details": {
+                  "cohort": "dnssec",
+                  "configuration_identity": "dnssec--mtu1280-pmtud-v4-only-edns1232",
+                  "edns_bytes": 1232,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280-pmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "no-lgi"
+                },
+                "identity": "pre-lgi:dnssec--mtu1280-pmtud-v4-only-edns1232"
+              },
+              {
+                "details": {
+                  "cohort": "dnssec",
+                  "configuration_identity": "dnssec--mtu1280-pmtud-v4-only-edns4096",
+                  "edns_bytes": 4096,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280-pmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "no-lgi"
+                },
+                "identity": "pre-lgi:dnssec--mtu1280-pmtud-v4-only-edns4096"
+              },
+              {
+                "details": {
+                  "cohort": "dnssec",
+                  "configuration_identity": "dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns1232",
+                  "edns_bytes": 1232,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280onpath-nopmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "lgi"
+                },
+                "identity": "pre-lgi:dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns1232"
+              },
+              {
+                "details": {
+                  "cohort": "dnssec",
+                  "configuration_identity": "dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns4096",
+                  "edns_bytes": 4096,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280onpath-nopmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "lgi"
+                },
+                "identity": "pre-lgi:dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns4096"
+              },
+              {
+                "details": {
+                  "cohort": "dnssec",
+                  "configuration_identity": "dnssec--mtu1280onpath-nopmtud-v4-only-edns1232",
+                  "edns_bytes": 1232,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280onpath-nopmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "no-lgi"
+                },
+                "identity": "pre-lgi:dnssec--mtu1280onpath-nopmtud-v4-only-edns1232"
+              },
+              {
+                "details": {
+                  "cohort": "dnssec",
+                  "configuration_identity": "dnssec--mtu1280onpath-nopmtud-v4-only-edns4096",
+                  "edns_bytes": 4096,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280onpath-nopmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "no-lgi"
+                },
+                "identity": "pre-lgi:dnssec--mtu1280onpath-nopmtud-v4-only-edns4096"
+              },
+              {
+                "details": {
+                  "cohort": "dnssec",
+                  "configuration_identity": "dnssec--mtu1500-lgi-v4-only-edns1232",
+                  "edns_bytes": 1232,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1500",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "lgi"
+                },
+                "identity": "pre-lgi:dnssec--mtu1500-lgi-v4-only-edns1232"
+              },
+              {
+                "details": {
+                  "cohort": "dnssec",
+                  "configuration_identity": "dnssec--mtu1500-lgi-v4-only-edns4096",
+                  "edns_bytes": 4096,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1500",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "lgi"
+                },
+                "identity": "pre-lgi:dnssec--mtu1500-lgi-v4-only-edns4096"
+              },
+              {
+                "details": {
+                  "cohort": "dnssec",
+                  "configuration_identity": "dnssec--mtu1500-v4-only-edns1232",
+                  "edns_bytes": 1232,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1500",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "no-lgi"
+                },
+                "identity": "pre-lgi:dnssec--mtu1500-v4-only-edns1232"
+              },
+              {
+                "details": {
+                  "cohort": "dnssec",
+                  "configuration_identity": "dnssec--mtu1500-v4-only-edns4096",
+                  "edns_bytes": 4096,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1500",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "no-lgi"
+                },
+                "identity": "pre-lgi:dnssec--mtu1500-v4-only-edns4096"
+              },
+              {
+                "details": {
+                  "cohort": "no-dnssec",
+                  "configuration_identity": "no-dnssec--mtu1280-nopmtud-lgi-v4-only-edns1232",
+                  "edns_bytes": 1232,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280-nopmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "lgi"
+                },
+                "identity": "pre-lgi:no-dnssec--mtu1280-nopmtud-lgi-v4-only-edns1232"
+              },
+              {
+                "details": {
+                  "cohort": "no-dnssec",
+                  "configuration_identity": "no-dnssec--mtu1280-nopmtud-lgi-v4-only-edns4096",
+                  "edns_bytes": 4096,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280-nopmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "lgi"
+                },
+                "identity": "pre-lgi:no-dnssec--mtu1280-nopmtud-lgi-v4-only-edns4096"
+              },
+              {
+                "details": {
+                  "cohort": "no-dnssec",
+                  "configuration_identity": "no-dnssec--mtu1280-nopmtud-v4-only-edns1232",
+                  "edns_bytes": 1232,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280-nopmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "no-lgi"
+                },
+                "identity": "pre-lgi:no-dnssec--mtu1280-nopmtud-v4-only-edns1232"
+              },
+              {
+                "details": {
+                  "cohort": "no-dnssec",
+                  "configuration_identity": "no-dnssec--mtu1280-nopmtud-v4-only-edns4096",
+                  "edns_bytes": 4096,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280-nopmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "no-lgi"
+                },
+                "identity": "pre-lgi:no-dnssec--mtu1280-nopmtud-v4-only-edns4096"
+              },
+              {
+                "details": {
+                  "cohort": "no-dnssec",
+                  "configuration_identity": "no-dnssec--mtu1280-pmtud-lgi-v4-only-edns1232",
+                  "edns_bytes": 1232,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280-pmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "lgi"
+                },
+                "identity": "pre-lgi:no-dnssec--mtu1280-pmtud-lgi-v4-only-edns1232"
+              },
+              {
+                "details": {
+                  "cohort": "no-dnssec",
+                  "configuration_identity": "no-dnssec--mtu1280-pmtud-lgi-v4-only-edns4096",
+                  "edns_bytes": 4096,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280-pmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "lgi"
+                },
+                "identity": "pre-lgi:no-dnssec--mtu1280-pmtud-lgi-v4-only-edns4096"
+              },
+              {
+                "details": {
+                  "cohort": "no-dnssec",
+                  "configuration_identity": "no-dnssec--mtu1280-pmtud-v4-only-edns1232",
+                  "edns_bytes": 1232,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280-pmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "no-lgi"
+                },
+                "identity": "pre-lgi:no-dnssec--mtu1280-pmtud-v4-only-edns1232"
+              },
+              {
+                "details": {
+                  "cohort": "no-dnssec",
+                  "configuration_identity": "no-dnssec--mtu1280-pmtud-v4-only-edns4096",
+                  "edns_bytes": 4096,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280-pmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "no-lgi"
+                },
+                "identity": "pre-lgi:no-dnssec--mtu1280-pmtud-v4-only-edns4096"
+              },
+              {
+                "details": {
+                  "cohort": "no-dnssec",
+                  "configuration_identity": "no-dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns1232",
+                  "edns_bytes": 1232,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280onpath-nopmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "lgi"
+                },
+                "identity": "pre-lgi:no-dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns1232"
+              },
+              {
+                "details": {
+                  "cohort": "no-dnssec",
+                  "configuration_identity": "no-dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns4096",
+                  "edns_bytes": 4096,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280onpath-nopmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "lgi"
+                },
+                "identity": "pre-lgi:no-dnssec--mtu1280onpath-nopmtud-lgi-v4-only-edns4096"
+              },
+              {
+                "details": {
+                  "cohort": "no-dnssec",
+                  "configuration_identity": "no-dnssec--mtu1280onpath-nopmtud-v4-only-edns1232",
+                  "edns_bytes": 1232,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280onpath-nopmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "no-lgi"
+                },
+                "identity": "pre-lgi:no-dnssec--mtu1280onpath-nopmtud-v4-only-edns1232"
+              },
+              {
+                "details": {
+                  "cohort": "no-dnssec",
+                  "configuration_identity": "no-dnssec--mtu1280onpath-nopmtud-v4-only-edns4096",
+                  "edns_bytes": 4096,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1280onpath-nopmtud",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "no-lgi"
+                },
+                "identity": "pre-lgi:no-dnssec--mtu1280onpath-nopmtud-v4-only-edns4096"
+              },
+              {
+                "details": {
+                  "cohort": "no-dnssec",
+                  "configuration_identity": "no-dnssec--mtu1500-lgi-v4-only-edns1232",
+                  "edns_bytes": 1232,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1500",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "lgi"
+                },
+                "identity": "pre-lgi:no-dnssec--mtu1500-lgi-v4-only-edns1232"
+              },
+              {
+                "details": {
+                  "cohort": "no-dnssec",
+                  "configuration_identity": "no-dnssec--mtu1500-lgi-v4-only-edns4096",
+                  "edns_bytes": 4096,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1500",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "lgi"
+                },
+                "identity": "pre-lgi:no-dnssec--mtu1500-lgi-v4-only-edns4096"
+              },
+              {
+                "details": {
+                  "cohort": "no-dnssec",
+                  "configuration_identity": "no-dnssec--mtu1500-v4-only-edns1232",
+                  "edns_bytes": 1232,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1500",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "no-lgi"
+                },
+                "identity": "pre-lgi:no-dnssec--mtu1500-v4-only-edns1232"
+              },
+              {
+                "details": {
+                  "cohort": "no-dnssec",
+                  "configuration_identity": "no-dnssec--mtu1500-v4-only-edns4096",
+                  "edns_bytes": 4096,
+                  "epoch": "pre-lgi",
+                  "family": "v4-only",
+                  "mtu": "mtu1500",
+                  "observation_origin": "Retained archived mean; full source configuration and cohort definition are in the imported configuration record.",
+                  "upstream": "no-lgi"
+                },
+                "identity": "pre-lgi:no-dnssec--mtu1500-v4-only-edns4096"
+              }
+            ],
+            "controls": [
+              "Exact observation/configuration/metric/units matching",
+              "No zero imputation",
+              "Unique observation keys"
+            ],
+            "coverage_limits": "Only the 192 reviewed absolute panel cells and retained archived means. Original per-query/packet parsing, relative figures, causality, generalization and current Internet conditions remain uncovered. TCP fallback is a TCP/UDP ratio; other packet metrics use observed UDP server identities, while TIMEOUT/SERVFAIL use NS-set outcomes.",
+            "data_origin": "archived-data",
+            "dates_or_epochs": "Use the explicit identities and epochs in the input; no present-day substitution.",
+            "dependence": "Dependencies may exist; no independent replications or population inference are asserted.",
+            "exclusions": "Unmatched observations are excluded and recorded; duplicates, unit mismatches and changed inputs fail the run.",
+            "hypotheses": "Numerical agreement is checked separately from correctness, causality and generalization.",
+            "input_versions": [
+              {
+                "identity": "matched-input.json",
+                "sha256": "374017eba78cb578a5510b4fbbe831154f855cb06f9e9c57468d25b7ac39cd23"
+              },
+              {
+                "identity": "prior-assessment-v2.json; source of recorded means",
+                "sha256": "3c3532901aa4b507a61849666d925a0268c0658c0129dbfd729514df8c3a07b0"
+              },
+              {
+                "identity": "reviewed PuRe main.pdf",
+                "sha256": "f6378fb3de19aa8d3204f4d3a2028f95497f334862a5298aa6678ef1b816290b"
+              }
+            ],
+            "metrics": [
+              {
+                "name": "SERVFAIL",
+                "tolerance_absolute": 0.0051,
+                "units": "percent"
+              },
+              {
+                "name": "TIMEOUT",
+                "tolerance_absolute": 0.0051,
+                "units": "percent"
+              },
+              {
+                "name": "edns0_fallback",
+                "tolerance_absolute": 0.0051,
+                "units": "percent"
+              },
+              {
+                "name": "tcp_fallback",
+                "tolerance_absolute": 0.0051,
+                "units": "percent"
+              },
+              {
+                "name": "udp_fragments",
+                "tolerance_absolute": 0.0051,
+                "units": "percent"
+              },
+              {
+                "name": "udp_packet_too_big",
+                "tolerance_absolute": 0.0051,
+                "units": "percent"
+              }
+            ],
+            "missing_data": "Absent expected observations remain missing. Invalid and ambiguous values remain distinct from recorded zero.",
+            "prior_exposure": "All retained values and the original numerical agreement were inspected in the earlier assessment. This is an exposed-data numerical recheck, not held-out validation or new raw-data reanalysis.",
+            "questions": [
+              "Do the retained archived-summary values for Figure 13a still match its separately transcribed published cells within 0.0051 percentage points?"
+            ],
+            "replication_unit": "The explicitly identified observation; no independence is inferred between observations.",
+            "resource_limits": {
+              "cost_basis": "Local or API hosting costs are unallocated; missing charges are not zero. No experiment instances or model calls are requested.",
+              "estimated_cost_usd": null,
+              "max_input_bytes": 256000,
+              "max_observations": 192,
+              "wall_seconds": 10
+            },
+            "sample_size_rationale": "Census of the supplied published comparison cells, with unexpected observations preserved as exclusions.",
+            "seeds": {
+              "applicable": false,
+              "rationale": "Deterministic census; no randomized algorithm."
+            },
+            "sensitivity": {
+              "applicable": false,
+              "rationale": "This campaign checks one fixed declared tolerance; amended tolerances require separate protocols."
+            },
+            "statistics": "Exact Decimal absolute differences of the supplied percentages; differences are percentage points. No inferential intervals or independent replication inferred.",
+            "stopping_rule": "Stop on an input identity, schema, configuration, units or budget violation; preserve the failed attempt.",
+            "preparation": {
+              "version": "research-preparation-v1",
+              "original_manifest_sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+              "original_manifest_plan_id": "ipv6-archive-v1",
+              "input_transformation": "Source identifiers rebound to this study; numerical values, units and observation identities preserved."
+            }
+          },
+          "protocol_reference": {
+            "id": "55eaee72-8ef0-5d13-880d-f2d2eb3cd5b4",
+            "document_sha256": "5c0652111b8c740b71c26b2a58fa5e6c9a1ab774b69b188c255ded7491f4d77f",
+            "view": "full-selected-document"
+          },
+          "retained_input_inventory": {
+            "sha256": "374017eba78cb578a5510b4fbbe831154f855cb06f9e9c57468d25b7ac39cd23",
+            "byte_count": 123739,
+            "provenance": "Computed from the hash-verified compiled original; counts describe archived input records, not new measurements.",
+            "counts": {
+              "published": {
+                "recorded": 192,
+                "missing": 0,
+                "invalid": 0,
+                "ambiguous": 0
+              },
+              "observed": {
+                "recorded": 192,
+                "missing": 0,
+                "invalid": 0,
+                "ambiguous": 0
+              }
+            }
+          }
+        },
+        "review_role": "comprehension"
+      }
+    }
+  ]
+}

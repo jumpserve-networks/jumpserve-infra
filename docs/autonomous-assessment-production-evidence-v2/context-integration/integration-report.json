@@ -1,0 +1,105 @@
+{
+  "protocol": "autonomous-assessment-production-amendment-v9",
+  "prompt_version_id": "83e26515-7b18-5730-9473-f34555a1a1b4",
+  "model_id": "us.anthropic.claude-opus-4-6-v1",
+  "live_provider_calls": 2,
+  "reserved_cents": 133,
+  "input_sha256": {
+    "autonomy.py": "ce5ce2737afec01ada86d9639c88b3e7b94743bb422cf6b2d030a72aace7e38b",
+    "autonomy_model.py": "158feca665ba216d7e66ecbdb023a2ad15937369f044e1b84c9b4325895246ea",
+    "autonomy_sources.py": "4f26059b9b4b3baa511c995735ac39af14f01a6e5f957a9d0c72b544ec693474",
+    "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b"
+  },
+  "integration_inputs_sha256": "3cc934d0f08afd6b8214972e9ed47adf5a47efa2c6530691bc2edba0519e0dcc",
+  "evaluator": {
+    "identity": "Codex deterministic integration evaluator",
+    "type": "AI",
+    "independent": false
+  },
+  "reviewer": {
+    "identity": "Primary Codex AI implementer; pending actual-answer inspection",
+    "type": "AI",
+    "independent": false,
+    "passed": false
+  },
+  "cases": [
+    {
+      "name": "indexed-six-check-selection",
+      "criterion": "Select one exact retained automatic check from all six indexed candidates, without a new proposal or weakened condition.",
+      "status": "complete",
+      "passed": false,
+      "usage": {
+        "inputTokens": 27520,
+        "outputTokens": 224,
+        "totalTokens": 27744,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+      },
+      "raw_answer_reviewed": false,
+      "rendered_answer_reviewed": false,
+      "request_sha256": "1c654fb08f0185ef16e27cb71ec215a8d4371462f55a55064d6d0eed12d304a6",
+      "provider_response_sha256": "62aa885af8f5a9f3be69bd02bd598119c7f3b0c872728664b5c7c9cc84db40d2",
+      "output_sha256": "27ed86814e63ea47f539b5d362fa9fc6cf7c203c231f5f69684eaea4ea600308",
+      "estimated_cents": 23,
+      "output": {
+        "action": "choose-check",
+        "reason": "The retained check is selected by identity; its frozen inputs and criteria remain unchanged.",
+        "blockers": [],
+        "claims": [],
+        "check_id": "6b32f6d1-06cf-5c38-8065-9c420377c2f0",
+        "proposal": null,
+        "ready": null,
+        "coverage_complete": false,
+        "assessment_label": null,
+        "evidence_ids": []
+      },
+      "deterministic_checks": {
+        "schema": true,
+        "phase_action": true,
+        "no_new_proposal": true,
+        "retained_identity": true
+      }
+    },
+    {
+      "name": "full-selected-protocol-review",
+      "criterion": "Return an explicit phase-correct review or concrete external blocker; preserve full selected configuration details and never claim one figure covers the whole six-figure claim without evidence.",
+      "status": "complete",
+      "passed": false,
+      "usage": {
+        "inputTokens": 10374,
+        "outputTokens": 199,
+        "totalTokens": 10573,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+      },
+      "raw_answer_reviewed": false,
+      "rendered_answer_reviewed": false,
+      "request_sha256": "2de9604e7cc54a08d649b99eb8bbe1bb5b8c0af82ff078ffb92f6f5672cee5f5",
+      "provider_response_sha256": "7cdabd369ec7227f553260fa03414b1fc4cd263688c9fe2556b254eed49ec8ac",
+      "output_sha256": "dda1e84fecdc753e2b21499048b4a0e6de9036c7d628e1fd7e5f8b844e23e708",
+      "estimated_cents": 10,
+      "output": {
+        "action": "review",
+        "reason": "The candidate is ready within its declared scope; readiness does not establish scientific validity.",
+        "blockers": [],
+        "claims": [],
+        "check_id": null,
+        "proposal": null,
+        "ready": true,
+        "coverage_complete": false,
+        "assessment_label": null,
+        "evidence_ids": []
+      },
+      "deterministic_checks": {
+        "schema": true,
+        "phase_action": true,
+        "no_new_proposal": true,
+        "explicit_review_or_external_blocker": true,
+        "no_scientific_finding": true
+      }
+    }
+  ],
+  "measured_charges_usd": null,
+  "started_at": "2026-10-18T22:55:28.474189+00:00",
+  "ended_at": "2026-10-18T22:56:07.827250+00:00"
+}

@@ -1,0 +1,47 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_krV73ZhqrYUSTbYK8Tg1zT",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "blocked",
+                            "reason": "missing-required-inputs",
+                            "blockers": [
+                                {
+                                    "kind": "missing-data",
+                                    "detail": "missing-source-data",
+                                    "required_input": "Measurement m1 is recorded in seconds (0.012 s) while the frozen claim metric is in milliseconds (12 ms). The previous feedback explicitly prohibits silent relabeling or manufacturing a conversion record. A documented, controller-authorized unit-conversion reconciliation of m1 from seconds to milliseconds is required before this measurement can be compared against the claimed value. Please provide an explicit versioned conversion record or a corrected measurement with matching units."
+                                }
+                            ],
+                            "claims": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": [
+                                "m1"
+                            ]
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3464,
+        "outputTokens": 319,
+        "totalTokens": 3783,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 4914
+    }
+}

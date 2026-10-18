@@ -1,0 +1,42 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_VFdONcCNvMEDbpy0uYzCeQ",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "assess",
+                            "reason": "evidence-incomplete",
+                            "blockers": [],
+                            "claims": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": "inconclusive",
+                            "evidence_ids": [
+                                "m0",
+                                "missing"
+                            ]
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3421,
+        "outputTokens": 205,
+        "totalTokens": 3626,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 2729
+    }
+}

@@ -26,14 +26,15 @@ def plan():
  return dict(schema_version=1,plan_id='autonomy-software-fixture-v1',title='Synthetic autonomous verification fixture',paper_urls=[URL],provenance=dict(producer='Explicit local software fixture',source_version='fixture-v1',prior_exposure='Exposed development inputs',limitations='Synthetic source/provider/auth/Storage; no cloud or scientific result'),records=records,campaigns=campaigns)
 
 def publish_fixture():
- seed=json.loads((f.ROOT/'database/seed-autonomy-v5.json').read_bytes());lock=json.loads((f.ROOT/'test/autonomy-implementation-lock-v5.json').read_bytes())
- for name,sha in lock['files'].items():
+ seed=json.loads((f.ROOT/'database/seed-autonomy-v6.json').read_bytes());lock=json.loads((f.ROOT/'test/autonomy-implementation-lock-v6.json').read_bytes())
+ released=json.loads((f.ROOT/'test/autonomy-integration-lock-v1.json').read_bytes())
+ for name,sha in released['files'].items():
   assert hashlib.sha256((f.ROOT.parent/'jumpserve-back-end/research_workflow'/name).read_bytes()).hexdigest()==sha,'Renew local source lock before testing changed implementation: '+name
  sha=f.query('select content_sha256 from agent_prompt_versions where id='+f.sql_text(seed['id']))
  report=dict(protocol='autonomous-assessment-protocol-v1',analysis_version=autonomy.VERSION,module_id=model.MODULE,prompt_version_id=seed['id'],prompt_version=seed['version'],prompt_content_sha256=sha,
-  evaluation_kind='actual-model-development',live_provider_calls=19,prior_live_provider_calls=14,prior_failed_provider_calls=5,new_provider_calls=5,reused_answer_count=9,recovery_source_sha256='d'*64,release_amendment='autonomous-assessment-production-amendment-v6',model_id=model.MODEL,cases_sha256=lock['cases_sha256'],request_manifest_sha256=lock['request_manifest_sha256'],response_channel_sha256=lock['response_channel_sha256'],input_sha256=lock['files'],
+  evaluation_kind='actual-model-development',live_provider_calls=18,model_evaluation_live_provider_calls=16,integration_live_provider_calls=2,report_kind='composite-model-and-context-integration',model_evaluation_report_sha256='e'*64,integration_evaluation_report_sha256='f'*64,released_input_sha256=released['files'],prior_live_provider_calls=14,prior_failed_provider_calls=5,new_provider_calls=5,reused_answer_count=9,recovery_source_sha256='d'*64,release_amendment='autonomous-assessment-production-amendment-v9',model_id=model.MODEL,cases_sha256=lock['cases_sha256'],request_manifest_sha256=lock['request_manifest_sha256'],response_channel_sha256=lock['response_channel_sha256'],input_sha256=lock['files'],
   fixture_notice='Synthetic SQL-guard declarations only; not an actual provider evaluation or production publication.',evaluator=dict(identity='Explicit synthetic evaluator fixture',type='AI',independent=False),reviewer=dict(identity='Explicit synthetic reviewer fixture',type='AI',independent=False,passed=True),
-  cases=[dict(name=c['name'],passed=True,status='complete',raw_answer_reviewed=True,rendered_answer_reviewed=True,output_sha256='b'*64,provider_response_sha256='c'*64) for c in json.loads((f.ROOT/'test/autonomy-evaluation-cases-v1.json').read_bytes())['cases']])
+  cases=[dict(name=c['name'],passed=True,status='complete',raw_answer_reviewed=True,rendered_answer_reviewed=True,output_sha256='b'*64,provider_response_sha256='c'*64) for c in json.loads((f.ROOT/'test/autonomy-evaluation-cases-v2.json').read_bytes())['cases']+json.loads((f.ROOT/'test/autonomy-integration-inputs-v1.json').read_bytes())['cases']])
  payload=dict(p_version_id=seed['id'],p_expected_active_version_id=None,p_expected_content_sha256=sha,p_report=report,p_actor='Synthetic local publication guard exercise only',p_module_id=model.MODULE)
  return payload
 
