@@ -1,0 +1,2 @@
+
+aws: [ERROR]: An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 0): Too many requests, please wait before trying again.

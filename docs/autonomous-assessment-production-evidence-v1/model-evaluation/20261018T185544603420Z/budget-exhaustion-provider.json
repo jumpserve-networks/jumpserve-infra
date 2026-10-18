@@ -1,0 +1,50 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_bMPKPoTIH8GHt9Cooy2RM8",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "blocked",
+                            "reason": "All 25 permitted attempts per claim have been exhausted (attempt_number=26 exceeds the limit of 25). Additionally, remaining_commitment_cents=0 means no budget remains to fund any further runner execution. No registered checks exist, and any new proposal would require budget and attempts neither of which are available. It is not possible to make progress on this claim under the documented constraints.",
+                            "blockers": [
+                                {
+                                    "kind": "capacity",
+                                    "detail": "Attempt limit of 25 per claim has been reached (current attempt_number=26). No further attempts are permitted under the documented policy.",
+                                    "required_input": "A controller-level reset or waiver of the per-claim attempt limit would be required to proceed."
+                                },
+                                {
+                                    "kind": "capacity",
+                                    "detail": "remaining_commitment_cents=0; no budget remains to fund any runner execution (emulated-netem-v1 or real-world-iperf-v1).",
+                                    "required_input": "Additional budget allocation by the controller is required before any measurement run can be commissioned."
+                                }
+                            ],
+                            "claims": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 2284,
+        "outputTokens": 440,
+        "totalTokens": 2724,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 3876
+    }
+}

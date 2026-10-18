@@ -1,0 +1,50 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_gaAgZtvlcgpZ1VdIuOzNFR",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "blocked",
+                            "reason": "The attempt counter has reached 26, which exceeds the hard limit of 25 attempts per claim. Additionally, remaining_commitment_cents is 0, meaning the budget is fully exhausted. Both fixed limits are exceeded and cannot be reset or waived within this workflow. No further planning, execution, or assessment steps are permissible. All prior records must be preserved as-is.",
+                            "blockers": [
+                                {
+                                    "kind": "capacity",
+                                    "detail": "Attempt limit exceeded: 26 attempts used against a maximum of 25 per claim. This limit is fixed and cannot be reset.",
+                                    "required_input": "No further attempts are permitted for claim 7587d734-a287-50ca-ba7e-dc1d1149f768."
+                                },
+                                {
+                                    "kind": "capacity",
+                                    "detail": "Budget exhausted: remaining_commitment_cents is 0. No additional spend is authorized for this claim.",
+                                    "required_input": "No remaining budget is available to fund any further execution or data acquisition."
+                                }
+                            ],
+                            "claims": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3080,
+        "outputTokens": 397,
+        "totalTokens": 3477,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 3940
+    }
+}

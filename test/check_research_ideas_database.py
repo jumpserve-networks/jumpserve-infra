@@ -46,6 +46,7 @@ def query(sql,database=DATABASE,role=None):
 
 def rpc(name,payload):
     signatures={
+      'research_autonomy_control':dict(p_operation='text',p_actor='uuid',p_study='uuid',p_payload='jsonb'),
       'research_initialize_claim_design':dict(p_study='uuid',p_actor='uuid',p_document='jsonb',p_raw='text',p_sha256='text',p_source='jsonb',p_claim='jsonb'),
       'research_reuse_claim_packet':dict(p_study='uuid',p_actor='uuid',p_id='uuid',p_packet='uuid',p_run='uuid'),
       'research_create_study':dict(p_actor='uuid',p_id='uuid',p_document='jsonb'),
@@ -90,11 +91,14 @@ def transport(path,method='GET',body=None,public=False,raw=False):
                 target.write_bytes(body);return None
             if path not in files:raise store.StoreError('Research persistence request failed (HTTP 404)')
             return files[path]
+    if parsed.path=='/rest/v1/rpc/get_active_agent_prompt' and method=='GET':
+        module=dict(urllib.parse.parse_qsl(parsed.query))['p_module_id']
+        return json.loads(query("select coalesce(json_agg(t),'[]') from public.get_active_agent_prompt("+sql_text(module)+")t",role='service_role'))
     if parsed.path.startswith('/rest/v1/rpc/'):
         return rpc(parsed.path.removeprefix('/rest/v1/rpc/'),body)
     if method!='GET' or body is not None:raise ValueError('Unexpected transport mutation')
     table=parsed.path.removeprefix('/rest/v1/')
-    allowed=['research_'+k for k in (*workflow.FIELDS,'studies','study_owners','queue_jobs','queue_events','prepared_plans','idea_packets','idea_runs','idea_readiness','idea_campaign_links','claim_designs')]
+    allowed=['research_'+k for k in (*workflow.FIELDS,'studies','study_owners','queue_jobs','queue_events','prepared_plans','idea_packets','idea_runs','idea_readiness','idea_campaign_links','claim_designs','autonomy_workflows','autonomy_tasks','autonomy_turns')]
     if table not in allowed:raise ValueError('Unsupported relation')
     params=dict(urllib.parse.parse_qsl(parsed.query));columns=params.pop('select').split(',')
     if any(not c.replace('_','').isalnum() for c in columns):raise ValueError('Unsafe projection')
@@ -103,13 +107,19 @@ def transport(path,method='GET',body=None,public=False,raw=False):
     if order:
         for entry in order.split(','):
             column,direction=entry.split('.')
-            if column not in ('created_at','id','version') or direction not in ('asc','desc'):raise ValueError('Unsafe order')
+            if column not in ('created_at','id','version','number','study_id') or direction not in ('asc','desc'):raise ValueError('Unsafe order')
             ordering.append(column+' '+direction)
     predicates=[]
     for column,value in params.items():
-        if column not in ('id','study_id','owner_id','created_at','packet_id','task','run_id','campaign_id','protocol_id'):raise ValueError('Unsafe filter')
+        if column not in ('id','study_id','owner_id','created_at','packet_id','task','run_id','campaign_id','protocol_id','task_id','number','claim_id'):raise ValueError('Unsafe filter')
         operator,argument=value.split('.',1)
         if operator=='eq':predicates.append(column+'='+sql_text(argument))
+        elif operator=='in':
+            if not argument.startswith('(') or not argument.endswith(')'):raise ValueError('Invalid fixed list filter')
+            predicates.append(column+' in ('+','.join(sql_text(str(uuid.UUID(v))) for v in argument[1:-1].split(','))+')')
+        elif operator=='lt' and column=='number':
+            if not argument.isdigit():raise ValueError('Invalid turn cursor')
+            predicates.append(column+'<'+str(int(argument)))
         elif operator=='lte' and column=='created_at':predicates.append(column+'<='+sql_text(argument))
         else:raise ValueError('Unsupported filter')
     where=' where '+' and '.join(predicates) if predicates else ''
@@ -145,6 +155,8 @@ grant all on public.agent_sessions to service_role;""")
     for name in ('202610130002_network_execution.sql','202610170001_claim_experiment_design.sql','202610170002_claim_design_prompt.sql','202610170003_claim_design_prompt_v2.sql','202610170004_claim_design_prompt_v3.sql','202610170005_claim_design_prompt_v4.sql','202610170006_claim_design_policy_guard.sql','202610170007_claim_design_prompt_v5.sql','202610170008_claim_design_v5_publication_guard.sql','202610170009_claim_design_prompt_v6.sql','202610170010_claim_design_v6_publication_guard.sql','202610170011_claim_design_replay_publication_guard.sql','202610170012_claim_design_quote_publication_guard.sql','202610170013_claim_design_exact_units_publication_guard.sql'):
         raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     name='202610180001_claim_packet_reuse.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
+    for name in ('202610180002_autonomous_assessments.sql','202610180003_autonomy_prompt_candidate.sql','202610180004_autonomy_publication_guard.sql','202610180005_autonomy_prompt_v2.sql','202610180006_autonomy_v2_publication_guard.sql','202610180007_autonomy_prompt_v3.sql','202610180008_autonomy_v3_publication_guard.sql','202610180009_autonomy_prompt_v4.sql','202610180010_autonomy_v4_publication_guard.sql','202610180011_autonomy_prompt_v5.sql','202610180012_autonomy_v5_publication_guard.sql','202610180013_autonomy_provider_recovery_guard.sql'):
+        raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     report['bootstrap_limit']='Legacy agent_sessions base table synthesized; listed prompt/research migrations executed as original files. Historical study-table migrations outside this feature are not replayed.'
     store.request=transport
 

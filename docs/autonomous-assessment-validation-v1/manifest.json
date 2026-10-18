@@ -1,0 +1,475 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-18T18:25:22.695251+00:00",
+  "scope": "Local development evidence only; exact copied producer bytes. SDK messages are canonical representations; database JSON is a parsed export. No original HTTP bytes are claimed.",
+  "artifacts": [
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T165147838324Z/autonomy-validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T165147838324Z/autonomy-validation-report.json",
+      "kind": "Original local SQL/controller test report, including failed attempts",
+      "bytes": 1957,
+      "sha256": "d33f045299efedfef65ab900e2fdab826f45a3530b8ca5db3c44508077bac0ab",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T170900144601Z/autonomy-validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T170900144601Z/autonomy-validation-report.json",
+      "kind": "Original local SQL/controller test report, including failed attempts",
+      "bytes": 8884,
+      "sha256": "f9ef87865967d42cc4c5517380593e89c2006c72e63277254d87204345251905",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T170919382168Z/autonomy-validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T170919382168Z/autonomy-validation-report.json",
+      "kind": "Original local SQL/controller test report, including failed attempts",
+      "bytes": 10168,
+      "sha256": "24dfbb2f57d83b5bb46dbc5ba7614270b87fe6080a3e8df55bedb5fad500515e",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T170952545375Z/autonomy-validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T170952545375Z/autonomy-validation-report.json",
+      "kind": "Original local SQL/controller test report, including failed attempts",
+      "bytes": 8801,
+      "sha256": "ab7ad6438838aa6f026190b9c89e3610b59518da8bf8733577a7dcce5bb7fe0a",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T171043807930Z/autonomy-validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T171043807930Z/autonomy-validation-report.json",
+      "kind": "Original local SQL/controller test report, including failed attempts",
+      "bytes": 10074,
+      "sha256": "6d271d4935a7053de8f24fa84595fe7c0f5647108503ba1a4bd6e4f71bb229fb",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T171139582975Z/autonomy-validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T171139582975Z/autonomy-validation-report.json",
+      "kind": "Original local SQL/controller test report, including failed attempts",
+      "bytes": 15606,
+      "sha256": "71688d4961a4714fe8a42f610089ac91bb12777ff0a4e383df04ede4d1049950",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T171152141515Z/autonomy-validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T171152141515Z/autonomy-validation-report.json",
+      "kind": "Original local SQL/controller test report, including failed attempts",
+      "bytes": 12784,
+      "sha256": "d6bc3c44953dcc3e92403724d72028bf9a183cbffa155bf78d4afbe841108044",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T171226904502Z/autonomy-validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T171226904502Z/autonomy-validation-report.json",
+      "kind": "Original local SQL/controller test report, including failed attempts",
+      "bytes": 8985,
+      "sha256": "1a893577bbd280fbb8c750e968b51b8330abbbbca4a35658731becf4083c509f",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T171402340131Z/autonomy-validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T171402340131Z/autonomy-validation-report.json",
+      "kind": "Original local SQL/controller test report, including failed attempts",
+      "bytes": 9308,
+      "sha256": "a9c541ec505eb08583584fc87df6727745d0898144014edc70d547397bd19be4",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T180715932732Z/autonomy-validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T180715932732Z/autonomy-validation-report.json",
+      "kind": "Original local SQL/controller test report, including failed attempts",
+      "bytes": 9714,
+      "sha256": "893bbd4c84196b46f45fd19ab46c0b4d7f308354925111353d06fa10d2defbcd",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T181045309609Z/autonomy-validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T181045309609Z/autonomy-validation-report.json",
+      "kind": "Original local SQL/controller test report, including failed attempts",
+      "bytes": 9716,
+      "sha256": "852251f659bef3686c4153ec63781981e88532e7127961ff93b1698408073a20",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T181216640266Z/autonomy-validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T181216640266Z/autonomy-validation-report.json",
+      "kind": "Original local SQL/controller test report, including failed attempts",
+      "bytes": 9776,
+      "sha256": "8e2f7d1cc26bb76cfaf03831e6f734519c803733691d45487abde04a9974ef93",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T181605571249Z/autonomy-validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T181605571249Z/autonomy-validation-report.json",
+      "kind": "Original local SQL/controller test report, including failed attempts",
+      "bytes": 9778,
+      "sha256": "e046d82b26d6acbc86b797767e10ae1a38701de94f813a802ddeafec2a72bfc3",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T181945135993Z/autonomy-validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T181945135993Z/autonomy-validation-report.json",
+      "kind": "Original local SQL/controller test report, including failed attempts",
+      "bytes": 9780,
+      "sha256": "4786cf2694c22641e48642c5eaaf5d3200c6a70bd3a74da3d9de9a9aa0247e86",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T182210938303Z/autonomy-validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T182210938303Z/autonomy-validation-report.json",
+      "kind": "Original local SQL/controller test report, including failed attempts",
+      "bytes": 9225,
+      "sha256": "6f132eefdc6cf5e14e7aada6f12d3409a69a2c1e14fa59240274d227f2ac05de",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T182233320942Z/autonomy-validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T182233320942Z/autonomy-validation-report.json",
+      "kind": "Original local SQL/controller test report, including failed attempts",
+      "bytes": 9868,
+      "sha256": "055fca89c269246671103ef79f00d669080c6559f31b35e535f88e9aa7f66c1e",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T182233320942Z/database-fixture-snapshot.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T182233320942Z/database-fixture-snapshot.json",
+      "kind": "Parsed synthetic database export",
+      "bytes": 1324098,
+      "sha256": "91ca446de9eb9fa78cf0e9224a19e5f19cb44c71cb09400cbf531b46a190254d",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T182233320942Z/raw-06e70eda27b541833c38c7fdc36bafe1730356764645f2209e701dc7810ca8fa",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T182233320942Z/raw-06e70eda27b541833c38c7fdc36bafe1730356764645f2209e701dc7810ca8fa",
+      "kind": "Original local fixture artifact bytes; not real networking observations",
+      "bytes": 306,
+      "sha256": "ecc19a411be0a34c310cefaed174cd1858e60e35e67abb064b4e30ca1ca8b5bb",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T182233320942Z/raw-07501ee95fa962aa911b0ba4e78c06362c98f287a65a79a1b81f3b4b2d60ed95",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T182233320942Z/raw-07501ee95fa962aa911b0ba4e78c06362c98f287a65a79a1b81f3b4b2d60ed95",
+      "kind": "Original local fixture artifact bytes; not real networking observations",
+      "bytes": 443,
+      "sha256": "2ece63b127163168d1ee3e2ea946b0ec6d003b7eec80e7d7d68e7b224db6d6d2",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T182233320942Z/raw-1d3f2f0949261194e592799e0656459a2a5657ab5a030907b8252d53a394bde5",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T182233320942Z/raw-1d3f2f0949261194e592799e0656459a2a5657ab5a030907b8252d53a394bde5",
+      "kind": "Original local fixture artifact bytes; not real networking observations",
+      "bytes": 3608,
+      "sha256": "0d8a4dc2387969f8b95c8b106acd3e95169e4ea1acca4be033435d9a463bb762",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T182233320942Z/raw-2af6f257df4c5bddebd2d6683001db46d3ef7525d0d150c8a3374e175afa69ed",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T182233320942Z/raw-2af6f257df4c5bddebd2d6683001db46d3ef7525d0d150c8a3374e175afa69ed",
+      "kind": "Original local fixture artifact bytes; not real networking observations",
+      "bytes": 22660,
+      "sha256": "244c4cde4a8bb8e0bcd97b94c10b2b4eac21532508dc96717a6f9a282ee6fa28",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T182233320942Z/raw-3a71bb23b67178d0b5ded4aa02acb98a3fcba408e99869ea816a8c1d96b68f50",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T182233320942Z/raw-3a71bb23b67178d0b5ded4aa02acb98a3fcba408e99869ea816a8c1d96b68f50",
+      "kind": "Original local fixture artifact bytes; not real networking observations",
+      "bytes": 1036,
+      "sha256": "dfa6a2568758022bbbbc2f4fcbde0c982a1cf36b24670d55b37870b5a757c51c",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T182233320942Z/raw-5512c030f0acd3504749aa9f8517c43c9074c50d119b653de5e4107f3bcd7e93",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T182233320942Z/raw-5512c030f0acd3504749aa9f8517c43c9074c50d119b653de5e4107f3bcd7e93",
+      "kind": "Original local fixture artifact bytes; not real networking observations",
+      "bytes": 22660,
+      "sha256": "244c4cde4a8bb8e0bcd97b94c10b2b4eac21532508dc96717a6f9a282ee6fa28",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T182233320942Z/raw-5bd4321575c0de41f06cb5f7024cd0ef46b308c5504d22a5d40b1d6fc9f20570",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T182233320942Z/raw-5bd4321575c0de41f06cb5f7024cd0ef46b308c5504d22a5d40b1d6fc9f20570",
+      "kind": "Original local fixture artifact bytes; not real networking observations",
+      "bytes": 30804,
+      "sha256": "fbf3905af84bb2ffcc6779dc6c4b542f7a871d78afd28a05952da8c4283be128",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T182233320942Z/raw-6505e91244cb395e06bb105ff856f8c120a1ffb0972bf8f5c3a20ac024d3cdc8",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T182233320942Z/raw-6505e91244cb395e06bb105ff856f8c120a1ffb0972bf8f5c3a20ac024d3cdc8",
+      "kind": "Original local fixture artifact bytes; not real networking observations",
+      "bytes": 3404,
+      "sha256": "f38186dce305c51f7bee08f44e8bb22e8455d3792433bc4ed2d54e01ea148cc1",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T182233320942Z/raw-6ebf9fe694c0d9cf3f685203293149ec1aea7e0ea3a9c36962c88b79fe2f73cb",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T182233320942Z/raw-6ebf9fe694c0d9cf3f685203293149ec1aea7e0ea3a9c36962c88b79fe2f73cb",
+      "kind": "Original local fixture artifact bytes; not real networking observations",
+      "bytes": 686,
+      "sha256": "b375c00e53a9c39b9c1b3d4a95e4198361a07eaac2ccf7116b3badec4c69fe8b",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T182233320942Z/raw-89785ff5d0f1995fa2a4ec9c0e86e5f13efa1ae2a2e4b9949bc51311f27db43d",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T182233320942Z/raw-89785ff5d0f1995fa2a4ec9c0e86e5f13efa1ae2a2e4b9949bc51311f27db43d",
+      "kind": "Original local fixture artifact bytes; not real networking observations",
+      "bytes": 3607,
+      "sha256": "1450eda46616094b80fa9a2ac12ed03553f1cd87bed425e96dfd614a969780df",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T182233320942Z/raw-91ee32e0899c0c2aefd4647bad2e9e9b9cbacd0ccad73ce2df3ea02be26107c1",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T182233320942Z/raw-91ee32e0899c0c2aefd4647bad2e9e9b9cbacd0ccad73ce2df3ea02be26107c1",
+      "kind": "Original local fixture artifact bytes; not real networking observations",
+      "bytes": 306,
+      "sha256": "73ad26d402908a12558d862e3e4340e92ccc09b2c0b8ed1d99d996a95e0a3dde",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T182233320942Z/raw-de9e9131ba894efab357ef66917430a2b3daa25b7112b6c1f86098e2445d07f9",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T182233320942Z/raw-de9e9131ba894efab357ef66917430a2b3daa25b7112b6c1f86098e2445d07f9",
+      "kind": "Original local fixture artifact bytes; not real networking observations",
+      "bytes": 30804,
+      "sha256": "dd22a2a7af0d2984dda502a09adfa45c95c020464230d590d72947db6473ad48",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T182233320942Z/raw-e65c9237da648ebcee99b38c5ccf762ca2f4ad93a393d4d17ddfba935511b16c",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T182233320942Z/raw-e65c9237da648ebcee99b38c5ccf762ca2f4ad93a393d4d17ddfba935511b16c",
+      "kind": "Original local fixture artifact bytes; not real networking observations",
+      "bytes": 443,
+      "sha256": "d8bce9cb2d909c4611fd31ff81004fe06e844d6de94e5bbbed802dd4fac4d49f",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/sql/20261018T182233320942Z/raw-f9eec7ec1e9a5ebbe688e2be2b8e84fec61a13635a2767599e53b76de2eead37",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T182233320942Z/raw-f9eec7ec1e9a5ebbe688e2be2b8e84fec61a13635a2767599e53b76de2eead37",
+      "kind": "Original local fixture artifact bytes; not real networking observations",
+      "bytes": 3403,
+      "sha256": "c7df7cfab9cbf59b7cbdedd050f2b0a453e5a46db872263251db61c1c182972b",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/browser/2026-10-18T18-05-42.431Z/validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-18T18-05-42.431Z/validation-report.json",
+      "kind": "Original browser campaign report, including failed attempts",
+      "bytes": 1883,
+      "sha256": "8ffc15a1b64147079ca6465084b7f6122c7c868401337ae8fee15ab94f8da9ac",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/browser/2026-10-18T18-20-15.039Z/validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-18T18-20-15.039Z/validation-report.json",
+      "kind": "Original browser campaign report, including failed attempts",
+      "bytes": 2164,
+      "sha256": "8d7c715b9baf1f73a2f6e83210a1add091b202bf7d1c5a98ae96b2cecde0488a",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/browser/2026-10-18T18-22-57.501Z/validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-18T18-22-57.501Z/validation-report.json",
+      "kind": "Original browser campaign report, including failed attempts",
+      "bytes": 2164,
+      "sha256": "7940f684c59097659fbb252d7b9ab9c0baa2532b3378bee661e2ae56ce740ab4",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/browser/2026-10-18T18-23-37.026Z/validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-18T18-23-37.026Z/validation-report.json",
+      "kind": "Original browser campaign report, including failed attempts",
+      "bytes": 1968,
+      "sha256": "384352018e4e92ad8433cad4dc070767b9b96900f1ce4ad9096a0ff8ce6eb67f",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/browser/2026-10-18T18-24-11.641Z/validation-report.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-18T18-24-11.641Z/validation-report.json",
+      "kind": "Original browser campaign report, including failed attempts",
+      "bytes": 2592,
+      "sha256": "3480fe635df4ab124d6f215a146aa128f454bff130a734f18492dd7831965937",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/browser/2026-10-18T18-24-11.641Z/1365-dark.png",
+      "origin_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-18T18-24-11.641Z/1365-dark.png",
+      "kind": "Original browser screenshot",
+      "bytes": 741989,
+      "sha256": "005d4e953fce09cb838680236b25ce7d397932be09c78d733080ac90c502e347",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/browser/2026-10-18T18-24-11.641Z/1365-light.png",
+      "origin_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-18T18-24-11.641Z/1365-light.png",
+      "kind": "Original browser screenshot",
+      "bytes": 745455,
+      "sha256": "a8a4983d850096b622845c776fcaccbaaf77ccab176eaece7c9f27a050029529",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/browser/2026-10-18T18-24-11.641Z/390-dark.png",
+      "origin_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-18T18-24-11.641Z/390-dark.png",
+      "kind": "Original browser screenshot",
+      "bytes": 621460,
+      "sha256": "22b3f887f3a746b58cbca3620223508ecaabf54db18def514b174e1940968d1f",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/browser/2026-10-18T18-24-11.641Z/390-light.png",
+      "origin_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-18T18-24-11.641Z/390-light.png",
+      "kind": "Original browser screenshot",
+      "bytes": 632225,
+      "sha256": "45d54ff21db08639f6b9869265599f2ff5dc335aaa5072be60fe2d50a8776b95",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/browser/2026-10-18T18-24-11.641Z/prompt-history-fixture.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-18T18-24-11.641Z/prompt-history-fixture.json",
+      "kind": "Synthetic prompt history export",
+      "bytes": 403849,
+      "sha256": "82ec99292ee482a4d76373769a6e2051a55fb9d2d7638e8f7ed576216c5e603b",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/browser/2026-10-18T18-24-11.641Z/stale-invalid-status.png",
+      "origin_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-18T18-24-11.641Z/stale-invalid-status.png",
+      "kind": "Original browser screenshot",
+      "bytes": 446929,
+      "sha256": "aa7070e67eff3fd6fbe9552334a4969aed1d399dd35f9b0d6d11fde6d9a68a20",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/browser/2026-10-18T18-24-11.641Z/unavailable-status.png",
+      "origin_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-18T18-24-11.641Z/unavailable-status.png",
+      "kind": "Original browser screenshot",
+      "bytes": 34673,
+      "sha256": "80752d8fc4f60af3222fd984bcbf9d7aeb5ed74243489c1eccbf794beafb1bc0",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/logs/frontend-build.log",
+      "origin_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-autonomy/final-v1/frontend-build.log",
+      "kind": "Original frontend check log",
+      "bytes": 3441,
+      "sha256": "42cc57290ed02a1321ad208a3debecb517190d8dbba6700ccbbcb7a31ccb7775",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/logs/frontend-lint.log",
+      "origin_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-autonomy/final-v1/frontend-lint.log",
+      "kind": "Original frontend check log",
+      "bytes": 489,
+      "sha256": "04f119d60dc37241178960c2aa1f9580cef98f1975fddf901fd22e88c8b56d5c",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/logs/frontend-unit.log",
+      "origin_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-autonomy/final-v1/frontend-unit.log",
+      "kind": "Original frontend check log",
+      "bytes": 30485,
+      "sha256": "da20e625dcc3f35cb4035cf07bb562e81db534890025553235808b5da80b1756",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/logs/backend-unit.log",
+      "origin_path": "/Users/Shared/allstar/jumpserve-back-end/.test-artifacts/autonomy-final-v3/backend-unit.log",
+      "kind": "Original backend check log",
+      "bytes": 1124,
+      "sha256": "4f6ca64411289eb04c09e9bed938a227c05e52871f997a42ef1bce7db2b9c222",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/logs/infra-unit.log",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/autonomy-final-v1/infra-unit-v3.log",
+      "kind": "Original infrastructure check log",
+      "bytes": 1013,
+      "sha256": "60da351950904f91c524704baa77fae929a2aee0b1b72213c65af92a6876606d",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/logs/infra-build.log",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/autonomy-final-v1/infra-build.log",
+      "kind": "Original infrastructure build log",
+      "bytes": 38,
+      "sha256": "20a797e92f8024034fdbd347cd8cd342383b44ea365d9434010da577a5f2d62b",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/compatibility/ideas-database.json",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261018T182113657835Z/validation-report.json",
+      "kind": "Original existing idea-flow compatibility report, before final autonomy-only lease cleanup",
+      "bytes": 9474,
+      "sha256": "33186e4738014a9efa2cbf8146be5f6675847fb56b8ae396c56fe0adfa69c19e",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/dependency/pypdf-6.19.0-py3-none-any.whl",
+      "origin_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/autonomy-dependencies/pypdf-6.19.0-py3-none-any.whl",
+      "kind": "Original third-party wheel; license included inside archive",
+      "bytes": 395480,
+      "sha256": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    },
+    {
+      "path": "docs/autonomous-assessment-validation-v1/logs/frontend-lint-v2.log",
+      "origin_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-autonomy/final-v1/frontend-lint-v2.log",
+      "kind": "Original final frontend lint log including the completed browser verifier",
+      "bytes": 489,
+      "sha256": "04f119d60dc37241178960c2aa1f9580cef98f1975fddf901fd22e88c8b56d5c",
+      "copied_original_bytes": true,
+      "retrieved_hash_verified": true
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_XeZdKNaUWBaJzndWC7ROuI",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "discover",
+                            "reason": "Extracting the exact factual quote from source_chunk.text on page 3 as required by the discover task. No substantive review is performed at this stage.",
+                            "claims": [
+                                {
+                                    "page": 3,
+                                    "quote": "Recorded completion time was 12 ms.",
+                                    "claim_type": "numerical"
+                                }
+                            ],
+                            "blockers": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 2854,
+        "outputTokens": 258,
+        "totalTokens": 3112,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 2111
+    }
+}

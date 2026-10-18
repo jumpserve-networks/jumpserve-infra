@@ -11,6 +11,26 @@ test('explicit shared-pool production mode omits reservations while retaining bo
   template.hasResourceProperties('AWS::Lambda::Function', { Handler: 'worker.handler', MemorySize: 512, Timeout: 180 });
   template.hasResourceProperties('AWS::Events::Rule', { ScheduleExpression: 'rate(1 minute)' });
 });
+test('autonomous assessment worker is explicit, private, bounded and separately scheduled', () => {
+  const app = new cdk.App({ context: { supabaseUrl: 'https://regphejnlvfpyokpniny.supabase.co', researchQueueEnabled: true, researchAutonomyEnabled: true } });
+  const stack = new cdk.Stack(app, 'AutonomyTest', { env: { account: '395567831870', region: 'us-east-1' } });
+  new ResearchWorkflow(stack, 'Research', new api.HttpApi(stack, 'Api'));
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::Lambda::Function', { Handler: 'autonomy.handler', MemorySize: 1024, Timeout: 180, ReservedConcurrentExecutions: 2, Layers: Match.anyValue() });
+  template.resourceCountIs('AWS::Lambda::Url', 0);
+  template.resourceCountIs('AWS::Events::Rule', 2);
+  template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'GET /research/studies/{studyId}/autonomy' });
+  template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'POST /research/studies/{studyId}/autonomy' });
+  const policies = JSON.stringify(template.findResources('AWS::IAM::Policy'));
+  expect(policies).toContain('bedrock:InvokeModel');
+  expect(policies).toContain('bedrock:InferenceProfileArn');
+  expect(policies).not.toContain('ec2:RunInstances');
+});
+test('autonomy cannot be enabled without the durable experiment queue', () => {
+  const app = new cdk.App({ context: { supabaseUrl: 'https://regphejnlvfpyokpniny.supabase.co', researchAutonomyEnabled: true } });
+  const stack = new cdk.Stack(app, 'MissingQueue', { env: { account: '395567831870', region: 'us-east-1' } });
+  expect(() => new ResearchWorkflow(stack, 'Research', new api.HttpApi(stack, 'Api'))).toThrow('durable experiment queue');
+});
 test.each([[true,true],['true',true],[false,false],['false',false],[undefined,false],['1',false],[1,false]])('CDK context %s explicitly enables research only as declared', (value, expected) => {
   expect(researchWorkflowIsEnabled(value)).toBe(expected);
 });

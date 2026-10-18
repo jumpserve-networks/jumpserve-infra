@@ -1,0 +1,11 @@
+{
+  "files": {
+    "autonomy.py": "3d1fd5dc331b75b02b3982a750ca2b0caaebcba2a2d81f607f40a353fdbee09b",
+    "autonomy_model.py": "1e9a295d3e3759966de3fea97b8b92fe1ca470d9efb03955138c91cfec2fc2b6",
+    "autonomy_sources.py": "4f26059b9b4b3baa511c995735ac39af14f01a6e5f957a9d0c72b544ec693474",
+    "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b"
+  },
+  "cases_sha256": "34c11c8d22419eb54f2765d84f5cdd81485cb148406d1578b0ec0eefcf1d6995",
+  "response_channel_sha256": "d8beedd8e3c6fc8852456e6cc4a7946fb999b77a58ca71a3e4178ff25b9195cc",
+  "request_manifest_sha256": "e14aa0bf5e91adfc78ddbb543184756646851e2b2293f6a66da5b626ef094f8b"
+}

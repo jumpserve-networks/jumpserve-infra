@@ -1,0 +1,55 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_vrAd2i4pLPQm803P0eafmZ",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "review",
+                            "reason": "unresolved-method",
+                            "blockers": [
+                                {
+                                    "kind": "design",
+                                    "detail": "missing-design-specification",
+                                    "required_input": "The candidate treats 100 adjacent snapshots from a single run on a single host as independent samples for a confidence interval. What is the justification for assuming independence among these temporally adjacent observations? Actual autocorrelation/dependence structure must be measured or a justified sampling/dependence design provided before inferential intervals can be constructed."
+                                },
+                                {
+                                    "kind": "design",
+                                    "detail": "insufficient-scope",
+                                    "required_input": "The replication unit is one host and one run. What justification exists that a single-run, single-host measurement generalizes to the claimed fixed-configuration completion time of 12 ms, given that run-to-run and host-to-host variability are unexamined?"
+                                },
+                                {
+                                    "kind": "design",
+                                    "detail": "invalid-source-grounding",
+                                    "required_input": "The source is described as a 'Synthetic text-only evaluation packet; no real paper was reviewed' with review_status 'partial-review'. What actual source data or paper grounds the claim that completion time is 12 ms under configuration A?"
+                                }
+                            ],
+                            "claims": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": false,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3309,
+        "outputTokens": 438,
+        "totalTokens": 3747,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 7322
+    }
+}

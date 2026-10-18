@@ -1,0 +1,21 @@
+{
+    "inferenceProfileName": "US Anthropic Claude Opus 4.6",
+    "description": "Routes requests to Anthropic Claude Opus 4.6 in us-east-1, us-east-2 and us-west-2.",
+    "createdAt": "2026-02-03T19:06:45.925000+00:00",
+    "updatedAt": "2026-10-13T18:38:59.724000+00:00",
+    "inferenceProfileArn": "arn:aws:bedrock:us-east-1:395567831870:inference-profile/us.anthropic.claude-opus-4-6-v1",
+    "models": [
+        {
+            "modelArn": "arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-opus-4-6-v1"
+        },
+        {
+            "modelArn": "arn:aws:bedrock:us-east-2::foundation-model/anthropic.claude-opus-4-6-v1"
+        },
+        {
+            "modelArn": "arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-opus-4-6-v1"
+        }
+    ],
+    "inferenceProfileId": "us.anthropic.claude-opus-4-6-v1",
+    "status": "ACTIVE",
+    "type": "SYSTEM_DEFINED"
+}

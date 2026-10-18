@@ -1,0 +1,39 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_EkHdr8FQSnGFRwObj5mP6U",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "choose-check",
+                            "reason": "The registered check 3fc305f6-51dc-5f2f-84bc-1c6646762869 (\"Exact frozen synthetic cell check\") directly applies to this claim. It covers the metric flow_completion_time_ms in ms under configuration A with a fixed absolute tolerance of 0.1 ms, using deterministic census matching. The previous feedback notes an unauthorized attempt to widen tolerance to 10000 ms; the frozen protocol's tolerance (0.1 ms) and all other parameters remain unchanged. Selecting this check as-is.",
+                            "blockers": [],
+                            "claims": [],
+                            "check_id": "3fc305f6-51dc-5f2f-84bc-1c6646762869",
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3412,
+        "outputTokens": 339,
+        "totalTokens": 3751,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 5366
+    }
+}

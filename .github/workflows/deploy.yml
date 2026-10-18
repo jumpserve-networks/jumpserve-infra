@@ -60,6 +60,7 @@ jobs:
       - name: Verify research runtime bytes and regressions
         run: |
           python3 -B bin/prepare-research-runtime.py --backend .runtime-research
+          python3 -B bin/prepare-autonomy-runtime.py
           python3 -B -m unittest discover -s .runtime-research/research_workflow/tests -v
 
       - name: Test real-world runtime

@@ -1,0 +1,33 @@
+{
+  "protocol": "autonomous-assessment-production-protocol-v1",
+  "recorded_at": "2026-10-18T18:52:51.508729+00:00",
+  "status": "awaiting AWS sign-in before live evaluation and production changes",
+  "backend_revision": "1c786df23a9dd68a2a8d90505b50e7bcf53d19e8",
+  "backend_pushed": true,
+  "frontend_revision": "2f36eb8376aadc0ee49dae84c127aeb765a33ee4",
+  "frontend_pushed": false,
+  "local_checks": {
+    "backend": 140,
+    "frontend": 186,
+    "infrastructure": 91,
+    "frontend_build": "passed",
+    "infrastructure_build": "passed",
+    "lint_errors": 0,
+    "lint_preexisting_warnings": 1
+  },
+  "live_evaluation": {
+    "cases": 14,
+    "maximum_calls": 14,
+    "maximum_commitment_cents": 500,
+    "computed_commitment_cents": 183,
+    "calls_so_far": 0
+  },
+  "production_changes": false,
+  "hashes": {
+    "test/evaluate_autonomy.py": "043d2dd9ddb40f5d1418e73647ef6574baf0b5f9eacb0f1c28772c745e2cdcae",
+    "bin/autonomy-release.py": "10f989870c9d9f441c16180b5c56b76697a085cbe8f8e41622d8fca52f1b47f8",
+    "docs/autonomous-assessment-production-protocol-v1.md": "07074c98ad56bf47ebc5ddbbd94f20cd62a4f7767ed1b72a9a3e50d738d3e8f5",
+    "research-workflow-runtime.json": "4fe0ec7336e5f5a05c1fa6bb9d77060a7c48060c1911f644924890032422ed0f"
+  },
+  "measured_charges_usd": null
+}

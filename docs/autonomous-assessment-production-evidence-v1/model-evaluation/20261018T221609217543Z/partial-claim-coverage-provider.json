@@ -1,0 +1,60 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_dcE049XTx39djAOsOPh85M",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "review",
+                            "reason": "unresolved-method",
+                            "blockers": [
+                                {
+                                    "kind": "design",
+                                    "detail": "unsupported-inference",
+                                    "required_input": "The claim asserts universal causal improvement across all real Internet paths in every region. The candidate uses a single emulated host with two flows under one condition and no treatment contrast. What justified causal identification strategy (e.g., randomized controlled experiment, instrumental variable, difference-in-differences) and what representative sampling design across diverse real-world paths and regions would support this universal causal claim?"
+                                },
+                                {
+                                    "kind": "design",
+                                    "detail": "insufficient-scope",
+                                    "required_input": "The candidate scope is a single synthetic emulation condition with no geographic or path diversity. What evidence from multiple real Internet paths across distinct regions, ISPs, and congestion regimes is available or planned to support the 'all real Internet paths in every region' generalization?"
+                                },
+                                {
+                                    "kind": "design",
+                                    "detail": "missing-design-specification",
+                                    "required_input": "The candidate has no treatment contrast (control vs. algorithm). What experimental design with a proper control condition and randomized or otherwise justified assignment mechanism is proposed to establish that the algorithm causally improves flow completion time?"
+                                },
+                                {
+                                    "kind": "missing-data",
+                                    "detail": "invalid-source-grounding",
+                                    "required_input": "The source is described as a synthetic text-only evaluation packet with no real paper reviewed and partial review status. What actual peer-reviewed or pre-print source grounds this universal causal claim?"
+                                }
+                            ],
+                            "claims": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": false,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3302,
+        "outputTokens": 493,
+        "totalTokens": 3795,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 9075
+    }
+}

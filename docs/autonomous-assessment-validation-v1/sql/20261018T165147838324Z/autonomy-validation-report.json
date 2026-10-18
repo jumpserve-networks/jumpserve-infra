@@ -1,0 +1,25 @@
+{
+  "protocol": "autonomous-assessment-protocol-v1",
+  "amendment": "research-ideas-amendment-v2",
+  "database": "jumpserve_research_ideas_test_20261018t165147838324z",
+  "started_at": "2026-10-18T16:51:47.838633+00:00",
+  "checks": [],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independence": "Not independent"
+  },
+  "design": "Actual local SQL/controller/arithmetic worker; explicit synthetic provider/auth/Storage/source. No actual networking or model evaluation.",
+  "conditional_gaps": [
+    "Remote Supabase Storage",
+    "Real Google-authenticated owner request",
+    "Production migrations and live prompt publication",
+    "Actual provider-to-Supabase storage roundtrip"
+  ],
+  "measured_charges_usd": null,
+  "model_usage": null,
+  "passed": false,
+  "error": "psql: error: connection to server at \"127.0.0.1\", port 54477 failed: Operation not permitted\n\tIs the server running on that host and accepting TCP/IP connections?",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/Shared/allstar/jumpserve-infra/test/check_autonomy_database.py\", line 12, in main\n    f.bootstrap()\n    ~~~~~~~~~~~^^\n  File \"/Users/Shared/allstar/jumpserve-infra/test/check_research_ideas_database.py\", line 143, in bootstrap\n    query('create database '+DATABASE+\" with template template0 encoding 'UTF8'\",'postgres')\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/Shared/allstar/jumpserve-infra/test/check_research_ideas_database.py\", line 44, in query\n    if result.returncode:raise RuntimeError(result.stderr.strip())\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: psql: error: connection to server at \"127.0.0.1\", port 54477 failed: Operation not permitted\n\tIs the server running on that host and accepting TCP/IP connections?\n",
+  "ended_at": "2026-10-18T16:51:47.863633+00:00"
+}

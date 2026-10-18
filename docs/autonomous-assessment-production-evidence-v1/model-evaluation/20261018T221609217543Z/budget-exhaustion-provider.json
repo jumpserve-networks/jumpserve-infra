@@ -1,0 +1,45 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_WgMunUXLrHmkXX5ednKAwp",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "blocked",
+                            "reason": "resource-limit",
+                            "blockers": [
+                                {
+                                    "kind": "capacity",
+                                    "detail": "resource-exhausted",
+                                    "required_input": "This workflow cannot admit further work under its fixed limits; preserve all prior records."
+                                }
+                            ],
+                            "claims": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3272,
+        "outputTokens": 231,
+        "totalTokens": 3503,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 2953
+    }
+}

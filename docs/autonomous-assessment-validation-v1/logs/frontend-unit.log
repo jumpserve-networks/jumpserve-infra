@@ -1,0 +1,310 @@
+
+> jumpserve-front-end@0.1.0 test
+> node --test tests/*.test.mjs
+
+(node:26986) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/agent-api.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ missing chat configuration never posts to the current frontend page (1.770666ms)
+✔ invalid, relative, or credential-bearing chat URLs are rejected before sending (0.405292ms)
+✔ HTML responses report their HTTP status without exposing markup (35.145916ms)
+✔ chat uses the exact configured endpoint and preserves message and session context (0.73325ms)
+✔ real-world chat sends its module and rejects an emulated or legacy service response (7.688167ms)
+✔ chat requires a session and never sends anonymous requests (0.142209ms)
+✔ LEO chat probes capability before the question and rejects cross-module answers (0.698ms)
+✔ malformed chat responses are rejected before rendering (1.93125ms)
+✔ HTTP/2 chat requires module capability and returns prompt and analysis provenance (0.724916ms)
+✔ structured API errors remain useful and unknown failures show a status (0.841084ms)
+✔ ReliableSketch capability and answer evidence provenance survive the browser API adapter (0.308834ms)
+✔ IPv6 chat checks module capability and retains bounded evidence provenance (0.298166ms)
+(node:26987) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/aws-region-map.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ map joins display locations to the live catalog without enabling opt-in Regions (50.309375ms)
+✔ Region changes clear the stale zone and preserve each selected instance size (0.242625ms)
+✔ world view includes all catalog locations on mobile and desktop without distorting geography (0.222458ms)
+✔ zoom stays bounded while panning wraps indefinitely on both axes (0.165542ms)
+✔ world copies cover every viewport edge without growing with pan distance (0.257542ms)
+✔ markers move continuously through horizontal and vertical seams (0.128459ms)
+✔ nearby markers cluster across either world seam with their original Regions intact (6.69525ms)
+✔ clustering preserves every live Region and all markers separate at maximum mobile zoom (1.011208ms)
+(node:26988) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/benchmark-api.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ multi-bottleneck sends topology, both link settings, and group sizes intact (23.0215ms)
+✔ incomplete saved multi-bottleneck configs and invalid pairs never launch an instance (0.492125ms)
+✔ launch never sends a request when the API URL is missing (0.266083ms)
+✔ launch reports HTML responses without exposing raw HTML (0.767542ms)
+✔ launch rejects malformed success responses (6.440541ms)
+✔ cancel never sends a request when the API URL is missing (0.184834ms)
+✔ cancel reports HTML responses without exposing raw HTML (0.541333ms)
+✔ cancel rejects malformed success responses (0.780708ms)
+✔ logs never sends a request when the API URL is missing (0.232291ms)
+✔ logs reports HTML responses without exposing raw HTML (0.644958ms)
+✔ logs rejects malformed success responses (0.466667ms)
+✔ invalid or relative API URLs cannot fall back to the frontend (0.320875ms)
+✔ logs use an encoded job ID, disable caching, and accept empty output during startup (0.204667ms)
+✔ logs validate entries and preserve text for safe rendering (0.300333ms)
+✔ launch uses the configured API path and accepts the Lambda's text/plain JSON (0.172416ms)
+✔ cancellation posts the job ID to the cancellation endpoint (0.122666ms)
+✔ API and gateway error messages are preserved (0.896167ms)
+✔ anonymous callers cannot launch or cancel, but can read logs (0.135875ms)
+(node:26989) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/benchmark-progress.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ active phases follow reported progress and allow prebuilt images to skip cloning (0.754125ms)
+✔ failures identify the reported phase without claiming later steps finished (0.197917ms)
+✔ cancellations and failures with no phase do not invent completed steps (0.077125ms)
+✔ only known terminal statuses stop status polling (0.077792ms)
+✔ completion distinguishes linked results from missing results (0.114083ms)
+(node:26990) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/delay-study.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ study chart data converts nested Postgres numerics while preserving missingness and identifiers (8.3465ms)
+✔ measurement reads recover from transport failure and stop after three attempts (805.671166ms)
+✔ measurement reads do not retry permission errors or incomplete schedules (0.255042ms)
+(node:26991) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/http2-study.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ recorded quantities preserve missing values, unsigned error codes and opaque evidence (7.08825ms)
+✔ CSV distinguishes missing and zero and prevents spreadsheet interpretation (0.173416ms)
+(node:26992) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/research-ideas.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ resume chooses missing information and keeps unknowns genuinely empty (0.828458ms)
+✔ user answers change only their declared fields and preserve previous protocols (0.146125ms)
+✔ inapplicable methods require an explicit flag and a rationale (0.212375ms)
+✔ observation budgets cannot become missing zero or fractional limits (0.140958ms)
+✔ data origins and algorithm declarations need explicit user input (0.114791ms)
+✔ a planning recommendation cannot substitute for complete methods or fresh reviews (0.084375ms)
+✔ latest critical review continues to block an otherwise answered experiment (0.236291ms)
+(node:26993) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/idea-interview.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ only a valid current-packet interview can select an answer field (1.118875ms)
+✔ a failed latest turn cannot revive an older tailored question (0.063583ms)
+✔ conversation restoration keeps older failed replies and exact saved answers (6.481042ms)
+(node:26994) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/idea-review-sources.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ statistics display is verified against the saved packet rather than model prose (0.545917ms)
+✔ wrong source value, plan hash, field presence and duplicate references are rejected (0.210917ms)
+✔ recorded zero, null, empty and genuinely missing fields remain distinct (4.823ms)
+✔ legacy review history remains readable without pretending source evidence was captured (0.692458ms)
+(node:26995) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/leo-study.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ numeric strings convert, absent measurements remain absent, and invalid strings fail (1.113917ms)
+✔ primary comparison requires all declared dimensions (0.102875ms)
+✔ scenario joins preserve country boundaries and do not manufacture missing samples (0.109083ms)
+(node:26996) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/network-execution.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ executable candidate preserves unknown methods rather than inventing a scientific protocol (0.75025ms)
+✔ execution compilation retains prior scientific decisions and stricter observation budgets (0.081417ms)
+✔ configuration identities and repetitions define invocation count, not packet count (0.591042ms)
+✔ fanout preserves original job identities and supports legacy manual preparations (0.193458ms)
+(node:26997) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/real-world-progress.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ active timeline retains completed times and identifies current and future steps (8.010333ms)
+✔ completed test shows all stages complete with recorded timestamps (0.371417ms)
+✔ failure and cancellation distinguish interrupted work, skipped stages, and successful cleanup (0.284416ms)
+✔ a cancellation request does not mark the active phase finished before the controller confirms it (0.234333ms)
+✔ legacy success never invents completion times from created_at or updated_at (0.16025ms)
+✔ legacy failures do not claim unrecorded work completed or was skipped (0.137792ms)
+✔ history captured partway through an old test preserves new completions without inventing starts (0.158917ms)
+✔ invalid dates and unknown controller phases remain explicit (0.19625ms)
+(node:26998) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/real-world-reports.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ different paths, duration, rate, buffer, types, receiver counts and software never pool (50.613166ms)
+✔ one test is one replication, independent of its number of trace samples (0.290375ms)
+✔ confidence intervals require five independent tests in each cohort and are deterministic (12.003875ms)
+✔ failed evidence, missing outcomes, and other algorithms remain visible as exclusions (0.291125ms)
+✔ selection is unique, bounded and restricted to test IDs (0.310375ms)
+✔ filters use any machine's region and inclusive UTC dates (0.162333ms)
+✔ CSV escapes quotes and spreadsheet formulas, preserving numeric negatives and missing values (4.676667ms)
+(node:27000) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/aws-region-map.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the status badge follows the recorded transfer window even while the controller is starting (6.520125ms)
+✔ cancellation, terminal states, errors, and stale polling never report active transfers (0.129041ms)
+✔ older jobs without recorded timing never imply active transfers (0.089958ms)
+✔ planned machines remain visible during provisioning and every receiver is reached through the bottleneck (0.322583ms)
+✔ sixteen co-located receivers preserve all seventeen directed hops in one geographic loop (0.23675ms)
+✔ unknown Region coordinates never bypass the bottleneck or hide machines from the inspector (0.1075ms)
+✔ Pacific paths wrap across the dateline in both directions with correctly directed arrows (6.218083ms)
+✔ traffic paths repeat vertically and keep local loops visible across an edge (32.990791ms)
+✔ fit topology keeps every location visible on desktop and mobile, including single-Region tests (0.261667ms)
+(node:27001) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/real-world.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ every real-world machine requires a resolved placement (0.641375ms)
+✔ every machine defaults to t3.medium and only the three supported sizes are accepted for every role (1.030916ms)
+✔ zones must offer the selected supported type, even with an older catalog (0.094125ms)
+✔ changing instance type preserves only a zone that offers the new type (0.419125ms)
+✔ random zone selection covers eligible zones and excludes unavailable or incompatible zones for every type (0.163833ms)
+✔ valid manual, copied, and automatic zones are preserved across repeated updates (0.079667ms)
+✔ empty catalogs never invent a zone and stale catalogs cannot change another Region (0.061541ms)
+✔ zone selection uses the latest instance size and fills a cleared incompatible selection (0.061667ms)
+✔ concurrent zone updates preserve other receivers and cannot restore a removed receiver (0.150125ms)
+✔ invalid numeric values cannot create oversized or indefinite EC2 tests (0.160625ms)
+✔ cleanup remains active until resources have actually been removed (0.059125ms)
+(node:27002) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/reliable-study.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ scientific display distinguishes missing, invalid, small recorded values and zero (9.984875ms)
+✔ Postgres numeric conversion rejects malformed values and preserves missing values (0.464916ms)
+(node:27003) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/research-autonomy.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ one submission atomically starts autonomy with fixed application defaults (0.844792ms)
+✔ older services cannot silently turn autonomous submission into a draft (0.241ms)
+✔ uncertain intake preserves the original identity and requests inspection (0.115667ms)
+✔ queue coverage retains blocked, unknown and unfinished claims honestly (1.389291ms)
+✔ budget overruns, missing task coverage and altered limits are rejected (0.204625ms)
+✔ prompt history is scoped to owner study and task with declared pagination (0.188458ms)
+(node:27005) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/research-claim-design.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ paper design identity stays in the paper module and rejects invalid routes (0.882875ms)
+✔ a paper proposal retains the exact claim and cannot silently weaken it (11.486042ms)
+✔ a design URL cannot invoke AI without a recent consumed click intent (0.146167ms)
+(node:27006) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/research-comparison.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ signed effects always use seconds, including negative and sub-second values (1.741333ms)
+✔ different workloads never become an algorithm comparison (45.296583ms)
+✔ equal configuration weighting prevents repetition imbalance from reversing the effect (1.095791ms)
+✔ the complete competing-client configuration is matched even if only one client is visible (0.873541ms)
+✔ mixed algorithms, incomplete configurations, missing outcomes, and duplicate clients are excluded (0.282333ms)
+✔ parent runs, not clients, determine replication and bootstrap eligibility (9.76275ms)
+✔ intervals require repetitions in every matched configuration, not only total sample count (11.71775ms)
+✔ notes cannot create matching blocks and conflicting launch settings are rejected (0.226916ms)
+✔ sweeps vary only the focal delay and keep repetitions, workloads, competitors and CCAs distinct (0.717583ms)
+✔ aggregate fetching consumes server-capped pages and retains configuration for missing FCT (0.633917ms)
+(node:27007) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/research-experiment-queue.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ overview preserves failures and distinguishes explicit empty from invalid or incomplete (1.600958ms)
+✔ gap previews cannot queue stale identities, missing plan hashes or unavailable inputs (0.61075ms)
+✔ partial handoff does not claim the selected job was queued (0.269125ms)
+✔ queue and gap links retain exact identities in the paper module only (0.554084ms)
+✔ only a recent same-tab click resumes writes after sign-in; intent is consumed once (1.358542ms)
+✔ one run action prepares once and queues all retained claim checks; partial replies stop without pretending success (1.111583ms)
+(node:27008) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/research-idea-api.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a failed capability check confirms no model invocation began (0.849834ms)
+✔ older agents cannot silently substitute generic planning for the conversational guide (14.973708ms)
+✔ older agents cannot substitute generic planning for paper experiment design (0.254209ms)
+✔ unknown invocation responses preserve uncertainty rather than invite another call (0.223ms)
+✔ an explicit unauthorized response does not masquerade as a running model (0.302125ms)
+✔ a returned answer must belong to the exact user-requested attempt and saved packet (1.275209ms)
+(node:27011) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/research-ideas.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ unpublished drafts preserve empty unknowns and have no candidate protocol (13.329917ms)
+✔ new idea and planning paths belong to their own module (0.218208ms)
+✔ packet JSON key order is irrelevant but changed values, versions and hashes are refused (0.246458ms)
+✔ cross-study records and conflicting packet references never become ready (0.1245ms)
+✔ fresh review metadata rejects planning history and cross-packet attempts (0.202458ms)
+✔ a later critical or failed review cannot be hidden by an earlier favorable recommendation (0.094375ms)
+✔ recorded readiness must reference the latest complete reviews of both roles (0.172875ms)
+(node:27012) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/auth-redirect.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ paper and idea modules keep every sidebar section within their own namespace (0.662708ms)
+✔ legacy idea routes resolve to the idea module before broader paper redirects (0.126084ms)
+✔ canonical idea intake, evidence, public results and exports retain sign-in destinations (0.154125ms)
+✔ mixed recorded studies split by explicit kind while older paper records stay accessible (0.400125ms)
+✔ return paths preserve repeated query values without interpreting their contents as routes (0.098875ms)
+✔ paper experiment designs resume their own workspace without relabeling them as ideas (0.047291ms)
+(node:27015) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/research-preparation.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ preparation chains every bounded job and confirms its persisted identity (0.972416ms)
+✔ a failed queue request stops further jobs and resume skips all retained states (0.399083ms)
+✔ missing or ambiguous coverage never becomes a successful queue (1.08725ms)
+✔ HTTP success with wrong study/job or no job stops and reports unconfirmed state (0.212958ms)
+(node:27016) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/research-queue-api.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ deployed backend without overview is read via existing owner endpoints, with no missing-route probe (1.604291ms)
+✔ empty owner queues are explicit; incomplete private coverage is not interpreted as zero (0.427083ms)
+✔ new backend uses its advertised overview; an overview failure is retained as failure (0.183959ms)
+✔ missing campaign metadata does not discard valid job statuses or invent a title (0.178542ms)
+✔ cancelled reads stop before sending requests; settings drift and private queue failures stay explicit (0.202667ms)
+✔ unreleased gap launches fail clearly before calling unavailable routes or writing (0.116458ms)
+(node:27020) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/research-workflow.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ queue coverage, ownership and missing states cannot silently become empty results (0.7715ms)
+✔ shared campaign tracks two claims without counting it as two experiments (0.191083ms)
+✔ event history must identify a recorded job; no orphaned history is accepted (0.285875ms)
+(node:27022) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/research-workflow.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ API target rejects embedded credentials and non-loopback cleartext (0.637916ms)
+✔ assessment times compare actual instants across timezone offsets (0.108875ms)
+✔ zero, missing, invalid and tiny scientific values stay distinct (0.155167ms)
+✔ current assessment is selected by identity and recorded version time, not array order (0.136416ms)
+✔ absent assessment is untested; invalid or truncated coverage is not silently normalized (0.136375ms)
+✔ CSV preserves missing values and recorded negatives while neutralizing source text formulas (0.168541ms)
+✔ public source links cannot execute embedded instructions (0.085583ms)
+✔ workflow pages and exports belong to the shared module (0.178166ms)
+✔ metadata-only intake has missing preparation rather than implied claim coverage or execution (0.438709ms)
+✔ unlinked, inapplicable and orphaned campaigns do not satisfy queue preparation (0.153459ms)
+(node:27024) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/Shared/allstar/jumpserve-front-end/lib/auth-redirect.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/Shared/allstar/jumpserve-front-end/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ sign-in without a destination returns home (0.520042ms)
+✔ sign-in resumes the requested action or result, with the complete query (0.253ms)
+✔ re-authenticating from a pending module choice preserves the original destination (0.187084ms)
+✔ untrusted redirect targets cannot leave the site or select a module (0.174959ms)
+✔ all existing tools and result URLs belong to the emulated module (0.064375ms)
+✔ global, unavailable, external and similarly prefixed routes do not inherit emulated tools (0.128708ms)
+✔ real-world tools and results belong to their own available module (0.205375ms)
+✔ navigation highlights the parent tool for detail pages with path boundaries (0.043209ms)
+✔ module overviews and every navigation section use their top-level namespace (0.184916ms)
+✔ canonical result, launch and chat URLs preserve their module and login destination (0.257584ms)
+✔ legacy overview URLs still identify the intended module (0.143375ms)
+✔ legacy redirects target canonical routes without self-redirects or chains (0.354833ms)
+✔ canonical and legacy routes respect module name boundaries (0.353584ms)
+ℹ tests 186
+ℹ suites 0
+ℹ pass 186
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 980.781959

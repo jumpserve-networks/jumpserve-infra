@@ -1,0 +1,434 @@
+
+> jumpserve-infra@0.1.0 cdk:benchmark
+> cdk --app "npx ts-node --prefer-ts-exts bin/benchmark.ts" diff JumpServeBenchmarkStack -c researchAutonomyEnabled=true --no-change-set
+
+Bundling asset JumpServeBenchmarkStack/LaunchBenchmarkFn/Code/Stage...
+
+  ...4831287107aa9aba9b49df137fc1f0d1c2e6b819998e7d3-building/index.js  24.8kb
+
+⚡ Done in 11ms
+Bundling asset JumpServeBenchmarkStack/CleanupBenchmarksFn/Code/Stage...
+
+  ...d16cd323a31972a39648a8a53af30eb93276a13f081377e2-building/index.js  4.7kb
+
+⚡ Done in 2ms
+Bundling asset JumpServeBenchmarkStack/CancelBenchmarkFn/Code/Stage...
+
+  ...ee63b73a77228644b7da13ecc6c60aeee495964c65d77a75-building/index.js  6.0kb
+
+⚡ Done in 1ms
+Bundling asset JumpServeBenchmarkStack/GetBenchmarkLogsFn/Code/Stage...
+
+  ...9c0cc5141b3f85c48896e834b6a134fde7bb9da21ab0649d-building/index.js  3.1kb
+
+⚡ Done in 1ms
+Bundling asset JumpServeBenchmarkStack/BenchmarkIngestFn/Code/Stage...
+
+  ...593190c7862f90f901e8bbdb45b071136dd26f602bdcfae2-building/index.js  4.1kb
+
+⚡ Done in 1ms
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-lookup-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+Lookup role arn:aws:iam::395567831870:role/cdk-hnb659fds-lookup-role-395567831870-us-east-1 was not assumed. Proceeding with default credentials.
+Stack JumpServeBenchmarkStack
+IAM Statement Changes
+┌───┬────────────────────────────────────────────────────────────────────────────────────────────┬────────┬───────────────────────────────┬────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│   │ Resource                                                                                   │ Effect │ Action                        │ Principal                                          │ Condition                                                                                                                   │
+├───┼────────────────────────────────────────────────────────────────────────────────────────────┼────────┼───────────────────────────────┼────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ + │ ${ResearchWorkflow/Api.Arn}                                                                │ Allow  │ lambda:InvokeFunction         │ Service:apigateway.amazonaws.com                   │ "ArnLike": {                                                                                                                │
+│   │                                                                                            │        │                               │                                                    │   "AWS:SourceArn": "arn:aws:execute-api:us-east-1:395567831870:${BenchmarkApi}/*/*/research/studies/{studyId}/autonomy"     │
+│   │                                                                                            │        │                               │                                                    │ }                                                                                                                           │
+│ + │ ${ResearchWorkflow/Api.Arn}                                                                │ Allow  │ lambda:InvokeFunction         │ Service:apigateway.amazonaws.com                   │ "ArnLike": {                                                                                                                │
+│   │                                                                                            │        │                               │                                                    │   "AWS:SourceArn": "arn:aws:execute-api:us-east-1:395567831870:${BenchmarkApi}/*/*/research/studies/{studyId}/autonomy"     │
+│   │                                                                                            │        │                               │                                                    │ }                                                                                                                           │
+├───┼────────────────────────────────────────────────────────────────────────────────────────────┼────────┼───────────────────────────────┼────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ + │ ${ResearchWorkflow/AutonomyWorker.Arn}                                                     │ Allow  │ lambda:InvokeFunction         │ Service:events.amazonaws.com                       │ "ArnLike": {                                                                                                                │
+│   │                                                                                            │        │                               │                                                    │   "AWS:SourceArn": "${ResearchWorkflow/AutonomyPoll.Arn}"                                                                   │
+│   │                                                                                            │        │                               │                                                    │ }                                                                                                                           │
+├───┼────────────────────────────────────────────────────────────────────────────────────────────┼────────┼───────────────────────────────┼────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ + │ ${ResearchWorkflow/AutonomyWorker.Arn}                                                     │ Allow  │ lambda:InvokeFunction         │ AWS:${ResearchWorkflow/Api/ServiceRole}            │                                                                                                                             │
+│   │ ${ResearchWorkflow/AutonomyWorker.Arn}:*                                                   │        │                               │                                                    │                                                                                                                             │
+│   │ ${ResearchWorkflow/QueueWorker.Arn}                                                        │        │                               │                                                    │                                                                                                                             │
+│   │ ${ResearchWorkflow/QueueWorker.Arn}:*                                                      │        │                               │                                                    │                                                                                                                             │
+├───┼────────────────────────────────────────────────────────────────────────────────────────────┼────────┼───────────────────────────────┼────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ + │ ${ResearchWorkflow/AutonomyWorker/ServiceRole.Arn}                                         │ Allow  │ sts:AssumeRole                │ Service:lambda.amazonaws.com                       │                                                                                                                             │
+├───┼────────────────────────────────────────────────────────────────────────────────────────────┼────────┼───────────────────────────────┼────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ + │ ${ResearchWorkflow/QueueWorker.Arn}                                                        │ Allow  │ lambda:InvokeFunction         │ AWS:${ResearchWorkflow/AutonomyWorker/ServiceRole} │                                                                                                                             │
+│   │ ${ResearchWorkflow/QueueWorker.Arn}:*                                                      │        │                               │                                                    │                                                                                                                             │
+│ - │ ${ResearchWorkflow/QueueWorker.Arn}                                                        │ Allow  │ lambda:InvokeFunction         │ AWS:${ResearchWorkflow/Api/ServiceRole}            │                                                                                                                             │
+│   │ ${ResearchWorkflow/QueueWorker.Arn}:*                                                      │        │                               │                                                    │                                                                                                                             │
+├───┼────────────────────────────────────────────────────────────────────────────────────────────┼────────┼───────────────────────────────┼────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ + │ arn:aws:bedrock:us-east-1:395567831870:inference-profile/us.anthropic.claude-opus-4-6-v1   │ Allow  │ bedrock:InvokeModel           │ AWS:${ResearchWorkflow/AutonomyWorker/ServiceRole} │                                                                                                                             │
+├───┼────────────────────────────────────────────────────────────────────────────────────────────┼────────┼───────────────────────────────┼────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ + │ arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-opus-4-6-v1                   │ Allow  │ bedrock:InvokeModel           │ AWS:${ResearchWorkflow/AutonomyWorker/ServiceRole} │ "StringEquals": {                                                                                                           │
+│   │ arn:aws:bedrock:us-east-2::foundation-model/anthropic.claude-opus-4-6-v1                   │        │                               │                                                    │   "bedrock:InferenceProfileArn": "arn:aws:bedrock:us-east-1:395567831870:inference-profile/us.anthropic.claude-opus-4-6-v1" │
+│   │ arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-opus-4-6-v1                   │        │                               │                                                    │ }                                                                                                                           │
+├───┼────────────────────────────────────────────────────────────────────────────────────────────┼────────┼───────────────────────────────┼────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ + │ arn:aws:secretsmanager:us-east-1:395567831870:secret:jumpserve/supabase-service-key-?????? │ Allow  │ secretsmanager:DescribeSecret │ AWS:${ResearchWorkflow/AutonomyWorker/ServiceRole} │                                                                                                                             │
+│   │                                                                                            │        │ secretsmanager:GetSecretValue │                                                    │                                                                                                                             │
+└───┴────────────────────────────────────────────────────────────────────────────────────────────┴────────┴───────────────────────────────┴────────────────────────────────────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+IAM Policy Changes
+┌───┬────────────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────┐
+│   │ Resource                                       │ Managed Policy ARN                                                             │
+├───┼────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────┤
+│ + │ ${ResearchWorkflow/AutonomyWorker/ServiceRole} │ arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole │
+└───┴────────────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────┘
+(NOTE: There may be security-related changes not in this list. See https://github.com/aws/aws-cdk/issues/1299)
+
+Resources
+[-] AWS::ApiGatewayV2::Integration BenchmarkApi/GET--research--capabilities/ResearchWorkflowIntegration BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50 destroy
+[+] AWS::ApiGatewayV2::Integration BenchmarkApi/GET--research--studies--{studyId}--autonomy/ResearchWorkflowIntegration BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8
+[+] AWS::Lambda::Permission BenchmarkApi/GET--research--studies--{studyId}--autonomy/ResearchWorkflowIntegration-Permission BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegrationPermissionBB16BAAD
+[+] AWS::ApiGatewayV2::Route BenchmarkApi/GET--research--studies--{studyId}--autonomy BenchmarkApiGETresearchstudiesstudyIdautonomyDFFA6A6B
+[+] AWS::Lambda::Permission BenchmarkApi/POST--research--studies--{studyId}--autonomy/ResearchWorkflowIntegration-Permission BenchmarkApiPOSTresearchstudiesstudyIdautonomyResearchWorkflowIntegrationPermission923CFFE6
+[+] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--autonomy BenchmarkApiPOSTresearchstudiesstudyIdautonomy3AF67B6F
+[+] AWS::Lambda::LayerVersion ResearchWorkflow/AutonomyPdfLayer ResearchWorkflowAutonomyPdfLayerFC2C7B49
+[+] AWS::IAM::Role ResearchWorkflow/AutonomyWorker/ServiceRole ResearchWorkflowAutonomyWorkerServiceRole0577F6FA
+[+] AWS::IAM::Policy ResearchWorkflow/AutonomyWorker/ServiceRole/DefaultPolicy ResearchWorkflowAutonomyWorkerServiceRoleDefaultPolicy01DA02D7
+[+] AWS::Lambda::Function ResearchWorkflow/AutonomyWorker ResearchWorkflowAutonomyWorker1BCFF82C
+[+] AWS::Logs::LogGroup ResearchWorkflow/AutonomyWorker/LogGroup ResearchWorkflowAutonomyWorkerLogGroup22B524E9
+[+] AWS::Lambda::EventInvokeConfig ResearchWorkflow/AutonomyWorker/EventInvokeConfig ResearchWorkflowAutonomyWorkerEventInvokeConfig2FAC9951
+[+] AWS::Events::Rule ResearchWorkflow/AutonomyPoll ResearchWorkflowAutonomyPoll0C56C453
+[+] AWS::Lambda::Permission ResearchWorkflow/AutonomyPoll/AllowEventRuleJumpServeBenchmarkStackResearchWorkflowAutonomyWorker316EF851 ResearchWorkflowAutonomyPollAllowEventRuleJumpServeBenchmarkStackResearchWorkflowAutonomyWorker316EF85187CDCC01
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/GET--research--capabilities BenchmarkApiGETresearchcapabilitiesE53A290C
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/GET--research--queue BenchmarkApiGETresearchqueueAEA71DB7
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/GET--research--studies BenchmarkApiGETresearchstudiesE9C7241A
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/GET--research--studies--{studyId} BenchmarkApiGETresearchstudiesstudyIdDBED4732
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/GET--research--studies--{studyId}--queue BenchmarkApiGETresearchstudiesstudyIdqueueC964316E
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/GET--research--studies--{studyId}--prepare BenchmarkApiGETresearchstudiesstudyIdprepareA56F730D
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/GET--research--studies--{studyId}--idea BenchmarkApiGETresearchstudiesstudyIdidea1AA7D1EF
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/GET--research--studies--{studyId}--gap-experiments BenchmarkApiGETresearchstudiesstudyIdgapexperiments4B3CA894
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/GET--research--studies--{studyId}--claim-design BenchmarkApiGETresearchstudiesstudyIdclaimdesign381C5339
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies BenchmarkApiPOSTresearchstudies3ADF7B43
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--records BenchmarkApiPOSTresearchstudiesstudyIdrecordsB1E70928
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--protocols BenchmarkApiPOSTresearchstudiesstudyIdprotocols60FC7808
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--runs BenchmarkApiPOSTresearchstudiesstudyIdrunsA58EB3DB
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--publish BenchmarkApiPOSTresearchstudiesstudyIdpublish5CB0323E
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--queue BenchmarkApiPOSTresearchstudiesstudyIdqueue6C948D7E
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--queue-actions BenchmarkApiPOSTresearchstudiesstudyIdqueueactions86100889
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--prepare BenchmarkApiPOSTresearchstudiesstudyIdprepare738F1EEE
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--idea BenchmarkApiPOSTresearchstudiesstudyIdidea7D2C281D
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--network BenchmarkApiPOSTresearchstudiesstudyIdnetworkCDA0D7F3
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--gap-experiments BenchmarkApiPOSTresearchstudiesstudyIdgapexperimentsE9A44084
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--claim-design BenchmarkApiPOSTresearchstudiesstudyIdclaimdesign3E2E1CBB
+ └─ [~] Target
+     └─ [~] .Fn::Join:
+         └─ @@ -3,7 +3,7 @@
+            [ ]   [
+            [ ]     "integrations/",
+            [ ]     {
+            [-]       "Ref": "BenchmarkApiGETresearchcapabilitiesResearchWorkflowIntegration2AC10A50"
+            [+]       "Ref": "BenchmarkApiGETresearchstudiesstudyIdautonomyResearchWorkflowIntegration0707BAC8"
+            [ ]     }
+            [ ]   ]
+            [ ] ]
+[~] AWS::Lambda::Function ResearchWorkflow/PackageExecutor ResearchWorkflowPackageExecutor32D08CE2
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] 8da88c9faada9ad6c05e0eec6664d41a6a755c9347ee26eb6c5508c4f3de7962.zip
+ │       └─ [+] d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c.zip
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.8da88c9faada9ad6c05e0eec6664d41a6a755c9347ee26eb6c5508c4f3de7962
+         └─ [+] asset.d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c
+[~] AWS::Lambda::Function ResearchWorkflow/PackageReaper ResearchWorkflowPackageReaperED8C6D40
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] 8da88c9faada9ad6c05e0eec6664d41a6a755c9347ee26eb6c5508c4f3de7962.zip
+ │       └─ [+] d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c.zip
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.8da88c9faada9ad6c05e0eec6664d41a6a755c9347ee26eb6c5508c4f3de7962
+         └─ [+] asset.d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c
+[~] AWS::Lambda::Function ResearchWorkflow/PackageIngest ResearchWorkflowPackageIngestAA97237D
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] 8da88c9faada9ad6c05e0eec6664d41a6a755c9347ee26eb6c5508c4f3de7962.zip
+ │       └─ [+] d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c.zip
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.8da88c9faada9ad6c05e0eec6664d41a6a755c9347ee26eb6c5508c4f3de7962
+         └─ [+] asset.d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c
+[~] AWS::IAM::Policy ResearchWorkflow/Api/ServiceRole/DefaultPolicy ResearchWorkflowApiServiceRoleDefaultPolicy378FDA82
+ └─ [~] PolicyDocument
+     └─ [~] .Statement:
+         └─ @@ -13,6 +13,12 @@
+            [ ] "Resource": [
+            [ ]   {
+            [ ]     "Fn::GetAtt": [
+            [+]       "ResearchWorkflowAutonomyWorker1BCFF82C",
+            [+]       "Arn"
+            [+]     ]
+            [+]   },
+            [+]   {
+            [+]     "Fn::GetAtt": [
+            [ ]       "ResearchWorkflowQueueWorker702E601D",
+            [ ]       "Arn"
+            [ ]     ]
+            @@ -23,6 +29,20 @@
+            [ ]     [
+            [ ]       {
+            [ ]         "Fn::GetAtt": [
+            [+]           "ResearchWorkflowAutonomyWorker1BCFF82C",
+            [+]           "Arn"
+            [+]         ]
+            [+]       },
+            [+]       ":*"
+            [+]     ]
+            [+]   ]
+            [+] },
+            [+] {
+            [+]   "Fn::Join": [
+            [+]     "",
+            [+]     [
+            [+]       {
+            [+]         "Fn::GetAtt": [
+            [ ]           "ResearchWorkflowQueueWorker702E601D",
+            [ ]           "Arn"
+            [ ]         ]
+[~] AWS::Lambda::Function ResearchWorkflow/Api ResearchWorkflowApiE04EBDAC
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] 8da88c9faada9ad6c05e0eec6664d41a6a755c9347ee26eb6c5508c4f3de7962.zip
+ │       └─ [+] d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c.zip
+ ├─ [~] Environment
+ │   └─ [~] .Variables:
+ │       ├─ [+] Added: .RESEARCH_AUTONOMY_ENABLED
+ │       └─ [+] Added: .RESEARCH_AUTONOMY_WORKER_FUNCTION
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.8da88c9faada9ad6c05e0eec6664d41a6a755c9347ee26eb6c5508c4f3de7962
+         └─ [+] asset.d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c
+[~] AWS::Lambda::Function ResearchWorkflow/QueueWorker ResearchWorkflowQueueWorker702E601D
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] 8da88c9faada9ad6c05e0eec6664d41a6a755c9347ee26eb6c5508c4f3de7962.zip
+ │       └─ [+] d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c.zip
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.8da88c9faada9ad6c05e0eec6664d41a6a755c9347ee26eb6c5508c4f3de7962
+         └─ [+] asset.d28b3717231f9ba3f9552830b151c399bffde4aecb0a044e46676ecd5727998c
+
+
+
+✨  Number of stacks with differences: 1
+

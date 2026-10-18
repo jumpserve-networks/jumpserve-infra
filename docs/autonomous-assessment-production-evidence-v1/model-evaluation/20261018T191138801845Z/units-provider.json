@@ -1,0 +1,47 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_KH4qWCgxL89qeGGSnSozk9",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "blocked",
+                            "reason": "missing-required-inputs",
+                            "blockers": [
+                                {
+                                    "kind": "missing-data",
+                                    "detail": "missing-source-data",
+                                    "required_input": "Measurement m1 is recorded in seconds (0.012 s) while the frozen claim metric is in milliseconds (12 ms). Previous feedback explicitly prohibits silent relabeling or manufacturing a conversion record. A documented, controller-authorized unit-conversion step or a new measurement recorded natively in milliseconds is required before assessment can proceed. Please provide either: (1) a controller-authorized unit-conversion record transforming m1 from seconds to milliseconds with explicit provenance, or (2) a new measurement recorded directly in ms."
+                                }
+                            ],
+                            "claims": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": [
+                                "m1"
+                            ]
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3362,
+        "outputTokens": 337,
+        "totalTokens": 3699,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 5576
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_TsVnAIQ3pdE2Y11ynxTds4",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "assess",
+                            "reason": "The claim states completion time is 12 ms under fixed configuration A. Two planned observations were specified. Measurement m0 is recorded with value 0 ms, and measurement \"missing\" has status \"missing\" with null value. A recorded zero (0 ms) versus a claimed 12 ms is a notable discrepancy, but the planned evidence is incomplete: one of two observations is missing. There is no controller_numeric_check supplied (registered_checks is empty), so a conclusive label (reproduced or discrepant) cannot be assigned. The source is synthetic with partial review status. Under workflow rules, with evidence present but incomplete planned observations and no controller_numeric_check, the appropriate label is inconclusive and coverage_complete is false.",
+                            "blockers": [],
+                            "claims": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": "inconclusive",
+                            "evidence_ids": [
+                                "m0",
+                                "missing"
+                            ]
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 2848,
+        "outputTokens": 361,
+        "totalTokens": 3209,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 6164
+    }
+}

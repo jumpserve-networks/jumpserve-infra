@@ -1,0 +1,1 @@
+{"observed":[],"published":[{"configuration_identity":"fixed","extraction":"Synthetic reference; not a published value","location":"Synthetic cell 1","metric":"latency","observation_id":"cell-1","reason":null,"source_id":"94ba1684-6230-51a8-9ee3-e8eb5a61344a","status":"recorded","units":"ms","value":10}]}

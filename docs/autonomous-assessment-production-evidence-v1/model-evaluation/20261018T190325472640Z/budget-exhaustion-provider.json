@@ -1,0 +1,50 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_IDXUJMMzZGbPi5qsZG7jHk",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "blocked",
+                            "reason": "Attempt 26 exceeds the fixed limit of 25 attempts per claim. No further progress is possible under the current workflow limits. Additionally, remaining_commitment_cents is 0, meaning no budget remains. No registered checks exist, and the source is a synthetic evaluation packet with no real scientific evidence. The claim cannot be assessed, proposed, or executed.",
+                            "blockers": [
+                                {
+                                    "kind": "capacity",
+                                    "detail": "Attempt number 26 exceeds the fixed maximum of 25 model invocations per claim. This limit cannot be reset or waived.",
+                                    "required_input": "No further attempts are permitted under the current workflow for this claim."
+                                },
+                                {
+                                    "kind": "missing-data",
+                                    "detail": "Remaining commitment is 0 cents; no budget available for any execution.",
+                                    "required_input": "Sufficient budget allocation would be required to proceed."
+                                }
+                            ],
+                            "claims": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 2801,
+        "outputTokens": 367,
+        "totalTokens": 3168,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 3423
+    }
+}

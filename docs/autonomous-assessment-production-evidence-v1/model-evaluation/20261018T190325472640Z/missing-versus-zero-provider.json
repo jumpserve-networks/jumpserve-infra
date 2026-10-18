@@ -1,0 +1,48 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_z7rbo3GXVZMae1bxPTTXoh",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "assess",
+                            "reason": "Assessment requires both planned observations to be present and a controller_numeric_check with a matching label. Here, planned_observations=2 but measurement \"missing\" has status \"missing\" and value null — one of the two required observations is absent. Additionally, no registered_checks entry exists (registered_checks is empty), so no controller_numeric_check is available. Measurement m0 records a value of 0 ms, which does not match the claimed 12 ms, but a single unmatched zero against a claimed number with incomplete planned evidence and no controller numeric check does not authorize a discrepant label. Coverage is therefore incomplete, and the assessment is inconclusive.",
+                            "blockers": [
+                                {
+                                    "kind": "missing-data",
+                                    "detail": "One of the two planned observations (id: 'missing') has status 'missing' and value null. Both planned observations must be recorded before a conclusive assessment can be made.",
+                                    "required_input": "Recorded measurement for observation id 'missing' with units ms and a valid numeric value."
+                                }
+                            ],
+                            "claims": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": "inconclusive",
+                            "evidence_ids": [
+                                "m0",
+                                "missing"
+                            ]
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 2848,
+        "outputTokens": 416,
+        "totalTokens": 3264,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 4459
+    }
+}

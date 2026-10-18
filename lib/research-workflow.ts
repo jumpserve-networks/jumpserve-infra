@@ -31,6 +31,8 @@ export class ResearchWorkflow extends Construct {
     if (url !== 'https://regphejnlvfpyokpniny.supabase.co') throw new Error('Research workflow requires the verified JumpServe Supabase project.');
     const secret = secretsmanager.Secret.fromSecretNameV2(this, 'SupabaseServiceKey', 'jumpserve/supabase-service-key');
     const queueEnabled = researchWorkflowIsEnabled(this.node.tryGetContext('researchQueueEnabled'));
+    const autonomyEnabled = researchWorkflowIsEnabled(this.node.tryGetContext('researchAutonomyEnabled'));
+    if (autonomyEnabled && !queueEnabled) throw new Error('Autonomous assessments require the durable experiment queue.');
     const reservationContext = this.node.tryGetContext('researchReservedConcurrencyEnabled');
     const reserveConcurrency = reservationContext !== false && reservationContext !== 'false';
     const networkingEnabled = Boolean(executors) && researchWorkflowIsEnabled(this.node.tryGetContext('networkExecutionEnabled'));
@@ -75,6 +77,7 @@ export class ResearchWorkflow extends Construct {
     });
     secret.grantRead(fn);
     const integration = new HttpLambdaIntegration('ResearchWorkflowIntegration', fn);
+    httpApi.addRoutes({ path: '/research/studies/{studyId}/autonomy', methods: [api.HttpMethod.GET, api.HttpMethod.POST], integration });
     for (const route of ['/research/capabilities', '/research/queue', '/research/studies', '/research/studies/{studyId}', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/prepare', '/research/studies/{studyId}/idea', '/research/studies/{studyId}/gap-experiments', '/research/studies/{studyId}/claim-design']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.GET], integration });
     for (const route of ['/research/studies', '/research/studies/{studyId}/records', '/research/studies/{studyId}/protocols', '/research/studies/{studyId}/runs', '/research/studies/{studyId}/publish', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/queue-actions', '/research/studies/{studyId}/prepare', '/research/studies/{studyId}/idea','/research/studies/{studyId}/network', '/research/studies/{studyId}/gap-experiments', '/research/studies/{studyId}/claim-design']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.POST], integration });
     if (queueEnabled) {
@@ -88,6 +91,38 @@ export class ResearchWorkflow extends Construct {
       secret.grantRead(worker);
       fn.addEnvironment('RESEARCH_QUEUE_WORKER_FUNCTION', worker.functionArn);
       worker.grantInvoke(fn);
+      if (autonomyEnabled) {
+        const pdfPath = path.join(__dirname, '..', '.runtime-autonomy-python');
+        const pdfLock = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'autonomy-pdf-runtime.json'), 'utf8'));
+        const pdfManifest = JSON.parse(fs.readFileSync(path.join(pdfPath, 'manifest.json'), 'utf8'));
+        if (pdfManifest.sha256 !== pdfLock.sha256 || pdfManifest.requirement !== pdfLock.requirement || JSON.stringify(pdfManifest.files) !== JSON.stringify(pdfLock.files)) throw new Error('Autonomous PDF dependency identity differs. Run bin/prepare-autonomy-runtime.py.');
+        for (const [name, hash] of Object.entries(pdfManifest.files)) {
+          if (name.includes('..') || path.isAbsolute(name) || createHash('sha256').update(fs.readFileSync(path.join(pdfPath, 'python', name))).digest('hex') !== hash) throw new Error('Autonomous PDF dependency bytes differ.');
+        }
+        const inventory = (directory: string): string[] => fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
+          if (entry.name === '__pycache__' || /\.py[co]$/.test(entry.name)) return [];
+          const location = path.join(directory, entry.name);
+          return entry.isDirectory() ? inventory(location) : [path.relative(pdfPath, location)];
+        });
+        if (inventory(pdfPath).some(name => name !== 'manifest.json' && !Object.hasOwn(pdfLock.files, name.replace(/^python\//, '')))) throw new Error('Undeclared PDF layer files cannot enter the runtime.');
+        const pdfLayer = new lambda.LayerVersion(this, 'AutonomyPdfLayer', { code: lambda.Code.fromAsset(pdfPath, { exclude: ['**/__pycache__/**', '**/*.pyc', '**/*.pyo'] }), compatibleRuntimes: [lambda.Runtime.PYTHON_3_12], description: 'Hash-verified pypdf 6.19.0; text extraction is not substantive paper review.' });
+        const autonomous = new lambda.Function(this, 'AutonomyWorker', {
+          code: lambda.Code.fromAsset(runtime), handler: 'autonomy.handler', runtime: lambda.Runtime.PYTHON_3_12,
+          memorySize: 1024, timeout: cdk.Duration.seconds(180), reservedConcurrentExecutions: reserveConcurrency ? 2 : undefined,
+          retryAttempts: 0, maxEventAge: cdk.Duration.minutes(1), layers: [pdfLayer],
+          environment: { SUPABASE_URL: url, SUPABASE_SECRET_ARN: secret.secretArn, RESEARCH_AUTONOMY_ENABLED: 'true', RESEARCH_QUEUE_WORKERS_ENABLED: 'true', RESEARCH_QUEUE_WORKER_FUNCTION: worker.functionArn, ...networkingEnvironment },
+          description: 'Durable parallel claim stages with atomic $100/7-day/25-attempt admission, prompt history and explicit blockers.',
+        });
+        secret.grantRead(autonomous);
+        worker.grantInvoke(autonomous);
+        autonomous.grantInvoke(fn);
+        fn.addEnvironment('RESEARCH_AUTONOMY_ENABLED', 'true');
+        fn.addEnvironment('RESEARCH_AUTONOMY_WORKER_FUNCTION', autonomous.functionArn);
+        const profile = 'arn:aws:bedrock:us-east-1:395567831870:inference-profile/us.anthropic.claude-opus-4-6-v1';
+        autonomous.addToRolePolicy(new iam.PolicyStatement({ actions: ['bedrock:InvokeModel'], resources: [profile] }));
+        autonomous.addToRolePolicy(new iam.PolicyStatement({ actions: ['bedrock:InvokeModel'], resources: ['us-east-1', 'us-east-2', 'us-west-2'].map(region => `arn:aws:bedrock:${region}::foundation-model/anthropic.claude-opus-4-6-v1`), conditions: { StringEquals: { 'bedrock:InferenceProfileArn': profile } } }));
+        new events.Rule(this, 'AutonomyPoll', { schedule: events.Schedule.rate(cdk.Duration.minutes(1)), targets: [new targets.LambdaFunction(autonomous, { retryAttempts: 0, maxEventAge: cdk.Duration.minutes(1) })] });
+      }
       if (networkingEnabled && executors && packageExecutor) for (const target of [executors.emulated,executors.realWorld,packageExecutor]) target.grantInvoke(worker);
       new events.Rule(this, 'QueuePoll', {
         schedule: events.Schedule.rate(cdk.Duration.minutes(1)),

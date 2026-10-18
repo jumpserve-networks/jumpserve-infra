@@ -1,0 +1,79 @@
+{
+  "protocol": "autonomous-assessment-protocol-v1",
+  "database": "jumpserve_research_ideas_test_20261018t182239891054z",
+  "checks": [
+    {
+      "name": "one form submission starts durable work with declared defaults and navigates to queue",
+      "passed": true,
+      "evidence": {
+        "study_id": "54a7b1bf-c9be-4a5e-af8e-0c79235a1b59",
+        "initial_prompt_retained": true,
+        "background_worker": true
+      }
+    },
+    {
+      "name": "closing the page does not stop parallel claims or personalized follow-up",
+      "passed": true,
+      "evidence": {
+        "independent_of_browser": true,
+        "claims": 3,
+        "resolved": 2,
+        "blocked": 1,
+        "experiments": 4,
+        "model_bound": true
+      }
+    },
+    {
+      "name": "recorded exact prompts responses costs and tailored retry are visible per claim",
+      "passed": true,
+      "evidence": {
+        "turns": 8,
+        "exact_prompts": true,
+        "tailored_failure_context": true,
+        "unknown_cost_preserved": true
+      }
+    },
+    {
+      "name": "desktop and mobile light and dark states fit with visible blockers",
+      "passed": true,
+      "evidence": {
+        "widths": [
+          1365,
+          390
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "horizontal_overflow": false
+      }
+    },
+    {
+      "name": "actual Next routes preserve the queue alias query and sign-in return paths",
+      "passed": true,
+      "evidence": {
+        "anonymous_real_next_routes": true,
+        "alias_query_preserved": true,
+        "legitimate_google_session": false
+      }
+    }
+  ],
+  "browser_errors": [],
+  "real_model_calls": 0,
+  "cloud_instances": 0,
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "conditional_gaps": [
+    "Real model evaluation/publication",
+    "Legitimate Google request",
+    "Remote Supabase Storage",
+    "Actual networking cost envelope/acquisition/cleanup"
+  ],
+  "measured_charges_usd": null,
+  "passed": true,
+  "study_id": "54a7b1bf-c9be-4a5e-af8e-0c79235a1b59",
+  "ended_at": "2026-10-18T18:23:13.255Z"
+}

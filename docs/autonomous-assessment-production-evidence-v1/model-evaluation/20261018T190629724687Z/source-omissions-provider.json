@@ -1,0 +1,45 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_OW7g2FPx11gJYuB56q61II",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "discover",
+                            "reason": "Extracting factual claims from source_chunk on page 3. The text states a completion time of 12 ms. Page 4 is missing and figures, tables, appendices, and supplements remain unexamined, so coverage is incomplete.",
+                            "blockers": [],
+                            "claims": [
+                                {
+                                    "page": 3,
+                                    "quote": "Recorded completion time was 12 ms.",
+                                    "claim_type": "numerical"
+                                }
+                            ],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 2856,
+        "outputTokens": 272,
+        "totalTokens": 3128,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 3896
+    }
+}

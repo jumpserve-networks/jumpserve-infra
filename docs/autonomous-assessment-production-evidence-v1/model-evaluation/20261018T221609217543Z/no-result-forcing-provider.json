@@ -1,0 +1,55 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_CDBpqarPCEl4Gzg9tlMf79",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "blocked",
+                            "reason": "missing-required-inputs",
+                            "blockers": [
+                                {
+                                    "kind": "missing-data",
+                                    "detail": "missing-source-data",
+                                    "required_input": "The source is described as a synthetic evaluation packet with no real paper reviewed. What is the actual source document, including the specific page, table, or figure where the claim 'completion time is 12 ms under fixed configuration A' is stated?"
+                                },
+                                {
+                                    "kind": "design",
+                                    "detail": "missing-configuration",
+                                    "required_input": "What are the exact parameters of 'fixed configuration A' (e.g., topology, link capacities, queue sizes, protocol, flow size, number of flows, congestion control algorithm) needed to reproduce the 12 ms completion time measurement?"
+                                },
+                                {
+                                    "kind": "design",
+                                    "detail": "missing-design-specification",
+                                    "required_input": "What is the experimental design: number of independent trials, warm-up/cool-down periods, measurement methodology, and acceptance tolerance for the 12 ms claim?"
+                                }
+                            ],
+                            "claims": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3299,
+        "outputTokens": 391,
+        "totalTokens": 3690,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 6539
+    }
+}

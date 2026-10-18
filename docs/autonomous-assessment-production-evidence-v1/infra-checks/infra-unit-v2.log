@@ -1,0 +1,35 @@
+
+> jumpserve-infra@0.1.0 test
+> jest --runInBand
+
+Bundling asset TestBenchmarkStack/LaunchBenchmarkFn/Code/Stage...
+
+  ...0b613e3315bc10e8d71a07912dac9eb29b433517cdf9318-building/index.js  24.8kb
+
+⚡ Done in 9ms
+Bundling asset TestBenchmarkStack/CleanupBenchmarksFn/Code/Stage...
+
+  ...47584ae5d2c005d88f6765710bb380f16eafdaea23ced467-building/index.js  4.7kb
+
+⚡ Done in 2ms
+Bundling asset TestBenchmarkStack/CancelBenchmarkFn/Code/Stage...
+
+  ...0f21c2363f2b128fef9424f2e355f95a96832afe4245c412-building/index.js  6.0kb
+
+⚡ Done in 2ms
+Bundling asset TestBenchmarkStack/GetBenchmarkLogsFn/Code/Stage...
+
+  ...ed550c291b5e5ef9caf7d66c194b33da51561415f35970f4-building/index.js  3.1kb
+
+⚡ Done in 1ms
+Bundling asset TestBenchmarkStack/BenchmarkIngestFn/Code/Stage...
+
+  ...4d76ef74d21c52e4831a3dbe15f384ea2b105b060e76e546-building/index.js  4.1kb
+
+⚡ Done in 1ms
+
+Test Suites: 11 passed, 11 total
+Tests:       91 passed, 91 total
+Snapshots:   0 total
+Time:        2.883 s, estimated 3 s
+Ran all test suites.

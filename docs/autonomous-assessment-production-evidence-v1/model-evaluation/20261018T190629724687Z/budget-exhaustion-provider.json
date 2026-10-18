@@ -1,0 +1,50 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_rVqPWD3RdOwwTJ2roVM7ip",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "blocked",
+                            "reason": "Multiple hard limits are exceeded or exhausted, making further planning impossible: (1) The attempt number is 26, which exceeds the per-claim limit of 25 attempts. (2) The remaining commitment budget is 0 cents (USD 0.00), so no runner execution can be funded. (3) No registered checks exist that match this claim. (4) The source is a synthetic evaluation packet with only partial review, so there is no real paper or real experimental context to ground the claim. Under these conditions, no valid proposal or check selection can be made.",
+                            "blockers": [
+                                {
+                                    "kind": "capacity",
+                                    "detail": "Attempt number 26 exceeds the per-claim limit of 25 attempts. The workflow cannot proceed with additional attempts.",
+                                    "required_input": "A new claim assessment cycle with reset attempt counter, if permitted by the controller."
+                                },
+                                {
+                                    "kind": "capacity",
+                                    "detail": "Remaining commitment budget is 0 cents. No runner execution can be funded.",
+                                    "required_input": "Additional budget allocation from the controller to cover runner costs."
+                                }
+                            ],
+                            "claims": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 2801,
+        "outputTokens": 412,
+        "totalTokens": 3213,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 7657
+    }
+}

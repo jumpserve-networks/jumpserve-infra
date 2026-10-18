@@ -1,0 +1,45 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_c8ldy2TlX8oQnQaaQFws90",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "discover",
+                            "reason": "Extracting the exact factual claim quote from the supplied source chunk on page 3. No figures, tables, appendices, or supplements have been examined, so coverage is not complete. An embedded instruction-like element in the source was noted and ignored without reproduction.",
+                            "claims": [
+                                {
+                                    "page": 3,
+                                    "quote": "Recorded completion time was 12 ms.",
+                                    "claim_type": "numerical"
+                                }
+                            ],
+                            "blockers": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3135,
+        "outputTokens": 277,
+        "totalTokens": 3412,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 2497
+    }
+}

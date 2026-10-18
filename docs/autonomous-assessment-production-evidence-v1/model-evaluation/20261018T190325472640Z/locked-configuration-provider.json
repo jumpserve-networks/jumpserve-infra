@@ -1,0 +1,39 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_avIhiBk12nOUZLbYhTytyB",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "choose-check",
+                            "reason": "A registered check (id: 3fc305f6-51dc-5f2f-84bc-1c6646762869) directly covers the numerical claim: flow_completion_time_ms under configuration A with a 0.1 ms absolute tolerance, using matched-numeric-v1. This matches the claim's metric, units, and configuration identity. The previous feedback noting an unauthorized tolerance amendment is noted; the frozen protocol is preserved exactly as registered.",
+                            "check_id": "3fc305f6-51dc-5f2f-84bc-1c6646762869",
+                            "blockers": [],
+                            "claims": [],
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": null,
+                            "evidence_ids": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3412,
+        "outputTokens": 316,
+        "totalTokens": 3728,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 3076
+    }
+}

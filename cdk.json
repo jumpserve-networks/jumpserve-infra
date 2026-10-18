@@ -112,6 +112,7 @@
     "@aws-cdk/aws-cloudfront:defaultFunctionRuntimeV2_0": true,
     "@aws-cdk/aws-elasticloadbalancingv2:usePostQuantumTlsPolicy": true,
     "networkExecutionEnabled": true,
-    "networkPackagesEnabled": false
+    "networkPackagesEnabled": false,
+    "researchAutonomyEnabled": true
   }
 }

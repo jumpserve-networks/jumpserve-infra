@@ -1,0 +1,48 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_nD3vVZls4StFSzHNFC5lW6",
+                        "name": "submit_assessment_step",
+                        "input": {
+                            "action": "assess",
+                            "reason": "evidence-incomplete",
+                            "blockers": [
+                                {
+                                    "kind": "missing-data",
+                                    "detail": "missing-source-data",
+                                    "required_input": "Measurement m1 (id 'missing') has status 'missing' and no recorded value. One of the two planned observations is absent, so the evidence set is incomplete. What is the recorded value for the second planned observation?"
+                                }
+                            ],
+                            "claims": [],
+                            "check_id": null,
+                            "proposal": null,
+                            "ready": null,
+                            "coverage_complete": false,
+                            "assessment_label": "inconclusive",
+                            "evidence_ids": [
+                                "m0",
+                                "missing"
+                            ]
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3319,
+        "outputTokens": 274,
+        "totalTokens": 3593,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 4925
+    }
+}
