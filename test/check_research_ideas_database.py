@@ -47,6 +47,7 @@ def query(sql,database=DATABASE,role=None):
 def rpc(name,payload):
     signatures={
       'research_initialize_claim_design':dict(p_study='uuid',p_actor='uuid',p_document='jsonb',p_raw='text',p_sha256='text',p_source='jsonb',p_claim='jsonb'),
+      'research_reuse_claim_packet':dict(p_study='uuid',p_actor='uuid',p_id='uuid',p_packet='uuid',p_run='uuid'),
       'research_create_study':dict(p_actor='uuid',p_id='uuid',p_document='jsonb'),
       'research_append':dict(p_study='uuid',p_actor='uuid',p_kind='text',p_record='jsonb'),
       'research_append_bundle':dict(p_study='uuid',p_actor='uuid',p_records='jsonb'),
@@ -143,6 +144,7 @@ grant all on public.agent_sessions to service_role;""")
         raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     for name in ('202610130002_network_execution.sql','202610170001_claim_experiment_design.sql','202610170002_claim_design_prompt.sql','202610170003_claim_design_prompt_v2.sql','202610170004_claim_design_prompt_v3.sql','202610170005_claim_design_prompt_v4.sql','202610170006_claim_design_policy_guard.sql','202610170007_claim_design_prompt_v5.sql','202610170008_claim_design_v5_publication_guard.sql','202610170009_claim_design_prompt_v6.sql','202610170010_claim_design_v6_publication_guard.sql','202610170011_claim_design_replay_publication_guard.sql','202610170012_claim_design_quote_publication_guard.sql','202610170013_claim_design_exact_units_publication_guard.sql'):
         raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
+    name='202610180001_claim_packet_reuse.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     report['bootstrap_limit']='Legacy agent_sessions base table synthesized; listed prompt/research migrations executed as original files. Historical study-table migrations outside this feature are not replayed.'
     store.request=transport
 

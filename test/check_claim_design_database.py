@@ -74,6 +74,30 @@ def main():
             assert f.rpc('publish_agent_prompt',pub)==prompt
             return dict(failed_and_incomplete_cases_rejected=True,publication='Local synthetic contract fixture only')
         f.check('prompt publication requires all twenty raw and rendered actual-answer cases',publication)
+        reuse_request={}
+        def unchanged_reuse():
+            # The production failure: reuse points to the already-saved packet.
+            # A duplicate version remains forbidden so review budgets cannot reset.
+            f.rejects(lambda:claim_design.save(target,f.ACTOR,dict(action='save',request_id=uid(),supersedes_id=selected['id'],document=value,reason='Identical duplicate must stay forbidden')))
+            for role in ('anon','authenticated'):
+                assert f.query("select has_function_privilege(current_user,'research_reuse_claim_packet(uuid,uuid,uuid,uuid,uuid)','EXECUTE')",role=role)=='f'
+            run_id=uid()
+            f.rpc('research_begin_idea_run',dict(p_study=target,p_actor=f.ACTOR,p_user='fixture@example.invalid',p_id=run_id,p_packet=selected['id'],p_task='planning',p_session=uid(),p_prompt=prompt,p_model='synthetic-test-provider',p_request=dict(task='planning',test='unchanged-reuse'),p_provenance=dict(packet_sha256=selected['sha256'])))
+            output=dict(response_version=claim_design.RESPONSE_VERSION,response_mode='reuse',summary='Synthetic reuse fixture only',questions=[],proposal=value,decision_policy=dict(claim_design.POLICY_IDENTITY,origin='server-policy',model_authored=False,protocol_reused=True))
+            f.rpc('research_finish_idea_run',dict(p_study=target,p_actor=f.ACTOR,p_id=run_id,p_status='complete',p_reason=None,p_raw=f.workflow.canonical(output).decode(),p_output=output,p_usage=None,p_provenance=dict(data_origin='software-fixture'),p_messages=[]))
+            request=dict(action='adopt',request_id=uid(),run_id=run_id,packet_id=selected['id'])
+            reuse_request.update(request)
+            before=f.query('select count(*) from research_idea_packets where study_id='+f.sql_text(target))
+            answer=claim_design.adopt(target,f.ACTOR,request)
+            assert answer['id']==selected['id'] and answer['adoption']['new_packet_created'] is False
+            assert claim_design.adopt(target,f.ACTOR,request)==answer
+            assert f.query('select count(*) from research_idea_packets where study_id='+f.sql_text(target))==before
+            assert f.query("select count(*) from research_audit_events where study_id="+f.sql_text(target)+" and action='claim:reuse-packet'")=='1'
+            assert not f.ideas.status(target)['ready']
+            f.rejects(lambda:f.rpc('research_reuse_claim_packet',dict(p_study=target,p_actor=f.OTHER,p_id=uid(),p_packet=selected['id'],p_run=run_id)))
+            f.rejects(lambda:f.rpc('research_reuse_claim_packet',dict(p_study=target,p_actor=f.ACTOR,p_id=request['request_id'],p_packet=selected['id'],p_run=uid())))
+            return dict(identical_version_still_rejected=True,reuse_audited_once=True,new_packets=0,readiness_remains_false=True,browser_rpc_denied=True)
+        f.check('unchanged reuse is audited without creating a packet or resetting review limits',unchanged_reuse)
         runs=[]
         for task in ('comprehension','critic'):
             run=f.rpc('research_begin_idea_run',dict(p_study=target,p_actor=f.ACTOR,p_user='fixture@example.invalid',p_id=uid(),p_packet=selected['id'],p_task=task,p_session=None,p_prompt=prompt,p_model='synthetic-test-provider',p_request=dict(task=task),p_provenance=dict(packet_sha256=selected['sha256'],context_policy='fresh-packet-only',history_messages=0)))
@@ -97,6 +121,12 @@ def main():
         revised=claim_design.save(target,f.ACTOR,dict(action='save',request_id=uid(),supersedes_id=selected['id'],document=dict(value,conditions=value['conditions']+' Revised scope.'),reason='Material scope revision'))
         assert not f.ideas.status(target)['ready']
         f.rejects(lambda:f.scheduler.enqueue(target,f.ACTOR,dict(prepared['queue_request'],request_id=uid())))
+        # A new adoption of an obsolete packet fails. Replaying its already
+        # audited request remains idempotent and cannot restore readiness.
+        f.rejects(lambda:f.rpc('research_reuse_claim_packet',dict(p_study=target,p_actor=f.ACTOR,p_id=uid(),p_packet=selected['id'],p_run=reuse_request['run_id'])))
+        replay=f.rpc('research_reuse_claim_packet',dict(p_study=target,p_actor=f.ACTOR,p_id=reuse_request['request_id'],p_packet=selected['id'],p_run=reuse_request['run_id']))
+        assert replay['id']==selected['id'] and f.ideas.status(target)['current_packet_id']==revised['id']
+        assert not f.ideas.status(target)['ready']
         f.check('material revisions invalidate readiness and block new queue work',lambda:dict(version=revised['version'],ready=False))
         f.report['passed']=True
     except Exception as error:

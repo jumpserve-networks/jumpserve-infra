@@ -118,8 +118,8 @@ def security():
     functions = admin.query("select proname,has_function_privilege('anon',p.oid,'EXECUTE') anon_execute,"
                             "has_function_privilege('authenticated',p.oid,'EXECUTE') browser_execute "
                             "from pg_proc p join pg_namespace n on n.oid=p.pronamespace "
-                            "where n.nspname='public' and proname in ('research_initialize_claim_design','publish_agent_prompt')")
-    if len(functions) != 2 or any(r['anon_execute'] or r['browser_execute'] for r in functions):
+                            "where n.nspname='public' and proname in ('research_initialize_claim_design','publish_agent_prompt','research_reuse_claim_packet')")
+    if len(functions) not in (2, 3) or any(r['anon_execute'] or r['browser_execute'] for r in functions):
         raise RuntimeError('Claim design/publication browser RPC permissions differ')
     definition = admin.query("select pg_get_functiondef('public.publish_agent_prompt(uuid,uuid,text,jsonb,text,text)'::regprocedure) definition")[0]['definition']
     if 'publish_agent_prompt_before_claim_v6_exact' not in definition:
@@ -228,12 +228,12 @@ def deny(endpoint, payload=None):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('mode', choices=('inspect', 'migrate', 'diff-api', 'deploy-api', 'diff-agent', 'deploy-agent', 'publish', 'verify', 'frontend-release', 'frontend-status', 'archive-release'))
+    parser.add_argument('mode', choices=('inspect', 'migrate', 'migrate-reuse', 'diff-api', 'deploy-api', 'diff-agent', 'deploy-agent', 'publish', 'verify', 'frontend-release', 'frontend-status', 'archive-release'))
     args = parser.parse_args()
     directory = ROOT / '.test-artifacts/claim-design/release' / dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
     directory.mkdir(parents=True, exist_ok=False)
     receipt = dict(protocol='claim-design-production-release-v1', mode=args.mode, status='running', started_at=stamp(),
-                   authorization='User explicitly requested merging all current changes to main and production deployment.',
+                   authorization='The current session instruction governs mutation authorization; read-only inspection/diff is not authorization to deploy later changes.',
                    new_model_calls=0, new_experiment_instances=0, measured_charges_usd=None)
     def save():
         (directory / 'receipt.json').write_text(json.dumps(receipt, indent=2) + '\n')
@@ -269,6 +269,23 @@ def main():
             if before['scientific_counts'] != after['scientific_counts']:
                 raise RuntimeError('Scientific counts changed; investigate concurrent writes')
             receipt['security'] = security()
+        elif args.mode == 'migrate-reuse':
+            if admin.query("select to_regprocedure('public.research_reuse_claim_packet(uuid,uuid,uuid,uuid,uuid)') present")[0]['present'] is not None:
+                raise RuntimeError('Reuse migration is already applied; inspect its retained receipt rather than overwriting history')
+            before = pointers()
+            if active()[0]['active_version_id'] != CANDIDATE:
+                raise RuntimeError('Unexpected active claim design prompt')
+            raw = (ROOT / 'database/202610180001_claim_packet_reuse.sql').read_bytes()
+            receipt['migration'] = dict(name='202610180001_claim_packet_reuse.sql', sha256=sha(raw), bytes=len(raw), status='running')
+            save()
+            admin.query(raw.decode(), read_only=False)
+            receipt['migration']['status'] = 'complete'
+            receipt['security'] = security()
+            if not any(r['proname'] == 'research_reuse_claim_packet' for r in receipt['security']['claim_functions']):
+                raise RuntimeError('New owner-only reuse RPC missing')
+            if pointers() != before:
+                raise RuntimeError('A prompt pointer changed during the reuse migration')
+            receipt['prompt_pointers_preserved'] = True
         elif args.mode.startswith(('diff-', 'deploy-')):
             deploying = args.mode.startswith('deploy-')
             kind = args.mode.split('-')[1]
@@ -325,6 +342,8 @@ def main():
                 raise RuntimeError('Unrelated prompt pointers changed')
         elif args.mode == 'verify':
             receipt['security'] = security()
+            if manifest['version'] >= 16 and not any(r['proname'] == 'research_reuse_claim_packet' for r in receipt['security']['claim_functions']):
+                raise RuntimeError('The corrected runtime requires the owner-only reuse RPC')
             receipt['agent'] = agent_archive(directory, expected=True)
             receipt['api'], _ = queue.archives(directory, manifest)
             receipt['active'] = active()
@@ -341,8 +360,7 @@ def main():
                 deny(API + '/studies/' + study + '/gap-experiments', dict(action='design')),
                 deny(AGENT, dict(action='idea', design_version='claim-experiment-design-v1')),
                 deny(AGENT, dict(action='capabilities'))]
-            receipt['conditional_gaps'] = ['Legitimate Google-authenticated planning/provider/persistence round trip',
-                'Authenticated plan-artifact Storage round trip', 'Actual networking experiment execution']
+            receipt['coverage_limits'] = ['This read-only release check does not invoke authenticated planning, artifact writes or networking execution. See the separately recorded authenticated campaign for their actual verification status.']
         elif args.mode == 'frontend-release':
             if active()[0]['active_version_id'] != CANDIDATE:
                 raise RuntimeError('Publish compatible prompt before frontend release')

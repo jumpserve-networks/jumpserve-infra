@@ -1,0 +1,62 @@
+{
+  "recorded_at": "2026-10-18T03:35:56.564463+00:00",
+  "stage": "Production adoption failed; local correction ready; no deployment authorization received yet",
+  "scope": "Authenticated operational verification with a real Google session; no scientific assessment",
+  "live_checks": {
+    "planning": {
+      "calls": 2,
+      "complete": 2,
+      "prompt_version": "research-claim-design-v6",
+      "input_tokens": 15621,
+      "output_tokens": 490
+    },
+    "configuration_storage": {
+      "bytes": 399,
+      "sha256": "a0c00449a809ff1e67c2b3e3ef48e4eacaa6652f67bd65ab6bbdbe46b948188a",
+      "browser_and_retrieved_bytes_match": true,
+      "anonymous_read_denied": true
+    },
+    "adoption": {
+      "status": 503,
+      "saved_packet_version": 3,
+      "mechanism": "Unchanged proposal enters new-version guard"
+    },
+    "execution": {
+      "status": "not-started",
+      "campaigns": 0,
+      "jobs": 0,
+      "instances": 0,
+      "measurements": 0
+    }
+  },
+  "local_correction_checks": {
+    "backend": 123,
+    "frontend": 180,
+    "infrastructure": 89,
+    "claim_sql_groups": 7,
+    "idea_sql_groups": 11,
+    "browser_groups": 11,
+    "frontend_lint": "pass with existing auth-button warning",
+    "frontend_build": true,
+    "infra_build": true
+  },
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "measured_charges_usd": null,
+  "estimated_charges_usd": null,
+  "private_evidence_root": ".test-artifacts/claim-flow/v1/",
+  "conditional_gaps": [
+    "Production fix deployment and live adoption retry",
+    "Actual fresh reviews/readiness/freeze/queue/EC2 measurement/termination",
+    "Other principals, real-world and custom-package runners"
+  ],
+  "correction_sha256": {
+    "database/202610180001_claim_packet_reuse.sql": "76f8b02321380f40c63b5a6ee6e291b3d1de81eb0f9637cab4043a58b661c798",
+    "../jumpserve-back-end/research_workflow/claim_design.py": "c79c04b519286d145738cbcc5585203b6199342937e018c712d31550e8132870",
+    "../jumpserve-back-end/research_workflow/store.py": "843bffaee17258beaa14d55966aa47225658f787c48b1f40c01324b7076c7600",
+    "../jumpserve-front-end/app/components/research-workflow/claim-designer.tsx": "1a5fe39158f48cb69e22417002e0d77e289e47f2f3f0298d1bb248b8f6b21168"
+  }
+}

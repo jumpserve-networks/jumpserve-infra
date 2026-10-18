@@ -117,6 +117,8 @@ def invoke(system,messages,**options):
             proposed['protocol']={k:v for k,v in claim_plan['protocol'].items() if k not in ('statistics','decision_policy')}
             proposed['protocol']['metrics']=[{k:v for k,v in metric.items() if k not in ('criterion','tolerance_absolute','tolerance_relative')} for metric in claim_plan['protocol']['metrics']]
         output=dict(mode='propose' if complete else 'clarify',guidance=[],unit_values=[],clarification_questions=[] if complete else ['Can you confirm the 1 MB cubic flow, 10 ms delay and 100 Mbit/s bottleneck for this pilot?'],proposal=proposed)
+        if context['user_message']=='Reuse current complete pilot unchanged.':
+            output=dict(mode='reuse',guidance=[],unit_values=[],clarification_questions=[],proposal=None)
         if '200 microseconds' in context['user_message']:
             output.update(mode='clarify',guidance=['units'],unit_values=[dict(value=.2,unit='ms',source_quote='200 microseconds'),dict(value=.2,unit='ms',source_quote='0.2 milliseconds')],clarification_questions=['Which workload and bottleneck will this comparison use?'],proposal=None)
         channel=agent.claim_design.CHANNEL
