@@ -1,0 +1,69 @@
+{
+  "protocol": "claim-design-production-release-v1",
+  "mode": "archive-reuse",
+  "status": "complete",
+  "started_at": "2026-10-18T03:46:56.324927+00:00",
+  "authorization": "The current session instruction governs mutation authorization; read-only inspection/diff is not authorization to deploy later changes.",
+  "new_model_calls": 0,
+  "new_experiment_instances": 0,
+  "measured_charges_usd": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "evidence_integrity": [
+    {
+      "folder": "claim-design-validation",
+      "files": 268,
+      "manifest_sha256": "c31bcdbe59e9a4930f5f238fa2b15bf203f9723ffcab92e86b11cd50d07cb42d"
+    },
+    {
+      "folder": "claim-design-correction-validation",
+      "files": 166,
+      "manifest_sha256": "44d461a50203d6e72525791c161f9475a8aeb632d24fb14c0f7c00efe54cf98a"
+    },
+    {
+      "folder": "claim-design-followup-validation",
+      "files": 379,
+      "manifest_sha256": "3193543026e81a2e94e6261d7a8e3421e6bc072c776ae3740a7075721c50488f"
+    }
+  ],
+  "evaluated_report_sha256": "a287305b58544a0b47b1f80bbf22f8440c263506343358c81fc8db3ddff70698",
+  "runtime_manifest": {
+    "version": 16,
+    "source_revision": "2a394ce1cc6597603f78a6a3853a8327e10bae43",
+    "revision_status": "Exact committed backend correction for audited unchanged-plan reuse; user-authorized production release under claim-packet-reuse-release-protocol-v1.",
+    "files": {
+      "api.py": "40db4f299d5ac784294f767b6f2b5a61abbdb6b67796c7a25f83099e81a11fdd",
+      "workflow.py": "03ebd6c328dc8d9428992c44d07c468e4639576853d32b92cb0e801a8727c75d",
+      "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+      "store.py": "843bffaee17258beaa14d55966aa47225658f787c48b1f40c01324b7076c7600",
+      "scheduler.py": "0f7a253fc8bd2db7d6255efe31b7ce19dd2e2e773699f5806fd166f45fcc9714",
+      "worker.py": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
+      "preparation.py": "f23424b4c73974ffda48e356cd19c2d0dd8877beb668d94380e7bb00da5a5f90",
+      "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "ideas.py": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+      "network_spec.py": "884857f8680eb73ae7b8f43de484c3bd59d0f2441b66e117e49a347191a31e7c",
+      "network_execution.py": "9e61b6c4a2d1e16f0c931e9902d824bfd38174108749739655cfae197ffa5577",
+      "network_package.py": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
+      "package_runtime.py": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
+      "gap_queue.py": "90bd0a01a9dc9b25575d6f2ac6b478a34e940829231132585a3eb1c93c7c841a",
+      "claim_design.py": "c79c04b519286d145738cbcc5585203b6199342937e018c712d31550e8132870",
+      "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3"
+    }
+  },
+  "private_release_originals": {
+    "bucket": "research-workflow-raw",
+    "path": "release-verification/claim-design-20261018/bf4c9fadf265525cf2d2a5408aebee5009b9e3c342fe3214d21c516a36666d71.zip",
+    "sha256": "bf4c9fadf265525cf2d2a5408aebee5009b9e3c342fe3214d21c516a36666d71",
+    "bytes": 3207969,
+    "files": 31,
+    "kind": "claim-packet-reuse-release-receipts",
+    "retrieved_hash_verified": true,
+    "anonymous_status": 400,
+    "measured_storage_charges_usd": null
+  },
+  "ended_at": "2026-10-18T03:47:02.426477+00:00"
+}

@@ -1,0 +1,250 @@
+{
+  "protocol": "claim-packet-reuse-release-protocol-v1",
+  "recorded_at": "2026-10-18T03:46:46.020721+00:00",
+  "software_release": "deployed and verified",
+  "frontend_commit": "6a501dc52db02b2caf248722690f6a4feaea2575",
+  "backend_commit": "2a394ce1cc6597603f78a6a3853a8327e10bae43",
+  "infrastructure_release_commit": "43215cbd97a5c897027306264dd47c061e5fa80c",
+  "amplify_build": "115",
+  "release_tests": {
+    "backend": 123,
+    "frontend": 180,
+    "infrastructure": 89,
+    "claim_sql_groups": 7,
+    "idea_sql_groups": 11,
+    "local_browser_groups": 11,
+    "production_browser_groups": 5
+  },
+  "authenticated": {
+    "study_id": "4287c5fa-1a66-5f0d-8eec-1533b879de0f",
+    "reuse_audits": [
+      {
+        "action": "claim:reuse-packet",
+        "details": {
+          "run_id": "6930f0f9-0dc7-4e4d-9ca4-9d81f10fa83f",
+          "packet_id": "15e898f0-4f21-454b-86ae-b6399526ae76",
+          "request_id": "dd1184e9-9b2e-4e0c-93eb-06923d63a3a3",
+          "packet_sha256": "66a242eded9f15863f2b2dee16c9f8c443805e6937998464da24eb54fdc151d9",
+          "packet_version": 3,
+          "new_packet_created": false,
+          "review_budget_preserved": true
+        }
+      },
+      {
+        "action": "claim:reuse-packet",
+        "details": {
+          "run_id": "6930f0f9-0dc7-4e4d-9ca4-9d81f10fa83f",
+          "packet_id": "15e898f0-4f21-454b-86ae-b6399526ae76",
+          "request_id": "ae04cc90-7e1f-47f6-bc76-2a1fd51a9db1",
+          "packet_sha256": "66a242eded9f15863f2b2dee16c9f8c443805e6937998464da24eb54fdc151d9",
+          "packet_version": 3,
+          "new_packet_created": false,
+          "review_budget_preserved": true
+        }
+      }
+    ],
+    "counts": {
+      "idea_packets": 3,
+      "idea_runs": 4,
+      "idea_readiness": 0,
+      "idea_campaign_links": 0,
+      "protocols": 0,
+      "campaigns": 0,
+      "queue_jobs": 0,
+      "runs": 0,
+      "measurements": 0,
+      "artifacts": 1,
+      "assessments": 0
+    },
+    "original_artifacts": [
+      {
+        "id": "ed5a98ee-834d-56f9-8825-a8573d29398e",
+        "sha256": "a0c00449a809ff1e67c2b3e3ef48e4eacaa6652f67bd65ab6bbdbe46b948188a",
+        "bytes": 399,
+        "retrieval_hash_verified": true,
+        "anonymous_read_denied": true,
+        "provenance": {
+          "kind": "original-network-configuration",
+          "transformation": "none; original owner configuration text"
+        }
+      }
+    ],
+    "model_attempts": [
+      {
+        "id": "f76a3d79-ecaa-4033-ab91-6b02855f6a60",
+        "packet_id": "a2bb92aa-45c4-5619-9778-4a0b9952d240",
+        "task": "planning",
+        "status": "complete",
+        "prompt_version_id": "3da220d0-cde0-5ab5-b8cd-ccbd23ece025",
+        "model_id": "us.anthropic.claude-sonnet-4-6",
+        "response_sha256": "3d9cd6674426d4f43420642e9af850e9a0eab3f35a2594aae093f6138b8eeedd",
+        "usage": {
+          "tokens": {
+            "inputTokens": 6416,
+            "totalTokens": 6799,
+            "outputTokens": 383,
+            "cacheReadInputTokens": 0,
+            "cacheWriteInputTokens": 0
+          },
+          "cost_basis": "Provider usage retained when available; billing and orchestration charges unallocated, not zero.",
+          "wall_seconds": 5.1154887590000016,
+          "measured_charges_usd": null,
+          "estimated_model_cost_usd": null
+        },
+        "created_at": "2026-10-18T03:13:16.557323+00:00",
+        "ended_at": "2026-10-18T03:13:21.788265+00:00"
+      },
+      {
+        "id": "6930f0f9-0dc7-4e4d-9ca4-9d81f10fa83f",
+        "packet_id": "15e898f0-4f21-454b-86ae-b6399526ae76",
+        "task": "planning",
+        "status": "complete",
+        "prompt_version_id": "3da220d0-cde0-5ab5-b8cd-ccbd23ece025",
+        "model_id": "us.anthropic.claude-sonnet-4-6",
+        "response_sha256": "daaf1f7edc6562ed2cd4e6c72b20728ed94ba329ae1c013e6bc15e9fd2159d79",
+        "usage": {
+          "tokens": {
+            "inputTokens": 9205,
+            "totalTokens": 9312,
+            "outputTokens": 107,
+            "cacheReadInputTokens": 0,
+            "cacheWriteInputTokens": 0
+          },
+          "cost_basis": "Provider usage retained when available; billing and orchestration charges unallocated, not zero.",
+          "wall_seconds": 1.3856380059999935,
+          "measured_charges_usd": null,
+          "estimated_model_cost_usd": null
+        },
+        "created_at": "2026-10-18T03:26:22.009773+00:00",
+        "ended_at": "2026-10-18T03:26:23.594442+00:00"
+      },
+      {
+        "id": "20ac65a7-002d-49df-aa3b-89d9462c7f7b",
+        "packet_id": "15e898f0-4f21-454b-86ae-b6399526ae76",
+        "task": "comprehension",
+        "status": "complete",
+        "prompt_version_id": "3da220d0-cde0-5ab5-b8cd-ccbd23ece025",
+        "model_id": "us.anthropic.claude-sonnet-4-6",
+        "response_sha256": "15779815437aa903db3f668abac1fb6f0a0e20c16ab6c429d1c1834313d20ed1",
+        "usage": {
+          "tokens": {
+            "inputTokens": 4716,
+            "totalTokens": 4833,
+            "outputTokens": 117,
+            "cacheReadInputTokens": 0,
+            "cacheWriteInputTokens": 0
+          },
+          "cost_basis": "Provider usage retained when available; billing and orchestration charges unallocated, not zero.",
+          "wall_seconds": 1.5217829890000019,
+          "measured_charges_usd": null,
+          "estimated_model_cost_usd": null
+        },
+        "created_at": "2026-10-18T03:43:00.86635+00:00",
+        "ended_at": "2026-10-18T03:43:02.510333+00:00"
+      },
+      {
+        "id": "6d7e9741-0d8f-4d31-baa4-6c0c92f172f0",
+        "packet_id": "15e898f0-4f21-454b-86ae-b6399526ae76",
+        "task": "critic",
+        "status": "complete",
+        "prompt_version_id": "3da220d0-cde0-5ab5-b8cd-ccbd23ece025",
+        "model_id": "us.anthropic.claude-sonnet-4-6",
+        "response_sha256": "70510d579cce245f444941d770b2da31fec96cddb5f8008c6b1746019228043e",
+        "usage": {
+          "tokens": {
+            "inputTokens": 4714,
+            "totalTokens": 4858,
+            "outputTokens": 144,
+            "cacheReadInputTokens": 0,
+            "cacheWriteInputTokens": 0
+          },
+          "cost_basis": "Provider usage retained when available; billing and orchestration charges unallocated, not zero.",
+          "wall_seconds": 1.857711217000002,
+          "measured_charges_usd": null,
+          "estimated_model_cost_usd": null
+        },
+        "created_at": "2026-10-18T03:43:10.642157+00:00",
+        "ended_at": "2026-10-18T03:43:12.593968+00:00"
+      }
+    ],
+    "model_input_tokens": 25051,
+    "model_output_tokens": 751,
+    "review_outcomes": [
+      {
+        "id": "20ac65a7-002d-49df-aa3b-89d9462c7f7b",
+        "task": "comprehension",
+        "output": {
+          "summary": "AI review found no blocking issues within the recorded plan's declared scope. Source declarations below are copied by the server from this exact saved packet, not paraphrased by the model. Issue classifications remain AI judgments; scientific validity and execution approval are separate.",
+          "verdict": "ready",
+          "findings": [
+            {
+              "field": "conditions",
+              "message": "AI notes a scope or evidence limitation in these declarations; assess it within the stated experimental scope. Recorded fields: /conditions, /protocol/coverage_limits, /limitations.",
+              "severity": "warning"
+            },
+            {
+              "field": "prior_exposure",
+              "message": "AI notes a scope or evidence limitation in these declarations; assess it within the stated experimental scope. Recorded fields: /protocol/prior_exposure, /protocol/replication_unit, /protocol/dependence.",
+              "severity": "warning"
+            },
+            {
+              "field": "resource_limits",
+              "message": "AI notes a scope or evidence limitation in these declarations; assess it within the stated experimental scope. Recorded fields: /protocol/resource_limits, /inputs.",
+              "severity": "warning"
+            }
+          ],
+          "questions": []
+        }
+      },
+      {
+        "id": "6d7e9741-0d8f-4d31-baa4-6c0c92f172f0",
+        "task": "critic",
+        "output": {
+          "summary": "AI review flagged issues in the cited plan fields. Source declarations below are copied by the server from this exact saved packet, not paraphrased by the model. Issue classifications remain AI judgments; scientific validity and execution approval are separate.",
+          "verdict": "needs-clarification",
+          "findings": [
+            {
+              "field": "conditions",
+              "message": "Required experiment inputs need clarification. Recorded fields: /conditions, /inputs, /protocol/configurations.",
+              "severity": "blocking"
+            },
+            {
+              "field": "limitations",
+              "message": "AI notes a scope or evidence limitation in these declarations; assess it within the stated experimental scope. Recorded fields: /limitations, /protocol/coverage_limits, /alternatives.",
+              "severity": "warning"
+            },
+            {
+              "field": "controls",
+              "message": "AI notes a scope or evidence limitation in these declarations; assess it within the stated experimental scope. Recorded fields: /controls, /protocol/dependence, /protocol/replication_unit.",
+              "severity": "warning"
+            },
+            {
+              "field": "resource_limits",
+              "message": "AI notes a scope or evidence limitation in these declarations; assess it within the stated experimental scope. Recorded fields: /protocol/resource_limits, /protocol/prior_exposure.",
+              "severity": "warning"
+            }
+          ],
+          "questions": [
+            "Which required inputs are available, and how will unavailable inputs be resolved? Recorded fields: /conditions, /inputs, /protocol/configurations."
+          ]
+        }
+      }
+    ]
+  },
+  "scientific_claim_labels_changed": 0,
+  "original_assessment_records_unchanged": true,
+  "execution": "not started; critic required-input finding blocks readiness and freezing",
+  "new_experiment_instances": 0,
+  "measured_charges_usd": null,
+  "estimated_model_cost_usd": null,
+  "unallocated_costs": "Deployment/build, orchestration and storage charges unknown; missing is not zero.",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "remaining_gaps": [
+    "Input clarification and fresh accepted reviews, then actual authenticated readiness/freezing/queue/measurement/termination",
+    "Another legitimate Google user, real-world and custom-package runners"
+  ]
+}

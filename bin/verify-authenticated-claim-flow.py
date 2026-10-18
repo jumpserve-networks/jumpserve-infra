@@ -63,6 +63,7 @@ def main():
                               SSL_CERT_FILE='/etc/ssl/cert.pem')
             result['study_id'] = study
             result['claim_context_sha256'] = contexts[0]['sha256']
+            result['reuse_audits'] = release.admin.query("select action,details from research_audit_events where study_id=" + release.admin.literal(study) + "::uuid and action='claim:reuse-packet' order by id")
             definition = release.admin.query("select pg_get_functiondef('public.research_save_idea_packet(uuid,uuid,uuid,uuid,jsonb,text,text,text)'::regprocedure) definition")[0]['definition']
             (directory / 'save-packet-catalog-definition.sql').write_text(definition)
             result['deployed_duplicate_guard'] = dict(catalog_definition_sha256=sha(definition.encode()),

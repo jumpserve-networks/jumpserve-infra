@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "scope": "Original release receipts and software browser checks, plus explicitly derived operational summary; no credentials or private user history",
+  "files": {
+    "release/20261018T033833186148Z/receipt.json": {
+      "sha256": "042b3bb50f29b411b69e330e73c03babed7501562c87d5709807b4bccfd9e4f5",
+      "bytes": 25873,
+      "source_path": ".test-artifacts/claim-design/release/20261018T033833186148Z/receipt.json",
+      "transformation": "none; original producer bytes"
+    },
+    "release/20261018T033922296847Z/receipt.json": {
+      "sha256": "e7efef26f8bfa0c3cb215f37bd7ca53af5bfd39877d625ed9f6c1d5614171b29",
+      "bytes": 572,
+      "source_path": ".test-artifacts/claim-design/release/20261018T033922296847Z/receipt.json",
+      "transformation": "none; original producer bytes"
+    },
+    "release/20261018T033938843136Z/receipt.json": {
+      "sha256": "5f51417c1618d5b243e83f2d500062695295cc5dcf72dd09dd7801195116814d",
+      "bytes": 11446,
+      "source_path": ".test-artifacts/claim-design/release/20261018T033938843136Z/receipt.json",
+      "transformation": "none; original producer bytes"
+    },
+    "release/20261018T033938843136Z/cdk.log": {
+      "sha256": "4acae39e869303018c6be6a1c8b8e22d3eb4b77134212d154e765b2c9627dcb1",
+      "bytes": 4017,
+      "source_path": ".test-artifacts/claim-design/release/20261018T033938843136Z/cdk.log",
+      "transformation": "none; original producer bytes"
+    },
+    "release/20261018T034022111980Z/receipt.json": {
+      "sha256": "d80260392e7d131c1b771122517375a86b6b78e3f5274e835c23f4d4d3a618ec",
+      "bytes": 10714,
+      "source_path": ".test-artifacts/claim-design/release/20261018T034022111980Z/receipt.json",
+      "transformation": "none; original producer bytes"
+    },
+    "release/20261018T034031097271Z/receipt.json": {
+      "sha256": "e719ad8e413ee42eda6e9582f34446fad821fbda795b58c7223aa336a228241f",
+      "bytes": 17566,
+      "source_path": ".test-artifacts/claim-design/release/20261018T034031097271Z/receipt.json",
+      "transformation": "none; original producer bytes"
+    },
+    "release/20261018T034031097271Z/cdk.log": {
+      "sha256": "a54427790494990f8a9711fcdfefafd695b90d075c090166d2923a448dd98223",
+      "bytes": 6927,
+      "source_path": ".test-artifacts/claim-design/release/20261018T034031097271Z/cdk.log",
+      "transformation": "none; original producer bytes"
+    },
+    "release/20261018T034031097271Z/outputs.json": {
+      "sha256": "bc9d35791d5a4b4f0a2e46bdec9529051339a6e55a63a502eb602f21ac09f47c",
+      "bytes": 614,
+      "source_path": ".test-artifacts/claim-design/release/20261018T034031097271Z/outputs.json",
+      "transformation": "none; original producer bytes"
+    },
+    "release/20261018T034225710201Z/receipt.json": {
+      "sha256": "7f4fb9877c78b42ea20f83bfd378d2126c0151ffd64c987510a84ec31dce63ca",
+      "bytes": 18327,
+      "source_path": ".test-artifacts/claim-design/release/20261018T034225710201Z/receipt.json",
+      "transformation": "none; original producer bytes"
+    },
+    "release/20261018T034230024582Z/receipt.json": {
+      "sha256": "9ae22978d3806232c434f26db0bd0532ebefd434e4942ff15bc90cfc015ec3ca",
+      "bytes": 5772,
+      "source_path": ".test-artifacts/claim-design/release/20261018T034230024582Z/receipt.json",
+      "transformation": "none; original producer bytes"
+    },
+    "release/20261018T034522417148Z/receipt.json": {
+      "sha256": "b95437674a47ea034d59ba9cf49772ae15f45264d017ccb83f1558c50637bf08",
+      "bytes": 5825,
+      "source_path": ".test-artifacts/claim-design/release/20261018T034522417148Z/receipt.json",
+      "transformation": "none; original producer bytes"
+    },
+    "claim-sql.json": {
+      "sha256": "79e7218c54ea83cc296cc1474a0d53b6625f5dd615fa6de687b1c3c3fc2a5b1a",
+      "bytes": 7476,
+      "source_path": ".test-artifacts/research-ideas/database/20261018T033853073113Z/claim-design-validation-report.json",
+      "transformation": "none; original producer bytes"
+    },
+    "idea-sql.json": {
+      "sha256": "6d19c91ed4a9fa1a71c47c38800b2733b9968ee69a04568c58a81743e0368f02",
+      "bytes": 9122,
+      "source_path": ".test-artifacts/research-ideas/database/20261018T033853051523Z/validation-report.json",
+      "transformation": "none; original producer bytes"
+    },
+    "local-browser/1365-dark.png": {
+      "sha256": "641c7d095da29dd21ff359c4278094a335becac5b2ef9e5a0fe1572613fe3f70",
+      "bytes": 155535,
+      "source_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/claim-design/browser/2026-10-18T03-39-03.160Z/1365-dark.png",
+      "transformation": "none; original producer bytes"
+    },
+    "local-browser/1365-light.png": {
+      "sha256": "77796fb4c7dd7f6d20b78ce48593f6a88857f43f00c60a4781b087534dd31936",
+      "bytes": 155175,
+      "source_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/claim-design/browser/2026-10-18T03-39-03.160Z/1365-light.png",
+      "transformation": "none; original producer bytes"
+    },
+    "local-browser/390-dark.png": {
+      "sha256": "95f1152a80c10cb01ef1f0c4f793fb617e981a8106f07bfc10336ca9680323e5",
+      "bytes": 87018,
+      "source_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/claim-design/browser/2026-10-18T03-39-03.160Z/390-dark.png",
+      "transformation": "none; original producer bytes"
+    },
+    "local-browser/390-light.png": {
+      "sha256": "0c0116fd79c1840f57861864804bfd4eefb4159f4440482487f215d8759aa1c4",
+      "bytes": 86716,
+      "source_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/claim-design/browser/2026-10-18T03-39-03.160Z/390-light.png",
+      "transformation": "none; original producer bytes"
+    },
+    "local-browser/validation-report.json": {
+      "sha256": "b832fd6ef7747ace2c24c79db7e3f38b6bb5c5a1fd99986005115d156e5b35ea",
+      "bytes": 3639,
+      "source_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/claim-design/browser/2026-10-18T03-39-03.160Z/validation-report.json",
+      "transformation": "none; original producer bytes"
+    },
+    "production-browser/1365-dark.png": {
+      "sha256": "706d72159406ebb590a217914788f6644f2749362f24ed08fe189679c88f261d",
+      "bytes": 704830,
+      "source_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/claim-design/production/2026-10-18T03-45-17.326Z/1365-dark.png",
+      "transformation": "none; original producer bytes"
+    },
+    "production-browser/1365-light.png": {
+      "sha256": "ff7c9c509a18459ee53e8bd0ae804b7cca29c3eb38d8c523a13819f358a928a2",
+      "bytes": 711389,
+      "source_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/claim-design/production/2026-10-18T03-45-17.326Z/1365-light.png",
+      "transformation": "none; original producer bytes"
+    },
+    "production-browser/390-dark.png": {
+      "sha256": "8f42ec875d0169db2c37547b72b90d90a9361a8f705c5088c5e4d0cf76d10d20",
+      "bytes": 681273,
+      "source_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/claim-design/production/2026-10-18T03-45-17.326Z/390-dark.png",
+      "transformation": "none; original producer bytes"
+    },
+    "production-browser/390-light.png": {
+      "sha256": "20d91e7b8e5b30d5b89470727f9bf28dfa7117a29d46ebe545849fb73f62df94",
+      "bytes": 694382,
+      "source_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/claim-design/production/2026-10-18T03-45-17.326Z/390-light.png",
+      "transformation": "none; original producer bytes"
+    },
+    "production-browser/browser-report.json": {
+      "sha256": "401974cfe34d546b143e58ec58858a6c7728de6781c8b65782529190b09035e0",
+      "bytes": 2324,
+      "source_path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/claim-design/production/2026-10-18T03-45-17.326Z/browser-report.json",
+      "transformation": "none; original producer bytes"
+    },
+    "release-summary.json": {
+      "sha256": "4dde982c53dee9bd61edfdb25138b3d0f05f039b6d214c5b54a4add4572c313a",
+      "bytes": 10707,
+      "transformation": "Derived summary; input paths and original receipts retained separately"
+    }
+  }
+}

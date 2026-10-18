@@ -1,0 +1,12 @@
+{
+  "protocol": "claim-design-production-release-v1",
+  "mode": "diff-api",
+  "status": "failed",
+  "started_at": "2026-10-18T03:39:22.297146+00:00",
+  "authorization": "The current session instruction governs mutation authorization; read-only inspection/diff is not authorization to deploy later changes.",
+  "new_model_calls": 0,
+  "new_experiment_instances": 0,
+  "measured_charges_usd": null,
+  "reason": "Command '['aws', 'sts', 'get-caller-identity', '--profile', 'jumpserve']' returned non-zero exit status 255.",
+  "ended_at": "2026-10-18T03:39:23.676735+00:00"
+}

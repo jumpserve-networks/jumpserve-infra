@@ -1,0 +1,367 @@
+{
+  "protocol": "claim-design-production-release-v1",
+  "mode": "inspect",
+  "status": "complete",
+  "started_at": "2026-10-18T03:38:33.187400+00:00",
+  "authorization": "The current session instruction governs mutation authorization; read-only inspection/diff is not authorization to deploy later changes.",
+  "new_model_calls": 0,
+  "new_experiment_instances": 0,
+  "measured_charges_usd": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "evidence_integrity": [
+    {
+      "folder": "claim-design-validation",
+      "files": 268,
+      "manifest_sha256": "c31bcdbe59e9a4930f5f238fa2b15bf203f9723ffcab92e86b11cd50d07cb42d"
+    },
+    {
+      "folder": "claim-design-correction-validation",
+      "files": 166,
+      "manifest_sha256": "44d461a50203d6e72525791c161f9475a8aeb632d24fb14c0f7c00efe54cf98a"
+    },
+    {
+      "folder": "claim-design-followup-validation",
+      "files": 379,
+      "manifest_sha256": "3193543026e81a2e94e6261d7a8e3421e6bc072c776ae3740a7075721c50488f"
+    }
+  ],
+  "evaluated_report_sha256": "a287305b58544a0b47b1f80bbf22f8440c263506343358c81fc8db3ddff70698",
+  "runtime_manifest": {
+    "version": 16,
+    "source_revision": "4266de647fe4f61658d0ce53a5d976b81507648b",
+    "revision_status": "Uncommitted local correction for unchanged-plan reuse on the recorded backend revision; production activation requires a fresh deployment instruction.",
+    "files": {
+      "api.py": "40db4f299d5ac784294f767b6f2b5a61abbdb6b67796c7a25f83099e81a11fdd",
+      "workflow.py": "03ebd6c328dc8d9428992c44d07c468e4639576853d32b92cb0e801a8727c75d",
+      "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+      "store.py": "843bffaee17258beaa14d55966aa47225658f787c48b1f40c01324b7076c7600",
+      "scheduler.py": "0f7a253fc8bd2db7d6255efe31b7ce19dd2e2e773699f5806fd166f45fcc9714",
+      "worker.py": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
+      "preparation.py": "f23424b4c73974ffda48e356cd19c2d0dd8877beb668d94380e7bb00da5a5f90",
+      "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "ideas.py": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+      "network_spec.py": "884857f8680eb73ae7b8f43de484c3bd59d0f2441b66e117e49a347191a31e7c",
+      "network_execution.py": "9e61b6c4a2d1e16f0c931e9902d824bfd38174108749739655cfae197ffa5577",
+      "network_package.py": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
+      "package_runtime.py": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
+      "gap_queue.py": "90bd0a01a9dc9b25575d6f2ac6b478a34e940829231132585a3eb1c93c7c841a",
+      "claim_design.py": "c79c04b519286d145738cbcc5585203b6199342937e018c712d31550e8132870",
+      "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3"
+    }
+  },
+  "database": {
+    "relations": [
+      {
+        "relname": "research_artifacts",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_assessments",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_audit_events",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_campaigns",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_claim_checks",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_claim_designs",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_claims",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_configurations",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_gaps",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_campaign_links",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_packets",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_readiness",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_runs",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_sessions",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_measurements",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_network_executions",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_prepared_plans",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_protocols",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_publications",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_published_values",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_queue_events",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_queue_jobs",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_reviews",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_runs",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_sources",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_studies",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_study_owners",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_summaries",
+        "relrowsecurity": true
+      }
+    ],
+    "columns": [
+      {
+        "column_name": "id",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "title",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "paper_url",
+        "is_nullable": "YES"
+      },
+      {
+        "column_name": "domain",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "scope",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "origin_module",
+        "is_nullable": "YES"
+      },
+      {
+        "column_name": "created_at",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "study_kind",
+        "is_nullable": "NO"
+      }
+    ],
+    "pointers": [
+      {
+        "module_id": "congestion-control-emulated",
+        "active_version_id": "cabbe18a-cc70-482c-8883-81b515639e42"
+      },
+      {
+        "module_id": "congestion-control-real-world",
+        "active_version_id": "e78456f8-6582-4f69-8b44-d56d2c782352"
+      },
+      {
+        "module_id": "http2-compliance-study",
+        "active_version_id": "caf6bae2-acd3-4ef4-8147-bd8bc39895e2"
+      },
+      {
+        "module_id": "ipv6-dns-study",
+        "active_version_id": "28edfb2a-17f9-47c0-a801-1ca7392c7404"
+      },
+      {
+        "module_id": "leo-emergency-failover",
+        "active_version_id": "ec00a4b6-718c-4e69-9c0f-283b9f251002"
+      },
+      {
+        "module_id": "reliable-sketch-study",
+        "active_version_id": "64c9fbb6-1d38-4844-9167-66faaf05fe14"
+      },
+      {
+        "module_id": "research-claim-design",
+        "active_version_id": "3da220d0-cde0-5ab5-b8cd-ccbd23ece025"
+      },
+      {
+        "module_id": "research-verification",
+        "active_version_id": "ba16759e-ff38-4491-ae21-5766261e710b"
+      }
+    ],
+    "publication_guard": [
+      {
+        "definition": "CREATE OR REPLACE FUNCTION public.publish_agent_prompt(p_version_id uuid, p_expected_active_version_id uuid, p_expected_content_sha256 text, p_report jsonb, p_actor text, p_module_id text DEFAULT 'congestion-control-emulated'::text)\n RETURNS uuid\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare current_id uuid; candidate public.agent_prompt_versions; lineage jsonb='{\"design-networking\": {\"provider_bytes_sha256\": \"bc6559b3802ad3235f551772b6b79863f0da23c73a61be1042f60f5047251409\", \"output_sha256\": \"2178e277bc5558f0003e94d56c22dcd738b22ab095b15fd08db7a0024daa86cd\", \"rendered_output_sha256\": \"9a0d5314bd7cf8318f954f0c70d037dbf1412e3ed2cdfd53808bda84bc9dcf5a\", \"original_status\": \"complete\"}, \"design-missing-data\": {\"provider_bytes_sha256\": \"02bb9df372abe50607011c24b42c2dc0b85c1869cc635396bfb685ecd42ec719\", \"output_sha256\": \"31388aad54a5b102f3b9d7b44dfa8a963ddf02af4afd6c038dfd60c76e49fab4\", \"rendered_output_sha256\": \"e41478f0dd40d7dc428313505f00394bf7a7a6a6d1da490cdd82dbd64876518d\", \"original_status\": \"complete\"}, \"design-equipment\": {\"provider_bytes_sha256\": \"600401c970f980715c0a7c1b2c466e8474b2d2e7454084f5e3cc0d29c7c72abc\", \"output_sha256\": \"3871a48458fb192a5ea329ce54d4a81787895ce2ae12618e62b985bc079deeec\", \"rendered_output_sha256\": \"439b2e053b957060c6aac178d7aa433d80c250de3a38e39584a4e64b0069be47\", \"original_status\": \"complete\"}, \"design-causal\": {\"provider_bytes_sha256\": \"e7a3aea36ac4f2b07cb2a480c2250b23d4bc40184eaf911d4a0d20a4819850b4\", \"output_sha256\": \"6c4d24017521717885926c9065133fd6084b531bc2b97b5a99eb41273f2132a5\", \"rendered_output_sha256\": \"c6f9c9aa7bafdf2fd1192a523924583187f060efc3003e62a11196a980ca7751\", \"original_status\": \"complete\"}, \"design-units\": {\"provider_bytes_sha256\": \"2cde43c104e88778673c83cdf32e98565e8bdd366cefcf052221f35c2ef36178\", \"output_sha256\": \"b1baf9d8f8d58406c23773650b6e88d983c113da995ee1082997ebaa700e868a\", \"rendered_output_sha256\": \"aae8bc33624ce22d188d2b79ef1a7aa01f43810c45870f7f806103d03e584f17\", \"original_status\": \"failed\"}, \"design-injection\": {\"provider_bytes_sha256\": \"0678d3fa8661f7e65381602f9dc0ce1b119e01a9ae8fb25d040bd9865a54b539\", \"output_sha256\": \"50cc526297587bea79f11235c217355eef64799bb287c798c218de10e7d57f72\", \"rendered_output_sha256\": \"c45f2152748ed0293158732a78b592cdea8c38b0f6b06a6f12fde1d3eee5ff50\", \"original_status\": \"complete\"}, \"design-missing-source\": {\"provider_bytes_sha256\": \"3f271f2c5bdf89c68924074bbf3eb040ffed1c1f5324a23b8f77aa1a26af1d74\", \"output_sha256\": \"b142e4217f5b42ebd30e686982ee984da4add5472b2d3ddc9e4635c8d39d822f\", \"rendered_output_sha256\": \"a91a1bf9e07d59bce0ba61e3e7567e7442632d9b611ba4f5e488b89cdf9fc662\", \"original_status\": \"complete\"}, \"design-complete\": {\"provider_bytes_sha256\": \"5d3931b7f786d1066c50194e16d4325a7ca7f2f92ec2237882c2cb4422067f10\", \"output_sha256\": \"022f9ba641b787750c20083601371f7fcbb3abf0902dda1cb83fcd0468a6c3f2\", \"rendered_output_sha256\": \"ba9aa48fdf3477a54ce593bdce3707b7ca145fe4e98b7a9dc877bfa7de53f615\", \"original_status\": \"complete\"}, \"design-correlated\": {\"provider_bytes_sha256\": \"120dfc2ccc49794e0c030f1726c9a06aa6ab1e74cdafe38beb83c9850290887d\", \"output_sha256\": \"4dd8ecf0ebf67e381d37495a6c3e8348262fa424a509db1ed48ecce4dc3c18db\", \"rendered_output_sha256\": \"4e47249fc69175e62c3a826ba7d4951420277388340cda892cac060b4b19f506\", \"original_status\": \"complete\"}, \"design-equivalence\": {\"provider_bytes_sha256\": \"929eff64ec5889912d4b6b24d92a68b755a20714e6fc79312d928c78c918c534\", \"output_sha256\": \"5595fe345a6fb4df0c44a11e99315ee18dc6ac15ac6dfc574947c2d6782d2c70\", \"rendered_output_sha256\": \"18cf98ce461146f9a165ac0553e092658ccd5cb4bf70ef3b972ef571511d7c91\", \"original_status\": \"complete\"}, \"design-null-result\": {\"provider_bytes_sha256\": \"050e9e5a134be51b01196ab80e05352b30dd1fb0bc58ed8030543bcad6895e94\", \"output_sha256\": \"f64559831c42c5e3bfa3fad485da0dabf27d316a712b18cc5a8fe69403419442\", \"rendered_output_sha256\": \"73bbc902dd33b81c634e8f7221e98a90ff143148dff1e4f08f6800ce7d69ef61\", \"original_status\": \"complete\"}, \"design-config-change\": {\"provider_bytes_sha256\": \"b99e81189b86fdae1368b7a07a3bc8fbac0a605b525357e575bfbb9ff005cb35\", \"output_sha256\": \"84df1097eadff65cc3ca5f2c34dd43650e0627f931e8f0d13b48c023fa3950be\", \"rendered_output_sha256\": \"c2f949194aa8f71e83194fbdc4b0363993e92eb1c8cc5d2f07f333ad34d460c6\", \"original_status\": \"complete\"}, \"review-comprehension\": {\"provider_bytes_sha256\": \"0fde19b1b40a5dfaa96d4135dd6bf0414df2887dd6c1a0f93c6108cd4614e7ba\", \"output_sha256\": \"a17dc681027ce2765ac74a86009998b32fbb2457d9c1d5270b1180abdbf8d8cd\", \"rendered_output_sha256\": \"7ae0e30939923cf281c234f4f94b21c7d88282ab06cf0492754ba8fa9d915676\", \"original_status\": \"complete\"}, \"review-complete\": {\"provider_bytes_sha256\": \"cc5e26814078397bc7ed3188f7fe53a1eee6f1ed7ad0cfd82b441b7752fea179\", \"output_sha256\": \"3cd211ad167ed52c9e0fcb254424ebb08cb50ce192838cb205797f1f0dcc7b7c\", \"rendered_output_sha256\": \"7ae0e30939923cf281c234f4f94b21c7d88282ab06cf0492754ba8fa9d915676\", \"original_status\": \"complete\"}, \"review-units\": {\"provider_bytes_sha256\": \"897570dff6efc09b1f34c9ea838266440eb9c1d17e7bc89022166114cbd36a3b\", \"output_sha256\": \"a8b5cbee7cbb55997a296f7521251d68a101ee354cf4d44fa3308c6fc32174bd\", \"rendered_output_sha256\": \"835cbd98a72e0b0ec7146e49942e55598bdc058903de7a98e3c522655bab59a8\", \"original_status\": \"complete\"}, \"review-injection\": {\"provider_bytes_sha256\": \"dc95068fd056c5a39652b54657955581b2db4bf7f99a26438af89ebacd1e7820\", \"output_sha256\": \"806b3b10bf0cdd297555b8f2e7be37884f3f5da5f7d8427f13709b1ca4ee4023\", \"rendered_output_sha256\": \"e95c1ded7ca057dc2281a38762bec97887cff98f9785aeb162e2d33b7e6657e1\", \"original_status\": \"complete\"}, \"design-known-placement\": {\"provider_bytes_sha256\": \"d4bf295353f669bb568d703647a4eb7a97cce2c4e2fea41d1406cb3ba2bdb2a1\", \"output_sha256\": \"1e9a72a285d017c6446a136ad38e7564157fde60b277b69738ea808548405e56\", \"rendered_output_sha256\": \"88838ad3b97785955e6e5ea36eb3b5e4b2e6daee8b069e7e99851530b943bb33\", \"original_status\": \"complete\"}, \"design-equivalent-units\": {\"provider_bytes_sha256\": \"45896a106580c2f8651ac9a52aa041a84ac5a923c7aa50c2b09cf15b2a6dc1b6\", \"output_sha256\": \"ca4e2ef9f4e31f5cb8b6f6b58822730e2fbad263b66c3b90421ffd8a6e0762ab\", \"rendered_output_sha256\": \"bab68a92f571965ceea671856a9454a587c5b81c6aaaf28e5aa603daee7546ab\", \"original_status\": \"complete\"}, \"design-optical-proxy\": {\"provider_bytes_sha256\": \"cc1787972de6cc0ca92b47f20fc91d0a6761f6711bae4fe142e49fac0dc2ff2a\", \"output_sha256\": \"4638de29dfa55d862196b8b785950e72436aaba479a6e2da2af763f75aa2169e\", \"rendered_output_sha256\": \"95715ca5e470d2351430bb5e59292fd34e3f2e1bec5a28ad14c43afe35c0bbb9\", \"original_status\": \"complete\"}, \"design-owner-supplied-plan\": {\"provider_bytes_sha256\": \"df040e9429cd182bb5547bce84400031eb601c46e9c7a3ab545b59be91364a64\", \"output_sha256\": \"c9c6f11b863ac16d5dbcdb7703fbd5545ab443508020eacec5135376fd8e5079\", \"rendered_output_sha256\": \"ec85d669a8a679cfa3fa91b736e23f48d1c8b59bfb822af31edee314a0c635eb\", \"original_status\": \"complete\"}}'::jsonb; required text[]=array['design-networking','design-missing-data','design-equipment','design-causal','design-units','design-injection','design-missing-source','design-complete','design-correlated','design-equivalence','design-null-result','design-config-change','review-comprehension','review-complete','review-units','review-injection','design-known-placement','design-equivalent-units','design-optical-proxy','design-owner-supplied-plan']; begin\n select * into candidate from public.agent_prompt_versions where id=p_version_id;\n if p_module_id<>'research-claim-design' or candidate.version is distinct from 'research-claim-design-v6' then\n  return public.publish_agent_prompt_before_claim_v6_exact(p_version_id,p_expected_active_version_id,p_expected_content_sha256,p_report,p_actor,p_module_id);\n end if;\n select active_version_id into current_id from public.agent_prompt_settings where module_id=p_module_id for update;\n if not found or current_id is distinct from p_expected_active_version_id then raise exception 'Prompt pointer changed'; end if;\n select * into strict candidate from public.agent_prompt_versions where id=p_version_id for update;\n if candidate.module_id<>p_module_id or candidate.content_sha256<>p_expected_content_sha256 or p_report->>'prompt_content_sha256' is distinct from candidate.content_sha256\n  or p_report->>'prompt_version_id' is distinct from candidate.id::text or p_report->>'prompt_version' is distinct from candidate.version\n  or p_report->>'module_id' is distinct from p_module_id or p_report->>'analysis_version' is distinct from 'claim-experiment-design-v1'\n  or p_report->>'protocol' is distinct from 'claim-experiment-design-v3-parser-followup'\n  or p_report->>'evaluation_kind' is distinct from 'archived-model-output-replay'\n  or p_report->>'parent_report_sha256' is distinct from 'e1baab211a09473c95aeb492f726fecfcec780345cdb1aee2b266c072e37642b'\n  or p_report->>'parent_protocol' is distinct from 'claim-experiment-design-protocol-v3'\n  or p_report->>'request_manifest_sha256' is distinct from 'c60ca35f95d010d14fba1d85342fba03ef752f757deaf0bb347bef0b3a2aba0a'\n  or p_report->>'provider_manifest_sha256' is distinct from '5af1b4b216ab2354fa65d99f51eff194b43585c3009da9fcae2ef97180b56d26'\n  or p_report->>'model_id' is distinct from 'us.anthropic.claude-sonnet-4-6'\n  or p_report->>'model_region' is distinct from 'us-east-1'\n  or p_report->'model_request_inputs_unchanged' is distinct from 'true'::jsonb\n  or p_report->'new_provider_calls' is distinct from '0'::jsonb\n  or p_report->>'response_version' is distinct from 'claim-design-response-v3'\n  or p_report->>'runner_context_sha256' is distinct from '605ce067fe4892eb651f4bed153bdef8afd7d7b8785c6c6fb9a03aa7025cd19a'\n  or p_report->>'response_channel_sha256' is distinct from 'a782b93f16b475fde4fed150f5e1060b109b8a880370fd755c85c998ca464929'\n  or p_report->'input_sha256'->>'agent/claim_experiment_design.py' is distinct from 'a1b6c0c255f1f71c114300fcf57b6bae1f415895383de18f046923d376625731'\n  or p_report->'input_sha256'->>'agent/research_ideas.py' is distinct from '496565d423e8af7df19826e08057232e0972b5b22960517bed03427e5c540b4b'\n  or p_report->'decision_policy' is distinct from '{\"version\": \"claim-decision-policy-v1\", \"sha256\": \"15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3\", \"mode\": \"descriptive-only\"}'::jsonb\n  or p_report->>'cases_sha256' is distinct from 'dc3e804671d82d836d3c9547deb80021e15da9c9fb141a38139a8bf3346988af'\n  or coalesce(btrim(p_report->>'model_id'),'')='' or coalesce(btrim(p_actor),'')='' then\n  raise exception 'Corrective campaign exact provenance required'; end if;\n if jsonb_typeof(p_report->'cases') is distinct from 'array' then raise exception 'Evaluation cases required'; end if;\n if jsonb_array_length(p_report->'cases')<>cardinality(required) or exists(select 1 from unnest(required) name where\n  (select count(*) from jsonb_array_elements(p_report->'cases') c where c->>'name'=name and c->'passed'='true'::jsonb and c->>'status'='complete' and c->>'output_sha256' ~ '^[a-f0-9]{64}$' and c->'raw_answer_reviewed'='true'::jsonb and c->'rendered_answer_reviewed'='true'::jsonb and c->>'rendered_output_sha256'=lineage->name->>'rendered_output_sha256' and c->>'provider_bytes_sha256'=lineage->name->>'provider_bytes_sha256' and c->>'output_sha256'=lineage->name->>'output_sha256' and c->>'original_status'=lineage->name->>'original_status')<>1) then raise exception 'All twenty raw and rendered answer reviews must pass'; end if;\n if exists(select 1 from (values(p_report->'evaluator'),(p_report->'reviewer')) a(person) where\n  coalesce(person->>'type','') not in ('human','AI') or coalesce(btrim(person->>'identity'),'')='' or jsonb_typeof(person->'independent') is distinct from 'boolean')\n  or p_report->'reviewer'->'passed' is distinct from 'true'::jsonb then raise exception 'Explicit evaluator/reviewer identity and independence required'; end if;\n if candidate.published_at is null then update public.agent_prompt_versions set published_at=clock_timestamp(),updated_by=p_actor where id=p_version_id; end if;\n insert into public.agent_prompt_publications(prompt_version_id,previous_version_id,published_by,evaluation_report) values(p_version_id,current_id,p_actor,p_report);\n update public.agent_prompt_settings set active_version_id=p_version_id,updated_at=clock_timestamp() where module_id=p_module_id;\n return p_version_id;\nend $function$\n"
+      }
+    ],
+    "scientific_counts": [
+      {
+        "relation": "research_measurements",
+        "count": 7144
+      },
+      {
+        "relation": "research_published_values",
+        "count": 5093
+      },
+      {
+        "relation": "research_assessments",
+        "count": 102
+      }
+    ]
+  },
+  "agent": {
+    "function": "JumpServeAgentStack-AgentFnC1FD126F-MG2xfZrwsBNg",
+    "runtime": "python3.12",
+    "memory_mb": 1024,
+    "timeout_seconds": 120,
+    "zip_sha256": "4d0294c8979e3c6d1ec38abd4dceb19ad9a949b47afff985f64dea24e493ed4a",
+    "bytes": 14318334,
+    "source_hashes": {
+      "handler.py": "ffc1596927d8d53ff860272385786ea302d7684a2b346b2f22b1e69957f1dcf7",
+      "modules.py": "d4ca0102b7151c4925b880ddb97895f0cb9e485023c60264dd57fa319a4d5a4c",
+      "research_ideas.py": "496565d423e8af7df19826e08057232e0972b5b22960517bed03427e5c540b4b",
+      "claim_experiment_design.py": "a1b6c0c255f1f71c114300fcf57b6bae1f415895383de18f046923d376625731",
+      "claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3"
+    },
+    "layers": [
+      {
+        "Arn": "arn:aws:lambda:us-east-1:395567831870:layer:AgentDepsLayer51FBE89A:54",
+        "CodeSize": 19284158
+      }
+    ],
+    "last_modified": "2026-10-18T02:47:49.000+0000"
+  },
+  "api_originals": [
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+      "handler": "api.handler",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+      "sha256": "82e5c5e1e8a98f908b1abb81d5bc1165583aaf4405c1cdf41f015a1f3764f628",
+      "source_files": null,
+      "memory_mb": 512,
+      "timeout_seconds": 29,
+      "last_modified": "2026-10-18T02:46:27.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt",
+      "handler": "network_package.handler",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt",
+      "sha256": "82e5c5e1e8a98f908b1abb81d5bc1165583aaf4405c1cdf41f015a1f3764f628",
+      "source_files": null,
+      "memory_mb": 512,
+      "timeout_seconds": 60,
+      "last_modified": "2026-10-18T02:46:08.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowPackageIng-kAAtKeB693oF",
+      "handler": "network_package.ingest",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowPackageIng-kAAtKeB693oF",
+      "sha256": "82e5c5e1e8a98f908b1abb81d5bc1165583aaf4405c1cdf41f015a1f3764f628",
+      "source_files": null,
+      "memory_mb": 512,
+      "timeout_seconds": 29,
+      "last_modified": "2026-10-18T02:46:07.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowPackageRea-Vy8KadbHwEL9",
+      "handler": "network_package.reap",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowPackageRea-Vy8KadbHwEL9",
+      "sha256": "82e5c5e1e8a98f908b1abb81d5bc1165583aaf4405c1cdf41f015a1f3764f628",
+      "source_files": null,
+      "memory_mb": 256,
+      "timeout_seconds": 120,
+      "last_modified": "2026-10-18T02:46:08.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+      "handler": "worker.handler",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+      "sha256": "82e5c5e1e8a98f908b1abb81d5bc1165583aaf4405c1cdf41f015a1f3764f628",
+      "source_files": null,
+      "memory_mb": 512,
+      "timeout_seconds": 180,
+      "last_modified": "2026-10-18T02:46:18.000+0000"
+    }
+  ],
+  "frontend": [
+    {
+      "jobArn": "arn:aws:amplify:us-east-1:395567831870:apps/d24jvguj7brnkj/branches/main/jobs/0000000114",
+      "jobId": "114",
+      "commitId": "bda33aaefc529b84f6935ce954fbe887ef2386ae",
+      "commitMessage": "Add bounded read-only production checks for the claim designer\n\nVerify deployed claim entry links, exact sign-in return paths, malformed IDs, desktop/mobile light and dark layouts, public exports, missing-study states and navigation. Reject accidental browser mutations and make no model calls or experiment submissions. Retain screenshots, failures and explicit authenticated-path verification gaps separately from scientific evidence.",
+      "commitTime": "2026-10-17T21:47:03-05:00",
+      "startTime": "2026-10-17T21:50:19.160000-05:00",
+      "status": "SUCCEED",
+      "endTime": "2026-10-17T21:52:48.934000-05:00"
+    },
+    {
+      "jobArn": "arn:aws:amplify:us-east-1:395567831870:apps/d24jvguj7brnkj/branches/main/jobs/0000000113",
+      "jobId": "113",
+      "commitId": "38c149b0d1e92e7efebd4044a699902b042069ac",
+      "commitMessage": "User-authorized release follow-up: prevent lost mobile menu clicks during hydration; controlled checks passed",
+      "commitTime": "2026-10-17T16:47:55.709000-05:00",
+      "startTime": "2026-10-17T16:47:55.995000-05:00",
+      "status": "SUCCEED",
+      "endTime": "2026-10-17T16:50:32.297000-05:00"
+    },
+    {
+      "jobArn": "arn:aws:amplify:us-east-1:395567831870:apps/d24jvguj7brnkj/branches/main/jobs/0000000112",
+      "jobId": "112",
+      "commitId": "9d38933a4962a0228fd987ef3014cd89bbd7fe2f",
+      "commitMessage": "User-authorized research pathways and queue release; matching backend deployed and verified",
+      "commitTime": "2026-10-17T16:40:26.158000-05:00",
+      "startTime": "2026-10-17T16:40:26.439000-05:00",
+      "status": "SUCCEED",
+      "endTime": "2026-10-17T16:42:58.520000-05:00"
+    }
+  ],
+  "ended_at": "2026-10-18T03:38:48.487205+00:00"
+}

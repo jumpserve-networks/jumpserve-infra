@@ -158,9 +158,12 @@ def agent_archive(directory, expected=False):
                 layers=config.get('Layers', []), last_modified=config['LastModified'])
 
 
-def archive_evidence(directory, release=False):
+def archive_evidence(directory, release=False, reuse=False):
     entries = []
-    if release:
+    if reuse:
+        entries.extend(p for p in sorted((ROOT / 'docs/claim-packet-reuse-release-evidence-v1').rglob('*')) if p.is_file())
+        entries += [ROOT / 'docs' / name for name in ('claim-packet-reuse-release-protocol-v1.md', 'claim-packet-reuse-production-release-v1.md', 'claim-design-authenticated-verification-protocol-v1.md', 'claim-design-authenticated-verification-v1.md', 'claim-design-authenticated-verification-v1.json')]
+    elif release:
         entries.extend(p for p in sorted((ROOT / 'docs/claim-design-production-release-evidence').rglob('*')) if p.is_file())
         entries += [ROOT / 'docs/claim-design-production-release-v1.md']
     else:
@@ -182,7 +185,7 @@ def archive_evidence(directory, release=False):
     raw = buffer.getvalue()
     if len(raw) > 32_000_000:
         raise RuntimeError('Declared storage budget exceeded')
-    (directory / ('release-originals.zip' if release else 'evaluation-originals.zip')).write_bytes(raw)
+    (directory / ('reuse-release-originals.zip' if reuse else 'release-originals.zip' if release else 'evaluation-originals.zip')).write_bytes(raw)
     key = aws('secretsmanager', 'get-secret-value', '--secret-id', 'jumpserve/supabase-service-key')['SecretString']
     path = 'release-verification/claim-design-20261018/' + sha(raw) + '.zip'
     url = 'https://regphejnlvfpyokpniny.supabase.co/storage/v1/object/research-workflow-raw/' + path
@@ -208,7 +211,7 @@ def archive_evidence(directory, release=False):
     if status not in (400, 401, 403, 404):
         raise RuntimeError('Private evidence anonymous access is not denied')
     return dict(bucket='research-workflow-raw', path=path, sha256=sha(raw), bytes=len(raw), files=len(manifest),
-                kind='release-receipts' if release else 'evaluation-originals',
+                kind='claim-packet-reuse-release-receipts' if reuse else 'release-receipts' if release else 'evaluation-originals',
                 retrieved_hash_verified=True, anonymous_status=status, measured_storage_charges_usd=None)
 
 
@@ -228,7 +231,7 @@ def deny(endpoint, payload=None):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('mode', choices=('inspect', 'migrate', 'migrate-reuse', 'diff-api', 'deploy-api', 'diff-agent', 'deploy-agent', 'publish', 'verify', 'frontend-release', 'frontend-status', 'archive-release'))
+    parser.add_argument('mode', choices=('inspect', 'migrate', 'migrate-reuse', 'diff-api', 'deploy-api', 'diff-agent', 'deploy-agent', 'publish', 'verify', 'frontend-release', 'frontend-status', 'archive-release', 'archive-reuse'))
     args = parser.parse_args()
     directory = ROOT / '.test-artifacts/claim-design/release' / dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
     directory.mkdir(parents=True, exist_ok=False)
@@ -372,6 +375,10 @@ def main():
             if active()[0]['active_version_id'] != CANDIDATE:
                 raise RuntimeError('Expected published candidate before archiving release receipts')
             receipt['private_release_originals'] = archive_evidence(directory, release=True)
+        elif args.mode == 'archive-reuse':
+            if active()[0]['active_version_id'] != CANDIDATE:
+                raise RuntimeError('Expected unchanged published candidate before archiving reuse release receipts')
+            receipt['private_release_originals'] = archive_evidence(directory, reuse=True)
         receipt['status'] = 'complete'
     except Exception as error:
         receipt.update(status='failed', reason=str(error))
