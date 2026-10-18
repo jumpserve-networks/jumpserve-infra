@@ -56,6 +56,12 @@ def sha(raw):
     return hashlib.sha256(raw).hexdigest()
 
 
+def archive_directory(directory, name):
+    destination = directory / name
+    destination.mkdir(exist_ok=False)
+    return destination
+
+
 def aws(*args):
     return queue.aws(*args)
 
@@ -152,11 +158,15 @@ def agent_archive(directory, expected=False):
                 layers=config.get('Layers', []), last_modified=config['LastModified'])
 
 
-def archive_evidence(directory):
+def archive_evidence(directory, release=False):
     entries = []
-    for folder in ('claim-design-validation', 'claim-design-correction-validation', 'claim-design-followup-validation'):
-        entries.extend(p for p in sorted((ROOT / 'docs' / folder).rglob('*')) if p.is_file())
-    entries += sorted((ROOT / 'docs').glob('claim-experiment-design*.md'))
+    if release:
+        entries.extend(p for p in sorted((ROOT / 'docs/claim-design-production-release-evidence').rglob('*')) if p.is_file())
+        entries += [ROOT / 'docs/claim-design-production-release-v1.md']
+    else:
+        for folder in ('claim-design-validation', 'claim-design-correction-validation', 'claim-design-followup-validation'):
+            entries.extend(p for p in sorted((ROOT / 'docs' / folder).rglob('*')) if p.is_file())
+        entries += sorted((ROOT / 'docs').glob('claim-experiment-design*.md'))
     entries += [ROOT / 'docs/claim-design-release-protocol-v1.md']
     manifest = []
     buffer = io.BytesIO()
@@ -172,7 +182,7 @@ def archive_evidence(directory):
     raw = buffer.getvalue()
     if len(raw) > 32_000_000:
         raise RuntimeError('Declared storage budget exceeded')
-    (directory / 'evaluation-originals.zip').write_bytes(raw)
+    (directory / ('release-originals.zip' if release else 'evaluation-originals.zip')).write_bytes(raw)
     key = aws('secretsmanager', 'get-secret-value', '--secret-id', 'jumpserve/supabase-service-key')['SecretString']
     path = 'release-verification/claim-design-20261018/' + sha(raw) + '.zip'
     url = 'https://regphejnlvfpyokpniny.supabase.co/storage/v1/object/research-workflow-raw/' + path
@@ -198,6 +208,7 @@ def archive_evidence(directory):
     if status not in (400, 401, 403, 404):
         raise RuntimeError('Private evidence anonymous access is not denied')
     return dict(bucket='research-workflow-raw', path=path, sha256=sha(raw), bytes=len(raw), files=len(manifest),
+                kind='release-receipts' if release else 'evaluation-originals',
                 retrieved_hash_verified=True, anonymous_status=status, measured_storage_charges_usd=None)
 
 
@@ -212,12 +223,12 @@ def deny(endpoint, payload=None):
         status = error.code
     if status not in (401, 403):
         raise RuntimeError('Private/model anonymous request not denied: ' + str(status))
-    return dict(endpoint=endpoint, method=request.method, status=status)
+    return dict(endpoint=endpoint, method=request.get_method(), status=status)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('mode', choices=('inspect', 'migrate', 'diff-api', 'deploy-api', 'diff-agent', 'deploy-agent', 'publish', 'verify', 'frontend-release', 'frontend-status'))
+    parser.add_argument('mode', choices=('inspect', 'migrate', 'diff-api', 'deploy-api', 'diff-agent', 'deploy-agent', 'publish', 'verify', 'frontend-release', 'frontend-status', 'archive-release'))
     args = parser.parse_args()
     directory = ROOT / '.test-artifacts/claim-design/release' / dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
     directory.mkdir(parents=True, exist_ok=False)
@@ -266,9 +277,9 @@ def main():
                 if manifest['source_revision'] != subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=BACKEND, text=True).strip() or subprocess.check_output(['git', 'status', '--porcelain'], cwd=BACKEND, text=True).strip():
                     raise RuntimeError('Release must pin a clean committed backend')
                 if kind == 'api':
-                    receipt['previous_api'], _ = queue.archives(directory)
+                    receipt['previous_api'], _ = queue.archives(archive_directory(directory, 'before-api'))
                 else:
-                    receipt['previous_agent'] = agent_archive(directory)
+                    receipt['previous_agent'] = agent_archive(archive_directory(directory, 'before-agent'))
             credentials = aws('configure', 'export-credentials', '--format', 'process')
             env = dict(os.environ, AWS_ACCESS_KEY_ID=credentials['AccessKeyId'], AWS_SECRET_ACCESS_KEY=credentials['SecretAccessKey'],
                        AWS_SESSION_TOKEN=credentials['SessionToken'], AWS_DEFAULT_REGION='us-east-1')
@@ -290,9 +301,9 @@ def main():
                 if receipt['before_stack'] != after['Parameters']:
                     raise RuntimeError('Existing stack parameters changed')
                 if kind == 'api':
-                    receipt['api'], _ = queue.archives(directory, manifest)
+                    receipt['api'], _ = queue.archives(archive_directory(directory, 'after-api'), manifest)
                 else:
-                    receipt['agent'] = agent_archive(directory, expected=True)
+                    receipt['agent'] = agent_archive(archive_directory(directory, 'after-agent'), expected=True)
         elif args.mode == 'publish':
             receipt['security'] = security()
             receipt['agent'] = agent_archive(directory, expected=True)
@@ -325,6 +336,8 @@ def main():
                 raise RuntimeError('Claim design capability differs')
             study = '00000000-0000-4000-8000-000000000001'
             receipt['anonymous_denials'] = [deny(API + '/studies/' + study + '/idea'),
+                deny(API + '/studies/' + study + '/claim-design'),
+                deny(API + '/studies/' + study + '/claim-design', dict(action='adopt')),
                 deny(API + '/studies/' + study + '/gap-experiments', dict(action='design')),
                 deny(AGENT, dict(action='idea', design_version='claim-experiment-design-v1')),
                 deny(AGENT, dict(action='capabilities'))]
@@ -337,6 +350,10 @@ def main():
         elif args.mode == 'frontend-status':
             jobs = aws('amplify', 'list-jobs', '--app-id', 'd24jvguj7brnkj', '--branch-name', 'main', '--max-results', '3')['jobSummaries']
             receipt['jobs'] = jobs
+        elif args.mode == 'archive-release':
+            if active()[0]['active_version_id'] != CANDIDATE:
+                raise RuntimeError('Expected published candidate before archiving release receipts')
+            receipt['private_release_originals'] = archive_evidence(directory, release=True)
         receipt['status'] = 'complete'
     except Exception as error:
         receipt.update(status='failed', reason=str(error))

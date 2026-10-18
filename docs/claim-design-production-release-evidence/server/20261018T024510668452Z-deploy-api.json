@@ -1,0 +1,496 @@
+{
+  "protocol": "claim-design-production-release-v1",
+  "mode": "deploy-api",
+  "status": "complete",
+  "started_at": "2026-10-18T02:45:10.668696+00:00",
+  "authorization": "User explicitly requested merging all current changes to main and production deployment.",
+  "new_model_calls": 0,
+  "new_experiment_instances": 0,
+  "measured_charges_usd": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "evidence_integrity": [
+    {
+      "folder": "claim-design-validation",
+      "files": 268,
+      "manifest_sha256": "c31bcdbe59e9a4930f5f238fa2b15bf203f9723ffcab92e86b11cd50d07cb42d"
+    },
+    {
+      "folder": "claim-design-correction-validation",
+      "files": 166,
+      "manifest_sha256": "44d461a50203d6e72525791c161f9475a8aeb632d24fb14c0f7c00efe54cf98a"
+    },
+    {
+      "folder": "claim-design-followup-validation",
+      "files": 379,
+      "manifest_sha256": "3193543026e81a2e94e6261d7a8e3421e6bc072c776ae3740a7075721c50488f"
+    }
+  ],
+  "evaluated_report_sha256": "a287305b58544a0b47b1f80bbf22f8440c263506343358c81fc8db3ddff70698",
+  "runtime_manifest": {
+    "version": 15,
+    "source_revision": "4266de647fe4f61658d0ce53a5d976b81507648b",
+    "revision_status": "Exact committed backend revision for the user-authorized claim designer production release; deployment receipts record activation separately.",
+    "files": {
+      "api.py": "40db4f299d5ac784294f767b6f2b5a61abbdb6b67796c7a25f83099e81a11fdd",
+      "workflow.py": "03ebd6c328dc8d9428992c44d07c468e4639576853d32b92cb0e801a8727c75d",
+      "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+      "store.py": "82a8f27c6456d27414eb0b8ff58806563ad360f3a18b629cac9b048a5b0cf842",
+      "scheduler.py": "0f7a253fc8bd2db7d6255efe31b7ce19dd2e2e773699f5806fd166f45fcc9714",
+      "worker.py": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
+      "preparation.py": "f23424b4c73974ffda48e356cd19c2d0dd8877beb668d94380e7bb00da5a5f90",
+      "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "ideas.py": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+      "network_spec.py": "884857f8680eb73ae7b8f43de484c3bd59d0f2441b66e117e49a347191a31e7c",
+      "network_execution.py": "9e61b6c4a2d1e16f0c931e9902d824bfd38174108749739655cfae197ffa5577",
+      "network_package.py": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
+      "package_runtime.py": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
+      "gap_queue.py": "90bd0a01a9dc9b25575d6f2ac6b478a34e940829231132585a3eb1c93c7c841a",
+      "claim_design.py": "09052615a7e5ba2db0e43eff0b641cb529fa7525770d0da3c6b8eb0888f72522",
+      "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3"
+    }
+  },
+  "security": {
+    "relations": [
+      {
+        "relname": "research_artifacts",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_assessments",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_audit_events",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_campaigns",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_claim_checks",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_claim_designs",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_claims",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_configurations",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_gaps",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_idea_campaign_links",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_idea_packets",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_idea_readiness",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_idea_runs",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_idea_sessions",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_measurements",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_network_executions",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_prepared_plans",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_protocols",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_publications",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_published_values",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_queue_events",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_queue_jobs",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_reviews",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_runs",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_sources",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_studies",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_study_owners",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_summaries",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      }
+    ],
+    "functions": [
+      {
+        "proname": "research_prepare_plan",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_queue_action",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_queue_claim",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_queue_enqueue",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_queue_finish",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_queue_snapshot",
+        "anon_execute": false,
+        "browser_execute": false
+      }
+    ],
+    "private_bucket": true,
+    "original_migration_bytes_verified": false,
+    "limitation": "Read-only catalog verification does not recover originally executed SQL.",
+    "claim_functions": [
+      {
+        "proname": "publish_agent_prompt",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_initialize_claim_design",
+        "anon_execute": false,
+        "browser_execute": false
+      }
+    ],
+    "final_publication_guard_sha256": "ecfb75d13ad4921aa07df9ec9b8eb8f6c074d73437317ea1d0494892e3064267"
+  },
+  "previous_api": [
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+      "handler": "api.handler",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+      "sha256": "34da1f95fa72cbf266bad70b2c893dfa45f962f2de129d4857449f33fd23016d",
+      "source_files": null,
+      "memory_mb": 512,
+      "timeout_seconds": 29,
+      "last_modified": "2026-10-17T21:39:08.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt",
+      "handler": "network_package.handler",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt",
+      "sha256": "34da1f95fa72cbf266bad70b2c893dfa45f962f2de129d4857449f33fd23016d",
+      "source_files": null,
+      "memory_mb": 512,
+      "timeout_seconds": 60,
+      "last_modified": "2026-10-17T21:38:27.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowPackageIng-kAAtKeB693oF",
+      "handler": "network_package.ingest",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowPackageIng-kAAtKeB693oF",
+      "sha256": "34da1f95fa72cbf266bad70b2c893dfa45f962f2de129d4857449f33fd23016d",
+      "source_files": null,
+      "memory_mb": 512,
+      "timeout_seconds": 29,
+      "last_modified": "2026-10-17T21:38:20.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowPackageRea-Vy8KadbHwEL9",
+      "handler": "network_package.reap",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowPackageRea-Vy8KadbHwEL9",
+      "sha256": "34da1f95fa72cbf266bad70b2c893dfa45f962f2de129d4857449f33fd23016d",
+      "source_files": null,
+      "memory_mb": 256,
+      "timeout_seconds": 120,
+      "last_modified": "2026-10-17T21:38:26.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+      "handler": "worker.handler",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+      "sha256": "34da1f95fa72cbf266bad70b2c893dfa45f962f2de129d4857449f33fd23016d",
+      "source_files": null,
+      "memory_mb": 512,
+      "timeout_seconds": 180,
+      "last_modified": "2026-10-17T21:38:36.000+0000"
+    }
+  ],
+  "before_stack": [
+    {
+      "ParameterKey": "SsmParameterValueawsservicecanonicalubuntuserver2404stablecurrentamd64hvmebsgp3amiidC96584B6F00A464EAD1953AFF4B05118Parameter",
+      "ParameterValue": "/aws/service/canonical/ubuntu/server/24.04/stable/current/amd64/hvm/ebs-gp3/ami-id",
+      "ResolvedValue": "ami-02a9cdd4e98bc3c78"
+    },
+    {
+      "ParameterKey": "BootstrapVersion",
+      "ParameterValue": "/cdk-bootstrap/hnb659fds/version",
+      "ResolvedValue": "31"
+    },
+    {
+      "ParameterKey": "SsmParameterValueawsservicecanonicalubuntuserver2204stablecurrentamd64hvmebsgp2amiidC96584B6F00A464EAD1953AFF4B05118Parameter",
+      "ParameterValue": "/aws/service/canonical/ubuntu/server/22.04/stable/current/amd64/hvm/ebs-gp2/ami-id",
+      "ResolvedValue": "ami-09db1e291cef3f1ef"
+    },
+    {
+      "ParameterKey": "BenchmarkAmiId",
+      "ParameterValue": "ami-0808d1157e26c65cb"
+    }
+  ],
+  "command": [
+    "npx",
+    "cdk",
+    "deploy",
+    "JumpServeBenchmarkStack",
+    "--app",
+    "npx ts-node --prefer-ts-exts bin/benchmark.ts",
+    "--exclusively",
+    "--require-approval",
+    "never",
+    "--outputs-file",
+    "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/claim-design/release/20261018T024510668452Z/outputs.json"
+  ],
+  "after_stack": {
+    "status": "UPDATE_COMPLETE",
+    "parameters": [
+      {
+        "ParameterKey": "SsmParameterValueawsservicecanonicalubuntuserver2404stablecurrentamd64hvmebsgp3amiidC96584B6F00A464EAD1953AFF4B05118Parameter",
+        "ParameterValue": "/aws/service/canonical/ubuntu/server/24.04/stable/current/amd64/hvm/ebs-gp3/ami-id",
+        "ResolvedValue": "ami-02a9cdd4e98bc3c78"
+      },
+      {
+        "ParameterKey": "BootstrapVersion",
+        "ParameterValue": "/cdk-bootstrap/hnb659fds/version",
+        "ResolvedValue": "31"
+      },
+      {
+        "ParameterKey": "SsmParameterValueawsservicecanonicalubuntuserver2204stablecurrentamd64hvmebsgp2amiidC96584B6F00A464EAD1953AFF4B05118Parameter",
+        "ParameterValue": "/aws/service/canonical/ubuntu/server/22.04/stable/current/amd64/hvm/ebs-gp2/ami-id",
+        "ResolvedValue": "ami-09db1e291cef3f1ef"
+      },
+      {
+        "ParameterKey": "BenchmarkAmiId",
+        "ParameterValue": "ami-0808d1157e26c65cb"
+      }
+    ]
+  },
+  "api": [
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+      "handler": "api.handler",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+      "sha256": "82e5c5e1e8a98f908b1abb81d5bc1165583aaf4405c1cdf41f015a1f3764f628",
+      "source_files": 16,
+      "memory_mb": 512,
+      "timeout_seconds": 29,
+      "last_modified": "2026-10-18T02:46:27.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt",
+      "handler": "network_package.handler",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt",
+      "sha256": "82e5c5e1e8a98f908b1abb81d5bc1165583aaf4405c1cdf41f015a1f3764f628",
+      "source_files": 16,
+      "memory_mb": 512,
+      "timeout_seconds": 60,
+      "last_modified": "2026-10-18T02:46:08.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowPackageIng-kAAtKeB693oF",
+      "handler": "network_package.ingest",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowPackageIng-kAAtKeB693oF",
+      "sha256": "82e5c5e1e8a98f908b1abb81d5bc1165583aaf4405c1cdf41f015a1f3764f628",
+      "source_files": 16,
+      "memory_mb": 512,
+      "timeout_seconds": 29,
+      "last_modified": "2026-10-18T02:46:07.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowPackageRea-Vy8KadbHwEL9",
+      "handler": "network_package.reap",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowPackageRea-Vy8KadbHwEL9",
+      "sha256": "82e5c5e1e8a98f908b1abb81d5bc1165583aaf4405c1cdf41f015a1f3764f628",
+      "source_files": 16,
+      "memory_mb": 256,
+      "timeout_seconds": 120,
+      "last_modified": "2026-10-18T02:46:08.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+      "handler": "worker.handler",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+      "sha256": "82e5c5e1e8a98f908b1abb81d5bc1165583aaf4405c1cdf41f015a1f3764f628",
+      "source_files": 16,
+      "memory_mb": 512,
+      "timeout_seconds": 180,
+      "last_modified": "2026-10-18T02:46:18.000+0000"
+    }
+  ],
+  "ended_at": "2026-10-18T02:46:53.424015+00:00"
+}

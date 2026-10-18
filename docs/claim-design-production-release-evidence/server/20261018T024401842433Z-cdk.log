@@ -1,0 +1,96 @@
+Bundling asset JumpServeBenchmarkStack/LaunchBenchmarkFn/Code/Stage...
+
+  ...4831287107aa9aba9b49df137fc1f0d1c2e6b819998e7d3-building/index.js  24.8kb
+
+⚡ Done in 9ms
+Bundling asset JumpServeBenchmarkStack/CleanupBenchmarksFn/Code/Stage...
+
+  ...d16cd323a31972a39648a8a53af30eb93276a13f081377e2-building/index.js  4.7kb
+
+⚡ Done in 8ms
+Bundling asset JumpServeBenchmarkStack/CancelBenchmarkFn/Code/Stage...
+
+  ...ee63b73a77228644b7da13ecc6c60aeee495964c65d77a75-building/index.js  6.0kb
+
+⚡ Done in 2ms
+Bundling asset JumpServeBenchmarkStack/GetBenchmarkLogsFn/Code/Stage...
+
+  ...9c0cc5141b3f85c48896e834b6a134fde7bb9da21ab0649d-building/index.js  3.1kb
+
+⚡ Done in 1ms
+Bundling asset JumpServeBenchmarkStack/BenchmarkIngestFn/Code/Stage...
+
+  ...593190c7862f90f901e8bbdb45b071136dd26f602bdcfae2-building/index.js  4.1kb
+
+⚡ Done in 1ms
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-lookup-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+Lookup role arn:aws:iam::395567831870:role/cdk-hnb659fds-lookup-role-395567831870-us-east-1 was not assumed. Proceeding with default credentials.
+Stack JumpServeBenchmarkStack
+IAM Statement Changes
+┌───┬─────────────────────────────┬────────┬───────────────────────┬──────────────────────────────────┬─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│   │ Resource                    │ Effect │ Action                │ Principal                        │ Condition                                                                                                                   │
+├───┼─────────────────────────────┼────────┼───────────────────────┼──────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ + │ ${ResearchWorkflow/Api.Arn} │ Allow  │ lambda:InvokeFunction │ Service:apigateway.amazonaws.com │ "ArnLike": {                                                                                                                │
+│   │                             │        │                       │                                  │   "AWS:SourceArn": "arn:aws:execute-api:us-east-1:395567831870:${BenchmarkApi}/*/*/research/studies/{studyId}/claim-design" │
+│   │                             │        │                       │                                  │ }                                                                                                                           │
+│ + │ ${ResearchWorkflow/Api.Arn} │ Allow  │ lambda:InvokeFunction │ Service:apigateway.amazonaws.com │ "ArnLike": {                                                                                                                │
+│   │                             │        │                       │                                  │   "AWS:SourceArn": "arn:aws:execute-api:us-east-1:395567831870:${BenchmarkApi}/*/*/research/studies/{studyId}/claim-design" │
+│   │                             │        │                       │                                  │ }                                                                                                                           │
+└───┴─────────────────────────────┴────────┴───────────────────────┴──────────────────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+(NOTE: There may be security-related changes not in this list. See https://github.com/aws/aws-cdk/issues/1299)
+
+Resources
+[+] AWS::Lambda::Permission BenchmarkApi/GET--research--studies--{studyId}--claim-design/ResearchWorkflowIntegration-Permission BenchmarkApiGETresearchstudiesstudyIdclaimdesignResearchWorkflowIntegrationPermission675A2334
+[+] AWS::ApiGatewayV2::Route BenchmarkApi/GET--research--studies--{studyId}--claim-design BenchmarkApiGETresearchstudiesstudyIdclaimdesign381C5339
+[+] AWS::Lambda::Permission BenchmarkApi/POST--research--studies--{studyId}--claim-design/ResearchWorkflowIntegration-Permission BenchmarkApiPOSTresearchstudiesstudyIdclaimdesignResearchWorkflowIntegrationPermission49B63918
+[+] AWS::ApiGatewayV2::Route BenchmarkApi/POST--research--studies--{studyId}--claim-design BenchmarkApiPOSTresearchstudiesstudyIdclaimdesign3E2E1CBB
+[~] AWS::Lambda::Function ResearchWorkflow/PackageExecutor ResearchWorkflowPackageExecutor32D08CE2
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] a064073c77951d103235a6795a14df7f6b2309732f531e3c36c86f2599037913.zip
+ │       └─ [+] e36c7b8634da42eb749502cd904f3cc78531e0b6dfc569f63a86e4c498f6f16b.zip
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.a064073c77951d103235a6795a14df7f6b2309732f531e3c36c86f2599037913
+         └─ [+] asset.e36c7b8634da42eb749502cd904f3cc78531e0b6dfc569f63a86e4c498f6f16b
+[~] AWS::Lambda::Function ResearchWorkflow/PackageReaper ResearchWorkflowPackageReaperED8C6D40
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] a064073c77951d103235a6795a14df7f6b2309732f531e3c36c86f2599037913.zip
+ │       └─ [+] e36c7b8634da42eb749502cd904f3cc78531e0b6dfc569f63a86e4c498f6f16b.zip
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.a064073c77951d103235a6795a14df7f6b2309732f531e3c36c86f2599037913
+         └─ [+] asset.e36c7b8634da42eb749502cd904f3cc78531e0b6dfc569f63a86e4c498f6f16b
+[~] AWS::Lambda::Function ResearchWorkflow/PackageIngest ResearchWorkflowPackageIngestAA97237D
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] a064073c77951d103235a6795a14df7f6b2309732f531e3c36c86f2599037913.zip
+ │       └─ [+] e36c7b8634da42eb749502cd904f3cc78531e0b6dfc569f63a86e4c498f6f16b.zip
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.a064073c77951d103235a6795a14df7f6b2309732f531e3c36c86f2599037913
+         └─ [+] asset.e36c7b8634da42eb749502cd904f3cc78531e0b6dfc569f63a86e4c498f6f16b
+[~] AWS::Lambda::Function ResearchWorkflow/Api ResearchWorkflowApiE04EBDAC
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] a064073c77951d103235a6795a14df7f6b2309732f531e3c36c86f2599037913.zip
+ │       └─ [+] e36c7b8634da42eb749502cd904f3cc78531e0b6dfc569f63a86e4c498f6f16b.zip
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.a064073c77951d103235a6795a14df7f6b2309732f531e3c36c86f2599037913
+         └─ [+] asset.e36c7b8634da42eb749502cd904f3cc78531e0b6dfc569f63a86e4c498f6f16b
+[~] AWS::Lambda::Function ResearchWorkflow/QueueWorker ResearchWorkflowQueueWorker702E601D
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] a064073c77951d103235a6795a14df7f6b2309732f531e3c36c86f2599037913.zip
+ │       └─ [+] e36c7b8634da42eb749502cd904f3cc78531e0b6dfc569f63a86e4c498f6f16b.zip
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.a064073c77951d103235a6795a14df7f6b2309732f531e3c36c86f2599037913
+         └─ [+] asset.e36c7b8634da42eb749502cd904f3cc78531e0b6dfc569f63a86e4c498f6f16b
+
+
+
+✨  Number of stacks with differences: 1
+

@@ -1,0 +1,36 @@
+
+✨  Synthesis time: 1.74s
+
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-file-publishing-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-file-publishing-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-file-publishing-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-deploy-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+JumpServeAgentStack: start: Building AgentFn/Code
+JumpServeAgentStack: success: Built AgentFn/Code
+JumpServeAgentStack: start: Building JumpServeAgentStack Template
+JumpServeAgentStack: success: Built JumpServeAgentStack Template
+JumpServeAgentStack: start: Publishing AgentFn/Code (395567831870-us-east-1-e7166b5b)
+JumpServeAgentStack: start: Publishing JumpServeAgentStack Template (395567831870-us-east-1-6cfcbc98)
+JumpServeAgentStack: success: Published JumpServeAgentStack Template (395567831870-us-east-1-6cfcbc98)
+JumpServeAgentStack: success: Published AgentFn/Code (395567831870-us-east-1-e7166b5b)
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-deploy-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+JumpServeAgentStack: creating CloudFormation changeset...
+Changeset arn:aws:cloudformation:us-east-1:395567831870:changeSet/cdk-deploy-change-set/b293efe1-ffea-4d78-90a9-f05c1293df84 created and waiting in review for manual execution (--no-execute)
+JumpServeAgentStack: deploying... [1/1]
+JumpServeAgentStack | 0/6 | 9:47:44 PM | UPDATE_IN_PROGRESS   | AWS::CloudFormation::Stack | JumpServeAgentStack User Initiated
+JumpServeAgentStack | 0/6 | 9:47:47 PM | UPDATE_IN_PROGRESS   | AWS::Lambda::Function      | AgentFn (AgentFnC1FD126F) 
+JumpServeAgentStack | 1/6 | 9:47:55 PM | UPDATE_COMPLETE      | AWS::Lambda::Function      | AgentFn (AgentFnC1FD126F) 
+JumpServeAgentStack | 2/6 | 9:47:57 PM | UPDATE_COMPLETE_CLEA | AWS::CloudFormation::Stack | JumpServeAgentStack 
+JumpServeAgentStack | 3/6 | 9:47:58 PM | UPDATE_COMPLETE      | AWS::CloudFormation::Stack | JumpServeAgentStack 
+
+ ✅  JumpServeAgentStack
+
+✨  Deployment time: 17.85s
+
+Outputs:
+JumpServeAgentStack.AgentFunctionUrl = https://idk3jouyc6g2uolmge5ctuizwq0kpgcf.lambda-url.us-east-1.on.aws/
+Stack ARN:
+arn:aws:cloudformation:us-east-1:395567831870:stack/JumpServeAgentStack/adca7910-5ac9-11f1-a822-0affeca4b48b
+
+✨  Total time: 19.59s
+

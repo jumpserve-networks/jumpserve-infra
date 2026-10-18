@@ -1,0 +1,18 @@
+current credentials could not be used to assume 'arn:aws:iam::395567831870:role/cdk-hnb659fds-lookup-role-395567831870-us-east-1', but are for the right account. Proceeding anyway.
+Lookup role arn:aws:iam::395567831870:role/cdk-hnb659fds-lookup-role-395567831870-us-east-1 was not assumed. Proceeding with default credentials.
+Stack JumpServeAgentStack
+Resources
+[~] AWS::Lambda::Function AgentFn AgentFnC1FD126F
+ ├─ [~] Code
+ │   └─ [~] .S3Key:
+ │       ├─ [-] 56d7d34486cc3c6e7c0400aaddab9406fc0cfce42afe352c5d90f71a4145e1ca.zip
+ │       └─ [+] 128ba6e1efaf2650c756bb7d7e906e9a3234520786d4e475940b905dd36f6e66.zip
+ └─ [~] Metadata
+     └─ [~] .aws:asset:path:
+         ├─ [-] asset.56d7d34486cc3c6e7c0400aaddab9406fc0cfce42afe352c5d90f71a4145e1ca
+         └─ [+] asset.128ba6e1efaf2650c756bb7d7e906e9a3234520786d4e475940b905dd36f6e66
+
+
+
+✨  Number of stacks with differences: 1
+

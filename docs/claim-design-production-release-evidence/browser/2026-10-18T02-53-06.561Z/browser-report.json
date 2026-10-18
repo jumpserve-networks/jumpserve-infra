@@ -1,0 +1,24 @@
+{
+  "protocol": "claim-design-production-release-v1",
+  "started_at": "2026-10-18T02:53:06.562Z",
+  "origin": "https://jumpserve.quaint-lab.org",
+  "checks": [],
+  "browser_errors": [],
+  "mutations": [],
+  "new_model_calls": 0,
+  "new_experiments": 0,
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "conditional_gaps": [
+    "Legitimate Google-authenticated planning and provider/persistence round trip",
+    "Authenticated plan-artifact Storage round trip",
+    "Actual networking experiment execution"
+  ],
+  "measured_charges_usd": null,
+  "passed": false,
+  "error": "fetch failed",
+  "ended_at": "2026-10-18T02:53:06.578Z"
+}

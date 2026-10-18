@@ -1,0 +1,32 @@
+{
+    "summary": {
+        "jobArn": "arn:aws:amplify:us-east-1:395567831870:apps/d24jvguj7brnkj/branches/main/jobs/0000000114",
+        "jobId": "114",
+        "commitId": "bda33aaefc529b84f6935ce954fbe887ef2386ae",
+        "commitMessage": "Add bounded read-only production checks for the claim designer\n\nVerify deployed claim entry links, exact sign-in return paths, malformed IDs, desktop/mobile light and dark layouts, public exports, missing-study states and navigation. Reject accidental browser mutations and make no model calls or experiment submissions. Retain screenshots, failures and explicit authenticated-path verification gaps separately from scientific evidence.",
+        "commitTime": "2026-10-17T21:47:03-05:00",
+        "startTime": "2026-10-17T21:50:19.160000-05:00",
+        "status": "SUCCEED",
+        "endTime": "2026-10-17T21:52:48.934000-05:00"
+    },
+    "steps": [
+        {
+            "name": "BUILD",
+            "status": "SUCCEED",
+            "start": "2026-10-17T21:50:19.177000-05:00",
+            "end": "2026-10-17T21:52:23.593000-05:00"
+        },
+        {
+            "name": "DEPLOY",
+            "status": "SUCCEED",
+            "start": "2026-10-17T21:52:23.791000-05:00",
+            "end": "2026-10-17T21:52:48.523000-05:00"
+        },
+        {
+            "name": "VERIFY",
+            "status": "SUCCEED",
+            "start": "2026-10-17T21:52:48.773000-05:00",
+            "end": "2026-10-17T21:52:48.796000-05:00"
+        }
+    ]
+}

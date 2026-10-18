@@ -1,0 +1,51 @@
+{
+  "scope": "Rollback archive preservation; no application or scientific data mutation",
+  "reason": "The initial per-deploy verifier reused ZIP filenames for before/after code. Exact pre-deployment bytes remained intact in the independent initial inspection. Copies below restore separate before directories, matched against the recorded pre-deployment hashes. Future deployments use distinct before/after directories.",
+  "original_inspection": "20261018T024304747866Z",
+  "files": [
+    {
+      "source": ".test-artifacts/claim-design/release/20261018T024304747866Z/JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X.zip",
+      "restored_to": ".test-artifacts/claim-design/release/20261018T024510668452Z/recovered-before/JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X.zip",
+      "sha256": "34da1f95fa72cbf266bad70b2c893dfa45f962f2de129d4857449f33fd23016d",
+      "bytes": 217426,
+      "target_verified_after_copy": true
+    },
+    {
+      "source": ".test-artifacts/claim-design/release/20261018T024304747866Z/JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt.zip",
+      "restored_to": ".test-artifacts/claim-design/release/20261018T024510668452Z/recovered-before/JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt.zip",
+      "sha256": "34da1f95fa72cbf266bad70b2c893dfa45f962f2de129d4857449f33fd23016d",
+      "bytes": 217426,
+      "target_verified_after_copy": true
+    },
+    {
+      "source": ".test-artifacts/claim-design/release/20261018T024304747866Z/JumpServeBenchmarkStack-ResearchWorkflowPackageIng-kAAtKeB693oF.zip",
+      "restored_to": ".test-artifacts/claim-design/release/20261018T024510668452Z/recovered-before/JumpServeBenchmarkStack-ResearchWorkflowPackageIng-kAAtKeB693oF.zip",
+      "sha256": "34da1f95fa72cbf266bad70b2c893dfa45f962f2de129d4857449f33fd23016d",
+      "bytes": 217426,
+      "target_verified_after_copy": true
+    },
+    {
+      "source": ".test-artifacts/claim-design/release/20261018T024304747866Z/JumpServeBenchmarkStack-ResearchWorkflowPackageRea-Vy8KadbHwEL9.zip",
+      "restored_to": ".test-artifacts/claim-design/release/20261018T024510668452Z/recovered-before/JumpServeBenchmarkStack-ResearchWorkflowPackageRea-Vy8KadbHwEL9.zip",
+      "sha256": "34da1f95fa72cbf266bad70b2c893dfa45f962f2de129d4857449f33fd23016d",
+      "bytes": 217426,
+      "target_verified_after_copy": true
+    },
+    {
+      "source": ".test-artifacts/claim-design/release/20261018T024304747866Z/JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP.zip",
+      "restored_to": ".test-artifacts/claim-design/release/20261018T024510668452Z/recovered-before/JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP.zip",
+      "sha256": "34da1f95fa72cbf266bad70b2c893dfa45f962f2de129d4857449f33fd23016d",
+      "bytes": 217426,
+      "target_verified_after_copy": true
+    },
+    {
+      "source": ".test-artifacts/claim-design/release/20261018T024304747866Z/agent-original.zip",
+      "restored_to": ".test-artifacts/claim-design/release/20261018T024706845012Z/recovered-before/agent-original.zip",
+      "sha256": "c6b66c7abc7638d3fd7a47eea88ad9a9fa72b1676f78ef2d44336f6a1613c768",
+      "bytes": 14308649,
+      "target_verified_after_copy": true
+    }
+  ],
+  "original_receipts_preserved": true,
+  "application_deployment_repeated": false
+}

@@ -1,0 +1,496 @@
+{
+  "protocol": "claim-design-production-release-v1",
+  "mode": "verify",
+  "status": "failed",
+  "started_at": "2026-10-18T02:48:53.078397+00:00",
+  "authorization": "User explicitly requested merging all current changes to main and production deployment.",
+  "new_model_calls": 0,
+  "new_experiment_instances": 0,
+  "measured_charges_usd": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "evidence_integrity": [
+    {
+      "folder": "claim-design-validation",
+      "files": 268,
+      "manifest_sha256": "c31bcdbe59e9a4930f5f238fa2b15bf203f9723ffcab92e86b11cd50d07cb42d"
+    },
+    {
+      "folder": "claim-design-correction-validation",
+      "files": 166,
+      "manifest_sha256": "44d461a50203d6e72525791c161f9475a8aeb632d24fb14c0f7c00efe54cf98a"
+    },
+    {
+      "folder": "claim-design-followup-validation",
+      "files": 379,
+      "manifest_sha256": "3193543026e81a2e94e6261d7a8e3421e6bc072c776ae3740a7075721c50488f"
+    }
+  ],
+  "evaluated_report_sha256": "a287305b58544a0b47b1f80bbf22f8440c263506343358c81fc8db3ddff70698",
+  "runtime_manifest": {
+    "version": 15,
+    "source_revision": "4266de647fe4f61658d0ce53a5d976b81507648b",
+    "revision_status": "Exact committed backend revision for the user-authorized claim designer production release; deployment receipts record activation separately.",
+    "files": {
+      "api.py": "40db4f299d5ac784294f767b6f2b5a61abbdb6b67796c7a25f83099e81a11fdd",
+      "workflow.py": "03ebd6c328dc8d9428992c44d07c468e4639576853d32b92cb0e801a8727c75d",
+      "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+      "store.py": "82a8f27c6456d27414eb0b8ff58806563ad360f3a18b629cac9b048a5b0cf842",
+      "scheduler.py": "0f7a253fc8bd2db7d6255efe31b7ce19dd2e2e773699f5806fd166f45fcc9714",
+      "worker.py": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
+      "preparation.py": "f23424b4c73974ffda48e356cd19c2d0dd8877beb668d94380e7bb00da5a5f90",
+      "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "ideas.py": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+      "network_spec.py": "884857f8680eb73ae7b8f43de484c3bd59d0f2441b66e117e49a347191a31e7c",
+      "network_execution.py": "9e61b6c4a2d1e16f0c931e9902d824bfd38174108749739655cfae197ffa5577",
+      "network_package.py": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
+      "package_runtime.py": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
+      "gap_queue.py": "90bd0a01a9dc9b25575d6f2ac6b478a34e940829231132585a3eb1c93c7c841a",
+      "claim_design.py": "09052615a7e5ba2db0e43eff0b641cb529fa7525770d0da3c6b8eb0888f72522",
+      "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3"
+    }
+  },
+  "security": {
+    "relations": [
+      {
+        "relname": "research_artifacts",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_assessments",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_audit_events",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_campaigns",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_claim_checks",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_claim_designs",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_claims",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_configurations",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_gaps",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_idea_campaign_links",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_idea_packets",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_idea_readiness",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_idea_runs",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_idea_sessions",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_measurements",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_network_executions",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_prepared_plans",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_protocols",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_publications",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_published_values",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_queue_events",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_queue_jobs",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_reviews",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_runs",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_sources",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_studies",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_study_owners",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_summaries",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      }
+    ],
+    "functions": [
+      {
+        "proname": "research_prepare_plan",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_queue_action",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_queue_claim",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_queue_enqueue",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_queue_finish",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_queue_snapshot",
+        "anon_execute": false,
+        "browser_execute": false
+      }
+    ],
+    "private_bucket": true,
+    "original_migration_bytes_verified": false,
+    "limitation": "Read-only catalog verification does not recover originally executed SQL.",
+    "claim_functions": [
+      {
+        "proname": "publish_agent_prompt",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_initialize_claim_design",
+        "anon_execute": false,
+        "browser_execute": false
+      }
+    ],
+    "final_publication_guard_sha256": "ecfb75d13ad4921aa07df9ec9b8eb8f6c074d73437317ea1d0494892e3064267"
+  },
+  "agent": {
+    "function": "JumpServeAgentStack-AgentFnC1FD126F-MG2xfZrwsBNg",
+    "runtime": "python3.12",
+    "memory_mb": 1024,
+    "timeout_seconds": 120,
+    "zip_sha256": "4d0294c8979e3c6d1ec38abd4dceb19ad9a949b47afff985f64dea24e493ed4a",
+    "bytes": 14318334,
+    "source_hashes": {
+      "handler.py": "ffc1596927d8d53ff860272385786ea302d7684a2b346b2f22b1e69957f1dcf7",
+      "modules.py": "d4ca0102b7151c4925b880ddb97895f0cb9e485023c60264dd57fa319a4d5a4c",
+      "research_ideas.py": "496565d423e8af7df19826e08057232e0972b5b22960517bed03427e5c540b4b",
+      "claim_experiment_design.py": "a1b6c0c255f1f71c114300fcf57b6bae1f415895383de18f046923d376625731",
+      "claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3"
+    },
+    "layers": [
+      {
+        "Arn": "arn:aws:lambda:us-east-1:395567831870:layer:AgentDepsLayer51FBE89A:54",
+        "CodeSize": 19284158
+      }
+    ],
+    "last_modified": "2026-10-18T02:47:49.000+0000"
+  },
+  "api": [
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+      "handler": "api.handler",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+      "sha256": "82e5c5e1e8a98f908b1abb81d5bc1165583aaf4405c1cdf41f015a1f3764f628",
+      "source_files": 16,
+      "memory_mb": 512,
+      "timeout_seconds": 29,
+      "last_modified": "2026-10-18T02:46:27.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt",
+      "handler": "network_package.handler",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt",
+      "sha256": "82e5c5e1e8a98f908b1abb81d5bc1165583aaf4405c1cdf41f015a1f3764f628",
+      "source_files": 16,
+      "memory_mb": 512,
+      "timeout_seconds": 60,
+      "last_modified": "2026-10-18T02:46:08.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowPackageIng-kAAtKeB693oF",
+      "handler": "network_package.ingest",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowPackageIng-kAAtKeB693oF",
+      "sha256": "82e5c5e1e8a98f908b1abb81d5bc1165583aaf4405c1cdf41f015a1f3764f628",
+      "source_files": 16,
+      "memory_mb": 512,
+      "timeout_seconds": 29,
+      "last_modified": "2026-10-18T02:46:07.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowPackageRea-Vy8KadbHwEL9",
+      "handler": "network_package.reap",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowPackageRea-Vy8KadbHwEL9",
+      "sha256": "82e5c5e1e8a98f908b1abb81d5bc1165583aaf4405c1cdf41f015a1f3764f628",
+      "source_files": 16,
+      "memory_mb": 256,
+      "timeout_seconds": 120,
+      "last_modified": "2026-10-18T02:46:08.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+      "handler": "worker.handler",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+      "sha256": "82e5c5e1e8a98f908b1abb81d5bc1165583aaf4405c1cdf41f015a1f3764f628",
+      "source_files": 16,
+      "memory_mb": 512,
+      "timeout_seconds": 180,
+      "last_modified": "2026-10-18T02:46:18.000+0000"
+    }
+  ],
+  "active": [
+    {
+      "active_version_id": "3da220d0-cde0-5ab5-b8cd-ccbd23ece025",
+      "version": "research-claim-design-v6",
+      "content_sha256": "581cea6ac6b03ff161b81c2f44e20282e56e32cced5064fed7e89ab39f2ebd64",
+      "published_at": "2026-10-18 02:48:47.940812+00"
+    }
+  ],
+  "capabilities": {
+    "version": "research-workflow-v1",
+    "ideas": {
+      "version": "research-ideas-v1",
+      "paper_required": false,
+      "packet_bytes": 24000
+    },
+    "networking": {
+      "version": "network-execution-v1",
+      "runners": [
+        {
+          "id": "emulated-netem-v1",
+          "name": "Emulated networking",
+          "mode": "emulated",
+          "module": "congestion-control-emulated",
+          "maximum_instances": 1,
+          "enabled": true
+        },
+        {
+          "id": "real-world-iperf-v1",
+          "name": "Real-world networking",
+          "mode": "real-world",
+          "module": "congestion-control-real-world",
+          "maximum_instances": 18,
+          "enabled": true
+        },
+        {
+          "id": "custom-package-v1",
+          "name": "Versioned experiment package",
+          "mode": "package",
+          "module": "research-verification",
+          "maximum_instances": 1,
+          "enabled": false
+        }
+      ],
+      "max_jobs": 32,
+      "package_contract": "network-observations-v1",
+      "limitations": "Executable configurations and versioned packages are required. Actual observations do not automatically validate a hypothesis. Missing charges remain unknown."
+    },
+    "adapters": [
+      "matched-numeric-v1"
+    ],
+    "preparation": {
+      "version": "research-preparation-v1",
+      "gap_queue_version": "research-gap-queue-v1",
+      "claim_design_version": "claim-experiment-design-v1",
+      "source_grounded_plans": true,
+      "automatic_claim_extraction": false,
+      "uploaded_plan_bytes": 250000
+    },
+    "queue": {
+      "version": "research-queue-v1",
+      "overview_version": "research-queue-overview-v1",
+      "limits": {
+        "global_jobs": 4,
+        "study_jobs": 2,
+        "invocation_jobs": 2,
+        "lease_seconds": 600,
+        "input_bytes": 256000,
+        "observations": 1000,
+        "algorithm_wall_seconds": 10,
+        "study_queue_jobs": 1000,
+        "automatic_retries": 0
+      },
+      "workers_enabled": true,
+      "claim_labels_automatic": false
+    },
+    "body_bytes": 512000,
+    "interactive_observations": 1000,
+    "interactive_wall_seconds": 10,
+    "labels": {
+      "reproduced": "The declared check meets its criterion under the recorded conditions; broader validity is not implied.",
+      "discrepant": "Examined evidence conflicts with the claim or declared criterion; comparability limits remain explicit.",
+      "inconclusive": "Relevant evidence was examined but cannot resolve the claim within the declared scope.",
+      "untested": "No adequate check has been completed; a plan or citation is not a test."
+    },
+    "arbitrary_code_execution": false,
+    "generic_ai_prompt": "not enabled; requires independent module evaluation and publication"
+  },
+  "reason": "'Request' object has no attribute 'method'",
+  "ended_at": "2026-10-18T02:49:21.158520+00:00"
+}

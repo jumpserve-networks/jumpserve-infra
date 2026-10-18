@@ -1,0 +1,82 @@
+{
+  "protocol": "claim-design-production-release-v1",
+  "started_at": "2026-10-18T03:02:07.523Z",
+  "origin": "https://jumpserve.quaint-lab.org",
+  "checks": [
+    {
+      "name": "published assessment exposes source-bound claim design links",
+      "passed": true,
+      "evidence": {
+        "claims": 15,
+        "design_links": 15,
+        "exact_return_path": "/research-verification/design-claim/83ae477c-3bc1-5d87-8a6d-90e1a018be14/e8589756-ffc4-58b1-82a4-59c44fa51065"
+      }
+    },
+    {
+      "name": "new private routes and malformed identities enforce their boundaries",
+      "passed": true,
+      "evidence": {
+        "sign_in_return_paths": 4,
+        "invalid_identity": "visible 404",
+        "legitimate_session": false
+      }
+    },
+    {
+      "name": "desktop and mobile public results render in both themes",
+      "passed": true,
+      "evidence": {
+        "widths": [
+          1365,
+          390
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "horizontal_overflow": false
+      }
+    },
+    {
+      "name": "published export preserves original data and missing studies stay unavailable",
+      "passed": true,
+      "evidence": {
+        "export_bytes": 3494894,
+        "export_sha256": "1fa277a7fc0484c3f160d5dee3b2aef2a6acd5d6d62d4f89f24f24459dea09ca",
+        "missing_export_status": 404
+      }
+    },
+    {
+      "name": "landing, previous assessments and methods remain navigable",
+      "passed": true,
+      "evidence": {
+        "paths": [
+          "/",
+          "/research-verification/test-results",
+          "/research-verification/methods"
+        ]
+      }
+    }
+  ],
+  "browser_errors": [],
+  "mutations": [],
+  "new_model_calls": 0,
+  "new_experiments": 0,
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "conditional_gaps": [
+    "Legitimate Google-authenticated planning and provider/persistence round trip",
+    "Authenticated plan-artifact Storage round trip",
+    "Actual networking experiment execution"
+  ],
+  "measured_charges_usd": null,
+  "study": {
+    "id": "83ae477c-3bc1-5d87-8a6d-90e1a018be14",
+    "title": "How I learned to stop worrying and love IPv6",
+    "claims": 15
+  },
+  "passed": true,
+  "ended_at": "2026-10-18T03:02:37.922Z"
+}

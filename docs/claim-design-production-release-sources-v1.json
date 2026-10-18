@@ -1,0 +1,33 @@
+{
+  "recorded_at": "2026-10-18T03:04:41.632674+00:00",
+  "deployed_frontend_revision": "bda33aaefc529b84f6935ce954fbe887ef2386ae",
+  "frontend_verification_and_docs_revision": "8d7bc319cdae623c56d3f8509d044e865a7e7761",
+  "backend_revision": "4266de647fe4f61658d0ce53a5d976b81507648b",
+  "infra_deployed_application_revision": "e582da2",
+  "files": {
+    "bin/claim-design-release.py": "6f62c1d02048bb4b7d470e4ef00492a5a49bd5296d4e4c545a25f2fe9601b0b9",
+    "../jumpserve-front-end/scripts/verify-claim-design-production.mjs": "b905ec2b5c800263231566ff09bd6be4bc2214cad4f3e64609528eacedb7761d",
+    "research-workflow-runtime.json": "37de67da33542c53ed5128dc7b6813ebbc21b2e4567f010e3bf28679e1b0a3e3",
+    "docs/claim-design-production-release-v1.md": "2163e4ec3b298bc66d5156fb1d926217527aa57ae23d33dfd1096fc3dc4b6fd5"
+  },
+  "evaluated_model_facing_source_unchanged": true,
+  "release_archive": {
+    "bucket": "research-workflow-raw",
+    "path": "release-verification/claim-design-20261018/1f2e93da008eaf1735ef97229ebcab06516d6349e13b0ab5486f9136af20a191.zip",
+    "sha256": "1f2e93da008eaf1735ef97229ebcab06516d6349e13b0ab5486f9136af20a191",
+    "bytes": 6642981,
+    "files": 41,
+    "kind": "release-receipts",
+    "retrieved_hash_verified": true,
+    "anonymous_status": 400,
+    "measured_storage_charges_usd": null
+  },
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "new_model_calls": 0,
+  "new_experiment_instances": 0,
+  "measured_charges_usd": null
+}

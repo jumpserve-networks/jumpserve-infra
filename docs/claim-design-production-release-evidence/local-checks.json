@@ -1,0 +1,119 @@
+{
+  "recorded_at": "2026-10-18T02:46:22.033733+00:00",
+  "scope": "Repeated local release verification before production deployment; no scientific assessment",
+  "checks": [
+    {
+      "repository": "jumpserve-back-end",
+      "command": "python3 -B -m unittest discover -s research_workflow/tests",
+      "passed": true,
+      "cases": 122
+    },
+    {
+      "repository": "jumpserve-infra",
+      "command": "python3 -B -m unittest discover -s test -p 'agent*_test.py'",
+      "passed": true,
+      "cases": 116
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "command": "npm test",
+      "passed": true,
+      "cases": 180
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "command": "npm run lint",
+      "passed": true,
+      "cases": null
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "command": "npm run build",
+      "passed": true,
+      "cases": null
+    },
+    {
+      "repository": "jumpserve-infra",
+      "command": "env JUMPSERVE_BACKEND_CHECKOUT=../jumpserve-back-end npm test -- --runInBand",
+      "passed": true,
+      "cases": 89
+    },
+    {
+      "repository": "jumpserve-infra",
+      "command": "npm run build",
+      "passed": true,
+      "cases": null
+    },
+    {
+      "repository": "jumpserve-infra",
+      "command": "python3 -B test/check_claim_design_database.py",
+      "passed": true,
+      "cases": 6
+    },
+    {
+      "repository": "jumpserve-infra",
+      "command": "python3 -B test/check_research_ideas_database.py",
+      "passed": true,
+      "cases": 11
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "command": "node scripts/verify-claim-design.mjs",
+      "passed": true,
+      "cases": 10
+    }
+  ],
+  "lint_warning": "Preexisting auth-button.tsx:153 internal navigation warning",
+  "diff_checks": "Three repositories pass git diff --check",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "evaluation": {
+    "v5_full_answer_passes": 16,
+    "v5_cases": 20,
+    "v6_original_pipeline_completions": 19,
+    "v6_original_cases": 20,
+    "final_archived_answer_replay_passes": 20,
+    "final_archived_answer_replay_cases": 20,
+    "new_provider_calls_in_replay": 0,
+    "held_out": false
+  },
+  "scientific_claims_reassessed": 0,
+  "network_measurements_created": 0,
+  "production_deployed": false,
+  "production_prompt_published": false,
+  "conditional_gaps": [
+    "Legitimate Google authenticated request",
+    "Production boto3/persistence roundtrip",
+    "Remote Supabase Storage",
+    "Actual cloud networking execution",
+    "Lambda Python 3.12; local Python 3.13"
+  ],
+  "original_log_scope": "Provider stdout and original reports retained. Full raw unit/build stdout not saved for every invocation; observed command outcomes summarized here.",
+  "local_publication_test": "Actual reviewed replay report accepted in isolated PostgreSQL; altered parent/provider hashes and failed/incomplete reports denied. Not production publication.",
+  "retained_failures": "V5 four answer failures, v6 original unit-validator rejection; prior campaigns and replay revisions preserved separately.",
+  "current_release": {
+    "backend_revision": "4266de647fe4f61658d0ce53a5d976b81507648b",
+    "frontend_feature_revision": "b23da38",
+    "infra_feature_revision": "e582da2",
+    "offline_replay": ".test-artifacts/claim-design/replays/20261018T024133188638Z",
+    "claim_database": ".test-artifacts/research-ideas/database/20261018T024142034108Z",
+    "idea_database": ".test-artifacts/research-ideas/database/20261018T024142010353Z",
+    "browser": "../jumpserve-front-end/.test-artifacts/claim-design/browser/2026-10-18T02-42-58.700Z",
+    "runtime_pin_verified_after_commit": true,
+    "infrastructure_tests_after_pin": 89,
+    "fresh_replay_compared_to_reviewed_report": {
+      "cases": 20,
+      "all_provider_raw_and_rendered_hashes_equal": true,
+      "new_provider_calls": 0
+    },
+    "production_verifier_script": "../jumpserve-front-end/scripts/verify-claim-design-production.mjs"
+  },
+  "release_deltas_from_frozen_evaluation": [
+    "Committed backend revision pin and release status metadata in research-workflow-runtime.json; runtime file bytes unchanged",
+    "Frontend feature documentation updated to identify eligible v6 archived replay",
+    "Fixed-target release runner/protocol and public production browser verifier added; model-facing runtime unchanged"
+  ]
+}

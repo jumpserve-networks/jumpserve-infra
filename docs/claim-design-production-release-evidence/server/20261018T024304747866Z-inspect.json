@@ -1,0 +1,356 @@
+{
+  "protocol": "claim-design-production-release-v1",
+  "mode": "inspect",
+  "status": "complete",
+  "started_at": "2026-10-18T02:43:04.748123+00:00",
+  "authorization": "User explicitly requested merging all current changes to main and production deployment.",
+  "new_model_calls": 0,
+  "new_experiment_instances": 0,
+  "measured_charges_usd": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "evidence_integrity": [
+    {
+      "folder": "claim-design-validation",
+      "files": 268,
+      "manifest_sha256": "c31bcdbe59e9a4930f5f238fa2b15bf203f9723ffcab92e86b11cd50d07cb42d"
+    },
+    {
+      "folder": "claim-design-correction-validation",
+      "files": 166,
+      "manifest_sha256": "44d461a50203d6e72525791c161f9475a8aeb632d24fb14c0f7c00efe54cf98a"
+    },
+    {
+      "folder": "claim-design-followup-validation",
+      "files": 379,
+      "manifest_sha256": "3193543026e81a2e94e6261d7a8e3421e6bc072c776ae3740a7075721c50488f"
+    }
+  ],
+  "evaluated_report_sha256": "a287305b58544a0b47b1f80bbf22f8440c263506343358c81fc8db3ddff70698",
+  "runtime_manifest": {
+    "version": 15,
+    "source_revision": "62f58791028a236e38b77beb2f8f8610123db270",
+    "revision_status": "Local working-tree candidate based on the recorded revision. Exact file hashes include uncommitted claim experiment design changes; not deployed.",
+    "files": {
+      "api.py": "40db4f299d5ac784294f767b6f2b5a61abbdb6b67796c7a25f83099e81a11fdd",
+      "workflow.py": "03ebd6c328dc8d9428992c44d07c468e4639576853d32b92cb0e801a8727c75d",
+      "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+      "store.py": "82a8f27c6456d27414eb0b8ff58806563ad360f3a18b629cac9b048a5b0cf842",
+      "scheduler.py": "0f7a253fc8bd2db7d6255efe31b7ce19dd2e2e773699f5806fd166f45fcc9714",
+      "worker.py": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
+      "preparation.py": "f23424b4c73974ffda48e356cd19c2d0dd8877beb668d94380e7bb00da5a5f90",
+      "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "ideas.py": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+      "network_spec.py": "884857f8680eb73ae7b8f43de484c3bd59d0f2441b66e117e49a347191a31e7c",
+      "network_execution.py": "9e61b6c4a2d1e16f0c931e9902d824bfd38174108749739655cfae197ffa5577",
+      "network_package.py": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
+      "package_runtime.py": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
+      "gap_queue.py": "90bd0a01a9dc9b25575d6f2ac6b478a34e940829231132585a3eb1c93c7c841a",
+      "claim_design.py": "09052615a7e5ba2db0e43eff0b641cb529fa7525770d0da3c6b8eb0888f72522",
+      "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3"
+    }
+  },
+  "database": {
+    "relations": [
+      {
+        "relname": "research_artifacts",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_assessments",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_audit_events",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_campaigns",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_claim_checks",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_claims",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_configurations",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_gaps",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_campaign_links",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_packets",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_readiness",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_runs",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_idea_sessions",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_measurements",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_network_executions",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_prepared_plans",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_protocols",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_publications",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_published_values",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_queue_events",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_queue_jobs",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_reviews",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_runs",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_sources",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_studies",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_study_owners",
+        "relrowsecurity": true
+      },
+      {
+        "relname": "research_summaries",
+        "relrowsecurity": true
+      }
+    ],
+    "columns": [
+      {
+        "column_name": "id",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "title",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "paper_url",
+        "is_nullable": "YES"
+      },
+      {
+        "column_name": "domain",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "scope",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "origin_module",
+        "is_nullable": "YES"
+      },
+      {
+        "column_name": "created_at",
+        "is_nullable": "NO"
+      },
+      {
+        "column_name": "study_kind",
+        "is_nullable": "NO"
+      }
+    ],
+    "pointers": [
+      {
+        "module_id": "congestion-control-emulated",
+        "active_version_id": "cabbe18a-cc70-482c-8883-81b515639e42"
+      },
+      {
+        "module_id": "congestion-control-real-world",
+        "active_version_id": "e78456f8-6582-4f69-8b44-d56d2c782352"
+      },
+      {
+        "module_id": "http2-compliance-study",
+        "active_version_id": "caf6bae2-acd3-4ef4-8147-bd8bc39895e2"
+      },
+      {
+        "module_id": "ipv6-dns-study",
+        "active_version_id": "28edfb2a-17f9-47c0-a801-1ca7392c7404"
+      },
+      {
+        "module_id": "leo-emergency-failover",
+        "active_version_id": "ec00a4b6-718c-4e69-9c0f-283b9f251002"
+      },
+      {
+        "module_id": "reliable-sketch-study",
+        "active_version_id": "64c9fbb6-1d38-4844-9167-66faaf05fe14"
+      },
+      {
+        "module_id": "research-verification",
+        "active_version_id": "ba16759e-ff38-4491-ae21-5766261e710b"
+      }
+    ],
+    "publication_guard": [
+      {
+        "definition": "CREATE OR REPLACE FUNCTION public.publish_agent_prompt(p_version_id uuid, p_expected_active_version_id uuid, p_expected_content_sha256 text, p_report jsonb, p_actor text, p_module_id text DEFAULT 'congestion-control-emulated'::text)\n RETURNS uuid\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare current_id uuid; candidate public.agent_prompt_versions; required text[]=array['idea-planning','idea-comprehension','idea-critic','idea-missing','idea-novelty','idea-untrusted','idea-clear-plan','idea-scope']; begin\n if p_module_id<>'research-verification' then\n  return public.publish_agent_prompt_before_research_ideas(p_version_id,p_expected_active_version_id,p_expected_content_sha256,p_report,p_actor,p_module_id);\n end if;\n select active_version_id into current_id from public.agent_prompt_settings where module_id=p_module_id for update;\n if not found or current_id is distinct from p_expected_active_version_id then raise exception 'Idea prompt pointer changed'; end if;\n select * into strict candidate from public.agent_prompt_versions where id=p_version_id for update;\n if candidate.version in ('research-ideas-v3','research-ideas-v4','research-ideas-v5','research-ideas-v6','research-ideas-v7','research-ideas-v8','research-ideas-v9','research-ideas-v10','research-ideas-v11') then required:=required || array['interview-cdn','interview-congestion','interview-known','interview-vague','interview-unknown','interview-untrusted','interview-pilot','interview-complete']; end if;\n if candidate.version in ('research-ideas-v9','research-ideas-v10','research-ideas-v11') then required:=required || array['review-complete-critic','review-controls-only','review-statistics-only','review-consistent-percent','review-untrusted-metadata']; end if;\n if candidate.module_id<>p_module_id or candidate.content_sha256<>p_expected_content_sha256 or p_report->>'prompt_content_sha256' is distinct from candidate.content_sha256\n  or p_report->>'prompt_version_id' is distinct from candidate.id::text or p_report->>'prompt_version' is distinct from candidate.version\n  or p_report->>'module_id' is distinct from p_module_id or p_report->>'analysis_version' is distinct from 'research-ideas-v1'\n  or p_report->>'evaluation_kind' is distinct from 'actual-model-development' or coalesce(btrim(p_report->>'model_id'),'')='' or coalesce(btrim(p_actor),'')=''\n  or coalesce(p_report->>'cases_sha256','') !~ '^[a-f0-9]{64}$' then raise exception 'Exact candidate and actual-answer evaluation provenance required'; end if;\n if jsonb_typeof(p_report->'cases') is distinct from 'array' then raise exception 'Evaluation cases required'; end if;\n if jsonb_array_length(p_report->'cases')<>cardinality(required) or exists(select 1 from unnest(required) name where\n  (select count(*) from jsonb_array_elements(p_report->'cases') c where c->>'name'=name and c->'passed'='true'::jsonb and c->>'status'='complete' and c->>'output_sha256' ~ '^[a-f0-9]{64}$')<>1) then raise exception 'Every declared actual-answer development case must pass'; end if;\n if candidate.version in ('research-ideas-v10','research-ideas-v11') and exists(select 1 from jsonb_array_elements(p_report->'cases') c where coalesce(c->>'rendered_sha256','') !~ '^[a-f0-9]{64}$') then raise exception 'Exact server-rendered answer hashes required'; end if;\n if coalesce(p_report->'reviewer'->>'type','') not in ('human','AI') or coalesce(btrim(p_report->'reviewer'->>'identity'),'')='' or\n  jsonb_typeof(p_report->'reviewer'->'independent') is distinct from 'boolean' or p_report->'reviewer'->'passed' is distinct from 'true'::jsonb then raise exception 'Declared answer review and independence required; AI review is not human review'; end if;\n if candidate.published_at is null then update public.agent_prompt_versions set published_at=clock_timestamp(),updated_by=p_actor where id=p_version_id; end if;\n insert into public.agent_prompt_publications(prompt_version_id,previous_version_id,published_by,evaluation_report) values(p_version_id,current_id,p_actor,p_report);\n update public.agent_prompt_settings set active_version_id=p_version_id,updated_at=clock_timestamp() where module_id=p_module_id;\n return p_version_id;\nend $function$\n"
+      }
+    ],
+    "scientific_counts": [
+      {
+        "relation": "research_measurements",
+        "count": 7144
+      },
+      {
+        "relation": "research_published_values",
+        "count": 5093
+      },
+      {
+        "relation": "research_assessments",
+        "count": 102
+      }
+    ]
+  },
+  "agent": {
+    "function": "JumpServeAgentStack-AgentFnC1FD126F-MG2xfZrwsBNg",
+    "runtime": "python3.12",
+    "memory_mb": 1024,
+    "timeout_seconds": 120,
+    "zip_sha256": "c6b66c7abc7638d3fd7a47eea88ad9a9fa72b1676f78ef2d44336f6a1613c768",
+    "bytes": 14308649,
+    "source_hashes": {
+      "handler.py": "76aad08e58b1557134efc1837f4e3109ba5cec28913533ced9bb7fba7c439196",
+      "modules.py": "639a02174548cea3e667408413a57eed4deb8f58429c2af4c13e139d8aa9e686",
+      "research_ideas.py": "eda137049c5a8061c8b04c9ad0c0d45282958f9865ac614826adf3543d49bfd2"
+    },
+    "layers": [
+      {
+        "Arn": "arn:aws:lambda:us-east-1:395567831870:layer:AgentDepsLayer51FBE89A:54",
+        "CodeSize": 19284158
+      }
+    ],
+    "last_modified": "2026-10-15T03:53:53.000+0000"
+  },
+  "api_originals": [
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+      "handler": "api.handler",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+      "sha256": "34da1f95fa72cbf266bad70b2c893dfa45f962f2de129d4857449f33fd23016d",
+      "source_files": null,
+      "memory_mb": 512,
+      "timeout_seconds": 29,
+      "last_modified": "2026-10-17T21:39:08.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt",
+      "handler": "network_package.handler",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt",
+      "sha256": "34da1f95fa72cbf266bad70b2c893dfa45f962f2de129d4857449f33fd23016d",
+      "source_files": null,
+      "memory_mb": 512,
+      "timeout_seconds": 60,
+      "last_modified": "2026-10-17T21:38:27.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowPackageIng-kAAtKeB693oF",
+      "handler": "network_package.ingest",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowPackageIng-kAAtKeB693oF",
+      "sha256": "34da1f95fa72cbf266bad70b2c893dfa45f962f2de129d4857449f33fd23016d",
+      "source_files": null,
+      "memory_mb": 512,
+      "timeout_seconds": 29,
+      "last_modified": "2026-10-17T21:38:20.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowPackageRea-Vy8KadbHwEL9",
+      "handler": "network_package.reap",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowPackageRea-Vy8KadbHwEL9",
+      "sha256": "34da1f95fa72cbf266bad70b2c893dfa45f962f2de129d4857449f33fd23016d",
+      "source_files": null,
+      "memory_mb": 256,
+      "timeout_seconds": 120,
+      "last_modified": "2026-10-17T21:38:26.000+0000"
+    },
+    {
+      "name": "JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+      "handler": "worker.handler",
+      "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+      "sha256": "34da1f95fa72cbf266bad70b2c893dfa45f962f2de129d4857449f33fd23016d",
+      "source_files": null,
+      "memory_mb": 512,
+      "timeout_seconds": 180,
+      "last_modified": "2026-10-17T21:38:36.000+0000"
+    }
+  ],
+  "frontend": [
+    {
+      "jobArn": "arn:aws:amplify:us-east-1:395567831870:apps/d24jvguj7brnkj/branches/main/jobs/0000000113",
+      "jobId": "113",
+      "commitId": "38c149b0d1e92e7efebd4044a699902b042069ac",
+      "commitMessage": "User-authorized release follow-up: prevent lost mobile menu clicks during hydration; controlled checks passed",
+      "commitTime": "2026-10-17T16:47:55.709000-05:00",
+      "startTime": "2026-10-17T16:47:55.995000-05:00",
+      "status": "SUCCEED",
+      "endTime": "2026-10-17T16:50:32.297000-05:00"
+    },
+    {
+      "jobArn": "arn:aws:amplify:us-east-1:395567831870:apps/d24jvguj7brnkj/branches/main/jobs/0000000112",
+      "jobId": "112",
+      "commitId": "9d38933a4962a0228fd987ef3014cd89bbd7fe2f",
+      "commitMessage": "User-authorized research pathways and queue release; matching backend deployed and verified",
+      "commitTime": "2026-10-17T16:40:26.158000-05:00",
+      "startTime": "2026-10-17T16:40:26.439000-05:00",
+      "status": "SUCCEED",
+      "endTime": "2026-10-17T16:42:58.520000-05:00"
+    },
+    {
+      "jobArn": "arn:aws:amplify:us-east-1:395567831870:apps/d24jvguj7brnkj/branches/main/jobs/0000000111",
+      "jobId": "111",
+      "commitId": "HEAD",
+      "commitTime": "2026-10-14T22:56:01.349000-05:00",
+      "startTime": "2026-10-14T22:56:01.607000-05:00",
+      "status": "SUCCEED",
+      "endTime": "2026-10-14T22:58:34.206000-05:00"
+    }
+  ],
+  "ended_at": "2026-10-18T02:43:32.767708+00:00"
+}
