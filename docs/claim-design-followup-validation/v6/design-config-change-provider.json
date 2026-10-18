@@ -1,0 +1,38 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_Y98GE5DWj7pP6u0GN05wYC",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "clarify",
+                            "guidance": [
+                                "owner-revision"
+                            ],
+                            "unit_values": [],
+                            "clarification_questions": [
+                                "The saved protocol is frozen and its configuration hash is already recorded. Adding snapshot_interval_ms=100 and loss_pct=0 would change the configuration identity and require a new hash, a fresh review, and an explicit owner-saved revision. Would you like to open a new draft with those parameters added, understanding that the existing saved packet and its hash will remain unchanged?"
+                            ],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 6666,
+        "outputTokens": 191,
+        "totalTokens": 6857,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 2896
+    }
+}

@@ -1,0 +1,121 @@
+{
+  "protocol": "claim-experiment-design-protocol-v3",
+  "database": "jumpserve_research_ideas_test_20261018t021702613980z",
+  "started_at": "2026-10-18T02:17:36.859Z",
+  "checks": [
+    {
+      "name": "an older connected service is explicit and cannot start a proposal",
+      "passed": true,
+      "evidence": {
+        "model_calls": 0,
+        "mutations": 0,
+        "older_capability": "visible error"
+      }
+    },
+    {
+      "name": "explicit claim click creates a source-bound paper design and one automatic proposal",
+      "passed": true,
+      "evidence": {
+        "study_id": "86097e34-9bd6-5660-9182-baa4ff633598",
+        "automatic_calls": 1,
+        "refresh_causes_no_new_call": true,
+        "origin": "paper"
+      }
+    },
+    {
+      "name": "clarification cannot be adopted and preserves the exact initial plan",
+      "passed": true,
+      "evidence": {
+        "versions": 1,
+        "proposal": null,
+        "adoption_denied": true,
+        "initial_bytes_unchanged": true
+      }
+    },
+    {
+      "name": "bounded unit conversions render and persist with real agent computation",
+      "passed": true,
+      "evidence": {
+        "converted_values_equal": true,
+        "deterministic_computation": true,
+        "proposal": null,
+        "packets": 1
+      }
+    },
+    {
+      "name": "tailored owner answer produces a complete candidate and another explicit version",
+      "passed": true,
+      "evidence": {
+        "versions": 2,
+        "missing": 0,
+        "readiness_requires_fresh_reviews": true
+      }
+    },
+    {
+      "name": "failed review is retained and fresh successful reviews gate readiness",
+      "passed": true,
+      "evidence": {
+        "failed_attempts": 1,
+        "fresh_review_context": true
+      }
+    },
+    {
+      "name": "reviewed networking campaign queues once and resume preserves job identity",
+      "passed": true,
+      "evidence": {
+        "jobs": 1,
+        "status": "queued",
+        "measurements": 0,
+        "cloud_execution": false
+      }
+    },
+    {
+      "name": "download includes original context bytes, versions and failed attempts",
+      "passed": true,
+      "evidence": {
+        "versions": 2,
+        "context_sha256": "2020df4c7525a5059b701b2e837a7a41b37777ec2cc7d698166ed03ede5c88ce",
+        "failed_attempt_preserved": true
+      }
+    },
+    {
+      "name": "desktop and mobile light and dark states fit the viewport",
+      "passed": true,
+      "evidence": {
+        "viewports": [
+          1365,
+          390
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ]
+      }
+    },
+    {
+      "name": "actual Next routes retain the exact design sign-in return paths",
+      "passed": true,
+      "evidence": {
+        "paths": 2,
+        "legitimate_session": false
+      }
+    }
+  ],
+  "browser_errors": [],
+  "conditional_gaps": [
+    "Legitimate Google session",
+    "Live provider persistence roundtrip",
+    "Remote Supabase Storage",
+    "Production deployment",
+    "Actual cloud networking execution"
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "measured_charges_usd": null,
+  "original_fixture_study_id": "566f2990-5dd1-4acd-abc8-21149476189b",
+  "passed": true,
+  "ended_at": "2026-10-18T02:17:52.664Z"
+}

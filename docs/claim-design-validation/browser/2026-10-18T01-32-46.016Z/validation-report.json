@@ -1,0 +1,30 @@
+{
+  "protocol": "claim-experiment-design-protocol-v1",
+  "amendment": "claim-experiment-design-amendment-v2",
+  "database": "jumpserve_research_ideas_test_20261018t013201513641z",
+  "started_at": "2026-10-18T01:32:46.020Z",
+  "checks": [
+    {
+      "name": "explicit claim click creates a source-bound paper design and one automatic proposal",
+      "passed": false,
+      "reason": "locator.waitFor: Timeout 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('AI proposal · complete · plan version 1', { exact: true }) to be visible\u001b[22m\n"
+    }
+  ],
+  "browser_errors": [],
+  "conditional_gaps": [
+    "Legitimate Google session",
+    "Live provider persistence roundtrip",
+    "Remote Supabase Storage",
+    "Production deployment",
+    "Actual cloud networking execution"
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "measured_charges_usd": null,
+  "passed": false,
+  "error": "locator.waitFor: Timeout 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('AI proposal · complete · plan version 1', { exact: true }) to be visible\u001b[22m\n",
+  "ended_at": "2026-10-18T01:33:01.498Z"
+}

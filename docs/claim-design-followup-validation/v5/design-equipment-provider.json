@@ -1,0 +1,37 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_1j6SMBDs3OoOb9fdcOvWJk",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "clarify",
+                            "summary": "The claim asserts 99.99% optical-link terminal availability over LEO passes. No hardware, orbital trace, atmospheric model, or availability definition has been supplied. Built-in transport runners (netem/iperf) cannot substitute for optical-terminal or orbital availability measurement. Before a feasible pilot can be proposed, several foundational decisions must be resolved.",
+                            "clarification_questions": [
+                                "What is the precise operational definition of 'availability' for this claim — e.g., fraction of scheduled LEO pass time during which the optical link meets a specified BER/SNR threshold, fraction of passes with at least one successful acquisition, or some other metric — and over what observation window (number of passes, calendar duration) is 99.99% asserted?",
+                                "What evidence source or model is intended to support the pilot — e.g., a specific versioned atmospheric/orbital simulation tool with a supplied input trace, archived terminal telemetry from a prior campaign, or a new empirical measurement campaign — and can you supply the identity (name, version, hash) of that source or dataset?",
+                                "If a simulation path is intended, which versioned simulation package (e.g., a specific link-budget or orbital-pass availability model) would be used, and can you supply its version identifier and a description of the input parameters (orbital altitude, terminal aperture, atmospheric model, pointing-loss budget) so that a custom-package protocol can be scoped?"
+                            ],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 4746,
+        "outputTokens": 388,
+        "totalTokens": 5134,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 5471
+    }
+}

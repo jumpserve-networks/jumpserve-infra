@@ -1,0 +1,52 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_xoD1RHQ8ShHiE299GsJkED",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "clarify",
+                            "guidance": [
+                                "units",
+                                "missing-inputs"
+                            ],
+                            "unit_values": [
+                                {
+                                    "value": 200,
+                                    "unit": "us",
+                                    "source_quote": "200 microseconds"
+                                },
+                                {
+                                    "value": 0.2,
+                                    "unit": "ms",
+                                    "source_quote": "0.2 milliseconds"
+                                }
+                            ],
+                            "clarification_questions": [
+                                "What workload (transfer size or duration) should each flow use, and how many replications per condition are you targeting?",
+                                "What is your resource/cost budget for this pilot (e.g., wall-clock limit, maximum number of jobs)?",
+                                "For the 20 ms delay increment in the claim, which link directions receive it — is 20 ms added per direction (totalling 40 ms round-trip), or is 20 ms the total round-trip increment?"
+                            ],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 5618,
+        "outputTokens": 271,
+        "totalTokens": 5889,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 3080
+    }
+}

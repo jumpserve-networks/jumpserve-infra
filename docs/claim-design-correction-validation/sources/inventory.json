@@ -1,0 +1,69 @@
+{
+  "recorded_at": "2026-10-18T02:03:25.565296+00:00",
+  "sources": [
+    {
+      "citation": "American Statistical Association. American Statistical Association Releases Statement on Statistical Significance and P-Values. March 7, 2016.",
+      "url": "https://www.amstat.org/docs/default-source/amstat-documents/p-valuestatement.pdf",
+      "doi": null,
+      "retrieved_version": "2016-03-07 press release, three PDF pages",
+      "artifact": "asa-p-value-statement-release-2016.pdf",
+      "sha256": "e164558a1bedd13627f1457cb53b16bb8f1b6f3047e9a6cc34e9c03fdedcdf3b",
+      "byte_count": 242048,
+      "retrieval_attempts": [
+        {
+          "method": "web PDF open/find",
+          "status": "accessible; text extracted"
+        },
+        {
+          "method": "curl -fL --max-time 30 original PDF",
+          "status": "success",
+          "local_file_mtime_utc": "2026-10-18T01:59:47.998211+00:00"
+        }
+      ],
+      "access_status": "retrieved",
+      "review_status": "partial-review",
+      "review_definition": "Complete review requires substantive examination of the entire original source including all figures, tables, appendices and referenced supplements; hashing/retrieval alone is insufficient.",
+      "examined": "All text returned by the web PDF reader, including the six principles.",
+      "unexamined": "Page images/layout and linked journal statement/associated commentaries were not fully examined.",
+      "reviewer": {
+        "identity": "Primary Codex AI implementer",
+        "type": "AI",
+        "independent": false
+      },
+      "findings": "Conclusions require context and more than a p-value threshold; a p-value does not measure the probability that a hypothesis is true.",
+      "limitations": "Targeted methodological rationale only; no claim to have reviewed associated bibliographies or implemented/validated a general inference engine."
+    },
+    {
+      "citation": "Yen, J.; Leber, D.; Pibida, L. Comparing Instruments. NIST Technical Note 2106. September 2020. DOI 10.6028/NIST.TN.2106.",
+      "url": "https://nvlpubs.nist.gov/nistpubs/TechnicalNotes/NIST.TN.2106.pdf",
+      "doi": "10.6028/NIST.TN.2106",
+      "retrieved_version": "September 2020, 57 PDF pages",
+      "artifact": "nist-tn2106-2020.pdf",
+      "sha256": "e457b12ab525cc3cbf3bdf0997f84fa0a780eadf5acf9910da031f019ddf216b",
+      "byte_count": 2562408,
+      "retrieval_attempts": [
+        {
+          "method": "web PDF open/find",
+          "status": "accessible; text extracted"
+        },
+        {
+          "method": "curl -fL --max-time 30 original PDF",
+          "status": "success",
+          "local_file_mtime_utc": "2026-10-18T01:59:48.628367+00:00"
+        }
+      ],
+      "access_status": "retrieved",
+      "review_status": "partial-review",
+      "review_definition": "Complete review requires substantive examination of the entire original source including all figures, tables, appendices and referenced supplements; hashing/retrieval alone is insufficient.",
+      "examined": "Targeted section 5 passages on null hypotheses/indifference zone and 5.4 confidence-interval representation, plus title/contents.",
+      "unexamined": "Remaining sections, derivations, figures including Figure 7, examples, sample-size calculations and references were not fully examined.",
+      "reviewer": {
+        "identity": "Primary Codex AI implementer",
+        "type": "AI",
+        "independent": false
+      },
+      "findings": "Equivalence requires a context-justified indifference region and an appropriate test/interval rule; failure to reject a difference is not a substitute.",
+      "limitations": "Targeted methodological rationale only; no claim to have reviewed associated bibliographies or implemented/validated a general inference engine."
+    }
+  ]
+}

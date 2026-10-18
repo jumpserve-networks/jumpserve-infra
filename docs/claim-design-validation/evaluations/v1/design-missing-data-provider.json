@@ -1,0 +1,167 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_yG8hCab7PVABiNO3w0uhcr",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "summary": "The paper claim asserts that adding 20 ms delay changes TCP flow completion time under fixed emulated bottleneck conditions. The authors' original recorded data are unavailable, so direct reanalysis is not possible. However, the claim is well-suited to an independent emulated-netem-v1 pilot: we can reproduce the described conditions (fixed bottleneck, 0 ms vs. 20 ms one-way delay) and measure flow completion time (FCT) for TCP flows under cubic, bbr, and reno. This proposal describes a bounded pilot experiment using the emulated network runner to generate new measurements that can be compared against the claim's direction (delay increases FCT), without asserting the original data have been recovered or the claim proven.",
+                            "questions": [
+                                "What bottleneck link rate (Mbit/s) and buffer size (kbytes) did the authors use in their emulated setup, so we can match those fixed conditions?",
+                                "What TCP file transfer sizes (MBytes) and number of concurrent flows were used in the original experiment?",
+                                "Were the 20 ms delays applied one-way or round-trip, and was any packet loss included alongside the delay condition?"
+                            ],
+                            "proposal": {
+                                "problem": "The authors' original recorded data are unavailable, making direct reanalysis impossible. The claim that adding 20 ms delay changes TCP flow completion time under fixed emulated bottleneck conditions must therefore be assessed via new independent measurements that reproduce the described scenario.",
+                                "question": "Under a fixed emulated bottleneck, does adding 20 ms client delay (vs. 0 ms baseline) produce a measurable change in TCP flow completion time across common congestion control algorithms?",
+                                "hypothesis": "Under fixed emulated bottleneck conditions, adding 20 ms delay changes TCP flow completion time.",
+                                "conditions": "Two delay conditions: 0 ms (baseline) and 20 ms one-way client delay. Fixed bottleneck rate (proposed: 100 Mbit/s) and buffer (proposed: 256 kbytes). No packet loss. Two concurrent clients. File size: 10 MBytes per flow. CCAs tested: cubic, bbr, reno. Snapshot interval: 100 ms.",
+                                "related_work": "Source citation: 'Synthetic networking paper claim for development evaluation' (sha256: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa). Source review status: retrieved-unreviewed. No full text provided; coverage is recorded metadata only. Original data are confirmed unavailable by the user. The emulated-netem-v1 runner provides a controlled Linux tc-netem environment suitable for reproducing described bottleneck conditions.",
+                                "alternatives": "1. Wait for authors to release original data and perform direct reanalysis — currently blocked. 2. Broader validation with varied bottleneck rates, buffer sizes, and file sizes to assess generality of the claim beyond the specific 20 ms condition. 3. Real-world iperf measurements (real-world-iperf-v1) to complement emulated results, though these introduce uncontrolled path variability.",
+                                "design": "Independent new-measurement pilot using emulated-netem-v1. Two configurations: (A) 0 ms delay baseline, (B) 20 ms delay treatment. Each configuration run with 2 clients, CCAs [cubic, bbr, reno], file size 10 MBytes, bottleneck 100 Mbit/s, buffer 256 kbytes, 0% loss. 8 replications per configuration (16 total planned units). FCT recorded per flow per replication. This is a pilot stage; causal inference and generalization are not claimed from pilot results alone.",
+                                "metrics": "Primary metric: flow_completion_time_ms (milliseconds). Per-flow FCT recorded for each client in each replication. Summary: median and range of FCT across replications per condition and CCA. No inferential intervals are declared without a justified independent sampling design.",
+                                "controls": "Fixed bottleneck rate (100 Mbit/s proposed), fixed buffer size (256 kbytes proposed), fixed file size (10 MBytes proposed), fixed number of clients (2), fixed loss (0%), same CCAs across both delay conditions, same snapshot interval (100 ms), same runner version (emulated-netem-v1).",
+                                "falsification": "The claim is not supported by these pilot measurements if median FCT under 20 ms delay is not observably different from median FCT under 0 ms delay for any tested CCA. A directional change (increase or decrease) in FCT with added delay is the minimum observable consistent with the claim. If FCT distributions fully overlap across conditions for all CCAs, the claim's direction is not confirmed in this pilot.",
+                                "inputs": "Runner: emulated-netem-v1. Source sha256 (paper claim): aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa. Packet sha256: a1b401caab0920ee2f11377b7285ff0ef7269c187cfa7f3df1c1cb576ba8c0da. Context sha256: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb. Bottleneck rate, buffer size, file size, and exact delay directionality (one-way vs. RTT) from the original paper are UNKNOWN and must be confirmed by the owner before freezing the protocol.",
+                                "limitations": "1. Original data are unavailable; this is new measurement, not reanalysis. 2. Proposed bottleneck rate (100 Mbit/s), buffer (256 kbytes), and file size (10 MBytes) are not confirmed from the paper — results may not reproduce the authors' exact conditions. 3. Pilot stage only; 8 replications per condition are insufficient to establish generalization or causality. 4. Emulated environment (Linux tc-netem) may differ from the authors' emulation platform. 5. Delay directionality (one-way vs. RTT) is unconfirmed. 6. Fresh AI reviews share models and inputs and are not independent human review.",
+                                "protocol": {
+                                    "questions": [
+                                        "What bottleneck link rate (Mbit/s) and buffer size (kbytes) did the authors use?",
+                                        "What TCP file transfer sizes (MBytes) and number of concurrent flows were used?",
+                                        "Were the 20 ms delays applied one-way or round-trip, and was any packet loss included?"
+                                    ],
+                                    "hypotheses": "Under fixed emulated bottleneck conditions, adding 20 ms delay changes TCP flow completion time.",
+                                    "metrics": [
+                                        {
+                                            "name": "flow_completion_time_ms",
+                                            "units": "ms",
+                                            "bounds": "0 to 300000",
+                                            "criterion": "Median FCT under 20 ms delay condition differs observably from median FCT under 0 ms delay condition for at least one CCA"
+                                        }
+                                    ],
+                                    "configurations": [
+                                        {
+                                            "identity": "baseline_0ms",
+                                            "details": {
+                                                "num_clients": 2,
+                                                "client_delays_ms": [
+                                                    0,
+                                                    0
+                                                ],
+                                                "client_ccas": [
+                                                    "cubic",
+                                                    "bbr",
+                                                    "reno"
+                                                ],
+                                                "client_file_sizes_mbytes": [
+                                                    10,
+                                                    10
+                                                ],
+                                                "loss_pct": 0,
+                                                "snapshot_interval_ms": 100,
+                                                "script": "netem_nines.py",
+                                                "bottleneck_all_client_rate_mbit": 100,
+                                                "bottleneck_buffer_kbytes": 256
+                                            }
+                                        },
+                                        {
+                                            "identity": "treatment_20ms",
+                                            "details": {
+                                                "num_clients": 2,
+                                                "client_delays_ms": [
+                                                    20,
+                                                    20
+                                                ],
+                                                "client_ccas": [
+                                                    "cubic",
+                                                    "bbr",
+                                                    "reno"
+                                                ],
+                                                "client_file_sizes_mbytes": [
+                                                    10,
+                                                    10
+                                                ],
+                                                "loss_pct": 0,
+                                                "snapshot_interval_ms": 100,
+                                                "script": "netem_nines.py",
+                                                "bottleneck_all_client_rate_mbit": 100,
+                                                "bottleneck_buffer_kbytes": 256
+                                            }
+                                        }
+                                    ],
+                                    "input_versions": [
+                                        {
+                                            "identity": "paper_claim_source",
+                                            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                                        },
+                                        {
+                                            "identity": "packet",
+                                            "sha256": "a1b401caab0920ee2f11377b7285ff0ef7269c187cfa7f3df1c1cb576ba8c0da"
+                                        }
+                                    ],
+                                    "dates_or_epochs": "To be recorded at execution time; no prior exposure to these exact configurations.",
+                                    "algorithms": [
+                                        "TCP cubic",
+                                        "TCP bbr",
+                                        "TCP reno",
+                                        "Linux tc-netem delay shaping"
+                                    ],
+                                    "seeds": "Not applicable for deterministic netem delay; replication provides variability sampling.",
+                                    "sensitivity": {
+                                        "applicable": true,
+                                        "rationale": "Bottleneck rate, buffer size, and file size are proposed values not confirmed from the paper. Sensitivity to these parameters should be assessed in a follow-on broader-validation stage if the pilot proceeds."
+                                    },
+                                    "controls": [
+                                        "Fixed bottleneck rate (100 Mbit/s proposed)",
+                                        "Fixed buffer size (256 kbytes proposed)",
+                                        "Fixed file size (10 MBytes proposed)",
+                                        "Fixed number of clients (2)",
+                                        "Fixed loss percentage (0%)",
+                                        "Same CCAs across both delay conditions",
+                                        "Same snapshot interval (100 ms)",
+                                        "Same runner version (emulated-netem-v1)"
+                                    ],
+                                    "replication_unit": "One full run of both clients completing file transfer under a given delay condition and CCA set",
+                                    "planned_units": 16,
+                                    "sample_size_rationale": "8 replications per condition (2 configurations × 8 = 16 total) is a minimal pilot to observe directional FCT differences. Insufficient for inferential statistics; pilot stage only.",
+                                    "exclusions": "Replications where any client flow does not complete (e.g., runner error or timeout) will be flagged and excluded from FCT summary; excluded runs will be reported.",
+                                    "missing_data": "If original bottleneck/file-size parameters are provided by the owner before freezing, configurations will be updated. Missing data from incomplete flows will be reported separately.",
+                                    "statistics": "Descriptive only: median and range of flow_completion_time_ms per condition per CCA. No inferential intervals declared at pilot stage without a justified independent sampling design.",
+                                    "dependence": "Two clients share the same bottleneck per run; their FCTs are not independent within a replication. Per-client FCTs will be reported separately and not pooled as independent observations.",
+                                    "resource_limits": {
+                                        "max_observations": 64,
+                                        "max_input_bytes": 10000000,
+                                        "wall_seconds": 3600,
+                                        "estimated_cost_usd": null,
+                                        "cost_basis": "Emulated runner; no cloud compute charges known at proposal time."
+                                    },
+                                    "stopping_rule": "Stop after 16 planned units. Do not retry indefinitely to obtain a desired directional result.",
+                                    "prior_exposure": "No prior measurements under these exact proposed configurations.",
+                                    "coverage_limits": "Pilot covers only the two delay conditions (0 ms, 20 ms), three CCAs, one file size, one bottleneck rate, and one buffer size. Generalization beyond these conditions is not supported by pilot results.",
+                                    "data_origin": "New emulated measurements generated by emulated-netem-v1 runner. Not a reanalysis of original author data (unavailable).",
+                                    "stage": "pilot",
+                                    "experiment_type": "new-measurement"
+                                }
+                            }
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 2428,
+        "outputTokens": 2912,
+        "totalTokens": 5340,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 25619
+    }
+}

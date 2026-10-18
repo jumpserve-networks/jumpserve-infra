@@ -1,0 +1,33 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_KrIt2hImY2ewY8gBVD0pOP",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "reuse",
+                            "summary": "The supplied packet contains a complete, internally consistent descriptive instrumentation pilot. One cubic flow at 10 ms delay is run once under emulated-netem-v1 to verify that flow_completion_time_ms can be recorded with a retained observation identity. The wider paper claim (20 ms delay comparison) remains unresolved. The server references the saved packet; no modifications are made.",
+                            "clarification_questions": [],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 5810,
+        "outputTokens": 170,
+        "totalTokens": 5980,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 2340
+    }
+}

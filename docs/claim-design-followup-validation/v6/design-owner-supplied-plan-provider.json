@@ -1,0 +1,140 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_nK9O5ZVnz6EbFJi5Hju5nz",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "propose",
+                            "guidance": [],
+                            "unit_values": [],
+                            "clarification_questions": [],
+                            "proposal": {
+                                "problem": "Verify the measurement path before a separate matched delay-comparison campaign.",
+                                "question": "Can the frozen emulated runner record one cubic flow completion time with a retained observation identity?",
+                                "hypothesis": "Under fixed emulated bottleneck conditions, adding 20 ms delay changes TCP flow completion time.",
+                                "conditions": "One 1 MB cubic flow with 10 ms delay, 100 Mbit/s bottleneck and 125 KB buffer in emulated-netem-v1.",
+                                "related_work": "No novelty or full-text literature review is asserted; original claim/source metadata and hashes are retained.",
+                                "alternatives": "A runner or instrumentation defect can prevent observation; successful recording alone does not validate the delay claim.",
+                                "design": "Run the one frozen configuration once and preserve the completion-time observation and exact identifiers.",
+                                "metrics": "flow_completion_time_ms in ms; finite nonnegative record, with no published numeric target.",
+                                "controls": "One frozen configuration and one flow; verify exact configuration and input hash before execution.",
+                                "inputs": "The fixed built-in runner configuration and source hashes are supplied; no external dataset or credentials are required for planning. Execution needs an enabled runner.",
+                                "limitations": "Instrumentation feasibility only. No claim about the 20 ms comparison, causality, real-world performance or generalization is resolved.",
+                                "protocol": {
+                                    "hypotheses": "Under fixed emulated bottleneck conditions, adding 20 ms delay changes TCP flow completion time.",
+                                    "dates_or_epochs": "Prospective execution after protocol freeze; retain actual UTC timestamps and runner revisions",
+                                    "replication_unit": "One complete emulated invocation; no independent population replication is asserted",
+                                    "sample_size_rationale": "One run verifies recording feasibility only; no comparison or population inference is attempted",
+                                    "exclusions": "Configuration or input identity mismatch fails the attempt; retain all failures",
+                                    "missing_data": "Absent completion time is missing, invalid values remain invalid, and a recorded zero is not imputed or silently excluded",
+                                    "dependence": "One shared emulated host; no independent sampling or population uncertainty is asserted",
+                                    "stopping_rule": "Stop after this one frozen invocation or its wall deadline; preserve failed outcomes without automatic retries",
+                                    "prior_exposure": "Synthetic development case exposed to the implementing AI; no held-out validation or new networking outcome asserted",
+                                    "coverage_limits": "Instrumentation feasibility only. No claim about the 20 ms comparison, causality, real-world performance or generalization is resolved",
+                                    "questions": [
+                                        "Can the frozen emulated runner record one cubic flow completion time with a retained observation identity?"
+                                    ],
+                                    "algorithms": [
+                                        "emulated-netem-v1, netem_cubic_benchmark_nines.py; cubic; record actual runtime versions"
+                                    ],
+                                    "controls": [
+                                        "One frozen configuration and one flow; verify exact configuration and input hash before execution"
+                                    ],
+                                    "seeds": {
+                                        "applicable": false,
+                                        "rationale": "No randomized assignment or stochastic analysis in this one-run instrumentation pilot"
+                                    },
+                                    "sensitivity": {
+                                        "applicable": false,
+                                        "rationale": "This instrumentation pilot records one configuration; sensitivity to delay requires a separate matched campaign"
+                                    },
+                                    "planned_units": 1,
+                                    "stage": "pilot",
+                                    "experiment_type": "independent-check",
+                                    "data_origin": "simulation",
+                                    "metrics": [
+                                        {
+                                            "name": "flow_completion_time_ms",
+                                            "units": "ms",
+                                            "lower_bound": 0,
+                                            "planned_observations": 1
+                                        }
+                                    ],
+                                    "configurations": [
+                                        {
+                                            "identity": "cubic-10ms",
+                                            "details": {
+                                                "test_config": {
+                                                    "num_clients": 1,
+                                                    "client_delays_ms": [
+                                                        10
+                                                    ],
+                                                    "client_ccas": [
+                                                        "cubic"
+                                                    ],
+                                                    "client_file_sizes_mbytes": [
+                                                        1
+                                                    ],
+                                                    "bottleneck_all_client_rate_mbit": 100,
+                                                    "bottleneck_buffer_kbytes": 125,
+                                                    "script": "netem_cubic_benchmark_nines.py"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "input_versions": [
+                                        {
+                                            "identity": "Original source",
+                                            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                                        },
+                                        {
+                                            "identity": "network-execution-v1:cubic-10ms:0",
+                                            "sha256": "b3214e010a634d4ce12405cff8854e29fecd9dad930f722f2bec898a57f87c46"
+                                        }
+                                    ],
+                                    "resource_limits": {
+                                        "max_observations": 1,
+                                        "max_input_bytes": 2000000,
+                                        "wall_seconds": 1800,
+                                        "estimated_cost_usd": null,
+                                        "cost_basis": "Actual cloud hosting charges unknown; configured limits are not measured costs"
+                                    },
+                                    "execution": {
+                                        "version": "network-execution-v1",
+                                        "runner": "emulated-netem-v1",
+                                        "replications": 1,
+                                        "limits": {
+                                            "wall_seconds": 1800,
+                                            "max_instances": 1,
+                                            "max_output_bytes": 1000000,
+                                            "max_network_bytes": 100000000
+                                        },
+                                        "exclusive_resources": [
+                                            "fixture:target"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 6823,
+        "outputTokens": 1468,
+        "totalTokens": 8291,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 6543
+    }
+}

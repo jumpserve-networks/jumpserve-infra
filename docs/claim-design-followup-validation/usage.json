@@ -1,0 +1,68 @@
+{
+  "recorded_at": "2026-10-18T02:37:04.677335+00:00",
+  "campaigns": [
+    {
+      "candidate": "v5",
+      "calls": 20,
+      "input_tokens": 93770,
+      "output_tokens": 6512,
+      "campaign_wall_seconds": 88.084415,
+      "provider_responses": 20,
+      "provider_failures": 0,
+      "pipeline_incomplete": []
+    },
+    {
+      "candidate": "v6",
+      "calls": 20,
+      "input_tokens": 107370,
+      "output_tokens": 5742,
+      "campaign_wall_seconds": 74.582337,
+      "provider_responses": 20,
+      "provider_failures": 0,
+      "pipeline_incomplete": [
+        "design-units"
+      ]
+    }
+  ],
+  "actual_provider_calls": 40,
+  "input_tokens": 201140,
+  "output_tokens": 12254,
+  "endpoint_region": "us-east-1",
+  "actual_provider_execution_region": null,
+  "aws_account": "395567831870",
+  "configured_supabase_project": "regphejnlvfpyokpniny",
+  "provider_retries": 0,
+  "measured_charges_usd": null,
+  "estimated_model_cost_usd": null,
+  "local_compute_cost_usd": null,
+  "shared_storage_cost_usd": null,
+  "authoring_and_review_model_usage": null,
+  "authoring_and_review_model_cost_usd": null,
+  "cost_basis": "Provider inputTokens/outputTokens and campaign elapsed time available; billing/authoring/local compute/storage allocation not available, not zero. Endpoint region does not establish provider compute location.",
+  "replays": [
+    {
+      "directory": "20261018T022141923314Z",
+      "new_provider_calls": 0,
+      "local_analysis_loop_wall_seconds": 0.01762858300935477,
+      "timing_scope": "Replay loop; initial snapshot/setup overhead unallocated. Historical provider tokens not counted again."
+    },
+    {
+      "directory": "20261018T022823046213Z",
+      "new_provider_calls": 0,
+      "local_analysis_loop_wall_seconds": 0.019939916965086013,
+      "timing_scope": "Replay loop; initial snapshot/setup overhead unallocated. Historical provider tokens not counted again."
+    },
+    {
+      "directory": "20261018T022913385588Z",
+      "new_provider_calls": 0,
+      "local_analysis_loop_wall_seconds": 0.020170749980024993,
+      "timing_scope": "Replay loop; initial snapshot/setup overhead unallocated. Historical provider tokens not counted again."
+    },
+    {
+      "directory": "20261018T023313505963Z",
+      "new_provider_calls": 0,
+      "local_analysis_loop_wall_seconds": 0.02385995798977092,
+      "timing_scope": "Replay loop; initial snapshot/setup overhead unallocated. Historical provider tokens not counted again."
+    }
+  ]
+}

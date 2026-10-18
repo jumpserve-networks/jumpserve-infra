@@ -1,0 +1,51 @@
+{
+  "protocol": "claim-experiment-design-protocol-v1",
+  "amendment": "claim-experiment-design-amendment-v2",
+  "database": "jumpserve_research_ideas_test_20261018t012836086867z",
+  "started_at": "2026-10-18T01:28:36.087368+00:00",
+  "checks": [],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independence": "Not independent"
+  },
+  "design": "Synthetic software development regressions, not scientific or held-out validation.",
+  "conditional_gaps": [
+    "Remote Supabase Storage",
+    "Real Google-authenticated owner request",
+    "Production migrations and live prompt publication",
+    "Actual provider-to-Supabase storage roundtrip"
+  ],
+  "measured_charges_usd": null,
+  "model_usage": null,
+  "migration_sha256": {
+    "202609200001_agent_prompts.sql": "7468b857ae542b5597077981ecd433c7662a5bb1f8f477e34d490c5f36cd849b",
+    "202609290001_real_world_agent.sql": "fb7b7556fc1f516e67e6334d0aaa5b21c0939e955f42d2e0abdd3bddc6fb373f",
+    "202610040009_agent_evidence_rendering.sql": "034b7fc766addee69474e86919b5062cf56b6e72502a658f9c4fae7533d5555e",
+    "202610050104_ipv6_publication_review_guard.sql": "bd4d000f5a34661c0026194b498e0cefaf12353b79cc7ea436736431768ef36d",
+    "202610070001_research_workflow.sql": "d97983192c89e40886d613e5a2ee4548e52a0e5d66a397ccaab134f3efacb6d3",
+    "202610070002_research_queue.sql": "49f0f761aba55bc7771968b30048c34a7db4996947503b558b3eaac599577d63",
+    "202610070003_research_preparation.sql": "e3e6b75ced1c98e494551c7500825080bc141a2594263cd8840f082bd383d906",
+    "202610120001_research_ideas.sql": "b91c8b157090e397029764372cfea09f0c9af7a37f61346fac5d912706cbf00f",
+    "202610120002_research_idea_prompt.sql": "9efa726606a59a16186bdb5ff5e9ab8e78d972185ed752bdd93e041926e7718b",
+    "202610120003_research_idea_prompt_seed.sql": "b2f01cfbed3e607f2513f7b7eefa08f3da8587664133451a180d05e47ae67286",
+    "202610120004_research_idea_prompt_seed_v2.sql": "e902230db40c097bbe6f1b1b406523b4a97725cce668dc51ce482c64e7d1f54d",
+    "202610130001_research_idea_review_roles.sql": "a9f46a0993cc23b417ce5f06e672678cc95a9efefbf752a632b44171d9ec1b97",
+    "202610140001_idea_interview_prompt.sql": "94aa9f3317bec4938d2b4a7fed6d8555170285279e1ce67bb57bf64546a5b71b",
+    "202610140002_idea_interview_prompt_v4.sql": "d35fd0e2f43db55330c064664d0bec38a9dea61c0910945e549132b8ae7c88a7",
+    "202610140003_idea_interview_prompt_v5.sql": "3f318da16db4c0622f7b98a5365bb97d551be31e39d1e555aa93fa381b052f49",
+    "202610140004_idea_interview_prompt_v6.sql": "7af34f10601d252179a759b851236940e5f2eb3a416f46a8848b381ebac8a67f",
+    "202610140005_idea_interview_prompt_v7.sql": "ab010bea1076af1b157a673d62275ce7d9fa021b67c8a753a8293c2f1bade394",
+    "202610140006_idea_interview_prompt_v8.sql": "3c0cbd7f42b38efebc717d2a5238b00b56469cefbbda03a189f92a17009303d1",
+    "202610140007_idea_review_sources_v9.sql": "b07d0048bcef80e271d93f245f5f869a34e5620c82ccf4f5dee76e1bedc40a23",
+    "202610140008_idea_review_sources_v10.sql": "4c6aca6ed15f1b76913f905414a98eaf67e50ba14c1d22a5e44dc90b5ed39779",
+    "202610140009_idea_review_sources_v11.sql": "99cd12fdc5bc90a639e4eabe4726d9711781df7a38a9a9825be7550f43e19bbf",
+    "202610130002_network_execution.sql": "2fca154107dd146a80c0fb7248fe6b6e78db017f1ef2bd1810b12ba6f69e0851",
+    "202610170001_claim_experiment_design.sql": "0ea6ce7630e2d51f5b2bdae697619ef1fbbf15329b4260b644bd1cfc5f0e8b78",
+    "202610170002_claim_design_prompt.sql": "b3bebf881b880a0523c100a14c180b1d7619579a0a0edd2ae96fcf6983e4535a"
+  },
+  "bootstrap_limit": "Legacy agent_sessions base table synthesized; listed prompt/research migrations executed as original files. Historical study-table migrations outside this feature are not replayed.",
+  "passed": false,
+  "error": "ERROR:  invalid input syntax for type json\nLINE 1: (p_source-'id') is distinct from (p_document->'source'-array...\n                                                      ^\nDETAIL:  Token \"source\" is invalid.\nQUERY:  (p_source-'id') is distinct from (p_document->'source'-array['id','study_id','created_at']) or\n  (p_claim-array['id','source_id']) is distinct from (p_document->'claim'-array['id','source_id','study_id','created_at']) or\n  p_claim->>'source_id' is distinct from p_source->>'id'\nCONTEXT:  JSON data, line 1: source\nPL/pgSQL function public.research_initialize_claim_design(uuid,uuid,jsonb,text,text,jsonb,jsonb) line 12 at IF",
+  "ended_at": "2026-10-18T01:28:38.014199+00:00"
+}

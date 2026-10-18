@@ -1,0 +1,34 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_6nr9jUvwVXM0GJ8vie6L19",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "reuse",
+                            "guidance": [],
+                            "unit_values": [],
+                            "clarification_questions": [],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 6660,
+        "outputTokens": 107,
+        "totalTokens": 6767,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 1856
+    }
+}

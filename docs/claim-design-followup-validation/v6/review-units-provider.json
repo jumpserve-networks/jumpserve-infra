@@ -1,0 +1,55 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_lMyUnRTTpIpbPikf83M9jl",
+                        "name": "submit_idea_issues",
+                        "input": {
+                            "issues": [
+                                {
+                                    "code": "unit-conflict",
+                                    "severity": "blocking",
+                                    "references": [
+                                        "/metrics",
+                                        "/protocol/metrics"
+                                    ]
+                                },
+                                {
+                                    "code": "limitation",
+                                    "severity": "warning",
+                                    "references": [
+                                        "/protocol/prior_exposure",
+                                        "/limitations",
+                                        "/protocol/coverage_limits"
+                                    ]
+                                },
+                                {
+                                    "code": "limitation",
+                                    "severity": "warning",
+                                    "references": [
+                                        "/protocol/resource_limits"
+                                    ]
+                                }
+                            ]
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3597,
+        "outputTokens": 107,
+        "totalTokens": 3704,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 1460
+    }
+}

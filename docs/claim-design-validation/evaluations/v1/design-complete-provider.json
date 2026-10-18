@@ -1,0 +1,152 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_V13IlRosxhVqndrlHFQxQ4",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "summary": "This proposal preserves a precisely bounded, single-configuration descriptive pilot using the emulated-netem-v1 runner. One cubic flow (1 MB, 10 ms delay, 100 Mbit/s bottleneck, 125 KB buffer) is executed once to record flow_completion_time_ms. The result is compared only with a subsequently identified matched baseline under exact absolute tolerance. The wider paper claim — that adding 20 ms delay changes TCP flow completion time under fixed emulated bottleneck conditions — remains unresolved by this pilot. No population inference, causal conclusion, or monetary charge is asserted. The protocol is reproduced exactly from the packet with source hashes retained as supplied.",
+                            "questions": [
+                                "What matched baseline configuration (e.g., cubic flow at 30 ms delay) will be used for the subsequent comparison, and has its execution specification been frozen?",
+                                "Is the script identifier 'netem_cubic_benchmark_nines.py' confirmed as the correct entry point for the emulated-netem-v1 runner, or should it be 'netem_nines.py' as referenced in the runner documentation?",
+                                "Are there any additional replications planned beyond this single pilot run before the broader 20 ms delay comparison is attempted?"
+                            ],
+                            "proposal": {
+                                "problem": "Check a precisely bounded compression hypothesis before any larger workload study. This pilot executes one frozen netem specification for a single cubic flow and records completion time for later matched comparison only.",
+                                "question": "What is the completion time of this one frozen cubic flow (1 MB, cubic CCA, 10 ms delay, 100 Mbit/s bottleneck, 125 KB buffer)?",
+                                "hypothesis": "Under fixed emulated bottleneck conditions, adding 20 ms delay changes TCP flow completion time.",
+                                "conditions": "One 1 MB cubic flow with 10 ms delay, 100 Mbit/s bottleneck and 125 KB buffer; a descriptive implementation pilot. Decompression must recover the exact byte hash of the original payload. Encoded bytes include gzip framing.",
+                                "related_work": "Novelty is not claimed. No literature search or full review is asserted. Existing stdlib algorithms are used. The wider paper claim remains unresolved pending a matched baseline run.",
+                                "alternatives": "Any reduction may reflect repetitive input; real-world benefit requires separate representative workloads and timing controls. A failed or missing completion time remains failed or missing. This one configuration does not resolve the broad delay comparison.",
+                                "design": "Execute the one frozen netem specification (cubic-10ms), record flow_completion_time_ms, and compare only with a subsequently identified matched baseline configuration. No population inference is drawn from this single pilot run.",
+                                "metrics": "flow_completion_time_ms in ms; no published numeric target is available. Exact absolute difference tolerance of 0 applies only to matched numeric comparisons against a separately supplied baseline.",
+                                "controls": "Same original payload for both configurations; decompression must recover its exact byte hash; count encoded bytes including the gzip framing. Exact observation/configuration/metric/units matching enforced. No zero imputation. Unique observation keys required.",
+                                "falsification": "A failed or missing completion time remains failed or missing. This one configuration does not resolve the broad delay comparison. Stop on any input identity, schema, configuration, units or budget violation; preserve the failed attempt. Unmatched observations are excluded and recorded; duplicates, unit mismatches and changed inputs fail the run.",
+                                "inputs": "Built-in emulated-netem-v1 runner. Exact configuration identity: cubic-10ms. Source sha256: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa. Execution input sha256: b3214e010a634d4ce12405cff8854e29fecd9dad930f722f2bec898a57f87c46. No original recorded data available. No present-day substitution of identities or epochs.",
+                                "limitations": "Software development pilot only. No independent population inference. No actual observations yet. Prior exposure to software development cases; no held-out scientific validation. Sensitivity analysis not applicable: this campaign checks one fixed declared tolerance; amended tolerances require separate protocols. Seeds not applicable: deterministic census, no randomized algorithm. Fresh AI reviews share models and inputs and are not independent human review.",
+                                "protocol": {
+                                    "questions": [
+                                        "Do every supplied matched numerical observation and separately sourced published value agree under the declared absolute tolerance?"
+                                    ],
+                                    "hypotheses": "Under fixed emulated bottleneck conditions, adding 20 ms delay changes TCP flow completion time.",
+                                    "metrics": [
+                                        {
+                                            "name": "flow_completion_time_ms",
+                                            "units": "ms",
+                                            "bounds": null,
+                                            "criterion": "Descriptive record only; no inferential bound. Exact absolute difference tolerance of 0 applied only against a subsequently identified matched baseline."
+                                        }
+                                    ],
+                                    "configurations": [
+                                        {
+                                            "identity": "cubic-10ms",
+                                            "details": {
+                                                "test_config": {
+                                                    "num_clients": 1,
+                                                    "client_delays_ms": [
+                                                        10
+                                                    ],
+                                                    "client_ccas": [
+                                                        "cubic"
+                                                    ],
+                                                    "client_file_sizes_mbytes": [
+                                                        1
+                                                    ],
+                                                    "loss_pct": 0,
+                                                    "snapshot_interval_ms": 100,
+                                                    "script": "netem_cubic_benchmark_nines.py",
+                                                    "bottleneck_all_client_rate_mbit": 100,
+                                                    "bottleneck_buffer_kbytes": 125
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "input_versions": [
+                                        {
+                                            "identity": "matched-input.json",
+                                            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                                        },
+                                        {
+                                            "identity": "network-execution-v1:cubic-10ms:0",
+                                            "sha256": "b3214e010a634d4ce12405cff8854e29fecd9dad930f722f2bec898a57f87c46"
+                                        },
+                                        {
+                                            "identity": "Original source",
+                                            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                                        }
+                                    ],
+                                    "dates_or_epochs": "Use the explicit identities and epochs in the input; no present-day substitution.",
+                                    "algorithms": [
+                                        "matched-numeric-v1; exact Decimal absolute differences"
+                                    ],
+                                    "seeds": {
+                                        "applicable": false,
+                                        "rationale": "Deterministic census; no randomized algorithm."
+                                    },
+                                    "sensitivity": {
+                                        "applicable": false,
+                                        "rationale": "This campaign checks one fixed declared tolerance; amended tolerances require separate protocols."
+                                    },
+                                    "controls": [
+                                        "Exact observation/configuration/metric/units matching",
+                                        "No zero imputation",
+                                        "Unique observation keys"
+                                    ],
+                                    "replication_unit": "The explicitly identified observation; no independence is inferred between observations.",
+                                    "planned_units": 1,
+                                    "sample_size_rationale": "Census of the supplied published comparison cells, with unexpected observations preserved as exclusions.",
+                                    "exclusions": "Unmatched observations are excluded and recorded; duplicates, unit mismatches and changed inputs fail the run.",
+                                    "missing_data": "Absent expected observations remain missing. Invalid and ambiguous values remain distinct from recorded zero.",
+                                    "statistics": "Descriptive exact comparisons only; no inferential intervals.",
+                                    "dependence": "Dependencies may exist; no independent replications or population inference are asserted.",
+                                    "resource_limits": {
+                                        "max_observations": 1000,
+                                        "max_input_bytes": 2000000,
+                                        "wall_seconds": 1800,
+                                        "estimated_cost_usd": null,
+                                        "cost_basis": "Local or API hosting costs are unallocated; missing charges are not zero. No experiment instances or model calls are requested."
+                                    },
+                                    "stopping_rule": "Stop on an input identity, schema, configuration, units or budget violation; preserve the failed attempt.",
+                                    "prior_exposure": "Exposed software development cases; no held-out scientific validation.",
+                                    "coverage_limits": "Numerical agreement within supplied cells only; no correctness, compliance, causal, operational or population validation.",
+                                    "data_origin": "simulation",
+                                    "stage": "pilot",
+                                    "experiment_type": "independent-check",
+                                    "execution": {
+                                        "version": "network-execution-v1",
+                                        "runner": "emulated-netem-v1",
+                                        "replications": 1,
+                                        "limits": {
+                                            "wall_seconds": 1800,
+                                            "max_instances": 1,
+                                            "max_output_bytes": 1000000,
+                                            "max_network_bytes": 100000000
+                                        },
+                                        "exclusive_resources": [
+                                            "fixture:target"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3467,
+        "outputTokens": 2171,
+        "totalTokens": 5638,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 14085
+    }
+}

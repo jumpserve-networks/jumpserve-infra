@@ -1,0 +1,48 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_KjKnobITvvmhQX7SHRdby7",
+                        "name": "submit_idea_issues",
+                        "input": {
+                            "issues": [
+                                {
+                                    "code": "limitation",
+                                    "severity": "warning",
+                                    "references": [
+                                        "/protocol/prior_exposure",
+                                        "/limitations",
+                                        "/protocol/coverage_limits"
+                                    ]
+                                },
+                                {
+                                    "code": "limitation",
+                                    "severity": "warning",
+                                    "references": [
+                                        "/protocol/resource_limits",
+                                        "/limitations"
+                                    ]
+                                }
+                            ]
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3605,
+        "outputTokens": 87,
+        "totalTokens": 3692,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 1302
+    }
+}

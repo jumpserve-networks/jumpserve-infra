@@ -46,6 +46,7 @@ def query(sql,database=DATABASE,role=None):
 
 def rpc(name,payload):
     signatures={
+      'research_initialize_claim_design':dict(p_study='uuid',p_actor='uuid',p_document='jsonb',p_raw='text',p_sha256='text',p_source='jsonb',p_claim='jsonb'),
       'research_create_study':dict(p_actor='uuid',p_id='uuid',p_document='jsonb'),
       'research_append':dict(p_study='uuid',p_actor='uuid',p_kind='text',p_record='jsonb'),
       'research_append_bundle':dict(p_study='uuid',p_actor='uuid',p_records='jsonb'),
@@ -92,7 +93,7 @@ def transport(path,method='GET',body=None,public=False,raw=False):
         return rpc(parsed.path.removeprefix('/rest/v1/rpc/'),body)
     if method!='GET' or body is not None:raise ValueError('Unexpected transport mutation')
     table=parsed.path.removeprefix('/rest/v1/')
-    allowed=['research_'+k for k in (*workflow.FIELDS,'studies','study_owners','queue_jobs','queue_events','prepared_plans','idea_packets','idea_runs','idea_readiness','idea_campaign_links')]
+    allowed=['research_'+k for k in (*workflow.FIELDS,'studies','study_owners','queue_jobs','queue_events','prepared_plans','idea_packets','idea_runs','idea_readiness','idea_campaign_links','claim_designs')]
     if table not in allowed:raise ValueError('Unsupported relation')
     params=dict(urllib.parse.parse_qsl(parsed.query));columns=params.pop('select').split(',')
     if any(not c.replace('_','').isalnum() for c in columns):raise ValueError('Unsafe projection')
@@ -128,7 +129,7 @@ def rejects(callback):
     raise AssertionError('Expected rejection')
 def uid(): return str(uuid.uuid4())
 def bootstrap():
-    query('create database '+DATABASE,'postgres')
+    query('create database '+DATABASE+" with template template0 encoding 'UTF8'",'postgres')
     query("""do $$ begin create role anon; exception when duplicate_object then null; end $$;
 do $$ begin create role authenticated; exception when duplicate_object then null; end $$;
 do $$ begin create role service_role bypassrls; exception when duplicate_object then null; end $$;
@@ -140,7 +141,8 @@ grant all on public.agent_sessions to service_role;""")
     report['migration_sha256']={}
     for name in ('202609200001_agent_prompts.sql','202609290001_real_world_agent.sql','202610040009_agent_evidence_rendering.sql','202610050104_ipv6_publication_review_guard.sql','202610070001_research_workflow.sql','202610070002_research_queue.sql','202610070003_research_preparation.sql','202610120001_research_ideas.sql','202610120002_research_idea_prompt.sql','202610120003_research_idea_prompt_seed.sql','202610120004_research_idea_prompt_seed_v2.sql','202610130001_research_idea_review_roles.sql','202610140001_idea_interview_prompt.sql','202610140002_idea_interview_prompt_v4.sql','202610140003_idea_interview_prompt_v5.sql','202610140004_idea_interview_prompt_v6.sql','202610140005_idea_interview_prompt_v7.sql','202610140006_idea_interview_prompt_v8.sql','202610140007_idea_review_sources_v9.sql','202610140008_idea_review_sources_v10.sql','202610140009_idea_review_sources_v11.sql'):
         raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
-    name='202610130002_network_execution.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
+    for name in ('202610130002_network_execution.sql','202610170001_claim_experiment_design.sql','202610170002_claim_design_prompt.sql','202610170003_claim_design_prompt_v2.sql','202610170004_claim_design_prompt_v3.sql','202610170005_claim_design_prompt_v4.sql','202610170006_claim_design_policy_guard.sql','202610170007_claim_design_prompt_v5.sql','202610170008_claim_design_v5_publication_guard.sql','202610170009_claim_design_prompt_v6.sql','202610170010_claim_design_v6_publication_guard.sql','202610170011_claim_design_replay_publication_guard.sql','202610170012_claim_design_quote_publication_guard.sql','202610170013_claim_design_exact_units_publication_guard.sql'):
+        raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     report['bootstrap_limit']='Legacy agent_sessions base table synthesized; listed prompt/research migrations executed as original files. Historical study-table migrations outside this feature are not replayed.'
     store.request=transport
 

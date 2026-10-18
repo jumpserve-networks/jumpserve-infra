@@ -1,0 +1,97 @@
+{
+  "recorded_at": "2026-10-18T02:37:04.677335+00:00",
+  "scope": "Local corrective implementation, not a scientific assessment or production release",
+  "checks": [
+    {
+      "repository": "jumpserve-back-end",
+      "command": "python3 -B -m unittest discover -s research_workflow/tests",
+      "passed": true,
+      "cases": 122
+    },
+    {
+      "repository": "jumpserve-infra",
+      "command": "python3 -B -m unittest discover -s test -p 'agent*_test.py'",
+      "passed": true,
+      "cases": 116
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "command": "npm test",
+      "passed": true,
+      "cases": 180
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "command": "npm run lint",
+      "passed": true,
+      "cases": null
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "command": "npm run build",
+      "passed": true,
+      "cases": null
+    },
+    {
+      "repository": "jumpserve-infra",
+      "command": "env JUMPSERVE_BACKEND_CHECKOUT=../jumpserve-back-end npm test -- --runInBand",
+      "passed": true,
+      "cases": 89
+    },
+    {
+      "repository": "jumpserve-infra",
+      "command": "npm run build",
+      "passed": true,
+      "cases": null
+    },
+    {
+      "repository": "jumpserve-infra",
+      "command": "python3 -B test/check_claim_design_database.py",
+      "passed": true,
+      "cases": 6
+    },
+    {
+      "repository": "jumpserve-infra",
+      "command": "python3 -B test/check_research_ideas_database.py",
+      "passed": true,
+      "cases": 11
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "command": "node scripts/verify-claim-design.mjs",
+      "passed": true,
+      "cases": 10
+    }
+  ],
+  "lint_warning": "Preexisting auth-button.tsx:153 internal navigation warning",
+  "diff_checks": "Three repositories pass git diff --check",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "evaluation": {
+    "v5_full_answer_passes": 16,
+    "v5_cases": 20,
+    "v6_original_pipeline_completions": 19,
+    "v6_original_cases": 20,
+    "final_archived_answer_replay_passes": 20,
+    "final_archived_answer_replay_cases": 20,
+    "new_provider_calls_in_replay": 0,
+    "held_out": false
+  },
+  "scientific_claims_reassessed": 0,
+  "network_measurements_created": 0,
+  "production_deployed": false,
+  "production_prompt_published": false,
+  "conditional_gaps": [
+    "Legitimate Google authenticated request",
+    "Production boto3/persistence roundtrip",
+    "Remote Supabase Storage",
+    "Actual cloud networking execution",
+    "Lambda Python 3.12; local Python 3.13"
+  ],
+  "original_log_scope": "Provider stdout and original reports retained. Full raw unit/build stdout not saved for every invocation; observed command outcomes summarized here.",
+  "local_publication_test": "Actual reviewed replay report accepted in isolated PostgreSQL; altered parent/provider hashes and failed/incomplete reports denied. Not production publication.",
+  "retained_failures": "V5 four answer failures, v6 original unit-validator rejection; prior campaigns and replay revisions preserved separately."
+}

@@ -1,0 +1,30 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_E0ICNRNJ7C0LFCpJapPH80",
+                        "name": "submit_idea_issues",
+                        "input": {
+                            "issues": []
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3520,
+        "outputTokens": 33,
+        "totalTokens": 3553,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 818
+    }
+}

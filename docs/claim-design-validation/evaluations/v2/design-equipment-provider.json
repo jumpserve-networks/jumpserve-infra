@@ -1,0 +1,50 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_kaXCWEJhiXbzut4Pe7Yoew",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "summary": "A synthetic claim asserts a LEO optical-link terminal achieves 99.99% availability over LEO passes. No hardware, orbital trace, or full paper text is available. This draft identifies the key unresolved questions needed before a protocol can be designed: how availability is defined and measured, what pass geometry and atmospheric conditions are assumed, and what data sources could substitute for missing hardware access.",
+                            "questions": [
+                                "How is '99.99 percent availability' operationally defined in the paper—is it link-budget margin exceedance, successful packet delivery ratio, or uptime fraction across all scheduled LEO passes, and over what time horizon?",
+                                "What atmospheric, pointing-loss, and orbital-geometry assumptions (e.g., elevation angle range, cloud-cover model, turbulence model) underpin the 99.99% figure, and are simulation inputs or archived orbital trace data available?",
+                                "Is there a simulation codebase, link-budget spreadsheet, or archived pass-log dataset associated with the paper that could serve as a reproducible input, and if so, what are their identities and hashes?"
+                            ],
+                            "proposal": {
+                                "problem": "A LEO optical-link terminal is claimed to achieve 99.99% availability over LEO passes, but no hardware, orbital trace, full paper text, or simulation inputs are available to evaluate or reproduce this figure.",
+                                "question": "Can the claimed 99.99% availability over LEO passes be reproduced or independently checked using available simulation inputs, archived orbital data, or link-budget models, and under what defined conditions does the claim hold?",
+                                "hypothesis": "The proposed optical-link terminal maintains 99.99 percent availability over LEO passes.",
+                                "conditions": "Conditions are unresolved: the elevation-angle range, atmospheric model, pointing-loss budget, and definition of an 'available' pass are not yet specified. These must be extracted from the paper or its supplementary materials before a protocol can be fixed.",
+                                "related_work": "LEO optical-link availability analyses typically rely on link-budget models incorporating atmospheric turbulence (e.g., Kolmogorov), cloud-cover statistics, and pointing-error budgets. No specific cited prior work has been reviewed here; the source is marked retrieved-unreviewed.",
+                                "alternatives": "Alternative explanations for a high availability figure include: (1) the metric is computed only over cloud-free or high-elevation passes, inflating the fraction; (2) availability is defined at a generous margin threshold; (3) the figure is a design target rather than a measured or simulated result.",
+                                "design": "A candidate design would replay archived orbital pass geometries through a link-budget simulation under varying atmospheric conditions, comparing the fraction of passes meeting the paper's availability criterion against the 99.99% threshold. This requires the paper's exact model inputs and availability definition, which are currently unknown.",
+                                "metrics": "Primary metric: fraction of LEO passes meeting the paper's availability criterion (dimensionless, target ≥ 0.9999). Secondary: link margin distribution across passes (dB). Both require a defined pass set and atmospheric model.",
+                                "controls": "Controls would include a baseline link budget with no pointing loss and clear-sky conditions (upper bound), and a worst-case cloud-cover or turbulence scenario (lower bound). The pass geometry and elevation-angle distribution must be held constant across conditions.",
+                                "falsification": "The claim is falsified if, under the paper's stated assumptions and input data, the simulated or reanalyzed availability falls below 99.99% across the defined pass set. It is also falsified if the availability definition is found to exclude a material fraction of scheduled passes.",
+                                "inputs": "Required inputs are unknown: the paper's link-budget model or simulation code, orbital trace or TLE set, atmospheric/cloud-cover dataset, pointing-error model, and the operational definition of availability. No hashes or file identities have been supplied.",
+                                "limitations": "Without hardware access, results are limited to simulation or reanalysis. The source is synthetic and unreviewed; the claim location is listed as 'Synthetic claim,' so the underlying methodology may not reflect a real published system. Protocol cannot be finalized until inputs and definitions are resolved.",
+                                "protocol": null
+                            }
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 4460,
+        "outputTokens": 1002,
+        "totalTokens": 5462,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 13124
+    }
+}

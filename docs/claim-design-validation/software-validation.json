@@ -1,0 +1,403 @@
+{
+  "version": "claim-design-software-validation-v1",
+  "recorded_at": "2026-10-18T01:48:38.539619+00:00",
+  "implementation": "local changes only",
+  "deployed": false,
+  "release_ready": false,
+  "scientific_claims_reassessed": 0,
+  "prompt_publication": "blocked; no candidate passes all declared criteria",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "checks": [
+    {
+      "command": "npm run lint",
+      "repository": "jumpserve-front-end",
+      "status": "passed-with-existing-warning",
+      "warning": "auth-button.tsx internal navigation warning; not introduced here"
+    },
+    {
+      "command": "npm test",
+      "repository": "jumpserve-front-end",
+      "status": "passed",
+      "cases": 180
+    },
+    {
+      "command": "npm run build",
+      "repository": "jumpserve-front-end",
+      "status": "passed",
+      "next_version": "16.3.8"
+    },
+    {
+      "command": "python3 -B -m unittest discover -s research_workflow/tests",
+      "repository": "jumpserve-back-end",
+      "status": "passed",
+      "cases": 118
+    },
+    {
+      "command": "python3 -B -m unittest discover -s test -p 'agent*_test.py'",
+      "repository": "jumpserve-infra",
+      "status": "passed",
+      "cases": 106
+    },
+    {
+      "command": "JUMPSERVE_BACKEND_CHECKOUT=../jumpserve-back-end npm test -- --runInBand",
+      "repository": "jumpserve-infra",
+      "status": "passed",
+      "cases": 89,
+      "suites": 11
+    },
+    {
+      "command": "npm run build",
+      "repository": "jumpserve-infra",
+      "status": "passed"
+    },
+    {
+      "command": "python3 -B test/check_claim_design_database.py",
+      "repository": "jumpserve-infra",
+      "status": "passed",
+      "groups": 6,
+      "receipt": "database/20261018T014157456428Z/claim-design-validation-report.json"
+    },
+    {
+      "command": "python3 -B test/check_research_ideas_database.py",
+      "repository": "jumpserve-infra",
+      "status": "passed",
+      "groups": 11,
+      "receipt": "database/20261018T014611382509Z/validation-report.json"
+    },
+    {
+      "command": "node scripts/verify-claim-design.mjs",
+      "repository": "jumpserve-front-end",
+      "status": "passed",
+      "groups": 9,
+      "receipt": "browser/2026-10-18T01-46-10.342Z/validation-report.json"
+    },
+    {
+      "command": "git diff --check",
+      "repository": "all three repositories",
+      "status": "passed"
+    },
+    {
+      "command": "research runtime file hash verification",
+      "repository": "jumpserve-infra",
+      "status": "passed",
+      "files": 15
+    }
+  ],
+  "conditional_gaps": [
+    "Legitimate Google-authenticated production flow",
+    "Deployed Supabase/Storage provider persistence roundtrip",
+    "New designer cloud networking execution",
+    "New paper retrieval and automatic claim extraction",
+    "Arbitrary-domain scientific validity",
+    "Production deployment"
+  ],
+  "measured_charges_usd": null,
+  "local_compute_usage": null,
+  "shared_storage_allocation": null,
+  "available_model_usage": {
+    "provider_calls": 36,
+    "input_tokens": 137128,
+    "output_tokens": 41411,
+    "estimated_cost_usd": null,
+    "measured_charges_usd": null
+  },
+  "limitations": [
+    "Software fixtures do not establish scientific correctness.",
+    "Model development evaluations are exposed, reused and tuned; no independent or held-out review.",
+    "Original-byte artifact hashes identify bytes, not review completeness.",
+    "Early software failures remain retained where receipts are available; initial unit/import diagnostics are in the tool transcript, not complete raw process-byte recordings."
+  ],
+  "implementation_files": [
+    {
+      "repository": "jumpserve-front-end",
+      "path": "app/components/research-ideas/idea-workspace.tsx",
+      "sha256": "dadd9fb8aa9e6ff3d3b7ef98dc6e3028a1b12f83870efbaa32260f54f518d1fa",
+      "byte_count": 34237
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "app/components/research-workflow/run-gap-experiment.tsx",
+      "sha256": "40c4eaad7ec299ce12197efe9d10cab0de2c6c812b9b11b4db879ed859331bbd",
+      "byte_count": 6137
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "app/components/research-workflow/study-panel.tsx",
+      "sha256": "cbd5671c665118d135413ee5c7a8924552e28fa3accb23dd6f372008c9a5fe97",
+      "byte_count": 14159
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "app/components/research-workflow/workspace.tsx",
+      "sha256": "08e673265cd32a26f25c4e299899413ec25c82657c9b80d4c4ab9ae1ec92ffbe",
+      "byte_count": 27581
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "lib/research-idea-api.ts",
+      "sha256": "254b028a22fb5a6f3923dc1847e3abf84ba6facf120a539d33528efc5822e09b",
+      "byte_count": 3612
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "lib/research-ideas.ts",
+      "sha256": "a5d9be27343415d6890e6f97e840645ec4af29ed85efc6e6b63000d642fca8e9",
+      "byte_count": 4775
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "lib/research-pathways.ts",
+      "sha256": "9136fcc36e54fe9adfd4c075034a55c1e17ea7421af9b0af986de5300e686feb",
+      "byte_count": 1514
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "lib/research-workflow.ts",
+      "sha256": "b666cab2ed8e1ae2f249dd23fd4b02aa8c59e32578b6c620db74ebb43feb5f22",
+      "byte_count": 7533
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "lib/test-modules.ts",
+      "sha256": "8e1559174df7c5104909d98dbc3b6f51775c3b1f37084ec5709d2cd4177ebff0",
+      "byte_count": 14559
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "tests/research-idea-api.test.mjs",
+      "sha256": "dee270c76ea745ac2c997ac0d7d15f89ad9e7d97a519846356a3be88ff5e5425",
+      "byte_count": 3485
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "tests/research-pathways.test.mjs",
+      "sha256": "6f7fd6012a77f4f7fa8ff349c24ba9828bd011953b4ff9ee1c21d8a70d79d973",
+      "byte_count": 4003
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "app/(modules)/research-verification/design-claim/[studyId]/[claimId]/page.tsx",
+      "sha256": "8ff7540a95f33093629479b95164e02302918d599d698eb01c7b9fd7c02d395e",
+      "byte_count": 911
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "app/(modules)/research-verification/experiment-design/[studyId]/page.tsx",
+      "sha256": "be8e4e27b0baa743a46ecf7cd96de8762920166e20c817b46d2f1360a59789d8",
+      "byte_count": 810
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "app/components/research-workflow/claim-designer.tsx",
+      "sha256": "0cf8bd5c2fc7e7376fe08f212c966e11402e995e725fd4d2ca101634069752f8",
+      "byte_count": 12070
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "app/components/research-workflow/design-claim.tsx",
+      "sha256": "6aa71ace5795739f89d5ef3dd630b4ba082de33900416cda44be8da1f7c6caf4",
+      "byte_count": 3635
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "lib/research-claim-design.ts",
+      "sha256": "d77b34fed2121671337f94ba45c8fffba7169820fd1eee2231e1ec49247f8a17",
+      "byte_count": 2376
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "scripts/verify-claim-design.mjs",
+      "sha256": "6e6bbfce4926d73fb525761deb19a1440ed8315cbfaa82f103a0d29665cefa80",
+      "byte_count": 14028
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "tests/research-claim-design.test.mjs",
+      "sha256": "4994063c91e9c7a352b69236800f2cafec95b3a5deae1fe83a0e04a1f714dd15",
+      "byte_count": 2455
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/api.py",
+      "sha256": "40db4f299d5ac784294f767b6f2b5a61abbdb6b67796c7a25f83099e81a11fdd",
+      "byte_count": 17679
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/ideas.py",
+      "sha256": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+      "byte_count": 13586
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/store.py",
+      "sha256": "82a8f27c6456d27414eb0b8ff58806563ad360f3a18b629cac9b048a5b0cf842",
+      "byte_count": 10126
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/claim_design.py",
+      "sha256": "ca4b4a174bb504e9639705a6744ff752138debe7d8a865620696f90edfeebab4",
+      "byte_count": 8908
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "path": "research_workflow/tests/test_claim_design.py",
+      "sha256": "e6d32964568fa6e006e4ec317e6c2f8d2a13b47095fe3c20fecf880b99203973",
+      "byte_count": 5274
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "agent/handler.py",
+      "sha256": "ffc1596927d8d53ff860272385786ea302d7684a2b346b2f22b1e69957f1dcf7",
+      "byte_count": 15510
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "agent/modules.py",
+      "sha256": "d4ca0102b7151c4925b880ddb97895f0cb9e485023c60264dd57fa319a4d5a4c",
+      "byte_count": 801
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "agent/research_ideas.py",
+      "sha256": "7ba4debd35d0ba155c4121891bcf352c657150c29e239853ce0b18dc146f5a6e",
+      "byte_count": 16717
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "lib/research-workflow.ts",
+      "sha256": "b09c02f830e92b12a855508f22fc3492f4f433b05c5c5d3ed32bc2e8d0584483",
+      "byte_count": 10275
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "research-workflow-runtime.json",
+      "sha256": "8f01205e6608218c2321ba60d8827a1192c2801d9c095961a71c7eefdcc851ba",
+      "byte_count": 1613
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "test/check_research_ideas_database.py",
+      "sha256": "7ebab699c04650783092426aeed6326001515431af96a7c4470c8a057b622a4e",
+      "byte_count": 27114
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "test/research-workflow.test.ts",
+      "sha256": "48ea74392553122183ae315e036e0134f478598b5ef3805f753c2429b52a0c79",
+      "byte_count": 5220
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "test/serve_research_ideas_fixture.py",
+      "sha256": "e19bec533711f76b174b2a4a13373870e25663e87194b1cd544cf3ef02d3c1a9",
+      "byte_count": 13977
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "agent/claim_experiment_design.py",
+      "sha256": "a8fd4f2ba41ef9b4954613ecbf84aba344e7f508ab5d3533100d409894302402",
+      "byte_count": 7827
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "database/202610170001_claim_experiment_design.sql",
+      "sha256": "f42157f6c903d68b9fc9ce1a8f8e313654b898d244e7815e5ffe23dab21b830c",
+      "byte_count": 15327
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "database/202610170002_claim_design_prompt.sql",
+      "sha256": "4642720a4c1551f76c42ba721b4abb3d46ba8017d76b03329d92616804db1779",
+      "byte_count": 18822
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "database/202610170003_claim_design_prompt_v2.sql",
+      "sha256": "b647e840e770ac8073e02de29ea7a1d73abfb370debe24154df0edc909f3e993",
+      "byte_count": 18175
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "database/202610170004_claim_design_prompt_v3.sql",
+      "sha256": "f8a312a30ce597f0acb772fce7656b1356ff627216340f02477def571914dc84",
+      "byte_count": 21811
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "database/seed-claim-experiment-design-v1.json",
+      "sha256": "f8b48ab4717c5de0248c85110f4901b82b6edb3d59c490a86cfef66d06198476",
+      "byte_count": 13601
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "database/seed-claim-experiment-design-v2.json",
+      "sha256": "46fb9c8348763073687cf90b77ae6a8c73e5f4b4035c26ed88591ff00cf37c36",
+      "byte_count": 18023
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "database/seed-claim-experiment-design-v3.json",
+      "sha256": "c3941afa9afaed01559ecc4bc4b1fb7331f3da58853279bf2f204d37f11063bf",
+      "byte_count": 21651
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "test/agent_claim_design_test.py",
+      "sha256": "1c3feb19ee52c09a50b1ae63680fbd7f1146e69a0a4fbacb68b1241bdfc32cbe",
+      "byte_count": 4574
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "test/check_claim_design_database.py",
+      "sha256": "e4825817cfea53f1f9143797fec4c54c5178dafe7b434820270489581d52ae21",
+      "byte_count": 9820
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "test/claim-design-evaluation-cases-v1.json",
+      "sha256": "2c46d5883b4bd40d937b9a11cd06897caf2c54c22b18756faeda7a42de891892",
+      "byte_count": 42149
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "test/claim-design-evaluation-cases-v1.lock.json",
+      "sha256": "149b4dc1c18bfe34c37902274aa6d81dec32f8aa956994bd9d7423da8f9a828f",
+      "byte_count": 190
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "test/claim-design-evaluation-cases-v2.json",
+      "sha256": "ca50d192800fa2fc1ee96cbb5ed5c18d1f745393ddaf5bfdc2099a271ed4784b",
+      "byte_count": 42256
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "test/claim-design-evaluation-cases-v2.lock.json",
+      "sha256": "b8d93ea84450d7df7bcd8bf30741e50cccee7c130ab404c1e6cc83d67c343a46",
+      "byte_count": 190
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "test/evaluate_claim_design.py",
+      "sha256": "8f67493c33ad4a667b09f4eaf14d2a4023d20542e4b5d6949803e3d808e5e401",
+      "byte_count": 8090
+    }
+  ],
+  "post_campaign_tool_versions": {
+    "aws": "aws-cli/2.35.11 Python/3.14.6 Darwin/27.0.0 source/arm64",
+    "python": "3.13.3",
+    "node": "v24.4.1",
+    "postgres_client": "17.6 (Homebrew)",
+    "next": "16.3.8",
+    "react": "19.2.3",
+    "playwright": "1.62.1"
+  },
+  "runtime_verification_limit": "Local Python regressions ran on 3.13.3; the configured Lambda runtime is 3.12. Deployed execution and direct Boto3 model/persistence calls were not exercised.",
+  "model_context_budget_scope": "24 KB packet/conversation messages; trusted system prompt and response schema are additional retained input."
+}

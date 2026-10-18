@@ -1,0 +1,19 @@
+{
+  "recorded_at": "2026-10-18T02:03:25.565296+00:00",
+  "repositories": {
+    "jumpserve-front-end": {
+      "base_revision": "225e7a66a715b8a37cb5ab6b29de0709e8e76dd7",
+      "state": "Uncommitted local working tree, not deployed"
+    },
+    "jumpserve-back-end": {
+      "base_revision": "62f58791028a236e38b77beb2f8f8610123db270",
+      "state": "Uncommitted local working tree, not deployed"
+    },
+    "jumpserve-infra": {
+      "base_revision": "2172ab4cdc899e2ab0bd66b2484b34f1bc8ae185",
+      "state": "Uncommitted local working tree, not deployed"
+    }
+  },
+  "files": 65,
+  "scope": "Pending feature implementation files; immutable earlier evidence is referenced separately. Existing unchanged dependencies are identified by base revision."
+}

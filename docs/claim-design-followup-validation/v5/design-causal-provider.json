@@ -1,0 +1,37 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_chDnyxdcEm29B8aG0mvX9r",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "clarify",
+                            "summary": "The user asks whether a single emulated trial can prove causality and generalization to all Internet users. It cannot: one emulated run is descriptive only, establishes no causal mechanism, and cannot generalize to a population. Several key design decisions remain unresolved before a pilot can be proposed.",
+                            "clarification_questions": [
+                                "What is the intended delay placement — is the 20 ms applied one-way (sender→receiver or receiver→sender) or as a round-trip (both directions), and which script or topology will be used?",
+                                "What transfer size, bandwidth cap, and queue discipline should be used at the emulated bottleneck so the baseline and delay conditions are fully specified?",
+                                "How many replications per condition does the owner want, and are there explicit wall-time or cost constraints that should bound the pilot?"
+                            ],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 4741,
+        "outputTokens": 256,
+        "totalTokens": 4997,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 3703
+    }
+}

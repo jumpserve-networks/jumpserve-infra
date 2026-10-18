@@ -1,0 +1,37 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_nL9deUSb225AXnPUY3vi23",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "clarify",
+                            "summary": "The packet contains a valid hypothesis but several required inputs are unresolved: the source SHA-256 is missing (and cannot be invented), delay placement is unspecified, and key protocol parameters (transfer size, bottleneck bandwidth, number of clients, replications, resource limits) have not been supplied. Clarification is needed before a proposal can be formed.",
+                            "clarification_questions": [
+                                "The source SHA-256 is null and cannot be invented — can you supply the actual SHA-256 digest of the source document or artifact this claim is drawn from? (Without it, input_versions cannot be populated and the proposal cannot be bound to a verified source.)",
+                                "The 20 ms delay placement is unspecified: is the 20 ms applied one-way (e.g., on the sender-to-receiver path only) or as a round-trip (e.g., split 10 ms each direction, or 20 ms on each direction)? Please state the intended netem tc-netem placement explicitly.",
+                                "What transfer size (bytes), bottleneck link bandwidth (Mbit/s), and number of concurrent TCP flows should be used, and what are your resource constraints (maximum wall-clock seconds, maximum observations, and estimated cost budget if known)?"
+                            ],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 4719,
+        "outputTokens": 361,
+        "totalTokens": 5080,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 5009
+    }
+}

@@ -1,0 +1,64 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_T61WATiuovT2IqrIbQuepo",
+                        "name": "submit_idea_issues",
+                        "input": {
+                            "issues": [
+                                {
+                                    "code": "missing-inputs",
+                                    "severity": "blocking",
+                                    "references": [
+                                        "/inputs",
+                                        "/protocol/missing_data"
+                                    ]
+                                },
+                                {
+                                    "code": "limitation",
+                                    "severity": "warning",
+                                    "references": [
+                                        "/protocol/prior_exposure",
+                                        "/limitations",
+                                        "/protocol/coverage_limits"
+                                    ]
+                                },
+                                {
+                                    "code": "limitation",
+                                    "severity": "warning",
+                                    "references": [
+                                        "/protocol/resource_limits"
+                                    ]
+                                },
+                                {
+                                    "code": "dependence",
+                                    "severity": "warning",
+                                    "references": [
+                                        "/protocol/dependence",
+                                        "/protocol/replication_unit",
+                                        "/protocol/sample_size_rationale"
+                                    ]
+                                }
+                            ]
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3349,
+        "outputTokens": 147,
+        "totalTokens": 3496,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 1741
+    }
+}

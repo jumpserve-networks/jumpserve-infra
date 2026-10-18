@@ -1,0 +1,41 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_3HTg2fJ5A71dplakZ3fy3h",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "clarify",
+                            "guidance": [
+                                "statistics",
+                                "equivalence"
+                            ],
+                            "unit_values": [],
+                            "clarification_questions": [
+                                "The decision policy for this pilot is descriptive-only: distribution overlap and a non-significant p-value (p=0.6) do not establish no effect, equivalence, or disconfirmation of the paper claim. To label the claim 'disproven' would require a separately reviewed analysis design — can you confirm whether you want to proceed with a new, independently reviewed inferential or equivalence design (specifying estimand, sampling/dependence structure, a justified equivalence margin, and decision criteria), or keep the current pilot as descriptive-only?",
+                                "If you do want an equivalence test, what is the minimum effect size (in ms of flow completion time) that would be practically meaningful to detect? This margin must be justified independently and is required before an equivalence design can be proposed.",
+                                "Were the two conditions (with and without the 20 ms delay) run on the same hosts during the same session, or in separate sessions? This is needed to characterize the dependence structure before any inferential analysis can be scoped."
+                            ],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 5603,
+        "outputTokens": 335,
+        "totalTokens": 5938,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 4061
+    }
+}

@@ -1,0 +1,41 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_azrp0kldbCSIKugH8RZdeI",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "clarify",
+                            "guidance": [
+                                "runner-scope",
+                                "missing-inputs"
+                            ],
+                            "unit_values": [],
+                            "clarification_questions": [
+                                "What is the paper's operational definition of 'availability' for the optical-link terminal — e.g., fraction of LEO pass time with link margin above a threshold, fraction of passes with successful acquisition, or some other criterion — and does the paper supply a model, simulation code, or archived dataset that produces availability estimates without physical hardware?",
+                                "Is there a versioned simulation model, atmospheric/orbital propagation tool, or archived measurement dataset (with a citable identity and digest) that you can supply as an input, so that a software-based pilot could reproduce or independently check the 99.99% figure without the terminal itself?",
+                                "If no applicable model or dataset is available, what evidence type would be acceptable for this pilot — for example, a sensitivity analysis of a supplied link-budget model, a reanalysis of a publicly archived orbital-pass dataset, or a deferred plan pending hardware access?"
+                            ],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 5596,
+        "outputTokens": 306,
+        "totalTokens": 5902,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 4457
+    }
+}

@@ -1,0 +1,58 @@
+{
+  "protocol": "claim-experiment-design-protocol-v2",
+  "database": "jumpserve_research_ideas_test_20261018t015743380582z",
+  "started_at": "2026-10-18T01:58:18.816Z",
+  "checks": [
+    {
+      "name": "an older connected service is explicit and cannot start a proposal",
+      "passed": true,
+      "evidence": {
+        "model_calls": 0,
+        "mutations": 0,
+        "older_capability": "visible error"
+      }
+    },
+    {
+      "name": "explicit claim click creates a source-bound paper design and one automatic proposal",
+      "passed": true,
+      "evidence": {
+        "study_id": "7b802d3c-2fc5-533a-adbc-ee5bd9830bd1",
+        "automatic_calls": 1,
+        "refresh_causes_no_new_call": true,
+        "origin": "paper"
+      }
+    },
+    {
+      "name": "proposal adoption preserves the exact claim and incomplete state",
+      "passed": true,
+      "evidence": {
+        "versions": 2,
+        "ready": false,
+        "protocol": null
+      }
+    },
+    {
+      "name": "tailored owner answer produces a complete candidate and another explicit version",
+      "passed": false,
+      "reason": "locator.waitFor: Timeout 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('AI proposal · complete · plan version 2', { exact: true }) to be visible\u001b[22m\n"
+    }
+  ],
+  "browser_errors": [],
+  "conditional_gaps": [
+    "Legitimate Google session",
+    "Live provider persistence roundtrip",
+    "Remote Supabase Storage",
+    "Production deployment",
+    "Actual cloud networking execution"
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "measured_charges_usd": null,
+  "original_fixture_study_id": "65ec0f00-14e5-4480-afe8-9b8212377c21",
+  "passed": false,
+  "error": "locator.waitFor: Timeout 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('AI proposal · complete · plan version 2', { exact: true }) to be visible\u001b[22m\n",
+  "ended_at": "2026-10-18T01:58:36.633Z"
+}

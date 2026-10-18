@@ -1,0 +1,20 @@
+{
+  "campaign": "claim-experiment-design-protocol-v2",
+  "calls_requested": 16,
+  "calls_with_responses": 16,
+  "failed_provider_calls": 0,
+  "transport_preflight_failures": 1,
+  "preflight_note": "Sandbox STS endpoint failure before any provider request; retried with network escalation. Initial separate STS check verified account.",
+  "input_tokens": 64716,
+  "output_tokens": 9945,
+  "wall_seconds": 131.641557,
+  "measured_charges_usd": null,
+  "estimated_model_cost_usd": null,
+  "local_compute_cost_usd": null,
+  "storage_cost_usd": null,
+  "cost_basis": "Token usage and elapsed campaign time measured. Billing, local compute and shared storage are unallocated; unknown is not zero.",
+  "aws_account": "395567831870",
+  "configured_supabase_project": "regphejnlvfpyokpniny",
+  "production_database_writes": 0,
+  "networking_experiments": 0
+}

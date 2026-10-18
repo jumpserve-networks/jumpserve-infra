@@ -1,0 +1,52 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_x8475WUmR2MZhh8Stq7lce",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "clarify",
+                            "guidance": [
+                                "units",
+                                "missing-inputs"
+                            ],
+                            "unit_values": [
+                                {
+                                    "value": 200,
+                                    "unit": "ms",
+                                    "source_quote": "0.2 seconds"
+                                },
+                                {
+                                    "value": 0.2,
+                                    "unit": "ms",
+                                    "source_quote": "0.2 milliseconds"
+                                }
+                            ],
+                            "clarification_questions": [
+                                "The two values you mention — 0.2 seconds (= 200 ms) and 0.2 milliseconds — differ by a factor of 1000. Which measured quantity does this threshold refer to (e.g., flow completion time, one-way delay, RTT, or something else), and which source statement or document records it?",
+                                "The claim specifies a 20 ms delay increment but does not say which direction(s) receive it. Is the 20 ms applied in one direction only, in both directions (totalling 40 ms round-trip), or as a total round-trip increment?",
+                                "Once the quantity and correct value are confirmed, what is the intended role of this threshold in the experiment — for example, a configuration input, an exclusion criterion, or a coverage boundary?"
+                            ],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 5603,
+        "outputTokens": 343,
+        "totalTokens": 5946,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 3638
+    }
+}

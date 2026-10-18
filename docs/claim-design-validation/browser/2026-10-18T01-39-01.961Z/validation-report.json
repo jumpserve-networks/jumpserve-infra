@@ -1,0 +1,101 @@
+{
+  "protocol": "claim-experiment-design-protocol-v1",
+  "amendment": "claim-experiment-design-amendment-v2",
+  "database": "jumpserve_research_ideas_test_20261018t013849545008z",
+  "started_at": "2026-10-18T01:39:01.962Z",
+  "checks": [
+    {
+      "name": "explicit claim click creates a source-bound paper design and one automatic proposal",
+      "passed": true,
+      "evidence": {
+        "study_id": "c628450a-0052-5286-9e33-93d0bce536da",
+        "automatic_calls": 1,
+        "refresh_causes_no_new_call": true,
+        "origin": "paper"
+      }
+    },
+    {
+      "name": "proposal adoption preserves the exact claim and incomplete state",
+      "passed": true,
+      "evidence": {
+        "versions": 2,
+        "ready": false,
+        "protocol": null
+      }
+    },
+    {
+      "name": "tailored owner answer produces a complete candidate and another explicit version",
+      "passed": true,
+      "evidence": {
+        "versions": 3,
+        "missing": 0,
+        "readiness_requires_fresh_reviews": true
+      }
+    },
+    {
+      "name": "failed review is retained and fresh successful reviews gate readiness",
+      "passed": true,
+      "evidence": {
+        "failed_attempts": 1,
+        "fresh_review_context": true
+      }
+    },
+    {
+      "name": "reviewed networking campaign queues once and resume preserves job identity",
+      "passed": true,
+      "evidence": {
+        "jobs": 1,
+        "status": "queued",
+        "measurements": 0,
+        "cloud_execution": false
+      }
+    },
+    {
+      "name": "download includes original context bytes, versions and failed attempts",
+      "passed": true,
+      "evidence": {
+        "versions": 3,
+        "context_sha256": "0a73ffefed5eb6adca82ba7413b890de69fe2a1e94c91ddf73b901083de28bfb",
+        "failed_attempt_preserved": true
+      }
+    },
+    {
+      "name": "desktop and mobile light and dark states fit the viewport",
+      "passed": true,
+      "evidence": {
+        "viewports": [
+          1365,
+          390
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ]
+      }
+    },
+    {
+      "name": "actual Next routes retain the exact design sign-in return paths",
+      "passed": true,
+      "evidence": {
+        "paths": 2,
+        "legitimate_session": false
+      }
+    }
+  ],
+  "browser_errors": [],
+  "conditional_gaps": [
+    "Legitimate Google session",
+    "Live provider persistence roundtrip",
+    "Remote Supabase Storage",
+    "Production deployment",
+    "Actual cloud networking execution"
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "measured_charges_usd": null,
+  "passed": true,
+  "ended_at": "2026-10-18T01:39:16.495Z"
+}

@@ -1,0 +1,7 @@
+{
+  "recorded_at": "2026-10-18T02:03:25.565296+00:00",
+  "files_checked": 268,
+  "hashes_match": true,
+  "original_manifest_sha256": "c31bcdbe59e9a4930f5f238fa2b15bf203f9723ffcab92e86b11cd50d07cb42d",
+  "note": "Verification of recorded original bytes, not source-review completeness. Extra ignored compiler emissions are not original evidence or included in the manifest."
+}

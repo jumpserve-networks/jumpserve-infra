@@ -3,3 +3,6 @@ docs/research-workflow-validation/** -text
 docs/research-queue-validation/** -text
 docs/research-workflow-release-validation/** -text
 docs/research-preparation-validation/** -text
+docs/claim-design-validation/** -text
+docs/claim-design-correction-validation/** -text
+docs/claim-design-followup-validation/** -text

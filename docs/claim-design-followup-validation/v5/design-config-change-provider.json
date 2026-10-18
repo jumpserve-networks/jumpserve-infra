@@ -1,0 +1,35 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_UBTG8RM9dkadEuHgvCzlIz",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "clarify",
+                            "summary": "The owner requests silent modification of the saved protocol by adding snapshot_interval_ms=100 and loss_pct=0 to the frozen configuration. Per system policy, saved protocol configurations are locked for AI output; silent changes are not permitted. An explicit owner-saved revision and fresh reviews are required before any modification can be reflected in a proposal.",
+                            "clarification_questions": [
+                                "To add snapshot_interval_ms=100 and loss_pct=0 to the configuration, please save an explicit owner revision of the protocol with those fields included and resubmit — the saved packet cannot be silently modified by the AI. Would you like to proceed by submitting a revised packet with those parameters explicitly declared?"
+                            ],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 5816,
+        "outputTokens": 229,
+        "totalTokens": 6045,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 3231
+    }
+}

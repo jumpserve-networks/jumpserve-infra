@@ -1,0 +1,42 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_zfQge5Epfaplz03SagfDPW",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "clarify",
+                            "guidance": [
+                                "equivalence",
+                                "statistics",
+                                "missing-inputs"
+                            ],
+                            "unit_values": [],
+                            "clarification_questions": [
+                                "What is the practical equivalence margin for flow_completion_time_ms — i.e., what maximum difference (in ms) between the two algorithms would you consider operationally negligible, and how was that threshold chosen?",
+                                "Which two algorithms are being compared, and what are their roles in the emulated setup (e.g., two congestion-control variants, two scheduling policies)? Please name them so they can be specified as distinct configurations.",
+                                "For the 20 ms delay condition: is 20 ms added in each direction independently (totalling 40 ms round-trip increment), or is 20 ms the total round-trip increment? And which link(s) or directions receive the delay?"
+                            ],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 5600,
+        "outputTokens": 271,
+        "totalTokens": 5871,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 3426
+    }
+}

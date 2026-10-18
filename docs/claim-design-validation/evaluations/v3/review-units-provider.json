@@ -1,0 +1,50 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_ydQsYfo9ChoUB24DkgXHGd",
+                        "name": "submit_idea_issues",
+                        "input": {
+                            "issues": [
+                                {
+                                    "code": "unit-conflict",
+                                    "severity": "blocking",
+                                    "references": [
+                                        "/metrics",
+                                        "/protocol/metrics",
+                                        "/hypothesis",
+                                        "/falsification"
+                                    ]
+                                },
+                                {
+                                    "code": "limitation",
+                                    "severity": "warning",
+                                    "references": [
+                                        "/protocol/prior_exposure",
+                                        "/limitations",
+                                        "/protocol/coverage_limits"
+                                    ]
+                                }
+                            ]
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3512,
+        "outputTokens": 94,
+        "totalTokens": 3606,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 1481
+    }
+}

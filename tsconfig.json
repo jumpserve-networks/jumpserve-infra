@@ -28,6 +28,9 @@
   },
   "exclude": [
     "node_modules",
-    "cdk.out"
+    "cdk.out",
+    "docs/claim-design-validation",
+    "docs/claim-design-correction-validation",
+    "docs/claim-design-followup-validation"
   ]
 }

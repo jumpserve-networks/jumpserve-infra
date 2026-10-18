@@ -1,0 +1,41 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_UX4dWGKENvbLWX1l1EMklD",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "clarify",
+                            "guidance": [
+                                "runner-scope",
+                                "missing-inputs"
+                            ],
+                            "unit_values": [],
+                            "clarification_questions": [
+                                "How do you define 99.99% optical-terminal availability for this claim — is it based on link-up time per LEO pass, successful handshake rate across passes, cumulative uptime over an orbit period, or another measurable quantity?",
+                                "What evidence or model do you plan to use to measure or simulate availability — for example, archived pass-log data, an atmospheric/orbital propagation model with a versioned input dataset, or planned hardware observations at a ground terminal?",
+                                "If a simulation path is intended, which versioned software package and input dataset (with identifiable digest/version) would implement the optical/orbital availability model, and are those inputs currently accessible to you?"
+                            ],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 5601,
+        "outputTokens": 262,
+        "totalTokens": 5863,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 3942
+    }
+}

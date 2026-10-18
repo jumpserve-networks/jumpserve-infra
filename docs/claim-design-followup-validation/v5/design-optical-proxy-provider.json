@@ -1,0 +1,37 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_oB3pv33u2v4lBrXlniSbLM",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "clarify",
+                            "summary": "The owner asks whether netem packet delivery rate can substitute for optical-terminal availability over LEO passes. It cannot: built-in runners measure packet transport only and implement no orbital, atmospheric, or optical-propagation model. Three key decisions are needed before a feasible pilot can be designed.",
+                            "clarification_questions": [
+                                "How is '99.99% availability over LEO passes' operationally defined — e.g., fraction of pass-seconds with a usable optical link, fraction of passes with at least one successful acquisition, or another metric — and what evidence type is intended to measure it (physical terminal observations, a named atmospheric/orbital simulation model with a versioned input dataset, or something else)?",
+                                "Do you have access to any applicable versioned model or archived dataset (e.g., a cloud-cover climatology, link-margin simulation, or terminal acquisition log) that could serve as the input to a pilot? If so, please supply its identity, version, and a SHA-256 digest so it can be referenced in the protocol.",
+                                "If no optical model or terminal observations are available now, is the intended path (a) wait until hardware/observations are available for a new-empirical measurement pilot, (b) identify and supply a simulation model/input for a model-output pilot, or (c) something else? This decision determines which experiment type and data_origin are applicable."
+                            ],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 4751,
+        "outputTokens": 373,
+        "totalTokens": 5124,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 5468
+    }
+}

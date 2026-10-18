@@ -1,0 +1,37 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_fCRFL6NZs9nggVJBUmG0PV",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "clarify",
+                            "summary": "The owner asks whether failing to reject a difference establishes equivalence. It does not: equivalence requires a prespecified practical margin, a justified estimand, and a separately reviewed decision design. Three key decisions are unresolved before a pilot can be proposed.",
+                            "clarification_questions": [
+                                "What is the practical margin (in ms of flow_completion_time_ms) within which the two algorithms would be considered equivalent for your use case? This margin must be specified before the experiment, not derived from results.",
+                                "What are the two specific algorithms or configurations you want to compare, and what is the delay placement (one-way or round-trip) for the 20 ms emulated delay in each condition?",
+                                "What transfer size, bottleneck bandwidth, and any other fixed emulated bottleneck parameters (e.g., queue size, loss rate) should be held constant across both conditions?"
+                            ],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 4750,
+        "outputTokens": 268,
+        "totalTokens": 5018,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 3471
+    }
+}

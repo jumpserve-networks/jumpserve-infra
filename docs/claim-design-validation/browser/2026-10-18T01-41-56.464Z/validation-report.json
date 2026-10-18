@@ -1,0 +1,30 @@
+{
+  "protocol": "claim-experiment-design-protocol-v1",
+  "amendment": "claim-experiment-design-amendment-v2",
+  "database": "jumpserve_research_ideas_test_20261018t013849545008z",
+  "started_at": "2026-10-18T01:41:56.465Z",
+  "checks": [
+    {
+      "name": "explicit claim click creates a source-bound paper design and one automatic proposal",
+      "passed": false,
+      "reason": "Expected values to be strictly equal:\n\n5 !== 1\n"
+    }
+  ],
+  "browser_errors": [],
+  "conditional_gaps": [
+    "Legitimate Google session",
+    "Live provider persistence roundtrip",
+    "Remote Supabase Storage",
+    "Production deployment",
+    "Actual cloud networking execution"
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "measured_charges_usd": null,
+  "passed": false,
+  "error": "Expected values to be strictly equal:\n\n5 !== 1\n",
+  "ended_at": "2026-10-18T01:41:59.336Z"
+}

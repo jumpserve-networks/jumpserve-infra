@@ -1,0 +1,37 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_h84hjMVZImX4FxSCQndC7R",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "clarify",
+                            "summary": "The owner has resolved delay placement (one-way, sender-to-receiver, 0 ms vs 20 ms). Several workload and bottleneck parameters remain unresolved before a full pilot proposal can be written.",
+                            "clarification_questions": [
+                                "What is the bottleneck bandwidth (in Mbit/s) and queue size (in packets or bytes) to emulate at the bottleneck link?",
+                                "What is the transfer size or workload per flow (e.g., number of bytes or a fixed file size) and how many concurrent flows, if any, should be run per replication?",
+                                "How many replications per condition do you want, and are there any wall-clock or cost constraints on the pilot (e.g., maximum total wall seconds or budget)?"
+                            ],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 4766,
+        "outputTokens": 248,
+        "totalTokens": 5014,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 3277
+    }
+}

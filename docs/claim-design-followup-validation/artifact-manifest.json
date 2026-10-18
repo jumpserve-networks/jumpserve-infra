@@ -1,0 +1,1525 @@
+{
+  "version": "claim-design-followup-evidence-v3",
+  "recorded_at": "2026-10-18T02:38:18.531022+00:00",
+  "scope": "Exposed model development and archived-answer correction; no scientific measurements or production release",
+  "original_copy_hashes_verified": true,
+  "final_code_matches_replay": true,
+  "files": {
+    "browser/2026-10-18T02-10-38.255Z/1365-dark.png": {
+      "sha256": "2fd82fef816bf2221f4717576f7d6dbcf47c8c3a19d1a27e5daeac4f3bfb10ba",
+      "byte_count": 140987
+    },
+    "browser/2026-10-18T02-10-38.255Z/1365-light.png": {
+      "sha256": "e4d20891c0c56ffec011873c792e2242e54a099394cd08092962ac9b6818108e",
+      "byte_count": 140602
+    },
+    "browser/2026-10-18T02-10-38.255Z/390-dark.png": {
+      "sha256": "c5bdd4416e5df88d089a6fd00c5be1f6eb9259f30295f4b5450592b0ef50407b",
+      "byte_count": 87087
+    },
+    "browser/2026-10-18T02-10-38.255Z/390-light.png": {
+      "sha256": "cd4dc50cd6767b688631e56f44544c8ad9bf2d3b8e3e99213a9bfc850d061c72",
+      "byte_count": 87302
+    },
+    "browser/2026-10-18T02-10-38.255Z/experiment-design.json": {
+      "sha256": "1e6163522d34ebfe8903cdcdb2c5a1492277732cfe1f7d6dc2ac7246c3ec1039",
+      "byte_count": 127972
+    },
+    "browser/2026-10-18T02-10-38.255Z/validation-report.json": {
+      "sha256": "a052db23000adab71a568fd5082a53689ce7d2aa19ee5fff55ebb28c5c7dcce1",
+      "byte_count": 3039
+    },
+    "browser/2026-10-18T02-17-36.858Z/1365-dark.png": {
+      "sha256": "71fbc8c171bb68a84d89eec1608d3d9d80a01e3a69be723c35e49a699092fe44",
+      "byte_count": 155535
+    },
+    "browser/2026-10-18T02-17-36.858Z/1365-light.png": {
+      "sha256": "77796fb4c7dd7f6d20b78ce48593f6a88857f43f00c60a4781b087534dd31936",
+      "byte_count": 155175
+    },
+    "browser/2026-10-18T02-17-36.858Z/390-dark.png": {
+      "sha256": "f8dbb118615d84d22b7fd40bd067481e930550f89133b28f3fb6d9136a7f2964",
+      "byte_count": 87411
+    },
+    "browser/2026-10-18T02-17-36.858Z/390-light.png": {
+      "sha256": "35e8f043768af5784369d2494686e5822d0239a5be726ddbef0676f4b035fcc8",
+      "byte_count": 87229
+    },
+    "browser/2026-10-18T02-17-36.858Z/experiment-design.json": {
+      "sha256": "f28ba6745a3f03fc81122fc531c22522e46c1d9fbf1c9771a6c3f8d922b314c7",
+      "byte_count": 159504
+    },
+    "browser/2026-10-18T02-17-36.858Z/validation-report.json": {
+      "sha256": "fb790d76f4ca31fabe1b641bee2ceb33cb022c1fda62436f7de57ca22892a117",
+      "byte_count": 3321
+    },
+    "browser/2026-10-18T02-24-54.803Z/1365-dark.png": {
+      "sha256": "84cec102a292e6b63682e67b3a86fa5d8e913d5965d05c7a31d65953c3096b2f",
+      "byte_count": 155536
+    },
+    "browser/2026-10-18T02-24-54.803Z/1365-light.png": {
+      "sha256": "1edeeda02836dff5909024b8c84c50b434c333ed6409ea9c84cf335dd532ee5f",
+      "byte_count": 155230
+    },
+    "browser/2026-10-18T02-24-54.803Z/390-dark.png": {
+      "sha256": "6ac37a49db31334bc08c0f5f5fda62366be2072bdb0ae44c727c988af1067cbf",
+      "byte_count": 87628
+    },
+    "browser/2026-10-18T02-24-54.803Z/390-light.png": {
+      "sha256": "00a55d53b3d1559f488692f9a0bf824cd9baa212f6f92f98ee6ca6b9dfea5130",
+      "byte_count": 87450
+    },
+    "browser/2026-10-18T02-24-54.803Z/experiment-design.json": {
+      "sha256": "549460ff391e2585561ddabb85c9f36ee3ad789906bb74bc08b81d91b56925be",
+      "byte_count": 159907
+    },
+    "browser/2026-10-18T02-24-54.803Z/validation-report.json": {
+      "sha256": "2ed15363ac50e29fec9b8349f04a270f2cd9e42e33ea68d1c45e7d01f8dbb5f2",
+      "byte_count": 3321
+    },
+    "browser/2026-10-18T02-35-49.768Z/1365-dark.png": {
+      "sha256": "2e6180eb6929ebbc8d1a8fe390fd79cbf24dea7107fd0f23d22789ab30743a43",
+      "byte_count": 155556
+    },
+    "browser/2026-10-18T02-35-49.768Z/1365-light.png": {
+      "sha256": "03d43ff6ef2c4348198a3e0ba85ba4fc17b0123218dd12a2769230a98e734b24",
+      "byte_count": 155235
+    },
+    "browser/2026-10-18T02-35-49.768Z/390-dark.png": {
+      "sha256": "f81a1e32e10d6b9a0b97bf4e2b5fa6e7c19109dec4f133b9bafdfe5320d0234b",
+      "byte_count": 87599
+    },
+    "browser/2026-10-18T02-35-49.768Z/390-light.png": {
+      "sha256": "459ec583e706120b3d3cefd931587f89f8fc217c0bc3326cf29fdad78c9cc30c",
+      "byte_count": 87214
+    },
+    "browser/2026-10-18T02-35-49.768Z/experiment-design.json": {
+      "sha256": "c132097f147b7021a2e15ed9a72211e93eb1446df8bca3aa54d7c69c496dd41d",
+      "byte_count": 159912
+    },
+    "browser/2026-10-18T02-35-49.768Z/validation-report.json": {
+      "sha256": "55b6544c9659a2258c03cc635a06702c33fe4c6b5c5944eb6215d390808d0612",
+      "byte_count": 3321
+    },
+    "database-final/claim-design-validation-report.json": {
+      "sha256": "06df413ab23034da2925d34404ceeaeb2acd51a6eee3c563ff857d114495655c",
+      "byte_count": 6977
+    },
+    "database-final/raw-d81217ac1da8624378a632b40240bdef5b268049297067984b9b841a2b7352f3": {
+      "sha256": "0605bf4523acc1f8ee86e8563638155cb6068d5df860183f5ac2e85da81f86be",
+      "byte_count": 5493
+    },
+    "database-idea/raw-99164ef76fb149d73bb6ac018334b666847223edc9043768545bb4a63000b503": {
+      "sha256": "11667b9e1b63d242273265af89666a5b4f1afcb4e23d2f004f7518cb1500f290",
+      "byte_count": 4469
+    },
+    "database-idea/validation-report.json": {
+      "sha256": "0c3d7827d8755e515ddad15b94898a2b2c9ee2738ca5e1e4df68651abdfe2a13",
+      "byte_count": 8752
+    },
+    "database-quotes/claim-design-validation-report.json": {
+      "sha256": "673761fcfbe43da1319dbb33407a4d54d9296864ba3629a6f9ad22355e09ca05",
+      "byte_count": 6840
+    },
+    "database-quotes/raw-9f939de695992fc11ff14cd26beeb4d6a68c103397e8d26fec69e949121737a3": {
+      "sha256": "0605bf4523acc1f8ee86e8563638155cb6068d5df860183f5ac2e85da81f86be",
+      "byte_count": 5493
+    },
+    "implementation/jumpserve-back-end/research_workflow/api.py": {
+      "sha256": "40db4f299d5ac784294f767b6f2b5a61abbdb6b67796c7a25f83099e81a11fdd",
+      "byte_count": 17679
+    },
+    "implementation/jumpserve-back-end/research_workflow/claim_design.py": {
+      "sha256": "09052615a7e5ba2db0e43eff0b641cb529fa7525770d0da3c6b8eb0888f72522",
+      "byte_count": 11050
+    },
+    "implementation/jumpserve-back-end/research_workflow/ideas.py": {
+      "sha256": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+      "byte_count": 13586
+    },
+    "implementation/jumpserve-back-end/research_workflow/policies/claim-decision-policy-v1.json": {
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "byte_count": 1019
+    },
+    "implementation/jumpserve-back-end/research_workflow/store.py": {
+      "sha256": "82a8f27c6456d27414eb0b8ff58806563ad360f3a18b629cac9b048a5b0cf842",
+      "byte_count": 10126
+    },
+    "implementation/jumpserve-back-end/research_workflow/tests/test_claim_design.py": {
+      "sha256": "8372030fc8fcf632bcb35dafd9a5fb40ab2c5319e98cc926d15590474b218851",
+      "byte_count": 9701
+    },
+    "implementation/jumpserve-front-end/app/(modules)/research-verification/design-claim/[studyId]/[claimId]/page.tsx": {
+      "sha256": "8ff7540a95f33093629479b95164e02302918d599d698eb01c7b9fd7c02d395e",
+      "byte_count": 911
+    },
+    "implementation/jumpserve-front-end/app/(modules)/research-verification/experiment-design/[studyId]/page.tsx": {
+      "sha256": "be8e4e27b0baa743a46ecf7cd96de8762920166e20c817b46d2f1360a59789d8",
+      "byte_count": 810
+    },
+    "implementation/jumpserve-front-end/app/components/research-ideas/idea-workspace.tsx": {
+      "sha256": "cb186492e1da21b4ad21ee1068460b16583b16a5f61dbc2929cc665833a26802",
+      "byte_count": 34386
+    },
+    "implementation/jumpserve-front-end/app/components/research-workflow/claim-designer.tsx": {
+      "sha256": "5fb34be28c4f4af60bcca1e3b3564bb6b5941b306440d82065f42793e0021449",
+      "byte_count": 14517
+    },
+    "implementation/jumpserve-front-end/app/components/research-workflow/design-claim.tsx": {
+      "sha256": "6aa71ace5795739f89d5ef3dd630b4ba082de33900416cda44be8da1f7c6caf4",
+      "byte_count": 3635
+    },
+    "implementation/jumpserve-front-end/app/components/research-workflow/run-gap-experiment.tsx": {
+      "sha256": "40c4eaad7ec299ce12197efe9d10cab0de2c6c812b9b11b4db879ed859331bbd",
+      "byte_count": 6137
+    },
+    "implementation/jumpserve-front-end/app/components/research-workflow/study-panel.tsx": {
+      "sha256": "cbd5671c665118d135413ee5c7a8924552e28fa3accb23dd6f372008c9a5fe97",
+      "byte_count": 14159
+    },
+    "implementation/jumpserve-front-end/app/components/research-workflow/workspace.tsx": {
+      "sha256": "08e673265cd32a26f25c4e299899413ec25c82657c9b80d4c4ab9ae1ec92ffbe",
+      "byte_count": 27581
+    },
+    "implementation/jumpserve-front-end/docs/claim-experiment-design.md": {
+      "sha256": "41dbe96d3284e084c0c2158a188ba7667aa9b0c22d0043fab72bf70fb6986312",
+      "byte_count": 2941
+    },
+    "implementation/jumpserve-front-end/lib/research-claim-design.ts": {
+      "sha256": "0dad713c0827b176d4f135facccb2b721a0a16bb21f8bf4ac2918b8da2aa9b6a",
+      "byte_count": 2449
+    },
+    "implementation/jumpserve-front-end/lib/research-idea-api.ts": {
+      "sha256": "254b028a22fb5a6f3923dc1847e3abf84ba6facf120a539d33528efc5822e09b",
+      "byte_count": 3612
+    },
+    "implementation/jumpserve-front-end/lib/research-ideas.ts": {
+      "sha256": "311ecd5e194f858a0474967cd90aa01835306159f2e57b10a46b2365215afccd",
+      "byte_count": 5249
+    },
+    "implementation/jumpserve-front-end/lib/research-pathways.ts": {
+      "sha256": "9136fcc36e54fe9adfd4c075034a55c1e17ea7421af9b0af986de5300e686feb",
+      "byte_count": 1514
+    },
+    "implementation/jumpserve-front-end/lib/research-workflow.ts": {
+      "sha256": "b666cab2ed8e1ae2f249dd23fd4b02aa8c59e32578b6c620db74ebb43feb5f22",
+      "byte_count": 7533
+    },
+    "implementation/jumpserve-front-end/lib/test-modules.ts": {
+      "sha256": "8e1559174df7c5104909d98dbc3b6f51775c3b1f37084ec5709d2cd4177ebff0",
+      "byte_count": 14559
+    },
+    "implementation/jumpserve-front-end/scripts/verify-claim-design.mjs": {
+      "sha256": "13871cd563e95c89a2fd269244d88d7576bed3900b47bc04718d17b94073e84c",
+      "byte_count": 15504
+    },
+    "implementation/jumpserve-front-end/tests/research-claim-design.test.mjs": {
+      "sha256": "4994063c91e9c7a352b69236800f2cafec95b3a5deae1fe83a0e04a1f714dd15",
+      "byte_count": 2455
+    },
+    "implementation/jumpserve-front-end/tests/research-idea-api.test.mjs": {
+      "sha256": "dee270c76ea745ac2c997ac0d7d15f89ad9e7d97a519846356a3be88ff5e5425",
+      "byte_count": 3485
+    },
+    "implementation/jumpserve-front-end/tests/research-pathways.test.mjs": {
+      "sha256": "6f7fd6012a77f4f7fa8ff349c24ba9828bd011953b4ff9ee1c21d8a70d79d973",
+      "byte_count": 4003
+    },
+    "implementation/jumpserve-infra/.gitattributes": {
+      "sha256": "10da467be9eb9b9664df8393c18307ccc0582f26d686e248c34b504a81661025",
+      "byte_count": 400
+    },
+    "implementation/jumpserve-infra/agent/claim-decision-policy-v1.json": {
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "byte_count": 1019
+    },
+    "implementation/jumpserve-infra/agent/claim_experiment_design.py": {
+      "sha256": "a1b6c0c255f1f71c114300fcf57b6bae1f415895383de18f046923d376625731",
+      "byte_count": 20873
+    },
+    "implementation/jumpserve-infra/agent/handler.py": {
+      "sha256": "ffc1596927d8d53ff860272385786ea302d7684a2b346b2f22b1e69957f1dcf7",
+      "byte_count": 15510
+    },
+    "implementation/jumpserve-infra/agent/modules.py": {
+      "sha256": "d4ca0102b7151c4925b880ddb97895f0cb9e485023c60264dd57fa319a4d5a4c",
+      "byte_count": 801
+    },
+    "implementation/jumpserve-infra/agent/research_ideas.py": {
+      "sha256": "496565d423e8af7df19826e08057232e0972b5b22960517bed03427e5c540b4b",
+      "byte_count": 17506
+    },
+    "implementation/jumpserve-infra/bin/prepare-research-runtime.py": {
+      "sha256": "02fc083e086490e9d70b85cf858ada7558ce7cc138fe893cd545fd56404bd1d2",
+      "byte_count": 1579
+    },
+    "implementation/jumpserve-infra/database/202610170001_claim_experiment_design.sql": {
+      "sha256": "f42157f6c903d68b9fc9ce1a8f8e313654b898d244e7815e5ffe23dab21b830c",
+      "byte_count": 15327
+    },
+    "implementation/jumpserve-infra/database/202610170002_claim_design_prompt.sql": {
+      "sha256": "4642720a4c1551f76c42ba721b4abb3d46ba8017d76b03329d92616804db1779",
+      "byte_count": 18822
+    },
+    "implementation/jumpserve-infra/database/202610170003_claim_design_prompt_v2.sql": {
+      "sha256": "b647e840e770ac8073e02de29ea7a1d73abfb370debe24154df0edc909f3e993",
+      "byte_count": 18175
+    },
+    "implementation/jumpserve-infra/database/202610170004_claim_design_prompt_v3.sql": {
+      "sha256": "f8a312a30ce597f0acb772fce7656b1356ff627216340f02477def571914dc84",
+      "byte_count": 21811
+    },
+    "implementation/jumpserve-infra/database/202610170005_claim_design_prompt_v4.sql": {
+      "sha256": "68ad8a3fd28c85a73359994a07e6af43106e530816f7010d099334db5b9924a7",
+      "byte_count": 14156
+    },
+    "implementation/jumpserve-infra/database/202610170006_claim_design_policy_guard.sql": {
+      "sha256": "e7ef7782b9711bfe395c04e3a0334db6e94ebad8857bc2c7d79230003b8720bd",
+      "byte_count": 6610
+    },
+    "implementation/jumpserve-infra/database/202610170007_claim_design_prompt_v5.sql": {
+      "sha256": "74440be9d7ec4395bbb6707130ab01ce0ba0849a99c7c233aebbabba36f674c3",
+      "byte_count": 17870
+    },
+    "implementation/jumpserve-infra/database/202610170008_claim_design_v5_publication_guard.sql": {
+      "sha256": "0952b51cfe3582418ffee1830ef721e19a60421e101e21b4a01a54fa0f07fde9",
+      "byte_count": 5304
+    },
+    "implementation/jumpserve-infra/database/202610170009_claim_design_prompt_v6.sql": {
+      "sha256": "6eb609d99509f936946a0add9938a29a1b1dace58d40dfc20920ed9b1ca77daa",
+      "byte_count": 23022
+    },
+    "implementation/jumpserve-infra/database/202610170010_claim_design_v6_publication_guard.sql": {
+      "sha256": "6746234763cd4d1bf7b848ed1649fae0f75ece1e70b0c426be4bb9cb047717ae",
+      "byte_count": 5304
+    },
+    "implementation/jumpserve-infra/database/202610170011_claim_design_replay_publication_guard.sql": {
+      "sha256": "0af3c9516c844cca8090e2dc8e88f0c5adec2ab6fa8016cb16b164014f4bb42d",
+      "byte_count": 12932
+    },
+    "implementation/jumpserve-infra/database/202610170012_claim_design_quote_publication_guard.sql": {
+      "sha256": "a3f0dce1c3dc874dc24074ee5f46a8ac5022fd483fc0a66e25a038143c4dddd9",
+      "byte_count": 13028
+    },
+    "implementation/jumpserve-infra/database/202610170013_claim_design_exact_units_publication_guard.sql": {
+      "sha256": "f59a3cd85d708aba84f284175ef3238bc3b65603ea931614b2c70478625be5bb",
+      "byte_count": 13113
+    },
+    "implementation/jumpserve-infra/database/seed-claim-experiment-design-v1.json": {
+      "sha256": "f8b48ab4717c5de0248c85110f4901b82b6edb3d59c490a86cfef66d06198476",
+      "byte_count": 13601
+    },
+    "implementation/jumpserve-infra/database/seed-claim-experiment-design-v2.json": {
+      "sha256": "46fb9c8348763073687cf90b77ae6a8c73e5f4b4035c26ed88591ff00cf37c36",
+      "byte_count": 18023
+    },
+    "implementation/jumpserve-infra/database/seed-claim-experiment-design-v3.json": {
+      "sha256": "c3941afa9afaed01559ecc4bc4b1fb7331f3da58853279bf2f204d37f11063bf",
+      "byte_count": 21651
+    },
+    "implementation/jumpserve-infra/database/seed-claim-experiment-design-v4.json": {
+      "sha256": "94b126626ab465c10819cc003f520891c223aae92c6fdba4601a0b729a173afa",
+      "byte_count": 13960
+    },
+    "implementation/jumpserve-infra/database/seed-claim-experiment-design-v5.json": {
+      "sha256": "5d0f3494304e40a97e94584ed998b5af3577900475f0764baee3c8369ca313e3",
+      "byte_count": 17656
+    },
+    "implementation/jumpserve-infra/database/seed-claim-experiment-design-v6.json": {
+      "sha256": "e14f4081c1a86818647026a7041adaa789a826faa05203db55567a45e6a3aafb",
+      "byte_count": 22840
+    },
+    "implementation/jumpserve-infra/docs/claim-experiment-design-amendment-v2.md": {
+      "sha256": "00af6ffda77e8ee8a7923b6342f2b4d4b2cc979dba8347c9d23854a78e0ddab5",
+      "byte_count": 1286
+    },
+    "implementation/jumpserve-infra/docs/claim-experiment-design-amendment-v3.md": {
+      "sha256": "406a18fdb8f1f2617d09b884cd905e2dcb7208743d9e8bd8c6dad7c56e84da83",
+      "byte_count": 1838
+    },
+    "implementation/jumpserve-infra/docs/claim-experiment-design-amendment-v4.md": {
+      "sha256": "ba79c76238fffa27b13ddcbd2717838c702b8fa9ea855d7cf66958c5a2c7be64",
+      "byte_count": 1300
+    },
+    "implementation/jumpserve-infra/docs/claim-experiment-design-correction-v2.md": {
+      "sha256": "74f7a0a0c663f27199add6622c312faf2d06fc37c40d91a1368f77dc7b15cc2f",
+      "byte_count": 11598
+    },
+    "implementation/jumpserve-infra/docs/claim-experiment-design-followup-v3.md": {
+      "sha256": "962a570210a96e37b9393faa9d2f5740fa256b930ec4c5dfdd3eae2483537315",
+      "byte_count": 10742
+    },
+    "implementation/jumpserve-infra/docs/claim-experiment-design-protocol-v1.md": {
+      "sha256": "a099c575b3e1b238cb2c7b8deb4b077aaea023e09df3c891f9f763c5a61d9e1c",
+      "byte_count": 2964
+    },
+    "implementation/jumpserve-infra/docs/claim-experiment-design-protocol-v2.md": {
+      "sha256": "bb4bb7fd90ddf7c57bedd30b5caf68212b331f78b982df63901a858833d1ab74",
+      "byte_count": 4869
+    },
+    "implementation/jumpserve-infra/docs/claim-experiment-design-protocol-v3.md": {
+      "sha256": "d2fc61f0be3b2a231d22b37d8362bfb21986d062280e595aea788568d12e8a3b",
+      "byte_count": 5228
+    },
+    "implementation/jumpserve-infra/docs/claim-experiment-design-v3-amendment-v6.md": {
+      "sha256": "600334816a717adceb6192fc5a104cf5b0f0725dbe3f9c586df2c15e40314a47",
+      "byte_count": 2936
+    },
+    "implementation/jumpserve-infra/docs/claim-experiment-design-v3-exact-unit-controls.md": {
+      "sha256": "18ed685b0ab61299f2cf59be75cc820774c3728dae5ffe8e887774e8cbd972d9",
+      "byte_count": 918
+    },
+    "implementation/jumpserve-infra/docs/claim-experiment-design-v3-parser-followup.md": {
+      "sha256": "73d5bcc9e7066ae60ed90eaa8240eb2e4b286406963ffc82f681d2011aaacd2a",
+      "byte_count": 3077
+    },
+    "implementation/jumpserve-infra/docs/claim-experiment-design-v3-quote-controls-v2.md": {
+      "sha256": "c3938e0aa9c09781b2d0528656515169c47acb5263830a0c6df30b6d517247e9",
+      "byte_count": 621
+    },
+    "implementation/jumpserve-infra/docs/claim-experiment-design-v3-quote-controls.md": {
+      "sha256": "25c136c5208e1038b45de38c93b96e2ec7de908f0042f24cabafe6eb409d2920",
+      "byte_count": 925
+    },
+    "implementation/jumpserve-infra/docs/claim-experiment-design-validation.md": {
+      "sha256": "a84051c9efde1515e40758e1cb36c2fc607c3eef064dc2ae93f08ce57ce41f23",
+      "byte_count": 10547
+    },
+    "implementation/jumpserve-infra/lib/research-workflow.ts": {
+      "sha256": "dcd3b8a461b732dd99fb3e227921f25d3f04d2c9f213681585fc1c4b15a94927",
+      "byte_count": 10288
+    },
+    "implementation/jumpserve-infra/research-workflow-runtime.json": {
+      "sha256": "5915fc3cffccf78df5f41c7a1a890c08adb3f8ab6918426a226e90c7b5fd3110",
+      "byte_count": 1727
+    },
+    "implementation/jumpserve-infra/test/agent_claim_design_test.py": {
+      "sha256": "b490e672f0ffba575c80051f78534de4bcd714a338a7ff5d5bbad4a64464e19d",
+      "byte_count": 13921
+    },
+    "implementation/jumpserve-infra/test/check_claim_design_database.py": {
+      "sha256": "61b34ce0b2bc902b69ee17cbf3338a79595587c2f48ce088c010665a7f1d62ee",
+      "byte_count": 12077
+    },
+    "implementation/jumpserve-infra/test/check_research_ideas_database.py": {
+      "sha256": "82192c693aff8058be02990162da86ca5d5743c7c972bdc3ed6546e8b9b5baa3",
+      "byte_count": 27566
+    },
+    "implementation/jumpserve-infra/test/claim-design-evaluation-cases-v1.json": {
+      "sha256": "2c46d5883b4bd40d937b9a11cd06897caf2c54c22b18756faeda7a42de891892",
+      "byte_count": 42149
+    },
+    "implementation/jumpserve-infra/test/claim-design-evaluation-cases-v1.lock.json": {
+      "sha256": "149b4dc1c18bfe34c37902274aa6d81dec32f8aa956994bd9d7423da8f9a828f",
+      "byte_count": 190
+    },
+    "implementation/jumpserve-infra/test/claim-design-evaluation-cases-v2.json": {
+      "sha256": "ca50d192800fa2fc1ee96cbb5ed5c18d1f745393ddaf5bfdc2099a271ed4784b",
+      "byte_count": 42256
+    },
+    "implementation/jumpserve-infra/test/claim-design-evaluation-cases-v2.lock.json": {
+      "sha256": "b8d93ea84450d7df7bcd8bf30741e50cccee7c130ab404c1e6cc83d67c343a46",
+      "byte_count": 190
+    },
+    "implementation/jumpserve-infra/test/claim-design-evaluation-cases-v3.json": {
+      "sha256": "597dd6d5249afae58b0a3106f348068208ba9f9718d81f1714c1805d8e199b1c",
+      "byte_count": 54161
+    },
+    "implementation/jumpserve-infra/test/claim-design-evaluation-cases-v3.lock.json": {
+      "sha256": "fb28455b8ba2d240859cae0ca950e20043ed54e16d03e98001f045544eaa34f5",
+      "byte_count": 178
+    },
+    "implementation/jumpserve-infra/test/claim-design-evaluation-cases-v4.json": {
+      "sha256": "dc3e804671d82d836d3c9547deb80021e15da9c9fb141a38139a8bf3346988af",
+      "byte_count": 70036
+    },
+    "implementation/jumpserve-infra/test/claim-design-evaluation-cases-v4.lock.json": {
+      "sha256": "be8c65df8349895a05be76159e5712ae093581f2d9b4f22cf163599d145389b4",
+      "byte_count": 178
+    },
+    "implementation/jumpserve-infra/test/evaluate_claim_design.py": {
+      "sha256": "8f67493c33ad4a667b09f4eaf14d2a4023d20542e4b5d6949803e3d808e5e401",
+      "byte_count": 8090
+    },
+    "implementation/jumpserve-infra/test/evaluate_claim_design_v2.py": {
+      "sha256": "cf6a24bb20156476d67536cbe4368f367db871099b6172eb5d895d841c3648f4",
+      "byte_count": 18148
+    },
+    "implementation/jumpserve-infra/test/research-workflow.test.ts": {
+      "sha256": "48ea74392553122183ae315e036e0134f478598b5ef3805f753c2429b52a0c79",
+      "byte_count": 5220
+    },
+    "implementation/jumpserve-infra/test/serve_research_ideas_fixture.py": {
+      "sha256": "ec3ee666cee08de6ee5d7e901ea5a6a01ab6a17a5f23235a50d30c8fcbf8a311",
+      "byte_count": 15992
+    },
+    "implementation/jumpserve-infra/tsconfig.json": {
+      "sha256": "b062586bd7b543d6f7cd5aa8dd8dadc66118ceefba849417a283849dac66a58a",
+      "byte_count": 869
+    },
+    "implementation-manifest.json": {
+      "sha256": "9d016a36b5932006db566983d83705059dbef172608beb61cdc76d410396ff77",
+      "byte_count": 657
+    },
+    "prior-evidence-verification.json": {
+      "sha256": "590e28f1af46ebf2fec45e015e4a547f1db0cec64dcabdc09ea69155f4faaaa6",
+      "byte_count": 614
+    },
+    "software-validation.json": {
+      "sha256": "0ac8c94ad34e98c5aed17af802545dba64050a94365fb8ca3510d6a3e340bb49",
+      "byte_count": 3153
+    },
+    "usage.json": {
+      "sha256": "e3d7e25481b99ba8bb0cc5cd7dd1b433b8582078721df626e3f2453ce82efaf6",
+      "byte_count": 2483
+    },
+    "v5/design-causal-channel.json": {
+      "sha256": "fd61f9d6f7eea788d005b9767d55a463e685d883ab8bee92d21279cada5b09dc",
+      "byte_count": 5625
+    },
+    "v5/design-causal-messages.json": {
+      "sha256": "02d9ddcc03500d5f210292ac46376717493492da1ae3441b3b64b3c9de120738",
+      "byte_count": 3859
+    },
+    "v5/design-causal-provider.json": {
+      "sha256": "120fb3563ba3cb91b59b2942f0b08dda9eee0a4244342b98bee49d3e74d1a394",
+      "byte_count": 1835
+    },
+    "v5/design-causal-system.json": {
+      "sha256": "8f3f1bc7c45fb289f3086054ca6c4f36f07841e87e34ceab95b81ebf5b328e2d",
+      "byte_count": 6239
+    },
+    "v5/design-complete-channel.json": {
+      "sha256": "fd61f9d6f7eea788d005b9767d55a463e685d883ab8bee92d21279cada5b09dc",
+      "byte_count": 5625
+    },
+    "v5/design-complete-messages.json": {
+      "sha256": "b6579bc364edb52dd900b95d0aab3b5668ed67133c7aff673eba07d90866bcac",
+      "byte_count": 8596
+    },
+    "v5/design-complete-provider.json": {
+      "sha256": "8ed33ace636b8423e5788c3101efd6898e9b0076f3f0ddf1a728b1beca07ee1a",
+      "byte_count": 1296
+    },
+    "v5/design-complete-system.json": {
+      "sha256": "8f3f1bc7c45fb289f3086054ca6c4f36f07841e87e34ceab95b81ebf5b328e2d",
+      "byte_count": 6239
+    },
+    "v5/design-config-change-channel.json": {
+      "sha256": "fd61f9d6f7eea788d005b9767d55a463e685d883ab8bee92d21279cada5b09dc",
+      "byte_count": 5625
+    },
+    "v5/design-config-change-messages.json": {
+      "sha256": "2f8e69b66b342f3d2796710860c00c455f39ab013b3849f4fbb5ee7a1dfdb29b",
+      "byte_count": 8558
+    },
+    "v5/design-config-change-provider.json": {
+      "sha256": "1a2c52712bc55c5da5c748b92c0863881a03cd8f8792186f1ad11e02feeb0366",
+      "byte_count": 1663
+    },
+    "v5/design-config-change-system.json": {
+      "sha256": "8f3f1bc7c45fb289f3086054ca6c4f36f07841e87e34ceab95b81ebf5b328e2d",
+      "byte_count": 6239
+    },
+    "v5/design-correlated-channel.json": {
+      "sha256": "fd61f9d6f7eea788d005b9767d55a463e685d883ab8bee92d21279cada5b09dc",
+      "byte_count": 5625
+    },
+    "v5/design-correlated-messages.json": {
+      "sha256": "502770179582fd3f093e05f6cbd9688e7a75c7a0fa17e1fc156f52f76446fa12",
+      "byte_count": 3894
+    },
+    "v5/design-correlated-provider.json": {
+      "sha256": "09efac5a852d14051815cf467ee01979079bb4a61bee53419def89cf907a5adb",
+      "byte_count": 2178
+    },
+    "v5/design-correlated-system.json": {
+      "sha256": "8f3f1bc7c45fb289f3086054ca6c4f36f07841e87e34ceab95b81ebf5b328e2d",
+      "byte_count": 6239
+    },
+    "v5/design-equipment-channel.json": {
+      "sha256": "fd61f9d6f7eea788d005b9767d55a463e685d883ab8bee92d21279cada5b09dc",
+      "byte_count": 5625
+    },
+    "v5/design-equipment-messages.json": {
+      "sha256": "ea67afb95c525da56bc04fd3b99f4545f808c800057e96945c24ea7e029174f3",
+      "byte_count": 3845
+    },
+    "v5/design-equipment-provider.json": {
+      "sha256": "b2f60ac48908f41b5baf4359f198daa170da469f068d113744535952c1868482",
+      "byte_count": 2480
+    },
+    "v5/design-equipment-system.json": {
+      "sha256": "8f3f1bc7c45fb289f3086054ca6c4f36f07841e87e34ceab95b81ebf5b328e2d",
+      "byte_count": 6239
+    },
+    "v5/design-equivalence-channel.json": {
+      "sha256": "fd61f9d6f7eea788d005b9767d55a463e685d883ab8bee92d21279cada5b09dc",
+      "byte_count": 5625
+    },
+    "v5/design-equivalence-messages.json": {
+      "sha256": "9730d5120d88291b6a6e592b6dae7dc818b70f2ca35d73fec8613aeb57e32ea8",
+      "byte_count": 3893
+    },
+    "v5/design-equivalence-provider.json": {
+      "sha256": "d22e806e04ed3235cbcc663ce4afb4df4bdf699460a0b92434c583024a73c9da",
+      "byte_count": 1894
+    },
+    "v5/design-equivalence-system.json": {
+      "sha256": "8f3f1bc7c45fb289f3086054ca6c4f36f07841e87e34ceab95b81ebf5b328e2d",
+      "byte_count": 6239
+    },
+    "v5/design-equivalent-units-channel.json": {
+      "sha256": "fd61f9d6f7eea788d005b9767d55a463e685d883ab8bee92d21279cada5b09dc",
+      "byte_count": 5625
+    },
+    "v5/design-equivalent-units-messages.json": {
+      "sha256": "63b4b760661e57483603349965c2533002273b46156e88cf8b1d319076433730",
+      "byte_count": 3940
+    },
+    "v5/design-equivalent-units-provider.json": {
+      "sha256": "1da87fde9fb33d147ad899c902ef9f3f5c81d461e4adf74f3335291c5622f279",
+      "byte_count": 1702
+    },
+    "v5/design-equivalent-units-system.json": {
+      "sha256": "8f3f1bc7c45fb289f3086054ca6c4f36f07841e87e34ceab95b81ebf5b328e2d",
+      "byte_count": 6239
+    },
+    "v5/design-injection-channel.json": {
+      "sha256": "fd61f9d6f7eea788d005b9767d55a463e685d883ab8bee92d21279cada5b09dc",
+      "byte_count": 5625
+    },
+    "v5/design-injection-messages.json": {
+      "sha256": "bb6412187b76db6293a4efcbadc83d36409f15dca8cb23f853830e16435427a9",
+      "byte_count": 3917
+    },
+    "v5/design-injection-provider.json": {
+      "sha256": "63c53216b6aaec6c844e94739a67b9fd24149adc0f7cbfe81e0b7dfc5361039e",
+      "byte_count": 2246
+    },
+    "v5/design-injection-system.json": {
+      "sha256": "8f3f1bc7c45fb289f3086054ca6c4f36f07841e87e34ceab95b81ebf5b328e2d",
+      "byte_count": 6239
+    },
+    "v5/design-known-placement-channel.json": {
+      "sha256": "fd61f9d6f7eea788d005b9767d55a463e685d883ab8bee92d21279cada5b09dc",
+      "byte_count": 5625
+    },
+    "v5/design-known-placement-messages.json": {
+      "sha256": "0a258fc9576c38cf3090aa3ab31fd0a2bd0c92fbd17432f36e87d59e3888a505",
+      "byte_count": 3943
+    },
+    "v5/design-known-placement-provider.json": {
+      "sha256": "f3af2c8267227714c292ec230dada3a249aff508d688a363d94de0470f4198ce",
+      "byte_count": 1667
+    },
+    "v5/design-known-placement-system.json": {
+      "sha256": "8f3f1bc7c45fb289f3086054ca6c4f36f07841e87e34ceab95b81ebf5b328e2d",
+      "byte_count": 6239
+    },
+    "v5/design-missing-data-channel.json": {
+      "sha256": "fd61f9d6f7eea788d005b9767d55a463e685d883ab8bee92d21279cada5b09dc",
+      "byte_count": 5625
+    },
+    "v5/design-missing-data-messages.json": {
+      "sha256": "149a2442c65707a5e282d6aecd927f141b1c819631f71793fbf827f5fb672b2b",
+      "byte_count": 3840
+    },
+    "v5/design-missing-data-provider.json": {
+      "sha256": "7779fdfa38062bfd8b429371900f703ff6b6dd35881f64cf501dbd313b4a96f8",
+      "byte_count": 1991
+    },
+    "v5/design-missing-data-system.json": {
+      "sha256": "8f3f1bc7c45fb289f3086054ca6c4f36f07841e87e34ceab95b81ebf5b328e2d",
+      "byte_count": 6239
+    },
+    "v5/design-missing-source-channel.json": {
+      "sha256": "fd61f9d6f7eea788d005b9767d55a463e685d883ab8bee92d21279cada5b09dc",
+      "byte_count": 5625
+    },
+    "v5/design-missing-source-messages.json": {
+      "sha256": "f5b3bbadccb8ee52a94a4add966f307ca3d7178b51c13588ff4c0bdffc6b76c2",
+      "byte_count": 3769
+    },
+    "v5/design-missing-source-provider.json": {
+      "sha256": "f95e802a41415579ec50016a0169cae07bb63de02cfdf85bb68661c6938484c3",
+      "byte_count": 2171
+    },
+    "v5/design-missing-source-system.json": {
+      "sha256": "8f3f1bc7c45fb289f3086054ca6c4f36f07841e87e34ceab95b81ebf5b328e2d",
+      "byte_count": 6239
+    },
+    "v5/design-networking-channel.json": {
+      "sha256": "fd61f9d6f7eea788d005b9767d55a463e685d883ab8bee92d21279cada5b09dc",
+      "byte_count": 5625
+    },
+    "v5/design-networking-messages.json": {
+      "sha256": "f30be409a37a8d2f2a056c04ddf7624eaa5514fdb7f96ef5012313d637ea43e4",
+      "byte_count": 3874
+    },
+    "v5/design-networking-provider.json": {
+      "sha256": "fb16266fcabae060fdc4bdafbe13fb21dc2fed760b20348dc1092c52d10729a4",
+      "byte_count": 2175
+    },
+    "v5/design-networking-system.json": {
+      "sha256": "8f3f1bc7c45fb289f3086054ca6c4f36f07841e87e34ceab95b81ebf5b328e2d",
+      "byte_count": 6239
+    },
+    "v5/design-null-result-channel.json": {
+      "sha256": "fd61f9d6f7eea788d005b9767d55a463e685d883ab8bee92d21279cada5b09dc",
+      "byte_count": 5625
+    },
+    "v5/design-null-result-messages.json": {
+      "sha256": "bfe09e2f03f5380c05803be9c68548f76f8192d4feebbb54abd9562bebf3e4e6",
+      "byte_count": 3877
+    },
+    "v5/design-null-result-provider.json": {
+      "sha256": "c95f0f49036c0dfbfb04288bacca4aa0253ed49a18d8637da49fe175cfbbcf51",
+      "byte_count": 2031
+    },
+    "v5/design-null-result-system.json": {
+      "sha256": "8f3f1bc7c45fb289f3086054ca6c4f36f07841e87e34ceab95b81ebf5b328e2d",
+      "byte_count": 6239
+    },
+    "v5/design-optical-proxy-channel.json": {
+      "sha256": "fd61f9d6f7eea788d005b9767d55a463e685d883ab8bee92d21279cada5b09dc",
+      "byte_count": 5625
+    },
+    "v5/design-optical-proxy-messages.json": {
+      "sha256": "2f2a1b4e89e045367a26655d7de3b57f57604544826c39ec6901f2eaaaebec6c",
+      "byte_count": 3892
+    },
+    "v5/design-optical-proxy-provider.json": {
+      "sha256": "49c7ea6d3e276bcff0426ee2e3e4ee35c514439155f7dfab33ee7157c23f6c47",
+      "byte_count": 2407
+    },
+    "v5/design-optical-proxy-system.json": {
+      "sha256": "8f3f1bc7c45fb289f3086054ca6c4f36f07841e87e34ceab95b81ebf5b328e2d",
+      "byte_count": 6239
+    },
+    "v5/design-owner-supplied-plan-channel.json": {
+      "sha256": "fd61f9d6f7eea788d005b9767d55a463e685d883ab8bee92d21279cada5b09dc",
+      "byte_count": 5625
+    },
+    "v5/design-owner-supplied-plan-messages.json": {
+      "sha256": "f7b591de2221e1fb356489bd90f536bf7b787337cd4ac6284e55ae22d1d26c48",
+      "byte_count": 9221
+    },
+    "v5/design-owner-supplied-plan-provider.json": {
+      "sha256": "e895ec003f869fcefb2191870b5d19cb88adc69767c44219230f8cc55f75f362",
+      "byte_count": 10047
+    },
+    "v5/design-owner-supplied-plan-system.json": {
+      "sha256": "8f3f1bc7c45fb289f3086054ca6c4f36f07841e87e34ceab95b81ebf5b328e2d",
+      "byte_count": 6239
+    },
+    "v5/design-units-channel.json": {
+      "sha256": "fd61f9d6f7eea788d005b9767d55a463e685d883ab8bee92d21279cada5b09dc",
+      "byte_count": 5625
+    },
+    "v5/design-units-messages.json": {
+      "sha256": "4a42a28ba27f15596d903b4ef78a51d2d54ca1b321e3184401dfaa9482d48d5c",
+      "byte_count": 3859
+    },
+    "v5/design-units-provider.json": {
+      "sha256": "19ab75d80cc66b3340140500ceb86b82f1306420b51c202e27ac2dbffd674448",
+      "byte_count": 1996
+    },
+    "v5/design-units-system.json": {
+      "sha256": "8f3f1bc7c45fb289f3086054ca6c4f36f07841e87e34ceab95b81ebf5b328e2d",
+      "byte_count": 6239
+    },
+    "v5/evaluation-report.json": {
+      "sha256": "49a8ddf58fdbd854da03d5d7fe54347239d6e04bd43885a542b13aa27b60333d",
+      "byte_count": 85753
+    },
+    "v5/evaluation-reviewed.json": {
+      "sha256": "d7127801fbcdb72caea74d3f56f87c0905840e346138bf6e27d9f418386dd85f",
+      "byte_count": 91368
+    },
+    "v5/inputs/agent/claim-decision-policy-v1.json": {
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "byte_count": 1019
+    },
+    "v5/inputs/agent/claim_experiment_design.py": {
+      "sha256": "b5b836eada5263ecd91834577ec72cf212c5ae8d218e335aa7ad4ed6343524d2",
+      "byte_count": 13504
+    },
+    "v5/inputs/agent/idea_interview.py": {
+      "sha256": "d454aaf2a2fcbc0b857e90706d152ee9c86c86ef98a0d2b3760af3f85fd05ccb",
+      "byte_count": 3199
+    },
+    "v5/inputs/agent/idea_review.py": {
+      "sha256": "4725154f1796e913b42ab612cd4dd138c3b2e3cd16b00e75a458cc4cde92bf51",
+      "byte_count": 7703
+    },
+    "v5/inputs/agent/research_ideas.py": {
+      "sha256": "2142a5dc00ac61663c200e19f19e77e7cfcd5a7915d52bf6393a1ddff2d2b967",
+      "byte_count": 17250
+    },
+    "v5/inputs/backend/claim_design.py": {
+      "sha256": "80684230ee5b0afa44482f4fa8caa3275ffccbc4905040da81655991a7c56bbf",
+      "byte_count": 11040
+    },
+    "v5/inputs/backend/network_spec.py": {
+      "sha256": "884857f8680eb73ae7b8f43de484c3bd59d0f2441b66e117e49a347191a31e7c",
+      "byte_count": 15432
+    },
+    "v5/inputs/backend/policies/claim-decision-policy-v1.json": {
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "byte_count": 1019
+    },
+    "v5/inputs/backend/workflow.py": {
+      "sha256": "03ebd6c328dc8d9428992c44d07c468e4639576853d32b92cb0e801a8727c75d",
+      "byte_count": 20365
+    },
+    "v5/inputs/database/seed-claim-experiment-design-v5.json": {
+      "sha256": "5d0f3494304e40a97e94584ed998b5af3577900475f0764baee3c8369ca313e3",
+      "byte_count": 17656
+    },
+    "v5/inputs/docs/claim-experiment-design-protocol-v3.md": {
+      "sha256": "d2fc61f0be3b2a231d22b37d8362bfb21986d062280e595aea788568d12e8a3b",
+      "byte_count": 5228
+    },
+    "v5/inputs/test/claim-design-evaluation-cases-v4.json": {
+      "sha256": "dc3e804671d82d836d3c9547deb80021e15da9c9fb141a38139a8bf3346988af",
+      "byte_count": 70036
+    },
+    "v5/inputs/test/claim-design-evaluation-cases-v4.lock.json": {
+      "sha256": "be8c65df8349895a05be76159e5712ae093581f2d9b4f22cf163599d145389b4",
+      "byte_count": 178
+    },
+    "v5/inputs/test/evaluate_claim_design_v2.py": {
+      "sha256": "54899f55c8f6178de57e2e12ad9bc9f82bd8539b1dcf9c4ae826f4c7aac71b5b",
+      "byte_count": 9903
+    },
+    "v5/review-complete-channel.json": {
+      "sha256": "1803635f00eeba8639c27cf4d2059ea67ae39a1c8043b371084157a9201327f5",
+      "byte_count": 1573
+    },
+    "v5/review-complete-messages.json": {
+      "sha256": "5957371fd81caaba989e1d4d2d10da4fd4514341e3eaeb0ea3ffd61dd53942f7",
+      "byte_count": 5886
+    },
+    "v5/review-complete-provider.json": {
+      "sha256": "53efea4d8ad4d75ed22619cec9987c74e6473a7a15734af8047b52b1791b43ac",
+      "byte_count": 1645
+    },
+    "v5/review-complete-system.json": {
+      "sha256": "50450d3efb2be618d7b7b351ad105a24c30b22c4c4f5ef403adac4e9c339586c",
+      "byte_count": 6009
+    },
+    "v5/review-comprehension-channel.json": {
+      "sha256": "1803635f00eeba8639c27cf4d2059ea67ae39a1c8043b371084157a9201327f5",
+      "byte_count": 1573
+    },
+    "v5/review-comprehension-messages.json": {
+      "sha256": "d0bfdef9abad1782fe8af8a7ba801bf1c14301b118eecf4450f57faaca9f4e7d",
+      "byte_count": 5893
+    },
+    "v5/review-comprehension-provider.json": {
+      "sha256": "aac30d54c65a14c0fac3eb4c5e3d38739d03f0bbd8dd71d005ae03b2ca6a2f43",
+      "byte_count": 1645
+    },
+    "v5/review-comprehension-system.json": {
+      "sha256": "162625b7d1d7da5da33f3cc1b03ab213a81257fc515fbc6ffb83eeb1b1c5ea05",
+      "byte_count": 6016
+    },
+    "v5/review-injection-channel.json": {
+      "sha256": "1803635f00eeba8639c27cf4d2059ea67ae39a1c8043b371084157a9201327f5",
+      "byte_count": 1573
+    },
+    "v5/review-injection-messages.json": {
+      "sha256": "fbd497568af6f033b3beadc3b89aed6b9b7e21c17f814056aae5654ef3a6b989",
+      "byte_count": 5871
+    },
+    "v5/review-injection-provider.json": {
+      "sha256": "65f6b427ff31ace9d4b9616c66297836f9c0629e70442540a7cb4d4b6a514b77",
+      "byte_count": 2074
+    },
+    "v5/review-injection-system.json": {
+      "sha256": "50450d3efb2be618d7b7b351ad105a24c30b22c4c4f5ef403adac4e9c339586c",
+      "byte_count": 6009
+    },
+    "v5/review-units-channel.json": {
+      "sha256": "1803635f00eeba8639c27cf4d2059ea67ae39a1c8043b371084157a9201327f5",
+      "byte_count": 1573
+    },
+    "v5/review-units-messages.json": {
+      "sha256": "0ac1a361565a269a09d61e5626be068dd553f2befeb04ac3738e40e1e55850b1",
+      "byte_count": 5886
+    },
+    "v5/review-units-provider.json": {
+      "sha256": "7ec44aa3714a6312f97f1eece1b88b95ec676c08c8b123fb119e507ef20d5e7f",
+      "byte_count": 1982
+    },
+    "v5/review-units-system.json": {
+      "sha256": "50450d3efb2be618d7b7b351ad105a24c30b22c4c4f5ef403adac4e9c339586c",
+      "byte_count": 6009
+    },
+    "v6/design-causal-channel.json": {
+      "sha256": "a782b93f16b475fde4fed150f5e1060b109b8a880370fd755c85c998ca464929",
+      "byte_count": 6205
+    },
+    "v6/design-causal-messages.json": {
+      "sha256": "164ee61ad9ee0b8bfd98784117e7a8c8c59ca8e950446a284ed681ec6e4c5ce1",
+      "byte_count": 4364
+    },
+    "v6/design-causal-provider.json": {
+      "sha256": "e7a3aea36ac4f2b07cb2a480c2250b23d4bc40184eaf911d4a0d20a4819850b4",
+      "byte_count": 1748
+    },
+    "v6/design-causal-system.json": {
+      "sha256": "2aa3700e59c5275c1899c454e6ad337681738d1696c055abb216dbd8ff1c711f",
+      "byte_count": 8828
+    },
+    "v6/design-complete-channel.json": {
+      "sha256": "a782b93f16b475fde4fed150f5e1060b109b8a880370fd755c85c998ca464929",
+      "byte_count": 6205
+    },
+    "v6/design-complete-messages.json": {
+      "sha256": "d5713b53245a6f1c27077c58c89d41709d568bcbb85e36c3abf4e9f7544ac249",
+      "byte_count": 9101
+    },
+    "v6/design-complete-provider.json": {
+      "sha256": "5d3931b7f786d1066c50194e16d4325a7ca7f2f92ec2237882c2cb4422067f10",
+      "byte_count": 954
+    },
+    "v6/design-complete-system.json": {
+      "sha256": "2aa3700e59c5275c1899c454e6ad337681738d1696c055abb216dbd8ff1c711f",
+      "byte_count": 8828
+    },
+    "v6/design-config-change-channel.json": {
+      "sha256": "a782b93f16b475fde4fed150f5e1060b109b8a880370fd755c85c998ca464929",
+      "byte_count": 6205
+    },
+    "v6/design-config-change-messages.json": {
+      "sha256": "75828ecc9595ff3628de59e3e14b18eb4b38103b0217b89702c5c541ba2801b3",
+      "byte_count": 9063
+    },
+    "v6/design-config-change-provider.json": {
+      "sha256": "b99e81189b86fdae1368b7a07a3bc8fbac0a605b525357e575bfbb9ff005cb35",
+      "byte_count": 1484
+    },
+    "v6/design-config-change-system.json": {
+      "sha256": "2aa3700e59c5275c1899c454e6ad337681738d1696c055abb216dbd8ff1c711f",
+      "byte_count": 8828
+    },
+    "v6/design-correlated-channel.json": {
+      "sha256": "a782b93f16b475fde4fed150f5e1060b109b8a880370fd755c85c998ca464929",
+      "byte_count": 6205
+    },
+    "v6/design-correlated-messages.json": {
+      "sha256": "e83da81aed24474681d24e37ada8bc5deaddf08c892ce0cd055c0a30ec1505ba",
+      "byte_count": 4399
+    },
+    "v6/design-correlated-provider.json": {
+      "sha256": "120dfc2ccc49794e0c030f1726c9a06aa6ab1e74cdafe38beb83c9850290887d",
+      "byte_count": 1836
+    },
+    "v6/design-correlated-system.json": {
+      "sha256": "2aa3700e59c5275c1899c454e6ad337681738d1696c055abb216dbd8ff1c711f",
+      "byte_count": 8828
+    },
+    "v6/design-equipment-channel.json": {
+      "sha256": "a782b93f16b475fde4fed150f5e1060b109b8a880370fd755c85c998ca464929",
+      "byte_count": 6205
+    },
+    "v6/design-equipment-messages.json": {
+      "sha256": "78e8f3de51c69ea81372456784344ebb5364b8d3f8eff43a01b9ae412844f825",
+      "byte_count": 4350
+    },
+    "v6/design-equipment-provider.json": {
+      "sha256": "600401c970f980715c0a7c1b2c466e8474b2d2e7454084f5e3cc0d29c7c72abc",
+      "byte_count": 2163
+    },
+    "v6/design-equipment-system.json": {
+      "sha256": "2aa3700e59c5275c1899c454e6ad337681738d1696c055abb216dbd8ff1c711f",
+      "byte_count": 8828
+    },
+    "v6/design-equivalence-channel.json": {
+      "sha256": "a782b93f16b475fde4fed150f5e1060b109b8a880370fd755c85c998ca464929",
+      "byte_count": 6205
+    },
+    "v6/design-equivalence-messages.json": {
+      "sha256": "1bdd9a5761f397b1af2a49a2382d74d719c6522adb20a0b7d09013f9caaef2b5",
+      "byte_count": 4398
+    },
+    "v6/design-equivalence-provider.json": {
+      "sha256": "929eff64ec5889912d4b6b24d92a68b755a20714e6fc79312d928c78c918c534",
+      "byte_count": 1915
+    },
+    "v6/design-equivalence-system.json": {
+      "sha256": "2aa3700e59c5275c1899c454e6ad337681738d1696c055abb216dbd8ff1c711f",
+      "byte_count": 8828
+    },
+    "v6/design-equivalent-units-channel.json": {
+      "sha256": "a782b93f16b475fde4fed150f5e1060b109b8a880370fd755c85c998ca464929",
+      "byte_count": 6205
+    },
+    "v6/design-equivalent-units-messages.json": {
+      "sha256": "2887952b0ce56840fe12cbf0851594eea492495d1a2f202e53eae5dac17b1c29",
+      "byte_count": 4445
+    },
+    "v6/design-equivalent-units-provider.json": {
+      "sha256": "45896a106580c2f8651ac9a52aa041a84ac5a923c7aa50c2b09cf15b2a6dc1b6",
+      "byte_count": 2122
+    },
+    "v6/design-equivalent-units-system.json": {
+      "sha256": "2aa3700e59c5275c1899c454e6ad337681738d1696c055abb216dbd8ff1c711f",
+      "byte_count": 8828
+    },
+    "v6/design-injection-channel.json": {
+      "sha256": "a782b93f16b475fde4fed150f5e1060b109b8a880370fd755c85c998ca464929",
+      "byte_count": 6205
+    },
+    "v6/design-injection-messages.json": {
+      "sha256": "0f5304ae67e8e929f276592debc3c556930a2730ee6704d6fe3699a547a51056",
+      "byte_count": 4422
+    },
+    "v6/design-injection-provider.json": {
+      "sha256": "0678d3fa8661f7e65381602f9dc0ce1b119e01a9ae8fb25d040bd9865a54b539",
+      "byte_count": 1664
+    },
+    "v6/design-injection-system.json": {
+      "sha256": "2aa3700e59c5275c1899c454e6ad337681738d1696c055abb216dbd8ff1c711f",
+      "byte_count": 8828
+    },
+    "v6/design-known-placement-channel.json": {
+      "sha256": "a782b93f16b475fde4fed150f5e1060b109b8a880370fd755c85c998ca464929",
+      "byte_count": 6205
+    },
+    "v6/design-known-placement-messages.json": {
+      "sha256": "1418a6afc22754c0758d37bfd907e023ea715a62d0d03820a9c899e6710d2b8c",
+      "byte_count": 4448
+    },
+    "v6/design-known-placement-provider.json": {
+      "sha256": "d4bf295353f669bb568d703647a4eb7a97cce2c4e2fea41d1406cb3ba2bdb2a1",
+      "byte_count": 1741
+    },
+    "v6/design-known-placement-system.json": {
+      "sha256": "2aa3700e59c5275c1899c454e6ad337681738d1696c055abb216dbd8ff1c711f",
+      "byte_count": 8828
+    },
+    "v6/design-missing-data-channel.json": {
+      "sha256": "a782b93f16b475fde4fed150f5e1060b109b8a880370fd755c85c998ca464929",
+      "byte_count": 6205
+    },
+    "v6/design-missing-data-messages.json": {
+      "sha256": "6b80c3ea69769202a8413e15282c4b43f041569dbd0c568dc947bf493900f67c",
+      "byte_count": 4345
+    },
+    "v6/design-missing-data-provider.json": {
+      "sha256": "02bb9df372abe50607011c24b42c2dc0b85c1869cc635396bfb685ecd42ec719",
+      "byte_count": 1967
+    },
+    "v6/design-missing-data-system.json": {
+      "sha256": "2aa3700e59c5275c1899c454e6ad337681738d1696c055abb216dbd8ff1c711f",
+      "byte_count": 8828
+    },
+    "v6/design-missing-source-channel.json": {
+      "sha256": "a782b93f16b475fde4fed150f5e1060b109b8a880370fd755c85c998ca464929",
+      "byte_count": 6205
+    },
+    "v6/design-missing-source-messages.json": {
+      "sha256": "24e4379dcc5d0cdb297d6fe641569818438989727d053c0e1d79b66cad00008a",
+      "byte_count": 4274
+    },
+    "v6/design-missing-source-provider.json": {
+      "sha256": "3f271f2c5bdf89c68924074bbf3eb040ffed1c1f5324a23b8f77aa1a26af1d74",
+      "byte_count": 1874
+    },
+    "v6/design-missing-source-system.json": {
+      "sha256": "2aa3700e59c5275c1899c454e6ad337681738d1696c055abb216dbd8ff1c711f",
+      "byte_count": 8828
+    },
+    "v6/design-networking-channel.json": {
+      "sha256": "a782b93f16b475fde4fed150f5e1060b109b8a880370fd755c85c998ca464929",
+      "byte_count": 6205
+    },
+    "v6/design-networking-messages.json": {
+      "sha256": "814c2550500a5da63e06eaa9956b089dca99c397564248f181370623d8257f86",
+      "byte_count": 4379
+    },
+    "v6/design-networking-provider.json": {
+      "sha256": "bc6559b3802ad3235f551772b6b79863f0da23c73a61be1042f60f5047251409",
+      "byte_count": 1821
+    },
+    "v6/design-networking-system.json": {
+      "sha256": "2aa3700e59c5275c1899c454e6ad337681738d1696c055abb216dbd8ff1c711f",
+      "byte_count": 8828
+    },
+    "v6/design-null-result-channel.json": {
+      "sha256": "a782b93f16b475fde4fed150f5e1060b109b8a880370fd755c85c998ca464929",
+      "byte_count": 6205
+    },
+    "v6/design-null-result-messages.json": {
+      "sha256": "7ab4bfd1a9011bf0821dcc8646ed2445e06412f0fd19cc04a925e9b5ddc50308",
+      "byte_count": 4382
+    },
+    "v6/design-null-result-provider.json": {
+      "sha256": "050e9e5a134be51b01196ab80e05352b30dd1fb0bc58ed8030543bcad6895e94",
+      "byte_count": 2249
+    },
+    "v6/design-null-result-system.json": {
+      "sha256": "2aa3700e59c5275c1899c454e6ad337681738d1696c055abb216dbd8ff1c711f",
+      "byte_count": 8828
+    },
+    "v6/design-optical-proxy-channel.json": {
+      "sha256": "a782b93f16b475fde4fed150f5e1060b109b8a880370fd755c85c998ca464929",
+      "byte_count": 6205
+    },
+    "v6/design-optical-proxy-messages.json": {
+      "sha256": "c1269361f862f799536928bd1a1540669f964003f7c900e17d893a5de1b50b52",
+      "byte_count": 4397
+    },
+    "v6/design-optical-proxy-provider.json": {
+      "sha256": "cc1787972de6cc0ca92b47f20fc91d0a6761f6711bae4fe142e49fac0dc2ff2a",
+      "byte_count": 1917
+    },
+    "v6/design-optical-proxy-system.json": {
+      "sha256": "2aa3700e59c5275c1899c454e6ad337681738d1696c055abb216dbd8ff1c711f",
+      "byte_count": 8828
+    },
+    "v6/design-owner-supplied-plan-channel.json": {
+      "sha256": "a782b93f16b475fde4fed150f5e1060b109b8a880370fd755c85c998ca464929",
+      "byte_count": 6205
+    },
+    "v6/design-owner-supplied-plan-messages.json": {
+      "sha256": "d215fad528abaa2f204eb6499fcdd25036c13cd0045a2313b5fd6bf9aaf1062d",
+      "byte_count": 9726
+    },
+    "v6/design-owner-supplied-plan-provider.json": {
+      "sha256": "df040e9429cd182bb5547bce84400031eb601c46e9c7a3ab545b59be91364a64",
+      "byte_count": 9773
+    },
+    "v6/design-owner-supplied-plan-system.json": {
+      "sha256": "2aa3700e59c5275c1899c454e6ad337681738d1696c055abb216dbd8ff1c711f",
+      "byte_count": 8828
+    },
+    "v6/design-units-channel.json": {
+      "sha256": "a782b93f16b475fde4fed150f5e1060b109b8a880370fd755c85c998ca464929",
+      "byte_count": 6205
+    },
+    "v6/design-units-messages.json": {
+      "sha256": "165df182549427e2e5c44f79f053dcf41ee05d84243c0389bc59afb3e15354b9",
+      "byte_count": 4364
+    },
+    "v6/design-units-provider.json": {
+      "sha256": "2cde43c104e88778673c83cdf32e98565e8bdd366cefcf052221f35c2ef36178",
+      "byte_count": 2413
+    },
+    "v6/design-units-system.json": {
+      "sha256": "2aa3700e59c5275c1899c454e6ad337681738d1696c055abb216dbd8ff1c711f",
+      "byte_count": 8828
+    },
+    "v6/evaluation-report.json": {
+      "sha256": "e1baab211a09473c95aeb492f726fecfcec780345cdb1aee2b266c072e37642b",
+      "byte_count": 93027
+    },
+    "v6/evaluation-reviewed.json": {
+      "sha256": "0f56a632b049c333d02ae72e9358e3523fd6344f4622f32f7df9a00c9876ebb7",
+      "byte_count": 99963
+    },
+    "v6/inputs/agent/claim-decision-policy-v1.json": {
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "byte_count": 1019
+    },
+    "v6/inputs/agent/claim_experiment_design.py": {
+      "sha256": "4c50748932f7137ce24ff8981ee775c964f6df77e531a21cff0771b26b9b903c",
+      "byte_count": 18917
+    },
+    "v6/inputs/agent/idea_interview.py": {
+      "sha256": "d454aaf2a2fcbc0b857e90706d152ee9c86c86ef98a0d2b3760af3f85fd05ccb",
+      "byte_count": 3199
+    },
+    "v6/inputs/agent/idea_review.py": {
+      "sha256": "4725154f1796e913b42ab612cd4dd138c3b2e3cd16b00e75a458cc4cde92bf51",
+      "byte_count": 7703
+    },
+    "v6/inputs/agent/research_ideas.py": {
+      "sha256": "7adc5c9c475751e5dbebb3a1dffaf8c73e740e4be61084a7e8429191aa0af9d0",
+      "byte_count": 17509
+    },
+    "v6/inputs/backend/claim_design.py": {
+      "sha256": "09052615a7e5ba2db0e43eff0b641cb529fa7525770d0da3c6b8eb0888f72522",
+      "byte_count": 11050
+    },
+    "v6/inputs/backend/network_spec.py": {
+      "sha256": "884857f8680eb73ae7b8f43de484c3bd59d0f2441b66e117e49a347191a31e7c",
+      "byte_count": 15432
+    },
+    "v6/inputs/backend/policies/claim-decision-policy-v1.json": {
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "byte_count": 1019
+    },
+    "v6/inputs/backend/workflow.py": {
+      "sha256": "03ebd6c328dc8d9428992c44d07c468e4639576853d32b92cb0e801a8727c75d",
+      "byte_count": 20365
+    },
+    "v6/inputs/database/seed-claim-experiment-design-v6.json": {
+      "sha256": "e14f4081c1a86818647026a7041adaa789a826faa05203db55567a45e6a3aafb",
+      "byte_count": 22840
+    },
+    "v6/inputs/docs/claim-experiment-design-protocol-v3.md": {
+      "sha256": "d2fc61f0be3b2a231d22b37d8362bfb21986d062280e595aea788568d12e8a3b",
+      "byte_count": 5228
+    },
+    "v6/inputs/docs/claim-experiment-design-v3-amendment-v6.md": {
+      "sha256": "600334816a717adceb6192fc5a104cf5b0f0725dbe3f9c586df2c15e40314a47",
+      "byte_count": 2936
+    },
+    "v6/inputs/test/claim-design-evaluation-cases-v4.json": {
+      "sha256": "dc3e804671d82d836d3c9547deb80021e15da9c9fb141a38139a8bf3346988af",
+      "byte_count": 70036
+    },
+    "v6/inputs/test/claim-design-evaluation-cases-v4.lock.json": {
+      "sha256": "be8c65df8349895a05be76159e5712ae093581f2d9b4f22cf163599d145389b4",
+      "byte_count": 178
+    },
+    "v6/inputs/test/evaluate_claim_design_v2.py": {
+      "sha256": "1bedb12fa06c0305d712c03f06560c7fac0a86870c6c14677f0824fdd37f10a3",
+      "byte_count": 10326
+    },
+    "v6/review-complete-channel.json": {
+      "sha256": "1803635f00eeba8639c27cf4d2059ea67ae39a1c8043b371084157a9201327f5",
+      "byte_count": 1573
+    },
+    "v6/review-complete-messages.json": {
+      "sha256": "5957371fd81caaba989e1d4d2d10da4fd4514341e3eaeb0ea3ffd61dd53942f7",
+      "byte_count": 5886
+    },
+    "v6/review-complete-provider.json": {
+      "sha256": "cc5e26814078397bc7ed3188f7fe53a1eee6f1ed7ad0cfd82b441b7752fea179",
+      "byte_count": 1645
+    },
+    "v6/review-complete-system.json": {
+      "sha256": "50450d3efb2be618d7b7b351ad105a24c30b22c4c4f5ef403adac4e9c339586c",
+      "byte_count": 6009
+    },
+    "v6/review-comprehension-channel.json": {
+      "sha256": "1803635f00eeba8639c27cf4d2059ea67ae39a1c8043b371084157a9201327f5",
+      "byte_count": 1573
+    },
+    "v6/review-comprehension-messages.json": {
+      "sha256": "d0bfdef9abad1782fe8af8a7ba801bf1c14301b118eecf4450f57faaca9f4e7d",
+      "byte_count": 5893
+    },
+    "v6/review-comprehension-provider.json": {
+      "sha256": "0fde19b1b40a5dfaa96d4135dd6bf0414df2887dd6c1a0f93c6108cd4614e7ba",
+      "byte_count": 1645
+    },
+    "v6/review-comprehension-system.json": {
+      "sha256": "162625b7d1d7da5da33f3cc1b03ab213a81257fc515fbc6ffb83eeb1b1c5ea05",
+      "byte_count": 6016
+    },
+    "v6/review-injection-channel.json": {
+      "sha256": "1803635f00eeba8639c27cf4d2059ea67ae39a1c8043b371084157a9201327f5",
+      "byte_count": 1573
+    },
+    "v6/review-injection-messages.json": {
+      "sha256": "fbd497568af6f033b3beadc3b89aed6b9b7e21c17f814056aae5654ef3a6b989",
+      "byte_count": 5871
+    },
+    "v6/review-injection-provider.json": {
+      "sha256": "dc95068fd056c5a39652b54657955581b2db4bf7f99a26438af89ebacd1e7820",
+      "byte_count": 2387
+    },
+    "v6/review-injection-system.json": {
+      "sha256": "50450d3efb2be618d7b7b351ad105a24c30b22c4c4f5ef403adac4e9c339586c",
+      "byte_count": 6009
+    },
+    "v6/review-units-channel.json": {
+      "sha256": "1803635f00eeba8639c27cf4d2059ea67ae39a1c8043b371084157a9201327f5",
+      "byte_count": 1573
+    },
+    "v6/review-units-messages.json": {
+      "sha256": "0ac1a361565a269a09d61e5626be068dd553f2befeb04ac3738e40e1e55850b1",
+      "byte_count": 5886
+    },
+    "v6/review-units-provider.json": {
+      "sha256": "897570dff6efc09b1f34c9ea838266440eb9c1d17e7bc89022166114cbd36a3b",
+      "byte_count": 1982
+    },
+    "v6/review-units-system.json": {
+      "sha256": "50450d3efb2be618d7b7b351ad105a24c30b22c4c4f5ef403adac4e9c339586c",
+      "byte_count": 6009
+    },
+    "v6-replay/evaluation-reviewed.json": {
+      "sha256": "e9d256c84fa59dfd7371f4eba34f9a78b4286780880a8ac9422c8ee832723ee9",
+      "byte_count": 102338
+    },
+    "v6-replay/inputs/agent/claim-decision-policy-v1.json": {
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "byte_count": 1019
+    },
+    "v6-replay/inputs/agent/claim_experiment_design.py": {
+      "sha256": "2c46e6003f06abe014584c2fecc7236fee53dfa4206e2435d9f3c75bd96b48a1",
+      "byte_count": 19467
+    },
+    "v6-replay/inputs/agent/idea_interview.py": {
+      "sha256": "d454aaf2a2fcbc0b857e90706d152ee9c86c86ef98a0d2b3760af3f85fd05ccb",
+      "byte_count": 3199
+    },
+    "v6-replay/inputs/agent/idea_review.py": {
+      "sha256": "4725154f1796e913b42ab612cd4dd138c3b2e3cd16b00e75a458cc4cde92bf51",
+      "byte_count": 7703
+    },
+    "v6-replay/inputs/agent/research_ideas.py": {
+      "sha256": "496565d423e8af7df19826e08057232e0972b5b22960517bed03427e5c540b4b",
+      "byte_count": 17506
+    },
+    "v6-replay/inputs/backend/claim_design.py": {
+      "sha256": "09052615a7e5ba2db0e43eff0b641cb529fa7525770d0da3c6b8eb0888f72522",
+      "byte_count": 11050
+    },
+    "v6-replay/inputs/backend/network_spec.py": {
+      "sha256": "884857f8680eb73ae7b8f43de484c3bd59d0f2441b66e117e49a347191a31e7c",
+      "byte_count": 15432
+    },
+    "v6-replay/inputs/backend/policies/claim-decision-policy-v1.json": {
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "byte_count": 1019
+    },
+    "v6-replay/inputs/backend/workflow.py": {
+      "sha256": "03ebd6c328dc8d9428992c44d07c468e4639576853d32b92cb0e801a8727c75d",
+      "byte_count": 20365
+    },
+    "v6-replay/inputs/database/seed-claim-experiment-design-v6.json": {
+      "sha256": "e14f4081c1a86818647026a7041adaa789a826faa05203db55567a45e6a3aafb",
+      "byte_count": 22840
+    },
+    "v6-replay/inputs/docs/claim-experiment-design-v3-parser-followup.md": {
+      "sha256": "73d5bcc9e7066ae60ed90eaa8240eb2e4b286406963ffc82f681d2011aaacd2a",
+      "byte_count": 3077
+    },
+    "v6-replay/inputs/test/claim-design-evaluation-cases-v4.json": {
+      "sha256": "dc3e804671d82d836d3c9547deb80021e15da9c9fb141a38139a8bf3346988af",
+      "byte_count": 70036
+    },
+    "v6-replay/inputs/test/claim-design-evaluation-cases-v4.lock.json": {
+      "sha256": "be8c65df8349895a05be76159e5712ae093581f2d9b4f22cf163599d145389b4",
+      "byte_count": 178
+    },
+    "v6-replay/inputs/test/evaluate_claim_design_v2.py": {
+      "sha256": "1949411212f594d1691e322946371a7d74520c331cd3e59910713cb01a79c026",
+      "byte_count": 17984
+    },
+    "v6-replay/replay-report.json": {
+      "sha256": "edb46cf3152e6d60b5da70c0e35fedc1bbfb3b4eeef84adf7159aa1eb9d7734d",
+      "byte_count": 92676
+    },
+    "v6-replay-exact-final/evaluation-reviewed.json": {
+      "sha256": "a287305b58544a0b47b1f80bbf22f8440c263506343358c81fc8db3ddff70698",
+      "byte_count": 102895
+    },
+    "v6-replay-exact-final/inputs/agent/claim-decision-policy-v1.json": {
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "byte_count": 1019
+    },
+    "v6-replay-exact-final/inputs/agent/claim_experiment_design.py": {
+      "sha256": "a1b6c0c255f1f71c114300fcf57b6bae1f415895383de18f046923d376625731",
+      "byte_count": 20873
+    },
+    "v6-replay-exact-final/inputs/agent/idea_interview.py": {
+      "sha256": "d454aaf2a2fcbc0b857e90706d152ee9c86c86ef98a0d2b3760af3f85fd05ccb",
+      "byte_count": 3199
+    },
+    "v6-replay-exact-final/inputs/agent/idea_review.py": {
+      "sha256": "4725154f1796e913b42ab612cd4dd138c3b2e3cd16b00e75a458cc4cde92bf51",
+      "byte_count": 7703
+    },
+    "v6-replay-exact-final/inputs/agent/research_ideas.py": {
+      "sha256": "496565d423e8af7df19826e08057232e0972b5b22960517bed03427e5c540b4b",
+      "byte_count": 17506
+    },
+    "v6-replay-exact-final/inputs/backend/claim_design.py": {
+      "sha256": "09052615a7e5ba2db0e43eff0b641cb529fa7525770d0da3c6b8eb0888f72522",
+      "byte_count": 11050
+    },
+    "v6-replay-exact-final/inputs/backend/network_spec.py": {
+      "sha256": "884857f8680eb73ae7b8f43de484c3bd59d0f2441b66e117e49a347191a31e7c",
+      "byte_count": 15432
+    },
+    "v6-replay-exact-final/inputs/backend/policies/claim-decision-policy-v1.json": {
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "byte_count": 1019
+    },
+    "v6-replay-exact-final/inputs/backend/workflow.py": {
+      "sha256": "03ebd6c328dc8d9428992c44d07c468e4639576853d32b92cb0e801a8727c75d",
+      "byte_count": 20365
+    },
+    "v6-replay-exact-final/inputs/database/seed-claim-experiment-design-v6.json": {
+      "sha256": "e14f4081c1a86818647026a7041adaa789a826faa05203db55567a45e6a3aafb",
+      "byte_count": 22840
+    },
+    "v6-replay-exact-final/inputs/docs/claim-experiment-design-v3-exact-unit-controls.md": {
+      "sha256": "18ed685b0ab61299f2cf59be75cc820774c3728dae5ffe8e887774e8cbd972d9",
+      "byte_count": 918
+    },
+    "v6-replay-exact-final/inputs/docs/claim-experiment-design-v3-parser-followup.md": {
+      "sha256": "73d5bcc9e7066ae60ed90eaa8240eb2e4b286406963ffc82f681d2011aaacd2a",
+      "byte_count": 3077
+    },
+    "v6-replay-exact-final/inputs/docs/claim-experiment-design-v3-quote-controls-v2.md": {
+      "sha256": "c3938e0aa9c09781b2d0528656515169c47acb5263830a0c6df30b6d517247e9",
+      "byte_count": 621
+    },
+    "v6-replay-exact-final/inputs/docs/claim-experiment-design-v3-quote-controls.md": {
+      "sha256": "25c136c5208e1038b45de38c93b96e2ec7de908f0042f24cabafe6eb409d2920",
+      "byte_count": 925
+    },
+    "v6-replay-exact-final/inputs/test/claim-design-evaluation-cases-v4.json": {
+      "sha256": "dc3e804671d82d836d3c9547deb80021e15da9c9fb141a38139a8bf3346988af",
+      "byte_count": 70036
+    },
+    "v6-replay-exact-final/inputs/test/claim-design-evaluation-cases-v4.lock.json": {
+      "sha256": "be8c65df8349895a05be76159e5712ae093581f2d9b4f22cf163599d145389b4",
+      "byte_count": 178
+    },
+    "v6-replay-exact-final/inputs/test/evaluate_claim_design_v2.py": {
+      "sha256": "cf6a24bb20156476d67536cbe4368f367db871099b6172eb5d895d841c3648f4",
+      "byte_count": 18148
+    },
+    "v6-replay-exact-final/replay-report.json": {
+      "sha256": "abcce3c4b64fb54311b22494b6be4d87ea45f765f4977f04829ff66a26b2885b",
+      "byte_count": 93059
+    },
+    "v6-replay-final/evaluation-reviewed.json": {
+      "sha256": "9c23b24dc2043dec3c738503c8609dbd27ce62d6b1e9d6a3403254ff0ec293f5",
+      "byte_count": 102787
+    },
+    "v6-replay-final/inputs/agent/claim-decision-policy-v1.json": {
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "byte_count": 1019
+    },
+    "v6-replay-final/inputs/agent/claim_experiment_design.py": {
+      "sha256": "8803ad7180e5d46e9efa35728efef5115e43d78857d5c8da7774becbed61e51d",
+      "byte_count": 20340
+    },
+    "v6-replay-final/inputs/agent/idea_interview.py": {
+      "sha256": "d454aaf2a2fcbc0b857e90706d152ee9c86c86ef98a0d2b3760af3f85fd05ccb",
+      "byte_count": 3199
+    },
+    "v6-replay-final/inputs/agent/idea_review.py": {
+      "sha256": "4725154f1796e913b42ab612cd4dd138c3b2e3cd16b00e75a458cc4cde92bf51",
+      "byte_count": 7703
+    },
+    "v6-replay-final/inputs/agent/research_ideas.py": {
+      "sha256": "496565d423e8af7df19826e08057232e0972b5b22960517bed03427e5c540b4b",
+      "byte_count": 17506
+    },
+    "v6-replay-final/inputs/backend/claim_design.py": {
+      "sha256": "09052615a7e5ba2db0e43eff0b641cb529fa7525770d0da3c6b8eb0888f72522",
+      "byte_count": 11050
+    },
+    "v6-replay-final/inputs/backend/network_spec.py": {
+      "sha256": "884857f8680eb73ae7b8f43de484c3bd59d0f2441b66e117e49a347191a31e7c",
+      "byte_count": 15432
+    },
+    "v6-replay-final/inputs/backend/policies/claim-decision-policy-v1.json": {
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "byte_count": 1019
+    },
+    "v6-replay-final/inputs/backend/workflow.py": {
+      "sha256": "03ebd6c328dc8d9428992c44d07c468e4639576853d32b92cb0e801a8727c75d",
+      "byte_count": 20365
+    },
+    "v6-replay-final/inputs/database/seed-claim-experiment-design-v6.json": {
+      "sha256": "e14f4081c1a86818647026a7041adaa789a826faa05203db55567a45e6a3aafb",
+      "byte_count": 22840
+    },
+    "v6-replay-final/inputs/docs/claim-experiment-design-v3-parser-followup.md": {
+      "sha256": "73d5bcc9e7066ae60ed90eaa8240eb2e4b286406963ffc82f681d2011aaacd2a",
+      "byte_count": 3077
+    },
+    "v6-replay-final/inputs/docs/claim-experiment-design-v3-quote-controls-v2.md": {
+      "sha256": "c3938e0aa9c09781b2d0528656515169c47acb5263830a0c6df30b6d517247e9",
+      "byte_count": 621
+    },
+    "v6-replay-final/inputs/docs/claim-experiment-design-v3-quote-controls.md": {
+      "sha256": "25c136c5208e1038b45de38c93b96e2ec7de908f0042f24cabafe6eb409d2920",
+      "byte_count": 925
+    },
+    "v6-replay-final/inputs/test/claim-design-evaluation-cases-v4.json": {
+      "sha256": "dc3e804671d82d836d3c9547deb80021e15da9c9fb141a38139a8bf3346988af",
+      "byte_count": 70036
+    },
+    "v6-replay-final/inputs/test/claim-design-evaluation-cases-v4.lock.json": {
+      "sha256": "be8c65df8349895a05be76159e5712ae093581f2d9b4f22cf163599d145389b4",
+      "byte_count": 178
+    },
+    "v6-replay-final/inputs/test/evaluate_claim_design_v2.py": {
+      "sha256": "9647f93259b6d03a337c8cd56d590b3edbe767164c6acc497836b82afba540be",
+      "byte_count": 18091
+    },
+    "v6-replay-final/replay-report.json": {
+      "sha256": "32ffa76c9bf15cf0237ef838ac5c11ebff5406e0b5e036b9311ff198cc6736ea",
+      "byte_count": 92930
+    },
+    "v6-replay-quote-controls/inputs/agent/claim-decision-policy-v1.json": {
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "byte_count": 1019
+    },
+    "v6-replay-quote-controls/inputs/agent/claim_experiment_design.py": {
+      "sha256": "e7d5ed11bfd3ea80fb5e626835905bc6dc8e601e8cbbf9a99d10c14ec38de721",
+      "byte_count": 20206
+    },
+    "v6-replay-quote-controls/inputs/agent/idea_interview.py": {
+      "sha256": "d454aaf2a2fcbc0b857e90706d152ee9c86c86ef98a0d2b3760af3f85fd05ccb",
+      "byte_count": 3199
+    },
+    "v6-replay-quote-controls/inputs/agent/idea_review.py": {
+      "sha256": "4725154f1796e913b42ab612cd4dd138c3b2e3cd16b00e75a458cc4cde92bf51",
+      "byte_count": 7703
+    },
+    "v6-replay-quote-controls/inputs/agent/research_ideas.py": {
+      "sha256": "496565d423e8af7df19826e08057232e0972b5b22960517bed03427e5c540b4b",
+      "byte_count": 17506
+    },
+    "v6-replay-quote-controls/inputs/backend/claim_design.py": {
+      "sha256": "09052615a7e5ba2db0e43eff0b641cb529fa7525770d0da3c6b8eb0888f72522",
+      "byte_count": 11050
+    },
+    "v6-replay-quote-controls/inputs/backend/network_spec.py": {
+      "sha256": "884857f8680eb73ae7b8f43de484c3bd59d0f2441b66e117e49a347191a31e7c",
+      "byte_count": 15432
+    },
+    "v6-replay-quote-controls/inputs/backend/policies/claim-decision-policy-v1.json": {
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "byte_count": 1019
+    },
+    "v6-replay-quote-controls/inputs/backend/workflow.py": {
+      "sha256": "03ebd6c328dc8d9428992c44d07c468e4639576853d32b92cb0e801a8727c75d",
+      "byte_count": 20365
+    },
+    "v6-replay-quote-controls/inputs/database/seed-claim-experiment-design-v6.json": {
+      "sha256": "e14f4081c1a86818647026a7041adaa789a826faa05203db55567a45e6a3aafb",
+      "byte_count": 22840
+    },
+    "v6-replay-quote-controls/inputs/docs/claim-experiment-design-v3-parser-followup.md": {
+      "sha256": "73d5bcc9e7066ae60ed90eaa8240eb2e4b286406963ffc82f681d2011aaacd2a",
+      "byte_count": 3077
+    },
+    "v6-replay-quote-controls/inputs/docs/claim-experiment-design-v3-quote-controls.md": {
+      "sha256": "25c136c5208e1038b45de38c93b96e2ec7de908f0042f24cabafe6eb409d2920",
+      "byte_count": 925
+    },
+    "v6-replay-quote-controls/inputs/test/claim-design-evaluation-cases-v4.json": {
+      "sha256": "dc3e804671d82d836d3c9547deb80021e15da9c9fb141a38139a8bf3346988af",
+      "byte_count": 70036
+    },
+    "v6-replay-quote-controls/inputs/test/claim-design-evaluation-cases-v4.lock.json": {
+      "sha256": "be8c65df8349895a05be76159e5712ae093581f2d9b4f22cf163599d145389b4",
+      "byte_count": 178
+    },
+    "v6-replay-quote-controls/inputs/test/evaluate_claim_design_v2.py": {
+      "sha256": "e133268be7c1f6592cbf9bc8fdaa85b12288546528307f32572e389b033c415f",
+      "byte_count": 18036
+    },
+    "v6-replay-quote-controls/replay-report.json": {
+      "sha256": "bf02cc30b0cfc5313b9648fe5162b4b774d669c89694475634562487925125ee",
+      "byte_count": 92802
+    }
+  }
+}

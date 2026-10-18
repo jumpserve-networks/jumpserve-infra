@@ -1,0 +1,57 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_aRk0QkPwtbp288rDe1gC1A",
+                        "name": "submit_idea_issues",
+                        "input": {
+                            "issues": [
+                                {
+                                    "code": "limitation",
+                                    "severity": "warning",
+                                    "references": [
+                                        "/protocol/prior_exposure",
+                                        "/limitations",
+                                        "/protocol/coverage_limits"
+                                    ]
+                                },
+                                {
+                                    "code": "limitation",
+                                    "severity": "warning",
+                                    "references": [
+                                        "/protocol/resource_limits",
+                                        "/inputs"
+                                    ]
+                                },
+                                {
+                                    "code": "dependence",
+                                    "severity": "warning",
+                                    "references": [
+                                        "/protocol/dependence",
+                                        "/protocol/replication_unit",
+                                        "/protocol/statistics"
+                                    ]
+                                }
+                            ]
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 3351,
+        "outputTokens": 120,
+        "totalTokens": 3471,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 1450
+    }
+}

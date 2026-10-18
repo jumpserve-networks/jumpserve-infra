@@ -1,0 +1,141 @@
+{
+  "version": "claim-design-corrective-software-validation-v2",
+  "recorded_at": "2026-10-18T02:03:25.565296+00:00",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "checks": [
+    {
+      "repository": "jumpserve-back-end",
+      "command": "python3 -B -m unittest discover -s research_workflow/tests",
+      "status": "passed",
+      "cases": 121
+    },
+    {
+      "repository": "jumpserve-infra",
+      "command": "python3 -B -m unittest discover -s test -p 'agent*_test.py'",
+      "status": "passed",
+      "cases": 111
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "command": "npm test",
+      "status": "passed",
+      "cases": 180
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "command": "npm run lint",
+      "status": "passed-with-existing-warning",
+      "cases": null
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "command": "npm run build",
+      "status": "passed",
+      "cases": null
+    },
+    {
+      "repository": "jumpserve-infra",
+      "command": "env JUMPSERVE_BACKEND_CHECKOUT=../jumpserve-back-end npm test -- --runInBand",
+      "status": "passed",
+      "cases": 89
+    },
+    {
+      "repository": "jumpserve-infra",
+      "command": "npm run build",
+      "status": "passed",
+      "cases": null
+    },
+    {
+      "repository": "jumpserve-infra",
+      "command": "python3 -B test/check_claim_design_database.py",
+      "status": "passed",
+      "cases": 6
+    },
+    {
+      "repository": "jumpserve-infra",
+      "command": "python3 -B test/check_research_ideas_database.py",
+      "status": "passed",
+      "cases": 11
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "command": "node scripts/verify-claim-design.mjs",
+      "status": "passed",
+      "cases": 9
+    },
+    {
+      "repository": "all three repositories",
+      "command": "git diff --check",
+      "status": "passed",
+      "cases": null
+    }
+  ],
+  "history": [
+    {
+      "check": "backend tests",
+      "status": "failed",
+      "cases": 120,
+      "errors": 30,
+      "reason": "Policy JSON initially placed in the registered preparation-plan directory; plan discovery correctly rejected its different schema.",
+      "correction": "Dedicated policies/ directory, declared in the runtime manifest. Final 121 cases pass."
+    },
+    {
+      "check": "agent tests",
+      "status": "failed",
+      "cases": 111,
+      "failures": 5,
+      "errors": 1,
+      "reason": "Stale fixtures returned forbidden decision criteria and the reuse test had a descriptive wording variant.",
+      "correction": "Corrected raw response fixtures and accepted explicit no-inferential wording for descriptive reuse; preserved the frozen provider inputs before actual calls. Final 111 cases pass."
+    },
+    {
+      "check": "infra tests without backend environment",
+      "status": "partial",
+      "passed": 84,
+      "skipped": 5,
+      "reason": "Backend integration cases require JUMPSERVE_BACKEND_CHECKOUT.",
+      "correction": "Reran with the documented checkout; all 89 cases pass."
+    },
+    {
+      "check": "infra TypeScript build",
+      "status": "failed",
+      "reason": "Default source discovery included archived TSX evidence snapshots, causing cross-repository imports and JSX errors.",
+      "correction": "Exclude the two evidence directories; compile actual infrastructure sources. Build passes. Original evidence file hashes remain unchanged."
+    },
+    {
+      "check": "browser fixture",
+      "status": "failed",
+      "artifact": "browser/2026-10-18T01-58-18.815Z/validation-report.json",
+      "reason": "Synthetic provider still emitted forbidden metric criterion; parser correctly retained invalid-output.",
+      "correction": "Corrected only synthetic response contract, preserved failed database/history; new campaign DB and browser report pass."
+    },
+    {
+      "check": "actual evaluation sandbox preflight",
+      "status": "failed-before-provider",
+      "reason": "STS endpoint unavailable inside sandbox; no provider invocation.",
+      "correction": "Reran purpose-specific evaluator with network escalation; sixteen calls, no provider retries."
+    }
+  ],
+  "unit_and_build_log_scope": "Observed tool outputs summarized here; full raw stdout/stderr was not saved for every unit/build invocation. Database/browser/model original reports and provider bytes are retained separately.",
+  "publication": "blocked: 9 of 16 actual answer cases pass",
+  "production_deployed": false,
+  "production_database_writes": false,
+  "scientific_claims_reassessed": 0,
+  "conditional_gaps": [
+    "Legitimate Google session",
+    "Production boto3 path and authenticated persistence roundtrip",
+    "Remote Supabase Storage",
+    "Actual cloud networking execution",
+    "Configured Lambda Python 3.12 runtime; local checks used Python 3.13"
+  ],
+  "existing_warning": "auth-button.tsx:153 internal navigation lint warning",
+  "costs": {
+    "measured_charges_usd": null,
+    "local_compute_usd": null,
+    "shared_storage_usd": null
+  }
+}

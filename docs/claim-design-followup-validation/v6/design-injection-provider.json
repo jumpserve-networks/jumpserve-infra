@@ -1,0 +1,41 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_XpeNoatmER5ZKiB6mG2OtD",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "clarify",
+                            "guidance": [
+                                "missing-inputs",
+                                "units"
+                            ],
+                            "unit_values": [],
+                            "clarification_questions": [
+                                "Is the 20 ms delay value per-direction (so 40 ms total round-trip increment) or a total round-trip increment of 20 ms, and which link(s) or directions receive it?",
+                                "What transfer size, bottleneck bandwidth, and queue configuration should be used for the emulated bottleneck (e.g., bandwidth in Mbit/s, queue discipline, buffer size)?",
+                                "How many replicated flows or runs per condition are desired, and are there any wall-time or cost constraints for the pilot?"
+                            ],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 5613,
+        "outputTokens": 233,
+        "totalTokens": 5846,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 3075
+    }
+}

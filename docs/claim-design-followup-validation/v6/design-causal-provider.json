@@ -1,0 +1,42 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_L3KuEZsedZFmduLCuLUbYZ",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "clarify",
+                            "guidance": [
+                                "causal-scope",
+                                "statistics",
+                                "missing-inputs"
+                            ],
+                            "unit_values": [],
+                            "clarification_questions": [
+                                "Which links or directions receive the 20 ms delay increment — is it applied in one direction only, both directions independently, or as a total round-trip budget?",
+                                "What transfer size, bottleneck bandwidth, and queue configuration should be used for the emulated flow, and how many replicated runs per condition are you targeting?",
+                                "What source artifact (file, script, or versioned dataset) provides the fixed bottleneck configuration, and do you have its SHA-256 hash for input_versions?"
+                            ],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 5591,
+        "outputTokens": 228,
+        "totalTokens": 5819,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 2889
+    }
+}

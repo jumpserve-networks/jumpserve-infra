@@ -1,0 +1,37 @@
+{
+    "output": {
+        "message": {
+            "role": "assistant",
+            "content": [
+                {
+                    "toolUse": {
+                        "toolUseId": "tooluse_lR189PymFKIs5FgqfQGrrM",
+                        "name": "submit_claim_experiment",
+                        "input": {
+                            "mode": "clarify",
+                            "summary": "200 microseconds and 0.2 milliseconds are exactly equal (1 ms = 1000 µs), so the two notes are consistent — no conflict exists. Workload size, budget, and delay placement remain unresolved before a full proposal can be drafted.",
+                            "clarification_questions": [
+                                "What transfer workload should each flow carry (e.g., file size in bytes or MB), and how many concurrent flows, if any, per replication?",
+                                "Is the 20 ms delay value intended as a one-way (sender→receiver) or round-trip (both directions) placement in the netem emulation?",
+                                "What are the resource or budget constraints for this pilot — specifically, how many total replications are acceptable and is there a wall-time or cost ceiling?"
+                            ],
+                            "proposal": null
+                        },
+                        "type": "tool_use"
+                    }
+                }
+            ]
+        }
+    },
+    "stopReason": "tool_use",
+    "usage": {
+        "inputTokens": 4768,
+        "outputTokens": 250,
+        "totalTokens": 5018,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+    },
+    "metrics": {
+        "latencyMs": 3613
+    }
+}

@@ -1,0 +1,18 @@
+{
+  "recorded_at": "2026-10-18T02:37:04.677335+00:00",
+  "original_inventories": [
+    {
+      "directory": "claim-design-validation",
+      "files_verified": 268,
+      "manifest_sha256": "c31bcdbe59e9a4930f5f238fa2b15bf203f9723ffcab92e86b11cd50d07cb42d",
+      "original_hashes_match": true
+    },
+    {
+      "directory": "claim-design-correction-validation",
+      "files_verified": 166,
+      "manifest_sha256": "44d461a50203d6e72525791c161f9475a8aeb632d24fb14c0f7c00efe54cf98a",
+      "original_hashes_match": true
+    }
+  ],
+  "scope": "Integrity of listed original bytes, not substantive source review."
+}
