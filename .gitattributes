@@ -11,5 +11,6 @@ docs/autonomous-assessment-validation-v1/** -text
 docs/autonomous-assessment-production-evidence-v1/** -text
 docs/autonomous-assessment-production-evidence-v2/** -text
 docs/autonomous-assessment-production-evidence-v3/** -text
+docs/autonomous-assessment-production-release-evidence-v1/** -text
 # Original CDK output contains producer whitespace; retain its recorded bytes.
 docs/claim-design-production-release-evidence/server/*-cdk.log -whitespace

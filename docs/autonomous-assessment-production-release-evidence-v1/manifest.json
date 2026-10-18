@@ -1,0 +1,45 @@
+{
+  "scope": "Final release reports and verified deployment receipts. Original private control snapshots, screenshots and model inputs are in the referenced private Storage archives.",
+  "files": [
+    {
+      "path": "archive-receipt.json",
+      "sha256": "2613eca08ebc34cd37c428f5a3b20c44109da33ba17602199dfb23aafc42dea2",
+      "bytes": 2114
+    },
+    {
+      "path": "autonomous-assessment-production-validation-v1.json",
+      "sha256": "a70558533b3faca61d83137d61efbeede60b2d61802be72facb4bc3fd7a5c0b4",
+      "bytes": 26831
+    },
+    {
+      "path": "autonomous-assessment-production-validation-v1.md",
+      "sha256": "5d518074d11702b6e1b15a10508f2790eab5aeeaecbd61cadfb55e3348b11beb",
+      "bytes": 4262
+    },
+    {
+      "path": "deploy-receipt.json",
+      "sha256": "7447383b4ef46d724d3d6dff0e151379cc472829a737640e4b94e441b0c7e213",
+      "bytes": 6574
+    },
+    {
+      "path": "frontend-status-receipt.json",
+      "sha256": "ff000f99c79b67d321af1c8298aaba3c0e843c51f62daf481c05a2eea6243507",
+      "bytes": 4823
+    },
+    {
+      "path": "managed-runtime.json",
+      "sha256": "58d28afa4a617ef974ea0a38f97807f470b67edab2299c6576a2e12d59bd9148",
+      "bytes": 623
+    },
+    {
+      "path": "publish-receipt.json",
+      "sha256": "90fdc6297f25ddaf3e10ca341d044be4003dbae92a8ab4065cc0436f6f42b2e7",
+      "bytes": 3357
+    },
+    {
+      "path": "verify-receipt.json",
+      "sha256": "ccd991eabcca6ea24e153cdaf8c1c9947340113b082b07fdb1e7705ad7f8bd8a",
+      "bytes": 23505
+    }
+  ]
+}

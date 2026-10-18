@@ -1,0 +1,547 @@
+{
+  "version": 1,
+  "completed_at": "2026-10-18T23:35:26.414856+00:00",
+  "production_url": "https://jumpserve.quaint-lab.org",
+  "software_readiness": "Deployed; authenticated recorded-data flow verified through assessment. Follow-up planning beyond the 96 KB bound remains a known technical limitation; full-paper autonomous closure is not verified.",
+  "scientific_coverage": "Operational control only: one archived-data reanalysis run with 192 measurements and one actual inconclusive AI assessment. No new Internet measurements or whole-paper validation.",
+  "authorization": "Current explicit user instruction to merge main and deploy; real Google browser session reused for both form submissions.",
+  "targets": {
+    "aws_account": "395567831870",
+    "region": "us-east-1",
+    "supabase_project": "regphejnlvfpyokpniny"
+  },
+  "defaults": {
+    "maximum_committed_usd_per_paper": 100,
+    "elapsed_days": 7,
+    "model_attempts_per_claim": 25,
+    "parallel_claims_per_paper": 2,
+    "global_parallel_claims": 4,
+    "request_bytes": 96000,
+    "interactive_measurement_limit": 1000
+  },
+  "revisions": {
+    "backend": "135184d13c7b4363ca9db9d5d640e5c3434fa0b6",
+    "frontend": "5c43799d9651997f0a5be3eeb84d61be4b07b0af",
+    "runtime_manifest_version": 23,
+    "amplify_job": "116",
+    "cloudformation_status": "UPDATE_COMPLETE",
+    "existing_stack_parameters_unchanged": true,
+    "infra_release_revision": "333af7c2cc8ea57a83da14536ef4974dcade8bff"
+  },
+  "prompt": {
+    "version": "research-autonomy-v6",
+    "active": [
+      {
+        "id": "83e26515-7b18-5730-9473-f34555a1a1b4",
+        "content_sha256": "c2a0391cb2a7f05327a0f201ac7bd55a4d46975f3a2c5dfca0744d591587f40a",
+        "published_at": "2026-10-18 22:57:43.293973+00"
+      }
+    ],
+    "publication_component_answers": 19,
+    "components": {
+      "frozen_model_cases": 16,
+      "context_builder_cases": 2,
+      "lossless_evidence_case": 1
+    },
+    "development_only": true,
+    "held_out": false,
+    "independent": false,
+    "human_review": false,
+    "reviewer": "Primary Codex AI implementer",
+    "publication_history": "v5 published after fourteen development cases, then held after live phase/context defects; v6 and later evidence revisions preserve every original report/publication. The packet-reference verifier false negative is retained with exact structured-field correction."
+  },
+  "validation": {
+    "backend_unit": 152,
+    "frontend_unit": 186,
+    "infra_unit": 91,
+    "total_unit": 429,
+    "sql_controller_groups": 8,
+    "local_browser_groups": 6,
+    "public_production_browser_groups": 5,
+    "frontend_build": "passed",
+    "infra_build": "passed",
+    "frontend_lint": "passed with existing auth-button.tsx:153 navigation warning",
+    "deployed_functions": [
+      {
+        "logical_id": "ResearchWorkflowApiE04EBDAC",
+        "function": "JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+        "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+        "zip_sha256": "2a48e56c2a4f6cd80519aac5e4da8ff36d80fd2c62180d395f9c2d9421711f71",
+        "source_hashes": {
+          "api.py": "feb505052c3ba743ea9fa2fe429cf5d51e7b80cf3fe72fb76ad0ba8123799855",
+          "workflow.py": "03ebd6c328dc8d9428992c44d07c468e4639576853d32b92cb0e801a8727c75d",
+          "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+          "store.py": "25e023e9c65ae1aca648631b59cfa81b8cc6d053221d4fed40fbd500c64e2b0d",
+          "scheduler.py": "27d9db3d8e209ff4419ecf4658bb569012a7e4f393d9348e6052df78cbddebe0",
+          "worker.py": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
+          "preparation.py": "f23424b4c73974ffda48e356cd19c2d0dd8877beb668d94380e7bb00da5a5f90",
+          "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+          "ideas.py": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+          "network_spec.py": "884857f8680eb73ae7b8f43de484c3bd59d0f2441b66e117e49a347191a31e7c",
+          "network_execution.py": "9e61b6c4a2d1e16f0c931e9902d824bfd38174108749739655cfae197ffa5577",
+          "network_package.py": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
+          "package_runtime.py": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
+          "gap_queue.py": "90bd0a01a9dc9b25575d6f2ac6b478a34e940829231132585a3eb1c93c7c841a",
+          "claim_design.py": "c79c04b519286d145738cbcc5585203b6199342937e018c712d31550e8132870",
+          "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+          "autonomy.py": "0528b20a0db0e8cfa05ef94dfb835d073ecab893fe3b852aad2b3353516ae5f0",
+          "autonomy_model.py": "158feca665ba216d7e66ecbdb023a2ad15937369f044e1b84c9b4325895246ea",
+          "autonomy_sources.py": "4f26059b9b4b3baa511c995735ac39af14f01a6e5f957a9d0c72b544ec693474",
+          "intake.py": "7ac9610b72ce9d1a2ddf86bb7328c1caa25c3e43abe3e4882de2d8e7f88689dd",
+          "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b"
+        },
+        "handler": "api.handler",
+        "runtime": "python3.12",
+        "memory_mb": 512,
+        "timeout": 29,
+        "layers": [],
+        "autonomy_enabled": "true",
+        "worker_target": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowAutonomyWo-5sN0tQ8Oziyq"
+      },
+      {
+        "logical_id": "ResearchWorkflowAutonomyWorker1BCFF82C",
+        "function": "JumpServeBenchmarkStack-ResearchWorkflowAutonomyWo-5sN0tQ8Oziyq",
+        "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowAutonomyWo-5sN0tQ8Oziyq",
+        "zip_sha256": "2a48e56c2a4f6cd80519aac5e4da8ff36d80fd2c62180d395f9c2d9421711f71",
+        "source_hashes": {
+          "api.py": "feb505052c3ba743ea9fa2fe429cf5d51e7b80cf3fe72fb76ad0ba8123799855",
+          "workflow.py": "03ebd6c328dc8d9428992c44d07c468e4639576853d32b92cb0e801a8727c75d",
+          "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+          "store.py": "25e023e9c65ae1aca648631b59cfa81b8cc6d053221d4fed40fbd500c64e2b0d",
+          "scheduler.py": "27d9db3d8e209ff4419ecf4658bb569012a7e4f393d9348e6052df78cbddebe0",
+          "worker.py": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
+          "preparation.py": "f23424b4c73974ffda48e356cd19c2d0dd8877beb668d94380e7bb00da5a5f90",
+          "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+          "ideas.py": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+          "network_spec.py": "884857f8680eb73ae7b8f43de484c3bd59d0f2441b66e117e49a347191a31e7c",
+          "network_execution.py": "9e61b6c4a2d1e16f0c931e9902d824bfd38174108749739655cfae197ffa5577",
+          "network_package.py": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
+          "package_runtime.py": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
+          "gap_queue.py": "90bd0a01a9dc9b25575d6f2ac6b478a34e940829231132585a3eb1c93c7c841a",
+          "claim_design.py": "c79c04b519286d145738cbcc5585203b6199342937e018c712d31550e8132870",
+          "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+          "autonomy.py": "0528b20a0db0e8cfa05ef94dfb835d073ecab893fe3b852aad2b3353516ae5f0",
+          "autonomy_model.py": "158feca665ba216d7e66ecbdb023a2ad15937369f044e1b84c9b4325895246ea",
+          "autonomy_sources.py": "4f26059b9b4b3baa511c995735ac39af14f01a6e5f957a9d0c72b544ec693474",
+          "intake.py": "7ac9610b72ce9d1a2ddf86bb7328c1caa25c3e43abe3e4882de2d8e7f88689dd",
+          "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b"
+        },
+        "handler": "autonomy.handler",
+        "runtime": "python3.12",
+        "memory_mb": 1024,
+        "timeout": 180,
+        "layers": [
+          {
+            "Arn": "arn:aws:lambda:us-east-1:395567831870:layer:ResearchWorkflowAutonomyPdfLayerFC2C7B49:1",
+            "CodeSize": 474054
+          }
+        ],
+        "autonomy_enabled": "true",
+        "worker_target": null
+      },
+      {
+        "logical_id": "ResearchWorkflowQueueWorker702E601D",
+        "function": "JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+        "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+        "zip_sha256": "2a48e56c2a4f6cd80519aac5e4da8ff36d80fd2c62180d395f9c2d9421711f71",
+        "source_hashes": {
+          "api.py": "feb505052c3ba743ea9fa2fe429cf5d51e7b80cf3fe72fb76ad0ba8123799855",
+          "workflow.py": "03ebd6c328dc8d9428992c44d07c468e4639576853d32b92cb0e801a8727c75d",
+          "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+          "store.py": "25e023e9c65ae1aca648631b59cfa81b8cc6d053221d4fed40fbd500c64e2b0d",
+          "scheduler.py": "27d9db3d8e209ff4419ecf4658bb569012a7e4f393d9348e6052df78cbddebe0",
+          "worker.py": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
+          "preparation.py": "f23424b4c73974ffda48e356cd19c2d0dd8877beb668d94380e7bb00da5a5f90",
+          "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+          "ideas.py": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+          "network_spec.py": "884857f8680eb73ae7b8f43de484c3bd59d0f2441b66e117e49a347191a31e7c",
+          "network_execution.py": "9e61b6c4a2d1e16f0c931e9902d824bfd38174108749739655cfae197ffa5577",
+          "network_package.py": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
+          "package_runtime.py": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
+          "gap_queue.py": "90bd0a01a9dc9b25575d6f2ac6b478a34e940829231132585a3eb1c93c7c841a",
+          "claim_design.py": "c79c04b519286d145738cbcc5585203b6199342937e018c712d31550e8132870",
+          "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+          "autonomy.py": "0528b20a0db0e8cfa05ef94dfb835d073ecab893fe3b852aad2b3353516ae5f0",
+          "autonomy_model.py": "158feca665ba216d7e66ecbdb023a2ad15937369f044e1b84c9b4325895246ea",
+          "autonomy_sources.py": "4f26059b9b4b3baa511c995735ac39af14f01a6e5f957a9d0c72b544ec693474",
+          "intake.py": "7ac9610b72ce9d1a2ddf86bb7328c1caa25c3e43abe3e4882de2d8e7f88689dd",
+          "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b"
+        },
+        "handler": "worker.handler",
+        "runtime": "python3.12",
+        "memory_mb": 512,
+        "timeout": 180,
+        "layers": [],
+        "autonomy_enabled": null,
+        "worker_target": null
+      }
+    ],
+    "pdf_layer": {
+      "arn": "arn:aws:lambda:us-east-1:395567831870:layer:ResearchWorkflowAutonomyPdfLayerFC2C7B49:1",
+      "zip_sha256": "c49e6c15f361cc3c40ddb71b64cde8c2ff97d1496595aa4f627eecfc0aa62a03",
+      "files": 64,
+      "original_wheel_sha256": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+      "all_file_hashes_verified": true
+    },
+    "schedule": {
+      "Name": "JumpServeBenchmarkStack-ResearchWorkflowAutonomyPol-NDTzbfIRUZ1V",
+      "State": "ENABLED",
+      "ScheduleExpression": "rate(1 minute)"
+    },
+    "anonymous_checks": [
+      {
+        "path": "/queue",
+        "status": 401
+      },
+      {
+        "path": "/studies/10000000-0000-4000-8000-000000000001/autonomy",
+        "status": 401
+      }
+    ],
+    "legitimate_authenticated_forms": 2,
+    "browser_widths": [
+      1365,
+      390
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "full_prompt_history_visible": true,
+    "background_progress_without_page": "Second control advanced from two to four recorded turns with the page closed, before operator acceleration.",
+    "original_prompts_and_raw_response_hashes_verified": true
+  },
+  "production_controls": [
+    {
+      "study_id": "efed5f05-422a-4ca2-a1b7-07b209607d9c",
+      "workflow_status": "cancelled",
+      "claim_count": 15,
+      "turn_count": 22,
+      "turn_statuses": {
+        "complete": 22
+      },
+      "completed_assessment_turns": 0,
+      "autonomous_assessments": 0,
+      "committed_cents": 1482,
+      "deadline_at": "2026-10-25T22:26:01.589737+00:00",
+      "runs": 0,
+      "measurements": 0,
+      "prompt_hashes_verified": true,
+      "known_estimated_model_cents": 146,
+      "missing_cost_count": 0,
+      "private_archive": {
+        "bucket": "research-workflow-raw",
+        "path": "release-verification/autonomy-positive-control/efed5f05-422a-4ca2-a1b7-07b209607d9c/a2c3451c79c922c4a9ab9b5f95cf4ed28715f1951371c84eb88aed12c7b2060f.zip",
+        "sha256": "a2c3451c79c922c4a9ab9b5f95cf4ed28715f1951371c84eb88aed12c7b2060f",
+        "bytes": 3912100,
+        "download_hash_verified": true,
+        "anonymous_status": 400,
+        "artifacts": [
+          {
+            "id": "1ca8a933-8cb7-5d7c-8827-515e9bd2f939",
+            "sha256": "217d664d39a605ce8d86ff216739bcd918695b71b635550ae5356a7e539c8a25",
+            "bytes": 1481437,
+            "retrieved_hash_verified": true
+          },
+          {
+            "id": "c2b2b6e3-75c5-5280-8142-fbda59bd24eb",
+            "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+            "bytes": 1452605,
+            "retrieved_hash_verified": true
+          },
+          {
+            "kind": "authenticated-browser-capture",
+            "name": "1365-dark.png",
+            "sha256": "a14a765a5afc6716c07eafa078d5c42e1761f1570a7355a721901c2afe77f684",
+            "bytes": 1385106,
+            "privacy": "May include user identity in sticky header; private only"
+          },
+          {
+            "kind": "authenticated-browser-capture",
+            "name": "1365-light.png",
+            "sha256": "2a5f4054102f7032dbdb020d2ed65e5a66323fdda264c9151d682cd47497d9f0",
+            "bytes": 1374635,
+            "privacy": "May include user identity in sticky header; private only"
+          },
+          {
+            "kind": "authenticated-browser-capture",
+            "name": "390-dark.png",
+            "sha256": "fcfbab6f4c17001ff4ed87b5916dd81a9423139f770cbd7d17cbfe20c120871a",
+            "bytes": 519678,
+            "privacy": "May include user identity in sticky header; private only"
+          },
+          {
+            "kind": "authenticated-browser-capture",
+            "name": "390-light.png",
+            "sha256": "9cf4a482c7adb796ce19738bc3c435fbc0388a6f7dc57a5f0cae6590408fca18",
+            "bytes": 596509,
+            "privacy": "May include user identity in sticky header; private only"
+          }
+        ]
+      },
+      "labels": {
+        "reproduced": 0,
+        "discrepant": 0,
+        "inconclusive": 0,
+        "untested": 15
+      },
+      "source_report_sha256": "2b11201da68f169bd3721ae7ff5daf109d28e7064ec9450b40e8894f6736284b"
+    },
+    {
+      "study_id": "b7bc978d-9a6a-4fc8-97fd-179be9989d24",
+      "workflow_status": "completed-with-blockers",
+      "claim_count": 15,
+      "turn_count": 32,
+      "turn_statuses": {
+        "complete": 32
+      },
+      "completed_assessment_turns": 1,
+      "autonomous_assessments": 0,
+      "committed_cents": 2021,
+      "deadline_at": "2026-10-25T23:00:05.762833+00:00",
+      "runs": 1,
+      "measurements": 192,
+      "prompt_hashes_verified": true,
+      "known_estimated_model_cents": 261,
+      "missing_cost_count": 0,
+      "private_archive": {
+        "bucket": "research-workflow-raw",
+        "path": "release-verification/autonomy-positive-control/b7bc978d-9a6a-4fc8-97fd-179be9989d24/7f3a43f5f94848ffc73a155fa693edbd5aece9462470546c33eb7ac6b05b344b.zip",
+        "sha256": "7f3a43f5f94848ffc73a155fa693edbd5aece9462470546c33eb7ac6b05b344b",
+        "bytes": 4230646,
+        "download_hash_verified": true,
+        "anonymous_status": 400,
+        "artifacts": [
+          {
+            "id": "16b8763b-4217-55f6-9029-d3dc68589427",
+            "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+            "bytes": 1452605,
+            "retrieved_hash_verified": true
+          },
+          {
+            "id": "9c5ed33a-7a56-5600-83a6-13f63406df4d",
+            "sha256": "3fd194680cd20ea8607fd698101edb7246415ce056b50da02f6abfc732e81083",
+            "bytes": 290935,
+            "retrieved_hash_verified": true
+          },
+          {
+            "id": "a8407b46-cbc8-542d-946a-42c45fafa893",
+            "sha256": "64c984633255efef99583a1443b8ca7e24cd98589d0110a71a2e059ffd67108d",
+            "bytes": 123739,
+            "retrieved_hash_verified": true
+          },
+          {
+            "id": "df3183f1-d96d-5268-ad87-605b3fd63fb3",
+            "sha256": "f9f541a253e4da4edde08e23a9715dbcdaccf7d9e7712f7d188891362ccd712a",
+            "bytes": 1481437,
+            "retrieved_hash_verified": true
+          },
+          {
+            "kind": "authenticated-browser-capture",
+            "name": "1365-dark.png",
+            "sha256": "a14a765a5afc6716c07eafa078d5c42e1761f1570a7355a721901c2afe77f684",
+            "bytes": 1385106,
+            "privacy": "May include user identity in sticky header; private only"
+          },
+          {
+            "kind": "authenticated-browser-capture",
+            "name": "1365-light.png",
+            "sha256": "2a5f4054102f7032dbdb020d2ed65e5a66323fdda264c9151d682cd47497d9f0",
+            "bytes": 1374635,
+            "privacy": "May include user identity in sticky header; private only"
+          },
+          {
+            "kind": "authenticated-browser-capture",
+            "name": "390-dark.png",
+            "sha256": "fcfbab6f4c17001ff4ed87b5916dd81a9423139f770cbd7d17cbfe20c120871a",
+            "bytes": 519678,
+            "privacy": "May include user identity in sticky header; private only"
+          },
+          {
+            "kind": "authenticated-browser-capture",
+            "name": "390-light.png",
+            "sha256": "9cf4a482c7adb796ce19738bc3c435fbc0388a6f7dc57a5f0cae6590408fca18",
+            "bytes": 596509,
+            "privacy": "May include user identity in sticky header; private only"
+          }
+        ]
+      },
+      "labels": {
+        "reproduced": 0,
+        "discrepant": 0,
+        "inconclusive": 1,
+        "untested": 14
+      },
+      "source_report_sha256": "810e835ba0bf482ccbf24c2b7911d90f135911b39e203a1251a7472d15577cdd"
+    }
+  ],
+  "recovered_assessment": {
+    "turn_number": 4,
+    "status": "complete",
+    "request_bytes": 86563,
+    "record_count": 192,
+    "record_set_sha256": "87800f666cdd44aaae84a852d018c08f336052e7779891270a271554b75acd31",
+    "lossless_record_hash_verified": true,
+    "numerical_values_equal_to_database": true,
+    "measurements_repeated": false,
+    "job_id": "3a32d572-0ca6-565e-96e6-4e4548b98824",
+    "data_origin": "archived-data reanalysis",
+    "result": "inconclusive",
+    "full_claim_coverage": false,
+    "new_conclusive_assessment_rows": 0,
+    "historical_imported_assessment_rows": 15,
+    "remaining_gap": "Subsequent planning combines remaining candidate plans and retained evidence beyond 96 KB; the task is explicitly blocked with an inconclusive label. Fourteen other claims remain untested for recorded method/data dependencies. No whole-paper closure was demonstrated."
+  },
+  "usage": {
+    "evaluation_provider_calls": 94,
+    "evaluation_calls_with_usage": 89,
+    "evaluation_known_estimate_cents": 379,
+    "evaluation_missing_usage_calls": 5,
+    "evaluation_reserved_cents": 2283,
+    "evaluation_input_tokens": 335662,
+    "evaluation_output_tokens": 40720,
+    "production_control_calls": 54,
+    "production_control_known_estimate_cents": 407,
+    "production_control_committed_cents": 3503,
+    "measured_model_charges_usd": null,
+    "measured_compute_charges_usd": null,
+    "measured_storage_charges_usd": null,
+    "unallocated_costs": "Managed Lambda/hosting, database, storage and five throttled provider calls; missing is not zero. Estimates use recorded conservative token price ceilings, not invoices."
+  },
+  "private_final_evidence": {
+    "bucket": "research-workflow-raw",
+    "path": "release-verification/autonomy-20261018/d3a27599e884b7018b8e96c3484d3980a1b53c802445576aca789ac4f7c9e802.zip",
+    "sha256": "d3a27599e884b7018b8e96c3484d3980a1b53c802445576aca789ac4f7c9e802",
+    "bytes": 23565932,
+    "files": 1538,
+    "retrieved_hash_verified": true,
+    "anonymous_status": 400,
+    "measured_storage_charges_usd": null
+  },
+  "public_evidence_manifests": [
+    "autonomous-assessment-validation-v1/manifest.json",
+    "autonomous-assessment-production-evidence-v1/manifest-v3.json",
+    "autonomous-assessment-production-evidence-v2/manifest.json",
+    "autonomous-assessment-production-evidence-v3/manifest.json"
+  ],
+  "limitations": [
+    "No automated guarantee that every paper claim becomes reproduced or discrepant. Limits and missing inputs can stop work.",
+    "Autonomous cloud acquisition remains denied by the empty cost-envelope catalog; no new EC2 experiment, hard network-byte cap or cleanup campaign was verified.",
+    "All model cases are exposed/tuned development evidence with non-independent AI inspection; no inferential reliability interval is justified.",
+    "Managed runtime/SDK and model-service behavior are not a bit-for-bit deterministic scientific instrument. Original provider HTTP bytes are unavailable; original CLI bytes and canonical SDK messages are retained.",
+    "One real Google identity was available. A fresh OAuth round trip and real second-user ownership probe were not exercised; sign-in return paths, isolated SQL ownership and production anonymous denial were checked.",
+    "Generic unregistered-paper public-PDF intake has local parser/network-boundary checks and a deployed hash-verified layer; the production control used the registered archived plan.",
+    "Source metadata/review status and archived dates are retained; no new complete literature, figure or supplement review is claimed.",
+    "Chrome desktop and emulated mobile viewports were checked; other browser engines and physical mobile devices were not exercised."
+  ],
+  "local_environment": {
+    "os": "macOS 27.0.1 arm64",
+    "python": "3.13.3",
+    "node": "v24.4.1",
+    "aws_cli": "2.35.11",
+    "managed_lambda": {
+      "Arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowAutonomyWo-5sN0tQ8Oziyq",
+      "Runtime": "python3.12",
+      "RuntimeVersion": {
+        "RuntimeVersionArn": "arn:aws:lambda:us-east-1::runtime:36aeb19f3326e129d9f096dea0a3c6a9ca8dce2610e62d2b2060747602d863ae"
+      },
+      "CodeSha256": "KkjlbCpPbNgFGarF5NqP822A/SxiGA05X5wtlCFxH3E=",
+      "RevisionId": "4d4f5874-7839-4ed2-bf9b-a07bfd001cf1",
+      "LastModified": "2026-10-18T23:27:08.000+0000",
+      "MemorySize": 1024,
+      "Timeout": 180,
+      "Architectures": [
+        "x86_64"
+      ],
+      "LastUpdateStatus": "Successful"
+    }
+  },
+  "migrations": [
+    {
+      "name": "202610180002_autonomous_assessments.sql",
+      "sha256": "82fa520df410503e66b075fdb742d1a7b22ad8ab0f7a3ccdde59be7c13bb90ff",
+      "status": "complete"
+    },
+    {
+      "name": "202610180003_autonomy_prompt_candidate.sql",
+      "sha256": "cd722f7c4c71a8b14ef21a3dff4b8395a3ab7a57dbe7fb155adc42860216bf74",
+      "status": "complete"
+    },
+    {
+      "name": "202610180004_autonomy_publication_guard.sql",
+      "sha256": "496b5f6546633ec69f4315aff6eaf0fc736a271440c98986b9548bc726fbcf10",
+      "status": "complete"
+    },
+    {
+      "name": "202610180005_autonomy_prompt_v2.sql",
+      "sha256": "206eaac31b952fe609906c80a85165ba96249701e51db71ef57e6f61db56eac9",
+      "status": "complete"
+    },
+    {
+      "name": "202610180006_autonomy_v2_publication_guard.sql",
+      "sha256": "95a4709989c55378e0646966cbd95336ec58896c491fb0e21ead364d2f1f900c",
+      "status": "complete"
+    },
+    {
+      "name": "202610180007_autonomy_prompt_v3.sql",
+      "sha256": "8cfae0e1550ad27090f1e6303c26200fa892aa911f3a95a5c4fca8a128d636b9",
+      "status": "complete"
+    },
+    {
+      "name": "202610180008_autonomy_v3_publication_guard.sql",
+      "sha256": "57121fb6305ed6cd0b120dee631352d74fbd90177d23024e5d4f44d0e84ad018",
+      "status": "complete"
+    },
+    {
+      "name": "202610180009_autonomy_prompt_v4.sql",
+      "sha256": "5ab02c2310109d6fbd8851d97087213679be74a16884d1560b1a58a87a640584",
+      "status": "complete"
+    },
+    {
+      "name": "202610180010_autonomy_v4_publication_guard.sql",
+      "sha256": "09350903c49ef9c4177955ffba196e756d798f3c8668b2a2c4bfb27a6323ac2d",
+      "status": "complete"
+    },
+    {
+      "name": "202610180011_autonomy_prompt_v5.sql",
+      "sha256": "7c2ca4925b84da963a9e7cc2b78e0db772e9bb22f03e1e6371542d31339728e4",
+      "status": "complete"
+    },
+    {
+      "name": "202610180012_autonomy_v5_publication_guard.sql",
+      "sha256": "ae5b5c34ffb5181cf314e4b742fca6a4dd464f516ade1126959b0ea4ecbb632d",
+      "status": "complete"
+    },
+    {
+      "name": "202610180013_autonomy_provider_recovery_guard.sql",
+      "sha256": "912afb98df28e4c4288edf7d79c33db4704401b8dba2616ce361ceae7f413cd0",
+      "status": "complete"
+    },
+    {
+      "name": "202610180014_autonomy_prompt_v6.sql",
+      "sha256": "b4b4cab86963ff5195d061734440d7936e8306eaa693e359d2ffbc8164fe0b32",
+      "status": "complete"
+    },
+    {
+      "name": "202610180015_autonomy_phase_publication_guard.sql",
+      "sha256": "0edbd47a8aa23a8318425907fc42cc5ef61bfacce21be710f3514002158669f4",
+      "status": "complete"
+    },
+    {
+      "name": "202610180016_autonomy_context_integration_guard.sql",
+      "sha256": "9b0bf0420e0afec0ea1fc0369bbff6ca66f281dfdbecaaa86e3fa66f049d19c7",
+      "status": "complete"
+    },
+    {
+      "name": "202610180017_autonomy_evidence_publication_guard.sql",
+      "sha256": "d64f3b2b00a310f718b239627af73df29a375254d158b99f9d97283299dca167",
+      "status": "complete"
+    }
+  ],
+  "label_definitions": {
+    "reproduced": "Complete applicable tested evidence satisfies the frozen scoped criterion; not universal proof.",
+    "discrepant": "Complete comparable tested evidence violates the original criterion; not a missing-input or software-error label.",
+    "inconclusive": "An applicable check was attempted but scope, evidence or resource limits prevent the original claim decision.",
+    "untested": "No applicable executed evidence covers the claim under the required conditions."
+  }
+}

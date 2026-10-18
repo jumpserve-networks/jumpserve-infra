@@ -1,0 +1,86 @@
+{
+  "protocol": "autonomous-assessment-production-protocol-v1",
+  "mode": "frontend-status",
+  "status": "complete",
+  "started_at": "2026-10-18T23:34:23.698103+00:00",
+  "measured_charges_usd": null,
+  "authorization": "Current explicit user request to merge main and deploy this release",
+  "new_experiment_instances": 0,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "prompt_pointers_before": [
+    {
+      "module_id": "congestion-control-emulated",
+      "active_version_id": "cabbe18a-cc70-482c-8883-81b515639e42"
+    },
+    {
+      "module_id": "congestion-control-real-world",
+      "active_version_id": "e78456f8-6582-4f69-8b44-d56d2c782352"
+    },
+    {
+      "module_id": "http2-compliance-study",
+      "active_version_id": "caf6bae2-acd3-4ef4-8147-bd8bc39895e2"
+    },
+    {
+      "module_id": "ipv6-dns-study",
+      "active_version_id": "28edfb2a-17f9-47c0-a801-1ca7392c7404"
+    },
+    {
+      "module_id": "leo-emergency-failover",
+      "active_version_id": "ec00a4b6-718c-4e69-9c0f-283b9f251002"
+    },
+    {
+      "module_id": "reliable-sketch-study",
+      "active_version_id": "64c9fbb6-1d38-4844-9167-66faaf05fe14"
+    },
+    {
+      "module_id": "research-autonomy",
+      "active_version_id": "83e26515-7b18-5730-9473-f34555a1a1b4"
+    },
+    {
+      "module_id": "research-claim-design",
+      "active_version_id": "3da220d0-cde0-5ab5-b8cd-ccbd23ece025"
+    },
+    {
+      "module_id": "research-verification",
+      "active_version_id": "ba16759e-ff38-4491-ae21-5766261e710b"
+    }
+  ],
+  "jobs": [
+    {
+      "jobArn": "arn:aws:amplify:us-east-1:395567831870:apps/d24jvguj7brnkj/branches/main/jobs/0000000116",
+      "jobId": "116",
+      "commitId": "5c43799d9651997f0a5be3eeb84d61be4b07b0af",
+      "commitMessage": "Verify versioned blocker questions in autonomous assessment browser flow\n\nMatch the browser assertion to the structured review issue catalog and retain the source-specific required-input question. Re-run the six local browser groups against actual PostgreSQL, controller and queue arithmetic with explicitly synthetic authentication, provider and Storage boundaries. All six pass, including desktop/mobile themes, prompt history, durable progress, sign-in return paths and unknown status handling.",
+      "commitTime": "2026-10-18T17:18:40-05:00",
+      "startTime": "2026-10-18T17:22:50.705000-05:00",
+      "status": "SUCCEED",
+      "endTime": "2026-10-18T17:25:16.923000-05:00"
+    },
+    {
+      "jobArn": "arn:aws:amplify:us-east-1:395567831870:apps/d24jvguj7brnkj/branches/main/jobs/0000000115",
+      "jobId": "115",
+      "commitId": "6a501dc52db02b2caf248722690f6a4feaea2575",
+      "commitMessage": "Let claim designers use an unchanged saved plan and retain review requirements\n\nRender Use this saved plan for exact reuse answers and consume the audited adoption response. Explain that reuse preserves the plan version and review budget, while changed proposals continue to create a new draft. Both paths still require fresh reviews before running.\n\nExtend the browser campaign to verify repeat adoption keeps the packet identity and readiness unchanged. Describe anonymous production checks as limited to their own scope instead of reporting earlier authenticated verification gaps as universally unverified.\n\nValidation: 180 frontend tests, lint, production build and all eleven integrated claim-design browser groups pass. Lint retains the existing auth-button internal-navigation warning. This UI change depends on the owner-only reuse migration and compatible backend deployed before the automatic Amplify release.",
+      "commitTime": "2026-10-17T22:39:52-05:00",
+      "startTime": "2026-10-17T22:42:27.301000-05:00",
+      "status": "SUCCEED",
+      "endTime": "2026-10-17T22:45:04.838000-05:00"
+    },
+    {
+      "jobArn": "arn:aws:amplify:us-east-1:395567831870:apps/d24jvguj7brnkj/branches/main/jobs/0000000114",
+      "jobId": "114",
+      "commitId": "bda33aaefc529b84f6935ce954fbe887ef2386ae",
+      "commitMessage": "Add bounded read-only production checks for the claim designer\n\nVerify deployed claim entry links, exact sign-in return paths, malformed IDs, desktop/mobile light and dark layouts, public exports, missing-study states and navigation. Reject accidental browser mutations and make no model calls or experiment submissions. Retain screenshots, failures and explicit authenticated-path verification gaps separately from scientific evidence.",
+      "commitTime": "2026-10-17T21:47:03-05:00",
+      "startTime": "2026-10-17T21:50:19.160000-05:00",
+      "status": "SUCCEED",
+      "endTime": "2026-10-17T21:52:48.934000-05:00"
+    }
+  ],
+  "ended_at": "2026-10-18T23:34:27.748477+00:00"
+}

@@ -41,7 +41,7 @@ def reviewed():
  return report
 def bundle(directory):
  entries=[]
- for base in (ROOT/'.test-artifacts/autonomy-evaluation',ROOT/'docs/autonomous-assessment-validation-v1',ROOT/'docs/autonomous-assessment-production-evidence-v1',ROOT/'.test-artifacts/autonomy-integration',ROOT/'.test-artifacts/autonomy-evidence'):
+ for base in (ROOT/'.test-artifacts/autonomy-evaluation',ROOT/'docs/autonomous-assessment-validation-v1',ROOT/'docs/autonomous-assessment-production-evidence-v1',ROOT/'docs/autonomous-assessment-production-evidence-v2',ROOT/'docs/autonomous-assessment-production-evidence-v3',ROOT/'.test-artifacts/autonomy-integration',ROOT/'.test-artifacts/autonomy-evidence'):
   entries.extend(p for p in base.rglob('*') if p.is_file())
  entries.extend(ROOT/'docs'/n for n in ('autonomous-assessment-production-protocol-v1.md','autonomous-assessment-production-amendment-v2.md','autonomous-assessment-production-amendment-v3.md','autonomous-assessment-production-amendment-v4.md','autonomous-assessment-production-amendment-v5.md','autonomous-assessment-production-amendment-v6.md','autonomous-assessment-production-amendment-v7.md','autonomous-assessment-production-amendment-v8.md','autonomous-assessment-production-amendment-v9.md','autonomous-assessment-production-amendment-v10.md','autonomous-assessment-production-amendment-v11.md','autonomous-assessment-protocol-v1.md','autonomous-assessments.md','autonomous-assessment-validation-v1.md','autonomous-assessment-validation-v1.json'))
  entries.extend(p for p in (ROOT/'.test-artifacts/autonomy-release').glob('*/*') if p.is_file() and p.name in ('receipt.json','cdk.log','outputs.json'))

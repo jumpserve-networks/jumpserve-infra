@@ -1,0 +1,21 @@
+# Autonomous assessment production release
+
+All three repositories are on main. The frontend is deployed as Amplify build 116; backend runtime 23 pins `135184d13c7b4363ca9db9d5d640e5c3434fa0b6`. AWS account 395567831870 and Supabase regphejnlvfpyokpniny were verified before changes. Existing benchmark stack parameters are unchanged.
+
+The software flow was verified with a legitimate Google session: form submission, durable background progress, per-claim prompts, a new execution of an archived-data check, 192 stored measurements and a real AI assessment. The same run was retained through recovery; no experiment was repeated for a preferred result. The model correctly returned inconclusive for one figure of a six-figure claim. This is a limited operational assessment, not whole-paper validation or new Internet measurement.
+
+**Remaining limitation:** follow-up planning still exceeds 96 KB when remaining plans and evidence are combined. The final private control therefore has one inconclusive and fourteen untested claims, with explicit reasons. Automatic closure of this full paper was not verified. The 15 historical assessment rows imported during preparation are separate from new results; no new conclusive assessment row was created.
+
+Defaults remain $100 in conservative commitments per paper, seven elapsed days, 25 model invocations per claim including failures, two parallel claims per paper and four globally. Actual invoice charges are not independently capped by that admission ledger. Autonomous cloud networking remains blocked pending current configuration-specific cost envelopes with verified hard resource bounds.
+
+Validation passed: 152 backend + 186 frontend + 91 infrastructure unit tests (429 total), eight actual SQL/controller groups, six local browser groups and five public production browser groups. Build checks passed; lint retains one existing navigation warning. Desktop/mobile light/dark views, exports, sign-in return paths, recorded prompt history, RLS/browser write denial, anonymous denial, deployed source hashes, all 64 PDF-layer files and the active minute schedule were checked.
+
+Nineteen component answers support publication: sixteen frozen saved-context model cases, two separately frozen context-builder cases and one lossless evidence case. Their implementation profiles remain separate. These are exposed development cases reviewed by the primary Codex AI implementer, without human or independent review. They do not establish general model accuracy; no confidence interval is justified by this design. Original failed candidates, the first production failure, context blocks and verifier corrections remain retained.
+
+The final assessment request was 86,563 bytes. Its reversible packet preserves all 192 supplied records and their canonical hash, and every numerical value matches the original database value. The original run/input/output artifacts and parsed exports were downloaded and hash-verified in private Supabase Storage. Authenticated screenshots and private study inputs are excluded from public evidence.
+
+The machine-readable [release record](autonomous-assessment-production-validation-v1.json) contains exact revisions, hashes, controls, usage, private archive manifests and verification gaps. Protocols are [production v1](autonomous-assessment-production-protocol-v1.md) plus preserved amendments v2–v11. The [implementation guide](autonomous-assessments.md) contains reproduction commands; original manifests are listed in the JSON record. Live evaluation scripts enforce their original no-retry budgets and refuse replay; reproducing private evidence requires authorized artifact access.
+
+Evaluation usage: 94 provider calls; five throttled calls lack usage and charges. Known evaluation token estimates total $3.79; the two production controls add $4.07 in token estimates. These are conservative usage-based estimates, not measured bills. Compute, hosting, database, storage and unavailable provider charges remain unallocated.
+
+A fresh OAuth exchange, a real second-user access probe, generic-paper production intake and actual autonomous cloud acquisition/cleanup remain conditional gaps. No source retrieval/hash check is presented as complete substantive literature review.

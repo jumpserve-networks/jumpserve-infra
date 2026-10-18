@@ -1,0 +1,146 @@
+{
+  "protocol": "autonomous-assessment-production-protocol-v1",
+  "mode": "deploy",
+  "status": "complete",
+  "started_at": "2026-10-18T23:25:58.867956+00:00",
+  "measured_charges_usd": null,
+  "authorization": "Current explicit user request to merge main and deploy this release",
+  "new_experiment_instances": 0,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "prompt_pointers_before": [
+    {
+      "module_id": "congestion-control-emulated",
+      "active_version_id": "cabbe18a-cc70-482c-8883-81b515639e42"
+    },
+    {
+      "module_id": "congestion-control-real-world",
+      "active_version_id": "e78456f8-6582-4f69-8b44-d56d2c782352"
+    },
+    {
+      "module_id": "http2-compliance-study",
+      "active_version_id": "caf6bae2-acd3-4ef4-8147-bd8bc39895e2"
+    },
+    {
+      "module_id": "ipv6-dns-study",
+      "active_version_id": "28edfb2a-17f9-47c0-a801-1ca7392c7404"
+    },
+    {
+      "module_id": "leo-emergency-failover",
+      "active_version_id": "ec00a4b6-718c-4e69-9c0f-283b9f251002"
+    },
+    {
+      "module_id": "reliable-sketch-study",
+      "active_version_id": "64c9fbb6-1d38-4844-9167-66faaf05fe14"
+    },
+    {
+      "module_id": "research-autonomy",
+      "active_version_id": "83e26515-7b18-5730-9473-f34555a1a1b4"
+    },
+    {
+      "module_id": "research-claim-design",
+      "active_version_id": "3da220d0-cde0-5ab5-b8cd-ccbd23ece025"
+    },
+    {
+      "module_id": "research-verification",
+      "active_version_id": "ba16759e-ff38-4491-ae21-5766261e710b"
+    }
+  ],
+  "manifest": {
+    "version": 23,
+    "source_revision": "135184d13c7b4363ca9db9d5d640e5c3434fa0b6",
+    "revision_status": "Exact committed main: lossless complete evidence transport; all earlier model/builder profiles and verifier corrections retained separately.",
+    "files": {
+      "api.py": "feb505052c3ba743ea9fa2fe429cf5d51e7b80cf3fe72fb76ad0ba8123799855",
+      "workflow.py": "03ebd6c328dc8d9428992c44d07c468e4639576853d32b92cb0e801a8727c75d",
+      "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+      "store.py": "25e023e9c65ae1aca648631b59cfa81b8cc6d053221d4fed40fbd500c64e2b0d",
+      "scheduler.py": "27d9db3d8e209ff4419ecf4658bb569012a7e4f393d9348e6052df78cbddebe0",
+      "worker.py": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
+      "preparation.py": "f23424b4c73974ffda48e356cd19c2d0dd8877beb668d94380e7bb00da5a5f90",
+      "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "ideas.py": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+      "network_spec.py": "884857f8680eb73ae7b8f43de484c3bd59d0f2441b66e117e49a347191a31e7c",
+      "network_execution.py": "9e61b6c4a2d1e16f0c931e9902d824bfd38174108749739655cfae197ffa5577",
+      "network_package.py": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
+      "package_runtime.py": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
+      "gap_queue.py": "90bd0a01a9dc9b25575d6f2ac6b478a34e940829231132585a3eb1c93c7c841a",
+      "claim_design.py": "c79c04b519286d145738cbcc5585203b6199342937e018c712d31550e8132870",
+      "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "autonomy.py": "0528b20a0db0e8cfa05ef94dfb835d073ecab893fe3b852aad2b3353516ae5f0",
+      "autonomy_model.py": "158feca665ba216d7e66ecbdb023a2ad15937369f044e1b84c9b4325895246ea",
+      "autonomy_sources.py": "4f26059b9b4b3baa511c995735ac39af14f01a6e5f957a9d0c72b544ec693474",
+      "intake.py": "7ac9610b72ce9d1a2ddf86bb7328c1caa25c3e43abe3e4882de2d8e7f88689dd",
+      "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b"
+    }
+  },
+  "stack_before": {
+    "stack_id": "arn:aws:cloudformation:us-east-1:395567831870:stack/JumpServeBenchmarkStack/de161ef0-5ab8-11f1-afd0-12c10299888f",
+    "status": "UPDATE_COMPLETE",
+    "parameters": [
+      {
+        "ParameterKey": "SsmParameterValueawsservicecanonicalubuntuserver2404stablecurrentamd64hvmebsgp3amiidC96584B6F00A464EAD1953AFF4B05118Parameter",
+        "ParameterValue": "/aws/service/canonical/ubuntu/server/24.04/stable/current/amd64/hvm/ebs-gp3/ami-id",
+        "ResolvedValue": "ami-02a9cdd4e98bc3c78"
+      },
+      {
+        "ParameterKey": "BootstrapVersion",
+        "ParameterValue": "/cdk-bootstrap/hnb659fds/version",
+        "ResolvedValue": "31"
+      },
+      {
+        "ParameterKey": "SsmParameterValueawsservicecanonicalubuntuserver2204stablecurrentamd64hvmebsgp2amiidC96584B6F00A464EAD1953AFF4B05118Parameter",
+        "ParameterValue": "/aws/service/canonical/ubuntu/server/22.04/stable/current/amd64/hvm/ebs-gp2/ami-id",
+        "ResolvedValue": "ami-09db1e291cef3f1ef"
+      },
+      {
+        "ParameterKey": "BenchmarkAmiId",
+        "ParameterValue": "ami-0808d1157e26c65cb"
+      }
+    ]
+  },
+  "command": [
+    "npm",
+    "run",
+    "cdk:benchmark",
+    "--",
+    "deploy",
+    "JumpServeBenchmarkStack",
+    "-c",
+    "researchAutonomyEnabled=true",
+    "--require-approval",
+    "never",
+    "--outputs-file",
+    "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/autonomy-release/20261018T232558867708Z/outputs.json"
+  ],
+  "stack_after": {
+    "stack_id": "arn:aws:cloudformation:us-east-1:395567831870:stack/JumpServeBenchmarkStack/de161ef0-5ab8-11f1-afd0-12c10299888f",
+    "status": "UPDATE_COMPLETE",
+    "parameters": [
+      {
+        "ParameterKey": "SsmParameterValueawsservicecanonicalubuntuserver2404stablecurrentamd64hvmebsgp3amiidC96584B6F00A464EAD1953AFF4B05118Parameter",
+        "ParameterValue": "/aws/service/canonical/ubuntu/server/24.04/stable/current/amd64/hvm/ebs-gp3/ami-id",
+        "ResolvedValue": "ami-02a9cdd4e98bc3c78"
+      },
+      {
+        "ParameterKey": "BootstrapVersion",
+        "ParameterValue": "/cdk-bootstrap/hnb659fds/version",
+        "ResolvedValue": "31"
+      },
+      {
+        "ParameterKey": "SsmParameterValueawsservicecanonicalubuntuserver2204stablecurrentamd64hvmebsgp2amiidC96584B6F00A464EAD1953AFF4B05118Parameter",
+        "ParameterValue": "/aws/service/canonical/ubuntu/server/22.04/stable/current/amd64/hvm/ebs-gp2/ami-id",
+        "ResolvedValue": "ami-09db1e291cef3f1ef"
+      },
+      {
+        "ParameterKey": "BenchmarkAmiId",
+        "ParameterValue": "ami-0808d1157e26c65cb"
+      }
+    ]
+  },
+  "ended_at": "2026-10-18T23:27:32.598352+00:00"
+}
