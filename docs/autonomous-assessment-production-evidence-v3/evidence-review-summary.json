@@ -1,0 +1,34 @@
+{
+  "protocol": "autonomous-assessment-production-amendment-v10",
+  "verifier_amendment": "autonomous-assessment-production-amendment-v11",
+  "original_report_sha256": "dd4b70f9b6eb25fd566c02c767033577789fd248020e48d2f917dda37b1b7f8a",
+  "reviewed_report_sha256": "809b812a05851865228e564915e068d01ecc29b9de43c11cb503dba2bb8c45f3",
+  "privacy": "Original private control inputs and provider responses retained in hash-verified private release archive.",
+  "live_provider_calls": 1,
+  "usage": {
+    "inputTokens": 35488,
+    "outputTokens": 361,
+    "totalTokens": 35849,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "estimated_cents": 30,
+  "original_reference_check": false,
+  "corrected_reference_check": true,
+  "source_paths": [
+    "$.runs[0].id",
+    "$.runs[0].campaign_id",
+    "$.runs[0].input_sha256",
+    "$.measurements.original_records_sha256",
+    "$.runs[0].output_sha256"
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false,
+    "human": false,
+    "passed": true,
+    "reviewed_at": "2026-10-18T23:22:04.475027+00:00",
+    "method": "Actual original raw coded message and rendered response inspected; every reference mapped to a supplied structured provenance path. No answer edited."
+  }
+}

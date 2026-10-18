@@ -27,14 +27,14 @@ def plan():
 
 def publish_fixture():
  seed=json.loads((f.ROOT/'database/seed-autonomy-v6.json').read_bytes());lock=json.loads((f.ROOT/'test/autonomy-implementation-lock-v6.json').read_bytes())
- released=json.loads((f.ROOT/'test/autonomy-integration-lock-v1.json').read_bytes())
+ released=json.loads((f.ROOT/'test/autonomy-evidence-lock-v1.json').read_bytes())
  for name,sha in released['files'].items():
   assert hashlib.sha256((f.ROOT.parent/'jumpserve-back-end/research_workflow'/name).read_bytes()).hexdigest()==sha,'Renew local source lock before testing changed implementation: '+name
  sha=f.query('select content_sha256 from agent_prompt_versions where id='+f.sql_text(seed['id']))
  report=dict(protocol='autonomous-assessment-protocol-v1',analysis_version=autonomy.VERSION,module_id=model.MODULE,prompt_version_id=seed['id'],prompt_version=seed['version'],prompt_content_sha256=sha,
-  evaluation_kind='actual-model-development',live_provider_calls=18,model_evaluation_live_provider_calls=16,integration_live_provider_calls=2,report_kind='composite-model-and-context-integration',model_evaluation_report_sha256='e'*64,integration_evaluation_report_sha256='f'*64,released_input_sha256=released['files'],prior_live_provider_calls=14,prior_failed_provider_calls=5,new_provider_calls=5,reused_answer_count=9,recovery_source_sha256='d'*64,release_amendment='autonomous-assessment-production-amendment-v9',model_id=model.MODEL,cases_sha256=lock['cases_sha256'],request_manifest_sha256=lock['request_manifest_sha256'],response_channel_sha256=lock['response_channel_sha256'],input_sha256=lock['files'],
+  evaluation_kind='actual-model-development',live_provider_calls=19,evidence_live_provider_calls=1,evaluation_revision='lossless-evidence-v1',evidence_evaluation_report_sha256='a'*64,evidence_inputs_sha256=released['inputs_sha256'],model_evaluation_live_provider_calls=16,integration_live_provider_calls=2,report_kind='composite-model-and-context-integration',model_evaluation_report_sha256='e'*64,integration_evaluation_report_sha256='f'*64,released_input_sha256=released['files'],prior_live_provider_calls=14,prior_failed_provider_calls=5,new_provider_calls=5,reused_answer_count=9,recovery_source_sha256='d'*64,release_amendment='autonomous-assessment-production-amendment-v11',model_id=model.MODEL,cases_sha256=lock['cases_sha256'],request_manifest_sha256=lock['request_manifest_sha256'],response_channel_sha256=lock['response_channel_sha256'],input_sha256=lock['files'],
   fixture_notice='Synthetic SQL-guard declarations only; not an actual provider evaluation or production publication.',evaluator=dict(identity='Explicit synthetic evaluator fixture',type='AI',independent=False),reviewer=dict(identity='Explicit synthetic reviewer fixture',type='AI',independent=False,passed=True),
-  cases=[dict(name=c['name'],passed=True,status='complete',raw_answer_reviewed=True,rendered_answer_reviewed=True,output_sha256='b'*64,provider_response_sha256='c'*64) for c in json.loads((f.ROOT/'test/autonomy-evaluation-cases-v2.json').read_bytes())['cases']+json.loads((f.ROOT/'test/autonomy-integration-inputs-v1.json').read_bytes())['cases']])
+  cases=[dict(name=c['name'],passed=True,status='complete',raw_answer_reviewed=True,rendered_answer_reviewed=True,output_sha256='b'*64,provider_response_sha256='c'*64) for c in json.loads((f.ROOT/'test/autonomy-evaluation-cases-v2.json').read_bytes())['cases']+json.loads((f.ROOT/'test/autonomy-integration-inputs-v1.json').read_bytes())['cases']+[dict(name='lossless-192-record-assessment')]])
  payload=dict(p_version_id=seed['id'],p_expected_active_version_id=None,p_expected_content_sha256=sha,p_report=report,p_actor='Synthetic local publication guard exercise only',p_module_id=model.MODULE)
  return payload
 
@@ -49,7 +49,8 @@ def provider(request):
   else:out.update(blockers=[dict(kind='implementation',detail='unavailable-implementation',required_input='A separately reviewed applicable experiment')])
  elif stage in ('comprehension','critic'):out.update(action='review',ready=True,coverage_complete=True,reason='ready-within-scope')
  elif stage=='assessment':
-  recorded=[r for r in context.get('measurements',[]) if r['status']=='recorded']
+  records=context.get('measurements',[]);records=autonomy.evidence_records(records) if isinstance(records,dict) else records
+  recorded=[r for r in records if r['status']=='recorded']
   if not recorded:out.update(action='assess',assessment_label='inconclusive',reason='evidence-incomplete')
   else:out.update(action='assess',assessment_label='discrepant' if any(Decimal(str(r['value']))!=10 for r in recorded) else 'reproduced',coverage_complete=True,reason='matched-numeric-check',evidence_ids=[r['id'] for r in recorded])
  return dict(stopReason='tool_use',output=dict(message=dict(role='assistant',content=[dict(toolUse=dict(toolUseId='explicit-fixture',name='submit_assessment_step',input=out))])),usage=dict(inputTokens=100,outputTokens=50,totalTokens=150))

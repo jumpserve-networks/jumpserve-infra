@@ -1,0 +1,24 @@
+{
+  "context_bytes": 83791,
+  "sizes": {
+    "task": 12,
+    "initial_prompt": 1097,
+    "claim": 672,
+    "source": 3586,
+    "attempt_number": 1,
+    "limits": 123,
+    "source_coverage": 84,
+    "registered_checks": 2,
+    "registered_runners": 63,
+    "previous_feedback": 4,
+    "remaining_commitment_cents": 4,
+    "deadline_at": 34,
+    "prior_attempts": 1818,
+    "candidate": 17962,
+    "runs": 1859,
+    "measurements": 56181,
+    "controller_numeric_check": 4
+  },
+  "source_sha256": "853b676a0fee28d207ca32f1d1ea71a5b916d343215c4f62d91cba7b0fa24cd3",
+  "record_count": 192
+}

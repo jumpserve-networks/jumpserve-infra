@@ -1,0 +1,22 @@
+{
+  "protocol": "autonomous-assessment-production-amendment-v10",
+  "files": {
+    "autonomy.py": "0528b20a0db0e8cfa05ef94dfb835d073ecab893fe3b852aad2b3353516ae5f0",
+    "autonomy_model.py": "158feca665ba216d7e66ecbdb023a2ad15937369f044e1b84c9b4325895246ea",
+    "autonomy_sources.py": "4f26059b9b4b3baa511c995735ac39af14f01a6e5f957a9d0c72b544ec693474",
+    "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b"
+  },
+  "prior_builder_input_sha256": {
+    "autonomy.py": "ce5ce2737afec01ada86d9639c88b3e7b94743bb422cf6b2d030a72aace7e38b",
+    "autonomy_model.py": "158feca665ba216d7e66ecbdb023a2ad15937369f044e1b84c9b4325895246ea",
+    "autonomy_sources.py": "4f26059b9b4b3baa511c995735ac39af14f01a6e5f957a9d0c72b544ec693474",
+    "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b"
+  },
+  "inputs_sha256": "c08132620b845f33e68df0604cba8a527a9860449ea969094ca4a9f57b7263e9",
+  "source_snapshot_sha256": "248a887e55e6f55c4753803678ba5be3ed64a3e9debeda771ab4e88eb3164840",
+  "record_count": 192,
+  "record_set_sha256": "dd55827832630094d79028c953018f46633ff82fe7b022e2f2f333c4173c74af",
+  "model_request_bytes": 86304,
+  "original_record_bytes": 151823,
+  "encoded_packet_bytes": 41535
+}

@@ -110,7 +110,7 @@ source/auth/provider/Storage boundaries. It is not a real model or cloud experim
 ## Production activation
 
 The current explicit release request authorizes this activation. Migrations
-`202610180003` through `202610180016` preserve each candidate and additive
+`202610180003` through `202610180017` preserve each candidate and additive
 publication guard in the existing Supabase prompt tables. They do not themselves
 publish or activate a candidate. Fourteen development cases, their full input
 contexts, pass criteria, schema and implementation hashes are locked under `test/`.
@@ -121,16 +121,17 @@ evaluation. Evaluator/reviewer identities and AI/human status must be recorded.
 Release operations verify AWS 395567831870 and Supabase
 regphejnlvfpyokpniny, pass the declared local checks, perform and retain actual
 candidate answer evaluation/review, apply migrations in order and publish only a
-passing exact candidate. Runtime version 22 pins backend commit
-`6b909cc09d8b89fa89b5068b26363cf3c6eaf73f`. The v6 prompt uses versioned typed
+passing exact candidate. Runtime version 23 pins backend commit
+`135184d13c7b4363ca9db9d5d640e5c3434fa0b6`. The v6 prompt uses versioned typed
 issue codes, per-phase schemas and Opus 4.6. The first production positive control
 exposed wrong-phase responses and an oversized selection context after the v5
 fourteen-case campaign passed. That publication and all original failures remain.
-The corrective evidence combines sixteen frozen saved-context model cases and
-two separately frozen actual-builder integration cases. Component source hashes
+The corrective evidence combines sixteen frozen saved-context model cases,
+two separately frozen actual-builder integration cases and one separately frozen
+complete-record assessment case. Component source hashes
 remain separate; the integration lock pins the released context builder. Every
 candidate is preserved, including five original throttled calls with unknown
-charges. See release amendments v2–v9; none of these exposed development cases
+charges. See release amendments v2–v11; none of these exposed development cases
 is held-out, independent or human validation.
 
 Selection indexes preserve every retained check/configuration identity and full
@@ -138,6 +139,16 @@ protocol hash. Fresh reviews receive the full selected conditions. Wrong-phase
 answers remain invalid numbered turns and get specific protocol-error feedback;
 unknown provider outcomes are not replayed. Neither indexing nor correction
 changes a scientific condition or establishes complete claim coverage.
+
+Assessment transports every original measurement field in a reversible columnar
+packet with common values, explicitly indexed dictionaries and duplicate detail
+fields factored once. Decoding must reproduce the original canonical record hash.
+No rows, value strings, nulls, zeros, statuses or identifiers are sampled or rounded.
+The 192-record production control fits an 86,304-byte request without raising the
+96 KB/1000-record limits. Source rows and raw artifacts remain unchanged. The
+separate packet verifier initially rejected real campaign/input/output hashes;
+that false negative and its structured-field correction remain preserved.
+
 Set `researchAutonomyEnabled=true` only with the durable queue enabled, stage the
 verified PDF layer, deploy API/controller before the frontend, then verify a real
 Google-authenticated request and private Storage round trip. Approve and validate

@@ -7,7 +7,7 @@ admin=release.admin;aws=release.aws;OPEN=release.guard.OPEN
 URL='https://pure.mpg.de/pubman/item/item_3670144_1/component/file_3670145/main.pdf'
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=('status','advance','archive','campaign','cancel'));p.add_argument('--study',required=True,type=uuid.UUID);a=p.parse_args();study=str(a.study)
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=('status','advance','archive','campaign','cancel','resume-assessment'));p.add_argument('--study',required=True,type=uuid.UUID);a=p.parse_args();study=str(a.study)
  directory=ROOT/'.test-artifacts/autonomy-positive-control'/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');directory.mkdir(parents=True)
  report=dict(protocol='autonomous-assessment-production-protocol-v1',amendment='autonomous-assessment-production-amendment-v7',mode=a.mode,study_id=study,started_at=dt.datetime.now(dt.timezone.utc).isoformat(),status='running',measured_charges_usd=None)
  try:
@@ -17,6 +17,19 @@ def main():
   if a.mode=='cancel':
    admin.query("select research_autonomy_control('cancel',(select owner_id from research_study_owners where study_id="+admin.literal(study)+"::uuid),"+admin.literal(study)+"::uuid,'{}'::jsonb)",read_only=False)
    report['operator_cancellation']='Release operator stopped this private positive control after a demonstrated phase-contract failure. This is a service-admin action, not a fabricated browser-authenticated cancellation.'
+  if a.mode=='resume-assessment':
+   if study!='b7bc978d-9a6a-4fc8-97fd-179be9989d24':raise RuntimeError('Only the second declared control may receive this one-time recovery')
+   release.functions(directory,True);release.reviewed()
+   admin.query("""do $$ declare t public.research_autonomy_tasks; w public.research_autonomy_workflows; begin
+    select * into strict w from public.research_autonomy_workflows where study_id='b7bc978d-9a6a-4fc8-97fd-179be9989d24' for update;
+    select * into strict t from public.research_autonomy_tasks where study_id=w.study_id and stage='assessment' and status='blocked' and reason='Autonomous context exceeds 96 KB; retain explicit coverage rather than truncate evidence.' for update;
+    if w.status<>'completed-with-blockers' or w.deadline_at<=clock_timestamp()+interval '180 seconds' or t.attempts>=25 or exists(select 1 from public.research_autonomy_turns where task_id=t.id and (stage='assessment' or status in ('running','unknown','failed'))) or exists(select 1 from public.research_autonomy_events where study_id=w.study_id and event='lossless-evidence-recovery') then raise exception 'Recovery preconditions differ'; end if;
+    if (select count(*) from public.research_runs where study_id=w.study_id and status='complete')<>1 or (select count(*) from public.research_measurements where study_id=w.study_id)<>192 then raise exception 'Retained evidence coverage differs'; end if;
+    insert into public.research_autonomy_events(study_id,task_id,event,details) values(w.study_id,t.id,'lossless-evidence-recovery',jsonb_build_object('operator','Primary Codex AI implementer; service-admin recovery, not a browser user action','protocol','autonomous-assessment-production-amendment-v10','old_workflow_status',w.status,'old_task_status',t.status,'old_reason',t.reason,'old_attempts',t.attempts,'old_committed_cents',w.committed_cents,'experiment_restarted',false));
+    update public.research_autonomy_workflows set status='running',reason='One-time transport correction; reassess the same retained run without resetting limits.',updated_at=clock_timestamp() where study_id=w.study_id;
+    update public.research_autonomy_tasks set status='queued',next_at=clock_timestamp(),reason='Lossless evidence transport correction; same run, original conditions and original limits.',context=context||jsonb_build_object('last_response_error','A confirmed pre-dispatch context limit stopped assessment. All 192 original records are now provided losslessly. Reassess the same evidence under the original claim scope; do not repeat the experiment or force a conclusion.'),updated_at=clock_timestamp() where id=t.id;
+   end $$""",read_only=False)
+   report['operator_recovery']='Known pre-dispatch context block only; original attempts, budgets, deadlines and one recorded run retained.'
   if a.mode=='campaign':
    tick=time.monotonic();report['children']=[]
    for _ in range(30):
@@ -42,7 +55,8 @@ def main():
    report['invocation']=aws('lambda','invoke','--function-name',functions[0],'--payload','{}','--cli-binary-format','raw-in-base64-out',str(directory/'worker-response.json'))
    if report['invocation'].get('FunctionError'):raise RuntimeError('Normal worker invocation returned a function error')
   tables=('autonomy_workflows','autonomy_tasks','autonomy_turns','autonomy_events','autonomy_job_commitments','prepared_plans','queue_jobs','runs','measurements','assessments','artifacts')
-  data={name:admin.query('select to_jsonb(r) record from research_'+name+' r where study_id='+admin.literal(study)+'::uuid') for name in tables}
+  if a.mode=='archive':tables+=('sources','claims','protocols','configurations','campaigns','claim_checks','published_values','summaries','gaps','reviews','publications')
+  data={name:admin.query("select "+("to_jsonb(r)||jsonb_build_object('value',r.value::text)" if name in ('measurements','published_values') else 'to_jsonb(r)')+' record from research_'+name+' r where study_id='+admin.literal(study)+'::uuid') for name in tables}
   data={k:[r['record'] for r in v] for k,v in data.items()}
   raw=json.dumps(data,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode();snapshot=directory/'private-parsed-snapshot.json';snapshot.write_bytes(raw);snapshot.chmod(0o600);report['private_snapshot_sha256']=sha(raw)
   workflow=data['autonomy_workflows'][0]
@@ -69,6 +83,8 @@ def main():
      image=capture.read_bytes()
      if len(image)>8000000:raise RuntimeError('Private browser capture exceeds declared bound')
      z.writestr('private-browser/'+capture.name,image);manifest.append(dict(kind='authenticated-browser-capture',name=capture.name,sha256=sha(image),bytes=len(image),privacy='May include user identity in sticky header; private only'))
+    browser_report=ROOT/'.test-artifacts/autonomy-production-browser/browser-report.json'
+    if browser_report.exists():z.writestr('private-browser/browser-report.json',browser_report.read_bytes())
     z.writestr('manifest.json',json.dumps(manifest,indent=2)+'\n')
    archive=buffer.getvalue()
    if len(archive)>32000000:raise RuntimeError('Private positive-control archive exceeds bound')

@@ -1,0 +1,374 @@
+{
+  "protocol": "autonomous-assessment-production-protocol-v1",
+  "mode": "evidence-correct",
+  "status": "complete",
+  "started_at": "2026-10-18T23:24:44.157629+00:00",
+  "measured_charges_usd": null,
+  "authorization": "Current explicit user request to merge main and deploy this release",
+  "new_experiment_instances": 0,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "prompt_pointers_before": [
+    {
+      "module_id": "congestion-control-emulated",
+      "active_version_id": "cabbe18a-cc70-482c-8883-81b515639e42"
+    },
+    {
+      "module_id": "congestion-control-real-world",
+      "active_version_id": "e78456f8-6582-4f69-8b44-d56d2c782352"
+    },
+    {
+      "module_id": "http2-compliance-study",
+      "active_version_id": "caf6bae2-acd3-4ef4-8147-bd8bc39895e2"
+    },
+    {
+      "module_id": "ipv6-dns-study",
+      "active_version_id": "28edfb2a-17f9-47c0-a801-1ca7392c7404"
+    },
+    {
+      "module_id": "leo-emergency-failover",
+      "active_version_id": "ec00a4b6-718c-4e69-9c0f-283b9f251002"
+    },
+    {
+      "module_id": "reliable-sketch-study",
+      "active_version_id": "64c9fbb6-1d38-4844-9167-66faaf05fe14"
+    },
+    {
+      "module_id": "research-autonomy",
+      "active_version_id": "83e26515-7b18-5730-9473-f34555a1a1b4"
+    },
+    {
+      "module_id": "research-claim-design",
+      "active_version_id": "3da220d0-cde0-5ab5-b8cd-ccbd23ece025"
+    },
+    {
+      "module_id": "research-verification",
+      "active_version_id": "ba16759e-ff38-4491-ae21-5766261e710b"
+    }
+  ],
+  "migration": {
+    "name": "202610180017_autonomy_evidence_publication_guard.sql",
+    "sha256": "d64f3b2b00a310f718b239627af73df29a375254d158b99f9d97283299dca167",
+    "status": "complete"
+  },
+  "security": {
+    "relations": [
+      {
+        "relname": "research_artifacts",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_assessments",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_audit_events",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_autonomy_events",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_autonomy_job_commitments",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_autonomy_tasks",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_autonomy_turns",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_autonomy_workflows",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_campaigns",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_claim_checks",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_claim_designs",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_claims",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_configurations",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_gaps",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_idea_campaign_links",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_idea_packets",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_idea_readiness",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_idea_runs",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_idea_sessions",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_measurements",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_network_executions",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_prepared_plans",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_protocols",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_publications",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_published_values",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_queue_events",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_queue_jobs",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_reviews",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_runs",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_sources",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_studies",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_study_owners",
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_read": false,
+        "anon_write": false,
+        "browser_write": false
+      },
+      {
+        "relname": "research_summaries",
+        "relrowsecurity": true,
+        "anon_read": true,
+        "browser_read": true,
+        "anon_write": false,
+        "browser_write": false
+      }
+    ],
+    "functions": [
+      {
+        "proname": "research_prepare_plan",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_queue_action",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_queue_claim",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_queue_enqueue",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_queue_finish",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_queue_snapshot",
+        "anon_execute": false,
+        "browser_execute": false
+      }
+    ],
+    "private_bucket": true,
+    "original_migration_bytes_verified": false,
+    "limitation": "Read-only catalog verification does not recover originally executed SQL.",
+    "autonomy_functions": [
+      {
+        "proname": "publish_agent_prompt",
+        "anon_execute": false,
+        "browser_execute": false
+      },
+      {
+        "proname": "research_autonomy_control",
+        "anon_execute": false,
+        "browser_execute": false
+      }
+    ]
+  },
+  "ended_at": "2026-10-18T23:24:51.743163+00:00"
+}
