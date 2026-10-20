@@ -1,8 +1,8 @@
 {
-  "version": 28,
-  "source_revision": "8ca00565948f19c2a7beb829c8142d95de892497",
-  "base_source_revision": "85e41235c5a7864358561f5e6fb696939bf7099e",
-  "revision_status": "PDF-upload release candidate pinned to the clean committed backend. Earlier released v27 remains in git and its private production archive. Published prompt v8 is unchanged; prior actual-model evaluations are not fresh v28 evaluations.",
+  "version": 29,
+  "source_revision": "a2db37f29231ee924dc2e825bc51df4ebb1b3f1d",
+  "base_source_revision": "8ca00565948f19c2a7beb829c8142d95de892497",
+  "revision_status": "PDF subprocess correction pinned after the first actual production upload exposed a layer import failure. v28 and its failed control are retained. Prompt v8 remains unchanged; no fresh model-evaluation claim.",
   "files": {
     "api.py": "61464dd9fafff725be178dd84602ab33ce3665302838cc4f16d584872d37a2bb",
     "autonomy.py": "e604b37f2d7aaefbc188cc1576e1cf1ef16f99b87a77c8ef03602b1ff79c8f13",
@@ -14,7 +14,7 @@
     "claim_design.py": "25ae2613b37cf31af13a5ee250a5c22d5266e18ec98c034d13bdc05e81d933e0",
     "gap_queue.py": "598c564817f6cc4ced6172ae14ead651458b2898d20771ecc426b30ecc8c9c18",
     "ideas.py": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
-    "intake.py": "7ac9610b72ce9d1a2ddf86bb7328c1caa25c3e43abe3e4882de2d8e7f88689dd",
+    "intake.py": "4276361ce09b9f362d1d5d5928d6c90d131c677fccf9addbe86b1832df106833",
     "network_execution.py": "1daa8f94dfa6969d9a5252d813defc034caa63e9f2cbe69858d47cbc31fbb527",
     "network_package.py": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
     "network_spec.py": "b481a00ea84e176b39a5426e36db8084a693a32e135ccd1685322bbe9a3cbe1f",

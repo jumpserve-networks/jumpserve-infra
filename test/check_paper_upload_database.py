@@ -55,12 +55,16 @@ def main():
    f.check('three concurrent completions atomically retain bytes and create only one workflow',finalization)
    def parser():
     s=autonomy.one('studies',study,study)
-    with patch.object(sources,'fetch',side_effect=AssertionError('Uploaded PDF must never be fetched from the Internet')),patch.dict(os.environ,{'PYTHONPATH':str(layer)}):result=sources.original(s,f.ACTOR)
+    # Lambda adds its layer to the parent sys.path, not necessarily PYTHONPATH.
+    # Exercise that distinction with the real pinned parser subprocess.
+    with patch.object(sources,'fetch',side_effect=AssertionError('Uploaded PDF must never be fetched from the Internet')),patch.dict(os.environ):
+     os.environ.pop('PYTHONPATH',None)
+     result=sources.original(s,f.ACTOR)
     packet=json.loads(store.artifact_bytes(study,result['text_artifact_id'],maximum=1000000));source=autonomy.one('sources',study,result['source_id'])
     assert packet['original_sha256']==workflow.digest(raw) and 'latency is 10 ms' in packet['pages'][0]['text']
     assert source['source_url'] is None and source['retrieved_url'] is None and source['review_status']=='retrieved-unreviewed'
     assert store.artifact_bytes(study,result['original_artifact_id'])==raw
-    return dict(actual_pypdf_version=packet['tool_version'],actual_parser_subprocess=True,original_bytes_unchanged=True,source_review_complete=False,internet_fetches=0)
+    return dict(actual_pypdf_version=packet['tool_version'],actual_parser_subprocess=True,parent_sys_path_only_dependency=True,inherited_pythonpath_fixture=False,original_bytes_unchanged=True,source_review_complete=False,internet_fetches=0)
    f.check('actual PDF extraction reads the private uploaded original with no synthetic URL',parser)
    def invalid():
     for invalid_data,stored in ((b'not a PDF',b'not a PDF'),(raw,raw+b'tampered')):

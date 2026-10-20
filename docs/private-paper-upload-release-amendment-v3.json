@@ -1,0 +1,12 @@
+{
+  "version":"private-paper-upload-release-amendment-v3",
+  "recorded_at":"2026-10-20T02:03:56Z",
+  "parent":"private-paper-upload-release-amendment-v2",
+  "finding":"The first real browser upload succeeded, created one workflow and retained the original hash and initial prompt. Its actual PDF parser subprocess failed with ModuleNotFoundError: No module named pypdf. A blocked state alone is insufficient to pass the declared parser check.",
+  "preserved_control":"8605412f-f912-40fa-8747-cfcd2d6aabf2",
+  "correction":"Forward the parent interpreter import path explicitly to the bounded subprocess. Lambda adds layer directories to the parent sys.path; a newly launched interpreter did not inherit those additions. Preserve the pinned pypdf layer and resource limits. Add a subprocess regression with a dependency visible only on parent sys.path, and repeat the actual local pypdf integration without a PYTHONPATH fixture.",
+  "followup_campaign":"After tests and a separately pinned backend runtime v29 pass, deploy the correction and upload a second, separately named blank PDF control with the same original bytes. Preserve the original failed workflow and diagnostic; do not alter or erase it. Require an actual derived PDF text packet naming pypdf 6.19.0, the original hash and missing-text page 1, followed by the explicit no-candidate blocker and zero model turns.",
+  "resource_amendment":{"total_control_studies":2,"new_application_model_calls":0,"new_experiment_instances":0,"maximum_additional_remote_verification_minutes":30},
+  "scientific_scope":"Software ingestion and parser correction only. No new scientific measurements, model validation or changes to published prompts.",
+  "reviewer":{"identity":"Primary Codex AI implementer","type":"AI","independent":false,"human":false}
+}

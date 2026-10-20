@@ -1,0 +1,10 @@
+{
+  "version":"private-paper-upload-release-amendment-v2",
+  "recorded_at":"2026-10-20T02:00:00Z",
+  "parent":"private-paper-upload-release-protocol-v1",
+  "reason":"Connected Chrome DevTools rejects explicit artifact paths under both authorized repository roots as outside its configured workspace roots. Inline script and screenshot responses work. This is a tool path restriction, not an application failure.",
+  "adaptation":"Retain inline sanitized browser output and original screenshot bytes through the authorized local artifact writer. Select the frozen 431-byte control as a browser File on the actual PDF input, then dispatch its normal input/change events and use the actual form submit button. Verify SHA256 in the browser before submission. No authentication, API, Storage, PDF parser or database response is mocked.",
+  "criteria_unchanged":["One real authenticated private upload", "One recorded workflow and initial prompt", "Hash-verified original bytes", "Explicit blank-text result with zero model turns", "Idempotent replay and private reads denied"],
+  "limitation":"The production OS file-picker dialog is not exercised. The actual input and component file-selection flow is exercised with a programmatically assigned File; local browser checks cover file input selection separately.",
+  "reviewer":{"identity":"Primary Codex AI implementer","type":"AI","independent":false,"human":false}
+}
