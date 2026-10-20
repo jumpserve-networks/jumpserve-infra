@@ -68,7 +68,7 @@ def evidence_archive(directory, upload=False):
   if retrieved!=raw or sha(retrieved)!=sha(raw):raise RuntimeError('Remote original archive retrieval hash differs')
   status=200;public=json.loads((ROOT/'cdk.json').read_bytes())['context']['supabaseAnonKey']
   try:
-   with prior.guard.OPEN.open(urllib.request.Request(url,headers={'apikey':public}),timeout=20) as response:response.read(1)
+   with prior.guard.OPEN.open(urllib.request.Request(url,headers={'apikey':public,'Authorization':'Bearer '+public}),timeout=20) as response:response.read(1)
   except urllib.error.HTTPError as error:status=error.code
   if status not in (400,401,403,404):raise RuntimeError('Private original archive is anonymously accessible')
   result.update(bucket='research-workflow-raw',path=path,remote_retrieval_hash_verified=True,anonymous_status=status)
