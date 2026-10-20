@@ -1,0 +1,126 @@
+{
+  "version": "private-paper-upload-validation-v1",
+  "created_at": "2026-10-20T01:46:23.382430+00:00",
+  "status": "local-implementation-verified-production-pending",
+  "unit_checks": {
+    "backend": 168,
+    "frontend": 194,
+    "infrastructure_focused": 14
+  },
+  "database_groups": {
+    "upload": 8,
+    "autonomy_regression": 11
+  },
+  "browser_groups": 9,
+  "builds": {
+    "frontend": "passed for the final source, including settled file-picker theme styling",
+    "infrastructure": "passed"
+  },
+  "lint": "focused passed",
+  "input_limit_bytes": 10000000,
+  "source_revision": "uncommitted development candidate",
+  "new_application_model_calls": 0,
+  "new_cloud_experiments": 0,
+  "new_production_mutations": 0,
+  "measured_charges_usd": null,
+  "unallocated_costs": [
+    "local compute",
+    "local artifact storage"
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false,
+    "human": false
+  },
+  "fixtures": [
+    "Google identity",
+    "Supabase HTTP and Storage transport",
+    "provider responses",
+    "registered synthetic source campaign",
+    "wake notifications"
+  ],
+  "actual_components": [
+    "React components",
+    "browser HTTP requests and file bytes",
+    "API orchestration",
+    "Postgres migrations/RPCs/RLS/grants",
+    "pypdf subprocess",
+    "queue arithmetic",
+    "Next.js anonymous login redirects"
+  ],
+  "conditional_gaps": [
+    "Remote signed Supabase upload and CORS",
+    "Remote Storage bucket enforcement",
+    "Fresh legitimate Google-authenticated upload",
+    "Production migration and deployment",
+    "Actual model evaluation of changed runtime"
+  ],
+  "evidence": [
+    {
+      "path": "jumpserve-infra/database/202610200001_private_paper_uploads.sql",
+      "sha256": "624fd8679d046cd96ba0bd7d71fe6dab59de74e2c7341098603ae706ee713b8c",
+      "bytes": 10512
+    },
+    {
+      "path": "jumpserve-infra/research-workflow-runtime.json",
+      "sha256": "a1be883039b09bf86ac6632539a6a5e270121341b5887aec6dc9f6f050b1bda3",
+      "bytes": 2795
+    },
+    {
+      "path": "jumpserve-infra/test/autonomy-publication-runtime-v8.json",
+      "sha256": "fb06a59c801c1d852459c5ac16a1c12f261c2b1df2159827726df741ff47bf21",
+      "bytes": 2625
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/research-ideas/database/20261020T014142081663Z/paper-upload-validation-report.json",
+      "sha256": "6fe7b1b4d199e6397a595540cfa9b19aa062f6c361a85de21766af2a6ea35247",
+      "bytes": 11581
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/research-ideas/database/20261020T014001677465Z/autonomy-validation-report.json",
+      "sha256": "78c78482088b46258828640d050f804e2175c371f6b841c9ced5c0840d160172",
+      "bytes": 14202
+    },
+    {
+      "path": "jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-20T01-40-00.714Z/validation-report.json",
+      "sha256": "5aa883efb45aa0d7ec25da83e7ee15e25c90f2c3035a43530d84a04a5a073d3c",
+      "bytes": 1368
+    },
+    {
+      "path": "jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-20T01-41-41.052Z/validation-report.json",
+      "sha256": "cf1f217bc93a771696955797838b97dd7234a24bed70054505f2892a0e280296",
+      "bytes": 3608
+    },
+    {
+      "path": "jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-20T01-43-40.334Z/validation-report.json",
+      "sha256": "9d486ed211041c68a235c7d6126741f34a3b2d968a64257d26d1b430dac863dd",
+      "bytes": 3608
+    },
+    {
+      "path": "jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-20T01-44-53.620Z/validation-report.json",
+      "sha256": "fa78a95d50c2dba745ecc97eb86aff94d55ee97787255c6a50394470e67141c5",
+      "bytes": 3608
+    },
+    {
+      "path": "jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-20T01-44-53.620Z/pdf-intake-390-light.png",
+      "sha256": "f10d1935f86820ae5f279c980ffc72093dc4e698ab9ba1003d74ae5a8a4b879b",
+      "bytes": 38187
+    },
+    {
+      "path": "jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-20T01-44-53.620Z/pdf-intake-390-dark.png",
+      "sha256": "6b10615aa20a38c4090a25a28dc3d37138256d09994ec9cef951579e7e013955",
+      "bytes": 38003
+    },
+    {
+      "path": "jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-20T01-44-53.620Z/pdf-intake-1365-light.png",
+      "sha256": "da1686645f19091f575dff055ee9ca2f990b8aa76d46d8a910fb96e50d76c239",
+      "bytes": 40185
+    },
+    {
+      "path": "jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-20T01-44-53.620Z/pdf-intake-1365-dark.png",
+      "sha256": "0556dcf7ffaa8efb3f26928309281a933037203b65dc6463d79fe4e135b5c4e1",
+      "bytes": 39812
+    }
+  ]
+}

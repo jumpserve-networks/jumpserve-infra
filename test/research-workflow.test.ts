@@ -18,6 +18,7 @@ test('autonomous assessment worker is explicit, private, bounded and separately 
   const template = Template.fromStack(stack);
   template.hasResourceProperties('AWS::Lambda::Function', { Handler: 'autonomy.handler', MemorySize: 1024, Timeout: 180, ReservedConcurrentExecutions: 2, Layers: Match.anyValue() });
   template.resourceCountIs('AWS::Lambda::Url', 0);
+  template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'POST /research/paper-uploads' });
   template.resourceCountIs('AWS::Events::Rule', 2);
   template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'GET /research/studies/{studyId}/autonomy' });
   template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'POST /research/studies/{studyId}/autonomy' });

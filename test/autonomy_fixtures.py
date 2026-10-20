@@ -6,10 +6,20 @@ import check_research_ideas_database as f
 import autonomy,autonomy_model as model,preparation,workflow
 
 URL='https://example.org/autonomy-software-fixture.pdf'
+def pdf_bytes():
+ content=b'BT /F1 12 Tf 40 200 Td (Explicit autonomous software fixture; no academic claims.) Tj ET'
+ objects=[b'<< /Type /Catalog /Pages 2 0 R >>',b'<< /Type /Pages /Kids [3 0 R] /Count 1 >>',b'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 400 400] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>',b'<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',b'<< /Length '+str(len(content)).encode()+b' >>\nstream\n'+content+b'\nendstream']
+ raw=b'%PDF-1.4\n';offsets=[]
+ for number,body in enumerate(objects,1):offsets.append(len(raw));raw+=str(number).encode()+b' 0 obj\n'+body+b'\nendobj\n'
+ start=len(raw);raw+=b'xref\n0 6\n0000000000 65535 f \n'
+ for offset in offsets:raw+=('%010d 00000 n \n'%offset).encode()
+ return raw+b'trailer\n<< /Root 1 0 R /Size 6 >>\nstartxref\n'+str(start).encode()+b'\n%%EOF\n'
+
 def plan():
  source=str(uuid.uuid5(uuid.NAMESPACE_URL,'autonomy-software-source'))
  reviewer=dict(identity='Synthetic software fixture',type='AI',independence='Synthetic inputs and model output; no actual scientific review')
- s=dict(id=source,citation='Synthetic matched-cell fixture, not an academic paper',source_url=URL,retrieved_url=None,kind='software-fixture',role='Exercise persistence and missing data only',retrieved_version='fixture-v1',sha256='a'*64,byte_count=1,access_status='software-fixture',review_status='retrieved-unreviewed',review_definition='No substantive source reviewed',examined='Synthetic fixture declarations',unexamined='No real source paper',retrieval_attempts=[],reviewer=reviewer,findings='No scientific findings',limitations='Not empirical data or a paper assessment')
+ original=pdf_bytes()
+ s=dict(id=source,citation='Synthetic matched-cell fixture, not an academic paper',source_url=URL,retrieved_url=None,kind='software-fixture',role='Exercise persistence and missing data only',retrieved_version='fixture-v1',sha256=workflow.digest(original),byte_count=len(original),access_status='software-fixture',review_status='retrieved-unreviewed',review_definition='No substantive source reviewed',examined='Synthetic fixture declarations',unexamined='No real source paper',retrieval_attempts=[],reviewer=reviewer,findings='No scientific findings',limitations='Not empirical data or a paper assessment')
  records=[dict(kind='sources',record=s)];campaigns=[]
  for index,name in enumerate(('eventual-agreement','eventual-discrepancy','missing-equipment')):
   claim=str(uuid.uuid5(uuid.NAMESPACE_URL,'autonomy-software-claim:'+name))
@@ -41,6 +51,15 @@ def publish_fixture():
   if candidate=='v8':report.update(trajectory_policy_sha256=hashlib.sha256((f.ROOT/'test/autonomy-trajectory-policy-v1.json').read_bytes()).hexdigest(),trajectory_report_sha256='a'*64,trajectory_report=dict(version='autonomy-trajectory-evaluation-v1',limits=dict(max_attempts_per_claim=25,max_paper_committed_cents=10000,max_elapsed_seconds=604800),status='complete',reviewer=dict(passed=True),input_sha256=manifest['files'],attempts_used=4,committed_cents=600,checks=dict(exact_prompts_retained=True,scoped_reads=True,evidence_decisions=True,authorization_preserved=True,no_unknown_call_replay=True),terminal_status='assessed',reason='Synthetic publication guard only; four turns are allowed.',cases=[dict(number=i+1,passed=True,raw_answer_reviewed=True,rendered_answer_reviewed=True,output=dict(action='assess',assessment_label='reproduced',coverage_complete=True) if i==3 else dict(action='inspect')) for i in range(4)]))
   if candidate=='v8':
    for case in report['trajectory_report']['cases']:case['status']='complete'
+   # Exercise the unchanged historical publication guard with its own frozen
+   # profile, while separately identifying the actual development code tested.
+   # These synthetic declarations never establish a new model evaluation.
+   profile=json.loads((f.ROOT/'test/autonomy-publication-runtime-v8.json').read_bytes())
+   report['fixture_tested_working_tree_sha256']=manifest['files']
+   report['fixture_publication_profile']='Historical released v27; synthetic SQL guard exercise, not a current model evaluation.'
+   report['input_sha256']=profile['files']
+   report['completion_report']['input_sha256']=profile['files']
+   report['trajectory_report']['input_sha256']=profile['files']
   return dict(p_version_id=seed['id'],p_expected_active_version_id=None,p_expected_content_sha256=sha,p_report=report,p_actor='Synthetic local publication guard exercise only',p_module_id=model.MODULE)
  seed=json.loads((f.ROOT/'database/seed-autonomy-v6.json').read_bytes());lock=json.loads((f.ROOT/'test/autonomy-implementation-lock-v6.json').read_bytes())
  released=json.loads((f.ROOT/'test/autonomy-evidence-lock-v1.json').read_bytes())
@@ -71,5 +90,5 @@ def provider(request):
  return dict(stopReason='tool_use',output=dict(message=dict(role='assistant',content=[dict(toolUse=dict(toolUseId='explicit-fixture',name='submit_assessment_step',input=out))])),usage=dict(inputTokens=100,outputTokens=50,totalTokens=150))
 
 def registered(study):
- value=plan();return (value,workflow.canonical(value)) if study.get('paper_url')==URL else ORIGINAL_REGISTERED(study)
+ value=plan();return (value,workflow.canonical(value)) if preparation.matches_paper(value,study) else ORIGINAL_REGISTERED(study)
 ORIGINAL_REGISTERED=preparation.registered

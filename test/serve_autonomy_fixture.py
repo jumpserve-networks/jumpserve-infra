@@ -1,8 +1,8 @@
 """Local actual API/controller/SQL/arithmetic with explicit synthetic boundaries."""
-import json,os,threading,time,urllib.parse
+import base64,json,os,threading,time,urllib.parse
 from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 import check_research_ideas_database as f
-import autonomy,autonomy_model as model,worker
+import autonomy,autonomy_model as model,worker,paper_uploads
 import autonomy_fixtures as fixture
 
 f.bootstrap();f.rpc('publish_agent_prompt',fixture.publish_fixture())
@@ -24,14 +24,26 @@ class Handler(BaseHTTPRequestHandler):
  def log_message(self,*args):pass
  def respond(self,status,value):
   raw=json.dumps(value).encode();self.send_response(status)
-  for key,value in {'Content-Type':'application/json','Content-Length':str(len(raw)),'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'authorization,content-type,accept','Access-Control-Allow-Methods':'GET,POST,OPTIONS','Cache-Control':'no-store'}.items():self.send_header(key,value)
+  for key,value in {'Content-Type':'application/json','Content-Length':str(len(raw)),'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'authorization,content-type,accept,x-upload-token','Access-Control-Allow-Methods':'GET,POST,PUT,OPTIONS','Cache-Control':'no-store'}.items():self.send_header(key,value)
   self.end_headers();self.wfile.write(raw)
  def do_OPTIONS(self):self.respond(200,{})
  def do_GET(self):self.handle_request('GET')
  def do_POST(self):self.handle_request('POST')
+ def do_PUT(self):
+  try:
+   if self.headers.get('Authorization')!='Bearer explicit-software-fixture' or self.headers.get('X-Upload-Token')!='explicit-local-upload-permission':return self.respond(401,dict(error='Explicit local upload permission required'))
+   path=urllib.parse.urlsplit(self.path).path
+   if not path.startswith('/fixture-paper-upload/'):return self.respond(404,dict(error='Not a fixture upload route'))
+   identity=path.removeprefix('/fixture-paper-upload/');study,sha=identity.split('/')
+   upload=paper_uploads.owned(f.ACTOR,study)
+   if upload['paper']['paper_upload']['sha256']!=sha:return self.respond(403,dict(error='Different reserved PDF'))
+   length=int(self.headers.get('Content-Length',0))
+   if not 1<=length<=paper_uploads.MAX_BYTES:return self.respond(413,dict(error='PDF fixture byte limit'))
+   f.transport('/storage/v1/object/'+paper_uploads.BUCKET+'/'+identity,'POST',self.rfile.read(length));self.respond(200,dict(stored=True,synthetic_storage=True))
+  except Exception as error:self.respond(409 if 'HTTP 409' in str(error) else 400,dict(error=str(error)))
  def handle_request(self,method):
   parsed=urllib.parse.urlsplit(self.path)
-  if parsed.path=='/fixture-metadata':return self.respond(200,dict(database=f.DATABASE,url=fixture.URL,synthetic_auth=True,synthetic_provider=True,synthetic_storage=True,actual_cloud=False))
+  if parsed.path=='/fixture-metadata':return self.respond(200,dict(database=f.DATABASE,url=fixture.URL,pdf_base64=base64.b64encode(fixture.pdf_bytes()).decode(),synthetic_auth=True,synthetic_provider=True,synthetic_storage=True,actual_cloud=False))
   if self.headers.get('Authorization')!='Bearer explicit-software-fixture':return self.respond(401,dict(error='Explicit synthetic local authentication required.'))
   try:
    raw=self.rfile.read(int(self.headers.get('Content-Length',0))).decode() if method=='POST' else None

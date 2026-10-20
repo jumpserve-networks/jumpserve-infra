@@ -46,6 +46,7 @@ def query(sql,database=DATABASE,role=None):
 
 def rpc(name,payload):
     signatures={
+      'research_paper_upload':dict(p_operation='text',p_actor='uuid',p_id='uuid',p_payload='jsonb'),
       'research_autonomy_control':dict(p_operation='text',p_actor='uuid',p_study='uuid',p_payload='jsonb'),
       'research_autonomy_resume_context':dict(p_study='uuid',p_actor='uuid',p_task='uuid',p_version='text'),
       'research_autonomy_context_candidates':{},
@@ -83,6 +84,8 @@ def rpc(name,payload):
 
 def transport(path,method='GET',body=None,public=False,raw=False):
     parsed=urllib.parse.urlsplit(path)
+    if parsed.path.startswith('/storage/v1/object/upload/sign/') and method=='POST':
+        return dict(url=parsed.path.removeprefix('/storage/v1')+'?token=explicit-local-upload-permission')
     if parsed.path.startswith('/storage/v1/object/'):
         if not raw and method!='POST':raise store.StoreError('Raw fixture access required')
         with file_lock:
@@ -100,7 +103,7 @@ def transport(path,method='GET',body=None,public=False,raw=False):
         return rpc(parsed.path.removeprefix('/rest/v1/rpc/'),body)
     if method!='GET' or body is not None:raise ValueError('Unexpected transport mutation')
     table=parsed.path.removeprefix('/rest/v1/')
-    allowed=['research_'+k for k in (*workflow.FIELDS,'studies','study_owners','queue_jobs','queue_events','prepared_plans','idea_packets','idea_runs','idea_readiness','idea_campaign_links','claim_designs','autonomy_workflows','autonomy_tasks','autonomy_turns')]
+    allowed=['research_'+k for k in (*workflow.FIELDS,'studies','study_owners','paper_uploads','queue_jobs','queue_events','prepared_plans','idea_packets','idea_runs','idea_readiness','idea_campaign_links','claim_designs','autonomy_workflows','autonomy_tasks','autonomy_turns')]
     if table not in allowed:raise ValueError('Unsupported relation')
     params=dict(urllib.parse.parse_qsl(parsed.query));columns=params.pop('select').split(',')
     if any(not c.replace('_','').isalnum() and c not in ('value::text','evidence_progress:context->evidence_progress') for c in columns):raise ValueError('Unsafe projection')
@@ -151,7 +154,7 @@ def bootstrap():
 do $$ begin create role authenticated; exception when duplicate_object then null; end $$;
 do $$ begin create role service_role bypassrls; exception when duplicate_object then null; end $$;
 grant usage on schema public to anon,authenticated,service_role;
-create schema storage; create table storage.buckets(id text primary key,name text,public boolean); create table storage.objects(id int primary key,bucket_id text); alter table storage.objects enable row level security;
+create schema storage; create table storage.buckets(id text primary key,name text,public boolean,file_size_limit bigint,allowed_mime_types text[]); create table storage.objects(id int primary key,bucket_id text); alter table storage.objects enable row level security;
 grant usage on schema storage to anon,authenticated,service_role; grant all on storage.objects to service_role;
 create table public.agent_sessions(id uuid primary key,user_id text not null,messages jsonb not null default '[]',created_at timestamptz default now(),updated_at timestamptz default now());
 grant all on public.agent_sessions to service_role;""")
@@ -165,7 +168,8 @@ grant all on public.agent_sessions to service_role;""")
         raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     for name in ('202610190001_bounded_followups.sql','202610190002_autonomy_prompt_v7.sql','202610190003_autonomy_v7_publication_guard.sql','202610190004_bounded_tcp_queue.sql','202610190005_autonomy_prompt_v8.sql','202610190006_autonomy_v8_publication_guard.sql','202610190007_autonomy_v8_review_criteria.sql','202610190008_autonomy_completion_publication_guard.sql','202610190009_application_trajectory_guard.sql','202610190010_rejected_turn_review.sql'):
         raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
-    report['bootstrap_limit']='Legacy agent_sessions base table synthesized; listed prompt/research migrations executed as original files. Historical study-table migrations outside this feature are not replayed.'
+    name='202610200001_private_paper_uploads.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
+    report['bootstrap_limit']='Legacy agent_sessions base table and Storage API catalog columns synthesized; listed prompt/research migrations executed as original files. Historical study-table migrations outside this feature are not replayed.'
     store.request=transport
 
 if __name__=='__main__':
