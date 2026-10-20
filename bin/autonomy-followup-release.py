@@ -150,6 +150,25 @@ def main():
     with zipfile.ZipFile(io.BytesIO(raw)) as archive:
      if sha(archive.read('index.py'))!=report['input_sha256']['bounded_network.py']:raise RuntimeError('Deployed bounded implementation differs')
     (directory/'bounded-original.zip').write_bytes(raw);receipt['deployed_functions']=functions;receipt['bounded_version']=dict(arn=target,zip_sha256=sha(raw),source_sha256=report['input_sha256']['bounded_network.py'])
+    receipt['security']=prior.security()
+    receipt['context_rpc_security']=prior.admin.query("select proname,has_function_privilege('anon',p.oid,'EXECUTE') anon_execute,has_function_privilege('authenticated',p.oid,'EXECUTE') browser_execute from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and proname in ('research_autonomy_resume_context','research_autonomy_context_candidates') order by proname")
+    if len(receipt['context_rpc_security'])!=2 or any(r['anon_execute'] or r['browser_execute'] for r in receipt['context_rpc_security']):raise RuntimeError('Bounded context RPCs must remain service-only')
+    with prior.guard.OPEN.open(prior.queue.BASE+'/capabilities',timeout=30) as response:receipt['capabilities']=json.load(response)
+    capability=receipt['capabilities']['autonomy']
+    if capability['version']!='research-autonomy-v2' or capability['enabled'] is not True or capability['defaults']!={'maximum_spend_usd':100,'elapsed_days':7,'attempts_per_claim':25,'parallel_claims_per_paper':2,'global_parallel_claims':4}:raise RuntimeError('Production autonomy activation/defaults differ')
+    if next(r['active_version_id'] for r in before if r['module_id']=='research-autonomy')!=seed['id']:raise RuntimeError('Reviewed v8 prompt is not active')
+    receipt['anonymous_checks']=[]
+    for path in ('/queue','/studies/10000000-0000-4000-8000-000000000001/autonomy'):
+     try:
+      with prior.guard.OPEN.open(prior.queue.BASE+path,timeout=20) as response:status=response.status
+     except urllib.error.HTTPError as error:status=error.code
+     if status not in (401,403):raise RuntimeError('Anonymous private API access must be denied')
+     receipt['anonymous_checks'].append(dict(path=path,status=status))
+    resources=prior.aws('cloudformation','list-stack-resources','--stack-name',prior.queue.STACK)['StackResourceSummaries']
+    rules=[r['PhysicalResourceId'] for r in resources if r['ResourceType']=='AWS::Events::Rule' and r['LogicalResourceId'].startswith('ResearchWorkflowAutonomyPoll')]
+    if len(rules)!=1:raise RuntimeError('One durable autonomous poll schedule is required')
+    rule=prior.aws('events','describe-rule','--name',rules[0]);receipt['autonomy_poll']=dict(name=rule['Name'],state=rule['State'],schedule=rule['ScheduleExpression'])
+    if rule['State']!='ENABLED' or rule['ScheduleExpression']!='rate(1 minute)':raise RuntimeError('Autonomy polling is not active at the declared cadence')
   receipt['status']='complete'
  except Exception as error:receipt.update(status='failed',reason=str(error));raise
  finally:save();print(json.dumps(dict(mode=args.mode,status=receipt['status'],directory=str(directory))))

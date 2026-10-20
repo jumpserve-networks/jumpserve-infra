@@ -1,0 +1,362 @@
+{
+  "version": "autonomy-bounded-followups-production-validation-v1",
+  "created_at": "2026-10-20T01:06:49.627729+00:00",
+  "release_status": "deployed-and-active-with-declared-conditional-gaps",
+  "origin": "https://jumpserve.quaint-lab.org",
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "revisions": {
+    "backend": "85e41235c5a7864358561f5e6fb696939bf7099e",
+    "frontend": "7b8768198fb3970b120d92490b79a838a92e650e",
+    "infrastructure_application": "0216551",
+    "infrastructure_control_correction": "bedf3fa",
+    "later_commits": "Verification and evidence only; deployed application bytes unchanged."
+  },
+  "amplify": {
+    "app": "d24jvguj7brnkj",
+    "branch": "main",
+    "job": "117",
+    "status": "SUCCEED"
+  },
+  "runtime_manifest_version": 27,
+  "prompt": {
+    "version": 8,
+    "id": "20934b76-08d7-55e9-b101-1bed29db42a0"
+  },
+  "capabilities": {
+    "version": "research-autonomy-v2",
+    "defaults": {
+      "maximum_spend_usd": 100,
+      "elapsed_days": 7,
+      "attempts_per_claim": 25,
+      "parallel_claims_per_paper": 2,
+      "global_parallel_claims": 4
+    },
+    "enabled": true,
+    "prompt_module": "research-autonomy",
+    "attempt_definition": "One model invocation, including failures; polling does not consume an attempt.",
+    "limit_kind": "Conservative aggregate commitments; unknown charges are retained, not zero."
+  },
+  "poll": {
+    "name": "JumpServeBenchmarkStack-ResearchWorkflowAutonomyPol-NDTzbfIRUZ1V",
+    "state": "ENABLED",
+    "schedule": "rate(1 minute)"
+  },
+  "migrations": [
+    {
+      "name": "202610190001_bounded_followups.sql",
+      "sha256": "03f802d118b2f3e32e6d22ab074fd2ae500806ac877bcdbd2e3acf3eb9e197ef",
+      "status": "complete"
+    },
+    {
+      "name": "202610190002_autonomy_prompt_v7.sql",
+      "sha256": "621a64e1487868a58398a609bfb1517034c879ee496db2c3c8a73d562c2da226",
+      "status": "complete"
+    },
+    {
+      "name": "202610190003_autonomy_v7_publication_guard.sql",
+      "sha256": "b4e3f4330f8573debb44a01401addb6fb55a27007326f4c8fbcce323866c09b1",
+      "status": "complete"
+    },
+    {
+      "name": "202610190004_bounded_tcp_queue.sql",
+      "sha256": "866ab90411707662dd8d8e33f727378614f0b752deb8362e2cbe0f07ffc01fb2",
+      "status": "complete"
+    },
+    {
+      "name": "202610190005_autonomy_prompt_v8.sql",
+      "sha256": "d450b3a5334680cd52f24731917cef9874f93b8420f8699d418d4aceed1a007d",
+      "status": "complete"
+    },
+    {
+      "name": "202610190006_autonomy_v8_publication_guard.sql",
+      "sha256": "aaa5eccfe6c49e9a746e60bc0a9a952642cc88b6653aba719bea62b1b332581f",
+      "status": "complete"
+    },
+    {
+      "name": "202610190007_autonomy_v8_review_criteria.sql",
+      "sha256": "73d4545673e96e02904fd8a32292ff8bc95453c591980e5ae54bf4ba03da806b",
+      "status": "complete"
+    },
+    {
+      "name": "202610190008_autonomy_completion_publication_guard.sql",
+      "sha256": "b39b45db543e847647911df4ef8c898316780c9cd6a0dc081066d2cc5b5fad6c",
+      "status": "complete"
+    },
+    {
+      "name": "202610190009_application_trajectory_guard.sql",
+      "sha256": "46b1fdf1ca30c82343705a13f9142801592ba72873ac4f221dfa59b3ede3b550",
+      "status": "complete"
+    },
+    {
+      "name": "202610190010_rejected_turn_review.sql",
+      "sha256": "a8f85f52092974908e769f3a0556635181397b826ab76b1dd0acd1022f085b45",
+      "status": "complete"
+    }
+  ],
+  "checks": {
+    "unit_tests": {
+      "backend": 161,
+      "frontend": 187,
+      "infrastructure": 93,
+      "policy": 8,
+      "total": 449,
+      "infrastructure_skipped": 0
+    },
+    "local_database_groups": 11,
+    "retained_local_browser_groups": 7,
+    "production_browser_groups": 5,
+    "frontend_build": "passed",
+    "infrastructure_build": "passed",
+    "lint": {
+      "errors": 0,
+      "preexisting_warnings": 1
+    },
+    "production_source_hashes": "all 25 files in three deployed functions match manifest",
+    "private_access": "RLS/browser writes/context RPCs/API/storage checks passed",
+    "actual_cloud_tcp": {
+      "status": "complete",
+      "queue_status": "awaiting-review",
+      "study_id": "feeb23fe-dc51-42b0-9a51-7ded3ee4fa6e",
+      "run_id": "0bea30f7-1c70-46ac-a33f-1dec657f701c",
+      "measurements": 4,
+      "independent_function_invocations": 1,
+      "correlated_exchanges": 2,
+      "original_artifacts": [
+        {
+          "id": "e02621eb-245b-5e6e-90e6-70a2303372c4",
+          "sha256": "3247516f6ed566e8466222802316861cbd334b3e8c2cdb9bb3530f7b4ae6faf7",
+          "bytes": 407,
+          "provenance": {
+            "job_id": "0bea30f7-1c70-46ac-a33f-1dec657f701c",
+            "transformation": "none; original UTF-8 queue input"
+          },
+          "retrieved_hash_verified": true,
+          "anonymous_denied": true
+        },
+        {
+          "id": "737b7d50-d387-5502-9756-82ba768c17c3",
+          "sha256": "febadb64c02db549653e98e6a8abb6fe25753c18e92099e84ce21231430c58d5",
+          "bytes": 1363,
+          "provenance": {
+            "kind": "bounded-tcp-original-lambda-response",
+            "complete": true,
+            "spec_sha256": "3247516f6ed566e8466222802316861cbd334b3e8c2cdb9bb3530f7b4ae6faf7",
+            "transformation": "none; original synchronous Lambda payload bytes"
+          },
+          "retrieved_hash_verified": true,
+          "anonymous_denied": true
+        },
+        {
+          "id": "73e1b66a-af2f-5326-9967-0921b381c7e7",
+          "sha256": "367983e4216361a18154e3687078d0e1257cfc3d2847036177f2c80d97c78766",
+          "bytes": 1273,
+          "provenance": {
+            "job_id": "0bea30f7-1c70-46ac-a33f-1dec657f701c",
+            "transformation": "Canonical normalized executor observation envelope; original package files referenced separately; no claim classification"
+          },
+          "retrieved_hash_verified": true,
+          "anonymous_denied": true
+        }
+      ],
+      "new_model_calls": 0,
+      "new_ec2_instances": 0,
+      "academic_assessments_created": 0
+    }
+  },
+  "scientific_scope": {
+    "claims_in_live_trajectory": 1,
+    "other_claims_excluded": 14,
+    "attempts": 25,
+    "returned_answers": 24,
+    "explicit_throttle_rejections": 1,
+    "completed_runs": 5,
+    "planned_runs": 6,
+    "matched_cells": 960,
+    "planned_cells": 1152,
+    "terminal_status": "attempt-limit",
+    "label": "inconclusive",
+    "new_conclusive_assessments": 0,
+    "independent_validation": false,
+    "operator_reconciled_known_rejection": true,
+    "automatic_production_provider_retry_verified": false
+  },
+  "usage": {
+    "unique_evaluation_provider_attempts": 45,
+    "answers": 44,
+    "known_token_based_estimates_usd": 4.61,
+    "conservative_evaluation_commitments_usd": 29,
+    "missing_usage_calls": 1,
+    "measured_charges_usd": null,
+    "cloud_control_per_invocation_compute_request_envelope_usd": 0.01,
+    "unallocated_costs": [
+      "hosting",
+      "orchestration",
+      "storage",
+      "taxes"
+    ]
+  },
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false,
+    "human": false,
+    "actual_trajectory_answers_reviewed": 24,
+    "original_rejection_reviewed": true,
+    "production_screenshots_visually_examined": [
+      "public-390-Light.png",
+      "public-1365-Dark.png"
+    ],
+    "held_out": false
+  },
+  "conditional_gaps": [
+    "No usable legitimate existing Google session was available; no session fabricated.",
+    "No fresh authenticated browser planning/storage/launch/chat request.",
+    "Autonomous netem/EC2/custom package spending requires runner-specific enforced cost policies.",
+    "No whole-paper causal, operational or generalization validation."
+  ],
+  "evidence": [
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/research-ideas/release/20261020T001510367326Z/receipt.json",
+      "sha256": "07cbd4181956d0e1e2f85e6b889ecb4fec55468cf7dff2fa9c109f7a82de2fed",
+      "bytes": 12047
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/autonomy-release/20261020T002630488692Z/receipt.json",
+      "sha256": "c8219a039428c6be62c6cfcdd5daff7c51b5b6c95c4ec1a1d5c4882b3b73de39",
+      "bytes": 21428
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/autonomy-release/20261020T002818802027Z/receipt.json",
+      "sha256": "f8adbb2e57a4503779d53797b222cb394c90ef869ba8540cfcf3af65615746cc",
+      "bytes": 1978
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T002547723835Z/receipt.json",
+      "sha256": "e627e3715f7f84fa5f4a9f9396fdf9bcc66bbe47832cb8cf08f4202c4abece6b",
+      "bytes": 569
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T002732860035Z/receipt.json",
+      "sha256": "e7ed31ecdfe415d534a2d35d2f2629b0dd4dfa3d2b51f75426724e51d1654aa0",
+      "bytes": 1689
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T002825485433Z/receipt.json",
+      "sha256": "f0fec651f17724ca1952e6e52305d8ed3fb016ffe6dead65fb70fc5d39fea47c",
+      "bytes": 3304
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T002939412961Z/receipt.json",
+      "sha256": "d304f11e326d1e3d98b5413336462b51160a17bbdac7b40e782b33a9804a9fa7",
+      "bytes": 2160
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T003011125586Z/receipt.json",
+      "sha256": "900cbaf1d7720bb3157d57b10853e9cf2b5d7bdf777a708d1f20d0b7a2422264",
+      "bytes": 1854
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T003311616131Z/receipt.json",
+      "sha256": "4a55b6836b3c936d3ea994946005106fd09fd38341d734547e9c829224066e90",
+      "bytes": 11173
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T010347119800Z/receipt.json",
+      "sha256": "cb8b15755b5c88dfcbba67d7e08012972098905a8f57e5f12e6aaf82540485e3",
+      "bytes": 1855
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T010515870605Z/receipt.json",
+      "sha256": "8fb701f404fa19057c198f226d75b3071d5a3e26f97b5c3dc6aa9fe7d0b616e1",
+      "bytes": 23648
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/research-ideas/database/20261020T001802063384Z/autonomy-validation-report.json",
+      "sha256": "b397f6a52ac5e09e50ede0e3796720e498942b5a44bf029630fcdae5ea4bd9f8",
+      "bytes": 14051
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followups/application-trajectory-v3/evaluation-report.json",
+      "sha256": "ac1c952a8338e847f57f0b3ea82630903c0e212663bdbeb8a95842dfd75823b8",
+      "bytes": 149820
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followups/application-trajectory-v3/evaluation-reviewed.json",
+      "sha256": "74342ad3299eb2cf3acf6d89b4eba4fe823142e2369433184ff7c5aee347c74b",
+      "bytes": 155129
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followups/application-trajectory-v3/private-database-snapshot.json",
+      "sha256": "1562544344ac59642899168c65321dc8f93bdd181007a51e600e7caa8d094ce0",
+      "bytes": 3157560
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/v1/report.json",
+      "sha256": "96f5f7e81bd7427ceaa753aa03e785836945bb784c9e791c63a147e19ec59a1d",
+      "bytes": 3451
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/v2/report.json",
+      "sha256": "7048ad02c532b6198880461006a2cea93f581b4ef629d3d04e8a0a56cfb98248",
+      "bytes": 7722
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/v2/run.json",
+      "sha256": "f16269a19133ddb6065d85607b7c1ed87934739dc7255eed7fcf262231bde5d5",
+      "bytes": 3408
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/v2/measurements.json",
+      "sha256": "d4759ece9c4d2ec40953bea2f9e411cd1303281ff5595ca0b3935c7a806f4f32",
+      "bytes": 4690
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/security-v1.json",
+      "sha256": "8ce920057db60e473fbf0c3bcc7e1ac57598e953554bf4fc56e60b7101de39c2",
+      "bytes": 828
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "jumpserve-front-end/.test-artifacts/autonomy-release-production/2026-10-20T00-21-17.158Z/report.json",
+      "sha256": "ae6581a60b1d6cf3199082100296b8a65a1792ff9e3bf1cf334b6ab288228a7c",
+      "bytes": 462
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "jumpserve-front-end/.test-artifacts/autonomy-release-production/2026-10-20T01-05-16.009Z/report.json",
+      "sha256": "6cc1c414f3c677c8b875b6937da0566df98b763d91169889fb819f254d89ed0a",
+      "bytes": 2053
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": "jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-19T23-40-53.593Z/validation-report.json",
+      "sha256": "c9cc0801ddcd9e1920744699d0f365e8468841e5820cbb5b598a1067451d10e2",
+      "bytes": 2962
+    }
+  ]
+}

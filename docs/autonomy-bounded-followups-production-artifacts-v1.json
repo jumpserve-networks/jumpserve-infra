@@ -1,0 +1,360 @@
+{
+  "status": "complete",
+  "started_at": "2026-10-20T01:21:49.119496+00:00",
+  "new_model_calls": 0,
+  "new_experiments": 0,
+  "measured_storage_charges_usd": null,
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "bucket": "research-workflow-raw",
+  "path": "release-verification/autonomy-followups-production-20261020/e3aba887c38bdef2c86cf4cb0f3e6c8bbdaeeaae3ce83d94abb40ab436a55fdb.zip",
+  "sha256": "e3aba887c38bdef2c86cf4cb0f3e6c8bbdaeeaae3ce83d94abb40ab436a55fdb",
+  "bytes": 6378917,
+  "original_bytes": 9575253,
+  "files": 67,
+  "manifest": [
+    {
+      "path": "jumpserve-front-end/.test-artifacts/autonomy-release-production/2026-10-20T00-21-17.158Z/report.json",
+      "sha256": "ae6581a60b1d6cf3199082100296b8a65a1792ff9e3bf1cf334b6ab288228a7c",
+      "bytes": 462
+    },
+    {
+      "path": "jumpserve-front-end/.test-artifacts/autonomy-release-production/2026-10-20T01-05-16.009Z/public-1365-Dark.png",
+      "sha256": "398104bb1e5fb9aea50ae70ad18a13f0071a5daf908866d86a0c598aebf85d61",
+      "bytes": 326603
+    },
+    {
+      "path": "jumpserve-front-end/.test-artifacts/autonomy-release-production/2026-10-20T01-05-16.009Z/public-1365-Light.png",
+      "sha256": "f7048446a14d50d3c56230e77b0a76a861b7afff0b6b7e441315d56a91ef68dd",
+      "bytes": 334115
+    },
+    {
+      "path": "jumpserve-front-end/.test-artifacts/autonomy-release-production/2026-10-20T01-05-16.009Z/public-390-Dark.png",
+      "sha256": "0eb851ee5d2f4dfba180de26815f235a12186e56c44aa1071022297f343c14b6",
+      "bytes": 247784
+    },
+    {
+      "path": "jumpserve-front-end/.test-artifacts/autonomy-release-production/2026-10-20T01-05-16.009Z/public-390-Light.png",
+      "sha256": "3215988806ce9ab6493f0b49a43160e354fd916c7481c8ff11b98758f80403bb",
+      "bytes": 246633
+    },
+    {
+      "path": "jumpserve-front-end/.test-artifacts/autonomy-release-production/2026-10-20T01-05-16.009Z/report.json",
+      "sha256": "6cc1c414f3c677c8b875b6937da0566df98b763d91169889fb819f254d89ed0a",
+      "bytes": 2053
+    },
+    {
+      "path": "jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-19T23-40-53.593Z/validation-report.json",
+      "sha256": "c9cc0801ddcd9e1920744699d0f365e8468841e5820cbb5b598a1067451d10e2",
+      "bytes": 2962
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261019T235928266133Z/receipt.json",
+      "sha256": "4e587ca5f13a830c1146bebfb5c761f8017f7d6198489e8317acb459a07c826d",
+      "bytes": 625
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T000452783421Z/receipt.json",
+      "sha256": "eff859231e7028afc24014e0b2869ecfc36822d12aae90c71e27fd6f57b94304",
+      "bytes": 663
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T002547723835Z/receipt.json",
+      "sha256": "e627e3715f7f84fa5f4a9f9396fdf9bcc66bbe47832cb8cf08f4202c4abece6b",
+      "bytes": 569
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T002732860035Z/cdk.log",
+      "sha256": "4784c11f24a6f2b32968a03cfa0632dd66f718d9491b79b022b30569f75b7a6a",
+      "bytes": 10749
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T002732860035Z/receipt.json",
+      "sha256": "e7ed31ecdfe415d534a2d35d2f2629b0dd4dfa3d2b51f75426724e51d1654aa0",
+      "bytes": 1689
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T002825485433Z/receipt.json",
+      "sha256": "f0fec651f17724ca1952e6e52305d8ed3fb016ffe6dead65fb70fc5d39fea47c",
+      "bytes": 3304
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T002939412961Z/receipt.json",
+      "sha256": "d304f11e326d1e3d98b5413336462b51160a17bbdac7b40e782b33a9804a9fa7",
+      "bytes": 2160
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T003011125586Z/cdk.log",
+      "sha256": "42b246d4d6b9e5dc098fb08291b547daa7a4fea0ad34d493fb95448363ca11ba",
+      "bytes": 12524
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T003011125586Z/outputs.json",
+      "sha256": "bc9d35791d5a4b4f0a2e46bdec9529051339a6e55a63a502eb602f21ac09f47c",
+      "bytes": 614
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T003011125586Z/receipt.json",
+      "sha256": "900cbaf1d7720bb3157d57b10853e9cf2b5d7bdf777a708d1f20d0b7a2422264",
+      "bytes": 1854
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T003311616131Z/JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X.zip",
+      "sha256": "ac55eecd604ed014a349eccb7bdd7eabc725196809863c0105db27d402c1ae39",
+      "bytes": 264337
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T003311616131Z/JumpServeBenchmarkStack-ResearchWorkflowAutonomyWo-5sN0tQ8Oziyq.zip",
+      "sha256": "ac55eecd604ed014a349eccb7bdd7eabc725196809863c0105db27d402c1ae39",
+      "bytes": 264337
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T003311616131Z/JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP.zip",
+      "sha256": "ac55eecd604ed014a349eccb7bdd7eabc725196809863c0105db27d402c1ae39",
+      "bytes": 264337
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T003311616131Z/bounded-original.zip",
+      "sha256": "defb5e807d8610561437165fa0ef9aa26b0e90ef9f8fa82b56436c9457135648",
+      "bytes": 2090
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T003311616131Z/receipt.json",
+      "sha256": "4a55b6836b3c936d3ea994946005106fd09fd38341d734547e9c829224066e90",
+      "bytes": 11173
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T010347119800Z/JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X.zip",
+      "sha256": "ac55eecd604ed014a349eccb7bdd7eabc725196809863c0105db27d402c1ae39",
+      "bytes": 264337
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T010347119800Z/JumpServeBenchmarkStack-ResearchWorkflowAutonomyWo-5sN0tQ8Oziyq.zip",
+      "sha256": "ac55eecd604ed014a349eccb7bdd7eabc725196809863c0105db27d402c1ae39",
+      "bytes": 264337
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T010347119800Z/JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP.zip",
+      "sha256": "ac55eecd604ed014a349eccb7bdd7eabc725196809863c0105db27d402c1ae39",
+      "bytes": 264337
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T010347119800Z/cdk.log",
+      "sha256": "4ac1b8f32aa41105c89907efd79839709a57e106c1a99f072b5014be3d33a316",
+      "bytes": 6082
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T010347119800Z/outputs.json",
+      "sha256": "bc9d35791d5a4b4f0a2e46bdec9529051339a6e55a63a502eb602f21ac09f47c",
+      "bytes": 614
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T010347119800Z/receipt.json",
+      "sha256": "cb8b15755b5c88dfcbba67d7e08012972098905a8f57e5f12e6aaf82540485e3",
+      "bytes": 1855
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T010515870605Z/JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X.zip",
+      "sha256": "ac55eecd604ed014a349eccb7bdd7eabc725196809863c0105db27d402c1ae39",
+      "bytes": 264337
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T010515870605Z/JumpServeBenchmarkStack-ResearchWorkflowAutonomyWo-5sN0tQ8Oziyq.zip",
+      "sha256": "ac55eecd604ed014a349eccb7bdd7eabc725196809863c0105db27d402c1ae39",
+      "bytes": 264337
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T010515870605Z/JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP.zip",
+      "sha256": "ac55eecd604ed014a349eccb7bdd7eabc725196809863c0105db27d402c1ae39",
+      "bytes": 264337
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T010515870605Z/bounded-original.zip",
+      "sha256": "defb5e807d8610561437165fa0ef9aa26b0e90ef9f8fa82b56436c9457135648",
+      "bytes": 2090
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followup-release/20261020T010515870605Z/receipt.json",
+      "sha256": "8fb701f404fa19057c198f226d75b3071d5a3e26f97b5c3dc6aa9fe7d0b616e1",
+      "bytes": 23648
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followups/application-trajectory-v3/evaluation-report.json",
+      "sha256": "ac1c952a8338e847f57f0b3ea82630903c0e212663bdbeb8a95842dfd75823b8",
+      "bytes": 149820
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followups/application-trajectory-v3/evaluation-reviewed.json",
+      "sha256": "74342ad3299eb2cf3acf6d89b4eba4fe823142e2369433184ff7c5aee347c74b",
+      "bytes": 155129
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-followups/application-trajectory-v3/private-database-snapshot.json",
+      "sha256": "1562544344ac59642899168c65321dc8f93bdd181007a51e600e7caa8d094ce0",
+      "bytes": 3157560
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-production-archive/v1/frontend-status.json",
+      "sha256": "5ffc4db5e125c7f3a3c0418ed66a54a545bd5b8a58a44a61b1eec1eaf52d0bba",
+      "bytes": 436
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-production-archive/v1/stack-status.json",
+      "sha256": "ef3da344958bf8d5db6b3cdb93dad8e4ad3327d37df3db7bbd82bd7ec7e5f3a6",
+      "bytes": 121
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-release/20261020T002630488692Z/JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X.zip",
+      "sha256": "2a48e56c2a4f6cd80519aac5e4da8ff36d80fd2c62180d395f9c2d9421711f71",
+      "bytes": 251606
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-release/20261020T002630488692Z/JumpServeBenchmarkStack-ResearchWorkflowAutonomyWo-5sN0tQ8Oziyq.zip",
+      "sha256": "2a48e56c2a4f6cd80519aac5e4da8ff36d80fd2c62180d395f9c2d9421711f71",
+      "bytes": 251606
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-release/20261020T002630488692Z/JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP.zip",
+      "sha256": "2a48e56c2a4f6cd80519aac5e4da8ff36d80fd2c62180d395f9c2d9421711f71",
+      "bytes": 251606
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-release/20261020T002630488692Z/receipt.json",
+      "sha256": "c8219a039428c6be62c6cfcdd5daff7c51b5b6c95c4ec1a1d5c4882b3b73de39",
+      "bytes": 21428
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-release/20261020T002818802027Z/receipt.json",
+      "sha256": "f8adbb2e57a4503779d53797b222cb394c90ef869ba8540cfcf3af65615746cc",
+      "bytes": 1978
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/security-v1.json",
+      "sha256": "8ce920057db60e473fbf0c3bcc7e1ac57598e953554bf4fc56e60b7101de39c2",
+      "bytes": 828
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/v1/JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X.zip",
+      "sha256": "ac55eecd604ed014a349eccb7bdd7eabc725196809863c0105db27d402c1ae39",
+      "bytes": 264337
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/v1/JumpServeBenchmarkStack-ResearchWorkflowAutonomyWo-5sN0tQ8Oziyq.zip",
+      "sha256": "ac55eecd604ed014a349eccb7bdd7eabc725196809863c0105db27d402c1ae39",
+      "bytes": 264337
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/v1/JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP.zip",
+      "sha256": "ac55eecd604ed014a349eccb7bdd7eabc725196809863c0105db27d402c1ae39",
+      "bytes": 264337
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/v1/report.json",
+      "sha256": "96f5f7e81bd7427ceaa753aa03e785836945bb784c9e791c63a147e19ec59a1d",
+      "bytes": 3451
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/v2/JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X.zip",
+      "sha256": "ac55eecd604ed014a349eccb7bdd7eabc725196809863c0105db27d402c1ae39",
+      "bytes": 264337
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/v2/JumpServeBenchmarkStack-ResearchWorkflowAutonomyWo-5sN0tQ8Oziyq.zip",
+      "sha256": "ac55eecd604ed014a349eccb7bdd7eabc725196809863c0105db27d402c1ae39",
+      "bytes": 264337
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/v2/JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP.zip",
+      "sha256": "ac55eecd604ed014a349eccb7bdd7eabc725196809863c0105db27d402c1ae39",
+      "bytes": 264337
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/v2/measurements.json",
+      "sha256": "d4759ece9c4d2ec40953bea2f9e411cd1303281ff5595ca0b3935c7a806f4f32",
+      "bytes": 4690
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/v2/original-3247516f6ed566e8466222802316861cbd334b3e8c2cdb9bb3530f7b4ae6faf7",
+      "sha256": "3247516f6ed566e8466222802316861cbd334b3e8c2cdb9bb3530f7b4ae6faf7",
+      "bytes": 407
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/v2/original-367983e4216361a18154e3687078d0e1257cfc3d2847036177f2c80d97c78766",
+      "sha256": "367983e4216361a18154e3687078d0e1257cfc3d2847036177f2c80d97c78766",
+      "bytes": 1273
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/v2/original-febadb64c02db549653e98e6a8abb6fe25753c18e92099e84ce21231430c58d5",
+      "sha256": "febadb64c02db549653e98e6a8abb6fe25753c18e92099e84ce21231430c58d5",
+      "bytes": 1363
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/v2/report.json",
+      "sha256": "7048ad02c532b6198880461006a2cea93f581b4ef629d3d04e8a0a56cfb98248",
+      "bytes": 7722
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/v2/run.json",
+      "sha256": "f16269a19133ddb6065d85607b7c1ed87934739dc7255eed7fcf262231bde5d5",
+      "bytes": 3408
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/bounded-autonomy-production/v2/worker-response.json",
+      "sha256": "129a9250a581f9428e3396b9245e8a3cb33704dd586dccc92467854cbc800f86",
+      "bytes": 246
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/research-ideas/database/20261020T001802063384Z/autonomy-validation-report.json",
+      "sha256": "b397f6a52ac5e09e50ede0e3796720e498942b5a44bf029630fcdae5ea4bd9f8",
+      "bytes": 14051
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/research-ideas/release/20261020T001510367326Z/receipt.json",
+      "sha256": "07cbd4181956d0e1e2f85e6b889ecb4fec55468cf7dff2fa9c109f7a82de2fed",
+      "bytes": 12047
+    },
+    {
+      "path": "jumpserve-infra/bin/archive-autonomy-production-evidence.py",
+      "sha256": "ca867b2f611c51966471791438b230a2f5574f26a3134011869028f966128724",
+      "bytes": 8632
+    },
+    {
+      "path": "jumpserve-infra/bin/autonomy-followup-release.py",
+      "sha256": "3165c7306350701d0b827bde78433fe6a3921ab2a92fed27e99aa92054a5b763",
+      "bytes": 21669
+    },
+    {
+      "path": "jumpserve-infra/bin/verify-bounded-autonomy-release.py",
+      "sha256": "71e40be75ca6ce4aa7d8ec96a15a89a735f06905d7ba1658a9fc5e252a2a456b",
+      "bytes": 15064
+    },
+    {
+      "path": "jumpserve-infra/docs/autonomy-bounded-followups-production-validation-v1.json",
+      "sha256": "4aa574fd156b2bb63961071e6e3a817e627f54808859d41af84522ac06b86606",
+      "bytes": 13927
+    },
+    {
+      "path": "jumpserve-infra/docs/autonomy-bounded-followups-production-validation-v1.md",
+      "sha256": "cc840a1033938dfeb7d74da87a10bbfb8446e0fda5fa96d3ee4c0c2b9e9bb0d6",
+      "bytes": 8648
+    },
+    {
+      "path": "jumpserve-infra/docs/autonomy-bounded-followups-release-protocol-v1.md",
+      "sha256": "d876f72c57937d5e8c77133addeae06e89d88c3591d49faabed26aa4f47912ce",
+      "bytes": 3769
+    },
+    {
+      "path": "jumpserve-infra/docs/autonomy-bounded-followups-release-validation-v1.md",
+      "sha256": "51b092e89be8661698eb81d589917b28da0138455f8cb920e2c3ac9d643bcb59",
+      "bytes": 4798
+    }
+  ],
+  "retrieved_hash_verified": true,
+  "all_member_hashes_verified": true,
+  "anonymous_status": 400,
+  "ended_at": "2026-10-20T01:21:57.661290+00:00"
+}
