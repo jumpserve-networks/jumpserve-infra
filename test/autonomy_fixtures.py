@@ -26,6 +26,22 @@ def plan():
  return dict(schema_version=1,plan_id='autonomy-software-fixture-v1',title='Synthetic autonomous verification fixture',paper_urls=[URL],provenance=dict(producer='Explicit local software fixture',source_version='fixture-v1',prior_exposure='Exposed development inputs',limitations='Synthetic source/provider/auth/Storage; no cloud or scientific result'),records=records,campaigns=campaigns)
 
 def publish_fixture():
+ if model.PROMPT_VERSION in ('research-autonomy-v7','research-autonomy-v8'):
+  candidate='v8' if model.PROMPT_VERSION=='research-autonomy-v8' else 'v7';case_version='v2' if candidate=='v8' else 'v1';case_path=f.ROOT/('test/autonomy-followup-cases-'+case_version+'.json')
+  seed=json.loads((f.ROOT/('database/seed-autonomy-'+candidate+'.json')).read_bytes());cases=json.loads(case_path.read_bytes());manifest=json.loads((f.ROOT/'research-workflow-runtime.json').read_bytes())
+  for name,sha in manifest['files'].items():assert hashlib.sha256((f.ROOT.parent/'jumpserve-back-end/research_workflow'/name).read_bytes()).hexdigest()==sha,'Local runtime source changed: '+name
+  sha=f.query('select content_sha256 from agent_prompt_versions where id='+f.sql_text(seed['id']))
+  report=dict(protocol=cases['protocol'],analysis_version=autonomy.VERSION,module_id=model.MODULE,prompt_version_id=seed['id'],prompt_version=seed['version'],prompt_content_sha256=sha,evaluation_kind='actual-model-development',live_provider_calls=len(cases['cases']),model_id=model.MODEL,
+   cases_sha256=hashlib.sha256(case_path.read_bytes()).hexdigest(),input_sha256=manifest['files'],request_manifest_sha256='a'*64,integration_report_sha256='b'*64,integration_passed=True,
+   fixture_notice='Synthetic local SQL guard declarations only; not actual provider evaluation or production publication.',
+   evaluator=dict(identity='Explicit synthetic evaluator fixture',type='AI',independent=False),reviewer=dict(identity='Explicit synthetic reviewer fixture',type='AI',independent=False,passed=True),
+   cases=[dict(name=c['name'],passed=True,status='complete',raw_answer_reviewed=True,rendered_answer_reviewed=True,output_sha256='b'*64,provider_response_sha256='c'*64) for c in cases['cases']])
+  if candidate=='v8':report.update(judgment_criteria_sha256=hashlib.sha256((f.ROOT/'test/autonomy-followup-judgments-v3.json').read_bytes()).hexdigest(),review_amendment='autonomy-bounded-followups-amendment-v4',original_strict_checks_passed=8,original_strict_checks_total=9,intermediate_only_cases=['earlier-partial-discrepancy'],original_evaluation_report_sha256='c'*64)
+  if candidate=='v8':report.update(completion_report_sha256='d'*64,completion_report=dict(version='autonomy-followup-completion-v2',passed=True,reviewer=dict(passed=True),decision_protocol_sha256=hashlib.sha256((f.ROOT/'docs/autonomy-bounded-followups-amendment-v5.md').read_bytes()).hexdigest(),input_sha256=manifest['files'],fixture_sha256='e'*64,frozen_inputs_sha256='f'*64,cases=[dict(passed=True,raw_answer_reviewed=True,rendered_answer_reviewed=True,output=dict(assessment_label='inconclusive'))]))
+  if candidate=='v8':report.update(trajectory_policy_sha256=hashlib.sha256((f.ROOT/'test/autonomy-trajectory-policy-v1.json').read_bytes()).hexdigest(),trajectory_report_sha256='a'*64,trajectory_report=dict(version='autonomy-trajectory-evaluation-v1',limits=dict(max_attempts_per_claim=25,max_paper_committed_cents=10000,max_elapsed_seconds=604800),status='complete',reviewer=dict(passed=True),input_sha256=manifest['files'],attempts_used=4,committed_cents=600,checks=dict(exact_prompts_retained=True,scoped_reads=True,evidence_decisions=True,authorization_preserved=True,no_unknown_call_replay=True),terminal_status='assessed',reason='Synthetic publication guard only; four turns are allowed.',cases=[dict(number=i+1,passed=True,raw_answer_reviewed=True,rendered_answer_reviewed=True,output=dict(action='assess',assessment_label='reproduced',coverage_complete=True) if i==3 else dict(action='inspect')) for i in range(4)]))
+  if candidate=='v8':
+   for case in report['trajectory_report']['cases']:case['status']='complete'
+  return dict(p_version_id=seed['id'],p_expected_active_version_id=None,p_expected_content_sha256=sha,p_report=report,p_actor='Synthetic local publication guard exercise only',p_module_id=model.MODULE)
  seed=json.loads((f.ROOT/'database/seed-autonomy-v6.json').read_bytes());lock=json.loads((f.ROOT/'test/autonomy-implementation-lock-v6.json').read_bytes())
  released=json.loads((f.ROOT/'test/autonomy-evidence-lock-v1.json').read_bytes())
  for name,sha in released['files'].items():
@@ -49,10 +65,9 @@ def provider(request):
   else:out.update(blockers=[dict(kind='implementation',detail='unavailable-implementation',required_input='A separately reviewed applicable experiment')])
  elif stage in ('comprehension','critic'):out.update(action='review',ready=True,coverage_complete=True,reason='ready-within-scope')
  elif stage=='assessment':
-  records=context.get('measurements',[]);records=autonomy.evidence_records(records) if isinstance(records,dict) else records
-  recorded=[r for r in records if r['status']=='recorded']
-  if not recorded:out.update(action='assess',assessment_label='inconclusive',reason='evidence-incomplete')
-  else:out.update(action='assess',assessment_label='discrepant' if any(Decimal(str(r['value']))!=10 for r in recorded) else 'reproduced',coverage_complete=True,reason='matched-numeric-check',evidence_ids=[r['id'] for r in recorded])
+  finding=context.get('controller_numeric_check')
+  if not finding:out.update(action='assess',assessment_label='inconclusive',reason='evidence-incomplete')
+  else:out.update(action='assess',assessment_label=finding['label'],coverage_complete=True,reason='matched-numeric-check')
  return dict(stopReason='tool_use',output=dict(message=dict(role='assistant',content=[dict(toolUse=dict(toolUseId='explicit-fixture',name='submit_assessment_step',input=out))])),usage=dict(inputTokens=100,outputTokens=50,totalTokens=150))
 
 def registered(study):

@@ -31,6 +31,34 @@ test('autonomy cannot be enabled without the durable experiment queue', () => {
   const stack = new cdk.Stack(app, 'MissingQueue', { env: { account: '395567831870', region: 'us-east-1' } });
   expect(() => new ResearchWorkflow(stack, 'Research', new api.HttpApi(stack, 'Api'))).toThrow('durable experiment queue');
 });
+test('bounded TCP has immutable version, enforced resource limits and no experiment cloud privileges', () => {
+  const app = new cdk.App({ context: { supabaseUrl: 'https://regphejnlvfpyokpniny.supabase.co', researchQueueEnabled: true, researchAutonomyEnabled: true } });
+  const stack = new cdk.Stack(app, 'BoundedTcpTest', { env: { account: '395567831870', region: 'us-east-1' } });
+  new ResearchWorkflow(stack, 'Research', new api.HttpApi(stack, 'Api'));
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::Lambda::Function', { Handler: 'index.handler', MemorySize: 128, Timeout: 5, EphemeralStorage: { Size: 512 }, ReservedConcurrentExecutions: 2 });
+  template.resourceCountIs('AWS::Lambda::Version', 1);
+  template.resourceCountIs('AWS::EC2::Instance', 0);
+  template.hasResourceProperties('AWS::Lambda::Function', { Handler: 'worker.handler', Environment: { Variables: Match.objectLike({ NETWORK_BOUNDED_FUNCTION: Match.anyValue(), NETWORK_BOUNDED_POLICY_SHA256: Match.stringLikeRegexp('^[a-f0-9]{64}$') }) } });
+  const resources = template.toJSON().Resources;
+  const bounded = Object.values(resources).find((r: any) => r.Type === 'AWS::Lambda::Function' && r.Properties.Handler === 'index.handler') as any;
+  expect(bounded.Properties.Environment).toBeUndefined();
+  const roleId = bounded.Properties.Role['Fn::GetAtt'][0];
+  const policies = Object.values(resources).filter((r: any) => r.Type === 'AWS::IAM::Policy' && r.Properties.Roles?.some((role: any) => role.Ref === roleId));
+  const text = JSON.stringify(policies);
+  expect(text).toContain('logs:PutLogEvents');
+  for (const forbidden of ['secretsmanager:', 'ec2:', 'lambda:InvokeFunction', 's3:', 'bedrock:']) expect(text).not.toContain(forbidden);
+  template.hasResourceProperties('AWS::Logs::LogGroup', { RetentionInDays: 1 });
+});
+test('a held rollout provisions the new runtime while keeping autonomy admission and polling disabled', () => {
+  const app = new cdk.App({ context: { supabaseUrl: 'https://regphejnlvfpyokpniny.supabase.co', researchQueueEnabled: true, researchAutonomyEnabled: true, researchAutonomyAdmissionEnabled: false } });
+  const stack = new cdk.Stack(app, 'HeldAutonomy', { env: { account: '395567831870', region: 'us-east-1' } });
+  new ResearchWorkflow(stack, 'Research', new api.HttpApi(stack, 'Api'));
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::Lambda::Function', { Handler: 'api.handler', Environment: { Variables: Match.objectLike({ RESEARCH_AUTONOMY_ENABLED: 'false' }) } });
+  template.hasResourceProperties('AWS::Lambda::Function', { Handler: 'autonomy.handler' });
+  template.hasResourceProperties('AWS::Events::Rule', { State: 'DISABLED' });
+});
 test.each([[true,true],['true',true],[false,false],['false',false],[undefined,false],['1',false],[1,false]])('CDK context %s explicitly enables research only as declared', (value, expected) => {
   expect(researchWorkflowIsEnabled(value)).toBe(expected);
 });

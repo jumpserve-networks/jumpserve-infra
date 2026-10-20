@@ -1,0 +1,12 @@
+{
+  "version": "autonomy-trajectory-policy-v1",
+  "amendment": "autonomy-bounded-followups-amendment-v7",
+  "max_attempts_per_claim": 25,
+  "max_paper_committed_cents": 10000,
+  "max_elapsed_seconds": 604800,
+  "continue_actions": ["inspect", "choose-check", "propose", "review", "assess"],
+  "terminal_statuses": ["assessed", "external-blocker", "attempt-limit", "budget-limit", "deadline"],
+  "required_checks": ["exact_prompts_retained", "scoped_reads", "evidence_decisions", "authorization_preserved", "no_unknown_call_replay"],
+  "evaluation_limit_before_application_limit": "incomplete-evaluation",
+  "review": "Development evidence; identify evaluator/reviewer type and independence. Do not relabel historical two-turn results."
+}

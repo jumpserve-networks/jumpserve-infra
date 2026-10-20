@@ -11,6 +11,7 @@ import * as fs from 'fs';
 import { createHash } from 'crypto';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as iam from 'aws-cdk-lib/aws-iam';
+import * as logs from 'aws-cdk-lib/aws-logs';
 
 export function researchWorkflowIsEnabled(value: unknown): boolean {
   return value === true || value === 'true';
@@ -32,12 +33,32 @@ export class ResearchWorkflow extends Construct {
     const secret = secretsmanager.Secret.fromSecretNameV2(this, 'SupabaseServiceKey', 'jumpserve/supabase-service-key');
     const queueEnabled = researchWorkflowIsEnabled(this.node.tryGetContext('researchQueueEnabled'));
     const autonomyEnabled = researchWorkflowIsEnabled(this.node.tryGetContext('researchAutonomyEnabled'));
+    const admissionContext = this.node.tryGetContext('researchAutonomyAdmissionEnabled');
+    const autonomyAdmission = autonomyEnabled && (admissionContext === undefined || researchWorkflowIsEnabled(admissionContext));
     if (autonomyEnabled && !queueEnabled) throw new Error('Autonomous assessments require the durable experiment queue.');
     const reservationContext = this.node.tryGetContext('researchReservedConcurrencyEnabled');
     const reserveConcurrency = reservationContext !== false && reservationContext !== 'false';
     const networkingEnabled = Boolean(executors) && researchWorkflowIsEnabled(this.node.tryGetContext('networkExecutionEnabled'));
     const packagesEnabled = networkingEnabled && researchWorkflowIsEnabled(this.node.tryGetContext('networkPackagesEnabled'));
     const networkingEnvironment: Record<string,string> = {};
+    let boundedVersion: lambda.IVersion | undefined;
+    if (autonomyEnabled) {
+      const policy = JSON.parse(fs.readFileSync(path.join(runtime, 'policies/autonomy-experiment-costs-v2.json'), 'utf8')).bounded_tcp;
+      if (policy.runner !== 'bounded-tcp-v1' || policy.region !== cdk.Stack.of(this).region || policy.memory_mb !== 128 || policy.timeout_seconds !== 5 || policy.remote_network_bytes !== 0 || policy.ec2_instances !== 0 || policy.maximum_cents !== 1) throw new Error('Bounded networking cost policy differs from enforced infrastructure.');
+      const role = new iam.Role(this, 'BoundedTcpRole', { assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com') });
+      const logGroup = new logs.LogGroup(this, 'BoundedTcpLogs', { retention: logs.RetentionDays.ONE_DAY });
+      logGroup.grantWrite(role);
+      const bounded = new lambda.Function(this, 'BoundedTcp', {
+        code: lambda.Code.fromInline(fs.readFileSync(path.join(runtime, 'bounded_network.py'), 'utf8')),
+        handler: 'index.handler', runtime: lambda.Runtime.PYTHON_3_12, architecture: lambda.Architecture.X86_64,
+        memorySize: 128, timeout: cdk.Duration.seconds(5), ephemeralStorageSize: cdk.Size.mebibytes(512),
+        reservedConcurrentExecutions: reserveConcurrency ? 2 : undefined, retryAttempts: 0,
+        role, logGroup, description: 'Immutable bounded TCP loopback exchanges; no remote targets, packages, EC2 or cloud API permissions.',
+      });
+      boundedVersion = bounded.currentVersion;
+      networkingEnvironment.NETWORK_BOUNDED_FUNCTION = boundedVersion.functionArn;
+      networkingEnvironment.NETWORK_BOUNDED_POLICY_SHA256 = createHash('sha256').update(JSON.stringify(policy, Object.keys(policy).sort())).digest('hex');
+    }
     let packageExecutor: lambda.Function | undefined;
     if (networkingEnabled && executors) {
       const packageVpc = new ec2.Vpc(this,'PackageVpc',{maxAzs:1,natGateways:0,subnetConfiguration:[{name:'Experiment',subnetType:ec2.SubnetType.PUBLIC,cidrMask:24}]});
@@ -89,6 +110,10 @@ export class ResearchWorkflow extends Construct {
         description: 'Two bounded queue slots per invocation; fenced Supabase leases, no automatic experiment retries.',
       });
       secret.grantRead(worker);
+      if (boundedVersion) {
+        boundedVersion.grantInvoke(worker);
+        worker.addToRolePolicy(new iam.PolicyStatement({ actions: ['lambda:GetFunctionConfiguration'], resources: [boundedVersion.functionArn] }));
+      }
       fn.addEnvironment('RESEARCH_QUEUE_WORKER_FUNCTION', worker.functionArn);
       worker.grantInvoke(fn);
       if (autonomyEnabled) {
@@ -110,18 +135,18 @@ export class ResearchWorkflow extends Construct {
           code: lambda.Code.fromAsset(runtime), handler: 'autonomy.handler', runtime: lambda.Runtime.PYTHON_3_12,
           memorySize: 1024, timeout: cdk.Duration.seconds(180), reservedConcurrentExecutions: reserveConcurrency ? 2 : undefined,
           retryAttempts: 0, maxEventAge: cdk.Duration.minutes(1), layers: [pdfLayer],
-          environment: { SUPABASE_URL: url, SUPABASE_SECRET_ARN: secret.secretArn, RESEARCH_AUTONOMY_ENABLED: 'true', RESEARCH_QUEUE_WORKERS_ENABLED: 'true', RESEARCH_QUEUE_WORKER_FUNCTION: worker.functionArn, ...networkingEnvironment },
+          environment: { SUPABASE_URL: url, SUPABASE_SECRET_ARN: secret.secretArn, RESEARCH_AUTONOMY_ENABLED: 'true', RESEARCH_AUTONOMY_CONTEXT_RECOVERY: 'autonomy-evidence-v2', RESEARCH_QUEUE_WORKERS_ENABLED: 'true', RESEARCH_QUEUE_WORKER_FUNCTION: worker.functionArn, ...networkingEnvironment },
           description: 'Durable parallel claim stages with atomic $100/7-day/25-attempt admission, prompt history and explicit blockers.',
         });
         secret.grantRead(autonomous);
         worker.grantInvoke(autonomous);
         autonomous.grantInvoke(fn);
-        fn.addEnvironment('RESEARCH_AUTONOMY_ENABLED', 'true');
+        fn.addEnvironment('RESEARCH_AUTONOMY_ENABLED', String(autonomyAdmission));
         fn.addEnvironment('RESEARCH_AUTONOMY_WORKER_FUNCTION', autonomous.functionArn);
         const profile = 'arn:aws:bedrock:us-east-1:395567831870:inference-profile/us.anthropic.claude-opus-4-6-v1';
         autonomous.addToRolePolicy(new iam.PolicyStatement({ actions: ['bedrock:InvokeModel'], resources: [profile] }));
         autonomous.addToRolePolicy(new iam.PolicyStatement({ actions: ['bedrock:InvokeModel'], resources: ['us-east-1', 'us-east-2', 'us-west-2'].map(region => `arn:aws:bedrock:${region}::foundation-model/anthropic.claude-opus-4-6-v1`), conditions: { StringEquals: { 'bedrock:InferenceProfileArn': profile } } }));
-        new events.Rule(this, 'AutonomyPoll', { schedule: events.Schedule.rate(cdk.Duration.minutes(1)), targets: [new targets.LambdaFunction(autonomous, { retryAttempts: 0, maxEventAge: cdk.Duration.minutes(1) })] });
+        new events.Rule(this, 'AutonomyPoll', { enabled: autonomyAdmission, schedule: events.Schedule.rate(cdk.Duration.minutes(1)), targets: [new targets.LambdaFunction(autonomous, { retryAttempts: 0, maxEventAge: cdk.Duration.minutes(1) })] });
       }
       if (networkingEnabled && executors && packageExecutor) for (const target of [executors.emulated,executors.realWorld,packageExecutor]) target.grantInvoke(worker);
       new events.Rule(this, 'QueuePoll', {

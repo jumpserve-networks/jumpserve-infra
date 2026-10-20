@@ -82,7 +82,7 @@ def functions(directory,expected=False):
    hashes={name:sha(archive.read(name)) for name in manifest['files'] if name in archive.namelist()}
    if expected and hashes!=manifest['files']:raise RuntimeError('Deployed runtime differs from exact committed manifest')
   out.append(dict(logical_id=resource['LogicalResourceId'],function=config['FunctionName'],arn=config['FunctionArn'],zip_sha256=sha(raw),source_hashes=hashes,handler=config['Handler'],runtime=config['Runtime'],memory_mb=config['MemorySize'],timeout=config['Timeout'],layers=config.get('Layers',[]),autonomy_enabled=environment.get('RESEARCH_AUTONOMY_ENABLED'),worker_target=environment.get('RESEARCH_AUTONOMY_WORKER_FUNCTION')))
- if len(out)!=(3 if expected else 2):raise RuntimeError('Unexpected research function inventory')
+ if len(out) not in ((3,) if expected else (2,3)):raise RuntimeError('Unexpected research function inventory')
  return out
 def verify(directory):
  result=dict(security=security(),functions=functions(directory,True))

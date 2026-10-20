@@ -1,0 +1,89 @@
+{
+  "version": "autonomy-bounded-followups-validation-v2",
+  "generated_at": "2026-10-20T00:04:52.602495+00:00",
+  "supersedes": {
+    "path": "docs/autonomy-bounded-followups-validation-v1.json",
+    "sha256": "e5086fae9dc588982844176c43ce54d94dcb909041f671ef76f477078df0182e",
+    "bytes": 33672
+  },
+  "amendment": {
+    "path": "docs/autonomy-bounded-followups-amendment-v7.md",
+    "sha256": "0173097bb614150781044d7b5e6648693627000c835ded74aefa7593854b0d47",
+    "bytes": 2530
+  },
+  "policy": {
+    "path": "test/autonomy-trajectory-policy-v1.json",
+    "sha256": "df3ae18ae4fa467e1ec6197a8694e3d0d5531211155c1f5013a070bc8b367bbb",
+    "bytes": 738
+  },
+  "passed": true,
+  "passed_scope": "Correction implementation and local regression checks; no claim of live trajectory completion",
+  "application_limits": {
+    "max_attempts_per_claim": 25,
+    "max_paper_committed_cents": 10000,
+    "max_elapsed_seconds": 604800
+  },
+  "runtime_already_allowed_more_than_two_turns": true,
+  "runtime_modified_this_correction": false,
+  "correction": "Two turns were an evaluator observation window, not the application authorization. The prior short-window result does not establish failure within 25 attempts. Early evaluation stop is incomplete evidence.",
+  "prior_two_turn_result": {
+    "path": ".test-artifacts/autonomy-followups/v4/evaluation-report.json",
+    "sha256": "89e11607ed566b5724d70e74bdc73c0f33c13d5f5377b0af8c2dc670dc1db554",
+    "bytes": 6848
+  },
+  "prior_original_result_preserved": true,
+  "original_criterion_relabeled_as_pass": false,
+  "corrected_live_trajectory_status": "pending",
+  "publication_ready": false,
+  "release_gate_reason": "Live trajectory evidence/review under corrected application limits is pending, not failure of a two-turn application requirement",
+  "checks": [
+    {
+      "command": "python3 -B -m unittest discover -s test -p 'autonomy_trajectory_policy_test.py' -v",
+      "passed": true,
+      "tests": 8,
+      "evidence": "Observed command output; normalized by primary AI"
+    },
+    {
+      "command": "npm run test:research:autonomy",
+      "passed": true,
+      "groups": 11,
+      "report": {
+        "path": ".test-artifacts/research-ideas/database/20261020T000419834858Z/autonomy-validation-report.json",
+        "sha256": "0242b50b81885e399464653974ac5d2f37ea6ed1dbf96cc45e4039d4f4e7ae24",
+        "bytes": 13942
+      }
+    }
+  ],
+  "database_evidence": {
+    "name": "publication rejects incomplete evidence; fixture publication is explicitly synthetic",
+    "passed": true,
+    "wall_seconds": 0.27007987501565367,
+    "evidence": {
+      "malformed_and_missing_cases_rejected": true,
+      "synthetic_local_guard_exercise_only": true,
+      "four_turn_trajectory_accepted": true,
+      "two_attempt_limit_rejected": true,
+      "incomplete_evaluation_not_publishable": true
+    }
+  },
+  "migration": {
+    "path": "database/202610190009_application_trajectory_guard.sql",
+    "sha256": "46b1fdf1ca30c82343705a13f9142801592ba72873ac4f221dfa59b3ede3b550",
+    "bytes": 3898
+  },
+  "new_provider_calls": 0,
+  "new_production_mutations": 0,
+  "new_deployments": 0,
+  "new_measured_charges_usd": null,
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "limitations": [
+    "No new live model campaign or production verification performed.",
+    "SQL/provider declarations are explicit synthetic fixtures; local controller and Postgres checks are actual.",
+    "An honest unresolved outcome at a real blocker/limit is distinct from scientific reproduction or discrepancy."
+  ],
+  "artifact_inventory": "docs/autonomy-bounded-followups-artifacts-v2.json"
+}

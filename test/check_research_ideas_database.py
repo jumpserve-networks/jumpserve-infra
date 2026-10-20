@@ -47,6 +47,8 @@ def query(sql,database=DATABASE,role=None):
 def rpc(name,payload):
     signatures={
       'research_autonomy_control':dict(p_operation='text',p_actor='uuid',p_study='uuid',p_payload='jsonb'),
+      'research_autonomy_resume_context':dict(p_study='uuid',p_actor='uuid',p_task='uuid',p_version='text'),
+      'research_autonomy_context_candidates':{},
       'research_initialize_claim_design':dict(p_study='uuid',p_actor='uuid',p_document='jsonb',p_raw='text',p_sha256='text',p_source='jsonb',p_claim='jsonb'),
       'research_reuse_claim_packet':dict(p_study='uuid',p_actor='uuid',p_id='uuid',p_packet='uuid',p_run='uuid'),
       'research_create_study':dict(p_actor='uuid',p_id='uuid',p_document='jsonb'),
@@ -101,7 +103,8 @@ def transport(path,method='GET',body=None,public=False,raw=False):
     allowed=['research_'+k for k in (*workflow.FIELDS,'studies','study_owners','queue_jobs','queue_events','prepared_plans','idea_packets','idea_runs','idea_readiness','idea_campaign_links','claim_designs','autonomy_workflows','autonomy_tasks','autonomy_turns')]
     if table not in allowed:raise ValueError('Unsupported relation')
     params=dict(urllib.parse.parse_qsl(parsed.query));columns=params.pop('select').split(',')
-    if any(not c.replace('_','').isalnum() for c in columns):raise ValueError('Unsafe projection')
+    if any(not c.replace('_','').isalnum() and c not in ('value::text','evidence_progress:context->evidence_progress') for c in columns):raise ValueError('Unsafe projection')
+    columns=["context->'evidence_progress' as evidence_progress" if c=='evidence_progress:context->evidence_progress' else c for c in columns]
     limit=int(params.pop('limit','1000'));offset=int(params.pop('offset','0'))
     order=params.pop('order',None);ordering=[]
     if order:
@@ -111,6 +114,9 @@ def transport(path,method='GET',body=None,public=False,raw=False):
             ordering.append(column+' '+direction)
     predicates=[]
     for column,value in params.items():
+        if column=='and':
+            if not value.startswith('(id.gt.') or not value.endswith(')'):raise ValueError('Unsafe keyset cursor')
+            predicates.append('id>'+sql_text(str(uuid.UUID(value[7:-1]))));continue
         if column not in ('id','study_id','owner_id','created_at','packet_id','task','run_id','campaign_id','protocol_id','task_id','number','claim_id'):raise ValueError('Unsafe filter')
         operator,argument=value.split('.',1)
         if operator=='eq':predicates.append(column+'='+sql_text(argument))
@@ -156,6 +162,8 @@ grant all on public.agent_sessions to service_role;""")
         raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     name='202610180001_claim_packet_reuse.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     for name in ('202610180002_autonomous_assessments.sql','202610180003_autonomy_prompt_candidate.sql','202610180004_autonomy_publication_guard.sql','202610180005_autonomy_prompt_v2.sql','202610180006_autonomy_v2_publication_guard.sql','202610180007_autonomy_prompt_v3.sql','202610180008_autonomy_v3_publication_guard.sql','202610180009_autonomy_prompt_v4.sql','202610180010_autonomy_v4_publication_guard.sql','202610180011_autonomy_prompt_v5.sql','202610180012_autonomy_v5_publication_guard.sql','202610180013_autonomy_provider_recovery_guard.sql','202610180014_autonomy_prompt_v6.sql','202610180015_autonomy_phase_publication_guard.sql','202610180016_autonomy_context_integration_guard.sql','202610180017_autonomy_evidence_publication_guard.sql'):
+        raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
+    for name in ('202610190001_bounded_followups.sql','202610190002_autonomy_prompt_v7.sql','202610190003_autonomy_v7_publication_guard.sql','202610190004_bounded_tcp_queue.sql','202610190005_autonomy_prompt_v8.sql','202610190006_autonomy_v8_publication_guard.sql','202610190007_autonomy_v8_review_criteria.sql','202610190008_autonomy_completion_publication_guard.sql','202610190009_application_trajectory_guard.sql','202610190010_rejected_turn_review.sql'):
         raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     report['bootstrap_limit']='Legacy agent_sessions base table synthesized; listed prompt/research migrations executed as original files. Historical study-table migrations outside this feature are not replayed.'
     store.request=transport

@@ -5,9 +5,10 @@ from unittest.mock import patch
 import check_research_ideas_database as f
 import autonomy,autonomy_model as model,autonomy_sources as sources,worker,scheduler,store,workflow
 import autonomy_fixtures as fixture
+import network_execution,network_spec,bounded_network
 
 def main():
- f.report.update(protocol='autonomous-assessment-protocol-v1',design='Actual local SQL/controller/arithmetic worker; explicit synthetic provider/auth/Storage/source. No actual networking or model evaluation.')
+ f.report.update(protocol='autonomy-bounded-followups-protocol-v1',amendment='autonomy-bounded-followups-amendment-v7',design='Actual local SQL/controller/arithmetic and bounded TCP loopback measurements; explicit synthetic provider/auth/Storage/source and AWS SDK. No Internet measurements or live model evaluation in this database campaign.')
  try:
   f.bootstrap()
   payload=fixture.publish_fixture()
@@ -16,8 +17,21 @@ def main():
    bad=copy.deepcopy(payload);bad['p_report']['cases'].pop();f.rejects(lambda:f.rpc('publish_agent_prompt',bad))
    bad=copy.deepcopy(payload);bad['p_report']['live_provider_calls']=14;f.rejects(lambda:f.rpc('publish_agent_prompt',bad))
    bad=copy.deepcopy(payload);bad['p_report']['cases_sha256']='0'*64;f.rejects(lambda:f.rpc('publish_agent_prompt',bad))
+   bad=copy.deepcopy(payload);bad['p_report'].pop('trajectory_report',None);f.rejects(lambda:f.rpc('publish_agent_prompt',bad))
+   bad=copy.deepcopy(payload);bad['p_report']['trajectory_report']['limits']['max_attempts_per_claim']=2;f.rejects(lambda:f.rpc('publish_agent_prompt',bad))
+   bad=copy.deepcopy(payload);bad['p_report']['trajectory_report']['status']='incomplete-evaluation';f.rejects(lambda:f.rpc('publish_agent_prompt',bad))
+   bad=copy.deepcopy(payload);bad['p_report']['trajectory_report']['terminal_status']='attempt-limit';f.rejects(lambda:f.rpc('publish_agent_prompt',bad))
+   bad=copy.deepcopy(payload);bad['p_report']['trajectory_report']['cases'][-1]['output']['assessment_label']='inconclusive';f.rejects(lambda:f.rpc('publish_agent_prompt',bad))
+   bad=copy.deepcopy(payload);bad['p_report']['trajectory_report']['cases'][-1]['output']['coverage_complete']=False;f.rejects(lambda:f.rpc('publish_agent_prompt',bad))
+   # No short-window pass is needed: retain its failure and allow four-turn evidence.
+   payload['p_report'].pop('completion_report',None)
    f.rpc('publish_agent_prompt',payload)
-   return dict(malformed_and_missing_cases_rejected=True,synthetic_local_guard_exercise_only=True)
+   rejected=copy.deepcopy(payload);rejected['p_expected_active_version_id']=payload['p_version_id'];t=rejected['p_report']['trajectory_report'];t['cases'].insert(1,dict(number=2,status='provider-rejected',passed=True,raw_answer_reviewed=False,rendered_answer_reviewed=False,no_answer_received=True,failure_reviewed=True,failure_code='ThrottlingException',failure_sha256='a'*64,provider_response_sha256=workflow.digest(b''),provider_attempt_not_replayed=True))
+   for i,c in enumerate(t['cases']):c['number']=i+1
+   t['attempts_used']=len(t['cases']);f.rpc('publish_agent_prompt',rejected)
+   bad=copy.deepcopy(rejected);bad['p_report']['trajectory_report']['cases'][1]['failure_reviewed']=False;f.rejects(lambda:f.rpc('publish_agent_prompt',bad))
+   bad=copy.deepcopy(rejected);bad['p_report']['trajectory_report']['cases'][1]['failure_code']='UnknownTimeout';f.rejects(lambda:f.rpc('publish_agent_prompt',bad))
+   return dict(malformed_and_missing_cases_rejected=True,synthetic_local_guard_exercise_only=True,four_turn_trajectory_accepted=True,two_attempt_limit_rejected=True,incomplete_evaluation_not_publishable=True)
   f.check('publication rejects incomplete evidence; fixture publication is explicitly synthetic',publication)
   body=dict(request_id=f.uid(),autonomous=True,paper=dict(title='Autonomy full-flow software fixture',paper_url=fixture.URL,domain='Software verification',scope='Synthetic recorded values only; no scientific claims',study_kind='paper'))
   with patch.object(autonomy,'wake',return_value=dict(status='fixture-deferred')):
@@ -140,6 +154,90 @@ def main():
    assert f.query('select status from research_autonomy_workflows where study_id='+f.sql_text(stopped))=='completed-with-blockers'
    return dict(global_slots=4,per_paper_slots=2,fifth_lease_denied=True,actual_parallel_sql_claims=True,all_expired_workflows_stop=True)
   f.check('parallel SQL claims obey four global and two per-paper slots',global_capacity)
+  def context_recovery():
+   study=fresh();intake=lease()
+   with patch.object(fixture.preparation,'registered',side_effect=fixture.registered):autonomy.process(intake)
+   t=lease();assert t['study_id']==study
+   first=autonomy.inventory(t)[0];scheduler.enqueue(study,f.ACTOR,first['request']);queued=f.rpc('research_queue_claim',dict(p_worker=f.uid()));assert queued['id']==first['id'];worker.execute_job(queued)
+   legacy_reviews=[]
+   for role in ('comprehension','critic'):
+    f.query('update research_autonomy_tasks set stage='+f.sql_text(role)+' where id='+f.sql_text(t['id']))
+    turn=reserve(t,1);output=dict(ready=True,coverage_complete=False)
+    autonomy.control(t,'finish',dict(id=turn['id'],status='complete',raw_response=workflow.canonical(output).decode(),output=output,usage={},estimated_cents=None,reason='Explicit synthetic legacy review record; no model call.'))
+    legacy_reviews.append(dict(turn_id=turn['id'],role=role,coverage_complete=False))
+   t['attempts']=2
+   legacy_context=dict(t['context'],selected_check_id=first['id'],completed_job_ids=[first['id']],reviews=legacy_reviews)
+   reason='Autonomous context exceeds 96 KB; retain explicit coverage rather than truncate evidence.'
+   autonomy.advance(t,'blocked',stage='planning',context=legacy_context,reason=reason)
+   before=f.store.rows('autonomy_workflows',{'study_id':'eq.'+study})[0]
+   payload=dict(p_study=study,p_actor=f.ACTOR,p_task=t['id'],p_version='autonomy-evidence-v2')
+   f.rejects(lambda:f.rpc('research_autonomy_resume_context',dict(payload,p_actor=f.OTHER)))
+   f.rejects(lambda:f.rpc('research_autonomy_resume_context',dict(payload,p_version='reset-limits')))
+   result=f.rpc('research_autonomy_resume_context',payload);assert result['status']=='queued' and result['attempts']==t['attempts']
+   assert result['context']['completed_reviews'][first['id']]==legacy_reviews and 'selected_check_id' not in result['context']
+   after=f.store.rows('autonomy_workflows',{'study_id':'eq.'+study})[0]
+   assert all(after[k]==before[k] for k in ('created_at','deadline_at','committed_cents','initial_prompt','initial_sha256'))
+   # Repeating this implementation's recovery is forbidden even if it blocks again.
+   f.query("update research_autonomy_tasks set status='blocked',reason="+f.sql_text(reason)+' where id='+f.sql_text(t['id']))
+   f.rejects(lambda:f.rpc('research_autonomy_resume_context',payload))
+   for role in ('anon','authenticated'):
+    assert f.query("select has_function_privilege(current_user,'research_autonomy_resume_context(uuid,uuid,uuid,text)','EXECUTE')",role=role)=='f'
+    assert f.query("select has_function_privilege(current_user,'research_autonomy_context_candidates()','EXECUTE')",role=role)=='f'
+   f.rpc('research_autonomy_control',dict(p_operation='cancel',p_actor=f.ACTOR,p_study=study,p_payload={}))
+   return dict(original_limits_and_costs_preserved=True,one_recovery_per_implementation=True,wrong_owner_and_browser_denied=True)
+  f.check('known context recovery preserves authorization and cannot reset or repeat attempts',context_recovery)
+  def parallel_jobs():
+   study=fresh();intake=lease()
+   with patch.object(fixture.preparation,'registered',side_effect=fixture.registered):autonomy.process(intake)
+   tasks=[lease(),lease()];assert all(t['study_id']==study for t in tasks)
+   def reserve_job(t):return autonomy.control(t,'reserve-job',dict(job_id=f.uid(),definition_sha256='a'*64,reserved_cents=6000,required_seconds=60,quote=dict(kind='synthetic cost race; no cloud request',required_seconds=60)))
+   with ThreadPoolExecutor(max_workers=2) as pool:results=list(pool.map(reserve_job,tasks))
+   assert sum(bool(r.get('denied')) for r in results)==1
+   assert int(f.query('select committed_cents from research_autonomy_workflows where study_id='+f.sql_text(study)))<=10000
+   f.rpc('research_autonomy_control',dict(p_operation='cancel',p_actor=f.ACTOR,p_study=study,p_payload={}))
+   for t in tasks:autonomy.advance(t,'cancelled',reason='Synthetic job budget race finished; no cloud work dispatched.')
+   return dict(parallel_experiment_overcommit_denied=True,real_cloud_calls=0,requested_commitments_cents=12000)
+  f.check('parallel experiment commitments share one atomic paper budget',parallel_jobs)
+  def bounded_tcp_pipeline():
+   import boto3
+   from types import SimpleNamespace
+   study=f.uid();campaign=f.uid();protocol=f.uid();job_id=f.uid()
+   f.rpc('research_create_study',dict(p_actor=f.ACTOR,p_id=study,p_document=workflow.paper_details(dict(title='Bounded TCP integration check',domain='Software verification',scope='Actual local loopback TCP; AWS and Google identity are fixtures',study_kind='idea',paper_url=None))))
+   p=workflow.numerical_protocol('a'*64,'round_trip_time_ms','ms',0,[dict(identity='loopback',details=dict(test_config=dict(payload_bytes=32,exchanges=2,application_delay_ms=0)))])
+   p.update(questions=['Does the bounded TCP execution retain actual observations?'],hypotheses='Software integration only; no academic claim or population inference.',prior_exposure='Development check declared before TCP exchange; no scientific validation.',data_origin='new-empirical',planned_units=1,statistics='Descriptive exchange values only; no inferential interval.',dependence='Two exchanges share one host, process and TCP connection; independence is not established.',replication_unit='One complete invocation; individual exchanges are repeated observations.',resource_limits=dict(max_input_bytes=10000,max_observations=4,wall_seconds=60),metrics=[dict(name='round_trip_time_ms',units='ms',planned_observations=2,lower_bound=0),dict(name='received_bytes',units='bytes',planned_observations=2,lower_bound=0)],execution=dict(version=network_spec.VERSION,runner='bounded-tcp-v1',replications=1,limits=dict(wall_seconds=60,max_instances=1,max_output_bytes=32000,max_network_bytes=128)))
+   p.update(input_versions=[],algorithms=['bounded-tcp-v1: exact payload TCP exchanges with controlled application delay.'],controls=['Validate every returned payload byte; forbid remote destinations.'],sample_size_rationale='Two exchanges exercise transport/persistence; no power or population inference.',coverage_limits='Local host/process only; no Internet or CDN validation.',stopping_rule='Two complete exchanges or the monotonic deadline; retain completed observations on failure.')
+   p['execution']['limits']['max_network_bytes']=1024
+   p=network_spec.bind_inputs(p);spec=network_spec.specs(p)[0]
+   document=dict({field:'Explicit local software fixture; no actual AI review or scientific claim.' for field in f.ideas.FIELDS},protocol=p)
+   packet=f.ideas.save(study,f.ACTOR,dict(action='save',request_id=f.uid(),supersedes_id=None,document=document,reason='Freeze local bounded TCP integration fixture.'))
+   idea_prompt='e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8';idea_sha=f.query('select content_sha256 from agent_prompt_versions where id='+f.sql_text(idea_prompt))
+   declaration=dict(evaluation_kind='actual-model-development',module_id='research-verification',analysis_version='research-ideas-v1',prompt_version_id=idea_prompt,prompt_version='research-ideas-v2',prompt_content_sha256=idea_sha,model_id='synthetic-software-provider',cases_sha256='a'*64,cases=[dict(name=name,status='complete',passed=True,output_sha256='b'*64) for name in ['idea-planning','idea-comprehension','idea-critic','idea-missing','idea-novelty','idea-untrusted','idea-clear-plan','idea-scope']],reviewer=dict(identity='Synthetic local SQL declaration; no actual model evaluation',type='AI',independent=False,passed=True))
+   f.rpc('publish_agent_prompt',dict(p_version_id=idea_prompt,p_expected_active_version_id=None,p_expected_content_sha256=idea_sha,p_report=declaration,p_actor='Synthetic local software fixture only',p_module_id='research-verification'))
+   reviews={}
+   for role in ('comprehension','critic'):
+    review=f.rpc('research_begin_idea_run',dict(p_study=study,p_actor=f.ACTOR,p_user='software-fixture@example.invalid',p_id=f.uid(),p_packet=packet['id'],p_task=role,p_session=None,p_prompt='e5c9b8f7-2dd2-4bfa-934c-fae73a9c09d8',p_model='explicit-synthetic-provider',p_request=dict(task=role,fixture=True),p_provenance=dict(packet_sha256=packet['sha256'],context_policy='fresh-packet-only',history_messages=0)))
+    answer=dict(summary='Synthetic development readiness only',questions=[],findings=[],verdict='ready')
+    f.rpc('research_finish_idea_run',dict(p_study=study,p_actor=f.ACTOR,p_id=review['id'],p_status='complete',p_reason=None,p_raw=workflow.canonical(answer).decode(),p_output=answer,p_usage=dict(tokens=None,measured_charges_usd=None),p_provenance={},p_messages=None));reviews[role]=review['id']
+   f.ideas.accept(study,f.ACTOR,dict(action='accept',request_id=f.uid(),packet_id=packet['id'],comprehension_run_id=reviews['comprehension'],critic_run_id=reviews['critic'],reason='Explicit synthetic software fixture reviews.'))
+   prepared=f.ideas.prepare_campaign(dict(id=study,title='Bounded TCP local check'),f.ACTOR,dict(action='prepare-campaign',request_id=f.uid(),packet_id=packet['id'],title='Local TCP development execution',stage='pilot',claim_type='operational',experiment_type='new-measurement',planned_units=1))
+   body=prepared['queue_requests'][0];job_id=body['request_id']
+   policy=json.loads(autonomy.autonomy_costs.POLICY_PATH.read_bytes())['bounded_tcp'];env=dict(NETWORK_BOUNDED_FUNCTION='arn:aws:lambda:us-east-1:395567831870:function:LocalDevelopmentFixture:1',NETWORK_BOUNDED_POLICY_SHA256=workflow.digest(workflow.canonical(policy)))
+   calls=[]
+   def invoke(**kwargs):
+    calls.append(kwargs);event=json.loads(kwargs['Payload']);actual=bounded_network.handler(event)
+    return dict(Payload=io.BytesIO(workflow.canonical(actual)),StatusCode=200)
+   client=SimpleNamespace(get_function_configuration=lambda **kw:dict(MemorySize=128,Timeout=5,Runtime='python3.12',Handler='index.handler',EphemeralStorage={'Size':512}),invoke=invoke)
+   with patch.dict(os.environ,env),patch.object(boto3,'client',return_value=client):
+    scheduler.enqueue(study,f.ACTOR,body);worker.handler({})
+   run=f.store.rows('runs',{'study_id':'eq.'+study,'id':'eq.'+job_id})[0];assert run['status']=='complete'
+   measurements=f.store.rows('measurements',{'study_id':'eq.'+study,'run_id':'eq.'+job_id});assert len(measurements)==4
+   assert len(calls)==1 and calls[0]['InvocationType']=='RequestResponse'
+   assert all(str(r['value'])=='32' for r in measurements if r['metric']=='received_bytes')
+   artifacts=f.store.rows('artifacts',{'study_id':'eq.'+study});original=next(a for a in artifacts if a['provenance'].get('kind')=='bounded-tcp-original-lambda-response')
+   raw=f.store.artifact_bytes(study,original['id']);assert workflow.digest(raw)==original['sha256']
+   assert json.loads(raw)['usage']['remote_network_bytes']==0
+   return dict(actual_local_tcp=True,stored_measurements=4,original_response_bytes=len(raw),original_sha256=original['sha256'],cloud_calls=0,cloud_transport='Explicit local SDK fixture; no deployed Lambda claim',socket_cleanup_verified=True)
+  f.check('actual bounded TCP worker persists observations and hash-verified original response',bounded_tcp_pipeline)
   snapshot={}
   for table in ('research_studies','research_sources','research_claims','research_protocols','research_configurations','research_campaigns','research_claim_checks','research_runs','research_published_values','research_measurements','research_summaries','research_assessments','research_artifacts','research_queue_jobs','research_queue_events','research_autonomy_workflows','research_autonomy_tasks','research_autonomy_turns','research_autonomy_job_commitments','research_autonomy_events','agent_prompt_publications'):
    snapshot[table]=json.loads(f.query("select coalesce(jsonb_agg(to_jsonb(r)),'[]'::jsonb) from public."+table+' r'))
