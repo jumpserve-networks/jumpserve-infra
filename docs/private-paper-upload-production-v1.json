@@ -1,0 +1,312 @@
+{
+  "version": "private-paper-upload-production-v1",
+  "created_at": "2026-10-20T02:09:56.038396+00:00",
+  "status": "deployed-and-verified-with-declared-conditional-gaps",
+  "origin": "https://jumpserve.quaint-lab.org",
+  "path": "/research-verification/new-study",
+  "aws_account": "395567831870",
+  "supabase_project": "regphejnlvfpyokpniny",
+  "frontend_commit": "cc03ebfa33042fd4a4856a1faf8f5c1fcd24f6e3",
+  "amplify_job": 118,
+  "amplify_status": "SUCCEED",
+  "backend_commit": "a2db37f29231ee924dc2e825bc51df4ebb1b3f1d",
+  "runtime_version": 29,
+  "infrastructure_implementation_commit": "996e4a5",
+  "published_autonomy_prompt": "20934b76-08d7-55e9-b101-1bed29db42a0",
+  "prompt_publication_changed": false,
+  "unit_tests": {
+    "backend": 169,
+    "frontend": 194,
+    "infrastructure": 93
+  },
+  "upload_database_groups": 8,
+  "previous_autonomy_database_groups": 11,
+  "previous_browser_groups": 9,
+  "public_browser_groups": 5,
+  "builds": {
+    "frontend": "passed",
+    "infrastructure": "passed"
+  },
+  "lint": {
+    "errors": 0,
+    "existing_warnings": 1
+  },
+  "failed_control": {
+    "id": "8605412f-f912-40fa-8747-cfcd2d6aabf2",
+    "parser_passed": false,
+    "reason": "Child interpreter could not import pypdf from the attached layer",
+    "originals_and_failure_retained": true
+  },
+  "followup_control": {
+    "id": "f20e4b43-6df3-4a50-bf3b-15b01d37c2dc",
+    "parser_passed": true,
+    "tool": "pypdf",
+    "tool_version": "6.19.0",
+    "original_bytes": 431,
+    "original_sha256": "41ca0ee1d6ec3a96190266e38063a2c20b7a9cea652eb73f395d461f62244077",
+    "missing_text_pages": [
+      1
+    ],
+    "workflows": 1,
+    "tasks": 1,
+    "model_turns": 0,
+    "initial_prompt_sha256": "db66501e5e33f93bbe7f105c2c09e40b8f8858b88176df90b6db606a124d1261",
+    "replay_statuses": [
+      200,
+      200
+    ],
+    "normal_authenticated_staging_read_status": 400,
+    "data_origin": "synthetic software release control; no scientific finding"
+  },
+  "new_application_model_calls": 0,
+  "new_experiment_instances": 0,
+  "scientific_assessments_reclassified": false,
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false,
+    "human": false
+  },
+  "failed_checks_retained": [
+    "Initial production parser import failure",
+    "Initial database launch while isolated cluster was stopped",
+    "Initial dependency test misplaced assertion; corrected before commit",
+    "Initial DevTools file-path and argument failures",
+    "Original mobile queue loading-state probe; settled view separately retained",
+    "Initial manifest repin used relative parent path; hash staging guard rejected stale profile"
+  ],
+  "conditional_gaps": [
+    "Fresh actual-model evaluation of v29 and full scientific assessment of a text-containing uploaded paper were not run",
+    "Production native OS file-picker dialog was not exercised",
+    "Human or independent usability/scientific review was not performed",
+    "Scanned pages, visual evidence, supplements and OCR retain the documented coverage limits",
+    "Measured hosting/database/storage invoice charges are unavailable"
+  ],
+  "usage": {
+    "model_calls": 0,
+    "new_ec2_instances": 0,
+    "control_commitments_cents": [
+      505,
+      510
+    ],
+    "commitments_are_charges": false,
+    "measured_charges_usd": null,
+    "unallocated": [
+      "local compute",
+      "existing Lambda/API and Amplify hosting",
+      "Supabase database and private artifact storage"
+    ]
+  },
+  "evidence": [
+    {
+      "repository": "jumpserve-infra",
+      "path": "docs/private-paper-upload-release-protocol-v1.json",
+      "sha256": "f40aec6d85e20a2ab8775bcf667948d3441a6d723d0cc628938064e065ac311b",
+      "bytes": 4020
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "docs/private-paper-upload-release-amendment-v2.json",
+      "sha256": "b7f1ff787fb7ee4f8d73d5a73a1919c6bc48bb69959ef2e1742bfe2a48028c32",
+      "bytes": 1414
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "docs/private-paper-upload-release-amendment-v3.json",
+      "sha256": "cfe7c244cce5e86acd93b6908e4effbf947e31f709adc4032fc3a1caedcfb1d3",
+      "bytes": 1802
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/private-paper-release/20261020T015301357478Z/receipt.json",
+      "sha256": "4052688556e4605f5a597c40dbc95664678c3844f9678d3c4274da863f81b45c",
+      "bytes": 10789
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/private-paper-release/20261020T015433113767Z/receipt.json",
+      "sha256": "726686ec3c02ccc94202aa9af294de1d40ad4987a7d1cdc9246f6970339d9e21",
+      "bytes": 2506
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/private-paper-release/20261020T020005929267Z/receipt.json",
+      "sha256": "21ddf72b8ecbeea005bec9d836657681e794413c5e27e07a7e7e17624a371956",
+      "bytes": 2768
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/private-paper-release/20261020T020033829152Z/receipt.json",
+      "sha256": "0db96dc596a9de585709b36e679df7d08a3343071b2fd0c776cb81ab4a8a2d21",
+      "bytes": 10578
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/private-paper-release/20261020T020612220187Z/receipt.json",
+      "sha256": "84543abe8fefd35470eeb46e55964f2b7f21f6a360b19fb965e2aef4fe0b358f",
+      "bytes": 11232
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/private-paper-release/20261020T020812740848Z/receipt.json",
+      "sha256": "b7429ec6b825c965afe6e61e8f808f326f6f5e5bc673dd09c78a52404d93efdb",
+      "bytes": 26708
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/private-paper-release/20261020T020831479150Z/receipt.json",
+      "sha256": "b6fe348a532a270f2a1264233f8e1d6f7c543cac56811d818be33f53e1ef8d6d",
+      "bytes": 11576
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261020T020453587132Z/paper-upload-validation-report.json",
+      "sha256": "484c27390dd31a56d8d4e4b4151295ddfd1c40e81a95bf6239f3fdc948345e8c",
+      "bytes": 11679
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": "research-workflow-runtime.json",
+      "sha256": "0f75be0774f8d57579c8e3b094c765567327500d65fba47c4297c7efa842a539",
+      "bytes": 2831
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v1/form-390-light.png",
+      "sha256": "4053ce2a2f392cdbdd0a14cdea3b104505d5fc560c7f942f9f089a40a7dfbce7",
+      "bytes": 51384
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v1/form-check.json",
+      "sha256": "6ae8e08e870f19b76e10a753466e617ec282d3d88d6f2b74fa48cdb29fdba17e",
+      "bytes": 295
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v1/JumpServe PDF upload release control.pdf",
+      "sha256": "41ca0ee1d6ec3a96190266e38063a2c20b7a9cea652eb73f395d461f62244077",
+      "bytes": 431
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v1/form-1365-light.png",
+      "sha256": "a42deb1ecc60f16c2bc019835e32cdfbd62615ae2079e1bb43a176551c3f46dc",
+      "bytes": 83659
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v1/form-1365-dark.png",
+      "sha256": "a42deb1ecc60f16c2bc019835e32cdfbd62615ae2079e1bb43a176551c3f46dc",
+      "bytes": 83659
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v1/form-themes.json",
+      "sha256": "6f879b8c4394f6a6e770471ed37a4a6150dcdb0f93e60258c57683da2b729b26",
+      "bytes": 665
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v1/form-390-dark.png",
+      "sha256": "4261f8fae5fb42ecb3ab1d3ac11eb7e1be9a5a71f70576b2679b9a0142b8e3c9",
+      "bytes": 51397
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v2/form-390-light.png",
+      "sha256": "4053ce2a2f392cdbdd0a14cdea3b104505d5fc560c7f942f9f089a40a7dfbce7",
+      "bytes": 51384
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v2/network-status.txt",
+      "sha256": "26d13b9c3068482bd673702659edb031930786eeba8baaf5a1e48ebc83cc3450",
+      "bytes": 5421
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v2/queue-views.json",
+      "sha256": "17a16279d05f8a206dd2b13e8ecf88c04302054a4a3f465a5cf0dc9d61ca5edd",
+      "bytes": 521
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v2/first-control-queue.json",
+      "sha256": "1cbe085102a24303c9d47256ee10d93b49cb2cf3b67ff214730b246fcc6340b1",
+      "bytes": 1326
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v2/queue-390-light-settled.png",
+      "sha256": "6d3856c1f9def53ae22f938848b7485f517fe4af32acbf7680742dd24f09fd10",
+      "bytes": 197466
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v2/queue-mobile-settled.json",
+      "sha256": "7ad0b9f75100c1e76af8f8b2db82a59ad61e71eb388a5f3667de74a6ec5116dd",
+      "bytes": 236
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v2/followup-upload-and-replay.json",
+      "sha256": "4de3cbb872261baa48499554423802e62b560243f998cace83dc6f33ac198251",
+      "bytes": 2847
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v2/queue-1365-dark.png",
+      "sha256": "6b586b7e549dcc51f69d26e5b0654763712dd8af07eccb950725b059c1f95090",
+      "bytes": 311672
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v2/form-1365-light.png",
+      "sha256": "a42deb1ecc60f16c2bc019835e32cdfbd62615ae2079e1bb43a176551c3f46dc",
+      "bytes": 83659
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v2/form-1365-dark.png",
+      "sha256": "1e41f27ffc0cbc36a6346fe8652f732aed53885621170fe2bc35ae0ef86e6af1",
+      "bytes": 84463
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v2/sanitized-network-bodies.json",
+      "sha256": "75e3c43bdcb417d10dc20885601df2bd0817afc8689d17e846ed489a059c20a9",
+      "bytes": 3970
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v2/form-themes.json",
+      "sha256": "972784f9ffeec55ec6afe8d4720fe6488edaa151b82a9967e35dece75a3543a1",
+      "bytes": 1197
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v2/selected-control.json",
+      "sha256": "dcededdc0eeeaf3725b4419975379cc5f03aebab8d5d2822fd3694c1ff35cd3c",
+      "bytes": 386
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v2/form-390-dark.png",
+      "sha256": "f8473bb209c3dc4887012d77712c0c67e230d14af090a4c54c2204951409955c",
+      "bytes": 50833
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/private-paper-production-browser/v2/queue-390-light.png",
+      "sha256": "02441dcd8189097aeec9216077b1b05dc66df14030bb8cd991fafb5ecb56f361",
+      "bytes": 50775
+    },
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/autonomy-release-production/2026-10-20T01-58-21.086Z/report.json",
+      "sha256": "e6b7f76bd864decb3c8fa79bbc4e8bfa76887bb33d69d752e12fe0b5f5e7fb4f",
+      "bytes": 2053
+    }
+  ]
+}

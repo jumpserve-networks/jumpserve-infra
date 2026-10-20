@@ -1,5 +1,9 @@
 # Private PDF paper intake
 
+This document preserves the original local implementation record. The later
+production release and actual parser correction are documented in
+[private-paper-upload-production-v1.md](private-paper-upload-production-v1.md).
+
 Local implementation; not deployed by this editing request. The new-study form
 accepts one PDF up to **10,000,000 bytes**, research domain and reproduction scope.
 It no longer asks for a title or public URL. The filename supplies the initial

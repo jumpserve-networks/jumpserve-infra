@@ -1,0 +1,21 @@
+{
+  "version": "private-paper-upload-production-artifacts-v1",
+  "release_report": "private-paper-upload-production-v1.json",
+  "receipt": ".test-artifacts/private-paper-release/20261020T021009761567Z/receipt.json",
+  "privacy": "Private originals and authenticated screenshots; no anonymous artifact access",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "bucket": "research-workflow-raw",
+  "path": "release-verification/private-paper-20261020/2b5e6a88d5329bce1eb72760b19f2716ffcbd83b279994ab17c7332b5cbf6f55.zip",
+  "sha256": "2b5e6a88d5329bce1eb72760b19f2716ffcbd83b279994ab17c7332b5cbf6f55",
+  "bytes": 21333329,
+  "original_bytes": 33093602,
+  "files": 325,
+  "retrieved_hash_verified": true,
+  "all_member_hashes_verified": true,
+  "anonymous_status": 400,
+  "measured_storage_charges_usd": null
+}
