@@ -43,7 +43,7 @@ def main():
      assert f.query("select has_table_privilege(current_user,'research_autonomy_"+name+"','SELECT,INSERT,UPDATE,DELETE')",role=role)=='f'
     assert f.query("select has_function_privilege(current_user,'research_autonomy_control(text,uuid,uuid,jsonb)','EXECUTE')",role=role)=='f'
    f.rejects(lambda:f.rpc('research_autonomy_control',dict(p_operation='cancel',p_actor=f.OTHER,p_study=study,p_payload={})))
-   row=created['autonomy'];assert row['max_spend_cents']==10000 and row['max_attempts']==25 and row['committed_cents']==500
+   row=created['autonomy'];assert row['max_spend_cents']==10000 and row['max_attempts'] is None and row['committed_cents']==500
    return dict(private_tables=5,owner_isolation=True,atomic_intake_replay=True,defaults=row)
   f.check('atomic intake defaults owner isolation RLS and browser denial',security)
   def full_flow():
@@ -126,14 +126,15 @@ def main():
   f.check('concurrent model reservations cannot exceed shared paper budget; expired calls retain unknown usage',budgets)
   def attempts():
    study3=fresh();t=lease();assert t['study_id']==study3
-   for i in range(25):
+   for i in range(40):
     r=reserve(t,1);assert not r.get('denied')
     autonomy.control(t,'finish',dict(id=r['id'],status='invalid-output',raw_response='{}',output=None,usage={},estimated_cents=None,reason='Synthetic invalid answer retained'))
-   assert reserve(t,1)['denied']=='attempt-limit'
+   history=autonomy.history(study3,t['id'],35)
+   assert len(history['turns'])==10 and history['turns'][0]['number']==34 and history['next_before']==25 and history['coverage']['total']==40
    f.rejects(lambda:autonomy.control(dict(t,lease_token=f.uid()),'advance',dict(status='blocked',stage='intake',context={},reason='Bad token',label=None)))
-   autonomy.advance(t,'attempt-limit',reason='Synthetic limit reached; invalid attempts retained.')
-   return dict(attempts=25,next_attempt_denied=True,failed_attempts_preserved=True,stale_fence_denied=True)
-  f.check('25 attempts include invalid responses and require current fenced lease',attempts)
+   autonomy.advance(t,'blocked',reason='Synthetic unlimited-turn regression finished; invalid attempts retained.')
+   return dict(attempts=40,beyond_former_limit=True,failed_attempts_preserved=True,stale_fence_denied=True,paginated_history=True)
+  f.check('turns continue beyond 25 with original failures numbering and fenced leases',attempts)
   def deadline():
    study4=fresh()
    # Time travel is explicit and restricted to the isolated database, preserving
@@ -180,11 +181,30 @@ def main():
    # Repeating this implementation's recovery is forbidden even if it blocks again.
    f.query("update research_autonomy_tasks set status='blocked',reason="+f.sql_text(reason)+' where id='+f.sql_text(t['id']))
    f.rejects(lambda:f.rpc('research_autonomy_resume_context',payload))
+   # A newer byte-budget implementation can recover a retained v2 pause once,
+   # after request serialization preflight, without resetting the original run.
+   wire=model.request('Explicit synthetic local preflight policy',dict(task='planning',initial_prompt=before['initial_prompt']))
+   recovery=dict(p_study=study,p_actor=f.ACTOR,p_task=t['id'],p_request_sha256=workflow.digest(workflow.canonical(wire)),p_request_bytes=len(workflow.canonical(wire)))
+   assert any(c['id']==t['id'] for c in f.rpc('research_autonomy_budget_candidates',{}))
+   for changes in (dict(p_actor=f.OTHER),dict(p_request_bytes=96001),dict(p_request_bytes=None),dict(p_request_sha256='invalid')):
+    f.rejects(lambda changes=changes:f.rpc('research_autonomy_resume_budget',dict(recovery,**changes)))
+   result=f.rpc('research_autonomy_resume_budget',recovery)
+   assert result['status']=='queued' and result['attempts']==t['attempts']
+   assert result['context']['completed_reviews'][first['id']]==legacy_reviews
+   after=f.store.rows('autonomy_workflows',{'study_id':'eq.'+study})[0]
+   assert all(after[k]==before[k] for k in ('created_at','deadline_at','committed_cents','initial_prompt','initial_sha256'))
+   event=json.loads(f.query("select details from research_autonomy_events where task_id="+f.sql_text(t['id'])+" and event='context-budget-recovery'"))
+   assert event['preflight_request_sha256']==recovery['p_request_sha256'] and event['preflight_request_bytes']==recovery['p_request_bytes']
+   f.query("update research_autonomy_tasks set status='blocked',reason="+f.sql_text(reason)+' where id='+f.sql_text(t['id']))
+   f.rejects(lambda:f.rpc('research_autonomy_resume_budget',recovery))
+   assert all(c['id']!=t['id'] for c in f.rpc('research_autonomy_budget_candidates',{}))
    for role in ('anon','authenticated'):
     assert f.query("select has_function_privilege(current_user,'research_autonomy_resume_context(uuid,uuid,uuid,text)','EXECUTE')",role=role)=='f'
     assert f.query("select has_function_privilege(current_user,'research_autonomy_context_candidates()','EXECUTE')",role=role)=='f'
+    assert f.query("select has_function_privilege(current_user,'research_autonomy_resume_budget(uuid,uuid,uuid,text,integer)','EXECUTE')",role=role)=='f'
+    assert f.query("select has_function_privilege(current_user,'research_autonomy_budget_candidates()','EXECUTE')",role=role)=='f'
    f.rpc('research_autonomy_control',dict(p_operation='cancel',p_actor=f.ACTOR,p_study=study,p_payload={}))
-   return dict(original_limits_and_costs_preserved=True,one_recovery_per_implementation=True,wrong_owner_and_browser_denied=True)
+   return dict(original_limits_and_costs_preserved=True,one_recovery_per_implementation=True,wrong_owner_and_browser_denied=True,new_byte_budget_recovery_after_v2=True,preflight_hash_and_size_recorded=True,oversized_preflight_rejected=True)
   f.check('known context recovery preserves authorization and cannot reset or repeat attempts',context_recovery)
   def parallel_jobs():
    study=fresh();intake=lease()

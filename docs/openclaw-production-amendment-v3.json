@@ -1,0 +1,9 @@
+{
+ "version":"openclaw-production-amendment-v3",
+ "base":"openclaw-production-v1",
+ "observed_failure":"The initial host bootstrap requested an unavailable awscli2 RPM, so DNF aborted before installing the runtime. Cloud-init stdout and the failed deployment preparation remain retained.",
+ "controlled_correction":"Use the documented Amazon Linux awscli-2 package. On the existing uninitialized host, preserve original user-data bytes and run a separate recovery script differing only in that exact package name. Host authorization has not begun, and no model work or credentials are replaced.",
+ "source":"https://alas.aws.amazon.com/AL2023/ALAS2023-2026-3133.html",
+ "other_updates":"A later source refresh preserves the previous runtime directory and the separate native authorization directory. New source assets require the matching scoped IAM object permissions before download.",
+ "scientific_effect":"None; infrastructure preparation failure, no experiment finding."
+}

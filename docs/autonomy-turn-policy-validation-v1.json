@@ -1,0 +1,818 @@
+{
+  "version": "autonomy-turn-policy-validation-v1",
+  "status": "local-verified-not-deployed",
+  "analysis_version": "research-autonomy-v3",
+  "runtime_manifest_version": 31,
+  "policy": {
+    "attempts_per_claim": null,
+    "maximum_spend_usd": 100,
+    "elapsed_days": 7
+  },
+  "tests": [
+    {
+      "command": "python3 -B -m unittest discover -s research_workflow/tests -v",
+      "tests": 177,
+      "passed": true,
+      "path": "/Users/Shared/allstar/jumpserve-back-end/.test-artifacts/autonomy-turn-policy/backend-tests-v2.log",
+      "sha256": "6f1b56bb07ec5b95f9b49ecec19e262b87357ef3a2a561e57e88cb22d0cdf4fe"
+    },
+    {
+      "command": "npm test",
+      "tests": 198,
+      "passed": true,
+      "path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/autonomy-turn-policy/frontend-tests-v1.log",
+      "sha256": "d06ef00c6d907dae2c2bfa47ab3fe055f4d6cda2611cc4074dba11c9546ace86"
+    },
+    {
+      "command": "JUMPSERVE_BACKEND_CHECKOUT=/Users/Shared/allstar/jumpserve-back-end npm test -- --runInBand",
+      "tests": 93,
+      "passed": true,
+      "path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/autonomy-turn-policy/infra-tests-v2.log",
+      "sha256": "b1e4be165bd988bfc5997ee6cafe36197edd183e06b642ad376889ad38fd8606"
+    },
+    {
+      "command": "npm run build",
+      "passed": true,
+      "path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/autonomy-turn-policy/frontend-build-v1.log",
+      "sha256": "95d5574b004652d02032552c1abb45e0ce1a89bb8825956c6598db575793c3b0",
+      "existing_warning": null
+    },
+    {
+      "command": "npm run lint",
+      "passed": true,
+      "path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/autonomy-turn-policy/frontend-lint-v2.log",
+      "sha256": "04f119d60dc37241178960c2aa1f9580cef98f1975fddf901fd22e88c8b56d5c",
+      "errors": 0,
+      "warnings": 1,
+      "warning": "Pre-existing auth-button.tsx internal navigation warning"
+    }
+  ],
+  "database": {
+    "workflow": {
+      "path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261020T221736193530Z/autonomy-validation-report.json",
+      "sha256": "fba632e798050aa05e5d48761dbe0ceb28b5966fcf6fbd25553f77292709d838",
+      "groups": 11,
+      "checks": [
+        {
+          "name": "publication rejects incomplete evidence; fixture publication is explicitly synthetic",
+          "passed": true,
+          "wall_seconds": 0.3349612079327926,
+          "evidence": {
+            "malformed_and_missing_cases_rejected": true,
+            "synthetic_local_guard_exercise_only": true,
+            "four_turn_trajectory_accepted": true,
+            "two_attempt_limit_rejected": true,
+            "incomplete_evaluation_not_publishable": true
+          }
+        },
+        {
+          "name": "atomic intake defaults owner isolation RLS and browser denial",
+          "passed": true,
+          "wall_seconds": 0.2617627920117229,
+          "evidence": {
+            "private_tables": 5,
+            "owner_isolation": true,
+            "atomic_intake_replay": true,
+            "defaults": {
+              "reason": "Accepted; durable background preparation is pending.",
+              "status": "running",
+              "study_id": "032b6288-98aa-4658-b060-49a7c53ac0a3",
+              "created_at": "2026-10-20T17:17:38.226824-05:00",
+              "updated_at": "2026-10-20T17:17:38.226824-05:00",
+              "deadline_at": "2026-10-27T17:17:38.226824-05:00",
+              "max_attempts": null,
+              "initial_prompt": "{\"defaults\":{\"attempts_per_claim\":null,\"elapsed_days\":7,\"global_parallel_claims\":4,\"maximum_spend_usd\":100,\"parallel_claims_per_paper\":2},\"instruction\":\"Assess this paper autonomously within application defaults. Preserve unresolved findings and explain external blockers; never force a desired result.\",\"paper\":{\"domain\":\"Software verification\",\"origin_module\":null,\"paper_url\":\"https://example.org/autonomy-software-fixture.pdf\",\"scope\":\"Synthetic recorded values only; no scientific claims\",\"study_kind\":\"paper\",\"title\":\"Autonomy full-flow software fixture\"}}",
+              "initial_sha256": "5101652f325117196f4780f1bcb578165898f52c75adce07a32b8df4e9adc2e8",
+              "committed_cents": 500,
+              "max_spend_cents": 10000,
+              "overhead_reservation_cents": 500
+            }
+          }
+        },
+        {
+          "name": "parallel claims execute recorded checks retry personalized gaps and retain external blockers",
+          "passed": true,
+          "wall_seconds": 12.02141391695477,
+          "evidence": {
+            "cycles": 12,
+            "tasks": 4,
+            "model_fixture_calls": 17,
+            "queue_jobs": 4,
+            "labels": [
+              "discrepant",
+              "reproduced",
+              "untested"
+            ],
+            "tailored_followup": true,
+            "original_prompts_verified": true,
+            "typed_evidence_references": true,
+            "real_provider_calls": 0,
+            "cloud_instances": 0
+          }
+        },
+        {
+          "name": "actual PDF parser preserves original bytes and explicit source review omissions",
+          "passed": true,
+          "wall_seconds": 0.6892456670757383,
+          "evidence": {
+            "actual_pypdf_version": "6.19.0",
+            "actual_parser_subprocess": true,
+            "synthetic_pdf": true,
+            "original_bytes_and_hash_verified": true,
+            "complete_review_claimed": false
+          }
+        },
+        {
+          "name": "concurrent model reservations cannot exceed shared paper budget; expired calls retain unknown usage",
+          "passed": true,
+          "wall_seconds": 0.5801235000835732,
+          "evidence": {
+            "concurrent_overcommit_denied": true,
+            "model_commitments_cents": 6000,
+            "controller_and_initial_commitments_cents": 515,
+            "expired_provider_never_replayed": true
+          }
+        },
+        {
+          "name": "turns continue beyond 25 with original failures numbering and fenced leases",
+          "passed": true,
+          "wall_seconds": 2.091973959002644,
+          "evidence": {
+            "attempts": 40,
+            "beyond_former_limit": true,
+            "failed_attempts_preserved": true,
+            "stale_fence_denied": true,
+            "paginated_history": true
+          }
+        },
+        {
+          "name": "seven-day elapsed deadline stops queued autonomous work",
+          "passed": true,
+          "wall_seconds": 0.08761587494518608,
+          "evidence": {
+            "expired_work_not_dispatched": true,
+            "clock_fixture_only": true
+          }
+        },
+        {
+          "name": "parallel SQL claims obey four global and two per-paper slots",
+          "passed": true,
+          "wall_seconds": 0.36069995805155486,
+          "evidence": {
+            "global_slots": 4,
+            "per_paper_slots": 2,
+            "fifth_lease_denied": true,
+            "actual_parallel_sql_claims": true,
+            "all_expired_workflows_stop": true
+          }
+        },
+        {
+          "name": "known context recovery preserves authorization and cannot reset or repeat attempts",
+          "passed": true,
+          "wall_seconds": 1.394484541960992,
+          "evidence": {
+            "original_limits_and_costs_preserved": true,
+            "one_recovery_per_implementation": true,
+            "wrong_owner_and_browser_denied": true,
+            "new_byte_budget_recovery_after_v2": true,
+            "preflight_hash_and_size_recorded": true,
+            "oversized_preflight_rejected": true
+          }
+        },
+        {
+          "name": "parallel experiment commitments share one atomic paper budget",
+          "passed": true,
+          "wall_seconds": 0.5061833329964429,
+          "evidence": {
+            "parallel_experiment_overcommit_denied": true,
+            "real_cloud_calls": 0,
+            "requested_commitments_cents": 12000
+          }
+        },
+        {
+          "name": "actual bounded TCP worker persists observations and hash-verified original response",
+          "passed": true,
+          "wall_seconds": 0.9795557080069557,
+          "evidence": {
+            "actual_local_tcp": true,
+            "stored_measurements": 4,
+            "original_response_bytes": 1272,
+            "original_sha256": "1a217305ecb869c54839b983e5b074179f7a38a1cafdcfaddd6babb7b8315932",
+            "cloud_calls": 0,
+            "cloud_transport": "Explicit local SDK fixture; no deployed Lambda claim",
+            "socket_cleanup_verified": true
+          }
+        }
+      ],
+      "migration_sha256": {
+        "202609200001_agent_prompts.sql": "7468b857ae542b5597077981ecd433c7662a5bb1f8f477e34d490c5f36cd849b",
+        "202609290001_real_world_agent.sql": "fb7b7556fc1f516e67e6334d0aaa5b21c0939e955f42d2e0abdd3bddc6fb373f",
+        "202610040009_agent_evidence_rendering.sql": "034b7fc766addee69474e86919b5062cf56b6e72502a658f9c4fae7533d5555e",
+        "202610050104_ipv6_publication_review_guard.sql": "bd4d000f5a34661c0026194b498e0cefaf12353b79cc7ea436736431768ef36d",
+        "202610070001_research_workflow.sql": "d97983192c89e40886d613e5a2ee4548e52a0e5d66a397ccaab134f3efacb6d3",
+        "202610070002_research_queue.sql": "49f0f761aba55bc7771968b30048c34a7db4996947503b558b3eaac599577d63",
+        "202610070003_research_preparation.sql": "e3e6b75ced1c98e494551c7500825080bc141a2594263cd8840f082bd383d906",
+        "202610120001_research_ideas.sql": "b91c8b157090e397029764372cfea09f0c9af7a37f61346fac5d912706cbf00f",
+        "202610120002_research_idea_prompt.sql": "9efa726606a59a16186bdb5ff5e9ab8e78d972185ed752bdd93e041926e7718b",
+        "202610120003_research_idea_prompt_seed.sql": "b2f01cfbed3e607f2513f7b7eefa08f3da8587664133451a180d05e47ae67286",
+        "202610120004_research_idea_prompt_seed_v2.sql": "e902230db40c097bbe6f1b1b406523b4a97725cce668dc51ce482c64e7d1f54d",
+        "202610130001_research_idea_review_roles.sql": "a9f46a0993cc23b417ce5f06e672678cc95a9efefbf752a632b44171d9ec1b97",
+        "202610140001_idea_interview_prompt.sql": "94aa9f3317bec4938d2b4a7fed6d8555170285279e1ce67bb57bf64546a5b71b",
+        "202610140002_idea_interview_prompt_v4.sql": "d35fd0e2f43db55330c064664d0bec38a9dea61c0910945e549132b8ae7c88a7",
+        "202610140003_idea_interview_prompt_v5.sql": "3f318da16db4c0622f7b98a5365bb97d551be31e39d1e555aa93fa381b052f49",
+        "202610140004_idea_interview_prompt_v6.sql": "7af34f10601d252179a759b851236940e5f2eb3a416f46a8848b381ebac8a67f",
+        "202610140005_idea_interview_prompt_v7.sql": "ab010bea1076af1b157a673d62275ce7d9fa021b67c8a753a8293c2f1bade394",
+        "202610140006_idea_interview_prompt_v8.sql": "3c0cbd7f42b38efebc717d2a5238b00b56469cefbbda03a189f92a17009303d1",
+        "202610140007_idea_review_sources_v9.sql": "b07d0048bcef80e271d93f245f5f869a34e5620c82ccf4f5dee76e1bedc40a23",
+        "202610140008_idea_review_sources_v10.sql": "4c6aca6ed15f1b76913f905414a98eaf67e50ba14c1d22a5e44dc90b5ed39779",
+        "202610140009_idea_review_sources_v11.sql": "99cd12fdc5bc90a639e4eabe4726d9711781df7a38a9a9825be7550f43e19bbf",
+        "202610130002_network_execution.sql": "2fca154107dd146a80c0fb7248fe6b6e78db017f1ef2bd1810b12ba6f69e0851",
+        "202610170001_claim_experiment_design.sql": "f42157f6c903d68b9fc9ce1a8f8e313654b898d244e7815e5ffe23dab21b830c",
+        "202610170002_claim_design_prompt.sql": "4642720a4c1551f76c42ba721b4abb3d46ba8017d76b03329d92616804db1779",
+        "202610170003_claim_design_prompt_v2.sql": "b647e840e770ac8073e02de29ea7a1d73abfb370debe24154df0edc909f3e993",
+        "202610170004_claim_design_prompt_v3.sql": "f8a312a30ce597f0acb772fce7656b1356ff627216340f02477def571914dc84",
+        "202610170005_claim_design_prompt_v4.sql": "68ad8a3fd28c85a73359994a07e6af43106e530816f7010d099334db5b9924a7",
+        "202610170006_claim_design_policy_guard.sql": "e7ef7782b9711bfe395c04e3a0334db6e94ebad8857bc2c7d79230003b8720bd",
+        "202610170007_claim_design_prompt_v5.sql": "74440be9d7ec4395bbb6707130ab01ce0ba0849a99c7c233aebbabba36f674c3",
+        "202610170008_claim_design_v5_publication_guard.sql": "0952b51cfe3582418ffee1830ef721e19a60421e101e21b4a01a54fa0f07fde9",
+        "202610170009_claim_design_prompt_v6.sql": "6eb609d99509f936946a0add9938a29a1b1dace58d40dfc20920ed9b1ca77daa",
+        "202610170010_claim_design_v6_publication_guard.sql": "6746234763cd4d1bf7b848ed1649fae0f75ece1e70b0c426be4bb9cb047717ae",
+        "202610170011_claim_design_replay_publication_guard.sql": "0af3c9516c844cca8090e2dc8e88f0c5adec2ab6fa8016cb16b164014f4bb42d",
+        "202610170012_claim_design_quote_publication_guard.sql": "a3f0dce1c3dc874dc24074ee5f46a8ac5022fd483fc0a66e25a038143c4dddd9",
+        "202610170013_claim_design_exact_units_publication_guard.sql": "f59a3cd85d708aba84f284175ef3238bc3b65603ea931614b2c70478625be5bb",
+        "202610180001_claim_packet_reuse.sql": "76f8b02321380f40c63b5a6ee6e291b3d1de81eb0f9637cab4043a58b661c798",
+        "202610180002_autonomous_assessments.sql": "82fa520df410503e66b075fdb742d1a7b22ad8ab0f7a3ccdde59be7c13bb90ff",
+        "202610180003_autonomy_prompt_candidate.sql": "cd722f7c4c71a8b14ef21a3dff4b8395a3ab7a57dbe7fb155adc42860216bf74",
+        "202610180004_autonomy_publication_guard.sql": "496b5f6546633ec69f4315aff6eaf0fc736a271440c98986b9548bc726fbcf10",
+        "202610180005_autonomy_prompt_v2.sql": "206eaac31b952fe609906c80a85165ba96249701e51db71ef57e6f61db56eac9",
+        "202610180006_autonomy_v2_publication_guard.sql": "95a4709989c55378e0646966cbd95336ec58896c491fb0e21ead364d2f1f900c",
+        "202610180007_autonomy_prompt_v3.sql": "8cfae0e1550ad27090f1e6303c26200fa892aa911f3a95a5c4fca8a128d636b9",
+        "202610180008_autonomy_v3_publication_guard.sql": "57121fb6305ed6cd0b120dee631352d74fbd90177d23024e5d4f44d0e84ad018",
+        "202610180009_autonomy_prompt_v4.sql": "5ab02c2310109d6fbd8851d97087213679be74a16884d1560b1a58a87a640584",
+        "202610180010_autonomy_v4_publication_guard.sql": "09350903c49ef9c4177955ffba196e756d798f3c8668b2a2c4bfb27a6323ac2d",
+        "202610180011_autonomy_prompt_v5.sql": "7c2ca4925b84da963a9e7cc2b78e0db772e9bb22f03e1e6371542d31339728e4",
+        "202610180012_autonomy_v5_publication_guard.sql": "ae5b5c34ffb5181cf314e4b742fca6a4dd464f516ade1126959b0ea4ecbb632d",
+        "202610180013_autonomy_provider_recovery_guard.sql": "912afb98df28e4c4288edf7d79c33db4704401b8dba2616ce361ceae7f413cd0",
+        "202610180014_autonomy_prompt_v6.sql": "b4b4cab86963ff5195d061734440d7936e8306eaa693e359d2ffbc8164fe0b32",
+        "202610180015_autonomy_phase_publication_guard.sql": "0edbd47a8aa23a8318425907fc42cc5ef61bfacce21be710f3514002158669f4",
+        "202610180016_autonomy_context_integration_guard.sql": "9b0bf0420e0afec0ea1fc0369bbff6ca66f281dfdbecaaa86e3fa66f049d19c7",
+        "202610180017_autonomy_evidence_publication_guard.sql": "d64f3b2b00a310f718b239627af73df29a375254d158b99f9d97283299dca167",
+        "202610190001_bounded_followups.sql": "03f802d118b2f3e32e6d22ab074fd2ae500806ac877bcdbd2e3acf3eb9e197ef",
+        "202610190002_autonomy_prompt_v7.sql": "621a64e1487868a58398a609bfb1517034c879ee496db2c3c8a73d562c2da226",
+        "202610190003_autonomy_v7_publication_guard.sql": "b4e3f4330f8573debb44a01401addb6fb55a27007326f4c8fbcce323866c09b1",
+        "202610190004_bounded_tcp_queue.sql": "866ab90411707662dd8d8e33f727378614f0b752deb8362e2cbe0f07ffc01fb2",
+        "202610190005_autonomy_prompt_v8.sql": "d450b3a5334680cd52f24731917cef9874f93b8420f8699d418d4aceed1a007d",
+        "202610190006_autonomy_v8_publication_guard.sql": "aaa5eccfe6c49e9a746e60bc0a9a952642cc88b6653aba719bea62b1b332581f",
+        "202610190007_autonomy_v8_review_criteria.sql": "73d4545673e96e02904fd8a32292ff8bc95453c591980e5ae54bf4ba03da806b",
+        "202610190008_autonomy_completion_publication_guard.sql": "b39b45db543e847647911df4ef8c898316780c9cd6a0dc081066d2cc5b5fad6c",
+        "202610190009_application_trajectory_guard.sql": "46b1fdf1ca30c82343705a13f9142801592ba72873ac4f221dfa59b3ede3b550",
+        "202610190010_rejected_turn_review.sql": "a8f85f52092974908e769f3a0556635181397b826ab76b1dd0acd1022f085b45",
+        "202610200001_private_paper_uploads.sql": "624fd8679d046cd96ba0bd7d71fe6dab59de74e2c7341098603ae706ee713b8c",
+        "202610200002_context_budget_recovery.sql": "583810d368133824cef9a468d31aa8f712f06db9e1be4f5c08b4cc491a39b223",
+        "202610200008_remove_autonomy_turn_cap.sql": "ca3289a721dfdc0167f2a9d68c0238b39422ef3ccc672e9ec1aafe1859677d64"
+      },
+      "synthetic_auth_provider_storage": true
+    },
+    "upgrade": {
+      "path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261020T221603227823Z/turn-policy-validation-report.json",
+      "sha256": "ea1baa3dd9971de99d2a0834119dee9a540a628b39322635f3c38b275eaf4ec3",
+      "groups": 6,
+      "checks": [
+        {
+          "name": "retain real legacy admission records before changing policy",
+          "passed": true,
+          "wall_seconds": 9.342020499985665,
+          "evidence": {
+            "campaigns": 7,
+            "numbered_synthetic_turns": 175,
+            "legacy_26th_admission_denied": true,
+            "real_model_calls": 0
+          }
+        },
+        {
+          "name": "retain original private audit ceiling as the pre-upgrade control",
+          "passed": true,
+          "wall_seconds": 0.1269339999416843,
+          "evidence": {
+            "private_audit_relations": 2,
+            "legacy_26th_row_denied": true,
+            "actual_provider_calls": 0
+          }
+        },
+        {
+          "name": "upgrade removes ceilings with immutable audit and no automatic dispatch",
+          "passed": true,
+          "wall_seconds": 0.6470932089723647,
+          "evidence": {
+            "original_prompts_turns_costs_deadlines_unchanged": true,
+            "policy_change_audited": true,
+            "migration_does_not_dispatch": true
+          }
+        },
+        {
+          "name": "private audit storage accepts future turn numbers while retaining security",
+          "passed": true,
+          "wall_seconds": 0.20689416700042784,
+          "evidence": {
+            "number_26_stored": true,
+            "zero_rejected": true,
+            "browser_access_denied": true,
+            "frozen_pilot_protocols_not_modified": true
+          }
+        },
+        {
+          "name": "eligible cap stops resume once with original numbering and uncertainty gates",
+          "passed": true,
+          "wall_seconds": 0.35887458291836083,
+          "evidence": {
+            "resumed_once": true,
+            "next_number": 26,
+            "blocked_unknown_cancelled_completed_budget_deadline_not_resumed": true,
+            "history_verified": true
+          }
+        },
+        {
+          "name": "legacy replay new defaults ownership RLS and immutable history remain correct",
+          "passed": true,
+          "wall_seconds": 0.17773995897732675,
+          "evidence": {
+            "same_request_replay_preserves_original": true,
+            "altered_source_rejected": true,
+            "browser_access_denied": true,
+            "ceiling_cannot_be_reinstated": true,
+            "new_intake_unlimited": true
+          }
+        }
+      ],
+      "migration_sha256": {
+        "202609200001_agent_prompts.sql": "7468b857ae542b5597077981ecd433c7662a5bb1f8f477e34d490c5f36cd849b",
+        "202609290001_real_world_agent.sql": "fb7b7556fc1f516e67e6334d0aaa5b21c0939e955f42d2e0abdd3bddc6fb373f",
+        "202610040009_agent_evidence_rendering.sql": "034b7fc766addee69474e86919b5062cf56b6e72502a658f9c4fae7533d5555e",
+        "202610050104_ipv6_publication_review_guard.sql": "bd4d000f5a34661c0026194b498e0cefaf12353b79cc7ea436736431768ef36d",
+        "202610070001_research_workflow.sql": "d97983192c89e40886d613e5a2ee4548e52a0e5d66a397ccaab134f3efacb6d3",
+        "202610070002_research_queue.sql": "49f0f761aba55bc7771968b30048c34a7db4996947503b558b3eaac599577d63",
+        "202610070003_research_preparation.sql": "e3e6b75ced1c98e494551c7500825080bc141a2594263cd8840f082bd383d906",
+        "202610120001_research_ideas.sql": "b91c8b157090e397029764372cfea09f0c9af7a37f61346fac5d912706cbf00f",
+        "202610120002_research_idea_prompt.sql": "9efa726606a59a16186bdb5ff5e9ab8e78d972185ed752bdd93e041926e7718b",
+        "202610120003_research_idea_prompt_seed.sql": "b2f01cfbed3e607f2513f7b7eefa08f3da8587664133451a180d05e47ae67286",
+        "202610120004_research_idea_prompt_seed_v2.sql": "e902230db40c097bbe6f1b1b406523b4a97725cce668dc51ce482c64e7d1f54d",
+        "202610130001_research_idea_review_roles.sql": "a9f46a0993cc23b417ce5f06e672678cc95a9efefbf752a632b44171d9ec1b97",
+        "202610140001_idea_interview_prompt.sql": "94aa9f3317bec4938d2b4a7fed6d8555170285279e1ce67bb57bf64546a5b71b",
+        "202610140002_idea_interview_prompt_v4.sql": "d35fd0e2f43db55330c064664d0bec38a9dea61c0910945e549132b8ae7c88a7",
+        "202610140003_idea_interview_prompt_v5.sql": "3f318da16db4c0622f7b98a5365bb97d551be31e39d1e555aa93fa381b052f49",
+        "202610140004_idea_interview_prompt_v6.sql": "7af34f10601d252179a759b851236940e5f2eb3a416f46a8848b381ebac8a67f",
+        "202610140005_idea_interview_prompt_v7.sql": "ab010bea1076af1b157a673d62275ce7d9fa021b67c8a753a8293c2f1bade394",
+        "202610140006_idea_interview_prompt_v8.sql": "3c0cbd7f42b38efebc717d2a5238b00b56469cefbbda03a189f92a17009303d1",
+        "202610140007_idea_review_sources_v9.sql": "b07d0048bcef80e271d93f245f5f869a34e5620c82ccf4f5dee76e1bedc40a23",
+        "202610140008_idea_review_sources_v10.sql": "4c6aca6ed15f1b76913f905414a98eaf67e50ba14c1d22a5e44dc90b5ed39779",
+        "202610140009_idea_review_sources_v11.sql": "99cd12fdc5bc90a639e4eabe4726d9711781df7a38a9a9825be7550f43e19bbf",
+        "202610130002_network_execution.sql": "2fca154107dd146a80c0fb7248fe6b6e78db017f1ef2bd1810b12ba6f69e0851",
+        "202610170001_claim_experiment_design.sql": "f42157f6c903d68b9fc9ce1a8f8e313654b898d244e7815e5ffe23dab21b830c",
+        "202610170002_claim_design_prompt.sql": "4642720a4c1551f76c42ba721b4abb3d46ba8017d76b03329d92616804db1779",
+        "202610170003_claim_design_prompt_v2.sql": "b647e840e770ac8073e02de29ea7a1d73abfb370debe24154df0edc909f3e993",
+        "202610170004_claim_design_prompt_v3.sql": "f8a312a30ce597f0acb772fce7656b1356ff627216340f02477def571914dc84",
+        "202610170005_claim_design_prompt_v4.sql": "68ad8a3fd28c85a73359994a07e6af43106e530816f7010d099334db5b9924a7",
+        "202610170006_claim_design_policy_guard.sql": "e7ef7782b9711bfe395c04e3a0334db6e94ebad8857bc2c7d79230003b8720bd",
+        "202610170007_claim_design_prompt_v5.sql": "74440be9d7ec4395bbb6707130ab01ce0ba0849a99c7c233aebbabba36f674c3",
+        "202610170008_claim_design_v5_publication_guard.sql": "0952b51cfe3582418ffee1830ef721e19a60421e101e21b4a01a54fa0f07fde9",
+        "202610170009_claim_design_prompt_v6.sql": "6eb609d99509f936946a0add9938a29a1b1dace58d40dfc20920ed9b1ca77daa",
+        "202610170010_claim_design_v6_publication_guard.sql": "6746234763cd4d1bf7b848ed1649fae0f75ece1e70b0c426be4bb9cb047717ae",
+        "202610170011_claim_design_replay_publication_guard.sql": "0af3c9516c844cca8090e2dc8e88f0c5adec2ab6fa8016cb16b164014f4bb42d",
+        "202610170012_claim_design_quote_publication_guard.sql": "a3f0dce1c3dc874dc24074ee5f46a8ac5022fd483fc0a66e25a038143c4dddd9",
+        "202610170013_claim_design_exact_units_publication_guard.sql": "f59a3cd85d708aba84f284175ef3238bc3b65603ea931614b2c70478625be5bb",
+        "202610180001_claim_packet_reuse.sql": "76f8b02321380f40c63b5a6ee6e291b3d1de81eb0f9637cab4043a58b661c798",
+        "202610180002_autonomous_assessments.sql": "82fa520df410503e66b075fdb742d1a7b22ad8ab0f7a3ccdde59be7c13bb90ff",
+        "202610180003_autonomy_prompt_candidate.sql": "cd722f7c4c71a8b14ef21a3dff4b8395a3ab7a57dbe7fb155adc42860216bf74",
+        "202610180004_autonomy_publication_guard.sql": "496b5f6546633ec69f4315aff6eaf0fc736a271440c98986b9548bc726fbcf10",
+        "202610180005_autonomy_prompt_v2.sql": "206eaac31b952fe609906c80a85165ba96249701e51db71ef57e6f61db56eac9",
+        "202610180006_autonomy_v2_publication_guard.sql": "95a4709989c55378e0646966cbd95336ec58896c491fb0e21ead364d2f1f900c",
+        "202610180007_autonomy_prompt_v3.sql": "8cfae0e1550ad27090f1e6303c26200fa892aa911f3a95a5c4fca8a128d636b9",
+        "202610180008_autonomy_v3_publication_guard.sql": "57121fb6305ed6cd0b120dee631352d74fbd90177d23024e5d4f44d0e84ad018",
+        "202610180009_autonomy_prompt_v4.sql": "5ab02c2310109d6fbd8851d97087213679be74a16884d1560b1a58a87a640584",
+        "202610180010_autonomy_v4_publication_guard.sql": "09350903c49ef9c4177955ffba196e756d798f3c8668b2a2c4bfb27a6323ac2d",
+        "202610180011_autonomy_prompt_v5.sql": "7c2ca4925b84da963a9e7cc2b78e0db772e9bb22f03e1e6371542d31339728e4",
+        "202610180012_autonomy_v5_publication_guard.sql": "ae5b5c34ffb5181cf314e4b742fca6a4dd464f516ade1126959b0ea4ecbb632d",
+        "202610180013_autonomy_provider_recovery_guard.sql": "912afb98df28e4c4288edf7d79c33db4704401b8dba2616ce361ceae7f413cd0",
+        "202610180014_autonomy_prompt_v6.sql": "b4b4cab86963ff5195d061734440d7936e8306eaa693e359d2ffbc8164fe0b32",
+        "202610180015_autonomy_phase_publication_guard.sql": "0edbd47a8aa23a8318425907fc42cc5ef61bfacce21be710f3514002158669f4",
+        "202610180016_autonomy_context_integration_guard.sql": "9b0bf0420e0afec0ea1fc0369bbff6ca66f281dfdbecaaa86e3fa66f049d19c7",
+        "202610180017_autonomy_evidence_publication_guard.sql": "d64f3b2b00a310f718b239627af73df29a375254d158b99f9d97283299dca167",
+        "202610190001_bounded_followups.sql": "03f802d118b2f3e32e6d22ab074fd2ae500806ac877bcdbd2e3acf3eb9e197ef",
+        "202610190002_autonomy_prompt_v7.sql": "621a64e1487868a58398a609bfb1517034c879ee496db2c3c8a73d562c2da226",
+        "202610190003_autonomy_v7_publication_guard.sql": "b4e3f4330f8573debb44a01401addb6fb55a27007326f4c8fbcce323866c09b1",
+        "202610190004_bounded_tcp_queue.sql": "866ab90411707662dd8d8e33f727378614f0b752deb8362e2cbe0f07ffc01fb2",
+        "202610190005_autonomy_prompt_v8.sql": "d450b3a5334680cd52f24731917cef9874f93b8420f8699d418d4aceed1a007d",
+        "202610190006_autonomy_v8_publication_guard.sql": "aaa5eccfe6c49e9a746e60bc0a9a952642cc88b6653aba719bea62b1b332581f",
+        "202610190007_autonomy_v8_review_criteria.sql": "73d4545673e96e02904fd8a32292ff8bc95453c591980e5ae54bf4ba03da806b",
+        "202610190008_autonomy_completion_publication_guard.sql": "b39b45db543e847647911df4ef8c898316780c9cd6a0dc081066d2cc5b5fad6c",
+        "202610190009_application_trajectory_guard.sql": "46b1fdf1ca30c82343705a13f9142801592ba72873ac4f221dfa59b3ede3b550",
+        "202610190010_rejected_turn_review.sql": "a8f85f52092974908e769f3a0556635181397b826ab76b1dd0acd1022f085b45",
+        "202610200001_private_paper_uploads.sql": "624fd8679d046cd96ba0bd7d71fe6dab59de74e2c7341098603ae706ee713b8c",
+        "202610200002_context_budget_recovery.sql": "583810d368133824cef9a468d31aa8f712f06db9e1be4f5c08b4cc491a39b223",
+        "202610200003_runtime_pilot_audit.sql": "5788ffe078f94ca5594642a7a417823fd23b67147c0d0b2c34ca0bd1d00f68ce",
+        "202610200005_subscription_pilot.sql": "e69206cb78927b2c92667be0593e338f07ea35297dac2c4f4643b286d6471236",
+        "202610200008_remove_autonomy_turn_cap.sql": "ca3289a721dfdc0167f2a9d68c0238b39422ef3ccc672e9ec1aafe1859677d64"
+      },
+      "synthetic_auth_provider_storage": true
+    },
+    "pdf_upload": {
+      "path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261020T221454924194Z/paper-upload-validation-report.json",
+      "sha256": "e6de028fce5e6031bce510bb0a64bb750ae3bf60b287a7ac7f112dac4a710cc1",
+      "groups": 8,
+      "checks": [
+        {
+          "name": "owner-scoped reservation is immutable and does not start work before upload",
+          "passed": true,
+          "wall_seconds": 0.13788425002712756,
+          "evidence": {
+            "exact_hash": "dcda89d39bb4200cc8bc9e7564a0c6b1adff8e382765aec10844717c6f092cb0",
+            "pending_without_workflow": true,
+            "same_id_replay": true,
+            "wrong_owner_denied": true
+          }
+        },
+        {
+          "name": "missing upload remains retryable without a study or model request",
+          "passed": true,
+          "wall_seconds": 0.06778354197740555,
+          "evidence": {
+            "missing_original_not_zero_or_success": true,
+            "original_request_retained": true
+          }
+        },
+        {
+          "name": "three concurrent completions atomically retain bytes and create only one workflow",
+          "passed": true,
+          "wall_seconds": 0.23872924991883337,
+          "evidence": {
+            "concurrent_completions": 3,
+            "workflows": 1,
+            "intake_tasks": 1,
+            "initial_prompt_sha256": "aaec420bfdde26bdc62b3483d168d9de32b073d70c3fa44065f5e7b3b48f4723",
+            "paper_url": null,
+            "original_hash_verified": true
+          }
+        },
+        {
+          "name": "actual PDF extraction reads the private uploaded original with no synthetic URL",
+          "passed": true,
+          "wall_seconds": 0.43279004201758653,
+          "evidence": {
+            "actual_pypdf_version": "6.19.0",
+            "actual_parser_subprocess": true,
+            "parent_sys_path_only_dependency": true,
+            "inherited_pythonpath_fixture": false,
+            "original_bytes_unchanged": true,
+            "source_review_complete": false,
+            "internet_fetches": 0
+          }
+        },
+        {
+          "name": "invalid or altered uploads retain rejection reasons without admitting work",
+          "passed": true,
+          "wall_seconds": 0.22133812494575977,
+          "evidence": {
+            "invalid_signature_rejected": true,
+            "tampered_hash_or_size_rejected": true,
+            "failed_originals_retained": true
+          }
+        },
+        {
+          "name": "RLS RPC grants original identity and bucket configuration retain private access",
+          "passed": true,
+          "wall_seconds": 0.22109770809765905,
+          "evidence": {
+            "rls_enabled": true,
+            "browser_reads": false,
+            "browser_writes": false,
+            "browser_rpc": false,
+            "private_bucket": true,
+            "bucket_maximum_bytes": 10000000,
+            "terminal_identity_immutable": true,
+            "remote_storage_enforcement_exercised": false
+          }
+        },
+        {
+          "name": "legacy studies replay while direct unverified PDF starts are denied",
+          "passed": true,
+          "wall_seconds": 0.15876645897515118,
+          "evidence": {
+            "legacy_url_and_idea_replay": true,
+            "unverified_direct_start_denied": true
+          }
+        },
+        {
+          "name": "owner follow-up workspaces preserve uploaded paper bytes without launching new autonomy",
+          "passed": true,
+          "wall_seconds": 0.2823986249277368,
+          "evidence": {
+            "owner_copy_hash_verified": true,
+            "duplicate_copy_idempotent": true,
+            "cross_owner_copy_denied": true,
+            "unrequested_autonomous_workflows": 0
+          }
+        }
+      ],
+      "migration_sha256": {
+        "202609200001_agent_prompts.sql": "7468b857ae542b5597077981ecd433c7662a5bb1f8f477e34d490c5f36cd849b",
+        "202609290001_real_world_agent.sql": "fb7b7556fc1f516e67e6334d0aaa5b21c0939e955f42d2e0abdd3bddc6fb373f",
+        "202610040009_agent_evidence_rendering.sql": "034b7fc766addee69474e86919b5062cf56b6e72502a658f9c4fae7533d5555e",
+        "202610050104_ipv6_publication_review_guard.sql": "bd4d000f5a34661c0026194b498e0cefaf12353b79cc7ea436736431768ef36d",
+        "202610070001_research_workflow.sql": "d97983192c89e40886d613e5a2ee4548e52a0e5d66a397ccaab134f3efacb6d3",
+        "202610070002_research_queue.sql": "49f0f761aba55bc7771968b30048c34a7db4996947503b558b3eaac599577d63",
+        "202610070003_research_preparation.sql": "e3e6b75ced1c98e494551c7500825080bc141a2594263cd8840f082bd383d906",
+        "202610120001_research_ideas.sql": "b91c8b157090e397029764372cfea09f0c9af7a37f61346fac5d912706cbf00f",
+        "202610120002_research_idea_prompt.sql": "9efa726606a59a16186bdb5ff5e9ab8e78d972185ed752bdd93e041926e7718b",
+        "202610120003_research_idea_prompt_seed.sql": "b2f01cfbed3e607f2513f7b7eefa08f3da8587664133451a180d05e47ae67286",
+        "202610120004_research_idea_prompt_seed_v2.sql": "e902230db40c097bbe6f1b1b406523b4a97725cce668dc51ce482c64e7d1f54d",
+        "202610130001_research_idea_review_roles.sql": "a9f46a0993cc23b417ce5f06e672678cc95a9efefbf752a632b44171d9ec1b97",
+        "202610140001_idea_interview_prompt.sql": "94aa9f3317bec4938d2b4a7fed6d8555170285279e1ce67bb57bf64546a5b71b",
+        "202610140002_idea_interview_prompt_v4.sql": "d35fd0e2f43db55330c064664d0bec38a9dea61c0910945e549132b8ae7c88a7",
+        "202610140003_idea_interview_prompt_v5.sql": "3f318da16db4c0622f7b98a5365bb97d551be31e39d1e555aa93fa381b052f49",
+        "202610140004_idea_interview_prompt_v6.sql": "7af34f10601d252179a759b851236940e5f2eb3a416f46a8848b381ebac8a67f",
+        "202610140005_idea_interview_prompt_v7.sql": "ab010bea1076af1b157a673d62275ce7d9fa021b67c8a753a8293c2f1bade394",
+        "202610140006_idea_interview_prompt_v8.sql": "3c0cbd7f42b38efebc717d2a5238b00b56469cefbbda03a189f92a17009303d1",
+        "202610140007_idea_review_sources_v9.sql": "b07d0048bcef80e271d93f245f5f869a34e5620c82ccf4f5dee76e1bedc40a23",
+        "202610140008_idea_review_sources_v10.sql": "4c6aca6ed15f1b76913f905414a98eaf67e50ba14c1d22a5e44dc90b5ed39779",
+        "202610140009_idea_review_sources_v11.sql": "99cd12fdc5bc90a639e4eabe4726d9711781df7a38a9a9825be7550f43e19bbf",
+        "202610130002_network_execution.sql": "2fca154107dd146a80c0fb7248fe6b6e78db017f1ef2bd1810b12ba6f69e0851",
+        "202610170001_claim_experiment_design.sql": "f42157f6c903d68b9fc9ce1a8f8e313654b898d244e7815e5ffe23dab21b830c",
+        "202610170002_claim_design_prompt.sql": "4642720a4c1551f76c42ba721b4abb3d46ba8017d76b03329d92616804db1779",
+        "202610170003_claim_design_prompt_v2.sql": "b647e840e770ac8073e02de29ea7a1d73abfb370debe24154df0edc909f3e993",
+        "202610170004_claim_design_prompt_v3.sql": "f8a312a30ce597f0acb772fce7656b1356ff627216340f02477def571914dc84",
+        "202610170005_claim_design_prompt_v4.sql": "68ad8a3fd28c85a73359994a07e6af43106e530816f7010d099334db5b9924a7",
+        "202610170006_claim_design_policy_guard.sql": "e7ef7782b9711bfe395c04e3a0334db6e94ebad8857bc2c7d79230003b8720bd",
+        "202610170007_claim_design_prompt_v5.sql": "74440be9d7ec4395bbb6707130ab01ce0ba0849a99c7c233aebbabba36f674c3",
+        "202610170008_claim_design_v5_publication_guard.sql": "0952b51cfe3582418ffee1830ef721e19a60421e101e21b4a01a54fa0f07fde9",
+        "202610170009_claim_design_prompt_v6.sql": "6eb609d99509f936946a0add9938a29a1b1dace58d40dfc20920ed9b1ca77daa",
+        "202610170010_claim_design_v6_publication_guard.sql": "6746234763cd4d1bf7b848ed1649fae0f75ece1e70b0c426be4bb9cb047717ae",
+        "202610170011_claim_design_replay_publication_guard.sql": "0af3c9516c844cca8090e2dc8e88f0c5adec2ab6fa8016cb16b164014f4bb42d",
+        "202610170012_claim_design_quote_publication_guard.sql": "a3f0dce1c3dc874dc24074ee5f46a8ac5022fd483fc0a66e25a038143c4dddd9",
+        "202610170013_claim_design_exact_units_publication_guard.sql": "f59a3cd85d708aba84f284175ef3238bc3b65603ea931614b2c70478625be5bb",
+        "202610180001_claim_packet_reuse.sql": "76f8b02321380f40c63b5a6ee6e291b3d1de81eb0f9637cab4043a58b661c798",
+        "202610180002_autonomous_assessments.sql": "82fa520df410503e66b075fdb742d1a7b22ad8ab0f7a3ccdde59be7c13bb90ff",
+        "202610180003_autonomy_prompt_candidate.sql": "cd722f7c4c71a8b14ef21a3dff4b8395a3ab7a57dbe7fb155adc42860216bf74",
+        "202610180004_autonomy_publication_guard.sql": "496b5f6546633ec69f4315aff6eaf0fc736a271440c98986b9548bc726fbcf10",
+        "202610180005_autonomy_prompt_v2.sql": "206eaac31b952fe609906c80a85165ba96249701e51db71ef57e6f61db56eac9",
+        "202610180006_autonomy_v2_publication_guard.sql": "95a4709989c55378e0646966cbd95336ec58896c491fb0e21ead364d2f1f900c",
+        "202610180007_autonomy_prompt_v3.sql": "8cfae0e1550ad27090f1e6303c26200fa892aa911f3a95a5c4fca8a128d636b9",
+        "202610180008_autonomy_v3_publication_guard.sql": "57121fb6305ed6cd0b120dee631352d74fbd90177d23024e5d4f44d0e84ad018",
+        "202610180009_autonomy_prompt_v4.sql": "5ab02c2310109d6fbd8851d97087213679be74a16884d1560b1a58a87a640584",
+        "202610180010_autonomy_v4_publication_guard.sql": "09350903c49ef9c4177955ffba196e756d798f3c8668b2a2c4bfb27a6323ac2d",
+        "202610180011_autonomy_prompt_v5.sql": "7c2ca4925b84da963a9e7cc2b78e0db772e9bb22f03e1e6371542d31339728e4",
+        "202610180012_autonomy_v5_publication_guard.sql": "ae5b5c34ffb5181cf314e4b742fca6a4dd464f516ade1126959b0ea4ecbb632d",
+        "202610180013_autonomy_provider_recovery_guard.sql": "912afb98df28e4c4288edf7d79c33db4704401b8dba2616ce361ceae7f413cd0",
+        "202610180014_autonomy_prompt_v6.sql": "b4b4cab86963ff5195d061734440d7936e8306eaa693e359d2ffbc8164fe0b32",
+        "202610180015_autonomy_phase_publication_guard.sql": "0edbd47a8aa23a8318425907fc42cc5ef61bfacce21be710f3514002158669f4",
+        "202610180016_autonomy_context_integration_guard.sql": "9b0bf0420e0afec0ea1fc0369bbff6ca66f281dfdbecaaa86e3fa66f049d19c7",
+        "202610180017_autonomy_evidence_publication_guard.sql": "d64f3b2b00a310f718b239627af73df29a375254d158b99f9d97283299dca167",
+        "202610190001_bounded_followups.sql": "03f802d118b2f3e32e6d22ab074fd2ae500806ac877bcdbd2e3acf3eb9e197ef",
+        "202610190002_autonomy_prompt_v7.sql": "621a64e1487868a58398a609bfb1517034c879ee496db2c3c8a73d562c2da226",
+        "202610190003_autonomy_v7_publication_guard.sql": "b4e3f4330f8573debb44a01401addb6fb55a27007326f4c8fbcce323866c09b1",
+        "202610190004_bounded_tcp_queue.sql": "866ab90411707662dd8d8e33f727378614f0b752deb8362e2cbe0f07ffc01fb2",
+        "202610190005_autonomy_prompt_v8.sql": "d450b3a5334680cd52f24731917cef9874f93b8420f8699d418d4aceed1a007d",
+        "202610190006_autonomy_v8_publication_guard.sql": "aaa5eccfe6c49e9a746e60bc0a9a952642cc88b6653aba719bea62b1b332581f",
+        "202610190007_autonomy_v8_review_criteria.sql": "73d4545673e96e02904fd8a32292ff8bc95453c591980e5ae54bf4ba03da806b",
+        "202610190008_autonomy_completion_publication_guard.sql": "b39b45db543e847647911df4ef8c898316780c9cd6a0dc081066d2cc5b5fad6c",
+        "202610190009_application_trajectory_guard.sql": "46b1fdf1ca30c82343705a13f9142801592ba72873ac4f221dfa59b3ede3b550",
+        "202610190010_rejected_turn_review.sql": "a8f85f52092974908e769f3a0556635181397b826ab76b1dd0acd1022f085b45",
+        "202610200001_private_paper_uploads.sql": "624fd8679d046cd96ba0bd7d71fe6dab59de74e2c7341098603ae706ee713b8c",
+        "202610200002_context_budget_recovery.sql": "583810d368133824cef9a468d31aa8f712f06db9e1be4f5c08b4cc491a39b223",
+        "202610200008_remove_autonomy_turn_cap.sql": "f811af36fae197bdce19b1ab10ad09fe55e573a6e0aa526579692ec491f4d10b"
+      },
+      "synthetic_auth_provider_storage": true
+    }
+  },
+  "scope": "Exposed development regression; not independent scientific or held-out model validation.",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "usage": {
+    "actual_provider_calls": 0,
+    "cloud_instances": 0,
+    "measured_charges_usd": null,
+    "local_compute_usd": null,
+    "local_storage_usd": null
+  },
+  "production_actions": {
+    "commits": 0,
+    "pushes": 0,
+    "merges": 0,
+    "deployments": 0,
+    "migrations": 0,
+    "prompt_publications": 0
+  },
+  "conditional_gaps": [
+    "Actual model answer evaluation under the amended controller instruction",
+    "Production rollout and eligible recovery",
+    "Legitimate Google-authenticated request and remote Supabase persistence"
+  ],
+  "original_subscription_pilot": "Unchanged frozen v9 results and inconclusive label; not resumed or relabelled.",
+  "retained_prior_attempts": [
+    "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261020T220911626796Z/turn-policy-validation-report.json",
+    "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261020T221426748876Z/turn-policy-validation-report.json",
+    "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-20T22-15-33.264Z/validation-report.json",
+    "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/research-ideas/database/20261020T220911626859Z/autonomy-validation-report.json"
+  ],
+  "historical_profiles": "Previous prompt publication and trajectory policies remain frozen at their original version/limits. Their synthetic local publication is never claimed as a new model evaluation.",
+  "artifact_sha256": {
+    "research-workflow-runtime.json": "065ae8e880924100321dea9e3d0b3952975fbe4fe4eb05a26271cd1be2dfe41e",
+    "database/202610200008_remove_autonomy_turn_cap.sql": "ca3289a721dfdc0167f2a9d68c0238b39422ef3ccc672e9ec1aafe1859677d64",
+    "docs/autonomy-turn-policy-protocol-v1.json": "5665970d055fe0ebd490ac7008bcf60224d4193901cebc80acc7115ffbc09fd7",
+    "docs/autonomy-turn-policy-amendment-v1.json": "19aaf6193e19bd9e64517e8bef1dc51bca178a3ab5c280754df6207ddca49dc9"
+  },
+  "ended_at": "2026-10-20T22:20:09.728845+00:00",
+  "browser": {
+    "path": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-20T22-19-10.843Z/validation-report.json",
+    "sha256": "9597c97a0d9f4a2572a20da2085ed0375dc30b6564a2f1a83430bbe8a596d7e4",
+    "groups": 9,
+    "checks": [
+      {
+        "name": "PDF intake fits desktop and mobile themes with one file picker and no title or URL input",
+        "passed": true,
+        "evidence": {
+          "file_picker": true,
+          "paper_title_input": false,
+          "paper_url_input": false,
+          "widths": [
+            1365,
+            390
+          ],
+          "themes": [
+            "light",
+            "dark"
+          ]
+        }
+      },
+      {
+        "name": "invalid PDF is explained without reserving storage or starting a workflow",
+        "passed": true,
+        "evidence": {
+          "post_admissions": 0,
+          "invalid_input_retained": true,
+          "new_workflows": 0
+        }
+      },
+      {
+        "name": "one form submission starts durable work with declared defaults and navigates to queue",
+        "passed": true,
+        "evidence": {
+          "study_id": "acb41abc-62e7-4a3d-88a2-db785cb66e68",
+          "initial_prompt_retained": true,
+          "background_worker": true
+        }
+      },
+      {
+        "name": "closing the page does not stop parallel claims or personalized follow-up",
+        "passed": true,
+        "evidence": {
+          "independent_of_browser": true,
+          "claims": 3,
+          "resolved": 2,
+          "blocked": 1,
+          "experiments": 4,
+          "turn_limit": null,
+          "attempt_counts": [
+            0,
+            8,
+            8,
+            1
+          ]
+        }
+      },
+      {
+        "name": "recorded exact prompts responses costs and tailored retry are visible per claim",
+        "passed": true,
+        "evidence": {
+          "turns": 8,
+          "exact_prompts": true,
+          "matched_study_and_task": true,
+          "tailored_failure_context": true,
+          "unknown_cost_preserved": true
+        }
+      },
+      {
+        "name": "desktop and mobile light and dark states fit with visible blockers",
+        "passed": true,
+        "evidence": {
+          "widths": [
+            1365,
+            390
+          ],
+          "themes": [
+            "light",
+            "dark"
+          ],
+          "horizontal_overflow": false
+        }
+      },
+      {
+        "name": "actual Next routes preserve the queue alias query and sign-in return paths",
+        "passed": true,
+        "evidence": {
+          "anonymous_real_next_routes": true,
+          "alias_query_preserved": true,
+          "legitimate_google_session": false
+        }
+      },
+      {
+        "name": "invalid and unavailable status stays unknown without overwriting retained evidence",
+        "passed": true,
+        "evidence": {
+          "invalid_progress_rejected": true,
+          "stale_retained_claims_marked": true,
+          "unavailable_counts_unknown": true,
+          "stored_outcomes_preserved": true,
+          "browser_response_fault_injection": true
+        }
+      },
+      {
+        "name": "bounded TCP editor exposes explicit units and host-local scope on mobile",
+        "passed": true,
+        "evidence": {
+          "host_local_scope_explicit": true,
+          "payload_units": "bytes",
+          "application_delay_units": "ms",
+          "custom_package_fields_absent": true,
+          "automatic_cloud_execution_verified": false
+        }
+      }
+    ],
+    "input_sha256": {
+      "api.py": "61464dd9fafff725be178dd84602ab33ce3665302838cc4f16d584872d37a2bb",
+      "autonomy.py": "6e457c64dfe07761d43fecde51f9173c116e79338c07f18548d25a48fac7177a",
+      "autonomy_costs.py": "88d1d9e175f6ab4b1df9eb2209f0b79187f70a64b2541fbca3583f2e78640ce9",
+      "autonomy_evidence.py": "53f27bc25e209d96c00a1f2c149e8fbecd74feb897e8769238b19eaca1899100",
+      "autonomy_model.py": "5112df3000c0cfea1771984d2f40727f7797b6eb9702e5aa8e3c94d024d2c38b",
+      "autonomy_sources.py": "ddd7b4f3a0306203f27a43428b4fae41cba4f31921e01b285fefe28effa0d7b8",
+      "bounded_network.py": "0b8bc5948dbf71712296c3b4c9a47f4ac68f5e32dcc591be3e42914ff17abc0c",
+      "claim_design.py": "25ae2613b37cf31af13a5ee250a5c22d5266e18ec98c034d13bdc05e81d933e0",
+      "gap_queue.py": "598c564817f6cc4ced6172ae14ead651458b2898d20771ecc426b30ecc8c9c18",
+      "ideas.py": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+      "intake.py": "4276361ce09b9f362d1d5d5928d6c90d131c677fccf9addbe86b1832df106833",
+      "network_execution.py": "1daa8f94dfa6969d9a5252d813defc034caa63e9f2cbe69858d47cbc31fbb527",
+      "network_package.py": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
+      "network_spec.py": "b481a00ea84e176b39a5426e36db8084a693a32e135ccd1685322bbe9a3cbe1f",
+      "package_runtime.py": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
+      "paper_uploads.py": "22e4a2fababb037f647bb168ef81f7be55470262dc3e52824e74234893cf0d8f",
+      "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b",
+      "policies/autonomy-experiment-costs-v2.json": "241f53ad7c51399b043d0567cc545fb3281d7581c619f51fc9474fc1eaa13b19",
+      "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "preparation.py": "5b1867da1f69b2b8a781d471abce1b871b7de10e2be40aa783390777b48462e3",
+      "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+      "scheduler.py": "27d9db3d8e209ff4419ecf4658bb569012a7e4f393d9348e6052df78cbddebe0",
+      "store.py": "752e7cee58145131f7cbdeb0c339042b6e611f535580fe2d7af570e02e76e480",
+      "worker.py": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
+      "workflow.py": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f",
+      "policies/autonomy-turn-policy-v1.json": "7aa48bccc617d1493e8621a8c290e2251180c768f021f6f8cccf06eac5eddafb"
+    },
+    "frontend_input_sha256": {
+      "scripts/verify-research-autonomy.mjs": "f3bd6469eee59e16299e18a310e4e939d325584c57133e449ec1cf315ff41f6f",
+      "app/components/research-workflow/autonomous-assessments.tsx": "e81cd330573d68fd0233d2f4d853a42aa476c307afb7e479acfed0a3e440cc73",
+      "lib/research-autonomy.ts": "f1705c213ca00f8ae8dd78a250debe81286a166fa9a478f2a3940ad25d80a574",
+      "lib/research-paper-upload.ts": "6daa204e01cf3f17015983d475889d26eb6a0cae47c91ee02fa643a75a9f6e76"
+    },
+    "synthetic_auth_provider_storage": true,
+    "legitimate_google_session": false
+  },
+  "automated_test_count": 468,
+  "builds": [
+    {
+      "repository": "jumpserve-front-end",
+      "passed": true,
+      "command": "npm run build",
+      "log": "/Users/Shared/allstar/jumpserve-front-end/.test-artifacts/autonomy-turn-policy/frontend-build-v1.log"
+    },
+    {
+      "repository": "jumpserve-infra",
+      "passed": true,
+      "command": "npm run build",
+      "evidence": "Successful tool command exit, no separate original log file"
+    }
+  ],
+  "original_artifacts": {
+    "manifest_path": "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/autonomy-turn-policy/raw-manifest-v1.json",
+    "sha256": "33fedcc180d29a15718d7d637e2a0061e03581f2c87ed78d8218a3c78c9838d3",
+    "files": 27,
+    "retrieval_rehash_verified": true
+  },
+  "implementation_sha256": {
+    "/Users/Shared/allstar/jumpserve-back-end/research_workflow/autonomy.py": "6e457c64dfe07761d43fecde51f9173c116e79338c07f18548d25a48fac7177a",
+    "/Users/Shared/allstar/jumpserve-back-end/research_workflow/autonomy_model.py": "5112df3000c0cfea1771984d2f40727f7797b6eb9702e5aa8e3c94d024d2c38b",
+    "/Users/Shared/allstar/jumpserve-back-end/research_workflow/store.py": "752e7cee58145131f7cbdeb0c339042b6e611f535580fe2d7af570e02e76e480",
+    "/Users/Shared/allstar/jumpserve-back-end/research_workflow/policies/autonomy-turn-policy-v1.json": "7aa48bccc617d1493e8621a8c290e2251180c768f021f6f8cccf06eac5eddafb",
+    "/Users/Shared/allstar/jumpserve-back-end/research_workflow/tests/test_autonomy.py": "bcd2c4473a90aee58423357d5f8b5be850dc1e69ee6ea7c6e8dd1e6284d5a149",
+    "/Users/Shared/allstar/jumpserve-infra/database/202610200008_remove_autonomy_turn_cap.sql": "ca3289a721dfdc0167f2a9d68c0238b39422ef3ccc672e9ec1aafe1859677d64",
+    "/Users/Shared/allstar/jumpserve-infra/test/check_autonomy_turn_policy_database.py": "021aea6cb247c19d804b33c2e69052c2992684a84aabb907648cef4965a79922",
+    "/Users/Shared/allstar/jumpserve-infra/test/check_autonomy_database.py": "c2b0beb65d571dbafa6574310bf6ed355f6ab1887b765f48ddf2b85b5f35fb9c",
+    "/Users/Shared/allstar/jumpserve-infra/test/check_research_ideas_database.py": "c343ee9ed0005028e2a9a1076dbbe85510d146cd322f90297ade19a221ca4a21",
+    "/Users/Shared/allstar/jumpserve-infra/test/autonomy_fixtures.py": "97ef8a2918462b80c67b5339ec83520e445ede72ff212faca12c1174c7c95bb4",
+    "/Users/Shared/allstar/jumpserve-front-end/app/components/research-workflow/autonomous-assessments.tsx": "e81cd330573d68fd0233d2f4d853a42aa476c307afb7e479acfed0a3e440cc73",
+    "/Users/Shared/allstar/jumpserve-front-end/lib/research-autonomy.ts": "f1705c213ca00f8ae8dd78a250debe81286a166fa9a478f2a3940ad25d80a574",
+    "/Users/Shared/allstar/jumpserve-front-end/lib/research-paper-upload.ts": "6daa204e01cf3f17015983d475889d26eb6a0cae47c91ee02fa643a75a9f6e76",
+    "/Users/Shared/allstar/jumpserve-front-end/scripts/verify-research-autonomy.mjs": "f3bd6469eee59e16299e18a310e4e939d325584c57133e449ec1cf315ff41f6f"
+  }
+}

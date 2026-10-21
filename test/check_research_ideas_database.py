@@ -50,6 +50,10 @@ def rpc(name,payload):
       'research_autonomy_control':dict(p_operation='text',p_actor='uuid',p_study='uuid',p_payload='jsonb'),
       'research_autonomy_resume_context':dict(p_study='uuid',p_actor='uuid',p_task='uuid',p_version='text'),
       'research_autonomy_context_candidates':{},
+      'research_autonomy_resume_budget':dict(p_study='uuid',p_actor='uuid',p_task='uuid',p_request_sha256='text',p_request_bytes='integer'),
+      'research_autonomy_budget_candidates':{},
+      'research_autonomy_resume_turns':dict(p_policy='text'),
+      'research_model_dispatch':dict(p_operation='text',p_payload='jsonb'),
       'research_initialize_claim_design':dict(p_study='uuid',p_actor='uuid',p_document='jsonb',p_raw='text',p_sha256='text',p_source='jsonb',p_claim='jsonb'),
       'research_reuse_claim_packet':dict(p_study='uuid',p_actor='uuid',p_id='uuid',p_packet='uuid',p_run='uuid'),
       'research_create_study':dict(p_actor='uuid',p_id='uuid',p_document='jsonb'),
@@ -148,7 +152,7 @@ def rejects(callback):
     except (ValueError,RuntimeError,store.StoreError): return
     raise AssertionError('Expected rejection')
 def uid(): return str(uuid.uuid4())
-def bootstrap():
+def bootstrap(apply_turn_policy=True):
     query('create database '+DATABASE+" with template template0 encoding 'UTF8'",'postgres')
     query("""do $$ begin create role anon; exception when duplicate_object then null; end $$;
 do $$ begin create role authenticated; exception when duplicate_object then null; end $$;
@@ -169,6 +173,10 @@ grant all on public.agent_sessions to service_role;""")
     for name in ('202610190001_bounded_followups.sql','202610190002_autonomy_prompt_v7.sql','202610190003_autonomy_v7_publication_guard.sql','202610190004_bounded_tcp_queue.sql','202610190005_autonomy_prompt_v8.sql','202610190006_autonomy_v8_publication_guard.sql','202610190007_autonomy_v8_review_criteria.sql','202610190008_autonomy_completion_publication_guard.sql','202610190009_application_trajectory_guard.sql','202610190010_rejected_turn_review.sql'):
         raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     name='202610200001_private_paper_uploads.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
+    name='202610200002_context_budget_recovery.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
+    if apply_turn_policy:
+        name='202610200008_remove_autonomy_turn_cap.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
+    name='202610200009_openclaw_dispatch.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     report['bootstrap_limit']='Legacy agent_sessions base table and Storage API catalog columns synthesized; listed prompt/research migrations executed as original files. Historical study-table migrations outside this feature are not replayed.'
     store.request=transport
 

@@ -60,12 +60,12 @@ def main():
   data={k:[r['record'] for r in v] for k,v in data.items()}
   raw=json.dumps(data,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode();snapshot=directory/'private-parsed-snapshot.json';snapshot.write_bytes(raw);snapshot.chmod(0o600);report['private_snapshot_sha256']=sha(raw)
   workflow=data['autonomy_workflows'][0]
-  assert workflow['max_spend_cents']==10000 and workflow['max_attempts']==25 and workflow['committed_cents']<=10000
+  assert workflow['max_spend_cents']==10000 and workflow['max_attempts'] is None and workflow['committed_cents']<=10000
   assert sha(workflow['initial_prompt'].encode())==workflow['initial_sha256']
   for row in data['autonomy_turns']:
    assert sha(row['request_raw'].encode())==row['request_sha256'] and json.loads(row['request_raw'])==row['request']
    if row['raw_response'] is not None:assert sha(row['raw_response'].encode())==row['response_sha256']
-  assert all(t['attempts']<=25 for t in data['autonomy_tasks'])
+  assert all(type(t['attempts']) is int and t['attempts']>=0 for t in data['autonomy_tasks'])
   report['autonomous_assessments']=sum(r.get('tested_conditions',{}).get('automatic_controller')=='research-autonomy-v1' for r in data['assessments'])
   report['completed_assessment_turns']=sum(r['stage']=='assessment' and r['status']=='complete' for r in data['autonomy_turns'])
   report.update(workflow_status=workflow['status'],committed_cents=workflow['committed_cents'],deadline_at=workflow['deadline_at'],task_count=len(data['autonomy_tasks']),claim_count=sum(r['claim_id'] is not None for r in data['autonomy_tasks']),turn_count=len(data['autonomy_turns']),turn_statuses={s:sum(r['status']==s for r in data['autonomy_turns']) for s in sorted({r['status'] for r in data['autonomy_turns']})},tasks=[dict(id=t['id'],stage=t['stage'],status=t['status'],label=t['label'],attempts=t['attempts'],reason=t['reason']) for t in data['autonomy_tasks']],jobs=[dict(id=j['id'],status=j['status'],run_id=j['run_id']) for j in data['queue_jobs']],runs=len(data['runs']),measurements=len(data['measurements']),assessments=len(data['assessments']),prompt_hashes_verified=True,provider_token_usage=[r['usage'].get('tokens') for r in data['autonomy_turns']],known_estimated_model_cents=sum(r['estimated_cents'] for r in data['autonomy_turns'] if r['estimated_cents'] is not None),missing_cost_count=sum(r['estimated_cents'] is None for r in data['autonomy_turns']))

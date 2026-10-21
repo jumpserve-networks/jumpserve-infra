@@ -1,0 +1,25 @@
+{
+  "version": "autonomy-turn-policy-v1",
+  "stage": "development-regression",
+  "frozen_before_campaign": "2026-10-20",
+  "question": "Does autonomous paper verification continue beyond 25 AI turns without changing evidence or the existing paper resource authorization?",
+  "policy": {"attempts_per_claim": null, "maximum_spend_usd": 100, "elapsed_days": 7},
+  "criteria": [
+    "New intake stores a null turn ceiling and retains the exact initial request",
+    "Actual PostgreSQL admission accepts numbered turns beyond 25, including invalid responses, while retaining positive cost reservations and fenced leases",
+    "The cumulative counter and owner-scoped paginated history work beyond turn 25",
+    "A historical cap stop resumes its retained stage at turn 26 without resetting prior prompts, responses, findings, commitments or deadline",
+    "Budget/deadline/cancelled/completed/external-blocker and uncertain-provider cases do not resume through the count-limit recovery gate",
+    "Original requests replay across the policy change only when their sole change is the removed count ceiling; changed source or scope is rejected",
+    "Current trusted controller policy supersedes immutable legacy prompt references to 25 turns and is stored in each actual request",
+    "Browser writes and private-history reads remain denied at SQL; anonymous and cross-owner routes remain protected",
+    "Desktop/mobile and light/dark queue views show cumulative counts without a turn ceiling and explain invalid/unavailable status"
+  ],
+  "methods": "Exposed synthetic software cases against actual local SQL, worker and UI. Forty sequential admission records check the former boundary; this is a deterministic regression count, not a scientific sample-size claim. Historical guard publication uses an explicitly synthetic fixture and its frozen original release profile. No new prompt or model candidate is published.",
+  "controls": "Retain legacy 25-turn admission denial before upgrade; compare full old turn records and immutable initial hashes after upgrade. Preserve failed checks and timestamped reports. Actual paper budget and deadline gates remain independent of count.",
+  "exclusions": "Frozen prior pilot protocols/results and historical model-evaluation policies keep their original attempt ceilings. No historical pilot replay or renewed paper budget/deadline is implied.",
+  "limits": {"provider_calls": 0, "cloud_instances": 0, "remote_database_writes": 0, "local_verification_minutes_target": 30},
+  "costs": {"measured_charges_usd": null, "local_compute_and_storage_usd": null},
+  "reviewer": {"identity": "Primary Codex AI implementer", "type": "AI", "independent": false},
+  "conditional_gaps": ["Actual live model behavior with the amended controller policy", "Production migration and worker/frontend rollout", "Legitimate production Google session", "The earlier subscription pilot remains stopped under its original frozen protocol; a separately versioned continuation is required"]
+}

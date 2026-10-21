@@ -1,0 +1,9 @@
+{
+  "version": "openclaw-loopback-ipv4-v1",
+  "path": "dist/token-sharing-CmBELw8t.mjs",
+  "original_sha256": "7a33f2b89b495379545bef015caf0c7378c1c4401e5c4180967c1ccd562e8e08",
+  "corrected_sha256": "9a968be0050cda25fd9116ce97c519f4cc177cdea833b88e50de52f3906b9596",
+  "before": "http://localhost:8080/auth/callback",
+  "after": "http://127.0.0.1:8080/auth/callback",
+  "rationale": "The official SIWC registration contract requires 127.0.0.1. Preserve original pinned module bytes and change only its callback host; authorization and token exchange use the same URI. Avoid localhost cookie collisions without changing OAuth state/PKCE/identity verification."
+}

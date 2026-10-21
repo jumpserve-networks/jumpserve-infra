@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "amends": "autonomy-context-budget-validation-v1.json",
+  "scope": "Identity confirmation from the user's clarification and previously retained read-only diagnostic; no new live status query.",
+  "user_identified_study_title": "Production autonomous release verification — IPv6 archived checks (2026-10-18)",
+  "user_identified_claim": "Published absolute folded metrics",
+  "study_id": "efed5f05-422a-4ca2-a1b7-07b209607d9c",
+  "claim_id": "06d44f24-557d-516b-ace8-bda1cff0c939",
+  "task_id": "afea9648-773b-5590-801a-b609421bfd0c",
+  "user_assessment_identified": true,
+  "diagnostic": {
+    "report": ".test-artifacts/autonomy-context-diagnostic/20261020T021937337454Z/report.json",
+    "report_sha256": "437724db0d213f2b1420afb58167efeb493714e4d4465977840ed73b716d707d",
+    "context_sha256": "0b7aaaf42947638205023c3b32fe4e5d4d3ab6ae868782f948bf9547fd62f6a0",
+    "context_bytes": 49194,
+    "rebuilt_request_bytes": 68060,
+    "request_limit_bytes": 96000,
+    "recorded_stage": "planning",
+    "recorded_model_attempts": 0,
+    "interpretation": "The rebuilt request fits. A retained historical size error alone does not demonstrate a present size failure or establish eligibility under all recovery guards."
+  },
+  "production_status": "Correction remains local and uncommitted; production recovery and real provider behavior remain unverified.",
+  "new_model_calls": 0,
+  "new_production_mutations": 0,
+  "measured_charges_usd": null,
+  "reviewer": {
+    "identity": "Codex primary assistant",
+    "type": "AI",
+    "independence": "Implementer; not independent or human review."
+  }
+}

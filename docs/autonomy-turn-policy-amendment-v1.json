@@ -1,0 +1,8 @@
+{
+  "version": "autonomy-turn-policy-amendment-v1",
+  "amends": "autonomy-turn-policy-v1",
+  "declared_before_followup": "2026-10-20",
+  "reason": "The first passing migration campaign covered application turns. Two optional private lab audit tables also retained a 25-row number constraint, which would prevent a future versioned pilot from storing turn 26.",
+  "additional_checks": ["Original private audit constraints reject row 26 before upgrade", "After upgrade, both private audit tables retain row 25 and accept row 26 with byte hashes and positive commitments", "Zero remains invalid and browser access remains denied"],
+  "scope": "Storage capability for future campaigns only. Frozen historical protocol limits, pilot code snapshots, requests, results and failed test reports remain unchanged. No live model requests or historical pilot resumes."
+}

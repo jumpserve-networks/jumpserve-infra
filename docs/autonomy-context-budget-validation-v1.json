@@ -1,0 +1,94 @@
+{
+  "version": "autonomy-context-budget-validation-v1",
+  "created_at": "2026-10-20T02:25:17.865831+00:00",
+  "status": "local-passed-production-unchanged",
+  "data_origin": "Exposed software fixtures and one read-only historical-task diagnosis; no new scientific finding",
+  "unit_checks": {
+    "backend": 174,
+    "infrastructure": 93
+  },
+  "database_groups": 11,
+  "infrastructure_build": "passed",
+  "new_live_model_calls": 0,
+  "production_mutations": 0,
+  "diagnostic_task_count": 1,
+  "user_assessment_identified": false,
+  "diagnosed_current_request_bytes": 68060,
+  "development_fixture_original_context_bytes": 192667,
+  "development_fixture_corrected_request_bytes": 29332,
+  "maximum_request_bytes": 96000,
+  "measured_charges_usd": null,
+  "unallocated_costs": [
+    "local compute",
+    "local storage",
+    "read-only production diagnostic API usage"
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false,
+    "human": false
+  },
+  "conditional_gaps": [
+    "Production migration and deployment",
+    "Affected user study identity and actual recovery",
+    "Fresh actual-provider behavior for indexed selection context"
+  ],
+  "evidence": [
+    {
+      "path": "jumpserve-infra/docs/autonomy-context-budget-protocol-v1.json",
+      "sha256": "8a5ae734499463736cf4109a9f34d439fffef62ca36061f1e819f0e569f0557e",
+      "bytes": 1876
+    },
+    {
+      "path": "jumpserve-infra/database/202610200002_context_budget_recovery.sql",
+      "sha256": "583810d368133824cef9a468d31aa8f712f06db9e1be4f5c08b4cc491a39b223",
+      "bytes": 5037
+    },
+    {
+      "path": "jumpserve-infra/research-workflow-runtime.json",
+      "sha256": "711b650e7efadc9e36672c80e492dc806404cb7d78d0c6a5f2ce8e3c7ee183e6",
+      "bytes": 2821
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-context-diagnostic/20261020T021937337454Z/report.json",
+      "sha256": "437724db0d213f2b1420afb58167efeb493714e4d4465977840ed73b716d707d",
+      "bytes": 1090
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-context-regression/v1/report.json",
+      "sha256": "79d1f1683aa8cc6ffdaefaa7f2d25758cf505e750bcf94bda103005adeb459ff",
+      "bytes": 500
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/autonomy-context-regression/v1/request.json",
+      "sha256": "181a0142e856c05b5a2ce56cc4ea337653e6bbf6db0566311d6d6840958b4688",
+      "bytes": 29332
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/research-ideas/database/20261020T022418033694Z/autonomy-validation-report.json",
+      "sha256": "95177b6bb9a942390ba43e3550b2b37c0fd4ad724f58a3078d6067c834ad28fc",
+      "bytes": 14459
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/autonomy.py",
+      "sha256": "669cc80f395d1cf9c5f0688523cd03b63cb463415028b0d65fbc40bde7ffbcc6",
+      "bytes": 51358
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/autonomy_model.py",
+      "sha256": "4dbd847aafd30ff2ffcfd62ae6c1762dfc7e9a5e5ca39b93941c8f598f3ced11",
+      "bytes": 17850
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/store.py",
+      "sha256": "63e76a1c462631283e22839ae12860d1d14f323e23fccc556c3b07b2644513d8",
+      "bytes": 11815
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/tests/test_autonomy_context_budget.py",
+      "sha256": "305b9deb844a8e0e1b19d5b94c284b8c1bd21bbb79b41eaf494a5fd6c93f9ee0",
+      "bytes": 4893
+    }
+  ]
+}

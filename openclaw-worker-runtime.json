@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "node": "24.16.0",
+  "openclaw": "2026.10.5",
+  "model": "gpt-6.1-sol",
+  "files": {
+    "package.json": "5d2c3f4e68083a1e0de35c7c1b9cd87671ea6e41d2566e241ba7c799a105ced2",
+    "package-lock.json": "95087eb0b01a796ee20846851315dc5f649fabb285dfd7c3afca9b1fb39569e7",
+    "requirements.txt": "90f56527b45930f8953dd911c1709caa63bfb72ac8603895b865d65ab33eab82",
+    "install.sh": "803379ad6bacead0c427f7ee4d813eacaab8cf6a931fef8c2eb6d375e3e6301f",
+    "jumpserve-openclaw.service": "7aee44c6b3f622e0fa5f8cfb8a3d7b349aec3dfe9a9c8d5d7f7511958bc91752",
+    "auth-patch.json": "34ec153e27359a2e78590ff4e509390d99765b90c1ccd9bf4d88bca9ae32a17c"
+  }
+}

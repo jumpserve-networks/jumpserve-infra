@@ -24,7 +24,7 @@ export class ResearchWorkflow extends Construct {
     const runtime = process.env.RESEARCH_WORKFLOW_RUNTIME_PATH ?? path.join(__dirname, '..', '.runtime-backend', 'research_workflow');
     const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'research-workflow-runtime.json'), 'utf8')) as { files: Record<string, string> };
     for (const [file, sha256] of Object.entries(manifest.files)) {
-      if (!/^(?:[a-z_]+\.py|(?:plans|policies)\/[a-z0-9-]+\.json)$/.test(file) || !fs.existsSync(path.join(runtime, file)) || createHash('sha256').update(fs.readFileSync(path.join(runtime, file))).digest('hex') !== sha256) {
+      if (!/^(?:[a-z_]+\.(?:py|mjs)|(?:plans|policies)\/[a-z0-9-]+\.json)$/.test(file) || !fs.existsSync(path.join(runtime, file)) || createHash('sha256').update(fs.readFileSync(path.join(runtime, file))).digest('hex') !== sha256) {
         throw new Error('Research runtime is absent or differs from the manifest. Run bin/prepare-research-runtime.py with the documented backend checkout.');
       }
     }
@@ -33,6 +33,9 @@ export class ResearchWorkflow extends Construct {
     const secret = secretsmanager.Secret.fromSecretNameV2(this, 'SupabaseServiceKey', 'jumpserve/supabase-service-key');
     const queueEnabled = researchWorkflowIsEnabled(this.node.tryGetContext('researchQueueEnabled'));
     const autonomyEnabled = researchWorkflowIsEnabled(this.node.tryGetContext('researchAutonomyEnabled'));
+    const openclawEnabled=researchWorkflowIsEnabled(this.node.tryGetContext('researchOpenClawEnabled'));
+    if(openclawEnabled&&!autonomyEnabled)throw new Error('OpenClaw requires autonomous assessments.');
+    const aiEnvironment:Record<string,string>=openclawEnabled?{RESEARCH_AI_RUNTIME:'openclaw-production-v1'}:{};
     const admissionContext = this.node.tryGetContext('researchAutonomyAdmissionEnabled');
     const autonomyAdmission = autonomyEnabled && (admissionContext === undefined || researchWorkflowIsEnabled(admissionContext));
     if (autonomyEnabled && !queueEnabled) throw new Error('Autonomous assessments require the durable experiment queue.');
@@ -136,17 +139,21 @@ export class ResearchWorkflow extends Construct {
           code: lambda.Code.fromAsset(runtime), handler: 'autonomy.handler', runtime: lambda.Runtime.PYTHON_3_12,
           memorySize: 1024, timeout: cdk.Duration.seconds(180), reservedConcurrentExecutions: reserveConcurrency ? 2 : undefined,
           retryAttempts: 0, maxEventAge: cdk.Duration.minutes(1), layers: [pdfLayer],
-          environment: { SUPABASE_URL: url, SUPABASE_SECRET_ARN: secret.secretArn, RESEARCH_AUTONOMY_ENABLED: 'true', RESEARCH_AUTONOMY_CONTEXT_RECOVERY: 'autonomy-evidence-v2', RESEARCH_QUEUE_WORKERS_ENABLED: 'true', RESEARCH_QUEUE_WORKER_FUNCTION: worker.functionArn, ...networkingEnvironment },
-          description: 'Durable parallel claim stages with atomic $100/7-day/25-attempt admission, prompt history and explicit blockers.',
+          environment: { SUPABASE_URL: url, SUPABASE_SECRET_ARN: secret.secretArn, RESEARCH_AUTONOMY_ENABLED: 'true', RESEARCH_AUTONOMY_CONTEXT_RECOVERY: 'autonomy-context-budget-v1', RESEARCH_QUEUE_WORKERS_ENABLED: 'true', RESEARCH_QUEUE_WORKER_FUNCTION: worker.functionArn, ...networkingEnvironment,...aiEnvironment },
+          description: 'Durable parallel claim stages with atomic $100/7-day admission, uncapped AI turns, exact history and explicit blockers.',
         });
         secret.grantRead(autonomous);
         worker.grantInvoke(autonomous);
         autonomous.grantInvoke(fn);
         fn.addEnvironment('RESEARCH_AUTONOMY_ENABLED', String(autonomyAdmission));
         fn.addEnvironment('RESEARCH_AUTONOMY_WORKER_FUNCTION', autonomous.functionArn);
+        if(openclawEnabled){
+          fn.addEnvironment('RESEARCH_AI_RUNTIME','openclaw-production-v1');
+        } else {
         const profile = 'arn:aws:bedrock:us-east-1:395567831870:inference-profile/us.anthropic.claude-opus-4-6-v1';
         autonomous.addToRolePolicy(new iam.PolicyStatement({ actions: ['bedrock:InvokeModel'], resources: [profile] }));
         autonomous.addToRolePolicy(new iam.PolicyStatement({ actions: ['bedrock:InvokeModel'], resources: ['us-east-1', 'us-east-2', 'us-west-2'].map(region => `arn:aws:bedrock:${region}::foundation-model/anthropic.claude-opus-4-6-v1`), conditions: { StringEquals: { 'bedrock:InferenceProfileArn': profile } } }));
+        }
         new events.Rule(this, 'AutonomyPoll', { enabled: autonomyAdmission, schedule: events.Schedule.rate(cdk.Duration.minutes(1)), targets: [new targets.LambdaFunction(autonomous, { retryAttempts: 0, maxEventAge: cdk.Duration.minutes(1) })] });
       }
       if (networkingEnabled && executors && packageExecutor) for (const target of [executors.emulated,executors.realWorld,packageExecutor]) target.grantInvoke(worker);

@@ -49,7 +49,7 @@ def main():
     assert f.query('select count(*) from research_autonomy_workflows where study_id='+f.sql_text(study))=='1'
     assert f.query('select count(*) from research_autonomy_tasks where study_id='+f.sql_text(study))=='1'
     s=autonomy.one('studies',study,study);assert s['paper_url'] is None and s['paper_upload']['sha256']==workflow.digest(raw)
-    w=store.rows('autonomy_workflows',dict(study_id='eq.'+study))[0];initial=json.loads(w['initial_prompt']);assert initial['paper']['paper_upload']['sha256']==workflow.digest(raw) and w['max_attempts']==25 and w['max_spend_cents']==10000
+    w=store.rows('autonomy_workflows',dict(study_id='eq.'+study))[0];initial=json.loads(w['initial_prompt']);assert initial['paper']['paper_upload']['sha256']==workflow.digest(raw) and w['max_attempts'] is None and w['max_spend_cents']==10000
     replay=paper_uploads.submit(f.ACTOR,request);assert replay['status']=='started' and replay['result']['id']==study
     return dict(concurrent_completions=3,workflows=1,intake_tasks=1,initial_prompt_sha256=w['initial_sha256'],paper_url=None,original_hash_verified=True)
    f.check('three concurrent completions atomically retain bytes and create only one workflow',finalization)

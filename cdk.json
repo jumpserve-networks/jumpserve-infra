@@ -113,6 +113,7 @@
     "@aws-cdk/aws-elasticloadbalancingv2:usePostQuantumTlsPolicy": true,
     "networkExecutionEnabled": true,
     "networkPackagesEnabled": false,
-    "researchAutonomyEnabled": true
+    "researchAutonomyEnabled": true,
+    "researchOpenClawEnabled": true
   }
 }

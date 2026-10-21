@@ -17,6 +17,7 @@ test('autonomous assessment worker is explicit, private, bounded and separately 
   new ResearchWorkflow(stack, 'Research', new api.HttpApi(stack, 'Api'));
   const template = Template.fromStack(stack);
   template.hasResourceProperties('AWS::Lambda::Function', { Handler: 'autonomy.handler', MemorySize: 1024, Timeout: 180, ReservedConcurrentExecutions: 2, Layers: Match.anyValue() });
+  template.hasResourceProperties('AWS::Lambda::Function', { Handler: 'autonomy.handler', Environment: { Variables: Match.objectLike({ RESEARCH_AUTONOMY_CONTEXT_RECOVERY: 'autonomy-context-budget-v1' }) } });
   template.resourceCountIs('AWS::Lambda::Url', 0);
   template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'POST /research/paper-uploads' });
   template.resourceCountIs('AWS::Events::Rule', 2);
@@ -31,6 +32,14 @@ test('autonomy cannot be enabled without the durable experiment queue', () => {
   const app = new cdk.App({ context: { supabaseUrl: 'https://regphejnlvfpyokpniny.supabase.co', researchAutonomyEnabled: true } });
   const stack = new cdk.Stack(app, 'MissingQueue', { env: { account: '395567831870', region: 'us-east-1' } });
   expect(() => new ResearchWorkflow(stack, 'Research', new api.HttpApi(stack, 'Api'))).toThrow('durable experiment queue');
+});
+test('OpenClaw mode selects its private subscription dispatcher with no Bedrock fallback permission',()=>{
+ const app=new cdk.App({context:{supabaseUrl:'https://regphejnlvfpyokpniny.supabase.co',researchQueueEnabled:true,researchAutonomyEnabled:true,researchOpenClawEnabled:true}});
+ const stack=new cdk.Stack(app,'OpenClawAutonomy',{env:{account:'395567831870',region:'us-east-1'}});
+ new ResearchWorkflow(stack,'Research',new api.HttpApi(stack,'Api'));const template=Template.fromStack(stack);
+ template.hasResourceProperties('AWS::Lambda::Function',{Handler:'autonomy.handler',Environment:{Variables:Match.objectLike({RESEARCH_AI_RUNTIME:'openclaw-production-v1'})}});
+ template.hasResourceProperties('AWS::Lambda::Function',{Handler:'api.handler',Environment:{Variables:Match.objectLike({RESEARCH_AI_RUNTIME:'openclaw-production-v1'})}});
+ expect(JSON.stringify(template.findResources('AWS::IAM::Policy'))).not.toContain('bedrock:InvokeModel');
 });
 test('bounded TCP has immutable version, enforced resource limits and no experiment cloud privileges', () => {
   const app = new cdk.App({ context: { supabaseUrl: 'https://regphejnlvfpyokpniny.supabase.co', researchQueueEnabled: true, researchAutonomyEnabled: true } });

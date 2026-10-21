@@ -1,0 +1,10 @@
+{
+ "version":"openclaw-production-amendment-v2",
+ "base":"openclaw-production-v1",
+ "prior_candidate":"research-autonomy-v9",
+ "finding":"All twelve original mechanical checks passed, but substantive AI inspection found evidence_ids on non-assessment responses. The candidate was rejected and all original request, response, producer and runtime bytes were retained.",
+ "correction":"New candidate v10 narrows each phase's schema, adds explicit null/empty instructions and validates the actual answer before the controller accepts it. Never silently delete an unsupported citation from a retained answer.",
+ "followup_design":"The original twelve cases are reused development regressions. Four newly frozen reserved cases exercise decoy citations, injected review verdicts, ambiguous observations and valid ready review. Reused/tuned cases are not independent held-out validation. Reviewer is the primary AI implementer, not human or independent.",
+ "resources":{"prior_provider_calls":12,"prior_reserved_orchestration_cents":1200,"maximum_aggregate_evaluation_reserved_cents":4000,"new_case_count":16,"elapsed_minutes_per_campaign":45,"api_key_fallback":false,"actual_subscription_allocation_usd":null},
+ "scientific_scope":"No new paper claim is reproduced or disproven by these software/model fixtures. Paper defaults remain $100 shared commitments, seven days and no turn-count ceiling."
+}

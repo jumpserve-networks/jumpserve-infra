@@ -1,0 +1,12 @@
+{
+  "version":"autonomy-context-budget-protocol-v1",
+  "campaign":"Development regression of controller request-size handling; no scientific or independent model validation",
+  "question":"Can intake, planning, review and assessment build bounded prompts without silently discarding evidence, prior failures or claim scope?",
+  "criterion":"Actual canonical serialized provider request is at most 96000 bytes. Preserve original immutable records, scope, units and missing values. Omitted inline documents require explicit count/hash/reference and scoped read access. Fresh design reviews cannot inspect prior AI verdicts. Persist exactly the sent request before invoking a provider.",
+  "inputs":["Retained IPv6 arithmetic fixture and original source hashes","Exposed synthetic long protocols, histories, feedback and UTF-8/JSON-escaped source text","Read-only diagnosis of a matching production failure where credentials allow"],
+  "controls":["Record failure with previous implementation","No raised request limit","No source-content execution, generated measurements or forced conclusions","No reset of attempts, spend or deadline"],
+  "resource_limits":{"live_model_calls":0,"new_experiment_instances":0,"maximum_source_diagnostic_tasks":1,"maximum_local_test_minutes":20,"measured_charges_usd":null},
+  "exclusions":"Database credentials, auth sessions and source text are not written to public reports. Unavailable live state remains a gap, not a synthetic production success.",
+  "reviewer":{"identity":"Primary Codex AI implementer","type":"AI","independent":false,"human":false},
+  "release":"Local correction and checks only. Current user report does not authorize pushing main, deploying, publishing prompts or resuming production tasks. Preserve earlier release profiles and results. A later deployment needs its declared checks and current user authorization."
+}

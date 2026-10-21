@@ -1,0 +1,10 @@
+{
+ "version":"openclaw-production-amendment-v1",
+ "declared_before_host_authorization":true,
+ "base":"openclaw-production-v1",
+ "change":"Apply openclaw-loopback-ipv4-v1 to the new production host only. Preserve the original native module and its hash; replace its exact localhost callback host with 127.0.0.1, matching current official SIWC registration documentation and preventing unrelated localhost cookies from reaching this listener.",
+ "unmodified":"State, nonce, PKCE, native token exchange, signature/identity verification, granted-scope checks and refresh remain the pinned implementation. Existing local pilot registration, native runtime and original bytes are unchanged.",
+ "source":"https://developers.openai.com/siwc/token-sharing-open-source/sign-in",
+ "host_separation":"Authorize a new native host grant on the private AWS worker. Never copy the Mac pilot grant to it.",
+ "release_scope":"Prepare the separate worker stack before changing the existing website/controller. Production admission stays held until live checks pass."
+}

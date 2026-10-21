@@ -70,7 +70,7 @@ def control_read(directory):
  workflows=result['research_autonomy_workflows'];tasks=result['research_autonomy_tasks']
  if len(workflows)!=1 or len(tasks)!=1 or result['research_autonomy_turns'] or result['research_claims']:raise RuntimeError('Blank control must have one intake and no claims or model turns')
  w=workflows[0]
- if sha(w['initial_prompt'].encode())!=w['initial_sha256'] or (w['max_spend_cents'],w['max_attempts'])!=(10000,25):raise RuntimeError('Initial prompt integrity or limits differ')
+ if sha(w['initial_prompt'].encode())!=w['initial_sha256'] or (w['max_spend_cents'],w['max_attempts'])!=(10000,None):raise RuntimeError('Initial prompt integrity or limits differ')
  if tasks[0]['status']!='blocked' or w['status']!='completed-with-blockers':raise RuntimeError('Wait for the deployed parser and explicit blank-PDF blocker before completing verification')
  key=prior.aws('secretsmanager','get-secret-value','--secret-id','jumpserve/supabase-service-key')['SecretString'];headers={'apikey':key,'Authorization':'Bearer '+key}
  result['retrieved_artifacts']=[]
@@ -206,7 +206,7 @@ def main():
    receipt['package_functions'],receipt['queue_notification_target']=prior.queue.archives(directory,prior.queue.source())
    with prior.guard.OPEN.open(prior.queue.BASE+'/capabilities',timeout=30) as response:cap=json.load(response)
    if cap.get('paper_uploads')!=dict(version='research-paper-upload-v1',maximum_bytes=10000000,media_type='application/pdf'):raise RuntimeError('PDF capability differs')
-   if cap['autonomy']['enabled'] is not True or cap['autonomy']['defaults']!=dict(maximum_spend_usd=100,elapsed_days=7,attempts_per_claim=25,parallel_claims_per_paper=2,global_parallel_claims=4):raise RuntimeError('Autonomy activation/defaults differ')
+   if cap['autonomy']['enabled'] is not True or cap['autonomy']['defaults']!=dict(maximum_spend_usd=100,elapsed_days=7,attempts_per_claim=None,parallel_claims_per_paper=2,global_parallel_claims=4):raise RuntimeError('Autonomy activation/defaults differ')
    receipt['capabilities']=cap;receipt['anonymous_checks']=[]
    for path,method in (('/paper-uploads','POST'),('/queue','GET')):
     try:

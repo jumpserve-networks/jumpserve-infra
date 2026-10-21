@@ -155,7 +155,7 @@ def main():
     if len(receipt['context_rpc_security'])!=2 or any(r['anon_execute'] or r['browser_execute'] for r in receipt['context_rpc_security']):raise RuntimeError('Bounded context RPCs must remain service-only')
     with prior.guard.OPEN.open(prior.queue.BASE+'/capabilities',timeout=30) as response:receipt['capabilities']=json.load(response)
     capability=receipt['capabilities']['autonomy']
-    if capability['version']!='research-autonomy-v2' or capability['enabled'] is not True or capability['defaults']!={'maximum_spend_usd':100,'elapsed_days':7,'attempts_per_claim':25,'parallel_claims_per_paper':2,'global_parallel_claims':4}:raise RuntimeError('Production autonomy activation/defaults differ')
+    if capability['version']!='research-autonomy-v3' or capability['enabled'] is not True or capability['defaults']!={'maximum_spend_usd':100,'elapsed_days':7,'attempts_per_claim':None,'parallel_claims_per_paper':2,'global_parallel_claims':4}:raise RuntimeError('Production autonomy activation/defaults differ')
     if next(r['active_version_id'] for r in before if r['module_id']=='research-autonomy')!=seed['id']:raise RuntimeError('Reviewed v8 prompt is not active')
     receipt['anonymous_checks']=[]
     for path in ('/queue','/studies/10000000-0000-4000-8000-000000000001/autonomy'):

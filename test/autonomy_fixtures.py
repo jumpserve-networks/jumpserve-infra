@@ -56,6 +56,8 @@ def publish_fixture():
    # These synthetic declarations never establish a new model evaluation.
    profile=json.loads((f.ROOT/'test/autonomy-publication-runtime-v8.json').read_bytes())
    report['fixture_tested_working_tree_sha256']=manifest['files']
+   report['fixture_tested_analysis_version']=autonomy.VERSION
+   report['analysis_version']='research-autonomy-v2'
    report['fixture_publication_profile']='Historical released v27; synthetic SQL guard exercise, not a current model evaluation.'
    report['input_sha256']=profile['files']
    report['completion_report']['input_sha256']=profile['files']

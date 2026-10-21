@@ -1,0 +1,24 @@
+[Unit]
+Description=JumpServe private OpenClaw subscription worker
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=jumpserve
+WorkingDirectory=/opt/jumpserve/runtime
+EnvironmentFile=/etc/jumpserve-openclaw.env
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/opt/jumpserve/python/bin/python -B /opt/jumpserve/runtime/openclaw_runtime.py
+Restart=on-failure
+RestartSec=10
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/jumpserve-openclaw
+MemoryMax=3G
+
+[Install]
+WantedBy=multi-user.target

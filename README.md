@@ -3,6 +3,19 @@
 AWS CDK infrastructure for the JumpServe frontend, benchmark API and AI tools.
 No EC2 instance needs to run continuously for benchmarks.
 
+The local autonomous research candidate removes the AI turn-count ceiling while
+retaining the $100 paper commitment limit and seven-day deadline. See
+[the turn-policy implementation and validation](docs/autonomy-turn-policy-validation-v1.md)
+for the migration, recovery behavior, reproduction commands and release gaps.
+Historical pilot and model-evaluation protocols retain their original limits.
+
+The OpenClaw subscription configuration adds a separate private, continuously
+running inference host; benchmark machines remain disposable. See the
+[versioned OpenClaw release record](docs/openclaw-production-release-v1.md) for
+native host authorization, exact runtime pins, rejected/passing prompt evidence,
+private persistence, release order and remaining activation checks. Subscription
+allocation and unallocated host charges remain unknown when not reported.
+
 ## Architecture
 
 - Amplify hosts the Next.js frontend at https://jumpserve.quaint-lab.org.

@@ -1,14 +1,14 @@
 {
-  "version": 29,
-  "source_revision": "a2db37f29231ee924dc2e825bc51df4ebb1b3f1d",
-  "base_source_revision": "8ca00565948f19c2a7beb829c8142d95de892497",
-  "revision_status": "PDF subprocess correction pinned after the first actual production upload exposed a layer import failure. v28 and its failed control are retained. Prompt v8 remains unchanged; no fresh model-evaluation claim.",
+  "version": 33,
+  "source_revision": "edf18bcfdd695bb90c9b4eca08e163f21b510e7a",
+  "base_source_revision": "a2db37f29231ee924dc2e825bc51df4ebb1b3f1d",
+  "revision_status": "Pinned clean main backend; sixteen actual OpenClaw candidate-v10 answers passed declared mechanical and substantive AI review. Production authorization and deployed execution remain release checks.",
   "files": {
     "api.py": "61464dd9fafff725be178dd84602ab33ce3665302838cc4f16d584872d37a2bb",
-    "autonomy.py": "e604b37f2d7aaefbc188cc1576e1cf1ef16f99b87a77c8ef03602b1ff79c8f13",
+    "autonomy.py": "5ec4d7fdd2ba1f4da7c43d44c817eba78759fcfda92c9bbe41ab2149bdc4f771",
     "autonomy_costs.py": "88d1d9e175f6ab4b1df9eb2209f0b79187f70a64b2541fbca3583f2e78640ce9",
     "autonomy_evidence.py": "53f27bc25e209d96c00a1f2c149e8fbecd74feb897e8769238b19eaca1899100",
-    "autonomy_model.py": "8dd6fd26de145e638f0d583e5d3695db61d639c7735e69f4d71a713cd66fff83",
+    "autonomy_model.py": "4e1ad33efe560d9df6c4fc0c28dd6d42166a417b4d16cd375ee0893fe8515de7",
     "autonomy_sources.py": "ddd7b4f3a0306203f27a43428b4fae41cba4f31921e01b285fefe28effa0d7b8",
     "bounded_network.py": "0b8bc5948dbf71712296c3b4c9a47f4ac68f5e32dcc591be3e42914ff17abc0c",
     "claim_design.py": "25ae2613b37cf31af13a5ee250a5c22d5266e18ec98c034d13bdc05e81d933e0",
@@ -27,8 +27,13 @@
     "preparation.py": "5b1867da1f69b2b8a781d471abce1b871b7de10e2be40aa783390777b48462e3",
     "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
     "scheduler.py": "27d9db3d8e209ff4419ecf4658bb569012a7e4f393d9348e6052df78cbddebe0",
-    "store.py": "b765a9bb705457e478f69316f7fa5d554852fbdd8085bedd12cbcd6dab64a26a",
+    "store.py": "941f6cd2e6cacb5a59c2f62e074f520400a999add64c776364d3790dae58c710",
     "worker.py": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
-    "workflow.py": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f"
+    "workflow.py": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f",
+    "policies/autonomy-turn-policy-v1.json": "7aa48bccc617d1493e8621a8c290e2251180c768f021f6f8cccf06eac5eddafb",
+    "model_dispatch.py": "500b4276a1deabf7b7711aa5dcc739a3d9d0ee07a8d5c7d21d63d43404ca84df",
+    "siwc_protocol.py": "73cbad57e87eb94add77e8d1e098776dc974f2a89e5b4e3eac7d42ea943f8d00",
+    "openclaw_runtime.py": "cee288eee33412966b7c5228b8dc93689df5dd82d24bc37d61808191b4203804",
+    "openclaw_auth.mjs": "40f583647563aabad3e0130ea4b6ba7c18a007d79ec63b8cb4d66c3ebabbd8ac"
   }
 }
