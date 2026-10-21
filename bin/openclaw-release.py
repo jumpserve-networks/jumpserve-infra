@@ -3,7 +3,10 @@ import argparse,datetime as dt,hashlib,importlib.util,json,os,re,subprocess,urll
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('openclaw_prior',ROOT/'bin/autonomy-release.py');prior=importlib.util.module_from_spec(spec);spec.loader.exec_module(prior)
-aws=prior.aws;admin=prior.admin
+admin=prior.admin
+def aws(*args):
+ raw=subprocess.check_output(['aws',*args,'--profile','jumpserve','--region','us-east-1','--output','json'],timeout=60)
+ return json.loads(raw) if raw.strip() else {}
 MIGRATIONS=[('202610200002_context_budget_recovery.sql',"select to_regprocedure('public.research_autonomy_resume_budget(uuid,uuid,uuid,text,integer)') is not null present"),('202610200008_remove_autonomy_turn_cap.sql',"select exists(select 1 from pg_proc where proname='research_autonomy_resume_turns') present"),('202610200009_openclaw_dispatch.sql',"select to_regclass('public.research_model_dispatches') is not null present"),('202610200010_openclaw_prompt_candidate.sql',"select exists(select 1 from agent_prompt_versions where version='research-autonomy-v9') present"),('202610210001_openclaw_prompt_v10.sql',"select exists(select 1 from agent_prompt_versions where version='research-autonomy-v10') present"),('202610210002_openclaw_publication_guard.sql',"select to_regprocedure('public.publish_agent_prompt_before_openclaw_v10(uuid,uuid,text,jsonb,text,text)') is not null present")]
 stamp=lambda:dt.datetime.now(dt.timezone.utc).isoformat()
 sha=lambda raw:hashlib.sha256(raw).hexdigest()
@@ -28,6 +31,21 @@ def functions():
  resources=aws('cloudformation','list-stack-resources','--stack-name','JumpServeBenchmarkStack')['StackResourceSummaries']
  return {kind:next(r['PhysicalResourceId'] for r in resources if r['ResourceType']=='AWS::Lambda::Function' and r['LogicalResourceId'].startswith(prefix)) for kind,prefix in [('api','ResearchWorkflowApi'),('autonomy','ResearchWorkflowAutonomyWorker')]}
 
+def benchmark_image():
+ resources=aws('cloudformation','list-stack-resources','--stack-name','JumpServeBenchmarkStack')['StackResourceSummaries']
+ name=next(r['PhysicalResourceId'] for r in resources if r['ResourceType']=='AWS::Lambda::Function' and r['LogicalResourceId'].startswith('LaunchBenchmarkFn'))
+ env=aws('lambda','get-function-configuration','--function-name',name)['Environment']['Variables']
+ return dict(function=name,ami_id=env['AMI_ID'],mode=env['BENCHMARK_IMAGE_MODE'])
+
+def compare_parameters(before,after,image):
+ old={p['ParameterKey']:p for p in before['parameters']};new={p['ParameterKey']:p for p in after['parameters']}
+ if {k:v['ParameterValue'] for k,v in old.items()}!={k:v['ParameterValue'] for k,v in new.items()}:raise RuntimeError('Literal benchmark parameters changed')
+ if image['mode']!='prebaked' or image['ami_id']!=old['BenchmarkAmiId']['ParameterValue']:raise RuntimeError('Active benchmark image changed')
+ drift=[dict(key=k,before=old[k].get('ResolvedValue'),after=new[k].get('ResolvedValue')) for k in old if old[k].get('ResolvedValue')!=new[k].get('ResolvedValue')]
+ fallback='/aws/service/canonical/ubuntu/server/22.04/stable/current/amd64/hvm/ebs-gp2/ami-id'
+ if any(old[d['key']]['ParameterValue']!=fallback for d in drift):raise RuntimeError('Unexpected active or non-fallback lookup resolution changed')
+ return dict(literal_parameters_unchanged=True,active_benchmark_image=image,resolved_lookup_changes=drift,inactive_fallback_only=True)
+
 def cdk(mode,directory,host=False,activate=False):
  manifest=prior.queue.source()
  if mode=='deploy' and not host:
@@ -38,13 +56,15 @@ def cdk(mode,directory,host=False,activate=False):
  if not host:command+=['-c','researchAutonomyEnabled=true','-c','researchOpenClawEnabled=true','-c','researchAutonomyAdmissionEnabled='+str(activate).lower()]
  command+=['--no-change-set'] if mode=='diff' else ['--require-approval','never','--outputs-file',str(directory/'outputs.json')]
  before=prior.queue.state() if not host else None
+ if before:(directory/'stack-before.json').write_text(json.dumps(before,indent=2)+'\n')
  with (directory/'cdk.log').open('w') as stream:result=subprocess.run(command,cwd=ROOT,env=env,stdout=stream,stderr=subprocess.STDOUT,timeout=1800)
  if result.returncode:raise RuntimeError('Scoped CDK command failed; original log retained')
- if mode=='deploy' and before and prior.queue.state()['parameters']!=before['parameters']:raise RuntimeError('Existing benchmark parameters changed; inspect original diff and receipt')
+ if mode=='deploy' and before:
+  after=prior.queue.state();(directory/'stack-after.json').write_text(json.dumps(after,indent=2)+'\n');comparison=compare_parameters(before,after,benchmark_image());(directory/'parameter-comparison.json').write_text(json.dumps(comparison,indent=2)+'\n')
  return dict(command=command,log_sha256=sha((directory/'cdk.log').read_bytes()),source_revision=manifest['source_revision'])
 
 def main():
- parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['inspect','migrate','hold','host-diff','host-deploy','host-status','host-repair','host-update','auth-correct','auth-start','auth-status','native-auth','host-check','host-refresh','cloud-control','cloud-verify','diff','deploy','activate','verify','publish','frontend-status']);parser.add_argument('--command-id');args=parser.parse_args()
+ parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['inspect','parameters','migrate','hold','host-diff','host-deploy','host-status','host-repair','host-update','auth-correct','auth-start','auth-status','native-auth','host-check','host-refresh','cloud-control','cloud-verify','diff','deploy','activate','verify','publish','frontend-status']);parser.add_argument('--command-id');args=parser.parse_args()
  directory=ROOT/'.test-artifacts/openclaw-release'/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');directory.mkdir(parents=True,exist_ok=False)
  receipt=dict(protocol='openclaw-production-v1',mode=args.mode,started_at=stamp(),status='running',measured_charges_usd=None)
  def save():(directory/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
@@ -53,6 +73,8 @@ def main():
   receipt['targets']=target();save()
   if args.mode=='inspect':
    receipt['inspection']=dict(prompts=prior.pointers(),active=admin.query("select stage,status,count(*) from research_autonomy_tasks where status in ('queued','running','waiting') group by stage,status"),limits=admin.query('select max_attempts,count(*) from research_autonomy_workflows group by max_attempts'),migrations=[dict(name=n,present=admin.query(q)[0]['present']) for n,q in MIGRATIONS])
+  elif args.mode=='parameters':
+   baseline=ROOT/'.test-artifacts/autonomy-release/20261018T232558867708Z/receipt.json';before=json.loads(baseline.read_bytes())['stack_after'];after=prior.queue.state();receipt['parameter_review']=compare_parameters(before,after,benchmark_image());receipt['comparison_baseline']=dict(path=str(baseline.relative_to(ROOT)),sha256=sha(baseline.read_bytes()),limitation='Last retained historical baseline; the failed first post-deploy guard did not persist its immediate before-state.')
   elif args.mode in ('host-diff','host-deploy'):receipt['cdk']=cdk('diff' if args.mode=='host-diff' else 'deploy',directory,host=True)
   elif args.mode=='hold':
    receipt['before']={};names=functions()
@@ -64,6 +86,8 @@ def main():
    for r in resources:
     if r['ResourceType']=='AWS::Events::Rule' and r['LogicalResourceId'].startswith('ResearchWorkflowAutonomyPoll'):aws('events','disable-rule','--name',r['PhysicalResourceId'])
    receipt['held']=True
+   for r in resources:
+    if r['ResourceType']=='AWS::Events::Rule' and r['LogicalResourceId'].startswith('ResearchWorkflowAutonomyPoll') and aws('events','describe-rule','--name',r['PhysicalResourceId'])['State']!='DISABLED':raise RuntimeError('Autonomy poll rule was not held')
   elif args.mode=='migrate':
    if admin.query("select count(*) count from research_autonomy_tasks where status='running'")[0]['count']:raise RuntimeError('Drain active autonomous leases before migration')
    receipt['migrations']=[]
