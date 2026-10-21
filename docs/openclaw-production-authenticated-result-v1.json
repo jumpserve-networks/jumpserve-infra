@@ -1,0 +1,387 @@
+{
+  "version": "openclaw-authenticated-control-result-v1",
+  "status": "passed",
+  "study_id": "5ef8e6bd-e3ff-4ba9-8427-d25fb525fb74",
+  "task_id": "7842ae5a-c516-5495-ad98-4df571163f05",
+  "backend_revision": "38e501ca63accb87a3b081846b63f797f8d2791f",
+  "before_snapshot_sha256": "b65a36fbef12028c6b5e2d0732fde9687e2b4fb855c31d118a6caaea3a63b9ee",
+  "after_snapshot_sha256": "2456fb979ce1289daf51d92bc8d6d6eb71baefb36b669b8c6e372b294b27aade",
+  "claim_statuses": {
+    "blocked": 14,
+    "resolved": 1
+  },
+  "claim_labels": {
+    "untested": 14,
+    "reproduced": 1
+  },
+  "actual_model_calls": 66,
+  "model_failures": 0,
+  "provider_retries": 0,
+  "paid_fallback": false,
+  "recorded_runs": 6,
+  "recorded_measurements": 1152,
+  "units": "percent",
+  "additional_followup_turns": 9,
+  "additional_followup_runs": 2,
+  "additional_followup_measurements": 384,
+  "original_records_preserved": true,
+  "other_fourteen_claim_tasks_unchanged": true,
+  "initial_and_followup_deadline_identical": true,
+  "max_ai_turns": null,
+  "resolved_claim_actual_turns": 25,
+  "turn_count_note": "This claim happened to resolve on turn 25; the application ceiling is null. Local SQL separately verified 40 actual reserved fixture turns.",
+  "original_committed_cents": 6514,
+  "final_committed_cents": 7471,
+  "commitment_increment_cents": 957,
+  "paper_limit_cents": 10000,
+  "deadline_at": "2026-10-28T14:12:04.641715+00:00",
+  "measured_charges_usd": null,
+  "subscription_allocation_usd": null,
+  "input_tokens": 638328,
+  "output_tokens": 6833,
+  "total_tokens": 645161,
+  "calls_missing_token_usage": 0,
+  "final_turn_ended_at": "2026-10-21T17:57:51.5224+00:00",
+  "later_snapshot_observed_at": "2026-10-21T19:38:16.475335+00:00",
+  "scientific_assessment": {
+    "campaign_id": "6681fbdf-7ad1-5b0f-bdcd-21107ef4a6b6",
+    "claim_id": "d3ec32d0-5b88-57a6-8cf3-64148595f579",
+    "created_at": "2026-10-21T17:58:00.21731+00:00",
+    "evidence": [
+      {
+        "id": "7cbc1165-9a8a-5380-b55b-1cab2634023d",
+        "kind": "runs"
+      },
+      {
+        "id": "33ca6bfd-966f-538e-a1cb-4ccafe60b0fc",
+        "kind": "protocols"
+      },
+      {
+        "id": "23097cc7-efb5-52e7-9c3c-01156b9d32f4",
+        "kind": "runs"
+      },
+      {
+        "id": "49a79a2b-422a-5493-b165-424556f3b6cf",
+        "kind": "protocols"
+      },
+      {
+        "id": "d8990eb2-166f-5369-869d-1db4fb4bf154",
+        "kind": "runs"
+      },
+      {
+        "id": "7157b37e-6dab-520f-91e7-260328ffc483",
+        "kind": "protocols"
+      },
+      {
+        "id": "6bd74181-80ee-5abc-ab7d-c1148abdc9d0",
+        "kind": "runs"
+      },
+      {
+        "id": "9c1fd0f8-aca4-5908-8c1f-83cf886f5d73",
+        "kind": "protocols"
+      },
+      {
+        "id": "554fe12f-b1db-5f8e-a261-f7840b997bfc",
+        "kind": "runs"
+      },
+      {
+        "id": "1a4b89b8-2de0-58b0-ba2b-7969ad0e2ce8",
+        "kind": "protocols"
+      },
+      {
+        "id": "fc051c0a-3fb6-53e1-860e-7608e77cba7e",
+        "kind": "runs"
+      },
+      {
+        "id": "4b7354e5-fced-55fa-89a7-d21c676690c6",
+        "kind": "protocols"
+      },
+      {
+        "id": "b57157c5-cb39-5956-abca-021930260896",
+        "kind": "artifacts"
+      }
+    ],
+    "id": "f23d5364-8313-5e8d-9b0c-c4aaff48020c",
+    "justification": "The matched recorded evidence supports the controller calculation under the frozen conditions only.",
+    "label": "reproduced",
+    "limitations": "Separate AI reviews share model and inputs. Numerical agreement is not correctness, causality, compliance or generalization. Source review remains as recorded.",
+    "reviewer": {
+      "identity": "Autonomous evidence controller with fresh AI reviews",
+      "independence": "Shared model and inputs; primary implementation is not independent or human scientific review.",
+      "type": "AI"
+    },
+    "study_id": "5ef8e6bd-e3ff-4ba9-8427-d25fb525fb74",
+    "supersedes_id": "2393aa29-e778-5a88-8ab7-4c2339010e8a",
+    "tested_conditions": {
+      "automatic_controller": "research-autonomy-v3",
+      "coverage": {
+        "completed_checks": 6,
+        "covered_cells": 1152,
+        "criterion": "Union of original frozen published cell identities and per-cell absolute tolerances; compatible alternative checks may cover the same cells. No population inference.",
+        "decision_runs": 6,
+        "prior_other_methods": 0,
+        "prior_partial_or_failed_runs": 0,
+        "record_inventories": [
+          {
+            "metric_counts": [
+              {
+                "count": 32,
+                "metric": "SERVFAIL",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "TIMEOUT",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "edns0_fallback",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "tcp_fallback",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "udp_fragments",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "udp_packet_too_big",
+                "units": "percent"
+              }
+            ],
+            "record_count": 192,
+            "records_sha256": "0822d373f37a4d159c5d02c3d7422e35b35725c6417d1a4874d3ce01b7c5958e",
+            "run_id": "7cbc1165-9a8a-5380-b55b-1cab2634023d",
+            "scope": "Complete retained record inventory, not a statistical estimate or source review.",
+            "status_counts": {
+              "recorded": 192
+            }
+          },
+          {
+            "metric_counts": [
+              {
+                "count": 32,
+                "metric": "SERVFAIL",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "TIMEOUT",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "edns0_fallback",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "tcp_fallback",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "udp_fragments",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "udp_packet_too_big",
+                "units": "percent"
+              }
+            ],
+            "record_count": 192,
+            "records_sha256": "40f415258c7775d2d58aacf56632efec5691486df3fd7f169f2444cf71741f69",
+            "run_id": "23097cc7-efb5-52e7-9c3c-01156b9d32f4",
+            "scope": "Complete retained record inventory, not a statistical estimate or source review.",
+            "status_counts": {
+              "recorded": 192
+            }
+          },
+          {
+            "metric_counts": [
+              {
+                "count": 32,
+                "metric": "SERVFAIL",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "TIMEOUT",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "edns0_fallback",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "tcp_fallback",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "udp_fragments",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "udp_packet_too_big",
+                "units": "percent"
+              }
+            ],
+            "record_count": 192,
+            "records_sha256": "bdc7a8035347c35d19f983cc4e75d78559160e2a42915c7ac07e6d013ccc3331",
+            "run_id": "d8990eb2-166f-5369-869d-1db4fb4bf154",
+            "scope": "Complete retained record inventory, not a statistical estimate or source review.",
+            "status_counts": {
+              "recorded": 192
+            }
+          },
+          {
+            "metric_counts": [
+              {
+                "count": 32,
+                "metric": "SERVFAIL",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "TIMEOUT",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "edns0_fallback",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "tcp_fallback",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "udp_fragments",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "udp_packet_too_big",
+                "units": "percent"
+              }
+            ],
+            "record_count": 192,
+            "records_sha256": "79c2fac46db64e18688c356b897c6df3c0a49c9014f240918e22ac2a8375120e",
+            "run_id": "6bd74181-80ee-5abc-ab7d-c1148abdc9d0",
+            "scope": "Complete retained record inventory, not a statistical estimate or source review.",
+            "status_counts": {
+              "recorded": 192
+            }
+          },
+          {
+            "metric_counts": [
+              {
+                "count": 32,
+                "metric": "SERVFAIL",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "TIMEOUT",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "edns0_fallback",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "tcp_fallback",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "udp_fragments",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "udp_packet_too_big",
+                "units": "percent"
+              }
+            ],
+            "record_count": 192,
+            "records_sha256": "0af8e02b554e2351ba40f79ab26f5648f9ccfa9b9d1b0213d9f10542b6a38738",
+            "run_id": "554fe12f-b1db-5f8e-a261-f7840b997bfc",
+            "scope": "Complete retained record inventory, not a statistical estimate or source review.",
+            "status_counts": {
+              "recorded": 192
+            }
+          },
+          {
+            "metric_counts": [
+              {
+                "count": 32,
+                "metric": "SERVFAIL",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "TIMEOUT",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "edns0_fallback",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "tcp_fallback",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "udp_fragments",
+                "units": "percent"
+              },
+              {
+                "count": 32,
+                "metric": "udp_packet_too_big",
+                "units": "percent"
+              }
+            ],
+            "record_count": 192,
+            "records_sha256": "eba50ecebb8921a9cd344380fbc9c4ca1d38450a957c4719acae4c52dcf27034",
+            "run_id": "fc051c0a-3fb6-53e1-860e-7608e77cba7e",
+            "scope": "Complete retained record inventory, not a statistical estimate or source review.",
+            "status_counts": {
+              "recorded": 192
+            }
+          }
+        ],
+        "required_cells": 1152,
+        "required_checks": 6
+      },
+      "protocols": [
+        "4b7354e5-fced-55fa-89a7-d21c676690c6"
+      ],
+      "scope": "Matched recorded numerical cells under the exact frozen criterion; no broader inference. Earlier valid comparable discrepancies remain part of the decision; prior partial/failed and other-method runs remain referenced separately."
+    }
+  },
+  "independence": "Exposed archived cells, shared source inputs and nonindependent AI implementer/evaluator/reviewer. No new Internet measurements or whole-paper validation.",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  }
+}

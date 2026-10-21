@@ -40,7 +40,13 @@ def main():
      cached=cache/artifact['sha256']
      if cached.exists():original=cached.read_bytes()
      else:
-      with r.prior.guard.OPEN.open(urllib.request.Request(base+artifact['storage_path'],headers=headers),timeout=30) as response:original=response.read(16000001)
+      for attempt in range(1,4):
+       try:
+        with r.prior.guard.OPEN.open(urllib.request.Request(base+artifact['storage_path'],headers=headers),timeout=30) as response:original=response.read(16000001)
+        break
+       except (urllib.error.URLError,TimeoutError) as error:
+        report.setdefault('artifact_retrieval_errors',[]).append(dict(sha256=artifact['sha256'],attempt=attempt,error=str(error)))
+        if attempt==3:raise
       assert len(original)==artifact['byte_count'] and sha(original)==artifact['sha256'];cached.write_bytes(original);cached.chmod(0o600)
      assert len(original)==artifact['byte_count'] and sha(original)==artifact['sha256']
      if artifact['sha256'] not in seen:

@@ -1,0 +1,269 @@
+{
+  "version": "openclaw-production-release-status-v1",
+  "recorded_at": "2026-10-21T19:42:57.545186+00:00",
+  "software_status": "deployed-and-verified",
+  "scientific_status": "limited-archived-numerical-control",
+  "production_url": "https://jumpserve.quaint-lab.org",
+  "queue_url": "https://jumpserve.quaint-lab.org/research-verification/experiment-queue?study=5ef8e6bd-e3ff-4ba9-8427-d25fb525fb74",
+  "aws_account": "395567831870",
+  "supabase_project": "regphejnlvfpyokpniny",
+  "backend_revision": "38e501ca63accb87a3b081846b63f797f8d2791f",
+  "frontend_revision": "823138b5f5f8af904fcf5f5c6b72158d54aa44e3",
+  "infrastructure_revision_at_runtime_deployment": "d3682f1",
+  "runtime_manifest_version": 34,
+  "amplify": {
+    "job_id": 119,
+    "status": "SUCCEED",
+    "completed_at": "2026-10-21T14:10:30.131000+00:00"
+  },
+  "runtime": {
+    "engine": "OpenClaw",
+    "version": "2026.10.5",
+    "node": "24.16.0",
+    "model": "gpt-6.1-sol",
+    "authorization": "Native production-host Sign in with ChatGPT; actual refresh and inference verified",
+    "api_key_or_bedrock_fallback": false
+  },
+  "defaults": {
+    "paper_commitment_cents": 10000,
+    "elapsed_days": 7,
+    "ai_turn_cap": null,
+    "per_paper_claim_slots": 2,
+    "global_claim_slots": 4
+  },
+  "prompt": {
+    "active_version": "research-autonomy-v10",
+    "active_id": "6117e5c5-84ce-5c31-aaa7-0d1d3522e62e",
+    "original_sixteen_answer_publication_unchanged": true,
+    "failed_v9_preserved": true,
+    "other_module_pointers_unchanged": true
+  },
+  "release_blockers_passed": true,
+  "conditional_verification_gaps": [
+    "No fresh raw-pcap or Internet experiment was performed; networking/package-specific results retain their earlier scope.",
+    "No separate classic ChatPanel request was exercised in this release campaign; the actual authenticated autonomous AI planning/storage/execution flow was exercised.",
+    "No human or independent review.",
+    "Actual provider, infrastructure, storage and subscription cost allocation is unavailable.",
+    "Catalog checks do not recover the original executed bytes of historical migrations; new release migrations have exact input hashes.",
+    "All 66 production turns were typed and hash checked; the substantive prompt evaluation covers its declared 16 cases. Production continuation/final answers were examined, not a systematic substantive review of all 66 raw provider streams."
+  ],
+  "scientific_result": {
+    "new_campaign_claims": 15,
+    "reproduced": 1,
+    "discrepant": 0,
+    "inconclusive": 0,
+    "untested": 14,
+    "archived_runs": 6,
+    "matched_cells": 1152,
+    "units": "percent",
+    "new_empirical_network_measurements": 0,
+    "paper_validation_complete": false,
+    "original_assessment_history_retained": true
+  },
+  "usage": {
+    "actual_release_model_calls": 95,
+    "breakdown": {
+      "rejected_v9_evaluation": 12,
+      "passing_v10_evaluation": 16,
+      "aws_native_control": 1,
+      "authenticated_paper_control": 66
+    },
+    "paper_input_tokens": 638328,
+    "paper_output_tokens": 6833,
+    "paper_total_tokens": 645161,
+    "paper_committed_cents": 7471,
+    "paper_deadline_at": "2026-10-28T14:12:04.641715+00:00",
+    "measured_charges_usd": null,
+    "subscription_allocation_usd": null,
+    "unallocated_infrastructure_and_storage_usd": null,
+    "cost_note": "Conservative orchestration commitments are admission reserves, not measured API prices or allocated subscription charges. Missing usage/cost is not zero."
+  },
+  "private_archives": {
+    "original_evaluation": {
+      "protocol": "openclaw-production-v1",
+      "bucket": "research-workflow-raw",
+      "path": "release-verification/openclaw-production-v1/6d3f8f6438ace2a32d3b71ac2016a7ff50d77ab59d885e3c5792c1e19dab57bd.zip",
+      "sha256": "6d3f8f6438ace2a32d3b71ac2016a7ff50d77ab59d885e3c5792c1e19dab57bd",
+      "retrieved_sha256": "6d3f8f6438ace2a32d3b71ac2016a7ff50d77ab59d885e3c5792c1e19dab57bd",
+      "byte_count": 3158755,
+      "manifest_sha256": "0b54916ded9b179922ab7a39fcd46a9378f93f2510de3013e385546278d1a96e",
+      "original_file_count": 425,
+      "public": false,
+      "excluded": "OAuth grants, native host authorization database/logs, per-turn transient state databases and ephemeral bridge configs. Original request/SSE/native output and exact source snapshots are included.",
+      "storage_charges_usd": null
+    },
+    "aws_native_control": {
+      "bucket": "research-workflow-raw",
+      "path": "release-verification/openclaw-cloud-control/6d116484-461e-4e95-b888-ff91eff080a9/29675d06773ed0ae350387a8b756481f29619d30010b31f5967f610b607eca55.zip",
+      "sha256": "29675d06773ed0ae350387a8b756481f29619d30010b31f5967f610b607eca55",
+      "retrieved_sha256": "29675d06773ed0ae350387a8b756481f29619d30010b31f5967f610b607eca55",
+      "byte_count": 62875,
+      "originals": [
+        {
+          "path": "logical.json",
+          "sha256": "37567224a4f3dd048390fbc6b8f04bdc2e8dbcf3437ce2088f35dc23f5dcddc5",
+          "byte_count": 18349
+        },
+        {
+          "path": "message.json",
+          "sha256": "0fb99f491ed06410ec0f8fe5a3706384655c2b0fe828ab6eda1ad13a826e7ccf",
+          "byte_count": 837
+        },
+        {
+          "path": "openclaw-http-body.bin",
+          "sha256": "fbd3f98ef8ec871a949e94527f16ceb9ebf14b8613a56d3af0f1382a07f8c81e",
+          "byte_count": 25586
+        },
+        {
+          "path": "provider-request.json",
+          "sha256": "66a43084b53cb6675264e8879ed0113d46beb2e42ec3b8742651c62cb7402baa",
+          "byte_count": 28327
+        },
+        {
+          "path": "provider-response.bin",
+          "sha256": "d9450feea1a0ad8bf3c09f2e0fa844e38204c6f84b98c1df2d6cad8f6483e48b",
+          "byte_count": 122888
+        },
+        {
+          "path": "receipt.json",
+          "sha256": "09eb65ccb71f521e57f0b1d28d680bfa14a5a41ba29a1816c517e072e1652b90",
+          "byte_count": 643
+        },
+        {
+          "path": "stderr.bin",
+          "sha256": "e9707264f6b514f39d59275268b9fd6779e938484e9f8a4bda616a7acf3b3035",
+          "byte_count": 402
+        },
+        {
+          "path": "stdout.bin",
+          "sha256": "dd0f3f42e0ce764dfc2cf1c427deaa2ab1c1b016d4aa69a8fb16ab20cd5deaa4",
+          "byte_count": 2182
+        },
+        {
+          "path": "workspace/AGENTS.md",
+          "sha256": "0628e39abf1eff04d143ece28631010608ea96b0349ebc0861fcdfa9fd75622d",
+          "byte_count": 14864
+        }
+      ]
+    },
+    "original_stopped_paper_control": {
+      "bucket": "research-workflow-raw",
+      "path": "release-verification/openclaw-authenticated-control/5ef8e6bd-e3ff-4ba9-8427-d25fb525fb74/866b0fbb1784015ef39192983ff83f707347ec0dae259a3494f13418043ce8a3.zip",
+      "sha256": "866b0fbb1784015ef39192983ff83f707347ec0dae259a3494f13418043ce8a3",
+      "retrieved_sha256": "866b0fbb1784015ef39192983ff83f707347ec0dae259a3494f13418043ce8a3",
+      "byte_count": 8535353,
+      "original_file_count": 527,
+      "private": true
+    },
+    "completed_paper_control": {
+      "bucket": "research-workflow-raw",
+      "path": "release-verification/openclaw-authenticated-control/5ef8e6bd-e3ff-4ba9-8427-d25fb525fb74/f449d587317ee870a46e5827afcb7fb51b52296969f2467983f21001e1617870.zip",
+      "sha256": "f449d587317ee870a46e5827afcb7fb51b52296969f2467983f21001e1617870",
+      "retrieved_sha256": "f449d587317ee870a46e5827afcb7fb51b52296969f2467983f21001e1617870",
+      "byte_count": 9977652,
+      "original_file_count": 615,
+      "private": true
+    }
+  },
+  "receipts": [
+    {
+      "name": "held_controller_deployment",
+      "path": ".test-artifacts/openclaw-release/20261021T173921455373Z/receipt.json",
+      "sha256": "18af5344fd88d1a40bcb3057036b049f94278cc2eb2bf383cd410ccacd7c0e49",
+      "status": "complete"
+    },
+    {
+      "name": "activation",
+      "path": ".test-artifacts/openclaw-release/20261021T174206095690Z/receipt.json",
+      "sha256": "e2a7673da9c14b6c5dd09b73e6e94a593a89f6aac74a9cc6a5d6b41a25c6bff1",
+      "status": "complete"
+    },
+    {
+      "name": "active_source_security_verification",
+      "path": ".test-artifacts/openclaw-release/20261021T174347788868Z/receipt.json",
+      "sha256": "93ce545ef68e4be5441c5517e7e3cbb8d29da23c48b29f63cd9e60290d2f32ea",
+      "status": "complete"
+    },
+    {
+      "name": "host_source_and_auth_check",
+      "path": ".test-artifacts/openclaw-release/20261021T174018686247Z/receipt.json",
+      "sha256": "66cb02ff06143a4e2cfd36411ac3c34f5d3673dce9c99ba30d4f9245912bd6b8",
+      "status": "complete"
+    },
+    {
+      "name": "audited_resumption",
+      "path": ".test-artifacts/openclaw-release/20261021T174346743300Z/receipt.json",
+      "sha256": "d937c1330839743fc7a8ea7c9796c44da060c8c8fc861c6a44aa68f4e6b2c28b",
+      "status": "complete"
+    },
+    {
+      "name": "recovery_migration",
+      "path": ".test-artifacts/openclaw-release/20261021T173643947231Z/receipt.json",
+      "sha256": "7cf1d3acebe99150fd6363fa74c7ff78c2d16484673c84a8517ade6401c27d00",
+      "status": "complete"
+    },
+    {
+      "name": "host_deployment",
+      "path": ".test-artifacts/openclaw-release/20261021T173713172097Z/receipt.json",
+      "sha256": "2abf10e0f365f16f5d7eaa43de55db770370f844ea4cf4ec7b054c005d50b86b",
+      "status": "complete"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/openclaw-production-validation-v1.json",
+      "sha256": "df75417a5316059db0fd58cc396826e86756a494165f66952936d8d4af0bf513"
+    },
+    {
+      "path": "docs/openclaw-production-controller-validation-v1.json",
+      "sha256": "4c7e5b5efe46abd37a8362f42c6e6841b0a4ecd00002d10b086bd537af03d18a"
+    },
+    {
+      "path": "docs/openclaw-production-partial-replay-v1.json",
+      "sha256": "fb0f7c71af9f4e1b6c0095feb480115684b702e9f258610964bf30314a6c7795"
+    },
+    {
+      "path": "docs/openclaw-production-authenticated-result-v1.json",
+      "sha256": "ec6d08dd09d5387e19d16a5f6873f8680797ebefc02470fec758a4ea495eaaeb"
+    },
+    {
+      "path": "docs/openclaw-production-authenticated-browser-v1.json",
+      "sha256": "eb04ebe64f6f7f376fe400cf47cbcc84a5b7519bb37379d598ed3d5596c72c77"
+    },
+    {
+      "path": "docs/openclaw-production-arithmetic-v1.json",
+      "sha256": "865926a3d2356692c2274b9cc0a3d78a69130dc7f03bef8d1f41b31db3dcfc9e"
+    },
+    {
+      "path": "docs/openclaw-production-claim-coverage-v1.json",
+      "sha256": "7ff4a407d3533de894ccb5399c1c62773b74b7fa82131596db2795de501f5a70"
+    },
+    {
+      "path": ".test-artifacts/openclaw-browser/2026-10-21T17-43-58.545Z/report.json",
+      "sha256": "eeffcf9d1c86fbfad7b356e8468d97489566682b081656baf6b40f1bf6034b78"
+    }
+  ],
+  "preserved_failures": [
+    "Rejected v9 live substantive reviews; original answers retained.",
+    "Original host package bootstrap and callback/interactive-login failures; separately documented corrections.",
+    "Empty AWS response and strict parameter-review reporting failures; original receipts retained.",
+    "Concurrent CDK output lock rejected one controller deployment before cloud changes; sequential retry succeeded.",
+    "First private ZIP upload timed out before its in-memory ZIP was saved; that exact ZIP buffer is unavailable. Original individual DB/Storage artifacts were retained, retrieved and verified in later content-addressed archives.",
+    "Subsequent TLS artifact retrieval failure retained its verified cache and failure report; bounded read-only retry completed the archive.",
+    "Initial SQL fixture had an incomplete current run and recovery correctly rejected it; a declared complete-per-panel fixture then passed.",
+    "Approval waits delayed administrative observations beyond declared windows; the recorded follow-up final turn completed at 2026-10-21T17:57:51.5224+00:00 and the later snapshot was observed at 2026-10-21T19:38:16.475335+00:00. Do not describe the late observation as an on-time observation."
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "production_answer_review": {
+    "all_66_typed_outputs_and_prompt_response_hashes_verified": true,
+    "all_66_raw_answers_systematically_substantively_reviewed": false,
+    "actual_prompt_candidate_answers_substantively_reviewed": 16,
+    "production_continuation_and_terminal_answers_examined": true,
+    "reviewer_type": "AI",
+    "independent": false
+  }
+}

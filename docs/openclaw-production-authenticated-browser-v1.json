@@ -1,0 +1,89 @@
+{
+  "protocol": "openclaw-production-authenticated-control-v1",
+  "scope": "Connected Chrome with legitimate Google user session; real production PDF submission, persisted turns and archived measurements; no fixture auth.",
+  "study_id": "5ef8e6bd-e3ff-4ba9-8427-d25fb525fb74",
+  "checks": [
+    {
+      "name": "PDF upload",
+      "passed": true,
+      "sha256": "f6378fb3de19aa8d3204f4d3a2028f95497f334862a5298aa6678ef1b816290b",
+      "bytes": 2183602
+    },
+    {
+      "name": "Owner prompt history pagination",
+      "passed": true,
+      "loaded_turns": 16,
+      "first_turn": 1,
+      "last_turn": 16
+    },
+    {
+      "name": "Saved exact prompt and original response details",
+      "passed": true,
+      "prompt_characters": 34374,
+      "response_characters": 8495
+    },
+    {
+      "name": "Viewport and themes",
+      "passed": true,
+      "widths": [
+        1365,
+        390
+      ],
+      "themes": [
+        "Light Mode",
+        "Dark Mode",
+        "System Default"
+      ],
+      "horizontal_overflow": false
+    },
+    {
+      "name": "Final completed claim card",
+      "passed": true,
+      "widths": [
+        1365,
+        390
+      ],
+      "status": "resolved",
+      "label": "reproduced",
+      "retained_checks": "6 / 6",
+      "horizontal_overflow": false
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "authenticated-desktop-system.png",
+      "sha256": "553d52a272b4530a710d01d3469bff936aacbdb1e60f942a3f96f50641844459",
+      "private": true
+    },
+    {
+      "name": "authenticated-mobile-dark-history.png",
+      "sha256": "43d44cbb4eed3d9b5956d24ec6ae6504df001bd10e0a3be7c7585a346d578033",
+      "private": true
+    },
+    {
+      "name": "authenticated-mobile-light.png",
+      "sha256": "ad720e9fb5df111ff6d8cbac8fb58b71d2bcc27e6c04bbeb1507ed63e9689b93",
+      "private": true
+    },
+    {
+      "name": "completed-claim-desktop.png",
+      "sha256": "dffc79ff80ec7fc391734b8775e64b1727dab0b246d077770ad157af0beda2f5",
+      "private": true
+    },
+    {
+      "name": "completed-claim-mobile.png",
+      "sha256": "6dc1f1ed98275e8ef4387f1dcf83f9ee4c2966142a614018b93039087f627166",
+      "private": true
+    }
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "limitations": [
+    "Exposed archived numerical control; not new Internet measurements",
+    "No independent or human review",
+    "Original observation window elapsed during approval waits; later checks are follow-up observations"
+  ]
+}

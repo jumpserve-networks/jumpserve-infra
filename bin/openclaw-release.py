@@ -65,7 +65,7 @@ def cdk(mode,directory,host=False,activate=False):
  return dict(command=command,log_sha256=sha((directory/'cdk.log').read_bytes()),source_revision=manifest['source_revision'])
 
 def main():
- parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['inspect','parameters','migrate','hold','host-diff','host-deploy','host-status','host-repair','host-update','auth-correct','auth-start','auth-status','native-auth','host-check','host-refresh','cloud-control','cloud-verify','diff','deploy','activate','verify','publish','frontend-status','partial-resume']);parser.add_argument('--command-id');args=parser.parse_args()
+ parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['inspect','parameters','migrate','hold','host-diff','host-deploy','host-status','host-repair','host-update','auth-correct','auth-start','auth-status','native-auth','host-check','host-refresh','cloud-control','cloud-verify','diff','deploy','activate','verify','publish','frontend-status','partial-resume','record-result']);parser.add_argument('--command-id');args=parser.parse_args()
  directory=ROOT/'.test-artifacts/openclaw-release'/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');directory.mkdir(parents=True,exist_ok=False)
  receipt=dict(protocol='openclaw-production-v1',mode=args.mode,started_at=stamp(),status='running',measured_charges_usd=None)
  def save():(directory/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
@@ -181,6 +181,19 @@ def main():
    raw=(ROOT/'docs/openclaw-production-controller-validation-v1.json').read_text()
    admin.query('insert into agent_prompt_evaluations(prompt_version_id,outcome,report_raw,report_sha256,original_artifacts,recorded_by) values('+','.join([admin.literal('6117e5c5-84ce-5c31-aaa7-0d1d3522e62e')+'::uuid',admin.literal('passed'),admin.literal(raw),admin.literal(sha(raw.encode())),admin.literal(json.dumps(dict(kind='controller-only-follow-up',original_prompt_evaluation_unchanged=True,replay=replay)))+'::jsonb',admin.literal('Primary Codex AI implementer; nonindependent controller regression, zero new model calls')])+') on conflict(prompt_version_id,report_sha256) do nothing',read_only=False)
    receipt['resumption']=admin.query("select research_autonomy_resume_partial('5ef8e6bd-e3ff-4ba9-8427-d25fb525fb74'::uuid,'7842ae5a-c516-5495-ad98-4df571163f05'::uuid,'continue-retained-checks-v1') result",read_only=False)
+  elif args.mode=='record-result':
+   release=json.loads((ROOT/'docs/openclaw-production-release-status-v1.json').read_bytes());manifest=json.loads((ROOT/'research-workflow-runtime.json').read_bytes())
+   archive=release['private_archives']['completed_paper_control']
+   if release['software_status']!='deployed-and-verified' or release['backend_revision']!=manifest['source_revision'] or archive['sha256']!=archive['retrieved_sha256']:raise RuntimeError('Verified exact release and retrieved private evidence required')
+   actual=admin.query("select (select count(*) from research_autonomy_turns where study_id='5ef8e6bd-e3ff-4ba9-8427-d25fb525fb74' and status='complete') turns,(select count(*) from research_runs where study_id='5ef8e6bd-e3ff-4ba9-8427-d25fb525fb74' and status='complete') runs,(select count(*) from research_measurements where study_id='5ef8e6bd-e3ff-4ba9-8427-d25fb525fb74' and status='recorded') measurements")
+   if actual!=[dict(turns=66,runs=6,measurements=1152)]:raise RuntimeError('Retained production result changed; record a new follow-up rather than this frozen report')
+   receipt['database_results']=[]
+   for name in ('openclaw-production-authenticated-result-v1.json','openclaw-production-arithmetic-v1.json','openclaw-production-claim-coverage-v1.json','openclaw-production-release-status-v1.json'):
+    raw=(ROOT/'docs'/name).read_text();digest=sha(raw.encode())
+    admin.query('insert into agent_prompt_evaluations(prompt_version_id,outcome,report_raw,report_sha256,original_artifacts,recorded_by) values('+','.join([admin.literal('6117e5c5-84ce-5c31-aaa7-0d1d3522e62e')+'::uuid',admin.literal('passed'),admin.literal(raw),admin.literal(digest),admin.literal(json.dumps(dict(kind='production-end-to-end-follow-up',prompt_publication_unchanged=True,private_archive=archive)))+'::jsonb',admin.literal('Primary Codex AI implementer; nonindependent production follow-up, not a new sixteen-case prompt evaluation')])+') on conflict(prompt_version_id,report_sha256) do nothing',read_only=False)
+    rows=admin.query('select report_sha256,encode(sha256(convert_to(report_raw,\'UTF8\')),\'hex\') retrieved_sha256 from agent_prompt_evaluations where prompt_version_id=\'6117e5c5-84ce-5c31-aaa7-0d1d3522e62e\' and report_sha256='+admin.literal(digest))
+    if rows!=[dict(report_sha256=digest,retrieved_sha256=digest)]:raise RuntimeError('Stored original report hash differs')
+    receipt['database_results'].append(dict(name=name,sha256=digest,retrieved_sha256=digest))
   elif args.mode=='frontend-status':receipt['jobs']=aws('amplify','list-jobs','--app-id','d24jvguj7brnkj','--branch-name','main','--max-results','3')['jobSummaries']
   receipt.update(status='complete',ended_at=stamp());save();print(json.dumps(dict(directory=str(directory),**receipt),indent=2))
  except Exception as error:receipt.update(status='failed',reason=str(error),ended_at=stamp());save();print(json.dumps(dict(directory=str(directory),status='failed',reason=str(error))));raise

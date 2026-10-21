@@ -1,0 +1,70 @@
+{
+  "version": "openclaw-control-arithmetic-check-v1",
+  "checked_at": "2026-10-21T19:38:56.945987+00:00",
+  "status": "passed",
+  "study_id": "5ef8e6bd-e3ff-4ba9-8427-d25fb525fb74",
+  "snapshot_sha256": "2456fb979ce1289daf51d92bc8d6d6eb71baefb36b669b8c6e372b294b27aade",
+  "original_plan_sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+  "checker_sha256": "953b18d9d67fce28eac7145744fb39dcd6f213fa2b2c0d8a3bea51c9382c259d",
+  "panels": [
+    {
+      "key": "fig-13a",
+      "job_id": "7cbc1165-9a8a-5380-b55b-1cab2634023d",
+      "status": "complete",
+      "required_cells": 192,
+      "checked_cells": 192
+    },
+    {
+      "key": "fig-13b",
+      "job_id": "23097cc7-efb5-52e7-9c3c-01156b9d32f4",
+      "status": "complete",
+      "required_cells": 192,
+      "checked_cells": 192
+    },
+    {
+      "key": "fig-14a",
+      "job_id": "d8990eb2-166f-5369-869d-1db4fb4bf154",
+      "status": "complete",
+      "required_cells": 192,
+      "checked_cells": 192
+    },
+    {
+      "key": "fig-14b",
+      "job_id": "6bd74181-80ee-5abc-ab7d-c1148abdc9d0",
+      "status": "complete",
+      "required_cells": 192,
+      "checked_cells": 192
+    },
+    {
+      "key": "fig-15a",
+      "job_id": "554fe12f-b1db-5f8e-a261-f7840b997bfc",
+      "status": "complete",
+      "required_cells": 192,
+      "checked_cells": 192
+    },
+    {
+      "key": "fig-15b",
+      "job_id": "fc051c0a-3fb6-53e1-860e-7608e77cba7e",
+      "status": "complete",
+      "required_cells": 192,
+      "checked_cells": 192
+    }
+  ],
+  "required_cells": 1152,
+  "checked_cells": 1152,
+  "full_required_numerical_coverage": true,
+  "labels": {
+    "reproduced": 1152
+  },
+  "units": "percent",
+  "model_calls": 0,
+  "database_writes": 0,
+  "new_empirical_measurements": 0,
+  "uncertainty": "Descriptive counts only; these reused deterministic cells do not support an inferential confidence interval.",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "independence": "Separate arithmetic implementation; shared frozen input data, UUID format, Python Decimal semantics and implementer. Not independent source-measurement or scientific validation."
+}
