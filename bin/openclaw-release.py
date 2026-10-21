@@ -44,7 +44,7 @@ def cdk(mode,directory,host=False,activate=False):
  return dict(command=command,log_sha256=sha((directory/'cdk.log').read_bytes()),source_revision=manifest['source_revision'])
 
 def main():
- parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['inspect','migrate','hold','host-diff','host-deploy','host-status','host-repair','host-update','auth-correct','auth-start','auth-status','native-auth','host-check','diff','deploy','activate','verify','publish','frontend-status']);parser.add_argument('--command-id');args=parser.parse_args()
+ parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['inspect','migrate','hold','host-diff','host-deploy','host-status','host-repair','host-update','auth-correct','auth-start','auth-status','native-auth','host-check','host-refresh','cloud-control','cloud-verify','diff','deploy','activate','verify','publish','frontend-status']);parser.add_argument('--command-id');args=parser.parse_args()
  directory=ROOT/'.test-artifacts/openclaw-release'/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');directory.mkdir(parents=True,exist_ok=False)
  receipt=dict(protocol='openclaw-production-v1',mode=args.mode,started_at=stamp(),status='running',measured_charges_usd=None)
  def save():(directory/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
@@ -89,14 +89,26 @@ def main():
    receipt['ssm']=ssm(['systemctl stop jumpserve-openclaw.service','cp -a /opt/jumpserve/runtime /opt/jumpserve/runtime-before-v10','aws s3 cp s3://'+bucket+'/'+key+' /opt/jumpserve/runtime-v10.zip --region us-east-1','unzip -o -q /opt/jumpserve/runtime-v10.zip -d /opt/jumpserve/runtime','chmod -R a+rX /opt/jumpserve/runtime','systemctl start jumpserve-openclaw.service'])
   elif args.mode=='native-auth':
    # Interactive native login avoids a background pseudo-terminal losing stdin.
-   login='stty cols 2000; exec runuser -u jumpserve -- env HOME=/var/lib/jumpserve-openclaw OPENCLAW_STATE_DIR=/var/lib/jumpserve-openclaw/auth OPENCLAW_CONFIG_PATH=/var/lib/jumpserve-openclaw/auth/config.json PATH=/opt/jumpserve/node/bin:/usr/bin:/bin /opt/jumpserve/node/bin/node /opt/jumpserve/openclaw/node_modules/openclaw/openclaw.mjs models auth login --provider openai --method siwc'
+   login='stty cols 2000; exec sudo -n runuser -u jumpserve -- env HOME=/var/lib/jumpserve-openclaw OPENCLAW_STATE_DIR=/var/lib/jumpserve-openclaw/auth OPENCLAW_CONFIG_PATH=/var/lib/jumpserve-openclaw/auth/config.json PATH=/opt/jumpserve/node/bin:/usr/bin:/bin /opt/jumpserve/node/bin/node /opt/jumpserve/openclaw/node_modules/openclaw/openclaw.mjs models auth login --provider openai --method siwc'
    env=dict(os.environ);env['PATH']=str(ROOT/'.test-artifacts/openclaw-release/tools/sessionmanager-bundle/bin')+':'+env.get('PATH','')
    command=['aws','ssm','start-session','--profile','jumpserve','--region','us-east-1','--target',instance(),'--document-name','AWS-StartInteractiveCommand','--parameters',json.dumps(dict(command=[login]))]
    completed=subprocess.run(command,env=env,timeout=900)
    if completed.returncode:raise RuntimeError('Native host authorization did not complete; preserve its host-specific state and retry sign-in, never inference.')
-   receipt['native_authorization_session_completed']=True
+   receipt['native_session_closed']=True
+   receipt['authorization_verified']=False # host-check verifies actual stored consent/catalog separately.
+  elif args.mode=='host-refresh':
+   js="import {DatabaseSync} from 'node:sqlite';import {refreshTokenSharingCredential} from '/opt/jumpserve/openclaw/node_modules/openclaw/dist/extensions/openai/token-sharing-oauth.runtime.js';const db=new DatabaseSync('/var/lib/jumpserve-openclaw/auth/state/openclaw.sqlite');db.exec('PRAGMA busy_timeout=5000');const row=db.prepare(\"SELECT value_json FROM config_machine_state WHERE state_key='authProfiles.store'\").get();const value=JSON.parse(row.value_json);const entries=Object.entries(value.profiles);if(entries.length!==1)throw Error('Exactly one native host grant required');const [id,old]=entries[0];const next=await refreshTokenSharingCredential(old);if(next.accountId!==old.accountId||next.clientId!==old.clientId)throw Error('Refresh identity changed');value.profiles[id]=next;db.prepare(\"UPDATE config_machine_state SET value_json=? WHERE state_key='authProfiles.store'\").run(JSON.stringify(value));db.close();console.log(JSON.stringify({native_refresh_verified:true,credential_identity_preserved:true,expires_advanced:next.expires>old.expires,credential_contents_emitted:false}));"
+   command='runuser -u jumpserve -- flock -x /var/lib/jumpserve-openclaw/auth/refresh.lock /opt/jumpserve/node/bin/node --input-type=module -e '+__import__('shlex').quote(js)
+   receipt['ssm']=ssm([command])
+  elif args.mode=='cloud-verify':
+   from openclaw_cloud_verify import verify
+   receipt['cloud_control']=verify(__import__('sys').modules[__name__],directory)
+  elif args.mode=='cloud-control':
+   from openclaw_cloud_control import prepare
+   frozen,command=prepare(directory)
+   receipt['frozen']=frozen;save();receipt['ssm']=ssm([command])
   elif args.mode=='host-check':
-   program="import json,sys,subprocess\nfrom pathlib import Path\nsys.path.insert(0,'/opt/jumpserve/runtime')\nimport openclaw_runtime as r\nr.verify_runtime()\nresult=subprocess.run([str(r.NODE),'/opt/jumpserve/runtime/openclaw_auth.mjs','/var/lib/jumpserve-openclaw/auth/state/openclaw.sqlite',str(r.PACKAGE/'dist/extensions/openai/token-sharing-oauth.runtime.js')],capture_output=True,timeout=30,env=r.environment(r.AUTH));assert result.returncode==0,'Native host refresh failed'\ncatalog=r.catalog(r.credential())\nprint(json.dumps(dict(runtime=r.VERSION,native_refresh_verified=True,catalog=catalog,api_key_fallback=False,credential_contents_emitted=False)))"
+   program="import json,sys,subprocess\nfrom pathlib import Path\nsys.path.insert(0,'/opt/jumpserve/runtime')\nimport openclaw_runtime as r\nr.verify_runtime()\nresult=subprocess.run([str(r.NODE),'/opt/jumpserve/runtime/openclaw_auth.mjs','/var/lib/jumpserve-openclaw/auth/state/openclaw.sqlite',str(r.PACKAGE/'dist/extensions/openai/token-sharing-oauth.runtime.js')],capture_output=True,timeout=30,env=r.environment(r.AUTH));assert result.returncode==0,'Native host refresh interface failed'\ncatalog=r.catalog(r.credential())\nprint(json.dumps(dict(runtime=r.VERSION,native_refresh_interface_verified=True,catalog=catalog,api_key_fallback=False,credential_contents_emitted=False)))"
    command="runuser -u jumpserve -- env RESEARCH_AI_RUNTIME=openclaw-production-v1 /opt/jumpserve/python/bin/python -B -c "+__import__('shlex').quote(program)
    receipt['ssm']=ssm([command])
   elif args.mode=='auth-correct':

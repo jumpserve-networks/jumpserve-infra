@@ -1,0 +1,120 @@
+{
+  "protocol": "openclaw-production-cloud-control-v1",
+  "id": "6d116484-461e-4e95-b888-ff91eff080a9",
+  "status": "complete",
+  "passed": true,
+  "output": {
+    "action": "blocked",
+    "reason": "Required inputs or an applicable implementation are unavailable; the affected claim is paused.",
+    "blockers": [
+      {
+        "kind": "missing-data",
+        "detail": "Required source data are not available in the supplied evidence.",
+        "required_input": "Provide the declared reference latency cell and corresponding original fixture data for synthetic-claim, including matching cell identities, values, units, and the comparison criterion."
+      },
+      {
+        "kind": "implementation",
+        "detail": "An applicable registered implementation is unavailable.",
+        "required_input": "Provide an applicable registered implementation and its exact executable schema for checking the declared matched latency cell in synthetic-claim."
+      }
+    ],
+    "claims": [],
+    "check_id": null,
+    "proposal": null,
+    "ready": null,
+    "coverage_complete": false,
+    "assessment_label": null,
+    "evidence_ids": []
+  },
+  "receipt": {
+    "request_hash": "fbd3f98ef8ec871a949e94527f16ceb9ebf14b8613a56d3af0f1382a07f8c81e",
+    "status": "complete",
+    "response_received": true,
+    "usage": {
+      "inputTokens": 5557,
+      "outputTokens": 137,
+      "totalTokens": 5694
+    },
+    "provider_retries": 0,
+    "paid_fallback": false,
+    "http_status": 200,
+    "request_id": null,
+    "runtime": "openclaw-production-v1",
+    "node_version": "24.16.0",
+    "openclaw_version": "2026.10.5",
+    "model_id": "gpt-6.1-sol",
+    "wall_seconds": 33.8159885319983,
+    "subscription_allocation_usd": null,
+    "measured_charges_usd": null,
+    "estimated_cost_usd": null,
+    "catalog_cost_fields": "Numeric zeros required by the adapter are non-billing placeholders.",
+    "turn_policy": "autonomy-turn-policy-v1"
+  },
+  "source_files_verified": 31,
+  "archive": {
+    "bucket": "research-workflow-raw",
+    "path": "release-verification/openclaw-cloud-control/6d116484-461e-4e95-b888-ff91eff080a9/29675d06773ed0ae350387a8b756481f29619d30010b31f5967f610b607eca55.zip",
+    "sha256": "29675d06773ed0ae350387a8b756481f29619d30010b31f5967f610b607eca55",
+    "retrieved_sha256": "29675d06773ed0ae350387a8b756481f29619d30010b31f5967f610b607eca55",
+    "byte_count": 62875,
+    "originals": [
+      {
+        "path": "logical.json",
+        "sha256": "37567224a4f3dd048390fbc6b8f04bdc2e8dbcf3437ce2088f35dc23f5dcddc5",
+        "byte_count": 18349
+      },
+      {
+        "path": "message.json",
+        "sha256": "0fb99f491ed06410ec0f8fe5a3706384655c2b0fe828ab6eda1ad13a826e7ccf",
+        "byte_count": 837
+      },
+      {
+        "path": "openclaw-http-body.bin",
+        "sha256": "fbd3f98ef8ec871a949e94527f16ceb9ebf14b8613a56d3af0f1382a07f8c81e",
+        "byte_count": 25586
+      },
+      {
+        "path": "provider-request.json",
+        "sha256": "66a43084b53cb6675264e8879ed0113d46beb2e42ec3b8742651c62cb7402baa",
+        "byte_count": 28327
+      },
+      {
+        "path": "provider-response.bin",
+        "sha256": "d9450feea1a0ad8bf3c09f2e0fa844e38204c6f84b98c1df2d6cad8f6483e48b",
+        "byte_count": 122888
+      },
+      {
+        "path": "receipt.json",
+        "sha256": "09eb65ccb71f521e57f0b1d28d680bfa14a5a41ba29a1816c517e072e1652b90",
+        "byte_count": 643
+      },
+      {
+        "path": "stderr.bin",
+        "sha256": "e9707264f6b514f39d59275268b9fd6779e938484e9f8a4bda616a7acf3b3035",
+        "byte_count": 402
+      },
+      {
+        "path": "stdout.bin",
+        "sha256": "dd0f3f42e0ce764dfc2cf1c427deaa2ab1c1b016d4aa69a8fb16ab20cd5deaa4",
+        "byte_count": 2182
+      },
+      {
+        "path": "workspace/AGENTS.md",
+        "sha256": "0628e39abf1eff04d143ece28631010608ea96b0349ebc0861fcdfa9fd75622d",
+        "byte_count": 14864
+      }
+    ]
+  },
+  "human_review": false,
+  "independent_retrieval_hash_verified": true,
+  "anonymous_archive_status": 400,
+  "raw_answer_reviewed": true,
+  "rendered_answer_reviewed": true,
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false,
+    "passed": true
+  },
+  "review_notes": "Actual planning answer identifies missing source records and an applicable implementation. Empty finding and evidence fields, false coverage, no fabricated measurement. Reused synthetic software case; not paper evidence or independent validation."
+}

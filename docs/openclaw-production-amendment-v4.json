@@ -1,0 +1,10 @@
+{
+  "version":"openclaw-production-amendment-v4",
+  "base":"openclaw-production-v1",
+  "observed_administration_failure":"The first interactive SSM command ran as ssm-user and runuser required root. SSM closed with status zero despite that command error. Its original receipt remains retained; session closure is not successful authorization.",
+  "controlled_correction":"Use sudo -n solely to switch to the dedicated jumpserve service user for native login. Mark session closure separately from authorization verification. Verify the stored native grant, a real refresh preserving host/client/account identity, the exact model catalog and a cloud inference control independently.",
+  "callback_observation":"The corrected native module bytes were verified, but the actual CLI authorization URL still advertised localhost. The connected browser completed that original native callback successfully. The effective callback was not demonstrated to use the patched IPv4 URI, and a cache or import explanation remains untested. No authorization code or local grant was copied to the host.",
+  "cloud_control":{"protocol":"openclaw-production-cloud-control-v1","input":"Exact reused missing-inputs request from the frozen v10 evaluation","maximum_provider_calls":1,"maximum_wall_seconds":180,"reserved_orchestration_cents":100,"actual_charges_usd":null,"subscription_allocation_usd":null,"criteria":"Exact deployed source hashes, actual native CLI/provider decision agreement, planning-phase blocked answer with explicit missing inputs, no assessment or coverage claim, private original-byte archive and verified retrieval."},
+  "input_change":"Release administration and verification only. The reviewed prompt, its complete model request constructor and all 31 production runtime file hashes are unchanged.",
+  "interpretation":"Exposed software transport control with native production-host authorization; not independent model validation, a paper finding or a new networking measurement. Application defaults remain $100 shared commitments, seven days and no turn-count ceiling."
+}

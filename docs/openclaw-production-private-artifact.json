@@ -1,0 +1,13 @@
+{
+  "protocol": "openclaw-production-v1",
+  "bucket": "research-workflow-raw",
+  "path": "release-verification/openclaw-production-v1/6d3f8f6438ace2a32d3b71ac2016a7ff50d77ab59d885e3c5792c1e19dab57bd.zip",
+  "sha256": "6d3f8f6438ace2a32d3b71ac2016a7ff50d77ab59d885e3c5792c1e19dab57bd",
+  "retrieved_sha256": "6d3f8f6438ace2a32d3b71ac2016a7ff50d77ab59d885e3c5792c1e19dab57bd",
+  "byte_count": 3158755,
+  "manifest_sha256": "0b54916ded9b179922ab7a39fcd46a9378f93f2510de3013e385546278d1a96e",
+  "original_file_count": 425,
+  "public": false,
+  "excluded": "OAuth grants, native host authorization database/logs, per-turn transient state databases and ephemeral bridge configs. Original request/SSE/native output and exact source snapshots are included.",
+  "storage_charges_usd": null
+}
