@@ -1,0 +1,39 @@
+{
+  "version": "openclaw-partial-answer-replay-v1",
+  "status": "passed",
+  "study_id": "5ef8e6bd-e3ff-4ba9-8427-d25fb525fb74",
+  "task_id": "7842ae5a-c516-5495-ad98-4df571163f05",
+  "turn_number": 16,
+  "snapshot_sha256": "b65a36fbef12028c6b5e2d0732fde9687e2b4fb855c31d118a6caaea3a63b9ee",
+  "request_sha256": "b08f215f7fc825d9976572b7f573558caa5572ed8492ae42fbb9420c7f3ef215",
+  "response_sha256": "cae2fd9b7b3ff1ce6dae411df832f02e878b01846985ac3d4b405452a42e9602",
+  "original_controller_sha256": "5ec4d7fdd2ba1f4da7c43d44c817eba78759fcfda92c9bbe41ab2149bdc4f771",
+  "corrected_controller_sha256": "b5a418d3b58c6b185d7193cc68fc75b0fe567bae33048ad5da5294df68d5c2f1",
+  "original_status": "blocked",
+  "corrected_status": "queued",
+  "corrected_stage": "planning",
+  "scientific_label": "inconclusive",
+  "completed_checks": 4,
+  "required_checks": 6,
+  "recorded_cells": 768,
+  "required_cells": 1152,
+  "remaining_check_ids": [
+    "554fe12f-b1db-5f8e-a261-f7840b997bfc",
+    "fc051c0a-3fb6-53e1-860e-7608e77cba7e"
+  ],
+  "model_calls": 0,
+  "database_writes": 0,
+  "fixtures": [
+    "Request construction replaced by exact retained request context",
+    "Model invocation replaced by exact completed answer",
+    "numeric_finding=None for four of six required checks; no full-coverage decision exists",
+    "Inventory independently recompiled from unchanged original plan",
+    "Persistence captured without writes"
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "limitations": "Exposed controller regression, not an independent model or scientific validation."
+}

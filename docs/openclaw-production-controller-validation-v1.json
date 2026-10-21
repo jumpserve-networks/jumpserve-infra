@@ -1,0 +1,70 @@
+{
+  "version": "openclaw-controller-validation-v1",
+  "protocol": "openclaw-production-amendment-v6",
+  "backend_revision": "38e501ca63accb87a3b081846b63f797f8d2791f",
+  "runtime_version": 34,
+  "checks": [
+    {
+      "name": "retained-answer-replay",
+      "path": "docs/openclaw-production-partial-replay-v1.json",
+      "sha256": "fb0f7c71af9f4e1b6c0095feb480115684b702e9f258610964bf30314a6c7795",
+      "status": "passed",
+      "groups": 1
+    },
+    {
+      "name": "actual-local-sql-continuation",
+      "path": ".test-artifacts/research-ideas/database/20261021T173520910903Z/partial-report.json",
+      "sha256": "7b654b0744d5a8d9f6155bbb571c8b29f21220a32e46808e5105e89dff4bded7",
+      "status": "passed",
+      "groups": 4
+    },
+    {
+      "name": "autonomy-sql-regressions",
+      "path": ".test-artifacts/research-ideas/database/20261021T173553267270Z/autonomy-validation-report.json",
+      "sha256": "61affb10b4c60bf66a23857e95fb0391e73b448f3f2efc538835bad5311de2c1",
+      "status": "passed",
+      "groups": 11
+    }
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "model_evaluation": "Original sixteen-case v10 prompt evaluation retained unchanged; controller follow-up uses exposed exact-answer replay and synthetic local SQL/provider fixtures.",
+  "limitations": [
+    "No independent or human reviewer",
+    "Local SQL auth/Storage/model transport are explicit fixtures",
+    "Cloud continuation verification is a separate pending campaign"
+  ],
+  "additional_checks": [
+    {
+      "name": "backend",
+      "passed": 187
+    },
+    {
+      "name": "infrastructure-with-backend-contract",
+      "passed": 95
+    },
+    {
+      "name": "deployment-parameter-guards",
+      "passed": 3
+    },
+    {
+      "name": "TypeScript build",
+      "status": "passed"
+    }
+  ],
+  "preserved_attempts": [
+    {
+      "path": ".test-artifacts/research-ideas/database/20261021T163255789660Z/partial-report.json",
+      "status": "failed",
+      "reason": "Initial fixture has an incomplete current run; strict recovery correctly rejected it. Follow-up fixture uses complete per-check runs with different required cells, matching production."
+    },
+    {
+      "path": ".test-artifacts/research-ideas/database/20261021T163343978346Z/partial-report.json",
+      "status": "failed",
+      "reason": "Sandbox blocked local PostgreSQL; rerun through purpose-specific escalation passed."
+    }
+  ]
+}

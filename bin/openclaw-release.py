@@ -10,6 +10,7 @@ def aws(*args):
 MIGRATIONS=[('202610200002_context_budget_recovery.sql',"select to_regprocedure('public.research_autonomy_resume_budget(uuid,uuid,uuid,text,integer)') is not null present"),('202610200008_remove_autonomy_turn_cap.sql',"select exists(select 1 from pg_proc where proname='research_autonomy_resume_turns') present"),('202610200009_openclaw_dispatch.sql',"select to_regclass('public.research_model_dispatches') is not null present"),('202610200010_openclaw_prompt_candidate.sql',"select exists(select 1 from agent_prompt_versions where version='research-autonomy-v9') present"),('202610210001_openclaw_prompt_v10.sql',"select exists(select 1 from agent_prompt_versions where version='research-autonomy-v10') present"),('202610210002_openclaw_publication_guard.sql',"select to_regprocedure('public.publish_agent_prompt_before_openclaw_v10(uuid,uuid,text,jsonb,text,text)') is not null present")]
 stamp=lambda:dt.datetime.now(dt.timezone.utc).isoformat()
 sha=lambda raw:hashlib.sha256(raw).hexdigest()
+MIGRATIONS.append(('202610210003_partial_assessment_recovery.sql',"select to_regprocedure('public.research_autonomy_resume_partial(uuid,uuid,text)') is not null present"))
 
 def target():
  account=aws('sts','get-caller-identity')['Account']
@@ -64,7 +65,7 @@ def cdk(mode,directory,host=False,activate=False):
  return dict(command=command,log_sha256=sha((directory/'cdk.log').read_bytes()),source_revision=manifest['source_revision'])
 
 def main():
- parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['inspect','parameters','migrate','hold','host-diff','host-deploy','host-status','host-repair','host-update','auth-correct','auth-start','auth-status','native-auth','host-check','host-refresh','cloud-control','cloud-verify','diff','deploy','activate','verify','publish','frontend-status']);parser.add_argument('--command-id');args=parser.parse_args()
+ parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['inspect','parameters','migrate','hold','host-diff','host-deploy','host-status','host-repair','host-update','auth-correct','auth-start','auth-status','native-auth','host-check','host-refresh','cloud-control','cloud-verify','diff','deploy','activate','verify','publish','frontend-status','partial-resume']);parser.add_argument('--command-id');args=parser.parse_args()
  directory=ROOT/'.test-artifacts/openclaw-release'/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');directory.mkdir(parents=True,exist_ok=False)
  receipt=dict(protocol='openclaw-production-v1',mode=args.mode,started_at=stamp(),status='running',measured_charges_usd=None)
  def save():(directory/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
@@ -108,9 +109,12 @@ def main():
    # Exact diagnosed bootstrap failure only; preserve the original user-data bytes.
    receipt['ssm']=ssm(["python3 - <<'PY'\nfrom pathlib import Path\np=Path('/var/lib/cloud/instance/scripts/part-001');raw=p.read_bytes();assert raw.count(b'awscli2')==1\nbackup=Path('/var/lib/jumpserve-openclaw-user-data-original.sh');assert not backup.exists();backup.write_bytes(raw)\nPath('/var/lib/jumpserve-openclaw-user-data-recovery.sh').write_bytes(raw.replace(b'awscli2',b'awscli-2'))\nPY","systemd-run --unit=jumpserve-openclaw-setup-recovery --property=RuntimeMaxSec=1800 /bin/bash /var/lib/jumpserve-openclaw-user-data-recovery.sh"])
   elif args.mode=='host-update':
+   if admin.query("select count(*) count from research_model_dispatches where status in ('queued','running','unknown')")[0]['count']:raise RuntimeError('Drain or reconcile dispatched model calls before updating the host')
    values={r['OutputKey']:r['OutputValue'] for r in aws('cloudformation','describe-stacks','--stack-name','JumpServeOpenClawStack')['Stacks'][0]['Outputs']};bucket=values['OpenClawRuntimeBucket'];key=values['OpenClawRuntimeObject']
    if bucket!='cdk-hnb659fds-assets-395567831870-us-east-1' or not re.fullmatch(r'[a-f0-9]{64}\.zip',key):raise RuntimeError('Unexpected pinned runtime asset')
-   receipt['ssm']=ssm(['systemctl stop jumpserve-openclaw.service','cp -a /opt/jumpserve/runtime /opt/jumpserve/runtime-before-v10','aws s3 cp s3://'+bucket+'/'+key+' /opt/jumpserve/runtime-v10.zip --region us-east-1','unzip -o -q /opt/jumpserve/runtime-v10.zip -d /opt/jumpserve/runtime','chmod -R a+rX /opt/jumpserve/runtime','systemctl start jumpserve-openclaw.service'])
+   suffix='before-'+directory.name;backup='/opt/jumpserve/runtime-'+suffix;archive='/opt/jumpserve/runtime-'+key
+   receipt['runtime_backup']=backup
+   receipt['ssm']=ssm(['set -eu','systemctl stop jumpserve-openclaw.service','test ! -e '+backup,'cp -a /opt/jumpserve/runtime '+backup,'aws s3 cp s3://'+bucket+'/'+key+' '+archive+' --region us-east-1','unzip -o -q '+archive+' -d /opt/jumpserve/runtime','chmod -R a+rX /opt/jumpserve/runtime','systemctl start jumpserve-openclaw.service'])
   elif args.mode=='native-auth':
    # Interactive native login avoids a background pseudo-terminal losing stdin.
    login='stty cols 2000; exec sudo -n runuser -u jumpserve -- env HOME=/var/lib/jumpserve-openclaw OPENCLAW_STATE_DIR=/var/lib/jumpserve-openclaw/auth OPENCLAW_CONFIG_PATH=/var/lib/jumpserve-openclaw/auth/config.json PATH=/opt/jumpserve/node/bin:/usr/bin:/bin /opt/jumpserve/node/bin/node /opt/jumpserve/openclaw/node_modules/openclaw/openclaw.mjs models auth login --provider openai --method siwc'
@@ -132,7 +136,9 @@ def main():
    frozen,command=prepare(directory)
    receipt['frozen']=frozen;save();receipt['ssm']=ssm([command])
   elif args.mode=='host-check':
+   expected=json.loads((ROOT/'research-workflow-runtime.json').read_bytes())['files']
    program="import json,sys,subprocess\nfrom pathlib import Path\nsys.path.insert(0,'/opt/jumpserve/runtime')\nimport openclaw_runtime as r\nr.verify_runtime()\nresult=subprocess.run([str(r.NODE),'/opt/jumpserve/runtime/openclaw_auth.mjs','/var/lib/jumpserve-openclaw/auth/state/openclaw.sqlite',str(r.PACKAGE/'dist/extensions/openai/token-sharing-oauth.runtime.js')],capture_output=True,timeout=30,env=r.environment(r.AUTH));assert result.returncode==0,'Native host refresh interface failed'\ncatalog=r.catalog(r.credential())\nprint(json.dumps(dict(runtime=r.VERSION,native_refresh_interface_verified=True,catalog=catalog,api_key_fallback=False,credential_contents_emitted=False)))"
+   program="import hashlib\nfrom pathlib import Path\nexpected="+repr(expected)+"\nactual={n:hashlib.sha256((Path('/opt/jumpserve/runtime')/n).read_bytes()).hexdigest() for n in expected}\nassert actual==expected,'Pinned host source hashes differ'\nprint('Pinned host source hashes verified: '+str(len(actual)))\n"+program
    command="runuser -u jumpserve -- env RESEARCH_AI_RUNTIME=openclaw-production-v1 /opt/jumpserve/python/bin/python -B -c "+__import__('shlex').quote(program)
    receipt['ssm']=ssm([command])
   elif args.mode=='auth-correct':
@@ -155,6 +161,8 @@ def main():
    rows=admin.query("select c.relname,c.relrowsecurity,has_table_privilege('anon',c.oid,'SELECT,INSERT,UPDATE,DELETE') anon_access,has_table_privilege('authenticated',c.oid,'SELECT,INSERT,UPDATE,DELETE') browser_access from pg_class c where c.oid='public.agent_prompt_evaluations'::regclass")
    if len(rows)!=1 or not rows[0]['relrowsecurity'] or rows[0]['anon_access'] or rows[0]['browser_access']:raise RuntimeError('Evaluation records must remain private with RLS')
    receipt['evaluation_security']=rows;receipt['runtime_iam']=[]
+   receipt['partial_recovery_security']=admin.query("select has_function_privilege('anon','research_autonomy_resume_partial(uuid,uuid,text)','EXECUTE') anon_execute,has_function_privilege('authenticated','research_autonomy_resume_partial(uuid,uuid,text)','EXECUTE') browser_execute,has_function_privilege('service_role','research_autonomy_resume_partial(uuid,uuid,text)','EXECUTE') service_execute")
+   if receipt['partial_recovery_security']!=[dict(anon_execute=False,browser_execute=False,service_execute=True)]:raise RuntimeError('Partial recovery RPC access differs')
    for kind,name in functions().items():
     config=aws('lambda','get-function-configuration','--function-name',name)
     if config['Environment']['Variables'].get('RESEARCH_AI_RUNTIME')!='openclaw-production-v1':raise RuntimeError('Unexpected production AI runtime')
@@ -165,6 +173,14 @@ def main():
   elif args.mode=='publish':
    from openclaw_evaluation import publication
    receipt['publication']=publication(admin)
+  elif args.mode=='partial-resume':
+   # Fixed, exposed release-control identity only; no operator-supplied SQL/IDs.
+   receipt['deployed_sources']=prior.functions(directory,True)
+   replay=json.loads((ROOT/'docs/openclaw-production-partial-replay-v1.json').read_bytes());manifest=json.loads((ROOT/'research-workflow-runtime.json').read_bytes())
+   if replay['status']!='passed' or replay['corrected_controller_sha256']!=manifest['files']['autonomy.py']:raise RuntimeError('Corrected controller replay does not match deployed source')
+   raw=(ROOT/'docs/openclaw-production-controller-validation-v1.json').read_text()
+   admin.query('insert into agent_prompt_evaluations(prompt_version_id,outcome,report_raw,report_sha256,original_artifacts,recorded_by) values('+','.join([admin.literal('6117e5c5-84ce-5c31-aaa7-0d1d3522e62e')+'::uuid',admin.literal('passed'),admin.literal(raw),admin.literal(sha(raw.encode())),admin.literal(json.dumps(dict(kind='controller-only-follow-up',original_prompt_evaluation_unchanged=True,replay=replay)))+'::jsonb',admin.literal('Primary Codex AI implementer; nonindependent controller regression, zero new model calls')])+') on conflict(prompt_version_id,report_sha256) do nothing',read_only=False)
+   receipt['resumption']=admin.query("select research_autonomy_resume_partial('5ef8e6bd-e3ff-4ba9-8427-d25fb525fb74'::uuid,'7842ae5a-c516-5495-ad98-4df571163f05'::uuid,'continue-retained-checks-v1') result",read_only=False)
   elif args.mode=='frontend-status':receipt['jobs']=aws('amplify','list-jobs','--app-id','d24jvguj7brnkj','--branch-name','main','--max-results','3')['jobSummaries']
   receipt.update(status='complete',ended_at=stamp());save();print(json.dumps(dict(directory=str(directory),**receipt),indent=2))
  except Exception as error:receipt.update(status='failed',reason=str(error),ended_at=stamp());save();print(json.dumps(dict(directory=str(directory),status='failed',reason=str(error))));raise

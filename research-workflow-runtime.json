@@ -1,11 +1,11 @@
 {
-  "version": 33,
-  "source_revision": "edf18bcfdd695bb90c9b4eca08e163f21b510e7a",
+  "version": 34,
+  "source_revision": "38e501ca63accb87a3b081846b63f797f8d2791f",
   "base_source_revision": "a2db37f29231ee924dc2e825bc51df4ebb1b3f1d",
-  "revision_status": "Pinned clean main backend; sixteen actual OpenClaw candidate-v10 answers passed declared mechanical and substantive AI review. Production authorization and deployed execution remain release checks.",
+  "revision_status": "Pinned clean main backend; controller-only partial-assessment continuation amendment. Original v10 prompt/request/parser/native transport and sixteen-answer evaluation/publication remain unchanged. Exact retained-answer replay and separate SQL/controller checks establish the amended handoff only.",
   "files": {
     "api.py": "61464dd9fafff725be178dd84602ab33ce3665302838cc4f16d584872d37a2bb",
-    "autonomy.py": "5ec4d7fdd2ba1f4da7c43d44c817eba78759fcfda92c9bbe41ab2149bdc4f771",
+    "autonomy.py": "b5a418d3b58c6b185d7193cc68fc75b0fe567bae33048ad5da5294df68d5c2f1",
     "autonomy_costs.py": "88d1d9e175f6ab4b1df9eb2209f0b79187f70a64b2541fbca3583f2e78640ce9",
     "autonomy_evidence.py": "53f27bc25e209d96c00a1f2c149e8fbecd74feb897e8769238b19eaca1899100",
     "autonomy_model.py": "4e1ad33efe560d9df6c4fc0c28dd6d42166a417b4d16cd375ee0893fe8515de7",
