@@ -1,0 +1,32 @@
+{
+  "version": "paper-queue-title-production-release-v1",
+  "frozen_date": "2026-10-22",
+  "authorization": "Current user request: merge the paper-title queue changes to main and deploy production.",
+  "targets": {"aws_account": "395567831870", "supabase_project": "regphejnlvfpyokpniny", "stack": "JumpServeBenchmarkStack", "amplify_app": "d24jvguj7brnkj", "branch": "main", "origin": "https://jumpserve.quaint-lab.org"},
+  "scope": "Display a source-grounded paper title instead of an upload filename in a selected paper queue. Add optional PDF title metadata to newly extracted text packets. Preserve original records, source bytes and scientific findings.",
+  "release_blockers": [
+    "Exact source hashes match the locally tested candidate: 213 backend tests, 204 frontend tests, a production frontend build and six public-queue browser scenarios passed; lint has no errors.",
+    "Commit and push backend main, add paper_titles.py to a versioned runtime manifest, stage every exact source byte and pass infrastructure build/tests.",
+    "Review the scoped stack diff before deployment: only research Lambda code/asset metadata may change. Retain IAM, routes, environments, schedules, admission, capacity, active machine image and parameters.",
+    "Deploy backend before pushing the frontend release. Retrieve original deployed Lambda ZIPs, verify their SHA256 and all runtime-file hashes, and check all six research Lambda asset identities.",
+    "The public API for e79f5cab-d28f-4cea-bf0c-3407933c8cfd shows the paper title verified against its retained first-page evidence. The original filename-based study title and initial prompt remain unchanged.",
+    "Public task/job identities, coverage, missingness and commitments match stored records. Private prompts, uploads and artifact metadata stay omitted; anonymous private reads and writes stay denied. Current RLS/browser-write denial and private Storage are retained.",
+    "Push frontend main and require successful Amplify production release for that exact commit.",
+    "Verify the production shared queue in a fresh anonymous browser on desktop/mobile and light/dark themes: correct title, no filename, no overflow, no private prompt controls and available status. Verify the selected owner's private title through an existing legitimate session when available."
+  ],
+  "conditional_checks": [
+    "A legitimate authenticated owner session is required for the owner-private production check; no login credentials or sessions will be fabricated.",
+    "No new AI calls or scientific experiments are required for this display-only release.",
+    "Title extraction across arbitrary publisher layouts is not validated by the NINeS example or synthetic fixtures; missing or ambiguous titles retain the explicit unavailable state."
+  ],
+  "development_evidence": {
+    "browser_report": "../jumpserve-front-end/.test-artifacts/public-experiment-queue/2026-10-22T16-52-17.291Z/report.json",
+    "browser_protocol": "public-experiment-queue-v2",
+    "actual_archived_pdf_sha256": "d6728c7914530ffcd75c55db80340595771ed7c4c104d22cec4cecd2501485aa",
+    "actual_archived_pdf_parser": "pypdf 6.19.0",
+    "actual_archived_pdf_title": "Making Congestion Control Algorithms Insensitive to Underlying Propagation Delays",
+    "limitation": "The local publisher PDF and the user's uploaded PDF are separate identities until the production retained packet is checked. No scientific claim was reassessed."
+  },
+  "reviewer": {"identity": "Primary Codex AI implementer", "type": "AI", "independent": false},
+  "usage": {"new_model_calls_initiated_by_release": 0, "new_experiment_launches": 0, "measured_charges_usd": null, "estimated_charges_usd": null, "unallocated_costs_usd": null}
+}

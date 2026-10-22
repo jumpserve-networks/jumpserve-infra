@@ -1,0 +1,24 @@
+{
+  "version": "paper-queue-title-release-review-v1",
+  "reviewer": {"identity": "Primary Codex AI implementer", "type": "AI", "independent": false},
+  "backend_revision": "2b67fba72e7a672e6b25a73e9e7b9339a019e32e",
+  "runtime_manifest_version": 37,
+  "runtime_manifest_sha256": "4299b9981b8dfe471176953ec2ce9264fbc780df5aa7bfb3db3774ef5f02db1c",
+  "diff_receipt": ".test-artifacts/public-queue-release/20261022T165825255958Z/receipt.json",
+  "diff_log_sha256": "c1943fdf6695f96bec8639d074feca8a6fcf998177ebeb00e6ceaf7c9c3005e3",
+  "reviewed_changes": "Only Code S3Key and asset metadata updates for the six research Lambdas sharing one runtime asset. No IAM, routes, environments, admission, schedules, capacity, instances, images, prompt or database changes.",
+  "new_runtime_asset": "5213e83c073658bd11cccbc7cc45e8d9ff7ce578b4dfe82535b89b17d95cfc8f.zip",
+  "changed_runtime_files": ["api.py", "intake.py", "scheduler.py", "paper_titles.py (added)"],
+  "infrastructure_checks": {"build": "passed", "initial_full_suite": {"passed": 90, "skipped": 5}, "optional_cli_contracts_with_backend_checkout": {"passed": 5}, "distinct_jest_tests_passed": 95, "existing_parameter_guard_tests_passed": 3},
+  "production_evidence_before_deploy": {
+    "receipt": ".test-artifacts/public-queue-release/20261022T165804571477Z/receipt.json",
+    "uploaded_pdf_sha256": "4b87fa5e983cc15f7226eb1f90c23ab745b67ec3c6fd5479dea8ce9b85312804",
+    "retained_text_packet_sha256": "ff2e012ddc34448e0905ac0aa5f320e4bb0457ff51a1e96c589708a1c7f9281e",
+    "retained_text_packet_bytes": 88237,
+    "independent_check": "First two nonempty first-page lines exactly concatenate to the expected title; original packet bytes/hash verified after retrieval.",
+    "title": "Making Congestion Control Algorithms Insensitive to Underlying Propagation Delays",
+    "scope": "Bibliographic title only; no scientific finding."
+  },
+  "host": "No host deployment is needed. The OpenClaw worker's separately pinned model runtime does not import scheduler or intake; none of its active model-path files changed.",
+  "decision": "Proceed with scoped backend deployment under the current explicit user authorization. Verify deployed source and title/private API behavior before pushing the frontend release."
+}
