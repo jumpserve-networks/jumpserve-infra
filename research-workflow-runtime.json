@@ -1,10 +1,10 @@
 {
-  "version": 35,
-  "source_revision": "9d105d67510d872fd48acccb2d5f3345d64f64bc",
+  "version": 36,
+  "source_revision": "d1b7dd70f9027b00d103f705e572910bd1e98ea8",
   "base_source_revision": "a2db37f29231ee924dc2e825bc51df4ebb1b3f1d",
-  "revision_status": "Merged backend main release candidate. Four-turn actual native AI planning/fresh-review/TCP/persistence check passed under documented software fixtures. Production deployment pending current authorized release.",
+  "revision_status": "Committed backend main public per-paper status projection. Existing controller, prompts, execution and authorization for private data are retained; deployment is authorized by the current release request.",
   "files": {
-    "api.py": "61464dd9fafff725be178dd84602ab33ce3665302838cc4f16d584872d37a2bb",
+    "api.py": "9872b924b2e64e52ff2019d0010ef7edf9a8e1ae742c22fe320c2adb9aec7f2f",
     "autonomy.py": "4264f2fba267417be2385b8cb9b2c8284a6ce4f4f13cba6a3bc2219b0272d1f9",
     "autonomy_costs.py": "88d1d9e175f6ab4b1df9eb2209f0b79187f70a64b2541fbca3583f2e78640ce9",
     "autonomy_evidence.py": "014ae3bfba5c0162735aa921ced7e3703096c7573cf256160b78e92173780ca6",
@@ -26,7 +26,7 @@
     "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
     "preparation.py": "5b1867da1f69b2b8a781d471abce1b871b7de10e2be40aa783390777b48462e3",
     "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
-    "scheduler.py": "27d9db3d8e209ff4419ecf4658bb569012a7e4f393d9348e6052df78cbddebe0",
+    "scheduler.py": "507de697a20bf529b5c182a7f57a35bcb4ad20ce9e84f8fb5758fd703dd85cd8",
     "store.py": "941f6cd2e6cacb5a59c2f62e074f520400a999add64c776364d3790dae58c710",
     "worker.py": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
     "workflow.py": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f",

@@ -1,0 +1,15 @@
+{
+  "version": "public-queue-release-review-v1",
+  "reviewer": {"identity": "Primary Codex AI implementer", "type": "AI", "independent": false},
+  "backend_revision": "d1b7dd70f9027b00d103f705e572910bd1e98ea8",
+  "runtime_manifest_version": 36,
+  "runtime_manifest_sha256": "cd264bccd77111077937e69a91006058dc0069e10477964346852d215af3d7e1",
+  "diff_receipt": ".test-artifacts/public-queue-release/20261022T163241605432Z/receipt.json",
+  "diff_log_sha256": "ce380f4d6affbf1dfc9ccdcf40459b1abe1c395271ac0b808399bfed89725d98",
+  "reviewed_changes": "Only Code S3Key and asset metadata changes for six research Lambdas sharing one runtime asset. No IAM, route, environment, admission, schedule, capacity, EC2, image, prompt or database change.",
+  "new_runtime_asset": "310e52d1f4284b32253ef56b0e5c7f10dab0fd8afe1df10f391fb48e31488ed9.zip",
+  "changed_runtime_files": ["api.py", "scheduler.py"],
+  "infrastructure_tests": {"initial_full_suite": {"passed": 90, "skipped": 5}, "skipped_cli_contracts_rerun_with_backend_checkout": {"passed": 5}, "combined_distinct_tests_passed": 95},
+  "host": "The private OpenClaw host retains its separately deployed runtime and authorization. No host-used code or executable configuration changed; host update is outside this status-only release.",
+  "decision": "Proceed with scoped backend deployment under the current explicit user authorization. Verify deployed code and public/private API behavior before pushing frontend."
+}

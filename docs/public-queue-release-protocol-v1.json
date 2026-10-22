@@ -1,0 +1,21 @@
+{
+  "version": "public-queue-production-release-v1",
+  "authorization": "Current user request: merge public per-study experiment queues to main and deploy production.",
+  "targets": {"aws_account": "395567831870", "supabase_project": "regphejnlvfpyokpniny", "stack": "JumpServeBenchmarkStack", "amplify_app": "d24jvguj7brnkj", "branch": "main", "origin": "https://jumpserve.quaint-lab.org"},
+  "scope": "Public read-only paper queue projection and shared links. No new scientific experiments, prompt publication, schema/RLS changes or resource launches.",
+  "release_blockers": [
+    "Exact tested source hashes match the backend/frontend candidate, with existing 204 backend and 203 frontend unit tests and five anonymous browser scenarios passed.",
+    "Production frontend build passes; lint has no errors; existing unrelated warning is recorded.",
+    "Commit backend main, pin and verify every runtime byte; infrastructure tests pass.",
+    "Review scoped stack diff before deployment: runtime code updates only, with existing admission, resource bounds, runtime selection and active benchmark image retained.",
+    "Deploy backend before frontend; retrieve deployed Lambda archives and verify manifest hashes.",
+    "Production anonymous public API returns the exact requested paper and recorded status, omits private fields, preserves coverage and missingness; private queue/history/listing and writes deny anonymous access.",
+    "Verify retained database RLS/browser-write denial and private artifacts through the existing release verifier.",
+    "Push frontend main, require successful Amplify release for that exact revision, then verify a fresh anonymous browser sees shared status on desktop/mobile light/dark views, with no sign-in redirect, private requests or horizontal overflow.",
+    "Verify private/action return paths still require sign-in; use an existing legitimate owner session to inspect its private view when available."
+  ],
+  "conditional_checks": ["Actual second-user Google session; cross-owner authorization is covered by unit regressions", "New experiment execution and AI answers are outside this status-only release"],
+  "reviewer": {"identity": "Primary Codex AI implementer", "type": "AI", "independent": false},
+  "usage": {"new_model_calls": 0, "new_experiment_launches": 0, "measured_charges_usd": null, "unallocated_costs_usd": null},
+  "prior_validation": {"frontend": "docs/public-experiment-queue-validation-v1.json", "browser_report_sha256": "de737404d86f1e4a7bc17a02c73a14af6940768668be4b8e4b740e173e71eb20"}
+}
