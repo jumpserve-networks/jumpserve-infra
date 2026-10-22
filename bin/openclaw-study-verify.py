@@ -10,7 +10,10 @@ def main():
  report=dict(protocol='openclaw-production-authenticated-control-v1',study_id=study,mode=a.mode,started_at=r.stamp(),status='running',measured_charges_usd=None,subscription_allocation_usd=None,reviewer=dict(identity='Primary Codex AI implementer',type='AI',independent=False))
  try:
   report['targets']=r.target();s=r.admin.query('select id,title,paper_upload from research_studies where id='+r.admin.literal(study)+'::uuid')
-  if len(s)!=1 or not s[0]['title'].startswith('Production OpenClaw release verification') or s[0]['paper_upload']['sha256']!='f6378fb3de19aa8d3204f4d3a2028f95497f334862a5298aa6678ef1b816290b':raise ValueError('Only the declared production IPv6 PDF control is allowed')
+  old=len(s)==1 and s[0]['title'].startswith('Production OpenClaw release verification') and s[0]['paper_upload']['sha256']=='f6378fb3de19aa8d3204f4d3a2028f95497f334862a5298aa6678ef1b816290b'
+  planning=len(s)==1 and s[0]['title']=='Production source-grounded planning software control 2026-10-22' and s[0]['paper_upload']['sha256']=='8069a701e935332d20925cfa166c494299de245a4efddeeae582b25818fedd7f'
+  if not (old or planning):raise ValueError('Only an exact declared production PDF software control is allowed')
+  if planning:report['protocol']='planning-context-production-control-protocol-v1'
   kinds=('autonomy_workflows','autonomy_tasks','autonomy_turns','autonomy_events','model_dispatches','queue_jobs','runs','measurements','assessments','artifacts','claims')
   data={}
   for kind in kinds:

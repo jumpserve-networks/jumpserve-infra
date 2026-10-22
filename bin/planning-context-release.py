@@ -1,5 +1,5 @@
 """Persist only the allowlisted planning release evidence; no prompt publication."""
-import argparse,datetime as dt,hashlib,importlib.util,io,json,urllib.error,urllib.request,zipfile
+import argparse,datetime as dt,hashlib,importlib.util,io,json,urllib.error,urllib.request,uuid,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('release',ROOT/'bin/openclaw-release.py');r=importlib.util.module_from_spec(spec);spec.loader.exec_module(r)
@@ -64,9 +64,17 @@ def archive(directory):
  if stored!=[dict(report_sha256=digest,retrieved_sha256=digest)]:raise RuntimeError('Stored review/report hash differs')
  (directory/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n');return dict(report=report,stored_report=stored)
 def main():
- parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['inspect','archive']);args=parser.parse_args();directory=ROOT/'.test-artifacts/planning-context-release'/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');directory.mkdir(parents=True,exist_ok=False)
+ parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['inspect','archive','cancel-control']);parser.add_argument('--study',type=uuid.UUID);args=parser.parse_args();directory=ROOT/'.test-artifacts/planning-context-release'/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');directory.mkdir(parents=True,exist_ok=False)
  receipt=dict(mode=args.mode,status='running',started_at=r.stamp())
- try:receipt['result']=inspect() if args.mode=='inspect' else archive(directory);receipt['status']='complete'
+ try:
+  if args.mode=='cancel-control':
+   receipt['before']=inspect();study=str(args.study);literal=r.admin.literal
+   rows=r.admin.query('select s.title,s.paper_upload,o.owner_id from research_studies s join research_study_owners o on o.study_id=s.id where s.id='+literal(study)+'::uuid')
+   if study==STUDY or len(rows)!=1 or rows[0]['title']!='Production source-grounded planning software control 2026-10-22' or rows[0]['paper_upload']['sha256']!='8069a701e935332d20925cfa166c494299de245a4efddeeae582b25818fedd7f':raise ValueError('Only the exact declared separate software control may be stopped')
+   receipt['result']=r.admin.query('select research_autonomy_control(\'cancel\','+literal(rows[0]['owner_id'])+'::uuid,'+literal(study)+"::uuid,'{}'::jsonb) result",read_only=False)
+   receipt['scope']='Operator stops the separately authenticated release control at its declared stop; source paper study is untouched.'
+  else:receipt['result']=inspect() if args.mode=='inspect' else archive(directory)
+  receipt['status']='complete'
  except Exception as error:receipt.update(status='failed',reason=str(error));raise
  finally:receipt['ended_at']=r.stamp();(directory/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(dict(directory=str(directory),status=receipt['status'],reason=receipt.get('reason'))))
 if __name__=='__main__':main()

@@ -1,0 +1,11 @@
+{
+ "version":"planning-context-production-control-protocol-v1",
+ "parent":"planning-context-release-protocol-v1",
+ "classification":"Exposed authenticated software release control; not a new academic assessment, held-out evaluation or scientific validation",
+ "input":{"title":"Production source-grounded planning software control 2026-10-22","pdf_sha256":"8069a701e935332d20925cfa166c494299de245a4efddeeae582b25818fedd7f","claim":"In the specified loopback test, both of two 256-byte payload exchanges complete with 256 received bytes.","methods":{"payload_bytes":256,"exchanges":2,"application_delay_ms":3}},
+ "browser":"Use the existing legitimate signed-in owner and actual new-study form. The browser file tool denied local filesystem access; generate the declared one-page ASCII PDF in browser memory and verify its exact hash before assigning it as a form file. This does not read any denied path or modify authentication. Preserve that input-method limitation.",
+ "required":"Actual production PDF upload, extracted source passage, native OpenClaw planning, fresh comprehension and critic reviews, one real AWS bounded TCP run, all four persisted byte/RTT observations, exact prompt/answer and original artifact hashes; visible queue progress in desktop/mobile themes. Record any coverage gaps and real errors without making a scientific conclusive label.",
+ "limits":{"maximum_new_studies":1,"maximum_model_turns":12,"maximum_commitment_cents":2000,"maximum_elapsed_seconds":1200,"maximum_tcp_invocations":1,"paid_fallback":false,"measured_charges_usd":null},
+ "stopping":"Cancel this separate software control after the first complete measured run or any stated limit, unknown provider outcome or incorrect configuration. Preserve history and outputs. No automatic replacement study/job. A scientific inconclusive label is not a software failure. Never resume or modify cancelled BBRv3 study 584e6ce7-b104-4f77-aa3a-2a2c0eac0f31.",
+ "reviewer":{"identity":"Primary Codex AI implementer","type":"AI","independent":false,"human_review":false}
+}
