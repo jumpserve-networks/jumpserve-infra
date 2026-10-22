@@ -1,0 +1,77 @@
+{
+  "version": "autonomy-planning-context-validation-v1",
+  "checked_at": "2026-10-22T00:39:30.703468+00:00",
+  "backend_commit": "8bf4fc2f90e7b1cdb568863aa89049a42083b531",
+  "runtime_candidate_version": 35,
+  "production_runtime": 34,
+  "deployed": false,
+  "prompt_publication": false,
+  "cancelled_study": {
+    "id": "584e6ce7-b104-4f77-aa3a-2a2c0eac0f31",
+    "status": "cancelled",
+    "active_turns": 0,
+    "active_dispatches": 0,
+    "turns_started_after_cancellation": 0,
+    "commitments_cents": 8695,
+    "commitments_are_measured_charges": false
+  },
+  "checks": {
+    "backend_tests": 198,
+    "infrastructure_tests": 95,
+    "infrastructure_build": "passed",
+    "existing_sql_groups": 11,
+    "new_paper_sql_groups": 3,
+    "real_source_report": "autonomy-planning-context-real-source-v4.json",
+    "actual_pdf_local_tcp_integration": ".test-artifacts/research-ideas/database/20261022T003708573399Z/planning-inputs-validation-report.json",
+    "existing_sql_report": ".test-artifacts/research-ideas/database/20261022T003803637479Z/autonomy-validation-report.json"
+  },
+  "native_development": {
+    "actual_calls": 14,
+    "max_calls": 14,
+    "usage": {
+      "inputTokens": 196457,
+      "outputTokens": 5034,
+      "totalTokens": 201491
+    },
+    "missing_usage_receipts": 0,
+    "provider_retries": 0,
+    "orchestration_reserve_cents": 1400,
+    "measured_charges_usd": null,
+    "subscription_allocation_usd": null,
+    "paid_fallback": false,
+    "original_strict_case_result": "3 of 4 immediate-answer checks passed; preserved",
+    "corrected_delivery_trajectory": "Three additional calls progressed to proposal; later substantive review failed fixed-output compatibility",
+    "final_complete_output_campaign": "Incomplete: allowed source read and honest executor-not-configured blocker. Frozen evaluator contracts incorrectly recorded false; originals retained. Producer corrected but not reevaluated.",
+    "live_end_to_end_demonstrated": false
+  },
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false,
+    "human_review": false
+  },
+  "release": {
+    "local_functional_fix": "implemented; software checks passed",
+    "release_ready": false,
+    "blocking_verification": [
+      "Fresh frozen native AI trajectory with correctly declared/configured executor, through actual persisted complete observations"
+    ],
+    "conditional_after_authorized_deployment": [
+      "Deployed source-reading/planning API and worker path",
+      "Authenticated study flow using new runtime"
+    ],
+    "scientific_limits": [
+      "52 retained candidate claims are not complete paper coverage",
+      "No cancelled BBR claim rerun or resolved",
+      "Unsupported BBR ACK interventions, exact revisions, method and data dependencies remain",
+      "Text delivery is not substantive source review"
+    ]
+  },
+  "artifact_manifest_sha256": "8c1708f862a1110b087e6a15ffe7fbe9109376faf798552f955ce34a4105a993",
+  "costs": {
+    "local_compute_charges_usd": null,
+    "storage_charges_usd": null,
+    "model_charges_usd": null,
+    "unallocated_costs": "Local validation compute/storage, subscription allocation and production orchestration not allocated; missing usage is not zero cost"
+  }
+}

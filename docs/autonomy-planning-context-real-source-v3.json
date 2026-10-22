@@ -1,0 +1,37 @@
+{
+  "protocol": "autonomy-planning-context-protocol-v5",
+  "context_version": "autonomy-planning-inputs-v3",
+  "input_implementation_sha256": "956487809a93eb8f3770624f8d8ffd345e2bd0fce7e4c81bbc02f3f46fc5e78f",
+  "kind": "Read-only exposed structural check; no model inference or experiment execution",
+  "status": "passed",
+  "study_id": "584e6ce7-b104-4f77-aa3a-2a2c0eac0f31",
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "source_pdf_sha256": "9114889ff82b40ba54ac2a5b792710459031be6a769a6f8817287ff1965f70b0",
+  "retrieved_text_packet_sha256": "ed1f6e355c4e94a9bd6d5b36717e251802271df474d0561d0e0805001cd8f746",
+  "candidate_claims_with_original_quote_delivered": 52,
+  "all_original_extracted_text_reconstructs": true,
+  "page_count": 15,
+  "max_actual_v10_wire_bytes": 45266,
+  "provider_wire_limit": 96000,
+  "complete_source_review_claimed": false,
+  "cancelled_study_unchanged": {
+    "status": "cancelled",
+    "committed_cents": 8695,
+    "running_turns": 0
+  },
+  "model_calls": 0,
+  "database_writes": 0,
+  "experiment_launches": 0,
+  "checked_at": "2026-10-22T00:29:17.774086+00:00",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "limitations": "Shows that retained passages/contracts reach the proposed context. Does not demonstrate successful BBRv3 experiment design or implementation, examine figures/equations/supplements, or resolve any cancelled claim."
+}

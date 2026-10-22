@@ -1,0 +1,2318 @@
+{
+  "version": "autonomy-planning-context-artifacts-v1",
+  "artifacts": [
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/bounded-echo-proposal/logical.json",
+      "byte_count": 44266,
+      "sha256": "b973b469936d60b5f7b0df0ea5b0e647649600d74eae5e51bdbdf050ba948290",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/bounded-echo-proposal/message.json",
+      "byte_count": 22988,
+      "sha256": "4cfbd2b0f483b335913141043fcd5b8acc03e0aeb443eeba23d774ad6f414853",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/bounded-echo-proposal/provider-request.json",
+      "byte_count": 54898,
+      "sha256": "59ae20dc3b47c98296adafd3bf865e7d9ac7b56c276f9654c6faafcc0dabc187",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/bounded-echo-proposal/provider-response.bin",
+      "byte_count": 408284,
+      "sha256": "3fc3276ee59212b66730fed190b98685bbaa9a94700c1d34e49683bb46656655",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/bounded-echo-proposal/receipt.json",
+      "byte_count": 648,
+      "sha256": "c7e638767dbfae3bd355b456524845f97215cc48a40c2871fe59914f431ba2e0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/bounded-echo-proposal-answer.json",
+      "byte_count": 4529,
+      "sha256": "0779b3a10f0b0714fc6cf3e51ea82beffd2c92114177016d30419e38855a7e82",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/bounded-echo-proposal-request.json",
+      "byte_count": 44266,
+      "sha256": "b973b469936d60b5f7b0df0ea5b0e647649600d74eae5e51bdbdf050ba948290",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/frozen.json",
+      "byte_count": 4685,
+      "sha256": "3afc28fe630a2f635b5166b04bc897e657f7191c4c3d37dc93ecb6b6c85e95d4",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/physical-equipment-request.json",
+      "byte_count": 35498,
+      "sha256": "daaa4746c84ce6b52aa3b277b8d51bc8d8a0fc6cdeb1724ad30ea439b1f32a72",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/producer.py",
+      "byte_count": 9082,
+      "sha256": "46b7f73542ca617e8ae3b2ca31ead9638b5c99c6c50b1f689cadc696a9139fb7",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/report.json",
+      "byte_count": 10519,
+      "sha256": "9504aa6580be76394bdc11b893fcea0a464561a70ed586e58f4baec0db846aa0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/api.py",
+      "byte_count": 19033,
+      "sha256": "61464dd9fafff725be178dd84602ab33ce3665302838cc4f16d584872d37a2bb",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/autonomy.py",
+      "byte_count": 53799,
+      "sha256": "9db4cf23a8d87e22b6d0c1f5c86fba0b5ada8a5927ba781108c3c1ceddbdd47b",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/autonomy_costs.py",
+      "byte_count": 1613,
+      "sha256": "88d1d9e175f6ab4b1df9eb2209f0b79187f70a64b2541fbca3583f2e78640ce9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/autonomy_evidence.py",
+      "byte_count": 4284,
+      "sha256": "014ae3bfba5c0162735aa921ced7e3703096c7573cf256160b78e92173780ca6",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/autonomy_inputs.py",
+      "byte_count": 15163,
+      "sha256": "53aee074c1271349c26fab35f8fbe735829970bb03949dc33f5a5823834a3edd",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/autonomy_model.py",
+      "byte_count": 20815,
+      "sha256": "4e1ad33efe560d9df6c4fc0c28dd6d42166a417b4d16cd375ee0893fe8515de7",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/autonomy_sources.py",
+      "byte_count": 10486,
+      "sha256": "ddd7b4f3a0306203f27a43428b4fae41cba4f31921e01b285fefe28effa0d7b8",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/bounded_network.py",
+      "byte_count": 5227,
+      "sha256": "0b8bc5948dbf71712296c3b4c9a47f4ac68f5e32dcc591be3e42914ff17abc0c",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/claim_design.py",
+      "byte_count": 11604,
+      "sha256": "25ae2613b37cf31af13a5ee250a5c22d5266e18ec98c034d13bdc05e81d933e0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/gap_queue.py",
+      "byte_count": 7168,
+      "sha256": "598c564817f6cc4ced6172ae14ead651458b2898d20771ecc426b30ecc8c9c18",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/ideas.py",
+      "byte_count": 13586,
+      "sha256": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/intake.py",
+      "byte_count": 9974,
+      "sha256": "4276361ce09b9f362d1d5d5928d6c90d131c677fccf9addbe86b1832df106833",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/model_dispatch.py",
+      "byte_count": 1752,
+      "sha256": "500b4276a1deabf7b7711aa5dcc739a3d9d0ee07a8d5c7d21d63d43404ca84df",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/network_execution.py",
+      "byte_count": 17012,
+      "sha256": "1daa8f94dfa6969d9a5252d813defc034caa63e9f2cbe69858d47cbc31fbb527",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/network_package.py",
+      "byte_count": 13058,
+      "sha256": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/network_spec.py",
+      "byte_count": 16434,
+      "sha256": "b481a00ea84e176b39a5426e36db8084a693a32e135ccd1685322bbe9a3cbe1f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/openclaw_auth.mjs",
+      "byte_count": 1248,
+      "sha256": "40f583647563aabad3e0130ea4b6ba7c18a007d79ec63b8cb4d66c3ebabbd8ac",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/openclaw_runtime.py",
+      "byte_count": 15285,
+      "sha256": "cee288eee33412966b7c5228b8dc93689df5dd82d24bc37d61808191b4203804",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/package_runtime.py",
+      "byte_count": 5329,
+      "sha256": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/paper_uploads.py",
+      "byte_count": 5800,
+      "sha256": "22e4a2fababb037f647bb168ef81f7be55470262dc3e52824e74234893cf0d8f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/plans/ipv6-archive-v1.json",
+      "byte_count": 1452605,
+      "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/policies/autonomy-experiment-costs-v1.json",
+      "byte_count": 487,
+      "sha256": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/policies/autonomy-experiment-costs-v2.json",
+      "byte_count": 1381,
+      "sha256": "241f53ad7c51399b043d0567cc545fb3281d7581c619f51fc9474fc1eaa13b19",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/policies/autonomy-turn-policy-v1.json",
+      "byte_count": 1112,
+      "sha256": "7aa48bccc617d1493e8621a8c290e2251180c768f021f6f8cccf06eac5eddafb",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/policies/claim-decision-policy-v1.json",
+      "byte_count": 1019,
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/preparation.py",
+      "byte_count": 20117,
+      "sha256": "5b1867da1f69b2b8a781d471abce1b871b7de10e2be40aa783390777b48462e3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/runner.py",
+      "byte_count": 11980,
+      "sha256": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/scheduler.py",
+      "byte_count": 13774,
+      "sha256": "27d9db3d8e209ff4419ecf4658bb569012a7e4f393d9348e6052df78cbddebe0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/siwc_protocol.py",
+      "byte_count": 9717,
+      "sha256": "73cbad57e87eb94add77e8d1e098776dc974f2a89e5b4e3eac7d42ea943f8d00",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/store.py",
+      "byte_count": 12008,
+      "sha256": "941f6cd2e6cacb5a59c2f62e074f520400a999add64c776364d3790dae58c710",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/worker.py",
+      "byte_count": 5351,
+      "sha256": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/runtime/workflow.py",
+      "byte_count": 21461,
+      "sha256": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/source-injection-request.json",
+      "byte_count": 44037,
+      "sha256": "1cd85e11c587907308a81998dd2aca24afc522380b043a9d39aa0eaa1924fcca",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T231408629731Z/unsupported-ack-control-request.json",
+      "byte_count": 35580,
+      "sha256": "b6c51d78fe09cd72087c55d0d2aa41c3185160f31074f586a308a760f1bf16f4",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/bounded-echo-proposal/logical.json",
+      "byte_count": 44787,
+      "sha256": "f6df383855d239c7482478413091a2a13a9eeee2c4b33771c83b1f656af4405a",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/bounded-echo-proposal/message.json",
+      "byte_count": 23505,
+      "sha256": "07b8cf588fd9adf66b489b637485211e059c9caa3264abf4bff0f95be3ef0a09",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/bounded-echo-proposal/provider-request.json",
+      "byte_count": 55419,
+      "sha256": "113da3dd33ef758ac6432aad5f908605e7c6d21be6c977a174e04b85fd9a25ee",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/bounded-echo-proposal/provider-response.bin",
+      "byte_count": 410419,
+      "sha256": "b21e930b0a38f40502f5d045db5e9e1fc34474d2ca902126d8295cecc904f8dc",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/bounded-echo-proposal/receipt.json",
+      "byte_count": 648,
+      "sha256": "eca6e8f50f1738942eeccb45ca824b2ce23b607d197f65c60decb52ff26ee7e6",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/bounded-echo-proposal-answer.json",
+      "byte_count": 4626,
+      "sha256": "96ad388977cc5f5cb53afc0cb313c83364fda0a2656ffcd33688fbbb4a4ebd21",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/bounded-echo-proposal-request.json",
+      "byte_count": 44787,
+      "sha256": "f6df383855d239c7482478413091a2a13a9eeee2c4b33771c83b1f656af4405a",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/echo/logical.json",
+      "byte_count": 46426,
+      "sha256": "73aa9a37218f57d2e9afa71b20af1df15b94399fd230d577d6c5f9620e08814c",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/echo/message.json",
+      "byte_count": 25092,
+      "sha256": "8876c58c5adb9ddb7f88a25199f4e8d5442ba0df173fb4da65e37818b74b88ab",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/echo-request.json",
+      "byte_count": 46426,
+      "sha256": "73aa9a37218f57d2e9afa71b20af1df15b94399fd230d577d6c5f9620e08814c",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/frozen.json",
+      "byte_count": 3291,
+      "sha256": "4c3be6a99882698a318308a6d4bb7cc6b69ec3ba8cef84b5f95dd71af52b5614",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/injection-continuation-request.json",
+      "byte_count": 59520,
+      "sha256": "dd4d48e48bcc4ebdb01164cff48a9e4c075d79108dc9aa394c89180217185191",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/producer.py",
+      "byte_count": 6074,
+      "sha256": "3da1f0e00b6f30800be1160a7a1c52dff573c124fb5c49f2949f1de059f3b320",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/report.json",
+      "byte_count": 504,
+      "sha256": "236de00038e6be1e4a0b56597998ae3e2b70e4aae461586148a0bce9d3157f8e",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/api.py",
+      "byte_count": 19033,
+      "sha256": "61464dd9fafff725be178dd84602ab33ce3665302838cc4f16d584872d37a2bb",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/autonomy.py",
+      "byte_count": 53864,
+      "sha256": "4264f2fba267417be2385b8cb9b2c8284a6ce4f4f13cba6a3bc2219b0272d1f9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/autonomy_costs.py",
+      "byte_count": 1613,
+      "sha256": "88d1d9e175f6ab4b1df9eb2209f0b79187f70a64b2541fbca3583f2e78640ce9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/autonomy_evidence.py",
+      "byte_count": 4284,
+      "sha256": "014ae3bfba5c0162735aa921ced7e3703096c7573cf256160b78e92173780ca6",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/autonomy_inputs.py",
+      "byte_count": 18513,
+      "sha256": "5f138390ac4014f6d99c9d4da2e2dbef95fc0804edaaabf7785ce96b9b2da0a9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/autonomy_model.py",
+      "byte_count": 20815,
+      "sha256": "4e1ad33efe560d9df6c4fc0c28dd6d42166a417b4d16cd375ee0893fe8515de7",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/autonomy_sources.py",
+      "byte_count": 10486,
+      "sha256": "ddd7b4f3a0306203f27a43428b4fae41cba4f31921e01b285fefe28effa0d7b8",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/bounded_network.py",
+      "byte_count": 5227,
+      "sha256": "0b8bc5948dbf71712296c3b4c9a47f4ac68f5e32dcc591be3e42914ff17abc0c",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/claim_design.py",
+      "byte_count": 11604,
+      "sha256": "25ae2613b37cf31af13a5ee250a5c22d5266e18ec98c034d13bdc05e81d933e0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/gap_queue.py",
+      "byte_count": 7168,
+      "sha256": "598c564817f6cc4ced6172ae14ead651458b2898d20771ecc426b30ecc8c9c18",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/ideas.py",
+      "byte_count": 13586,
+      "sha256": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/intake.py",
+      "byte_count": 9974,
+      "sha256": "4276361ce09b9f362d1d5d5928d6c90d131c677fccf9addbe86b1832df106833",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/model_dispatch.py",
+      "byte_count": 1752,
+      "sha256": "500b4276a1deabf7b7711aa5dcc739a3d9d0ee07a8d5c7d21d63d43404ca84df",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/network_execution.py",
+      "byte_count": 17012,
+      "sha256": "1daa8f94dfa6969d9a5252d813defc034caa63e9f2cbe69858d47cbc31fbb527",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/network_package.py",
+      "byte_count": 13058,
+      "sha256": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/network_spec.py",
+      "byte_count": 16819,
+      "sha256": "cd9eed9696048dc0c9420e6a7b4ac2bfee17c45e7830462e8a1209400ff77a0a",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/openclaw_auth.mjs",
+      "byte_count": 1248,
+      "sha256": "40f583647563aabad3e0130ea4b6ba7c18a007d79ec63b8cb4d66c3ebabbd8ac",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/openclaw_runtime.py",
+      "byte_count": 15285,
+      "sha256": "cee288eee33412966b7c5228b8dc93689df5dd82d24bc37d61808191b4203804",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/package_runtime.py",
+      "byte_count": 5329,
+      "sha256": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/paper_uploads.py",
+      "byte_count": 5800,
+      "sha256": "22e4a2fababb037f647bb168ef81f7be55470262dc3e52824e74234893cf0d8f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/plans/ipv6-archive-v1.json",
+      "byte_count": 1452605,
+      "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/policies/autonomy-experiment-costs-v1.json",
+      "byte_count": 487,
+      "sha256": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/policies/autonomy-experiment-costs-v2.json",
+      "byte_count": 1381,
+      "sha256": "241f53ad7c51399b043d0567cc545fb3281d7581c619f51fc9474fc1eaa13b19",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/policies/autonomy-turn-policy-v1.json",
+      "byte_count": 1112,
+      "sha256": "7aa48bccc617d1493e8621a8c290e2251180c768f021f6f8cccf06eac5eddafb",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/policies/claim-decision-policy-v1.json",
+      "byte_count": 1019,
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/preparation.py",
+      "byte_count": 20117,
+      "sha256": "5b1867da1f69b2b8a781d471abce1b871b7de10e2be40aa783390777b48462e3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/runner.py",
+      "byte_count": 11980,
+      "sha256": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/scheduler.py",
+      "byte_count": 13774,
+      "sha256": "27d9db3d8e209ff4419ecf4658bb569012a7e4f393d9348e6052df78cbddebe0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/siwc_protocol.py",
+      "byte_count": 9717,
+      "sha256": "73cbad57e87eb94add77e8d1e098776dc974f2a89e5b4e3eac7d42ea943f8d00",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/store.py",
+      "byte_count": 12008,
+      "sha256": "941f6cd2e6cacb5a59c2f62e074f520400a999add64c776364d3790dae58c710",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/worker.py",
+      "byte_count": 5351,
+      "sha256": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v1/runtime/workflow.py",
+      "byte_count": 21461,
+      "sha256": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/echo/logical.json",
+      "byte_count": 46426,
+      "sha256": "53992ec01257db700b9dd5f650dc69b3e602d1ea002ae2b80baa8a836bb21fdf",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/echo/message.json",
+      "byte_count": 25092,
+      "sha256": "cef9b2c56ee5fcdf99cd9c720d14c593189865045183970956cc7a2c18c71150",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/echo/provider-request.json",
+      "byte_count": 57070,
+      "sha256": "1e9d8a5369f2752f0b739769e907b4c1c672066380ca8c24548f9d945d36af8f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/echo/provider-response.bin",
+      "byte_count": 115857,
+      "sha256": "b07f23de5321a4c32fae693cca0d2843a424e68f39a99781fed82c31d80a5e70",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/echo/receipt.json",
+      "byte_count": 647,
+      "sha256": "97fda9172cc616b357c2ef83491cc437c2e8237d5d171b6c237098a1f9d53a1c",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/echo-answer.json",
+      "byte_count": 516,
+      "sha256": "c23bdd3b3cf64e0dd30d63c6cb08f8a0290deacfba0bdb6d6ec5aa6b310fe49f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/echo-request.json",
+      "byte_count": 46426,
+      "sha256": "53992ec01257db700b9dd5f650dc69b3e602d1ea002ae2b80baa8a836bb21fdf",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/frozen.json",
+      "byte_count": 3291,
+      "sha256": "ce051a2fad45edbb610bfed0c1029d585c9fe7db63c0f7205cfb17b1da17027c",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/injection-continuation-request.json",
+      "byte_count": 59520,
+      "sha256": "dd4d48e48bcc4ebdb01164cff48a9e4c075d79108dc9aa394c89180217185191",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/pending-case-v1/injection-continuation/logical.json",
+      "byte_count": 59520,
+      "sha256": "dd4d48e48bcc4ebdb01164cff48a9e4c075d79108dc9aa394c89180217185191",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/pending-case-v1/injection-continuation/message.json",
+      "byte_count": 36394,
+      "sha256": "55f30249870fcfb4feeb47033f085e66cf17f1634bbb38c47240718481610ec7",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/pending-case-v1/injection-continuation/provider-request.json",
+      "byte_count": 70368,
+      "sha256": "8c394910b8ad4e28874cdfa633e468c2b8c52f96547017efeaaf8087999ab6dd",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/pending-case-v1/injection-continuation/provider-response.bin",
+      "byte_count": 128957,
+      "sha256": "972998fcc1215f7b09f99ddeca914a09837974e4afe126a65cbad230af0928cb",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/pending-case-v1/injection-continuation/receipt.json",
+      "byte_count": 647,
+      "sha256": "abb3a938c615874100589b344917033d042cee8f5c70fb014956c008c0d29990",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/pending-case-v1/injection-continuation-answer.json",
+      "byte_count": 839,
+      "sha256": "eb7fbab16334c35884a8a68a4b6b6a4675f54838d6a405570da23c8be08bdc31",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/pending-case-v1/producer.py",
+      "byte_count": 6556,
+      "sha256": "d2e9c4ca8b9e4609dd6647f10d1a15448ea0a8c01280e384101f8ec1a0e87207",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/pending-case-v1/report.json",
+      "byte_count": 2547,
+      "sha256": "0e80f998645ae52e835eb92dfce17d175d4e753a10662b88edeed5b0a7834f84",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/producer.py",
+      "byte_count": 6074,
+      "sha256": "24dd1264cd7db27f5074cb0d068127217e94521b039098521241065fe348cc61",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/report.json",
+      "byte_count": 2073,
+      "sha256": "ccdba66106c14f1e7bfc4750779a366411d9c4d72dbb7030095bc91643c1c382",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/api.py",
+      "byte_count": 19033,
+      "sha256": "61464dd9fafff725be178dd84602ab33ce3665302838cc4f16d584872d37a2bb",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/autonomy.py",
+      "byte_count": 53864,
+      "sha256": "4264f2fba267417be2385b8cb9b2c8284a6ce4f4f13cba6a3bc2219b0272d1f9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/autonomy_costs.py",
+      "byte_count": 1613,
+      "sha256": "88d1d9e175f6ab4b1df9eb2209f0b79187f70a64b2541fbca3583f2e78640ce9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/autonomy_evidence.py",
+      "byte_count": 4284,
+      "sha256": "014ae3bfba5c0162735aa921ced7e3703096c7573cf256160b78e92173780ca6",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/autonomy_inputs.py",
+      "byte_count": 18513,
+      "sha256": "5f138390ac4014f6d99c9d4da2e2dbef95fc0804edaaabf7785ce96b9b2da0a9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/autonomy_model.py",
+      "byte_count": 20815,
+      "sha256": "4e1ad33efe560d9df6c4fc0c28dd6d42166a417b4d16cd375ee0893fe8515de7",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/autonomy_sources.py",
+      "byte_count": 10486,
+      "sha256": "ddd7b4f3a0306203f27a43428b4fae41cba4f31921e01b285fefe28effa0d7b8",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/bounded_network.py",
+      "byte_count": 5227,
+      "sha256": "0b8bc5948dbf71712296c3b4c9a47f4ac68f5e32dcc591be3e42914ff17abc0c",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/claim_design.py",
+      "byte_count": 11604,
+      "sha256": "25ae2613b37cf31af13a5ee250a5c22d5266e18ec98c034d13bdc05e81d933e0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/gap_queue.py",
+      "byte_count": 7168,
+      "sha256": "598c564817f6cc4ced6172ae14ead651458b2898d20771ecc426b30ecc8c9c18",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/ideas.py",
+      "byte_count": 13586,
+      "sha256": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/intake.py",
+      "byte_count": 9974,
+      "sha256": "4276361ce09b9f362d1d5d5928d6c90d131c677fccf9addbe86b1832df106833",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/model_dispatch.py",
+      "byte_count": 1752,
+      "sha256": "500b4276a1deabf7b7711aa5dcc739a3d9d0ee07a8d5c7d21d63d43404ca84df",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/network_execution.py",
+      "byte_count": 17012,
+      "sha256": "1daa8f94dfa6969d9a5252d813defc034caa63e9f2cbe69858d47cbc31fbb527",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/network_package.py",
+      "byte_count": 13058,
+      "sha256": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/network_spec.py",
+      "byte_count": 16819,
+      "sha256": "cd9eed9696048dc0c9420e6a7b4ac2bfee17c45e7830462e8a1209400ff77a0a",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/openclaw_auth.mjs",
+      "byte_count": 1248,
+      "sha256": "40f583647563aabad3e0130ea4b6ba7c18a007d79ec63b8cb4d66c3ebabbd8ac",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/openclaw_runtime.py",
+      "byte_count": 15285,
+      "sha256": "cee288eee33412966b7c5228b8dc93689df5dd82d24bc37d61808191b4203804",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/package_runtime.py",
+      "byte_count": 5329,
+      "sha256": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/paper_uploads.py",
+      "byte_count": 5800,
+      "sha256": "22e4a2fababb037f647bb168ef81f7be55470262dc3e52824e74234893cf0d8f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/plans/ipv6-archive-v1.json",
+      "byte_count": 1452605,
+      "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/policies/autonomy-experiment-costs-v1.json",
+      "byte_count": 487,
+      "sha256": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/policies/autonomy-experiment-costs-v2.json",
+      "byte_count": 1381,
+      "sha256": "241f53ad7c51399b043d0567cc545fb3281d7581c619f51fc9474fc1eaa13b19",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/policies/autonomy-turn-policy-v1.json",
+      "byte_count": 1112,
+      "sha256": "7aa48bccc617d1493e8621a8c290e2251180c768f021f6f8cccf06eac5eddafb",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/policies/claim-decision-policy-v1.json",
+      "byte_count": 1019,
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/preparation.py",
+      "byte_count": 20117,
+      "sha256": "5b1867da1f69b2b8a781d471abce1b871b7de10e2be40aa783390777b48462e3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/runner.py",
+      "byte_count": 11980,
+      "sha256": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/scheduler.py",
+      "byte_count": 13774,
+      "sha256": "27d9db3d8e209ff4419ecf4658bb569012a7e4f393d9348e6052df78cbddebe0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/siwc_protocol.py",
+      "byte_count": 9717,
+      "sha256": "73cbad57e87eb94add77e8d1e098776dc974f2a89e5b4e3eac7d42ea943f8d00",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/store.py",
+      "byte_count": 12008,
+      "sha256": "941f6cd2e6cacb5a59c2f62e074f520400a999add64c776364d3790dae58c710",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/worker.py",
+      "byte_count": 5351,
+      "sha256": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/complete-output-v2/runtime/workflow.py",
+      "byte_count": 21461,
+      "sha256": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/frozen.json",
+      "byte_count": 4938,
+      "sha256": "15a7796905064ec682f4a941135220d1e650fa00a4707f14f31050ae4ef943a9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/physical-equipment/logical.json",
+      "byte_count": 36019,
+      "sha256": "c96675b68e5316e08af1c140e95f1f71ab4922c6059bd321ab67103eebc06f51",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/physical-equipment/message.json",
+      "byte_count": 17105,
+      "sha256": "5e334229997fa42155e083fbce61dee1d4689f029324b23b84620813c1c350a6",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/physical-equipment/provider-request.json",
+      "byte_count": 46633,
+      "sha256": "dca61930a306d50bf705ce56d94ecf75fee113952e7a1aa01e9507eac125a04f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/physical-equipment/provider-response.bin",
+      "byte_count": 121723,
+      "sha256": "77308f7f857c5983a07cc5078a1455ba87467dfa6999676f9614c3b8b11cd90c",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/physical-equipment/receipt.json",
+      "byte_count": 645,
+      "sha256": "d00c917f5508253037b890757f806ac5f961fd7a5715c55ce07665a582c9031e",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/physical-equipment-answer.json",
+      "byte_count": 852,
+      "sha256": "6e2b6adb894b3cd61fc3d2469b701aa755680bf5d9a32adb8ec94509070b63ca",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/physical-equipment-request.json",
+      "byte_count": 36019,
+      "sha256": "c96675b68e5316e08af1c140e95f1f71ab4922c6059bd321ab67103eebc06f51",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/producer.py",
+      "byte_count": 9592,
+      "sha256": "f2b1497f1b993953dea53d74c04aa1818b81e92900bca0150c6e2067f2cb33c1",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/report.json",
+      "byte_count": 17646,
+      "sha256": "c8d49f25206c75eae3cb2ae5a769ab2beba88c475c8e4267e51e4310709f93d3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/api.py",
+      "byte_count": 19033,
+      "sha256": "61464dd9fafff725be178dd84602ab33ce3665302838cc4f16d584872d37a2bb",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/autonomy.py",
+      "byte_count": 53799,
+      "sha256": "9db4cf23a8d87e22b6d0c1f5c86fba0b5ada8a5927ba781108c3c1ceddbdd47b",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/autonomy_costs.py",
+      "byte_count": 1613,
+      "sha256": "88d1d9e175f6ab4b1df9eb2209f0b79187f70a64b2541fbca3583f2e78640ce9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/autonomy_evidence.py",
+      "byte_count": 4284,
+      "sha256": "014ae3bfba5c0162735aa921ced7e3703096c7573cf256160b78e92173780ca6",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/autonomy_inputs.py",
+      "byte_count": 15680,
+      "sha256": "6c09618551d96e723701a444fd0c2cbda6dad7a863f8ace1074ade1ab21896f4",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/autonomy_model.py",
+      "byte_count": 20815,
+      "sha256": "4e1ad33efe560d9df6c4fc0c28dd6d42166a417b4d16cd375ee0893fe8515de7",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/autonomy_sources.py",
+      "byte_count": 10486,
+      "sha256": "ddd7b4f3a0306203f27a43428b4fae41cba4f31921e01b285fefe28effa0d7b8",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/bounded_network.py",
+      "byte_count": 5227,
+      "sha256": "0b8bc5948dbf71712296c3b4c9a47f4ac68f5e32dcc591be3e42914ff17abc0c",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/claim_design.py",
+      "byte_count": 11604,
+      "sha256": "25ae2613b37cf31af13a5ee250a5c22d5266e18ec98c034d13bdc05e81d933e0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/gap_queue.py",
+      "byte_count": 7168,
+      "sha256": "598c564817f6cc4ced6172ae14ead651458b2898d20771ecc426b30ecc8c9c18",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/ideas.py",
+      "byte_count": 13586,
+      "sha256": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/intake.py",
+      "byte_count": 9974,
+      "sha256": "4276361ce09b9f362d1d5d5928d6c90d131c677fccf9addbe86b1832df106833",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/model_dispatch.py",
+      "byte_count": 1752,
+      "sha256": "500b4276a1deabf7b7711aa5dcc739a3d9d0ee07a8d5c7d21d63d43404ca84df",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/network_execution.py",
+      "byte_count": 17012,
+      "sha256": "1daa8f94dfa6969d9a5252d813defc034caa63e9f2cbe69858d47cbc31fbb527",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/network_package.py",
+      "byte_count": 13058,
+      "sha256": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/network_spec.py",
+      "byte_count": 16434,
+      "sha256": "b481a00ea84e176b39a5426e36db8084a693a32e135ccd1685322bbe9a3cbe1f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/openclaw_auth.mjs",
+      "byte_count": 1248,
+      "sha256": "40f583647563aabad3e0130ea4b6ba7c18a007d79ec63b8cb4d66c3ebabbd8ac",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/openclaw_runtime.py",
+      "byte_count": 15285,
+      "sha256": "cee288eee33412966b7c5228b8dc93689df5dd82d24bc37d61808191b4203804",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/package_runtime.py",
+      "byte_count": 5329,
+      "sha256": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/paper_uploads.py",
+      "byte_count": 5800,
+      "sha256": "22e4a2fababb037f647bb168ef81f7be55470262dc3e52824e74234893cf0d8f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/plans/ipv6-archive-v1.json",
+      "byte_count": 1452605,
+      "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/policies/autonomy-experiment-costs-v1.json",
+      "byte_count": 487,
+      "sha256": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/policies/autonomy-experiment-costs-v2.json",
+      "byte_count": 1381,
+      "sha256": "241f53ad7c51399b043d0567cc545fb3281d7581c619f51fc9474fc1eaa13b19",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/policies/autonomy-turn-policy-v1.json",
+      "byte_count": 1112,
+      "sha256": "7aa48bccc617d1493e8621a8c290e2251180c768f021f6f8cccf06eac5eddafb",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/policies/claim-decision-policy-v1.json",
+      "byte_count": 1019,
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/preparation.py",
+      "byte_count": 20117,
+      "sha256": "5b1867da1f69b2b8a781d471abce1b871b7de10e2be40aa783390777b48462e3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/runner.py",
+      "byte_count": 11980,
+      "sha256": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/scheduler.py",
+      "byte_count": 13774,
+      "sha256": "27d9db3d8e209ff4419ecf4658bb569012a7e4f393d9348e6052df78cbddebe0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/siwc_protocol.py",
+      "byte_count": 9717,
+      "sha256": "73cbad57e87eb94add77e8d1e098776dc974f2a89e5b4e3eac7d42ea943f8d00",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/store.py",
+      "byte_count": 12008,
+      "sha256": "941f6cd2e6cacb5a59c2f62e074f520400a999add64c776364d3790dae58c710",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/worker.py",
+      "byte_count": 5351,
+      "sha256": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/runtime/workflow.py",
+      "byte_count": 21461,
+      "sha256": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-injection/logical.json",
+      "byte_count": 44558,
+      "sha256": "82b76a020cd0e04c2a065c811303fb540fe12368b083bb092f1d9540d953d826",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-injection/message.json",
+      "byte_count": 23360,
+      "sha256": "259fd6109fbaa4625fba00cd986ab92c169085a589ceefa2a0f24e44e884d48d",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-injection/provider-request.json",
+      "byte_count": 55160,
+      "sha256": "3fd4bf2054e43c5c7b328e320d966a62959f8aecee67f957bd32ba872b6b0138",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-injection/provider-response.bin",
+      "byte_count": 115819,
+      "sha256": "403e53c4c93200ff507c802c449947883394ac10a403a22267c11539f6ce8fae",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-injection/receipt.json",
+      "byte_count": 647,
+      "sha256": "0b001ea837c849eeaae3413fd1ca45d1484bdc234aa61e806593f42ca6c571a5",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-injection-answer.json",
+      "byte_count": 516,
+      "sha256": "ae07cf1b0802515bee1e37e14e70d193ca9ec3148cfaa655ce7c6c3a75aecd43",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-injection-request.json",
+      "byte_count": 44558,
+      "sha256": "82b76a020cd0e04c2a065c811303fb540fe12368b083bb092f1d9540d953d826",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-followup-v1/answer.json",
+      "byte_count": 516,
+      "sha256": "18ee1ba4ec1422fcd431b00af84f6c5c2d2b902506a289e69acaa4fad936cb21",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-followup-v1/frozen.json",
+      "byte_count": 12661,
+      "sha256": "2dc998a2706a037a7571f054cdde50ec59b00dfad36385fa868f017d82098030",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-followup-v1/native/logical.json",
+      "byte_count": 54879,
+      "sha256": "a46be9ba094118fb538cb94273fb717cb16ee2193457422dbcbdde5f7b059642",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-followup-v1/native/message.json",
+      "byte_count": 33347,
+      "sha256": "a99e0c79c1a0c5cdf15db728375f7d9e5e86cadc7b9eee5cbb52a0eca0c28159",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-followup-v1/native/provider-request.json",
+      "byte_count": 65565,
+      "sha256": "64d83375970fa7929f76ccb57c62c0ec1fee1ece064cb769610a458f0d73730c",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-followup-v1/native/provider-response.bin",
+      "byte_count": 112053,
+      "sha256": "bf3f40879fdf9ebfd02d02c828b4fd9925fbfe79753c25b19657113fbe4c0aca",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-followup-v1/native/receipt.json",
+      "byte_count": 645,
+      "sha256": "438027aedee5bb69c7d5e555d3a4a0c99eb161de923825251e8c097fe4c042a9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-followup-v1/producer.py",
+      "byte_count": 6683,
+      "sha256": "791e1a97f31fdf5f8e5929fbede5101c240f7dd9625020435da0f212b330a80d",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-followup-v1/report.json",
+      "byte_count": 1884,
+      "sha256": "890d1a4628e7d3aabd891f59049936ed2e04d8e14691ebc2d8c4369b488c2ad7",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-followup-v1/request.json",
+      "byte_count": 54879,
+      "sha256": "a46be9ba094118fb538cb94273fb717cb16ee2193457422dbcbdde5f7b059642",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/3-request.json",
+      "byte_count": 57744,
+      "sha256": "d354e557caef62efcb9ca8961f9daa9659ec2518de5d6aaecfb156d9a519499e",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/frozen.json",
+      "byte_count": 3269,
+      "sha256": "e0f181c3276b400e9ae00324d082745da068743e8e78a4488675181167ced879",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/native-3/logical.json",
+      "byte_count": 57744,
+      "sha256": "d354e557caef62efcb9ca8961f9daa9659ec2518de5d6aaecfb156d9a519499e",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/native-3/message.json",
+      "byte_count": 36016,
+      "sha256": "bf5b137a6affca89e021ff40c5ed30c20abd1a94ff66e7550ad76fc3f8f14006",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/producer.py",
+      "byte_count": 14388,
+      "sha256": "41af625ee88548e722c2eff7a2231a174b5660ea27680edc768d040ccaf17517",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/report.json",
+      "byte_count": 505,
+      "sha256": "e078c92a4ad578c0d3d893dc57e4c78df4aab17ab5479ec190330f50b80f1de0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/api.py",
+      "byte_count": 19033,
+      "sha256": "61464dd9fafff725be178dd84602ab33ce3665302838cc4f16d584872d37a2bb",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/autonomy.py",
+      "byte_count": 53864,
+      "sha256": "4264f2fba267417be2385b8cb9b2c8284a6ce4f4f13cba6a3bc2219b0272d1f9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/autonomy_costs.py",
+      "byte_count": 1613,
+      "sha256": "88d1d9e175f6ab4b1df9eb2209f0b79187f70a64b2541fbca3583f2e78640ce9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/autonomy_evidence.py",
+      "byte_count": 4284,
+      "sha256": "014ae3bfba5c0162735aa921ced7e3703096c7573cf256160b78e92173780ca6",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/autonomy_inputs.py",
+      "byte_count": 18069,
+      "sha256": "956487809a93eb8f3770624f8d8ffd345e2bd0fce7e4c81bbc02f3f46fc5e78f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/autonomy_model.py",
+      "byte_count": 20815,
+      "sha256": "4e1ad33efe560d9df6c4fc0c28dd6d42166a417b4d16cd375ee0893fe8515de7",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/autonomy_sources.py",
+      "byte_count": 10486,
+      "sha256": "ddd7b4f3a0306203f27a43428b4fae41cba4f31921e01b285fefe28effa0d7b8",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/bounded_network.py",
+      "byte_count": 5227,
+      "sha256": "0b8bc5948dbf71712296c3b4c9a47f4ac68f5e32dcc591be3e42914ff17abc0c",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/claim_design.py",
+      "byte_count": 11604,
+      "sha256": "25ae2613b37cf31af13a5ee250a5c22d5266e18ec98c034d13bdc05e81d933e0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/gap_queue.py",
+      "byte_count": 7168,
+      "sha256": "598c564817f6cc4ced6172ae14ead651458b2898d20771ecc426b30ecc8c9c18",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/ideas.py",
+      "byte_count": 13586,
+      "sha256": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/intake.py",
+      "byte_count": 9974,
+      "sha256": "4276361ce09b9f362d1d5d5928d6c90d131c677fccf9addbe86b1832df106833",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/model_dispatch.py",
+      "byte_count": 1752,
+      "sha256": "500b4276a1deabf7b7711aa5dcc739a3d9d0ee07a8d5c7d21d63d43404ca84df",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/network_execution.py",
+      "byte_count": 17012,
+      "sha256": "1daa8f94dfa6969d9a5252d813defc034caa63e9f2cbe69858d47cbc31fbb527",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/network_package.py",
+      "byte_count": 13058,
+      "sha256": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/network_spec.py",
+      "byte_count": 16434,
+      "sha256": "b481a00ea84e176b39a5426e36db8084a693a32e135ccd1685322bbe9a3cbe1f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/openclaw_auth.mjs",
+      "byte_count": 1248,
+      "sha256": "40f583647563aabad3e0130ea4b6ba7c18a007d79ec63b8cb4d66c3ebabbd8ac",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/openclaw_runtime.py",
+      "byte_count": 15285,
+      "sha256": "cee288eee33412966b7c5228b8dc93689df5dd82d24bc37d61808191b4203804",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/package_runtime.py",
+      "byte_count": 5329,
+      "sha256": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/paper_uploads.py",
+      "byte_count": 5800,
+      "sha256": "22e4a2fababb037f647bb168ef81f7be55470262dc3e52824e74234893cf0d8f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/plans/ipv6-archive-v1.json",
+      "byte_count": 1452605,
+      "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/policies/autonomy-experiment-costs-v1.json",
+      "byte_count": 487,
+      "sha256": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/policies/autonomy-experiment-costs-v2.json",
+      "byte_count": 1381,
+      "sha256": "241f53ad7c51399b043d0567cc545fb3281d7581c619f51fc9474fc1eaa13b19",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/policies/autonomy-turn-policy-v1.json",
+      "byte_count": 1112,
+      "sha256": "7aa48bccc617d1493e8621a8c290e2251180c768f021f6f8cccf06eac5eddafb",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/policies/claim-decision-policy-v1.json",
+      "byte_count": 1019,
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/preparation.py",
+      "byte_count": 20117,
+      "sha256": "5b1867da1f69b2b8a781d471abce1b871b7de10e2be40aa783390777b48462e3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/runner.py",
+      "byte_count": 11980,
+      "sha256": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/scheduler.py",
+      "byte_count": 13774,
+      "sha256": "27d9db3d8e209ff4419ecf4658bb569012a7e4f393d9348e6052df78cbddebe0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/siwc_protocol.py",
+      "byte_count": 9717,
+      "sha256": "73cbad57e87eb94add77e8d1e098776dc974f2a89e5b4e3eac7d42ea943f8d00",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/store.py",
+      "byte_count": 12008,
+      "sha256": "941f6cd2e6cacb5a59c2f62e074f520400a999add64c776364d3790dae58c710",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/worker.py",
+      "byte_count": 5351,
+      "sha256": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v2/runtime/workflow.py",
+      "byte_count": 21461,
+      "sha256": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/3-answer.json",
+      "byte_count": 515,
+      "sha256": "5c99c10068115cfe88395344075f015e90031e392d6da9e61f99819b16df0acc",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/3-request.json",
+      "byte_count": 57744,
+      "sha256": "d354e557caef62efcb9ca8961f9daa9659ec2518de5d6aaecfb156d9a519499e",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/4-answer.json",
+      "byte_count": 515,
+      "sha256": "19536696fa32f1ea621f4d0261af1399ead0e18d806fe3b8d5d9e616321ad4c3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/4-request.json",
+      "byte_count": 58166,
+      "sha256": "32de4e20ae53936089b0db7ac32a10d7dbcc6149de82d387ceffc43072c51e44",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/5-answer.json",
+      "byte_count": 4949,
+      "sha256": "80f7419f89377122942b4c606af39901d41cc203c76d7b3bbf2b1fe7dc771f09",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/5-request.json",
+      "byte_count": 58775,
+      "sha256": "952d5eb41ed8aee897bb2ab02783a98e5936813ed497af5c5f575f8848751c2e",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/frozen.json",
+      "byte_count": 3269,
+      "sha256": "a9298f67790ae72a8eee71b2ab5dd53c222a3fcb728407f992f4e039239feafc",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/native-3/logical.json",
+      "byte_count": 57744,
+      "sha256": "d354e557caef62efcb9ca8961f9daa9659ec2518de5d6aaecfb156d9a519499e",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/native-3/message.json",
+      "byte_count": 36016,
+      "sha256": "bf5b137a6affca89e021ff40c5ed30c20abd1a94ff66e7550ad76fc3f8f14006",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/native-3/provider-request.json",
+      "byte_count": 68442,
+      "sha256": "d18b4c15a20d835fe06f2641e183da80503a3ad600b432bbdb8074009b98ca59",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/native-3/provider-response.bin",
+      "byte_count": 112088,
+      "sha256": "dd2e68cde07162a86d433707fb9cf87b3e027a093d985a97e9e5ea4747e5b7f0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/native-3/receipt.json",
+      "byte_count": 646,
+      "sha256": "4373d11d784819f613129e2f65b2e265c5b9e3744768c16e589a2dd5d17938a2",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/native-4/logical.json",
+      "byte_count": 58166,
+      "sha256": "32de4e20ae53936089b0db7ac32a10d7dbcc6149de82d387ceffc43072c51e44",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/native-4/message.json",
+      "byte_count": 34534,
+      "sha256": "6a55a12e0eeb99f2c0a72608823703e581a80e095c54ac0fb71dff7880aa7eda",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/native-4/provider-request.json",
+      "byte_count": 68864,
+      "sha256": "502aa52575a30c1e070f76d7a47cdb23eabe0863c571465189226af4e7596a75",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/native-4/provider-response.bin",
+      "byte_count": 112088,
+      "sha256": "46001f356b74acbb73ae7e574235fd29c802025f7c386f0097e682b85c4d2f12",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/native-4/receipt.json",
+      "byte_count": 646,
+      "sha256": "0ebc02eff45eb501a372aaf10d0aab5ee14df9e12c3f7ae71a47381c1fe19437",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/native-5/logical.json",
+      "byte_count": 58775,
+      "sha256": "952d5eb41ed8aee897bb2ab02783a98e5936813ed497af5c5f575f8848751c2e",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/native-5/message.json",
+      "byte_count": 35655,
+      "sha256": "7d4c169afa07ce3be6a9269266e00444b323fb99b8bf8f660e7923b894f7fe92",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/native-5/provider-request.json",
+      "byte_count": 69473,
+      "sha256": "c75ab2e23bb48c12ab46ab9bb3be67a47bfd7c271c61d22c8f86660b9c253379",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/native-5/provider-response.bin",
+      "byte_count": 423028,
+      "sha256": "ff9d06c458f1ba7c4a4f78fb835ccca3a188d193a6076670d8578c0d4a75f82c",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/native-5/receipt.json",
+      "byte_count": 648,
+      "sha256": "b4a1dea734c7db56a87c3de1bd1e8fe313464a7eb258f4d496d8e3067ee07b2b",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/producer.py",
+      "byte_count": 14388,
+      "sha256": "e16ef32a4962c89b84bc71d08756ba6d97b9a0de70ea4c1d38839920ce8703a4",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/report.json",
+      "byte_count": 55085,
+      "sha256": "5c65d1a6680f71954357e7e43c4b4a9b47e5f53fd36719d8d504b7abc20bf7cf",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/api.py",
+      "byte_count": 19033,
+      "sha256": "61464dd9fafff725be178dd84602ab33ce3665302838cc4f16d584872d37a2bb",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/autonomy.py",
+      "byte_count": 53864,
+      "sha256": "4264f2fba267417be2385b8cb9b2c8284a6ce4f4f13cba6a3bc2219b0272d1f9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/autonomy_costs.py",
+      "byte_count": 1613,
+      "sha256": "88d1d9e175f6ab4b1df9eb2209f0b79187f70a64b2541fbca3583f2e78640ce9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/autonomy_evidence.py",
+      "byte_count": 4284,
+      "sha256": "014ae3bfba5c0162735aa921ced7e3703096c7573cf256160b78e92173780ca6",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/autonomy_inputs.py",
+      "byte_count": 18069,
+      "sha256": "956487809a93eb8f3770624f8d8ffd345e2bd0fce7e4c81bbc02f3f46fc5e78f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/autonomy_model.py",
+      "byte_count": 20815,
+      "sha256": "4e1ad33efe560d9df6c4fc0c28dd6d42166a417b4d16cd375ee0893fe8515de7",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/autonomy_sources.py",
+      "byte_count": 10486,
+      "sha256": "ddd7b4f3a0306203f27a43428b4fae41cba4f31921e01b285fefe28effa0d7b8",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/bounded_network.py",
+      "byte_count": 5227,
+      "sha256": "0b8bc5948dbf71712296c3b4c9a47f4ac68f5e32dcc591be3e42914ff17abc0c",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/claim_design.py",
+      "byte_count": 11604,
+      "sha256": "25ae2613b37cf31af13a5ee250a5c22d5266e18ec98c034d13bdc05e81d933e0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/gap_queue.py",
+      "byte_count": 7168,
+      "sha256": "598c564817f6cc4ced6172ae14ead651458b2898d20771ecc426b30ecc8c9c18",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/ideas.py",
+      "byte_count": 13586,
+      "sha256": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/intake.py",
+      "byte_count": 9974,
+      "sha256": "4276361ce09b9f362d1d5d5928d6c90d131c677fccf9addbe86b1832df106833",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/model_dispatch.py",
+      "byte_count": 1752,
+      "sha256": "500b4276a1deabf7b7711aa5dcc739a3d9d0ee07a8d5c7d21d63d43404ca84df",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/network_execution.py",
+      "byte_count": 17012,
+      "sha256": "1daa8f94dfa6969d9a5252d813defc034caa63e9f2cbe69858d47cbc31fbb527",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/network_package.py",
+      "byte_count": 13058,
+      "sha256": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/network_spec.py",
+      "byte_count": 16434,
+      "sha256": "b481a00ea84e176b39a5426e36db8084a693a32e135ccd1685322bbe9a3cbe1f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/openclaw_auth.mjs",
+      "byte_count": 1248,
+      "sha256": "40f583647563aabad3e0130ea4b6ba7c18a007d79ec63b8cb4d66c3ebabbd8ac",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/openclaw_runtime.py",
+      "byte_count": 15285,
+      "sha256": "cee288eee33412966b7c5228b8dc93689df5dd82d24bc37d61808191b4203804",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/package_runtime.py",
+      "byte_count": 5329,
+      "sha256": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/paper_uploads.py",
+      "byte_count": 5800,
+      "sha256": "22e4a2fababb037f647bb168ef81f7be55470262dc3e52824e74234893cf0d8f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/plans/ipv6-archive-v1.json",
+      "byte_count": 1452605,
+      "sha256": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/policies/autonomy-experiment-costs-v1.json",
+      "byte_count": 487,
+      "sha256": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/policies/autonomy-experiment-costs-v2.json",
+      "byte_count": 1381,
+      "sha256": "241f53ad7c51399b043d0567cc545fb3281d7581c619f51fc9474fc1eaa13b19",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/policies/autonomy-turn-policy-v1.json",
+      "byte_count": 1112,
+      "sha256": "7aa48bccc617d1493e8621a8c290e2251180c768f021f6f8cccf06eac5eddafb",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/policies/claim-decision-policy-v1.json",
+      "byte_count": 1019,
+      "sha256": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/preparation.py",
+      "byte_count": 20117,
+      "sha256": "5b1867da1f69b2b8a781d471abce1b871b7de10e2be40aa783390777b48462e3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/runner.py",
+      "byte_count": 11980,
+      "sha256": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/scheduler.py",
+      "byte_count": 13774,
+      "sha256": "27d9db3d8e209ff4419ecf4658bb569012a7e4f393d9348e6052df78cbddebe0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/siwc_protocol.py",
+      "byte_count": 9717,
+      "sha256": "73cbad57e87eb94add77e8d1e098776dc974f2a89e5b4e3eac7d42ea943f8d00",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/store.py",
+      "byte_count": 12008,
+      "sha256": "941f6cd2e6cacb5a59c2f62e074f520400a999add64c776364d3790dae58c710",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/worker.py",
+      "byte_count": 5351,
+      "sha256": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-progress-v3/runtime/workflow.py",
+      "byte_count": 21461,
+      "sha256": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/3-answer.json",
+      "byte_count": 516,
+      "sha256": "5ce2d289d22c27563716ac9da3531c4999f2a1cdef8eb3ba25614e059d7b0bf5",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/3-request.json",
+      "byte_count": 56087,
+      "sha256": "f39938cfb452fad20dd8136f3a64934402065727218176530dcc40cd55dc5bc7",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/4-answer.json",
+      "byte_count": 516,
+      "sha256": "71bfb8a121cd28ce477cf879aa16d987a1d3496a1db9391d7ac38cfaa955a9d9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/4-request.json",
+      "byte_count": 55670,
+      "sha256": "b53ad6436cdf21f8a174ca37df01281145c9a8cd9ae95b990ff71d2d19bb1ec9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/5-answer.json",
+      "byte_count": 516,
+      "sha256": "a2cda98e1207e745ef2c41c28d59638352a8f30be8404c1ee5b86a7107b0b549",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/5-request.json",
+      "byte_count": 56265,
+      "sha256": "fe3933a2a35b33c875f51991b47dcd4630b96ec4900cabbe4ded5f3618d0dc1b",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/frozen.json",
+      "byte_count": 3269,
+      "sha256": "685b7b6800fb7367f49ff54b0a87384d18fe7d95d82689785cd986e1465446dd",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/native-3/logical.json",
+      "byte_count": 56087,
+      "sha256": "f39938cfb452fad20dd8136f3a64934402065727218176530dcc40cd55dc5bc7",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/native-3/message.json",
+      "byte_count": 34483,
+      "sha256": "eb63cf7bf841449268be9ae64304836881f7710045ec9f33ff08cc701f61cf0d",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/native-3/provider-request.json",
+      "byte_count": 66797,
+      "sha256": "817ad0e990452057b8af10dea125796f2bed0041913e90e45d24cdb5b260e1e8",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/native-3/provider-response.bin",
+      "byte_count": 117167,
+      "sha256": "7dff52026b0356064f4fe203a593cec5d9a7b01ca40a76651d3ee9a81b02deb9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/native-3/receipt.json",
+      "byte_count": 646,
+      "sha256": "6d8f9a8337f8aadf78657c2ef5cebf36d1a950c74f7c9e9d221604e6fefa20e0",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/native-4/logical.json",
+      "byte_count": 55670,
+      "sha256": "b53ad6436cdf21f8a174ca37df01281145c9a8cd9ae95b990ff71d2d19bb1ec9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/native-4/message.json",
+      "byte_count": 32350,
+      "sha256": "97e4a8d6cf6fa2f10b7882cc575eac22bd9c3cb0613a0681a2a88f6294c7d079",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/native-4/provider-request.json",
+      "byte_count": 66380,
+      "sha256": "01a546392f90fce09b4072d9ba6192745ad87370b0c2297ca1324b8fe6e455de",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/native-4/provider-response.bin",
+      "byte_count": 116209,
+      "sha256": "51ff3c99c994a0bc17a2836ccfbc703ba8de3a1eb64f65b0d9093a36281ac25f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/native-4/receipt.json",
+      "byte_count": 647,
+      "sha256": "03dbff97ebd4c9fd2bd5ab6cc873a81268b633b99757854446f59c9501e0382f",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/native-5/logical.json",
+      "byte_count": 56265,
+      "sha256": "fe3933a2a35b33c875f51991b47dcd4630b96ec4900cabbe4ded5f3618d0dc1b",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/native-5/message.json",
+      "byte_count": 32729,
+      "sha256": "616079c23c6d40f440fcdb1b6f358882e2ff01f9387571a754582b67a7db7f69",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/native-5/provider-request.json",
+      "byte_count": 66975,
+      "sha256": "92ce51e74c6277417984079adb9d8cf5e283c528a9e27f8c0fa31836c7a77907",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/native-5/provider-response.bin",
+      "byte_count": 116165,
+      "sha256": "04c07d65ca4da18cecdf2e43ce3e5897ef3e6c8a05801e25c961866ac2e925ca",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/native-5/receipt.json",
+      "byte_count": 647,
+      "sha256": "0189064bd1eda75d1e24ac06122cf0b1e242ce4c718ca8a984bc6f39e26266cf",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/producer.py",
+      "byte_count": 13010,
+      "sha256": "59ac8701acdd84559b043c888738c9d796a0beb9cb32ba3fb155b7177c111cc9",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/source-read-trajectory-v1/report.json",
+      "byte_count": 45388,
+      "sha256": "e18bd969eedfb820a3593aad72d7de31a924b2a426b6a1dc06d0e395f3212989",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/unsupported-ack-control/logical.json",
+      "byte_count": 36101,
+      "sha256": "ecc12d5a1059d9003ab178607718a115d87d63373a0d5ab6b5bcf65b3d05579b",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/unsupported-ack-control/message.json",
+      "byte_count": 17187,
+      "sha256": "4ff144173e7eb2438af936cf2b4a64d6a74f20302b618ced6290aef2c8dfc32c",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/unsupported-ack-control/provider-request.json",
+      "byte_count": 46745,
+      "sha256": "0bfe3ee22925c56f8541ced2fe6b7a03a63ac196784479475a143bbc0e1d6deb",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/unsupported-ack-control/provider-response.bin",
+      "byte_count": 130879,
+      "sha256": "af4511caba384c24f473e4be12e75661ee40ab8c7e0129c0f818498156067a6a",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/unsupported-ack-control/receipt.json",
+      "byte_count": 645,
+      "sha256": "b643d1157164a9925dcc23971ec7d4dc8ffa60bcc6182509601951b690396cd8",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/unsupported-ack-control-answer.json",
+      "byte_count": 905,
+      "sha256": "3d3651bdfbc358430d20fd0025d4711e8ab39f5c60e90c4adeb66e093d88a7f3",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/planning-context-model/20261021T234322562553Z/unsupported-ack-control-request.json",
+      "byte_count": 36101,
+      "sha256": "ecc12d5a1059d9003ab178607718a115d87d63373a0d5ab6b5bcf65b3d05579b",
+      "access": "private-local-development-artifact",
+      "verification": "Hash verified by rereading retained local bytes; not remote storage verification"
+    },
+    {
+      "path": ".test-artifacts/study-cancellation/584e6ce7-b104-4f77-aa3a-2a2c0eac0f31/before.json",
+      "byte_count": 184481,
+      "sha256": "0bf9f9d441cfad575473a80d357ced00c9016b17418f533ded18f329c2a8d189",
+      "access": "private-owner-study-data",
+      "verification": "Retained cancellation/source receipt; original remote retrieval check in real-source report"
+    },
+    {
+      "path": ".test-artifacts/study-cancellation/584e6ce7-b104-4f77-aa3a-2a2c0eac0f31/receipt.json",
+      "byte_count": 703,
+      "sha256": "df052bb4c538b061202e4feaca781a5ed4f644d4e9fb4b73388e766ee5c1ac63",
+      "access": "private-owner-study-data",
+      "verification": "Retained cancellation/source receipt; original remote retrieval check in real-source report"
+    },
+    {
+      "path": ".test-artifacts/study-cancellation/584e6ce7-b104-4f77-aa3a-2a2c0eac0f31/verified.json",
+      "byte_count": 187,
+      "sha256": "9f219a54cde61f72a34cc98510899f11c89c3211a9fba168faac7197c44bc6af",
+      "access": "private-owner-study-data",
+      "verification": "Retained cancellation/source receipt; original remote retrieval check in real-source report"
+    },
+    {
+      "path": ".test-artifacts/study-cancellation/584e6ce7-b104-4f77-aa3a-2a2c0eac0f31/retained-text-original.json",
+      "byte_count": 70983,
+      "sha256": "ed1f6e355c4e94a9bd6d5b36717e251802271df474d0561d0e0805001cd8f746",
+      "access": "private-owner-study-data",
+      "verification": "Retained cancellation/source receipt; original remote retrieval check in real-source report"
+    }
+  ],
+  "credential_files_included": false,
+  "raw_auth_state_excluded": true,
+  "published_downloads": false
+}

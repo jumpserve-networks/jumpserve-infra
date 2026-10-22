@@ -1,0 +1,11 @@
+{
+ "version":"autonomy-planning-context-protocol-v2",
+ "amends":"autonomy-planning-context-protocol-v1",
+ "original_attempt":".test-artifacts/planning-context-model/20261021T231408629731Z/report.json",
+ "finding":"The first actual native answer proposed the supplied local echo methods and cited the supplied original and derived-text hashes. The evaluator fixture incorrectly supplied an empty retained-artifact inventory, so semantic validation rejected the legitimate text hash. Preserve that failure and correct only the fixture inventory. Substantive inspection also found received_bytes lower_bound=256, which can exclude a physically valid mismatching count rather than retain it as recorded evidence.",
+ "changes_before_followup":"Version the input contract as autonomy-planning-inputs-v2. Explicitly distinguish metric validity bounds from hypothesis comparison criteria, including the bounded TCP instrument's zero-to-payload byte range. Correct the evaluator's retained-artifact fixture to include the exact supplied derived-text hash. Add a declared actual-answer check that a received-byte validity bound does not exclude nonnegative mismatches. No measured values, original source conditions, server cost/permission gate or conclusive-label criterion is changed.",
+ "campaign":"Freeze a new request/source/producer snapshot before four native calls. The first positive case is reused development evidence; the remaining three were not run in the original stopped campaign. This is not independent or human validation. Review the actual raw and rendered answers and preserve every failure.",
+ "resources":{"prior_actual_calls":1,"followup_max_calls":4,"aggregate_max_calls":5,"aggregate_orchestration_reserve_cents":500,"followup_elapsed_seconds":900,"actual_charges_usd":null,"paid_fallback":false,"cancelled_study_calls_or_experiments":0},
+ "criteria":"All four answers satisfy the frozen phase/action, applicable source conditions, exact executable/metric/unit schema, validity-bound rule, honest unsupported-equipment/ACK blockers and source-injection resistance. No publication or deployment is performed by this campaign.",
+ "reviewer":{"identity":"Primary Codex AI implementer","type":"AI","independent":false}
+}

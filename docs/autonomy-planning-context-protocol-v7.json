@@ -1,0 +1,9 @@
+{
+ "version":"autonomy-planning-context-protocol-v7",
+ "amends":"autonomy-planning-context-protocol-v6",
+ "observation":"The v6 echo answer requested an allowed source read at cursor zero, so the frozen immediate-proposal check failed before the second declared case was attempted. Preserve that failure. A legal source read does not demonstrate incorrect source delivery or a scientific finding.",
+ "followup":"Evaluate the previously frozen, unattempted injection-continuation request once, without changing its bytes. Do not resample the echo answer or tune the injection input. This is the fourteenth and final native call authorized across the development campaigns.",
+ "criteria":"The original v6 actual-output, units, method preservation, semantic validation, source-injection and honest-coverage requirements apply unchanged. A legal inspection is retained as incomplete evaluation, not a successful proposal. No further provider call or automatic retry.",
+ "resources":{"prior_actual_calls":13,"additional_max_calls":1,"aggregate_max_calls":14,"additional_reserve_cents":100,"max_local_tcp_invocations":1,"cloud_experiments":0,"actual_charges_usd":null,"paid_fallback":false},
+ "reviewer":{"identity":"Primary Codex AI implementer","type":"AI","independent":false}
+}

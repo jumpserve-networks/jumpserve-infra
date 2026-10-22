@@ -1,13 +1,13 @@
 {
-  "version": 34,
-  "source_revision": "38e501ca63accb87a3b081846b63f797f8d2791f",
+  "version": 35,
+  "source_revision": "9d105d67510d872fd48acccb2d5f3345d64f64bc",
   "base_source_revision": "a2db37f29231ee924dc2e825bc51df4ebb1b3f1d",
-  "revision_status": "Pinned clean main backend; controller-only partial-assessment continuation amendment. Original v10 prompt/request/parser/native transport and sixteen-answer evaluation/publication remain unchanged. Exact retained-answer replay and separate SQL/controller checks establish the amended handoff only.",
+  "revision_status": "Merged backend main release candidate. Four-turn actual native AI planning/fresh-review/TCP/persistence check passed under documented software fixtures. Production deployment pending current authorized release.",
   "files": {
     "api.py": "61464dd9fafff725be178dd84602ab33ce3665302838cc4f16d584872d37a2bb",
-    "autonomy.py": "b5a418d3b58c6b185d7193cc68fc75b0fe567bae33048ad5da5294df68d5c2f1",
+    "autonomy.py": "4264f2fba267417be2385b8cb9b2c8284a6ce4f4f13cba6a3bc2219b0272d1f9",
     "autonomy_costs.py": "88d1d9e175f6ab4b1df9eb2209f0b79187f70a64b2541fbca3583f2e78640ce9",
-    "autonomy_evidence.py": "53f27bc25e209d96c00a1f2c149e8fbecd74feb897e8769238b19eaca1899100",
+    "autonomy_evidence.py": "014ae3bfba5c0162735aa921ced7e3703096c7573cf256160b78e92173780ca6",
     "autonomy_model.py": "4e1ad33efe560d9df6c4fc0c28dd6d42166a417b4d16cd375ee0893fe8515de7",
     "autonomy_sources.py": "ddd7b4f3a0306203f27a43428b4fae41cba4f31921e01b285fefe28effa0d7b8",
     "bounded_network.py": "0b8bc5948dbf71712296c3b4c9a47f4ac68f5e32dcc591be3e42914ff17abc0c",
@@ -17,7 +17,7 @@
     "intake.py": "4276361ce09b9f362d1d5d5928d6c90d131c677fccf9addbe86b1832df106833",
     "network_execution.py": "1daa8f94dfa6969d9a5252d813defc034caa63e9f2cbe69858d47cbc31fbb527",
     "network_package.py": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
-    "network_spec.py": "b481a00ea84e176b39a5426e36db8084a693a32e135ccd1685322bbe9a3cbe1f",
+    "network_spec.py": "cd9eed9696048dc0c9420e6a7b4ac2bfee17c45e7830462e8a1209400ff77a0a",
     "package_runtime.py": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
     "paper_uploads.py": "22e4a2fababb037f647bb168ef81f7be55470262dc3e52824e74234893cf0d8f",
     "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
@@ -34,6 +34,7 @@
     "model_dispatch.py": "500b4276a1deabf7b7711aa5dcc739a3d9d0ee07a8d5c7d21d63d43404ca84df",
     "siwc_protocol.py": "73cbad57e87eb94add77e8d1e098776dc974f2a89e5b4e3eac7d42ea943f8d00",
     "openclaw_runtime.py": "cee288eee33412966b7c5228b8dc93689df5dd82d24bc37d61808191b4203804",
-    "openclaw_auth.mjs": "40f583647563aabad3e0130ea4b6ba7c18a007d79ec63b8cb4d66c3ebabbd8ac"
+    "openclaw_auth.mjs": "40f583647563aabad3e0130ea4b6ba7c18a007d79ec63b8cb4d66c3ebabbd8ac",
+    "autonomy_inputs.py": "5f138390ac4014f6d99c9d4da2e2dbef95fc0804edaaabf7785ce96b9b2da0a9"
   }
 }
