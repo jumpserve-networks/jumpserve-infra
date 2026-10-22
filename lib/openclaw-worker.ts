@@ -18,6 +18,7 @@ export class OpenClawWorker extends Construct {
     const manifest=JSON.parse(fs.readFileSync(path.join(__dirname,'..','research-workflow-runtime.json'),'utf8'));
     for(const [name,sha] of Object.entries(manifest.files))if(createHash('sha256').update(fs.readFileSync(path.join(props.runtime,name))).digest('hex')!==sha)throw new Error('OpenClaw controller bytes differ from the declared runtime.');
     const lock=JSON.parse(fs.readFileSync(path.join(__dirname,'..','openclaw-worker-runtime.json'),'utf8'));
+    if(!/^ami-[a-f0-9]{17}$/.test(lock.worker_ami_id))throw new Error('Pinned worker AMI required; a latest-image lookup can replace the authorized host.');
     for(const [name,sha] of Object.entries(lock.files)) {
       if(name.includes('..')||path.isAbsolute(name)||createHash('sha256').update(fs.readFileSync(path.join(directory,name))).digest('hex')!==sha)throw new Error('Pinned OpenClaw worker inputs differ. Run prepare-openclaw-worker.py.');
     }
@@ -47,7 +48,7 @@ export class OpenClawWorker extends Construct {
       'install -m 644 /opt/jumpserve/dependencies/jumpserve-openclaw.service /etc/systemd/system/jumpserve-openclaw.service',
       'systemctl daemon-reload','systemctl enable --now jumpserve-openclaw.service'
     );
-    this.instance=new ec2.Instance(this,'Host',{vpc:props.vpc,vpcSubnets:{subnetType:ec2.SubnetType.PUBLIC},instanceType:new ec2.InstanceType('t3.medium'),machineImage:ec2.MachineImage.latestAmazonLinux2023(),role,securityGroup:sg,requireImdsv2:true,associatePublicIpAddress:true,userData,userDataCausesReplacement:false,blockDevices:[{deviceName:'/dev/xvda',volume:ec2.BlockDeviceVolume.ebs(24,{encrypted:true,deleteOnTermination:false,volumeType:ec2.EbsDeviceVolumeType.GP3})}]});
+    this.instance=new ec2.Instance(this,'Host',{vpc:props.vpc,vpcSubnets:{subnetType:ec2.SubnetType.PUBLIC},instanceType:new ec2.InstanceType('t3.medium'),machineImage:ec2.MachineImage.genericLinux({'us-east-1':lock.worker_ami_id}),role,securityGroup:sg,requireImdsv2:true,associatePublicIpAddress:true,userData,userDataCausesReplacement:false,blockDevices:[{deviceName:'/dev/xvda',volume:ec2.BlockDeviceVolume.ebs(24,{encrypted:true,deleteOnTermination:false,volumeType:ec2.EbsDeviceVolumeType.GP3})}]});
     cdk.Tags.of(this.instance).add('Purpose','JumpServe OpenClaw subscription inference');
     new cdk.CfnOutput(cdk.Stack.of(this),'OpenClawWorkerInstanceId',{value:this.instance.instanceId,description:'Private SSM-managed lab worker; ChatGPT grant stays on its encrypted host.'});
     new cdk.CfnOutput(cdk.Stack.of(this),'OpenClawRuntimeBucket',{value:runtime.s3BucketName});

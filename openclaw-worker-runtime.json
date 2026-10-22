@@ -1,5 +1,6 @@
 {
-  "version": 1,
+  "version": 2,
+  "worker_ami_id": "ami-0636d90d6337ae368",
   "node": "24.16.0",
   "openclaw": "2026.10.5",
   "model": "gpt-6.1-sol",

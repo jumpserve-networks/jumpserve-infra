@@ -1,0 +1,10 @@
+{
+ "version":"planning-context-release-amendment-v2",
+ "amends":"planning-context-release-protocol-v1",
+ "finding":"The unexecuted host change set planning-context-runtime-35 reported Replacement=True. Its detail identified ImageId, despite the human-readable CDK diff showing only UserData and IAM changes. The deployment-time latest AL2023 SSM lookup had drifted.",
+ "verified_existing_host":{"instance_id":"i-087f1493809643115","ami_id":"ami-0636d90d6337ae368","root_device_type":"ebs"},
+ "correction":"Pin the verified installed AMI in the versioned worker runtime lock and remove the latest-image lookup. Preserve existing instance identity, encrypted retained state and host-specific ChatGPT authorization. Add the image assertion to the existing infrastructure security regression.",
+ "gate":"Do not execute the original replacement change set. Review a newly prepared change set; proceed only if the EC2 resource is not replaced. If CloudFormation cannot establish this, retain the current host and update only its exact runtime asset through SSM with a narrowly scoped asset-read policy. No API/model permissions are broadened.",
+ "scope":"Infrastructure deployment correction only; backend source and published prompt remain unchanged. Local native evaluation and scientific scope are unchanged. Keep autonomous admission held until verification and activation.",
+ "reviewer":{"identity":"Primary Codex AI implementer","type":"AI","independent":false}
+}
