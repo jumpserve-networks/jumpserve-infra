@@ -11,5 +11,7 @@ test('private OpenClaw worker has no ingress, no model billing fallback permissi
  const t=Template.fromStack(stack);t.hasResourceProperties('AWS::EC2::Instance',{ImageId:'ami-0636d90d6337ae368',InstanceType:'t3.medium',BlockDeviceMappings:[{DeviceName:'/dev/xvda',Ebs:{VolumeSize:24,Encrypted:true,DeleteOnTermination:false,VolumeType:'gp3'}}]});
  for(const r of Object.values(t.findResources('AWS::EC2::SecurityGroup')))expect(r.Properties.SecurityGroupIngress??[]).toEqual([]);
  const policies=JSON.stringify(t.findResources('AWS::IAM::Policy'));expect(policies).toContain('secretsmanager:GetSecretValue');
+ const instance=Object.values(t.findResources('AWS::EC2::Instance'))[0] as {Properties:{UserData:unknown}};
+ expect(JSON.stringify(instance.Properties.UserData)).toContain('6ac384f7cb73f9acae510bfca5eda0e6abaacdf581e4cdb5914122416eecac59.zip');
  for(const permission of ['bedrock:','ec2:RunInstances','lambda:InvokeFunction'])expect(policies).not.toContain(permission);
 });

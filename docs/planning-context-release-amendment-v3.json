@@ -1,0 +1,9 @@
+{
+ "version":"planning-context-release-amendment-v3",
+ "amends":"planning-context-release-amendment-v2",
+ "observation":"The pinned-image change set removed ImageId replacement, but UserData still reported Conditional recreation. Neither prepared host change set was executed.",
+ "correction":"Retain the original bootstrap runtime object in the versioned worker lock, keeping bootstrap UserData stable. Current runtime assets remain explicit stack outputs and are applied by the existing drained SSM host-update procedure, with backup and hash verification. Grant read access only to the original bootstrap, current runtime and existing dependency objects.",
+ "gate":"Inspect another prepared change set and require no EC2-instance change. Preserve the existing instance ID and grant. For a future new host, bootstrap has no subscription grant; apply and verify the current runtime before authorization/admission. Do not treat bootstrap as current deployed controller provenance.",
+ "runtime":"The current production runtime remains candidate 35, backend 9d105d67510d872fd48acccb2d5f3345d64f64bc; the retained bootstrap object is not this release's evaluated implementation.",
+ "reviewer":{"identity":"Primary Codex AI implementer","type":"AI","independent":false}
+}

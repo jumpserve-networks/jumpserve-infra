@@ -1,6 +1,7 @@
 {
   "version": 2,
   "worker_ami_id": "ami-0636d90d6337ae368",
+  "bootstrap_runtime_object": "6ac384f7cb73f9acae510bfca5eda0e6abaacdf581e4cdb5914122416eecac59.zip",
   "node": "24.16.0",
   "openclaw": "2026.10.5",
   "model": "gpt-6.1-sol",

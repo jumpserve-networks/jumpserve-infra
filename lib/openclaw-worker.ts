@@ -19,6 +19,7 @@ export class OpenClawWorker extends Construct {
     for(const [name,sha] of Object.entries(manifest.files))if(createHash('sha256').update(fs.readFileSync(path.join(props.runtime,name))).digest('hex')!==sha)throw new Error('OpenClaw controller bytes differ from the declared runtime.');
     const lock=JSON.parse(fs.readFileSync(path.join(__dirname,'..','openclaw-worker-runtime.json'),'utf8'));
     if(!/^ami-[a-f0-9]{17}$/.test(lock.worker_ami_id))throw new Error('Pinned worker AMI required; a latest-image lookup can replace the authorized host.');
+    if(!/^[a-f0-9]{64}\.zip$/.test(lock.bootstrap_runtime_object))throw new Error('Retain the original bootstrap runtime object; current runtime updates use the explicit SSM deployment.');
     for(const [name,sha] of Object.entries(lock.files)) {
       if(name.includes('..')||path.isAbsolute(name)||createHash('sha256').update(fs.readFileSync(path.join(directory,name))).digest('hex')!==sha)throw new Error('Pinned OpenClaw worker inputs differ. Run prepare-openclaw-worker.py.');
     }
@@ -26,7 +27,7 @@ export class OpenClawWorker extends Construct {
     const runtime=new assets.Asset(this,'Runtime',{path:props.runtime});
     const role=new iam.Role(this,'Role',{assumedBy:new iam.ServicePrincipal('ec2.amazonaws.com'),managedPolicies:[iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonSSMManagedInstanceCore')]});
     props.secret.grantRead(role);
-    role.addToPolicy(new iam.PolicyStatement({actions:['s3:GetObject'],resources:[dependencies.bucket.arnForObjects(dependencies.s3ObjectKey),runtime.bucket.arnForObjects(runtime.s3ObjectKey)]}));
+    role.addToPolicy(new iam.PolicyStatement({actions:['s3:GetObject'],resources:[dependencies.bucket.arnForObjects(dependencies.s3ObjectKey),runtime.bucket.arnForObjects(runtime.s3ObjectKey),runtime.bucket.arnForObjects(lock.bootstrap_runtime_object)]}));
     const sg=new ec2.SecurityGroup(this,'Network',{vpc:props.vpc,description:'OpenClaw private worker; SSM only, no ingress',allowAllOutbound:false});
     sg.addEgressRule(ec2.Peer.anyIpv4(),ec2.Port.tcp(443),'Pinned software, OAuth, provider and private persistence over HTTPS');
     sg.addEgressRule(ec2.Peer.anyIpv4(),ec2.Port.tcp(80),'Signed Amazon Linux package repositories');
@@ -38,7 +39,10 @@ export class OpenClawWorker extends Construct {
       'useradd --system --create-home --home-dir /var/lib/jumpserve-openclaw jumpserve || true',
       'mkdir -p /opt/jumpserve/runtime /opt/jumpserve/dependencies /var/lib/jumpserve-openclaw/auth /var/lib/jumpserve-openclaw/spool',
       `aws s3 cp s3://${dependencies.s3BucketName}/${dependencies.s3ObjectKey} /opt/jumpserve/dependencies.zip --region us-east-1`,
-      `aws s3 cp s3://${runtime.s3BucketName}/${runtime.s3ObjectKey} /opt/jumpserve/runtime.zip --region us-east-1`,
+      // Bootstrap stays byte-stable across controller releases. A new host has
+      // no subscription grant; operators apply and hash-check the current
+      // output asset through host-update before authorizing/admitting work.
+      `aws s3 cp s3://${runtime.s3BucketName}/${lock.bootstrap_runtime_object} /opt/jumpserve/runtime.zip --region us-east-1`,
       'unzip -q /opt/jumpserve/dependencies.zip -d /opt/jumpserve/dependencies',
       'unzip -q /opt/jumpserve/runtime.zip -d /opt/jumpserve/runtime',
       'bash /opt/jumpserve/dependencies/install.sh',
