@@ -1,0 +1,99 @@
+{
+  "version": "planning-context-release-live-reviewed-v1",
+  "protocol": "planning-context-release-protocol-v1",
+  "passed": true,
+  "report": ".test-artifacts/research-ideas/database/20261022T132057570953Z/planning-live-report.json",
+  "report_sha256": "e58fe7366d39b5c6d9a07eb9e0049f91f8a4bb973a6b4923cfa963777de60daa",
+  "frozen_input_sha256": "7f52219cb3b463f99673ead542b36e59d59ecbf5bd11fb8e4f2e63a9a4dc06b4",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "human_review": false,
+  "raw_parsed_answers_reviewed": true,
+  "original_transport_bytes_retained_but_not_fully_substantively_reviewed": true,
+  "model": {
+    "runtime": "openclaw-production-v1",
+    "model_id": "gpt-6.1-sol",
+    "prompt_id": "6117e5c5-84ce-5c31-aaa7-0d1d3522e62e",
+    "prompt_sha256": "e66038798c413151b47b9c00d7f2e70802ea330168989ee6967ce568b7dafd36",
+    "actual_calls": 4,
+    "usage": {
+      "inputTokens": 33173,
+      "outputTokens": 1570,
+      "totalTokens": 34743
+    },
+    "paid_fallback": false,
+    "measured_charges_usd": null,
+    "subscription_allocation_usd": null
+  },
+  "checks": {
+    "original_quote_and_methods_preserved": true,
+    "fixed_complete_output_inventory": true,
+    "truthful_executor_configuration": true,
+    "actual_fresh_reviews": 2,
+    "fresh_reviews_receive_primary_source_without_ai_verdicts": true,
+    "actual_local_tcp_invocations": 1,
+    "recorded_measurements": 4,
+    "received_bytes": [
+      256,
+      256
+    ],
+    "diagnostic_rtt_ms": [
+      4.671458,
+      4.624833
+    ],
+    "statistical_scope": "Descriptive per-exchange values; shared connection/host; no inferential interval",
+    "raw_prompt_response_and_executor_hashes_verified": true,
+    "valid_unexpected_counts_preserved": true,
+    "missing_values_not_imputed": true,
+    "academic_assessments_created": 0
+  },
+  "failed_preflights": [
+    {
+      "report": ".test-artifacts/research-ideas/database/20261022T010030599397Z/planning-live-report.json",
+      "sha256": "4c86d6d7099be88de8afe876e2e8c7d9c0ccbf1331de265a10c0eb70deb6f27e",
+      "actual_model_calls": 0,
+      "reason": "Native ChatGPT authorization needs sign-in; no fallback."
+    },
+    {
+      "report": ".test-artifacts/research-ideas/database/20261022T130031027835Z/planning-live-report.json",
+      "sha256": "ebf1159d8b6d452c7652705f2182bc7ed3d4e44341c2e55a0313d205a990cc32",
+      "actual_model_calls": 0,
+      "reason": "Command '['/Users/Shared/allstar/jumpserve-back-end/experiments/openclaw_pilot/runtime/node_modules/node/bin/node', '/Users/Shared/allstar/jumpserve-back-end/research_workflow/openclaw_auth.mjs', '/Users/Shared/allstar/jumpserve-back-end/experiments/openclaw_pilot/.subscription-auth/state/openclaw.sqlite', '/Users/Shared/allstar/jumpserve-back-end/experiments/openclaw_pilot/runtime/node_modules/openclaw/dist/extensions/openai/token-sharing-oauth.runtime.js']' timed out after 20 seconds"
+    },
+    {
+      "report": ".test-artifacts/research-ideas/database/20261022T131855240749Z/planning-live-report.json",
+      "sha256": "7dfc71d82b82d57bba158eb7c992e684c763223f99ed0d3e3459e2eb2f87e48c",
+      "actual_model_calls": 0,
+      "reason": "psql: error: connection to server at \"127.0.0.1\", port 54477 failed: Connection refused\n\tIs the server running on that host and accepting TCP/IP connections?"
+    },
+    {
+      "report": ".test-artifacts/research-ideas/database/20261022T131944181853Z/planning-live-report.json",
+      "sha256": "787f1285308b5c8cde51cac7efe779c4931e8fab0a245468f2b6bc8cb60e6032",
+      "actual_model_calls": 0,
+      "reason": "Renew local source lock before testing changed implementation: autonomy.py"
+    },
+    {
+      "report": ".test-artifacts/research-ideas/database/20261022T132027467046Z/planning-live-report.json",
+      "sha256": "de3a94d4ac9e4f3328f2a3186aa925d4026e5758583d91c7ea3229fe63f945e9",
+      "actual_model_calls": 0,
+      "reason": "ERROR:  Exact frozen input, actual answer and integration provenance required\nCONTEXT:  PL/pgSQL function public.publish_agent_prompt_before_autonomy_v8_criteria(uuid,uuid,text,jsonb,text,text) line 14 at RAISE\nPL/pgSQL function public.publish_agent_prompt_before_autonomy_completion(uuid,uuid,text,jsonb,text,text) line 11 at RETURN\nPL/pgSQL function public.publish_agent_prompt(uuid,uuid,text,jsonb,text,text) line 28 at RETURN"
+    }
+  ],
+  "prior_fourteen_calls_preserved": true,
+  "limitations": [
+    "Exposed synthetic software control, not independent scientific validation",
+    "Actual native AI and real local TCP with isolated PostgreSQL persistence; Google owner, source origin, Storage and AWS transport remain fixtures",
+    "No production authenticated launch or actual AWS executor call in this predeployment campaign",
+    "No BBRv3 experiment or complete source review demonstrated"
+  ],
+  "judgments": [
+    "Discovery extracts the exact specified narrow quote without adding assumptions.",
+    "Planning preserves 256-byte payload, two exchanges and 3 ms application delay. Both mandatory outputs have correct units and four-observation budget. Counts below expected success remain valid.",
+    "Both actual fresh AI reviewers accept the exact prospective protocol within its stated scope. Their shared model/inputs do not establish independent scientific review.",
+    "Actual executor and persisted rows have two complete byte counts and two nonnegative RTTs; timing is diagnostic without an invented 3-ms threshold.",
+    "No scientific verdict is manufactured and the local control is cancelled after its one measured run."
+  ]
+}

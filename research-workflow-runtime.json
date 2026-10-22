@@ -1,8 +1,8 @@
 {
   "version": 35,
-  "source_revision": "8bf4fc2f90e7b1cdb568863aa89049a42083b531",
+  "source_revision": "9d105d67510d872fd48acccb2d5f3345d64f64bc",
   "base_source_revision": "a2db37f29231ee924dc2e825bc51df4ebb1b3f1d",
-  "revision_status": "Local committed planning-context candidate on fix/autonomy-planning-context; production remains runtime 34. Native end-to-end execution remains a release verification gap. No deployment or prompt publication.",
+  "revision_status": "Merged backend main release candidate. Four-turn actual native AI planning/fresh-review/TCP/persistence check passed under documented software fixtures. Production deployment pending current authorized release.",
   "files": {
     "api.py": "61464dd9fafff725be178dd84602ab33ce3665302838cc4f16d584872d37a2bb",
     "autonomy.py": "4264f2fba267417be2385b8cb9b2c8284a6ce4f4f13cba6a3bc2219b0272d1f9",
