@@ -1,126 +1,210 @@
 {
   "version": "planning-context-production-release-v1",
-  "status": "merged-backend-local-checks-passed-awaiting-aws-sign-in",
-  "authorization": "Current user explicitly requests merge to main and production deployment",
+  "status": "deployed-and-verified",
+  "authorization": "User explicitly requested merge to main and production deployment; AWS sign-in completed",
   "backend_revision": "9d105d67510d872fd48acccb2d5f3345d64f64bc",
   "runtime_version": 35,
-  "frontend_changed": false,
-  "prompt_changed": false,
-  "migrations_required": false,
-  "live_validation": {
-    "version": "planning-context-release-live-reviewed-v1",
-    "protocol": "planning-context-release-protocol-v1",
-    "passed": true,
-    "report": ".test-artifacts/research-ideas/database/20261022T132057570953Z/planning-live-report.json",
-    "report_sha256": "e58fe7366d39b5c6d9a07eb9e0049f91f8a4bb973a6b4923cfa963777de60daa",
-    "frozen_input_sha256": "7f52219cb3b463f99673ead542b36e59d59ecbf5bd11fb8e4f2e63a9a4dc06b4",
-    "reviewer": {
-      "identity": "Primary Codex AI implementer",
-      "type": "AI",
-      "independent": false
-    },
-    "human_review": false,
-    "raw_parsed_answers_reviewed": true,
-    "original_transport_bytes_retained_but_not_fully_substantively_reviewed": true,
-    "model": {
-      "runtime": "openclaw-production-v1",
-      "model_id": "gpt-6.1-sol",
-      "prompt_id": "6117e5c5-84ce-5c31-aaa7-0d1d3522e62e",
-      "prompt_sha256": "e66038798c413151b47b9c00d7f2e70802ea330168989ee6967ce568b7dafd36",
-      "actual_calls": 4,
-      "usage": {
-        "inputTokens": 33173,
-        "outputTokens": 1570,
-        "totalTokens": 34743
-      },
-      "paid_fallback": false,
-      "measured_charges_usd": null,
-      "subscription_allocation_usd": null
-    },
-    "checks": {
-      "original_quote_and_methods_preserved": true,
-      "fixed_complete_output_inventory": true,
-      "truthful_executor_configuration": true,
-      "actual_fresh_reviews": 2,
-      "fresh_reviews_receive_primary_source_without_ai_verdicts": true,
-      "actual_local_tcp_invocations": 1,
-      "recorded_measurements": 4,
-      "received_bytes": [
-        256,
-        256
-      ],
-      "diagnostic_rtt_ms": [
-        4.671458,
-        4.624833
-      ],
-      "statistical_scope": "Descriptive per-exchange values; shared connection/host; no inferential interval",
-      "raw_prompt_response_and_executor_hashes_verified": true,
-      "valid_unexpected_counts_preserved": true,
-      "missing_values_not_imputed": true,
-      "academic_assessments_created": 0
-    },
-    "failed_preflights": [
-      {
-        "report": ".test-artifacts/research-ideas/database/20261022T010030599397Z/planning-live-report.json",
-        "sha256": "4c86d6d7099be88de8afe876e2e8c7d9c0ccbf1331de265a10c0eb70deb6f27e",
-        "actual_model_calls": 0,
-        "reason": "Native ChatGPT authorization needs sign-in; no fallback."
-      },
-      {
-        "report": ".test-artifacts/research-ideas/database/20261022T130031027835Z/planning-live-report.json",
-        "sha256": "ebf1159d8b6d452c7652705f2182bc7ed3d4e44341c2e55a0313d205a990cc32",
-        "actual_model_calls": 0,
-        "reason": "Command '['/Users/Shared/allstar/jumpserve-back-end/experiments/openclaw_pilot/runtime/node_modules/node/bin/node', '/Users/Shared/allstar/jumpserve-back-end/research_workflow/openclaw_auth.mjs', '/Users/Shared/allstar/jumpserve-back-end/experiments/openclaw_pilot/.subscription-auth/state/openclaw.sqlite', '/Users/Shared/allstar/jumpserve-back-end/experiments/openclaw_pilot/runtime/node_modules/openclaw/dist/extensions/openai/token-sharing-oauth.runtime.js']' timed out after 20 seconds"
-      },
-      {
-        "report": ".test-artifacts/research-ideas/database/20261022T131855240749Z/planning-live-report.json",
-        "sha256": "7dfc71d82b82d57bba158eb7c992e684c763223f99ed0d3e3459e2eb2f87e48c",
-        "actual_model_calls": 0,
-        "reason": "psql: error: connection to server at \"127.0.0.1\", port 54477 failed: Connection refused\n\tIs the server running on that host and accepting TCP/IP connections?"
-      },
-      {
-        "report": ".test-artifacts/research-ideas/database/20261022T131944181853Z/planning-live-report.json",
-        "sha256": "787f1285308b5c8cde51cac7efe779c4931e8fab0a245468f2b6bc8cb60e6032",
-        "actual_model_calls": 0,
-        "reason": "Renew local source lock before testing changed implementation: autonomy.py"
-      },
-      {
-        "report": ".test-artifacts/research-ideas/database/20261022T132027467046Z/planning-live-report.json",
-        "sha256": "de3a94d4ac9e4f3328f2a3186aa925d4026e5758583d91c7ea3229fe63f945e9",
-        "actual_model_calls": 0,
-        "reason": "ERROR:  Exact frozen input, actual answer and integration provenance required\nCONTEXT:  PL/pgSQL function public.publish_agent_prompt_before_autonomy_v8_criteria(uuid,uuid,text,jsonb,text,text) line 14 at RAISE\nPL/pgSQL function public.publish_agent_prompt_before_autonomy_completion(uuid,uuid,text,jsonb,text,text) line 11 at RETURN\nPL/pgSQL function public.publish_agent_prompt(uuid,uuid,text,jsonb,text,text) line 28 at RETURN"
-      }
-    ],
-    "prior_fourteen_calls_preserved": true,
-    "limitations": [
-      "Exposed synthetic software control, not independent scientific validation",
-      "Actual native AI and real local TCP with isolated PostgreSQL persistence; Google owner, source origin, Storage and AWS transport remain fixtures",
-      "No production authenticated launch or actual AWS executor call in this predeployment campaign",
-      "No BBRv3 experiment or complete source review demonstrated"
-    ],
-    "judgments": [
-      "Discovery extracts the exact specified narrow quote without adding assumptions.",
-      "Planning preserves 256-byte payload, two exchanges and 3 ms application delay. Both mandatory outputs have correct units and four-observation budget. Counts below expected success remain valid.",
-      "Both actual fresh AI reviewers accept the exact prospective protocol within its stated scope. Their shared model/inputs do not establish independent scientific review.",
-      "Actual executor and persisted rows have two complete byte counts and two nonnegative RTTs; timing is diagnostic without an invented 3-ms threshold.",
-      "No scientific verdict is manufactured and the local control is cancelled after its one measured run."
-    ]
+  "production_url": "https://jumpserve.quaint-lab.org",
+  "frontend": {
+    "changed": false,
+    "revision": "823138b5f5f8af904fcf5f5c6b72158d54aa44e3",
+    "amplify_job": "119",
+    "status": "SUCCEED",
+    "note": "Existing frontend already supports this API; no rebuild required"
   },
-  "cancelled_study": "584e6ce7-b104-4f77-aa3a-2a2c0eac0f31 remains cancelled; verify unchanged after release",
+  "prompt": {
+    "changed": false,
+    "id": "6117e5c5-84ce-5c31-aaa7-0d1d3522e62e",
+    "version": "research-autonomy-v10",
+    "sha256": "e66038798c413151b47b9c00d7f2e70802ea330168989ee6967ce568b7dafd36",
+    "new_publication": false
+  },
+  "migrations_required": false,
   "checks": {
     "backend_tests": 198,
     "infrastructure_tests": 95,
     "infrastructure_build": "passed",
     "sql_autonomy_groups": 11,
-    "live_native_calls": 4,
-    "persisted_measurements": 4
+    "predeployment_actual_native_calls": 4,
+    "predeployment_persisted_measurements": 4,
+    "public_production_browser_groups": 5,
+    "deployed_source_files_per_function": 32,
+    "verified_functions": 3,
+    "host_source_files": 32,
+    "database_security": "RLS and browser write denial retained; private source/evaluation tables and bucket checked",
+    "paid_model_fallback": false
   },
-  "deployment": null,
-  "remaining": [
-    "AWS sign-in, reverify targets, scoped CDK diffs and deployment",
-    "Verify deployed source hashes, database security, published prompt and worker authorization",
-    "Authenticated production control and browser verification"
+  "release_blockers_remaining": [],
+  "deployment": {
+    "runtime": {
+      "path": ".test-artifacts/openclaw-release/20261022T143836323559Z/receipt.json",
+      "sha256": "f65d2622a1d0665bcc2a07745d76f170f2b89e5c7527c2cba0afbe3232215516"
+    },
+    "activation": {
+      "path": ".test-artifacts/openclaw-release/20261022T144414091912Z/receipt.json",
+      "sha256": "8a738cdd40deea7ca87aee732b5717bd8bc57757cbe4fba87400f7395c91c81b"
+    },
+    "verification": {
+      "path": ".test-artifacts/openclaw-release/20261022T144535218269Z/receipt.json",
+      "sha256": "e0025053d04837f1de0c5184a12d6d817eeb56301e636fcc07a805e747aa9b00"
+    },
+    "host_update": {
+      "path": ".test-artifacts/openclaw-release/20261022T144338250028Z/receipt.json",
+      "sha256": "d5c68e3dea4ed2eb7b0c30087ddfc40a203341e94f8ae31d2aeb29bf00da05ee"
+    },
+    "host_hash_and_authorization": {
+      "path": ".test-artifacts/openclaw-release/20261022T144412937370Z/receipt.json",
+      "sha256": "7f7207068dcc8f438861357436147349e3fec5a2add8c3be6f2234066b83b175"
+    },
+    "host_instance_preserved": "i-087f1493809643115",
+    "host_ami_preserved": "ami-0636d90d6337ae368",
+    "host_change_set": {
+      "path": ".test-artifacts/planning-context-release/host-change-set-stable.json",
+      "sha256": "adffe19e16d4d7a04557e2766477ee787e72bf369a94fce0be5d2d8106d9ae14"
+    },
+    "rejected_unexecuted_change_sets": [
+      {
+        "path": ".test-artifacts/planning-context-release/host-change-set.json",
+        "sha256": "fd9181c12655f65d688645e31b7240a7429d0744d63ce8e51cdc7ff64330582c"
+      },
+      {
+        "path": ".test-artifacts/planning-context-release/host-change-set-pinned.json",
+        "sha256": "955c6e7ad3079f4de0308f3d02e52e91b8975003036876b99c2922eff507417f"
+      }
+    ],
+    "benchmark_parameters_and_active_image": "Verified unchanged by scoped deployment comparator"
+  },
+  "authenticated_control": {
+    "study_id": "2c80d382-f8a4-453c-8691-adfa3bcb5970",
+    "url": "https://jumpserve.quaint-lab.org/research-verification/experiment-queue?study=2c80d382-f8a4-453c-8691-adfa3bcb5970",
+    "classification": "Exposed synthetic software release control; no academic finding",
+    "legitimate_google_session": true,
+    "actual_browser_form_submit": true,
+    "pdf_sha256": "8069a701e935332d20925cfa166c494299de245a4efddeeae582b25818fedd7f",
+    "file_input_method": "Generated exact declared PDF in browser memory after MCP filesystem upload denial; no denied path read, no authentication modification",
+    "actual_native_turns": 4,
+    "actual_fresh_ai_reviews": 2,
+    "actual_aws_tcp_invocations": 1,
+    "persisted_measurements": 4,
+    "received_bytes": [
+      256,
+      256
+    ],
+    "diagnostic_rtt_ms": [
+      "3.291365",
+      "3.830205"
+    ],
+    "original_artifacts_hashed": 41,
+    "study_status": "cancelled at declared first measured-run endpoint",
+    "no_additional_model_turn_after_stop": true,
+    "academic_assessments_created": 0,
+    "conservative_commitments_cents": 931,
+    "commitments_are_measured_charges": false,
+    "model_usage": {
+      "inputTokens": 33947,
+      "outputTokens": 1235,
+      "totalTokens": 35182
+    },
+    "private_archive": {
+      "bucket": "research-workflow-raw",
+      "path": "release-verification/planning-context-production-control/2c80d382-f8a4-453c-8691-adfa3bcb5970/75703d63a2ed1722eb11d79acb250e389c9a68f36454c24c80612a59f042b4fb.zip",
+      "sha256": "75703d63a2ed1722eb11d79acb250e389c9a68f36454c24c80612a59f042b4fb",
+      "retrieved_sha256": "75703d63a2ed1722eb11d79acb250e389c9a68f36454c24c80612a59f042b4fb",
+      "byte_count": 449195,
+      "original_file_count": 45,
+      "private": true
+    },
+    "snapshot_and_original_report": {
+      "path": ".test-artifacts/openclaw-study-verification/20261022T145544001991Z/report.json",
+      "sha256": "7ff03af0e9cdb685bc55ef69dc32d3bb0065f2210bc6136b22d8e0aec411b02d"
+    },
+    "independent_arithmetic_check": {
+      "path": "docs/planning-context-production-measurement-check-v1.json",
+      "sha256": "8b32c7826398860bf433c972d342ce86209c2e272905cd7253ff591fa599c3db"
+    },
+    "earlier_metadata_archive_preserved": {
+      "bucket": "research-workflow-raw",
+      "path": "release-verification/planning-context-production-control/2c80d382-f8a4-453c-8691-adfa3bcb5970/4147d2be4f8b6349983f508deb7ab3ca2396bd11ff5022bd53538f0b45449fcd.zip",
+      "sha256": "4147d2be4f8b6349983f508deb7ab3ca2396bd11ff5022bd53538f0b45449fcd",
+      "retrieved_sha256": "4147d2be4f8b6349983f508deb7ab3ca2396bd11ff5022bd53538f0b45449fcd",
+      "byte_count": 445815,
+      "original_file_count": 44,
+      "private": true
+    },
+    "complete_relational_counts": {
+      "sources": 1,
+      "published_values": 0,
+      "configurations": 1,
+      "protocols": 1,
+      "campaigns": 1,
+      "claim_checks": 1,
+      "summaries": 2,
+      "reviews": 0,
+      "gaps": 0
+    },
+    "all_originals_and_relational_records_archived": true
+  },
+  "cancelled_original_study": {
+    "id": "584e6ce7-b104-4f77-aa3a-2a2c0eac0f31",
+    "status": "cancelled",
+    "committed_cents": 8695,
+    "running_turns": 0,
+    "resumed": false,
+    "final_verification": {
+      "path": ".test-artifacts/planning-context-release/20261022T145335095847Z/receipt.json",
+      "sha256": "0ee590a7f8e7dfb2b6219c428a6bf41b1577130085e11d5a6eefee192f44ef67"
+    }
+  },
+  "evidence": {
+    "predeployment_live_review": {
+      "path": "docs/planning-context-release-live-reviewed-v1.json",
+      "sha256": "f894349e42ce39718124256d33b123f03bf86c44e758e85c4a4de5bb7119dc94"
+    },
+    "public_browser": {
+      "path": ".test-artifacts/openclaw-browser/2026-10-22T14-45-43.510Z/report.json",
+      "sha256": "49320799c22e26a0093b2b28056c87b99e713feb80e27305a614777dfb1b8073"
+    },
+    "authenticated_browser": {
+      "path": ".test-artifacts/planning-context-production-browser/layouts-and-themes.json",
+      "sha256": "fddbe2c4a5a853f378ca9452e87ce409d2077906e431814cacb4394d3543cfa3"
+    },
+    "prior_failed_evaluations": "All fourteen earlier calls, original protocols, failed expectations and five zero-call release preflights preserved; no retroactive relabeling",
+    "local_live_review": "e58fe7366d39b5c6d9a07eb9e0049f91f8a4bb973a6b4923cfa963777de60daa"
+  },
+  "scientific_scope": {
+    "claims_resolved_by_release": 0,
+    "limitations": [
+      "Real host-local TCP and actual production persistence only; no Internet, CDN, BBRv3 or physical-network generalization",
+      "Source passage delivery is not full substantive review of figures, equations, tables or supplements",
+      "Two exchanges share a single host, connection and run; RTT values are descriptive, not confidence intervals",
+      "Existing paper assessments and cancelled original study are unchanged",
+      "Other networking runners and unchanged classic ChatPanel requests were not re-exercised in this release"
+    ]
+  },
+  "verification_gaps": [
+    "Browser MCP filesystem transfer/capture was unavailable; exact in-memory PDF and DOM checks were used, with separate public Playwright screenshots",
+    "No independent or human scientific review; actual AI judgments reviewed by the AI implementer"
   ],
-  "scientific_scope": "Software control only; no BBRv3 finding or complete paper/source validation",
-  "updated_at": "2026-10-22T13:25:05.807160+00:00"
+  "costs": {
+    "model_actual_charges_usd": null,
+    "subscription_allocation_usd": null,
+    "storage_actual_charges_usd": null,
+    "compute_actual_charges_usd": null,
+    "meaning": "Commitments are conservative admission reservations. Missing charges and unallocated usage are not zero cost.",
+    "prior_development_native_calls": 14,
+    "predeployment_native_calls": 4,
+    "production_native_calls": 4,
+    "production_available_tokens": {
+      "inputTokens": 33947,
+      "outputTokens": 1235,
+      "totalTokens": 35182
+    }
+  },
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false,
+    "human_review": false
+  },
+  "updated_at": "2026-10-22T14:56:48.904286+00:00"
 }

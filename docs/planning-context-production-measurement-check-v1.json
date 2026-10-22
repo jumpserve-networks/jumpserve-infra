@@ -1,0 +1,30 @@
+{
+  "version": "planning-context-production-measurement-check-v1",
+  "status": "passed",
+  "snapshot_sha256": "a68b02c37a0984bba7d4afc4805d8d4584df0790762f97d63760217d58ba56cf",
+  "source_sha256": "8069a701e935332d20925cfa166c494299de245a4efddeeae582b25818fedd7f",
+  "original_executor_sha256": "b5a73b6d77e0d2b8f66a5ef65a785ba1d3046ac63a049eb2212477fdafd82790",
+  "original_artifacts_hashed": 41,
+  "turns": 4,
+  "actual_fresh_ai_reviews": 2,
+  "executions": 1,
+  "measurements": 4,
+  "received_bytes": [
+    256,
+    256
+  ],
+  "rtt_ms": [
+    "3.291365",
+    "3.830205"
+  ],
+  "committed_cents": 931,
+  "actual_charges_usd": null,
+  "academic_assessments": 0,
+  "method": "Standard-library JSON/Decimal, hash and exact matched-identity checks, without application parsers or numeric finding code. Shared original inputs and AI implementer; not independent scientific validation.",
+  "uncertainty": "Two exchanges share a single host/run/connection; descriptive values only, no inferential interval.",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  }
+}

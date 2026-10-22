@@ -15,6 +15,7 @@ def main():
   if not (old or planning):raise ValueError('Only an exact declared production PDF software control is allowed')
   if planning:report['protocol']='planning-context-production-control-protocol-v1'
   kinds=('autonomy_workflows','autonomy_tasks','autonomy_turns','autonomy_events','model_dispatches','queue_jobs','runs','measurements','assessments','artifacts','claims')
+  if planning:kinds+=('sources','published_values','configurations','protocols','campaigns','claim_checks','summaries','reviews','gaps')
   data={}
   for kind in kinds:
    projection="to_jsonb(t)||jsonb_build_object('value',t.value::text)" if kind=='measurements' else 'to_jsonb(t)'
@@ -57,13 +58,14 @@ def main():
       if total>64000000:raise ValueError('Original archive exceeds 64 MB uncompressed; preserve this snapshot before amending')
       z.writestr('artifacts/'+artifact['sha256'],original);seen.add(artifact['sha256'])
      manifest.append(dict(id=artifact['id'],sha256=sha(original),byte_count=len(original)))
-    for image in sorted((ROOT.parent/'jumpserve-front-end/.test-artifacts/openclaw-production-browser').glob('*.png')):
+    browser=ROOT/'.test-artifacts/planning-context-production-browser' if planning else ROOT.parent/'jumpserve-front-end/.test-artifacts/openclaw-production-browser'
+    for image in sorted(browser.glob('*.json' if planning else '*.png')):
      original=image.read_bytes();z.writestr('private-browser/'+image.name,original);manifest.append(dict(kind='private-browser',name=image.name,sha256=sha(original),byte_count=len(original)))
     z.writestr('manifest.json',json.dumps(manifest,indent=2)+'\n')
    original=buffer.getvalue()
    (directory/'private-originals.zip').write_bytes(original);(directory/'private-originals.zip').chmod(0o600)
    if len(original)>32000000:raise ValueError('Private compressed archive exceeds 32 MB; preserve before amending')
-   archive_path='release-verification/openclaw-authenticated-control/'+study+'/'+sha(original)+'.zip';url=base+archive_path
+   archive_path='release-verification/'+('planning-context-production-control/' if planning else 'openclaw-authenticated-control/')+study+'/'+sha(original)+'.zip';url=base+archive_path
    report['archive_candidate']=dict(path=archive_path,sha256=sha(original),byte_count=len(original),artifact_records=len(data['artifacts']),unique_artifacts=len(seen));(directory/'report.json').write_text(json.dumps(report,indent=2)+'\n')
    try:
     with r.prior.guard.OPEN.open(urllib.request.Request(url,data=original,headers=dict(headers,**{'Content-Type':'application/zip','x-upsert':'false'}),method='POST'),timeout=120) as response:response.read(1000)
@@ -74,7 +76,7 @@ def main():
    with r.prior.guard.OPEN.open(urllib.request.Request(url,headers=headers),timeout=60) as response:retrieved=response.read(32000001)
    assert sha(retrieved)==sha(original)
    report['private_archive']=dict(bucket='research-workflow-raw',path=archive_path,sha256=sha(original),retrieved_sha256=sha(retrieved),byte_count=len(original),original_file_count=len(manifest),private=True)
-  report.update(status='verified',scientific_scope='Exposed archived numerical control; running/blocked claims are not complete validation. No new Internet measurement or independent human review.')
+  report.update(status='verified',scientific_scope='Exposed synthetic software control with actual prospective host-local TCP; not academic validation, Internet measurement or independent human review. Snapshot verification is separate from execution_criteria_met.' if planning else 'Exposed archived numerical control; running/blocked claims are not complete validation. No new Internet measurement or independent human review.')
  except Exception as error:report.update(status='failed',reason=str(error));raise
  finally:
   report['ended_at']=r.stamp();(directory/'report.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(dict(directory=str(directory),**{k:v for k,v in report.items() if k not in ('tasks','available_model_usage')}),indent=2))

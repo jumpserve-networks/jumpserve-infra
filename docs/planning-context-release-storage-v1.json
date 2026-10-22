@@ -1,0 +1,42 @@
+{
+  "version": "planning-context-release-storage-v1",
+  "status": "retrieved-and-hash-verified",
+  "release_archive": {
+    "bucket": "research-workflow-raw",
+    "path": "release-verification/planning-context-20261022/bf4baadf68e50bea7a35ab9e7227ffab81e54a8bda56ceefd7fca8c2771dfeac.zip",
+    "sha256": "bf4baadf68e50bea7a35ab9e7227ffab81e54a8bda56ceefd7fca8c2771dfeac",
+    "retrieved_sha256": "bf4baadf68e50bea7a35ab9e7227ffab81e54a8bda56ceefd7fca8c2771dfeac",
+    "bytes": 4058660,
+    "files": 456,
+    "anonymous_status": 400,
+    "measured_storage_charges_usd": null
+  },
+  "database_reports": [
+    {
+      "report_sha256": "0c71c22904b2c280fa02c11d1ae89fefd85d1f826d4c396edef0745898e55780",
+      "retrieved_sha256": "0c71c22904b2c280fa02c11d1ae89fefd85d1f826d4c396edef0745898e55780"
+    }
+  ],
+  "production_archive": {
+    "bucket": "research-workflow-raw",
+    "path": "release-verification/planning-context-production-control/2c80d382-f8a4-453c-8691-adfa3bcb5970/75703d63a2ed1722eb11d79acb250e389c9a68f36454c24c80612a59f042b4fb.zip",
+    "sha256": "75703d63a2ed1722eb11d79acb250e389c9a68f36454c24c80612a59f042b4fb",
+    "retrieved_sha256": "75703d63a2ed1722eb11d79acb250e389c9a68f36454c24c80612a59f042b4fb",
+    "byte_count": 449195,
+    "original_file_count": 45,
+    "private": true
+  },
+  "report_file_sha256": "5c6a6e469b8ef82f68a1062a919e0a215972782343091b8dbfcd041738bb98d3",
+  "current_report_file_sha256": "5c6a6e469b8ef82f68a1062a919e0a215972782343091b8dbfcd041738bb98d3",
+  "reproduction_sources_in_accompanying_git_commit": {
+    "bin/check-planning-control-measurements.py": "d9a34b3c458f20c87f0db80e46553a64849665b8ebdfead96d6a039684f8d305",
+    "bin/openclaw-study-verify.py": "57afa7800bbf40fe426e21bd2a7bafaac49e9bdfbed0fbd2e3acdfd0941074a6",
+    "bin/planning-context-release.py": "07f4ab265b1fa5eb43402b9450eb332cc2e452ad0ef03b66cc5b552538bebda4",
+    "test/check_autonomy_planning_live.py": "b04dd319599529ab5ed4dc2893563fe6e9c458b4076bba7f919fb995e09944d4"
+  },
+  "receipt_path": ".test-artifacts/planning-context-release/20261022T145649057129Z/receipt.json",
+  "receipt_sha256": "099f33b636645d12b9312b9605369877bc15d9a24a0ac7cc2c902dfe0d3ff21b",
+  "prompt_publication_unchanged": true,
+  "credential_files_excluded": true,
+  "measured_storage_charges_usd": null
+}

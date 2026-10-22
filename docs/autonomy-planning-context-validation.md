@@ -1,5 +1,13 @@
 # Source-grounded planning correction
 
+Production update, 2026-10-22: the correction is deployed and verified, including
+an actual authenticated PDF upload, four native AI turns, fresh reviews, one AWS
+TCP execution and four persisted measurements. See the versioned
+[production release record](planning-context-production-release-v1.json) and
+[measurement check](planning-context-production-measurement-check-v1.json).
+The pre-release findings below remain preserved as historical evidence; their
+then-outstanding live verification gap was closed by the new declared campaigns.
+
 Study `584e6ce7-b104-4f77-aa3a-2a2c0eac0f31` was cancelled at
 2026-10-21 23:02:14 UTC, using the existing owner-bound cancellation RPC after
 verifying AWS account `395567831870` and Supabase project

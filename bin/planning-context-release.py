@@ -24,7 +24,7 @@ def archive(directory):
   entries[str(path.relative_to(ROOT))]=raw
  old_manifest=json.loads((ROOT/'docs/autonomy-planning-context-artifacts-v1.json').read_bytes())
  for item in old_manifest['artifacts']:add(ROOT/item['path'],item['sha256'])
- for pattern in ('autonomy-planning-context*','planning-context-release*'):
+ for pattern in ('autonomy-planning-context*','planning-context-release*','planning-context-production*'):
   for path in (ROOT/'docs').glob(pattern):
    if path.is_file():add(path)
  for path in (ROOT/'.test-artifacts/research-ideas/database').glob('*/planning-live-report.json'):
@@ -40,6 +40,11 @@ def archive(directory):
   if path.parent.name>='20261022T143600000000Z' and path.name in ('receipt.json','cdk.log','outputs.json','stack-before.json','stack-after.json','parameter-comparison.json'):add(path)
  for path in (ROOT/'.test-artifacts/planning-context-release').glob('host-*.json'):add(path)
  for path in (ROOT/'.test-artifacts/planning-context-production-browser').glob('*.json'):add(path)
+ for path in (ROOT/'.test-artifacts/openclaw-study-verification').glob('*/report.json'):
+  record=json.loads(path.read_bytes())
+  if record.get('study_id')=='2c80d382-f8a4-453c-8691-adfa3bcb5970':
+   add(path);snapshot=path.parent/'private-snapshot.json'
+   if snapshot.exists():add(snapshot)
  manifest=[dict(path=name,sha256=sha(data),bytes=len(data)) for name,data in sorted(entries.items())];buffer=io.BytesIO()
  with zipfile.ZipFile(buffer,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as z:
   for name,data in sorted(entries.items()):
@@ -62,6 +67,12 @@ def archive(directory):
  if status not in (400,401,403,404):raise RuntimeError('Evidence archive must stay private')
  archive=dict(bucket='research-workflow-raw',path=key,sha256=sha(raw),retrieved_sha256=sha(retrieved),bytes=len(raw),files=len(manifest),anonymous_status=status,measured_storage_charges_usd=None)
  report=dict(version='planning-context-release-evidence-v1',targets=before['targets'],review=review,archive=archive,old_failures_preserved=True,prompt_publication_unchanged=True,kind='Controller software development follow-up; not independent scientific validation or a new prompt evaluation',reviewer=dict(identity='Primary Codex AI implementer',type='AI',independent=False))
+ production=ROOT/'docs/planning-context-production-release-v1.json'
+ if production.exists():
+  actual=json.loads(production.read_bytes())
+  if actual.get('status')=='deployed-and-verified':
+   if actual['backend_revision']!=json.loads((ROOT/'research-workflow-runtime.json').read_bytes())['source_revision']:raise RuntimeError('Verified production source revision differs')
+   report['production_verification']=dict(report_path=str(production.relative_to(ROOT)),report_sha256=sha(production.read_bytes()),authenticated_control=actual['authenticated_control'])
  original=json.dumps(report,sort_keys=True,indent=2)+'\n';digest=sha(original.encode());literal=r.admin.literal
  r.admin.query('insert into agent_prompt_evaluations(prompt_version_id,outcome,report_raw,report_sha256,original_artifacts,recorded_by) values('+','.join([literal('6117e5c5-84ce-5c31-aaa7-0d1d3522e62e')+'::uuid',literal('passed'),literal(original),literal(digest),literal(json.dumps(archive))+'::jsonb',literal('Primary Codex AI implementer; controller integration follow-up; no publication')])+') on conflict(prompt_version_id,report_sha256) do nothing',read_only=False)
  stored=r.admin.query("select report_sha256,encode(sha256(convert_to(report_raw,'UTF8')),'hex') retrieved_sha256 from agent_prompt_evaluations where report_sha256="+literal(digest))
