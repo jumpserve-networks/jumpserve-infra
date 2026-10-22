@@ -1,0 +1,454 @@
+{
+  "version": "paper-queue-title-production-release-v1",
+  "status": "deployed-and-verified",
+  "recorded_at": "2026-10-22T17:07:57.254722+00:00",
+  "backend_revision": "2b67fba72e7a672e6b25a73e9e7b9339a019e32e",
+  "frontend_revision": "46449fc6f6613c26bbb7a164e201264a7e8b81b6",
+  "infrastructure_runtime_pin_revision": "1ec7e09",
+  "runtime_manifest_version": 37,
+  "runtime_manifest_sha256": "4299b9981b8dfe471176953ec2ce9264fbc780df5aa7bfb3db3774ef5f02db1c",
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "amplify": {
+    "summary": {
+      "id": "122",
+      "status": "SUCCEED",
+      "commit": "46449fc6f6613c26bbb7a164e201264a7e8b81b6",
+      "start": "2026-10-22T13:01:55.806000-04:00",
+      "end": "2026-10-22T13:04:43.022000-04:00"
+    },
+    "steps": [
+      {
+        "name": "BUILD",
+        "status": "SUCCEED"
+      },
+      {
+        "name": "DEPLOY",
+        "status": "SUCCEED"
+      },
+      {
+        "name": "VERIFY",
+        "status": "SUCCEED"
+      }
+    ]
+  },
+  "checks": {
+    "backend_tests": 213,
+    "frontend_tests": 204,
+    "infrastructure_jest_tests": 95,
+    "deployment_parameter_guard_tests": 3,
+    "frontend_build": "passed",
+    "infrastructure_build": "passed",
+    "lint_errors": 0,
+    "existing_lint_warning": "auth-button.tsx:153 navigation warning",
+    "development_browser_scenarios": 6,
+    "production_public_views": 4,
+    "production_owner_private_view": "passed with existing legitimate Google session",
+    "anonymous_private_sign_in_return": "passed"
+  },
+  "title_evidence": {
+    "study_id": "e79f5cab-d28f-4cea-bf0c-3407933c8cfd",
+    "expected_title": "Making Congestion Control Algorithms Insensitive to Underlying Propagation Delays",
+    "retained_study_title": "ProxyDelay_Nines_CameraReady",
+    "original_pdf_sha256": "4b87fa5e983cc15f7226eb1f90c23ab745b67ec3c6fd5479dea8ce9b85312804",
+    "text_artifact_id": "48ecb033-7746-5924-89c3-d7271e7d9a32",
+    "text_packet_sha256": "ff2e012ddc34448e0905ac0aa5f320e4bb0457ff51a1e96c589708a1c7f9281e",
+    "text_packet_bytes": 88237,
+    "first_page_front_matter": [
+      "Making Congestion Control Algorithms Insensitive",
+      "to Underlying Propagation Delays",
+      "Cyrus Illick\u2709",
+      "Columbia University, United States"
+    ],
+    "initial_prompt_identity": [
+      {
+        "initial_sha256": "5e3626c28aeb8dd58efbd08c6ae0861623290ca4c51aafea2ce207b09adc77b0"
+      }
+    ],
+    "study_identity_sha256": "c93f4776a7575002d4529d44f861b3258af85d99f51e554ba772d9932bd05ae0",
+    "stored_packet_hash_verified": true,
+    "independent_title_check": "Exact concatenation of first 1\u20134 nonempty lines; no model or production title helper.",
+    "limitation": "Title inspection only, not substantive review or claim verification."
+  },
+  "public_status": {
+    "study_id": "e79f5cab-d28f-4cea-bf0c-3407933c8cfd",
+    "paper_title": "Making Congestion Control Algorithms Insensitive to Underlying Propagation Delays",
+    "public_response_sha256": "13280a6a85bdac9b1bcc5c8b141533efca392d19d8a5de6cd8618a7bf6e4abb1",
+    "response_bytes": 24240,
+    "tasks": 38,
+    "candidate_claims": 37,
+    "jobs": 0,
+    "workflow": [
+      {
+        "status": "budget",
+        "max_spend_cents": 10000,
+        "committed_cents": 10000,
+        "max_attempts": null
+      }
+    ],
+    "database_identity_coverage_matches": true,
+    "private_fields_absent": true,
+    "anonymous_denials": [
+      {
+        "path": "/queue",
+        "method": "GET",
+        "status": 401
+      },
+      {
+        "path": "/studies?mine=1",
+        "method": "GET",
+        "status": 401
+      },
+      {
+        "path": "/studies/e79f5cab-d28f-4cea-bf0c-3407933c8cfd/queue",
+        "method": "GET",
+        "status": 401
+      },
+      {
+        "path": "/studies/e79f5cab-d28f-4cea-bf0c-3407933c8cfd/autonomy",
+        "method": "GET",
+        "status": 401
+      },
+      {
+        "path": "/studies/e79f5cab-d28f-4cea-bf0c-3407933c8cfd/queue-actions",
+        "method": "POST",
+        "status": 401
+      },
+      {
+        "path": "/studies/e79f5cab-d28f-4cea-bf0c-3407933c8cfd/autonomy",
+        "method": "POST",
+        "status": 401
+      }
+    ],
+    "missing_paper_status": 404,
+    "unpublished_idea_denied": true,
+    "limitation": "Separate status/database reads; this paper was stopped and stable during verification. No experiment was restarted."
+  },
+  "deployed_source": {
+    "status": "passed",
+    "backend_revision": "2b67fba72e7a672e6b25a73e9e7b9339a019e32e",
+    "manifest_version": 37,
+    "verified_runtime_files": 33,
+    "original_archives_retrieved": 3,
+    "zip_sha256": "28536a9aeff0464fb6214594d37f01d507cf1103ca5329183ec93ff488a34e9d",
+    "functions": [
+      {
+        "logical_id": "ResearchWorkflowApiE04EBDAC",
+        "zip_code_sha256": "KFNqmu/wRk+2IUWU038B1QfPEQPKUykYPsk/9IijTp0="
+      },
+      {
+        "logical_id": "ResearchWorkflowAutonomyWorker1BCFF82C",
+        "zip_code_sha256": "KFNqmu/wRk+2IUWU038B1QfPEQPKUykYPsk/9IijTp0="
+      },
+      {
+        "logical_id": "ResearchWorkflowPackageExecutor32D08CE2",
+        "zip_code_sha256": "KFNqmu/wRk+2IUWU038B1QfPEQPKUykYPsk/9IijTp0="
+      },
+      {
+        "logical_id": "ResearchWorkflowPackageIngestAA97237D",
+        "zip_code_sha256": "KFNqmu/wRk+2IUWU038B1QfPEQPKUykYPsk/9IijTp0="
+      },
+      {
+        "logical_id": "ResearchWorkflowPackageReaperED8C6D40",
+        "zip_code_sha256": "KFNqmu/wRk+2IUWU038B1QfPEQPKUykYPsk/9IijTp0="
+      },
+      {
+        "logical_id": "ResearchWorkflowQueueWorker702E601D",
+        "zip_code_sha256": "KFNqmu/wRk+2IUWU038B1QfPEQPKUykYPsk/9IijTp0="
+      }
+    ],
+    "prompt_pointers_unchanged": true,
+    "private_bucket": true,
+    "all_source_hashes_verified": true
+  },
+  "original_record_identity": {
+    "preserved": [
+      "study_identity_sha256",
+      "initial_prompt_identity",
+      "original_pdf_sha256",
+      "text_packet_sha256"
+    ],
+    "original_records_unchanged": true,
+    "public_title_matches_verified_first_page": true,
+    "comparison": "Before deployment versus post-deployment public verification; stopped study, read-only checks."
+  },
+  "production_browser": {
+    "version": "paper-queue-title-production-browser-v1",
+    "reviewer": {
+      "identity": "Primary Codex AI implementer",
+      "type": "AI",
+      "independent": false
+    },
+    "checks": [
+      {
+        "time": "2026-10-22T17:06:24.451Z",
+        "url": "https://jumpserve.quaint-lab.org/research-verification/experiment-queue?study=e79f5cab-d28f-4cea-bf0c-3407933c8cfd",
+        "width": 1365,
+        "height": 900,
+        "theme": "light",
+        "anonymous_isolated_context": true,
+        "signed_in": false,
+        "sign_in_available": true,
+        "paper_title": "Making Congestion Control Algorithms Insensitive to Underlying Propagation Delays",
+        "title_matches": true,
+        "filename_visible": false,
+        "horizontal_overflow": false,
+        "title_clipped": false,
+        "task_cards": 38,
+        "private_prompt_controls": 0,
+        "initial_prompt_visible": false,
+        "alerts": [],
+        "only_public_status_API": true
+      },
+      {
+        "time": "2026-10-22T17:06:24.687Z",
+        "url": "https://jumpserve.quaint-lab.org/research-verification/experiment-queue?study=e79f5cab-d28f-4cea-bf0c-3407933c8cfd",
+        "width": 1365,
+        "height": 900,
+        "theme": "dark",
+        "anonymous_isolated_context": true,
+        "signed_in": false,
+        "sign_in_available": true,
+        "paper_title": "Making Congestion Control Algorithms Insensitive to Underlying Propagation Delays",
+        "title_matches": true,
+        "filename_visible": false,
+        "horizontal_overflow": false,
+        "title_clipped": false,
+        "task_cards": 38,
+        "private_prompt_controls": 0,
+        "initial_prompt_visible": false,
+        "alerts": [],
+        "only_public_status_API": true
+      },
+      {
+        "time": "2026-10-22T17:06:53.979Z",
+        "url": "https://jumpserve.quaint-lab.org/research-verification/experiment-queue?study=e79f5cab-d28f-4cea-bf0c-3407933c8cfd",
+        "width": 390,
+        "height": 844,
+        "theme": "light",
+        "anonymous_isolated_context": true,
+        "signed_in": false,
+        "sign_in_available": true,
+        "paper_title": "Making Congestion Control Algorithms Insensitive to Underlying Propagation Delays",
+        "title_matches": true,
+        "filename_visible": false,
+        "horizontal_overflow": false,
+        "title_clipped": false,
+        "task_cards": 38,
+        "private_prompt_controls": 0,
+        "initial_prompt_visible": false,
+        "alerts": [],
+        "only_public_status_API": true
+      },
+      {
+        "time": "2026-10-22T17:06:54.258Z",
+        "url": "https://jumpserve.quaint-lab.org/research-verification/experiment-queue?study=e79f5cab-d28f-4cea-bf0c-3407933c8cfd",
+        "width": 390,
+        "height": 844,
+        "theme": "dark",
+        "anonymous_isolated_context": true,
+        "signed_in": false,
+        "sign_in_available": true,
+        "paper_title": "Making Congestion Control Algorithms Insensitive to Underlying Propagation Delays",
+        "title_matches": true,
+        "filename_visible": false,
+        "horizontal_overflow": false,
+        "title_clipped": false,
+        "task_cards": 38,
+        "private_prompt_controls": 0,
+        "initial_prompt_visible": false,
+        "alerts": [],
+        "only_public_status_API": true
+      }
+    ],
+    "new_model_calls": 0,
+    "new_experiment_launches": 0,
+    "measured_charges_usd": null,
+    "owner_private_view": {
+      "time": "2026-10-22T17:06:02.386Z",
+      "url": "https://jumpserve.quaint-lab.org/research-verification/experiment-queue?study=e79f5cab-d28f-4cea-bf0c-3407933c8cfd&view=private",
+      "legitimate_signed_in_owner": true,
+      "paper_title": "Making Congestion Control Algorithms Insensitive to Underlying Propagation Delays",
+      "title_matches": true,
+      "private_prompt_controls": 38,
+      "initial_prompt_summaries": 1,
+      "alerts": 0,
+      "selected_title_request_seen": true,
+      "queue_read_paths": [
+        "/research/queue?title_study=e79f5cab-d28f-4cea-bf0c-3407933c8cfd"
+      ],
+      "private_prompt_contents_exported": false
+    },
+    "instrumentation_amendments": [
+      {
+        "status": "failed-harness-attempt",
+        "error": "TypeError: Cannot read properties of null (reading '1') while parsing a Chrome tool result during the first mobile check.",
+        "resolution": "Inspect current DOM, explicitly wait for title and sign-in controls after viewport emulation, then rerun remaining mobile assertions.",
+        "limitation": "The original non-JSON tool result was not retained; its underlying cause is unconfirmed. No product code changed."
+      }
+    ],
+    "anonymous_private_return": {
+      "time": "2026-10-22T17:07:14.894Z",
+      "anonymous": true,
+      "login_path": "/login",
+      "next_path": "/research-verification/experiment-queue",
+      "study_preserved": true,
+      "private_view_preserved": true,
+      "private_prompt_controls": 0
+    },
+    "frontend_release": {
+      "amplify_job": 122,
+      "commit": "46449fc6f6613c26bbb7a164e201264a7e8b81b6",
+      "status": "SUCCEED",
+      "checks_performed_after_success": true
+    },
+    "status": "passed",
+    "notes": [
+      "Fresh named isolated browser context; no auth cookies or storage copied.",
+      "Actual production application and APIs; no synthetic responses or experiment launches.",
+      "Viewport screenshots inspected for desktop dark and mobile light; all four viewport/theme combinations passed DOM/title/overflow checks.",
+      "Owner verification used an existing legitimate Google session; no prompt content, tokens or user information exported."
+    ]
+  },
+  "database_security": {
+    "current_catalog_checks": "passed",
+    "private_storage": true,
+    "RLS_and_browser_write_denial_retained": true,
+    "no_migration_performed": true,
+    "original_migration_bytes_reconstructed": false
+  },
+  "parameter_comparison": {
+    "literal_parameters_unchanged": true,
+    "active_benchmark_image": {
+      "function": "JumpServeBenchmarkStack-LaunchBenchmarkFn5833EFAD-L6HWyzv2tgwl",
+      "ami_id": "ami-0808d1157e26c65cb",
+      "mode": "prebaked"
+    },
+    "resolved_lookup_changes": [],
+    "inactive_fallback_only": true
+  },
+  "prompt_pointers_unchanged": true,
+  "scientific_coverage": "Unchanged. This title-display release did not run experiments, resume studies, spend paper budgets or reassess scientific findings. The selected study retains 37 unresolved candidate claims and its existing budget stop.",
+  "conditional_gaps": [
+    "Title extraction accuracy across arbitrary publisher layouts remains unvalidated; ambiguous or missing titles retain the explicit unavailable state.",
+    "No second legitimate Google user session was tested; owner/foreign-owner scope is covered by development regressions. Anonymous and existing owner views were exercised in production.",
+    "No new authenticated AI request or scientific experiment was initiated; those behaviors are outside this display-only release."
+  ],
+  "amendments": [
+    {
+      "kind": "verification environment",
+      "status": "resolved",
+      "finding": "The additional six-function AWS hash check could not connect inside the sandbox; the exact read-only command passed after a scoped elevated retry. Three original deployed archives and public/database checks had already passed before the frontend push."
+    },
+    {
+      "status": "failed-harness-attempt",
+      "error": "TypeError: Cannot read properties of null (reading '1') while parsing a Chrome tool result during the first mobile check.",
+      "resolution": "Inspect current DOM, explicitly wait for title and sign-in controls after viewport emulation, then rerun remaining mobile assertions.",
+      "limitation": "The original non-JSON tool result was not retained; its underlying cause is unconfirmed. No product code changed."
+    }
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "usage": {
+    "new_model_calls_initiated_by_release": 0,
+    "new_experiment_launches": 0,
+    "measured_charges_usd": null,
+    "estimated_charges_usd": null,
+    "unallocated_costs_usd": null,
+    "background_activity": "Existing workers and browser polling are outside release cost attribution. Commitments are not measured charges."
+  },
+  "evidence": [
+    {
+      "path": "docs/paper-queue-title-release-protocol-v1.json",
+      "sha256": "27ce7dbf2339c4032846df6032594e1f78a27ce19e6159440f89a40838cebc0c",
+      "bytes": 3738
+    },
+    {
+      "path": "docs/paper-queue-title-release-review-v1.json",
+      "sha256": "f142d0d451d75c4a6c99ab97914e81ffda6db115a03718465633cc8d43a1b5b1",
+      "bytes": 2266
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/20261022T165804571477Z/receipt.json",
+      "sha256": "5ecd69f6e46071b29d8339671b87a05d2e197716bb4fcfcf25dc530bbef97a20",
+      "bytes": 1831
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/20261022T165825255958Z/receipt.json",
+      "sha256": "f6e83ccbf0f496d862a50e0a04a087f0c996e5183f2042b3271d77483119ee04",
+      "bytes": 2305
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/20261022T165825255958Z/cdk.log",
+      "sha256": "c1943fdf6695f96bec8639d074feca8a6fcf998177ebeb00e6ceaf7c9c3005e3",
+      "bytes": 4824
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/20261022T165915285234Z/receipt.json",
+      "sha256": "dd7f452d2c89ab4a3e8be7d2a2303e2ffe44ff78677de3d336e02816b150a046",
+      "bytes": 2471
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/20261022T165915285234Z/cdk.log",
+      "sha256": "9400904ee404620accfcd21ee7f25c45034becdb0191f11c5ed0ef375211c7a6",
+      "bytes": 7674
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/20261022T165915285234Z/parameter-comparison.json",
+      "sha256": "ce90f5ab69e42789a3cd22f69b73d9700493d743a8cb493975d6ac95e95e2b02",
+      "bytes": 289
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/20261022T170119235058Z/receipt.json",
+      "sha256": "d22dc26bd6c76db2780724fee4cb359122e3b126a8b288f0af70a8f9f3bf63ca",
+      "bytes": 3435
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/20261022T170119235058Z/public-status-original.json",
+      "sha256": "13280a6a85bdac9b1bcc5c8b141533efca392d19d8a5de6cd8618a7bf6e4abb1",
+      "bytes": 24240
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/20261022T170119235058Z/retained-title-text-packet.json",
+      "sha256": "ff2e012ddc34448e0905ac0aa5f320e4bb0457ff51a1e96c589708a1c7f9281e",
+      "bytes": 88237
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/paper-title-deployed-source-summary.json",
+      "sha256": "4ca3d7059aaae9b4c4cea0958eadf07d1c0612a0085e3c06484fe62dc00d7df0",
+      "bytes": 1258
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/paper-title-original-identity-check.json",
+      "sha256": "8f87ea830fe4fb65fdefbcbae5aa1bf240ca4419af0932ab09182298942dac87",
+      "bytes": 341
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/paper-title-pinned-parser-check.json",
+      "sha256": "937012b076d675c492cb5ae8be85cc351c5d1767e706b6e6ccfcc3367c883658",
+      "bytes": 634
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/paper-title-production-browser.json",
+      "sha256": "be2af32c11d92cfe67c7d072e92dba50ba0a591337e7b1475213dc8f9f80a7c0",
+      "bytes": 5383
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/paper-title-amplify-122.json",
+      "sha256": "c4c37777f7d55672bf448701e887a2af885727c8a2ed38f21bdec853592ee466",
+      "bytes": 511
+    },
+    {
+      "path": ".test-artifacts/openclaw-release/20261022T170119234813Z/receipt.json",
+      "sha256": "fe7edbf0f01adaf8f2246644fdc00b3662a86941f39c3ce1c15b2e58a1a328d1",
+      "bytes": 26684
+    }
+  ]
+}
