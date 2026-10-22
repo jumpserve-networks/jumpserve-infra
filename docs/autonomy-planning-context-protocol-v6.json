@@ -1,0 +1,11 @@
+{
+ "version":"autonomy-planning-context-protocol-v6",
+ "amends":"autonomy-planning-context-protocol-v5",
+ "finding":"The v5 corrected trajectory made progress and produced a source-bound pilot in three calls. Substantive AI review found a further contract gap: bounded-tcp-v1 always emits byte count AND RTT per exchange, while the actual proposal declared only byte counts and a two-observation budget. The existing semantic validator accepted that shape although ingestion would reject the actual four observations. Preserve v5 mechanical pass and failed substantive output-compatibility review separately.",
+ "change":"Expose and enforce the fixed TCP output metric inventory and minimum observation budget before execution. Do not filter extra recorded output or fill settings automatically. The planner must declare RTT as descriptive diagnostic data if byte count is the comparison target.",
+ "criteria":"Two exposed native development checks, original echo and corrected injection continuation, must preserve original hypothesis and methods, include both byte and RTT observations with correct units and budgets, pass actual semantic validation AND parse one real local TCP execution's complete raw output with no dropping observations. No final scientific verdict or independent-validation claim.",
+ "resources":{"prior_actual_model_calls":12,"additional_max_calls":2,"aggregate_max_calls":14,"additional_reserve_cents":200,"elapsed_seconds":900,"max_actual_local_tcp_invocations":2,"cloud_experiments":0,"cancelled_study_work":0,"actual_charges_usd":null,"paid_fallback":false},
+ "regressions":"Unit rejection of formerly accepted unusable proposals; existing complete-output protocol accepted; all existing database, backend, context-size and infrastructure checks remain required.",
+ "stopping":"Stop on invalid or unknown outcome, failed actual-output ingestion, original-method drift or the declared evaluation budget. Preserve failed outputs and original protocols; no automatic replay.",
+ "reviewer":{"identity":"Primary Codex AI implementer","type":"AI","independent":false}
+}
