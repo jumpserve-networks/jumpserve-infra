@@ -20,7 +20,7 @@ def request(path, method='GET'):
     req = urllib.request.Request(BASE + path, data=b'{}' if method == 'POST' else None,
         method=method, headers={'Accept': 'application/json', 'Content-Type': 'application/json'})
     try:
-        with urllib.request.urlopen(req, timeout=35) as response: return response.status, response.read(4_000_001)
+        with r.prior.guard.OPEN.open(req, timeout=35) as response: return response.status, response.read(4_000_001)
     except urllib.error.HTTPError as error: return error.code, error.read(10000)
 
 def public_check(directory):

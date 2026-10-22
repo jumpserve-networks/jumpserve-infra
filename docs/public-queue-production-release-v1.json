@@ -1,0 +1,459 @@
+{
+  "version": "public-queue-production-release-v1",
+  "status": "deployed-and-verified",
+  "completed_at": "2026-10-22T16:42:12.150982+00:00",
+  "authorization": "Current user request: merge to main and deploy public shared study queue access.",
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "sources": {
+    "backend_main": "d1b7dd70f9027b00d103f705e572910bd1e98ea8",
+    "frontend_main": "d7792712f280660968d3a6ee2ec6dfb31d510f46",
+    "infrastructure_runtime_pin_commit": "2cafff1",
+    "runtime_manifest_version": 36,
+    "runtime_manifest_sha256": "cd264bccd77111077937e69a91006058dc0069e10477964346852d215af3d7e1"
+  },
+  "release_scope": "Shared per-paper queue status; no new scientific assessment, AI prompt publication, schema/RLS migration or experiment execution.",
+  "local_validation": {
+    "frontend_tests": 203,
+    "backend_tests": 204,
+    "infrastructure_tests": 95,
+    "anonymous_browser_scenarios": 5,
+    "production_build": "passed",
+    "lint_errors": 0,
+    "existing_lint_warnings": 1,
+    "exact_browser_tested_source_hashes_match": true
+  },
+  "backend": {
+    "deployment": {
+      "protocol": "public-queue-production-release-v1",
+      "mode": "deploy",
+      "status": "passed",
+      "runtime_manifest_sha256": "cd264bccd77111077937e69a91006058dc0069e10477964346852d215af3d7e1",
+      "backend_revision": "d1b7dd70f9027b00d103f705e572910bd1e98ea8",
+      "started_at": "2026-10-22T16:33:26.499209+00:00",
+      "measured_charges_usd": null,
+      "targets": {
+        "aws_account": "395567831870",
+        "supabase_project": "regphejnlvfpyokpniny",
+        "database": "postgres",
+        "supabase_project_identity_verified": true
+      },
+      "cdk": {
+        "command": [
+          "npm",
+          "run",
+          "cdk:benchmark",
+          "--",
+          "deploy",
+          "JumpServeBenchmarkStack",
+          "-c",
+          "researchAutonomyEnabled=true",
+          "-c",
+          "researchOpenClawEnabled=true",
+          "-c",
+          "researchAutonomyAdmissionEnabled=true",
+          "--require-approval",
+          "never",
+          "--outputs-file",
+          "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/public-queue-release/20261022T163326498631Z/outputs.json"
+        ],
+        "log_sha256": "936f8dc6f621218b1626582607adedd9c3c91cec0abf48e6e4d13560d1f10910",
+        "source_revision": "d1b7dd70f9027b00d103f705e572910bd1e98ea8"
+      },
+      "ended_at": "2026-10-22T16:34:58.140255+00:00"
+    },
+    "source_verification": {
+      "summary": {
+        "status": "complete",
+        "downloaded_runtime_archives": 3,
+        "manifest_files_per_archive": 32,
+        "zip_sha256": "8fccd33a573c3c39b45a05fef5b693730964820a80b679a81937b37b024c4f0c",
+        "base64_zip_sha256": "j8zTOlc8PDm0WgX+9baTcwlkggqAtnmoGTezewJMTww=",
+        "RLS_and_browser_write_denial": true,
+        "private_bucket": true,
+        "prompt_pointers_unchanged": true,
+        "receipt_sha256": "0bdff2e4d67f6adfa50e39c4118f621815ec8f2fc95a9b73eae541d61ac4d90b"
+      },
+      "functions": [
+        {
+          "name": "JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+          "codeSha256": "j8zTOlc8PDm0WgX+9baTcwlkggqAtnmoGTezewJMTww=",
+          "status": "Successful"
+        },
+        {
+          "name": "JumpServeBenchmarkStack-ResearchWorkflowAutonomyWo-5sN0tQ8Oziyq",
+          "codeSha256": "j8zTOlc8PDm0WgX+9baTcwlkggqAtnmoGTezewJMTww=",
+          "status": "Successful"
+        },
+        {
+          "name": "JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt",
+          "codeSha256": "j8zTOlc8PDm0WgX+9baTcwlkggqAtnmoGTezewJMTww=",
+          "status": "Successful"
+        },
+        {
+          "name": "JumpServeBenchmarkStack-ResearchWorkflowPackageIng-kAAtKeB693oF",
+          "codeSha256": "j8zTOlc8PDm0WgX+9baTcwlkggqAtnmoGTezewJMTww=",
+          "status": "Successful"
+        },
+        {
+          "name": "JumpServeBenchmarkStack-ResearchWorkflowPackageRea-Vy8KadbHwEL9",
+          "codeSha256": "j8zTOlc8PDm0WgX+9baTcwlkggqAtnmoGTezewJMTww=",
+          "status": "Successful"
+        },
+        {
+          "name": "JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+          "codeSha256": "j8zTOlc8PDm0WgX+9baTcwlkggqAtnmoGTezewJMTww=",
+          "status": "Successful"
+        }
+      ]
+    },
+    "parameter_comparison": {
+      "literal_parameters_unchanged": true,
+      "active_benchmark_image": {
+        "function": "JumpServeBenchmarkStack-LaunchBenchmarkFn5833EFAD-L6HWyzv2tgwl",
+        "ami_id": "ami-0808d1157e26c65cb",
+        "mode": "prebaked"
+      },
+      "resolved_lookup_changes": [],
+      "inactive_fallback_only": true
+    },
+    "private_OpenClaw_host": "Separate existing host runtime and authorization retained; no host-used executable code changed."
+  },
+  "frontend": {
+    "origin": "https://jumpserve.quaint-lab.org",
+    "amplify": {
+      "summary": {
+        "jobId": "121",
+        "status": "SUCCEED",
+        "commitId": "d7792712f280660968d3a6ee2ec6dfb31d510f46",
+        "startTime": "2026-10-22T12:35:58.948000-04:00",
+        "endTime": "2026-10-22T12:38:37.793000-04:00"
+      },
+      "steps": [
+        {
+          "name": "BUILD",
+          "status": "SUCCEED",
+          "startTime": "2026-10-22T12:35:58.984000-04:00",
+          "endTime": "2026-10-22T12:38:12.890000-04:00"
+        },
+        {
+          "name": "DEPLOY",
+          "status": "SUCCEED",
+          "startTime": "2026-10-22T12:38:13.155000-04:00",
+          "endTime": "2026-10-22T12:38:37.280000-04:00"
+        },
+        {
+          "name": "VERIFY",
+          "status": "SUCCEED",
+          "startTime": "2026-10-22T12:38:37.598000-04:00",
+          "endTime": "2026-10-22T12:38:37.615000-04:00"
+        }
+      ]
+    },
+    "elapsed_release_seconds": 158.845
+  },
+  "production_public_api": {
+    "study_id": "e79f5cab-d28f-4cea-bf0c-3407933c8cfd",
+    "public_response_sha256": "b04f0de703d0272448996d4b919b7795fde5d481ab7ecd66f63eb2fdf47db6a7",
+    "response_bytes": 24187,
+    "tasks": 38,
+    "candidate_claims": 37,
+    "jobs": 0,
+    "workflow": [
+      {
+        "status": "budget",
+        "max_spend_cents": 10000,
+        "committed_cents": 10000,
+        "max_attempts": null
+      }
+    ],
+    "database_identity_coverage_matches": true,
+    "private_fields_absent": true,
+    "anonymous_denials": [
+      {
+        "path": "/queue",
+        "method": "GET",
+        "status": 401
+      },
+      {
+        "path": "/studies?mine=1",
+        "method": "GET",
+        "status": 401
+      },
+      {
+        "path": "/studies/e79f5cab-d28f-4cea-bf0c-3407933c8cfd/queue",
+        "method": "GET",
+        "status": 401
+      },
+      {
+        "path": "/studies/e79f5cab-d28f-4cea-bf0c-3407933c8cfd/autonomy",
+        "method": "GET",
+        "status": 401
+      },
+      {
+        "path": "/studies/e79f5cab-d28f-4cea-bf0c-3407933c8cfd/queue-actions",
+        "method": "POST",
+        "status": 401
+      },
+      {
+        "path": "/studies/e79f5cab-d28f-4cea-bf0c-3407933c8cfd/autonomy",
+        "method": "POST",
+        "status": 401
+      }
+    ],
+    "missing_paper_status": 404,
+    "unpublished_idea_denied": true,
+    "limitation": "Separate status/database reads; this paper was stopped and stable during verification. No experiment was restarted."
+  },
+  "additional_populated_queue": {
+    "study_id": "5ef8e6bd-e3ff-4ba9-8427-d25fb525fb74",
+    "jobs": 6,
+    "recorded_run_status": "complete",
+    "job_state": "awaiting-review",
+    "frontend_decoder": "passed against original public bytes",
+    "provenance": "Retained IPv6 archived-check assessment; these are not newly collected network measurements."
+  },
+  "production_browser": {
+    "version": "public-queue-production-browser-v1",
+    "status": "passed",
+    "reviewer": {
+      "identity": "Primary Codex AI implementer",
+      "type": "AI",
+      "independent": false
+    },
+    "shared_views": [
+      {
+        "time": "2026-10-22T16:39:28.374Z",
+        "url": "https://jumpserve.quaint-lab.org/research-verification/experiment-queue?study=e79f5cab-d28f-4cea-bf0c-3407933c8cfd",
+        "width": 1365,
+        "height": 900,
+        "theme": "light",
+        "anonymous_isolated_context": true,
+        "signed_in": false,
+        "task_cards": 38,
+        "claim_finding_cards": 37,
+        "private_controls": 0,
+        "initial_prompt_visible": false,
+        "preparation": "Paper preparation \u00b7 5 AI turns",
+        "owner_link": "/research-verification/experiment-queue?study=e79f5cab-d28f-4cea-bf0c-3407933c8cfd&view=private",
+        "no_jobs_state": true,
+        "alerts": [],
+        "horizontal_overflow": false
+      },
+      {
+        "time": "2026-10-22T16:39:31.902Z",
+        "url": "https://jumpserve.quaint-lab.org/research-verification/experiment-queue?study=e79f5cab-d28f-4cea-bf0c-3407933c8cfd",
+        "width": 1365,
+        "height": 900,
+        "theme": "dark",
+        "anonymous_isolated_context": true,
+        "signed_in": false,
+        "task_cards": 38,
+        "claim_finding_cards": 37,
+        "private_controls": 0,
+        "initial_prompt_visible": false,
+        "preparation": "Paper preparation \u00b7 5 AI turns",
+        "owner_link": "/research-verification/experiment-queue?study=e79f5cab-d28f-4cea-bf0c-3407933c8cfd&view=private",
+        "no_jobs_state": true,
+        "alerts": [],
+        "horizontal_overflow": false
+      },
+      {
+        "time": "2026-10-22T16:39:42.105Z",
+        "url": "https://jumpserve.quaint-lab.org/research-verification/experiment-queue?study=e79f5cab-d28f-4cea-bf0c-3407933c8cfd",
+        "width": 390,
+        "height": 844,
+        "theme": "dark",
+        "anonymous_isolated_context": true,
+        "signed_in": false,
+        "task_cards": 38,
+        "claim_finding_cards": 37,
+        "private_controls": 0,
+        "initial_prompt_visible": false,
+        "preparation": "Paper preparation \u00b7 5 AI turns",
+        "owner_link": "/research-verification/experiment-queue?study=e79f5cab-d28f-4cea-bf0c-3407933c8cfd&view=private",
+        "no_jobs_state": true,
+        "alerts": [],
+        "horizontal_overflow": false
+      },
+      {
+        "time": "2026-10-22T16:39:46.298Z",
+        "url": "https://jumpserve.quaint-lab.org/research-verification/experiment-queue?study=e79f5cab-d28f-4cea-bf0c-3407933c8cfd",
+        "width": 390,
+        "height": 844,
+        "theme": "light",
+        "anonymous_isolated_context": true,
+        "signed_in": false,
+        "task_cards": 38,
+        "claim_finding_cards": 37,
+        "private_controls": 0,
+        "initial_prompt_visible": false,
+        "preparation": "Paper preparation \u00b7 5 AI turns",
+        "owner_link": "/research-verification/experiment-queue?study=e79f5cab-d28f-4cea-bf0c-3407933c8cfd&view=private",
+        "no_jobs_state": true,
+        "alerts": [],
+        "horizontal_overflow": false
+      }
+    ],
+    "legitimate_owner_private_view": {
+      "time": "2026-10-22T16:39:28.798Z",
+      "url": "https://jumpserve.quaint-lab.org/research-verification/experiment-queue?study=e79f5cab-d28f-4cea-bf0c-3407933c8cfd&view=private",
+      "signed_in": true,
+      "owner_prompt_controls": 38,
+      "initial_prompt_summaries": 1,
+      "alerts": [],
+      "shared_component_present": false
+    },
+    "populated_archived_check_view": {
+      "time": "2026-10-22T16:40:06.026Z",
+      "study_id": "5ef8e6bd-e3ff-4ba9-8427-d25fb525fb74",
+      "job_cards": 6,
+      "complete_run_cards": 6,
+      "job_execution_states": [
+        "awaiting review"
+      ],
+      "width": 390,
+      "horizontal_overflow": false,
+      "scientific_limit_visible": true
+    },
+    "missing_study_view": {
+      "time": "2026-10-22T16:40:13.942Z",
+      "missing_study": true,
+      "alert": "This paper queue is unavailable. Check the shared study link. Queue counts and current status are unknown.",
+      "current_counts_unknown": true,
+      "rendered_jobs": 0
+    },
+    "anonymous_sign_in_returns": [
+      {
+        "url": "https://jumpserve.quaint-lab.org/login?next=%2Fresearch-verification%2Fexperiment-queue%3Fview%3Dprivate%26study%3De79f5cab-d28f-4cea-bf0c-3407933c8cfd",
+        "next": "/research-verification/experiment-queue?view=private&study=e79f5cab-d28f-4cea-bf0c-3407933c8cfd",
+        "private_prompt_controls": 0,
+        "query_semantics_preserved": true
+      },
+      {
+        "url": "https://jumpserve.quaint-lab.org/login?next=%2Fresearch-verification%2Fexperiment-queue",
+        "next": "/research-verification/experiment-queue",
+        "private_prompt_controls": 0,
+        "query_semantics_preserved": true
+      },
+      {
+        "url": "https://jumpserve.quaint-lab.org/login?next=%2Fresearch-verification%2Fexperiment-queue%3Fgap%3D00000000-0000-4000-8000-000000000001%26sourceStudy%3De79f5cab-d28f-4cea-bf0c-3407933c8cfd",
+        "next": "/research-verification/experiment-queue?gap=00000000-0000-4000-8000-000000000001&sourceStudy=e79f5cab-d28f-4cea-bf0c-3407933c8cfd",
+        "private_prompt_controls": 0,
+        "query_semantics_preserved": true
+      }
+    ],
+    "notes": [
+      "Fresh named isolated Chrome context; no authentication cookies or storage copied.",
+      "Actual production backend and database; no synthetic network responses in these production checks.",
+      "Next.js prefetched the guarded private-page link; no owner-private API request was observed in the anonymous shared view.",
+      "Screenshots inspected through browser tooling; structured DOM evidence retained here.",
+      "An initial return check compared literal query ordering; corrected to decoded key/value semantics. A subsequent harness attempt used URL in the orchestration isolate; final comparisons ran inside the browser where URL is available. Neither required a product change."
+    ],
+    "new_experiment_launches": 0,
+    "new_model_calls": 0,
+    "measured_charges_usd": null
+  },
+  "security": {
+    "RLS_and_browser_write_denial": "Verified from current database catalogs",
+    "private_relations_not_directly_browser_readable": true,
+    "private_storage_retained": true,
+    "anonymous_private_api_denials": 6,
+    "unpublished_ideas_not_exposed": true,
+    "owner_private_view": "Actual existing legitimate Google session; prompt controls and initial prompt section available, private prompt contents not exported.",
+    "prompt_pointers": "Unchanged; verified against pre-release pointers"
+  },
+  "conditional_gaps": [
+    "No second legitimate Google user session was exercised; foreign-owner authorization is covered by development regressions. Public viewing omits credentials and was verified in a fresh anonymous context.",
+    "No new experiment or authenticated AI request was made; this status-only release does not validate scientific claims or resolve stopped studies.",
+    "Current catalog security was checked; originally executed migration bytes were not reconstructed. No migration was part of this release."
+  ],
+  "amendments": [
+    {
+      "evidence": ".test-artifacts/public-queue-release/20261022T163224013608Z/receipt.json",
+      "reason": "Sandbox blocked AWS connection; rerun using a purpose-scoped approved release command."
+    },
+    {
+      "evidence": ".test-artifacts/public-queue-release/20261022T163504292812Z/receipt.json",
+      "reason": "Local Python default CA selection rejected the HTTPS certificate. Reused the existing verified system-CA opener; TLS verification remains enabled. Public/API check subsequently passed."
+    },
+    {
+      "evidence": ".test-artifacts/public-queue-release/browser-return-instrumentation-amendment.json",
+      "reason": "Hosting normalized query order. Final return checks compare pathname, fragment and decoded key/value semantics, using browser URL APIs. No product change."
+    }
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "usage": {
+    "new_model_calls_initiated_by_release": 0,
+    "new_experiment_launches": 0,
+    "measured_charges_usd": null,
+    "estimated_charges_usd": null,
+    "unallocated_costs_usd": null,
+    "background_activity": "Existing background work is outside this release cost attribution; paper commitments are not measured billing."
+  },
+  "evidence": [
+    {
+      "path": ".test-artifacts/public-queue-release/20261022T163241605432Z/receipt.json",
+      "sha256": "b54cfd671feb847070af264b57190a61fde2749d4d6e2fcd3c01eb85b51ed797",
+      "bytes": 1053
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/20261022T163241605432Z/cdk.log",
+      "sha256": "ce380f4d6affbf1dfc9ccdcf40459b1abe1c395271ac0b808399bfed89725d98",
+      "bytes": 4824
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/20261022T163326498631Z/receipt.json",
+      "sha256": "fb9a90d1bf8e566a8841a2c7d15e5a7da1d3d55b64eeaf09d46e772547daedd6",
+      "bytes": 1219
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/20261022T163326498631Z/parameter-comparison.json",
+      "sha256": "ce90f5ab69e42789a3cd22f69b73d9700493d743a8cb493975d6ac95e95e2b02",
+      "bytes": 289
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/20261022T163538378525Z/receipt.json",
+      "sha256": "a6ee38acd3e7d0fb8d4a29e5a0d626f62fe81bb0b873e50cc30662b04a696f91",
+      "bytes": 2079
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/20261022T163538378525Z/public-status-original.json",
+      "sha256": "b04f0de703d0272448996d4b919b7795fde5d481ab7ecd66f63eb2fdf47db6a7",
+      "bytes": 24187
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/ipv6-retained-status.json",
+      "sha256": "330115541924dd78b3a8094634cacbcb9dfc56b5d6148d5d70ca1ec1792a6163",
+      "bytes": 13367
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/production-browser.json",
+      "sha256": "9144a71f77c0ad0f027018fca1953d6003deeb4d362f12e581a8b3a4bc7cbb39",
+      "bytes": 5903
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/amplify-121.json",
+      "sha256": "0c212900547111119bbd89cf5bee54d284c71861d12506a192174be513797156",
+      "bytes": 760
+    },
+    {
+      "path": ".test-artifacts/public-queue-release/deployed-source-summary.json",
+      "sha256": "1ada4700269d8d02eaebf58d37969295862243c410c84c3f41abfe356bf5bc16",
+      "bytes": 1649
+    },
+    {
+      "path": ".test-artifacts/openclaw-release/20261022T163504293018Z/receipt.json",
+      "sha256": "0bdff2e4d67f6adfa50e39c4118f621815ec8f2fc95a9b73eae541d61ac4d90b",
+      "bytes": 26399
+    }
+  ]
+}
