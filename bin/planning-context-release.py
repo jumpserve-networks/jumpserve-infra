@@ -36,6 +36,10 @@ def archive(directory):
   path=(ROOT.parent/'jumpserve-back-end' if name.endswith('backend.log') else ROOT)/'.test-artifacts'/name
   if name.endswith('backend.log'):entries['backend-validation/'+name]=path.read_bytes()
   else:add(path)
+ for path in (ROOT/'.test-artifacts/openclaw-release').glob('20261022T*/*'):
+  if path.parent.name>='20261022T143600000000Z' and path.name in ('receipt.json','cdk.log','outputs.json','stack-before.json','stack-after.json','parameter-comparison.json'):add(path)
+ for path in (ROOT/'.test-artifacts/planning-context-release').glob('host-*.json'):add(path)
+ for path in (ROOT/'.test-artifacts/planning-context-production-browser').glob('*.json'):add(path)
  manifest=[dict(path=name,sha256=sha(data),bytes=len(data)) for name,data in sorted(entries.items())];buffer=io.BytesIO()
  with zipfile.ZipFile(buffer,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as z:
   for name,data in sorted(entries.items()):
