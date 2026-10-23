@@ -1,0 +1,45 @@
+{
+  "version": "assessment-catalog-release-readiness-v1",
+  "status": "approved-for-scoped-deployment",
+  "protocol": "docs/assessment-catalog-release-protocol-v1.json",
+  "backend_revision": "a94eb0e26c96da73aa4d7d435899b2ce796db61d",
+  "frontend_revision": "a3b9ab0",
+  "runtime_manifest_version": 38,
+  "runtime_manifest_sha256": "b946696074141fac238c7a8012aa1389c7151d7e0cedd296dd38d27a14bc5413",
+  "checks": {
+    "backend_research_unit": {"passed": 219, "failed": 0},
+    "frontend_unit": {"passed": 214, "failed": 0},
+    "frontend_lint": {"errors": 0, "existing_warnings": ["auth-button.tsx:153 navigation warning"]},
+    "frontend_build": "passed",
+    "frontend_browser": {"public_fixture_cases": 14, "queue_component_cases": 10, "evidence": "jumpserve-front-end/docs/my-assessments-route-validation-v1.json and docs/assessment-queue-grouping-validation-v1.json"},
+    "infrastructure_build": "passed",
+    "infrastructure_jest": {"passed": 90, "failed": 0, "existing_skipped": 5},
+    "parameter_guard": {"passed": 3, "failed": 0},
+    "frontend_current_source_hashes_verified": 54
+  },
+  "baseline": {
+    "receipt": ".test-artifacts/assessment-catalog-release/20261023T010054311547Z/receipt.json",
+    "retained_metadata_sha256": "76b777097e813b7ca7dd18bd4a29c967cfe8b6b7a9767da4675aaeadb45e3126",
+    "active_prompt_versions_recorded": 9,
+    "earlier_failed_attempt": "Sandbox network denial retained at .test-artifacts/assessment-catalog-release/20261022T234400534537Z/receipt.json; no changes made."
+  },
+  "diff_review": {
+    "receipt": ".test-artifacts/assessment-catalog-release/20261023T010109664195Z/receipt.json",
+    "original_log_sha256": "4945ade20707c6482ea1587896c93373777b92b6646cc108a70eaf9bd2005df5",
+    "new_routes": ["GET /research/papers", "GET /research/papers/{studyId}/title"],
+    "new_permissions": "Only the two API Gateway invocation grants for these GET routes.",
+    "shared_asset_updates": 6,
+    "new_asset": "296615e29028720ab8a6af00a00ac1f24fa564fc199451921982685e8e77bd36.zip",
+    "changed_runtime_sources": ["api.py", "paper_catalog.py (added)"],
+    "other_changes": "None: no environment, IAM policy, network, instance, SQL, prompt, budget, experiment or OpenClaw host changes.",
+    "lookup_warning": "CDK lookup role was not assumed; verified credentials for the correct account were used."
+  },
+  "deployment": {
+    "stack": "JumpServeBenchmarkStack",
+    "preserve_active_flags": ["researchAutonomyEnabled=true", "researchOpenClawEnabled=true", "researchAutonomyAdmissionEnabled=true"],
+    "infra_ci": "Skipped for this commit; the general workflow includes paid model evaluations and broader infrastructure. Relevant local checks passed and the fixed-target helper deploys only the reviewed stack.",
+    "post_deploy_blockers": "All production blockers in the frozen protocol remain required before declaring release success."
+  },
+  "reviewer": {"identity": "Primary Codex AI implementer", "type": "AI", "independent": false},
+  "usage": {"new_research_model_calls": 0, "new_experiment_launches": 0, "measured_charges_usd": null, "unallocated_costs_usd": null}
+}

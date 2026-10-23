@@ -84,6 +84,8 @@ test('research API has bounded resources, explicit routes and no experiment or m
   template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'GET /research/studies/{studyId}/claim-design' });
   template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'GET /research/studies/{studyId}/prepare' });
   template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'GET /research/queue' });
+  template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'GET /research/papers' });
+  template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'GET /research/papers/{studyId}/title' });
   template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'GET /research/studies/{studyId}/gap-experiments' });
   template.resourceCountIs('AWS::Events::Rule', 0);
   const policies = JSON.stringify(template.findResources('AWS::IAM::Policy'));

@@ -1,0 +1,58 @@
+{
+  "version": "assessment-catalog-production-release-v1",
+  "frozen_at": "2026-10-22T23:41:22.193641+00:00",
+  "authorization": "User explicitly requested merge to main and production deployment of the pending assessment catalog, routes, naming, queue grouping and My Assessments changes.",
+  "targets": {
+    "aws_account": "395567831870",
+    "region": "us-east-1",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "stack": "JumpServeBenchmarkStack",
+    "amplify_app": "d24jvguj7brnkj",
+    "branch": "main",
+    "site": "https://jumpserve.quaint-lab.org"
+  },
+  "backend_revision": "a94eb0e26c96da73aa4d7d435899b2ce796db61d",
+  "runtime_manifest_version": 38,
+  "previous_manifest_sha256": "4299b9981b8dfe471176953ec2ce9264fbc780df5aa7bfb3db3774ef5f02db1c",
+  "runtime_files": 34,
+  "release_blockers_before_deployment": [
+    "Exact clean committed backend revision and all declared runtime file hashes match; new paper_catalog.py included.",
+    "Backend research tests, infrastructure TypeScript/Jest and parameter guard tests pass. Current frontend unit, lint, build and frozen local browser campaigns pass. Existing unrelated lint warning remains explicit.",
+    "AWS and Supabase identities verified; existing RLS/browser-write denials, private artifact bucket and evaluated prompt pointers retained.",
+    "Scoped CDK diff permits only shared research Lambda source assets, the two new GET catalog/title gateway routes with required invocation permissions, and source metadata. No environment, IAM-policy, network, instance, prompt, SQL, budget, experiment or host-runtime changes."
+  ],
+  "sequence": [
+    "Commit/push backend main; stage and pin exact runtime bytes.",
+    "Inspect scoped diff and run infrastructure checks; commit/push reviewed infra main with skip-ci because the general workflow evaluates models and deploys broader infrastructure.",
+    "Deploy only JumpServeBenchmarkStack with existing active runtime flags and unchanged literal parameters. Verify backend, RLS, deployed runtime hashes and catalog before frontend push.",
+    "Commit/push frontend main and use its Amplify main release; verify exact deployed revision.",
+    "Verify production routes, catalog pagination/status/identity coverage, original-source title reads, exports, privacy denials, desktop/mobile themes, redirects, My Assessments sign-in return paths and queue groups."
+  ],
+  "production_blockers": [
+    "Public catalog schema/counts/IDs/order/workflow/publication states match independent database observations, within 100 metadata pages and three attempts for concurrent inserts. Retain every attempt.",
+    "Deployed Lambda archives match all 34 original runtime files; existing prompt settings and retained paper metadata/initial-prompt identities match baseline.",
+    "New source-title resource resolves the known retained propagation-delay paper; invalid cursor is 400, missing/idea titles are 404, anonymous private reads/writes denied.",
+    "Frontend canonical routes and old saved links work; private list requires Google sign-in while published detail/export and status remain public.",
+    "Actual legitimate authenticated owner pages render assessment groups when a valid browser session is available."
+  ],
+  "conditional_checks": [
+    "Authenticated writes, paper submission, planning, chat and experiment execution are outside this presentation/catalog release; do not launch or resume assessments as verification.",
+    "If the existing legitimate Google browser session is unavailable, record authenticated list/queue verification as conditional rather than simulate credentials.",
+    "Scientific findings and broader reproduction coverage are outside this software release."
+  ],
+  "rollback": "Restore the previous exact runtime manifest and deploy only the same stack; release the prior Amplify commit if frontend verification fails. Keep original evidence and any failed receipts. No schema migration to reverse.",
+  "resources": {
+    "new_research_model_calls": 0,
+    "new_experiment_launches": 0,
+    "maximum_catalog_pages_per_attempt": 100,
+    "maximum_catalog_consistency_attempts": 3,
+    "title_checks": 2,
+    "measured_charges_usd": null,
+    "costs": "Cloud deployment/build/storage charges and unallocated compute are unknown unless separately measured; missing usage is not zero."
+  },
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  }
+}
