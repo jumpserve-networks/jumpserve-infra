@@ -1,0 +1,77 @@
+{
+  "version": "assessment-catalog-production-release-v1",
+  "software_status": "deployed-and-verified",
+  "scope": "Assessment catalog, canonical routes and terminology, My Assessments navigation, and experiment queues grouped by assessment.",
+  "scientific_status": "Unchanged. This release performs no new scientific experiments or claim adjudication.",
+  "authorization": "User explicitly requested merge to main and production deployment of the current changes.",
+  "targets": {
+    "aws_account": "395567831870",
+    "region": "us-east-1",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "site": "https://jumpserve.quaint-lab.org"
+  },
+  "revisions": {
+    "backend_main": "a94eb0e26c96da73aa4d7d435899b2ce796db61d",
+    "frontend_main": "a3b9ab001e1f55b7a34a8e84723389779ad2d260",
+    "infrastructure_deployment": "ae74d67",
+    "runtime_manifest_version": 38,
+    "runtime_manifest_sha256": "b946696074141fac238c7a8012aa1389c7151d7e0cedd296dd38d27a14bc5413",
+    "runtime_files": 34,
+    "merge": "All three repositories were already on main and synchronized with origin; tested changes were committed and pushed directly to main."
+  },
+  "deployments": {
+    "backend": {"stack": "JumpServeBenchmarkStack", "status": "UPDATE_COMPLETE", "completed_at": "2026-10-23T01:03:57.339599+00:00", "literal_parameters_unchanged": true, "resolved_lookup_changes": [], "host_runtime_changed": false},
+    "frontend": {"amplify_app": "d24jvguj7brnkj", "branch": "main", "job": "123", "status": "SUCCEED", "build_deploy_verify": "All succeeded", "completed_at": "2026-10-23T01:07:16.584Z"},
+    "schema_migrations": [],
+    "prompt_publications": [],
+    "infrastructure_ci": "The broader automatic workflow was skipped. The reviewed stack was deployed manually after the relevant local and scoped checks passed."
+  },
+  "production_checks": {
+    "catalog": {"assessments": 28, "published": 5, "unpublished": 23, "pages": 3, "identity_order_epochs_status_publication_match_database": true, "stable_independent_database_observations": 2, "consistency_attempts": 1},
+    "source_titles": {"explicit_backend_checks": 2, "known_retained_packet_sha256_verified": true, "independent_first_page_title_check": true, "original_stored_title_and_prompt_preserved": true},
+    "runtime": {"deployed_api_queue_autonomy_archives": 3, "all_34_manifest_files_verified_per_archive": true, "active_prompt_versions_preserved": 9, "bedrock_fallback_permission": false},
+    "security": {"rls_and_private_artifact_bucket": "verified", "browser_writes": "denied", "anonymous_private_reads_and_actions": "401", "unpublished_export": "404", "unpublished_idea_title_and_queue": "404", "invalid_cursor": "400"},
+    "browser": {
+      "passed_final_cases": 18,
+      "superseded_selector_probes": 1,
+      "unresolved_failures": 0,
+      "browser_paper_ids_match_database_validated_api": true,
+      "legitimate_authenticated_session": true,
+      "authenticated_queue_groups": 21,
+      "independent_group_pagination": "First assessment expands from 20 to 29 jobs; other assessment groups retain their counts.",
+      "viewports_px": [1365, 390],
+      "themes": ["light", "dark", "system control"],
+      "horizontal_overflow": false,
+      "completed_ipv6_detail": {"svg_charts": 4, "tables": 1, "mobile_dark": "passed"},
+      "published_exports": ["JSON 200, 3494919 bytes", "CSV 200, 177348 bytes"],
+      "legacy_routes_queries_and_sign_in_returns": "passed",
+      "missing_invalid_and_unavailable_title_states": "passed",
+      "pdf_intake_form": "Rendered with legitimate session; no submission performed.",
+      "review": "Primary AI implementer inspected public catalog desktop light, public queue mobile light, and My Assessments mobile light screenshots. This is not human or independent review.",
+      "console_coverage": "No errors/warnings in the final homepage and authenticated intake navigations; not a continuous all-page trace."
+    }
+  },
+  "local_checks": {"backend_unit": 219, "frontend_unit": 214, "infrastructure_jest_passed": 90, "infrastructure_jest_existing_skips": 5, "parameter_guards": 3, "local_public_browser_cases": 14, "local_queue_component_cases": 10, "builds": "Frontend and infrastructure passed", "lint": "No errors; one existing auth-button navigation warning"},
+  "operational_limitations": [
+    "OpenClaw reported auth-required as of 2026-10-23T01:11:07.639077+00:00. Queued AI work waits for renewed host authorization; no paid API fallback is enabled. This interface release does not claim working new inference.",
+    "Seven first-page catalog entries show Paper title unavailable when a source title cannot be recovered. Arbitrary PDF title accuracy is unverified; unavailable titles do not erase assessment status.",
+    "No new paper submission, authenticated write, chat, planning call, experiment launch, cancellation or resumption was performed for this presentation/catalog release.",
+    "The owner list and grouped overview retain recorded titles; selected public assessment queues and the catalog use bounded source-title resolution.",
+    "Browser filesystem exports were denied by the MCP workspace boundary. Production screenshots were inspected through the tool; local browser reports and the production structural report are retained separately.",
+    "A transient loading snapshot and a hidden desktop-link selector probe were preserved. The settled owner queue and corrected visible mobile menu checks passed; no product correction was necessary."
+  ],
+  "protocol": "docs/assessment-catalog-release-protocol-v1.json",
+  "readiness_review": "docs/assessment-catalog-release-readiness-v1.json",
+  "evidence_sha256": {
+    ".test-artifacts/assessment-catalog-release/20261023T010054311547Z/receipt.json": "697b270d2113c56d92a0708c4adc9d13e483fc0eada892b042807178bc4e3b5a",
+    ".test-artifacts/assessment-catalog-release/20261023T010109664195Z/receipt.json": "eb6619f79cdb1375892ccf56c8c4d917cc66d2d5f06806fb09bd4c8713b8c325",
+    ".test-artifacts/assessment-catalog-release/20261023T010222454834Z/receipt.json": "85b6b931332583a8d70a79b6f49ea707ff473860f27cf552efd109fba6132af6",
+    ".test-artifacts/assessment-catalog-release/20261023T010404552297Z/receipt.json": "dac9d00d057dc5ca6a4fb8c42827906c0ad411cb254b233328b95b0fcba4a0a6",
+    ".test-artifacts/openclaw-release/20261023T010404552326Z/receipt.json": "90d3a6a1d5788ea9545748670b1854fed467cfcd0addddea0f7eb2c54780ded7",
+    ".test-artifacts/openclaw-release/20261023T011029780497Z/receipt.json": "8378d4f067c0d8573a3a13c05ddeea3fc071444ca341a4290323c93f56e58b44",
+    "../jumpserve-front-end/.test-artifacts/assessment-catalog-production-v1/report-v2.json": "51f7e50a2d314afe79d43b7c67973810698d6a6cbc2d4a2e378001eca6930711"
+  },
+  "evidence_storage": "Private ignored local release directories retain original catalog response bytes, source text packet, runtime archives, stack snapshots, deployment logs and receipts. No private artifacts were committed or made public.",
+  "usage": {"new_research_model_calls": 0, "new_experiment_launches": 0, "measured_charges_usd": null, "unallocated_costs_usd": null, "note": "AWS deployment/build/storage and primary agent costs are unallocated or unavailable; missing usage is not zero cost."},
+  "reviewer": {"identity": "Primary Codex AI implementer", "type": "AI", "independent": false}
+}
