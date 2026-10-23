@@ -1,0 +1,23 @@
+{
+  "version": "profile-production-release-v1",
+  "authorization": "User requested merge to main and production deployment of the current profile and timezone changes.",
+  "targets": {"aws_account": "395567831870", "supabase_project": "regphejnlvfpyokpniny", "site": "https://jumpserve.quaint-lab.org", "amplify_app": "d24jvguj7brnkj", "branch": "main"},
+  "scope": "Create private user profiles and deploy the Next profile route, authenticated save action, preferences provider and timezone-aware displays. Include the prior removal of assessment IDs from catalog cards.",
+  "migration": "database/202610230001_user_profiles.sql",
+  "migration_sha256": "24eaa3441a6636474ea462634618efc62fa0730ea92224879cf4359221e6c9ac",
+  "release_blockers": [
+    "Source hashes match the passing local validation record; current unit checks, lint and normal build pass.",
+    "Verify AWS account and actual Supabase project identity before production mutation. Reject an unexpected existing profile table/function.",
+    "Apply only the versioned profiles migration, then verify exact columns, RLS, owner policies, grants, constraints and timezone validation; anonymous profile SQL access remains denied.",
+    "Retain active prompt settings; do not deploy research worker, host or infrastructure runtime changes.",
+    "Release the exact committed frontend revision only after database verification succeeds; require Amplify build/deploy/verify success.",
+    "Production anonymous profile API is 401, /profile sign-in return is preserved, and public timestamps use the browser timezone.",
+    "When a legitimate Google session is available, exercise the actual profile save action behind CloudFront, reload persisted values, check preference-based assessment timestamps and restore the original preferences."
+  ],
+  "authenticated_check_bounds": {"maximum_save_actions": 3, "names": "Do not change the displayed name inputs.", "timezone": "Save the current browser default if this is the first profile; temporarily compare another supported zone and restore the baseline timezone.", "other_users": "Do not modify other users or manufacture production accounts."},
+  "conditional_checks": ["If a legitimate Google session is unavailable, record that gap explicitly; synthetic local transport is not production authentication.", "A second legitimate user session is not required; production catalog/policy inspection plus the local cross-owner SQL regressions provide bounded ownership evidence."],
+  "checks": {"local_unit": 220, "local_sql": 11, "local_browser": 10, "viewports_px": [1365,390], "themes": ["light","dark"], "invalid_and_missing": "Invalid timezone, missing profile/browser fallback and storage failure covered locally; production invalid timezone action must preserve saved values."},
+  "rollback": "If necessary redeploy the prior frontend commit. Retain the additive private profiles table and user preferences; do not drop personal data as an automatic rollback.",
+  "resources": {"research_model_calls": 0, "experiment_launches": 0, "measured_charges_usd": null, "unallocated_costs_usd": null},
+  "reviewer": {"identity": "Primary Codex AI implementer", "type": "AI", "independent": false}
+}
