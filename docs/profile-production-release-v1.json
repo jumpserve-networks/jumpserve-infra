@@ -1,0 +1,138 @@
+{
+  "version": "profile-production-release-v1",
+  "recorded_at": "2026-10-23T15:12:30.972490+00:00",
+  "software_status": "deployed-and-verified",
+  "scientific_status": "Unchanged; no claim adjudication, new networking experiments or model evaluations.",
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "site": "https://jumpserve.quaint-lab.org"
+  },
+  "revisions": {
+    "frontend": "390b67357e4fba6c1288f52284e2065519d33c26",
+    "infrastructure_schema_and_helper": "7a283573bae94259a6fe6efa16b3acaecf4a9470",
+    "backend": "a94eb0e26c96da73aa4d7d435899b2ce796db61d (unchanged)"
+  },
+  "main_branch": "Both changed repositories were already on main and synchronized with origin; commits were pushed directly to main.",
+  "deployment": {
+    "amplify_app": "d24jvguj7brnkj",
+    "branch": "main",
+    "job": "124",
+    "status": "SUCCEED",
+    "completed_at": "2026-10-23T11:06:12.646000-04:00",
+    "database_migration": "database/202610230001_user_profiles.sql",
+    "migration_sha256": "24eaa3441a6636474ea462634618efc62fa0730ea92224879cf4359221e6c9ac",
+    "original_submitted_bytes_verified": true,
+    "migration_applications": 1,
+    "infrastructure_runtime_deployments": 0,
+    "prompt_publications": 0,
+    "host_updates": 0,
+    "ci_note": "Infrastructure commits use skip ci to avoid the broader model-evaluation and infrastructure workflow. This scoped release applies the pinned SQL and uses the normal Amplify frontend build/deploy/verify pipeline."
+  },
+  "checks": {
+    "unit": 220,
+    "isolated_sql": 11,
+    "isolated_browser": 10,
+    "production_browser": 15,
+    "build": "passed",
+    "lint": "0 errors; one existing auth-button navigation warning",
+    "source_hashes_checked": 40,
+    "production_database": "Exact four columns, five constraints, RLS, three owner policies, inherited signed-in-user restriction, grants, private validator security and valid/invalid timezone behavior verified. Anonymous HTTP profile read returned 401; catalog privileges deny anonymous profile reads and writes.",
+    "production_authenticated": "Existing legitimate Google session exercised actual Server Actions behind the production CDN, private GET, upsert and reload. No synthetic identity or token was injected.",
+    "production_saves": 3,
+    "timezone_override": "Temporarily saved Asia/Tokyo while the browser stayed in America/New_York. Public assessment instant 2026-10-22T17:44:52.988Z displayed as Oct 23, 2026, 2:44:52 AM GMT+9; anonymous display used Oct 22, 2026, 1:44:52 PM EDT.",
+    "final_profile": "America/New_York browser default saved in the owner profile. First/last-name values were left unchanged. Temporary timezone and theme checks were restored.",
+    "layouts": "1365 desktop / 390 mobile, light and dark; profile link visible, save control enabled, header spans viewport, no horizontal overflow.",
+    "queue": "Forty valid recorded time elements in the public queue use the browser timezone. No jobs were launched or modified.",
+    "catalog_cleanup": "Assessment <id> line is removed; links retain record identity.",
+    "cache": "Private profile GET uses private, no-store and anonymous status 401.",
+    "visual_review": "Primary implementing AI inspected the production mobile dark screenshot in the browser tool; this is not independent or human review."
+  },
+  "protocol": "docs/profile-release-protocol-v1.json",
+  "local_validation": "../jumpserve-front-end/docs/profile-timezones-validation-v1.json",
+  "preserved_failures": [
+    "The migration committed successfully, but the initial verifier assumed policy roles were JSON arrays and omitted the inherited global safety policy. Corrected role decoding and checked the exact existing restrictive predicate; migration bytes and permissions were not changed.",
+    "A verifier SELECT could not execute the private timezone validator as supabase_read_only_user. Confirmed that role lacks EXECUTE; the corrected fixed SELECT uses the authorized Management connection without granting additional permissions or writing records.",
+    "An immediate post-click browser assertion failed before the completed save was observed; the early response was not retained. Completed-action read-back passed without resubmitting. Timing is a likely explanation rather than a demonstrated storage defect.",
+    "A catalog read ran during asynchronous loading and found no time elements. Waiting for the visible timezone produced the expected completed result.",
+    "Public queue navigation exceeded the tool navigation timeout; its loaded page and all 40 timestamp elements subsequently passed without a reload."
+  ],
+  "conditional_gaps": [
+    "A fresh Google provider round trip was not repeated; the checks used the existing legitimate Google session.",
+    "No second production user session was used. Cross-owner write/read denial was exercised against isolated PostgreSQL and production owner policies/grants were inspected.",
+    "Other modules compile and share the timezone renderer; every module route was not separately exercised in production."
+  ],
+  "existing_operational_gap": "The public queue still reports OpenClaw auth-required. This profile release does not change or reauthenticate the worker.",
+  "evidence": {
+    "receipts": [
+      {
+        "path": ".test-artifacts/profile-release/20261023T145950097271Z/receipt.json",
+        "sha256": "08cd926258720cf5dd0c25ceb274327edab11dcbf3ff061f5a9d04a6821fa9a1",
+        "mode": "inspect",
+        "status": "passed",
+        "reason": null
+      },
+      {
+        "path": ".test-artifacts/profile-release/20261023T150029405944Z/receipt.json",
+        "sha256": "33fc41e9643cf4e1794194134b375ff0ce3ef36aec3cea3c9b78905cc0c2485f",
+        "mode": "apply",
+        "status": "failed",
+        "reason": "Unexpected profile policy role/command."
+      },
+      {
+        "path": ".test-artifacts/profile-release/20261023T150056872768Z/receipt.json",
+        "sha256": "a6de712eb9331d2818efed3931705be665132caf49d94e784388497fc04437bd",
+        "mode": "inspect",
+        "status": "passed",
+        "reason": null
+      },
+      {
+        "path": ".test-artifacts/profile-release/20261023T150124254522Z/receipt.json",
+        "sha256": "5926401e4c0d6deeed8b78e11e8afd6655cd4f57fe15f10cdbff33a6b5db2944",
+        "mode": "verify",
+        "status": "failed",
+        "reason": "Supabase request failed (HTTP 400); inspect the database operation"
+      },
+      {
+        "path": ".test-artifacts/profile-release/20261023T150212744718Z/receipt.json",
+        "sha256": "b75e9b6e867a11ace07b898d50a1f8d8e5d3f77a371706631bc6d6338824efd6",
+        "mode": "inspect",
+        "status": "passed",
+        "reason": null
+      },
+      {
+        "path": ".test-artifacts/profile-release/20261023T150245599994Z/receipt.json",
+        "sha256": "23cf6c24cc4c26b9a9f621f32b87333c3c525ba5185e03cf5ca0eded82720877",
+        "mode": "verify",
+        "status": "passed",
+        "reason": null
+      },
+      {
+        "path": ".test-artifacts/profile-release/20261023T151005520563Z/receipt.json",
+        "sha256": "20fc88cbee5ea5d0c17ec8f2aa2ccca4aafe6730281d8cfd190b51822d1889f1",
+        "mode": "frontend-status",
+        "status": "passed",
+        "reason": null
+      }
+    ],
+    "browser": {
+      "path": "../jumpserve-front-end/.test-artifacts/profile-production-v1/report.json",
+      "sha256": "154f03498b73a11d68a5ee194629660d0c0cfc35e5c61e5499266de49a63043c"
+    },
+    "privacy": "Ignored local evidence directories retain original SQL, receipts and structural browser checks. No profile names, emails, credentials or private user identities are published in this release record."
+  },
+  "usage": {
+    "research_model_calls": 0,
+    "new_experiment_launches": 0,
+    "successful_production_profile_saves": 3,
+    "amplify_builds": 1,
+    "measured_charges_usd": null,
+    "unallocated_costs_usd": null,
+    "note": "Build, database, storage and primary-agent costs are unavailable or unallocated; missing usage is not zero."
+  },
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  }
+}
