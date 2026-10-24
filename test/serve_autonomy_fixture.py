@@ -1,11 +1,13 @@
 """Local actual API/controller/SQL/arithmetic with explicit synthetic boundaries."""
-import base64,json,os,threading,time,urllib.parse
+import base64,json,os,sys,threading,time,urllib.parse
 from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 import check_research_ideas_database as f
 import autonomy,autonomy_model as model,worker,paper_uploads
 import autonomy_fixtures as fixture
 
 f.bootstrap();f.rpc('publish_agent_prompt',fixture.publish_fixture())
+# Match the deployed worker's pinned PDF layer, including its parser subprocess.
+sys.path.insert(0,str(f.ROOT/'.runtime-autonomy-python/python'))
 fixture.preparation.registered=fixture.registered;model.invoke=fixture.provider
 os.environ.update(RESEARCH_AUTONOMY_ENABLED='true',RESEARCH_QUEUE_WORKERS_ENABLED='true')
 stop=threading.Event()

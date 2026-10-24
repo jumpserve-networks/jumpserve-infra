@@ -1,0 +1,81 @@
+{
+  "version": "paper-confirmation-production-release-status-v1",
+  "updated_at": "2026-10-24T16:33:25.857059+00:00",
+  "status": "awaiting-network-and-live-release-checks",
+  "deployed": false,
+  "pushed": false,
+  "authorization": "User explicitly requested merging current work to main and production deployment.",
+  "local_main_commits": {
+    "backend": "87d7a35d31decd7d1c9f6504e51850abca87840f",
+    "frontend": "6f9fbb46521025d4b138709cc35776ba34636ca0"
+  },
+  "verified_targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "verified_on": "2026-10-23",
+    "reverification_required": true
+  },
+  "checks": {
+    "frontend_unit_tests": {
+      "passed": 223
+    },
+    "backend_unit_tests": {
+      "passed": 225
+    },
+    "infrastructure_unit_tests": {
+      "passed": 90,
+      "skipped": 5,
+      "skipped_reason": "Backend benchmark-CLI contract fixture was not selected in this infrastructure Jest invocation; not a paper-confirmation execution check."
+    },
+    "frontend_build": "passed",
+    "infrastructure_build": "passed",
+    "lint": "passed with existing auth-button.tsx:157 warning",
+    "paper_confirmation_sql": {
+      "passed": 9,
+      "report": ".test-artifacts/research-ideas/database/20261023T212545021569Z/paper-upload-validation-report.json"
+    },
+    "previous_browser_and_controller_checks": "Retained in docs/paper-confirmation-local-validation-v1.json; source file hashes are unchanged."
+  },
+  "runtime_manifest": {
+    "version": 39,
+    "sha256": "584be0111e421c6e1b68681583aef88bdeff2608e83b41de825d405e3256658c",
+    "source_revision": "87d7a35d31decd7d1c9f6504e51850abca87840f",
+    "files": 34
+  },
+  "migration": {
+    "path": "database/202610230002_paper_confirmation.sql",
+    "sha256": "f99041700aa4fa66891060e4930ec004f3c23fdad7df569177e042e7bb132259",
+    "production_applied": false,
+    "previous_local_filename": "202610230001_paper_confirmation.sql",
+    "rename_reason": "Avoid collision with the released user-profile migration; original SQL bytes unchanged."
+  },
+  "remaining_release_blockers": [
+    "Network access to AWS, OpenAI and Supabase must be restored and targets reverified.",
+    "Five frozen actual-model extraction cases and substantive nonindependent AI review must pass; current attempts stopped before any case completed.",
+    "Repair the paused OpenClaw host administration path and verify its own native subscription authorization.",
+    "Apply migration and deploy scoped backend/worker/frontend updates; preserve published prompts and unrelated benchmark parameters.",
+    "Verify the actual authenticated upload, owner review, confirmation and queue flow after deployment."
+  ],
+  "operational_cleanup": {
+    "endpoint": "eice-02fe524bc95e0861e",
+    "security_group": "sg-0c686111b5ff6a4ad",
+    "status": "pending network access; last observed endpoint create-in-progress",
+    "public_ssh_rule": "Removed and verified after the earlier direct diagnostic",
+    "worker_ssh_rule": "Not admitted during private-endpoint creation; endpoint did not become ready",
+    "command": "python3 -B bin/paper-worker-repair.py cleanup-endpoint"
+  },
+  "original_failed_receipts_retained": true,
+  "published_prompt_changes": false,
+  "production_application_changes": false,
+  "usage": {
+    "completed_live_model_cases": 0,
+    "measured_charges_usd": null,
+    "subscription_allocation_usd": null,
+    "unallocated_costs": "Existing worker hosting, temporary network infrastructure, local compute and storage; missing charges are not zero."
+  },
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  }
+}

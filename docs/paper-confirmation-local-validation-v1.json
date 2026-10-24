@@ -1,0 +1,102 @@
+{
+  "version": "paper-confirmation-local-validation-v1",
+  "created_at": "2026-10-23T15:42:27.089246+00:00",
+  "status": "local-checks-passed-not-released",
+  "protocol": "docs/paper-confirmation-v1.md",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "software_checks": {
+    "frontend_unit_tests": 223,
+    "backend_unit_tests": 225,
+    "frontend_build": "passed",
+    "frontend_lint": "passed with existing auth-button.tsx:157 warning",
+    "focused_changed_file_lint": "passed",
+    "git_diff_check": "passed in all three repositories"
+  },
+  "reports": [
+    {
+      "repository": "jumpserve-front-end",
+      "path": ".test-artifacts/research-autonomy/2026-10-23T15-41-23.113Z/validation-report.json",
+      "sha256": "345f56a7c7e783df6bee8a1e9cf68d26f9342a28b8debcc4e9092c69cec8bbce",
+      "passed": true,
+      "checks": 10
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261023T153706550157Z/paper-upload-validation-report.json",
+      "sha256": "fa7ac4e727447ba9b2beb65c4c330234a3f969706447b97a47f0c558c9b83cd6",
+      "passed": true,
+      "checks": 9
+    },
+    {
+      "repository": "jumpserve-infra",
+      "path": ".test-artifacts/research-ideas/database/20261023T153821981782Z/autonomy-validation-report.json",
+      "sha256": "d38f67d1be8b56b4d28324b6a3d4aa63fe45be1b5de05b9b4f607dceb5627391",
+      "passed": true,
+      "checks": 11
+    }
+  ],
+  "runtime_manifest": {
+    "version": 39,
+    "sha256": "b8ab6fb6e629ffd3335bf905324d74e64e72bcafe1f4b64d239fb39f11dfaac6",
+    "files": {
+      "api.py": "5c367d11640460113e8b86e9c14f29b046f95bd8c1d05b91fbf94b9797bd74ee",
+      "autonomy.py": "e73a70f167e13021ca987fc31600e0b4bb583df578e036143f1595afb74da489",
+      "autonomy_costs.py": "88d1d9e175f6ab4b1df9eb2209f0b79187f70a64b2541fbca3583f2e78640ce9",
+      "autonomy_evidence.py": "014ae3bfba5c0162735aa921ced7e3703096c7573cf256160b78e92173780ca6",
+      "autonomy_model.py": "b4cacebee82ace3b9e21214893fb08948ec57d5a4c261985ae2c4045f615730a",
+      "autonomy_sources.py": "debc3a35264a82677f2b4f566323ebb85c8efdaa63b51fd796336c891d2de942",
+      "bounded_network.py": "0b8bc5948dbf71712296c3b4c9a47f4ac68f5e32dcc591be3e42914ff17abc0c",
+      "claim_design.py": "25ae2613b37cf31af13a5ee250a5c22d5266e18ec98c034d13bdc05e81d933e0",
+      "gap_queue.py": "598c564817f6cc4ced6172ae14ead651458b2898d20771ecc426b30ecc8c9c18",
+      "ideas.py": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+      "intake.py": "6833dd2e22be112b4b4f8c91c0946fb850d9e8cc823b4f9b4c0416a4df882cce",
+      "network_execution.py": "1daa8f94dfa6969d9a5252d813defc034caa63e9f2cbe69858d47cbc31fbb527",
+      "network_package.py": "cf7130d6669918401f1f92528a20fe8f0c63adeadd088dc6a52d22b759541461",
+      "network_spec.py": "cd9eed9696048dc0c9420e6a7b4ac2bfee17c45e7830462e8a1209400ff77a0a",
+      "package_runtime.py": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
+      "paper_titles.py": "04f7640a1ce8e35aefef6fa14a019013212b0784a57325acab36dd7ace9ae6b8",
+      "paper_uploads.py": "b72b74b68582ea072940ace2ca8c587991b691c2ac6a5703ef1339d20472b483",
+      "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b",
+      "policies/autonomy-experiment-costs-v2.json": "241f53ad7c51399b043d0567cc545fb3281d7581c619f51fc9474fc1eaa13b19",
+      "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "preparation.py": "5b1867da1f69b2b8a781d471abce1b871b7de10e2be40aa783390777b48462e3",
+      "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+      "scheduler.py": "8b0d6f0aae2e65cb0c367d333520fcd20635d6f73acbd41062f638773fad771c",
+      "store.py": "62b88b897094f773a3385c4288395f44a580c6fe963b75d7b77dc1b9a3de65c4",
+      "worker.py": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
+      "workflow.py": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f",
+      "policies/autonomy-turn-policy-v1.json": "7aa48bccc617d1493e8621a8c290e2251180c768f021f6f8cccf06eac5eddafb",
+      "model_dispatch.py": "500b4276a1deabf7b7711aa5dcc739a3d9d0ee07a8d5c7d21d63d43404ca84df",
+      "siwc_protocol.py": "73cbad57e87eb94add77e8d1e098776dc974f2a89e5b4e3eac7d42ea943f8d00",
+      "openclaw_runtime.py": "cee288eee33412966b7c5228b8dc93689df5dd82d24bc37d61808191b4203804",
+      "openclaw_auth.mjs": "40f583647563aabad3e0130ea4b6ba7c18a007d79ec63b8cb4d66c3ebabbd8ac",
+      "autonomy_inputs.py": "5f138390ac4014f6d99c9d4da2e2dbef95fc0804edaaabf7785ce96b9b2da0a9",
+      "paper_catalog.py": "e2cd06bbba9fc4308b5588e178ee1dfd3dd1d779a98afc9902fe4e7bb2ddbb30"
+    },
+    "source_revision": "working-tree-paper-confirmation-v1",
+    "deployed": false
+  },
+  "migration": {
+    "path": "database/202610230001_paper_confirmation.sql",
+    "sha256": "f99041700aa4fa66891060e4930ec004f3c23fdad7df569177e042e7bb132259",
+    "production_applied": false
+  },
+  "evidence_limits": [
+    "Synthetic Google authentication, model answers and Storage transport in the end-to-end fixture; actual local PostgreSQL, PDF parser, controller, recorded-check arithmetic and React components.",
+    "Actual Next routes verified anonymous sign-in return paths; no legitimate authenticated Next request in this campaign.",
+    "OpenClaw subscription calls and semantic metadata quality not live evaluated.",
+    "No production database, AWS infrastructure or deployed application changes.",
+    "Earlier failed SQL and browser receipts remain in timestamped .test-artifacts directories."
+  ],
+  "usage": {
+    "actual_model_calls": 0,
+    "cloud_instances_launched": 0,
+    "measured_charges_usd": null,
+    "unallocated_costs": "Local compute, isolated PostgreSQL storage, browser execution and hosting overhead are unallocated. Unknown costs are not recorded zero."
+  }
+}

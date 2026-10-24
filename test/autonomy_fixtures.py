@@ -78,7 +78,11 @@ def publish_fixture():
 def provider(request):
  context=json.loads(request['messages'][-1]['content'][0]['text']);stage=context['task']
  out=dict(action='blocked',reason='missing-required-inputs',blockers=[],claims=[],check_id=None,proposal=None,ready=None,coverage_complete=False,assessment_label=None,evidence_ids=[])
- if stage=='planning':
+ if stage=='discover':
+  quote=context['source_chunk']['text'].strip()
+  out.update(action='discover',reason='text-extracted',claims=[dict(page=context['source_chunk']['page'],quote=quote,claim_type='operational')])
+  if context.get('paper_metadata_requested'):out['paper_metadata']=dict(title=dict(text=quote,quote=quote,page=context['source_chunk']['page']),domain=dict(text='Software testing',quote=quote,page=context['source_chunk']['page']))
+ elif stage=='planning':
   if 'missing-equipment' in context['claim']['description']:
    out.update(blockers=[dict(kind='equipment',detail='unavailable-equipment',required_input='Applicable authorized instrument or archived measurement data')])
   elif context['registered_checks']:
