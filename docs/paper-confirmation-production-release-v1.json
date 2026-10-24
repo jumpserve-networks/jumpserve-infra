@@ -1,0 +1,274 @@
+{
+  "version": "paper-confirmation-production-release-v1",
+  "recorded_at": "2026-10-24T17:48:43.478423+00:00",
+  "software_release_status": "production-verified",
+  "scientific_assessment_status": "Release control only; selected claim remains in progress. This is not complete validation of the paper.",
+  "production_url": "https://jumpserve.quaint-lab.org/research-verification/new-assessment",
+  "authorization": "User explicitly requested merge to main and production deployment of this change.",
+  "targets": {
+    "aws_account": "395567831870",
+    "aws_profile": "jumpserve",
+    "aws_region": "us-east-1",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "identities_reverified_before_mutations": true
+  },
+  "application_revisions": {
+    "backend": "87d7a35d31decd7d1c9f6504e51850abca87840f",
+    "frontend": "6f9fbb46521025d4b138709cc35776ba34636ca0",
+    "infrastructure_deployed_code": "4dee574",
+    "branches": "main",
+    "frontend_amplify_app": "d24jvguj7brnkj",
+    "frontend_amplify_job": "125",
+    "frontend_amplify_status": "SUCCEED"
+  },
+  "behavior": [
+    "PDF upload opens a private review screen.",
+    "Title and research domain suggestions have exact source quotes and page references; unknown values remain empty.",
+    "Candidate claim inventory stays recorded; owner selection admits only the selected claims.",
+    "No claim task or experiment job can be inserted before owner confirmation.",
+    "Atomic confirmation saves title, domain, selected identities and the reviewed revision, then opens Experiment Queue.",
+    "Each actual model prompt, response, configuration, usage and provenance is recorded; raw artifacts stay private."
+  ],
+  "migration": {
+    "path": "database/202610230002_paper_confirmation.sql",
+    "sha256": "f99041700aa4fa66891060e4930ec004f3c23fdad7df569177e042e7bb132259",
+    "production_applied": true,
+    "previous_local_filename": "202610230001_paper_confirmation.sql",
+    "rename_reason": "Avoid collision with the released user-profile migration; original SQL bytes unchanged."
+  },
+  "runtime_manifest": {
+    "version": 39,
+    "sha256": "584be0111e421c6e1b68681583aef88bdeff2608e83b41de825d405e3256658c",
+    "source_revision": "87d7a35d31decd7d1c9f6504e51850abca87840f",
+    "files": 34
+  },
+  "local_checks": {
+    "frontend_unit_tests": {
+      "passed": 223
+    },
+    "backend_unit_tests": {
+      "passed": 225
+    },
+    "infrastructure_unit_tests": {
+      "passed": 90,
+      "skipped": 5,
+      "skipped_reason": "Backend benchmark-CLI contract fixture was not selected in this infrastructure Jest invocation; not a paper-confirmation execution check."
+    },
+    "frontend_build": "passed",
+    "infrastructure_build": "passed",
+    "lint": "passed with existing auth-button.tsx:157 warning",
+    "paper_confirmation_sql": {
+      "passed": 9,
+      "report": ".test-artifacts/research-ideas/database/20261023T212545021569Z/paper-upload-validation-report.json"
+    },
+    "previous_browser_and_controller_checks": "Retained in docs/paper-confirmation-local-validation-v1.json; source file hashes are unchanged."
+  },
+  "additional_checks": {
+    "release_parameter_guards": {
+      "passed": 5,
+      "command": "python3 -B test/openclaw_release_test.py"
+    },
+    "network_image_template_regression": {
+      "passed": 3,
+      "command": "npm test -- --runInBand test/network-execution.test.ts"
+    },
+    "autonomy_database": {
+      "passed": 11,
+      "scope": "Isolated database plus bounded loopback TCP; no live Internet measurement."
+    },
+    "browser_fixture": {
+      "passed": 10,
+      "report": "../jumpserve-front-end/.test-artifacts/research-autonomy/2026-10-23T15-41-23.113Z/validation-report.json",
+      "classification": "Synthetic auth/provider/storage; real React, API, local PostgreSQL, PDF parser and controller."
+    }
+  },
+  "live_extraction_evaluation": {
+    "passed": 5,
+    "classification": "Exposed development checks; not held-out validation",
+    "report": "docs/paper-confirmation-live-review-v1.json",
+    "private_original_artifacts": "docs/paper-confirmation-private-artifact-v1.json",
+    "runtime": "OpenClaw 2026.10.5; Node 24.16.0; gpt-6.1-sol",
+    "recorded_tokens": {
+      "input": 29515,
+      "output": 889,
+      "total": 30404
+    },
+    "maximum_calls": 5,
+    "attempted_calls": 5,
+    "orchestration_reservation_cents": 500,
+    "measured_charges_usd": null,
+    "subscription_allocation_usd": null
+  },
+  "production_checks": {
+    "schema_rls_browser_grants_and_legacy_bypass_denial": "passed",
+    "three_deployed_lambda_source_hash_checks": "passed, 34 source files each",
+    "worker_source_hash_check": "passed, 34 files",
+    "native_worker_refresh_and_model_catalog": "passed; worker host grant reconnected independently of the local evaluation grant",
+    "active_prompt_pointers": "unchanged",
+    "admission": "enabled",
+    "scheduler": "ENABLED; rate(1 minute)",
+    "authenticated_pdf_upload_review_confirmation_queue_execution": "passed",
+    "anonymous_review_sign_in_return_path": "passed",
+    "unknown_private_review": "explicit missing-review error; confirmation unavailable",
+    "public_queue_projection": "HTTP 200; tested private owner/prompt/response/storage keys absent",
+    "desktop_mobile_themes": "Production review examined at 1365x900 and 390x844, light and dark; no horizontal overflow. Fixture also covers failure, missing and reload states.",
+    "private_prompt_history": "Actual intake turn and versioned prompt/response controls load through the legitimate Google session."
+  },
+  "production_control": {
+    "assessment_id": "6fd4c2d1-94b0-4fee-bba2-bf50994274db",
+    "public_queue_url": "https://jumpserve.quaint-lab.org/research-verification/experiment-queue?assessment=6fd4c2d1-94b0-4fee-bba2-bf50994274db",
+    "classification": "Separate software release control with the existing archived IPv6 source-grounded plan",
+    "pdf_sha256": "f6378fb3de19aa8d3204f4d3a2028f95497f334862a5298aa6678ef1b816290b",
+    "pdf_bytes": 2183602,
+    "suggested_title": "‘How I learned to stop worrying and love IPv6’ : Measuring the Internet’s Readiness for DNS over IPv6",
+    "suggested_domain": "Internet network measurement: DNS resolution over IPv6",
+    "candidate_inventory_origin": "Retained source-grounded inventory, 15 claims; actual first-page AI metadata extraction, not a fresh full-paper inventory review",
+    "owner_confirmation_action": "Primary Codex AI implementer acting through the legitimate existing Google session; not human scientific review",
+    "verification": {
+      "assessment_id": "6fd4c2d1-94b0-4fee-bba2-bf50994274db",
+      "snapshot_sha256": "09384c964cfdccf08e58995e3f1b92a06528b3a381531f4301433cffc5b46bf5",
+      "snapshot_file": "private-control.json",
+      "review_status": "confirmed",
+      "claims": 15,
+      "claim_tasks": 1,
+      "jobs": 1,
+      "turns": 8,
+      "prompt_response_hashes_verified": true,
+      "task_statuses": [
+        {
+          "stage": "intake",
+          "status": "finished",
+          "label": null
+        },
+        {
+          "stage": "critic",
+          "status": "running",
+          "label": "inconclusive"
+        }
+      ],
+      "job_statuses": [
+        "awaiting-review"
+      ],
+      "checks": {
+        "pre_confirmation_no_claim_tasks_or_jobs": true,
+        "confirmed": true,
+        "only_selected_claim_admitted": true,
+        "original_claims_preserved": true,
+        "original_deadline_and_budget_preserved": true,
+        "default_spend_and_no_turn_cap": true,
+        "title_confirmation_saved": true,
+        "domain_confirmation_saved": true,
+        "immutable_confirmation_snapshot": true,
+        "prompts_and_responses_hash_verified": true
+      },
+      "complete_runs": 1,
+      "measurement_status_counts": [
+        {
+          "run_id": "76c8615a-1c32-5bfc-870b-0b6b8d45b3b2",
+          "status": "recorded",
+          "count": 192
+        }
+      ],
+      "turn_status_counts": {
+        "complete": 7,
+        "running": 1
+      },
+      "recorded_tokens": {
+        "inputTokens": 104014,
+        "outputTokens": 863,
+        "totalTokens": 104877
+      },
+      "usage_coverage": {
+        "turns": 8,
+        "turns_with_usage": 7
+      },
+      "measured_charges_usd": null,
+      "subscription_allocation_usd": null
+    },
+    "workflow_snapshot": {
+      "study_id": "6fd4c2d1-94b0-4fee-bba2-bf50994274db",
+      "status": "running",
+      "reason": "Owner confirmed paper information; selected claims are ready for assessment.",
+      "max_spend_cents": 10000,
+      "max_attempts": null,
+      "committed_cents": 1351,
+      "created_at": "2026-10-24 17:34:29.572581+00",
+      "deadline_at": "2026-10-31 17:34:29.572581+00"
+    },
+    "run_ids": [
+      "76c8615a-1c32-5bfc-870b-0b6b8d45b3b2"
+    ],
+    "summaries": 12,
+    "run_data_origin": "archived-data",
+    "new_internet_measurements": 0,
+    "new_experiment_ec2_instances": 0,
+    "observations": "192 stored scalar measurement rows from the first archived run, not 192 independent new empirical observations. A later second completed archived run was observed in the browser.",
+    "continues_in_background": true,
+    "consistency": "Counts and statuses are bounded separate reads and can change during retrieval. The receipt is a timestamped observation, not a transaction-wide snapshot.",
+    "recorded_usage_limit": "Token totals cover seven completed turns at the retained snapshot; one running turn had no usage yet. Later calls are outside these totals. Missing charges are not zero."
+  },
+  "operations": {
+    "worker_instance": "i-087f1493809643115",
+    "full_disk_recovery": "Encrypted root volume and XFS expanded in place from 24 to 48 GiB; 24 GiB free, 51% used immediately afterward. No original evidence or native grant was deleted or transferred.",
+    "rollback_snapshot": "snap-0137a98c3c03a2028; completed, encrypted",
+    "temporary_repair_access": "All temporary rules, Instance Connect Endpoints and associated groups removed and verified; OAuth port-forwarding session terminated after success.",
+    "historical_unknown_dispatches": 18,
+    "historical_unknown_outcomes": "Preserved as unknown, never replayed or relabeled by the release.",
+    "package_image_correction": "First stack update completed but strict guard caught mutable image lookup drift. Corrective deployment restored/pinned ami-02a9cdd4e98bc3c78. No package experiment admitted during that interval.",
+    "active_benchmark_image": "ami-0808d1157e26c65cb, unchanged",
+    "failed_attempts_retained": true,
+    "costs": {
+      "measured_compute_storage_model_charges_usd": null,
+      "estimates": "Per-turn and job commitments are conservative admission reservations, not measured charges.",
+      "unallocated": "Existing EC2 worker hosting, extra 24 GiB of root storage, rollback snapshot, temporary repair infrastructure, local compute/storage, Lambda/Supabase hosting and subscription allowance allocation."
+    }
+  },
+  "limitations": [
+    "This is a production software release verification, not a new full scientific assessment of all 15 claims. Only one claim was selected, with six retained checks; remaining checks and final interpretation continue in the background.",
+    "The production PDF control follows the retained-plan path. Arbitrary papers and visual/supplement coverage are not validated by this one case; extracted text and five development excerpts do not establish complete literature review or perfect extraction.",
+    "New real-world Internet networking and custom EC2/container execution were not exercised in this release control; its executed run is archived bounded arithmetic.",
+    "A fresh Google OAuth round trip was not repeated. The real existing Google session and anonymous sign-in return paths were verified.",
+    "Raw model runtime artifact receipts identify retained HTTP SSE bytes; a legacy generic response_scope string also says provider HTTP bytes unavailable. Treat those specific artifact manifests as the available-byte record, not a claim of universal capture.",
+    "The existing worker now has a 48-GiB operational volume while its original launch declaration remains 24 GiB, avoiding instance replacement. Monitoring and an evidence-preserving spool retention policy remain follow-ups.",
+    "All substantive release answer review was performed by the AI implementer; no independent or human scientific review is claimed."
+  ],
+  "release_receipts": {
+    "migration": "20261024T164234067263Z",
+    "initial_backend_postcheck_failure": "20261024T164356788905Z",
+    "corrective_diff": "20261024T170256728784Z",
+    "cdk_output_lock_failure": "20261024T170352316106Z",
+    "backend_corrective_success": "20261024T170626505395Z",
+    "worker_stack_success": "20261024T170353476222Z",
+    "worker_runtime_update": "20261024T171002537701Z",
+    "schema_and_lambda_verification": "20261024T172452187773Z",
+    "admission_restored": "20261024T173252192451Z",
+    "initial_pre_confirmation": "20261024T173440916286Z",
+    "ready_pre_confirmation": "20261024T173628726095Z",
+    "confirmed_selection": "20261024T173743606931Z",
+    "confirmation_invariants": "20261024T173934767493Z",
+    "execution_and_persistence": "20261024T174544582044Z"
+  },
+  "historical_protocols_preserved": [
+    "docs/paper-confirmation-v1.md",
+    "docs/paper-confirmation-local-validation-v1.json",
+    "docs/paper-confirmation-release-v1.md",
+    "docs/paper-confirmation-release-status-v1.json"
+  ],
+  "reproduction_commands": [
+    "npm test && npm run build (frontend)",
+    "python3 -B -m unittest discover -s research_workflow/tests -v (backend)",
+    "npm test -- --runInBand (infrastructure)",
+    "npm run test:research:paper-uploads (isolated local PostgreSQL)",
+    "python3 -B test/openclaw_release_test.py",
+    "python3 -B bin/paper-confirmation-release.py verify (guarded production read-only)",
+    "python3 -B bin/paper-confirmation-release.py control-verify (fixed release control, read-only)",
+    "python3 -B bin/paper-confirmation-release.py archive-release (private content-addressed evidence upload; preserves originals)"
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false,
+    "human_review": false
+  },
+  "verification_helper_sha256": "73833e429fb10c35a2d8a188db4ad5172396ea6d4320e25c73d143a3ba6865f4"
+}

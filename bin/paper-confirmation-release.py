@@ -188,11 +188,85 @@ def control_snapshot(directory):
   turn=item['value']
   if sha(turn['request_raw'].encode())!=turn['request_sha256']:raise RuntimeError('Stored original prompt hash differs')
   if turn['raw_response'] is not None and sha(turn['raw_response'].encode())!=turn['response_sha256']:raise RuntimeError('Stored original response hash differs')
+ data['runs']=r.admin.query('select to_jsonb(v) value from research_runs v where study_id='+sid+' order by created_at,id')
+ data['measurement_status_counts']=r.admin.query('select run_id::text,status,count(*) count from research_measurements where study_id='+sid+' group by run_id,status order by run_id,status')
+ data['summaries']=r.admin.query('select to_jsonb(v) value from research_summaries v where study_id='+sid+' order by created_at,id')
  raw=json.dumps(data,indent=2).encode();(directory/'private-control.json').write_bytes(raw)
  return dict(assessment_id=assessment,snapshot_sha256=sha(raw),snapshot_file='private-control.json',review_status=data['review'][0]['value']['status'],claims=len(data['claims']),claim_tasks=sum(t['claim_id'] is not None for t in data['tasks']),jobs=len(data['jobs']),turns=len(data['turns']),prompt_response_hashes_verified=True,task_statuses=[dict(stage=t['stage'],status=t['status'],label=t['label']) for t in data['tasks']],job_statuses=[j['status'] for j in data['jobs']])
 
+def verify_control(directory):
+ result=control_snapshot(directory);after=json.loads((directory/'private-control.json').read_bytes());before=[]
+ for path in sorted(BASE.glob('*/private-control.json')):
+  if path.parent==directory:continue
+  value=json.loads(path.read_bytes())
+  if value['paper'][0]['id']==result['assessment_id'] and value['review'][0]['value']['status']!='confirmed':before.append(value)
+ if not before or not any(v['review'][0]['value']['status']=='ready' for v in before):raise RuntimeError('Retained ready and pre-confirmation snapshots required')
+ original=before[0];review=after['review'][0]['value'];confirmation=review['confirmation'];selected=confirmation['claim_ids'] if confirmation else []
+ tasks=[t for t in after['tasks'] if t['claim_id'] is not None]
+ expected=[c['value']['id'] for c in original['claims'] if c['value']['description']=='Published absolute folded metrics']
+ fields=('max_spend_cents','max_attempts','created_at','deadline_at');stable=lambda v:{k:v['workflow'][0][k] for k in fields};claims=lambda v:sorted((c['value'] for c in v['claims']),key=lambda c:c['id'])
+ checks=dict(pre_confirmation_no_claim_tasks_or_jobs=all(not v['jobs'] and not any(t['claim_id'] is not None for t in v['tasks']) for v in before),confirmed=review['status']=='confirmed',only_selected_claim_admitted=len(expected)==1 and selected==expected and [t['claim_id'] for t in tasks]==expected,original_claims_preserved=claims(original)==claims(after),original_deadline_and_budget_preserved=stable(original)==stable(after),default_spend_and_no_turn_cap=after['workflow'][0]['max_spend_cents']==10000 and after['workflow'][0]['max_attempts'] is None,title_confirmation_saved=after['paper'][0]['title']==confirmation['title'] and confirmation['title'].startswith('Release verification — '),domain_confirmation_saved=after['paper'][0]['domain']==confirmation['domain'],immutable_confirmation_snapshot=after['review_events'][-1]['value']['snapshot']==review,prompts_and_responses_hash_verified=result['prompt_response_hashes_verified'])
+ if not all(checks.values()):raise RuntimeError('Production confirmation control failed: '+','.join(k for k,v in checks.items() if not v))
+ complete=[v['value'] for v in after['runs'] if v['value']['status']=='complete'];turns=[v['value'] for v in after['turns']]
+ return dict(**result,checks=checks,complete_runs=len(complete),measurement_status_counts=after['measurement_status_counts'],turn_status_counts={status:sum(t['status']==status for t in turns) for status in sorted({t['status'] for t in turns})},recorded_tokens={key:sum((t['usage'].get('tokens') or {}).get(key,0) for t in turns) for key in ('inputTokens','outputTokens','totalTokens')},usage_coverage=dict(turns=len(turns),turns_with_usage=sum(bool(t['usage'].get('tokens')) for t in turns)),measured_charges_usd=None,subscription_allocation_usd=None)
+
+def archive_release(directory):
+ # Explicit evidence filenames only; never collect native auth state, SSH keys,
+ # environment files, browser cookies, SSM interactive logs or Lambda env vars.
+ entries={}
+ for root in (BASE,ROOT/'.test-artifacts/paper-worker-repair'):
+  for folder in root.iterdir():
+   if not folder.is_dir() or folder==directory:continue
+   for name in ('receipt.json','private-control.json','parameter-comparison.json'):
+    path=folder/name
+    if path.is_file():entries[str(path.relative_to(ROOT))]=path.read_bytes()
+ for stamp in ('20261024T171303860323Z','20261024T171309049767Z','20261024T171345106208Z','20261024T172148312155Z','20261024T172806376787Z','20261024T172949010453Z','20261024T173316951538Z'):
+  path=ROOT/'.test-artifacts/openclaw-release'/stamp/'receipt.json'
+  entries[str(path.relative_to(ROOT))]=path.read_bytes()
+ for name in ('main.pdf','identity.json','frozen-control.json'):
+  path=ROOT/'.test-artifacts/paper-confirmation-control'/name;entries[str(path.relative_to(ROOT))]=path.read_bytes()
+ for path in (ROOT.parent/'jumpserve-front-end/.test-artifacts/paper-confirmation-production').iterdir():
+  if path.suffix=='.png' or path.name in ('browser-observations.json','browser-follow-up.json'):entries['browser/'+path.name]=path.read_bytes()
+ for name in ('docs/paper-confirmation-production-release-v1.json','docs/paper-confirmation-release-amendments-v1.md','docs/paper-confirmation-private-artifact-v1.json','bin/paper-confirmation-release.py','bin/paper-worker-repair.py','research-workflow-runtime.json','database/202610230002_paper_confirmation.sql'):
+  entries[name]=(ROOT/name).read_bytes()
+ identity=json.loads((ROOT/'.test-artifacts/paper-confirmation-control/identity.json').read_bytes());assessment=str(uuid.UUID(identity['assessment_id']))
+ paper=r.admin.query('select paper_upload from research_studies where id='+r.admin.literal(assessment)+'::uuid')
+ if len(paper)!=1 or paper[0]['paper_upload'].get('sha256')!='f6378fb3de19aa8d3204f4d3a2028f95497f334862a5298aa6678ef1b816290b' or paper[0]['paper_upload'].get('filename')!='JumpServe release verification IPv6.pdf':raise RuntimeError('Only the fixed release-control artifacts may be retrieved')
+ artifacts=r.admin.query('select id::text,sha256,byte_count,storage_path,media_type from research_artifacts where study_id='+r.admin.literal(assessment)+'::uuid order by id limit 501')
+ if len(artifacts)>500 or sum(a['byte_count'] for a in artifacts)>32_000_000:raise RuntimeError('Control artifact verification exceeds its 500-record/32-MB bound')
+ key=r.aws('secretsmanager','get-secret-value','--secret-id','jumpserve/supabase-service-key')['SecretString'];headers={'apikey':key,'Authorization':'Bearer '+key}
+ for artifact in artifacts:
+  if artifact['storage_path']!=assessment+'/'+artifact['sha256'] or not re.fullmatch('[a-f0-9]{64}',artifact['sha256']):raise RuntimeError('Control artifact identity differs')
+  url='https://regphejnlvfpyokpniny.supabase.co/storage/v1/object/research-workflow-raw/'+artifact['storage_path']
+  with r.prior.guard.OPEN.open(urllib.request.Request(url,headers=headers),timeout=45) as response:raw=response.read(10_000_001)
+  if len(raw)!=artifact['byte_count'] or sha(raw)!=artifact['sha256']:raise RuntimeError('Retrieved control artifact bytes differ')
+  entries['control-original-artifacts/'+artifact['sha256']]=raw
+ entries['control-original-artifacts/manifest.json']=json.dumps(artifacts,indent=2).encode()
+ members=[dict(path=name,sha256=sha(raw),byte_count=len(raw)) for name,raw in sorted(entries.items())];buffer=io.BytesIO()
+ with zipfile.ZipFile(buffer,'w',zipfile.ZIP_DEFLATED) as archive:
+  for name,raw in sorted(entries.items()):archive.writestr(name,raw)
+  archive.writestr('manifest.json',json.dumps(members,indent=2)+'\n')
+ raw=buffer.getvalue()
+ if len(raw)>10_000_000:raise RuntimeError('Private operational release archive exceeds 10 MB bound')
+ (directory/'release-evidence.zip').write_bytes(raw)
+ path='release-verification/paper-confirmation/production/'+sha(raw)+'.zip';url='https://regphejnlvfpyokpniny.supabase.co/storage/v1/object/research-workflow-raw/'+path;headers={'apikey':key,'Authorization':'Bearer '+key}
+ with r.prior.guard.OPEN.open(urllib.request.Request(url,data=raw,method='POST',headers={**headers,'Content-Type':'application/zip','x-upsert':'false'}),timeout=45) as response:response.read(1000)
+ with r.prior.guard.OPEN.open(urllib.request.Request(url,headers=headers),timeout=45) as response:retrieved=response.read(10_000_001)
+ if raw!=retrieved:raise RuntimeError('Retrieved operational evidence bytes differ')
+ with zipfile.ZipFile(io.BytesIO(retrieved)) as archive:
+  for member in members:
+   if sha(archive.read(member['path']))!=member['sha256']:raise RuntimeError('Retrieved operational evidence member differs')
+ anon=json.loads((ROOT/'cdk.json').read_bytes())['context']['supabaseAnonKey'];status=200
+ try:
+  with r.prior.guard.OPEN.open(urllib.request.Request(url,headers={'apikey':anon}),timeout=20) as response:response.read(1)
+ except urllib.error.HTTPError as error:status=error.code
+ if status not in (400,401,403,404):raise RuntimeError('Operational archive is anonymously readable')
+ result=dict(bucket='research-workflow-raw',path=path,sha256=sha(raw),retrieved_sha256=sha(retrieved),byte_count=len(raw),files=len(members),all_member_hashes_verified=True,original_control_artifacts_retrieved_and_verified=len(artifacts),original_control_artifact_bytes=sum(a['byte_count'] for a in artifacts),anonymous_read_denied=True,anonymous_status=status,measured_storage_charges_usd=None,coverage='Immutable artifacts visible at the archive query; later background work is outside this snapshot.')
+ (ROOT/'docs/paper-confirmation-production-artifact-v1.json').write_text(json.dumps(result,indent=2)+'\n')
+ return result
+
 def main():
- parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['freeze','run-local','inspect','archive','migrate','diff','deploy','host-diff','host-deploy','host-update','activate','verify','control-snapshot']);args=parser.parse_args()
+ parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['freeze','run-local','inspect','archive','archive-release','migrate','diff','deploy','host-diff','host-deploy','host-update','activate','verify','control-snapshot','control-verify']);args=parser.parse_args()
  if args.mode=='freeze':print(json.dumps(freeze()));return
  if args.mode=='run-local':run_local();return
  directory=BASE/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');directory.mkdir(parents=True,mode=0o700)
@@ -204,6 +278,8 @@ def main():
    report['inspection']=dict(review_relation=r.admin.query("select to_regclass('public.research_paper_reviews') relation"),active=r.admin.query("select stage,status,count(*) from research_autonomy_tasks where status in ('running','queued','waiting') group by stage,status"),dispatch=r.admin.query("select status,count(*) from research_model_dispatches where status in ('queued','running','unknown') group by status"))
   elif args.mode=='archive':report['archive']=archive_evaluation(directory)
   elif args.mode=='control-snapshot':report['control']=control_snapshot(directory)
+  elif args.mode=='control-verify':report['control']=verify_control(directory)
+  elif args.mode=='archive-release':report['archive']=archive_release(directory)
   elif args.mode=='migrate':
    report['live_review']=reviewed()
    if r.admin.query("select count(*) count from research_autonomy_tasks where status='running'")[0]['count'] or r.admin.query("select count(*) count from research_autonomy_turns where status='running'")[0]['count']:raise ValueError('Drain active autonomous leases/turns before migration')

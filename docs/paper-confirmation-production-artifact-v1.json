@@ -1,0 +1,15 @@
+{
+  "bucket": "research-workflow-raw",
+  "path": "release-verification/paper-confirmation/production/991e93d7c00f87a62438f7962852b26f4295ca104ec24c3178fea1080d7c625b.zip",
+  "sha256": "991e93d7c00f87a62438f7962852b26f4295ca104ec24c3178fea1080d7c625b",
+  "retrieved_sha256": "991e93d7c00f87a62438f7962852b26f4295ca104ec24c3178fea1080d7c625b",
+  "byte_count": 6191258,
+  "files": 147,
+  "all_member_hashes_verified": true,
+  "original_control_artifacts_retrieved_and_verified": 89,
+  "original_control_artifact_bytes": 8843298,
+  "anonymous_read_denied": true,
+  "anonymous_status": 400,
+  "measured_storage_charges_usd": null,
+  "coverage": "Immutable artifacts visible at the archive query; later background work is outside this snapshot."
+}

@@ -70,3 +70,17 @@ evaluation grant; copying credentials between them is not a release procedure.
 Admission and the schedule must remain held until the worker's native catalog
 check succeeds. The final production receipt records whether that gate and the
 authenticated browser control completed.
+
+The completed production record is
+[`paper-confirmation-production-release-v1.json`](paper-confirmation-production-release-v1.json).
+The worker's native grant, pinned model catalog and all 34 source files passed
+verification. Admission and the one-minute schedule were restored. A legitimate
+signed-in PDF upload produced the source-quoted title/domain and 15 retained
+claim candidates. Before confirmation there were no claim tasks or experiment
+jobs. Confirmation of one selected claim created exactly its task, preserved
+the original budget/deadline and all 15 original claim records, and opened the
+queue. The selected archived check executed automatically and persisted a
+complete run, 192 scalar measurement rows and 12 summaries. This verifies the
+software path; the selected claim has six retained checks, so its scientific
+assessment continues with its current unresolved label. No new Internet
+measurement or experiment EC2 instance was launched by this control.
