@@ -66,8 +66,12 @@ export class ResearchWorkflow extends Construct {
     if (networkingEnabled && executors) {
       const packageVpc = new ec2.Vpc(this,'PackageVpc',{maxAzs:1,natGateways:0,subnetConfiguration:[{name:'Experiment',subnetType:ec2.SubnetType.PUBLIC,cidrMask:24}]});
       const sg = new ec2.SecurityGroup(this,'PackageMachines',{vpc:packageVpc,description:'Isolated networking packages: no inbound access and no instance IAM profile',allowAllOutbound:true});
+      // Keep experiment input identity stable across unrelated controller
+      // deployments. A latest-image SSM parameter is re-resolved by CloudFormation.
+      const packageAmi = String(this.node.tryGetContext('networkPackageAmiId') ?? 'ami-02a9cdd4e98bc3c78');
+      if (!/^ami-[a-f0-9]{17}$/.test(packageAmi)) throw new Error('A pinned package-experiment AMI is required.');
       const machineEnvironment = {SUPABASE_URL:url,SUPABASE_SECRET_ARN:secret.secretArn,NETWORK_AWS_ACCOUNT:'395567831870',
-        NETWORK_PACKAGE_AMI:ec2.MachineImage.fromSsmParameter('/aws/service/canonical/ubuntu/server/24.04/stable/current/amd64/hvm/ebs-gp3/ami-id').getImage(this).imageId,
+        NETWORK_PACKAGE_AMI:packageAmi,
         NETWORK_PACKAGE_SUBNET:packageVpc.publicSubnets[0].subnetId,NETWORK_PACKAGE_SECURITY_GROUP:sg.securityGroupId,NETWORK_PACKAGE_INGEST_URL:`${httpApi.apiEndpoint}/research/network-ingest`};
       packageExecutor = new lambda.Function(this,'PackageExecutor',{code:lambda.Code.fromAsset(runtime),handler:'network_package.handler',runtime:lambda.Runtime.PYTHON_3_12,memorySize:512,timeout:cdk.Duration.seconds(60),retryAttempts:0,environment:machineEnvironment});
       const reaper = new lambda.Function(this,'PackageReaper',{code:lambda.Code.fromAsset(runtime),handler:'network_package.reap',runtime:lambda.Runtime.PYTHON_3_12,memorySize:256,timeout:cdk.Duration.seconds(120),retryAttempts:0,environment:machineEnvironment});

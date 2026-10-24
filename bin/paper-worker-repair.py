@@ -9,7 +9,7 @@ spec=importlib.util.spec_from_file_location('paper_worker_guard',ROOT/'bin/openc
 r=importlib.util.module_from_spec(spec);spec.loader.exec_module(r)
 
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['inspect','inspect-tunnel','repair-ssm','cleanup-endpoint','reboot-paused-worker']);a=p.parse_args()
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['inspect','inspect-tunnel','repair-ssm','expand-root','cleanup-endpoint','reboot-paused-worker']);a=p.parse_args()
  directory=ROOT/'.test-artifacts/paper-worker-repair'/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');directory.mkdir(parents=True,mode=0o700)
  receipt=dict(mode=a.mode,status='running',started_at=r.stamp(),measured_charges_usd=None)
  rule=None;group=None;endpoint=None;endpoint_group=None
@@ -22,7 +22,13 @@ def main():
    endpoint='eice-02fe524bc95e0861e';endpoint_group='sg-0c686111b5ff6a4ad'
    receipt.update(temporary_endpoint=endpoint,temporary_endpoint_group=endpoint_group,status='cleanup-requested');save();return
   if a.mode=='reboot-paused-worker':
-   if r.admin.query("select count(*) count from research_autonomy_tasks where status='running'")[0]['count'] or r.admin.query("select count(*) count from research_model_dispatches where status in ('queued','running','unknown')")[0]['count']:raise RuntimeError('Drain or reconcile active model work before reboot')
+   if r.admin.query("select count(*) count from research_autonomy_tasks where status='running'")[0]['count'] or r.admin.query("select count(*) count from research_model_dispatches where status in ('queued','running')")[0]['count']:raise RuntimeError('Drain active model work before reboot')
+   # Historical unknown outcomes remain unknown. They are never replayed, and
+   # their records/spool are preserved. After ten minutes with an expired lease,
+   # the worker's bounded 100-second subprocess cannot still be that invocation.
+   if r.admin.query("select count(*) count from research_model_dispatches where status='unknown' and greatest(created_at,coalesce(lease_until,created_at),coalesce(ended_at,created_at))>clock_timestamp()-interval '10 minutes'")[0]['count']:raise RuntimeError('A recent unconfirmed invocation still needs reconciliation before reboot')
+   receipt['historical_unknowns']=r.admin.query("select id::text,request_sha256,status,created_at::text,ended_at::text from research_model_dispatches where status='unknown' order by id")
+   save()
    if not instance_paused():raise RuntimeError('Only the paused authentication worker may be rebooted')
    receipt['before']=r.aws('ec2','describe-instance-status','--instance-ids',identity,'--include-all-instances')
    r.aws('ec2','reboot-instances','--instance-ids',identity);receipt.update(status='reboot-requested',instance_id=identity);save();return
@@ -32,7 +38,20 @@ def main():
   if group!='sg-0b4f8e89ed3c5fc0f':raise ValueError('Unexpected worker security group')
   before=r.aws('ec2','describe-security-groups','--group-ids',group)['SecurityGroups'][0]['IpPermissions']
   if before:raise ValueError('Expected no preexisting inbound rules; do not alter unknown access')
-  tunnel=a.mode in ('inspect-tunnel','repair-ssm')
+  if a.mode=='expand-root':
+   if r.admin.query("select count(*) count from research_autonomy_tasks where status='running'")[0]['count'] or r.admin.query("select count(*) count from research_model_dispatches where status in ('queued','running')")[0]['count']:raise RuntimeError('Drain active work before capacity recovery')
+   volume=r.aws('ec2','describe-volumes','--volume-ids','vol-0993b9127ac7a8231')['Volumes'][0]
+   if not volume['Encrypted'] or len(volume['Attachments'])!=1 or volume['Attachments'][0]['InstanceId']!=identity or volume['Size'] not in (24,48):raise ValueError('Unexpected original encrypted worker volume')
+   snapshot=r.aws('ec2','create-snapshot','--volume-id',volume['VolumeId'],'--description','JumpServe paper-confirmation full-disk recovery '+directory.name)
+   receipt.update(original_volume=volume['VolumeId'],rollback_snapshot=snapshot['SnapshotId'],requested_volume_gib=48,previous_volume_gib=volume['Size'],snapshot_consistency='Crash-consistent EBS snapshot while model work is paused; no file deletion or grant migration');save()
+   if volume['Size']==24:r.aws('ec2','modify-volume','--volume-id',volume['VolumeId'],'--size','48')
+   for attempt in range(60):
+    change=r.aws('ec2','describe-volumes-modifications','--volume-ids',volume['VolumeId'])['VolumesModifications']
+    if change and change[0]['ModificationState'] in ('optimizing','completed'):break
+    if change and change[0]['ModificationState']=='failed':raise RuntimeError('Original volume expansion failed')
+    time.sleep(5)
+   else:raise RuntimeError('Volume expansion readiness exceeded five-minute bound')
+  tunnel=a.mode in ('inspect-tunnel','repair-ssm','expand-root')
   key=directory/'temporary-key'
   subprocess.run(['ssh-keygen','-q','-t','ed25519','-N','','-f',str(key)],check=True,capture_output=True,timeout=10)
   if tunnel:
@@ -68,6 +87,18 @@ sudo dnf reinstall -y amazon-ssm-agent
 sudo systemctl restart amazon-ssm-agent.service
 sudo systemctl is-active amazon-ssm-agent.service
 sudo rpm -V amazon-ssm-agent
+'''
+  if a.mode=='expand-root':commands='''set -eu
+test "$(lsblk -dn -o SERIAL /dev/nvme0n1 | tr -d ' -')" = vol0993b9127ac7a8231
+test "$(findmnt -n -o FSTYPE /)" = xfs
+df -h /
+sudo env TMPDIR=/run growpart /dev/nvme0n1 1
+sudo xfs_growfs -d /
+df -h /
+sudo du -x -h -d 2 /var/lib/jumpserve-openclaw | sort -h | tail -18
+sudo systemctl restart amazon-ssm-agent.service
+sudo systemctl restart jumpserve-openclaw.service
+sudo systemctl is-active amazon-ssm-agent.service jumpserve-openclaw.service
 '''
   options=[]
   if tunnel:options=['-o','ProxyCommand='+shlex.join(['aws','ec2-instance-connect','open-tunnel','--instance-id',identity,'--instance-connect-endpoint-id',endpoint,'--remote-port','22','--profile','jumpserve','--region','us-east-1'])]

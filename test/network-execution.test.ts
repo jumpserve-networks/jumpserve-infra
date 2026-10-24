@@ -21,7 +21,8 @@ test('network workers invoke only registered functions; custom hosts receive no 
  const realWorld=new lambda.Function(stack,'RealWorld',{runtime:lambda.Runtime.PYTHON_3_12,handler:'index.handler',code:lambda.Code.fromInline('def handler(event,context): return {}')});
  new ResearchWorkflow(stack,'Research',new api.HttpApi(stack,'Api'),{emulated,realWorld,vpc});
  const t=Template.fromStack(stack);
- t.hasResourceProperties('AWS::Lambda::Function',{Handler:'network_package.handler',Timeout:60});
+ t.hasResourceProperties('AWS::Lambda::Function',{Handler:'network_package.handler',Timeout:60,Environment:{Variables:Match.objectLike({NETWORK_PACKAGE_AMI:'ami-02a9cdd4e98bc3c78'})}});
+ expect(JSON.stringify(t.toJSON().Parameters)).not.toContain('/ubuntu/server/24.04/stable/current/');
  t.hasResourceProperties('AWS::Lambda::Function',{Handler:'network_package.reap',Timeout:120});
  t.hasResourceProperties('AWS::Lambda::Function',{Handler:'network_package.ingest',Timeout:29});
  t.hasResourceProperties('AWS::ApiGatewayV2::Route',{RouteKey:'POST /research/studies/{studyId}/network'});

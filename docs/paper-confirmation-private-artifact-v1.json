@@ -1,0 +1,13 @@
+{
+  "bucket": "research-workflow-raw",
+  "path": "release-verification/paper-confirmation/bf24bca2328f22bdeaf366f0e9b5ace36bba24cac72548f1db2b5d8857230000.zip",
+  "sha256": "bf24bca2328f22bdeaf366f0e9b5ace36bba24cac72548f1db2b5d8857230000",
+  "retrieved_sha256": "bf24bca2328f22bdeaf366f0e9b5ace36bba24cac72548f1db2b5d8857230000",
+  "byte_count": 783864,
+  "files": 119,
+  "all_member_hashes_verified": true,
+  "anonymous_read_denied": true,
+  "anonymous_status": 400,
+  "review_sha256": "52541e603b6dc7f4ab0b3b246589c100c9719e5742933829e1ec03426837f5ce",
+  "measured_storage_charges_usd": null
+}
