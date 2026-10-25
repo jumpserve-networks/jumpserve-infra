@@ -180,6 +180,7 @@ grant all on public.agent_sessions to service_role;""")
         name='202610200008_remove_autonomy_turn_cap.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     name='202610200009_openclaw_dispatch.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     name='202610230002_paper_confirmation.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
+    name='202610240001_paper_review_selection.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     report['bootstrap_limit']='Legacy agent_sessions base table and Storage API catalog columns synthesized; listed prompt/research migrations executed as original files. Historical study-table migrations outside this feature are not replayed.'
     store.request=transport
 

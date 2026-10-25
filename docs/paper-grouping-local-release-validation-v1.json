@@ -1,0 +1,30 @@
+{
+  "version": "paper-grouping-local-release-validation-v1",
+  "backend_source_revision": "3d7cf31c420b281426a02b52de04aa207aa8f5fb",
+  "backend_unit_tests": {
+    "run": 237,
+    "passed": 236,
+    "skipped": 1,
+    "skip": "Pinned CLI absent in initial isolated checkout; exact committed native transport subsequently passed 7/7 after providing the existing pinned runtime."
+  },
+  "native_transport_tests": {
+    "run": 7,
+    "passed": 7,
+    "synthetic_provider": true,
+    "actual_committed_runtime": true
+  },
+  "database_grouping_checks": {
+    "passed": 5,
+    "report": ".test-artifacts/research-ideas/database/20261025T225841970803Z/paper-selection-validation-report.json"
+  },
+  "pdf_database_checks": {
+    "passed": 9,
+    "report": ".test-artifacts/research-ideas/database/20261025T225929129947Z/paper-upload-validation-report.json"
+  },
+  "real_model_evaluation": "docs/paper-grouping-release-evaluation-v2.json",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  }
+}

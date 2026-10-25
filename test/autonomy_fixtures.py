@@ -82,6 +82,11 @@ def provider(request):
   quote=context['source_chunk']['text'].strip()
   out.update(action='discover',reason='text-extracted',claims=[dict(page=context['source_chunk']['page'],quote=quote,claim_type='operational')])
   if context.get('paper_metadata_requested'):out['paper_metadata']=dict(title=dict(text=quote,quote=quote,page=context['source_chunk']['page']),domain=dict(text='Software testing',quote=quote,page=context['source_chunk']['page']))
+ elif stage=='paper-review-selection':
+  prior=[item for name in ('central_claims','testable_findings') for item in context['prior_shortlist'][name]]
+  incoming=[dict(claim_id=c['id'],label=c['description'][:100]) for c in context['candidates']]
+  items=list({c['claim_id']:c for c in prior+incoming}.values())
+  out.update(action='discover',reason='text-extracted',paper_review_selection=dict(central_claims=items[:1],testable_findings=items[1:16],rationale='Explicit synthetic organization fixture; not a model quality evaluation.'))
  elif stage=='planning':
   if 'missing-equipment' in context['claim']['description']:
    out.update(blockers=[dict(kind='equipment',detail='unavailable-equipment',required_input='Applicable authorized instrument or archived measurement data')])

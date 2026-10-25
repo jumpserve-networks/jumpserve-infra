@@ -1,14 +1,12 @@
 {
-  "version": 39,
-  "source_revision": "87d7a35d31decd7d1c9f6504e51850abca87840f",
-  "base_source_revision": "a94eb0e26c96da73aa4d7d435899b2ce796db61d",
-  "revision_status": "Committed backend main candidate for owner-confirmed PDF assessment intake; production rollout and live metadata checks recorded in the separate release receipt.",
+  "version": 43,
+  "source_revision": "3d7cf31c420b281426a02b52de04aa207aa8f5fb",
   "files": {
     "api.py": "5c367d11640460113e8b86e9c14f29b046f95bd8c1d05b91fbf94b9797bd74ee",
-    "autonomy.py": "e73a70f167e13021ca987fc31600e0b4bb583df578e036143f1595afb74da489",
+    "autonomy.py": "c45a77e7c1363fcd15c67369da20b2e7d25877e0b2c975f4699d82c0a9a90464",
     "autonomy_costs.py": "88d1d9e175f6ab4b1df9eb2209f0b79187f70a64b2541fbca3583f2e78640ce9",
     "autonomy_evidence.py": "014ae3bfba5c0162735aa921ced7e3703096c7573cf256160b78e92173780ca6",
-    "autonomy_model.py": "b4cacebee82ace3b9e21214893fb08948ec57d5a4c261985ae2c4045f615730a",
+    "autonomy_model.py": "c0cf305f8be060d2c92d908c8ce69ca60578e9dfbf8f287ade77df28df059334",
     "autonomy_sources.py": "debc3a35264a82677f2b4f566323ebb85c8efdaa63b51fd796336c891d2de942",
     "bounded_network.py": "0b8bc5948dbf71712296c3b4c9a47f4ac68f5e32dcc591be3e42914ff17abc0c",
     "claim_design.py": "25ae2613b37cf31af13a5ee250a5c22d5266e18ec98c034d13bdc05e81d933e0",
@@ -20,7 +18,7 @@
     "network_spec.py": "cd9eed9696048dc0c9420e6a7b4ac2bfee17c45e7830462e8a1209400ff77a0a",
     "package_runtime.py": "43ee77002899a3f476daf83f5a42172ca117eec3ec90d010e77ee41257575c37",
     "paper_titles.py": "04f7640a1ce8e35aefef6fa14a019013212b0784a57325acab36dd7ace9ae6b8",
-    "paper_uploads.py": "b72b74b68582ea072940ace2ca8c587991b691c2ac6a5703ef1339d20472b483",
+    "paper_uploads.py": "b9d70281c8a65626c15a7e2d599e7713c35359a2c7bf679e3fe517a6ed2f8488",
     "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
     "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b",
     "policies/autonomy-experiment-costs-v2.json": "241f53ad7c51399b043d0567cc545fb3281d7581c619f51fc9474fc1eaa13b19",
@@ -37,6 +35,9 @@
     "openclaw_runtime.py": "cee288eee33412966b7c5228b8dc93689df5dd82d24bc37d61808191b4203804",
     "openclaw_auth.mjs": "40f583647563aabad3e0130ea4b6ba7c18a007d79ec63b8cb4d66c3ebabbd8ac",
     "autonomy_inputs.py": "5f138390ac4014f6d99c9d4da2e2dbef95fc0804edaaabf7785ce96b9b2da0a9",
-    "paper_catalog.py": "e2cd06bbba9fc4308b5588e178ee1dfd3dd1d779a98afc9902fe4e7bb2ddbb30"
+    "paper_catalog.py": "e2cd06bbba9fc4308b5588e178ee1dfd3dd1d779a98afc9902fe4e7bb2ddbb30",
+    "paper_selection.py": "5de2564131056dff3039c83bec56e283996d19c7a79b3d495ed453c473721f70",
+    "policies/paper-review-selection-v1.json": "d62371e1d7bde37c799ddb0da74b3570c89cfa57f189b974693da8da62ec144c",
+    "policies/paper-review-selection-policy-v2.json": "cd9336091528b167ac000fd5405d1b6545a52d500cdb17d657d66defe4d21ca5"
   }
 }

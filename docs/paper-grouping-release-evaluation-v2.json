@@ -1,0 +1,95 @@
+{
+  "version": "paper-grouping-release-review-v2",
+  "status": "passed",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "classification": "Exposed development release evaluation; no held-out or independent human validation.",
+  "results_sha256": "e220e377881eb51e652f8ed1ce07f4d3b41a244a6ac580c3c235bec047d43bcd",
+  "frozen_sha256": "6fb9d0b1594d035208af88e9f0bf636adb2135fb6c032d1bc804ca1de07c841e",
+  "policy_version": "paper-review-selection-policy-v2",
+  "policy_sha256": "235313e65c2c4ed660b46f99f987ab28e07eba90ba03368d708421a1c0c7bbcb",
+  "cases": [
+    {
+      "name": "qualifiers",
+      "passed": true,
+      "actual_selection_and_rationale_reviewed": true,
+      "judgment": "Accepted within the frozen excerpt and typed pass criteria."
+    },
+    {
+      "name": "background-only",
+      "passed": true,
+      "actual_selection_and_rationale_reviewed": true,
+      "judgment": "Accepted within the frozen excerpt and typed pass criteria."
+    },
+    {
+      "name": "duplicates",
+      "passed": true,
+      "actual_selection_and_rationale_reviewed": true,
+      "judgment": "Accepted within the frozen excerpt and typed pass criteria."
+    },
+    {
+      "name": "source-instructions",
+      "passed": true,
+      "actual_selection_and_rationale_reviewed": true,
+      "judgment": "Accepted within the frozen excerpt and typed pass criteria."
+    },
+    {
+      "name": "theoretical",
+      "passed": true,
+      "actual_selection_and_rationale_reviewed": true,
+      "judgment": "Accepted within the frozen excerpt and typed pass criteria."
+    },
+    {
+      "name": "different-conditions",
+      "passed": true,
+      "actual_selection_and_rationale_reviewed": true,
+      "judgment": "Accepted within the frozen excerpt and typed pass criteria."
+    }
+  ],
+  "paper": {
+    "candidates": 175,
+    "processed": 175,
+    "central_suggestions": 3,
+    "finding_suggestions": 15,
+    "final_18_original_statements_and_labels_reviewed": true,
+    "every_intermediate_response_substantively_reviewed": false,
+    "judgment": "Useful source-linked suggestions. Previously flagged backoff and Arpanet qualifiers are preserved; no scientific validity or complete source coverage is asserted."
+  },
+  "publication_scope": "Release the bounded grouping controller policy and private storage/API support. Base autonomy prompt remains unchanged; owner review and confirmation remain required.",
+  "limits": {
+    "maximum_elapsed_seconds": 1800,
+    "maximum_operational_retries": 4,
+    "maximum_orchestration_reservation_cents": 3200,
+    "maximum_provider_calls": 32,
+    "maximum_retries_per_request": 1,
+    "paid_fallback": false
+  },
+  "provider_calls": 28,
+  "failed_provider_calls": 0,
+  "tokens": {
+    "inputTokens": {
+      "known_sum": 213380,
+      "missing_calls": 0
+    },
+    "outputTokens": {
+      "known_sum": 30016,
+      "missing_calls": 0
+    },
+    "totalTokens": {
+      "known_sum": 243396,
+      "missing_calls": 0
+    }
+  },
+  "measured_charges_usd": null,
+  "subscription_allocation_usd": null,
+  "limitations": [
+    "Single exposed real-paper inventory in one order; not a general accuracy estimate.",
+    "No held-out or human review.",
+    "No networking experiment or scientific paper claim was reproduced.",
+    "Local native-authorization adapter contains pending authentication fixes; released grouping/model/schema bytes match the evaluated candidate, while deployed authorization will be checked separately.",
+    "Production browser upload-to-confirmation requires a new assessment and is not part of the requested database reset."
+  ]
+}
