@@ -101,12 +101,13 @@ assert retrieved==raw
 print(json.dumps(dict(status='passed',model_id=rt.MODEL,runtime=rt.VERSION,source_revision=REVISION,request_sha256=hashlib.sha256((directory/'logical.json').read_bytes()).hexdigest(),usage=receipt.get('usage'),suggestions=chosen,archive=dict(bucket='research-workflow-raw',path=path,sha256=digest,bytes=len(raw),retrieved_hash_verified=True),no_assessment_created=True,paid_fallback=False)))
 """
  # Fixed, frozen synthetic release case; source content never selects code.
- program=program.replace('INPUT',repr(base64.b64encode(logical).decode())).replace('RUN',repr(directory.name)).replace('REVISION',repr(r.prior.queue.source()['source_revision']))
+ program='INPUT='+repr(base64.b64encode(logical).decode())+'\nRUN='+repr(directory.name)+'\nREVISION='+repr(r.prior.queue.source()['source_revision'])+'\n'+program
+ compile(program,'frozen-worker-smoke','exec')
  (directory/'host-smoke-program.py').write_text(program)
  command='runuser -u jumpserve -- env RESEARCH_AI_RUNTIME=openclaw-production-v1 SUPABASE_URL=https://regphejnlvfpyokpniny.supabase.co SUPABASE_SECRET_ARN='+shlex.quote(secret)+' /opt/jumpserve/python/bin/python -B -c '+shlex.quote(program)
  return r.ssm([command])
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['inspect','archive','migrate','diff','deploy','host-diff','host-deploy','host-update','host-smoke','host-result','activate','verify']);p.add_argument('--command-id');args=p.parse_args();directory=BASE/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');directory.mkdir(parents=True,mode=0o700)
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['inspect','archive','migrate','diff','deploy','host-diff','host-deploy','host-update','host-smoke','host-result','activate','verify','final-verify','record-result']);p.add_argument('--command-id');args=p.parse_args();directory=BASE/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');directory.mkdir(parents=True,mode=0o700)
  receipt=dict(version='paper-grouping-release-v1',mode=args.mode,started_at=r.stamp(),status='running',measured_charges_usd=None,authorization='Current explicit request to release the backend grouping update; frontend and authentication changes excluded.');save=lambda:(directory/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n');save()
  try:
   receipt['targets']=r.target();save()
@@ -135,10 +136,36 @@ def main():
      value=json.loads(receipt['stdout'].strip().splitlines()[-1]);assert value['status']=='passed' and value['source_revision']==r.prior.queue.source()['source_revision'];(selected()/'host-verification.json').write_text(json.dumps(value,indent=2)+'\n');receipt['host_verification']=value
    elif args.mode=='activate':
     verified=json.loads((selected()/'host-verification.json').read_bytes());assert verified['status']=='passed' and verified['source_revision']==r.prior.queue.source()['source_revision'];receipt['cdk']=r.cdk('deploy',directory,activate=True);receipt['admission_enabled']=True
-   elif args.mode=='verify':
+   elif args.mode=='record-result':
+    value=json.loads((selected()/'host-verification.json').read_bytes());a=value['archive'];key=r.aws('secretsmanager','get-secret-value','--secret-id','jumpserve/supabase-service-key')['SecretString'];url='https://regphejnlvfpyokpniny.supabase.co/storage/v1/object/'+a['bucket']+'/'+a['path'];headers={'apikey':key,'Authorization':'Bearer '+key}
+    with r.prior.guard.OPEN.open(urllib.request.Request(url,headers=headers),timeout=30) as response:raw=response.read(10000001)
+    assert sha(raw)==a['sha256']
+    with zipfile.ZipFile(io.BytesIO(raw)) as z:assert sha(z.read('logical.json'))==value['request_sha256']
+    anon=json.loads((ROOT/'cdk.json').read_bytes())['context']['supabaseAnonKey'];status=200
+    try:
+     with r.prior.guard.OPEN.open(urllib.request.Request(url,headers={'apikey':anon}),timeout=20) as response:response.read(1)
+    except urllib.error.HTTPError as error:status=error.code
+    assert status in (400,401,403,404)
+    report=dict(version='paper-grouping-production-model-check-v1',status='passed',reviewer=dict(identity='Primary Codex AI implementer',type='AI',independent=False),judgment='Actual worker selection preserves proposed/unproved/observed/target/derived distinctions and 16 KBps units; no scientific validity or complete source review asserted.',evidence=value,anonymous_archive_read_denied=True,measured_charges_usd=None,subscription_allocation_usd=None);text=json.dumps(report,indent=2)+'\n';lit=r.admin.literal
+    r.admin.query('insert into agent_prompt_evaluations(prompt_version_id,outcome,report_raw,report_sha256,original_artifacts,recorded_by) values('+','.join([lit(PROMPT)+'::uuid',lit('passed'),lit(text),lit(sha(text.encode())),lit(json.dumps(dict(a,kind='paper-grouping-production-model-check'))) + '::jsonb',lit('Primary Codex AI implementer; real deployed grouping inference, no assessment created')])+') on conflict(prompt_version_id,report_sha256) do nothing',read_only=False)
+    assert r.admin.query("select encode(sha256(convert_to(report_raw,'UTF8')),'hex') hash from agent_prompt_evaluations where report_sha256="+lit(sha(text.encode())))==[dict(hash=sha(text.encode()))]
+    receipt['production_model_report_sha256']=sha(text.encode());(ROOT/'docs/paper-grouping-production-model-check-v1.json').write_text(text)
+   elif args.mode in ('verify','final-verify'):
     receipt['functions']=r.prior.functions(directory,True);receipt['security']=security()
     with r.prior.guard.OPEN.open('https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/research/capabilities',timeout=30) as response:cap=json.load(response)
     assert cap['paper_uploads']['selection_version']=='paper-review-selection-v1';receipt['capability']=cap['paper_uploads'];receipt['autonomy_enabled']=cap['autonomy']['enabled']
+    if args.mode=='final-verify':
+     assert cap['autonomy']['enabled'] and cap['autonomy']['runtime']['status']=='ready'
+     resources=r.aws('cloudformation','list-stack-resources','--stack-name','JumpServeBenchmarkStack')['StackResourceSummaries'];rules=[x['PhysicalResourceId'] for x in resources if x['ResourceType']=='AWS::Events::Rule' and x['LogicalResourceId'].startswith('ResearchWorkflowAutonomyPoll')];assert len(rules)==1
+     rule=r.aws('events','describe-rule','--name',rules[0]);assert rule['State']=='ENABLED';receipt['polling_enabled']=True
+     status=200
+     try:
+      request=urllib.request.Request('https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/research/paper-uploads',data=json.dumps(dict(action='organize',request_id='10000000-0000-4000-8000-000000000001')).encode(),headers={'Content-Type':'application/json'})
+      with r.prior.guard.OPEN.open(request,timeout=20) as response:response.read(1000)
+     except urllib.error.HTTPError as error:status=error.code
+     assert status in (401,403);receipt['anonymous_organization_denied']=status
+     with r.prior.guard.OPEN.open('https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/research/papers',timeout=20) as response:papers=json.load(response)
+     receipt['public_paper_count']=papers['coverage']['papers'];receipt['host_verification']=json.loads((selected()/'host-verification.json').read_bytes())
   receipt['status']='passed'
  except Exception as error:receipt.update(status='failed',reason=type(error).__name__+': '+str(error)[:400]);raise
  finally:receipt['ended_at']=r.stamp();save();print(json.dumps(dict(directory=str(directory),status=receipt['status'],mode=args.mode)))

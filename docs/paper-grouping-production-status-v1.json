@@ -1,0 +1,173 @@
+{
+  "version": "paper-grouping-production-status-v1",
+  "recorded_at": "2026-10-26T00:01:30.122428+00:00",
+  "release_status": "live-and-verified",
+  "aws_account": "395567831870",
+  "supabase_project": "regphejnlvfpyokpniny",
+  "backend_source_revision": "3d7cf31c420b281426a02b52de04aa207aa8f5fb",
+  "backend_main_release_marker": "cc072e3",
+  "infrastructure_release_revision": "19fc96d",
+  "verification_helper_sha256": "9ef6d5be6287e3e5794e964fa896cb419761db3a3babdd7e69bc221e17a8915b",
+  "scope": "Backend grouping only. Pending frontend and authentication changes excluded.",
+  "checks": {
+    "grouping_envelope": "paper-review-selection-v1",
+    "controller_policy": "paper-review-selection-policy-v2",
+    "lambda_source_files_verified": 37,
+    "worker_source_files_verified": 37,
+    "real_deployed_worker_model_check": "passed",
+    "admission_enabled": true,
+    "polling_enabled": true,
+    "anonymous_organization_http": 401,
+    "private_rpc_grants_and_rls_verified": true,
+    "network_ami_and_placement_configuration_unchanged": true
+  },
+  "data_reset": {
+    "paper_assessments_deleted": 31,
+    "linked_rows_deleted": 60310,
+    "public_catalog_count": 0,
+    "research_ideas_retained": 4,
+    "backup_bytes": 95071235,
+    "backup_directory": ".test-artifacts/assessment-reset/20261025T225026860119Z",
+    "backup_manifest_sha256": "b9b832e4654aa01cb88412f9548d96d6a66b5c8c6c9e9294830133a4ace43fa1",
+    "private_raw_storage_objects_retained": true
+  },
+  "usage": {
+    "development_model_calls": 28,
+    "production_model_calls": 1,
+    "input_tokens_known": 219821,
+    "output_tokens_known": 30369,
+    "total_tokens_known": 250190,
+    "paid_api_fallback": false,
+    "measured_charges_usd": null,
+    "subscription_allocation_usd": null,
+    "new_ec2_instances": 0,
+    "new_private_evaluation_archive_bytes": 2488616
+  },
+  "conditional_gaps": [
+    "No fresh production PDF upload through extraction, grouped review and owner confirmation was created after the requested database reset.",
+    "Frontend changes remain local and were not deployed.",
+    "Exposed, nonindependent AI development checks; no general accuracy estimate, human review or scientific reproduction claim."
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "receipts": [
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T231419750697Z/receipt.json",
+      "sha256": "96c2d17ec2dccf0e5b7a779054e78049a938987b16f6cbc97615f5e5f1cb101b",
+      "mode": "inspect",
+      "status": "failed"
+    },
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T232711878280Z/receipt.json",
+      "sha256": "0673ae136e089e7836cbcbae6edbba8956d1e7dade87dd45fae0225861ab38bf",
+      "mode": "inspect",
+      "status": "passed"
+    },
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T232712721626Z/receipt.json",
+      "sha256": "bf93515858064f08b63a864e8a669a200d0381415f1b1da2bf249b151ec74b30",
+      "mode": "archive",
+      "status": "passed"
+    },
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T232713891657Z/receipt.json",
+      "sha256": "13e5f7ce59576fd1d1328fa4bbbcc07ef03ad4a71d7717bb2d4dc8a731464c2f",
+      "mode": "diff",
+      "status": "failed"
+    },
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T232823464950Z/receipt.json",
+      "sha256": "4af2955a2d21ec5eb085248604b1c872e1350cd9e71c04aa5f4d1149b95528d9",
+      "mode": "diff",
+      "status": "passed"
+    },
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T232824577641Z/receipt.json",
+      "sha256": "bb20de295e23a3760cb8b1b77692835494ab510883395ddb417366559c3daf50",
+      "mode": "host-diff",
+      "status": "failed"
+    },
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T232947415036Z/receipt.json",
+      "sha256": "8529a5455795c65c2ff6c7dd480edefe13caa3a9ffe824763ed99f0d64121768",
+      "mode": "host-diff",
+      "status": "failed"
+    },
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T232948648321Z/receipt.json",
+      "sha256": "1b803108c377a6698a29f1ef132b45d40a79055d40eb22df9cd55097caeb7260",
+      "mode": "migrate",
+      "status": "passed"
+    },
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T233148254378Z/receipt.json",
+      "sha256": "6539e35515b05014b0f1fbfa606fe00f94bad82f186c30591be4ec352c1811fe",
+      "mode": "host-diff",
+      "status": "passed"
+    },
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T234420902106Z/receipt.json",
+      "sha256": "b45d99d7badddee01bf68960c159204cd472715834ffe803dbd7969fc62e00d1",
+      "mode": "deploy",
+      "status": "passed"
+    },
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T234628010054Z/receipt.json",
+      "sha256": "aa0431551bf0ab1466c62498289eaf4a94db6335d933a3e0bef98edca9ab533f",
+      "mode": "host-deploy",
+      "status": "passed"
+    },
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T234629166421Z/receipt.json",
+      "sha256": "96a00c48c497d5e71a30bde05c7976b82e938474b2f6c5c83f12a7304889d0c1",
+      "mode": "verify",
+      "status": "passed"
+    },
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T234813119582Z/receipt.json",
+      "sha256": "9ac9009c061693b759c06212bb5ada70f1206a8beaa87cd40170df8c5e2c609c",
+      "mode": "host-update",
+      "status": "passed"
+    },
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T234906923622Z/receipt.json",
+      "sha256": "d269a1ed5dbdb0a583a120bb30cd8cdb2779e567e303dce9eabcc36e86b764be",
+      "mode": "host-result",
+      "status": "passed"
+    },
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T234908086681Z/receipt.json",
+      "sha256": "cfbcd944ad1b4263b675b7f8b8feb425ff81c49c47a1fbaea843b74aec3978d7",
+      "mode": "host-smoke",
+      "status": "passed"
+    },
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T235032645755Z/receipt.json",
+      "sha256": "f98c9aede1e1c343ddd67466af10e8d681bc15d098b5110cea8c4b153a520d8f",
+      "mode": "host-result",
+      "status": "passed"
+    },
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T235235777256Z/receipt.json",
+      "sha256": "9cca89f4cd1050010f41d6ae247a1dc1177f4fd8bca419d916975effcd1b29c7",
+      "mode": "activate",
+      "status": "passed"
+    },
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T235457238938Z/receipt.json",
+      "sha256": "8637e73fc63b00631105654bf5dd347b667502cb98eeda5e4e0823037856750c",
+      "mode": "final-verify",
+      "status": "passed"
+    },
+    {
+      "path": ".test-artifacts/paper-grouping-release/20261025T235748677255Z/receipt.json",
+      "sha256": "5b73dce0cc572d6208032e06e1d516b615317a612bcf5dd4ccedd319a067ca7b",
+      "mode": "record-result",
+      "status": "passed"
+    }
+  ],
+  "production_model_check_report_sha256": "8a5c08bfe5c9be4ee627463a80cc67009e98d373fa849a0bf7f481fce6b2675f"
+}

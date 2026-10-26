@@ -8,6 +8,7 @@ import argparse,datetime as dt,hashlib,importlib.util,json,pathlib,re,subprocess
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('paper_reset_admin',ROOT/'bin/agent-prompts.py');admin=importlib.util.module_from_spec(spec);spec.loader.exec_module(admin)
 BASE=ROOT/'.test-artifacts/assessment-reset'
+APPROVED_IDS_SHA256='74195063e952f0821383fdfdfbfec22e364d1f70b158f7d5f548237c44b602e5'
 sha=lambda b:hashlib.sha256(b).hexdigest()
 stamp=lambda:dt.datetime.now(dt.timezone.utc).isoformat()
 def target():
@@ -28,6 +29,7 @@ def backup():
  targets=target();studies=admin.query("select id,title,study_kind,created_at from research_studies where study_kind='paper' order by id")
  if len(studies)!=31:raise ValueError('The user authorized the inspected 31 assessments; changed inventory requires explicit scope reconciliation.')
  ids=[s['id'] for s in studies]
+ if sha(json.dumps(sorted(ids),separators=(',',':')).encode())!=APPROVED_IDS_SHA256:raise ValueError('The assessment identities differ from the explicitly approved one-time reset.')
  active=admin.query("select (select count(*) from research_autonomy_tasks where study_id in (select id from research_studies where study_kind='paper') and status='running' and lease_until>clock_timestamp())+(select count(*) from research_queue_jobs where study_id in (select id from research_studies where study_kind='paper') and status='running')+(select count(*) from research_model_dispatches where study_id in (select id from research_studies where study_kind='paper') and status='running' and lease_until>clock_timestamp()) n")[0]['n']
  if active:raise ValueError('Drain active paper execution before backing up/deleting.')
  catalog=json.loads((BASE/'catalog-before.json').read_bytes());tables=[t['name'] for t in catalog['tables'] if 'study_id' in t['columns'] or t['name'] in ('research_studies','research_paper_uploads')]
@@ -62,6 +64,7 @@ def backup():
 def apply(dry_run=False):
  target();directory=BASE/(BASE/'selected.txt').read_text().strip();path=directory/'backup-manifest.json';packet=json.loads(path.read_bytes())
  assert packet['status']=='backup-verified' and len(packet['ids'])==31 and len(set(packet['ids']))==31
+ assert sha(json.dumps(sorted(packet['ids']),separators=(',',':')).encode())==APPROVED_IDS_SHA256
  if not dry_run:
   prior=json.loads((directory/'dry-run-receipt.json').read_bytes())
   assert prior['status']=='rolled-back-verified' and prior['backup_manifest_sha256']==sha(path.read_bytes())
