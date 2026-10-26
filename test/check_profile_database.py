@@ -21,6 +21,8 @@ DATABASE = 'jumpserve_profile_test_' + STAMP.lower()
 DIRECTORY = ROOT / '.test-artifacts/profiles' / STAMP
 ACTOR = '11111111-1111-4111-8111-111111111111'
 OTHER = '22222222-2222-4222-8222-222222222222'
+FIRST = '44444444-4444-4444-8444-444444444444'
+ACTORS = (ACTOR, OTHER, FIRST)
 PORT = 4105
 MODE = 'normal'
 WRITES = 0
@@ -34,7 +36,7 @@ def query(sql, database=DATABASE, actor=None):
     if database != 'postgres' and database != DATABASE:
         raise ValueError('Only the new isolated local database is permitted.')
     if actor:
-        if actor not in (ACTOR, OTHER):
+        if actor not in ACTORS:
             raise ValueError('Fixed synthetic actor required.')
         sql = 'begin; set local role authenticated; set local request.jwt.claims=' + literal(json.dumps(dict(sub=actor))) + '; ' + sql + '; commit;'
     result = subprocess.run([PSQL, ORIGIN + database, '-X', '-v', 'ON_ERROR_STOP=1', '-q', '-t', '-A'], input=sql, capture_output=True, text=True, timeout=20)
@@ -62,7 +64,7 @@ def bootstrap():
         $$;
         alter default privileges in schema public grant all on tables to anon,authenticated;
         alter default privileges in schema public grant execute on functions to anon,authenticated;
-        insert into auth.users values ('""" + ACTOR + "'),('" + OTHER + "');")
+        insert into auth.users values ('""" + ACTOR + "'),('" + OTHER + "'),('" + FIRST + "');")
         query(migration.decode())
         checks = """
         begin;
@@ -71,8 +73,12 @@ def bootstrap():
         insert into profiles values ('ACTOR','Ada','Lovelace','America/New_York');
         insert into profiles values ('ACTOR','Ada','Updated','Asia/Tokyo')
           on conflict(id) do update set id=excluded.id,last_name=excluded.last_name,timezone=excluded.timezone;
+        -- A returning OAuth callback must preserve a profile saved after its
+        -- initial SELECT. This is the production ignoreDuplicates insert path.
+        insert into profiles values ('ACTOR','Google','Account',null) on conflict(id) do nothing;
         do $$ begin
           if (select timezone from profiles where id='ACTOR') <> 'Asia/Tokyo' then raise exception 'Own upsert did not persist'; end if;
+          if (select last_name from profiles where id='ACTOR') <> 'Updated' then raise exception 'Google initialization overwrote an existing edit'; end if;
           begin insert into profiles values ('OTHER','','','UTC'); raise exception 'Cross-owner insert allowed'; exception when insufficient_privilege then null; end;
           begin update profiles set id='OTHER' where id='ACTOR'; raise exception 'Ownership transfer allowed'; exception when insufficient_privilege then null; end;
           begin update profiles set timezone='not/a-zone'; raise exception 'Invalid zone accepted'; exception when check_violation then null; end;
@@ -95,7 +101,7 @@ def bootstrap():
         """.replace('ACTOR', ACTOR).replace('OTHER', OTHER)
         query(checks)
         query("insert into profiles values ('" + ACTOR + "','Ada','Lovelace','America/New_York'),('" + OTHER + "','Other','Researcher','Europe/London')")
-        report.update(status='passed', checks=11, coverage=['own insert/update/upsert', 'cross-owner read/insert/update', 'identity transfer', 'anonymous read/write', 'browser delete', 'invalid timezone/name/control character'])
+        report.update(status='passed', checks=12, coverage=['own insert/update/upsert', 'Google initialization preserves existing names/timezone', 'cross-owner read/insert/update', 'identity transfer', 'anonymous read/write', 'browser delete', 'invalid timezone/name/control character'])
     except Exception as error:
         report.update(status='failed', error=str(error))
         raise
@@ -111,6 +117,10 @@ def token(actor):
 
 def user(actor):
     return dict(id=actor, aud='authenticated', role='authenticated', email='fixture@example.invalid', app_metadata=dict(provider='google', providers=['google']), user_metadata=dict(given_name='Fixture', family_name='User'), identities=[], is_anonymous=False, created_at='2026-01-01T00:00:00Z')
+
+
+def session(actor):
+    return dict(access_token=token(actor), token_type='bearer', refresh_token='explicit-local-refresh', expires_in=3600, expires_at=4102444800, user=user(actor))
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -137,10 +147,10 @@ class Handler(BaseHTTPRequestHandler):
     def handle_request(self):
         global MODE, WRITES
         path = urllib.parse.urlsplit(self.path)
-        actor = next((identity for identity in (ACTOR, OTHER) if self.headers.get('Authorization') == 'Bearer ' + token(identity)), None)
+        actor = next((identity for identity in ACTORS if self.headers.get('Authorization') == 'Bearer ' + token(identity)), None)
         body = self.rfile.read(min(int(self.headers.get('Content-Length', 0)), 10000))
         if path.path == '/fixture/metadata':
-            return self.respond(200, dict(port=PORT, database=DATABASE, sql_report=str(DIRECTORY / 'database-report.json'), sessions={identity: dict(access_token=token(identity), token_type='bearer', refresh_token='explicit-local-refresh', expires_in=3600, expires_at=4102444800, user=user(identity)) for identity in (ACTOR, OTHER)}))
+            return self.respond(200, dict(port=PORT, database=DATABASE, sql_report=str(DIRECTORY / 'database-report.json'), sessions={identity: session(identity) for identity in ACTORS}))
         if path.path == '/fixture/state':
             return self.respond(200, dict(rows=json.loads(query("select coalesce(json_agg(p order by id),'[]') from profiles p")), writes=WRITES))
         if path.path == '/fixture/mode' and self.command == 'POST':
@@ -151,6 +161,11 @@ class Handler(BaseHTTPRequestHandler):
             return self.respond(200, {})
         if path.path == '/auth/v1/user':
             return self.respond(200, user(actor)) if actor else self.respond(401, dict(message='Explicit local fixture session required.'))
+        if path.path == '/auth/v1/token' and self.command == 'POST':
+            value = json.loads(body)
+            if urllib.parse.parse_qs(path.query).get('grant_type') != ['pkce'] or value != dict(auth_code='explicit-local-first-login', code_verifier='explicit-local-code-verifier'):
+                return self.respond(400, dict(message='Fixed local PKCE fixture required.'))
+            return self.respond(200, session(FIRST))
         if path.path == '/research/papers':
             return self.respond(200, dict(version='research-paper-catalog-v1', access='public-read-only', papers=[dict(id='33333333-3333-4333-8333-333333333333', title='Synthetic timezone paper', created_at='2026-10-23T18:00:00Z', workflow_status='completed-with-blockers', published=False)], coverage=dict(papers=1), next_cursor=None))
         if path.path != '/rest/v1/profiles':
@@ -162,14 +177,15 @@ class Handler(BaseHTTPRequestHandler):
         try:
             if self.command == 'POST':
                 value = json.loads(body)
-                if set(value) != {'id', 'first_name', 'last_name', 'timezone'} or value['id'] not in (ACTOR, OTHER):
+                if set(value) != {'id', 'first_name', 'last_name', 'timezone'} or value['id'] not in ACTORS:
                     return self.respond(400, dict(message='Invalid fixture projection.'))
-                sql = 'insert into profiles(id,first_name,last_name,timezone) values (' + ','.join(literal(value[key]) for key in ('id', 'first_name', 'last_name', 'timezone')) + ') on conflict(id) do update set id=excluded.id,first_name=excluded.first_name,last_name=excluded.last_name,timezone=excluded.timezone returning *'
+                conflict = 'do nothing' if 'resolution=ignore-duplicates' in self.headers.get('Prefer', '') else 'do update set id=excluded.id,first_name=excluded.first_name,last_name=excluded.last_name,timezone=excluded.timezone'
+                sql = 'insert into profiles(id,first_name,last_name,timezone) values (' + ','.join(literal(value[key]) for key in ('id', 'first_name', 'last_name', 'timezone')) + ') on conflict(id) ' + conflict + ' returning *'
                 result = query('with changed as (' + sql + ') select row_to_json(changed) from changed', actor=actor)
-                WRITES += 1
-                return self.respond(200, json.loads(result))
+                WRITES += int(bool(result))
+                return self.respond(200, json.loads(result) if result else None)
             identity = urllib.parse.parse_qs(path.query).get('id', ['eq.' + actor])[0].removeprefix('eq.')
-            if identity not in (ACTOR, OTHER):
+            if identity not in ACTORS:
                 return self.respond(400, dict(message='Invalid fixture identity.'))
             result = query("select coalesce(json_agg(p),'[]') from profiles p where id=" + literal(identity), actor=actor)
             return self.respond(200, json.loads(result))
