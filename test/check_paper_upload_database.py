@@ -117,13 +117,14 @@ def main():
     f.rpc('publish_agent_prompt',fixture.publish_fixture())
     def provider(request):
      value=fixture.provider(request);out=value['output']['message']['content'][0]['toolUse']['input']
-     out['claims'].append(dict(page=1,quote='latency is 10 ms',claim_type='numerical'))
+     if json.loads(request['messages'][0]['content'][0]['text'])['task']=='discover':out['claims'].append(dict(page=1,quote='latency is 10 ms',claim_type='numerical'))
      return value
     with patch.object(model,'invoke',side_effect=provider):
-     for _ in range(3):
+     for _ in range(8):
       task=f.rpc('research_autonomy_control',dict(p_operation='lease',p_actor=None,p_study=None,p_payload={}))
       assert task and task['study_id']==assessment
       autonomy.step(task)
+      if paper_uploads.submit(f.ACTOR,dict(action='review',request_id=assessment))['status']=='ready':break
     review=paper_uploads.submit(f.ACTOR,dict(action='review',request_id=assessment))
     assert review['status']=='ready' and review['can_start'] and review['title'] and review['domain']=='Software testing' and len(review['claims'])==2,review
     assert f.query('select count(*) from research_autonomy_tasks where study_id='+f.sql_text(assessment)+' and claim_id is not null')=='0'
@@ -131,7 +132,7 @@ def main():
     try:f.query('insert into research_autonomy_tasks(id,study_id,claim_id,stage,label) values('+','.join(map(f.sql_text,[f.uid(),assessment,review['claims'][0]['id'],'planning','untested']))+')',role='service_role')
     except RuntimeError as error:assert 'confirm before starting claim work' in str(error)
     else:raise AssertionError('Direct task insert bypassed confirmation')
-    turns=store.rows('autonomy_turns',dict(study_id='eq.'+assessment));assert len(turns)==1 and turns[0]['status']=='complete' and turns[0]['request_raw'] and turns[0]['raw_response']
+    turns=store.rows('autonomy_turns',dict(study_id='eq.'+assessment));assert len(turns)==2 and all(t['status']=='complete' and t['request_raw'] and t['raw_response'] for t in turns)
     payload=dict(action='confirm',request_id=assessment,title='Owner corrected paper title',domain='Networking research',claim_ids=[review['claims'][0]['id']],revision=review['revision'])
     f.rejects(lambda:paper_uploads.submit(f.ACTOR,dict(payload,revision=1)))
     f.rejects(lambda:paper_uploads.submit(f.ACTOR,dict(payload,claim_ids=[f.uid()])))
@@ -149,7 +150,7 @@ def main():
       assert f.query("select has_table_privilege(current_user,"+f.sql_text(table)+",'SELECT,INSERT,UPDATE,DELETE')",role=role)=='f'
     assert int(f.query('select count(*) from research_paper_review_events where study_id='+f.sql_text(assessment)))>=4
     return dict(assessment=assessment,actual_pdf_parser=True,provider='Explicit synthetic output, not live AI',owner_metadata_corrections_saved=True,
-      preparation_model_turns=1,premature_jobs=0,parallel_confirmations=3,claim_tasks_after_confirmation=1,
+      preparation_model_turns=len(turns),premature_jobs=0,parallel_confirmations=3,claim_tasks_after_confirmation=1,
       private_review_history=True,original_budget_and_deadline_unchanged=True,actual_cloud_experiments=0)
    f.check('PDF preparation is durable and source-linked while owner confirmation atomically gates claim work',confirmation_flow)
   f.report['passed']=True

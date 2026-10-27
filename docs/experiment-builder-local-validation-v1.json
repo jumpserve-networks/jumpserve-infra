@@ -1,0 +1,118 @@
+{
+  "version": "experiment-builder-local-validation-v1",
+  "recorded_at": "2026-10-27T16:02:40.751013+00:00",
+  "status": "local-checks-passed; production-not-ready",
+  "runtime_version": 46,
+  "source_manifest": "jumpserve-infra/.test-artifacts/experiment-builder/source-manifest-v3.json",
+  "source_dirty": true,
+  "protocols": [
+    "experiment-builder-validation-v1",
+    "experiment-builder-live-evaluation-v1"
+  ],
+  "checks": {
+    "backend_unit_tests": 301,
+    "frontend_unit_tests": 271,
+    "infrastructure_tests": 20,
+    "builder_database_scenarios": 4,
+    "existing_autonomy_database_scenarios": 11,
+    "existing_shared_methods_database_scenarios": 3,
+    "browser_scenarios": 18,
+    "frontend_build": "passed; intended local environment restored after fixture build",
+    "infrastructure_build": "passed",
+    "lint": "passed with one existing auth-button navigation warning",
+    "native_openclaw": "passed two sessions, seven synthetic model calls, actual Docker write/exec/read and retained installed-state marker",
+    "generated_package": "passed offline UDP through frozen wrapper; nine received bytes, one observation; no paper finding",
+    "source_hashes": "46 runtime files verified; original-byte snapshots retained"
+  },
+  "original_reports": [
+    {
+      "path": "jumpserve-back-end/.test-artifacts/experiment-builder/20261027T155530340741Z/report.json",
+      "byte_count": 6102,
+      "sha256": "3edbeae5e8169e67e2c0661c43fdfab861553ebb04235b4dc4f55c31ba568c07"
+    },
+    {
+      "path": "jumpserve-back-end/.test-artifacts/experiment-builder-packages/20261027T144141701323Z/report.json",
+      "byte_count": 1713,
+      "sha256": "64aa8f1be030e44a157edbe686caa58c091eed9350db79e0fb6a64600483c488"
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/research-ideas/database/20261027T155530462201Z/report.json",
+      "byte_count": 10872,
+      "sha256": "af7f0ae0bd651cf732928a2d0ca43672130b308e7b2946f512646ece1649da7d"
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/research-ideas/database/20261027T154052761876Z/autonomy-validation-report.json",
+      "byte_count": 15426,
+      "sha256": "8524b1dab9a77ad3e94d4023878c4687d5a1892027b0e42603c69ecb43e5ad39"
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/research-ideas/database/20261027T154307214408Z/report.json",
+      "byte_count": 10717,
+      "sha256": "51bbac1462a2f645295a065e33b7f776287632b716cd7cd9474456b6f4fa8575"
+    },
+    {
+      "path": "jumpserve-front-end/.test-artifacts/public-experiment-queue/2026-10-27T15-39-07.760Z/report.json",
+      "byte_count": 41593,
+      "sha256": "e5a05502957deba068f2e4ff08838b1fbcbed74c3341e48de29227b95f7d2ce3"
+    },
+    {
+      "path": "jumpserve-back-end/.test-artifacts/experiment-builder/backend-final.log",
+      "byte_count": 1552,
+      "sha256": "dd4f5dfdf488e64b763669ecea8b456c048c26d5ba6f2d6de346a5d66d6a719f"
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/experiment-builder/source-manifest-v3.json",
+      "byte_count": 20731,
+      "sha256": "0d106f2c4e63ca87e3fceab482b6ea553fd94f0680772f88b661f22dad593a88"
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/experiment-builder/source-snapshot-v3.zip",
+      "byte_count": 608940,
+      "sha256": "29500e6a5ef48d88b23643884c3309fec88baaefb1c020e42ee2a689ec105677"
+    }
+  ],
+  "artifact_manifest": "jumpserve-infra/.test-artifacts/experiment-builder/artifact-manifest-v1.json",
+  "warnings": [
+    "Existing SQLite ResourceWarning remains non-blocking.",
+    "Earlier timeout test exposed a startup race; its real deadline was increased from 0.2 to 1 second without removing timeout/stdout assertions.",
+    "Failed development reports remain retained. This is not independent or held-out scientific validation."
+  ],
+  "evaluator": {
+    "identity": "Deterministic assertions and actual CLI/SQL/browser executions",
+    "type": "software"
+  },
+  "reviewer": {
+    "identity": "Codex implementation author",
+    "type": "AI",
+    "independent": false,
+    "human_review": false
+  },
+  "usage": {
+    "real_provider_calls": 0,
+    "final_native_synthetic_provider_calls": 7,
+    "new_cloud_instances": 0,
+    "production_database_mutations": 0,
+    "measured_charges_usd": null,
+    "estimated_charges_usd": null,
+    "subscription_allocation_usd": null,
+    "local_compute": "Unallocated; individual reports retain available wall times."
+  },
+  "conditional_gaps": [
+    "Actual subscription inference and ten-case live answer evaluation not run.",
+    "Two held-out inputs require selection and freezing before evaluation.",
+    "Production image/platform, credentials, AWS launch/ingestion/deadline cleanup unverified.",
+    "Generated-package cost policy remains unapproved and blocks automatic cloud admission.",
+    "Large-context and long-install behavior beyond exercised limits is not general validation.",
+    "No legitimate authenticated production builder request exercised."
+  ],
+  "publication": {
+    "builder_prompt": "draft and unpublished",
+    "cloud_cost_policy": "approved_for_lab_execution=false",
+    "default_admission": "disabled",
+    "merged": false,
+    "pushed": false,
+    "deployed": false,
+    "existing_assessments": "unchanged"
+  },
+  "scientific_scope": "Software checks only; no paper claim newly reproduced or disproven. Code execution is not scientific validity."
+}

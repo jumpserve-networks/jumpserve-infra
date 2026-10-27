@@ -1,0 +1,35 @@
+{
+  "version": "executable-methods-validation-v1",
+  "declared_on": "2026-10-27",
+  "stage": "development verification",
+  "prior_exposure": "The synthetic SNC-NEG-001 manuscript, its authoring thread and original failed assessment have been examined by the implementing AI. Earlier exploratory checks and failed reports remain retained. This declaration governs the final verification campaign; it is not a preregistered independent scientific reproduction.",
+  "questions": [
+    "Can the fixed Linux namespace/netem/iperf3 implementation collect duration-based receiver goodput and path diagnostics?",
+    "Do source-bound deterministic operations recompute values instead of accepting model-supplied observations?",
+    "Can concurrent claims share identical acquisition jobs and one experiment reservation while retaining separate protocols and criteria?",
+    "Are confirmed transient model failures retained before a new numbered retry, with unchanged claim and original resource admission?"
+  ],
+  "pass_criteria": [
+    "Linux smoke: two conditions (0 and 5 percent forward loss), one three-second transfer per condition, all ten declared observations recorded, receiver bytes/time/rate consistency and 35..60 ms loss-free idle RTT for a configured 40 ms path.",
+    "Arithmetic: exact source/text hashes and unique page/quote/token identities; valid mean, difference, relative percentage and strict ordering; mismatching reported results detected; missing, ambiguous, invalid and recorded zero remain distinct; no eval or source instructions executed.",
+    "Database: actual isolated PostgreSQL migrations, controller, queue and worker persist one shared run for two claims, two claim protocols, two claim-check links, one experiment reservation, and separate source-reported values and calculated measurements.",
+    "Sharing: source/version, actual input bytes, configuration, seeds, metric bounds, resource limits and replication multiplicity must match; prose labels and different claim comparison rules do not create duplicate acquisitions. Every claim retains its protocol and explicit configuration mapping. Shared observations are not independent replications.",
+    "Retry: only confirmed terminal HTTP 429/500/502/503/504 failures with matching transient error codes; preserve the failed turn before scheduling a new turn with 15..300 second backoff. Never replay uncertain calls, experiments, expired leases, authentication failures or exhausted subscription grants. Every new call uses existing atomic budget/deadline checks.",
+    "All backend regressions, targeted infrastructure assertions, TypeScript builds and frontend regressions pass. RLS, browser-write denial, owner-only mutations, immutable evidence and original assessments remain intact."
+  ],
+  "sampling_and_statistics": "These are exposed software regression cases, not population samples or held-out validation. The Linux conditions share a single Docker guest and host. Use descriptive values only; no inferential intervals or claims about Internet performance, causal mechanisms or paper truth.",
+  "resource_limits": {"live_model_calls": 0, "cloud_instances": 0, "linux_smoke_timeout_seconds": 120, "linux_smoke_cpus": 2, "linux_smoke_memory_mb": 512, "docker_network": "none", "paper_defaults_unchanged": {"maximum_commitment_usd": 100, "elapsed_days": 7, "ai_turn_cap": null}},
+  "missing_and_exclusions": "No trials or failed software checks are silently discarded. New invocations get new directories. Missing usage is null, not zero. The short Linux smoke is not substituted for the manuscript's three 30-second trials per loss condition.",
+  "release_blockers": [
+    "Local checks above pass and runtime artifact manifests match the exact working tree.",
+    "Before production changes verify AWS account 395567831870 and Supabase project regphejnlvfpyokpniny.",
+    "Apply the versioned migration before the new backend. Verify immutable built-in executor version, current cost-policy hash, one-host resource bounds, ingestion and independent deadline cleanup using an actual bounded AWS smoke run before admitting production acquisition work.",
+    "Evaluate actual OpenClaw planning/review answers for the new v4 contracts with declared cases covering source arithmetic versus empirical claims, runner selection, source instructions, missing inputs, shared observations and retry provenance. Preserve failures and usage; do not treat synthetic provider fixtures as a live evaluation.",
+    "Verify a legitimate authenticated submission through planning, storage, queue and result display, and anonymous read-only result access."
+  ],
+  "conditional_gaps_until_release": ["Actual AWS allocation, ingestion, billing and independent cleanup", "Live OpenClaw answers under the new execution contracts", "Legitimate Google-authenticated browser submission", "Full 30-second paper reproduction and causal-mechanism controls"],
+  "commands": {"backend": "python3 -B -m unittest discover -s research_workflow/tests -p 'test_*.py'", "linux_image": "docker build -f research_workflow/tests/netem-iperf.Dockerfile -t jumpserve-netem-iperf-test:local research_workflow/tests", "linux_smoke": "python3 -B research_workflow/tests/check_netem_iperf_linux.py", "database": "npm run test:research:executable-methods", "autonomy_regressions": "npm run test:research:autonomy", "infrastructure": "npm run build && npm test -- --runInBand test/network-execution.test.ts", "frontend": "npm test && npm run build"},
+  "reviewer": {"identity": "Primary implementing Codex assistant", "type": "AI", "independent": false},
+  "costs": "The netem per-job one-dollar admission reservation is conservative configuration, not measured billing or a guarantee against cloud cleanup failure. Model subscription allocation, local Docker and database costs remain unallocated. No paid fallback is enabled.",
+  "deployment": "No merge, push, deployment, live experiment or rerun of the original assessment is authorized by this implementation turn. Await a new explicit release instruction."
+}

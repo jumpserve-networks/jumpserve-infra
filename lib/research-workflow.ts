@@ -43,6 +43,9 @@ export class ResearchWorkflow extends Construct {
     const reserveConcurrency = reservationContext !== false && reservationContext !== 'false';
     const networkingEnabled = Boolean(executors) && researchWorkflowIsEnabled(this.node.tryGetContext('networkExecutionEnabled'));
     const packagesEnabled = networkingEnabled && researchWorkflowIsEnabled(this.node.tryGetContext('networkPackagesEnabled'));
+    const builderEnabled = researchWorkflowIsEnabled(this.node.tryGetContext('researchExperimentBuilderEnabled'));
+    if(builderEnabled&&(!openclawEnabled||!networkingEnabled))throw new Error('Experiment builder requires native OpenClaw and the disposable networking executor.');
+    aiEnvironment.RESEARCH_BUILDER_ENABLED=String(builderEnabled);
     const networkingEnvironment: Record<string,string> = {};
     let boundedVersion: lambda.IVersion | undefined;
     if (autonomyEnabled) {
@@ -93,6 +96,18 @@ export class ResearchWorkflow extends Construct {
       // Provision private executors for operational checks before admitting
       // submitted packages through the public authenticated queue.
       if (packagesEnabled) networkingEnvironment.NETWORK_PACKAGE_FUNCTION=packageExecutor.functionArn;
+      // Fixed built-in experiment code has a separate admission path from
+      // submitted custom packages. Pin the executor version and cost policy.
+      const sweepPolicy = JSON.parse(fs.readFileSync(path.join(runtime, 'policies/netem-iperf-costs-v1.json'), 'utf8'));
+      if (sweepPolicy.account !== cdk.Stack.of(this).account || sweepPolicy.region !== cdk.Stack.of(this).region || sweepPolicy.instance_type !== 't3.medium' || sweepPolicy.root_gib !== 8 || sweepPolicy.cpu_credits !== 'standard' || sweepPolicy.max_instances !== 1 || sweepPolicy.max_wall_seconds !== 1800) throw new Error('TCP sweep resource envelope differs from enforced infrastructure.');
+      networkingEnvironment.NETWORK_NETEM_IPERF_FUNCTION=packageExecutor.currentVersion.functionArn;
+      networkingEnvironment.NETWORK_NETEM_IPERF_POLICY_SHA256=createHash('sha256').update(JSON.stringify(sweepPolicy,Object.keys(sweepPolicy).sort())).digest('hex');
+      if(builderEnabled){
+        const buildPolicy=JSON.parse(fs.readFileSync(path.join(runtime,'policies/built-package-costs-v1.json'),'utf8'));
+        if(buildPolicy.instance_type!=='t3.medium'||buildPolicy.root_volume_gib!==8||buildPolicy.cpu_credits!=='standard'||buildPolicy.max_instances!==1||buildPolicy.max_wall_seconds!==1800)throw new Error('Built package reservation differs from disposable host configuration.');
+        networkingEnvironment.NETWORK_BUILT_PACKAGE_FUNCTION=packageExecutor.currentVersion.functionArn;
+        networkingEnvironment.NETWORK_BUILT_PACKAGE_POLICY_SHA256=createHash('sha256').update(JSON.stringify(buildPolicy,Object.keys(buildPolicy).sort())).digest('hex');
+      }
       executors.emulated.addToRolePolicy(new iam.PolicyStatement({actions:['ec2:DescribeInstances'],resources:['*']}));
       executors.emulated.addToRolePolicy(new iam.PolicyStatement({actions:['ec2:TerminateInstances'],resources:[cdk.Stack.of(this).formatArn({service:'ec2',resource:'instance',resourceName:'*',arnFormat:cdk.ArnFormat.SLASH_RESOURCE_NAME})],conditions:{StringEquals:{'ec2:ResourceTag/Project':'JumpServe'}}}));
     }
@@ -104,6 +119,7 @@ export class ResearchWorkflow extends Construct {
       description: 'Versioned research evidence; registered bounded arithmetic only, no submitted-code execution.',
     });
     secret.grantRead(fn);
+    fn.addEnvironment('RESEARCH_BUILDER_ENABLED',String(builderEnabled));
     const integration = new HttpLambdaIntegration('ResearchWorkflowIntegration', fn);
     httpApi.addRoutes({ path: '/research/paper-uploads', methods: [api.HttpMethod.POST], integration });
     httpApi.addRoutes({ path: '/research/studies/{studyId}/autonomy', methods: [api.HttpMethod.GET, api.HttpMethod.POST], integration });
@@ -160,7 +176,10 @@ export class ResearchWorkflow extends Construct {
         }
         new events.Rule(this, 'AutonomyPoll', { enabled: autonomyAdmission, schedule: events.Schedule.rate(cdk.Duration.minutes(1)), targets: [new targets.LambdaFunction(autonomous, { retryAttempts: 0, maxEventAge: cdk.Duration.minutes(1) })] });
       }
-      if (networkingEnabled && executors && packageExecutor) for (const target of [executors.emulated,executors.realWorld,packageExecutor]) target.grantInvoke(worker);
+      if (networkingEnabled && executors && packageExecutor) {
+        for (const target of [executors.emulated,executors.realWorld,packageExecutor]) target.grantInvoke(worker);
+        packageExecutor.currentVersion.grantInvoke(worker);
+      }
       new events.Rule(this, 'QueuePoll', {
         schedule: events.Schedule.rate(cdk.Duration.minutes(1)),
         targets: [new targets.LambdaFunction(worker, { retryAttempts: 0, maxEventAge: cdk.Duration.minutes(1) })],

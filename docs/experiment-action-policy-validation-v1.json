@@ -1,0 +1,11 @@
+{
+  "version": "experiment-action-policy-validation-v1",
+  "frozen_at": "2026-10-27",
+  "kind": "development-regression",
+  "question": "Does the system retain broad experiment authority without treating authorization as capability, waiving resource controls or changing unrelated resources?",
+  "cases": ["Exact policy bytes and hash are included in admitted builder prompts and receipts", "Controller/worker policy mismatch stops before inference", "Native command mode remains full inside the assigned environment", "Cloud resource approval, original budget/deadline and fresh reviews remain required", "Actual native write/exec/read/resume still works with the policy"],
+  "pass_criteria": "Every declared mechanical case passes; existing backend and infrastructure checks pass. No cloud mutation, prompt publication or deployment in this campaign.",
+  "limits": {"real_provider_calls": 0, "new_cloud_instances": 0, "native_synthetic_calls": 7},
+  "reviewer": {"identity": "Codex implementation author", "type": "AI", "independent": false},
+  "limitations": "Policy and execution regressions do not establish actual-model compliance, support for every future experiment, or scientific validity. Live AI evaluation and operational release checks remain required."
+}

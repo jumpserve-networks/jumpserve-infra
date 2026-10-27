@@ -47,8 +47,35 @@ test('custom package queue admission is disabled until operational checks pass',
   const props=service.Properties;
   if(props.Handler==='api.handler'||props.Handler==='worker.handler'){
    expect(props.Environment.Variables.NETWORK_PACKAGE_FUNCTION).toBeUndefined();
+  if (props.Handler === 'worker.handler' || props.Handler === 'api.handler') {
+   expect(props.Environment.Variables.NETWORK_NETEM_IPERF_FUNCTION).toBeDefined();
+   expect(props.Environment.Variables.NETWORK_NETEM_IPERF_POLICY_SHA256).toMatch(/^[a-f0-9]{64}$/);
+  }
    expect(props.Environment.Variables.NETWORK_EMULATED_FUNCTION).toBeDefined();
    expect(props.Environment.Variables.NETWORK_REAL_WORLD_FUNCTION).toBeDefined();
   }
  }
+});
+test('native experiment builder fails closed without its native worker and disposable executor',()=>{
+ const app=new cdk.App({context:{supabaseUrl:'https://regphejnlvfpyokpniny.supabase.co',researchQueueEnabled:true,researchAutonomyEnabled:true,researchExperimentBuilderEnabled:true}});
+ const stack=new cdk.Stack(app,'InvalidBuilder',{env:{account:'395567831870',region:'us-east-1'}});
+ expect(()=>new ResearchWorkflow(stack,'Research',new api.HttpApi(stack,'Api'))).toThrow('Experiment builder requires native OpenClaw');
+});
+test('generated packages use a separately pinned executor and keep arbitrary custom package admission disabled',()=>{
+ const app=new cdk.App({context:{supabaseUrl:'https://regphejnlvfpyokpniny.supabase.co',researchQueueEnabled:true,researchAutonomyEnabled:true,researchOpenClawEnabled:true,networkExecutionEnabled:true,researchExperimentBuilderEnabled:true}});
+ const stack=new cdk.Stack(app,'GeneratedPackages',{env:{account:'395567831870',region:'us-east-1'}});
+ const vpc=new ec2.Vpc(stack,'ExistingVpc',{natGateways:0,maxAzs:1});
+ const emulated=new lambda.Function(stack,'Emulated',{runtime:lambda.Runtime.NODEJS_22_X,handler:'index.handler',code:lambda.Code.fromInline('exports.handler=async()=>({});')});
+ const realWorld=new lambda.Function(stack,'RealWorld',{runtime:lambda.Runtime.PYTHON_3_12,handler:'index.handler',code:lambda.Code.fromInline('def handler(event,context): return {}')});
+ new ResearchWorkflow(stack,'Research',new api.HttpApi(stack,'Api'),{emulated,realWorld,vpc});
+ const t=Template.fromStack(stack);const functions=t.findResources('AWS::Lambda::Function');
+ for(const item of Object.values(functions)){
+  const props=item.Properties;
+  if(['api.handler','worker.handler','autonomy.handler'].includes(props.Handler)){
+   expect(props.Environment.Variables.NETWORK_BUILT_PACKAGE_FUNCTION).toBeDefined();
+   expect(props.Environment.Variables.NETWORK_BUILT_PACKAGE_POLICY_SHA256).toMatch(/^[a-f0-9]{64}$/);
+   expect(props.Environment.Variables.NETWORK_PACKAGE_FUNCTION).toBeUndefined();
+  }
+ }
+ t.resourceCountIs('AWS::EC2::Instance',0);expect(JSON.stringify(t.findResources('AWS::IAM::Policy'))).not.toContain('iam:PassRole');
 });

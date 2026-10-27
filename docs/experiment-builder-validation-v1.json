@@ -1,0 +1,18 @@
+{
+  "version": "experiment-builder-validation-v1",
+  "frozen_at": "2026-10-27",
+  "kind": "development-regression-protocol",
+  "questions": ["Can native OpenClaw write and execute a previously unavailable experiment in a Linux sandbox?", "Are every provider request, response, failed slice and workspace version retained before subsequent admission?", "Do package execution, reviews, costs and deadlines remain subject to existing gates?"],
+  "configuration": {"openclaw": "2026.10.5", "node": "24.16.0", "model": "gpt-6.1-sol", "transport": "synthetic Responses API for local regressions; no subscription call", "paper_budget_usd": 100, "paper_elapsed_days": 7, "ai_turn_cap": null, "slice_seconds": 60},
+  "replication_units": "Independent deterministic test scenarios; Docker smoke is one development execution, not a research replication.",
+  "sample_size_rationale": "Enumerated admission, protocol, failure and resume branches; no population inference or confidence intervals.",
+  "release_blockers": ["A provider request can bypass durable admission", "A generated command can reach host execution or host credentials", "Archive traversal, symlinks or oversized files are accepted", "A package can bypass fresh method reviews or original paper limits", "Unknown provider outcomes are silently replayed", "Required local backend, database, infrastructure or UI checks fail"],
+  "cases": ["Native write/read/exec tool round trip", "Checkpoint resume with changed feedback", "Budget exhaustion and deadline refusal", "Same request replay and in-flight refusal", "Unknown outcome retained", "Missing dependency, invalid manifest and failed pilot retained", "Exact dependency and source hash verification", "Public queue builder progress with no credentials", "Concurrent claims retain distinct workspaces"],
+  "criteria": "All declared local blocking scenarios must pass. AI answer quality and scientific validity require a separately frozen live evaluation before publishing the builder prompt or enabling production.",
+  "controls": ["Old data-only runtime regressions unchanged", "Separate generated-package runner; arbitrary custom-package switch stays disabled", "Synthetic provider has no credentials or network calls"],
+  "exclusions": "Unavailable production credentials, AWS equipment and provider usage are conditional checks and must be reported as unverified, never passed.",
+  "stopping": "No live provider or AWS calls in this campaign; one bounded Linux smoke per implementation revision unless a failure requires correction. Preserve all failed reports.",
+  "reviewers": [{"identity": "Codex", "type": "AI", "independence": "Implementation author; development inspection only, not independent or human review"}],
+  "costs": {"provider_calls": 0, "measured_charges_usd": null, "local_compute": "Unallocated; record available elapsed time."},
+  "coverage_limits": "Does not demonstrate arbitrary-paper reproducibility, guarantee conclusive claims, validate causal inference or replace source review. Existing fictitious paper is an exposed regression, not a held-out check."
+}

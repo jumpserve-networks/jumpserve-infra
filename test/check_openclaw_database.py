@@ -66,6 +66,22 @@ def main():
    finish(t,turn);heartbeat('paused-quota');assert dispatch.health()['status']=='paused-quota'
    return dict(expired_outcome_unknown=True,never_reclaimed=True,late_worker_refused=True)
   f.check('expired or paused provider work is never silently repeated',expiry)
+  def temporary_recovery():
+   t,turn,body=fresh();dispatch.rpc('enqueue',body)
+   for reason in ('storage-low','refresh-temporary','client-configuration'):
+    dispatch.rpc('heartbeat',dict(status='unavailable',configuration=dict(runtime=dispatch.VERSION,auth_recovery='openclaw-auth-recovery-v1',reason=reason,paid_fallback=False)))
+    assert dispatch.health()['status']=='unavailable' and dispatch.rpc('claim',{}) is None
+   heartbeat('auth-required');assert dispatch.rpc('claim',{}) is None
+   heartbeat();job=dispatch.rpc('claim',{});assert job['id']==turn['id']
+   dispatch.rpc('finish',dict(id=turn['id'],token=job['lease_token'],status='failed',response_artifact_id=None,response_sha256=None,provenance=dict(credential_status='unavailable',error_code='storage-unavailable',provider_request_sent=False,provider_calls=0,usage=None,paid_fallback=False)))
+   result=dispatch.rpc('result',dict(id=turn['id'],study_id=t['study_id']))
+   assert result['provenance']['provider_calls']==0 and result['provenance']['usage'] is None
+   assert result['request_sha256']==body['request_sha256'] and result['status']=='failed'
+   heartbeat();assert dispatch.rpc('claim',{}) is None
+   f.rejects(lambda:f.query("update research_model_dispatches set status='queued' where id="+f.sql_text(turn['id'])))
+   finish(t,turn)
+   return dict(temporary_and_configuration_states_not_authentication=True,queued_identity_preserved_on_recovery=True,known_zero_provider_calls_preserved=True,missing_usage_not_zero=True,terminal_failed_attempt_not_replayed=True)
+  f.check('availability recovery admits the original queued identity and preserves a pre-provider failure',temporary_recovery)
   def publication_guards():
    import copy,hashlib
    for name in ('202610200010_openclaw_prompt_candidate.sql','202610210001_openclaw_prompt_v10.sql','202610210002_openclaw_publication_guard.sql'):

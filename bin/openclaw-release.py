@@ -1,5 +1,5 @@
 """Fixed-target OpenClaw release operations; no arbitrary SQL or shell arguments."""
-import argparse,datetime as dt,hashlib,importlib.util,json,os,re,subprocess,urllib.parse,urllib.request
+import argparse,datetime as dt,hashlib,importlib.util,json,os,re,shlex,subprocess,urllib.parse,urllib.request
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('openclaw_prior',ROOT/'bin/autonomy-release.py');prior=importlib.util.module_from_spec(spec);spec.loader.exec_module(prior)
@@ -31,6 +31,27 @@ def ssm(commands):
 def functions():
  resources=aws('cloudformation','list-stack-resources','--stack-name','JumpServeBenchmarkStack')['StackResourceSummaries']
  return {kind:next(r['PhysicalResourceId'] for r in resources if r['ResourceType']=='AWS::Lambda::Function' and r['LogicalResourceId'].startswith(prefix)) for kind,prefix in [('api','ResearchWorkflowApi'),('autonomy','ResearchWorkflowAutonomyWorker')]}
+
+def auth_maintenance_guard():
+ # Native interactive login does not acquire our Python refresh-owner lock by
+ # itself. Require held admission/polling and drained calls before stopping it.
+ config=aws('lambda','get-function-configuration','--function-name',functions()['api'])
+ resources=aws('cloudformation','list-stack-resources','--stack-name','JumpServeBenchmarkStack')['StackResourceSummaries']
+ rules=[r['PhysicalResourceId'] for r in resources if r['ResourceType']=='AWS::Events::Rule' and r['LogicalResourceId'].startswith('ResearchWorkflowAutonomyPoll')]
+ if config['Environment']['Variables'].get('RESEARCH_AUTONOMY_ENABLED')!='false' or len(rules)!=1 or aws('events','describe-rule','--name',rules[0])['State']!='DISABLED':raise RuntimeError('Hold new admission and autonomous polling before native authorization maintenance.')
+ if admin.query("select (select count(*) from research_autonomy_tasks where status='running')+(select count(*) from research_model_dispatches where status in ('queued','running') or (status='unknown' and greatest(created_at,coalesce(lease_until,created_at),coalesce(ended_at,created_at))>clock_timestamp()-interval '10 minutes')) count")[0]['count']:raise RuntimeError('Drain active or recent uncertain model work before authorization maintenance; preserve original outcomes.')
+
+def auth_maintenance_script(login):
+ # login is an internal fixed command, never a caller-supplied CLI argument.
+ return "set -eu; task_worker_active=0; if systemctl is-active --quiet jumpserve-openclaw.service; then task_worker_active=1; systemctl stop jumpserve-openclaw.service; fi; trap 'if test \"$task_worker_active\" = 1; then systemctl start jumpserve-openclaw.service; fi' EXIT; "+login
+
+def native_auth_command():
+ login='runuser -u jumpserve -- env HOME=/var/lib/jumpserve-openclaw OPENCLAW_STATE_DIR=/var/lib/jumpserve-openclaw/auth OPENCLAW_CONFIG_PATH=/var/lib/jumpserve-openclaw/auth/config.json PATH=/opt/jumpserve/node/bin:/usr/bin:/bin flock -x /var/lib/jumpserve-openclaw/auth/refresh.lock /opt/jumpserve/node/bin/node /opt/jumpserve/openclaw/node_modules/openclaw/openclaw.mjs models auth login --provider openai --method siwc'
+ return 'stty cols 2000; sudo -n /bin/bash -c '+shlex.quote(auth_maintenance_script(login))
+
+def host_refresh_command():
+ program="import json,sys\nsys.path.insert(0,'/opt/jumpserve/runtime')\nimport openclaw_runtime as r\nr.verify_runtime()\nr.credential(force_refresh=True)\nprint(json.dumps(dict(native_refresh_verified=True,credential_contents_emitted=False)))"
+ return 'runuser -u jumpserve -- env RESEARCH_AI_RUNTIME=openclaw-production-v1 /opt/jumpserve/python/bin/python -B -c '+shlex.quote(program)
 
 def benchmark_image():
  resources=aws('cloudformation','list-stack-resources','--stack-name','JumpServeBenchmarkStack')['StackResourceSummaries']
@@ -117,7 +138,7 @@ def main():
    receipt['ssm']=ssm(['set -eu','systemctl stop jumpserve-openclaw.service','test ! -e '+backup,'cp -a /opt/jumpserve/runtime '+backup,'aws s3 cp s3://'+bucket+'/'+key+' '+archive+' --region us-east-1','unzip -o -q '+archive+' -d /opt/jumpserve/runtime','chmod -R a+rX /opt/jumpserve/runtime','systemctl start jumpserve-openclaw.service'])
   elif args.mode=='native-auth':
    # Interactive native login avoids a background pseudo-terminal losing stdin.
-   login='stty cols 2000; exec sudo -n runuser -u jumpserve -- env HOME=/var/lib/jumpserve-openclaw OPENCLAW_STATE_DIR=/var/lib/jumpserve-openclaw/auth OPENCLAW_CONFIG_PATH=/var/lib/jumpserve-openclaw/auth/config.json PATH=/opt/jumpserve/node/bin:/usr/bin:/bin /opt/jumpserve/node/bin/node /opt/jumpserve/openclaw/node_modules/openclaw/openclaw.mjs models auth login --provider openai --method siwc'
+   auth_maintenance_guard();login=native_auth_command()
    env=dict(os.environ);env['PATH']=str(ROOT/'.test-artifacts/openclaw-release/tools/sessionmanager-bundle/bin')+':'+env.get('PATH','')
    command=['aws','ssm','start-session','--profile','jumpserve','--region','us-east-1','--target',instance(),'--document-name','AWS-StartInteractiveCommand','--parameters',json.dumps(dict(command=[login]))]
    completed=subprocess.run(command,env=env,timeout=900)
@@ -125,9 +146,7 @@ def main():
    receipt['native_session_closed']=True
    receipt['authorization_verified']=False # host-check verifies actual stored consent/catalog separately.
   elif args.mode=='host-refresh':
-   js="import {DatabaseSync} from 'node:sqlite';import {refreshTokenSharingCredential} from '/opt/jumpserve/openclaw/node_modules/openclaw/dist/extensions/openai/token-sharing-oauth.runtime.js';const db=new DatabaseSync('/var/lib/jumpserve-openclaw/auth/state/openclaw.sqlite');db.exec('PRAGMA busy_timeout=5000');const row=db.prepare(\"SELECT value_json FROM config_machine_state WHERE state_key='authProfiles.store'\").get();const value=JSON.parse(row.value_json);const entries=Object.entries(value.profiles);if(entries.length!==1)throw Error('Exactly one native host grant required');const [id,old]=entries[0];const next=await refreshTokenSharingCredential(old);if(next.accountId!==old.accountId||next.clientId!==old.clientId)throw Error('Refresh identity changed');value.profiles[id]=next;db.prepare(\"UPDATE config_machine_state SET value_json=? WHERE state_key='authProfiles.store'\").run(JSON.stringify(value));db.close();console.log(JSON.stringify({native_refresh_verified:true,credential_identity_preserved:true,expires_advanced:next.expires>old.expires,credential_contents_emitted:false}));"
-   command='runuser -u jumpserve -- flock -x /var/lib/jumpserve-openclaw/auth/refresh.lock /opt/jumpserve/node/bin/node --input-type=module -e '+__import__('shlex').quote(js)
-   receipt['ssm']=ssm([command])
+   receipt['ssm']=ssm([host_refresh_command()])
   elif args.mode=='cloud-verify':
    from openclaw_cloud_verify import verify
    receipt['cloud_control']=verify(__import__('sys').modules[__name__],directory)
@@ -137,7 +156,7 @@ def main():
    receipt['frozen']=frozen;save();receipt['ssm']=ssm([command])
   elif args.mode=='host-check':
    expected=json.loads((ROOT/'research-workflow-runtime.json').read_bytes())['files']
-   program="import json,sys,subprocess\nfrom pathlib import Path\nsys.path.insert(0,'/opt/jumpserve/runtime')\nimport openclaw_runtime as r\nr.verify_runtime()\nresult=subprocess.run([str(r.NODE),'/opt/jumpserve/runtime/openclaw_auth.mjs','/var/lib/jumpserve-openclaw/auth/state/openclaw.sqlite',str(r.PACKAGE/'dist/extensions/openai/token-sharing-oauth.runtime.js')],capture_output=True,timeout=30,env=r.environment(r.AUTH));assert result.returncode==0,'Native host refresh interface failed'\ncatalog=r.catalog(r.credential())\nprint(json.dumps(dict(runtime=r.VERSION,native_refresh_interface_verified=True,catalog=catalog,api_key_fallback=False,credential_contents_emitted=False)))"
+   program="import json,sys,subprocess\nfrom pathlib import Path\nsys.path.insert(0,'/opt/jumpserve/runtime')\nimport openclaw_runtime as r\nr.verify_runtime()\ncatalog=r.catalog(r.credential())\nprint(json.dumps(dict(runtime=r.VERSION,native_refresh_interface_verified=True,catalog=catalog,api_key_fallback=False,credential_contents_emitted=False)))"
    program="import hashlib\nfrom pathlib import Path\nexpected="+repr(expected)+"\nactual={n:hashlib.sha256((Path('/opt/jumpserve/runtime')/n).read_bytes()).hexdigest() for n in expected}\nassert actual==expected,'Pinned host source hashes differ'\nprint('Pinned host source hashes verified: '+str(len(actual)))\n"+program
    command="runuser -u jumpserve -- env RESEARCH_AI_RUNTIME=openclaw-production-v1 /opt/jumpserve/python/bin/python -B -c "+__import__('shlex').quote(program)
    receipt['ssm']=ssm([command])
@@ -146,7 +165,7 @@ def main():
    program="from pathlib import Path\nimport hashlib,json\np=Path('/opt/jumpserve/openclaw/node_modules/openclaw')/"+repr(patch['path'])+"\nr=p.read_bytes();h=hashlib.sha256(r).hexdigest()\nif h=="+repr(patch['original_sha256'])+":\n b=p.with_suffix(p.suffix+'.original');assert not b.exists() or b.read_bytes()==r;b.write_bytes(r);r=r.replace("+repr(patch['before'].encode())+","+repr(patch['after'].encode())+");assert hashlib.sha256(r).hexdigest()=="+repr(patch['corrected_sha256'])+";p.write_bytes(r)\nassert hashlib.sha256(p.read_bytes()).hexdigest()=="+repr(patch['corrected_sha256'])+"\nprint(json.dumps(dict(callback_patch='openclaw-loopback-ipv4-v1',original_sha256=h,current_sha256=hashlib.sha256(p.read_bytes()).hexdigest())))"
    receipt['ssm']=ssm(['systemctl stop jumpserve-openclaw-login.service || true',"python3.12 - <<'PY'\n"+program+"\nPY",'chmod a+r /opt/jumpserve/openclaw/node_modules/openclaw/dist/token-sharing-CmBELw8t.mjs','systemctl reset-failed jumpserve-openclaw-login.service || true'])
   elif args.mode=='auth-start':
-   login="runuser -u jumpserve -- env HOME=/var/lib/jumpserve-openclaw OPENCLAW_STATE_DIR=/var/lib/jumpserve-openclaw/auth OPENCLAW_CONFIG_PATH=/var/lib/jumpserve-openclaw/auth/config.json PATH=/opt/jumpserve/node/bin:/usr/bin:/bin /opt/jumpserve/node/bin/node /opt/jumpserve/openclaw/node_modules/openclaw/openclaw.mjs models auth login --provider openai --method siwc"
+   auth_maintenance_guard();login=native_auth_command()
    receipt['ssm']=ssm(["systemd-run --unit=jumpserve-openclaw-login --property=RuntimeMaxSec=900 /usr/bin/script -q -c "+__import__('shlex').quote('stty cols 2000; exec '+login)+" /var/lib/jumpserve-openclaw/auth-login.log"])
   elif args.mode=='auth-status':
    commands=["python3.12 - <<'PY'\nfrom pathlib import Path\nimport re,json,urllib.parse,subprocess\np=Path('/var/lib/jumpserve-openclaw/auth-login.log');s=p.read_text(errors='replace') if p.exists() else ''\ns=re.sub(r'\\x1b\\[[0-?]*[ -/]*[@-~]','',s)\nurls=re.findall(r'https://auth.openai.com/[^\\s\\x1b]+',s)\nurl=next((u for u in reversed(urls) if urllib.parse.urlsplit(u).path.endswith('/authorize') and {'state','code_challenge'}<=set(urllib.parse.parse_qs(urllib.parse.urlsplit(u).query))),None)\nif url and {'id_token_hint','code','access_token','refresh_token'}&set(urllib.parse.parse_qs(urllib.parse.urlsplit(url).query)):url=None\nerrors=[line.strip()[:300] for line in s.splitlines() if re.search(r'Error:|EACCES|ENOENT|Cannot find|already in use',line) and not re.search(r'https?://|token|code=|secret',line,re.I)]\nprint(json.dumps(dict(authorization_url=url,log_bytes=p.stat().st_size if p.exists() else 0,errors=errors[-3:],service_active=subprocess.run(['systemctl','is-active','--quiet','jumpserve-openclaw-login.service']).returncode==0,url_paths=[urllib.parse.urlsplit(u).path for u in urls],credential_store_exists=Path('/var/lib/jumpserve-openclaw/auth/state/openclaw.sqlite').exists())))\nPY"]

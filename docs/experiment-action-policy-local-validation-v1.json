@@ -1,0 +1,95 @@
+{
+  "version": "experiment-action-policy-local-validation-v1",
+  "recorded_at": "2026-10-27T16:34:48.762105+00:00",
+  "status": "local-checks-passed",
+  "policy_version": "experiment-action-policy-v1",
+  "policy_sha256": "973ae76b13a64f4205ca2f581722da8c237cd8afb61d68e2a36e187562be3e52",
+  "runtime_version": 47,
+  "runtime_files_verified": 47,
+  "checks": {
+    "backend_tests": 304,
+    "infrastructure_tests": 20,
+    "builder_database_scenarios": 4,
+    "existing_autonomy_database_scenarios": 11,
+    "native": "Two native OpenClaw sessions; seven synthetic model calls; actual Linux helper installation, execution and resume; exact policy file/hash retained",
+    "policy_mismatch": "Refused before credentials or inference",
+    "publication": "Missing/failed authority judgments refused; original live-evaluation checks retained",
+    "diff_check": "passed"
+  },
+  "artifacts": [
+    {
+      "path": "jumpserve-back-end/research_workflow/policies/experiment-action-policy-v1.json",
+      "sha256": "973ae76b13a64f4205ca2f581722da8c237cd8afb61d68e2a36e187562be3e52",
+      "byte_count": 4541
+    },
+    {
+      "path": "jumpserve-back-end/.test-artifacts/experiment-builder/20261027T162614009542Z/report.json",
+      "sha256": "f26170a596fcfa82025f84f2b24359364774eed4f8b62eb870b2b760d953afb6",
+      "byte_count": 6390
+    },
+    {
+      "path": "jumpserve-back-end/.test-artifacts/experiment-builder/20261027T162614009542Z/slice/action-policy.json",
+      "sha256": "973ae76b13a64f4205ca2f581722da8c237cd8afb61d68e2a36e187562be3e52",
+      "byte_count": 4541
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/research-ideas/database/20261027T162924093149Z/report.json",
+      "sha256": "e542e7a2ca346c1637e12103a0922244281788a034030b343b8bba233d0e3e7e",
+      "byte_count": 11061
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/research-ideas/database/20261027T163158041903Z/autonomy-validation-report.json",
+      "sha256": "f2d96ff0889590f08c4f51d8ddae38e3fec113578efe35dfe797a0a1e72ac926",
+      "byte_count": 15542
+    },
+    {
+      "path": "jumpserve-back-end/.test-artifacts/experiment-action-policy-backend-tests.log",
+      "sha256": "d0da2c7419486c0e6c157eff7cbf297f0a35654ad8c576a5c30bc4b565a95a56",
+      "byte_count": 1552
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/experiment-action-policy/source-snapshot-v1.zip",
+      "sha256": "156fbda6e57696f79ff4b7aaddf57a9a4a93770b87f2a16c044ea55c7ffe7718",
+      "byte_count": 72082
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/experiment-action-policy/source-manifest-v1.json",
+      "sha256": "fe93b88f933ef27416cd19d72d0b109a9048f02e9a49492c869e32362f563983",
+      "byte_count": 2792
+    }
+  ],
+  "reviewer": {
+    "identity": "Codex implementation author",
+    "type": "AI",
+    "independent": false,
+    "human_review": false
+  },
+  "usage": {
+    "real_provider_calls": 0,
+    "native_synthetic_calls": 7,
+    "new_cloud_instances": 0,
+    "production_database_changes": 0,
+    "measured_charges_usd": null,
+    "estimated_charges_usd": null,
+    "subscription_allocation_usd": null,
+    "local_compute": "Unallocated; available wall times remain in original reports"
+  },
+  "limitations": [
+    "Native model transport and provider token usage are synthetic; this does not demonstrate actual-model compliance.",
+    "The local helper install is not validation of arbitrary package-manager downloads or every future experiment.",
+    "No production execution, live prompt publication, cloud provisioning or cost-policy qualification was performed.",
+    "Frontend code was unchanged in this policy update; earlier browser results remain separately retained."
+  ],
+  "release": {
+    "merged": false,
+    "pushed": false,
+    "deployed": false,
+    "builder_prompt": "unpublished",
+    "cloud_cost_policy_approved": false,
+    "pending": [
+      "Bounded actual-answer evaluation with the authority amendment",
+      "Production operational and cost-policy qualification",
+      "Explicit user release instruction"
+    ]
+  }
+}

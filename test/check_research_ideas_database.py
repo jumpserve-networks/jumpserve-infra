@@ -55,6 +55,8 @@ def rpc(name,payload):
       'research_autonomy_budget_candidates':{},
       'research_autonomy_resume_turns':dict(p_policy='text'),
       'research_model_dispatch':dict(p_operation='text',p_payload='jsonb'),
+      'research_builder_call':dict(p_operation='text',p_payload='jsonb'),
+      'research_builder_package':dict(p_dispatch='uuid',p_token='uuid',p_project='uuid',p_wrapper='uuid',p_manifest='uuid',p_candidate='uuid'),
       'research_initialize_claim_design':dict(p_study='uuid',p_actor='uuid',p_document='jsonb',p_raw='text',p_sha256='text',p_source='jsonb',p_claim='jsonb'),
       'research_reuse_claim_packet':dict(p_study='uuid',p_actor='uuid',p_id='uuid',p_packet='uuid',p_run='uuid'),
       'research_create_study':dict(p_actor='uuid',p_id='uuid',p_document='jsonb'),
@@ -77,6 +79,7 @@ def rpc(name,payload):
       'research_network_update':dict(p_job='uuid',p_phase='text',p_data='jsonb',p_ingest_hash='text'),
       'research_network_cancel':dict(p_study='uuid',p_actor='uuid',p_job='uuid',p_id='uuid',p_reason='text'),
       'research_network_token':dict(p_job='uuid',p_hash='text'),
+      'research_shared_campaign_bind':dict(p_study='uuid',p_actor='uuid',p_task='uuid',p_claim='uuid',p_sha='text',p_acquisition='jsonb',p_campaign='uuid',p_protocol='uuid',p_records='jsonb'),
       'publish_agent_prompt':dict(p_version_id='uuid',p_expected_active_version_id='uuid',p_expected_content_sha256='text',p_report='jsonb',p_actor='text',p_module_id='text')}
     if name not in signatures or set(payload)!=set(signatures[name]):raise ValueError('Unsupported fixture RPC')
     arguments=[]
@@ -108,7 +111,7 @@ def transport(path,method='GET',body=None,public=False,raw=False):
         return rpc(parsed.path.removeprefix('/rest/v1/rpc/'),body)
     if method!='GET' or body is not None:raise ValueError('Unexpected transport mutation')
     table=parsed.path.removeprefix('/rest/v1/')
-    allowed=['research_'+k for k in (*workflow.FIELDS,'studies','study_owners','paper_uploads','paper_reviews','queue_jobs','queue_events','prepared_plans','idea_packets','idea_runs','idea_readiness','idea_campaign_links','claim_designs','autonomy_workflows','autonomy_tasks','autonomy_turns')]
+    allowed=['research_'+k for k in (*workflow.FIELDS,'studies','study_owners','paper_uploads','paper_reviews','queue_jobs','queue_events','prepared_plans','idea_packets','idea_runs','idea_readiness','idea_campaign_links','claim_designs','autonomy_workflows','autonomy_tasks','autonomy_turns','builder_calls','builder_packages','shared_campaigns','shared_campaign_members')]
     if table not in allowed:raise ValueError('Unsupported relation')
     params=dict(urllib.parse.parse_qsl(parsed.query));columns=params.pop('select').split(',')
     if any(not c.replace('_','').isalnum() and c not in ('value::text','evidence_progress:context->evidence_progress') for c in columns):raise ValueError('Unsafe projection')
@@ -125,7 +128,7 @@ def transport(path,method='GET',body=None,public=False,raw=False):
         if column=='and':
             if not value.startswith('(id.gt.') or not value.endswith(')'):raise ValueError('Unsafe keyset cursor')
             predicates.append('id>'+sql_text(str(uuid.UUID(value[7:-1]))));continue
-        if column not in ('id','study_id','owner_id','created_at','packet_id','task','run_id','campaign_id','protocol_id','task_id','number','claim_id'):raise ValueError('Unsafe filter')
+        if column not in ('id','study_id','owner_id','source_id','created_at','packet_id','task','run_id','campaign_id','protocol_id','task_id','number','claim_id'):raise ValueError('Unsafe filter')
         operator,argument=value.split('.',1)
         if operator=='eq':predicates.append(column+'='+sql_text(argument))
         elif operator=='is' and argument=='null':predicates.append(column+' is null')
@@ -180,6 +183,10 @@ grant all on public.agent_sessions to service_role;""")
         name='202610200008_remove_autonomy_turn_cap.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     name='202610200009_openclaw_dispatch.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     name='202610230002_paper_confirmation.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
+    name='202610240001_paper_review_selection.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
+    name='202610260001_executable_assessment_methods.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
+    for name in ('202610270001_experiment_builder.sql','202610270002_experiment_builder_prompt.sql','202610270003_builder_package_catalog.sql','202610270004_experiment_action_authority.sql'):
+        raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     report['bootstrap_limit']='Legacy agent_sessions base table and Storage API catalog columns synthesized; listed prompt/research migrations executed as original files. Historical study-table migrations outside this feature are not replayed.'
     store.request=transport
 

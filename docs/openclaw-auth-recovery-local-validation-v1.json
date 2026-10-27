@@ -1,0 +1,196 @@
+{
+  "version": "openclaw-auth-recovery-local-validation-v1",
+  "recorded_at": "2026-10-24T19:21:14.128635+00:00",
+  "status": "local-checks-passed-awaiting-explicit-release",
+  "production_deployed": false,
+  "production_status_polled": false,
+  "committed_merged_or_pushed": false,
+  "protocol": "../jumpserve-back-end/research_workflow/auth-recovery-protocol-v1.md",
+  "base_backend_revision": "87d7a35d31decd7d1c9f6504e51850abca87840f",
+  "runtime_candidate": {
+    "version": 40,
+    "files": 35,
+    "revision_status": "Local uncommitted auth-recovery candidate based on source_revision; exact file hashes below. An explicitly requested release must pin the final committed backend revision.",
+    "sha256": "7c50136a7d28ca41d336986fd80a3b80cff8f66de3a05f688fd0f6a59fc8750e"
+  },
+  "behavior": [
+    "Serialize host refresh through the existing private lock, including checks and manual refresh.",
+    "Allocate and fsync private recovery state before refresh; journal the issued replacement before SQLite commit, recover it after restart, preserve client/account identity and newer manual sign-ins.",
+    "Only absent setup or a confirmed unusable grant reports authentication required; temporary rejection, unknown refresh, configuration, permission and storage failures remain distinct unavailable states.",
+    "Back off after slow failure responses and bound confirmed-rejection attempts to three per fifteen-minute window; never automatically replay an uncertain rotation.",
+    "Recognize repaired grants without a sticky worker latch; preserve an independent durable quota hold until explicit operator resume.",
+    "Block model admission below 512 MiB free; retain all original research spools.",
+    "Preserve a pre-provider failed logical request and receipt with known zero provider calls, missing usage and no paid fallback.",
+    "Require held admission/polling and drained model work for native sign-in; stop the worker for exclusive grant ownership and restore its prior service state on CLI success or failure."
+  ],
+  "checks": {
+    "backend_unittest": {
+      "passed": 241,
+      "command": "python3 -B -m unittest discover -s research_workflow/tests -v",
+      "log": {
+        "path": ".test-artifacts/openclaw-auth-recovery/20261024T192114113789Z/jumpserve-openclaw-auth-suite-v4.log",
+        "sha256": "7ef3ac40e1af6144a4ea67de4ffc4cf3e6940f04b7d5e4de20c2a1d17638ae57",
+        "bytes": 41603
+      },
+      "includes_native_auth_suite": 17,
+      "includes_two_process_single_refresh_check": true,
+      "includes_native_cli_with_fake_loopback_provider": true
+    },
+    "native_auth_cases": {
+      "passed": 17,
+      "nested_in_backend_suite": true,
+      "command": "experiments/openclaw_pilot/runtime/node_modules/node/bin/node --test research_workflow/tests/openclaw_auth_test.mjs",
+      "coverage": [
+        "valid grant reuse",
+        "renewal and restart",
+        "invalid grant quarantine and fresh sign-in",
+        "durable bounded retry window",
+        "429/503 versus invalid client and permissions",
+        "unknown transport outcome without replay",
+        "preflight low space",
+        "replacement recovery after SQLite commit failure",
+        "abrupt process exit after journal fsync",
+        "failed recovery write remains uncertain",
+        "preserve fresh sign-in and logout",
+        "client/account mismatch and corrupt recovery",
+        "preallocation failure before provider",
+        "reject stale recovery slot from a prior rotation",
+        "missing storage versus first-time setup",
+        "actual helper output omits secret-bearing error text",
+        "configuration repair and untyped 400 handling",
+        "backoff begins after a slow rejected response"
+      ]
+    },
+    "private_dispatch_database": {
+      "passed": 6,
+      "command": "npm run test:research:openclaw",
+      "report": ".test-artifacts/openclaw-auth-recovery/20261024T192114113789Z/openclaw-validation-report.json",
+      "sha256": "1b778e83250b641e3e23d0c25d657902ccbff66ba4c1226fd73c2c952318304b",
+      "scope": "Actual isolated PostgreSQL and service-only RPCs, synthetic provider/storage/auth/worker heartbeats."
+    },
+    "release_maintenance_guards": {
+      "passed": 8,
+      "command": "python3 -B test/openclaw_release_test.py",
+      "scope": "Mock AWS/Management API; actual local shell lifecycle with a synthetic systemctl executable, no real service actions."
+    },
+    "infrastructure_jest": {
+      "passed": 90,
+      "skipped": 5,
+      "skip_reason": "Existing benchmark CLI contract fixture not selected; unrelated to auth recovery.",
+      "command": "npm test -- --runInBand",
+      "log": {
+        "path": ".test-artifacts/openclaw-auth-recovery/20261024T192114113789Z/jumpserve-openclaw-auth-infra-final.log",
+        "sha256": "d0baea85f63328d03376d2d11472ecbd75f8716b786025ca24f65f58b34b5a7b",
+        "bytes": 1042
+      }
+    },
+    "infrastructure_build": "npm run build passed",
+    "runtime_staging": "All 35 declared source hashes verified locally; no assets uploaded.",
+    "diff_whitespace": "git diff --check passed in both changed repositories"
+  },
+  "source_sha256": {
+    "openclaw_auth.mjs": "ff5a01312d3539e091e60cf060f7433b087f390f5d126e8c8baa065ac5a11d63",
+    "openclaw_runtime.py": "5066c2f90de66ef3f7d063a2603eb1c51bf1d592ae4dba4d25025af554fb1f69",
+    "openclaw_health.py": "4cfe95969ce7451fbcc4d6519ca19c1e031cb9c8994baa6596f1fde324234885",
+    "siwc_protocol.py": "8818a9a949ac3810154d243bfd664d0e4671abbcdb21e61b92c6e0e8b42090b8",
+    "tests/test_openclaw_auth.py": "bf5e39facece251b661859b65de6df1db96340880e56015a96fd50023e5522ae",
+    "tests/openclaw_auth_test.mjs": "9dd6b8d1ed0c0a0672a1dccec0bc908281bf88871698ea3e4603a747d549e273",
+    "auth-recovery-protocol-v1.md": "7c730073594899127709f588bdc0bf1d02ba1cb02778a642b0a4a0bf88002fe8"
+  },
+  "local_evidence_directory": ".test-artifacts/openclaw-auth-recovery/20261024T192114113789Z",
+  "original_and_followup_logs": {
+    "suite": {
+      "path": ".test-artifacts/openclaw-auth-recovery/20261024T192114113789Z/jumpserve-openclaw-auth-suite.log",
+      "sha256": "47aa5d21ed072d44c2f9cee715caad19f49fcf0bb4a90c347e91ab16d8156a60",
+      "bytes": 41389
+    },
+    "suite-final": {
+      "path": ".test-artifacts/openclaw-auth-recovery/20261024T192114113789Z/jumpserve-openclaw-auth-suite-final.log",
+      "sha256": "0336878b824577c5df5d92c54e76981b09377bb64b28589eaa8442876b02c6e3",
+      "bytes": 41389
+    },
+    "suite-v2": {
+      "path": ".test-artifacts/openclaw-auth-recovery/20261024T192114113789Z/jumpserve-openclaw-auth-suite-v2.log",
+      "sha256": "d580711f720a4fc631f2ba2cdcdf27d1be997c725542dede544bbed3d4e3c385",
+      "bytes": 41390
+    },
+    "suite-v3": {
+      "path": ".test-artifacts/openclaw-auth-recovery/20261024T192114113789Z/jumpserve-openclaw-auth-suite-v3.log",
+      "sha256": "c57ff4e6614ee4c64a4731941288f519c44324aad4bcc7aae60eca7d2f8a4f19",
+      "bytes": 41603
+    },
+    "suite-v4": {
+      "path": ".test-artifacts/openclaw-auth-recovery/20261024T192114113789Z/jumpserve-openclaw-auth-suite-v4.log",
+      "sha256": "7ef3ac40e1af6144a4ea67de4ffc4cf3e6940f04b7d5e4de20c2a1d17638ae57",
+      "bytes": 41603
+    },
+    "database": {
+      "path": ".test-artifacts/openclaw-auth-recovery/20261024T192114113789Z/jumpserve-openclaw-auth-database.log",
+      "sha256": "5c0c14f24e9b29be5be309ca7cd14613c3647fae54df38af76102b2b79ce8b36",
+      "bytes": 720
+    },
+    "infra": {
+      "path": ".test-artifacts/openclaw-auth-recovery/20261024T192114113789Z/jumpserve-openclaw-auth-infra.log",
+      "sha256": "6f1b3265c4c7823bd39dc443ea5f548e5aae36a1f4312e1f93349600e06afa97",
+      "bytes": 1042
+    },
+    "infra-final": {
+      "path": ".test-artifacts/openclaw-auth-recovery/20261024T192114113789Z/jumpserve-openclaw-auth-infra-final.log",
+      "sha256": "d0baea85f63328d03376d2d11472ecbd75f8716b786025ca24f65f58b34b5a7b",
+      "bytes": 1042
+    }
+  },
+  "configuration_limits": {
+    "native_runtime": "OpenClaw 2026.10.5; Node 24.16.0; gpt-6.1-sol",
+    "auth_helper_seconds": 75,
+    "native_sdk_single_http_timeout_seconds": 30,
+    "recovery_file_bytes": 262144,
+    "minimum_free_before_refresh_bytes": 8388608,
+    "minimum_spool_free_before_claim_bytes": 536870912,
+    "refresh_attempts_per_window": 3,
+    "refresh_window_seconds": 900,
+    "provider_or_model_request_replay": false,
+    "paid_fallback": false,
+    "schema_or_public_response_change": false
+  },
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false,
+    "human_review": false
+  },
+  "limitations": [
+    "Exposed development regressions, not independent held-out or human validation.",
+    "SDK refresh and provider errors use synthetic grants/responses; no real credential was inspected or refreshed.",
+    "Disk errors and failed commits are injected; the abrupt process exit and SQLite/lock operations are real local processes. A physical power cut or full production XFS filesystem was not tested.",
+    "An externally rotated grant that never reaches a durable local recovery record cannot be guaranteed recoverable; it is quarantined as uncertain, not silently retried or asserted expired.",
+    "The earlier production invalid_grant cause remains unproven. This fixes demonstrated design defects without claiming they caused that historical incident.",
+    "First upgrade must explicitly preserve any legacy quota hold, because the prior implementation held that state in memory.",
+    "Live production refresh, reconnect and authenticated queue recovery await an explicit release request; no deployment readiness claim for those conditional checks.",
+    "Frontend, SQL schema, public projection, model selection and published prompt pointers were not changed; no new frontend/browser or model-answer evaluation campaign applies to this local authentication change."
+  ],
+  "usage": {
+    "actual_openai_refresh_calls": 0,
+    "actual_openai_inference_calls": 0,
+    "new_cloud_resources": 0,
+    "model_usage": null,
+    "measured_charges_usd": null,
+    "subscription_allocation_usd": null,
+    "unallocated": "Local verification compute/storage and coding-agent usage are not metered by these application tests; missing usage/charges are not zero."
+  },
+  "reproduction": {
+    "local_backend": "python3 -B -m unittest discover -s research_workflow/tests -v",
+    "native_auth_suite": "experiments/openclaw_pilot/runtime/node_modules/node/bin/node --test research_workflow/tests/openclaw_auth_test.mjs",
+    "local_database": "npm run test:research:openclaw",
+    "maintenance_and_parameter_guards": "python3 -B test/openclaw_release_test.py",
+    "stage_candidate": "python3 -B bin/prepare-research-runtime.py",
+    "infrastructure": "npm run build; npm test -- --runInBand"
+  },
+  "documentation": [
+    "https://developers.openai.com/siwc/token-sharing-open-source/token-reference#token-lifetimes",
+    "https://developers.openai.com/siwc/token-sharing-open-source/profiles-and-sessions#refreshing-tokens",
+    "https://developers.openai.com/siwc/token-sharing-open-source/errors-and-recovery#refresh-errors",
+    "https://nodejs.org/docs/latest-v24.x/api/sqlite.html",
+    "https://nodejs.org/docs/latest-v24.x/api/fs.html"
+  ]
+}
