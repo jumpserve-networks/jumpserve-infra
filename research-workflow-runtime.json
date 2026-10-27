@@ -1,6 +1,6 @@
 {
   "version": 47,
-  "source_revision": "cc072e3ed61c28f8427eb7ed6c69de2ce242328c",
+  "source_revision": "eb8779cc7e3348f828e2de794a8fd0e45f7ccbb9",
   "files": {
     "api.py": "de0ef9251379e1a369a9293bee07a09dc4fdbc9ba25019f31eb9fd686cfa84fb",
     "autonomy.py": "bd5231b998f3ecce44f8d51f2036172dfdb429f76b0634c922d8c5992c39b903",
@@ -51,7 +51,7 @@
     "workflow.py": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f"
   },
   "base_source_revision": "3d7cf31c420b281426a02b52de04aa207aa8f5fb",
-  "revision_status": "Unreleased local authentication-recovery and title-fallback candidate based on the deployed grouping revision; current file hashes only. Not the deployed runtime; a later explicitly requested release must pin a final committed backend revision.",
-  "source_dirty": true,
-  "change_set": "Retained prior local work plus native experiment builder and versioned standing experiment-action authority; uncommitted working-tree bytes."
+  "revision_status": "Committed release candidate; deployment requires live qualification.",
+  "source_dirty": false,
+  "change_set": "Native experiment builder, standing experimental authority and retained assessment improvements."
 }

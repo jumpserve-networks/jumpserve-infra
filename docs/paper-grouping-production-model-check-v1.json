@@ -1,0 +1,57 @@
+{
+  "version": "paper-grouping-production-model-check-v1",
+  "status": "passed",
+  "reviewer": {
+    "identity": "Primary Codex AI implementer",
+    "type": "AI",
+    "independent": false
+  },
+  "judgment": "Actual worker selection preserves proposed/unproved/observed/target/derived distinctions and 16 KBps units; no scientific validity or complete source review asserted.",
+  "evidence": {
+    "status": "passed",
+    "model_id": "gpt-6.1-sol",
+    "runtime": "openclaw-production-v1",
+    "source_revision": "3d7cf31c420b281426a02b52de04aa207aa8f5fb",
+    "request_sha256": "c8b5d6af28d242cc05e63b9da8b81a1662305f466e19beaadcc36b068b26d44d",
+    "usage": {
+      "inputTokens": 6441,
+      "outputTokens": 353,
+      "totalTokens": 6794
+    },
+    "suggestions": {
+      "central_claims": [
+        {
+          "claim_id": "b703b9a1-703a-572d-a37d-376353670f6d",
+          "label": "Proposed transport controller combining a new timer estimator with congestion-window control"
+        }
+      ],
+      "testable_findings": [
+        {
+          "claim_id": "6ac1c5f6-49b3-543a-98a3-614f3ca7966d",
+          "label": "Unproved argument: only exponential backoff has hope of working in the stated setting; proof outside paper scope"
+        },
+        {
+          "claim_id": "28da7548-2f21-5d26-9ccb-001e409ad9ba",
+          "label": "Observed Arpanet windows: 8\u201312 packets; target drop rate <1%; derived one-packet increments for 1% average drop rate"
+        },
+        {
+          "claim_id": "645928a3-4c6c-59e1-9db3-af6be953d54d",
+          "label": "Reported measured throughput: 16 KBps during the reported interval in fixed-configuration experiments"
+        }
+      ],
+      "rationale": "The controller design is the explicit original contribution. Separate findings retain the unproved backoff argument, observed window range with its distinct loss target and derived increment statement, and condition-specific throughput observation. Supplied numerical metadata does not make the proposed design or unproved argument numerical measurements. This organizes only the supplied excerpts for owner confirmation; it neither independently verifies findings nor constitutes complete source review."
+    },
+    "archive": {
+      "bucket": "research-workflow-raw",
+      "path": "release-verification/paper-grouping/host/4b6f9990fab14e1126e7a684aef2069b4591001adf8f2fe80ba7fdfe98e770d8.zip",
+      "sha256": "4b6f9990fab14e1126e7a684aef2069b4591001adf8f2fe80ba7fdfe98e770d8",
+      "bytes": 53139,
+      "retrieved_hash_verified": true
+    },
+    "no_assessment_created": true,
+    "paid_fallback": false
+  },
+  "anonymous_archive_read_denied": true,
+  "measured_charges_usd": null,
+  "subscription_allocation_usd": null
+}

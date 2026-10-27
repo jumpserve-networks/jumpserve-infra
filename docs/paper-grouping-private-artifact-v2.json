@@ -1,0 +1,11 @@
+{
+  "bucket": "research-workflow-raw",
+  "path": "release-verification/paper-grouping/e7432c8529a0c0531b69bf47a110517f00d41979550979a52e7743e40192680f.zip",
+  "sha256": "e7432c8529a0c0531b69bf47a110517f00d41979550979a52e7743e40192680f",
+  "retrieved_sha256": "e7432c8529a0c0531b69bf47a110517f00d41979550979a52e7743e40192680f",
+  "bytes": 2435477,
+  "files": 240,
+  "anonymous_read_denied": true,
+  "review_sha256": "fbbaf258ac7c9491d7b52fe31aa605ee35e9b0866dd0ba289b6bad91f94167af",
+  "measured_storage_charges_usd": null
+}
