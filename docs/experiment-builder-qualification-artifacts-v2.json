@@ -1,0 +1,148 @@
+{
+  "version": "experiment-builder-qualification-artifacts-v2",
+  "campaign": "20261027T220810693438Z",
+  "aws_account": "395567831870",
+  "supabase_project": "regphejnlvfpyokpniny",
+  "public": false,
+  "release_status": "Local committed backend candidate and infrastructure feature branch only; builder prompt unpublished and general builder disabled in production. No deployment performed in this follow-up.",
+  "frozen": {
+    "sha256": "57817046ed7cff586f1ab648eb31e5e0a3683cd5e614b2d86d8846c8cdecaec6",
+    "runtime_files": 48,
+    "runtime_candidate_sha256": "a2ba5467581001ab509808febd9572f68ed66ff2761c9ca902b4a65a915dcef0",
+    "execution_contract_sha256": "e4dee8fad79714ff757d72fc4c4507620180511d46d2398c7b366d475382b04e"
+  },
+  "release": {
+    "backend_revision": "f5453c866bfd74e770398fd6adfebae3265b01c6",
+    "manifest_version": 53,
+    "manifest_sha256": "8cd7ea0e6582f9e939ecb9fec115ed32c57afcce8331f4c4660b77887879c69c",
+    "files": 49,
+    "unchanged_from_frozen": 47,
+    "changed": [
+      "autonomy_costs.py"
+    ],
+    "added": [
+      "policies/built-package-costs-v2.json"
+    ],
+    "native_core_prompt_and_wrapper_match": true
+  },
+  "archives": {
+    "candidate": {
+      "path": "qualification/experiment-builder-v2/20261027T220810693438Z/candidate-089efa19574b8ec198a30d72f4987af7e8e31cb24a1b556a81b20108cc0177d1.zip",
+      "sha256": "089efa19574b8ec198a30d72f4987af7e8e31cb24a1b556a81b20108cc0177d1",
+      "bytes": 330573
+    },
+    "main": {
+      "bucket": "research-workflow-raw",
+      "bytes": 4471731,
+      "path": "qualification/experiment-builder-v2/20261027T220810693438Z/archive/28537b2a8fb765908cf38b272ae523339aaa89199397c16fa34bfe2e9d7de52d.zip",
+      "public": false,
+      "retrieved_sha256": "28537b2a8fb765908cf38b272ae523339aaa89199397c16fa34bfe2e9d7de52d",
+      "sha256": "28537b2a8fb765908cf38b272ae523339aaa89199397c16fa34bfe2e9d7de52d"
+    },
+    "feedback_followup": {
+      "bucket": "research-workflow-raw",
+      "bytes": 256643,
+      "path": "qualification/experiment-builder-v2/20261027T220810693438Z/followup-v7/archive/a8d155e584c84a9e4725a9d2f7fedb051b431c2a364b548554a97fb0adb1e25a.zip",
+      "public": false,
+      "retrieved_sha256": "a8d155e584c84a9e4725a9d2f7fedb051b431c2a364b548554a97fb0adb1e25a",
+      "sha256": "a8d155e584c84a9e4725a9d2f7fedb051b431c2a364b548554a97fb0adb1e25a"
+    },
+    "vendor_linux_controls": {
+      "bucket": "research-workflow-raw",
+      "path": "qualification/experiment-builder-v2/20261027T220810693438Z/supplement/5e9acb5c5c2d592ede0acde06ac9529aa0904f70cab77ea893a743ab88fc24ee.zip",
+      "sha256": "5e9acb5c5c2d592ede0acde06ac9529aa0904f70cab77ea893a743ab88fc24ee",
+      "retrieved_sha256": "5e9acb5c5c2d592ede0acde06ac9529aa0904f70cab77ea893a743ab88fc24ee",
+      "bytes": 207649,
+      "public": false
+    },
+    "exact_image": {
+      "bucket": "research-workflow-raw",
+      "path": "qualification/experiment-builder-v2/20261027T220810693438Z/image-manifest-a50c5353c443d693951ac718cbc349fd25320d5d230d37716c103f6bb5a86a2e.json",
+      "sha256": "a50c5353c443d693951ac718cbc349fd25320d5d230d37716c103f6bb5a86a2e",
+      "retrieved_sha256": "a50c5353c443d693951ac718cbc349fd25320d5d230d37716c103f6bb5a86a2e",
+      "bytes": 9012,
+      "public": false,
+      "compressed_bytes": 164777146,
+      "chunks": 21,
+      "image": "sha256:ef390fb5c927fc11773da987e96c3264b618118fd39b8715139cf977b1b4320a"
+    },
+    "validation_prices": {
+      "bucket": "research-workflow-raw",
+      "path": "qualification/experiment-builder-v2/20261027T220810693438Z/local-validation/3326bdeb7b82613650b507a8084f112f99595d9e00922035182f0acea33089da.zip",
+      "sha256": "3326bdeb7b82613650b507a8084f112f99595d9e00922035182f0acea33089da",
+      "retrieved_sha256": "3326bdeb7b82613650b507a8084f112f99595d9e00922035182f0acea33089da",
+      "bytes": 584287,
+      "members": 116,
+      "public": false
+    },
+    "validation_metadata_correction": {
+      "bucket": "research-workflow-raw",
+      "path": "qualification/experiment-builder-v2/20261027T220810693438Z/local-validation-metadata-correction/e7b034fe5f72ec45a32a0f229f246f98f3cb47dd11c1b56af1216b374b842d58.zip",
+      "sha256": "e7b034fe5f72ec45a32a0f229f246f98f3cb47dd11c1b56af1216b374b842d58",
+      "retrieved_sha256": "e7b034fe5f72ec45a32a0f229f246f98f3cb47dd11c1b56af1216b374b842d58",
+      "bytes": 585961,
+      "members": 118,
+      "public": false
+    }
+  },
+  "image": {
+    "image": "sha256:ef390fb5c927fc11773da987e96c3264b618118fd39b8715139cf977b1b4320a",
+    "platform": "linux/amd64",
+    "compressed_bytes": 164777146,
+    "compressed_sha256": "8bd155a93e3493f425a5141432f41c94723fa92f79acacfdc185e8a05f13f7d4",
+    "raw_tar_bytes": 417117184,
+    "raw_tar_sha256": "624ed4c30d48fb6a2fca77b12cceba1bf3ef421309204abe2ead9c5b7e956905",
+    "chunks": 21,
+    "verification": "Each original chunk retrieved byte-for-byte from private Supabase Storage before recording. Docker archive config hash equals qualified image ID. This is artifact integrity, not a full package/source audit.",
+    "scope": "All chunks retrieved/hash-verified on worker; image manifest separately retrieved/hash-verified locally. Entire compressed image not downloaded locally."
+  },
+  "prompt": {
+    "id": "dfab5ecb-b8b9-5ad3-8771-f28a06b53b27",
+    "version": "research-experiment-builder-v2",
+    "sha256": "da3ff82e259cfd25d95c0c97af63defd4cd232277e4bf3462fdb49e2b42843d4",
+    "published": false
+  },
+  "database_evaluations": [
+    {
+      "report_sha256": "6f6fd2d437ab72ef2228ff3e0c79156e922b4ea095287d48a2877eab108463fc",
+      "retrieved_sha256": "6f6fd2d437ab72ef2228ff3e0c79156e922b4ea095287d48a2877eab108463fc",
+      "outcome": "failed-substantive-review",
+      "report_bytes": 3138411,
+      "meaning": "Original 68-call main campaign, nine pass and one invalid blocker."
+    },
+    {
+      "report_sha256": "a1919cb01be6a93122495c4654e1c84129bb2994b4507db412dc643f7948caf1",
+      "retrieved_sha256": "a1919cb01be6a93122495c4654e1c84129bb2994b4507db412dc643f7948caf1",
+      "outcome": "passed",
+      "report_bytes": 3391771,
+      "meaning": "Functional results pass; superseded metadata has wrong initial-report cross-reference. Preserved unchanged."
+    },
+    {
+      "report_sha256": "54be72374de3326592a63dbd9e008064710d6e4e9f7cf3d6143c37dcd067dd37",
+      "retrieved_sha256": "54be72374de3326592a63dbd9e008064710d6e4e9f7cf3d6143c37dcd067dd37",
+      "outcome": "passed",
+      "report_bytes": 3393344,
+      "meaning": "Selected corrected metadata, all ten checks and two authority judgments pass after five-call feedback follow-up."
+    }
+  ],
+  "serialization": "agent_prompt_evaluations.report_raw: json.dumps(sort_keys=True,separators=(comma,colon)), default ensure_ascii=True; SHA256 of exact stored UTF-8 bytes. This differs from workflow.canonical for Unicode.",
+  "unique_native_calls": 73,
+  "retained_request_records": 74,
+  "retained_unadmitted_requests": 1,
+  "model_reservations_usd": 73,
+  "measured_charges_usd": null,
+  "new_experiment_vms_requested": 0,
+  "accounting": "Initial, original-final and corrected-final reports overlap by call identity/request hash; do not sum their call counts. No new provider calls for metadata correction.",
+  "reviewer": {
+    "identity": "Primary Codex AI implementation author",
+    "type": "AI",
+    "independent": false,
+    "passed": true
+  },
+  "conditional_verification": [
+    "Full legitimate Google-authenticated production planning/building/persistence/execution flow",
+    "Deployment of this exact candidate and new publication guard",
+    "Fresh public desktop/mobile deployed status checks"
+  ],
+  "review_scope": "All ten final answer fields, generated TCP/UDP sources and relevant actual command outputs examined; archived provider reasoning and whole dependency source trees are not exhaustively reviewed. Hash verification alone is not complete review."
+}

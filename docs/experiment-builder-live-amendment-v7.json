@@ -1,0 +1,11 @@
+{
+  "version": "experiment-builder-live-amendment-v7",
+  "amends": "experiment-builder-live-amendment-v6",
+  "kind": "deterministic-runtime-feedback-follow-up",
+  "reason": "The qualification harness marks any parsed answer.json awaiting review, even when the actual runtime receipt reports invalid candidate/blocker feedback. Production autonomy.py queues another building turn with that feedback. Preserve the original v6 report and invalid outputs; exercise this already-existing continuation behavior rather than changing the model or accepting a malformed blocker.",
+  "eligibility": "Only cases with original complete runtime receipts and nonempty deterministic receipt.feedback. No semantic answer hints or manual file correction. Do not retry unknown/failed provider outcomes. Original v6 campaign must be terminal and archived.",
+  "invariants": "Same prompt v2, exact candidate runtime, image, vendor correction, question, blocker contract and scientific pass criteria. Preserve original workspaces/checkpoints/history. Feed the original runtime error and prior receipt to the model as production does. New code/checkpoints are distinct revisions; invalid originals are not overwritten in the archive.",
+  "resources": "No reset: count all v6 and follow-up admissions against the original 80-call/USD80 reservation ceiling and original 2026-10-27T22:42:30.720770Z start plus 3600 seconds. Retain the original 12-call ceiling per case. At most two cases in parallel; no new cloud host or paid API.",
+  "completion": "An answer file alone is insufficient. Require no remaining runtime feedback and, for missing-data/equipment/budget cases, a runtime-validated external-blocked receipt. Review final answers and original failures separately. This is a development harness correction, not independent validation.",
+  "publication": "The passing report, if achieved, must name v6 and this follow-up, retain the original failed v6 evaluation and every original request/response, and identify the nonindependent AI reviewer. No prompt publication or production activation this turn."
+}

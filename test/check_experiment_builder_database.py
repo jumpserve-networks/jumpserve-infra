@@ -104,6 +104,11 @@ def main():
    # Authority notes alone cannot replace the original ten-case live guard.
    f.rejects(lambda:f.rpc('publish_agent_prompt',dict(publication,p_report=authority_report)))
    assert f.query('select published_at is null from agent_prompt_versions where id='+f.sql_text(candidate))=='t'
+   v2='dfab5ecb-b8b9-5ad3-8771-f28a06b53b27'
+   v2_sha=f.query('select content_sha256 from agent_prompt_versions where id='+f.sql_text(v2))
+   f.rejects(lambda:f.rpc('publish_agent_prompt',dict(publication,p_version_id=v2,p_expected_content_sha256=v2_sha,p_report=authority_report)))
+   assert f.query('select published_at is null from agent_prompt_versions where id='+f.sql_text(v2))=='t'
+   assert 'absolute filename' in f.query('select system_prompt from agent_prompt_versions where id='+f.sql_text(v2))
    return {'RLS':'enabled','browser_writes':'denied','stale_fence':'refused','draft_publication':'refused','authority_checks':'required; original live checks retained'}
   f.check('RLS, immutable history, fences and publication checks',security)
   f.report['passed']=True

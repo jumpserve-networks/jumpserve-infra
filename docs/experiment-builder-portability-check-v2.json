@@ -1,0 +1,15 @@
+{
+  "version": "experiment-builder-portability-check-v2",
+  "kind": "independent implementation interface check",
+  "source_archive_sha256": "28537b2a8fb765908cf38b272ae523339aaa89199397c16fa34bfe2e9d7de52d",
+  "case": "new-implementation",
+  "question": "Does the unchanged model-generated project execute through the unchanged server wrapper with actual spec/input/output paths?",
+  "configurations": ["Exact retained development spec bytes", "Canonical network-execution-v1 spec under the same fixed 1001-byte question"],
+  "criteria": "Both isolated executions return zero; network-observations-v1 contains exactly one recorded received_bytes observation of 1001 bytes, matching the independently calculated deterministic payload digest and EOF/exact-content checks. Sum of receive chunk sizes is 1001 and every nonempty read is at most 37 bytes; do not require a fixed number of recv calls.",
+  "controls": "Original project files and wrapper bytes preserved and hashed. No model-written code runs on the controller host. Offline Linux Docker, read-only root and inputs, one CPU, 512 MiB, 64 PIDs, at most 45 seconds per configuration; no dependency installation needed for empty locks.",
+  "replication_unit": "Two software interface configurations, not independent scientific replications. No confidence interval or population inference.",
+  "missing_failure": "Retain original stdout/stderr and failed output without correction. Missing output is missing, not zero.",
+  "limits": "Uses local Linux ARM image versus model development on Linux x86. This tests Python/socket interface compatibility; no fresh EC2 or authenticated user request is implied.",
+  "reviewer": {"identity": "Primary Codex AI implementation author", "type": "AI", "independent": false},
+  "measured_charges_usd": null
+}

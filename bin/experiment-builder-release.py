@@ -9,9 +9,11 @@ MIGRATIONS=[
  ('202610270002_experiment_builder_prompt.sql',"select exists(select 1 from agent_prompt_versions where id='6102d16d-c5cf-5f1c-8fc7-2df2899da972') present"),
  ('202610270003_builder_package_catalog.sql',"select to_regclass('public.research_builder_packages') is not null present"),
  ('202610270004_experiment_action_authority.sql',"select to_regprocedure('public.publish_agent_prompt_before_action_policy_v1(uuid,uuid,text,jsonb,text,text)') is not null present"),
- ('202610270005_builder_scheduling_window.sql',"select strpos(pg_get_functiondef('public.research_model_dispatch(text,jsonb)'::regprocedure),'245 seconds')>0 present")]
+ ('202610270005_builder_scheduling_window.sql',"select strpos(pg_get_functiondef('public.research_model_dispatch(text,jsonb)'::regprocedure),'245 seconds')>0 present"),
+ ('202610270006_experiment_builder_prompt_v2.sql',"select exists(select 1 from agent_prompt_versions where id='dfab5ecb-b8b9-5ad3-8771-f28a06b53b27') present"),
+ ('202610270007_experiment_builder_v2_publication.sql',"select strpos(pg_get_functiondef('public.publish_agent_prompt_before_action_policy_v1(uuid,uuid,text,jsonb,text,text)'::regprocedure),'research-experiment-builder-v2')>0 present")]
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['inspect','migrate','prepare-host','status','freeze','evaluate','retrieve','collect','diagnose-operational','stop-qualification','review-diagnostic','reconcile-op-review','record-evaluations','publish','verify','recover-capture','capture-status']);a=p.parse_args()
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['inspect','migrate','prepare-host','status','freeze','evaluate','retrieve','collect','diagnose-operational','stop-qualification','review-diagnostic','reconcile-op-review','record-evaluations','publish','publish-v2','verify','recover-capture','capture-status']);a=p.parse_args()
  BASE.mkdir(parents=True,exist_ok=True);d=BASE/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');d.mkdir()
  report=dict(mode=a.mode,status='running',targets=r.target(),measured_charges_usd=None)
  def save():(d/'receipt.json').write_text(json.dumps(report,indent=2)+'\n')
@@ -50,6 +52,22 @@ def main():
     r.admin.query('insert into agent_prompt_evaluations(prompt_version_id,outcome,report_raw,report_sha256,original_artifacts,recorded_by) values('+','.join([lit('6102d16d-c5cf-5f1c-8fc7-2df2899da972')+'::uuid',lit(outcome),lit(raw),lit(digest),lit(json.dumps(archive))+'::jsonb',lit('Primary Codex AI implementer; nonindependent evaluation, not human review')])+') on conflict(prompt_version_id,report_sha256) do nothing',read_only=False)
     checked=r.admin.query('select encode(sha256(convert_to(report_raw,\'UTF8\')),\'hex\') sha256 from agent_prompt_evaluations where prompt_version_id=\'6102d16d-c5cf-5f1c-8fc7-2df2899da972\' and report_sha256='+lit(digest));assert checked==[dict(sha256=digest)]
     report['evaluations'].append(dict(campaign=source.name,outcome=outcome,sha256=digest,retrieved_sha256=digest))
+  elif a.mode=='publish-v2':
+   selected=(ROOT/'.test-artifacts/builder-qualification-v2/selected.txt').read_text().strip();assert selected.isalnum();source=ROOT/'.test-artifacts/builder-qualification-v2'/selected
+   evaluation=json.loads((source/'reviewed.json').read_bytes());frozen=json.loads((source/'frozen.json').read_bytes())
+   assert evaluation['status']=='passed' and evaluation['publication_eligible'] and len(evaluation['cases'])==10 and all(x['passed'] and x['actual_answer_reviewed'] for x in evaluation['cases'])
+   assert evaluation['prompt_id']=='dfab5ecb-b8b9-5ad3-8771-f28a06b53b27' and evaluation['prompt_sha256']==frozen['prompt_sha256']
+   assert evaluation['local_release_checks_passed'] and evaluation['operational_release_checks_passed']
+   for name in ('experiment_builder.py','generated_package.py','openclaw-builder-patch.json'):
+    assert r.sha((ROOT.parent/'jumpserve-back-end/research_workflow'/name).read_bytes())==frozen['runtime_files'][name],'Requalify changed native core before publishing.'
+   current=r.admin.query("select active_version_id from agent_prompt_settings where module_id='research-experiment-builder'")[0]['active_version_id']
+   if current==evaluation['prompt_id']:report['publication']=dict(status='already-active',id=current)
+   else:
+    key=r.aws('secretsmanager','get-secret-value','--secret-id','jumpserve/supabase-service-key')['SecretString']
+    payload=dict(p_version_id=evaluation['prompt_id'],p_expected_active_version_id=current,p_expected_content_sha256=evaluation['prompt_sha256'],p_report=evaluation,p_actor='Primary Codex AI implementer; explicit user-authorized lab release, nonindependent',p_module_id='research-experiment-builder')
+    request=urllib.request.Request('https://regphejnlvfpyokpniny.supabase.co/rest/v1/rpc/publish_agent_prompt',data=json.dumps(payload).encode(),headers={'apikey':key,'Authorization':'Bearer '+key,'Content-Type':'application/json'},method='POST')
+    with r.prior.guard.OPEN.open(request,timeout=60) as response:result=json.loads(response.read(10000))
+    assert result==evaluation['prompt_id'];report['publication']=dict(status='published',id=result)
   elif a.mode=='publish':
    selected=(BASE/'selected.txt').read_text().strip();assert selected.isalnum();source=BASE/selected
    evaluation=json.loads((source/'reviewed.json').read_bytes());frozen=json.loads((source/'frozen.json').read_bytes());archive=json.loads((source/'archive.json').read_bytes())
@@ -99,20 +117,17 @@ for study,identity,reason in [('c6490138-18f2-440b-be15-a1f4862ece13','1aab00aa-
     raw=(ROOT/'database'/n).read_bytes();present=r.admin.query(q)[0]['present'];entry=dict(name=n,sha256=r.sha(raw),status='present' if present else 'applying');report['migrations'].append(entry);save()
     if not present:r.admin.query(raw.decode(),read_only=False);assert r.admin.query(q)[0]['present'];entry['status']='applied';save()
   elif a.mode=='prepare-host':
-   r.auth_maintenance_guard();dockerfile=(ROOT.parent/'jumpserve-back-end/research_workflow/experiment-builder.Dockerfile').read_bytes()
-   code="from pathlib import Path;import base64;Path('/var/lib/jumpserve-builder-image/Dockerfile').write_bytes(base64.b64decode("+repr(base64.b64encode(dockerfile).decode())+"))"
-   commands=['set -eu','test "$(id -u)" = 0','mkdir -p /var/lib/jumpserve-builder-image','dnf install -y docker','systemctl enable --now docker','usermod -aG docker jumpserve','python3.12 -c '+shlex.quote(code),
-    'docker pull --platform linux/amd64 ubuntu:22.04 > /var/lib/jumpserve-builder-image/base-pull.log 2>&1',
-    "docker image inspect ubuntu:22.04 --format '{{index .RepoDigests 0}}' > /var/lib/jumpserve-builder-image/base-digest.txt",
-    'docker build --platform linux/amd64 --build-arg BASE_IMAGE="$(cat /var/lib/jumpserve-builder-image/base-digest.txt)" -t jumpserve-builder:release /var/lib/jumpserve-builder-image > /var/lib/jumpserve-builder-image/build.log 2>&1',
-    'docker image inspect jumpserve-builder:release > /var/lib/jumpserve-builder-image/image.json',
-    "docker image inspect jumpserve-builder:release --format '{{.Id}}' > /var/lib/jumpserve-builder-image/image-id.txt",
-    'docker run --rm jumpserve-builder:release cat /jumpserve-image-packages.txt > /var/lib/jumpserve-builder-image/installed-packages.txt',
-    "sed -i '/^OPENCLAW_BUILDER_IMAGE=/d;/^RESEARCH_BUILDER_ENABLED=/d' /etc/jumpserve-openclaw.env",
-    "printf '%s\\n' \"OPENCLAW_BUILDER_IMAGE=$(cat /var/lib/jumpserve-builder-image/image-id.txt)\" 'RESEARCH_BUILDER_ENABLED=false' >> /etc/jumpserve-openclaw.env",
-    'chmod 600 /etc/jumpserve-openclaw.env',
-    "docker image inspect jumpserve-builder:release --format '{{.Id}} {{.Os}} {{.Architecture}}'",'systemctl restart jumpserve-openclaw.service']
-   report['dockerfile_sha256']=r.sha(dockerfile);report['ssm']=r.ssm(commands);(BASE/'host-command.json').write_text(json.dumps(report['ssm']))
+   r.auth_maintenance_guard()
+   selected=(ROOT/'.test-artifacts/builder-qualification-v2/selected.txt').read_text().strip();assert selected.isalnum()
+   source=ROOT/'.test-artifacts/builder-qualification-v2'/selected
+   evaluation=json.loads((source/'reviewed.json').read_bytes());image=json.loads((source/'image-archive.json').read_bytes())
+   assert evaluation['publication_eligible'] and evaluation['status']=='passed'
+   assert image['image']=='sha256:ef390fb5c927fc11773da987e96c3264b618118fd39b8715139cf977b1b4320a'
+   raw=(ROOT/'bin/prepare-experiment-builder-host.sh').read_bytes();host='/var/lib/jumpserve-builder-image/prepare-'+r.sha(raw)+'.sh'
+   install="from pathlib import Path;import base64;p=Path("+repr(host)+");p.parent.mkdir(parents=True,exist_ok=True);raw=base64.b64decode("+repr(base64.b64encode(raw).decode())+");assert not p.exists() or p.read_bytes()==raw;p.write_bytes(raw);p.chmod(0o700)"
+   report['image']=image;report['host_script_sha256']=r.sha(raw)
+   report['ssm']=r.ssm(['set -eu','python3.12 -c '+shlex.quote(install),'JUMPSERVE_BUILDER_IMAGE='+shlex.quote(image['image'])+' /bin/bash '+shlex.quote(host)])
+   (BASE/'host-command.json').write_text(json.dumps(report['ssm']))
   elif a.mode=='status':
    original=json.loads((BASE/'host-command.json').read_bytes());result=r.aws('ssm','get-command-invocation','--command-id',original['command_id'],'--instance-id',original['instance_id']);report['command']=result
   elif a.mode=='freeze':

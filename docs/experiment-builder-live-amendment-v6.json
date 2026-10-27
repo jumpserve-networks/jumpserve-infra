@@ -1,0 +1,28 @@
+{
+  "version": "experiment-builder-live-amendment-v6",
+  "amends": "experiment-builder-live-evaluation-v1",
+  "kind": "new-corrected-candidate-campaign",
+  "frozen_before_inference": true,
+  "prompt_id": "dfab5ecb-b8b9-5ad3-8771-f28a06b53b27",
+  "prompt_version": "research-experiment-builder-v2",
+  "reason": "Prior qualification failed actual clean-executor portability and left five checks unrun. Correct the contract and sandbox/worker UID mismatch; preserve all original campaigns and judgments.",
+  "resources": {
+    "maximum_live_calls": 80,
+    "maximum_reserved_cents": 8000,
+    "maximum_elapsed_seconds": 3600,
+    "maximum_parallel_cases": 2,
+    "maximum_calls_per_case": 12,
+    "maximum_operational_hosts": 2,
+    "maximum_operational_reserved_cents": 2000,
+    "aggregate_followup_reservation_cents": 10000
+  },
+  "scheduling": "One native slot per unfinished case per round, at most two concurrent cases. A single lengthy case must not prevent all other cases receiving an initial slot. Count failed/unknown calls; never replay unknown outcomes.",
+  "inputs": "Reuse the eight exposed development cases. Both original held-out case questions have never reached a provider or guided model-output tuning; freeze their original bytes/hashes before candidate evaluation. Input author/evaluator knows them; no independent blind validation claimed.",
+  "changes": "Candidate prompt v2 clarifies 180-second scheduling, actual spec/input/output paths and focused diagnostic artifacts. A server-owned exact wrapper hash/contract is delivered before code generation. Commands/file tools use worker UID:GID; installations use container-only sudo. The pinned upstream Docker launcher unconditionally disables sudo. Preserve its original bytes and apply one hash-bound conditional no-new-privileges correction only in a separate builder-only package copy, enabled by a trusted CLI-only environment flag; the installed production package is unchanged.",
+  "controls": "First run the synthetic native CLI on the actual Linux worker in a separate candidate runtime. Compare root UID to aligned UID under the same source/image and fixed write/edit/exec/read requests; retain original errors. Qualify installation via noninteractive sudo. Production runtime, service, prompt pointers and admission remain untouched.",
+  "criteria": "All original ten actual-answer checks, both authority judgments, exact original wrapper portability, applicable backend/database/infrastructure regressions and final operational checks must pass. Failed, blocked, invalid and not-run cases remain explicit. Resource exhaustion cannot be reclassified as a passing answer.",
+  "independence": "Primary Codex AI implementation author evaluates and reviews, nonindependent, not human. Development checks and two enumerated held-out methods do not estimate general model accuracy or paper reproducibility.",
+  "persistence": "Retain and hash-verify each request/response before another inference, with a per-call private journal and original raw bytes in Supabase Storage. Retain aggregate evaluation in existing prompt tables with archive pointers. Unknown usage/charges remain missing. No paid API fallback.",
+  "deployment": "Do not publish prompts, change active pointers, replace production runtime/image/environment, merge/push main or deploy. A new explicit release instruction is required.",
+  "exploratory_pilot": "A real native local pilot passed aligned write/edit but failed sudo because upstream sets no-new-privileges. Preserve 20261027T215002415721Z as failed development evidence. This correction and all inputs are frozen before any v6 live inference."
+}

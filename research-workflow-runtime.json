@@ -1,17 +1,17 @@
 {
-  "version": 52,
-  "source_revision": "99f11b26df50b3533307284ce802e0e8cd79a8c2",
+  "version": 53,
+  "source_revision": "f5453c866bfd74e770398fd6adfebae3265b01c6",
   "files": {
     "api.py": "de0ef9251379e1a369a9293bee07a09dc4fdbc9ba25019f31eb9fd686cfa84fb",
     "autonomy.py": "bd5231b998f3ecce44f8d51f2036172dfdb429f76b0634c922d8c5992c39b903",
-    "autonomy_costs.py": "d98844b2ad7d4f40eefed9113819105399e9047d2f2c97482320e0350ea8d21f",
+    "autonomy_costs.py": "7b7864386140724e11c782a5af1ac311e355014087807f97b125f46297bb4318",
     "autonomy_evidence.py": "014ae3bfba5c0162735aa921ced7e3703096c7573cf256160b78e92173780ca6",
     "autonomy_inputs.py": "1af187d56e37e6a71f2a8573119db400a9334f1fea48bf2937012badf51390a3",
     "autonomy_model.py": "dfd0ff77e7d3842adfa8c90cf4f220196bdc039e0342e43f3db9335df4bc950c",
     "autonomy_sources.py": "debc3a35264a82677f2b4f566323ebb85c8efdaa63b51fd796336c891d2de942",
     "bounded_network.py": "0b8bc5948dbf71712296c3b4c9a47f4ac68f5e32dcc591be3e42914ff17abc0c",
     "claim_design.py": "25ae2613b37cf31af13a5ee250a5c22d5266e18ec98c034d13bdc05e81d933e0",
-    "experiment_builder.py": "1630eb5217d6877deaae5ae4fd426bb19d7e4cb58af8993056b94289ef63d8fc",
+    "experiment_builder.py": "d6a9ebb578872cb2da6d70cacb9a5ea042cbffb5648fa472723b5b3c36f03544",
     "gap_queue.py": "598c564817f6cc4ced6172ae14ead651458b2898d20771ecc426b30ecc8c9c18",
     "generated_package.py": "4f02af4ece4023bd0534dc7e616754bb5c1498dccdfbb6312bb240d82e9385aa",
     "ideas.py": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
@@ -21,6 +21,7 @@
     "network_execution.py": "4358b5ec6c2a18111a2f9fa39937261bc0241ac3420f624a243b220f7cdd8cbe",
     "network_package.py": "9eac81c23ebb6addd7c198ab631c72ed8e21f62e2898f1427a257f0cf2c4d32c",
     "network_spec.py": "8cff74c9dddf65b86f5020fec087f590e2f98d1521a133ec0c1850c780db9e8c",
+    "openclaw-builder-patch.json": "8b8f157008ad0353bc1cd3b3856778ab3d85b8bb9c22decbe4fde33a13cc39db",
     "openclaw_auth.mjs": "ff5a01312d3539e091e60cf060f7433b087f390f5d126e8c8baa065ac5a11d63",
     "openclaw_health.py": "4cfe95969ce7451fbcc4d6519ca19c1e031cb9c8994baa6596f1fde324234885",
     "openclaw_runtime.py": "d23cdf6b351c413476a1582f4080a02e7fc2c1ebc814d9c11a8e5620835f1ca2",
@@ -34,6 +35,7 @@
     "policies/autonomy-experiment-costs-v2.json": "241f53ad7c51399b043d0567cc545fb3281d7581c619f51fc9474fc1eaa13b19",
     "policies/autonomy-turn-policy-v1.json": "7aa48bccc617d1493e8621a8c290e2251180c768f021f6f8cccf06eac5eddafb",
     "policies/built-package-costs-v1.json": "cd6f4b2891199e2f29001168972964f3e769220034db57b2266bf89022b904e4",
+    "policies/built-package-costs-v2.json": "ef48cd2fca9d87ddcd1730567d18e058c09111c0b4d880f052b30210a7f63e59",
     "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
     "policies/experiment-action-policy-v1.json": "973ae76b13a64f4205ca2f581722da8c237cd8afb61d68e2a36e187562be3e52",
     "policies/netem-iperf-costs-v1.json": "7f65f2f726ee685714c8dba1ae8fa8614e142ce80e5aad7cc0f669095311fe61",
@@ -51,7 +53,7 @@
     "workflow.py": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f"
   },
   "base_source_revision": "3d7cf31c420b281426a02b52de04aa207aa8f5fb",
-  "revision_status": "Committed production release; native experiment-builder activation remains gated by incomplete live qualification.",
+  "revision_status": "Committed local v2 qualification candidate. Native core passed declared checks with retained v7 feedback repair; publication, merge and production activation require the next explicit release instruction.",
   "source_dirty": false,
-  "change_set": "Native experiment builder, standing experimental authority and retained assessment improvements."
+  "change_set": "OpenClaw builder v2 qualification and cost-admission follow-up."
 }

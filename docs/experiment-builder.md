@@ -8,6 +8,15 @@ failed the executor file interface, and five further cases were not completed.
 See `experiment-builder-release-2026-10-27.md` and the retained actual-answer
 review. No existing assessment is automatically resumed by the migrations.
 
+The subsequent [v2 candidate qualification](experiment-builder-qualification-v2.md)
+corrects the executor contract, native file ownership and container sudo path.
+It completes ten functional checks plus two authority judgments after preserving
+an initial budget-format failure and its runtime-feedback continuation. The
+reviewed cost policy and release tooling are prepared on a local feature branch;
+the candidate is not yet published or activated. The sections below retain the
+original v1 implementation and release history; use the v2 report for the current
+candidate's hashes, results, limitations and next release order.
+
 The operator's standing experiment authority is versioned separately in
 `policies/experiment-action-policy-v1.json`. It covers necessary setup, retrieval,
 installation, coding, compilation, debugging, supported provisioning, measurements

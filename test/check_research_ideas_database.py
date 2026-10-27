@@ -185,7 +185,7 @@ grant all on public.agent_sessions to service_role;""")
     name='202610230002_paper_confirmation.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     name='202610240001_paper_review_selection.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     name='202610260001_executable_assessment_methods.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
-    for name in ('202610270001_experiment_builder.sql','202610270002_experiment_builder_prompt.sql','202610270003_builder_package_catalog.sql','202610270004_experiment_action_authority.sql','202610270005_builder_scheduling_window.sql'):
+    for name in ('202610270001_experiment_builder.sql','202610270002_experiment_builder_prompt.sql','202610270003_builder_package_catalog.sql','202610270004_experiment_action_authority.sql','202610270005_builder_scheduling_window.sql','202610270006_experiment_builder_prompt_v2.sql','202610270007_experiment_builder_v2_publication.sql'):
         raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     report['bootstrap_limit']='Legacy agent_sessions base table and Storage API catalog columns synthesized; listed prompt/research migrations executed as original files. Historical study-table migrations outside this feature are not replayed.'
     store.request=transport

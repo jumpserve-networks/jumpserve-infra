@@ -1,0 +1,57 @@
+{
+  "version": "builder-lab-cost-review-v2",
+  "retrieved_date": "2026-10-27",
+  "source": "Original AWS Price List GetProducts JSON, retained without transformation; unavailable invoice/discount data not inferred.",
+  "original_sha256": {
+    "compute.json": "2a48f5b0e107fcc74e34529e37f2e37a3c00cf310da7ff22115cc069a7a74d61",
+    "egress.json": "65d418b440bbcaff74e8374a7280a4904af203e87c452378c3c02dd2188c053d",
+    "ipv4-family.json": "c6770493315d07e740f8d26723e103d9deb6d48f99ddfe3d1ce62ba6577c5e43",
+    "ipv4.json": "c6770493315d07e740f8d26723e103d9deb6d48f99ddfe3d1ce62ba6577c5e43",
+    "storage.json": "68ccf5cf3aaf8ef96bfd58e3e35a0ecdbafd12c37af53f27be288fca738bb661",
+    "vpc-region.json": "787949de0702092879cfbda30bb4d834ce84310d40ebbaa8b118fd43ce4fc935"
+  },
+  "rates": {
+    "compute_usd_per_hour": "0.0416000000",
+    "gp3_usd_per_gb_month": "0.0800000000",
+    "ipv4_usd_per_hour": "0.0050000000",
+    "maximum_standard_internet_egress_usd_per_gb": "0.0900000000"
+  },
+  "illustrative_allowance": {
+    "hours": 1,
+    "root_gib": 8,
+    "month_hours": 672,
+    "egress_gb": 20
+  },
+  "illustrative_estimate_usd": "1.847552380952380952380952381",
+  "reservation_usd": 10,
+  "measured_charges_usd": null,
+  "judgment": "Approve a conservative USD10 reservation for the trusted-lab fixed host path, contingent on exact executor/policy hashes and original USD100/seven-day paper admission. This is an estimate and operational authorization, not a guaranteed bill ceiling.",
+  "operational_evidence": [
+    {
+      "path": ".test-artifacts/experiment-builder-operational/20261027T193919034325Z/receipt.json",
+      "sha256": "975ac905fd6bc15fed8ce21517c30db0bf80a46b9d525a09b9845c0a7360b4fd"
+    },
+    {
+      "path": ".test-artifacts/experiment-builder-operational/20261027T194617231295Z/receipt.json",
+      "sha256": "7609e1f72b129447674861906158a0c4443576d08268d3713e015b3e28c21070"
+    },
+    {
+      "path": ".test-artifacts/experiment-builder-operational/20261027T195256383920Z/receipt.json",
+      "sha256": "6cf05b05c660e67b41f0dac1edfc51b60edaa56a439a9ec899422077b5075ba7"
+    }
+  ],
+  "limitations": [
+    "50-ms output/network sampling can overshoot; counter resets/unavailable values stay missing.",
+    "Controlled counter test validates guard behavior, not a calibrated Internet invoice or adversarial metering.",
+    "Loopback and packets on one host are not independent replications.",
+    "Bootstrap and cleanup consume time and transfer; the estimate includes one hour and 20 billed-GB allowance rather than assuming free tiers.",
+    "Generated code is root-capable in its disposable VM and could undo guest restrictions; lab use only.",
+    "Shared worker, Lambda, Supabase storage/requests and subscription allocations remain unallocated. No additional paid services or arbitrary instances are included."
+  ],
+  "reviewer": {
+    "identity": "Primary Codex AI implementation author",
+    "type": "AI",
+    "independent": false
+  },
+  "authority": "User authorized completing this cost-policy review and bounded qualification; production activation still requires explicit deployment instruction."
+}

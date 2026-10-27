@@ -24,7 +24,7 @@ export class ResearchWorkflow extends Construct {
     const runtime = process.env.RESEARCH_WORKFLOW_RUNTIME_PATH ?? path.join(__dirname, '..', '.runtime-backend', 'research_workflow');
     const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'research-workflow-runtime.json'), 'utf8')) as { files: Record<string, string> };
     for (const [file, sha256] of Object.entries(manifest.files)) {
-      if (!/^(?:[a-z_]+\.(?:py|mjs)|(?:plans|policies)\/[a-z0-9-]+\.json)$/.test(file) || !fs.existsSync(path.join(runtime, file)) || createHash('sha256').update(fs.readFileSync(path.join(runtime, file))).digest('hex') !== sha256) {
+      if (!/^(?:[a-z_]+\.(?:py|mjs)|openclaw-builder-patch\.json|(?:plans|policies)\/[a-z0-9-]+\.json)$/.test(file) || !fs.existsSync(path.join(runtime, file)) || createHash('sha256').update(fs.readFileSync(path.join(runtime, file))).digest('hex') !== sha256) {
         throw new Error('Research runtime is absent or differs from the manifest. Run bin/prepare-research-runtime.py with the documented backend checkout.');
       }
     }
@@ -103,7 +103,7 @@ export class ResearchWorkflow extends Construct {
       networkingEnvironment.NETWORK_NETEM_IPERF_FUNCTION=packageExecutor.currentVersion.functionArn;
       networkingEnvironment.NETWORK_NETEM_IPERF_POLICY_SHA256=createHash('sha256').update(JSON.stringify(sweepPolicy,Object.keys(sweepPolicy).sort())).digest('hex');
       if(builderEnabled){
-        const buildPolicy=JSON.parse(fs.readFileSync(path.join(runtime,'policies/built-package-costs-v1.json'),'utf8'));
+        const buildPolicy=JSON.parse(fs.readFileSync(path.join(runtime,'policies/built-package-costs-v2.json'),'utf8'));
         if(buildPolicy.instance_type!=='t3.medium'||buildPolicy.root_volume_gib!==8||buildPolicy.cpu_credits!=='standard'||buildPolicy.max_instances!==1||buildPolicy.max_wall_seconds!==1800)throw new Error('Built package reservation differs from disposable host configuration.');
         networkingEnvironment.NETWORK_BUILT_PACKAGE_FUNCTION=packageExecutor.currentVersion.functionArn;
         networkingEnvironment.NETWORK_BUILT_PACKAGE_POLICY_SHA256=createHash('sha256').update(JSON.stringify(buildPolicy,Object.keys(buildPolicy).sort())).digest('hex');
