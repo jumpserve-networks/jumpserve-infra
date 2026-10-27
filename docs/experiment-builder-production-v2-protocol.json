@@ -1,0 +1,44 @@
+{
+  "version": "experiment-builder-production-v2",
+  "stage": "release-validation",
+  "authorization": "User explicitly requested merge to main and production deployment after v2 qualification.",
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "origin": "https://jumpserve.quaint-lab.org",
+    "worker": "i-087f1493809643115"
+  },
+  "backend_revision": "f5453c866bfd74e770398fd6adfebae3265b01c6",
+  "runtime_manifest_version": 53,
+  "qualified_report_sha256": "54be72374de3326592a63dbd9e008064710d6e4e9f7cf3d6143c37dcd067dd37",
+  "prompt_id": "dfab5ecb-b8b9-5ad3-8771-f28a06b53b27",
+  "image": "sha256:ef390fb5c927fc11773da987e96c3264b618118fd39b8715139cf977b1b4320a",
+  "release_blockers": [
+    "Verify account/project before writes; merge exact clean source and retain source hashes.",
+    "Retain passing declared qualification, failed original and corrected report provenance; do not repeat or relabel native calls.",
+    "Hold admission/polling and drain active or recently uncertain work before migrations and worker maintenance; preserve old fenced outcomes.",
+    "Publish only the exact qualified v2 prompt through the guarded SQL publication path.",
+    "Review scoped infrastructure differences, preserve the authorized worker and benchmark AMI/parameters, and keep arbitrary custom packages disabled.",
+    "Stage and verify all 49 source files, qualified x86 image and separate hash-bound vendor correction; retain upstream bytes and existing host grant.",
+    "Verify native file/edit/exec/sudo/read/resume behavior using synthetic provider transport; verify real subscription refresh/catalog without exposing credentials or adding paid fallback.",
+    "Verify deployed API/controller ZIPs, runtime/cost/wrapper hashes, builder environment, restored admission/polling, and private-table RLS/browser write denial.",
+    "Verify public desktop/mobile themes, navigation, missing-data states and sign-in return paths, retaining actual results."
+  ],
+  "conditional_checks": [
+    "Actual Google-authenticated upload/planning/building/execution/storage requires a legitimate browser session. Do not fabricate an authenticated identity or describe service-owned controls as user requests.",
+    "No new physical experiment or arbitrary-paper reproduction is inferred. Reuse the three recorded matching EC2 lifecycle controls for the unchanged executor explicitly.",
+    "Independent human review is unavailable; implementation-author AI inspection is nonindependent.",
+    "Measured subscription, shared compute, storage and deployment charges may be unavailable and must remain missing."
+  ],
+  "resources": {
+    "new_live_model_evaluation_calls": 0,
+    "new_experiment_ec2_instances": 0,
+    "paid_api_fallback": false,
+    "candidate_qualification_calls_reused": 73,
+    "paper_defaults": {"maximum_usd": 100, "elapsed_days": 7, "ai_turn_limit": null},
+    "deployment_costs_usd": null,
+    "stopping_rule": "On a blocking mismatch, preserve receipts and keep admission held while correcting it or restore the prior reviewed state. Do not replay unknown calls or erase outcomes. No new scientific campaign is authorized by this release protocol."
+  },
+  "reviewer": {"identity": "Primary Codex AI implementation author", "type": "AI", "independent": false},
+  "history": "Preserve all prior qualification and release protocols. This release changes production activation only; it does not reset paper or qualification limits."
+}
