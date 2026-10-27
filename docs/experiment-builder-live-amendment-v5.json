@@ -1,0 +1,17 @@
+{
+  "version":"experiment-builder-live-amendment-v5",
+  "amends":"experiment-builder-live-evaluation-v1",
+  "prior_campaigns":[
+    {"id":"20261027T190640638887Z","additional_calls":3,"archive_sha256":"33f42b1d24896c3a482d7be92225a5057a4b59365a73c6b2d642e28358b56cf8"},
+    {"id":"20261027T191345373638Z","additional_calls":11,"archive_sha256":"824ad6033bf9bcad7d1162b64ff2631fdc8ff7b1037d0705d6b5d541b5953164"},
+    {"id":"20261027T192323207354Z","additional_calls":11,"archive_sha256":"d7496022d8d4c759fa02af73b61c81d562bd383661ab0d07fa5f9d518c8f16ca"}
+  ],
+  "continues_campaign":"20261027T193546166732Z",
+  "recovered_archive_sha256":"5c791441ad75b4ea53574bd9e02bd9e01171330578e37cf4dddc1417dbfe5e0a",
+  "reason":"The longer slot generated and executed real TCP code and four unit tests. Six native provider calls completed, but root-owned mode-0600 files caused host capture to fail. Preserve the original failed report. Recover its actual first answer through byte-verified metadata normalization with no inference or program replay; reanalysis is distinct from a successful original campaign.",
+  "implementation":"A fixed networkless helper changes only workspace ownership/modes, rejects symlinks and special files, and verifies unchanged hashes. Real Linux-volume tests reproduce the permission failure and verify recovery. Future native captures use this postprocessing correction. Model, base prompt, action policy, 180-second scheduling, question text and observation criteria remain unchanged.",
+  "resources":"Continue the original 30-call/USD30 campaign with six calls already consumed and the original 2026-10-27T19:36:55.054924Z start: the 1800-second deadline is not reset. Retain the separate prior 25 calls/USD25 reservations. Operational controls retain the four-host/USD30 bound including failures. Aggregate release reservations remain at most USD85.",
+  "remaining_inputs":"Before their first inference, the nine unused cases receive the actual server blocker-code contract that their contexts previously omitted. No output from those cases has been seen. This repairs the harness rather than inventing data, equipment or authorization.",
+  "scheduling":"Run at most two remaining cases concurrently, matching production claim capacity, with atomic shared call admission and isolated workspaces. The recovered first case ran alone. These enumerated correctness and design checks support no performance comparison or inferential interval.",
+  "publication":"Substantively review every actual answer, its code/commands and limitations, including the recovered first answer. Preserve every failed or interrupted report and all original call identities. All scientific-design, operational and publication gates still apply. Both held-out inputs remain preselected and unused until this continuation. AI review remains nonindependent and is not human review."
+}

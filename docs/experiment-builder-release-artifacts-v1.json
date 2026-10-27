@@ -1,0 +1,78 @@
+{
+  "version": "experiment-builder-release-artifacts-v1",
+  "public": false,
+  "qualification_archives": [
+    {
+      "campaign": "20261027T190640638887Z",
+      "bucket": "research-workflow-raw",
+      "bytes": 154113,
+      "path": "release-verification/experiment-builder/20261027T190640638887Z/33f42b1d24896c3a482d7be92225a5057a4b59365a73c6b2d642e28358b56cf8.zip",
+      "public": false,
+      "retrieved_sha256": "33f42b1d24896c3a482d7be92225a5057a4b59365a73c6b2d642e28358b56cf8",
+      "sha256": "33f42b1d24896c3a482d7be92225a5057a4b59365a73c6b2d642e28358b56cf8"
+    },
+    {
+      "campaign": "20261027T191345373638Z",
+      "bucket": "research-workflow-raw",
+      "bytes": 739077,
+      "path": "release-verification/experiment-builder/20261027T191345373638Z/824ad6033bf9bcad7d1162b64ff2631fdc8ff7b1037d0705d6b5d541b5953164.zip",
+      "public": false,
+      "retrieved_sha256": "824ad6033bf9bcad7d1162b64ff2631fdc8ff7b1037d0705d6b5d541b5953164",
+      "sha256": "824ad6033bf9bcad7d1162b64ff2631fdc8ff7b1037d0705d6b5d541b5953164"
+    },
+    {
+      "campaign": "20261027T192323207354Z",
+      "bucket": "research-workflow-raw",
+      "bytes": 790275,
+      "path": "release-verification/experiment-builder/20261027T192323207354Z/d7496022d8d4c759fa02af73b61c81d562bd383661ab0d07fa5f9d518c8f16ca.zip",
+      "public": false,
+      "retrieved_sha256": "d7496022d8d4c759fa02af73b61c81d562bd383661ab0d07fa5f9d518c8f16ca",
+      "sha256": "d7496022d8d4c759fa02af73b61c81d562bd383661ab0d07fa5f9d518c8f16ca"
+    },
+    {
+      "campaign": "20261027T193546166732Z",
+      "bucket": "research-workflow-raw",
+      "path": "release-verification/experiment-builder/20261027T193546166732Z/capture-recovery/5c791441ad75b4ea53574bd9e02bd9e01171330578e37cf4dddc1417dbfe5e0a.zip",
+      "sha256": "5c791441ad75b4ea53574bd9e02bd9e01171330578e37cf4dddc1417dbfe5e0a",
+      "retrieved_sha256": "5c791441ad75b4ea53574bd9e02bd9e01171330578e37cf4dddc1417dbfe5e0a",
+      "bytes": 394029,
+      "public": false
+    },
+    {
+      "campaign": "20261027T195457951090Z",
+      "bucket": "research-workflow-raw",
+      "bytes": 1477302,
+      "path": "release-verification/experiment-builder/20261027T195457951090Z/0f21d532744a5a467421d9e5de43ab1d4b8aaa37696d9409e90cc53ae089435b.zip",
+      "public": false,
+      "retrieved_sha256": "0f21d532744a5a467421d9e5de43ab1d4b8aaa37696d9409e90cc53ae089435b",
+      "sha256": "0f21d532744a5a467421d9e5de43ab1d4b8aaa37696d9409e90cc53ae089435b"
+    }
+  ],
+  "original_source_capsule": {
+    "bucket": "research-workflow-raw",
+    "path": "release-verification/experiment-builder/final-source-capsule/660421157de8b00238a8ae9a4a12d374c9d2800dff5bcce38ae8783044d125eb.zip",
+    "sha256": "660421157de8b00238a8ae9a4a12d374c9d2800dff5bcce38ae8783044d125eb",
+    "retrieved_sha256": "660421157de8b00238a8ae9a4a12d374c9d2800dff5bcce38ae8783044d125eb",
+    "bytes": 95967,
+    "public": false
+  },
+  "release_evidence_archive": {
+    "bucket": "research-workflow-raw",
+    "path": "release-verification/experiment-builder/final-release/48af8a39c6dc8610d1586a2bdab1dbe568be7226f03587ccbb8026b5f2fea3ba.zip",
+    "sha256": "48af8a39c6dc8610d1586a2bdab1dbe568be7226f03587ccbb8026b5f2fea3ba",
+    "retrieved_sha256": "48af8a39c6dc8610d1586a2bdab1dbe568be7226f03587ccbb8026b5f2fea3ba",
+    "bytes": 206450,
+    "public": false
+  },
+  "local_final_receipt": ".test-artifacts/builder-release-final/20261027T205842330464Z/receipt.json",
+  "current_browser_report": ".test-artifacts/builder-production-browser/2026-10-27T20-58-50.795Z/report.json",
+  "retrieval_verification": "Each archive hash verified after retrieval; source capsule and raw qualification archives have per-member manifests. Hash verification does not establish complete review.",
+  "review_status": "Actual five final answers and their relevant command output examined by nonindependent Codex AI implementer; no complete-review claim for every archived byte.",
+  "known_omissions": [
+    "Exact downloaded six wheel bytes not independently retained; exact wheel hash, failed/corrected pip and import outputs retained.",
+    "No legitimate Google session for authenticated UI execution.",
+    "Five live answer cases including both held-out cases not run."
+  ],
+  "measured_charges_usd": null,
+  "subscription_allocation_usd": null
+}

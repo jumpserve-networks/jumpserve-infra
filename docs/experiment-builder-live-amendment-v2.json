@@ -1,0 +1,10 @@
+{
+  "version":"experiment-builder-live-amendment-v2",
+  "amends":"experiment-builder-live-evaluation-v1",
+  "reason":"The first campaign retained two completed provider requests and one unknown timeout; no implementation files or later-case answers were produced. Preserve that unknown request and do not replay its identity. A committed runtime correction reserves a complete 65-second provider window in a 90-second scheduling slot. Qualification continues across retained workspace checkpoints instead of imposing a one-slot case limit.",
+  "prior_campaign":"20261027T190640638887Z",
+  "prior_provider_calls":3,
+  "resources":"The follow-up includes the original three calls in the cumulative 30-call/USD30 reservation ceiling. At most 1800 seconds for follow-up evaluation. No paid fallback; unknown outcomes remain unknown. EC2 controls have a separate three-host bound and at most USD30 reservation, so aggregate release reservations are at most USD60, with missing measured charges and subscription allocation preserved.",
+  "case_exposure":"new-implementation is reused development. The two held-out inputs were preselected in the original frozen packet and never reached inference; their first actual use remains held-out for this candidate. Evaluator and reviewer remain the nonindependent implementation-author AI.",
+  "claim_scope":"Functional qualification only. It is not a paper assessment, production database admission check or independent scientific validation. All original publication criteria remain required."
+}

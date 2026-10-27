@@ -115,6 +115,6 @@
     "networkPackagesEnabled": false,
     "researchAutonomyEnabled": true,
     "researchOpenClawEnabled": true,
-    "networkPackageAmiId": "ami-02a9cdd4e98bc3c78"
+    "networkPackageAmiId": "ami-033ea4ff4a9c726dc"
   }
 }

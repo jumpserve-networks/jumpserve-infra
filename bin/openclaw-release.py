@@ -130,7 +130,10 @@ def main():
    # Exact diagnosed bootstrap failure only; preserve the original user-data bytes.
    receipt['ssm']=ssm(["python3 - <<'PY'\nfrom pathlib import Path\np=Path('/var/lib/cloud/instance/scripts/part-001');raw=p.read_bytes();assert raw.count(b'awscli2')==1\nbackup=Path('/var/lib/jumpserve-openclaw-user-data-original.sh');assert not backup.exists();backup.write_bytes(raw)\nPath('/var/lib/jumpserve-openclaw-user-data-recovery.sh').write_bytes(raw.replace(b'awscli2',b'awscli-2'))\nPY","systemd-run --unit=jumpserve-openclaw-setup-recovery --property=RuntimeMaxSec=1800 /bin/bash /var/lib/jumpserve-openclaw-user-data-recovery.sh"])
   elif args.mode=='host-update':
-   if admin.query("select count(*) count from research_model_dispatches where status in ('queued','running','unknown')")[0]['count']:raise RuntimeError('Drain or reconcile dispatched model calls before updating the host')
+   # Historical uncertain outcomes remain fenced in the ledger. Updating files
+   # must not replay or relabel them; only active/recent work blocks maintenance.
+   auth_maintenance_guard()
+   receipt['retained_uncertain_dispatches']=admin.query("select id,status,created_at,lease_until,ended_at from research_model_dispatches where status='unknown' order by created_at")
    values={r['OutputKey']:r['OutputValue'] for r in aws('cloudformation','describe-stacks','--stack-name','JumpServeOpenClawStack')['Stacks'][0]['Outputs']};bucket=values['OpenClawRuntimeBucket'];key=values['OpenClawRuntimeObject']
    if bucket!='cdk-hnb659fds-assets-395567831870-us-east-1' or not re.fullmatch(r'[a-f0-9]{64}\.zip',key):raise RuntimeError('Unexpected pinned runtime asset')
    suffix='before-'+directory.name;backup='/opt/jumpserve/runtime-'+suffix;archive='/opt/jumpserve/runtime-'+key

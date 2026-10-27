@@ -1,9 +1,12 @@
 # Native experiment builder
 
 This change adds an implementation-development stage to the existing autonomous
-assessment controller. It is local and disabled by default. It has not been
-deployed or evaluated with a live subscription model. No existing assessment is
-automatically resumed by the migrations.
+assessment controller. Its implementation and migrations were deployed on
+2026-10-27, but the builder remains disabled and its prompt unpublished. Bounded
+live subscription qualification reviewed five actual answers: four passed, one
+failed the executor file interface, and five further cases were not completed.
+See `experiment-builder-release-2026-10-27.md` and the retained actual-answer
+review. No existing assessment is automatically resumed by the migrations.
 
 The operator's standing experiment authority is versioned separately in
 `policies/experiment-action-policy-v1.json`. It covers necessary setup, retrieval,
@@ -32,7 +35,9 @@ request is stored and admitted before inference. Native reasoning, function call
 identities and tool results pass through without a chat-completions conversion.
 The historical data-only runtime remains separate.
 
-A scheduling slot is 60 seconds, not a turn ceiling. Its source checkpoint is
+A scheduling slot is 180 seconds, not a turn ceiling. A new native call requires
+its complete 65-second provider window before admission. Native function-call
+history and its source checkpoint are
 saved in private Storage and verified after retrieval. The stopped container's
 writable filesystem retains installations between slots; stopping releases CPU
 and memory. A worker restart can restore source from Storage. If the local
@@ -41,6 +46,13 @@ paper limits or erase failures. Terminal claims and paper stops retire their
 container through a worker cleanup pass. Unknown provider or persistence outcomes
 remain fenced until reconciliation. Only confirmed transient runtime failures
 use the existing bounded backoff policy.
+
+Root-created workspace files are normalized after the agent stops using a fixed
+networkless helper. Original ownership/modes and unchanged content hashes are
+retained. An actual Linux volume regression demonstrates permission failure and
+recovery. OpenClaw file tools can still report false write-verification failures
+on root-owned mode-0600 files; that integration issue remains visible in the
+failed qualification history.
 
 The builder cannot supply its own artifact identifiers. The server freezes the
 original project ZIP, manifest and wrapper, derives the compiled candidate, and
@@ -70,6 +82,10 @@ package path: one t3.medium, standard credits, 8-GiB root, at most 1800 seconds,
 3 MB returned output and 10 decimal GB sampled traffic. The independent reaper
 and watchdog remain active. The new path has its own immutable function version
 and server-owned policy; arbitrary custom-package admission stays separate.
+The pinned Ubuntu 22.04 AMI matches the builder OS. IMDSv2 is available for
+cloud-init bootstrap, and the metadata route is blocked before generated code
+runs. The guest has no IAM instance profile. This is a lab restriction, not an
+adversarial-root isolation guarantee.
 
 The draft cost envelope proposes a $10 reservation per execution and has
 `approved_for_lab_execution=false`; it refuses automatic cloud admission until
@@ -130,7 +146,7 @@ The user must explicitly request release. Verify AWS account `395567831870` and
 Supabase project `regphejnlvfpyokpniny` first. The connected Supabase MCP may
 target a different project; it must not be used for these migrations.
 
-1. Replay migrations `202610270001` through `202610270004` after the
+1. Replay migrations `202610270001` through `202610270005` after the
    existing executable-methods migration. Keep the builder prompt unpublished.
 2. Build/review a Linux image from the backend's `experiment-builder.Dockerfile`
    using a verified Ubuntu 22.04 base digest. Retain platform, image digest,

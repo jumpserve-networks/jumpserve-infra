@@ -1,0 +1,12 @@
+{
+  "version":"experiment-builder-live-amendment-v3",
+  "amends":"experiment-builder-live-evaluation-v1",
+  "prior_campaigns":[
+    {"id":"20261027T190640638887Z","calls":3,"status":"failed-or-paused","archive_sha256":"33f42b1d24896c3a482d7be92225a5057a4b59365a73c6b2d642e28358b56cf8"},
+    {"id":"20261027T191345373638Z","additional_calls":11,"cumulative_calls":14,"status":"operator-stopped-no-progress","archive_sha256":"824ad6033bf9bcad7d1162b64ff2631fdc8ff7b1037d0705d6b5d541b5953164"}
+  ],
+  "reason":"Source checkpoints alone did not deliver the native tool conversation to a fresh agent-exec session. The corrected runtime retains exact typed calls/results, includes bounded history in the next request and preserves full history in verified checkpoints. Changed tool identities and oversized history are rejected explicitly.",
+  "resources":"A new, versioned campaign has at most 30 provider calls, 1800 seconds and USD30 reservations. Preserve the prior 14 calls/USD14 reservation separately. With up to USD30 for three operational cloud controls and their reviews, aggregate release reservations are at most USD74. This is not a paper workflow or a reset of a paper limit. Subscription allocation and measured charges remain unknown; no paid API fallback.",
+  "exposure":"The first implementation remains a development regression. No other case reached a provider in the two earlier campaigns. Both original held-out inputs were selected before those campaigns and remain first-use for the corrected candidate. Implementation-author AI inspection is not independent or human review.",
+  "publication":"All original semantic and operational publication gates remain required. Failed and stopped campaigns remain preserved. No timing correction or numerical smoke alone can publish the prompt."
+}

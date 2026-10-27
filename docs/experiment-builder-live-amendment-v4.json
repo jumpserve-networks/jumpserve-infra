@@ -1,0 +1,14 @@
+{
+  "version":"experiment-builder-live-amendment-v4",
+  "amends":"experiment-builder-live-evaluation-v1",
+  "prior_campaigns":[
+    {"id":"20261027T190640638887Z","additional_calls":3,"archive_sha256":"33f42b1d24896c3a482d7be92225a5057a4b59365a73c6b2d642e28358b56cf8"},
+    {"id":"20261027T191345373638Z","additional_calls":11,"archive_sha256":"824ad6033bf9bcad7d1162b64ff2631fdc8ff7b1037d0705d6b5d541b5953164"},
+    {"id":"20261027T192323207354Z","additional_calls":11,"archive_sha256":"d7496022d8d4c759fa02af73b61c81d562bd383661ab0d07fa5f9d518c8f16ca"}
+  ],
+  "reason":"Exact retained tool history confirmed repeated initial inspections in short headless slots. Coordinate a 180-second builder slot, building-only 245-second dispatch lease, 260-second controller wait and 300-second Lambda timeout under the unchanged 300-second task lease. Data-only dispatch timing, paper limits and replay fences remain unchanged.",
+  "resources":"New campaign: at most 30 provider calls, 1800 seconds, USD30 reservations. Preserve prior 25 calls/USD25 reservations. Operational controls have at most four launched hosts including the failed metadata-disabled control, at most ten fresh review calls including failed reviews, and USD30 total reservations. Aggregate declared release reservations are at most USD85. No paper budget or AI-turn limit is reset. Missing measured charges and subscription allocation remain unknown; no paid fallback.",
+  "cloud_correction":"The failed cloud control's actual console reports DataSourceNone after IMDS was disabled at launch. Enable IMDSv2 for cloud-init without an instance IAM profile, and block its IPv4 route before downloaded/generated code. IPv6 metadata is disabled. This is a lab configuration, not an adversarial root-code sandbox guarantee. Pin experiment hosts to Ubuntu 22.04 AMI ami-033ea4ff4a9c726dc to match the builder OS; benchmark AMI stays unchanged.",
+  "case_exposure":"Only the first implementation has reached inference in native campaigns; it remains reused development. Both original held-out cases remain preselected first-use for the final candidate. Other original criteria and the nonindependent AI review declaration remain unchanged.",
+  "publication":"All ten actual answers and operational gates must pass. Preserve failed and operator-stopped campaigns, raw runtime status fields and external stop receipts. Never reinterpret an interrupted original report as completed."
+}
