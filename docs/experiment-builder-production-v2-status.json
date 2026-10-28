@@ -113,7 +113,8 @@
     "CDK diff encountered a concurrent output lock; preserved and rerun in sequence.",
     "Native controls passed but the first evidence archive included runtime caches and exceeded its bound; recovered using a fixed allowlist without reexecution.",
     "Historical verifier omitted two explicitly private confirmation tables; corrected classification without changing SQL permissions.",
-    "Manual polling hold survived an unchanged CloudFormation property; explicitly restored the exact rule and verified both live rules enabled."
+    "Manual polling hold survived an unchanged CloudFormation property; explicitly restored the exact rule and verified both live rules enabled.",
+    "Final audit insert used an unsupported outcome enum; corrected to the existing passed status for operational checks, retaining report kind/conditional gaps and the failed insert without changing schema or replaying experiments."
   ],
   "conditional_verification_gaps": [
     "Available Chrome/Firefox contexts were logged out. No authenticated upload, confirmation, builder execution or chat request was exercised.",

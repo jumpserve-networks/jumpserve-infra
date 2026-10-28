@@ -71,6 +71,12 @@ new experiment EC2 instances.
    declared the rule enabled and did not repair the drift. The fixed release
    helper explicitly enabled the exact held rule and checked its live state.
    Final verification confirms both autonomous and queue polling enabled.
+5. The first final-audit insert used an unsupported outcome label. The existing
+   evaluation schema accepts `passed`, `failed-substantive-review` and
+   `failed-or-paused`; it was not relaxed. The corrected writer uses `passed` for
+   the enumerated release checks, while the report explicitly identifies
+   operational verification and the remaining authenticated-flow condition. The
+   failed insert and already-verified original archive remain retained.
 
 These are software/release-control findings. They are not scientific discrepancies.
 

@@ -1,0 +1,15 @@
+{
+  "protocol": "experiment-builder-production-v2",
+  "archive": {
+    "bucket": "research-workflow-raw",
+    "path": "release-verification/experiment-builder-v2/final/f87dc5ae77731daf8e05b323971ea420c4f27227569b4b92e50d30169c69e7df.zip",
+    "sha256": "f87dc5ae77731daf8e05b323971ea420c4f27227569b4b92e50d30169c69e7df",
+    "retrieved_sha256": "f87dc5ae77731daf8e05b323971ea420c4f27227569b4b92e50d30169c69e7df",
+    "bytes": 4884303,
+    "members": 76,
+    "public": false
+  },
+  "evaluation_sha256": "c41467cd82f277d73bcc09a54175da7d2eccf946ea4a9263be2287cf649ce210",
+  "retrieved_evaluation_sha256": "c41467cd82f277d73bcc09a54175da7d2eccf946ea4a9263be2287cf649ce210",
+  "public": false
+}
