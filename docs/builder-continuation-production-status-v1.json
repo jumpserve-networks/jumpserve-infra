@@ -1,7 +1,7 @@
 {
   "version": "builder-continuation-production-v1",
-  "status": "qualified;deployment-pending",
-  "updated_at": "2026-10-28T19:54:37.999787+00:00",
+  "status": "deployed-and-verified",
+  "updated_at": "2026-10-28T20:14:50.799694+00:00",
   "aws_account": "395567831870",
   "supabase_project": "regphejnlvfpyokpniny",
   "backend_revision": "3a2c0baa8edc288b96d116c492660c2fc87ba8ab",
@@ -96,5 +96,155 @@
     "type": "AI",
     "independent": false,
     "human": false
-  }
+  },
+  "infrastructure_revision": "36ec960c47d8aadef8352d025919a9f6b135da84",
+  "production_verification": {
+    "status": "passed",
+    "source_revision": "3a2c0baa8edc288b96d116c492660c2fc87ba8ab",
+    "verified_at": "2026-10-28T20:09:03.423183+00:00",
+    "runtime_files": 50,
+    "image": "sha256:542c0bd0a512d3c18348103775a983a840067eaadb703276e432c17cc5308c64",
+    "worker_preserved": "i-087f1493809643115",
+    "worker_health": {
+      "status": "ready",
+      "runtime": "openclaw-production-v1",
+      "model_id": "gpt-6.1-sol",
+      "updated_at": "2026-10-28T20:06:45.772032+00:00"
+    },
+    "api_and_controller": {
+      "path": ".test-artifacts/builder-production-v2/20261028T200633835578Z/receipt.json",
+      "sha256": "b533c5f54971162bcbd1cf7cbfff22fa21b944330e8e9b6e8ad1b7b25f1cd1d0"
+    },
+    "executor": {
+      "path": ".test-artifacts/builder-production-v2/20261028T200554964873Z/receipt.json",
+      "sha256": "b681b334f0e094cbf075d5494553669c45f71b2f7cfd4b231ad87b9520efadd8"
+    },
+    "worker": {
+      "path": ".test-artifacts/openclaw-release/20261028T200556043322Z/receipt.json",
+      "sha256": "6197829b413106cafa8bfefc67b7d34bf9635d33f6237396164bd0fa1aecac2c"
+    },
+    "polling": [
+      {
+        "logical_id": "ResearchWorkflowAutonomyPoll0C56C453",
+        "state": "ENABLED"
+      },
+      {
+        "logical_id": "ResearchWorkflowQueuePoll49F7FA3B",
+        "state": "ENABLED"
+      }
+    ],
+    "browser_report": ".test-artifacts/assessment-methods-release-v1/browser/2026-10-28T20-06-35.137Z/report.json",
+    "auth_upload_chat_reverified": false
+  },
+  "recovery": {
+    "resumed": 7,
+    "excluded_unknown": 2,
+    "original_limits_preserved": true,
+    "observed_at": "2026-10-28T20:14:34.709997+00:00",
+    "workflow": {
+      "status": "running",
+      "reason": "Reconciled retained claims resume under their original budget and deadline after the qualified continuation release.",
+      "max_spend_cents": 10000,
+      "max_attempts": null,
+      "committed_cents": 8703,
+      "deadline_at": "2026-11-04 02:47:45.237124+00"
+    },
+    "tasks": [
+      {
+        "id": "2a3369f7-832d-533d-b7b9-813933a1af98",
+        "claim_id": null,
+        "stage": "intake",
+        "status": "finished",
+        "reason": "Reused owner-confirmed source inventory; no new AI extraction or independent review.",
+        "attempts": 0
+      },
+      {
+        "id": "cdc6d06c-37be-5f13-96ab-73e16fa40828",
+        "claim_id": "a4e6438e-6c51-505c-a023-af45bac5c3e8",
+        "stage": "assessment",
+        "status": "running",
+        "reason": "The corrected artifact-backed reader is qualified. Reassess the same recorded jobs under the same frozen numerical criterion; no replacement measurement or favorable-result selection.",
+        "attempts": 4
+      },
+      {
+        "id": "e5fe0ab6-03e9-5b0a-87f4-c821e269e3c5",
+        "claim_id": "2fcbd64d-e73c-5bb9-8781-418d3d8cd15e",
+        "stage": "building",
+        "status": "running",
+        "reason": "Local context precheck failed before provider admission. Continue the exact original checkpoint with bounded context files, verified page deliveries and prepared networking tools; preserve the original criterion, budget and deadline.",
+        "attempts": 11
+      },
+      {
+        "id": "aead8f13-fab4-5851-9b8b-ae475e6515ba",
+        "claim_id": "4bacc327-8f9d-59aa-926b-6bf9155497c6",
+        "stage": "building",
+        "status": "queued",
+        "reason": "Local context precheck failed before provider admission. Continue the exact original checkpoint with bounded context files, verified page deliveries and prepared networking tools; preserve the original criterion, budget and deadline.",
+        "attempts": 11
+      },
+      {
+        "id": "b3b8a09c-a06b-532a-9021-4f69d6d80603",
+        "claim_id": "37919c77-9345-51f7-b7fa-555131db1b2a",
+        "stage": "building",
+        "status": "queued",
+        "reason": "Local context precheck failed before provider admission. Continue the exact original checkpoint with bounded context files, verified page deliveries and prepared networking tools; preserve the original criterion, budget and deadline.",
+        "attempts": 9
+      },
+      {
+        "id": "786ce19a-7f1d-5272-b07b-4e0daced391c",
+        "claim_id": "a465a025-0cd6-5955-80b5-bf10f1a20e0f",
+        "stage": "building",
+        "status": "queued",
+        "reason": "Local context precheck failed before provider admission. Continue the exact original checkpoint with bounded context files, verified page deliveries and prepared networking tools; preserve the original criterion, budget and deadline.",
+        "attempts": 10
+      },
+      {
+        "id": "0254daab-507a-5790-a764-9803e0ac33e0",
+        "claim_id": "b986dd0c-f80e-53ae-93b6-a6e700a20792",
+        "stage": "planning",
+        "status": "blocked",
+        "reason": "OpenClaw stopped: unknown; the original outcome is retained. No paid fallback.",
+        "attempts": 6
+      },
+      {
+        "id": "ff69702f-7180-5564-9ec7-d6a9ac6a3f67",
+        "claim_id": "7515de08-7111-5771-9d91-b87dddcbfc29",
+        "stage": "building",
+        "status": "queued",
+        "reason": "Local context precheck failed before provider admission. Continue the exact original checkpoint with bounded context files, verified page deliveries and prepared networking tools; preserve the original criterion, budget and deadline.",
+        "attempts": 12
+      },
+      {
+        "id": "6ebd38cd-b4df-5928-a63d-1130a859b25f",
+        "claim_id": "12ed9bb9-0189-5577-852d-89258e7a8340",
+        "stage": "planning",
+        "status": "blocked",
+        "reason": "OpenClaw stopped: unknown; the original outcome is retained. No paid fallback.",
+        "attempts": 7
+      },
+      {
+        "id": "7cd9926d-a186-513c-b546-abd5966aa2fa",
+        "claim_id": "e1c69442-aba0-52a6-afeb-8c60cecd7034",
+        "stage": "building",
+        "status": "queued",
+        "reason": "Local context precheck failed before provider admission. Continue the exact original checkpoint with bounded context files, verified page deliveries and prepared networking tools; preserve the original criterion, budget and deadline.",
+        "attempts": 10
+      }
+    ]
+  },
+  "release_delivery": {
+    "infrastructure_revision": "36ec960c47d8aadef8352d025919a9f6b135da84",
+    "scope": "JumpServeOpenClawStack and JumpServeBenchmarkStack only",
+    "legacy_ci_run": "40758694980",
+    "legacy_ci_status": "Cancelled to prevent concurrent broad all-stack deployment; scoped manual checks and deployments are recorded instead."
+  },
+  "operational_archive": {
+    "bucket": "research-workflow-raw",
+    "path": "release-verification/builder-continuation-v1/0ec82cbc81fa7bca98f1d1fe941e360753d813715b68dd52b2783cb1526792f5.zip",
+    "sha256": "0ec82cbc81fa7bca98f1d1fe941e360753d813715b68dd52b2783cb1526792f5",
+    "retrieved_sha256": "0ec82cbc81fa7bca98f1d1fe941e360753d813715b68dd52b2783cb1526792f5",
+    "bytes": 3312360,
+    "public": false
+  },
+  "operational_evaluation_sha256": "ea17bbf41ed98a04c4161158bead108076dde0d43147ad88690adf9a4f1fc7ec"
 }

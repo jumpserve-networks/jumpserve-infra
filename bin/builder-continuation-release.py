@@ -1,5 +1,5 @@
 """Fixed-target continuation qualification/release evidence; no arbitrary runner."""
-import argparse,ast,base64,datetime as dt,importlib.util,io,json,pathlib,re,shlex,subprocess,sys,time,zipfile
+import argparse,ast,base64,datetime as dt,importlib.util,io,json,pathlib,re,shlex,subprocess,sys,time,urllib.error,zipfile
 ROOT=pathlib.Path(__file__).resolve().parents[1];BACK=ROOT.parent/'jumpserve-back-end'
 spec=importlib.util.spec_from_file_location('release',ROOT/'bin/openclaw-release.py');r=importlib.util.module_from_spec(spec);spec.loader.exec_module(r)
 spec=importlib.util.spec_from_file_location('methods_release',ROOT/'bin/assessment-methods-release.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
@@ -249,7 +249,7 @@ def recover(source,dry_run):
     verified=json.loads((source/'deployed-verified.json').read_bytes());assert verified['status']=='passed' and verified['source_revision']==plan['source_revision']
     sha=r.sha((source/'evaluations-recorded.json').read_bytes());payload=dict(plan,evaluation_sha256=sha)
     sql="begin;select pg_advisory_xact_lock(hashtextextended('research-autonomy-v1',0));create temp table continuation_recovery_payload(value jsonb) on commit drop;insert into continuation_recovery_payload values("+r.admin.literal(json.dumps(payload))+'::jsonb);'+'''
-do $continuation_recovery$ declare p jsonb;v jsonb;t public.research_autonomy_tasks;w public.research_autonomy_workflows;d public.research_model_dispatches;reason text;begin
+do $continuation_recovery$ declare p jsonb;v jsonb;t public.research_autonomy_tasks;w public.research_autonomy_workflows;d public.research_model_dispatches;recovery_reason text;begin
  select value into strict p from continuation_recovery_payload;
  select * into strict w from public.research_autonomy_workflows where study_id=(p->>'assessment')::uuid for update;
  if w.max_spend_cents<>(p->'workflow'->>'max_spend_cents')::integer or w.max_attempts is not null or w.deadline_at<>(p->'workflow'->>'deadline_at')::timestamptz then raise exception 'Original limits changed';end if;
@@ -262,24 +262,99 @@ do $continuation_recovery$ declare p jsonb;v jsonb;t public.research_autonomy_ta
   select * into strict d from public.research_model_dispatches where id=(v->>'dispatch_id')::uuid and task_id=t.id;
   if v->>'kind'='confirmed-zero-provider-context-overflow' then
    if d.status<>'failed' or d.provenance->>'provider_calls'<>'0' or d.provenance->>'native_tool_cleanup'<>'true' or t.context->'builder_checkpoint' is distinct from d.provenance->'checkpoint' then raise exception 'Confirmed stopped native checkpoint required';end if;
-   reason='Local context precheck failed before provider admission. Continue the exact original checkpoint with bounded context files, verified page deliveries and prepared networking tools; preserve the original criterion, budget and deadline.';
+   recovery_reason='Local context precheck failed before provider admission. Continue the exact original checkpoint with bounded context files, verified page deliveries and prepared networking tools; preserve the original criterion, budget and deadline.';
   elsif v->>'kind'='artifact-reader-before-model-error' then
    if d.status<>'complete' or t.stage<>'assessment' or t.reason not like '%KeyError%' then raise exception 'Original reader failure required';end if;
-   reason='The corrected artifact-backed reader is qualified. Reassess the same recorded jobs under the same frozen numerical criterion; no replacement measurement or favorable-result selection.';
+   recovery_reason='The corrected artifact-backed reader is qualified. Reassess the same recorded jobs under the same frozen numerical criterion; no replacement measurement or favorable-result selection.';
   else raise exception 'Unsupported recovery';end if;
   insert into public.research_autonomy_events(study_id,task_id,event,details) values(w.study_id,t.id,'continuation-release-resumed',jsonb_build_object('evaluation_sha256',p->>'evaluation_sha256','source_revision',p->>'source_revision','kind',v->>'kind','old_task',to_jsonb(t)-array['lease_token'],'committed_cents',w.committed_cents,'deadline_at',w.deadline_at,'scope','Operator release recovery of confirmed stops; historical prompts, responses, findings, counters and resource limits remain unchanged.'));
-  update public.research_autonomy_tasks set status='queued',reason=reason,context=context||jsonb_build_object('last_feedback',reason,'builder_feedback',reason,'release_recovery',jsonb_build_object('version','builder-continuation-recovery-v1','source_revision',p->>'source_revision')),lease_token=null,lease_until=null,next_at=clock_timestamp(),updated_at=clock_timestamp() where id=t.id;
+  update public.research_autonomy_tasks set status='queued',reason=recovery_reason,context=context||jsonb_build_object('last_feedback',recovery_reason,'builder_feedback',recovery_reason,'release_recovery',jsonb_build_object('version','builder-continuation-recovery-v1','source_revision',p->>'source_revision')),lease_token=null,lease_until=null,next_at=clock_timestamp(),updated_at=clock_timestamp() where id=t.id;
  end loop;
  update public.research_autonomy_workflows set status='running',reason='Reconciled retained claims resume under their original budget and deadline after the qualified continuation release.',updated_at=clock_timestamp() where study_id=w.study_id;
 end $continuation_recovery$;
 '''+('rollback;' if dry_run else 'commit;')
-    (source/('recovery-dry-run.sql' if dry_run else 'recovery.sql')).write_text(sql)
-    r.admin.query(sql,read_only=False)
+    if not dry_run:
+        control=json.loads((source/'recovery-dry-run.json').read_bytes())
+        assert control['status']=='rollback-verified' and control['sql_sha256']==r.sha((sql[:-len('commit;')]+'rollback;').encode()),'The exact recovery transaction must first pass its rollback control.'
+    target=source/('recovery-dry-run.sql' if dry_run else 'recovery.sql')
+    if target.exists():
+        previous=target.read_bytes();(source/('previous-'+r.sha(previous)+'-'+target.name)).write_bytes(previous)
+    target.write_text(sql)
+    try:r.admin.query(sql,read_only=False)
+    except RuntimeError as error:
+        cause=error.__context__
+        if isinstance(cause,urllib.error.HTTPError):
+            raw=cause.read(1000000);(source/('recovery-error-'+r.sha(raw)+'.json')).write_bytes(raw)
+            try:message=json.loads(raw).get('message','').splitlines()[0][:600]
+            except (ValueError,AttributeError,IndexError):message='Original bounded error body retained privately.'
+            raise RuntimeError('Recovery SQL rejected: '+message) from None
+        raise
     result=dict(status='rollback-verified' if dry_run else 'resumed',tasks=7,excluded_unknown=2,limits_preserved=True,sql_sha256=r.sha(sql.encode()))
     save(source/('recovery-dry-run.json' if dry_run else 'recovery-result.json'),result);return result
 
+def record_release(source):
+    verified=json.loads((source/'deployed-verified.json').read_bytes());recovery=json.loads((source/'recovery-result.json').read_bytes());plan=json.loads((source/'recovery-plan.json').read_bytes())
+    assert verified['status']=='passed' and recovery['status']=='resumed' and recovery['limits_preserved'] and verified['source_revision']==plan['source_revision']
+    browser=ROOT/verified['browser_report'];assert json.loads(browser.read_bytes())['passed']
+    events=r.admin.query("select task_id,details,created_at from research_autonomy_events where study_id='"+ASSESSMENT+"' and event='continuation-release-resumed' order by created_at")
+    assert len(events)==7 and {e['task_id'] for e in events}=={v['task']['id'] for v in plan['expected']}
+    for event in events:
+        original=next(v['task'] for v in plan['expected'] if v['task']['id']==event['task_id'])
+        assert event['details']['old_task']['context']==original['context'] and event['details']['old_task']['attempts']==original['attempts']
+    workflow=r.admin.query("select status,reason,max_spend_cents,max_attempts,committed_cents,deadline_at from research_autonomy_workflows where study_id='"+ASSESSMENT+"'")[0]
+    assert workflow['max_spend_cents']==plan['workflow']['max_spend_cents'] and workflow['max_attempts'] is None
+    assert dt.datetime.fromisoformat(workflow['deadline_at'])==dt.datetime.fromisoformat(plan['workflow']['deadline_at'])
+    tasks=r.admin.query("select id,claim_id,stage,status,reason,attempts from research_autonomy_tasks where study_id='"+ASSESSMENT+"' order by created_at")
+    unknown={'0254daab-507a-5790-a764-9803e0ac33e0','6ebd38cd-b4df-5928-a63d-1130a859b25f'}
+    assert all(t['status']=='blocked' and t['stage']=='planning' for t in tasks if t['id'] in unknown) and sum(t['id'] in unknown for t in tasks)==2
+    observed=dict(observed_at=r.stamp(),workflow=workflow,tasks=tasks,recovery_events=events)
+    save(source/'recovery-observed.json',observed)
+    files={}
+    for directory in [source,BASE/json.loads((source/'frozen.json').read_bytes())['followup_of']]:
+        for p in directory.glob('*'):
+            if p.is_file() and (p.suffix in ('.json','.sql') or p.name=='source-diff-review.json'):
+                files['qualification/'+directory.name+'/'+p.name]=p.read_bytes()
+    for p in (source/'recovery-proof').glob('*'):files['recovery-proof/'+p.name]=p.read_bytes()
+    for p in BASE.glob('*/receipt.json'):files['operator/'+str(p.relative_to(BASE))]=p.read_bytes()
+    for dirname in ('openclaw-release','builder-production-v2'):
+        base=ROOT/'.test-artifacts'/dirname
+        for p in base.glob('*/receipt.json'):
+            if p.parent.name>='20261028T195600000000Z':files[dirname+'/'+str(p.relative_to(base))]=p.read_bytes()
+    lock_log=ROOT/'.test-artifacts/openclaw-release/20261028T195636410854Z/cdk.log'
+    files['preserved-local-synth-lock-failure.log']=lock_log.read_bytes()
+    for p in browser.parent.iterdir():
+        if p.is_file() and p.suffix in ('.json','.png'):files['browser/'+p.name]=p.read_bytes()
+    for p in (ROOT/'docs').glob('builder-continuation-*'):
+        if p.is_file() and 'production-status' not in p.name:files['docs/'+p.name]=p.read_bytes()
+    for name in ('research-workflow-runtime.json','bin/builder-continuation-release.py','bin/verify_assessment_methods_browser.mjs'):
+        files[name]=(ROOT/name).read_bytes()
+    report=dict(version='builder-continuation-operational-release-v1',status='passed-software-gates',source_revision=verified['source_revision'],verification=verified,recovery=observed,
+        recovery_failure='An ambiguous SQL reason variable was caught in rollback-only controls; original errors/SQL retained. Corrected exact transaction passed rollback before commit.',
+        delivery=dict(infrastructure_revision='36ec960c47d8aadef8352d025919a9f6b135da84',scope='JumpServeOpenClawStack and JumpServeBenchmarkStack only',legacy_ci_run='40758694980',legacy_ci_status='Cancelled to prevent concurrent broad all-stack deployment; scoped manual checks and deployments are recorded instead.'),
+        scientific_completion=False,reviewer=dict(identity='Implementing Codex assistant',type='AI',independent=False,human=False),measured_charges_usd=None,subscription_allocation_usd=None,unallocated_worker_storage_cost_usd=None)
+    files['release-report.json']=json.dumps(report,sort_keys=True,separators=(',',':')).encode()
+    stream=io.BytesIO()
+    with zipfile.ZipFile(stream,'w',zipfile.ZIP_DEFLATED) as archive:
+        for name,raw in sorted(files.items()):archive.writestr(name,raw)
+        archive.writestr('artifact-manifest.json',json.dumps([dict(path=n,sha256=r.sha(v),bytes=len(v)) for n,v in sorted(files.items())]))
+    raw=stream.getvalue();assert len(raw)<20000000
+    path='release-verification/builder-continuation-v1/'+r.sha(raw)+'.zip';m.storage(path,raw);restored=m.storage(path);assert restored==raw
+    with zipfile.ZipFile(io.BytesIO(restored)) as archive:
+        for item in json.loads(archive.read('artifact-manifest.json')):assert r.sha(archive.read(item['path']))==item['sha256']
+    pointer=dict(bucket='research-workflow-raw',path=path,sha256=r.sha(raw),retrieved_sha256=r.sha(restored),bytes=len(raw),public=False)
+    (source/'operational-evidence.zip').write_bytes(raw)
+    value=dict(report,archive=pointer);text=json.dumps(value,sort_keys=True,separators=(',',':'));sha=r.sha(text.encode())
+    for prompt in json.loads((source/'frozen.json').read_bytes())['prompts']:
+        r.admin.query('insert into agent_prompt_evaluations(prompt_version_id,outcome,report_raw,report_sha256,original_artifacts,recorded_by) values('+','.join([r.admin.literal(prompt['id'])+'::uuid',r.admin.literal('passed'),r.admin.literal(text),r.admin.literal(sha),r.admin.literal(json.dumps(pointer))+'::jsonb',r.admin.literal('Codex AI implementer/evaluator/reviewer; nonindependent operational release verification, not human review or scientific completion')])+') on conflict(prompt_version_id,report_sha256) do nothing',read_only=False)
+        stored=r.admin.query('select report_raw from agent_prompt_evaluations where prompt_version_id='+r.admin.literal(prompt['id'])+'::uuid and report_sha256='+r.admin.literal(sha));assert len(stored)==1 and r.sha(stored[0]['report_raw'].encode())==sha
+    public_path=ROOT/'docs/builder-continuation-production-status-v1.json';public=json.loads(public_path.read_bytes())
+    public.update(status='deployed-and-verified',updated_at=r.stamp(),infrastructure_revision=report['delivery']['infrastructure_revision'],production_verification=verified,
+        recovery=dict(resumed=7,excluded_unknown=2,original_limits_preserved=True,observed_at=observed['observed_at'],workflow=workflow,tasks=tasks),release_delivery=report['delivery'],operational_archive=pointer,operational_evaluation_sha256=sha)
+    save(public_path,public)
+    result=dict(status='deployed-and-verified',archive=pointer,evaluation_sha256=sha,scientific_completion=False);save(source/'release-recorded.json',result);return result
+
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['inspect','freeze','freeze-followup','prepare','native','replay','live','image','evidence','status','collect-status','collect','record-review','update-image','verify-worker','plan-recovery','dry-run-recovery','recover']);args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['inspect','freeze','freeze-followup','prepare','native','replay','live','image','evidence','status','collect-status','collect','record-review','update-image','verify-worker','plan-recovery','dry-run-recovery','recover','record-release']);args=parser.parse_args()
     BASE.mkdir(parents=True,exist_ok=True)
     out=BASE/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');out.mkdir()
     receipt=dict(mode=args.mode,status='running',started_at=r.stamp(),targets=r.target())
@@ -294,6 +369,7 @@ def main():
         elif args.mode=='collect':
             value=collect(selected());receipt['result']={k:v for k,v in value.items() if k!='cases'}
         elif args.mode=='record-review':receipt['result']=record_review(selected())
+        elif args.mode=='record-release':receipt['result']=record_release(selected())
         elif args.mode=='update-image':receipt['result']=update_image(selected())
         elif args.mode=='verify-worker':receipt['result']=verify_worker(selected())
         elif args.mode=='plan-recovery':receipt['result']=recovery_plan(selected())
