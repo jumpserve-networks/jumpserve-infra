@@ -1,21 +1,25 @@
 # Native experiment builder
 
-This change adds an implementation-development stage to the existing autonomous
-assessment controller. Its implementation and migrations were deployed on
-2026-10-27, but the builder remains disabled and its prompt unpublished. Bounded
-live subscription qualification reviewed five actual answers: four passed, one
-failed the executor file interface, and five further cases were not completed.
-See `experiment-builder-release-2026-10-27.md` and the retained actual-answer
-review. No existing assessment is automatically resumed by the migrations.
+This implementation-development stage is enabled in production following the
+[v2 release](experiment-builder-production-v2.md) on 2026-10-27/28 UTC. Its prompt,
+image and runtime are qualified and versioned. The full authenticated application
+flow remains a recorded conditional check. Existing assessments are not
+automatically resumed or scientifically relabeled.
+
+The initial 2026-10-27 deployment kept the builder disabled after bounded live
+qualification reviewed five actual answers: four passed, one failed the executor
+file interface, and five further cases were not completed. That history remains
+in `experiment-builder-release-2026-10-27.md` and the retained original review.
 
 The subsequent [v2 candidate qualification](experiment-builder-qualification-v2.md)
 corrects the executor contract, native file ownership and container sudo path.
 It completes ten functional checks plus two authority judgments after preserving
 an initial budget-format failure and its runtime-feedback continuation. The
 reviewed cost policy and release tooling are prepared on a local feature branch;
-the candidate is not yet published or activated. The sections below retain the
-original v1 implementation and release history; use the v2 report for the current
-candidate's hashes, results, limitations and next release order.
+the separate production release published and activated it after the declared
+checks. The sections below retain the original v1 implementation and release
+history; use the qualification and production reports for current hashes,
+results, limits and precise verification coverage.
 
 The operator's standing experiment authority is versioned separately in
 `policies/experiment-action-policy-v1.json`. It covers necessary setup, retrieval,

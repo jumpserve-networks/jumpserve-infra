@@ -1,0 +1,134 @@
+{
+  "version": "experiment-builder-production-v2-status",
+  "status": "deployed-with-conditional-verification-gap",
+  "release_blocking_checks_passed": true,
+  "verified_at": "2026-10-28T00:17:34.592875+00:00",
+  "targets": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "backend_revision": "f5453c866bfd74e770398fd6adfebae3265b01c6",
+  "runtime_manifest_version": 53,
+  "frontend": "No frontend source change or Amplify build in this release; existing public deployment inspected.",
+  "builder_enabled": true,
+  "admission_enabled": true,
+  "polling": [
+    {
+      "logical_id": "ResearchWorkflowAutonomyPoll0C56C453",
+      "state": "ENABLED"
+    },
+    {
+      "logical_id": "ResearchWorkflowQueuePoll49F7FA3B",
+      "state": "ENABLED"
+    }
+  ],
+  "worker": "i-087f1493809643115",
+  "runtime": {
+    "status": "ready",
+    "runtime": "openclaw-production-v1",
+    "model_id": "gpt-6.1-sol",
+    "updated_at": "2026-10-28T00:11:59.308558+00:00"
+  },
+  "prompts": [
+    {
+      "module_id": "research-autonomy",
+      "id": "6117e5c5-84ce-5c31-aaa7-0d1d3522e62e",
+      "version": "research-autonomy-v10",
+      "content_sha256": "e66038798c413151b47b9c00d7f2e70802ea330168989ee6967ce568b7dafd36",
+      "published_at": "2026-10-21 14:02:11.966897+00"
+    },
+    {
+      "module_id": "research-experiment-builder",
+      "id": "dfab5ecb-b8b9-5ad3-8771-f28a06b53b27",
+      "version": "research-experiment-builder-v2",
+      "content_sha256": "da3ff82e259cfd25d95c0c97af63defd4cd232277e4bf3462fdb49e2b42843d4",
+      "published_at": "2026-10-27 23:53:17.661453+00"
+    }
+  ],
+  "deployed_functions": [
+    {
+      "function": "JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+      "zip_sha256": "78e69501c83c9d0edd63aa77ae8faf134cea7cda4087f076c2731bdc03414c29",
+      "source_files_verified": 49,
+      "built_executor": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt:5",
+      "policy_sha256": "10f467ed7e6991c69340595e3d9c1de2dbcb182c4b61ac87862a8d753a70608d",
+      "custom_packages_enabled": false
+    },
+    {
+      "function": "JumpServeBenchmarkStack-ResearchWorkflowAutonomyWo-5sN0tQ8Oziyq",
+      "zip_sha256": "78e69501c83c9d0edd63aa77ae8faf134cea7cda4087f076c2731bdc03414c29",
+      "source_files_verified": 49,
+      "built_executor": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt:5",
+      "policy_sha256": "10f467ed7e6991c69340595e3d9c1de2dbcb182c4b61ac87862a8d753a70608d",
+      "custom_packages_enabled": false
+    },
+    {
+      "function": "JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+      "zip_sha256": "78e69501c83c9d0edd63aa77ae8faf134cea7cda4087f076c2731bdc03414c29",
+      "source_files_verified": 49,
+      "built_executor": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt:5",
+      "policy_sha256": "10f467ed7e6991c69340595e3d9c1de2dbcb182c4b61ac87862a8d753a70608d",
+      "custom_packages_enabled": false
+    }
+  ],
+  "database": {
+    "relations": 42,
+    "private_relations": 27,
+    "service_only_rpcs_checked": 8,
+    "RLS_enabled": true,
+    "browser_writes_denied": true,
+    "original_artifact_bucket_private": true
+  },
+  "native_control": {
+    "status": "passed",
+    "new_live_provider_calls": 0,
+    "synthetic_transport_calls": 8,
+    "production_service_restrictions": true,
+    "original_archive_failure_retained": true,
+    "reexecuted_for_archive_recovery": false
+  },
+  "reused_qualification": {
+    "live_provider_calls": 73,
+    "functional_checks": 10,
+    "authority_judgments": 2,
+    "independent": false,
+    "selected_report_sha256": "54be72374de3326592a63dbd9e008064710d6e4e9f7cf3d6143c37dcd067dd37"
+  },
+  "reused_cloud_controls": "Three prior matching lifecycle controls; deployed execution files match byte-for-byte. New Lambda version 5 reflects a changed bundle, not a claimed byte-identical full ZIP.",
+  "software_checks": {
+    "backend_tests_reused": 311,
+    "fresh_infrastructure_tests": 92,
+    "optional_cli_tests_reused": 5,
+    "local_database_fixtures_reused": "builder and autonomy passed",
+    "browser_checks": 7
+  },
+  "scientific_coverage": {
+    "new_claims_assessed": 0,
+    "new_experiment_ec2_instances": 0,
+    "interpretation": "Software deployment verification; no paper claim was newly reproduced or contradicted."
+  },
+  "corrections_retained": [
+    "CDK diff encountered a concurrent output lock; preserved and rerun in sequence.",
+    "Native controls passed but the first evidence archive included runtime caches and exceeded its bound; recovered using a fixed allowlist without reexecution.",
+    "Historical verifier omitted two explicitly private confirmation tables; corrected classification without changing SQL permissions.",
+    "Manual polling hold survived an unchanged CloudFormation property; explicitly restored the exact rule and verified both live rules enabled."
+  ],
+  "conditional_verification_gaps": [
+    "Available Chrome/Firefox contexts were logged out. No authenticated upload, confirmation, builder execution or chat request was exercised.",
+    "No exhaustive console-error, chart or data-export audit was performed; this release changes backend/infrastructure, and frontend code was unchanged."
+  ],
+  "costs": {
+    "new_live_model_calls": 0,
+    "new_experiment_ec2_instances": 0,
+    "measured_charges_usd": null,
+    "subscription_allocation_usd": null,
+    "unallocated": "Existing worker CPU, deployment services and storage/request costs are unallocated; missing usage is not zero cost."
+  },
+  "reviewer": {
+    "identity": "Primary Codex AI implementation author",
+    "type": "AI",
+    "independent": false
+  }
+}
