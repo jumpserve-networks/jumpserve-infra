@@ -1,0 +1,100 @@
+{
+  "version": "builder-continuation-production-v1",
+  "status": "qualified;deployment-pending",
+  "updated_at": "2026-10-28T19:54:37.999787+00:00",
+  "aws_account": "395567831870",
+  "supabase_project": "regphejnlvfpyokpniny",
+  "backend_revision": "3a2c0baa8edc288b96d116c492660c2fc87ba8ab",
+  "runtime_version": 56,
+  "runtime_files": 50,
+  "image": "sha256:542c0bd0a512d3c18348103775a983a840067eaadb703276e432c17cc5308c64",
+  "worker": "i-087f1493809643115",
+  "source_volume_gib": 300,
+  "backup_snapshot": "snap-002af2609269bc721",
+  "backup_snapshot_status": "completed",
+  "qualification_campaign": "20261028T193736006181Z",
+  "original_campaign": "20261028T192310899435Z",
+  "checks": {
+    "backend_tests": 341,
+    "infrastructure_tests": 92,
+    "infrastructure_skipped_optional_tests": 5,
+    "production_native_control": "passed; three native slots, zero real provider calls",
+    "repeated_real_container_retirements": 2,
+    "live_answer_cases": 2,
+    "actual_provider_calls": 8,
+    "actual_answer_review": "passed; same implementing AI; reused/corrected development cases",
+    "read_only_recorded_assessment_replay": "passed; archived arithmetic only; no scientific record changed"
+  },
+  "evaluations": [
+    {
+      "prompt_version_id": "6117e5c5-84ce-5c31-aaa7-0d1d3522e62e",
+      "report_sha256": "fa6b9490d58f73439cf6dca56b162ae4e822cc5906adf48e1435225a7db918de",
+      "outcome": "failed-or-paused",
+      "campaign": "20261028T192310899435Z"
+    },
+    {
+      "prompt_version_id": "dfab5ecb-b8b9-5ad3-8771-f28a06b53b27",
+      "report_sha256": "fa6b9490d58f73439cf6dca56b162ae4e822cc5906adf48e1435225a7db918de",
+      "outcome": "failed-or-paused",
+      "campaign": "20261028T192310899435Z"
+    },
+    {
+      "prompt_version_id": "6117e5c5-84ce-5c31-aaa7-0d1d3522e62e",
+      "report_sha256": "77365568abac80aeec46fee5ae0e1922ad70271f00a77f9782cc0ac087d428df",
+      "outcome": "passed",
+      "campaign": "20261028T193736006181Z"
+    },
+    {
+      "prompt_version_id": "dfab5ecb-b8b9-5ad3-8771-f28a06b53b27",
+      "report_sha256": "77365568abac80aeec46fee5ae0e1922ad70271f00a77f9782cc0ac087d428df",
+      "outcome": "passed",
+      "campaign": "20261028T193736006181Z"
+    }
+  ],
+  "private_original_archives": [
+    {
+      "bucket": "research-workflow-raw",
+      "bytes": 1402230,
+      "path": "qualification/builder-continuation-v1/20261028T193736006181Z/1ccc72e50a1814588c771149b9bfdf7caa6f833afc986ba66de4a9221730c9cd-evidence.zip",
+      "public": false,
+      "retrieved_sha256": "1ccc72e50a1814588c771149b9bfdf7caa6f833afc986ba66de4a9221730c9cd",
+      "sha256": "1ccc72e50a1814588c771149b9bfdf7caa6f833afc986ba66de4a9221730c9cd"
+    },
+    {
+      "bucket": "research-workflow-raw",
+      "bytes": 1710838,
+      "path": "qualification/builder-continuation-v1/20261028T192310899435Z/32c7d3f0d3ec0e849ec69c2e4f5b2500b2e319fbdfced8889297003338bf0eed-evidence.zip",
+      "public": false,
+      "retrieved_sha256": "32c7d3f0d3ec0e849ec69c2e4f5b2500b2e319fbdfced8889297003338bf0eed",
+      "sha256": "32c7d3f0d3ec0e849ec69c2e4f5b2500b2e319fbdfced8889297003338bf0eed"
+    },
+    {
+      "bucket": "research-workflow-raw",
+      "bytes": 9125,
+      "image": "sha256:542c0bd0a512d3c18348103775a983a840067eaadb703276e432c17cc5308c64",
+      "path": "qualification/builder-continuation-v1/20261028T193736006181Z/image-manifest-a94a535861805622f08875b042e7a7d85446188f09a4a859b3ba8f76ace53741.json",
+      "public": false,
+      "retrieved_sha256": "a94a535861805622f08875b042e7a7d85446188f09a4a859b3ba8f76ace53741",
+      "sha256": "a94a535861805622f08875b042e7a7d85446188f09a4a859b3ba8f76ace53741"
+    }
+  ],
+  "assessment": "a3bad34f-a9b5-44bb-be46-e1800cf1cf89",
+  "scientific_completion": false,
+  "conditional_limits": [
+    "Exposed, reused and corrected development cases; no human or independent validation.",
+    "The original changed-input control is a preserved harness failure. The corrected integrity-control check does not show generalization to another source.",
+    "Automatic page-progress credit currently recognizes direct absolute-path reader calls. This live case used compound relative-path commands; its exact page outputs were manually checked and remain retained but were conservatively uncredited by the automatic index.",
+    "No fresh Google-authenticated upload or chat request in this backend-only release.",
+    "Real paper networking campaigns remain separate scientific work; two historical unknown planning outcomes remain paused."
+  ],
+  "frontend_changes": false,
+  "measured_charges_usd": null,
+  "subscription_allocation_usd": null,
+  "unallocated_worker_storage_cost_usd": null,
+  "reviewer": {
+    "identity": "Implementing Codex assistant",
+    "type": "AI",
+    "independent": false,
+    "human": false
+  }
+}

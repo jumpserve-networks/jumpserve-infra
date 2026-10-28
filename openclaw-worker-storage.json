@@ -1,0 +1,12 @@
+{
+  "version": "openclaw-worker-storage-v1",
+  "aws_account": "395567831870",
+  "region": "us-east-1",
+  "instance_id": "i-087f1493809643115",
+  "volume_id": "vol-0993b9127ac7a8231",
+  "desired_root_volume_gib": 300,
+  "original_cloudformation_launch_volume_gib": 24,
+  "management": "Resize the attached encrypted gp3 volume in place with Elastic Volumes and extend the existing partition/filesystem through SSM.",
+  "launch_property_guard": "Keep the original EC2 BlockDeviceMappings launch property pinned: changing it through CloudFormation replaces the authorized instance. Apply this operational target using bin/openclaw-storage.py instead.",
+  "scope": "Shared OpenClaw builder host only; disposable experiment hosts and per-paper budgets are unchanged."
+}

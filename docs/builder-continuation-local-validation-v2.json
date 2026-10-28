@@ -1,0 +1,235 @@
+{
+  "version": "builder-continuation-local-validation-v2",
+  "recorded_at": "2026-10-28T14:52:42.669609+00:00",
+  "status": "local-checks-passed; deployment-pending",
+  "assessment": "a3bad34f-a9b5-44bb-be46-e1800cf1cf89",
+  "source_heads": {
+    "jumpserve-back-end": "cf58f1a4ebc038769a00771d746b660e160ca7c7",
+    "jumpserve-infra": "4eb2be79e1ef29007e03944ec16d70f77e644dba"
+  },
+  "source_dirty": true,
+  "protocols": [
+    {
+      "path": "jumpserve-back-end/research_workflow/policies/builder-continuation-validation-v1.json",
+      "sha256": "333faed75ebe3d2fadaaaebf68c5014fae8c33b94b9189c63fe8cc2e68d035fb",
+      "bytes": 3129
+    },
+    {
+      "path": "jumpserve-back-end/research_workflow/policies/builder-continuation-validation-v2.json",
+      "sha256": "08897e9e7332039d5c5d28d1e094968ea934e0b099ea8b7776a18d8c52ba430c",
+      "bytes": 1462
+    }
+  ],
+  "changes": [
+    "Artifact-backed and consistent legacy queue inputs share one hash-verifying reader in the worker and numerical evaluator; prior-run input reads are fixed too.",
+    "The native builder retains full context and tool history in exact files, indexes verified page deliveries, and checkpoints before another provider admission when the context byte threshold is reached. Trusted instructions remain whole.",
+    "A builder can reconsider newly retained sibling packages through claim-specific planning and fresh review, preserving original criteria, checkpoints and limits.",
+    "Common networking userspace tools are prepared once in a pinned development image with an original installed-package inventory. Exact shared acquisitions retain one campaign and separate claim protocols."
+  ],
+  "checks": {
+    "backend": {
+      "tests": 340,
+      "status": "passed",
+      "raw_log": {
+        "path": "jumpserve-back-end/.test-artifacts/builder-continuation-v1/backend-tests-final.log",
+        "sha256": "ae6586e1882435b7c3261abffe2f2b02d600e0bc3d3a4b43c6107418410bb0e8",
+        "bytes": 1640
+      },
+      "note": "One existing sqlite ResourceWarning in the suite; no failures."
+    },
+    "native": {
+      "status": "passed",
+      "report": {
+        "path": "jumpserve-back-end/.test-artifacts/experiment-builder/20261028T145107434594Z/report.json",
+        "sha256": "2d13195fcaac7d5d0ac67869af2690b5d484c42b372bd67b9ee13941bd1f9d30",
+        "bytes": 16228
+      },
+      "slots": 3,
+      "synthetic_provider_calls": 16,
+      "live_provider_calls": 0,
+      "maximum_admitted_request_bytes": 70946,
+      "retained_tool_history_bytes": 42048,
+      "previous_page_deliveries": 6,
+      "full_published_system_composition": true,
+      "prompt_content_sha256": "da3ff82e259cfd25d95c0c97af63defd4cd232277e4bf3462fdb49e2b42843d4",
+      "source_files": {
+        "autonomy_methods.py": {
+          "bytes": 23740,
+          "sha256": "f9e43f9e3d43415350bc22696aa4de7f244fcaa20cf573059c7ed0f4dc343fec"
+        },
+        "autonomy_model.py": {
+          "bytes": 25101,
+          "sha256": "b4cea101f7d73f701fcc67e2ebe097dbd4c3ded48653ff9fca365e605b47990f"
+        },
+        "experiment-builder.Dockerfile": {
+          "bytes": 1059,
+          "sha256": "3268508a2287e7762d7ce1ceb99b3ed39208a82e6b2c3b017adad7643a402c25"
+        },
+        "experiment_builder.py": {
+          "bytes": 50676,
+          "sha256": "7fe621aae02e4ceb04bd72278dfaca4dc1e58ef124c96d25391b07e82b6f6d2f"
+        },
+        "generated_package.py": {
+          "bytes": 5632,
+          "sha256": "4f02af4ece4023bd0534dc7e616754bb5c1498dccdfbb6312bb240d82e9385aa"
+        },
+        "network_spec.py": {
+          "bytes": 19842,
+          "sha256": "8cff74c9dddf65b86f5020fec087f590e2f98d1521a133ec0c1850c780db9e8c"
+        },
+        "openclaw-builder-patch.json": {
+          "bytes": 951,
+          "sha256": "8b8f157008ad0353bc1cd3b3856778ab3d85b8bb9c22decbe4fde33a13cc39db"
+        },
+        "openclaw_runtime.py": {
+          "bytes": 18237,
+          "sha256": "5993af66ce2418a0aa16209b7dd7ad44dae596e960a315577dfb33708db970a4"
+        },
+        "policies/autonomy-turn-policy-v1.json": {
+          "bytes": 1112,
+          "sha256": "7aa48bccc617d1493e8621a8c290e2251180c768f021f6f8cccf06eac5eddafb"
+        },
+        "policies/builder-continuation-validation-v1.json": {
+          "bytes": 3129,
+          "sha256": "333faed75ebe3d2fadaaaebf68c5014fae8c33b94b9189c63fe8cc2e68d035fb"
+        },
+        "policies/builder-continuation-validation-v2.json": {
+          "bytes": 1462,
+          "sha256": "08897e9e7332039d5c5d28d1e094968ea934e0b099ea8b7776a18d8c52ba430c"
+        },
+        "policies/experiment-action-policy-v1.json": {
+          "bytes": 4541,
+          "sha256": "973ae76b13a64f4205ca2f581722da8c237cd8afb61d68e2a36e187562be3e52"
+        },
+        "store.py": {
+          "bytes": 15674,
+          "sha256": "9ed5ebf0bef49aec6df4ecba566b0aa83fba13175127dcbb08fc3fa55aae880e"
+        },
+        "tests/check_experiment_builder_linux.py": {
+          "bytes": 14780,
+          "sha256": "1decabf7ccf0a418f240c2f8042d6652156fda048d2bb8d84796d3208c6558d3"
+        },
+        "workflow.py": {
+          "bytes": 21461,
+          "sha256": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f"
+        }
+      }
+    },
+    "database": {
+      "status": "passed",
+      "report": {
+        "path": "jumpserve-infra/.test-artifacts/research-ideas/database/20261028T144750553063Z/report.json",
+        "sha256": "ec0a88bb72215f55e38900772ecc678d259f37a8df8952ab22e4f30e19af6dba",
+        "bytes": 14203
+      },
+      "scenarios": 4,
+      "claims": 2,
+      "claim_protocols": 2,
+      "campaigns": 1,
+      "execution_jobs": 1,
+      "execution_commitments": 1,
+      "measurements": 2,
+      "published_values": 2,
+      "numerical_decisions": 2,
+      "review_judgments": "Explicit synthetic responses persisted through actual numbered request/response RPCs; no scientific or human review.",
+      "storage": "Local original-byte transport fixture, with real store hash verification; not remote Supabase."
+    },
+    "image": {
+      "status": "passed",
+      "report": {
+        "path": "jumpserve-back-end/.test-artifacts/builder-image/20261028T143716011996Z/report.json",
+        "sha256": "5b37dc88861e26be67bb6abced496bff7ef4bd428e184a308d254db1a402a21a",
+        "bytes": 2033
+      },
+      "image": "sha256:ef9eec8c7c44fa2da5312721295aeea6ee92837a8e7f909c5f70785ecb9207be",
+      "platform": "linux/arm64",
+      "package_inventory_sha256": "98106232a9f0cc31af49edd59b1a0761cd6f5cf112e7f0042ef126b7fae37d49",
+      "namespace_execution_verified": false
+    },
+    "diff_check": "passed in both changed repositories"
+  },
+  "original_failed_reports": [
+    {
+      "path": "jumpserve-back-end/.test-artifacts/experiment-builder/20261028T143830778618Z/report.json",
+      "sha256": "150fc45973b73cf58bf37e1bd4bd80a9921afe550db358bf981e5018c7aacaea",
+      "bytes": 401
+    },
+    {
+      "path": "jumpserve-back-end/.test-artifacts/experiment-builder/20261028T143844527926Z/report.json",
+      "sha256": "4898bafc1037b41b8f760371c45ec496652872c1dfece63bb132a0fa8e49e511",
+      "bytes": 14055
+    },
+    {
+      "path": "jumpserve-back-end/.test-artifacts/builder-image/20261028T141226630114Z/report.json",
+      "sha256": "a79f14f848739f06933acd4f56845de3e37b6829ab1ff5be6f11795d686a0594",
+      "bytes": 450
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/research-ideas/database/20261028T144025659506Z/report.json",
+      "sha256": "38f200d501ad9f4432367a43b8d216b37603cde1fff035383d4410e18fc2d203",
+      "bytes": 11023
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/research-ideas/database/20261028T144056196438Z/report.json",
+      "sha256": "1a9b8f730544f91d713b88af85313015d2fef7a35d70c8c6a08207b4824ab107",
+      "bytes": 12676
+    },
+    {
+      "path": "jumpserve-infra/.test-artifacts/research-ideas/database/20261028T144156264497Z/report.json",
+      "sha256": "efa825d0ebdc56734cef7277b7f3cf6e0399182582df37cf5a1de418ea5be368",
+      "bytes": 10858
+    }
+  ],
+  "failed_report_note": "Development fixture, preflight and sandbox-access failures are retained, not erased by later successes. Published scientific discrepancies are not software failures.",
+  "reproduction_commands": [
+    {
+      "repository": "jumpserve-infra",
+      "command": "npm run test:research:executable-methods"
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "command": "python3 -B research_workflow/tests/prepare_builder_image.py"
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "command": "python3 -B research_workflow/tests/check_experiment_builder_linux.py"
+    },
+    {
+      "repository": "jumpserve-back-end",
+      "command": "python3 -B -m unittest discover -s research_workflow/tests"
+    }
+  ],
+  "requirements": [
+    "Local isolated PostgreSQL at port 54477 and the existing fixture roles/bootstrap.",
+    "Local Docker, the pinned Ubuntu base, network for image preparation and the existing pinned OpenClaw/Node packages. Native provider responses are synthetic."
+  ],
+  "resources": {
+    "live_provider_calls": 0,
+    "new_cloud_instances": 0,
+    "production_writes": 0,
+    "measured_charges_usd": null,
+    "local_compute_storage_cost_usd": null,
+    "subscription_allocation_usd": null,
+    "scope": "Local build, Docker and Postgres resources used; charges and unallocated local costs remain unknown, not zero."
+  },
+  "reviewer": {
+    "identity": "Implementing Codex assistant",
+    "type": "AI",
+    "independent": false,
+    "human_review": false
+  },
+  "scientific_status": "No new paper findings, empirical networking campaign, causal validation or guarantee of conclusive claims. Existing assessment evidence and limits were not altered.",
+  "release_status": {
+    "merged": false,
+    "pushed": false,
+    "deployed": false,
+    "production_assessment_resumed": false,
+    "production_database_migration_required_for_these_reader_fixes": false
+  },
+  "conditional_release_checks": [
+    "Qualify the new prepared image and native tool behavior on the production linux/amd64 worker before activation; the local image is arm64.",
+    "Bounded live AI evaluation of the changed context delivery and package-reuse prompts. Synthetic answers do not establish planning quality.",
+    "Pin and publish the reviewed runtime/image through a separately requested release, then resume only reconciled blocked tasks under the original remaining budget and deadline.",
+    "Actual frozen networking campaign execution and resulting scientific assessments remain unverified by these local software checks."
+  ]
+}

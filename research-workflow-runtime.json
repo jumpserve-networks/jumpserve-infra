@@ -1,18 +1,18 @@
 {
-  "version": 54,
-  "source_revision": "cf58f1a4ebc038769a00771d746b660e160ca7c7",
+  "version": 56,
+  "source_revision": "3a2c0baa8edc288b96d116c492660c2fc87ba8ab",
   "files": {
     "api.py": "de0ef9251379e1a369a9293bee07a09dc4fdbc9ba25019f31eb9fd686cfa84fb",
-    "autonomy.py": "eebec95964eb3dd217f3178ac17e5ae662a29defea3fcd50bf9f17c4a00be764",
+    "autonomy.py": "1187d4bb737c38a51f348d6baf6be3c2ef8386c9fdf8d2c63327b864d79c76cb",
     "autonomy_costs.py": "7b7864386140724e11c782a5af1ac311e355014087807f97b125f46297bb4318",
     "autonomy_evidence.py": "014ae3bfba5c0162735aa921ced7e3703096c7573cf256160b78e92173780ca6",
     "autonomy_inputs.py": "3e44a7fcdf468c3136bb7cd40fed1f4657811b064679bd834b0ac1c5070d0e0a",
-    "autonomy_methods.py": "9fc076cc30c99753285246c1a08c6ded757f98e8ee83280ff0b11cf32cb26f81",
+    "autonomy_methods.py": "f9e43f9e3d43415350bc22696aa4de7f244fcaa20cf573059c7ed0f4dc343fec",
     "autonomy_model.py": "b4cea101f7d73f701fcc67e2ebe097dbd4c3ded48653ff9fca365e605b47990f",
     "autonomy_sources.py": "debc3a35264a82677f2b4f566323ebb85c8efdaa63b51fd796336c891d2de942",
     "bounded_network.py": "0b8bc5948dbf71712296c3b4c9a47f4ac68f5e32dcc591be3e42914ff17abc0c",
     "claim_design.py": "25ae2613b37cf31af13a5ee250a5c22d5266e18ec98c034d13bdc05e81d933e0",
-    "experiment_builder.py": "b9864b102547081518326804483443be798d25953e16cdb2b51b429f983347c1",
+    "experiment_builder.py": "c353e63f7586f50027945c7b8ade3f19636e166fc033b7f8a048fac1bc4d140e",
     "gap_queue.py": "598c564817f6cc4ced6172ae14ead651458b2898d20771ecc426b30ecc8c9c18",
     "generated_package.py": "4f02af4ece4023bd0534dc7e616754bb5c1498dccdfbb6312bb240d82e9385aa",
     "ideas.py": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
@@ -49,12 +49,12 @@
     "shared_campaigns.py": "76b2c92453ad9b805fbd411b12db80fdc5f43259da472ed34bf3734da1162270",
     "siwc_protocol.py": "6341b9df6fbe781aa0efa7db276455af2188e07d50bcfb21c13553c02bf6de35",
     "source_arithmetic.py": "489badbc601f37830c406595bed0e0930077f4f64f6bad6cf68c4592f82ca3b7",
-    "store.py": "f7c3b9be1f352d091a2490891c2b3f5005bde8380a1d2007eba33ec96c68b528",
-    "worker.py": "2d6e2b208dcdd2420402fae0d277f88b85bc42288593fb7e8314d1bbb9da3d81",
+    "store.py": "9ed5ebf0bef49aec6df4ecba566b0aa83fba13175127dcbb08fc3fa55aae880e",
+    "worker.py": "d19e7faefd49793ec39b5b4f09050f3731e3bd264bcb05fad712b0ce808e88ad",
     "workflow.py": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f"
   },
   "base_source_revision": "3d7cf31c420b281426a02b52de04aa207aa8f5fb",
-  "revision_status": "Exact clean backend commit; runtime file bytes match the frozen autonomy-methods-release-v1 candidate.",
+  "revision_status": "Exact clean backend commit; continuation candidate plus versioned resumed-container cleanup follow-up.",
   "source_dirty": false,
-  "change_set": "Autonomous method completion, short source delivery, and aligned data-only model timing."
+  "change_set": "Artifact-backed numerical input verification, bounded native context delivery and checkpointing, verified page delivery inventory, and reconsideration of sibling experiment packages. Preserve repeated retirement receipts and clean containers created by resumed tasks."
 }

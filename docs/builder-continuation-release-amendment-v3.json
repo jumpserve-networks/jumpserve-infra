@@ -1,0 +1,16 @@
+{
+  "version": "builder-continuation-release-amendment-v3",
+  "parents": ["builder-continuation-release-v1", "builder-continuation-release-amendment-v2"],
+  "kind": "exposed-development-harness-correction-and-cleanup-followup",
+  "observed_failure": "The original changed-input control exited at calculation.py line 14, asserting the full source-file SHA-256 before arithmetic. Original output was 35 percent. Source code reads Decimal operands from the original fixture and also checks the fixed source criterion. No evidence of copied arithmetic was found. The failure, code, stderr, seven native provider calls and original failed campaign remain unchanged in the first archive.",
+  "correction": "An immutable-source program must reject modified source bytes. The v1 requirement that the unchanged program accept a different input conflicted with its input-integrity checks. Preserve the failed control, rerun unchanged code with the original bytes as a positive control, and separately require rejection of altered bytes before any new result is written. This does not establish computational generalization to another source or remove the original failed check.",
+  "criteria": [
+    "Restore the original hash-verified native workspace; do not replay any native model call. Inspect the original actual answer, program, exact Decimal calculation and native command/page evidence.",
+    "The unchanged program executes in a networkless container on original input bytes and emits the same 35-percent source-consistency result with missing preserved.",
+    "After preserving original/changed input versions and removing only the generated control outputs, changing input bytes causes a nonzero integrity assertion and no new output. Preserve both raw control results.",
+    "Make only the original, not-yet-attempted shared-acquisition planning request, then structurally and substantively review its actual answer.",
+    "Repeat the zero-provider native control and real Docker resumed-container cleanup checks on the exact committed cleanup follow-up runtime. Preserve unchanged bootstrap/execution function AST evidence and original prompt/fixture identities."
+  ],
+  "resources": {"additional_real_provider_calls": 1, "original_native_provider_calls": 7, "aggregate_campaign_maximum_calls": 24, "new_cloud_instances": 0, "maximum_followup_seconds": 1200, "measured_charges_usd": null},
+  "independence": "These are reused and corrected development cases reviewed by the same implementing AI. They are not independent, held-out, human-reviewed or scientific paper validation."
+}

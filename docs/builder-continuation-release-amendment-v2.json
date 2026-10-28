@@ -1,0 +1,16 @@
+{
+  "version": "builder-continuation-release-amendment-v2",
+  "parent": "builder-continuation-release-v1",
+  "stage": "source-and-cleanup-followup",
+  "reason": "Recovery inspection found that an earlier retired.json marker exempted a resumed task's new container from later cleanup, and its fixed artifact identity could conflict with the previous receipt. Preserve old retirement receipts, inspect newly created resources, and use content-bound cleanup identities. This is necessary before resuming the six reconciled context-overflow claims.",
+  "scope": "Change only the container list operation and terminal reaper lifecycle. Bootstrap, _execute, prompt composition, reader, source calculations and package decisions remain unchanged.",
+  "criteria": [
+    "All backend regressions pass, including a previously retired task that creates a new container and later stops again.",
+    "Repeat the three-slot zero-provider native control on the exact follow-up runtime and image.",
+    "Use real Docker resources to verify repeated retirement of a resumed task while preserving old receipt bytes and distinct immutable artifact identities. Task and Storage records in this cleanup control are synthetic fixtures.",
+    "Reuse original live development answers only if frozen fixture/prompt bytes and the ASTs of all model-request/execution functions are identical. Identify this dependence explicitly; do not claim new or independent live calls.",
+    "Recover only confirmed zero-provider context-overflow stops and the read-only-verified numerical-reader stop. Leave historical unknown outcomes paused and retain original counters, budget, deadline, prompts, responses and scientific evidence."
+  ],
+  "resources": {"additional_live_provider_calls": 0, "maximum_original_campaign_provider_calls": 24, "new_cloud_instances": 0, "maximum_followup_seconds": 1200, "measured_charges_usd": null},
+  "reviewer": {"identity": "Implementing Codex assistant", "type": "AI", "independent": false, "human": false}
+}

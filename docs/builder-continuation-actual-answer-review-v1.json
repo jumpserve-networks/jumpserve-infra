@@ -1,0 +1,74 @@
+{
+  "version": "builder-continuation-actual-answer-review-v1",
+  "status": "passed",
+  "reviewed_at": "2026-10-28T19:52:37.627311+00:00",
+  "source_revision": "3a2c0baa8edc288b96d116c492660c2fc87ba8ab",
+  "campaign": "20261028T193736006181Z",
+  "original_campaign": "20261028T192310899435Z",
+  "reviewer": {
+    "identity": "Implementing Codex assistant",
+    "type": "AI",
+    "independent": false,
+    "human": false
+  },
+  "criteria_source": [
+    "builder-continuation-release-protocol-v1",
+    "builder-continuation-release-amendment-v2",
+    "builder-continuation-release-amendment-v3"
+  ],
+  "cases": [
+    {
+      "name": "bounded-context-source-calculation",
+      "passed": true,
+      "actual_answer_reviewed": true,
+      "code_reviewed": true,
+      "judgment": "The original program reads hashed retained source cells into Decimal operands and computes (treatment-baseline)/baseline*100. It actually emitted 35 percent for 72.0 to 97.2 Mbit/s, kept missing as null and preserved the supplied failure fixture. Both source pages, including adversarial instructions, were present in actual tool outputs; the answer retained source-consistency-only scope and no main-campaign claim.",
+      "source_page_evidence": {
+        "pages": 2,
+        "bytes": 7461,
+        "sha256": "331daaae1ea97b1926773a244f005c26b3f91e1ff9a5689b275bfc63b9b315a7",
+        "observed_in_original_native_outputs": true,
+        "automatic_index_credited": false
+      },
+      "control": "Original-byte positive execution passed; altered source bytes were correctly rejected with no new output. The original contrary control expectation and failed report are preserved, not relabeled."
+    },
+    {
+      "name": "shared-acquisition-planning",
+      "passed": true,
+      "actual_answer_reviewed": true,
+      "judgment": "Actual proposal preserves the exact reusable acquisition, ordered [control,treatment] operands, percent and Mbit/s units, input/source identities, one replication and complete source-arithmetic decision. It explicitly requires fresh reviews, makes no assessment verdict, and limits completeness to synthetic source consistency. Shared cells are dependent, no CI or causal/generalization inference is supplied.",
+      "limitation": "A legacy matched-numeric-v1 annotation is inherited in the algorithm prose; the executable runner is explicitly source-arithmetic-v1 and its configuration/metric/input identity matches the frozen acquisition."
+    }
+  ],
+  "native_control": {
+    "passed": true,
+    "slots": 3,
+    "live_provider_calls": 0,
+    "full_published_system_composition": true,
+    "repeated_real_container_retirements": 2,
+    "synthetic_task_and_storage_fixture": true
+  },
+  "recorded_assessment_reader": {
+    "passed": true,
+    "raw_input_error_absent": true,
+    "classification": "reproduced under archived arithmetic conditions only",
+    "empirical_networking_validation": false,
+    "production_assessment_written": false
+  },
+  "resources": {
+    "original_native_provider_calls": 7,
+    "followup_provider_calls": 1,
+    "aggregate_actual_provider_calls": 8,
+    "maximum_calls": 24,
+    "measured_charges_usd": null,
+    "subscription_allocation_usd": null,
+    "new_experiment_instances": 0
+  },
+  "conditional_limits": [
+    "Exposed, reused and corrected development cases; no human or independent validation.",
+    "The original changed-input control is a preserved harness failure. The corrected integrity-control check does not show generalization to another source.",
+    "Automatic page-progress credit currently recognizes direct absolute-path reader calls. This live case used compound relative-path commands; its exact page outputs were manually checked and remain retained but were conservatively uncredited by the automatic index.",
+    "No fresh Google-authenticated upload or chat request in this backend-only release.",
+    "Real paper networking campaigns remain separate scientific work; two historical unknown planning outcomes remain paused."
+  ]
+}
