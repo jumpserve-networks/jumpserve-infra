@@ -1,0 +1,219 @@
+{
+  "version": "assessment-recovery-production-status-v1",
+  "assessment": "4055396e-35c0-4962-ba39-cf23e443ad8d",
+  "recorded_at": "2026-10-28T23:20:26.873181+00:00",
+  "status": "deployed-with-conditional-verification-gap",
+  "release_blocking_checks_passed": true,
+  "scientific_completion": false,
+  "sources": {
+    "backend": "267d95e4eb3d642a83126a0ecf7ee463c4f8e6d1",
+    "frontend": "15668bbc9e79a3fae41e7e527993e89928f89f9c",
+    "infrastructure_deployed": "548334ad20669f56ff97d37c2f3eef9523e1f725",
+    "runtime_version": 57,
+    "runtime_files": 50,
+    "operator_verifier_sha256": "58989fe170bdcf6fcacdd512fa3b9013afb9e6fab33578096fe34ff2c397558c"
+  },
+  "deployment": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "amplify_job": "129",
+    "frontend_status": "SUCCEED",
+    "background_polling": [
+      {
+        "logical_id": "ResearchWorkflowAutonomyPoll0C56C453",
+        "state": "ENABLED"
+      },
+      {
+        "logical_id": "ResearchWorkflowQueuePoll49F7FA3B",
+        "state": "ENABLED"
+      }
+    ],
+    "worker": "i-087f1493809643115",
+    "worker_replaced": false,
+    "storage_gib": 300,
+    "snapshot": "snap-002af2609269bc721",
+    "snapshot_status": "completed",
+    "image": "sha256:542c0bd0a512d3c18348103775a983a840067eaadb703276e432c17cc5308c64",
+    "legacy_broad_ci": "intentionally skipped; scoped manual deployment and recorded checks used",
+    "migrations": [
+      {
+        "name": "202610280002_assessment_budget_amendments.sql",
+        "sha256": "e847236e27794e23680db454430c7f50999860f60df50d36272e0c75861f878b",
+        "bytes": 5106,
+        "status": "applied-exact-retained-bytes"
+      },
+      {
+        "name": "202610280003_controller_reconciliation_window.sql",
+        "sha256": "1e0441a59647fb83e7900035f22fa8503c8cfd8ff44516650f486f92a0b64847",
+        "bytes": 1815,
+        "status": "applied-exact-retained-bytes"
+      }
+    ]
+  },
+  "checks": {
+    "backend_tests": 349,
+    "frontend_tests": 273,
+    "infrastructure_tests": 92,
+    "optional_infrastructure_skipped": 5,
+    "isolated_sql": [
+      {
+        "name": "only audited bounded operator amendments can increase funding",
+        "passed": true,
+        "wall_seconds": 0.12109879200579599,
+        "evidence": {
+          "unaudited_write_denied": true,
+          "browser_rpc_denied": true,
+          "bounds_enforced": true
+        }
+      },
+      {
+        "name": "an amendment preserves original records without resetting or resuming work",
+        "passed": true,
+        "wall_seconds": 0.22818475001258776,
+        "evidence": {
+          "cap_cents": 100000,
+          "defaults_cents": 10000,
+          "old_authorization_retained": true,
+          "idempotent": true,
+          "old_usage_and_deadline_unchanged": true,
+          "tasks_not_resumed": true
+        }
+      },
+      {
+        "name": "actual admission can cross the former cap and still denies overspending",
+        "passed": true,
+        "wall_seconds": 0.7288153329864144,
+        "evidence": {
+          "aggregate_commitments_cents": 92505,
+          "above_former_cap": true,
+          "new_cap_enforced": true,
+          "new_provider_calls": 0
+        }
+      }
+    ],
+    "deployed_source_hashes": true,
+    "worker_source_hashes": true,
+    "executor_source_hashes": true,
+    "database_rls_browser_denials": true,
+    "desktop_mobile_light_dark": true,
+    "shared_records_and_retained_turns": true,
+    "invalid_identity_state": true,
+    "rendered_budget_matches_record": true,
+    "budget_label_followup": "Targeted ESLint and Next.js production build with TypeScript passed; versioned visual follow-up required.",
+    "budget_recovery_transaction": "identical rollback control then commit"
+  },
+  "budget": {
+    "maximum_usd": 1000,
+    "application_default_usd": 100,
+    "original_commitments_cents": 9980,
+    "current_commitments_cents": 14355,
+    "deadline_at": "2026-11-04T20:25:04.587324+00:00",
+    "deadline_unchanged": true,
+    "ai_turn_cap": null,
+    "original_attempts_and_history_preserved": true,
+    "measured_charges_usd": null,
+    "commitments_are_measured_charges": false
+  },
+  "qualification": {
+    "actual_calls": 2,
+    "actual_input_tokens": 14527,
+    "actual_output_tokens": 1891,
+    "native_control_real_provider_calls": 0,
+    "native_control": "three-slot Linux/native CLI with synthetic provider and retirement cleanup control",
+    "actual_answer_review_passed": true,
+    "failed_harness_and_pre_dispatch_control_preserved": true,
+    "reviewer": {
+      "identity": "Implementing Codex assistant",
+      "type": "AI",
+      "independent": false,
+      "human": false
+    },
+    "independent": false,
+    "held_out": false,
+    "human_review": false,
+    "measured_charges_usd": null,
+    "subscription_allocation_usd": null
+  },
+  "recovery": {
+    "tasks_resumed": 5,
+    "task_snapshot": [
+      {
+        "id": "2dfbd3d1-2514-586d-9d07-47f04a5c78ff",
+        "claim_id": "1a9eb275-f8f6-53d7-afe5-9d1416d7bee7",
+        "stage": "building",
+        "status": "blocked",
+        "label": "untested",
+        "attempts": 30,
+        "updated_at": "2026-10-28T23:18:20.920685+00:00"
+      },
+      {
+        "id": "b9c00763-023d-5971-9367-e02d30949d7c",
+        "claim_id": "1b8ae633-953e-50b5-bced-b173279bd70e",
+        "stage": "building",
+        "status": "queued",
+        "label": "untested",
+        "attempts": 46,
+        "updated_at": "2026-10-28T23:20:05.63097+00:00"
+      },
+      {
+        "id": "872f6faa-3215-5a0a-96e2-aac94fd0a6c0",
+        "claim_id": "b410cc01-81a7-55b9-ac59-9502b9c1758a",
+        "stage": "planning",
+        "status": "blocked",
+        "label": "untested",
+        "attempts": 19,
+        "updated_at": "2026-10-28T23:08:28.23571+00:00"
+      },
+      {
+        "id": "1fa0b903-5ccd-5608-a57b-4ff01d75cf73",
+        "claim_id": "bac92a6e-00ca-5404-a50b-39de0932df8c",
+        "stage": "planning",
+        "status": "blocked",
+        "label": "untested",
+        "attempts": 3,
+        "updated_at": "2026-10-28T23:05:33.739358+00:00"
+      },
+      {
+        "id": "258366b4-0865-55b3-9d67-87a4b801a7d5",
+        "claim_id": "f30423b8-7999-5b18-8ed4-d2635a988720",
+        "stage": "building",
+        "status": "blocked",
+        "label": "untested",
+        "attempts": 31,
+        "updated_at": "2026-10-28T23:18:24.126114+00:00"
+      }
+    ],
+    "workflow_status": "running",
+    "model_turns_after_resumption": 15,
+    "experiment_jobs": 0,
+    "recorded_runs": 0,
+    "recorded_measurements": 0,
+    "scientific_assessment_records": 0,
+    "original_unknown_and_failed_receipts_preserved": true
+  },
+  "windows_seconds": {
+    "builder_slice": 180,
+    "builder_dispatch": 330,
+    "builder_controller_wait": 350,
+    "lambda_timeout": 420,
+    "task_lease": 480
+  },
+  "limitations": [
+    "Fresh authenticated upload/chat was not reverified; production public queue, records and retained turns were exercised.",
+    "The live cases are exposed development checks reviewed by the implementing AI, not independent, held-out or human validation.",
+    "Replanning and runtime activation do not establish a scientific result or guarantee all claims will become conclusive.",
+    "Reported commitments are reservations, not measured charges. Subscription allocation, new release storage/compute charges and unallocated costs are unknown.",
+    "This is a time-stamped recovery snapshot. Later autonomous work can change task states, commitments and scientific coverage."
+  ],
+  "measured_charges_usd": null,
+  "unallocated_cost_usd": null,
+  "evidence": {
+    "artifact_id": "a748403d-5a1a-5bf5-ba54-05601293550e",
+    "sha256": "4b6ac0bacabc8d62a80e38832f6b2c49cd48a9f115c2fa1d3b149ab2f9c56be6",
+    "retrieved_sha256": "4b6ac0bacabc8d62a80e38832f6b2c49cd48a9f115c2fa1d3b149ab2f9c56be6",
+    "bytes": 14194106,
+    "members": 175,
+    "public": false
+  },
+  "operational_evaluation_sha256": "b714d8c44c72beb99578aba4b560dbb8c958dc488e243cc2fe161742073eb305"
+}

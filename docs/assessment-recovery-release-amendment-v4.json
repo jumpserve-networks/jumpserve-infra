@@ -1,0 +1,12 @@
+{
+  "version": "assessment-recovery-release-amendment-v4",
+  "amends": "assessment-recovery-release-v1",
+  "reason": "Visual inspection of the first post-amendment browser captures found a hardcoded $100 limit in the shared queue component. The API returned the correct 100000-cent cap and the original browser assertions checked that API value, but did not verify the rendered limit.",
+  "original_browser_report": ".test-artifacts/assessment-recovery-release-v1/browser/2026-10-28T23-02-16.718Z/report.json",
+  "original_status": "Original API/navigation/theme assertions passed; rendered budget correctness was not established and the screenshot demonstrates the stale label. Original captures and report remain unchanged.",
+  "correction": "Render the recorded maximum_spend_cents in dollars in the shared public/owner component. Keep defaults and server authorization unchanged. Release this frontend correction before closing the production qualification.",
+  "followup_criteria": "On desktop and mobile, the rendered committed-of dollar limit must match the current API maximum, in addition to the original records, turns, themes, overflow and invalid-identity checks. Visually inspect corrected captures.",
+  "resources": {"additional_model_calls": 0, "additional_experiment_jobs": 0},
+  "reviewer": {"identity": "Implementing Codex assistant", "type": "AI", "independent": false, "human": false},
+  "scope": "Development regression follow-up; not an independent scientific validation or a change to claim criteria. Backend runtime and infrastructure configuration remain unchanged."
+}

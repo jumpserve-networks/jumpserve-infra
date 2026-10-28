@@ -1,5 +1,5 @@
 """Fixed-assessment release qualification and guarded funding amendment."""
-import argparse,copy,datetime as dt,importlib.util,io,json,pathlib,subprocess,sys,urllib.error,uuid,zipfile
+import argparse,copy,datetime as dt,importlib.util,io,json,pathlib,subprocess,sys,time,urllib.error,uuid,zipfile
 ROOT=pathlib.Path(__file__).resolve().parents[1];BACK=ROOT.parent/'jumpserve-back-end'
 spec=importlib.util.spec_from_file_location('continuation',ROOT/'bin/builder-continuation-release.py');q=importlib.util.module_from_spec(spec);spec.loader.exec_module(q)
 r=q.r;m=q.m;BASE=ROOT/'.test-artifacts/assessment-recovery-release-v1';STUDY='4055396e-35c0-4962-ba39-cf23e443ad8d'
@@ -47,16 +47,18 @@ def freeze(out):
  q.save(out/'candidate.json',dict(path=path,sha256=r.sha(raw),retrieved_sha256=r.sha(raw),bytes=len(raw)));(BASE/'selected.txt').write_text(out.name+'\n')
  return dict(source_revision=manifest['source_revision'],cases=[c['id'] for c in cases],maximum_provider_calls=2,candidate_sha256=r.sha(raw))
 def main():
- parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['freeze','prepare','native','live','evidence','status','collect-status','collect','record-review','migrate','budget','plan-recovery','dry-run-recovery','recover']);args=parser.parse_args();BASE.mkdir(parents=True,exist_ok=True)
+ parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['freeze','prepare','native','live','evidence','status','collect-status','collect','record-review','migrate','verify-held','budget','plan-recovery','dry-run-recovery','recover','record-release']);args=parser.parse_args();BASE.mkdir(parents=True,exist_ok=True)
  out=BASE/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');out.mkdir();receipt=dict(mode=args.mode,status='running',targets=r.target(),started_at=r.stamp())
  if args.mode=='live':receipt['operator_amendment_sha256']=r.sha((ROOT/'docs/assessment-recovery-release-amendment-v3.json').read_bytes())
  try:
   if args.mode=='freeze':result=freeze(out)
   elif args.mode=='record-review':result=record_review(q.selected())
   elif args.mode=='migrate':result=migrate(q.selected())
+  elif args.mode=='verify-held':result=verify_held(q.selected(),out)
   elif args.mode=='budget':result=budget(q.selected())
   elif args.mode=='plan-recovery':result=plan_recovery(q.selected())
   elif args.mode in ('dry-run-recovery','recover'):result=recover(q.selected(),args.mode=='dry-run-recovery')
+  elif args.mode=='record-release':result=record_release(q.selected(),out)
   elif args.mode in ('status','collect-status','collect'):result=getattr(q,args.mode.replace('-','_'))(q.selected());result.pop('cases',None)
   else:result=q.dispatch(q.selected(),args.mode)
   receipt.update(status='complete',result=result)
@@ -102,6 +104,26 @@ def budget(source):
  after=r.admin.query(query)[0]['record'];assert after['max_spend_cents']==100000
  assert all(after[k]==before[k] for k in ('initial_prompt','initial_sha256','committed_cents','deadline_at','max_attempts','status'))
  q.save(source/'budget-applied.json',dict(status='passed',request_id=request,result=result,previous=before,amended=after,frontend_revision=front));return dict(status='passed',maximum_usd=1000,committed_cents=after['committed_cents'],deadline_at=after['deadline_at'],tasks_not_resumed=True)
+
+def verify_held(source,out):
+ assert json.loads((source/'migrations-applied.json').read_bytes())['status']=='passed';r.auth_maintenance_guard()
+ functions=r.prior.functions(out,True);assert len(functions)==3 and all(len(f['source_hashes'])==50 for f in functions)
+ worker=next(f for f in functions if f['handler']=='autonomy.handler');assert worker['timeout']==420
+ for stack in ('JumpServeBenchmarkStack','JumpServeOpenClawStack'):assert r.aws('cloudformation','describe-stacks','--stack-name',stack)['Stacks'][0]['StackStatus']=='UPDATE_COMPLETE'
+ call=q.verify_worker(source);q.save(source/'worker-verification-command.json',call)
+ invocation=None
+ for _ in range(12):
+  time.sleep(2);invocation=r.aws('ssm','get-command-invocation','--command-id',call['command_id'],'--instance-id',call['instance_id'])
+  if invocation['Status'] not in ('Pending','InProgress','Delayed'):break
+ q.save(out/'worker-verification.json',invocation);assert invocation['Status']=='Success' and 'runtime_files_verified' in invocation['StandardOutputContent']
+ r.prior.PRIVATE|={'research_model_workers','research_model_dispatches','research_builder_calls','research_builder_packages','research_shared_campaigns','research_shared_campaign_members','research_paper_reviews','research_paper_review_events'}
+ security=r.prior.security();assert r.instance()=='i-087f1493809643115'
+ health=r.admin.query("select status,configuration,updated_at from research_model_workers where id='openclaw-production-v1'")[0];assert health['status']=='ready'
+ with r.prior.guard.OPEN.open('https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/research/capabilities',timeout=30) as response:raw=response.read(2000000)
+ (out/'capabilities.json').write_bytes(raw);cap=json.loads(raw);assert cap['autonomy']['enabled'] is False and cap['autonomy']['defaults']['attempts_per_claim'] is None and cap['autonomy']['defaults']['maximum_spend_usd']==100
+ assert cap['autonomy']['runtime']['status']=='ready' and next(v for v in cap['networking']['runners'] if v['id']=='netem-iperf-v1')['enabled'] and next(v for v in cap['networking']['runners'] if v['id']=='built-package-v1')['enabled']
+ result=dict(status='passed',source_revision=json.loads((source/'frozen.json').read_bytes())['source_revision'],verified_at=r.stamp(),runtime_files=50,functions=functions,security=security,worker_command=call,worker_stdout_sha256=r.sha(invocation['StandardOutputContent'].encode()),health=health,capabilities_sha256=r.sha(raw),admission_held=True,frontend_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT.parent/'jumpserve-front-end',text=True).strip(),auth_upload_chat_reverified=False)
+ q.save(source/'deployed-verified.json',result);return dict(status='passed',source_revision=result['source_revision'],runtime_files=50,admission_held=True,worker='i-087f1493809643115',health=health['status'])
 
 def plan_recovery(source):
  sys.path.insert(0,str(BACK/'research_workflow'));import autonomy_model,openclaw_runtime,siwc_protocol
@@ -185,5 +207,75 @@ end $recovery$;
    raw=error.__context__.read(1000000);(source/('recovery-error-'+r.sha(raw)+'.json')).write_bytes(raw);raise RuntimeError(json.loads(raw).get('message','Recovery SQL rejected').splitlines()[0][:500]) from None
   raise
  result=dict(status='rollback-verified' if dry else 'resumed',tasks=5,sql_sha256=r.sha(sql.encode()),limits_and_history_preserved=True);q.save(source/('recovery-dry-run.json' if dry else 'recovery-result.json'),result);return result
+
+def record_release(source,out):
+ """Retain this release's fixed evidence, not a general command/SQL interface."""
+ frozen=json.loads((source/'frozen.json').read_bytes());verified=json.loads((source/'deployed-verified.json').read_bytes());funding=json.loads((source/'budget-applied.json').read_bytes());recovery=json.loads((source/'recovery-result.json').read_bytes())
+ assert verified['status']==funding['status']=='passed' and recovery['status']=='resumed'
+ def latest(base,mode):
+  rows=[(p,json.loads(p.read_bytes())) for p in base.glob('*/receipt.json')]
+  return sorted([(p,v) for p,v in rows if v.get('mode')==mode and p.parent.name>='20261028T223105574596Z'],key=lambda x:x[0])[-1]
+ activated_path,activated=latest(ROOT/'.test-artifacts/builder-production-v2','activated');executor_path,executor=latest(ROOT/'.test-artifacts/builder-production-v2','executor')
+ assert activated['status']==executor['status']=='complete' and activated['preserved_worker']=='i-087f1493809643115'
+ assert all(f['source_files_verified']==50 for f in activated['functions']) and activated['capabilities']['autonomy_enabled']
+ browsers=[(p,json.loads(p.read_bytes())) for p in (BASE/'browser').glob('*/report.json')];browser_path,browser=sorted([(p,v) for p,v in browsers if v.get('amended')],key=lambda x:x[0])[-1]
+ assert browser['passed'] and browser['actual_authenticated_request'] is False and len(browser['checks'])==4 and all(c.get('rendered_budget_matches_record') for c in browser['checks'] if 'themes' in c)
+ front=ROOT.parent/'jumpserve-front-end';front_revision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=front,text=True).strip()
+ jobs=r.aws('amplify','list-jobs','--app-id','d24jvguj7brnkj','--branch-name','main','--max-results','3')['jobSummaries'];job_id=next(j['jobId'] for j in jobs if j['commitId']==front_revision and j['status']=='SUCCEED')
+ job=r.aws('amplify','get-job','--app-id','d24jvguj7brnkj','--branch-name','main','--job-id',job_id)['job'];q.save(out/'amplify-job.json',job)
+ assert job['summary']['status']=='SUCCEED' and job['summary']['commitId']==front_revision and all(s['status']=='SUCCEED' for s in job['steps'])
+ data={}
+ for kind in ('autonomy_workflows','autonomy_tasks','autonomy_events','autonomy_turns','model_dispatches','builder_calls','queue_jobs','runs','measurements','assessments'):
+  rows=r.admin.query('select to_jsonb(t) record from research_'+kind+" t where study_id='"+STUDY+"' order by created_at")
+  assert len(rows)==r.admin.query('select count(*) count from research_'+kind+" where study_id='"+STUDY+"'")[0]['count']
+  data[kind]=[v['record'] for v in rows]
+ q.save(out/'assessment-snapshot.json',data);w=data['autonomy_workflows'][0];original=funding['previous'];assert w['max_spend_cents']==100000 and w['max_attempts'] is None and 9980<=w['committed_cents']<=100000
+ assert all(w[k]==original[k] for k in ('initial_prompt','initial_sha256','deadline_at','created_at','overhead_reservation_cents'))
+ resumed=[e for e in data['autonomy_events'] if e['event']=='assessment-recovery-resumed'];assert len(resumed)==5 and len({e['task_id'] for e in resumed})==5
+ tasks=[{k:t[k] for k in ('id','claim_id','stage','status','label','attempts','updated_at')} for t in data['autonomy_tasks'] if t['claim_id']];assert len(tasks)==5
+ volume=r.aws('ec2','describe-volumes','--volume-ids','vol-0993b9127ac7a8231')['Volumes'][0];snapshot=r.aws('ec2','describe-snapshots','--snapshot-ids','snap-002af2609269bc721')['Snapshots'][0]
+ assert volume['Size']==300 and volume['Encrypted'] and volume['Attachments'][0]['InstanceId']=='i-087f1493809643115' and snapshot['State']=='completed'
+ q.save(out/'worker-storage.json',dict(volume=volume,snapshot=snapshot));local=json.loads((ROOT/'docs/assessment-4055396e-recovery-validation-v1.json').read_bytes());review=json.loads((source/'reviewed.json').read_bytes())
+ assert review['passed'] and review['actual_calls']==2 and review['usage']['actual_input_tokens']==14527 and review['usage']['actual_output_tokens']==1891
+ publication=next(v for v in activated['prompts'] if v['module_id']=='research-autonomy');assert publication['id']=='6117e5c5-84ce-5c31-aaa7-0d1d3522e62e'
+ report=dict(version='assessment-recovery-production-status-v1',assessment=STUDY,recorded_at=r.stamp(),status='deployed-with-conditional-verification-gap',release_blocking_checks_passed=True,scientific_completion=False,
+  sources=dict(backend=frozen['source_revision'],frontend=front_revision,infrastructure_deployed='548334ad20669f56ff97d37c2f3eef9523e1f725',runtime_version=json.loads((ROOT/'research-workflow-runtime.json').read_bytes())['version'],runtime_files=50,operator_verifier_sha256=r.sha(pathlib.Path(__file__).read_bytes())),
+  deployment=dict(aws_account='395567831870',supabase_project='regphejnlvfpyokpniny',amplify_job=job_id,frontend_status='SUCCEED',background_polling=activated['polling'],worker='i-087f1493809643115',worker_replaced=False,storage_gib=300,snapshot='snap-002af2609269bc721',snapshot_status='completed',image=frozen['image'],legacy_broad_ci='intentionally skipped; scoped manual deployment and recorded checks used',migrations=json.loads((source/'migrations-applied.json').read_bytes())['migrations']),
+  checks=dict(backend_tests=local['checks']['backend_tests'],frontend_tests=273,infrastructure_tests=92,optional_infrastructure_skipped=5,isolated_sql=local['checks']['isolated_sql'],deployed_source_hashes=True,worker_source_hashes=True,executor_source_hashes=True,database_rls_browser_denials=True,desktop_mobile_light_dark=True,shared_records_and_retained_turns=True,invalid_identity_state=True,rendered_budget_matches_record=True,budget_label_followup='Targeted ESLint and Next.js production build with TypeScript passed; versioned visual follow-up required.',budget_recovery_transaction='identical rollback control then commit'),
+  budget=dict(maximum_usd=1000,application_default_usd=100,original_commitments_cents=9980,current_commitments_cents=w['committed_cents'],deadline_at=w['deadline_at'],deadline_unchanged=True,ai_turn_cap=None,original_attempts_and_history_preserved=True,measured_charges_usd=None,commitments_are_measured_charges=False),
+  qualification=dict(actual_calls=2,actual_input_tokens=14527,actual_output_tokens=1891,native_control_real_provider_calls=0,native_control='three-slot Linux/native CLI with synthetic provider and retirement cleanup control',actual_answer_review_passed=True,failed_harness_and_pre_dispatch_control_preserved=True,reviewer=review['reviewer'],independent=False,held_out=False,human_review=False,measured_charges_usd=None,subscription_allocation_usd=None),
+  recovery=dict(tasks_resumed=5,task_snapshot=tasks,workflow_status=w['status'],model_turns_after_resumption=sum(t['created_at']>min(e['created_at'] for e in resumed) for t in data['autonomy_turns']),experiment_jobs=len(data['queue_jobs']),recorded_runs=len(data['runs']),recorded_measurements=len(data['measurements']),scientific_assessment_records=len(data['assessments']),original_unknown_and_failed_receipts_preserved=True),
+  windows_seconds=local['windows_seconds'],limitations=['Fresh authenticated upload/chat was not reverified; production public queue, records and retained turns were exercised.','The live cases are exposed development checks reviewed by the implementing AI, not independent, held-out or human validation.','Replanning and runtime activation do not establish a scientific result or guarantee all claims will become conclusive.','Reported commitments are reservations, not measured charges. Subscription allocation, new release storage/compute charges and unallocated costs are unknown.','This is a time-stamped recovery snapshot. Later autonomous work can change task states, commitments and scientific coverage.'],measured_charges_usd=None,unallocated_cost_usd=None)
+ q.save(out/'production-status.json',report);files={}
+ # Fixed allowlist excludes authorization stores, environment files and login logs.
+ for base in (source,source.parent/'20261028T223546360526Z',out,BASE/'browser',activated_path.parent,executor_path.parent):
+  for p in base.rglob('*'):
+   if p.is_file() and p.suffix in ('.json','.zip','.sql','.bin','.png'):files[str(p.relative_to(ROOT))]=p.read_bytes()
+ for dirname in ('openclaw-release','assessment-recovery-release-v1','autonomy-release'):
+  for directory in (ROOT/'.test-artifacts'/dirname).iterdir():
+   if not directory.is_dir() or directory.name<'20261028T223105574596Z':continue
+   for p in directory.iterdir():
+    if p.is_file() and (p.name in ('receipt.json','cdk.log','outputs.json','stack-before.json','stack-after.json','parameter-comparison.json','worker-verification.json','capabilities.json') or p.suffix=='.zip'):files[str(p.relative_to(ROOT))]=p.read_bytes()
+ for name in ('docs/assessment-4055396e-recovery-protocol-v1.json','docs/assessment-recovery-release-protocol-v1.json','docs/assessment-recovery-release-amendment-v2.json','docs/assessment-recovery-release-amendment-v3.json','docs/assessment-recovery-release-amendment-v4.json','docs/assessment-recovery-actual-answer-review-v1.json','docs/assessment-4055396e-recovery-validation-v1.json','database/202610280002_assessment_budget_amendments.sql','database/202610280003_controller_reconciliation_window.sql','bin/assessment-recovery-release.py','bin/verify_assessment_recovery_browser.mjs','research-workflow-runtime.json','.test-artifacts/assessment-recovery-release-v1/frontend-budget-label-followup.json','.test-artifacts/assessment-recovery-release-v1/progress-after-activation-public.json'):files[name]=(ROOT/name).read_bytes()
+ stream=io.BytesIO()
+ with zipfile.ZipFile(stream,'w',zipfile.ZIP_DEFLATED) as z:
+  for name,raw in sorted(files.items()):z.writestr(name,raw)
+  z.writestr('artifact-manifest.json',json.dumps([dict(path=n,bytes=len(v),sha256=r.sha(v)) for n,v in sorted(files.items())],sort_keys=True,separators=(',',':')))
+ raw=stream.getvalue();assert len(raw)<20000000;sha=r.sha(raw);path=STUDY+'/'+sha;m.storage(path,raw);restored=m.storage(path);assert restored==raw
+ with zipfile.ZipFile(io.BytesIO(restored)) as z:
+  assert z.testzip() is None
+  for entry in json.loads(z.read('artifact-manifest.json')):
+   item=z.read(entry['path']);assert len(item)==entry['bytes'] and r.sha(item)==entry['sha256']
+ actor=r.admin.query("select owner_id from research_study_owners where study_id='"+STUDY+"'")[0]['owner_id'];identity=str(uuid.uuid5(uuid.UUID(STUDY),'production-recovery-evidence:'+sha))
+ artifact=dict(id=identity,sha256=sha,byte_count=len(raw),storage_path=path,media_type='application/zip',verified_at=r.stamp(),provenance=dict(kind='assessment-recovery-production-evidence',version=report['version'],scientific_completion=False,reviewer=review['reviewer']))
+ r.admin.query('select public.research_append('+','.join([r.admin.literal(STUDY)+'::uuid',r.admin.literal(actor)+'::uuid',r.admin.literal('artifacts'),r.admin.literal(json.dumps(artifact))+'::jsonb'])+')',read_only=False)
+ assert r.admin.query("select sha256,byte_count from research_artifacts where study_id='"+STUDY+"' and id='"+identity+"'")==[dict(sha256=sha,byte_count=len(raw))]
+ evidence=dict(artifact_id=identity,sha256=sha,retrieved_sha256=r.sha(restored),bytes=len(raw),members=len(files),public=False);report['evidence']=evidence
+ evaluation=json.dumps(dict(kind='operational-release-verification',release=report,archive=evidence,reviewer=review['reviewer'],new_qualification_calls_in_recording=0,scientific_completion=False),sort_keys=True,separators=(',',':'));digest=r.sha(evaluation.encode())
+ for p in frozen['prompts']:
+  r.admin.query('insert into agent_prompt_evaluations(prompt_version_id,outcome,report_raw,report_sha256,original_artifacts,recorded_by) values('+','.join([r.admin.literal(p['id'])+'::uuid',r.admin.literal('passed'),r.admin.literal(evaluation),r.admin.literal(digest),r.admin.literal(json.dumps(evidence))+'::jsonb',r.admin.literal('Implementing Codex AI; nonindependent operational release verification, not human or held-out scientific validation.')])+') on conflict(prompt_version_id,report_sha256) do nothing',read_only=False)
+  saved=r.admin.query('select report_raw from agent_prompt_evaluations where prompt_version_id='+r.admin.literal(p['id'])+'::uuid and report_sha256='+r.admin.literal(digest));assert len(saved)==1 and r.sha(saved[0]['report_raw'].encode())==digest
+ report['operational_evaluation_sha256']=digest;q.save(out/'production-status-retained.json',report);q.save(ROOT/'docs/assessment-recovery-production-status-v1.json',report)
+ return dict(status=report['status'],release_blocking_checks_passed=True,evidence=evidence,evaluation_sha256=digest,tasks_resumed=5,workflow_status=w['status'],tasks=[dict(stage=t['stage'],status=t['status'],label=t['label']) for t in tasks],maximum_usd=1000,current_commitments_cents=w['committed_cents'],authenticated_upload_chat_reverified=False)
 
 if __name__=='__main__':main()
