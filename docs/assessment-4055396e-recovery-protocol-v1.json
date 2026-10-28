@@ -1,0 +1,14 @@
+{
+  "version": "assessment-recovery-v1",
+  "assessment": "4055396e-35c0-4962-ba39-cf23e443ad8d",
+  "stage": "software-development-regression-and-read-only-original-replay",
+  "scientific_campaign": false,
+  "questions": ["Does the netem decision contract identify actual per-condition output keys?", "Do exact relative/compound reader outputs survive continuation without false delivery credit?", "Does a stalled workspace cause targeted replanning and then pause without endless unchanged spending?", "Do transient reads reconcile the same dispatch without another model call?", "Can only an audited operator raise one paper budget while prior records and deadline remain unchanged?"],
+  "criteria": ["Exact condition keys and units match producer outputs, including integer versus floating-point loss labels; missing stays null", "Byte-verified fragments only; unrelated shell output, changed context and self-reported progress do not count", "Three unchanged continuations trigger replanning; the same previously replanned fingerprint pauses, and actual changed work permits progress", "One enqueue only across simulated status/artifact read timeouts; hash mismatch and terminal unknown remain blocked", "Real isolated SQL denies unaudited raises, reductions, over-limit budgets, conflicting replay and browser writes; exact idempotent amendment retains commitment, attempts and deadline", "Both owner and public queue validators accept the amended cap and reject overcommitment; new-paper default remains $100"],
+  "inputs": "Synthetic unit/SQL fixtures plus hash-verified original stopped-assessment checkpoints and native call outputs. Fixture labels are never scientific results.",
+  "replication_units": "Independent software scenarios; no statistical inference, confidence intervals or repeated packet samples",
+  "resources": {"new_model_calls": 0, "new_experiment_instances": 0, "live_database": "Read-only diagnostics and explicit pending operator budget authorization only", "model_charges_usd": null},
+  "exclusions": "No fabricated completion, old-turn rewrite, refund, deadline reset, automatic replay of unknown calls or automatic production deployment.",
+  "release_gates": ["Backend regressions, actual isolated SQL guard tests, frontend unit/lint/type checks and infrastructure synth assertions pass", "Release the compatible frontend before applying an effective $1000 cap; the old frontend rejects caps above $100", "Deploy matching controller/runtime/lease window, verify original artifacts, and use a separately audited recovery for eligible stopped tasks", "Unconfirmed outcomes require explicit retained proof; a larger budget is not proof of safe replay"],
+  "reviewer": {"identity": "Implementing Codex assistant", "type": "AI", "independent": false, "human": false}
+}

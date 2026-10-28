@@ -87,7 +87,9 @@ def dispatch(source,mode):
     destination=host(source)
     if mode=='live':
         packet=json.loads((source/'frozen.json').read_bytes())
-        if packet.get('amendment'):assert packet.get('inherited_native') and packet['amendment']['resources']['additional_real_provider_calls']==1
+        if packet.get('protocol',{}).get('version')=='assessment-recovery-release-v1':
+            assert packet['amendment']['version']=='assessment-recovery-release-amendment-v2' and len(packet['live_cases'])==2 and packet['protocol']['resources']['maximum_real_provider_calls']==2
+        elif packet.get('amendment'):assert packet.get('inherited_native') and packet['amendment']['resources']['additional_real_provider_calls']==1
     if mode=='prepare':
         item=json.loads((source/'candidate.json').read_bytes())
         install='''import io,json,pathlib,sys,zipfile

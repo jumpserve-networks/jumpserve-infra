@@ -1,0 +1,157 @@
+{
+  "version": "assessment-recovery-validation-v1",
+  "assessment": "4055396e-35c0-4962-ba39-cf23e443ad8d",
+  "status": "local-software-checks-passed;release-pending",
+  "target": {
+    "aws_account": "395567831870",
+    "supabase_project": "regphejnlvfpyokpniny",
+    "database": "postgres",
+    "supabase_project_identity_verified": true
+  },
+  "recorded_at": "2026-10-28T22:27:43.705157+00:00",
+  "checks": {
+    "backend_tests": 349,
+    "frontend_tests": 273,
+    "infrastructure_tests": 92,
+    "infrastructure_optional_skipped": 5,
+    "isolated_sql": [
+      {
+        "name": "only audited bounded operator amendments can increase funding",
+        "passed": true,
+        "wall_seconds": 0.12109879200579599,
+        "evidence": {
+          "unaudited_write_denied": true,
+          "browser_rpc_denied": true,
+          "bounds_enforced": true
+        }
+      },
+      {
+        "name": "an amendment preserves original records without resetting or resuming work",
+        "passed": true,
+        "wall_seconds": 0.22818475001258776,
+        "evidence": {
+          "cap_cents": 100000,
+          "defaults_cents": 10000,
+          "old_authorization_retained": true,
+          "idempotent": true,
+          "old_usage_and_deadline_unchanged": true,
+          "tasks_not_resumed": true
+        }
+      },
+      {
+        "name": "actual admission can cross the former cap and still denies overspending",
+        "passed": true,
+        "wall_seconds": 0.7288153329864144,
+        "evidence": {
+          "aggregate_commitments_cents": 92505,
+          "above_former_cap": true,
+          "new_cap_enforced": true,
+          "new_provider_calls": 0
+        }
+      }
+    ],
+    "offline_replay": {
+      "protocol": "assessment-recovery-v1",
+      "kind": "offline-original-request-and-checkpoint-replay",
+      "passed": true,
+      "new_model_calls": 0,
+      "new_experiments": 0,
+      "scientific_completion": false,
+      "pages": [
+        {
+          "task": "2dfbd3d1-2514-586d-9d07-47f04a5c78ff",
+          "checkpoint_sha256": "0cd78c40a73e36166f25d077697f56911d454be4d89be5546a75cf1246ab6078",
+          "original_index_pages": 0,
+          "corrected_exact_pages": 9,
+          "working_files": [],
+          "complete_source_review": false
+        },
+        {
+          "task": "b9c00763-023d-5971-9367-e02d30949d7c",
+          "checkpoint_sha256": "03867d0ff8ae2c01972e8e6ccfe52a89026c66561deab13b35c4cc5f94cdd986",
+          "original_index_pages": 0,
+          "corrected_exact_pages": 11,
+          "working_files": [],
+          "complete_source_review": false
+        },
+        {
+          "task": "872f6faa-3215-5a0a-96e2-aac94fd0a6c0",
+          "checkpoint_sha256": "4bae4fff643b93824e0e6feff28efb592c4f0d62bc43dd2cd47bb6c1b5b4557c",
+          "original_index_pages": 4,
+          "corrected_exact_pages": 10,
+          "working_files": [],
+          "complete_source_review": false
+        },
+        {
+          "task": "258366b4-0865-55b3-9d67-87a4b801a7d5",
+          "checkpoint_sha256": "57c6c4202d937f334cebda4904cb0bc0487d0fbc4201fd7630a20b3877ebd242",
+          "original_index_pages": 0,
+          "corrected_exact_pages": 9,
+          "working_files": [],
+          "complete_source_review": false
+        }
+      ],
+      "request": {
+        "dispatch_id": "75f9b315-e1e2-5499-8c59-8c3bf6c58193",
+        "original_logical_sha256": "cda13947f3b75fb4216a6d5510b51a576583f5e83b4cabf353cc8184426b81f9",
+        "original_derived_provider_bytes": 96866,
+        "corrected_provider_bytes": 87220,
+        "original_derived_sha256": "5d48cd3291ef3cb1a35c722978165b9cee828996034b1366fd7ffa3f27eef26e",
+        "corrected_provider_sha256": "83b583392276c351e30385345c0676fbbce098f3a43fb300236e2f4ab584c6df",
+        "original_provider_transport_files_present": false,
+        "scope": "Exact reconstructed preflight reproduces rejection before the provider-request write/transport. Original unknown receipt is preserved; this replay is evidence for reconciliation, not a rewritten outcome."
+      },
+      "reviewer": {
+        "identity": "Implementing Codex assistant",
+        "type": "AI",
+        "independent": false,
+        "human": false
+      }
+    },
+    "frontend_lint_and_types": "passed",
+    "infrastructure_types": "passed",
+    "native_cli": "Actual pinned CLI, synthetic provider transport: original logical request forwarded once; oversized preflight recorded as confirmed zero provider calls."
+  },
+  "budget": {
+    "authorized_maximum_usd": 1000,
+    "effective_maximum_usd": 100.0,
+    "authorization_event_id": "feac9619-68f1-5b32-9941-a96a9f9dce61",
+    "state": "authorized-pending-compatible-release",
+    "application_default_usd": 100,
+    "existing_commitments_cents": 9980,
+    "deadline_unchanged": true
+  },
+  "windows_seconds": {
+    "builder_slice": 180,
+    "builder_dispatch": 330,
+    "builder_controller_wait": 350,
+    "lambda_timeout": 420,
+    "task_lease": 480
+  },
+  "limitations": [
+    "Software development regressions and original stopped-request replay; no independent, human, held-out or scientific validation.",
+    "No production runtime/schema/frontend release or fresh authenticated upload/chat test in this turn.",
+    "Historical unknown outcomes retain their original receipts and require guarded reconciliation; no automatic replay is authorized.",
+    "The $1000 cap becomes effective only after the compatible frontend/runtime and audited budget RPC are released. New-assessment default remains $100.",
+    "File/transport progress is not substantive review or correctness, and a modified file is not proof of useful scientific progress.",
+    "Source revisions are uncommitted working-tree byte versions; exact files and hashes are retained. A bounded live model qualification and deployed end-to-end checks remain release work."
+  ],
+  "new_remote_model_calls": 0,
+  "new_experiment_instances": 0,
+  "scientific_completion": false,
+  "measured_charges_usd": null,
+  "unallocated_storage_and_compute_cost_usd": null,
+  "reviewer": {
+    "identity": "Implementing Codex assistant",
+    "type": "AI",
+    "independent": false,
+    "human": false
+  },
+  "evidence": {
+    "artifact_id": "66d17beb-22f0-5f00-9bcd-60a197f67bef",
+    "sha256": "e26a91cf305f674c13ed966f03c634832d08815b8bba2714e228682adba0e6d3",
+    "retrieved_sha256": "e26a91cf305f674c13ed966f03c634832d08815b8bba2714e228682adba0e6d3",
+    "bytes": 3530720,
+    "public": false
+  }
+}

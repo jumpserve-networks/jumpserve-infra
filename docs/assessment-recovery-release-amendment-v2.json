@@ -1,0 +1,12 @@
+{
+  "version":"assessment-recovery-release-amendment-v2",
+  "parent":"assessment-recovery-release-v1",
+  "original_campaign":"20261028T223546360526Z",
+  "kind":"qualification-harness-correction-before-live-calls",
+  "failure":"The unchanged native control imports .test-artifacts/builder-image/continuation-v1.json. The custom preparation inspected the exact existing image but omitted that metadata file. Native import failed before provider calls or test execution; original campaign, stdout, traceback and frozen source bytes remain unchanged.",
+  "correction":"Write the metadata required by the existing native control from the actually inspected image identity. Freeze a new campaign and rerun preparation/native controls before any live requests.",
+  "criteria_changes":false,
+  "original_live_provider_calls":0,
+  "aggregate_maximum_live_provider_calls":2,
+  "independence":"Exposed development harness correction reviewed by the implementing AI. No independent or held-out validation."
+}

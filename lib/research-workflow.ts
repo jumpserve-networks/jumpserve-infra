@@ -157,7 +157,7 @@ export class ResearchWorkflow extends Construct {
         const pdfLayer = new lambda.LayerVersion(this, 'AutonomyPdfLayer', { code: lambda.Code.fromAsset(pdfPath, { exclude: ['**/__pycache__/**', '**/*.pyc', '**/*.pyo'] }), compatibleRuntimes: [lambda.Runtime.PYTHON_3_12], description: 'Hash-verified pypdf 6.19.0; text extraction is not substantive paper review.' });
         const autonomous = new lambda.Function(this, 'AutonomyWorker', {
           code: lambda.Code.fromAsset(runtime), handler: 'autonomy.handler', runtime: lambda.Runtime.PYTHON_3_12,
-          memorySize: 1024, timeout: cdk.Duration.seconds(300), reservedConcurrentExecutions: reserveConcurrency ? 2 : undefined,
+          memorySize: 1024, timeout: cdk.Duration.seconds(420), reservedConcurrentExecutions: reserveConcurrency ? 2 : undefined,
           retryAttempts: 0, maxEventAge: cdk.Duration.minutes(1), layers: [pdfLayer],
           environment: { SUPABASE_URL: url, SUPABASE_SECRET_ARN: secret.secretArn, RESEARCH_AUTONOMY_ENABLED: 'true', RESEARCH_AUTONOMY_CONTEXT_RECOVERY: 'autonomy-context-budget-v1', RESEARCH_QUEUE_WORKERS_ENABLED: 'true', RESEARCH_QUEUE_WORKER_FUNCTION: worker.functionArn, ...networkingEnvironment,...aiEnvironment },
           description: 'Durable parallel claim stages with atomic $100/7-day admission, uncapped AI turns, exact history and explicit blockers.',

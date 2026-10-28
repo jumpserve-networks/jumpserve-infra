@@ -16,9 +16,9 @@ test('autonomous assessment worker is explicit, private, bounded and separately 
   const stack = new cdk.Stack(app, 'AutonomyTest', { env: { account: '395567831870', region: 'us-east-1' } });
   new ResearchWorkflow(stack, 'Research', new api.HttpApi(stack, 'Api'));
   const template = Template.fromStack(stack);
-  // A building dispatch has a 245-second fence and 260-second controller wait;
+  // A building dispatch has a 330-second fence and 350-second controller wait;
   // the Lambda must allow that completion/persistence window under task leases.
-  template.hasResourceProperties('AWS::Lambda::Function', { Handler: 'autonomy.handler', MemorySize: 1024, Timeout: 300, ReservedConcurrentExecutions: 2, Layers: Match.anyValue() });
+  template.hasResourceProperties('AWS::Lambda::Function', { Handler: 'autonomy.handler', MemorySize: 1024, Timeout: 420, ReservedConcurrentExecutions: 2, Layers: Match.anyValue() });
   template.hasResourceProperties('AWS::Lambda::Function', { Handler: 'autonomy.handler', Environment: { Variables: Match.objectLike({ RESEARCH_AUTONOMY_CONTEXT_RECOVERY: 'autonomy-context-budget-v1' }) } });
   template.resourceCountIs('AWS::Lambda::Url', 0);
   template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'POST /research/paper-uploads' });

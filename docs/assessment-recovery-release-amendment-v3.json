@@ -1,0 +1,13 @@
+{
+  "version":"assessment-recovery-release-amendment-v3",
+  "parent":"assessment-recovery-release-v1",
+  "kind":"operator-dispatch-compatibility-correction-before-live-calls",
+  "affected_campaign":"20261028T224207510236Z",
+  "failure":"The shared dispatcher applied the historical one-call inherited-native follow-up gate to the new two-case protocol. It asserted before creating live-command.json or calling SSM. The original failed operator receipt 20261028T224709718630Z remains unchanged; no live request was sent.",
+  "correction":"Recognize the exact assessment-recovery-release-v1 protocol, its amendment-v2 harness, two frozen cases and two-call resource ceiling. Preserve the historical inherited-native assertion for every other amended continuation campaign.",
+  "criteria_or_input_changes":false,
+  "prior_native_control":"Passed on the frozen source and image; not repeated for a local dispatcher-only correction.",
+  "prior_real_provider_calls":0,
+  "maximum_real_provider_calls":2,
+  "reviewer":{"identity":"Implementing Codex assistant","type":"AI","independent":false,"human":false}
+}
