@@ -1,0 +1,63 @@
+{
+  "protocol": "autonomy-methods-release-v1",
+  "status": "passed",
+  "campaign": "20261028T023634408349Z",
+  "archive": {
+    "sha256": "e73d19f98066b7fd11d569303646fc0b6edd7340f950f71513afaa10c7e502dd",
+    "retrieved_sha256": "e73d19f98066b7fd11d569303646fc0b6edd7340f950f71513afaa10c7e502dd",
+    "bytes": 7723986,
+    "public": false
+  },
+  "evaluations": [
+    {
+      "prompt_version_id": "6117e5c5-84ce-5c31-aaa7-0d1d3522e62e",
+      "report_sha256": "0691ff8c7d9495616eab990b6dcbe37feb7defc0a0e0614f089367edd4439cca",
+      "campaign": "20261028T020118569396Z",
+      "outcome": "failed-or-paused"
+    },
+    {
+      "prompt_version_id": "dfab5ecb-b8b9-5ad3-8771-f28a06b53b27",
+      "report_sha256": "0691ff8c7d9495616eab990b6dcbe37feb7defc0a0e0614f089367edd4439cca",
+      "campaign": "20261028T020118569396Z",
+      "outcome": "failed-or-paused"
+    },
+    {
+      "prompt_version_id": "6117e5c5-84ce-5c31-aaa7-0d1d3522e62e",
+      "report_sha256": "d56f80ecfec9bc815cc58a156d7dce4ffef92a616861c85ca4cc5216b363824e",
+      "campaign": "20261028T021924679648Z",
+      "outcome": "failed-or-paused"
+    },
+    {
+      "prompt_version_id": "dfab5ecb-b8b9-5ad3-8771-f28a06b53b27",
+      "report_sha256": "d56f80ecfec9bc815cc58a156d7dce4ffef92a616861c85ca4cc5216b363824e",
+      "campaign": "20261028T021924679648Z",
+      "outcome": "failed-or-paused"
+    },
+    {
+      "prompt_version_id": "6117e5c5-84ce-5c31-aaa7-0d1d3522e62e",
+      "report_sha256": "2ae8f1818304aa41e8bc501200103796c175b5015137609bbad878a4903cc989",
+      "campaign": "20261028T023214569363Z",
+      "outcome": "failed-or-paused"
+    },
+    {
+      "prompt_version_id": "dfab5ecb-b8b9-5ad3-8771-f28a06b53b27",
+      "report_sha256": "2ae8f1818304aa41e8bc501200103796c175b5015137609bbad878a4903cc989",
+      "campaign": "20261028T023214569363Z",
+      "outcome": "failed-or-paused"
+    },
+    {
+      "prompt_version_id": "6117e5c5-84ce-5c31-aaa7-0d1d3522e62e",
+      "report_sha256": "f46cb41292743d2e4605e611d1cf0d5e976f20831c94a95945497fafac467372",
+      "campaign": "20261028T023634408349Z",
+      "outcome": "passed"
+    },
+    {
+      "prompt_version_id": "dfab5ecb-b8b9-5ad3-8771-f28a06b53b27",
+      "report_sha256": "f46cb41292743d2e4605e611d1cf0d5e976f20831c94a95945497fafac467372",
+      "campaign": "20261028T023634408349Z",
+      "outcome": "passed"
+    }
+  ],
+  "aggregate_provider_calls": 42,
+  "private_location_retained_in_operator_receipt": true
+}
