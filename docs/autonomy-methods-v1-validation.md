@@ -163,3 +163,63 @@ unknown. All original archives were retrieved and their member hashes verified.
 
 Production activation, final function/worker hashes, RLS, polling and the new
 assessment execution remain subsequent release gates at this checkpoint.
+
+## Production release verification
+
+Backend `cf58f1a4ebc038769a00771d746b660e160ca7c7` is deployed. Worker
+`i-087f1493809643115` is preserved, its previous runtime backed up, all 50 current
+source hashes verified, and its existing subscription authorization/catalog
+checked without inference. API, queue and autonomy ZIPs each match all 50
+qualified source files (ZIP SHA256
+`78a7e6867ebd826bba5ff5a2a5df389aa029ffbc52d4e4532bab96f3d3f01bb4`).
+
+Private timing migration SHA256
+`fb14ac922c2cdcf326421192889a282eb371cfe152d5f731e54135759cb55928`
+was applied under held admission and drained work. Current function definition
+and browser-execute denial were checked. All 42 research relations retain RLS
+and browser write denial; original artifact storage remains private. Both queue
+and autonomy polls are enabled. Published baseline prompt pointers are unchanged,
+with the new exact composition and failed/passed evaluations retained separately.
+
+The disposable-host executor and direct dependencies match the previous actual
+AWS success/deadline/cancellation controls; its pinned AMI is unchanged. This
+release verifies source continuity and the new clean Docker control, not a new
+EC2 lifecycle campaign. Public capabilities report OpenClaw ready, built packages
+enabled, USD100/seven-day defaults and no AI-turn cap. Generic submitted custom
+packages remain disabled; native-built reviewed projects are enabled.
+
+The final gate passed at 2026-10-28T02:47:02.961764Z. Exact operator receipts,
+downloaded deployment ZIPs, hashes and security catalog are retained privately.
+An operator-authorized rerun does not verify an authenticated Google browser
+submission; no session was fabricated. Actual paper measurements and scientific
+findings must be evaluated from the separately identified new assessment.
+
+## New assessment admission and browser verification
+
+New assessment `a3bad34f-a9b5-44bb-be46-e1800cf1cf89` was created at
+2026-10-28T02:47:45Z from the byte-identical PDF/text and nine previously
+owner-confirmed statements. Standard copy/append/start/review-confirmation
+functions ran atomically with explicit service-operator authorization provenance.
+It is not represented as a Google-authenticated browser submission or a new
+independent source extraction. The prior assessment is unchanged across all
+eight recorded relation inventories (snapshot SHA256
+`02416f3160ffd94911bb41c157f1d6da83e045fdd52f45f49de1946302495a3a`).
+
+Limits: USD100 commitment maximum, deadline 2026-11-04T02:47:45.237124Z,
+no AI-turn cap and two concurrent claim tasks. At 02:50:15Z the workflow is
+running, two planning responses are complete and saved, two further planning
+turns run concurrently, the arithmetic candidate awaits comprehension review
+and an empirical claim is queued for native building. Four prompts are retained.
+USD9.20 is committed including reservations, not measured charges. No experiment
+jobs, measurements or scientific verdicts have completed at this checkpoint.
+
+The anonymous public queue passed headless desktop (1365px) and mobile (390px)
+checks in both themes: correct title, nine claims, exact budget/no-turn-cap
+metadata, no queue error, no page error, no horizontal overflow and expandable
+shared-record controls. Screenshots were visually inspected by the same Codex
+AI author. An initial overly broad role=alert assertion counted Next.js hidden
+empty route announcer; that failed test report is retained. The corrected check
+records all alerts and targets actual queue errors. No production UI change
+was needed. Google-authenticated upload/chat remains outside this operator
+rerun verification. Background execution and scientific completion are pending;
+software readiness and scientific coverage remain separate.

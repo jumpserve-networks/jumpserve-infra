@@ -1,0 +1,20 @@
+{
+  "status": "passed-software-gates-background-scientific-assessment-running",
+  "backend_revision": "cf58f1a4ebc038769a00771d746b660e160ca7c7",
+  "assessment_id": "a3bad34f-a9b5-44bb-be46-e1800cf1cf89",
+  "maximum_spend_usd": 100,
+  "original_unchanged": true,
+  "archive": {
+    "sha256": "ce6b7120477edd9c0609d032cd462d689d751b978f6e35c47a65c8cbe6c06ef8",
+    "retrieved_sha256": "ce6b7120477edd9c0609d032cd462d689d751b978f6e35c47a65c8cbe6c06ef8",
+    "bytes": 3299577,
+    "public": false
+  },
+  "evaluation_sha256": "757a3697dedac2ced8c0a7eb64c72222c1a6832a3b91ada2caae077debb976e4",
+  "scientific_completion": false,
+  "conditional_gaps": [
+    "No Google-authenticated browser submission is represented by this operator-authorized rerun.",
+    "The clean native software control does not establish paper experiment execution or scientific findings."
+  ],
+  "measured_charges_usd": null
+}

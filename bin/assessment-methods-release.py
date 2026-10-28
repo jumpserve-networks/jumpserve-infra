@@ -235,8 +235,71 @@ def migrate_window():
     after=r.admin.query(query)[0]['definition'];assert "else interval '235 seconds' end" in after and "else interval '100 seconds' end" not in after
     return dict(status='passed',migration='202610280001_data_only_model_window.sql',sha256=r.sha(sql),present_before=already,definition_sha256=r.sha(after.encode()),private_function_grants_preserved=True)
 
+def verify_release(source):
+    qualification=json.loads((BASE/'qualification-recorded.json').read_bytes());manifest=json.loads((ROOT/'research-workflow-runtime.json').read_bytes())
+    assert qualification['status']=='passed' and qualification['campaign']==source.name
+    assert manifest['files']==json.loads((source/'frozen.json').read_bytes())['runtime_files']
+    checks=[json.loads(p.read_bytes()) for p in sorted((ROOT/'.test-artifacts/builder-production-v2').glob('*/receipt.json'))]
+    activated=next(c for c in reversed(checks) if c['mode']=='activated' and c['status']=='complete' and c['functions'][0]['source_files_verified']==50)
+    executor=next(c for c in reversed(checks) if c['mode']=='executor' and c['status']=='complete' and c['function']==activated['functions'][0]['built_executor'].split(':function:')[1].rsplit(':',1)[0])
+    receipts=sorted((ROOT/'.test-artifacts/openclaw-release').glob('*/receipt.json'))
+    host=next(json.loads(p.read_bytes()) for p in reversed(receipts) if json.loads(p.read_bytes()).get('mode')=='host-check')
+    assert host['started_at']>json.loads((source/'qualification-report.json').read_bytes())['ended_at']
+    invocation=r.aws('ssm','get-command-invocation','--command-id',host['ssm']['command_id'],'--instance-id',host['ssm']['instance_id'])
+    assert invocation['Status']=='Success' and 'Pinned host source hashes verified: 50' in invocation['StandardOutputContent']
+    definition=r.admin.query("select pg_get_functiondef('public.research_model_dispatch(text,jsonb)'::regprocedure) definition")[0]['definition'];assert "else interval '235 seconds' end" in definition
+    grants=r.admin.query("select has_function_privilege('anon','public.research_model_dispatch(text,jsonb)','EXECUTE') anon,has_function_privilege('authenticated','public.research_model_dispatch(text,jsonb)','EXECUTE') authenticated");assert grants==[dict(anon=False,authenticated=False)]
+    assert r.instance()=='i-087f1493809643115'
+    result=dict(status='passed',campaign=source.name,verified_at=r.stamp(),backend_revision=manifest['source_revision'],runtime_files_verified=50,qualification=qualification,functions=activated['functions'],security=activated['security'],polling=activated['polling'],host_check=dict(command_id=host['ssm']['command_id'],status=invocation['Status'],stdout_sha256=r.sha(invocation['StandardOutputContent'].encode())),executor_source_verification=True,dispatch_definition_sha256=r.sha(definition.encode()),conditional_gaps=['No Google-authenticated browser submission is represented by this operator-authorized rerun.','The clean native software control does not establish paper experiment execution or scientific findings.'],measured_charges_usd=None)
+    save(BASE/'release-verified.json',result);return {k:v for k,v in result.items() if k not in ('qualification','functions','security')}
+
+def verify_held(source,out):
+    r.auth_maintenance_guard()
+    qualification=json.loads((BASE/'qualification-recorded.json').read_bytes());assert qualification['status']=='passed' and qualification['campaign']==source.name
+    functions=r.prior.functions(out,True);assert len(functions)==3 and all(len(f['source_hashes'])==50 for f in functions)
+    assert r.aws('cloudformation','describe-stacks','--stack-name','JumpServeBenchmarkStack')['Stacks'][0]['StackStatus']=='UPDATE_COMPLETE'
+    save(BASE/'held-release-verified.json',dict(status='passed',campaign=source.name,functions=functions,verified_at=r.stamp()))
+    return dict(status='passed',functions=len(functions),files_per_function=50,admission_held=True)
+
+def observe_rerun(source,out):
+    plan=json.loads((source/'rerun-plan.json').read_bytes());identity=r.admin.literal(plan['id'])+'::uuid'
+    result=dict(id=plan['id'],observed_at=r.stamp(),workflow=r.admin.query('select status,max_spend_cents,committed_cents,max_attempts,deadline_at,updated_at from research_autonomy_workflows where study_id='+identity),tasks=r.admin.query('select id,claim_id,stage,status,label,attempts,reason,updated_at from research_autonomy_tasks where study_id='+identity+' order by created_at,id'),turns=r.admin.query('select id,stage,status,request_sha256,prompt_version_id,model_id,usage,estimated_cents,reason,created_at from research_autonomy_turns where study_id='+identity+' order by created_at'),queue=r.admin.query('select id,status,reason,created_at,updated_at from research_queue_jobs where study_id='+identity+' order by created_at'),runs=r.admin.query('select id,status,created_at from research_runs where study_id='+identity+' order by created_at'),measurements=r.admin.query('select status,count(*) count from research_measurements where study_id='+identity+' group by status'),scientific_assessments=r.admin.query('select claim_id,label,created_at from research_assessments where study_id='+identity+' order by created_at'),measured_charges_usd=None)
+    save(out/'private-progress.json',result)
+    return dict(id=plan['id'],workflow=result['workflow'],task_statuses=[dict(claim_id=t['claim_id'],stage=t['stage'],status=t['status'],label=t['label'],attempts=t['attempts'],reason=t['reason']) for t in result['tasks']],turns=len(result['turns']),turn_statuses={s:sum(t['status']==s for t in result['turns']) for s in {t['status'] for t in result['turns']}},queue=result['queue'],runs=result['runs'],measurements=result['measurements'],scientific_assessments=result['scientific_assessments'],measured_charges_usd=None)
+
+def record_release(source,out):
+    verified=json.loads((BASE/'release-verified.json').read_bytes());created=json.loads((source/'rerun-created.json').read_bytes())
+    browser_path=sorted((BASE/'browser').glob('*/report.json'))[-1];browser=json.loads(browser_path.read_bytes())
+    assert verified['status']=='passed' and verified['campaign']==source.name and created['mode']=='created' and created['original_unchanged'] and browser['passed'] and browser['assessment_id']==created['id']
+    files={}
+    for p in BASE.rglob('*'):
+        if p.is_file() and p.suffix in ('.json','.png') and p.name not in ('private-snapshot.json','published-prompts.json','rerun-plan.json'):
+            files['operator/'+str(p.relative_to(BASE))]=p.read_bytes()
+    for dirname in ('openclaw-release','builder-production-v2'):
+        for p in (ROOT/'.test-artifacts'/dirname).glob('*/*'):
+            if p.is_file() and p.parent.name>='20261028T024126796590Z' and (p.name in ('receipt.json','cdk.log','outputs.json','parameter-comparison.json') or p.suffix=='.zip'):
+                files[dirname+'/'+str(p.relative_to(ROOT/'.test-artifacts'/dirname))]=p.read_bytes()
+    for name in ('docs/autonomy-methods-v1-validation.md','docs/autonomy-methods-actual-answer-review-v1.json','docs/autonomy-methods-qualification-artifacts-v1.json','docs/autonomy-methods-release-protocol-v1.md','research-workflow-runtime.json','bin/assessment-methods-release.py','bin/verify_assessment_methods_browser.mjs','database/202610280001_data_only_model_window.sql'):
+        files[name]=(ROOT/name).read_bytes()
+    stream=io.BytesIO()
+    with zipfile.ZipFile(stream,'w',zipfile.ZIP_DEFLATED) as z:
+        for name,raw in files.items():z.writestr(name,raw)
+        z.writestr('artifact-manifest.json',json.dumps([dict(path=n,sha256=r.sha(v),bytes=len(v)) for n,v in files.items()]))
+    raw=stream.getvalue();assert len(raw)<20000000
+    path='release-verification/autonomy-methods-v1/'+r.sha(raw)+'.zip';storage(path,raw);restored=storage(path);assert restored==raw
+    with zipfile.ZipFile(io.BytesIO(restored)) as z:
+        for item in json.loads(z.read('artifact-manifest.json')):assert r.sha(z.read(item['path']))==item['sha256']
+    archive=dict(bucket='research-workflow-raw',path=path,sha256=r.sha(raw),retrieved_sha256=r.sha(restored),bytes=len(raw),public=False)
+    value=dict(protocol='autonomy-methods-release-v1',kind='operational-release-and-authorized-rerun-verification',status='passed-software-gates-background-scientific-assessment-running',backend_revision=verified['backend_revision'],release_verification=verified,browser=browser,rerun=created,archive=archive,reviewer=dict(identity='Codex AI implementation/evaluation/review author',type='AI',independent=False,human=False),scientific_completion=False,measured_charges_usd=None,subscription_allocation_usd=None,unallocated_existing_worker_cost_usd=None)
+    raw=json.dumps(value,sort_keys=True,separators=(',',':'));sha=r.sha(raw.encode())
+    for prompt in ('6117e5c5-84ce-5c31-aaa7-0d1d3522e62e','dfab5ecb-b8b9-5ad3-8771-f28a06b53b27'):
+        r.admin.query('insert into agent_prompt_evaluations(prompt_version_id,outcome,report_raw,report_sha256,original_artifacts,recorded_by) values('+','.join([r.admin.literal(prompt)+'::uuid',r.admin.literal('passed'),r.admin.literal(raw),r.admin.literal(sha),r.admin.literal(json.dumps(archive))+'::jsonb',r.admin.literal('Codex AI implementer; nonindependent operational release verification, not human review or scientific completion')])+') on conflict(prompt_version_id,report_sha256) do nothing',read_only=False)
+        restored=r.admin.query('select report_raw from agent_prompt_evaluations where prompt_version_id='+r.admin.literal(prompt)+'::uuid and report_sha256='+r.admin.literal(sha));assert len(restored)==1 and r.sha(restored[0]['report_raw'].encode())==sha
+    result=dict(status=value['status'],backend_revision=verified['backend_revision'],assessment_id=created['id'],maximum_spend_usd=100,original_unchanged=True,archive={k:archive[k] for k in ('sha256','retrieved_sha256','bytes','public')},evaluation_sha256=sha,scientific_completion=False,conditional_gaps=verified['conditional_gaps'],measured_charges_usd=None)
+    save(ROOT/'docs/autonomy-methods-production-status-v1.json',result);return result
+
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['inspect','freeze','amend','followup','repair-followup','native-continuation','contract-amend','prepare','start','status','collect','diagnose','retain','retained','record-qualification','migrate-window','plan-rerun','dry-run-rerun','create-rerun']);args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['inspect','freeze','amend','followup','repair-followup','native-continuation','contract-amend','prepare','start','status','collect','diagnose','retain','retained','record-qualification','migrate-window','verify-held','verify-release','plan-rerun','dry-run-rerun','create-rerun','observe-rerun','record-release']);args=parser.parse_args()
     BASE.mkdir(parents=True,exist_ok=True);out=BASE/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');out.mkdir()
     report=dict(protocol='autonomy-methods-release-v1',mode=args.mode,status='running',started_at=r.stamp(),targets=r.target())
     try:
@@ -287,6 +350,10 @@ def main():
             if args.mode=='prepare':report['command']=prepare(source)
             elif args.mode=='record-qualification':report['qualification']=record_qualification(source)
             elif args.mode=='migrate-window':report['migration']=migrate_window()
+            elif args.mode=='verify-release':report['verification']=verify_release(source)
+            elif args.mode=='verify-held':report['verification']=verify_held(source,out)
+            elif args.mode=='observe-rerun':report['progress']=observe_rerun(source,out)
+            elif args.mode=='record-release':report['release_record']=record_release(source,out)
             elif args.mode=='plan-rerun':report['rerun']=plan_rerun(source)
             elif args.mode in ('dry-run-rerun','create-rerun'):report['rerun']=create_rerun(source,dry_run=args.mode=='dry-run-rerun')
             elif args.mode=='diagnose':
