@@ -30,20 +30,21 @@ def prepare():
 def live():
  assert not (ROOT/'live.json').exists(),'Never replay a dispatched campaign'
  assert json.loads((ROOT/'prepared.json').read_bytes())['status']=='passed' and json.loads((ROOT/'native.json').read_bytes())['status']=='passed'
- limits=packet['protocol']['resources'];began=time.monotonic();artifacts={};report=dict(status='running',actual_calls=0,live_provider_calls_issued=0,admissions=0,reserved_cents=0,cases=[],new_scientific_experiments=0,measured_charges_usd=None,subscription_allocation_usd=None,reviewer=dict(identity='Codex implementing AI',type='AI',independent=False,human=False,held_out=False))
+ limits=packet['protocol']['resources'];inherited=packet.get('inherited');current_max=packet['amendment']['resources']['maximum_additional_provider_calls'] if inherited else limits['maximum_actual_provider_calls'];began=time.monotonic();artifacts={};report=dict(status='running',actual_calls=0,live_provider_calls_issued=0,admissions=0,reserved_cents=0,cases=[],new_scientific_experiments=0,measured_charges_usd=None,subscription_allocation_usd=None,reviewer=dict(identity='Codex implementing AI',type='AI',independent=False,human=False,held_out=False))
+ if inherited:report.update(cases=copy.deepcopy(inherited['planner_results']),inherited_actual_calls=inherited['actual_calls'],inherited_reserved_cents=inherited['reserved_cents'],inherited_archive=inherited['archive'])
  def save():base.save(ROOT/'live.json',report)
  def retain(job,name,raw,kind='builder-original'):
   ident=str(uuid.uuid5(uuid.UUID(job['id']),name));artifacts[ident]=raw;p=ROOT/'live-originals'/job['id']/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(raw)
   pointer=base.put(job['id']+'-'+name,raw);base.save(p.with_suffix(p.suffix+'.pointer.json'),pointer)
   return dict(artifact_id=ident,sha256=digest(raw),version=builder.VERSION)
  def transport(method,url,token,body):
-  assert report['actual_calls']<limits['maximum_actual_provider_calls'] and time.monotonic()-began<limits['maximum_elapsed_seconds']-65
+  assert report['actual_calls']<current_max and time.monotonic()-began<limits['maximum_elapsed_seconds']-65
   report['actual_calls']+=1;report['live_provider_calls_issued']=report['actual_calls'];base.save(ROOT/('transport-'+str(report['actual_calls'])+'.json'),dict(request_sha256=digest(body),bytes=len(body)));save()
   return runtime.http_request(method,url,token,body,timeout_seconds=65)
  native_start=None
  def admit(op,job,**payload):
   if op=='begin':
-   if report['admissions']>=limits['maximum_actual_provider_calls'] or native_start is not None and report['actual_calls']-native_start>=limits['maximum_native_case_calls'] or time.monotonic()-began>limits['maximum_elapsed_seconds']-205:return dict(denied='qualification-envelope')
+   if report['admissions']>=current_max or native_start is not None and report['actual_calls']-native_start>=limits['maximum_native_case_calls'] or time.monotonic()-began>limits['maximum_elapsed_seconds']-205:return dict(denied='qualification-envelope')
    report['admissions']+=1;report['reserved_cents']+=100;result=dict(id=str(uuid.uuid4()))
   else:result={}
   event=dict(operation=op,job=job,payload=payload,result=result)
@@ -51,7 +52,7 @@ def live():
   base.put('ledger-'+digest(canonical(event))+'.json',canonical(event));save();return result
  save()
  try:
-  for case in packet['planner_cases']:
+  for case in ([] if inherited else packet['planner_cases']):
    assert report['admissions']<limits['maximum_actual_provider_calls'];report['admissions']+=1;report['reserved_cents']+=100;save()
    answer,receipt=runtime.execute(case['request'],ROOT/('live-'+case['id']),transport=transport)
    item=dict(name=case['id'],id=case['id'],receipt=receipt,structural_checks_passed=False);report['cases'].append(item);save()
@@ -72,7 +73,11 @@ def live():
    work=ROOT/'builder-workspaces'/job['task_id']/'workspace';project=work/'project';work.mkdir(parents=True)
    item=dict(name=name,id=name,status='running',receipts=[],controls=[],structural_checks_passed=False);report['cases'].append(item);save()
    def command():return ['docker','run','--rm','--network','none','--read-only','--pids-limit','64','--memory','256m','--cpus','0.5','--cap-drop','ALL','--user',str(os.getuid())+':'+str(os.getgid()),'--mount','type=bind,src='+str(work)+',dst=/workspace','--workdir','/workspace/project','-e','PYTHONDONTWRITEBYTECODE=1','-e','JUMPSERVE_SPEC=/workspace/control-input.json','-e','JUMPSERVE_OUTPUT=/workspace/control-output.json',packet['image'],'python3','/workspace/project/experiment.py']
-   if name=='native-file-path-repair':
+   if name=='native-file-path-repair' and inherited:
+    original=packet['original_program'].encode();raw=(ROOT/'inherited-checkpoint.zip').read_bytes();assert digest(raw)==inherited['checkpoint']['sha256'];builder.restore(raw,work)
+    assert (project/'original_experiment.py').read_bytes()==original and digest((work/'previous-failure.log').read_bytes())==inherited['failure_sha256']
+    item['inherited_receipts']=inherited['native_receipts'];item['scope']='Reused original model-authored project; fresh corrected validator and executable controls, no replacement model call.'
+   elif name=='native-file-path-repair':
     project.mkdir();original=packet['original_program'].encode()
     for filename,raw in {'experiment.py':original,'original_experiment.py':original,'requirements.lock':b'','system-packages.lock.json':b'[]','build-evidence.json':canonical(dict(commands=[],checks=[],limitations=['Software qualification only']))}.items():(project/filename).write_bytes(raw)
     (work/'control-input.json').write_bytes(canonical(dict(value=7)));failed=subprocess.run(command(),capture_output=True,timeout=20)
@@ -86,7 +91,8 @@ def live():
    start_calls=report['actual_calls'];native_start=start_calls
    try:
     with patch.object(builder,'retain',side_effect=retain),patch.object(builder,'rpc',side_effect=admit),patch.object(store,'artifact_bytes',side_effect=lambda study,ident,**kw:artifacts[ident]):
-     while report['actual_calls']-start_calls<limits['maximum_native_case_calls'] and time.monotonic()-began<limits['maximum_elapsed_seconds']-205:
+     if name=='native-file-path-repair' and inherited:item['validation']=repair_validation.validate(job,work,context,retain)
+     while not (name=='native-file-path-repair' and inherited) and report['actual_calls']-start_calls<limits['maximum_native_case_calls'] and time.monotonic()-began<limits['maximum_elapsed_seconds']-205:
       _,receipt=builder.execute(logical,ROOT/('live-'+name+'-'+str(len(item['receipts'])+1)),job,transport=transport);item['receipts'].append(receipt);save()
       assert receipt['status']=='complete' and not receipt.get('admission_denied'),'Native outcome or envelope needs reconciliation; no replay'
       if name=='native-file-path-repair':
