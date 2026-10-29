@@ -104,6 +104,7 @@ def snapshot(source,out):
  before=json.loads((source/'assessment-before.json').read_bytes())
  assert all(workflow[k]==before[k] for k in ('max_spend_cents','deadline_at','max_attempts','initial_sha256'))
  assert workflow['committed_cents']>=before['committed_cents'],'Historical commitments must not be reset'
+ assert 0<=workflow['committed_cents']<=workflow['max_spend_cents'],'Observed commitments exceed the authorized ceiling'
  baseline=json.loads((ROOT/'.test-artifacts/assessment-4055396e/20261029T213731633407Z/snapshot.json').read_bytes())
  dispatches=r.admin.query('select id,status,request_sha256 from research_model_dispatches where study_id='+identity+' order by created_at')
  indexed={d['id']:d for d in dispatches}
@@ -128,8 +129,52 @@ def snapshot(source,out):
  q.save(out/'assessment-snapshot.json',result);q.save(source/'latest-assessment-snapshot.json',dict(path=str(out/'assessment-snapshot.json'),sha256=r.sha((out/'assessment-snapshot.json').read_bytes())))
  return dict(assessment=prior.STUDY,limits_preserved=True,original_parents_checked=result['original_parents_checked'],reconciliations=proofs,committed_cents=workflow['committed_cents'],maximum_cents=workflow['max_spend_cents'],tasks=tasks,jobs=jobs)
 
+def record_release(source,out):
+ """Archive verified release bytes, keeping operational and scientific scope apart."""
+ active=json.loads((source/'active-verified.json').read_bytes());assert active['status']=='passed' and active['admission']
+ manifest=json.loads((ROOT/'research-workflow-runtime.json').read_bytes());assert active['source_revision']==manifest['source_revision']
+ browser_path=sorted((ROOT/'.test-artifacts/autonomous-repair-production-browser').glob('*/report.json'))[-1]
+ browser=json.loads(browser_path.read_bytes());assert browser['passed'] and browser['assessment']==prior.STUDY and browser_path.stat().st_mtime>(source/'active-verified.json').stat().st_mtime
+ reference=json.loads((source/'latest-assessment-snapshot.json').read_bytes());snapshot_path=pathlib.Path(reference['path']);raw=snapshot_path.read_bytes();assert r.sha(raw)==reference['sha256']
+ state=json.loads(raw);assert state['original_parent_identities_preserved']
+ expected={'af717ce4-6790-5647-9623-e67b5f9c4eca','353bf8b5-55e4-5e5e-b0a2-c0ffa757d765','45176ed6-af9f-5d6e-99af-fa2174d9f774','dc5d5273-f29c-5e9a-aea6-dcc8d17c0985','8983af13-bebc-5def-bd84-8d5b521c2ece'}
+ assert expected<={x['dispatch_id'] for x in state['reconciliations']},'Original blockers must have stored verified supplemental proofs'
+ volume=r.aws('ec2','describe-volumes','--volume-ids','vol-0993b9127ac7a8231')['Volumes'][0]
+ assert volume['Size']==300 and volume['Encrypted'] and any(a['InstanceId']=='i-087f1493809643115' for a in volume['Attachments']) and r.instance()=='i-087f1493809643115'
+ revisions={name:subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT.parent/name,text=True).strip() for name in ('jumpserve-back-end','jumpserve-infra','jumpserve-front-end')}
+ assert revisions['jumpserve-back-end']==manifest['source_revision']
+ value=dict(version='builder-recovery-production-v1',status='deployed-with-conditional-verification-gaps',recorded_at=r.stamp(),release_blocking_checks_passed=True,revisions=revisions,runtime_manifest_version=manifest['version'],runtime_files=len(manifest['files']),aws_account='395567831870',supabase_project='regphejnlvfpyokpniny',worker=r.instance(),worker_replaced=False,worker_storage_gib=300,encrypted=True,frontend_changed=False,qualification=json.loads((ROOT/'docs/builder-recovery-qualification-v1.json').read_bytes()),migration=json.loads((source/'migration-applied.json').read_bytes()),deployed_source_security_flags='passed',browser=browser,original_assessment_authorization={k:state['workflow'][k] for k in ('study_id','max_spend_cents','deadline_at','max_attempts','committed_cents')},original_parent_identities_preserved=True,reconciliations=state['reconciliations'],assessment_tasks=[{k:t[k] for k in ('id','claim_id','stage','status','label','attempts')} for t in state['tasks']],queue_jobs=state['jobs'],scientific_scope='Software release verification; no scientific verdict follows. Actual bounded assessment snapshot is reported separately and can change after retrieval.',conditional_gaps=browser['conditional_gaps'],measured_charges_usd=None,subscription_allocation_usd=None,unallocated_host_storage_cost_usd=None,reviewer=dict(identity='Codex implementing AI',type='AI',independent=False,human=False,held_out=False))
+ files={}
+ for directory in (source,snapshot_path.parent,browser_path.parent):
+  for p in directory.iterdir():
+   if p.is_file() and p.suffix in ('.json','.zip','.png'):files[str(p.relative_to(ROOT))]=p.read_bytes()
+ for p in (ROOT/'.test-artifacts/openclaw-release').glob('*/receipt.json'):
+  if p.parent.name<'20261029T214341538952Z':continue
+  files[str(p.relative_to(ROOT))]=p.read_bytes()
+  for name in ('cdk.log','outputs.json','parameter-comparison.json'):
+   a=p.parent/name
+   if a.exists():files[str(a.relative_to(ROOT))]=a.read_bytes()
+ for name in ('bin/builder-recovery-release.py','docs/builder-recovery-release-protocol-v1.json','docs/builder-recovery-release-amendment-v2.json','database/202610290001_builder_reconciliation.sql','research-workflow-runtime.json'):files[name]=(ROOT/name).read_bytes()
+ for name in ('.test-artifacts/builder-recovery-v3-unit-validator-followup-final.log','.test-artifacts/repair-validation-linux/20261029T221234601819Z/report.json'):
+  files['jumpserve-back-end/'+name]=(BACK/name).read_bytes()
+ files['isolated-database-report.json']=(ROOT/'.test-artifacts/research-ideas/database/20261029T215305296218Z/report.json').read_bytes()
+ files['release-report.json']=json.dumps(value,sort_keys=True,separators=(',',':')).encode();buffer=io.BytesIO()
+ with zipfile.ZipFile(buffer,'w',zipfile.ZIP_DEFLATED) as z:
+  for name,raw in sorted(files.items()):z.writestr(name,raw)
+  z.writestr('artifact-manifest.json',json.dumps([dict(path=n,sha256=r.sha(raw),bytes=len(raw)) for n,raw in sorted(files.items())]))
+ raw=buffer.getvalue();assert len(raw)<20000000;path='release-verification/builder-recovery-v1/'+r.sha(raw)+'.zip';m.storage(path,raw);restored=m.storage(path);assert restored==raw
+ with zipfile.ZipFile(io.BytesIO(restored)) as z:
+  for item in json.loads(z.read('artifact-manifest.json')):assert r.sha(z.read(item['path']))==item['sha256']
+ (out/'release-evidence.zip').write_bytes(raw);pointer=dict(bucket='research-workflow-raw',path=path,sha256=r.sha(raw),retrieved_sha256=r.sha(restored),bytes=len(raw),members=len(files),public=False);value['evidence']=pointer
+ report=json.dumps(dict(kind='operational-release-verification',release=value),sort_keys=True,separators=(',',':'));sha=r.sha(report.encode())
+ for prompt in json.loads((source/'frozen.json').read_bytes())['prompts']:
+  r.admin.query('insert into agent_prompt_evaluations(prompt_version_id,outcome,report_raw,report_sha256,original_artifacts,recorded_by) values('+','.join([r.admin.literal(prompt['id'])+'::uuid',r.admin.literal('passed'),r.admin.literal(report),r.admin.literal(sha),r.admin.literal(json.dumps(pointer))+'::jsonb',r.admin.literal('Codex implementing AI; nonindependent operational verification, not human or scientific validation')])+') on conflict(prompt_version_id,report_sha256) do nothing',read_only=False)
+  rows=r.admin.query('select report_raw from agent_prompt_evaluations where prompt_version_id='+r.admin.literal(prompt['id'])+'::uuid and report_sha256='+r.admin.literal(sha));assert len(rows)==1 and r.sha(rows[0]['report_raw'].encode())==sha
+ value['operational_evaluation_sha256']=sha;q.save(ROOT/'docs/builder-recovery-production-v1-status.json',value)
+ return dict(status=value['status'],evidence=pointer,evaluation_sha256=sha)
+
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['pin','freeze','freeze-followup','prepare','native','live','evidence','status','collect-status','collect','preview','snapshot','record-review','approve','migrate','verify-held','verify-active']);args=p.parse_args();BASE.mkdir(parents=True,exist_ok=True)
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['pin','freeze','freeze-followup','prepare','native','live','evidence','status','collect-status','collect','preview','snapshot','record-review','approve','migrate','verify-held','verify-active','record-release']);args=p.parse_args();BASE.mkdir(parents=True,exist_ok=True)
  out=BASE/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');out.mkdir();receipt=dict(mode=args.mode,status='running',started_at=r.stamp())
  try:
   receipt['targets']=r.target()
@@ -141,6 +186,7 @@ def main():
   elif args.mode=='migrate':result=migrate(q.selected())
   elif args.mode=='preview':result=preview(q.selected(),out)
   elif args.mode=='snapshot':result=snapshot(q.selected(),out)
+  elif args.mode=='record-release':result=record_release(q.selected(),out)
   elif args.mode in ('verify-held','verify-active'):
    r.prior.PRIVATE.add('research_model_reconciliations');result=prior.verify(q.selected(),out,args.mode=='verify-active')
   elif args.mode in ('status','collect-status','collect'):result=getattr(q,args.mode.replace('-','_'))(q.selected());result.pop('cases',None)
