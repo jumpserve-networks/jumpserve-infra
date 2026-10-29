@@ -57,6 +57,8 @@ def rpc(name,payload):
       'research_autonomy_budget_candidates':{},
       'research_autonomy_resume_turns':dict(p_policy='text'),
       'research_model_dispatch':dict(p_operation='text',p_payload='jsonb'),
+      'research_model_reconcile':dict(p_dispatch='uuid',p_artifact='uuid',p_sha256='text',p_proof='jsonb'),
+      'research_model_reconciliation_candidates':dict(p_after='uuid'),
       'research_builder_call':dict(p_operation='text',p_payload='jsonb'),
       'research_builder_package':dict(p_dispatch='uuid',p_token='uuid',p_project='uuid',p_wrapper='uuid',p_manifest='uuid',p_candidate='uuid'),
       'research_initialize_claim_design':dict(p_study='uuid',p_actor='uuid',p_document='jsonb',p_raw='text',p_sha256='text',p_source='jsonb',p_claim='jsonb'),
@@ -89,7 +91,8 @@ def rpc(name,payload):
         value=payload[key]
         argument='null::'+kind if value is None else sql_json(value) if kind=='jsonb' else sql_text(value)+'::'+kind
         arguments.append(key+' => '+argument)
-    result=query('select public.'+name+'('+','.join(arguments)+')',role='service_role')
+    expression='public.'+name+'('+','.join(arguments)+')'
+    result=query('select coalesce(jsonb_agg(item),\'[]\') from '+expression+' item' if name=='research_model_reconciliation_candidates' else 'select '+expression,role='service_role')
     return result if name=='publish_agent_prompt' else json.loads(result) if result else None
 
 def transport(path,method='GET',body=None,public=False,raw=False):
@@ -113,7 +116,7 @@ def transport(path,method='GET',body=None,public=False,raw=False):
         return rpc(parsed.path.removeprefix('/rest/v1/rpc/'),body)
     if method!='GET' or body is not None:raise ValueError('Unexpected transport mutation')
     table=parsed.path.removeprefix('/rest/v1/')
-    allowed=['research_'+k for k in (*workflow.FIELDS,'studies','study_owners','paper_uploads','paper_reviews','queue_jobs','queue_events','prepared_plans','idea_packets','idea_runs','idea_readiness','idea_campaign_links','claim_designs','autonomy_workflows','autonomy_tasks','autonomy_turns','autonomy_events','model_dispatches','builder_calls','builder_packages','shared_campaigns','shared_campaign_members','autonomy_repairs','autonomy_repair_events')]
+    allowed=['research_'+k for k in (*workflow.FIELDS,'studies','study_owners','paper_uploads','paper_reviews','queue_jobs','queue_events','prepared_plans','idea_packets','idea_runs','idea_readiness','idea_campaign_links','claim_designs','autonomy_workflows','autonomy_tasks','autonomy_turns','autonomy_events','model_dispatches','model_reconciliations','builder_calls','builder_packages','shared_campaigns','shared_campaign_members','autonomy_repairs','autonomy_repair_events')]
     if table not in allowed:raise ValueError('Unsupported relation')
     params=dict(urllib.parse.parse_qsl(parsed.query));columns=params.pop('select').split(',')
     aliases={'evidence_progress:context->evidence_progress':"context->'evidence_progress' as evidence_progress",'repair_progress:context->repair_progress':"context->'repair_progress' as repair_progress"}
@@ -124,7 +127,7 @@ def transport(path,method='GET',body=None,public=False,raw=False):
     if order:
         for entry in order.split(','):
             column,direction=entry.split('.')
-            if column not in ('created_at','id','version','number','study_id') or direction not in ('asc','desc'):raise ValueError('Unsafe order')
+            if column not in ('created_at','id','version','number','study_id','dispatch_id') or direction not in ('asc','desc'):raise ValueError('Unsafe order')
             ordering.append(column+' '+direction)
     predicates=[]
     for column,value in params.items():

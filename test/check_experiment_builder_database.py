@@ -7,7 +7,7 @@ import json,sys,tempfile
 from pathlib import Path
 from unittest.mock import patch
 import check_research_ideas_database as f
-import autonomy,store,workflow
+import autonomy,store,workflow,autonomy_methods,dispatch_recovery,autonomous_repair
 import autonomy_fixtures
 import experiment_builder,network_spec,network_execution
 
@@ -15,6 +15,7 @@ def main():
  f.report.update(protocol='experiment-builder-validation-v1',design=__doc__,live_provider_calls=0,new_cloud_instances=0)
  try:
   f.bootstrap()
+  name='202610290001_builder_reconciliation.sql';migration=(f.ROOT/'database'/name).read_bytes();f.report['migration_sha256'][name]=workflow.digest(migration);f.query(migration.decode())
   with patch.object(autonomy,'wake',return_value={}):study=autonomy.start(f.ACTOR,dict(request_id=f.uid(),autonomous=True,paper=dict(title='Builder software fixture',paper_url='https://example.org/builder-fixture.pdf',domain='Software verification',scope='Synthetic original prompt and native round-trip persistence only')))['id']
   initial=f.rpc('research_autonomy_control',dict(p_operation='lease',p_actor=None,p_study=None,p_payload={}))
   records=autonomy_fixtures.plan()['records'];source=next(r for r in records if r['kind']=='sources');claim=next(r for r in records if r['kind']=='claims')
@@ -33,11 +34,11 @@ def main():
   job=f.rpc('research_model_dispatch',dict(p_operation='claim',p_payload={}))
   def rpc(op,**kw):return experiment_builder.rpc(op,job,**kw)
   def begin(index):
-   raw=workflow.canonical(dict(model='gpt-6.1-sol',input=[{'role':'user','content':'Synthetic native prompt '+str(index)}]))
+   raw=workflow.canonical(dict(model='gpt-6.1-sol',store=False,stream=True,input=[{'role':'user','content':'Synthetic native prompt '+str(index)}]))
    artifact=store.artifact(study,f.ACTOR,raw,f.uid(),'application/json',{'kind':'builder-original','version':'experiment-builder-v1'});store.append(study,f.ACTOR,'artifacts',artifact)
    return dict(request_artifact_id=artifact['id'],request_sha256=artifact['sha256'],request_bytes=len(raw))
   def finish(call,status='complete'):
-   raw=b'data: {"type":"response.completed","response":{"status":"completed","output":[]}}\n\n'
+   raw=b'data: {"type":"response.completed","response":{"status":"completed","model":"gpt-6.1-sol","output":[]}}\n\n'
    artifact=store.artifact(study,f.ACTOR,raw,f.uid(),'application/octet-stream',{'kind':'builder-original','version':'experiment-builder-v1'});store.append(study,f.ACTOR,'artifacts',artifact)
    return rpc('finish',id=call['id'],status=status,response_artifact_id=artifact['id'],response_sha256=artifact['sha256'],usage=None,response_received=True,http_status=200,reason=None)
   original_cents=int(f.query('select committed_cents from research_autonomy_workflows'))
@@ -65,6 +66,7 @@ def main():
     p['resource_limits'].update(wall_seconds=600,max_input_bytes=1000000)
     p['metrics'][0]['planned_observations']=1
     p['execution']=dict(version=network_spec.VERSION,runner='built-package-v1',replications=1,limits=dict(wall_seconds=600,max_instances=1,max_output_bytes=1000000,max_network_bytes=1000000))
+    p['decision']=dict(version=autonomy_methods.DECISION_VERSION,claim_id=claim['record']['id'],kind='recorded-comparisons',coverage='complete-under-tested-conditions',rationale='Explicit synthetic 10-ms cell only; no actual scientific execution claimed.',groups=[dict(id='cell',configuration='fixture',metric='latency',units='ms',observation_ids=['synthetic-cell'])],rules=[dict(id='target',operation='value',groups=['cell'],target='10',tolerance_absolute='0')])
     (root/'candidate.json').write_bytes(workflow.canonical(dict(protocol=p,experiment_type='independent-check')))
     candidate=experiment_builder.freeze_candidate(job,root)
     validated=autonomy.validate_proposal(task,candidate)
@@ -111,6 +113,49 @@ def main():
    assert 'absolute filename' in f.query('select system_prompt from agent_prompt_versions where id='+f.sql_text(v2))
    return {'RLS':'enabled','browser_writes':'denied','stale_fence':'refused','draft_publication':'refused','authority_checks':'required; original live checks retained'}
   f.check('RLS, immutable history, fences and publication checks',security)
+  def reconciliation():
+   calls=store.rows('builder_calls',dict(study_id='eq.'+study,dispatch_id='eq.'+turn,order='number.asc'))
+   checkpoint=store.artifact(study,f.ACTOR,b'Explicit checkpoint transport fixture; no execution',f.uid(),'application/octet-stream',dict(kind='builder-reconciled-workspace',dispatch_id=turn));store.append(study,f.ACTOR,'artifacts',checkpoint)
+   proof=dict(version='builder-dispatch-reconciliation-v1',dispatch_id=turn,request_sha256=workflow.digest(raw),original_status='unknown',container_cleanup='stopped',checkpoint=dict(artifact_id=checkpoint['id'],sha256=checkpoint['sha256']),calls=[{k:c[k] for k in ('id','request_sha256','response_sha256')} for c in calls])
+   def submit(value,role=None):
+    original=workflow.canonical(value);a=store.artifact(study,f.ACTOR,original,f.uid(),'application/json',dict(kind='builder-dispatch-reconciliation',dispatch_id=turn));store.append(study,f.ACTOR,'artifacts',a)
+    payload=dict(p_dispatch=turn,p_artifact=a['id'],p_sha256=a['sha256'],p_proof=value)
+    if role:return f.query('select research_model_reconcile('+','.join([f.sql_text(turn)+'::uuid',f.sql_text(a['id'])+'::uuid',f.sql_text(a['sha256']),f.sql_text(json.dumps(value))+'::jsonb'])+')',role=role)
+    return f.rpc('research_model_reconcile',payload)
+   f.rejects(lambda:submit(proof)) # Still a live dispatch/task, no cleanup proof may override it.
+   f.rpc('research_model_dispatch',dict(p_operation='finish',p_payload=dict(id=turn,token=job['lease_token'],status='unknown',provenance=dict(reason='Explicit synthetic interrupted parent'))))
+   autonomy.control(task,'finish',dict(id=turn,status='unknown',raw_response=None,output=None,reason='Synthetic missed parent completion; no replay.',usage={},estimated_cents=None))
+   autonomy.advance(task,'waiting',reason='Explicit retained unknown fixture; no provider replay.')
+   before=json.loads(f.query('select row_to_json(w) from research_autonomy_workflows w'))
+   unknown=json.loads(f.query('select row_to_json(d) from research_model_dispatches d where id='+f.sql_text(turn)))
+   f.rejects(lambda:submit(dict(proof,calls=proof['calls'][:1])))
+   f.rejects(lambda:submit(dict(proof,calls=[proof['calls'][0],proof['calls'][0]])))
+   f.rejects(lambda:submit(dict(proof,calls=[dict(c,request_sha256='0'*64) for c in proof['calls']])))
+   f.rejects(lambda:submit(dict(proof,request_sha256='0'*64)))
+   for role in ('anon','authenticated'):
+    f.rejects(lambda role=role:f.query('select * from research_model_reconciliations',role=role))
+    f.rejects(lambda role=role:submit(proof,role))
+   assert f.rpc('research_model_reconciliation_candidates',dict(p_after=None))[0]['id']==turn
+   with tempfile.TemporaryDirectory() as tmp:
+    root=Path(tmp);directory=root/turn;directory.mkdir();(directory/'logical.json').write_bytes(raw)
+    workspace=root/'builder-workspaces'/task['id']/'workspace';workspace.mkdir(parents=True);(workspace/'experiment.py').write_text('print("retained software fixture")\n')
+    with patch.object(experiment_builder,'container_action',return_value=[]) as cleanup,patch.object(experiment_builder,'normalize_workspace',return_value=b'{"bytes_unchanged":true,"fixture":true}'):
+     recovered=dispatch_recovery.reconcile_spool(root)
+    assert recovered==[turn],recovered
+    cleanup.assert_called_once_with(task['id'],'stop')
+   result=store.rows('model_reconciliations',dict(dispatch_id='eq.'+turn,study_id='eq.'+study))[0]
+   confirmed=dispatch_recovery.confirmed(task,unknown,{},autonomous_repair.original,autonomous_repair.rows)
+   assert confirmed['native_calls']==2 and result['proof']['calls']==proof['calls']
+   assert f.rpc('research_model_reconciliation_candidates',dict(p_after=None))==[]
+   f.rejects(lambda:f.query("update research_model_reconciliations set proof='{}'",role='service_role'))
+   f.rejects(lambda:f.query('delete from research_model_reconciliations',role='service_role'))
+   after=json.loads(f.query('select row_to_json(w) from research_autonomy_workflows w'))
+   for key in ('max_spend_cents','committed_cents','max_attempts','deadline_at','initial_prompt','initial_sha256'):assert before[key]==after[key],key
+   assert json.loads(f.query('select row_to_json(d) from research_model_dispatches d where id='+f.sql_text(turn)))==unknown
+   assert f.query("select count(*) from research_autonomy_events where event='model-dispatch-reconciled'")=='1'
+   assert f.query('select count(*) from research_queue_jobs')=='0'
+   return dict(original_unknown_retained=True,browser_access_denied=True,distinct_call_hash_coverage=True,active_work_fenced=True,limits_unchanged=True,scientific_measurements=0,actual_worker_to_database_reconciliation=True,cleanup='mocked here; real Docker qualified separately')
+  f.check('separate immutable reconciliation accounts for finished native calls without replay or budget reset',reconciliation)
   f.report['passed']=True
  except Exception as error:f.report.update(passed=False,error=str(error));raise
  finally:
