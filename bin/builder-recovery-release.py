@@ -97,8 +97,39 @@ print(json.dumps(dict(status=report['status'],actual_calls=report['actual_calls'
   time.sleep(1)
  q.save(out/'ssm.json',value);assert value['Status']=='Success';data=json.loads(value['StandardOutputContent']);q.save(out/'preview.json',data);return data
 
+def snapshot(source,out):
+ """Fixed assessment read-only audit; never restart work or change limits."""
+ identity=r.admin.literal(prior.STUDY)+'::uuid'
+ workflow=r.admin.query('select to_jsonb(w) record from research_autonomy_workflows w where study_id='+identity)[0]['record']
+ before=json.loads((source/'assessment-before.json').read_bytes())
+ assert all(workflow[k]==before[k] for k in ('max_spend_cents','deadline_at','max_attempts','initial_sha256'))
+ assert workflow['committed_cents']>=before['committed_cents'],'Historical commitments must not be reset'
+ baseline=json.loads((ROOT/'.test-artifacts/assessment-4055396e/20261029T213731633407Z/snapshot.json').read_bytes())
+ dispatches=r.admin.query('select id,status,request_sha256 from research_model_dispatches where study_id='+identity+' order by created_at')
+ indexed={d['id']:d for d in dispatches}
+ for row in baseline['model_dispatches']:
+  old=row['record'];assert all(indexed[old['id']][k]==old[k] for k in ('status','request_sha256')),'Original parent outcome or request identity changed'
+ tasks=r.admin.query('select id,claim_id,stage,status,label,reason,attempts,updated_at from research_autonomy_tasks where study_id='+identity+' order by created_at')
+ reconciled=r.admin.query('select to_jsonb(r) record from research_model_reconciliations r where study_id='+identity+' order by created_at')
+ proofs=[]
+ for row in reconciled:
+  record=row['record'];proof=record['proof'];assert proof['dispatch_id']==record['dispatch_id'] and proof['request_sha256']==indexed[record['dispatch_id']]['request_sha256'] and proof['original_status']==indexed[record['dispatch_id']]['status']
+  for kind,ref in (('proof',dict(artifact_id=record['artifact_id'],sha256=record['sha256'])),('checkpoint',proof['checkpoint'])):
+   a=r.admin.query('select storage_path,sha256,byte_count from research_artifacts where study_id='+identity+' and id='+r.admin.literal(ref['artifact_id'])+'::uuid')[0]
+   raw=m.storage(a['storage_path']);assert r.sha(raw)==a['sha256']==ref['sha256'] and len(raw)==a['byte_count']
+   (out/(record['dispatch_id']+'-'+kind+('.json' if kind=='proof' else '.zip'))).write_bytes(raw)
+   if kind=='proof':assert json.loads(raw)==proof
+  calls=r.admin.query('select id,status,request_sha256,response_sha256 from research_builder_calls where dispatch_id='+r.admin.literal(record['dispatch_id'])+'::uuid order by created_at')
+  assert len(calls)==len(proof['calls']) and all(c['status']=='complete' for c in calls)
+  assert {c['id']:(c['request_sha256'],c['response_sha256']) for c in calls}=={c['id']:(c['request_sha256'],c['response_sha256']) for c in proof['calls']}
+  proofs.append(dict(dispatch_id=record['dispatch_id'],original_status=proof['original_status'],native_calls=len(calls),proof_sha256=record['sha256'],checkpoint_sha256=proof['checkpoint']['sha256']))
+ jobs=r.admin.query('select status,count(*) count from research_queue_jobs where study_id='+identity+' group by status')
+ result=dict(recorded_at=r.stamp(),assessment=prior.STUDY,workflow=workflow,tasks=tasks,original_parent_identities_preserved=True,original_parents_checked=len(baseline['model_dispatches']),reconciliations=proofs,dispatches=dispatches,jobs=jobs,scope='Bounded separate database reads; live work may advance during retrieval. Operational reconciliation is not scientific validation.')
+ q.save(out/'assessment-snapshot.json',result);q.save(source/'latest-assessment-snapshot.json',dict(path=str(out/'assessment-snapshot.json'),sha256=r.sha((out/'assessment-snapshot.json').read_bytes())))
+ return dict(assessment=prior.STUDY,limits_preserved=True,original_parents_checked=result['original_parents_checked'],reconciliations=proofs,committed_cents=workflow['committed_cents'],maximum_cents=workflow['max_spend_cents'],tasks=tasks,jobs=jobs)
+
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['pin','freeze','freeze-followup','prepare','native','live','evidence','status','collect-status','collect','preview','record-review','approve','migrate','verify-held','verify-active']);args=p.parse_args();BASE.mkdir(parents=True,exist_ok=True)
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['pin','freeze','freeze-followup','prepare','native','live','evidence','status','collect-status','collect','preview','snapshot','record-review','approve','migrate','verify-held','verify-active']);args=p.parse_args();BASE.mkdir(parents=True,exist_ok=True)
  out=BASE/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');out.mkdir();receipt=dict(mode=args.mode,status='running',started_at=r.stamp())
  try:
   receipt['targets']=r.target()
@@ -109,6 +140,7 @@ def main():
   elif args.mode=='approve':result=prior.approve(q.selected())
   elif args.mode=='migrate':result=migrate(q.selected())
   elif args.mode=='preview':result=preview(q.selected(),out)
+  elif args.mode=='snapshot':result=snapshot(q.selected(),out)
   elif args.mode in ('verify-held','verify-active'):
    r.prior.PRIVATE.add('research_model_reconciliations');result=prior.verify(q.selected(),out,args.mode=='verify-active')
   elif args.mode in ('status','collect-status','collect'):result=getattr(q,args.mode.replace('-','_'))(q.selected());result.pop('cases',None)
