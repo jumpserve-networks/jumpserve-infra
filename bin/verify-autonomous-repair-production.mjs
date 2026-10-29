@@ -19,7 +19,9 @@ try{
   const response=await read(`/studies/${assessment}/queue?public=1&diagnostics=1`,'queue-original.json');queue=response.data;assert.equal(queue.study.id,assessment);assert.equal(queue.coverage.jobs,queue.jobs.length);assert.equal(queue.autonomy.coverage.tasks,queue.autonomy.tasks.length);
   assert.equal(queue.autonomy.defaults.attempts_per_claim,null);assert.equal(queue.autonomy.defaults.maximum_spend_usd,100);
   const claims=queue.autonomy.tasks.filter(t=>t.claim_id);assert.equal(claims.length,5);const counts={};for(const task of claims){counts[task.label]=(counts[task.label]??0)+1;if(task.repair_progress)assert.equal(task.repair_progress.version,'autonomous-repair-v1');}
-  await page.goto(origin+'/research-verification/experiment-queue?assessment='+assessment,{waitUntil:'networkidle'});await page.getByText(queue.study.title,{exact:true}).first().waitFor();assert.doesNotMatch(await page.locator('main').innerText(),/Failed to fetch|Assessment status unavailable|Current status is unknown/);
+  // This page polls continuously. Readiness is the real assessment content,
+  // rather than the absence of background requests (Playwright discourages networkidle).
+  await page.goto(origin+'/research-verification/experiment-queue?assessment='+assessment,{waitUntil:'domcontentloaded'});await page.getByText(queue.study.title,{exact:true}).first().waitFor();assert.doesNotMatch(await page.locator('main').innerText(),/Failed to fetch|Assessment status unavailable|Current status is unknown/);
   return {queue_sha256:response.sha256,claims:claims.length,scientific_labels:counts,jobs:queue.jobs.length,repair_states:claims.filter(t=>t.repair_progress).map(t=>t.repair_progress.state),scope:'Recorded snapshot; work may advance after retrieval.'};
  });
  await check('repair incidents and immutable event projections are available through the public backend',async()=>{
@@ -29,8 +31,8 @@ try{
   return checked;
  });
  await check('desktop/mobile queue, themes and shared records remain usable',async()=>{
-  for(const width of [1365,390])for(const theme of ['Light Mode','Dark Mode']){await page.setViewportSize({width,height:900});await page.getByRole('button',{name:theme,exact:true}).click();await page.waitForFunction(dark=>document.documentElement.classList.contains('dark')===dark,theme==='Dark Mode');assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.screenshot({path:directory+`/queue-${width}-${theme==='Dark Mode'?'dark':'light'}.png`,fullPage:true});}
-  return {widths:[1365,390],themes:['light','dark'],overflow:false};
+  for(const width of [1365,390])for(const theme of ['Light Mode','Dark Mode']){await page.setViewportSize({width,height:900});await page.getByRole('button',{name:theme,exact:true}).click();await page.waitForFunction(dark=>document.documentElement.classList.contains('dark')===dark,theme==='Dark Mode');assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:directory+`/queue-${width}-${theme==='Dark Mode'?'dark':'light'}.png`,fullPage:true});}
+  return {widths:[1365,390],themes:['light','dark'],overflow:false,screenshot_scroll_origin:'top-of-document'};
  });
  await check('previous assessments, explicit missing data and sign-in return paths',async()=>{
   await page.goto(origin+'/research-verification/previous-assessments',{waitUntil:'networkidle'});await page.getByRole('heading',{name:'Previous Assessments',exact:true}).waitFor();
