@@ -174,6 +174,11 @@ def record_release(source,out):
  old=ROOT/'.test-artifacts/autonomous-repair-local/20261029T010001267011Z/evidence.zip';assert r.sha(old.read_bytes())=='abfa36e381c69d2abc775de175e548090f4b1d01dd28da584d1bc2efc7d07330';files[str(old.relative_to(ROOT))]=old.read_bytes()
  with r.prior.guard.OPEN.open('https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/research/studies/'+STUDY+'/queue?public=1&diagnostics=1',timeout=30) as response:raw=response.read(2000000)
  queue=json.loads(raw);assert queue['study']['id']==STUDY;files['recorded-public-queue.json']=raw
+ before=json.loads((source/'before-activation-queue.json').read_bytes());old=before['autonomy']['workflows'][0];now=queue['autonomy']['workflows'][0]
+ assert all(old[k]==now[k] for k in ('study_id','max_spend_cents','max_attempts','created_at','deadline_at'))
+ assert old['committed_cents']<=now['committed_cents']<=now['max_spend_cents']
+ assert {(t['id'],t['claim_id']) for t in before['autonomy']['tasks']}=={(t['id'],t['claim_id']) for t in queue['autonomy']['tasks']}
+ result['original_assessment_authorization']=dict(max_spend_cents=now['max_spend_cents'],deadline_at=now['deadline_at'],ai_turn_cap=now['max_attempts'],commitments_before=old['committed_cents'],commitments_observed=now['committed_cents'],original_task_and_claim_identities_retained=True)
  result['recorded_assessment_snapshot']=dict(id=STUDY,workflow=queue['autonomy']['workflows'],claim_states=[{k:t.get(k) for k in ('id','claim_id','stage','status','label','repair_progress')} for t in queue['autonomy']['tasks'] if t['claim_id']],jobs=queue['coverage']['jobs'],sha256=r.sha(raw),scope='Recorded bounded snapshot; autonomous work may advance after retrieval.')
  files['release-report.json']=json.dumps(result,sort_keys=True,separators=(',',':')).encode();buffer=io.BytesIO()
  with zipfile.ZipFile(buffer,'w',zipfile.ZIP_DEFLATED) as z:

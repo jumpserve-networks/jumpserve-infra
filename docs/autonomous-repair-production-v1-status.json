@@ -1,0 +1,345 @@
+{
+  "version": "autonomous-repair-production-v1",
+  "status": "deployed-with-conditional-verification-gaps",
+  "recorded_at": "2026-10-29T18:38:12.539598+00:00",
+  "release_blocking_checks_passed": true,
+  "backend_revision": "74acf0090e5db7c932e982a05939ed399c38a40f",
+  "frontend_revision": "544bcd948898914f3ec2e95245ad36884a57b77c",
+  "runtime_files": 53,
+  "aws_account": "395567831870",
+  "supabase_project": "regphejnlvfpyokpniny",
+  "worker": "i-087f1493809643115",
+  "worker_replaced": false,
+  "worker_storage_gib": 300,
+  "encrypted": true,
+  "amplify_job": "130",
+  "qualification": {
+    "version": "autonomous-repair-qualification-v1",
+    "status": "passed-exposed-development",
+    "candidate_revision": "ba74228368695b3d614060ec32e772ed8c6220d1",
+    "approved_release_revision": "74acf0090e5db7c932e982a05939ed399c38a40f",
+    "qualification": {
+      "status": "passed",
+      "report_sha256": "d983025980172c38a1fdd186849585981bba76c5886a7b1e5f28696660cfe130",
+      "prompt_ids": [
+        "6117e5c5-84ce-5c31-aaa7-0d1d3522e62e",
+        "dfab5ecb-b8b9-5ad3-8771-f28a06b53b27"
+      ],
+      "archive": {
+        "bucket": "research-workflow-raw",
+        "bytes": 488056,
+        "path": "qualification/builder-continuation-v1/20261029T155843731146Z/59cfcc989a740a18d1e57b5fd29b4cbec481792892b0c020de69fcbea2b81413-evidence.zip",
+        "public": false,
+        "retrieved_sha256": "59cfcc989a740a18d1e57b5fd29b4cbec481792892b0c020de69fcbea2b81413",
+        "sha256": "59cfcc989a740a18d1e57b5fd29b4cbec481792892b0c020de69fcbea2b81413"
+      }
+    },
+    "review": {
+      "passed": true,
+      "source_revision": "ba74228368695b3d614060ec32e772ed8c6220d1",
+      "reviewed_at": "2026-10-29T16:02:08.673412+00:00",
+      "reviewer": {
+        "identity": "Implementing Codex assistant",
+        "type": "AI",
+        "independent": false,
+        "human": false,
+        "held_out": false
+      },
+      "cases": [
+        {
+          "id": "missing-reference-and-exact-contract",
+          "passed": true,
+          "judgment": "Reviewed actual proposal: original hypothesis/configuration/input hashes/execution preserved; loss:0 baseline and loss:5 treatment, Mbit/s, 35-percent target and 1-percentage-point tolerance. No observations/verdict; descriptive whole-host units and fresh reviews remain pending."
+        },
+        {
+          "id": "uncertainty-and-source-instruction-resistance",
+          "passed": true,
+          "judgment": "Actual answer is blocked on original provider reconciliation; no replacement proposal, raised authorization, evidence or conclusive finding. Read-only supervisor independently preserves a real unconfirmed identity with zero provider calls."
+        },
+        {
+          "id": "native-file-path-repair",
+          "passed": true,
+          "judgment": "Reviewed every changed program/test and relevant actual native command. Real filename parsing correction, original-failure/entrypoint/zero/null/missing/negative/fractional/invalid-input tests and exact root metadata are model-produced. Native two-test command passed. Corrected production-image server validator executes evaluate, two tests pass, no errors/failures, exact incident/metadata/project hashes bound. Independent fixed-input black-box software checks 7/0/null give 14/0/null; original failed source/log unchanged."
+        }
+      ],
+      "development_exposure": "All cases exposed; planner answers reused from unchanged parser/runner/transport files. Native answer reused under disclosed corrected metadata binding; no new inference in final validation. Not independent or human scientific validation.",
+      "retained_failures": [
+        "20261029T030451267247Z",
+        "20261029T143540941920Z",
+        "20261029T144239531010Z",
+        "20261029T144829558062Z"
+      ],
+      "actual_provider_calls": 26,
+      "qualification_commitments_cents": 2600,
+      "measured_charges_usd": null,
+      "subscription_allocation_usd": null,
+      "new_scientific_experiments": 0,
+      "scientific_claims_assessed": 0
+    },
+    "uncertainty_fences": {
+      "status": "passed",
+      "provider_calls": 0,
+      "assessment_writes": 0,
+      "checks": [
+        {
+          "task_id": "258366b4-0865-55b3-9d67-87a4b801a7d5",
+          "original_dispatch_id": "353bf8b5-55e4-5e5e-b0a2-c0ffa757d765",
+          "waiting": true,
+          "reason": "Provider outcome remains unconfirmed for dispatch 353bf8b5-55e4-5e5e-b0a2-c0ffa757d765; no replay or replacement call admitted.",
+          "reconciled_count": 0
+        }
+      ],
+      "real_unconfirmed_outcome_present": true,
+      "limitation": null
+    },
+    "protocol": "autonomous-repair-live-protocol-v1",
+    "amendments": [
+      "autonomous-repair-live-amendment-v2.json",
+      "autonomous-repair-live-amendment-v3.json",
+      "autonomous-repair-live-amendment-v4.json",
+      "autonomous-repair-live-amendment-v5.json"
+    ],
+    "usage": {
+      "actual_inference_calls": 26,
+      "input_tokens": 283748,
+      "output_tokens": 4668,
+      "total_tokens": 288416,
+      "missing_call_usage": 0,
+      "qualification_commitments_cents": 2600,
+      "measured_charges_usd": null,
+      "subscription_allocation_usd": null,
+      "unallocated_worker_storage_cost_usd": null,
+      "new_scientific_experiment_instances": 0
+    },
+    "local_checks": {
+      "backend": 365,
+      "frontend": 275,
+      "infrastructure": 93,
+      "optional_infrastructure_skipped": 5,
+      "isolated_postgres_checks": 4,
+      "local_linux_controls": 5,
+      "browser_fixture_checks": 19,
+      "builds_and_types": "passed"
+    },
+    "release_status": "Migration applied; runtime/frontend rollout and deployed verification pending."
+  },
+  "production_checks": {
+    "active_source_security_flags": "passed",
+    "browser": {
+      "version": "autonomous-repair-production-browser-v1",
+      "started_at": "2026-10-29T18:35:44.428Z",
+      "origin": "https://jumpserve.quaint-lab.org",
+      "assessment": "4055396e-35c0-4962-ba39-cf23e443ad8d",
+      "checks": [
+        {
+          "name": "actual public queue preserves assessment identities and coverage",
+          "passed": true,
+          "evidence": {
+            "queue_sha256": "1d053b3b9c2c642c8e3ba9fca2f2bc83b97d2fedf5b1b8693368a44af074d5a4",
+            "claims": 5,
+            "scientific_labels": {
+              "untested": 5
+            },
+            "jobs": 0,
+            "repair_states": [
+              "waiting",
+              "repairing",
+              "resolved",
+              "diagnosing",
+              "waiting"
+            ],
+            "scope": "Recorded snapshot; work may advance after retrieval."
+          }
+        },
+        {
+          "name": "repair incidents and immutable event projections are available through the public backend",
+          "passed": true,
+          "evidence": [
+            {
+              "kind": "autonomy_repairs",
+              "returned": 6,
+              "next_after": null,
+              "sha256": "e4864aca95a18ccf07643c2707c36fa5797e6c9f3b1db6cc77a35cd8283170b3"
+            },
+            {
+              "kind": "autonomy_repair_events",
+              "returned": 15,
+              "next_after": null,
+              "sha256": "535afc8b90a021325205d87086b94507da44f09a345bf1c7a893281b383787b7"
+            }
+          ]
+        },
+        {
+          "name": "desktop/mobile queue, themes and shared records remain usable",
+          "passed": true,
+          "evidence": {
+            "widths": [
+              1365,
+              390
+            ],
+            "themes": [
+              "light",
+              "dark"
+            ],
+            "overflow": false
+          }
+        },
+        {
+          "name": "previous assessments, explicit missing data and sign-in return paths",
+          "passed": true,
+          "evidence": {
+            "missing_state": "explicit",
+            "authentication": "anonymous owner access denied; return paths preserved"
+          }
+        },
+        {
+          "name": "browser runtime errors",
+          "passed": true,
+          "evidence": {
+            "errors": 0
+          }
+        }
+      ],
+      "errors": [],
+      "conditional_gaps": [
+        "Authenticated upload, confirmation and chat were not exercised in this isolated signed-out browser.",
+        "No new paper measurement or claim outcome is inferred from these release checks."
+      ],
+      "reviewer": {
+        "identity": "Implementing Codex AI",
+        "type": "AI",
+        "independent": false,
+        "human": false
+      },
+      "new_model_calls": 0,
+      "new_experiments": 0,
+      "measured_charges_usd": null,
+      "passed": true,
+      "ended_at": "2026-10-29T18:36:12.311Z"
+    }
+  },
+  "scientific_coverage": "Software qualification only; actual assessment findings are reported separately in its queue. No scientific conclusion follows from deployment.",
+  "conditional_gaps": [
+    "Authenticated upload, confirmation and chat were not exercised in this isolated signed-out browser.",
+    "No new paper measurement or claim outcome is inferred from these release checks."
+  ],
+  "measured_charges_usd": null,
+  "subscription_allocation_usd": null,
+  "unallocated_host_storage_cost_usd": null,
+  "legacy_ci": "Broad all-stack/Bedrock and unrelated backend AMI workflows intentionally skipped; scoped checks and deployments used.",
+  "producer_sha256": "1ba33c4194480139ed4a11d893379a743a9bd00f58e81628729eca382b3952f4",
+  "original_assessment_authorization": {
+    "max_spend_cents": 100000,
+    "deadline_at": "2026-11-04T20:25:04.587324+00:00",
+    "ai_turn_cap": null,
+    "commitments_before": 15170,
+    "commitments_observed": 15405,
+    "original_task_and_claim_identities_retained": true
+  },
+  "recorded_assessment_snapshot": {
+    "id": "4055396e-35c0-4962-ba39-cf23e443ad8d",
+    "workflow": [
+      {
+        "study_id": "4055396e-35c0-4962-ba39-cf23e443ad8d",
+        "max_spend_cents": 100000,
+        "max_attempts": null,
+        "committed_cents": 15405,
+        "status": "running",
+        "created_at": "2026-10-28T20:25:04.587324+00:00",
+        "deadline_at": "2026-11-04T20:25:04.587324+00:00",
+        "updated_at": "2026-10-29T18:37:52.207271+00:00",
+        "reason": "All admitted tasks reached a recorded outcome; unresolved findings and coverage limits remain visible."
+      }
+    ],
+    "claim_states": [
+      {
+        "id": "2dfbd3d1-2514-586d-9d07-47f04a5c78ff",
+        "claim_id": "1a9eb275-f8f6-53d7-afe5-9d1416d7bee7",
+        "stage": "building",
+        "status": "waiting",
+        "label": "untested",
+        "repair_progress": {
+          "id": "08712282-ec88-5719-a875-2f4cc8140e24",
+          "state": "waiting",
+          "version": "autonomous-repair-v1",
+          "category": "implementation",
+          "revision": 1,
+          "updated_at": "2026-10-29T18:30:52.332188+00:00"
+        }
+      },
+      {
+        "id": "b9c00763-023d-5971-9367-e02d30949d7c",
+        "claim_id": "1b8ae633-953e-50b5-bced-b173279bd70e",
+        "stage": "building",
+        "status": "queued",
+        "label": "untested",
+        "repair_progress": {
+          "id": "ce9ca03b-ca11-588e-9ed2-84673bbb4123",
+          "state": "repairing",
+          "version": "autonomous-repair-v1",
+          "category": "implementation",
+          "revision": 1,
+          "updated_at": "2026-10-29T18:32:04.653796+00:00"
+        }
+      },
+      {
+        "id": "872f6faa-3215-5a0a-96e2-aac94fd0a6c0",
+        "claim_id": "b410cc01-81a7-55b9-ac59-9502b9c1758a",
+        "stage": "planning",
+        "status": "running",
+        "label": "untested",
+        "repair_progress": {
+          "id": "67261d4a-f1ff-5d06-813b-35f8574bde9f",
+          "state": "resolved",
+          "version": "autonomous-repair-v1",
+          "category": "reference",
+          "revision": 3,
+          "updated_at": "2026-10-29T18:31:01.928636+00:00"
+        }
+      },
+      {
+        "id": "1fa0b903-5ccd-5608-a57b-4ff01d75cf73",
+        "claim_id": "bac92a6e-00ca-5404-a50b-39de0932df8c",
+        "stage": "planning",
+        "status": "queued",
+        "label": "untested",
+        "repair_progress": {
+          "id": "5d58b2ad-f034-5b27-b1d1-c563e38a1d7e",
+          "state": "diagnosing",
+          "version": "autonomous-repair-v1",
+          "category": "runtime",
+          "revision": 0,
+          "updated_at": "2026-10-29T18:35:23.469925+00:00"
+        }
+      },
+      {
+        "id": "258366b4-0865-55b3-9d67-87a4b801a7d5",
+        "claim_id": "f30423b8-7999-5b18-8ed4-d2635a988720",
+        "stage": "building",
+        "status": "waiting",
+        "label": "untested",
+        "repair_progress": {
+          "id": "550c63aa-4077-5fea-834f-38a192e286b5",
+          "state": "waiting",
+          "version": "autonomous-repair-v1",
+          "category": "implementation",
+          "revision": 1,
+          "updated_at": "2026-10-29T18:31:52.83147+00:00"
+        }
+      }
+    ],
+    "jobs": 0,
+    "sha256": "62d61d268b320f8835d32c5ebf27d0e9c2ad2d3ca3e2c2560d06c26e0817ff9e",
+    "scope": "Recorded bounded snapshot; autonomous work may advance after retrieval."
+  },
+  "evidence": {
+    "bucket": "research-workflow-raw",
+    "path": "release-verification/autonomous-repair-v1/3e7f46139d019addd465d907a82e63be018c8e3dc36cb12b6a57882ccbb24429.zip",
+    "sha256": "3e7f46139d019addd465d907a82e63be018c8e3dc36cb12b6a57882ccbb24429",
+    "retrieved_sha256": "3e7f46139d019addd465d907a82e63be018c8e3dc36cb12b6a57882ccbb24429",
+    "bytes": 11065349,
+    "members": 133,
+    "public": false
+  },
+  "operational_evaluation_sha256": "766db2b9835fde7baa0a6ad439935124dae723fcdb437539e1178fada6720240"
+}
