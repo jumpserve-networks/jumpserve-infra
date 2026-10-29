@@ -1,5 +1,5 @@
 """Fixed-target, versioned recovery qualification and scoped release operations."""
-import argparse,copy,datetime as dt,importlib.util,io,json,pathlib,shlex,subprocess,sys,time,zipfile
+import argparse,copy,datetime as dt,importlib.util,io,json,pathlib,shlex,subprocess,sys,time,urllib.error,urllib.request,zipfile
 ROOT=pathlib.Path(__file__).resolve().parents[1];BACK=ROOT.parent/'jumpserve-back-end'
 spec=importlib.util.spec_from_file_location('prior_repair',ROOT/'bin/autonomous-repair-release.py');prior=importlib.util.module_from_spec(spec);spec.loader.exec_module(prior)
 q=prior.q;r=q.r;m=q.m;BASE=ROOT/'.test-artifacts/builder-recovery-release-v1';q.BASE=BASE;q.ASSESSMENT=prior.STUDY
@@ -129,8 +129,44 @@ def snapshot(source,out):
  q.save(out/'assessment-snapshot.json',result);q.save(source/'latest-assessment-snapshot.json',dict(path=str(out/'assessment-snapshot.json'),sha256=r.sha((out/'assessment-snapshot.json').read_bytes())))
  return dict(assessment=prior.STUDY,limits_preserved=True,original_parents_checked=result['original_parents_checked'],reconciliations=proofs,committed_cents=workflow['committed_cents'],maximum_cents=workflow['max_spend_cents'],tasks=tasks,jobs=jobs)
 
+def finish_release(source,out,pending):
+ """Resume the identical no-overwrite storage object, never a model call."""
+ archive=ROOT/pending['archive'];assert archive.resolve().is_relative_to(BASE.resolve())
+ raw=archive.read_bytes();assert len(raw)<20000000 and r.sha(raw)==pending['sha256']
+ path='release-verification/builder-recovery-v1/'+pending['sha256']+'.zip'
+ key=r.aws('secretsmanager','get-secret-value','--secret-id','jumpserve/supabase-service-key')['SecretString']
+ headers={'apikey':key,'Authorization':'Bearer '+key};url=m.API+'/storage/v1/object/research-workflow-raw/'+path
+ def get():
+  try:
+   with r.prior.guard.OPEN.open(urllib.request.Request(url,headers=headers),timeout=180) as response:return response.read(20000001)
+  except urllib.error.HTTPError as error:
+   body=error.read(10000);(out/'archive-read-error.bin').write_bytes(body)
+   if error.code in (400,404) and any(word in body.lower() for word in (b'not found',b'not_found',b'notfound')):return None
+   raise
+ restored=get()
+ if restored is None:
+  q.save(out/'archive-write-attempt.json',dict(path=path,sha256=pending['sha256'],bytes=len(raw),socket_timeout_seconds=180,upsert=False,model_calls=0))
+  request=urllib.request.Request(url,data=raw,method='POST',headers={**headers,'Content-Type':'application/zip','x-upsert':'false'})
+  try:
+   with r.prior.guard.OPEN.open(request,timeout=180) as response:response.read(10000)
+  except (urllib.error.URLError,TimeoutError) as error:
+   q.save(out/'archive-write-unconfirmed.json',dict(path=path,sha256=pending['sha256'],error_type=type(error).__name__,scope='Original local bytes retained. Reconcile only this immutable object by GET; no inference or experiment retry.'))
+  restored=get()
+ assert restored==raw,'Private archive upload remains unconfirmed; retain the pending original identity'
+ with zipfile.ZipFile(io.BytesIO(restored)) as z:
+  for item in json.loads(z.read('artifact-manifest.json')):assert r.sha(z.read(item['path']))==item['sha256']
+ pointer=dict(bucket='research-workflow-raw',path=path,sha256=pending['sha256'],retrieved_sha256=r.sha(restored),bytes=len(raw),members=pending['members'],public=False)
+ value=copy.deepcopy(pending['value']);value['evidence']=pointer
+ report=json.dumps(dict(kind='operational-release-verification',release=value),sort_keys=True,separators=(',',':'));sha=r.sha(report.encode())
+ for prompt in json.loads((source/'frozen.json').read_bytes())['prompts']:
+  r.admin.query('insert into agent_prompt_evaluations(prompt_version_id,outcome,report_raw,report_sha256,original_artifacts,recorded_by) values('+','.join([r.admin.literal(prompt['id'])+'::uuid',r.admin.literal('passed'),r.admin.literal(report),r.admin.literal(sha),r.admin.literal(json.dumps(pointer))+'::jsonb',r.admin.literal('Codex implementing AI; nonindependent operational verification, not human or scientific validation')])+') on conflict(prompt_version_id,report_sha256) do nothing',read_only=False)
+  rows=r.admin.query('select report_raw from agent_prompt_evaluations where prompt_version_id='+r.admin.literal(prompt['id'])+'::uuid and report_sha256='+r.admin.literal(sha));assert len(rows)==1 and r.sha(rows[0]['report_raw'].encode())==sha
+ value['operational_evaluation_sha256']=sha;q.save(ROOT/'docs/builder-recovery-production-v1-status.json',value)
+ return dict(status=value['status'],evidence=pointer,evaluation_sha256=sha)
+
 def record_release(source,out):
  """Archive verified release bytes, keeping operational and scientific scope apart."""
+ if (source/'release-pending.json').exists():return finish_release(source,out,json.loads((source/'release-pending.json').read_bytes()))
  active=json.loads((source/'active-verified.json').read_bytes());assert active['status']=='passed' and active['admission']
  manifest=json.loads((ROOT/'research-workflow-runtime.json').read_bytes());assert active['source_revision']==manifest['source_revision']
  browser_path=sorted((ROOT/'.test-artifacts/autonomous-repair-production-browser').glob('*/report.json'))[-1]
@@ -146,6 +182,7 @@ def record_release(source,out):
  value=dict(version='builder-recovery-production-v1',status='deployed-with-conditional-verification-gaps',recorded_at=r.stamp(),release_blocking_checks_passed=True,revisions=revisions,runtime_manifest_version=manifest['version'],runtime_files=len(manifest['files']),aws_account='395567831870',supabase_project='regphejnlvfpyokpniny',worker=r.instance(),worker_replaced=False,worker_storage_gib=300,encrypted=True,frontend_changed=False,qualification=json.loads((ROOT/'docs/builder-recovery-qualification-v1.json').read_bytes()),migration=json.loads((source/'migration-applied.json').read_bytes()),deployed_source_security_flags='passed',browser=browser,original_assessment_authorization={k:state['workflow'][k] for k in ('study_id','max_spend_cents','deadline_at','max_attempts','committed_cents')},original_parent_identities_preserved=True,reconciliations=state['reconciliations'],assessment_tasks=[{k:t[k] for k in ('id','claim_id','stage','status','label','attempts')} for t in state['tasks']],queue_jobs=state['jobs'],scientific_scope='Software release verification; no scientific verdict follows. Actual bounded assessment snapshot is reported separately and can change after retrieval.',conditional_gaps=browser['conditional_gaps'],measured_charges_usd=None,subscription_allocation_usd=None,unallocated_host_storage_cost_usd=None,reviewer=dict(identity='Codex implementing AI',type='AI',independent=False,human=False,held_out=False))
  value['browser_harness_amendment']=json.loads((ROOT/'docs/builder-recovery-browser-amendment-v2.json').read_bytes())
  value['conditional_gaps'].append('Intermittent navigation delays exceeded the earlier 20-second harness limit. The final instrumented run passed with content ready in 7429 ms; the cause of earlier delays and general performance are unverified.')
+ value['archive_transport_history']='The first large release ZIP upload timed out before local ZIP staging was added. Its failure receipt and all source inputs remain retained; that upload was not verified. The final archive is staged before transport and resumes only the identical content-addressed, no-overwrite object, followed by GET and per-file hash verification.'
  value['browser_runs']=[]
  files={}
  for directory in (source,snapshot_path.parent,browser_path.parent):
@@ -164,7 +201,8 @@ def record_release(source,out):
   report=json.loads(p.read_bytes());value['browser_runs'].append(dict(path=str(p.relative_to(ROOT)),sha256=r.sha(p.read_bytes()),passed=report['passed']))
   for a in p.parent.iterdir():
    if a.is_file() and a.suffix in ('.json','.png'):files[str(a.relative_to(ROOT))]=a.read_bytes()
- for name in ('bin/builder-recovery-release.py','bin/verify-autonomous-repair-production.mjs','docs/builder-recovery-release-protocol-v1.json','docs/builder-recovery-release-amendment-v2.json','docs/builder-recovery-browser-amendment-v2.json','database/202610290001_builder_reconciliation.sql','research-workflow-runtime.json'):files[name]=(ROOT/name).read_bytes()
+ for name in ('bin/builder-recovery-release.py','bin/verify-autonomous-repair-production.mjs','test/builder_recovery_release_test.py','docs/builder-recovery-release-protocol-v1.json','docs/builder-recovery-release-amendment-v2.json','docs/builder-recovery-browser-amendment-v2.json','database/202610290001_builder_reconciliation.sql','research-workflow-runtime.json'):files[name]=(ROOT/name).read_bytes()
+ files['release-storage-tests.log']=(source/'release-storage-tests.log').read_bytes()
  files['public-page.html']=(source/'public-page.html').read_bytes()
  for name in ('.test-artifacts/builder-recovery-v3-unit-validator-followup-final.log','.test-artifacts/repair-validation-linux/20261029T221234601819Z/report.json'):
   files['jumpserve-back-end/'+name]=(BACK/name).read_bytes()
@@ -173,16 +211,9 @@ def record_release(source,out):
  with zipfile.ZipFile(buffer,'w',zipfile.ZIP_DEFLATED) as z:
   for name,raw in sorted(files.items()):z.writestr(name,raw)
   z.writestr('artifact-manifest.json',json.dumps([dict(path=n,sha256=r.sha(raw),bytes=len(raw)) for n,raw in sorted(files.items())]))
- raw=buffer.getvalue();assert len(raw)<20000000;path='release-verification/builder-recovery-v1/'+r.sha(raw)+'.zip';m.storage(path,raw);restored=m.storage(path);assert restored==raw
- with zipfile.ZipFile(io.BytesIO(restored)) as z:
-  for item in json.loads(z.read('artifact-manifest.json')):assert r.sha(z.read(item['path']))==item['sha256']
- (out/'release-evidence.zip').write_bytes(raw);pointer=dict(bucket='research-workflow-raw',path=path,sha256=r.sha(raw),retrieved_sha256=r.sha(restored),bytes=len(raw),members=len(files),public=False);value['evidence']=pointer
- report=json.dumps(dict(kind='operational-release-verification',release=value),sort_keys=True,separators=(',',':'));sha=r.sha(report.encode())
- for prompt in json.loads((source/'frozen.json').read_bytes())['prompts']:
-  r.admin.query('insert into agent_prompt_evaluations(prompt_version_id,outcome,report_raw,report_sha256,original_artifacts,recorded_by) values('+','.join([r.admin.literal(prompt['id'])+'::uuid',r.admin.literal('passed'),r.admin.literal(report),r.admin.literal(sha),r.admin.literal(json.dumps(pointer))+'::jsonb',r.admin.literal('Codex implementing AI; nonindependent operational verification, not human or scientific validation')])+') on conflict(prompt_version_id,report_sha256) do nothing',read_only=False)
-  rows=r.admin.query('select report_raw from agent_prompt_evaluations where prompt_version_id='+r.admin.literal(prompt['id'])+'::uuid and report_sha256='+r.admin.literal(sha));assert len(rows)==1 and r.sha(rows[0]['report_raw'].encode())==sha
- value['operational_evaluation_sha256']=sha;q.save(ROOT/'docs/builder-recovery-production-v1-status.json',value)
- return dict(status=value['status'],evidence=pointer,evaluation_sha256=sha)
+ raw=buffer.getvalue();assert len(raw)<20000000;archive=out/'release-evidence.zip';archive.write_bytes(raw);archive.chmod(0o600)
+ pending=dict(archive=str(archive.relative_to(ROOT)),sha256=r.sha(raw),members=len(files),value=value);q.save(source/'release-pending.json',pending)
+ return finish_release(source,out,pending)
 
 def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['pin','freeze','freeze-followup','prepare','native','live','evidence','status','collect-status','collect','preview','snapshot','record-review','approve','migrate','verify-held','verify-active','record-release']);args=p.parse_args();BASE.mkdir(parents=True,exist_ok=True)

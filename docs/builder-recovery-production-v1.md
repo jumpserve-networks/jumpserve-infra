@@ -65,6 +65,11 @@ campaign and raw evidence stay in `.test-artifacts/builder-recovery-release-v1`.
 Qualification and deployment archives are private, with per-file manifests and
 GET-after-upload byte verification. Failed read-only target requests are retained
 separately and can safely be retried; uncertain model or execution calls cannot.
+The final release ZIP is saved locally before upload. If transport fails, repeating
+`record-release` resumes the exact pending object and idempotent evaluation rows,
+without regenerating its bytes or invoking a model. Archive transport has a bounded
+180-second socket timeout; missing, matching, conflicting and uncertain-write
+behavior is covered by `test/builder_recovery_release_test.py`.
 
 The read-only `snapshot` mode verifies original parent identities against 102
 retained records, retrieves proof/checkpoint bytes, checks native call coverage,
