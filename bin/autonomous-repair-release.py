@@ -145,8 +145,51 @@ def verify(source,out,active):
  assert len(polls)==1 and r.instance()=='i-087f1493809643115'
  result=dict(status='passed',source_revision=manifest['source_revision'],runtime_files=len(manifest['files']),functions=functions,flags=flags,security=security,worker=call,worker_stdout_sha256=r.sha(invocation['StandardOutputContent'].encode()),health=health,capabilities_sha256=r.sha(raw),admission=active,polling=polls,auth_upload_chat_reverified=False)
  q.save(source/('active-verified.json' if active else 'held-verified.json'),result);return dict(status='passed',source_revision=manifest['source_revision'],runtime_files=len(manifest['files']),admission=active,worker=r.instance())
+def record_release(source,out):
+ active=json.loads((source/'active-verified.json').read_bytes());assert active['status']=='passed' and active['admission']
+ manifest=json.loads((ROOT/'research-workflow-runtime.json').read_bytes());assert active['source_revision']==manifest['source_revision']
+ front=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT.parent/'jumpserve-front-end',text=True).strip()
+ jobs=r.aws('amplify','list-jobs','--app-id','d24jvguj7brnkj','--branch-name','main','--max-results','10')['jobSummaries'];job=next(j for j in jobs if j['commitId']==front and j['status']=='SUCCEED')
+ browser_path=sorted((ROOT/'.test-artifacts/autonomous-repair-production-browser').glob('*/report.json'))[-1];browser=json.loads(browser_path.read_bytes());assert browser['passed']
+ qualification=json.loads((ROOT/'docs/autonomous-repair-qualification-v1.json').read_bytes())
+ result=dict(version='autonomous-repair-production-v1',status='deployed-with-conditional-verification-gaps',recorded_at=r.stamp(),release_blocking_checks_passed=True,backend_revision=manifest['source_revision'],frontend_revision=front,runtime_files=len(manifest['files']),aws_account='395567831870',supabase_project='regphejnlvfpyokpniny',worker=r.instance(),worker_replaced=False,worker_storage_gib=300,encrypted=True,amplify_job=job['jobId'],qualification=qualification,production_checks=dict(active_source_security_flags='passed',browser=browser),scientific_coverage='Software qualification only; actual assessment findings are reported separately in its queue. No scientific conclusion follows from deployment.',conditional_gaps=browser['conditional_gaps'],measured_charges_usd=None,subscription_allocation_usd=None,unallocated_host_storage_cost_usd=None,legacy_ci='Broad all-stack/Bedrock and unrelated backend AMI workflows intentionally skipped; scoped checks and deployments used.')
+ files={}
+ for name in ('bin/autonomous-repair-release.py','bin/verify-autonomous-repair-production.mjs'):
+  files[name]=(ROOT/name).read_bytes()
+ result['producer_sha256']=r.sha(files['bin/autonomous-repair-release.py'])
+ for directory in (source,browser_path.parent):
+  for p in directory.iterdir():
+   if p.is_file() and p.suffix in ('.json','.zip','.png'):files[str(p.relative_to(ROOT))]=p.read_bytes()
+ for p in (ROOT/'.test-artifacts/openclaw-release').glob('*/receipt.json'):
+  value=json.loads(p.read_bytes())
+  if p.parent.name<'20261029T010746449274Z' or value.get('mode') not in ('hold','inspect','host-diff','host-deploy','diff','deploy','host-update','host-status','host-check','activate'):continue
+  for item in p.parent.iterdir():
+   if item.is_file() and item.name in ('receipt.json','cdk.log','outputs.json','stack-before.json','stack-after.json','parameter-comparison.json'):files[str(item.relative_to(ROOT))]=item.read_bytes()
+ for name in ('research-workflow-runtime.json','database/202610280004_autonomous_repair.sql','docs/autonomous-repair-qualification-v1.json','docs/autonomous-repair-release.md'):
+  files[name]=(ROOT/name).read_bytes()
+ for name,sha in manifest['files'].items():
+  raw=(BACK/'research_workflow'/name).read_bytes();assert r.sha(raw)==sha;files['runtime/research_workflow/'+name]=raw
+ for p in BASE.glob('*/JumpServeBenchmarkStack*.zip'):files[str(p.relative_to(ROOT))]=p.read_bytes()
+ for p in BASE.glob('*/worker-ssm.json'):files[str(p.relative_to(ROOT))]=p.read_bytes()
+ old=ROOT/'.test-artifacts/autonomous-repair-local/20261029T010001267011Z/evidence.zip';assert r.sha(old.read_bytes())=='abfa36e381c69d2abc775de175e548090f4b1d01dd28da584d1bc2efc7d07330';files[str(old.relative_to(ROOT))]=old.read_bytes()
+ with r.prior.guard.OPEN.open('https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/research/studies/'+STUDY+'/queue?public=1&diagnostics=1',timeout=30) as response:raw=response.read(2000000)
+ queue=json.loads(raw);assert queue['study']['id']==STUDY;files['recorded-public-queue.json']=raw
+ result['recorded_assessment_snapshot']=dict(id=STUDY,workflow=queue['autonomy']['workflows'],claim_states=[{k:t.get(k) for k in ('id','claim_id','stage','status','label','repair_progress')} for t in queue['autonomy']['tasks'] if t['claim_id']],jobs=queue['coverage']['jobs'],sha256=r.sha(raw),scope='Recorded bounded snapshot; autonomous work may advance after retrieval.')
+ files['release-report.json']=json.dumps(result,sort_keys=True,separators=(',',':')).encode();buffer=io.BytesIO()
+ with zipfile.ZipFile(buffer,'w',zipfile.ZIP_DEFLATED) as z:
+  for n,raw in sorted(files.items()):z.writestr(n,raw)
+  z.writestr('artifact-manifest.json',json.dumps([dict(path=n,sha256=r.sha(raw),bytes=len(raw)) for n,raw in sorted(files.items())],sort_keys=True,separators=(',',':')))
+ raw=buffer.getvalue();assert len(raw)<=20000000;path='release-verification/autonomous-repair-v1/'+r.sha(raw)+'.zip';m.storage(path,raw);restored=m.storage(path);assert restored==raw
+ with zipfile.ZipFile(io.BytesIO(restored)) as z:
+  for row in json.loads(z.read('artifact-manifest.json')):assert r.sha(z.read(row['path']))==row['sha256']
+ (out/'release-evidence.zip').write_bytes(raw);pointer=dict(bucket='research-workflow-raw',path=path,sha256=r.sha(raw),retrieved_sha256=r.sha(restored),bytes=len(raw),members=len(files),public=False);result['evidence']=pointer
+ text=json.dumps(dict(kind='operational-release-verification',release=result,reviewer=dict(identity='Implementing Codex AI',type='AI',independent=False,human=False)),sort_keys=True,separators=(',',':'));sha=r.sha(text.encode())
+ for ident in ('6117e5c5-84ce-5c31-aaa7-0d1d3522e62e','dfab5ecb-b8b9-5ad3-8771-f28a06b53b27'):
+  r.admin.query('insert into agent_prompt_evaluations(prompt_version_id,outcome,report_raw,report_sha256,original_artifacts,recorded_by) values('+','.join([r.admin.literal(ident)+'::uuid',r.admin.literal('passed'),r.admin.literal(text),r.admin.literal(sha),r.admin.literal(json.dumps(pointer))+'::jsonb',r.admin.literal('Implementing Codex AI; nonindependent operational release verification with explicit conditional gaps, not scientific or human review')])+') on conflict(prompt_version_id,report_sha256) do nothing',read_only=False)
+  rows=r.admin.query('select report_raw from agent_prompt_evaluations where prompt_version_id='+r.admin.literal(ident)+'::uuid and report_sha256='+r.admin.literal(sha));assert len(rows)==1 and r.sha(rows[0]['report_raw'].encode())==sha
+ result['operational_evaluation_sha256']=sha;q.save(ROOT/'docs/autonomous-repair-production-v1-status.json',result);return dict(status=result['status'],amplify_job=job['jobId'],evidence=pointer,evaluation_sha256=sha)
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['freeze','freeze-followup','freeze-validation','prepare','live','evidence','status','collect-status','collect','record-review','approve','migrate','verify-fences','verify-worker','verify-held','verify-active']);args=p.parse_args();BASE.mkdir(parents=True,exist_ok=True)
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['freeze','freeze-followup','freeze-validation','prepare','live','evidence','status','collect-status','collect','record-review','approve','migrate','verify-fences','verify-worker','verify-held','verify-active','record-release']);args=p.parse_args();BASE.mkdir(parents=True,exist_ok=True)
  out=BASE/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');out.mkdir();receipt=dict(mode=args.mode,status='running',started_at=r.stamp())
  try:
   receipt['target']=r.target()
@@ -155,6 +198,7 @@ def main():
   elif args.mode=='freeze-validation':result=freeze(out,q.selected(),True)
   elif args.mode=='verify-fences':result=fences(q.selected())
   elif args.mode in ('verify-held','verify-active'):result=verify(q.selected(),out,args.mode=='verify-active')
+  elif args.mode=='record-release':result=record_release(q.selected(),out)
   elif args.mode in ('record-review','approve','migrate'):result=dict(record_review=record,approve=approve,migrate=migrate)[args.mode.replace('-','_')](q.selected())
   elif args.mode in ('status','collect-status','collect','verify-worker'):result=getattr(q,args.mode.replace('-','_'))(q.selected());result.pop('cases',None)
   else:result=q.dispatch(q.selected(),args.mode)
