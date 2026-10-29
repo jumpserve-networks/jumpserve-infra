@@ -145,6 +145,7 @@ def record_release(source,out):
  assert revisions['jumpserve-back-end']==manifest['source_revision']
  value=dict(version='builder-recovery-production-v1',status='deployed-with-conditional-verification-gaps',recorded_at=r.stamp(),release_blocking_checks_passed=True,revisions=revisions,runtime_manifest_version=manifest['version'],runtime_files=len(manifest['files']),aws_account='395567831870',supabase_project='regphejnlvfpyokpniny',worker=r.instance(),worker_replaced=False,worker_storage_gib=300,encrypted=True,frontend_changed=False,qualification=json.loads((ROOT/'docs/builder-recovery-qualification-v1.json').read_bytes()),migration=json.loads((source/'migration-applied.json').read_bytes()),deployed_source_security_flags='passed',browser=browser,original_assessment_authorization={k:state['workflow'][k] for k in ('study_id','max_spend_cents','deadline_at','max_attempts','committed_cents')},original_parent_identities_preserved=True,reconciliations=state['reconciliations'],assessment_tasks=[{k:t[k] for k in ('id','claim_id','stage','status','label','attempts')} for t in state['tasks']],queue_jobs=state['jobs'],scientific_scope='Software release verification; no scientific verdict follows. Actual bounded assessment snapshot is reported separately and can change after retrieval.',conditional_gaps=browser['conditional_gaps'],measured_charges_usd=None,subscription_allocation_usd=None,unallocated_host_storage_cost_usd=None,reviewer=dict(identity='Codex implementing AI',type='AI',independent=False,human=False,held_out=False))
  value['browser_harness_amendment']=json.loads((ROOT/'docs/builder-recovery-browser-amendment-v2.json').read_bytes())
+ value['conditional_gaps'].append('Intermittent navigation delays exceeded the earlier 20-second harness limit. The final instrumented run passed with content ready in 7429 ms; the cause of earlier delays and general performance are unverified.')
  value['browser_runs']=[]
  files={}
  for directory in (source,snapshot_path.parent,browser_path.parent):
@@ -156,6 +157,8 @@ def record_release(source,out):
   for name in ('cdk.log','outputs.json','parameter-comparison.json'):
    a=p.parent/name
    if a.exists():files[str(a.relative_to(ROOT))]=a.read_bytes()
+ for p in BASE.glob('*/receipt.json'):
+  if p.parent!=out:files[str(p.relative_to(ROOT))]=p.read_bytes()
  for p in (ROOT/'.test-artifacts/autonomous-repair-production-browser').glob('*/report.json'):
   if p.parent.name<'2026-10-29T22-42-00.666Z':continue
   report=json.loads(p.read_bytes());value['browser_runs'].append(dict(path=str(p.relative_to(ROOT)),sha256=r.sha(p.read_bytes()),passed=report['passed']))
