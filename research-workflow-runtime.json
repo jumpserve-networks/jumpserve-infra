@@ -1,6 +1,6 @@
 {
-  "version": 63,
-  "source_revision": "2e0524cf6ec6e88a0b76856e40cdb32a198d7fec",
+  "version": 64,
+  "source_revision": "4d42a1b05da29851d83e9696f91c16d43aa8b6b5",
   "files": {
     "api.py": "de0ef9251379e1a369a9293bee07a09dc4fdbc9ba25019f31eb9fd686cfa84fb",
     "autonomous_repair.py": "85dbd25a37dd5128872a40972f7941ec7ea47fb3909fa7c26782dade0c9eac8e",
@@ -34,7 +34,7 @@
     "paper_titles.py": "2656fcdb94ca4b5aa6996cc3e46422520d0c8ddbdbd5a45195f343a6e1879c94",
     "paper_uploads.py": "b9d70281c8a65626c15a7e2d599e7713c35359a2c7bf679e3fe517a6ed2f8488",
     "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
-    "policies/autonomous-repair-release-v1.json": "ab1e45e27f542f95545f29c4f3f22b2893e8138ac99c7df83076287a9c08ee6d",
+    "policies/autonomous-repair-release-v1.json": "674c016b50db0e4f431238b50d04496eb000274e78f49267ef0a38ed24925902",
     "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b",
     "policies/autonomy-experiment-costs-v2.json": "241f53ad7c51399b043d0567cc545fb3281d7581c619f51fc9474fc1eaa13b19",
     "policies/autonomy-turn-policy-v1.json": "7aa48bccc617d1493e8621a8c290e2251180c768f021f6f8cccf06eac5eddafb",
