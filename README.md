@@ -16,6 +16,13 @@ native host authorization, exact runtime pins, rejected/passing prompt evidence,
 private persistence, release order and remaining activation checks. Subscription
 allocation and unallocated host charges remain unknown when not reported.
 
+The builder recovery release retains completed native work, compresses long
+tool histories without discarding records, and stores supplemental reconciliation
+proofs without rewriting failed or unknown parent outcomes. See the
+[qualified development checks](docs/builder-recovery-qualification-v1.json) and
+[recovery release procedure](docs/builder-recovery-production-v1.md). These
+software checks do not establish scientific findings for an assessment.
+
 ## Architecture
 
 - Amplify hosts the Next.js frontend at https://jumpserve.quaint-lab.org.
