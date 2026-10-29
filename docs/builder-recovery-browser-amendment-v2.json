@@ -1,0 +1,26 @@
+{
+  "version": "builder-recovery-browser-amendment-v2",
+  "recorded_at": "2026-10-29T22:48:00Z",
+  "scope": "Operational browser verification only; no product, model, scientific protocol or decision criteria changed",
+  "reason": [
+    "The first queue navigation timed out at 20 seconds waiting for networkidle; a later run passed after DOMContentLoaded plus the existing exact title readiness assertion.",
+    "A subsequent screenshot run also timed out at 20 seconds waiting for DOMContentLoaded, while later UI/API checks passed. Polling alone is not a demonstrated explanation for all navigation delays.",
+    "A separate unauthenticated curl request returned HTTP 200, 35554 bytes, first byte 0.552160 seconds and total 0.588778 seconds. This single request is not a performance distribution or SLA."
+  ],
+  "resources": {
+    "navigation_timeout_ms": 60000,
+    "unchanged_content_locator_timeout_ms": 20000
+  },
+  "changes": [
+    "Use DOMContentLoaded and actual visible paper title, not network silence, for queue readiness.",
+    "Retain document response and failed-request timings with URL queries omitted.",
+    "Capture full-page screenshots from document top, avoiding fixed-header capture at the records-panel scroll offset."
+  ],
+  "criteria": "Keep all original identity, coverage, source/repair record, desktop/mobile theme, overflow, missing-data, sign-in return and runtime-error assertions. Retain every failed and passing run; do not claim a product defect or its cause from a harness timeout.",
+  "reviewer": {
+    "identity": "Codex implementing AI",
+    "type": "AI",
+    "human": false,
+    "independent": false
+  }
+}
