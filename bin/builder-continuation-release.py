@@ -89,6 +89,12 @@ def dispatch(source,mode):
         packet=json.loads((source/'frozen.json').read_bytes())
         if packet.get('protocol',{}).get('version')=='assessment-recovery-release-v1':
             assert packet['amendment']['version']=='assessment-recovery-release-amendment-v2' and len(packet['live_cases'])==2 and packet['protocol']['resources']['maximum_real_provider_calls']==2
+        elif packet.get('protocol',{}).get('version')=='builder-recovery-release-followup-v2':
+            amendment=packet['amendment'];bounds=amendment['resources'];inherited=packet['inherited']
+            assert amendment['version']=='builder-recovery-release-amendment-v2' and inherited['actual_calls']==18
+            assert bounds['maximum_additional_provider_calls']==16 and bounds['maximum_cumulative_provider_calls']==36
+            assert packet['protocol']['resources']['maximum_actual_provider_calls']==36 and packet['protocol']['resources']['maximum_native_case_calls']==16
+            assert len(inherited['planner_results'])==2 and all(v['status']=='complete' for v in inherited['native_receipts'])
         elif packet.get('amendment'):assert packet.get('inherited_native') and packet['amendment']['resources']['additional_real_provider_calls']==1
     if mode=='prepare':
         item=json.loads((source/'candidate.json').read_bytes())
