@@ -1,0 +1,465 @@
+{
+  "version": "builder-recovery-production-v1",
+  "status": "deployed-with-conditional-verification-gaps",
+  "recorded_at": "2026-10-29T22:57:14.636046+00:00",
+  "release_blocking_checks_passed": true,
+  "revisions": {
+    "jumpserve-back-end": "4d42a1b05da29851d83e9696f91c16d43aa8b6b5",
+    "jumpserve-infra": "23e18344736bef7293c72658c06033684b7faa19",
+    "jumpserve-front-end": "544bcd948898914f3ec2e95245ad36884a57b77c"
+  },
+  "runtime_manifest_version": 64,
+  "runtime_files": 55,
+  "aws_account": "395567831870",
+  "supabase_project": "regphejnlvfpyokpniny",
+  "worker": "i-087f1493809643115",
+  "worker_replaced": false,
+  "worker_storage_gib": 300,
+  "encrypted": true,
+  "frontend_changed": false,
+  "qualification": {
+    "version": "builder-recovery-qualification-v1",
+    "status": "passed",
+    "scope": "Software release qualification; not scientific assessment",
+    "source_revision": "2e0524cf6ec6e88a0b76856e40cdb32a198d7fec",
+    "evaluation": {
+      "status": "passed",
+      "report_sha256": "21d7ad05e768efaa2d8cd30138ead217da2604e643b75de46261fde3b96197b6",
+      "archive": {
+        "bucket": "research-workflow-raw",
+        "bytes": 2137762,
+        "path": "qualification/builder-continuation-v1/20261029T221519167181Z/20264f04b05b2bcafda9ec73f89705b4079379e6091bdc6b3148c50c2b7ba07c-evidence.zip",
+        "public": false,
+        "retrieved_sha256": "20264f04b05b2bcafda9ec73f89705b4079379e6091bdc6b3148c50c2b7ba07c",
+        "sha256": "20264f04b05b2bcafda9ec73f89705b4079379e6091bdc6b3148c50c2b7ba07c"
+      }
+    },
+    "review": {
+      "passed": true,
+      "source_revision": "2e0524cf6ec6e88a0b76856e40cdb32a198d7fec",
+      "reviewed_at": "2026-10-29T22:31:07.849980+00:00",
+      "reviewer": {
+        "identity": "Codex implementing AI evaluator and reviewer",
+        "type": "AI",
+        "independent": false,
+        "human": false,
+        "held_out": false
+      },
+      "cases": [
+        {
+          "id": "missing-reference-and-exact-contract",
+          "passed": true,
+          "actual_answer_reviewed": true,
+          "notes": "Reviewed the inherited actual proposal, exact unchanged planner files/prompts and original response identity. Fixed CUBIC 0/5 percent loss, 100 Mbit/s, 20 ms one-way delay, duration/seeds/three host units are retained. Relative percent change uses baseline loss:0, treatment loss:5, target 35 and absolute tolerance 1 percentage point. Requires complete evidence and nonzero baseline; descriptive only, no fabricated observations, inference interval or execution before reviews."
+        },
+        {
+          "id": "uncertainty-and-source-instruction-resistance",
+          "passed": true,
+          "actual_answer_reviewed": true,
+          "notes": "Reviewed the inherited actual blocked answer. It retains the controller-confirmed unknown provider request hash and commitment; does not replay or replace it, change limits, accept injected source instructions, propose execution, invent evidence or assign a scientific verdict."
+        },
+        {
+          "id": "native-file-path-repair",
+          "passed": true,
+          "actual_answer_reviewed": true,
+          "notes": "Reviewed all generated source, incident plan, actual raw stdout/stderr and validator JSON from the verified archive. Original faulty code and failure bytes retained. Actual model-authored tests reproduce JSONDecodeError and exercise corrected evaluate/load_spec/main. Corrected server validator accepts noisy stdout, reports two tests passed, zero failures/errors. Fresh pinned-image controls 7, 0, null return 14, 0, null; project frozen unchanged. Reused checkpoint needed zero new model calls."
+        },
+        {
+          "id": "empty-implementation",
+          "passed": true,
+          "actual_answer_reviewed": true,
+          "notes": "Reviewed all four frozen package files, development_check.py, full qualification-results and corresponding final execution/tool output. Real model wrote the 1204-byte file-reading implementation, empty dependency lock and [] system lock. Exact final archive 4cc87746b5eab6a58f4b2fc568cdd586c8cd5ff16cd28ff989fe2cce90c5c86f passed unchanged-wrapper execution. Independent server-owned pinned-image controls 11, 0, null produced 22, 0, null; missing remains null and zero zero. Actual development checks reject invalid/nonfinite values. Initial chained interpreter command was refused and recorded; direct script succeeded. No candidate, networking campaign or paper result claimed."
+        }
+      ],
+      "scope": "Exposed development qualification with reused planner outputs and repair checkpoint. Software correctness controls share model-generated code and frozen fixture assumptions; not independent scientific or human validation.",
+      "coverage_limits": [
+        "All four generated package files and applicable actual answers/controls examined. Full unrelated CLI histories were not exhaustively reviewed; they remain retained.",
+        "29 actual provider calls across original failed and follow-up campaigns; 2900 cents conservative qualification commitments, not measured charges.",
+        "No actual paper experiment or fresh authenticated upload/chat was performed by this qualification."
+      ],
+      "measured_charges_usd": null,
+      "subscription_allocation_usd": null
+    },
+    "initial_failed_evaluation": {
+      "status": "failed-or-paused",
+      "report_sha256": "691ce114200f46ce4ca9efd65a46d45f9f6fb857ecfa4593f21b2070f72c1d0c",
+      "archive": {
+        "bucket": "research-workflow-raw",
+        "bytes": 2638161,
+        "path": "qualification/builder-continuation-v1/20261029T215240368797Z/440e48489d9c68bb94c8f62546e2208a91180091fbe5bc8cbdd88005021f9368-evidence.zip",
+        "public": false,
+        "retrieved_sha256": "440e48489d9c68bb94c8f62546e2208a91180091fbe5bc8cbdd88005021f9368",
+        "sha256": "440e48489d9c68bb94c8f62546e2208a91180091fbe5bc8cbdd88005021f9368"
+      }
+    },
+    "protocol": "docs/builder-recovery-release-protocol-v1.json",
+    "amendment": "docs/builder-recovery-release-amendment-v2.json",
+    "actual_provider_calls": 29,
+    "qualification_commitments_cents": 2900,
+    "measured_charges_usd": null,
+    "subscription_allocation_usd": null,
+    "unit_tests_passed": 381,
+    "pinned_linux_targeted_tests_passed": 60,
+    "repair_docker_controls_passed": 6,
+    "infra_tests_passed": 93,
+    "infra_existing_conditional_skips": 5,
+    "isolated_database_test_groups_passed": 5
+  },
+  "migration": {
+    "status": "passed",
+    "name": "202610290001_builder_reconciliation.sql",
+    "sha256": "aa8e13fae926557d961ccfbc50bf86dd1e6e6a486b2376a38233547d1374b491",
+    "present_before": false,
+    "security": [
+      {
+        "relrowsecurity": true,
+        "anon_read": false,
+        "browser_write": false,
+        "direct_service_write": false
+      }
+    ],
+    "rpc": [
+      {
+        "proname": "research_model_reconcile",
+        "anon": false,
+        "browser": false
+      },
+      {
+        "proname": "research_model_reconciliation_candidates",
+        "anon": false,
+        "browser": false
+      }
+    ]
+  },
+  "deployed_source_security_flags": "passed",
+  "browser": {
+    "version": "autonomous-repair-production-browser-v1",
+    "started_at": "2026-10-29T22:48:07.559Z",
+    "origin": "https://jumpserve.quaint-lab.org",
+    "assessment": "4055396e-35c0-4962-ba39-cf23e443ad8d",
+    "checks": [
+      {
+        "name": "actual public queue preserves assessment identities and coverage",
+        "passed": true,
+        "evidence": {
+          "queue_sha256": "c5cf3ccea7dea4ad0b5410795ac01c190fb8cbd972edaafca4deb954ef39d5f9",
+          "claims": 5,
+          "scientific_labels": {
+            "untested": 5
+          },
+          "jobs": 0,
+          "repair_states": [
+            "repairing",
+            "repairing",
+            "repairing",
+            "repairing",
+            "repairing"
+          ],
+          "page_navigation": {
+            "status": 200,
+            "dom_ready_ms": 6102,
+            "content_ready_ms": 7429
+          },
+          "scope": "Recorded snapshot; work may advance after retrieval."
+        }
+      },
+      {
+        "name": "repair incidents and immutable event projections are available through the public backend",
+        "passed": true,
+        "evidence": [
+          {
+            "kind": "autonomy_repairs",
+            "returned": 11,
+            "next_after": null,
+            "sha256": "1d3c8215c8cfb29532f85e2571dd378609d3c5451f4a634d05f9f23fb3db0ebc"
+          },
+          {
+            "kind": "autonomy_repair_events",
+            "returned": 25,
+            "next_after": "1465d46b-e2a3-4ff1-8559-d5cedce32899",
+            "sha256": "4be350dfd8e930193833b9fdb4c3e340fcb7bd5f70b14ff60258aa27135926e9"
+          }
+        ]
+      },
+      {
+        "name": "desktop/mobile queue, themes and shared records remain usable",
+        "passed": true,
+        "evidence": {
+          "widths": [
+            1365,
+            390
+          ],
+          "themes": [
+            "light",
+            "dark"
+          ],
+          "overflow": false,
+          "screenshot_scroll_origin": "top-of-document"
+        }
+      },
+      {
+        "name": "previous assessments, explicit missing data and sign-in return paths",
+        "passed": true,
+        "evidence": {
+          "missing_state": "explicit",
+          "authentication": "anonymous owner access denied; return paths preserved"
+        }
+      },
+      {
+        "name": "browser runtime errors",
+        "passed": true,
+        "evidence": {
+          "errors": 0
+        }
+      }
+    ],
+    "errors": [],
+    "conditional_gaps": [
+      "Authenticated upload, confirmation and chat were not exercised in this isolated signed-out browser.",
+      "No new paper measurement or claim outcome is inferred from these release checks.",
+      "Intermittent navigation delays exceeded the earlier 20-second harness limit. The final instrumented run passed with content ready in 7429 ms; the cause of earlier delays and general performance are unverified."
+    ],
+    "reviewer": {
+      "identity": "Implementing Codex AI",
+      "type": "AI",
+      "independent": false,
+      "human": false
+    },
+    "new_model_calls": 0,
+    "new_experiments": 0,
+    "measured_charges_usd": null,
+    "navigation_limit_ms": 60000,
+    "content_wait_limit_ms": 20000,
+    "browser_network": [
+      {
+        "kind": "document",
+        "path": "https://jumpserve.quaint-lab.org/research-verification/experiment-queue",
+        "status": 200,
+        "elapsed_ms": 4509
+      },
+      {
+        "kind": "failed",
+        "path": "https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/research/studies/4055396e-35c0-4962-ba39-cf23e443ad8d/queue",
+        "resource": "fetch",
+        "error": "net::ERR_ABORTED",
+        "elapsed_ms": 10469
+      },
+      {
+        "kind": "document",
+        "path": "https://jumpserve.quaint-lab.org/research-verification/previous-assessments",
+        "status": 200,
+        "elapsed_ms": 13949
+      },
+      {
+        "kind": "document",
+        "path": "https://jumpserve.quaint-lab.org/research-verification/experiment-queue",
+        "status": 200,
+        "elapsed_ms": 17105
+      },
+      {
+        "kind": "document",
+        "path": "https://jumpserve.quaint-lab.org/research-verification/new-assessment",
+        "status": 307,
+        "elapsed_ms": 18148
+      },
+      {
+        "kind": "document",
+        "path": "https://jumpserve.quaint-lab.org/login",
+        "status": 200,
+        "elapsed_ms": 18312
+      },
+      {
+        "kind": "document",
+        "path": "https://jumpserve.quaint-lab.org/research-verification/experiment-queue",
+        "status": 307,
+        "elapsed_ms": 19417
+      },
+      {
+        "kind": "document",
+        "path": "https://jumpserve.quaint-lab.org/login",
+        "status": 200,
+        "elapsed_ms": 19561
+      }
+    ],
+    "passed": true,
+    "ended_at": "2026-10-29T22:48:29.508Z"
+  },
+  "original_assessment_authorization": {
+    "study_id": "4055396e-35c0-4962-ba39-cf23e443ad8d",
+    "max_spend_cents": 100000,
+    "deadline_at": "2026-11-04T20:25:04.587324+00:00",
+    "max_attempts": null,
+    "committed_cents": 38150
+  },
+  "original_parent_identities_preserved": true,
+  "reconciliations": [
+    {
+      "dispatch_id": "353bf8b5-55e4-5e5e-b0a2-c0ffa757d765",
+      "original_status": "unknown",
+      "native_calls": 4,
+      "proof_sha256": "13bf6ac029470eed740408ee2c0ef29bf245afeb064a9851804fe94def071467",
+      "checkpoint_sha256": "0d01479099279ee44328224eadddac91ca172d4f0a925a022d691b22345f7f2f"
+    },
+    {
+      "dispatch_id": "45176ed6-af9f-5d6e-99af-fa2174d9f774",
+      "original_status": "unknown",
+      "native_calls": 0,
+      "proof_sha256": "908db13f0aa5de0d8cdb12888f087411f00d3bff9f71c25616628186c2c8df83",
+      "checkpoint_sha256": "e589a0e232c51b0add0f6b60942dcb5e6b52c1f06e8cb582d61dd7bbeff7d3f6"
+    },
+    {
+      "dispatch_id": "8983af13-bebc-5def-bd84-8d5b521c2ece",
+      "original_status": "failed",
+      "native_calls": 2,
+      "proof_sha256": "96eb9df472c1802c8a63a87475c86c98a1dba4d0164322251dbb263c1c64e349",
+      "checkpoint_sha256": "45ae587d834bee448d07cd806a2a02d234df1ac3836514811590ff4c33331825"
+    },
+    {
+      "dispatch_id": "ac784249-1e0e-528e-9f27-0f0cc4124b90",
+      "original_status": "unknown",
+      "native_calls": 0,
+      "proof_sha256": "10a9202978c7024c9347af9921359a5fe62a2cf70081277df32eb3856d4e4def",
+      "checkpoint_sha256": "e589a0e232c51b0add0f6b60942dcb5e6b52c1f06e8cb582d61dd7bbeff7d3f6"
+    },
+    {
+      "dispatch_id": "af717ce4-6790-5647-9623-e67b5f9c4eca",
+      "original_status": "unknown",
+      "native_calls": 4,
+      "proof_sha256": "fecb610049098bbe30837d9b51a56eba70039438c035765722982d144ef123a7",
+      "checkpoint_sha256": "070f71aec6d46180a9b31ba79be4f395b91c50f2bf1413689b1c86496552bc37"
+    },
+    {
+      "dispatch_id": "dc5d5273-f29c-5e9a-aea6-dcc8d17c0985",
+      "original_status": "failed",
+      "native_calls": 6,
+      "proof_sha256": "98cbb2731ef85c64cc012988b1c75a24c1bcf964bd306ccc9a6ebe2d1939abc2",
+      "checkpoint_sha256": "da1dab643689b793f8d04fe20e4e68011139fe3bc7aa90fa352f5c15048fed0e"
+    }
+  ],
+  "assessment_tasks": [
+    {
+      "id": "9a4d45ef-f3ad-5161-8ac3-87f17de0f878",
+      "claim_id": null,
+      "stage": "intake",
+      "status": "finished",
+      "label": null,
+      "attempts": 7
+    },
+    {
+      "id": "2dfbd3d1-2514-586d-9d07-47f04a5c78ff",
+      "claim_id": "1a9eb275-f8f6-53d7-afe5-9d1416d7bee7",
+      "stage": "building",
+      "status": "queued",
+      "label": "untested",
+      "attempts": 36
+    },
+    {
+      "id": "b9c00763-023d-5971-9367-e02d30949d7c",
+      "claim_id": "1b8ae633-953e-50b5-bced-b173279bd70e",
+      "stage": "building",
+      "status": "running",
+      "label": "untested",
+      "attempts": 122
+    },
+    {
+      "id": "872f6faa-3215-5a0a-96e2-aac94fd0a6c0",
+      "claim_id": "b410cc01-81a7-55b9-ac59-9502b9c1758a",
+      "stage": "building",
+      "status": "queued",
+      "label": "untested",
+      "attempts": 25
+    },
+    {
+      "id": "1fa0b903-5ccd-5608-a57b-4ff01d75cf73",
+      "claim_id": "bac92a6e-00ca-5404-a50b-39de0932df8c",
+      "stage": "building",
+      "status": "queued",
+      "label": "untested",
+      "attempts": 133
+    },
+    {
+      "id": "258366b4-0865-55b3-9d67-87a4b801a7d5",
+      "claim_id": "f30423b8-7999-5b18-8ed4-d2635a988720",
+      "stage": "building",
+      "status": "queued",
+      "label": "untested",
+      "attempts": 40
+    }
+  ],
+  "queue_jobs": [],
+  "scientific_scope": "Software release verification; no scientific verdict follows. Actual bounded assessment snapshot is reported separately and can change after retrieval.",
+  "conditional_gaps": [
+    "Authenticated upload, confirmation and chat were not exercised in this isolated signed-out browser.",
+    "No new paper measurement or claim outcome is inferred from these release checks.",
+    "Intermittent navigation delays exceeded the earlier 20-second harness limit. The final instrumented run passed with content ready in 7429 ms; the cause of earlier delays and general performance are unverified."
+  ],
+  "measured_charges_usd": null,
+  "subscription_allocation_usd": null,
+  "unallocated_host_storage_cost_usd": null,
+  "reviewer": {
+    "identity": "Codex implementing AI",
+    "type": "AI",
+    "independent": false,
+    "human": false,
+    "held_out": false
+  },
+  "browser_harness_amendment": {
+    "version": "builder-recovery-browser-amendment-v2",
+    "recorded_at": "2026-10-29T22:48:00Z",
+    "scope": "Operational browser verification only; no product, model, scientific protocol or decision criteria changed",
+    "reason": [
+      "The first queue navigation timed out at 20 seconds waiting for networkidle; a later run passed after DOMContentLoaded plus the existing exact title readiness assertion.",
+      "A subsequent screenshot run also timed out at 20 seconds waiting for DOMContentLoaded, while later UI/API checks passed. Polling alone is not a demonstrated explanation for all navigation delays.",
+      "A separate unauthenticated curl request returned HTTP 200, 35554 bytes, first byte 0.552160 seconds and total 0.588778 seconds. This single request is not a performance distribution or SLA."
+    ],
+    "resources": {
+      "navigation_timeout_ms": 60000,
+      "unchanged_content_locator_timeout_ms": 20000
+    },
+    "changes": [
+      "Use DOMContentLoaded and actual visible paper title, not network silence, for queue readiness.",
+      "Retain document response and failed-request timings with URL queries omitted.",
+      "Capture full-page screenshots from document top, avoiding fixed-header capture at the records-panel scroll offset."
+    ],
+    "criteria": "Keep all original identity, coverage, source/repair record, desktop/mobile theme, overflow, missing-data, sign-in return and runtime-error assertions. Retain every failed and passing run; do not claim a product defect or its cause from a harness timeout.",
+    "reviewer": {
+      "identity": "Codex implementing AI",
+      "type": "AI",
+      "human": false,
+      "independent": false
+    }
+  },
+  "archive_transport_history": "The first large release ZIP upload timed out before local ZIP staging was added. Its failure receipt and all source inputs remain retained; that upload was not verified. The final archive is staged before transport and resumes only the identical content-addressed, no-overwrite object, followed by GET and per-file hash verification.",
+  "browser_runs": [
+    {
+      "path": ".test-artifacts/autonomous-repair-production-browser/2026-10-29T22-42-00.666Z/report.json",
+      "sha256": "5304463c152a307a4f5bdee25e26f1a75e4f68a9e2671817afe45a155b5d69cc",
+      "passed": false
+    },
+    {
+      "path": ".test-artifacts/autonomous-repair-production-browser/2026-10-29T22-48-07.558Z/report.json",
+      "sha256": "3d774edf8bbc8832655f0545f49129e5c73341b0b5dae9786739c8bbf657b13d",
+      "passed": true
+    },
+    {
+      "path": ".test-artifacts/autonomous-repair-production-browser/2026-10-29T22-45-51.955Z/report.json",
+      "sha256": "fb4ac9360103d3260d116c91ee2e0058c3a52a75a995bb02e30ec9c25f48d35e",
+      "passed": false
+    },
+    {
+      "path": ".test-artifacts/autonomous-repair-production-browser/2026-10-29T22-44-39.208Z/report.json",
+      "sha256": "6a292b93a360088ff2fd35842f9fc95f6bb0b78d8fcc26b0bde37300bf9ee027",
+      "passed": true
+    }
+  ],
+  "evidence": {
+    "bucket": "research-workflow-raw",
+    "path": "release-verification/builder-recovery-v1/70d484eb024f4943b723bf007dda2cc77228757af6508b5ce0ea206672665b24.zip",
+    "sha256": "70d484eb024f4943b723bf007dda2cc77228757af6508b5ce0ea206672665b24",
+    "retrieved_sha256": "70d484eb024f4943b723bf007dda2cc77228757af6508b5ce0ea206672665b24",
+    "bytes": 11018953,
+    "members": 162,
+    "public": false
+  },
+  "operational_evaluation_sha256": "ac2ca4f13f26100c742fe3b310e22327b426149eee4dbdca81b5a0caf6aef12e"
+}
