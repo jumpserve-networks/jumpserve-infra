@@ -17,6 +17,12 @@ export function researchWorkflowIsEnabled(value: unknown): boolean {
   return value === true || value === 'true';
 }
 
+export function requireRepairQualification(qualification: {version?:string;approved_for_lab_recovery?:boolean;qualified_files_sha256?:string;evidence_sha256?:string}, files: Record<string,string>): void {
+  const repairFiles = Object.fromEntries(Object.entries(files).filter(([name])=>name!=='policies/autonomous-repair-release-v1.json').sort(([a],[b])=>a < b ? -1 : a > b ? 1 : 0));
+  const filesSha = createHash('sha256').update(JSON.stringify(repairFiles)).digest('hex');
+  if (qualification.version !== 'autonomous-repair-release-v1' || qualification.approved_for_lab_recovery !== true || qualification.qualified_files_sha256 !== filesSha || !/^[a-f0-9]{64}$/.test(qualification.evidence_sha256 ?? '')) throw new Error('Passing exact-source live repair qualification is required before activation.');
+}
+
 export class ResearchWorkflow extends Construct {
   constructor(scope: Construct, id: string, httpApi: api.HttpApi, executors?: {emulated:lambda.IFunction;realWorld:lambda.IFunction;vpc:ec2.IVpc}) {
     super(scope, id);
@@ -46,6 +52,13 @@ export class ResearchWorkflow extends Construct {
     const builderEnabled = researchWorkflowIsEnabled(this.node.tryGetContext('researchExperimentBuilderEnabled'));
     if(builderEnabled&&(!openclawEnabled||!networkingEnabled))throw new Error('Experiment builder requires native OpenClaw and the disposable networking executor.');
     aiEnvironment.RESEARCH_BUILDER_ENABLED=String(builderEnabled);
+    const repairEnabled = researchWorkflowIsEnabled(this.node.tryGetContext('researchAutonomyRepairEnabled'));
+    if (repairEnabled) {
+      if (!builderEnabled) throw new Error('Autonomous repair requires the native OpenClaw experiment builder.');
+      const qualification = JSON.parse(fs.readFileSync(path.join(runtime, 'policies/autonomous-repair-release-v1.json'), 'utf8'));
+      requireRepairQualification(qualification, manifest.files);
+    }
+    aiEnvironment.RESEARCH_AUTONOMY_REPAIR_ENABLED=String(repairEnabled);
     const networkingEnvironment: Record<string,string> = {};
     let boundedVersion: lambda.IVersion | undefined;
     if (autonomyEnabled) {

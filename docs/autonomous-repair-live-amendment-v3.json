@@ -1,0 +1,9 @@
+{
+ "version":"autonomous-repair-live-amendment-v3",
+ "before_additional_provider_calls":true,
+ "original_campaign":"20261029T143540941920Z",
+ "original_outcome":"All eight admitted calls completed. Both planner cases passed structural checks. Six native calls inspected the exact failure, corrected the real filename loader and wrote substantive original-failure/corrected-behavior tests; the call budget stopped work before the incident plan and test execution. The original failed qualification remains failed.",
+ "change":"Continue the hash-verified native checkpoint with actual tool history and focused missing-work feedback. Inherit the two unchanged planner answers from their original raw evidence without calling them again. Preserve the same runtime, image, prompts, faulty source, fixed inputs and acceptance criteria. No operator writes the repair or test plan.",
+ "resources":{"additional_maximum_actual_provider_calls":6,"additional_elapsed_seconds":600,"additional_qualification_commitments_cents":600,"combined_maximum_calls":14,"combined_qualification_commitments_cents":1400,"new_scientific_experiment_instances":0,"paid_api_fallback":false},
+ "limits":"Qualification call budgets are scheduling and evaluation resource limits, not assessment AI-turn caps. This is a disclosed, exposed development follow-up; no independent or held-out validation is claimed. Stop on any uncertain call or the new resource ceiling."
+}

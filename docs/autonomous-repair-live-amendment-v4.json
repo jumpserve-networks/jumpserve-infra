@@ -1,0 +1,10 @@
+{
+ "version":"autonomous-repair-live-amendment-v4",
+ "before_additional_provider_calls":true,
+ "original_campaign":"20261029T144239531010Z",
+ "demonstrated_failure":"The 14,782-byte native bootstrap retained only task=building. Reverse field pruning discarded the immediate next-action feedback behind the longer repair directive. Six fully completed continuation calls repeated context and implementation inspection; the exact original code correction and substantive tests remained unchanged, but the test-plan metadata was still absent.",
+ "change":"Prioritize the incident-specific builder feedback ahead of long directives in the native bootstrap. Full source/context/directive bytes remain indexed and unchanged. Add a byte-boundary regression requiring the complete immediate feedback and complete trusted system instructions. Continue the latest verified checkpoint, inheriting the two original planner answers because all planner, parsing, validation, runner-contract and transport files are byte-identical. Only experiment_builder.py changes, specifically bootstrap field order and its comment.",
+ "acceptance":"All original software and answer criteria remain required. Preserve both failed qualifications as failed. Inspect the actual corrected native commands, incident plan, server-owned validator output, frozen package and independent fixed-input program controls. No model-authored success statement substitutes for execution.",
+ "resources":{"additional_maximum_actual_provider_calls":12,"additional_elapsed_seconds":600,"additional_qualification_commitments_cents":1200,"combined_maximum_calls":26,"combined_qualification_commitments_cents":2600,"new_scientific_experiment_instances":0,"paid_api_fallback":false},
+ "review":"Exposed development correction and continuation, evaluated by the implementing AI. Not human, independent or held-out validation. Subscription allocation and measured charges remain unknown."
+}

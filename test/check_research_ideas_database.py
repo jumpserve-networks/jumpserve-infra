@@ -46,6 +46,8 @@ def query(sql,database=DATABASE,role=None):
 
 def rpc(name,payload):
     signatures={
+      'research_autonomy_repair':dict(p_operation='text',p_study='uuid',p_task='uuid',p_token='uuid',p_payload='jsonb'),
+      'research_autonomy_repair_candidates':{},
       'research_paper_upload':dict(p_operation='text',p_actor='uuid',p_id='uuid',p_payload='jsonb'),
       'research_paper_review':dict(p_operation='text',p_actor='uuid',p_study='uuid',p_payload='jsonb'),
       'research_autonomy_control':dict(p_operation='text',p_actor='uuid',p_study='uuid',p_payload='jsonb'),
@@ -111,11 +113,12 @@ def transport(path,method='GET',body=None,public=False,raw=False):
         return rpc(parsed.path.removeprefix('/rest/v1/rpc/'),body)
     if method!='GET' or body is not None:raise ValueError('Unexpected transport mutation')
     table=parsed.path.removeprefix('/rest/v1/')
-    allowed=['research_'+k for k in (*workflow.FIELDS,'studies','study_owners','paper_uploads','paper_reviews','queue_jobs','queue_events','prepared_plans','idea_packets','idea_runs','idea_readiness','idea_campaign_links','claim_designs','autonomy_workflows','autonomy_tasks','autonomy_turns','builder_calls','builder_packages','shared_campaigns','shared_campaign_members')]
+    allowed=['research_'+k for k in (*workflow.FIELDS,'studies','study_owners','paper_uploads','paper_reviews','queue_jobs','queue_events','prepared_plans','idea_packets','idea_runs','idea_readiness','idea_campaign_links','claim_designs','autonomy_workflows','autonomy_tasks','autonomy_turns','autonomy_events','model_dispatches','builder_calls','builder_packages','shared_campaigns','shared_campaign_members','autonomy_repairs','autonomy_repair_events')]
     if table not in allowed:raise ValueError('Unsupported relation')
     params=dict(urllib.parse.parse_qsl(parsed.query));columns=params.pop('select').split(',')
-    if any(not c.replace('_','').isalnum() and c not in ('value::text','evidence_progress:context->evidence_progress') for c in columns):raise ValueError('Unsafe projection')
-    columns=["context->'evidence_progress' as evidence_progress" if c=='evidence_progress:context->evidence_progress' else c for c in columns]
+    aliases={'evidence_progress:context->evidence_progress':"context->'evidence_progress' as evidence_progress",'repair_progress:context->repair_progress':"context->'repair_progress' as repair_progress"}
+    if any(not c.replace('_','').isalnum() and c not in ('value::text',*aliases) for c in columns):raise ValueError('Unsafe projection')
+    columns=[aliases.get(c,c) for c in columns]
     limit=int(params.pop('limit','1000'));offset=int(params.pop('offset','0'))
     order=params.pop('order',None);ordering=[]
     if order:
@@ -128,13 +131,13 @@ def transport(path,method='GET',body=None,public=False,raw=False):
         if column=='and':
             if not value.startswith('(id.gt.') or not value.endswith(')'):raise ValueError('Unsafe keyset cursor')
             predicates.append('id>'+sql_text(str(uuid.UUID(value[7:-1]))));continue
-        if column not in ('id','study_id','owner_id','source_id','created_at','packet_id','task','run_id','campaign_id','protocol_id','task_id','number','claim_id'):raise ValueError('Unsafe filter')
+        if column not in ('id','study_id','owner_id','source_id','created_at','packet_id','task','run_id','campaign_id','protocol_id','task_id','number','claim_id','event','status','state','dispatch_id'):raise ValueError('Unsafe filter')
         operator,argument=value.split('.',1)
         if operator=='eq':predicates.append(column+'='+sql_text(argument))
         elif operator=='is' and argument=='null':predicates.append(column+' is null')
         elif operator=='in':
             if not argument.startswith('(') or not argument.endswith(')'):raise ValueError('Invalid fixed list filter')
-            predicates.append(column+' in ('+','.join(sql_text(str(uuid.UUID(v))) for v in argument[1:-1].split(','))+')')
+            predicates.append(column+' in ('+','.join(sql_text(v if column in ('status','state') else str(uuid.UUID(v))) for v in argument[1:-1].split(','))+')')
         elif operator=='lt' and column=='number':
             if not argument.isdigit():raise ValueError('Invalid turn cursor')
             predicates.append(column+'<'+str(int(argument)))

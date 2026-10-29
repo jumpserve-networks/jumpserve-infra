@@ -68,7 +68,7 @@ def compare_parameters(before,after,image):
  if any(old[d['key']]['ParameterValue']!=fallback for d in drift):raise RuntimeError('Unexpected active or non-fallback lookup resolution changed')
  return dict(literal_parameters_unchanged=True,active_benchmark_image=image,resolved_lookup_changes=drift,inactive_fallback_only=True)
 
-def cdk(mode,directory,host=False,activate=False,builder=None):
+def cdk(mode,directory,host=False,activate=False,builder=None,repair=None):
  manifest=prior.queue.source()
  configured=json.loads((ROOT/'cdk.json').read_bytes()).get('context',{}).get('researchExperimentBuilderEnabled',False)
  effective_builder=(configured is True or configured=='true') if builder is None else builder
@@ -83,6 +83,7 @@ def cdk(mode,directory,host=False,activate=False,builder=None):
  command=['npm','run','cdk:openclaw' if host else 'cdk:benchmark','--',mode,'JumpServeOpenClawStack' if host else 'JumpServeBenchmarkStack']
  if not host:command+=['-c','researchAutonomyEnabled=true','-c','researchOpenClawEnabled=true','-c','researchAutonomyAdmissionEnabled='+str(activate).lower()]
  if not host and builder is not None:command+=['-c','researchExperimentBuilderEnabled='+str(builder).lower()]
+ if not host and repair is not None:command+=['-c','researchAutonomyRepairEnabled='+str(repair).lower()]
  command+=['--no-change-set'] if mode=='diff' else ['--require-approval','never','--outputs-file',str(directory/'outputs.json')]
  before=prior.queue.state() if not host else None
  if before:(directory/'stack-before.json').write_text(json.dumps(before,indent=2)+'\n')
@@ -93,8 +94,9 @@ def cdk(mode,directory,host=False,activate=False,builder=None):
  return dict(command=command,log_sha256=sha((directory/'cdk.log').read_bytes()),source_revision=manifest['source_revision'])
 
 def main():
- parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['inspect','parameters','migrate','hold','host-diff','host-deploy','host-status','host-repair','host-update','auth-correct','auth-start','auth-status','native-auth','host-check','host-refresh','cloud-control','cloud-verify','diff','deploy','activate','verify','publish','frontend-status','partial-resume','record-result']);parser.add_argument('--command-id');parser.add_argument('--builder',action='store_true',default=None,help='Explicit builder flag for diff/deploy/activate; deployment requires published v2 prompt and reviewed cost policy.');args=parser.parse_args()
- if args.builder and args.mode not in ('diff','deploy','activate'):raise ValueError('--builder applies only to scoped benchmark diff/deploy/activate modes.')
+ parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('mode',choices=['inspect','parameters','migrate','hold','host-diff','host-deploy','host-status','host-repair','host-update','auth-correct','auth-start','auth-status','native-auth','host-check','host-refresh','cloud-control','cloud-verify','diff','deploy','activate','verify','publish','frontend-status','partial-resume','record-result']);parser.add_argument('--command-id');parser.add_argument('--builder',action='store_true',default=None,help='Explicit builder flag for diff/deploy/activate; deployment requires published v2 prompt and reviewed cost policy.')
+ parser.add_argument('--repair',action='store_true',default=None,help='Enable only the exact-source live-qualified repair policy.');args=parser.parse_args()
+ if (args.builder or args.repair) and args.mode not in ('diff','deploy','activate'):raise ValueError('--builder/--repair apply only to scoped benchmark diff/deploy/activate modes.')
  directory=ROOT/'.test-artifacts/openclaw-release'/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');directory.mkdir(parents=True,exist_ok=False)
  receipt=dict(protocol='openclaw-production-v1',mode=args.mode,started_at=stamp(),status='running',measured_charges_usd=None)
  def save():(directory/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
@@ -126,7 +128,7 @@ def main():
     if not present:admin.query(raw.decode(),read_only=False);entry['status']='applied';save()
   elif args.mode in ('diff','deploy','activate'):
    if args.mode=='activate' and admin.query("select version from agent_prompt_versions v join agent_prompt_settings s on s.active_version_id=v.id where s.module_id='research-autonomy'")!=[{'version':'research-autonomy-v10'}]:raise RuntimeError('Evaluated OpenClaw prompt must be active before admission')
-   receipt['cdk']=cdk('diff' if args.mode=='diff' else 'deploy',directory,activate=args.mode=='activate',builder=args.builder)
+   receipt['cdk']=cdk('diff' if args.mode=='diff' else 'deploy',directory,activate=args.mode=='activate',builder=args.builder,repair=args.repair)
   elif args.mode=='host-status':
    if args.command_id:
     if not re.fullmatch(r'[a-f0-9-]{36}',args.command_id):raise RuntimeError('Invalid SSM receipt ID')

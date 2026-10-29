@@ -1,0 +1,10 @@
+{
+ "version":"autonomous-repair-live-amendment-v5",
+ "before_additional_provider_calls":true,
+ "original_campaign":"20261029T144829558062Z",
+ "demonstrated_failure":"Actual native output contains a real implementation fix, exact incident-bound metadata at /workspace/repair-test-plan.json, successful execution of both regression tests with exit 0, unchanged original source/failure hashes and saved test logs. The validator and harness required metadata under project/ even though the original instruction allowed the workspace-relative filename. No software validator ran; the campaign remained failed.",
+ "change":"Accept either of the two fixed metadata locations without moving or altering model-produced files. Validate exact incident/version/software scope before execution; reject symlinks, files over 4096 bytes and conflicting duplicate originals. Retain every metadata original and hash alongside the unchanged project hash. The server-owned unittest runner no longer redundantly reads a project-local plan after controller validation.",
+ "qualification":"No additional model inference. Reuse the fully completed native answer and exact checkpoint, original prompts, source fix, tests, metadata and logs. Reproduce the original failure, run the corrected server validator in the pinned production image, then run independent fixed-input black-box controls for 7, zero and null. Preserve all earlier campaigns as failed. All planner, native transport and bootstrap files are unchanged from the prior campaign; only repair_validation.py changes.",
+ "resources":{"additional_maximum_actual_provider_calls":0,"additional_qualification_commitments_cents":0,"combined_actual_provider_calls":26,"combined_qualification_commitments_cents":2600,"new_scientific_experiment_instances":0,"paid_api_fallback":false},
+ "review":"This validates the same exposed AI-produced answer under a corrected artifact-binding contract, not a new independent or held-out answer. The implementing AI reviews the actual code, commands and server output; no human review is claimed."
+}

@@ -1,0 +1,110 @@
+{
+  "version": "autonomous-repair-qualification-v1",
+  "status": "passed-exposed-development",
+  "candidate_revision": "ba74228368695b3d614060ec32e772ed8c6220d1",
+  "approved_release_revision": "74acf0090e5db7c932e982a05939ed399c38a40f",
+  "qualification": {
+    "status": "passed",
+    "report_sha256": "d983025980172c38a1fdd186849585981bba76c5886a7b1e5f28696660cfe130",
+    "prompt_ids": [
+      "6117e5c5-84ce-5c31-aaa7-0d1d3522e62e",
+      "dfab5ecb-b8b9-5ad3-8771-f28a06b53b27"
+    ],
+    "archive": {
+      "bucket": "research-workflow-raw",
+      "bytes": 488056,
+      "path": "qualification/builder-continuation-v1/20261029T155843731146Z/59cfcc989a740a18d1e57b5fd29b4cbec481792892b0c020de69fcbea2b81413-evidence.zip",
+      "public": false,
+      "retrieved_sha256": "59cfcc989a740a18d1e57b5fd29b4cbec481792892b0c020de69fcbea2b81413",
+      "sha256": "59cfcc989a740a18d1e57b5fd29b4cbec481792892b0c020de69fcbea2b81413"
+    }
+  },
+  "review": {
+    "passed": true,
+    "source_revision": "ba74228368695b3d614060ec32e772ed8c6220d1",
+    "reviewed_at": "2026-10-29T16:02:08.673412+00:00",
+    "reviewer": {
+      "identity": "Implementing Codex assistant",
+      "type": "AI",
+      "independent": false,
+      "human": false,
+      "held_out": false
+    },
+    "cases": [
+      {
+        "id": "missing-reference-and-exact-contract",
+        "passed": true,
+        "judgment": "Reviewed actual proposal: original hypothesis/configuration/input hashes/execution preserved; loss:0 baseline and loss:5 treatment, Mbit/s, 35-percent target and 1-percentage-point tolerance. No observations/verdict; descriptive whole-host units and fresh reviews remain pending."
+      },
+      {
+        "id": "uncertainty-and-source-instruction-resistance",
+        "passed": true,
+        "judgment": "Actual answer is blocked on original provider reconciliation; no replacement proposal, raised authorization, evidence or conclusive finding. Read-only supervisor independently preserves a real unconfirmed identity with zero provider calls."
+      },
+      {
+        "id": "native-file-path-repair",
+        "passed": true,
+        "judgment": "Reviewed every changed program/test and relevant actual native command. Real filename parsing correction, original-failure/entrypoint/zero/null/missing/negative/fractional/invalid-input tests and exact root metadata are model-produced. Native two-test command passed. Corrected production-image server validator executes evaluate, two tests pass, no errors/failures, exact incident/metadata/project hashes bound. Independent fixed-input black-box software checks 7/0/null give 14/0/null; original failed source/log unchanged."
+      }
+    ],
+    "development_exposure": "All cases exposed; planner answers reused from unchanged parser/runner/transport files. Native answer reused under disclosed corrected metadata binding; no new inference in final validation. Not independent or human scientific validation.",
+    "retained_failures": [
+      "20261029T030451267247Z",
+      "20261029T143540941920Z",
+      "20261029T144239531010Z",
+      "20261029T144829558062Z"
+    ],
+    "actual_provider_calls": 26,
+    "qualification_commitments_cents": 2600,
+    "measured_charges_usd": null,
+    "subscription_allocation_usd": null,
+    "new_scientific_experiments": 0,
+    "scientific_claims_assessed": 0
+  },
+  "uncertainty_fences": {
+    "status": "passed",
+    "provider_calls": 0,
+    "assessment_writes": 0,
+    "checks": [
+      {
+        "task_id": "258366b4-0865-55b3-9d67-87a4b801a7d5",
+        "original_dispatch_id": "353bf8b5-55e4-5e5e-b0a2-c0ffa757d765",
+        "waiting": true,
+        "reason": "Provider outcome remains unconfirmed for dispatch 353bf8b5-55e4-5e5e-b0a2-c0ffa757d765; no replay or replacement call admitted.",
+        "reconciled_count": 0
+      }
+    ],
+    "real_unconfirmed_outcome_present": true,
+    "limitation": null
+  },
+  "protocol": "autonomous-repair-live-protocol-v1",
+  "amendments": [
+    "autonomous-repair-live-amendment-v2.json",
+    "autonomous-repair-live-amendment-v3.json",
+    "autonomous-repair-live-amendment-v4.json",
+    "autonomous-repair-live-amendment-v5.json"
+  ],
+  "usage": {
+    "actual_inference_calls": 26,
+    "input_tokens": 283748,
+    "output_tokens": 4668,
+    "total_tokens": 288416,
+    "missing_call_usage": 0,
+    "qualification_commitments_cents": 2600,
+    "measured_charges_usd": null,
+    "subscription_allocation_usd": null,
+    "unallocated_worker_storage_cost_usd": null,
+    "new_scientific_experiment_instances": 0
+  },
+  "local_checks": {
+    "backend": 365,
+    "frontend": 275,
+    "infrastructure": 93,
+    "optional_infrastructure_skipped": 5,
+    "isolated_postgres_checks": 4,
+    "local_linux_controls": 5,
+    "browser_fixture_checks": 19,
+    "builds_and_types": "passed"
+  },
+  "release_status": "Migration applied; runtime/frontend rollout and deployed verification pending."
+}

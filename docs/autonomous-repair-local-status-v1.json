@@ -1,0 +1,132 @@
+{
+  "version": "autonomous-repair-local-status-v1",
+  "recorded_at": "2026-10-29T01:00:01.361138+00:00",
+  "status": "implemented-locally;live-qualification-and-release-pending",
+  "sources": {
+    "backend": {
+      "base_revision": "267d95e4eb3d642a83126a0ecf7ee463c4f8e6d1",
+      "working_tree_files": {
+        "research_workflow/autonomous_repair.py": "859da4cae7d586b4470b96c6176eee1c2f0bda5b7da9eeb7e25bbf5e32eaebb9",
+        "research_workflow/autonomy.py": "002001e7754a733d00c9800eabbc3a868b9c8718e81711a8ef4d2b61f3b7c6c7",
+        "research_workflow/autonomy_inputs.py": "c867d82d6cb7bc0ebe3619e131435b6f71eaa59445d3c63d832847c1a88448d6",
+        "research_workflow/autonomy_model.py": "25b48763f3808d05ccf6cd20ae1da20bc83f87e3faece699eff55a583671ec14",
+        "research_workflow/experiment_builder.py": "5d9cdeec74bf6084fc8893347f4dd5f8073e2edd7badfcfa4c153a04f3a03995",
+        "research_workflow/repair_validation.py": "d5b01382e4f365988ca97fd76f022e929db6df50099c91a2809f36598b5b5e5a",
+        "research_workflow/scheduler.py": "e78c0a3245ce437c84b04a87aa1b161ba1cf28ed14189e4f9577f7874b11576e",
+        "research_workflow/store.py": "ce43efd7886e22759ff5532c81a27a9a02c1954240e04e2dbed244c38cf92992",
+        "research_workflow/policies/autonomous-repair-release-v1.json": "16c875800a94186b5f9d2a49f2ab2ba152def40aefda2ba35fb1dd350e706df1",
+        "research_workflow/tests/test_autonomous_repair.py": "37b61e047e88f0d28d0e8fbc8fe53275e6e4581a7b8c032cf0e64bdbf8881322",
+        "research_workflow/tests/check_repair_validation_linux.py": "7814027163cf241a2e9b42c8890872febcd030f335e2b53307a3e8b9b3c49351",
+        "research_workflow/tests/public_queue_fixture.py": "8887cbe02a8765ee1f952d6c895da54e5f7000609db9e24d598004d518eaceff"
+      }
+    },
+    "frontend": {
+      "base_revision": "15668bbc9e79a3fae41e7e527993e89928f89f9c",
+      "working_tree_files": {
+        "app/components/research-workflow/autonomous-assessments.tsx": "4acb5b063c8ec2c4d0dfec8d08e07e08fccf9d633950d928d811fec1a8b4578e",
+        "lib/research-autonomy.ts": "f0236aa5ed1b8c23016d9ff9fc77a5197233f5eeb52d86ca454a1211a276def4",
+        "lib/research-public-queue.ts": "68e45f3f617aea65158e5ea4b2f1c79c3903ba5443a1a3e1864314f3f54ad2e8",
+        "scripts/verify-public-experiment-queue.mjs": "6887b35c17c0804c58a53c5b7562250cb378b060cae374d930c524410aff2da3",
+        "tests/research-autonomy.test.mjs": "8d247c9e0f664b27a8b28d91476f967d231a375c3d9d61f36121ed707fa2fe89",
+        "tests/research-public-queue.test.mjs": "e919bd99958871a76a1a37927a0bd06fa15f440d389650ce4b5bfeb6a4cd9c03"
+      }
+    },
+    "infrastructure": {
+      "base_revision": "06ac686be936cfeea4a1b24cc81086c9c7dd0f5a",
+      "working_tree_files": {
+        "database/202610280004_autonomous_repair.sql": "0d4297dd1172d845f1d5959139fd3cb5e1a540c4a2ec28fb5e83f5cbc8d0f1a3",
+        "lib/research-workflow.ts": "836e3c414df6290bdf80dc2a2482a453f520475f2cca4c0a29ae8c33f19a4a7a",
+        "research-workflow-runtime.json": "10ed81c34430a34e13a9703c1fd4ad863e60717afa3436796f1ac6d353f6f4ef",
+        "package.json": "44cc44ca0f9d34b147ee64e76064fcee4a60ba255556a99dd142a0c5a792afc2",
+        "test/check_research_ideas_database.py": "75ac42b92ee4a99dfe5a0252aa30f1bc107d615798be0e71b1dc57400b630c0f",
+        "test/check_autonomous_repair_database.py": "089bbc5a13bf9384bbd6610bea521a9f92561a4050c7099a2c028a2d714c7f13",
+        "test/network-execution.test.ts": "9d6c9d1757f3d25f3c9b8ceede2a6584d5d6c61e72e62e6cb8425824fab80efd",
+        "bin/research-queue-release.py": "30f9c937040c525b8fb89456b23f8f0e45b8ebd93c60d820dd37d0794e79ec60",
+        "bin/record-autonomous-repair-local.py": "b192d7a8e313691434d82d66d18a5609a506cf6dacc953307ed8de554652e0be",
+        "docs/autonomous-repair-protocol-v1.json": "7435ed3afb2a9abbb5dd4235e5bf33b5a04dc7c96db052500e81dfac643fe5c3",
+        "docs/autonomous-repair-live-protocol-v1.json": "b9ba0bab33a8e2e74d93d6a5231c3ec5258bc3d2ccafa946f8af299a5d358800"
+      }
+    }
+  },
+  "checks": {
+    "backend": 363,
+    "frontend": 275,
+    "infrastructure": 93,
+    "optional_infrastructure_skipped": 5,
+    "infrastructure_targeted_final": 6,
+    "isolated_postgres_checks": 4,
+    "linux_controls": 5,
+    "linux_actual_successful_fixture": 1,
+    "linux_expected_rejections": 4,
+    "browser_checks": 19,
+    "desktop_mobile_light_dark": true,
+    "visual_inspection": "Implementing AI inspected mobile light and desktop dark captures.",
+    "lint_and_build_types": "passed"
+  },
+  "implementation": [
+    "Durable service-only repair incidents and immutable event history, using existing claim leases and authorization.",
+    "Automatic diagnosis and original-identity reconciliation; uncertain outcomes remain fenced with backoff.",
+    "Hash-verified native diagnosis delivery with labeled/redacted original log excerpts and unchanged admitted requests.",
+    "Exact logical/provider-wire preflight, scoped retrievable executable contracts and retained source/turn references.",
+    "Native experiment-code repair with incident-bound executed software checks, frozen package identity and fresh scientific reviews.",
+    "Public/owner queue progress and bounded shared repair incident/event history."
+  ],
+  "limits": {
+    "application_default_usd": 100,
+    "existing_assessment_cap_unchanged": true,
+    "deadline_and_prior_commitments_preserved": true,
+    "ai_turn_cap": null,
+    "new_live_model_calls": 0,
+    "new_cloud_experiment_instances": 0,
+    "new_scientific_measurements": 0,
+    "production_writes": 0,
+    "deployed": false,
+    "measured_charges_usd": null,
+    "unallocated_local_compute_storage_cost_usd": null
+  },
+  "evaluator": {
+    "identity": "Implementing Codex assistant",
+    "type": "AI",
+    "independent": false,
+    "human": false,
+    "held_out": false
+  },
+  "gaps": [
+    "Live actual-answer OpenClaw repair qualification has not run; exact-source activation approval remains false.",
+    "The real Docker control used cached local image sha256:ef9eec8c7c44fa2da5312721295aeea6ee92837a8e7f909c5f70785ecb9207be; the production image was not available locally.",
+    "No production migration, runtime rollout, authenticated repair request or Supabase Storage round trip was performed.",
+    "General global application/infrastructure self-patching is outside experiment-worker authority.",
+    "Unavailable apparatus/data/authorization or an irreconcilable provider outcome can still prevent results; scientific findings are never forced.",
+    "AI-authored software tests and source inspection do not establish independent correctness or scientific validation."
+  ],
+  "retained_failures": [
+    {
+      "report": ".test-artifacts/research-ideas/database/20261028T233927487207Z/autonomous-repair-report.json",
+      "reason": "psql: error: connection to server at \"127.0.0.1\", port 54477 failed: Operation not permitted\n\tIs the server running on that host and accepting TCP/IP connections?"
+    },
+    {
+      "report": ".test-artifacts/research-ideas/database/20261028T234153288265Z/autonomous-repair-report.json",
+      "reason": "Unsupported research operation."
+    },
+    {
+      "report": ".test-artifacts/research-ideas/database/20261028T234300285536Z/autonomous-repair-report.json",
+      "reason": "committed_cents"
+    }
+  ],
+  "commands": [
+    "python3 -B -m unittest discover -s research_workflow/tests -p test_*.py (backend)",
+    "npm test (frontend)",
+    "npm run test:research:repair (infrastructure; isolated local Postgres)",
+    "python3 -B research_workflow/tests/check_repair_validation_linux.py (backend; cached local image only)",
+    "npm run verify:research:public-queue (frontend; local synthetic API)",
+    "npm test -- --runInBand (infrastructure)"
+  ],
+  "evidence": {
+    "path": ".test-artifacts/autonomous-repair-local/20261029T010001267011Z/evidence.zip",
+    "sha256": "abfa36e381c69d2abc775de175e548090f4b1d01dd28da584d1bc2efc7d07330",
+    "retrieved_sha256": "abfa36e381c69d2abc775de175e548090f4b1d01dd28da584d1bc2efc7d07330",
+    "bytes": 5476067,
+    "members": 130,
+    "remote_storage_verified": false
+  }
+}

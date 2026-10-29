@@ -1,0 +1,9 @@
+{
+ "version":"autonomous-repair-live-amendment-v2",
+ "before_additional_provider_calls":true,
+ "original_campaign":"20261029T030451267247Z",
+ "original_outcome":"Preparation failed before inference: read-only systemd mount boundaries reject the vendor preparer's hard links with EXDEV. No native or data-only model phase was dispatched.",
+ "change":"Inspect and reuse the existing production builder-only vendor copy through the candidate's exact package/version/corrected-byte verifier. Qualification does not modify that copy. Freeze a new isolated campaign with the same candidate runtime, contexts, controls and acceptance criteria.",
+ "resources":{"maximum_actual_provider_calls":8,"maximum_elapsed_seconds":900,"maximum_qualification_commitments_cents":1000,"new_scientific_experiment_instances":0,"paid_api_fallback":false},
+ "evidence":"Retain the failed preparation's source manifest, SSM result and original failure log as a separately hash-verified private archive and failed evaluation. This is an exposed harness correction, not independent validation."
+}

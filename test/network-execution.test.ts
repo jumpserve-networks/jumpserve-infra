@@ -3,7 +3,8 @@ import * as api from 'aws-cdk-lib/aws-apigatewayv2';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import { Template, Match } from 'aws-cdk-lib/assertions';
-import { ResearchWorkflow } from '../lib/research-workflow';
+import { ResearchWorkflow, requireRepairQualification } from '../lib/research-workflow';
+import {createHash} from 'crypto';
 import { networkEnvelope } from '../lambda/shared/research-network';
 
 test('API Gateway bodies cannot select the private IAM networking envelope',()=>{
@@ -56,6 +57,14 @@ test('custom package queue admission is disabled until operational checks pass',
   }
  }
 });
+test('autonomous repair cannot activate without exact-source actual-answer qualification',()=>{
+ const files={'autonomy.py':'a'.repeat(64),'policies/autonomous-repair-release-v1.json':'b'.repeat(64)};
+ const policy={version:'autonomous-repair-release-v1',approved_for_lab_recovery:true,qualified_files_sha256:createHash('sha256').update(JSON.stringify({'autonomy.py':files['autonomy.py']})).digest('hex'),evidence_sha256:'c'.repeat(64)};
+ expect(()=>requireRepairQualification(policy,files)).not.toThrow();
+ expect(()=>requireRepairQualification({...policy,approved_for_lab_recovery:false},files)).toThrow('Passing exact-source live repair qualification');
+ expect(()=>requireRepairQualification(policy,{...files,'autonomy.py':'d'.repeat(64)})).toThrow('Passing exact-source live repair qualification');
+ expect(()=>requireRepairQualification({...policy,evidence_sha256:''},files)).toThrow('Passing exact-source live repair qualification');
+});
 test('native experiment builder fails closed without its native worker and disposable executor',()=>{
  const app=new cdk.App({context:{supabaseUrl:'https://regphejnlvfpyokpniny.supabase.co',researchQueueEnabled:true,researchAutonomyEnabled:true,researchExperimentBuilderEnabled:true}});
  const stack=new cdk.Stack(app,'InvalidBuilder',{env:{account:'395567831870',region:'us-east-1'}});
@@ -72,6 +81,7 @@ test('generated packages use a separately pinned executor and keep arbitrary cus
  for(const item of Object.values(functions)){
   const props=item.Properties;
   if(['api.handler','worker.handler','autonomy.handler'].includes(props.Handler)){
+   if(props.Handler==='autonomy.handler')expect(props.Environment.Variables.RESEARCH_AUTONOMY_REPAIR_ENABLED).toBe('false');
    expect(props.Environment.Variables.NETWORK_BUILT_PACKAGE_FUNCTION).toBeDefined();
    expect(props.Environment.Variables.NETWORK_BUILT_PACKAGE_POLICY_SHA256).toMatch(/^[a-f0-9]{64}$/);
    expect(props.Environment.Variables.NETWORK_PACKAGE_FUNCTION).toBeUndefined();

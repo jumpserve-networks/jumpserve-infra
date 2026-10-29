@@ -5,6 +5,7 @@
     "jumpserve-infra": "bin/jumpserve-infra.js"
   },
   "scripts": {
+    "test:research:repair": "python3 -B test/check_autonomous_repair_database.py",
     "test:research:assessment-recovery": "python3 -B test/check_assessment_recovery_database.py",
     "build": "tsc",
     "watch": "tsc -w",

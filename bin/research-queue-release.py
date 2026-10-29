@@ -25,7 +25,7 @@ guard = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(guard)
 STACK = 'JumpServeBenchmarkStack'
 BASE = 'https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/research'
-PRIVATE = {'research_study_owners', 'research_artifacts', 'research_audit_events', 'research_paper_uploads',
+PRIVATE = {'research_autonomy_repairs', 'research_autonomy_repair_events', 'research_study_owners', 'research_artifacts', 'research_audit_events', 'research_paper_uploads',
            'research_queue_jobs', 'research_queue_events', 'research_prepared_plans',
            'research_idea_packets', 'research_idea_sessions', 'research_idea_runs',
            'research_idea_readiness', 'research_idea_campaign_links',
