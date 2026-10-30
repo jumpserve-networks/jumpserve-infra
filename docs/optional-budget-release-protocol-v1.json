@@ -1,0 +1,16 @@
+{
+  "version":"optional-budget-release-v1",
+  "assessment_id":"4055396e-35c0-4962-ba39-cf23e443ad8d",
+  "stage":"exposed operational release qualification",
+  "questions":["Does explicit unlimited authorization preserve missing-data and scientific decision rules?","Do installed Linux transport and budget authority regressions pass?","Can the audited operator amendment resume only safe budget-stopped tasks while retaining usage, identities, deadline and uncertain-call fences?"],
+  "cases":[
+    {"id":"linux-native-and-budget-regressions","pass":"All 23 installed-native, optional-budget and assessment-recovery tests pass with zero failures, errors or skips; no real provider calls."},
+    {"id":"live-data-only-response","pass":"One actual subscription call receives explicit unlimited assessment authority but an explicit missing-source fixture. It must return phase-valid blocked/missing-data with no invented claims, proposal, evidence, scientific label or complete coverage."}
+  ],
+  "comparison":"Deterministic admission, exact hashes and actual answers; exposed development checks, not held-out or scientific validation. Inherit previous builder/netem execution qualification only for byte-identical implementation files.",
+  "resources":{"maximum_actual_provider_calls":1,"maximum_qualification_reservation_cents":100,"maximum_elapsed_seconds":480,"new_cloud_instances":0,"worker_disk_gib":300,"paid_api_fallback":false,"measured_charges_usd":null,"subscription_allocation_usd":null},
+  "stopping":"Persist failures and never replay a dispatched or uncertain inference. Hold admissions while changing schema and runtime. Apply explicit unlimited authority only after compatible frontend/backend and database checks pass; never reset usage, time, scientific criteria or blocked/unknown work.",
+  "release_checks":["398 backend tests, 278 frontend tests, isolated PostgreSQL budget checks including proof-aware resumption, actual public API/frontend validation, build and lint","Installed Linux controls and actual subscription answer review","Audited migration, exact installed operator function body, unchanged defaults, RLS and browser write/RPC denial","Exact source hashes on host and all research functions; unchanged worker image and encrypted 300 GiB volume","Passing exact-commit Amplify release; public desktop and mobile unlimited-budget display","Explicit per-assessment amendment and safe resumption with preserved commitments and deadline"],
+  "conditional_checks":["Fresh Google-authenticated uploads/chat require a legitimate session","Actual paper completion and new experiment measurements are separate from this budget release"],
+  "reviewer":{"identity":"Codex implementing AI","type":"AI","independent":false,"human":false,"held_out":false}
+}
