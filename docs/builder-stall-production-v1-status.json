@@ -1,0 +1,355 @@
+{
+  "version": "builder-stall-production-v1",
+  "status": "deployed-with-explicit-verification-scope",
+  "recorded_at": "2026-10-30T01:51:58.270856+00:00",
+  "release_blocking_checks_passed": true,
+  "revisions": {
+    "jumpserve-back-end": "52abe168691afb678ecfcbd91f3f07b70fb7ca04",
+    "jumpserve-infra": "bd80277c96d93c62c8eef151e01bbb83f18ea97e",
+    "jumpserve-front-end": "544bcd948898914f3ec2e95245ad36884a57b77c"
+  },
+  "runtime_manifest_version": 69,
+  "runtime_files": 59,
+  "aws_account": "395567831870",
+  "supabase_project": "regphejnlvfpyokpniny",
+  "worker": "i-087f1493809643115",
+  "worker_replaced": false,
+  "worker_storage_gib": 300,
+  "encrypted": true,
+  "frontend_changed": false,
+  "schema_changed": false,
+  "qualification": {
+    "evaluation": {
+      "status": "passed",
+      "report_sha256": "d495d30bedaa3f715b757487742d853fd3ab169032cc817194d0ecb4ee395418",
+      "archive": {
+        "bucket": "research-workflow-raw",
+        "bytes": 1731684,
+        "path": "qualification/builder-continuation-v1/20261030T012202729637Z/71b179462f085cc61e59494454020668f04126f88b82b0dd48a19c0f74d5baa9-evidence.zip",
+        "public": false,
+        "retrieved_sha256": "71b179462f085cc61e59494454020668f04126f88b82b0dd48a19c0f74d5baa9",
+        "sha256": "71b179462f085cc61e59494454020668f04126f88b82b0dd48a19c0f74d5baa9"
+      }
+    },
+    "source_revision": "1e8bf8ce86e3d34364c70cd1f916308890c0ded5",
+    "actual_calls": 0,
+    "inherited_unique_calls": 46,
+    "total_unique_calls": 46,
+    "additional_reservations_cents": 0,
+    "inherited_reservations_cents": 4600,
+    "netem_replications": 3,
+    "netem_observations": 75,
+    "dependence": "Three repeated sweeps share one existing host; no cross-host inference or confidence interval."
+  },
+  "production_checks": {
+    "active_source_security_flags": "passed",
+    "executors": {
+      "status": "passed",
+      "source_revision": "52abe168691afb678ecfcbd91f3f07b70fb7ca04",
+      "executors": [
+        {
+          "function": "JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt",
+          "handler": "network_package.handler",
+          "zip_sha256": "b33929db53b7d74200c34eeadae8a8bf47fa57f92ab8d6eef8764fb54342f327",
+          "files_verified": 59
+        },
+        {
+          "function": "JumpServeBenchmarkStack-ResearchWorkflowPackageIng-kAAtKeB693oF",
+          "handler": "network_package.ingest",
+          "zip_sha256": "b33929db53b7d74200c34eeadae8a8bf47fa57f92ab8d6eef8764fb54342f327",
+          "files_verified": 59
+        },
+        {
+          "function": "JumpServeBenchmarkStack-ResearchWorkflowPackageRea-Vy8KadbHwEL9",
+          "handler": "network_package.reap",
+          "zip_sha256": "b33929db53b7d74200c34eeadae8a8bf47fa57f92ab8d6eef8764fb54342f327",
+          "files_verified": 59
+        }
+      ]
+    },
+    "public": {
+      "status": "passed",
+      "recorded_at": "2026-10-30T01:51:13.661135+00:00",
+      "checks": [
+        {
+          "name": "capabilities",
+          "status": 200,
+          "bytes": 3739,
+          "sha256": "8884a1a1b622610c493eb24945a46690a1d35888bb983882727ff1dd2a7a54e1"
+        },
+        {
+          "name": "queue",
+          "status": 200,
+          "bytes": 6410,
+          "sha256": "c64552327dd8d1120ab97b898b8926180508990e87d5c70413d9113aa279ee2e"
+        },
+        {
+          "name": "repairs",
+          "status": 200,
+          "bytes": 191879,
+          "sha256": "92b355db86c0a844ef3eecd0ffd9fd3816d03c5328fd86947f118d9aa8c74708"
+        },
+        {
+          "name": "repair-events",
+          "status": 200,
+          "bytes": 197145,
+          "sha256": "3ae403b955a87cb5b718e5ffe48755d630d8946cd4feae826da69eae63eae90c"
+        },
+        {
+          "name": "/studies/4055396e-35c0-4962-ba39-cf23e443ad8d/autonomy",
+          "unauthenticated_status": 401,
+          "sha256": "caa8b5a433ea0fcb99780c424b4a69de533ca0e7d3508d34eb9a17b637ce31bd"
+        },
+        {
+          "name": "/studies/4055396e-35c0-4962-ba39-cf23e443ad8d/network",
+          "unauthenticated_status": 401,
+          "sha256": "caa8b5a433ea0fcb99780c424b4a69de533ca0e7d3508d34eb9a17b637ce31bd"
+        }
+      ],
+      "scope": "Public queue and provenance reads, unauthenticated write denial; no browser session inferred."
+    },
+    "browser": {
+      "passed": true,
+      "recorded_at": "2026-10-30T01:51:00Z",
+      "reviewer": {
+        "identity": "Codex implementing AI using CUA",
+        "type": "AI",
+        "independent": false,
+        "human": false
+      },
+      "method": "Actual Firefox browser interactions through CUA; accessibility state and screenshots inspected. No Playwright or synthetic authentication used.",
+      "checks": [
+        {
+          "name": "public assessment queue",
+          "status": "passed",
+          "url": "https://jumpserve.quaint-lab.org/research-verification/experiment-queue?assessment=4055396e-35c0-4962-ba39-cf23e443ad8d",
+          "observed": "Correct paper title, five claim rows, retained reasons, budget and preferred-timezone deadline load while logged out."
+        },
+        {
+          "name": "desktop dark theme",
+          "status": "passed",
+          "observed": "Screenshot reviewed: full-width header, fixed sidebar and queue content readable with no visible horizontal clipping."
+        },
+        {
+          "name": "mobile light theme",
+          "status": "passed",
+          "viewport_css_px": {
+            "width": 390,
+            "height": 844
+          },
+          "observed": "Actual responsive screenshot and accessibility tree reviewed; header controls fit, title/deadline wrap, cards readable."
+        },
+        {
+          "name": "theme and navigation controls",
+          "status": "passed",
+          "observed": "Dark, light and system controls change state; mobile module navigation opens and closes. Restored System Default and desktop viewport."
+        },
+        {
+          "name": "public prompt and response evidence",
+          "status": "passed",
+          "observed": "Expanded an actual claim history and an actual native response fragment; retained turns and read-next-fragment control load. Public view explicitly labels redactions and derived fragments."
+        },
+        {
+          "name": "empty experiment list",
+          "status": "passed",
+          "observed": "Zero recorded jobs explicitly shown; no measurements or findings invented."
+        },
+        {
+          "name": "unavailable assessment",
+          "status": "passed",
+          "observed": "Valid nonexistent assessment identifier displays shared queue unavailable and counts/status unknown, rather than recorded zero."
+        },
+        {
+          "name": "sign-in return path",
+          "status": "passed",
+          "observed": "Sign in opens /login?next=%2Fresearch-verification%2Fexperiment-queue%3Fassessment%3D4055396e-35c0-4962-ba39-cf23e443ad8d with Login with Google control."
+        },
+        {
+          "name": "active queue polling",
+          "status": "passed",
+          "observed": "After activation the controller-disabled warning disappears; recorded commitment rises from $579.65 to $582.75, one retained claim is running at turn 85 and repair progress updates. Original budget/deadline remain visible."
+        }
+      ],
+      "conditional_gaps": [
+        "No legitimate authenticated JumpServe browser session was available. Fresh authenticated PDF upload, confirmation, cancellation and AI chat were not exercised in this release.",
+        "The live qualification executed real generated packages and netem sweeps on the production worker. It did not create owner experiment-queue jobs; full new cloud-job launch/measurement ingestion for the resumed assessment remains unverified at this observation.",
+        "No frontend source changed. Queue-specific states were inspected; completed-study charts and download UI flows were not rerun. Numerical CSV output and private artifact retrieval hashes were checked separately."
+      ]
+    }
+  },
+  "assessment": {
+    "id": "4055396e-35c0-4962-ba39-cf23e443ad8d",
+    "maximum_cents": 100000,
+    "committed_cents": 58785,
+    "deadline_at": "2026-11-04T20:25:04.587324+00:00",
+    "attempt_cap": null,
+    "labels": {
+      "untested": 5
+    },
+    "queue_jobs": 0,
+    "tasks": [
+      {
+        "id": "9a4d45ef-f3ad-5161-8ac3-87f17de0f878",
+        "claim_id": null,
+        "stage": "intake",
+        "status": "finished",
+        "label": null,
+        "reason": "Central claims and testable findings are ready for owner review; other extracted statements remain retained.",
+        "attempts": 7,
+        "stall": null,
+        "repair_progress": null,
+        "updated_at": "2026-10-28 20:32:14.295671+00"
+      },
+      {
+        "id": "2dfbd3d1-2514-586d-9d07-47f04a5c78ff",
+        "claim_id": "1a9eb275-f8f6-53d7-afe5-9d1416d7bee7",
+        "stage": "building",
+        "status": "running",
+        "label": "untested",
+        "reason": "Native implementation repair with the retained checkpoint and fresh incident-specific instructions.",
+        "attempts": 69,
+        "stall": null,
+        "repair_progress": {
+          "id": "08712282-ec88-5719-a875-2f4cc8140e24",
+          "state": "repairing",
+          "version": "autonomous-repair-v1",
+          "category": "implementation",
+          "revision": 73,
+          "updated_at": "2026-10-30T00:03:38.814767+00:00"
+        },
+        "updated_at": "2026-10-30 01:51:36.850072+00"
+      },
+      {
+        "id": "b9c00763-023d-5971-9367-e02d30949d7c",
+        "claim_id": "1b8ae633-953e-50b5-bced-b173279bd70e",
+        "stage": "planning",
+        "status": "queued",
+        "label": "untested",
+        "reason": "OpenClaw stopped: failed; the original outcome is retained. No paid fallback.",
+        "attempts": 168,
+        "stall": null,
+        "repair_progress": {
+          "id": "ce9ca03b-ca11-588e-9ed2-84673bbb4123",
+          "state": "diagnosing",
+          "version": "autonomous-repair-v1",
+          "category": "implementation",
+          "revision": 68,
+          "updated_at": "2026-10-30T01:51:19.166779+00:00"
+        },
+        "updated_at": "2026-10-30 01:51:19.331207+00"
+      },
+      {
+        "id": "872f6faa-3215-5a0a-96e2-aac94fd0a6c0",
+        "claim_id": "b410cc01-81a7-55b9-ac59-9502b9c1758a",
+        "stage": "building",
+        "status": "queued",
+        "label": "untested",
+        "reason": "Native implementation repair with the retained checkpoint and fresh incident-specific instructions.",
+        "attempts": 58,
+        "stall": null,
+        "repair_progress": {
+          "id": "1ac68354-a9e3-574c-a877-4f75488e2dd7",
+          "state": "repairing",
+          "version": "autonomous-repair-v1",
+          "category": "implementation",
+          "revision": 75,
+          "updated_at": "2026-10-30T01:49:49.624507+00:00"
+        },
+        "updated_at": "2026-10-30 01:49:49.777156+00"
+      },
+      {
+        "id": "1fa0b903-5ccd-5608-a57b-4ff01d75cf73",
+        "claim_id": "bac92a6e-00ca-5404-a50b-39de0932df8c",
+        "stage": "building",
+        "status": "queued",
+        "label": "untested",
+        "reason": "Builder remained unchanged after targeted replanning. Recorded integration/implementation repair is required before further spending; original checkpoint retained.",
+        "attempts": 175,
+        "stall": null,
+        "repair_progress": {
+          "id": "dc512669-522a-5ba5-aa1a-4285a80ecef9",
+          "state": "diagnosing",
+          "version": "autonomous-repair-v1",
+          "category": "implementation",
+          "revision": 60,
+          "updated_at": "2026-10-30T00:03:50.565279+00:00"
+        },
+        "updated_at": "2026-10-30 00:03:50.708011+00"
+      },
+      {
+        "id": "258366b4-0865-55b3-9d67-87a4b801a7d5",
+        "claim_id": "f30423b8-7999-5b18-8ed4-d2635a988720",
+        "stage": "building",
+        "status": "running",
+        "label": "untested",
+        "reason": "Native implementation repair with the retained checkpoint and fresh incident-specific instructions.",
+        "attempts": 88,
+        "stall": null,
+        "repair_progress": {
+          "id": "550c63aa-4077-5fea-834f-38a192e286b5",
+          "state": "repairing",
+          "version": "autonomous-repair-v1",
+          "category": "implementation",
+          "revision": 79,
+          "updated_at": "2026-10-30T00:00:50.659172+00:00"
+        },
+        "updated_at": "2026-10-30 01:50:52.162946+00"
+      }
+    ],
+    "scope": "Bounded separate snapshot; work can advance after retrieval. Scientific findings are not inferred from software qualification."
+  },
+  "conditional_gaps": [
+    "No legitimate authenticated JumpServe browser session was available. Fresh authenticated PDF upload, confirmation, cancellation and AI chat were not exercised in this release.",
+    "The live qualification executed real generated packages and netem sweeps on the production worker. It did not create owner experiment-queue jobs; full new cloud-job launch/measurement ingestion for the resumed assessment remains unverified at this observation.",
+    "No frontend source changed. Queue-specific states were inspected; completed-study charts and download UI flows were not rerun. Numerical CSV output and private artifact retrieval hashes were checked separately."
+  ],
+  "measured_charges_usd": null,
+  "subscription_allocation_usd": null,
+  "unallocated_host_storage_cost_usd": null,
+  "reviewer": {
+    "identity": "Codex implementing AI",
+    "type": "AI",
+    "independent": false,
+    "human": false,
+    "held_out": false
+  },
+  "evidence": {
+    "artifact_id": "50d9222f-aa7c-560b-8145-1559fb495236",
+    "sha256": "6f40b4fbf456149d7d8f1a92649b49c2f1e75e4c9b373b3b493107644b5237ca",
+    "retrieved_sha256": "6f40b4fbf456149d7d8f1a92649b49c2f1e75e4c9b373b3b493107644b5237ca",
+    "bytes": 17262295,
+    "members": 288,
+    "public": false
+  },
+  "postrelease_followup": {
+    "recorded_at": "2026-10-30T01:55:52.215100+00:00",
+    "kind": "bounded operational observation; not final scientific finding",
+    "committed_cents": 60405,
+    "max_spend_cents": 100000,
+    "active_dispatches": 2,
+    "queue_jobs": 0,
+    "labels": {
+      "untested": 5
+    },
+    "actual_source_progress": {
+      "file": "project/experiment.py",
+      "bytes": 4934,
+      "sha256": "77b639d004c4a5151a347f8d8e6d94f6b92aaf707afd04ba884a7e788f58469d",
+      "validated": false
+    },
+    "remaining_planning_failure": {
+      "dispatch_id": "6e5b884a-3322-508b-ae00-c01df7ec9307",
+      "error_code": "local-pre-provider-ValueError",
+      "provider_calls": 0,
+      "precise_cause": "not established by retained receipt"
+    },
+    "evidence": {
+      "artifact_id": "81039f8c-35bd-5d50-8fc0-9f1ea1b1b1b9",
+      "sha256": "b084fca70671d0d255389b3d735905a4edb9a36213f95ad878f1d58a9967721c",
+      "retrieved_sha256": "b084fca70671d0d255389b3d735905a4edb9a36213f95ad878f1d58a9967721c",
+      "bytes": 29874,
+      "public": false
+    },
+    "original_release_archive_unchanged": true
+  }
+}

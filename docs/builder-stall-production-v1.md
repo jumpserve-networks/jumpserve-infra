@@ -1,8 +1,10 @@
 # Builder recovery release and verification
 
 The release removes the recorded context/repair loops and the five-loss counter
-admission conflict. All three declared live qualification cases passed; deployment
-and its separate production verification are pending.
+admission conflict. All three declared live qualification cases passed. Backend
+`52abe168691afb678ecfcbd91f3f07b70fb7ca04` is deployed in production as runtime
+manifest 69 (59 files). Admissions and autonomy polling are restored after
+deployed-byte, worker, executor, RLS and public API checks passed.
 The final machine-readable deployment receipt is
 `builder-stall-production-v1-status.json`; scientific coverage is reported
 separately in the assessment queue.
@@ -158,3 +160,39 @@ checks. Authenticated upload/confirmation/chat require a legitimate browser
 session and are reported precisely when unavailable. Actual autonomous candidate,
 review, job and measurement progress is observed separately; qualification
 programs and Docker sweeps are not relabeled as owner-created queue jobs.
+
+The actual public queue was inspected in Firefox on desktop and at 390 × 844
+CSS pixels, including dark/light/system themes, mobile navigation, retained
+native response fragments, an unavailable assessment, empty job state and the
+sign-in return path. No legitimate authenticated JumpServe browser session was
+available: fresh upload/confirmation, cancellation and chat were not exercised.
+No frontend or schema change was needed for this release.
+
+Assessment `4055396e-35c0-4962-ba39-cf23e443ad8d` resumed under its original
+$1,000 maximum and November 4 deadline, with no AI-turn cap. The first post-release
+snapshot recorded $582.75 committed, active repair work and five untested claims;
+it had no experiment jobs yet. Those are conservative commitments, not measured
+charges. Qualification succeeded, but new owner-job execution/ingestion and final
+scientific assessments remain separate, incomplete verification. The receipt
+records a later bounded snapshot if progress advances before evidence sealing.
+
+At 01:55:52 UTC, the bounded follow-up recorded two active model dispatches,
+$604.05 committed, five untested claims and no experiment jobs. An actual builder
+checkpoint contains a new 4,934-byte `project/experiment.py`; creation alone is not
+correctness or execution. Two inspected builder dispatches completed with retained
+context-boundary checkpoints after six and five successful provider calls. A
+separate planning dispatch failed with `local-pre-provider-ValueError`, zero
+provider calls and no paid fallback. Its generic service-reachability text does
+not establish an external outage. This receipt does not identify the precise
+rejected field or byte boundary, so the cause remains open. All originals and the
+nonindependent AI inspection are appended separately, rather than revising the
+release evidence or marking scientific claims resolved.
+
+The private 288-file release archive is SHA256
+`6f40b4fbf456149d7d8f1a92649b49c2f1e75e4c9b373b3b493107644b5237ca`.
+The separate post-release observation archive is SHA256
+`b084fca70671d0d255389b3d735905a4edb9a36213f95ad878f1d58a9967721c`.
+Both were retrieved and all member hashes verified after storage. These results
+support the declared operational release checks, with the authenticated-browser,
+new owner-job ingestion and planning-route gaps above; they are not a claim of
+complete end-to-end or scientific validation.

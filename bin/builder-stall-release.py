@@ -153,6 +153,45 @@ def public_checks(out):
    raw=error.read(20000);assert error.code in (401,403),error.code;checks.append(dict(name=suffix,unauthenticated_status=error.code,sha256=r.sha(raw)))
  value=dict(status='passed',recorded_at=r.stamp(),checks=checks,scope='Public queue and provenance reads, unauthenticated write denial; no browser session inferred.');q.save(out/'public-verified.json',value);return value
 
+def postrelease(out):
+ """Bounded read-only follow-up; preserve failures without replay or relabeling."""
+ identity=r.admin.literal(STUDY)+'::uuid'
+ records=r.admin.query("select id,task_id,status,provenance,created_at,ended_at from research_model_dispatches where study_id="+identity+" and created_at >= '2026-10-30T01:49:00Z' and status not in ('queued','running') order by created_at desc limit 6")
+ result=dict(recorded_at=r.stamp(),kind='post-release-operational-observation',writes=0,model_calls=0,dispatches=[],scope='Latest six recorded outcomes, not complete history or scientific findings.')
+ total=0
+ for d in records:
+  item=dict(d);item['retrieved_artifacts']=[]
+  for a in d['provenance'].get('artifacts',[]):
+   if a['name'] not in ('receipt.json','stdout.bin','stderr.bin'):continue
+   ref=r.admin.query('select storage_path,sha256,byte_count from research_artifacts where study_id='+identity+' and id='+r.admin.literal(a.get('id') or a['artifact_id'])+'::uuid')[0]
+   assert ref['sha256']==a['sha256'] and total+ref['byte_count']<=8000000
+   raw=m.storage(ref['storage_path']);assert len(raw)==ref['byte_count'] and r.sha(raw)==ref['sha256'];total+=len(raw)
+   name=d['id']+'-'+a['name'];(out/name).write_bytes(raw);item['retrieved_artifacts'].append(dict(file=name,sha256=r.sha(raw),bytes=len(raw)))
+  result['dispatches'].append(item);q.save(out/'postrelease.json',result)
+ q.save(out/'postrelease.json',result)
+ return dict(directory=str(out),recorded_outcomes=len(records),status_counts={s:sum(d['status']==s for d in records) for s in {d['status'] for d in records}},retrieved_bytes=total)
+
+def retain_postrelease(out):
+ source=sorted(BASE.glob('*/postrelease.json'))[-1].parent;pending_path=source/'postrelease-pending.json'
+ if pending_path.exists():pending=json.loads(pending_path.read_bytes())
+ else:
+  report=json.loads((source/'postrelease.json').read_bytes());review=json.loads((source/'postrelease-review.json').read_bytes());assert report['writes']==report['model_calls']==0 and review['reviewer']['type']=='AI' and not review['reviewer']['independent']
+  files={p.name:p.read_bytes() for p in source.iterdir() if p.is_file() and p.suffix in ('.json','.bin')};files['release-helper.py']=(ROOT/'bin/builder-stall-release.py').read_bytes()
+  buffer=io.BytesIO()
+  with zipfile.ZipFile(buffer,'w',zipfile.ZIP_DEFLATED) as z:
+   for name,raw in sorted(files.items()):z.writestr(name,raw)
+   z.writestr('artifact-manifest.json',json.dumps([dict(path=n,sha256=r.sha(raw),bytes=len(raw)) for n,raw in sorted(files.items())]))
+  raw=buffer.getvalue();assert len(raw)<=8000000;path=source/'postrelease-evidence.zip';path.write_bytes(raw);pending=dict(archive=str(path.relative_to(ROOT)),sha256=r.sha(raw),bytes=len(raw));q.save(pending_path,pending)
+ archive=(ROOT/pending['archive']).resolve();assert archive.is_relative_to(BASE.resolve());raw=archive.read_bytes();assert r.sha(raw)==pending['sha256'];storage_path=STUDY+'/'+pending['sha256'];m.storage(storage_path,raw);restored=m.storage(storage_path);assert restored==raw
+ with zipfile.ZipFile(io.BytesIO(restored)) as z:
+  for item in json.loads(z.read('artifact-manifest.json')):assert r.sha(z.read(item['path']))==item['sha256']
+ ident=str(uuid.uuid5(uuid.UUID(STUDY),'builder-stall-postrelease:'+pending['sha256']));actor=r.admin.query('select owner_id from research_study_owners where study_id='+r.admin.literal(STUDY)+'::uuid')[0]['owner_id']
+ record=dict(id=ident,sha256=pending['sha256'],byte_count=len(raw),storage_path=storage_path,media_type='application/zip',verified_at=r.stamp(),provenance=dict(kind='post-release-operational-observation',version='builder-stall-postrelease-observation-v1',scientific_completion=False,reviewer=dict(identity='Codex implementing AI',type='AI',independent=False,human=False)))
+ rows=r.admin.query('select sha256,byte_count from research_artifacts where study_id='+r.admin.literal(STUDY)+'::uuid and id='+r.admin.literal(ident)+'::uuid')
+ if not rows:r.admin.query('select public.research_append('+','.join([r.admin.literal(STUDY)+'::uuid',r.admin.literal(actor)+'::uuid',r.admin.literal('artifacts'),r.admin.literal(json.dumps(record))+'::jsonb'])+')',read_only=False)
+ rows=r.admin.query('select sha256,byte_count from research_artifacts where study_id='+r.admin.literal(STUDY)+'::uuid and id='+r.admin.literal(ident)+'::uuid');assert rows==[dict(sha256=pending['sha256'],byte_count=len(raw))]
+ result=dict(status='retained',artifact_id=ident,sha256=pending['sha256'],retrieved_sha256=r.sha(restored),bytes=len(raw),public=False);q.save(out/'postrelease-retained.json',result);return result
+
 def verify_executors(out):
  manifest=json.loads((ROOT/'research-workflow-runtime.json').read_bytes());resources=r.aws('cloudformation','list-stack-resources','--stack-name','JumpServeBenchmarkStack')['StackResourceSummaries'];result=[]
  for item in resources:
@@ -206,7 +245,7 @@ def record_release(source,out):
  value=pending['value'];value['evidence']=dict(artifact_id=ident,sha256=pending['sha256'],retrieved_sha256=r.sha(restored),bytes=len(raw),members=pending['members'],public=False);q.save(ROOT/'docs/builder-stall-production-v1-status.json',value);return dict(status=value['status'],evidence=value['evidence'],assessment=value['assessment'])
 
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['pin','freeze','freeze-cache-followup','freeze-metadata-followup','freeze-preservation-followup','prepare','native','live','evidence','status','collect-status','collect','preview','snapshot','record-review','record-initial-failure','approve','verify-held','verify-active','public-checks','verify-executors','record-release']);args=p.parse_args();BASE.mkdir(parents=True,exist_ok=True);out=BASE/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');out.mkdir();receipt=dict(mode=args.mode,status='running',started_at=r.stamp())
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['pin','freeze','freeze-cache-followup','freeze-metadata-followup','freeze-preservation-followup','prepare','native','live','evidence','status','collect-status','collect','preview','snapshot','record-review','record-initial-failure','approve','verify-held','verify-active','public-checks','verify-executors','record-release','postrelease','retain-postrelease']);args=p.parse_args();BASE.mkdir(parents=True,exist_ok=True);out=BASE/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');out.mkdir();receipt=dict(mode=args.mode,status='running',started_at=r.stamp())
  try:
   receipt['targets']=r.target()
   if args.mode=='pin':value=pin()
@@ -220,6 +259,8 @@ def main():
    frozen=json.loads((q.selected()/'frozen.json').read_bytes());previous=BASE/frozen['pre_provider_harness_amendment']['previous_campaign'];assert previous.is_relative_to(BASE) and not (previous/'live.json').exists();value=record(previous);assert value['status']=='failed-or-paused'
   elif args.mode=='approve':value=approve(q.selected())
   elif args.mode=='public-checks':value=public_checks(out)
+  elif args.mode=='postrelease':value=postrelease(out)
+  elif args.mode=='retain-postrelease':value=retain_postrelease(out)
   elif args.mode=='verify-executors':value=verify_executors(out)
   elif args.mode=='record-release':value=record_release(q.selected(),out)
   elif args.mode=='preview':value=old.preview(q.selected(),out)
