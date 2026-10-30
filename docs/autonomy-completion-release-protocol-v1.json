@@ -1,0 +1,18 @@
+{
+  "version":"autonomy-completion-release-v1",
+  "assessment_id":"4055396e-35c0-4962-ba39-cf23e443ad8d",
+  "stage":"exposed operational release qualification",
+  "questions":["Does the exact retained large planner request pass on the existing production Linux worker with unchanged complete upstream bytes?","Do rejection diagnostics and uncertain-call fencing pass on that worker?","Does one actual subscription response complete through the corrected adapter?"],
+  "cases":[
+    {"id":"linux-retained-request","pass":"Old source reproduces local bridge rejection with zero upstream calls. New source completes exactly one synthetic response, with upstream bytes equal to the exact retained logical conversion. No bound is increased."},
+    {"id":"linux-native-regressions","pass":"All test_openclaw.py tests pass against the pinned installed native CLI, including rejected fields, original-byte transport, safe errors and uncertain-call fencing; zero skipped tests."},
+    {"id":"live-data-only-response","pass":"One actual authorized ChatGPT subscription call returns a complete, phase-valid blocked decision for an explicit missing-source software fixture. Retain original prompt/SSE/CLI outputs and usage; no experiment or scientific finding is inferred."}
+  ],
+  "inputs":"Frozen 59-file runtime manifest, unchanged published autonomy/builder prompts, original retained failed request and local verified evidence. Inherit the previous builder/netem qualification only for byte-identical executable components and AST-identical shared runtime functions.",
+  "comparison":"Deterministic software criteria, exact request identities/hashes, actual native request bytes and call counts. Not a statistical sample or held-out model evaluation; no confidence interval.",
+  "resources":{"maximum_actual_provider_calls":1,"maximum_qualification_reservation_cents":100,"maximum_elapsed_seconds":480,"new_cloud_instances":0,"worker_disk_gib":300,"paid_api_fallback":false,"measured_charges_usd":null,"subscription_allocation_usd":null},
+  "stopping":"Persist failures; never replay a dispatched phase or uncertain call. Stop on failed release-blocking qualification. Hold admissions during runtime deployment; verify deployed hashes, RLS and write denial before activation.",
+  "production_acceptance":"Observe the existing assessment for up to ten minutes after activation, without resetting limits or changing claim criteria. This observation window is not an AI-turn limit. Record actual jobs, measurements, repairs and remaining blockers; lack of completion is an explicit verification gap.",
+  "conditional_checks":["Authenticated browser actions require a legitimate session","Actual paper completion depends on evidence and its original remaining authorization"],
+  "reviewer":{"identity":"Codex implementing AI","type":"AI","independent":false,"human":false,"held_out":false}
+}

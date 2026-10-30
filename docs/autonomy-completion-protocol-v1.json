@@ -1,0 +1,22 @@
+{
+  "version": "autonomy-completion-protocol-v1",
+  "stage": "exposed development regression and integration qualification",
+  "assessment_id": "4055396e-35c0-4962-ba39-cf23e443ad8d",
+  "questions": [
+    "Which exact boundary rejects the retained planning request before provider admission?",
+    "Can a corrected adapter transport equivalent logical authority, context and schema with precise bounded receipts and no uncertain-call replay?",
+    "Can the ordinary assessment controller and queue persist an executable protocol, actual measurements and an evidence-backed assessment through the real database interfaces?"
+  ],
+  "cases": [
+    {"id":"retained-planner-boundary","inputs":"Original failed dispatch 6e5b884a-3322-508b-ae00-c01df7ec9307 and hash-verified original logical/message/receipt bytes","pass":"Reproduce the precise failing boundary using the pinned native CLI without forwarding any inference. Preserve the baseline failure and corrected results separately."},
+    {"id":"adapter-correctness","inputs":"Same retained logical request plus explicit small, invalid and oversized transport controls","pass":"Corrected execution preserves exact upstream logical content and schema, admits at most one inference, reports the actual rejected boundary and sizes, and keeps unknown outcomes fenced. Synthetic provider responses are labelled synthetic."},
+    {"id":"assessment-queue-integration","inputs":"Isolated Postgres with original migrations, real controller/queue/storage functions and declared Linux measurement fixture","pass":"Persist protocol/configuration, queued and completed run records, original raw bytes, parsed measurements and rule-based assessment, with matching identities and hash retrieval verification. Any stubbed external boundary is identified and does not establish live AI autonomy."}
+  ],
+  "metrics": {"request_sizes":"UTF-8 bytes at each exact transport","provider_admissions":"integer count","interventions":"manual edits to a running campaign","measurements":"count and original metric units","hashes":"SHA256 of unchanged original bytes"},
+  "controls": ["Wrong model, tools, roles and authentication rejected","Oversized and incomplete bodies rejected before provider admission","Zero and missing observations remain distinct","Cancellation, original budget/deadline, immutable history and ambiguous outcomes remain enforced"],
+  "sampling": "Deterministic matched-input software checks. No population inference, confidence intervals or scientific reproduction claim. Linux smoke measurements share one guest and are software qualification only.",
+  "resources": {"new_live_provider_calls":0,"new_cloud_instances":0,"production_deployment":false,"production_mutations":false,"local_linux_guest_cpus":2,"local_linux_guest_memory_mib":512,"linux_campaign_wall_seconds":120,"native_cli_check_wall_seconds":180,"estimated_incremental_model_charge_usd":0,"measured_charges_usd":null,"unallocated_host_storage_cost_usd":null},
+  "missing_and_exclusions":"Do not replace failed campaigns or fabricate observations. Missing runtime/credentials block the associated check, with a recorded reason. All failures and amendments retained.",
+  "stopping":"Stop at the first uncorrected boundary. No deployment or additional paid inference under this protocol. Production verification of locally changed code requires a later explicit deployment request.",
+  "reviewer":{"identity":"Codex implementing AI","type":"AI","independent":false,"human":false,"held_out":false}
+}

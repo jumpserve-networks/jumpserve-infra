@@ -166,7 +166,9 @@ def collect_status(source):
     try:data=json.loads(raw)
     except ValueError:return dict(status='requires-archive',bytes=len(raw))
     save(source/'host-status.json',data)
-    return dict(status='retrieved',phases={k:dict(status=v.get('status'),cases=[dict(name=c['name'],status=c['status']) for c in v.get('cases',[])]) for k,v in data.items()})
+    # Older and newer qualification producers may omit per-case status while
+    # retaining the authoritative phase status. Preserve absence as missing.
+    return dict(status='retrieved',phases={k:dict(status=v.get('status'),cases=[dict(name=c['name'],status=c.get('status')) for c in v.get('cases',[])]) for k,v in data.items()})
 
 def collect(source):
     values=json.loads((source/'host-status.json').read_bytes());item=values['evidence.json'];raw=m.storage(item['path']);assert r.sha(raw)==item['sha256']==item['retrieved_sha256']

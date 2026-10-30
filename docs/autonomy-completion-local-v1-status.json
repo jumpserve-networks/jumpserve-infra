@@ -1,0 +1,44 @@
+{
+  "status": "retained; local only",
+  "artifact_id": "a2786d06-ca82-54d0-8509-6e0045a73a5f",
+  "sha256": "0dd5732dcab0e42f068c0f841194384cd359b3a42a124b23d2903784116f3cc1",
+  "retrieved_sha256": "0dd5732dcab0e42f068c0f841194384cd359b3a42a124b23d2903784116f3cc1",
+  "bytes": 1801526,
+  "members": 285,
+  "public": false,
+  "backend_tests": 396,
+  "new_live_provider_calls": 0,
+  "database_checks": [
+    {
+      "evidence": {
+        "actual_tcp_exchanges": 2,
+        "claims": 2,
+        "hash_verified_artifacts": 117,
+        "jobs": 1,
+        "labels": [
+          "discrepant",
+          "reproduced"
+        ],
+        "live_provider_calls": 0,
+        "manual_running_campaign_edits": 0,
+        "measurements": 4,
+        "native_dispatches": 10,
+        "original_limits_preserved": true,
+        "runs": 1,
+        "study": "b604d683-10a4-4703-9398-92617c9152c2",
+        "synthetic_model_judgments": 10,
+        "wall_seconds": 108.94668304198422,
+        "workflow_status": "completed"
+      },
+      "name": "PDF confirmation through durable native dispatch and shared TCP measurement to frozen assessments",
+      "passed": true
+    }
+  ],
+  "conditional_gaps": [
+    "Live model answer quality",
+    "Real Google browser authentication",
+    "Remote Supabase Storage upload/CORS",
+    "Deployed Lambda/cloud-job execution",
+    "Actual retained paper assessment completion"
+  ]
+}

@@ -156,11 +156,36 @@ def matched_checkpoints():
     print(json.dumps(dict(directory=str(out),checkpoints=len(report['checkpoints']),model_calls=0,writes=0)))
 
 
+def planner_boundary():
+    """Retrieve the exact known failure, never invoke/replay its model request."""
+    target=r.target();identity=r.admin.literal(STUDY)+'::uuid'
+    dispatch_id='6e5b884a-3322-508b-ae00-c01df7ec9307'
+    records=r.admin.query('select to_jsonb(d) record from research_model_dispatches d where study_id='+identity+' and id='+r.admin.literal(dispatch_id)+'::uuid')
+    assert len(records)==1;record=records[0]['record'];assert record['status']=='failed' and record['provenance']['provider_calls']==0
+    assert r.sha(record['request_raw'].encode())==record['request_sha256']
+    out=ROOT/'.test-artifacts/autonomy-completion-v1'/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');out.mkdir(parents=True,mode=0o700)
+    protocol=(ROOT/'docs/autonomy-completion-protocol-v1.json').read_bytes();(out/'protocol.json').write_bytes(protocol)
+    release.save(out/'dispatch.json',record)
+    report=dict(version='retained-planner-boundary-v1',target=target,dispatch_id=dispatch_id,protocol_sha256=r.sha(protocol),artifacts=[],provider_calls=0,production_writes=0,review_status='retrieved; not yet reviewed')
+    release.save(out/'retrieval.json',report)
+    for ref in record['provenance']['artifacts']:
+        if ref['name'] not in ('logical.json','message.json','receipt.json','stdout.bin','stderr.bin','openclaw-http-body.bin','provider-request.json'):continue
+        row=r.admin.query('select storage_path,sha256,byte_count from research_artifacts where study_id='+identity+' and id='+r.admin.literal(ref.get('id') or ref['artifact_id'])+'::uuid')[0]
+        assert row['sha256']==ref['sha256'] and row['byte_count']<=1000000
+        raw=m.storage(row['storage_path']);assert len(raw)==row['byte_count'] and r.sha(raw)==row['sha256']
+        (out/ref['name']).write_bytes(raw);report['artifacts'].append(dict(name=ref['name'],bytes=len(raw),sha256=r.sha(raw),retrieved_sha256=r.sha(raw)))
+        release.save(out/'retrieval.json',report)
+    report['review_status']='originals retrieved and hash-verified; completeness not implied';release.save(out/'retrieval.json',report)
+    print(json.dumps(dict(directory=str(out),artifacts=report['artifacts'],provider_calls=0,production_writes=0)))
+
+
 if __name__ == '__main__':
     if sys.argv[1:] == ['--requests']:
         supplement()
     elif sys.argv[1:] == ['--matched-checkpoints']:
         matched_checkpoints()
+    elif sys.argv[1:] == ['--planner-boundary']:
+        planner_boundary()
     elif not sys.argv[1:]:
         main()
     else:

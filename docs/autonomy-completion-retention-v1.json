@@ -1,0 +1,9 @@
+{
+  "version":"autonomy-completion-retention-v1",
+  "parent_protocol":"autonomy-completion-protocol-v1",
+  "scope":"Persist the completed local development evidence as one separate private operational artifact on assessment 4055396e-35c0-4962-ba39-cf23e443ad8d. This does not deploy the fix, execute models, reset limits or change assessment findings.",
+  "mutation":"Append only an immutable research_artifacts record and its private Storage ZIP, after verifying AWS account 395567831870 and Supabase project regphejnlvfpyokpniny. Original bytes and every archive member hash are verified after retrieval.",
+  "resource_limits":{"live_provider_calls":0,"new_cloud_instances":0,"maximum_archive_bytes":20000000,"measured_charges_usd":null,"storage_charges_usd":null},
+  "exclusions":"Do not include config.json, environment files, credentials, original private storage paths or unrelated files. Keep synthetic provider judgments separate from actual local TCP/netem measurements and the real assessment's scientific findings.",
+  "reviewer":{"identity":"Codex implementing AI","type":"AI","independent":false,"human":false,"held_out":false}
+}
