@@ -108,6 +108,37 @@ def approve(source):
  names=frozen['runtime_manifest']['files'];qualified={n:r.sha((BACK/'research_workflow'/n).read_bytes()) for n in sorted(names) if n!='policies/autonomous-repair-release-v1.json'}
  value=dict(version='autonomous-repair-release-v1',approved_for_lab_recovery=True,qualified_files_sha256=r.sha(json.dumps(qualified,sort_keys=True,separators=(',',':')).encode()),evidence_sha256=result['archive']['sha256']);q.save(BACK/'research_workflow/policies/autonomous-repair-release-v1.json',value);q.save(source/'approved-policies.json',dict(repair=value,netem=policy));return value
 
+def freeze_preservation_followup(out):
+ r.auth_maintenance_guard();previous=q.selected();first=json.loads((previous/'frozen.json').read_bytes());live=json.loads((previous/'live.json').read_bytes());assert live['actual_calls']==4 and live['inherited_actual_calls']==42 and len(live['cases'])==2 and 'Preserve the complete original metadata bytes' in live['failure']
+ assert json.loads((previous/'evaluations-recorded.json').read_bytes())['status']=='failed-or-paused'
+ manifest=json.loads((ROOT/'research-workflow-runtime.json').read_bytes());assert manifest==first['runtime_manifest'] and subprocess.check_output(['git','rev-parse','HEAD'],cwd=BACK,text=True).strip()==manifest['source_revision'] and not subprocess.check_output(['git','status','--porcelain'],cwd=BACK,text=True).strip()
+ pointer=json.loads((previous/'host-status.json').read_bytes())['evidence.json'];raw=(previous/'evidence.zip').read_bytes();assert r.sha(raw)==pointer['sha256'] and m.storage(pointer['path'])==raw
+ with zipfile.ZipFile(previous/'candidate.zip') as z:files={n:z.read(n) for n in z.namelist() if n not in ('frozen.json','artifact-manifest.json')}
+ old_ref=first['packaging_followup']['checkpoints']['retained-paper-implementation'];old_checkpoint=files[old_ref['file']];assert r.sha(old_checkpoint)==old_ref['sha256']
+ with zipfile.ZipFile(io.BytesIO(old_checkpoint)) as z:
+  original=z.read('project/build-evidence.json');required={n:r.sha(z.read('project/'+n)) for n in ('experiment.py','requirements.lock','system-packages.lock.json')}
+ cases={c['name']:copy.deepcopy(c) for c in live['cases']};paper=cases['retained-paper-implementation'];assert len(paper['receipts'])==1 and paper['receipts'][0]['status']=='complete' and paper['receipts'][0]['native_tool_cleanup'] is True and paper['receipts'][0]['provider_calls']==4
+ checkpoint_ref=paper['receipts'][0]['checkpoint']
+ with zipfile.ZipFile(io.BytesIO(raw)) as z:
+  matches=[n for n in z.namelist() if n.endswith('checkpoint.zip') and r.sha(z.read(n))==checkpoint_ref['sha256']];assert len(matches)==1;checkpoint=z.read(matches[0]);files['completed-metadata-checkpoint.zip']=checkpoint
+ with zipfile.ZipFile(io.BytesIO(checkpoint)) as z:
+  spec=importlib.util.spec_from_file_location('preservation',ROOT/'bin/builder_preservation_check.py');decoder=importlib.util.module_from_spec(spec);spec.loader.exec_module(decoder)
+  proof=decoder.proof(z.read('project/build-evidence-original.json'),original);assert proof and proof['encoding']=='json-base64-sha256'
+  assert all(r.sha(z.read('project/'+n))==h for n,h in required.items())
+  assert json.loads(z.read('project/build-evidence.json'))=={k:json.loads(original)[k] for k in ('commands','checks','limitations')}
+ files['original-build-evidence.bin']=original;files['qualification.py']=(ROOT/'bin/builder_stall_qualification_host.py').read_bytes();files['builder_preservation_check.py']=(ROOT/'bin/builder_preservation_check.py').read_bytes()
+ # Inherit exact already-passed native controls: backend, image and native
+ # fixture bytes are identical. Only the preservation checker has changed.
+ for name in ('prepared.json','native.json'):files[name]=(previous/name).read_bytes();assert json.loads(files[name])['status']=='passed'
+ for case in cases.values():case['receipts']=case.get('inherited_receipts',[])+case['receipts']
+ packet=copy.deepcopy(first);packet['protocol']['version']='builder-stall-release-followup-v6';packet.update(frozen_at=r.stamp(),source_files={n:r.sha(v) for n,v in files.items() if n!='prepared.json'})
+ inherited=packet['packaging_followup'];inherited.update(version='lossless-preservation-check-followup-v6',previous_validation_campaign=previous.name,actual_calls=46,reserved_cents=4600,additional_model_calls=0,metadata_repair=None,preservation_validation_only=True,original_metadata_file='original-build-evidence.bin',original_metadata_sha256=r.sha(original),required_file_hashes=required,cases=cases,archive=pointer,checkpoints=dict(inherited['checkpoints'],**{'retained-paper-implementation':dict(file='completed-metadata-checkpoint.zip',sha256=checkpoint_ref['sha256'])}),equivalent_preservation_amendment=dict(reason='The actual model preserved all 4055 original bytes in a JSON base64 envelope with its SHA256. The raw-file-only harness falsely rejected that lossless encoding. Accept only strict base64 decode plus exact original-byte and SHA256 equality; retain raw originals separately and keep the failed test/evaluation unchanged.',proof=proof,original_archive=inherited['archive'],inherited_native_report_sha256=r.sha(files['native.json']),runtime_manifest_unchanged=True,additional_model_calls=0,scientific_criteria_unchanged=True,reviewer='Implementing AI; exposed harness correction, not independent or human validation.'))
+ files['frozen.json']=json.dumps(packet,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode();q.save(out/'frozen.json',packet);files['artifact-manifest.json']=json.dumps([dict(path=n,sha256=r.sha(v),bytes=len(v)) for n,v in sorted(files.items())]).encode();stream=io.BytesIO()
+ with zipfile.ZipFile(stream,'w',zipfile.ZIP_DEFLATED) as z:
+  for n,v in sorted(files.items()):z.writestr(n,v)
+ raw=stream.getvalue();(out/'candidate.zip').write_bytes(raw);path='qualification/builder-stall-release-v6/'+out.name+'/'+r.sha(raw)+'.zip';m.storage(path,raw);assert m.storage(path)==raw;q.save(out/'candidate.json',dict(path=path,sha256=r.sha(raw),bytes=len(raw)));(BASE/'selected.txt').write_text(out.name+'\n');q.save(out/'assessment-before.json',json.loads((previous/'assessment-before.json').read_bytes()));q.save(ROOT/'docs/builder-stall-preservation-followup-v6.json',dict(protocol=packet['protocol']['version'],source_revision=packet['source_revision'],overall_deadline_at=inherited['overall_deadline_at'],amendment=inherited['equivalent_preservation_amendment']))
+ return dict(source_revision=packet['source_revision'],inherited_unique_calls=46,additional_model_calls=0,proof=proof,native_controls_inherited_without_replay=True)
+
 def public_checks(out):
  origin='https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/research';checks=[]
  for suffix,name in [('/capabilities','capabilities'),('/studies/'+STUDY+'/queue?public=1&diagnostics=1','queue'),('/studies/'+STUDY+'/queue?public=1&records=autonomy_repairs','repairs'),('/studies/'+STUDY+'/queue?public=1&records=autonomy_repair_events','repair-events')]:
@@ -152,7 +183,7 @@ def record_release(source,out):
   for directory in (source,out,*[p.parent for p in BASE.glob('*/receipt.json')]):
    for p in directory.iterdir():
     if p.is_file() and p.suffix in ('.json','.zip','.log','.bin') and p.name not in ('candidate.zip','release-evidence.zip','release-pending.json'):files[str(p.relative_to(ROOT))]=p.read_bytes()
-  for name in ('research-workflow-runtime.json','bin/builder-stall-release.py','bin/builder_stall_qualification_host.py','docs/builder-stall-release-protocol-v1.json','docs/builder-stall-metadata-followup-v4.json'):
+  for name in ('research-workflow-runtime.json','bin/builder-stall-release.py','bin/builder_stall_qualification_host.py','bin/builder_preservation_check.py','test/builder_preservation_check_test.py','docs/builder-stall-preservation-followup-v6.json','docs/builder-stall-release-protocol-v1.json','docs/builder-stall-metadata-followup-v4.json'):
    files[name]=(ROOT/name).read_bytes()
   if (ROOT/'docs/builder-stall-packet-followup-v5.json').exists():files['docs/builder-stall-packet-followup-v5.json']=(ROOT/'docs/builder-stall-packet-followup-v5.json').read_bytes()
   for name in ('builder-stall-release-packet-final-unit.log',):files['backend/'+name]=(BACK/'.test-artifacts'/name).read_bytes()
@@ -175,13 +206,14 @@ def record_release(source,out):
  value=pending['value'];value['evidence']=dict(artifact_id=ident,sha256=pending['sha256'],retrieved_sha256=r.sha(restored),bytes=len(raw),members=pending['members'],public=False);q.save(ROOT/'docs/builder-stall-production-v1-status.json',value);return dict(status=value['status'],evidence=value['evidence'],assessment=value['assessment'])
 
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['pin','freeze','freeze-cache-followup','freeze-metadata-followup','prepare','native','live','evidence','status','collect-status','collect','preview','snapshot','record-review','record-initial-failure','approve','verify-held','verify-active','public-checks','verify-executors','record-release']);args=p.parse_args();BASE.mkdir(parents=True,exist_ok=True);out=BASE/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');out.mkdir();receipt=dict(mode=args.mode,status='running',started_at=r.stamp())
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['pin','freeze','freeze-cache-followup','freeze-metadata-followup','freeze-preservation-followup','prepare','native','live','evidence','status','collect-status','collect','preview','snapshot','record-review','record-initial-failure','approve','verify-held','verify-active','public-checks','verify-executors','record-release']);args=p.parse_args();BASE.mkdir(parents=True,exist_ok=True);out=BASE/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');out.mkdir();receipt=dict(mode=args.mode,status='running',started_at=r.stamp())
  try:
   receipt['targets']=r.target()
   if args.mode=='pin':value=pin()
   elif args.mode=='freeze':value=freeze(out)
   elif args.mode=='freeze-cache-followup':value=freeze_cache_followup(out)
   elif args.mode=='freeze-metadata-followup':value=freeze_cache_followup(out,True)
+  elif args.mode=='freeze-preservation-followup':value=freeze_preservation_followup(out)
   elif args.mode=='snapshot':value=snapshot(q.selected() if (BASE/'selected.txt').exists() else None,out)
   elif args.mode=='record-review':value=record(q.selected())
   elif args.mode=='record-initial-failure':

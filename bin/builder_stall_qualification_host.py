@@ -4,6 +4,7 @@ from unittest.mock import patch
 ROOT=pathlib.Path(__file__).resolve().parent;sys.path.insert(0,str(ROOT/'research_workflow'))
 import experiment_builder as builder,generated_package,netem_iperf,openclaw_runtime as runtime,repair_validation,source_project,store
 from workflow import canonical,digest
+from builder_preservation_check import proof as preservation_proof
 spec=importlib.util.spec_from_file_location('qualification_base',ROOT/'base_qualification.py');base=importlib.util.module_from_spec(spec);spec.loader.exec_module(base)
 packet=base.packet
 
@@ -63,6 +64,13 @@ def live():
     if name=='native-file-path-repair':
      assert (project/'original_experiment.py').read_bytes()==original
      item['validation']=repair_validation.validate(job,work,context,retain)
+    elif inherited.get('preservation_validation_only'):
+     original_metadata=(ROOT/inherited['original_metadata_file']).read_bytes();assert digest(original_metadata)==inherited['original_metadata_sha256']
+     proofs=[dict(path=p.name,proof=preservation_proof(p.read_bytes(),original_metadata)) for p in project.glob('*.json') if p.name!='build-evidence.json']
+     assert any(p['proof'] for p in proofs),'No byte-verified original metadata representation exists'
+     for filename,sha in inherited['required_file_hashes'].items():assert digest((project/filename).read_bytes())==sha
+     current=json.loads((project/'build-evidence.json').read_bytes());original=json.loads(original_metadata);assert current=={k:original[k] for k in ('commands','checks','limitations')}
+     item['metadata_preservation']=dict(checks=proofs,decoded_original=retain(job,'original-build-evidence.bin',original_metadata),scope='Original byte equality and SHA256 verified independently of model notes; original failed direct-copy-only check retained.')
    elif name=='native-file-path-repair':
     project.mkdir();original=packet['original_program'].encode()
     for filename,raw in {'experiment.py':original,'original_experiment.py':original,'requirements.lock':b'','system-packages.lock.json':b'[]','build-evidence.json':canonical(dict(commands=[],checks=[],limitations=['Software qualification only']))}.items():(project/filename).write_bytes(raw)
@@ -85,7 +93,7 @@ def live():
       _,receipt=builder.execute(logical,ROOT/'live-metadata-repair',job,transport=transport);item['receipts'].append(receipt);save()
      assert receipt['status']=='complete' and receipt.get('native_tool_cleanup') is True,'Every issued call and tool must complete; no uncertain retry'
      assert all((project/n).read_bytes()==raw for n,raw in baseline.items()),'Metadata repair cannot change the executable or dependencies'
-     assert any(p.is_file() and p.name!='build-evidence.json' and p.read_bytes()==original_metadata for p in project.glob('*.json')),'Preserve the complete original metadata bytes in the project'
+     assert any(p.is_file() and p.name!='build-evidence.json' and preservation_proof(p.read_bytes(),original_metadata) for p in project.glob('*.json')),'Preserve the complete original metadata bytes in the project'
     with patch.object(builder,'retain',side_effect=retain),patch.object(builder,'rpc',side_effect=admit),patch.object(store,'artifact_bytes',side_effect=lambda study,ident,**kw:artifacts[ident]):
      while not inherited and report['actual_calls']-case_start<limits['maximum_native_case_calls'] and time.monotonic()-began<limits['maximum_elapsed_seconds']-205:
       _,receipt=builder.execute(logical,ROOT/('live-'+name+'-'+str(len(item['receipts'])+1)),job,transport=transport);item['receipts'].append(receipt);save()

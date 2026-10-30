@@ -1,0 +1,27 @@
+{
+  "protocol": "builder-stall-release-followup-v6",
+  "source_revision": "1e8bf8ce86e3d34364c70cd1f916308890c0ded5",
+  "overall_deadline_at": "2026-10-30T01:46:46.115792+00:00",
+  "amendment": {
+    "reason": "The actual model preserved all 4055 original bytes in a JSON base64 envelope with its SHA256. The raw-file-only harness falsely rejected that lossless encoding. Accept only strict base64 decode plus exact original-byte and SHA256 equality; retain raw originals separately and keep the failed test/evaluation unchanged.",
+    "proof": {
+      "encoding": "json-base64-sha256",
+      "sha256": "64519e2c0c1e8f4aea5f53efc7c6c2016c4c26e8079d41dc906f805e75850e04",
+      "representation_sha256": "dda475ff08e5c7d0222117d3317288c7909c95235e16012ed0d35daaae6d015a",
+      "bytes": 4055
+    },
+    "original_archive": {
+      "bucket": "research-workflow-raw",
+      "bytes": 4590149,
+      "path": "qualification/builder-continuation-v1/20261030T001634539056Z/ab555824443297d87dabc02cd4139963ad6af4ca311dcddc7f091119f5092845-evidence.zip",
+      "public": false,
+      "retrieved_sha256": "ab555824443297d87dabc02cd4139963ad6af4ca311dcddc7f091119f5092845",
+      "sha256": "ab555824443297d87dabc02cd4139963ad6af4ca311dcddc7f091119f5092845"
+    },
+    "inherited_native_report_sha256": "15080af74ed476453d9559ed6a95e645155657f6d2f532d8d1c5777d7489b48b",
+    "runtime_manifest_unchanged": true,
+    "additional_model_calls": 0,
+    "scientific_criteria_unchanged": true,
+    "reviewer": "Implementing AI; exposed harness correction, not independent or human validation."
+  }
+}
