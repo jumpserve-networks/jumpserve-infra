@@ -56,7 +56,7 @@ def main():
    task=lease();task['context']['blockers']=[dict(kind='implementation',detail='An applicable registered implementation is unavailable.',required_input='Write queue instrumentation.')]
    # Persist the ordinary working context before creating its repair snapshot.
    autonomy.advance(task,'queued',context=task['context'],reason='Retain development requirement.');task=lease()
-   queued=autonomy.advance(task,'blocked',reason='Builder remained unchanged after targeted replanning.')
+   queued=autonomy.advance(task,'blocked',reason='Required measurement instrumentation has not yet been implemented.')
    task=lease();result=repair.drive(task,lambda _:None,autonomy.advance)
    def native():
     assert result['stage']=='building' and result['context']['repair_progress']['state']=='repairing'
@@ -64,7 +64,7 @@ def main():
     assert 'run a concrete development check' in result['context']['repair_packet']['command']
     assert result['attempts']==0 and result['label']=='untested'
     return dict(native_repair_prepared=True,original_claim_retained=True,scientific_readiness=False,actual_native_call=False)
-   f.check('stalled implementation receives a targeted native repair packet under the same claim',native)
+   f.check('missing implementation receives a targeted native repair packet under the same claim',native)
    task=lease();record=store.rows('autonomy_repairs',dict(study_id='eq.'+study,state='eq.repairing',limit=1))[0]
    def fences():
     f.rejects(lambda:repair.transition(task,dict(record,revision=record['revision']-1),'validating','stale revision',{}))

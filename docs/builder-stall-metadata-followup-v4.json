@@ -1,0 +1,46 @@
+{
+  "version": "source-metadata-contract-followup-v4",
+  "previous_campaign": "20261030T001634539056Z",
+  "reason": "The original model programs passed all seven independent numerical controls but source sealing rejected derived Python bytecode. Preserve failed evidence; retain caches separately, seal identical source bytes, validate the exact source tree and execute the unchanged server wrapper. The unattempted loss sweep retains its conditions, replications and criteria.",
+  "actual_calls": 42,
+  "reserved_cents": 4200,
+  "additional_model_calls": 6,
+  "archive": {
+    "bucket": "research-workflow-raw",
+    "bytes": 4590149,
+    "path": "qualification/builder-continuation-v1/20261030T001634539056Z/ab555824443297d87dabc02cd4139963ad6af4ca311dcddc7f091119f5092845-evidence.zip",
+    "public": false,
+    "retrieved_sha256": "ab555824443297d87dabc02cd4139963ad6af4ca311dcddc7f091119f5092845",
+    "sha256": "ab555824443297d87dabc02cd4139963ad6af4ca311dcddc7f091119f5092845"
+  },
+  "unchanged_native_functions": {
+    "bootstrap": "6a88213c253c17f4119cb7868ccc7eac6ab8c7b978abbc66992896a04377f021",
+    "work_packet": "9213df011a9e0e4b5d91d394086b673e207b5b18d258a2b3ccbb13031430ab34",
+    "_execute": "eab114ecb81666f73e398a65d7c9903cced0b827deddd82ee0c0dbcaca9ff28e",
+    "validate_calls": "4abba2e6019d2f23d41e1d14a7e224b65040d05a1749da0b2bda0ef9f727b51d",
+    "config": "88d383ab353ba79355a98ba70726354226564ab3d33a1b147c4935a1c003f365"
+  },
+  "original_source_revision": "a8403f715a5167f413f9a44fade2ed4863686cf2",
+  "overall_deadline_at": "2026-10-30T01:35:51.315059+00:00",
+  "metadata_repair": "The exact experiment.py and dependency locks already passed all four independent source-arithmetic controls. Do not modify them or repeat paper/context inspection. Correct ONLY project/build-evidence.json: it must contain exactly commands, checks, limitations, each a JSON array. Preserve its COMPLETE original bytes in a separate JSON file in project/ before changing that envelope; keep additional runtime/version/source notes there. You can write a small Python helper OUTSIDE project/ and execute it directly to preserve the original bytes and extract those three existing arrays. No candidate.json, scientific run or paper verdict. At most SIX additional provider calls remain under the original cumulative 48-call qualification allowance. Make the concrete metadata correction now.",
+  "metadata_parent": {
+    "campaign": "20261030T003830442550Z",
+    "archive": {
+      "bucket": "research-workflow-raw",
+      "bytes": 1887220,
+      "path": "qualification/builder-continuation-v1/20261030T003830442550Z/742516e2faa427db295c3f29c149eac71f80575eb42cd514933a9a7d9d30ddfa-evidence.zip",
+      "public": false,
+      "retrieved_sha256": "742516e2faa427db295c3f29c149eac71f80575eb42cd514933a9a7d9d30ddfa",
+      "sha256": "742516e2faa427db295c3f29c149eac71f80575eb42cd514933a9a7d9d30ddfa"
+    },
+    "additional_model_calls": 0
+  },
+  "original_deadline_at": "2026-10-30T01:01:46.115792+00:00",
+  "qualification_resource_amendment": "Pre-acquisition amendment: after cache and metadata integration failures, permit a fresh 2700-second qualification phase within 5400 seconds from the original freeze. Preserve all failures and the original 48-call/$48 reservation ceiling; at most six new calls, no refunds or replays. Paper budget, deadline, findings and scientific criteria unchanged. No netem measurements were attempted before this amendment.",
+  "changed_model_interface": {
+    "function": "execution_contract",
+    "before_sha256": "b331f50f10f8b5c914f552a3a3703118297aec19a37b4457715e9fd938ee522e",
+    "after_sha256": "1561bb916a55860fce9f7c164674b21994b2f867e859ee915cf11684b31c7035",
+    "change": "Declare the previously omitted exact metadata/dependency schemas; all executable, wrapper and scientific contracts unchanged."
+  }
+}

@@ -1,7 +1,14 @@
 import * as cdk from 'aws-cdk-lib';
 import * as api from 'aws-cdk-lib/aws-apigatewayv2';
 import { Template, Match } from 'aws-cdk-lib/assertions';
-import { ResearchWorkflow, researchWorkflowIsEnabled } from '../lib/research-workflow';
+import { ResearchWorkflow, researchWorkflowIsEnabled, requireNetemPolicy } from '../lib/research-workflow';
+test('netem counter envelope changes require v2 and preserve host and historical policy scope', () => {
+  const base = {account:'395567831870',region:'us-east-1',instance_type:'t3.medium',root_gib:8,cpu_credits:'standard',max_instances:1,max_wall_seconds:1800};
+  expect(()=>requireNetemPolicy({...base,version:'netem-iperf-costs-v1'},base.account,base.region)).not.toThrow();
+  const v2={...base,version:'netem-iperf-costs-v2',max_network_bytes:20000000000,max_output_bytes:3000000,approved_for_lab_execution:false};
+  expect(()=>requireNetemPolicy(v2,base.account,base.region)).not.toThrow();
+  for (const changed of [{max_network_bytes:20000000001},{max_network_bytes:10000000000},{instance_type:'t3.large'},{max_wall_seconds:3600},{version:'netem-iperf-costs-v1'},{approved_for_lab_execution:'true'}]) expect(()=>requireNetemPolicy({...v2,...changed},base.account,base.region)).toThrow();
+});
 test('explicit shared-pool production mode omits reservations while retaining bounded workers', () => {
   const app = new cdk.App({ context: { supabaseUrl: 'https://regphejnlvfpyokpniny.supabase.co', researchQueueEnabled: true, researchReservedConcurrencyEnabled: false } });
   const stack = new cdk.Stack(app, 'ResearchSharedPool', { env: { account: '395567831870', region: 'us-east-1' } });

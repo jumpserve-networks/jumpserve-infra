@@ -1,0 +1,367 @@
+{
+  "version": "builder-stall-fix-local-v1",
+  "recorded_at": "2026-10-29T23:57:48.434748+00:00",
+  "status": "implemented-and-locally-verified;release-pending",
+  "protocols": [
+    "builder-stall-fix-validation-v1",
+    "builder-stall-fix-validation-v2"
+  ],
+  "checks": {
+    "backend_tests": 388,
+    "infrastructure_tests": 94,
+    "existing_infrastructure_skips": 5,
+    "typescript_build": "passed",
+    "native": {
+      "image": "sha256:ef9eec8c7c44fa2da5312721295aeea6ee92837a8e7f909c5f70785ecb9207be",
+      "platform": "linux/arm64",
+      "legacy_slots": 3,
+      "retained_paper": {
+        "context_bytes": 67412,
+        "live_provider_calls": 0,
+        "maximum_request_bytes": 49133,
+        "original_checkpoint_sha256": "14da75587e42b0c2483ecb9115462f780d5b552acca6ec4bc7c0f71ddcfbcac9",
+        "original_context_sha256": "edc6e4d0c1c17b6011c69d405d8d0286765602f9b4bb448be8c84e57f527e869",
+        "original_dispatch_id": "9d361f3a-a312-587f-8ecd-7f106d539b53",
+        "receipt": {
+          "action_policy_sha256": "973ae76b13a64f4205ca2f581722da8c237cd8afb61d68e2a36e187562be3e52",
+          "action_policy_version": "experiment-action-policy-v1",
+          "build_state": "checkpoint",
+          "catalog_cost_fields": "Native zero cost fields are non-billing placeholders; subscription allocation and measured charges remain unknown.",
+          "checkpoint": {
+            "artifact_id": "e7b3bbe9-5759-5004-9b11-6a3e6dd7279c",
+            "sha256": "15c068809822212b459fff266f4cb2a355e4e9109e77e419476d6ad0e7b80689",
+            "version": "experiment-builder-v1"
+          },
+          "container_cleanup": "stopped",
+          "context_delivery": {
+            "artifact_id": "d7bbbe95-2c4d-5cab-b46e-3e79fb5fda6b",
+            "sha256": "f1c12df3143a71e98c4719421e4e7231c071c5d4771a58715803a250d9050eb5",
+            "version": "experiment-builder-v1"
+          },
+          "estimated_cost_usd": null,
+          "execution_contract_sha256": "b84107612a0b55fb54931a7361769c2935b9cd6145727ec162bc56868ef293ea",
+          "measured_charges_usd": null,
+          "model_id": "gpt-6.1-sol",
+          "native_tool_cleanup": true,
+          "paid_fallback": false,
+          "provider_calls": 6,
+          "provider_request_sent": true,
+          "runtime": "experiment-builder-v1",
+          "slice_seconds": 180,
+          "status": "complete",
+          "usage": {
+            "calls": [
+              {
+                "inputTokens": 100,
+                "outputTokens": 20,
+                "totalTokens": 120
+              },
+              {
+                "inputTokens": 100,
+                "outputTokens": 20,
+                "totalTokens": 120
+              },
+              {
+                "inputTokens": 100,
+                "outputTokens": 20,
+                "totalTokens": 120
+              },
+              {
+                "inputTokens": 100,
+                "outputTokens": 20,
+                "totalTokens": 120
+              },
+              {
+                "inputTokens": 100,
+                "outputTokens": 20,
+                "totalTokens": 120
+              },
+              {
+                "inputTokens": 100,
+                "outputTokens": 20,
+                "totalTokens": 120
+              }
+            ],
+            "scope": "Per-call available provider token counts; missing entries and subscription allocation remain unknown."
+          },
+          "wall_seconds": 12.928878333012108,
+          "work_progress": {
+            "delivered": {
+              "source": {
+                "pages": [
+                  0
+                ],
+                "sha256": "a8466a939c5afcccc22ce55955935dca2a0976dfda4729bb9fbb04599bb9e40b"
+              }
+            },
+            "files": [
+              {
+                "bytes": 30,
+                "path": "development-input.json",
+                "sha256": "71f75e1a8c97c106842bfbc1dd9b854e9db84ffd5ca9b8ee66d3a47afed47fe8"
+              },
+              {
+                "bytes": 346,
+                "path": "development_check.py",
+                "sha256": "569ec85232034d02256327d8d3a2da2bfa1b10e6ca4bd8eb7755fdb5a0181380"
+              },
+              {
+                "bytes": 350,
+                "path": "project/__pycache__/experiment.cpython-310.pyc",
+                "sha256": "555b13433581b68e5215b5e1958c103efec70d6fc924444f9494879d15a117bf"
+              },
+              {
+                "bytes": 126,
+                "path": "project/experiment.py",
+                "sha256": "8f62c32b2946a2b9872e5979ecab697b915f92c82742874bfb3975c7fa4da61d"
+              }
+            ],
+            "implementation_files": [
+              {
+                "bytes": 346,
+                "path": "development_check.py",
+                "sha256": "569ec85232034d02256327d8d3a2da2bfa1b10e6ca4bd8eb7755fdb5a0181380"
+              },
+              {
+                "bytes": 126,
+                "path": "project/experiment.py",
+                "sha256": "8f62c32b2946a2b9872e5979ecab697b915f92c82742874bfb3975c7fa4da61d"
+              }
+            ],
+            "implementation_sha256": "bc3e1e7c38ac78e1ee9cffc970d03d8729cfc3bb2c24f4518e69bd8f6d1f2cb1",
+            "scope": "File changes and exact context transport, not substantive review, correctness or scientific completion.",
+            "sha256": "fe3aebab7215fe4c99f2218b4cc9443f5a8d33e925e616f79cd093446119a2c1",
+            "version": "builder-work-progress-v2"
+          },
+          "workspace_gid": 20,
+          "workspace_uid": 501
+        },
+        "scope": "Real native CLI read packet/source, wrote and executed a fixed SOFTWARE-ONLY conditions parser with full retained paper context. Diagnosis was already delivered in that checkpoint. No model behavior, paper experiment, candidate publication or measurement ingestion is validated.",
+        "status": "passed",
+        "synthetic_provider_requests": 6
+      },
+      "live_provider_calls": 0,
+      "scope": "Actual local CLI/container, synthetic model plan. Production Linux/amd64 qualification and autonomous model behavior remain unverified."
+    },
+    "counterfactual": {
+      "amendment": {
+        "amends": "builder-stall-fix-validation-v1",
+        "checks": [
+          "All five exact matched checkpoints produce a bounded work packet and a fresh native request with the entire real developer message/tool schema overhead plus an actual packet-read result below 72000 bytes",
+          "Historical read sequences retain their original call identities, source context and full archived history. Report which transformed sequences still exceed the limit; never call those accepted or silently truncate them",
+          "Oversized requests retain the existing pre-provider stop; the no-progress router regression, resource bounds, source/zero/null controls and native synthetic-provider integration checks pass"
+        ],
+        "classification": "Exposed, tuned development cases reviewed by implementing AI, not independent or held-out validation",
+        "reason": "Initial counterfactual development replays brought four old requests under the bound, but the fifth still exceeded it after ten historical reads. Requiring every arbitrarily long old conversation to fit would contradict the unchanged bounded stateless-session contract. Preserve all failed replays and distinguish payload fit from model behavior.",
+        "unchanged": [
+          "Original hypotheses, measurements, source conditions, runtime budgets and limits",
+          "No live model calls, cloud instances, production mutation or deployment",
+          "Live full-paper-context and held-out model behavior remain unverified"
+        ],
+        "version": "builder-stall-fix-validation-v2"
+      },
+      "cases": [
+        {
+          "checkpoint_sha256": "14da75587e42b0c2483ecb9115462f780d5b552acca6ec4bc7c0f71ddcfbcac9",
+          "context_sha256": "edc6e4d0c1c17b6011c69d405d8d0286765602f9b4bb448be8c84e57f527e869",
+          "counterfactual_bytes": 64251,
+          "dispatch_id": "9d361f3a-a312-587f-8ecd-7f106d539b53",
+          "fresh_packet_request_bytes": 43317,
+          "fresh_request_kind": "Synthetic first packet-read request; real native overhead retained. No model behavior implied.",
+          "full_original_history_preserved": true,
+          "historical_counterfactual_fits": true,
+          "maximum_bytes": 72000,
+          "original_bytes": 76651,
+          "original_request_sha256": "5720a49429924be3ad7cce43252e2e49079b24a8142d32d66214af6f6e2997b0",
+          "remaining_bytes": 7749,
+          "replacements": [
+            "bootstrap",
+            "metadata",
+            "metadata"
+          ],
+          "task_id": "2dfbd3d1-2514-586d-9d07-47f04a5c78ff",
+          "work_packet_bytes": 6547,
+          "work_packet_sha256": "0d06f9e83ba7e69cb08f02efeb685e934a39e7ba5ebc5d14fb05e9bca609a37b"
+        },
+        {
+          "checkpoint_sha256": "e33db5eba2a74276ab952075b9147649f8f3959487655fbe0a53ff9a411db7ef",
+          "context_sha256": "12bf64cf37fcee9e079addfe14ca1ba5424bf0387caa37475ba8f71dde8d1bcc",
+          "counterfactual_bytes": 63821,
+          "dispatch_id": "81eda403-836d-599f-b0bf-7123f3d27221",
+          "fresh_packet_request_bytes": 43377,
+          "fresh_request_kind": "Synthetic first packet-read request; real native overhead retained. No model behavior implied.",
+          "full_original_history_preserved": true,
+          "historical_counterfactual_fits": true,
+          "maximum_bytes": 72000,
+          "original_bytes": 75766,
+          "original_request_sha256": "edc4da6e18f2c1b1ce7cd4dc18f6ead87ada4a94c472d32767aadb4f21f726df",
+          "remaining_bytes": 8179,
+          "replacements": [
+            "bootstrap",
+            "metadata",
+            "metadata"
+          ],
+          "task_id": "b9c00763-023d-5971-9367-e02d30949d7c",
+          "work_packet_bytes": 6606,
+          "work_packet_sha256": "bf9acb265e2add276724a5322101c527305064810dcbfa3fb8e1e8c46ecebcf9"
+        },
+        {
+          "checkpoint_sha256": "adf0e954f9e62aa0ac9a462fd616ad9f13eb0b120ee2288c9c0aaf285ebabe4f",
+          "context_sha256": "2f667957a81b2f58966de6684a87972fd911fc79485acdc8f87e8f0c47caacde",
+          "counterfactual_bytes": 63090,
+          "dispatch_id": "5d3897e7-62c1-5b94-b32d-bc53a47cd70d",
+          "fresh_packet_request_bytes": 43123,
+          "fresh_request_kind": "Synthetic first packet-read request; real native overhead retained. No model behavior implied.",
+          "full_original_history_preserved": true,
+          "historical_counterfactual_fits": true,
+          "maximum_bytes": 72000,
+          "original_bytes": 75372,
+          "original_request_sha256": "a5c1fb26285148c1bd3230da522410eeeb2001363c61714f90917ac4354d36d0",
+          "remaining_bytes": 8910,
+          "replacements": [
+            "bootstrap",
+            "metadata",
+            "metadata"
+          ],
+          "task_id": "872f6faa-3215-5a0a-96e2-aac94fd0a6c0",
+          "work_packet_bytes": 6355,
+          "work_packet_sha256": "ec8a6fbe5fb6f4c4e42478722cb4a6133e3630e4b15bd42051b594e40a57519b"
+        },
+        {
+          "checkpoint_sha256": "be5e4c5a410f93e95e4b28c41131c166c7465f9c95815e4a6b60f487e29e5ba8",
+          "context_sha256": "56f403c338132bb8ec03f8d549686958629a196a03ea7e60d53eb9726ac21d68",
+          "counterfactual_bytes": 60167,
+          "dispatch_id": "820a90fc-3009-598e-9dbd-17920d4cbd13",
+          "fresh_packet_request_bytes": 43210,
+          "fresh_request_kind": "Synthetic first packet-read request; real native overhead retained. No model behavior implied.",
+          "full_original_history_preserved": true,
+          "historical_counterfactual_fits": true,
+          "maximum_bytes": 72000,
+          "original_bytes": 73006,
+          "original_request_sha256": "dacaa1c838c01c16a2342a9d4f5858df4f5d51795130c188f65847550d3e4ba6",
+          "remaining_bytes": 11833,
+          "replacements": [
+            "bootstrap",
+            "metadata",
+            "metadata"
+          ],
+          "task_id": "1fa0b903-5ccd-5608-a57b-4ff01d75cf73",
+          "work_packet_bytes": 6439,
+          "work_packet_sha256": "5af4c94a2c511d927dda00654d6c506f3ba18e58c4b59462ff1e9ae0744f335c"
+        },
+        {
+          "checkpoint_sha256": "fc4af3529f2a9f38cf6b61817bc9c08ada3ecc58de0de07a9a2ff03455ad8e94",
+          "context_sha256": "7454994aa74c54566c48479e76ff33323b163a7ca0bfeec907ab4e9e54dad9c5",
+          "counterfactual_bytes": 72948,
+          "dispatch_id": "48b19ac9-7d2e-59c6-9094-a56ec5bbd041",
+          "fresh_packet_request_bytes": 43864,
+          "fresh_request_kind": "Synthetic first packet-read request; real native overhead retained. No model behavior implied.",
+          "full_original_history_preserved": true,
+          "historical_counterfactual_fits": false,
+          "maximum_bytes": 72000,
+          "original_bytes": 77525,
+          "original_request_sha256": "c0a85e147c09be7e90b523f63925c2a3d4ec005a42ee7be0dd51be458393dd15",
+          "remaining_bytes": -948,
+          "replacements": [
+            "bootstrap",
+            "metadata"
+          ],
+          "task_id": "258366b4-0865-55b3-9d67-87a4b801a7d5",
+          "work_packet_bytes": 6907,
+          "work_packet_sha256": "ac054a6e8d19d5fae125d9e7a8af06d5aa9a8ccf4a874e35d318edb08e3a62b3"
+        }
+      ],
+      "kind": "Counterfactual development regression, not held-out or scientific validation",
+      "new_experiments": 0,
+      "new_live_model_calls": 0,
+      "production_writes": 0,
+      "reviewer": {
+        "human": false,
+        "identity": "Codex implementing AI",
+        "independent": false,
+        "type": "AI"
+      },
+      "source_files": {
+        "autonomous_repair.py": "9f5e0178671032244ffee26734d17d4444ce83b47327ce5e5524bd34657f89f2",
+        "autonomy.py": "30348fcc3d95dbadcae280ef631c65d376f26d59c9eb1a7be0424a48d2ea2879",
+        "autonomy_costs.py": "c08abf79a1dffeb7d20bdfc9a01151ecd0e0c5b29c4e5d4ea074cd2a7e20257f",
+        "autonomy_inputs.py": "2bf2d6ce377508f9ddf6f66bb18230e929fe779c1ca3b960a9b788c3cb9dd76a",
+        "experiment_builder.py": "6634c9373e700388744d60a96aa487867fb4cd47eb990d2e9b7d661ce223a34e",
+        "netem_iperf.py": "f1793bde4bd24bd769332063c154c04bbe55ca5f63390d7a9e99afb725cbaf71",
+        "network_spec.py": "91792dbaaf7aaf7d1ea56c76f16958848de2d05151651bbfa624387cd4ce59d6"
+      },
+      "status": "passed",
+      "transformation": "Retain original developer message, schemas, call identities and all other outputs. Substitute the new bootstrap and server-generated index/continuation outputs using the exact completed parent checkpoint. Post-slot history is retained as a new continuation; no original request or result is overwritten.",
+      "version": "builder-stall-work-packet-replay-v1"
+    }
+  },
+  "source_files": {
+    "backend/research_workflow/autonomous_repair.py": "9f5e0178671032244ffee26734d17d4444ce83b47327ce5e5524bd34657f89f2",
+    "backend/research_workflow/autonomy.py": "30348fcc3d95dbadcae280ef631c65d376f26d59c9eb1a7be0424a48d2ea2879",
+    "backend/research_workflow/autonomy_costs.py": "c08abf79a1dffeb7d20bdfc9a01151ecd0e0c5b29c4e5d4ea074cd2a7e20257f",
+    "backend/research_workflow/autonomy_inputs.py": "2bf2d6ce377508f9ddf6f66bb18230e929fe779c1ca3b960a9b788c3cb9dd76a",
+    "backend/research_workflow/experiment_builder.py": "6634c9373e700388744d60a96aa487867fb4cd47eb990d2e9b7d661ce223a34e",
+    "backend/research_workflow/netem_iperf.py": "f1793bde4bd24bd769332063c154c04bbe55ca5f63390d7a9e99afb725cbaf71",
+    "backend/research_workflow/network_spec.py": "91792dbaaf7aaf7d1ea56c76f16958848de2d05151651bbfa624387cd4ce59d6",
+    "backend/research_workflow/policies/autonomous-repair-release-v1.json": "ed141a436a682c2e5c47828765e8a26dde48b695dfc6b998b9227a3eff642c2b",
+    "backend/research_workflow/policies/netem-iperf-costs-v2.json": "aed8d4b70c2ea23831e7aeca3a9ccb0ac41d32a132a69719b98b0cebc8746e2d",
+    "backend/research_workflow/policies/builder-stall-fix-validation-v1.json": "9e6ae81f6df3c0375f22743090bd6d6ec012231bc7a95f826d58cc492d51291f",
+    "backend/research_workflow/policies/builder-stall-fix-validation-v2.json": "e984248be10b4b5dacaf98cf2951d2da9c868985c4008b325f1b90a0b68b5356",
+    "backend/research_workflow/tests/test_builder_work_packet.py": "1992e144f99f99624a897c44a38639c6979c161cd7852b44117dab6662894588",
+    "backend/research_workflow/tests/check_experiment_builder_linux.py": "92ea6d4724fd77ad3288dff4630a149aff9f4a548789a1e095466eb5988a4e4e",
+    "lib/research-workflow.ts": "55b53d70f71ecf12212fd9d66b35d6220cd1106ecb0322fe9b3042f247de6cd0",
+    "test/research-workflow.test.ts": "3b6110c857c30dce44322a319fe079dc325cc68e9d7d296ce758bf25802fc821",
+    "bin/check-builder-stall-fix-local.py": "1bcccc6838b71ea33a2b935240f0b10c70f85ba4446f2cdcf2790483fefebc4d",
+    "bin/record-builder-stall-fix-local.py": "3722d6c6eedf4dd29e9e28cb2b639110630fe9baa4fb96d9607b44da23e4f4f0"
+  },
+  "new_live_model_calls": 0,
+  "new_scientific_experiments": 0,
+  "production_execution_or_configuration_changes": 0,
+  "merged": false,
+  "deployed": false,
+  "measured_charges_usd": null,
+  "subscription_allocation_usd": null,
+  "storage_charges_usd": null,
+  "reviewer": {
+    "identity": "Codex implementing AI",
+    "type": "AI",
+    "independent": false,
+    "human": false,
+    "held_out": false
+  },
+  "remaining": [
+    "Exact production linux/amd64 platform qualification with changed sources",
+    "Frozen bounded live full-paper-context model evaluation; model selection of implementation and actual candidate/job/measurement ingestion are unverified",
+    "New committed runtime pin including netem-iperf-costs-v2.json; historical v1 and current manifest remain unchanged",
+    "Publish only exact-source passing repair/resource policy approvals during a separately authorized release",
+    "No frontend or SQL schema changes; browser/auth/database/deployed checks were not rerun for this local-only change"
+  ],
+  "retained_failed_replays": [
+    {
+      "path": ".test-artifacts/builder-stall-fix/20261029T234638060175Z/report.json",
+      "sha256": "02b45f4e5b788962d45e516cef9e523c844d5f94cdc871e526dda2b1ee61aec3",
+      "status": "failed"
+    },
+    {
+      "path": ".test-artifacts/builder-stall-fix/20261029T234735840928Z/report.json",
+      "sha256": "cc450db5e900bcbfab16f85a692b382c3e6e02dfcc7d8f7e4864dffa5601df92",
+      "status": "failed"
+    },
+    {
+      "path": ".test-artifacts/builder-stall-fix/20261029T234808776757Z/report.json",
+      "sha256": "90887b690382222a3d0889cdffd0cd7db480ddb849da3b413b28002c2d2cb4b7",
+      "status": "failed"
+    }
+  ],
+  "scientific_scope": "These are software regressions and counterfactual payload checks. No paper claim has been reclassified, source setting changed or scientific measurement collected. Reused/tuned cases are not held-out validation.",
+  "evidence": {
+    "path": ".test-artifacts/builder-stall-fix-sealed/20261029T235748435458Z/evidence.zip",
+    "sha256": "da8b21f7e24a36fd37a09b31ba06c515c69c5d9640b4f5376c78243cd73e9955",
+    "bytes": 2063956,
+    "members": 260,
+    "remote_storage_verified": true,
+    "artifact_id": "c15b0490-1789-5076-9504-5a60f5ea2952",
+    "retrieved_sha256": "da8b21f7e24a36fd37a09b31ba06c515c69c5d9640b4f5376c78243cd73e9955",
+    "public": false
+  }
+}

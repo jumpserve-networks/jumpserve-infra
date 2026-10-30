@@ -1,0 +1,17 @@
+{
+  "version": "assessment-4055396e-builder-stall-retention-v1",
+  "assessment": "4055396e-35c0-4962-ba39-cf23e443ad8d",
+  "status": "investigated;runtime-unchanged",
+  "artifact_id": "7c143b4d-f9bb-5d28-ab34-b3b8a3d8fc9d",
+  "sha256": "b7e3fa94e66f124c49be0482ec9d9f28abe0a6e382470322de69259a9054ce61",
+  "retrieved_sha256": "b7e3fa94e66f124c49be0482ec9d9f28abe0a6e382470322de69259a9054ce61",
+  "bytes": 3923775,
+  "members": 172,
+  "public": false,
+  "analysis_sha256": "77f2034d3ff9d3c9744c6931c386cce969231c7328c0243ae8fac9810d3868d7",
+  "source_revision": "4d42a1b05da29851d83e9696f91c16d43aa8b6b5",
+  "new_investigator_model_calls": 0,
+  "new_investigator_experiments": 0,
+  "assessment_execution_changed": false,
+  "deployed": false
+}

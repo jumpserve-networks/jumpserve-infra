@@ -17,6 +17,12 @@ export function researchWorkflowIsEnabled(value: unknown): boolean {
   return value === true || value === 'true';
 }
 
+export function requireNetemPolicy(policy: Record<string, unknown>, account: string, region: string): void {
+  if (policy.account !== account || policy.region !== region || policy.instance_type !== 't3.medium' || policy.root_gib !== 8 || policy.cpu_credits !== 'standard' || policy.max_instances !== 1 || policy.max_wall_seconds !== 1800) throw new Error('TCP sweep resource envelope differs from enforced infrastructure.');
+  if (policy.version === 'netem-iperf-costs-v1' && policy.max_network_bytes === undefined) return;
+  if (policy.version !== 'netem-iperf-costs-v2' || policy.max_network_bytes !== 20000000000 || policy.max_output_bytes !== 3000000 || typeof policy.approved_for_lab_execution !== 'boolean') throw new Error('TCP sweep counter envelope requires its declared version and exact bound.');
+}
+
 export function requireRepairQualification(qualification: {version?:string;approved_for_lab_recovery?:boolean;qualified_files_sha256?:string;evidence_sha256?:string}, files: Record<string,string>): void {
   const repairFiles = Object.fromEntries(Object.entries(files).filter(([name])=>name!=='policies/autonomous-repair-release-v1.json').sort(([a],[b])=>a < b ? -1 : a > b ? 1 : 0));
   const filesSha = createHash('sha256').update(JSON.stringify(repairFiles)).digest('hex');
@@ -111,8 +117,11 @@ export class ResearchWorkflow extends Construct {
       if (packagesEnabled) networkingEnvironment.NETWORK_PACKAGE_FUNCTION=packageExecutor.functionArn;
       // Fixed built-in experiment code has a separate admission path from
       // submitted custom packages. Pin the executor version and cost policy.
-      const sweepPolicy = JSON.parse(fs.readFileSync(path.join(runtime, 'policies/netem-iperf-costs-v1.json'), 'utf8'));
-      if (sweepPolicy.account !== cdk.Stack.of(this).account || sweepPolicy.region !== cdk.Stack.of(this).region || sweepPolicy.instance_type !== 't3.medium' || sweepPolicy.root_gib !== 8 || sweepPolicy.cpu_credits !== 'standard' || sweepPolicy.max_instances !== 1 || sweepPolicy.max_wall_seconds !== 1800) throw new Error('TCP sweep resource envelope differs from enforced infrastructure.');
+      // A historical pin retains v1. Only a new committed manifest explicitly
+      // declaring v2 can introduce the new counter envelope into a release.
+      const sweepPolicyName = manifest.files['policies/netem-iperf-costs-v2.json'] ? 'policies/netem-iperf-costs-v2.json' : 'policies/netem-iperf-costs-v1.json';
+      const sweepPolicy = JSON.parse(fs.readFileSync(path.join(runtime, sweepPolicyName), 'utf8'));
+      requireNetemPolicy(sweepPolicy, cdk.Stack.of(this).account, cdk.Stack.of(this).region);
       networkingEnvironment.NETWORK_NETEM_IPERF_FUNCTION=packageExecutor.currentVersion.functionArn;
       networkingEnvironment.NETWORK_NETEM_IPERF_POLICY_SHA256=createHash('sha256').update(JSON.stringify(sweepPolicy,Object.keys(sweepPolicy).sort())).digest('hex');
       if(builderEnabled){

@@ -1,0 +1,14 @@
+{
+  "version":"builder-stall-release-v1",
+  "scope":"Production software qualification on the retained fabricated benchmark paper, not independent scientific validation or a guarantee of general autonomy.",
+  "cases":[
+    {"id":"native-file-path-repair","pass":"Actual model repairs the existing file-path defect, preserves original failure/code, passes incident-bound server validation and independent 7/0/null executable controls."},
+    {"id":"retained-paper-implementation","pass":"Real OpenClaw model with the complete retained paper context writes a portable source-table calculation package, executes development checks, freezes actual source and passes independently executed ordinary/zero/null/changed-input controls. It identifies source calculations as archived fabricated data, never new empirical observations."},
+    {"id":"full-grid-netem","pass":"Exact production Linux AMD64 image executes the unchanged fixed runner for 0/1/2/5/10 percent loss, 100 Mbit/s, 20 ms each direction, three 30-second replications. Preserve condition/replication identities, actual outputs, byte/time/rate consistency, missing values and cleanup. Repeated trials on one host are not independent machines or confidence intervals."}
+  ],
+  "preconditions":["Verify AWS 395567831870 and Supabase regphejnlvfpyokpniny", "Hold admissions/polling and drain active/recent uncertain work", "Freeze exact clean committed source and prompt hashes before calls", "Production image sha256:542c0bd0a512d3c18348103775a983a840067eaadb703276e432c17cc5308c64 is linux/amd64", "Production-platform native synthetic controls and targeted regressions pass"],
+  "resources":{"maximum_actual_provider_calls":48,"maximum_native_case_calls":30,"maximum_elapsed_seconds":2700,"maximum_qualification_commitments_cents":4800,"netem_replications":3,"netem_duration_seconds":30,"new_cloud_instances":0,"paid_api_fallback":false,"measured_charges_usd":null,"subscription_allocation_usd":null},
+  "stopping":"Stop on exhausted envelope, uncertain provider call, auth/quota pause, failed acceptance or unverified persistence. Never replay a dispatched phase or reset the original assessment's $1000 and deadline. Synthetic controls are not model evaluations. Retain all failures and amend before follow-up calls.",
+  "publication":"Pass every declared case and inspect actual programs and answers. Preserve original evidence with GET/hash verification and versioned evaluations in existing prompt tables before exact-source policy approval. Deploy worker/controller/executor using immutable pins while held, verify bytes/RLS/API, then restore admission. Observe real candidate reviews/job creation/measurement ingestion and browser queue rendering. If a boundary fails, repair it and retain failed evidence; disclose any incomplete boundary.",
+  "reviewer":{"identity":"Codex implementing AI","type":"AI","independent":false,"human":false,"held_out":false}
+}

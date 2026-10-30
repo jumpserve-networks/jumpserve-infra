@@ -1,0 +1,19 @@
+{
+  "version": "assessment-4055396e-builder-stall-v1",
+  "assessment": "4055396e-35c0-4962-ba39-cf23e443ad8d",
+  "scope": "Read-only diagnosis of current production builder stagnation, followed by bounded offline checks on retained originals. Not a paper experiment or model-behavior qualification.",
+  "questions": [
+    "Are native write/edit/exec tools admitted with usable schemas and permissions?",
+    "Do recent prompts preserve the claim, current feedback, runner contracts and implementation state?",
+    "Are executable files absent, present but rejected, or missed by progress detection?",
+    "Do repeated inspection, context boundaries or stale repair/planning state explain the observed loop?"
+  ],
+  "sampling": "All five confirmed claim tasks. Up to three most recent builder parent dispatches per task, two most recent controller turns and two most recent native calls per task, plus each task's retained checkpoint. Separate database reads are not an atomic snapshot. Active or unavailable outputs stay missing; no provider replay.",
+  "metrics": ["Native commands by tool and read/write/execute intent", "Actual implementation file paths, bytes and SHA-256", "Executed command outputs and exit/failure evidence", "Per-dispatch context/provider byte limits and stop reasons", "Implementation fingerprints and unchanged-slice counters", "Known commitments in cents, not measured charges"],
+  "controls": "Bind each original to assessment/task/dispatch/call identities and verify stored bytes after retrieval. Use exact recorded inputs for any deterministic replay; label changed-context or clean-workspace comparisons as counterfactuals. File inventory and hashes do not prove full review, executable correctness or scientific validity.",
+  "limits": {"new_live_model_calls": 0, "new_cloud_instances": 0, "production_execution_or_configuration_changes": 0, "maximum_download_bytes": 64000000, "maximum_expanded_history_bytes_per_checkpoint": 16000000},
+  "missing": "Retain failed reads, active/unconfirmed calls and absent artifacts distinctly. Do not fill missing outputs, reset budgets, change labels, cancel or restart the assessment.",
+  "analysis": "Descriptive diagnosis. Calls, repeated continuations and claims share software and history; no independent-replication assumption, confidence interval or causal generalization. Demonstrated parser/validator mechanisms must be separated from hypotheses about future model behavior.",
+  "review": {"identity": "Codex implementing investigator", "type": "AI", "human": false, "independent": false},
+  "delivery": "Preserve original artifacts and a hash manifest, report source/review coverage, exact findings, limitations and any locally validated correction. No merge or deployment is authorized by this investigation."
+}
