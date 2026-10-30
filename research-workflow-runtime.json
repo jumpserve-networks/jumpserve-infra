@@ -1,6 +1,6 @@
 {
-  "version": 68,
-  "source_revision": "1e8bf8ce86e3d34364c70cd1f916308890c0ded5",
+  "version": 69,
+  "source_revision": "52abe168691afb678ecfcbd91f3f07b70fb7ca04",
   "files": {
     "api.py": "de0ef9251379e1a369a9293bee07a09dc4fdbc9ba25019f31eb9fd686cfa84fb",
     "autonomous_repair.py": "9f5e0178671032244ffee26734d17d4444ce83b47327ce5e5524bd34657f89f2",
@@ -34,7 +34,7 @@
     "paper_titles.py": "2656fcdb94ca4b5aa6996cc3e46422520d0c8ddbdbd5a45195f343a6e1879c94",
     "paper_uploads.py": "b9d70281c8a65626c15a7e2d599e7713c35359a2c7bf679e3fe517a6ed2f8488",
     "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
-    "policies/autonomous-repair-release-v1.json": "ed141a436a682c2e5c47828765e8a26dde48b695dfc6b998b9227a3eff642c2b",
+    "policies/autonomous-repair-release-v1.json": "b26a52871e75adf80e9ebdc488157f934dc8867bc5f1eb3fcaa5d30bcaf33b85",
     "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b",
     "policies/autonomy-experiment-costs-v2.json": "241f53ad7c51399b043d0567cc545fb3281d7581c619f51fc9474fc1eaa13b19",
     "policies/autonomy-turn-policy-v1.json": "7aa48bccc617d1493e8621a8c290e2251180c768f021f6f8cccf06eac5eddafb",
@@ -46,7 +46,7 @@
     "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
     "policies/experiment-action-policy-v1.json": "973ae76b13a64f4205ca2f581722da8c237cd8afb61d68e2a36e187562be3e52",
     "policies/netem-iperf-costs-v1.json": "7f65f2f726ee685714c8dba1ae8fa8614e142ce80e5aad7cc0f669095311fe61",
-    "policies/netem-iperf-costs-v2.json": "aed8d4b70c2ea23831e7aeca3a9ccb0ac41d32a132a69719b98b0cebc8746e2d",
+    "policies/netem-iperf-costs-v2.json": "3bd4d81ff13b4596a675cd4ed8dce788bb80b9c2e38bcca356c40f4efb7cc1ea",
     "policies/paper-review-selection-policy-v2.json": "cd9336091528b167ac000fd5405d1b6545a52d500cdb17d657d66defe4d21ca5",
     "policies/paper-review-selection-v1.json": "d62371e1d7bde37c799ddb0da74b3570c89cfa57f189b974693da8da62ec144c",
     "preparation.py": "5b1867da1f69b2b8a781d471abce1b871b7de10e2be40aa783390777b48462e3",

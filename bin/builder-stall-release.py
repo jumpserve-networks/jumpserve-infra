@@ -182,12 +182,12 @@ def record_release(source,out):
   files={'release-report.json':json.dumps(value,sort_keys=True,separators=(',',':')).encode()}
   for directory in (source,out,*[p.parent for p in BASE.glob('*/receipt.json')]):
    for p in directory.iterdir():
-    if p.is_file() and p.suffix in ('.json','.zip','.log','.bin') and p.name not in ('candidate.zip','release-evidence.zip','release-pending.json'):files[str(p.relative_to(ROOT))]=p.read_bytes()
-  for name in ('research-workflow-runtime.json','bin/builder-stall-release.py','bin/builder_stall_qualification_host.py','bin/builder_preservation_check.py','test/builder_preservation_check_test.py','docs/builder-stall-preservation-followup-v6.json','docs/builder-stall-release-protocol-v1.json','docs/builder-stall-metadata-followup-v4.json'):
+    if p.is_file() and p.suffix in ('.json','.zip','.log','.bin','.csv') and p.name not in ('candidate.zip','release-evidence.zip','release-pending.json'):files[str(p.relative_to(ROOT))]=p.read_bytes()
+  for name in ('research-workflow-runtime.json','bin/builder-stall-release.py','bin/builder_stall_qualification_host.py','bin/builder_preservation_check.py','bin/review-builder-stall-evidence.py','test/builder_preservation_check_test.py','docs/builder-stall-preservation-followup-v6.json','docs/builder-stall-release-protocol-v1.json','docs/builder-stall-metadata-followup-v4.json','docs/builder-stall-production-v1.md'):
    files[name]=(ROOT/name).read_bytes()
   if (ROOT/'docs/builder-stall-packet-followup-v5.json').exists():files['docs/builder-stall-packet-followup-v5.json']=(ROOT/'docs/builder-stall-packet-followup-v5.json').read_bytes()
-  for name in ('builder-stall-release-packet-final-unit.log',):files['backend/'+name]=(BACK/'.test-artifacts'/name).read_bytes()
-  for name in ('builder-stall-release-cache-infra.log','builder-stall-release-infra-build.log','builder-stall-release-database-repair.log','builder-stall-release-cache-database-builder.log'):files['reports/'+name]=(ROOT/'.test-artifacts'/name).read_bytes()
+  for name in ('builder-stall-release-packet-final-unit.log','builder-stall-release-approved-unit.log'):files['backend/'+name]=(BACK/'.test-artifacts'/name).read_bytes()
+  for name in ('builder-stall-release-cache-infra.log','builder-stall-release-infra-build.log','builder-stall-release-approved-infra.log','builder-stall-release-approved-build.log','builder-stall-release-database-repair.log','builder-stall-release-cache-database-builder.log'):files['reports/'+name]=(ROOT/'.test-artifacts'/name).read_bytes()
   for p in (ROOT/'.test-artifacts/openclaw-release').glob('20261030T*/*'):
    if p.is_file() and p.name in ('receipt.json','cdk.log','outputs.json','parameter-comparison.json'):files[str(p.relative_to(ROOT))]=p.read_bytes()
   buffer=io.BytesIO()
