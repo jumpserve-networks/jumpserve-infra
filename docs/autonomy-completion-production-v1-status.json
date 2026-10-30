@@ -1,0 +1,1028 @@
+{
+  "version": "autonomy-completion-production-v1",
+  "status": "deployed-with-explicit-verification-scope",
+  "recorded_at": "2026-10-30T03:11:50.725685+00:00",
+  "runtime_manifest": {
+    "version": 72,
+    "source_revision": "5c9525d92938a53aa39f078795f99a9bc0a87cd6",
+    "files": {
+      "api.py": "de0ef9251379e1a369a9293bee07a09dc4fdbc9ba25019f31eb9fd686cfa84fb",
+      "autonomous_repair.py": "9f5e0178671032244ffee26734d17d4444ce83b47327ce5e5524bd34657f89f2",
+      "autonomy.py": "30348fcc3d95dbadcae280ef631c65d376f26d59c9eb1a7be0424a48d2ea2879",
+      "autonomy_costs.py": "c08abf79a1dffeb7d20bdfc9a01151ecd0e0c5b29c4e5d4ea074cd2a7e20257f",
+      "autonomy_evidence.py": "014ae3bfba5c0162735aa921ced7e3703096c7573cf256160b78e92173780ca6",
+      "autonomy_inputs.py": "2bf2d6ce377508f9ddf6f66bb18230e929fe779c1ca3b960a9b788c3cb9dd76a",
+      "autonomy_methods.py": "0d391642e0dca6c834a2e693c5071a9aca35e52df7ac2221793f018ea68afc58",
+      "autonomy_model.py": "25b48763f3808d05ccf6cd20ae1da20bc83f87e3faece699eff55a583671ec14",
+      "autonomy_sources.py": "debc3a35264a82677f2b4f566323ebb85c8efdaa63b51fd796336c891d2de942",
+      "bounded_network.py": "0b8bc5948dbf71712296c3b4c9a47f4ac68f5e32dcc591be3e42914ff17abc0c",
+      "claim_design.py": "25ae2613b37cf31af13a5ee250a5c22d5266e18ec98c034d13bdc05e81d933e0",
+      "dispatch_recovery.py": "fc42566196a521541910fa500234661f52f3896c8ef5e5ce3b444e1f7dea86bb",
+      "experiment_builder.py": "a42c79d586f6bd48c2f6b1d266f81ba0c348bc401788e55db11cf4505dd233b0",
+      "gap_queue.py": "598c564817f6cc4ced6172ae14ead651458b2898d20771ecc426b30ecc8c9c18",
+      "generated_package.py": "4f02af4ece4023bd0534dc7e616754bb5c1498dccdfbb6312bb240d82e9385aa",
+      "ideas.py": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+      "intake.py": "368040222619b26049c9598f41ae6ebf6ddacd44262f2fb9a7cf25bc1519b0ae",
+      "model_dispatch.py": "ca98bd887d9eed327786ba55a9d0923b7e46e6bb47b00dce86a3f0b7724810d0",
+      "netem_iperf.py": "f1793bde4bd24bd769332063c154c04bbe55ca5f63390d7a9e99afb725cbaf71",
+      "network_execution.py": "4358b5ec6c2a18111a2f9fa39937261bc0241ac3420f624a243b220f7cdd8cbe",
+      "network_package.py": "9eac81c23ebb6addd7c198ab631c72ed8e21f62e2898f1427a257f0cf2c4d32c",
+      "network_spec.py": "91792dbaaf7aaf7d1ea56c76f16958848de2d05151651bbfa624387cd4ce59d6",
+      "openclaw-builder-patch.json": "8b8f157008ad0353bc1cd3b3856778ab3d85b8bb9c22decbe4fde33a13cc39db",
+      "openclaw_auth.mjs": "ff5a01312d3539e091e60cf060f7433b087f390f5d126e8c8baa065ac5a11d63",
+      "openclaw_health.py": "4cfe95969ce7451fbcc4d6519ca19c1e031cb9c8994baa6596f1fde324234885",
+      "openclaw_runtime.py": "028c8afe6548c5c6b097aa6ad3baa59c4ed19a15529349c921405ce4076c72b8",
+      "package_runtime.py": "a108122e46fbc764a14b260940a3cb272b3254746e270499ea3593d45b04237a",
+      "paper_catalog.py": "308229285a4d2044a0af840899273a38a7aaf990d53d5954276dba3a49302121",
+      "paper_selection.py": "5de2564131056dff3039c83bec56e283996d19c7a79b3d495ed453c473721f70",
+      "paper_titles.py": "2656fcdb94ca4b5aa6996cc3e46422520d0c8ddbdbd5a45195f343a6e1879c94",
+      "paper_uploads.py": "b9d70281c8a65626c15a7e2d599e7713c35359a2c7bf679e3fe517a6ed2f8488",
+      "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+      "policies/autonomous-repair-release-v1.json": "5d53ff918e913f51222d200f8ee6840fd5b82c98e2679b677a2e51aa96757865",
+      "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b",
+      "policies/autonomy-experiment-costs-v2.json": "241f53ad7c51399b043d0567cc545fb3281d7581c619f51fc9474fc1eaa13b19",
+      "policies/autonomy-turn-policy-v1.json": "7aa48bccc617d1493e8621a8c290e2251180c768f021f6f8cccf06eac5eddafb",
+      "policies/builder-recovery-validation-v3.json": "7ef5324ff165238c741a9efeaa2b38ce2adfd5843699cfc0f07ddd4f51564511",
+      "policies/builder-stall-fix-validation-v1.json": "9e6ae81f6df3c0375f22743090bd6d6ec012231bc7a95f826d58cc492d51291f",
+      "policies/builder-stall-fix-validation-v2.json": "e984248be10b4b5dacaf98cf2951d2da9c868985c4008b325f1b90a0b68b5356",
+      "policies/built-package-costs-v1.json": "cd6f4b2891199e2f29001168972964f3e769220034db57b2266bf89022b904e4",
+      "policies/built-package-costs-v2.json": "ef48cd2fca9d87ddcd1730567d18e058c09111c0b4d880f052b30210a7f63e59",
+      "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+      "policies/experiment-action-policy-v1.json": "973ae76b13a64f4205ca2f581722da8c237cd8afb61d68e2a36e187562be3e52",
+      "policies/netem-iperf-costs-v1.json": "7f65f2f726ee685714c8dba1ae8fa8614e142ce80e5aad7cc0f669095311fe61",
+      "policies/netem-iperf-costs-v2.json": "3bd4d81ff13b4596a675cd4ed8dce788bb80b9c2e38bcca356c40f4efb7cc1ea",
+      "policies/paper-review-selection-policy-v2.json": "cd9336091528b167ac000fd5405d1b6545a52d500cdb17d657d66defe4d21ca5",
+      "policies/paper-review-selection-v1.json": "d62371e1d7bde37c799ddb0da74b3570c89cfa57f189b974693da8da62ec144c",
+      "preparation.py": "5b1867da1f69b2b8a781d471abce1b871b7de10e2be40aa783390777b48462e3",
+      "repair_validation.py": "0454f9c86f004f8a5b9ba66a01a490d96727b6ee3d712a09262078cba94b54c9",
+      "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+      "runtime_retry.py": "2d57e625e2b13080fdecf42e756e8e527af892e416b3f440c6e7b30bbbc02a6c",
+      "scheduler.py": "e78c0a3245ce437c84b04a87aa1b161ba1cf28ed14189e4f9577f7874b11576e",
+      "shared_campaigns.py": "76b2c92453ad9b805fbd411b12db80fdc5f43259da472ed34bf3734da1162270",
+      "siwc_protocol.py": "6341b9df6fbe781aa0efa7db276455af2188e07d50bcfb21c13553c02bf6de35",
+      "source_arithmetic.py": "489badbc601f37830c406595bed0e0930077f4f64f6bad6cf68c4592f82ca3b7",
+      "source_project.py": "a7bc65f7f95d4ff706b9b477b476772f6743a491bf9400e328c0e8514b5c83f0",
+      "store.py": "50ec68be831f1bf8e789cd91e4837fd2b8972fc36c10e58bd7deb65a4dc778a2",
+      "worker.py": "d19e7faefd49793ec39b5b4f09050f3731e3bd264bcb05fad712b0ce808e88ad",
+      "workflow.py": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f"
+    }
+  },
+  "release_blocking_checks_passed": true,
+  "evaluation": {
+    "status": "passed",
+    "report_sha256": "66826224dae6c5f149d2dac75be232816874fb48017286b4960d86fa75e4bf29",
+    "archive": {
+      "bucket": "research-workflow-raw",
+      "bytes": 807525,
+      "path": "qualification/builder-continuation-v1/20261030T024545008975Z/0f165f7a5b37e0c34dc930832b24f548276bdfccbea0e9b910f4336b81f34337-evidence.zip",
+      "public": false,
+      "retrieved_sha256": "0f165f7a5b37e0c34dc930832b24f548276bdfccbea0e9b910f4336b81f34337",
+      "sha256": "0f165f7a5b37e0c34dc930832b24f548276bdfccbea0e9b910f4336b81f34337"
+    }
+  },
+  "active": {
+    "status": "passed",
+    "source_revision": "5c9525d92938a53aa39f078795f99a9bc0a87cd6",
+    "runtime_files": 59,
+    "functions": [
+      {
+        "logical_id": "ResearchWorkflowApiE04EBDAC",
+        "function": "JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+        "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowApiE04EBDA-mGlPl5tGRx2X",
+        "zip_sha256": "b68bcff8741ce59d067b0311bf0ac3672400baed84c53c87074d5dbcdc1cd064",
+        "source_hashes": {
+          "api.py": "de0ef9251379e1a369a9293bee07a09dc4fdbc9ba25019f31eb9fd686cfa84fb",
+          "autonomous_repair.py": "9f5e0178671032244ffee26734d17d4444ce83b47327ce5e5524bd34657f89f2",
+          "autonomy.py": "30348fcc3d95dbadcae280ef631c65d376f26d59c9eb1a7be0424a48d2ea2879",
+          "autonomy_costs.py": "c08abf79a1dffeb7d20bdfc9a01151ecd0e0c5b29c4e5d4ea074cd2a7e20257f",
+          "autonomy_evidence.py": "014ae3bfba5c0162735aa921ced7e3703096c7573cf256160b78e92173780ca6",
+          "autonomy_inputs.py": "2bf2d6ce377508f9ddf6f66bb18230e929fe779c1ca3b960a9b788c3cb9dd76a",
+          "autonomy_methods.py": "0d391642e0dca6c834a2e693c5071a9aca35e52df7ac2221793f018ea68afc58",
+          "autonomy_model.py": "25b48763f3808d05ccf6cd20ae1da20bc83f87e3faece699eff55a583671ec14",
+          "autonomy_sources.py": "debc3a35264a82677f2b4f566323ebb85c8efdaa63b51fd796336c891d2de942",
+          "bounded_network.py": "0b8bc5948dbf71712296c3b4c9a47f4ac68f5e32dcc591be3e42914ff17abc0c",
+          "claim_design.py": "25ae2613b37cf31af13a5ee250a5c22d5266e18ec98c034d13bdc05e81d933e0",
+          "dispatch_recovery.py": "fc42566196a521541910fa500234661f52f3896c8ef5e5ce3b444e1f7dea86bb",
+          "experiment_builder.py": "a42c79d586f6bd48c2f6b1d266f81ba0c348bc401788e55db11cf4505dd233b0",
+          "gap_queue.py": "598c564817f6cc4ced6172ae14ead651458b2898d20771ecc426b30ecc8c9c18",
+          "generated_package.py": "4f02af4ece4023bd0534dc7e616754bb5c1498dccdfbb6312bb240d82e9385aa",
+          "ideas.py": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+          "intake.py": "368040222619b26049c9598f41ae6ebf6ddacd44262f2fb9a7cf25bc1519b0ae",
+          "model_dispatch.py": "ca98bd887d9eed327786ba55a9d0923b7e46e6bb47b00dce86a3f0b7724810d0",
+          "netem_iperf.py": "f1793bde4bd24bd769332063c154c04bbe55ca5f63390d7a9e99afb725cbaf71",
+          "network_execution.py": "4358b5ec6c2a18111a2f9fa39937261bc0241ac3420f624a243b220f7cdd8cbe",
+          "network_package.py": "9eac81c23ebb6addd7c198ab631c72ed8e21f62e2898f1427a257f0cf2c4d32c",
+          "network_spec.py": "91792dbaaf7aaf7d1ea56c76f16958848de2d05151651bbfa624387cd4ce59d6",
+          "openclaw-builder-patch.json": "8b8f157008ad0353bc1cd3b3856778ab3d85b8bb9c22decbe4fde33a13cc39db",
+          "openclaw_auth.mjs": "ff5a01312d3539e091e60cf060f7433b087f390f5d126e8c8baa065ac5a11d63",
+          "openclaw_health.py": "4cfe95969ce7451fbcc4d6519ca19c1e031cb9c8994baa6596f1fde324234885",
+          "openclaw_runtime.py": "028c8afe6548c5c6b097aa6ad3baa59c4ed19a15529349c921405ce4076c72b8",
+          "package_runtime.py": "a108122e46fbc764a14b260940a3cb272b3254746e270499ea3593d45b04237a",
+          "paper_catalog.py": "308229285a4d2044a0af840899273a38a7aaf990d53d5954276dba3a49302121",
+          "paper_selection.py": "5de2564131056dff3039c83bec56e283996d19c7a79b3d495ed453c473721f70",
+          "paper_titles.py": "2656fcdb94ca4b5aa6996cc3e46422520d0c8ddbdbd5a45195f343a6e1879c94",
+          "paper_uploads.py": "b9d70281c8a65626c15a7e2d599e7713c35359a2c7bf679e3fe517a6ed2f8488",
+          "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+          "policies/autonomous-repair-release-v1.json": "5d53ff918e913f51222d200f8ee6840fd5b82c98e2679b677a2e51aa96757865",
+          "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b",
+          "policies/autonomy-experiment-costs-v2.json": "241f53ad7c51399b043d0567cc545fb3281d7581c619f51fc9474fc1eaa13b19",
+          "policies/autonomy-turn-policy-v1.json": "7aa48bccc617d1493e8621a8c290e2251180c768f021f6f8cccf06eac5eddafb",
+          "policies/builder-recovery-validation-v3.json": "7ef5324ff165238c741a9efeaa2b38ce2adfd5843699cfc0f07ddd4f51564511",
+          "policies/builder-stall-fix-validation-v1.json": "9e6ae81f6df3c0375f22743090bd6d6ec012231bc7a95f826d58cc492d51291f",
+          "policies/builder-stall-fix-validation-v2.json": "e984248be10b4b5dacaf98cf2951d2da9c868985c4008b325f1b90a0b68b5356",
+          "policies/built-package-costs-v1.json": "cd6f4b2891199e2f29001168972964f3e769220034db57b2266bf89022b904e4",
+          "policies/built-package-costs-v2.json": "ef48cd2fca9d87ddcd1730567d18e058c09111c0b4d880f052b30210a7f63e59",
+          "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+          "policies/experiment-action-policy-v1.json": "973ae76b13a64f4205ca2f581722da8c237cd8afb61d68e2a36e187562be3e52",
+          "policies/netem-iperf-costs-v1.json": "7f65f2f726ee685714c8dba1ae8fa8614e142ce80e5aad7cc0f669095311fe61",
+          "policies/netem-iperf-costs-v2.json": "3bd4d81ff13b4596a675cd4ed8dce788bb80b9c2e38bcca356c40f4efb7cc1ea",
+          "policies/paper-review-selection-policy-v2.json": "cd9336091528b167ac000fd5405d1b6545a52d500cdb17d657d66defe4d21ca5",
+          "policies/paper-review-selection-v1.json": "d62371e1d7bde37c799ddb0da74b3570c89cfa57f189b974693da8da62ec144c",
+          "preparation.py": "5b1867da1f69b2b8a781d471abce1b871b7de10e2be40aa783390777b48462e3",
+          "repair_validation.py": "0454f9c86f004f8a5b9ba66a01a490d96727b6ee3d712a09262078cba94b54c9",
+          "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+          "runtime_retry.py": "2d57e625e2b13080fdecf42e756e8e527af892e416b3f440c6e7b30bbbc02a6c",
+          "scheduler.py": "e78c0a3245ce437c84b04a87aa1b161ba1cf28ed14189e4f9577f7874b11576e",
+          "shared_campaigns.py": "76b2c92453ad9b805fbd411b12db80fdc5f43259da472ed34bf3734da1162270",
+          "siwc_protocol.py": "6341b9df6fbe781aa0efa7db276455af2188e07d50bcfb21c13553c02bf6de35",
+          "source_arithmetic.py": "489badbc601f37830c406595bed0e0930077f4f64f6bad6cf68c4592f82ca3b7",
+          "source_project.py": "a7bc65f7f95d4ff706b9b477b476772f6743a491bf9400e328c0e8514b5c83f0",
+          "store.py": "50ec68be831f1bf8e789cd91e4837fd2b8972fc36c10e58bd7deb65a4dc778a2",
+          "worker.py": "d19e7faefd49793ec39b5b4f09050f3731e3bd264bcb05fad712b0ce808e88ad",
+          "workflow.py": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f"
+        },
+        "handler": "api.handler",
+        "runtime": "python3.12",
+        "memory_mb": 512,
+        "timeout": 29,
+        "layers": [],
+        "autonomy_enabled": "true",
+        "worker_target": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowAutonomyWo-5sN0tQ8Oziyq"
+      },
+      {
+        "logical_id": "ResearchWorkflowAutonomyWorker1BCFF82C",
+        "function": "JumpServeBenchmarkStack-ResearchWorkflowAutonomyWo-5sN0tQ8Oziyq",
+        "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowAutonomyWo-5sN0tQ8Oziyq",
+        "zip_sha256": "b68bcff8741ce59d067b0311bf0ac3672400baed84c53c87074d5dbcdc1cd064",
+        "source_hashes": {
+          "api.py": "de0ef9251379e1a369a9293bee07a09dc4fdbc9ba25019f31eb9fd686cfa84fb",
+          "autonomous_repair.py": "9f5e0178671032244ffee26734d17d4444ce83b47327ce5e5524bd34657f89f2",
+          "autonomy.py": "30348fcc3d95dbadcae280ef631c65d376f26d59c9eb1a7be0424a48d2ea2879",
+          "autonomy_costs.py": "c08abf79a1dffeb7d20bdfc9a01151ecd0e0c5b29c4e5d4ea074cd2a7e20257f",
+          "autonomy_evidence.py": "014ae3bfba5c0162735aa921ced7e3703096c7573cf256160b78e92173780ca6",
+          "autonomy_inputs.py": "2bf2d6ce377508f9ddf6f66bb18230e929fe779c1ca3b960a9b788c3cb9dd76a",
+          "autonomy_methods.py": "0d391642e0dca6c834a2e693c5071a9aca35e52df7ac2221793f018ea68afc58",
+          "autonomy_model.py": "25b48763f3808d05ccf6cd20ae1da20bc83f87e3faece699eff55a583671ec14",
+          "autonomy_sources.py": "debc3a35264a82677f2b4f566323ebb85c8efdaa63b51fd796336c891d2de942",
+          "bounded_network.py": "0b8bc5948dbf71712296c3b4c9a47f4ac68f5e32dcc591be3e42914ff17abc0c",
+          "claim_design.py": "25ae2613b37cf31af13a5ee250a5c22d5266e18ec98c034d13bdc05e81d933e0",
+          "dispatch_recovery.py": "fc42566196a521541910fa500234661f52f3896c8ef5e5ce3b444e1f7dea86bb",
+          "experiment_builder.py": "a42c79d586f6bd48c2f6b1d266f81ba0c348bc401788e55db11cf4505dd233b0",
+          "gap_queue.py": "598c564817f6cc4ced6172ae14ead651458b2898d20771ecc426b30ecc8c9c18",
+          "generated_package.py": "4f02af4ece4023bd0534dc7e616754bb5c1498dccdfbb6312bb240d82e9385aa",
+          "ideas.py": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+          "intake.py": "368040222619b26049c9598f41ae6ebf6ddacd44262f2fb9a7cf25bc1519b0ae",
+          "model_dispatch.py": "ca98bd887d9eed327786ba55a9d0923b7e46e6bb47b00dce86a3f0b7724810d0",
+          "netem_iperf.py": "f1793bde4bd24bd769332063c154c04bbe55ca5f63390d7a9e99afb725cbaf71",
+          "network_execution.py": "4358b5ec6c2a18111a2f9fa39937261bc0241ac3420f624a243b220f7cdd8cbe",
+          "network_package.py": "9eac81c23ebb6addd7c198ab631c72ed8e21f62e2898f1427a257f0cf2c4d32c",
+          "network_spec.py": "91792dbaaf7aaf7d1ea56c76f16958848de2d05151651bbfa624387cd4ce59d6",
+          "openclaw-builder-patch.json": "8b8f157008ad0353bc1cd3b3856778ab3d85b8bb9c22decbe4fde33a13cc39db",
+          "openclaw_auth.mjs": "ff5a01312d3539e091e60cf060f7433b087f390f5d126e8c8baa065ac5a11d63",
+          "openclaw_health.py": "4cfe95969ce7451fbcc4d6519ca19c1e031cb9c8994baa6596f1fde324234885",
+          "openclaw_runtime.py": "028c8afe6548c5c6b097aa6ad3baa59c4ed19a15529349c921405ce4076c72b8",
+          "package_runtime.py": "a108122e46fbc764a14b260940a3cb272b3254746e270499ea3593d45b04237a",
+          "paper_catalog.py": "308229285a4d2044a0af840899273a38a7aaf990d53d5954276dba3a49302121",
+          "paper_selection.py": "5de2564131056dff3039c83bec56e283996d19c7a79b3d495ed453c473721f70",
+          "paper_titles.py": "2656fcdb94ca4b5aa6996cc3e46422520d0c8ddbdbd5a45195f343a6e1879c94",
+          "paper_uploads.py": "b9d70281c8a65626c15a7e2d599e7713c35359a2c7bf679e3fe517a6ed2f8488",
+          "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+          "policies/autonomous-repair-release-v1.json": "5d53ff918e913f51222d200f8ee6840fd5b82c98e2679b677a2e51aa96757865",
+          "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b",
+          "policies/autonomy-experiment-costs-v2.json": "241f53ad7c51399b043d0567cc545fb3281d7581c619f51fc9474fc1eaa13b19",
+          "policies/autonomy-turn-policy-v1.json": "7aa48bccc617d1493e8621a8c290e2251180c768f021f6f8cccf06eac5eddafb",
+          "policies/builder-recovery-validation-v3.json": "7ef5324ff165238c741a9efeaa2b38ce2adfd5843699cfc0f07ddd4f51564511",
+          "policies/builder-stall-fix-validation-v1.json": "9e6ae81f6df3c0375f22743090bd6d6ec012231bc7a95f826d58cc492d51291f",
+          "policies/builder-stall-fix-validation-v2.json": "e984248be10b4b5dacaf98cf2951d2da9c868985c4008b325f1b90a0b68b5356",
+          "policies/built-package-costs-v1.json": "cd6f4b2891199e2f29001168972964f3e769220034db57b2266bf89022b904e4",
+          "policies/built-package-costs-v2.json": "ef48cd2fca9d87ddcd1730567d18e058c09111c0b4d880f052b30210a7f63e59",
+          "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+          "policies/experiment-action-policy-v1.json": "973ae76b13a64f4205ca2f581722da8c237cd8afb61d68e2a36e187562be3e52",
+          "policies/netem-iperf-costs-v1.json": "7f65f2f726ee685714c8dba1ae8fa8614e142ce80e5aad7cc0f669095311fe61",
+          "policies/netem-iperf-costs-v2.json": "3bd4d81ff13b4596a675cd4ed8dce788bb80b9c2e38bcca356c40f4efb7cc1ea",
+          "policies/paper-review-selection-policy-v2.json": "cd9336091528b167ac000fd5405d1b6545a52d500cdb17d657d66defe4d21ca5",
+          "policies/paper-review-selection-v1.json": "d62371e1d7bde37c799ddb0da74b3570c89cfa57f189b974693da8da62ec144c",
+          "preparation.py": "5b1867da1f69b2b8a781d471abce1b871b7de10e2be40aa783390777b48462e3",
+          "repair_validation.py": "0454f9c86f004f8a5b9ba66a01a490d96727b6ee3d712a09262078cba94b54c9",
+          "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+          "runtime_retry.py": "2d57e625e2b13080fdecf42e756e8e527af892e416b3f440c6e7b30bbbc02a6c",
+          "scheduler.py": "e78c0a3245ce437c84b04a87aa1b161ba1cf28ed14189e4f9577f7874b11576e",
+          "shared_campaigns.py": "76b2c92453ad9b805fbd411b12db80fdc5f43259da472ed34bf3734da1162270",
+          "siwc_protocol.py": "6341b9df6fbe781aa0efa7db276455af2188e07d50bcfb21c13553c02bf6de35",
+          "source_arithmetic.py": "489badbc601f37830c406595bed0e0930077f4f64f6bad6cf68c4592f82ca3b7",
+          "source_project.py": "a7bc65f7f95d4ff706b9b477b476772f6743a491bf9400e328c0e8514b5c83f0",
+          "store.py": "50ec68be831f1bf8e789cd91e4837fd2b8972fc36c10e58bd7deb65a4dc778a2",
+          "worker.py": "d19e7faefd49793ec39b5b4f09050f3731e3bd264bcb05fad712b0ce808e88ad",
+          "workflow.py": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f"
+        },
+        "handler": "autonomy.handler",
+        "runtime": "python3.12",
+        "memory_mb": 1024,
+        "timeout": 420,
+        "layers": [
+          {
+            "Arn": "arn:aws:lambda:us-east-1:395567831870:layer:ResearchWorkflowAutonomyPdfLayerFC2C7B49:1",
+            "CodeSize": 474054
+          }
+        ],
+        "autonomy_enabled": "true",
+        "worker_target": null
+      },
+      {
+        "logical_id": "ResearchWorkflowQueueWorker702E601D",
+        "function": "JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+        "arn": "arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkStack-ResearchWorkflowQueueWorke-82Gxm08dQQsP",
+        "zip_sha256": "b68bcff8741ce59d067b0311bf0ac3672400baed84c53c87074d5dbcdc1cd064",
+        "source_hashes": {
+          "api.py": "de0ef9251379e1a369a9293bee07a09dc4fdbc9ba25019f31eb9fd686cfa84fb",
+          "autonomous_repair.py": "9f5e0178671032244ffee26734d17d4444ce83b47327ce5e5524bd34657f89f2",
+          "autonomy.py": "30348fcc3d95dbadcae280ef631c65d376f26d59c9eb1a7be0424a48d2ea2879",
+          "autonomy_costs.py": "c08abf79a1dffeb7d20bdfc9a01151ecd0e0c5b29c4e5d4ea074cd2a7e20257f",
+          "autonomy_evidence.py": "014ae3bfba5c0162735aa921ced7e3703096c7573cf256160b78e92173780ca6",
+          "autonomy_inputs.py": "2bf2d6ce377508f9ddf6f66bb18230e929fe779c1ca3b960a9b788c3cb9dd76a",
+          "autonomy_methods.py": "0d391642e0dca6c834a2e693c5071a9aca35e52df7ac2221793f018ea68afc58",
+          "autonomy_model.py": "25b48763f3808d05ccf6cd20ae1da20bc83f87e3faece699eff55a583671ec14",
+          "autonomy_sources.py": "debc3a35264a82677f2b4f566323ebb85c8efdaa63b51fd796336c891d2de942",
+          "bounded_network.py": "0b8bc5948dbf71712296c3b4c9a47f4ac68f5e32dcc591be3e42914ff17abc0c",
+          "claim_design.py": "25ae2613b37cf31af13a5ee250a5c22d5266e18ec98c034d13bdc05e81d933e0",
+          "dispatch_recovery.py": "fc42566196a521541910fa500234661f52f3896c8ef5e5ce3b444e1f7dea86bb",
+          "experiment_builder.py": "a42c79d586f6bd48c2f6b1d266f81ba0c348bc401788e55db11cf4505dd233b0",
+          "gap_queue.py": "598c564817f6cc4ced6172ae14ead651458b2898d20771ecc426b30ecc8c9c18",
+          "generated_package.py": "4f02af4ece4023bd0534dc7e616754bb5c1498dccdfbb6312bb240d82e9385aa",
+          "ideas.py": "f8d6ceac979fc8bb34045378c37eda35154b56a3cecec4c7e9f4cb481b4833d0",
+          "intake.py": "368040222619b26049c9598f41ae6ebf6ddacd44262f2fb9a7cf25bc1519b0ae",
+          "model_dispatch.py": "ca98bd887d9eed327786ba55a9d0923b7e46e6bb47b00dce86a3f0b7724810d0",
+          "netem_iperf.py": "f1793bde4bd24bd769332063c154c04bbe55ca5f63390d7a9e99afb725cbaf71",
+          "network_execution.py": "4358b5ec6c2a18111a2f9fa39937261bc0241ac3420f624a243b220f7cdd8cbe",
+          "network_package.py": "9eac81c23ebb6addd7c198ab631c72ed8e21f62e2898f1427a257f0cf2c4d32c",
+          "network_spec.py": "91792dbaaf7aaf7d1ea56c76f16958848de2d05151651bbfa624387cd4ce59d6",
+          "openclaw-builder-patch.json": "8b8f157008ad0353bc1cd3b3856778ab3d85b8bb9c22decbe4fde33a13cc39db",
+          "openclaw_auth.mjs": "ff5a01312d3539e091e60cf060f7433b087f390f5d126e8c8baa065ac5a11d63",
+          "openclaw_health.py": "4cfe95969ce7451fbcc4d6519ca19c1e031cb9c8994baa6596f1fde324234885",
+          "openclaw_runtime.py": "028c8afe6548c5c6b097aa6ad3baa59c4ed19a15529349c921405ce4076c72b8",
+          "package_runtime.py": "a108122e46fbc764a14b260940a3cb272b3254746e270499ea3593d45b04237a",
+          "paper_catalog.py": "308229285a4d2044a0af840899273a38a7aaf990d53d5954276dba3a49302121",
+          "paper_selection.py": "5de2564131056dff3039c83bec56e283996d19c7a79b3d495ed453c473721f70",
+          "paper_titles.py": "2656fcdb94ca4b5aa6996cc3e46422520d0c8ddbdbd5a45195f343a6e1879c94",
+          "paper_uploads.py": "b9d70281c8a65626c15a7e2d599e7713c35359a2c7bf679e3fe517a6ed2f8488",
+          "plans/ipv6-archive-v1.json": "6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3",
+          "policies/autonomous-repair-release-v1.json": "5d53ff918e913f51222d200f8ee6840fd5b82c98e2679b677a2e51aa96757865",
+          "policies/autonomy-experiment-costs-v1.json": "395b28c725e892370460d7582c2214124bb51c4c7ee7af9de96804a4daa9566b",
+          "policies/autonomy-experiment-costs-v2.json": "241f53ad7c51399b043d0567cc545fb3281d7581c619f51fc9474fc1eaa13b19",
+          "policies/autonomy-turn-policy-v1.json": "7aa48bccc617d1493e8621a8c290e2251180c768f021f6f8cccf06eac5eddafb",
+          "policies/builder-recovery-validation-v3.json": "7ef5324ff165238c741a9efeaa2b38ce2adfd5843699cfc0f07ddd4f51564511",
+          "policies/builder-stall-fix-validation-v1.json": "9e6ae81f6df3c0375f22743090bd6d6ec012231bc7a95f826d58cc492d51291f",
+          "policies/builder-stall-fix-validation-v2.json": "e984248be10b4b5dacaf98cf2951d2da9c868985c4008b325f1b90a0b68b5356",
+          "policies/built-package-costs-v1.json": "cd6f4b2891199e2f29001168972964f3e769220034db57b2266bf89022b904e4",
+          "policies/built-package-costs-v2.json": "ef48cd2fca9d87ddcd1730567d18e058c09111c0b4d880f052b30210a7f63e59",
+          "policies/claim-decision-policy-v1.json": "15f01c489c51ca834279f6226bd9048da3abd5e2334d363daba33a7b3e1ad6f3",
+          "policies/experiment-action-policy-v1.json": "973ae76b13a64f4205ca2f581722da8c237cd8afb61d68e2a36e187562be3e52",
+          "policies/netem-iperf-costs-v1.json": "7f65f2f726ee685714c8dba1ae8fa8614e142ce80e5aad7cc0f669095311fe61",
+          "policies/netem-iperf-costs-v2.json": "3bd4d81ff13b4596a675cd4ed8dce788bb80b9c2e38bcca356c40f4efb7cc1ea",
+          "policies/paper-review-selection-policy-v2.json": "cd9336091528b167ac000fd5405d1b6545a52d500cdb17d657d66defe4d21ca5",
+          "policies/paper-review-selection-v1.json": "d62371e1d7bde37c799ddb0da74b3570c89cfa57f189b974693da8da62ec144c",
+          "preparation.py": "5b1867da1f69b2b8a781d471abce1b871b7de10e2be40aa783390777b48462e3",
+          "repair_validation.py": "0454f9c86f004f8a5b9ba66a01a490d96727b6ee3d712a09262078cba94b54c9",
+          "runner.py": "8d3982de80352721a891abfa39016825bc313328c1fa837c8171fb0504674155",
+          "runtime_retry.py": "2d57e625e2b13080fdecf42e756e8e527af892e416b3f440c6e7b30bbbc02a6c",
+          "scheduler.py": "e78c0a3245ce437c84b04a87aa1b161ba1cf28ed14189e4f9577f7874b11576e",
+          "shared_campaigns.py": "76b2c92453ad9b805fbd411b12db80fdc5f43259da472ed34bf3734da1162270",
+          "siwc_protocol.py": "6341b9df6fbe781aa0efa7db276455af2188e07d50bcfb21c13553c02bf6de35",
+          "source_arithmetic.py": "489badbc601f37830c406595bed0e0930077f4f64f6bad6cf68c4592f82ca3b7",
+          "source_project.py": "a7bc65f7f95d4ff706b9b477b476772f6743a491bf9400e328c0e8514b5c83f0",
+          "store.py": "50ec68be831f1bf8e789cd91e4837fd2b8972fc36c10e58bd7deb65a4dc778a2",
+          "worker.py": "d19e7faefd49793ec39b5b4f09050f3731e3bd264bcb05fad712b0ce808e88ad",
+          "workflow.py": "32bbc65cf6f02b2c1427688b9c89e80b3f24e3bae1e8ebd6d9240e82f96c263f"
+        },
+        "handler": "worker.handler",
+        "runtime": "python3.12",
+        "memory_mb": 512,
+        "timeout": 180,
+        "layers": [],
+        "autonomy_enabled": null,
+        "worker_target": null
+      }
+    ],
+    "flags": [
+      {
+        "handler": "api.handler",
+        "repair": false,
+        "builder": true,
+        "public_admission": true
+      },
+      {
+        "handler": "autonomy.handler",
+        "repair": true,
+        "builder": true,
+        "public_admission": true
+      }
+    ],
+    "security": {
+      "relations": [
+        {
+          "relname": "research_artifacts",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_assessments",
+          "relrowsecurity": true,
+          "anon_read": true,
+          "browser_read": true,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_audit_events",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_autonomy_events",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_autonomy_job_commitments",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_autonomy_repair_events",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_autonomy_repairs",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_autonomy_tasks",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_autonomy_turns",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_autonomy_workflows",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_builder_calls",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_builder_packages",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_campaigns",
+          "relrowsecurity": true,
+          "anon_read": true,
+          "browser_read": true,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_claim_checks",
+          "relrowsecurity": true,
+          "anon_read": true,
+          "browser_read": true,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_claim_designs",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_claims",
+          "relrowsecurity": true,
+          "anon_read": true,
+          "browser_read": true,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_configurations",
+          "relrowsecurity": true,
+          "anon_read": true,
+          "browser_read": true,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_gaps",
+          "relrowsecurity": true,
+          "anon_read": true,
+          "browser_read": true,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_idea_campaign_links",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_idea_packets",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_idea_readiness",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_idea_runs",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_idea_sessions",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_measurements",
+          "relrowsecurity": true,
+          "anon_read": true,
+          "browser_read": true,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_model_dispatches",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_model_reconciliations",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_model_workers",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_network_executions",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_paper_review_events",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_paper_reviews",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_paper_uploads",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_prepared_plans",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_protocols",
+          "relrowsecurity": true,
+          "anon_read": true,
+          "browser_read": true,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_publications",
+          "relrowsecurity": true,
+          "anon_read": true,
+          "browser_read": true,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_published_values",
+          "relrowsecurity": true,
+          "anon_read": true,
+          "browser_read": true,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_queue_events",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_queue_jobs",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_reviews",
+          "relrowsecurity": true,
+          "anon_read": true,
+          "browser_read": true,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_runs",
+          "relrowsecurity": true,
+          "anon_read": true,
+          "browser_read": true,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_shared_campaign_members",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_shared_campaigns",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_sources",
+          "relrowsecurity": true,
+          "anon_read": true,
+          "browser_read": true,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_studies",
+          "relrowsecurity": true,
+          "anon_read": true,
+          "browser_read": true,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_study_owners",
+          "relrowsecurity": true,
+          "anon_read": false,
+          "browser_read": false,
+          "anon_write": false,
+          "browser_write": false
+        },
+        {
+          "relname": "research_summaries",
+          "relrowsecurity": true,
+          "anon_read": true,
+          "browser_read": true,
+          "anon_write": false,
+          "browser_write": false
+        }
+      ],
+      "functions": [
+        {
+          "proname": "research_prepare_plan",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_queue_action",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_queue_claim",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_queue_enqueue",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_queue_finish",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_queue_snapshot",
+          "anon_execute": false,
+          "browser_execute": false
+        }
+      ],
+      "private_bucket": true,
+      "original_migration_bytes_verified": false,
+      "limitation": "Read-only catalog verification does not recover originally executed SQL.",
+      "autonomy_functions": [
+        {
+          "proname": "publish_agent_prompt",
+          "anon_execute": false,
+          "browser_execute": false
+        },
+        {
+          "proname": "research_autonomy_control",
+          "anon_execute": false,
+          "browser_execute": false
+        }
+      ]
+    },
+    "worker": {
+      "command_id": "e5e65a2c-3ab5-4f82-8b54-f8a0c9069b60",
+      "instance_id": "i-087f1493809643115"
+    },
+    "worker_stdout_sha256": "f089c0f7d9190e9bcf4a939b1ddd8cebd861808258626d7e21ce787af32c94e8",
+    "health": {
+      "status": "ready",
+      "configuration": {
+        "reason": "ready",
+        "runtime": "openclaw-production-v1",
+        "model_id": "gpt-6.1-sol",
+        "auth_recovery": "openclaw-auth-recovery-v1",
+        "paid_fallback": false,
+        "actual_cost_usd": null,
+        "retry_after_seconds": 0
+      },
+      "updated_at": "2026-10-30 03:03:33.563852+00"
+    },
+    "capabilities_sha256": "33a507198c942e5450bcf8357fc2a9d19dcd4e90d48d0bbbdee0a298154e4b83",
+    "admission": true,
+    "polling": [
+      {
+        "logical_id": "ResearchWorkflowAutonomyPoll0C56C453",
+        "state": "ENABLED"
+      }
+    ],
+    "auth_upload_chat_reverified": false
+  },
+  "executors": {
+    "status": "passed",
+    "source_revision": "5c9525d92938a53aa39f078795f99a9bc0a87cd6",
+    "executors": [
+      {
+        "function": "JumpServeBenchmarkStack-ResearchWorkflowPackageExe-0QWe4I5CRgSt",
+        "handler": "network_package.handler",
+        "zip_sha256": "b68bcff8741ce59d067b0311bf0ac3672400baed84c53c87074d5dbcdc1cd064",
+        "files_verified": 59
+      },
+      {
+        "function": "JumpServeBenchmarkStack-ResearchWorkflowPackageIng-kAAtKeB693oF",
+        "handler": "network_package.ingest",
+        "zip_sha256": "b68bcff8741ce59d067b0311bf0ac3672400baed84c53c87074d5dbcdc1cd064",
+        "files_verified": 59
+      },
+      {
+        "function": "JumpServeBenchmarkStack-ResearchWorkflowPackageRea-Vy8KadbHwEL9",
+        "handler": "network_package.reap",
+        "zip_sha256": "b68bcff8741ce59d067b0311bf0ac3672400baed84c53c87074d5dbcdc1cd064",
+        "files_verified": 59
+      }
+    ]
+  },
+  "public": {
+    "status": "passed",
+    "recorded_at": "2026-10-30T03:03:27.512906+00:00",
+    "checks": [
+      {
+        "name": "capabilities",
+        "status": 200,
+        "bytes": 3739,
+        "sha256": "ab6c2d2e60de333980506c7ef949dc5a811bfb3bd1454b846c7b5d30321dbd5a"
+      },
+      {
+        "name": "queue",
+        "status": 200,
+        "bytes": 6222,
+        "sha256": "17250eef30147c1f5d844bcfab03e15ee4e988d19d79b047a808cc54fde6264f"
+      },
+      {
+        "name": "repairs",
+        "status": 200,
+        "bytes": 185764,
+        "sha256": "976ef6bea8530cd1b7fbc5846871bde720098f71a94f1bdb460112e481a9a60d"
+      },
+      {
+        "name": "repair-events",
+        "status": 200,
+        "bytes": 209028,
+        "sha256": "fb68640e67f903d27375f63bde3a7bdd7d0ba2e687fce9679da9eb5377d4793f"
+      },
+      {
+        "name": "/studies/4055396e-35c0-4962-ba39-cf23e443ad8d/autonomy",
+        "unauthenticated_status": 401,
+        "sha256": "caa8b5a433ea0fcb99780c424b4a69de533ca0e7d3508d34eb9a17b637ce31bd"
+      },
+      {
+        "name": "/studies/4055396e-35c0-4962-ba39-cf23e443ad8d/network",
+        "unauthenticated_status": 401,
+        "sha256": "caa8b5a433ea0fcb99780c424b4a69de533ca0e7d3508d34eb9a17b637ce31bd"
+      }
+    ],
+    "scope": "Public queue and provenance reads, unauthenticated write denial; no browser session inferred."
+  },
+  "browser": {
+    "passed": true,
+    "version": "autonomy-completion-production-browser-v1",
+    "reviewer": {
+      "identity": "Codex implementing AI",
+      "type": "AI",
+      "independent": false,
+      "human": false,
+      "held_out": false
+    },
+    "browser": "Existing Firefox window, native CUA accessibility and screenshots",
+    "url": "https://jumpserve.quaint-lab.org/research-verification/experiment-queue?assessment=4055396e-35c0-4962-ba39-cf23e443ad8d",
+    "checks": [
+      "Actual public page loaded and reloaded while signed out; no failed-fetch state observed.",
+      "The held-controller warning disappeared after activation; running and queued claim states updated automatically.",
+      "The original paper title, $1000 maximum, November 4 deadline, honest five untested labels and zero experiment-job state were visible.",
+      "Desktop screenshot showed the full header, sidebar and readable queue cards; Firefox responsive mode at 390x844 showed wrapped cards and mobile menu without visible horizontal clipping. Desktop mode was restored.",
+      "Opened the first claim's public prompt history and its newly completed turn 85 response. The actual missing-implementation blocker and subsequent native builder calls were visible alongside retained original hashes, redaction information, usage and unknown-charge fields.",
+      "The separately fenced ca15a6b5 provider outcome remained visible as waiting for reconciliation. No replay, deletion, restart or scientific relabeling was performed."
+    ],
+    "limitations": [
+      "Not a human or independent browser review.",
+      "No authenticated JumpServe session was available: fresh Google login, PDF upload/confirmation, owner writes and authenticated chat were not exercised in this release.",
+      "No frontend changes were deployed. Unchanged chart rendering, export downloads, theme changes and sign-in return paths were not newly exercised.",
+      "The visible overall workflow reason retained an earlier all-tasks-recorded-outcome message while individual tasks were running. Individual statuses and timestamps, not that stale reason, establish the observed resumption.",
+      "No actual paper claim was resolved and no experiment job was recorded during this browser inspection. Model-call completion and repair checkpoints do not establish executable-package completion or scientific correctness."
+    ]
+  },
+  "assessment_snapshot": {
+    "recorded_at": "2026-10-30T03:11:49.090464+00:00",
+    "workflow": {
+      "reason": "All admitted tasks reached a recorded outcome; unresolved findings and coverage limits remain visible.",
+      "status": "running",
+      "study_id": "4055396e-35c0-4962-ba39-cf23e443ad8d",
+      "created_at": "2026-10-28T20:25:04.587324+00:00",
+      "updated_at": "2026-10-30T03:11:26.616621+00:00",
+      "deadline_at": "2026-11-04T20:25:04.587324+00:00",
+      "max_attempts": null,
+      "initial_prompt": "{\"defaults\":{\"attempts_per_claim\":null,\"elapsed_days\":7,\"global_parallel_claims\":4,\"maximum_spend_usd\":100,\"parallel_claims_per_paper\":2},\"instruction\":\"Assess this paper autonomously within application defaults. Preserve unresolved findings and explain external blockers; never force a desired result.\",\"paper\":{\"domain\":\"Pending paper review\",\"origin_module\":null,\"paper_upload\":{\"byte_count\":123371,\"filename\":\"SNC-NEG-001_recreated_paper.pdf\",\"sha256\":\"77becb203ef79c5e5d0b69ee9cfc5553e5680d2c44128aaa6b8f2c545d533617\"},\"paper_url\":null,\"scope\":\"Assess owner-confirmed claims under their documented conditions; retain uncovered claims and evidence gaps.\",\"study_kind\":\"paper\",\"title\":\"SNC-NEG-001_recreated_paper\"}}",
+      "initial_sha256": "1f80be989c320c8f673488f4ececd68690ac640b3321d2043406aed8921d30c3",
+      "committed_cents": 76565,
+      "max_spend_cents": 100000,
+      "overhead_reservation_cents": 500
+    },
+    "tasks": [
+      {
+        "id": "9a4d45ef-f3ad-5161-8ac3-87f17de0f878",
+        "claim_id": null,
+        "stage": "intake",
+        "status": "finished",
+        "label": null,
+        "reason": "Central claims and testable findings are ready for owner review; other extracted statements remain retained.",
+        "attempts": 7,
+        "stall": null,
+        "repair_progress": null,
+        "updated_at": "2026-10-28 20:32:14.295671+00"
+      },
+      {
+        "id": "2dfbd3d1-2514-586d-9d07-47f04a5c78ff",
+        "claim_id": "1a9eb275-f8f6-53d7-afe5-9d1416d7bee7",
+        "stage": "building",
+        "status": "running",
+        "label": "untested",
+        "reason": "Builder checkpoint retained; continuing from actual files and feedback within the original paper limits.",
+        "attempts": 93,
+        "stall": null,
+        "repair_progress": {
+          "id": "08712282-ec88-5719-a875-2f4cc8140e24",
+          "state": "repairing",
+          "version": "autonomous-repair-v1",
+          "category": "implementation",
+          "revision": 77,
+          "updated_at": "2026-10-30T02:23:53.511923+00:00"
+        },
+        "updated_at": "2026-10-30 03:11:26.631903+00"
+      },
+      {
+        "id": "b9c00763-023d-5971-9367-e02d30949d7c",
+        "claim_id": "1b8ae633-953e-50b5-bced-b173279bd70e",
+        "stage": "building",
+        "status": "running",
+        "label": "untested",
+        "reason": "Builder checkpoint retained; continuing from actual files and feedback within the original paper limits.",
+        "attempts": 210,
+        "stall": null,
+        "repair_progress": {
+          "id": "ce9ca03b-ca11-588e-9ed2-84673bbb4123",
+          "state": "repairing",
+          "version": "autonomous-repair-v1",
+          "category": "implementation",
+          "revision": 69,
+          "updated_at": "2026-10-30T01:53:57.54928+00:00"
+        },
+        "updated_at": "2026-10-30 03:11:26.316308+00"
+      },
+      {
+        "id": "872f6faa-3215-5a0a-96e2-aac94fd0a6c0",
+        "claim_id": "b410cc01-81a7-55b9-ac59-9502b9c1758a",
+        "stage": "building",
+        "status": "queued",
+        "label": "untested",
+        "reason": "Builder checkpoint retained; continuing from actual files and feedback within the original paper limits.",
+        "attempts": 103,
+        "stall": null,
+        "repair_progress": {
+          "id": "1ac68354-a9e3-574c-a877-4f75488e2dd7",
+          "state": "repairing",
+          "version": "autonomous-repair-v1",
+          "category": "implementation",
+          "revision": 77,
+          "updated_at": "2026-10-30T02:22:48.633541+00:00"
+        },
+        "updated_at": "2026-10-30 03:09:49.903772+00"
+      },
+      {
+        "id": "1fa0b903-5ccd-5608-a57b-4ff01d75cf73",
+        "claim_id": "bac92a6e-00ca-5404-a50b-39de0932df8c",
+        "stage": "building",
+        "status": "queued",
+        "label": "untested",
+        "reason": "Builder checkpoint retained; continuing from actual files and feedback within the original paper limits.",
+        "attempts": 222,
+        "stall": null,
+        "repair_progress": {
+          "id": "dc512669-522a-5ba5-aa1a-4285a80ecef9",
+          "state": "repairing",
+          "version": "autonomous-repair-v1",
+          "category": "implementation",
+          "revision": 61,
+          "updated_at": "2026-10-30T01:52:50.850438+00:00"
+        },
+        "updated_at": "2026-10-30 03:09:55.45393+00"
+      },
+      {
+        "id": "258366b4-0865-55b3-9d67-87a4b801a7d5",
+        "claim_id": "f30423b8-7999-5b18-8ed4-d2635a988720",
+        "stage": "building",
+        "status": "waiting",
+        "label": "untested",
+        "reason": "Provider outcome remains unconfirmed for dispatch ca15a6b5-756f-5e50-8645-d109eded40d2; no replay or replacement call admitted.",
+        "attempts": 106,
+        "stall": null,
+        "repair_progress": {
+          "id": "550c63aa-4077-5fea-834f-38a192e286b5",
+          "state": "waiting",
+          "version": "autonomous-repair-v1",
+          "category": "implementation",
+          "revision": 85,
+          "updated_at": "2026-10-30T03:06:24.845859+00:00"
+        },
+        "updated_at": "2026-10-30 03:06:25.017127+00"
+      }
+    ],
+    "jobs": [],
+    "active": [
+      {
+        "id": "1d0ff651-6c9d-5927-86c4-3b067f74920c",
+        "status": "running",
+        "lease_until": "2026-10-30 03:16:03.403313+00"
+      },
+      {
+        "id": "fecdec56-0790-522c-a559-563f1adfe362",
+        "status": "running",
+        "lease_until": "2026-10-30 03:16:04.738667+00"
+      }
+    ],
+    "scope": "Separate bounded reads; no mutations, no conclusive scientific finding inferred."
+  },
+  "scientific_completion": false,
+  "new_qualification_provider_calls": 1,
+  "qualification_reservation_cents": 100,
+  "measured_charges_usd": null,
+  "subscription_allocation_usd": null,
+  "unallocated_host_storage_cost_usd": null,
+  "worker_replaced": false,
+  "worker_disk_gib": 300,
+  "encrypted": true,
+  "frontend_changed": false,
+  "schema_changed": false,
+  "reviewer": {
+    "identity": "Codex implementing AI",
+    "type": "AI",
+    "independent": false,
+    "human": false,
+    "held_out": false
+  },
+  "evidence": {
+    "artifact_id": "bef19941-809d-52c2-bea7-d37e3417c57c",
+    "sha256": "18e46bc8307f1a1252bc936334d2bb7d884016d30acabce1acdf8ef598d77b5b",
+    "retrieved_sha256": "18e46bc8307f1a1252bc936334d2bb7d884016d30acabce1acdf8ef598d77b5b",
+    "bytes": 5601357,
+    "members": 172,
+    "public": false
+  }
+}

@@ -64,11 +64,11 @@ def retain(source,out):
     if p.is_file() and p.suffix in ('.json','.bin','.zip','.log') and p.name not in ('candidate.zip','release-pending.json','release-evidence.zip'):files[str(p.relative_to(ROOT))]=p.read_bytes()
   for n in ('bin/autonomy-completion-release.py','bin/autonomy_completion_qualification_host.py','bin/builder-continuation-release.py','docs/autonomy-completion-release-protocol-v1.json','docs/autonomy-completion-local-v1.md','docs/autonomy-completion-local-v1-status.json','docs/autonomy-completion-production-v1.md','research-workflow-runtime.json'):files[n]=(ROOT/n).read_bytes()
   files['backend-unit.log']=(BACK/'.test-artifacts/autonomy-completion-release-unit.log').read_bytes()
-  for n in ('autonomy-completion-release-infra.log','autonomy-completion-release-build.log'):files[n]=(ROOT/'.test-artifacts'/n).read_bytes()
+  for n in ('autonomy-completion-release-infra.log','autonomy-completion-release-build.log','autonomy-completion-release-cli-contract.log'):files[n]=(ROOT/'.test-artifacts'/n).read_bytes()
   for directory in (ROOT/'.test-artifacts/openclaw-release').glob('20261030T*'):
    if directory.name<'20261030T022601979253Z':continue
    for p in directory.iterdir():
-    if p.is_file() and p.name in ('receipt.json','cdk.log','outputs.json','parameter-comparison.json'):files[str(p.relative_to(ROOT))]=p.read_bytes()
+    if p.is_file() and p.name in ('receipt.json','cdk.log','outputs.json','parameter-comparison.json','host-update-result.json'):files[str(p.relative_to(ROOT))]=p.read_bytes()
   stream=io.BytesIO()
   with zipfile.ZipFile(stream,'w',zipfile.ZIP_DEFLATED) as archive:
    for n,raw in sorted(files.items()):archive.writestr(n,raw)
@@ -83,12 +83,13 @@ def retain(source,out):
  assert r.admin.query('select sha256,byte_count from research_artifacts where study_id='+r.admin.literal(STUDY)+'::uuid and id='+r.admin.literal(ident)+'::uuid')==[dict(sha256=pending['sha256'],byte_count=len(raw))]
  value=pending['report'];value['evidence']=dict(artifact_id=ident,sha256=pending['sha256'],retrieved_sha256=r.sha(restored),bytes=len(raw),members=pending['members'],public=False);q.save(ROOT/'docs/autonomy-completion-production-v1-status.json',value);return dict(status=value['status'],evidence=value['evidence'])
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['freeze','prepare','native','live','evidence','status','collect','record-review','record-failure','approve','pin','snapshot','verify-held','verify-active','verify-executors','public-checks','record-release']);args=p.parse_args();BASE.mkdir(exist_ok=True);out=BASE/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');out.mkdir();receipt=dict(mode=args.mode,status='running',started_at=r.stamp())
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('mode',choices=['freeze','prepare','native','live','evidence','status','collect','record-review','record-failure','approve','pin','snapshot','postrelease','verify-held','verify-active','verify-executors','public-checks','record-release']);args=p.parse_args();BASE.mkdir(exist_ok=True);out=BASE/(dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')+'-'+uuid.uuid4().hex[:8]);out.mkdir();receipt=dict(mode=args.mode,status='running',started_at=r.stamp())
  try:
   receipt['targets']=r.target()
   if args.mode=='freeze':value=freeze(out)
   elif args.mode=='pin':value=prior.pin()
   elif args.mode=='snapshot':value=prior.snapshot(q.selected(),out)
+  elif args.mode=='postrelease':value=prior.postrelease(out)
   elif args.mode=='record-review':value=record(q.selected())
   elif args.mode=='record-failure':value=record_failure(q.selected())
   elif args.mode=='approve':value=prior.old.prior.approve(q.selected())
