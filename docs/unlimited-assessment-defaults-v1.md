@@ -71,6 +71,15 @@ permission is added and no AMI is refreshed. Keeping `UsePreviousValue` would
 retain the SSM key and fetch its latest value, as described in the
 [AWS parameter documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-supplied-parameter-types.html).
 
+The original code-only update reached CloudFormation but rolled back because
+resolving an existing role's `Arn` requires `iam:GetRole`. The execution policy
+adds only that metadata read, restricted to the same existing benchmark/agent
+role namespaces as its Lambda `PassRole` permission. No IAM mutation permission
+is added. The original rollback and matching AWS failure events are retained.
+Release sessions continue to use GitHub OIDC; the one-time policy repair requires
+an administrator credential because the release service cannot edit its own
+authority.
+
 Local validation includes 398 backend tests (four environment-dependent skips),
 295 frontend tests, lint and the production frontend build. The isolated
 PostgreSQL check executes the existing audited-amendment and unknown-call tests,
