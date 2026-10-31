@@ -210,6 +210,8 @@ def record_update():
  details=dict(version='unlimited-assessment-defaults-release-v1',execution='Operator-requested interactive release',frontend=frontend,
    infrastructure_intent=read('infrastructure-verification-intent.json'),future_default_active=complete,
    failed_attempts=[json.loads(path.read_bytes()) for path in sorted(BASE.glob('infrastructure-release-failed-attempt-*.json'))])
+ if (BASE/'iam-read-repair-verified.json').exists():
+  repair=read('iam-read-repair-verified.json');assert repair['passed'];details['iam_metadata_repair']=repair
  if complete:
   for name in ('infrastructure-production-verification','migration-applied-and-verified','production-new-intake-verified'):
    proof=read(name+'.json');assert proof['passed'];details[name]=proof

@@ -91,5 +91,12 @@
       "source_path": "/aws/service/canonical/ubuntu/server/22.04/stable/current/amd64/hvm/ebs-gp2/ami-id",
       "resolved_value": "ami-033ea4ff4a9c726dc"
     }
+  },
+  "existing_output_pins": {
+    "BenchmarkImagePipelineRoleArn": {
+      "role_logical_id": "BenchmarkImagePipelineRoleCAA30BA5",
+      "role_name": "JumpServeBenchmarkImageBuilder",
+      "value": "arn:aws:iam::395567831870:role/JumpServeBenchmarkImageBuilder"
+    }
   }
 }

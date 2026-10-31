@@ -65,6 +65,8 @@ export function addBenchmarkImagePipelineRole(
   allow(['iam:PassRole'], [arn('iam', `role/cdk-hnb659fds-cfn-exec-role-${stack.account}-${stack.region}`)], {
     StringEquals: { 'iam:PassedToService': 'cloudformation.amazonaws.com' },
   });
-  new cdk.CfnOutput(scope, 'BenchmarkImagePipelineRoleArn', { value: role.roleArn });
+  // This fixed role name makes its ARN deterministic. Avoid an unrelated IAM
+  // metadata lookup when a scoped release only updates application code.
+  new cdk.CfnOutput(scope, 'BenchmarkImagePipelineRoleArn', { value: arn('iam', 'role/JumpServeBenchmarkImageBuilder') });
   return role;
 }

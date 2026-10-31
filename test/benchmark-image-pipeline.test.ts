@@ -10,6 +10,9 @@ test('image workflow trusts only backend main and limits temporary role permissi
   const instanceRole = iam.Role.fromRoleArn(stack, 'InstanceRole', 'arn:aws:iam::395567831870:role/BenchmarkInstance');
   addBenchmarkImagePipelineRole(stack, instanceRole, 'arn:aws:lambda:us-east-1:395567831870:function:Launch');
   const template = Template.fromStack(stack);
+  const roleOutput = JSON.stringify(template.toJSON().Outputs.BenchmarkImagePipelineRoleArn.Value);
+  expect(roleOutput).toContain(':role/JumpServeBenchmarkImageBuilder');
+  expect(roleOutput).not.toContain('Fn::GetAtt');
   template.hasResourceProperties('AWS::IAM::Role', {
     RoleName: 'JumpServeBenchmarkImageBuilder',
     AssumeRolePolicyDocument: { Statement: [Match.objectLike({
