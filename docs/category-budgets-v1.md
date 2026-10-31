@@ -1,7 +1,7 @@
 # Supabase category budgets
 
-Status: implemented and verified locally; production activation has not been
-performed. A new explicit deployment request is required for these changes.
+Status: activated and verified in production on October 31, 2026 after explicit
+deployment authorization. See [the production record](category-budgets-production-20261031.md).
 
 `public.autonomy_budget_categories` is the current policy table for autonomous
 work. Both numeric limits are seeded to **-1**, meaning unlimited, in all four
@@ -37,9 +37,8 @@ RLS policy. Viewers can read; other Google accounts and anonymous users cannot.
 Workers have SELECT access and cannot increase their own budgets. Category
 identities cannot be renamed or deleted.
 
-For example, this administrative operation sets every current category to
-unlimited. It is an example for the explicitly authorized activation; it has not
-been run against production by the implementation task:
+For future policy edits, this administrative operation sets every category to
+unlimited. The deployed migration initialized all eight limits to these values:
 
 ```sql
 update public.autonomy_budget_categories
@@ -111,6 +110,11 @@ it cannot use a general infrastructure-only automatic release.
    the API and assessment worker only with the compatible controller. The CDK
    changes include this flag and a truthful description; they need a dedicated
    reviewed configuration/code release, not the older code-only default adapter.
+   The source-qualified `bin/category-budgets-runtime-release.py` provides fixed
+   `prepare`, `deploy` and `verify` actions for this release. Its renderer starts
+   from the actual deployed template and retains all experiment code, versions,
+   roles, parameters, outputs and other settings. The general release guard and
+   historical defaults profile are unchanged.
 6. Verify actual installed function sources, RLS/ACLs, all eight -1 limit values,
    refreshed worker leases, retained counters/deadlines and current dashboard
    responses. Record source revisions and production receipts in private Platform
@@ -135,5 +139,5 @@ limits, current defaults and versioned authority. The frontend checks include
 legacy compatibility, category metadata and unlimited formatting. Browser
 fixtures use the real component and built CSS on desktop/mobile in both themes,
 with synthetic authentication/API/Realtime boundaries. Qualification's six-call
-guard is tested independently of production budgets. No live cloud qualification
-or production activation is claimed by these local tests.
+guard is tested independently of production budgets. The separate production record reports actual cloud qualification and activation;
+these local tests alone do not establish either.
