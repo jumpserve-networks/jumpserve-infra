@@ -42,5 +42,14 @@ class IntegratedRelease(unittest.TestCase):
  def test_already_submitted_version_is_not_replayed(self):
   before,policies=fixture();after,_=r.render(before,'b'*64+'.zip',policies)
   with self.assertRaises(ValueError):r.render(after,'b'*64+'.zip',policies)
+ def test_existing_security_group_is_pinned_without_new_authority(self):
+  before,policies=fixture();group='ResearchWorkflowPackageMachinesF1AA60C3';before['Resources'][group]=dict(Type='AWS::EC2::SecurityGroup',Properties=dict(VpcId='vpc-fixture'))
+  names=[r.EXECUTOR,'ResearchWorkflowPackageReaperED8C6D40']
+  for name in names:before['Resources'][name]['Properties']['Environment']['Variables']['NETWORK_PACKAGE_SECURITY_GROUP']={'Fn::GetAtt':[group,'GroupId']}
+  with self.assertRaises(ValueError):r.render(before,'b'*64+'.zip',policies)
+  after,_=r.render(before,'b'*64+'.zip',policies,'sg-0123456789abcdef0')
+  self.assertEqual(before['Resources'][group],after['Resources'][group])
+  self.assertEqual(before['Resources']['ExistingAuthority'],after['Resources']['ExistingAuthority'])
+  for name in names:self.assertEqual(after['Resources'][name]['Properties']['Environment']['Variables']['NETWORK_PACKAGE_SECURITY_GROUP'],'sg-0123456789abcdef0')
 
 if __name__=='__main__':unittest.main()

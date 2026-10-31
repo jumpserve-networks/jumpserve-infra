@@ -12,7 +12,7 @@ EXECUTOR='ResearchWorkflowPackageExecutor32D08CE2'
 def canonical(value):return json.dumps(value,sort_keys=True,separators=(',',':')).encode()
 def digest(raw):return hashlib.sha256(raw).hexdigest()
 
-def render(previous,key,policies):
+def render(previous,key,policies,security_group_pin=None):
  if not re.fullmatch(r'[a-f0-9]{64}\.zip',key):raise ValueError('Content-addressed runtime ZIP required.')
  expected={'built-package-v1':('built-package-costs-v3',2000),'netem-iperf-v1':('netem-iperf-costs-v3',100)}
  if set(policies)!=set(expected):raise ValueError('Both exact v3 policies required.')
@@ -34,6 +34,14 @@ def render(previous,key,policies):
     if env.get('NETWORK_'+prefix+'_FUNCTION') not in [{'Ref':v} for v in versions]:raise ValueError('Controller no longer uses the reviewed immutable executor.')
     env['NETWORK_'+prefix+'_FUNCTION']={'Ref':new_version}
     env['NETWORK_'+prefix+'_POLICY_SHA256']=digest(canonical(policies[runner]))
+  elif 'NETWORK_PACKAGE_SECURITY_GROUP' in resource['Properties'].get('Environment',{}).get('Variables',{}):
+   # CloudFormation re-reads GetAtt attributes even during a code-only update.
+   # The fixed release caller verifies this pin against both installed Lambda
+   # environments and the existing stack's physical security-group identity.
+   env=resource['Properties']['Environment']['Variables'];value=env['NETWORK_PACKAGE_SECURITY_GROUP']
+   if value!={'Fn::GetAtt':['ResearchWorkflowPackageMachinesF1AA60C3','GroupId']} or not isinstance(security_group_pin,str) or not re.fullmatch(r'sg-(?:[a-f0-9]{8}|[a-f0-9]{17})',security_group_pin):raise ValueError('Existing network placement must have a verified literal pin.')
+   if old['ResearchWorkflowPackageMachinesF1AA60C3']['Type']!='AWS::EC2::SecurityGroup':raise ValueError('Existing security group identity differs.')
+   env['NETWORK_PACKAGE_SECURITY_GROUP']=security_group_pin
  result['Resources'][new_version]={'Type':'AWS::Lambda::Version','DeletionPolicy':'Retain','UpdateReplacePolicy':'Retain','Properties':{'FunctionName':{'Ref':EXECUTOR},'CodeSha256':base64.b64encode(bytes.fromhex(key[:-4])).decode(),'Description':'Qualified integrated research runtime '+key[:-4]}}
  # Existing invocations retain their original executor version. No role,
  # permission, endpoint, machine, storage or stack parameter changes enter here.
