@@ -17,12 +17,31 @@ import shutil
 import subprocess
 import sys
 import zipfile
+import tarfile
 
 ROOT=Path(__file__).resolve().parents[1];BACK=ROOT.parent/'jumpserve-back-end'
 MIGRATIONS=['202610300004_platform_supervisor.sql','202610300005_platform_worker.sql','202610300006_platform_host_coordination.sql']
 BUCKET='cdk-hnb659fds-assets-395567831870-us-east-1'
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def save(path,value):path.write_text(json.dumps(value,sort_keys=True,indent=2)+'\n')
+def classic_image(archive,qualified):
+    # Desktop's OCI index and the cloud Docker engine's config identity address
+    # the same verified linux/amd64 manifest. Retain both identities.
+    with tarfile.open(archive,'r:gz') as saved:
+        def blob(digest):
+            if not re.fullmatch('sha256:[a-f0-9]{64}',digest):raise ValueError('Malformed saved image digest.')
+            raw=saved.extractfile('blobs/sha256/'+digest.split(':')[1]).read()
+            if 'sha256:'+sha(raw)!=digest:raise ValueError('Saved image blob differs from its qualified identity.')
+            return json.loads(raw)
+        index=blob(qualified)
+        if 'manifests' in index:
+            choices=[m for m in index['manifests'] if m.get('platform')==dict(architecture='amd64',os='linux')]
+            if len(choices)!=1:raise ValueError('Exactly one qualified Linux/amd64 manifest required.')
+            manifest=blob(choices[0]['digest'])
+        else:manifest=index
+        config=manifest['config']['digest'];value=blob(config)
+        if value.get('architecture')!='amd64' or value.get('os')!='linux':raise ValueError('Qualified image platform differs.')
+        return config
 def aws(*args,timeout=60):
     raw=subprocess.check_output(['aws',*args,'--profile','jumpserve','--region','us-east-1','--output','json'],timeout=timeout)
     return json.loads(raw) if raw.strip() else None
@@ -133,16 +152,20 @@ def install(packet,packet_path):
         with temporary.open('rb') as source,archive.open('wb') as file,gzip.GzipFile(filename='',mode='wb',fileobj=file,mtime=0) as compressed:shutil.copyfileobj(source,compressed)
         temporary.unlink()
     with archive.open('rb') as original:image_archive_sha=hashlib.file_digest(original,'sha256').hexdigest()
+    runtime_image=classic_image(archive,image['image'])
     for name,path in [(packet['bundle_sha256']+'.zip',directory/'runtime.zip'),('images/'+image_archive_sha+'.tar.gz',archive)]:
-        aws('s3api','put-object','--bucket',BUCKET,'--key','platform-supervisor/'+name,'--body',str(path),'--server-side-encryption','AES256',timeout=600)
+        key='platform-supervisor/'+name
+        try:exists=aws('s3api','head-object','--bucket',BUCKET,'--key',key).get('ContentLength')==path.stat().st_size
+        except subprocess.CalledProcessError:exists=False
+        if not exists:aws('s3','cp',str(path),'s3://'+BUCKET+'/'+key,'--sse','AES256','--only-show-errors','--no-progress',timeout=600)
     comment='platform-install-'+packet['bundle_sha256'][:32];intent=directory/'install-intent.json'
     if intent.exists():
         commands=aws('ssm','list-commands','--max-results','50')['Commands'];matches=[c for c in commands if c.get('Comment')==comment and packet['worker_id'] in c.get('InstanceIds',[])]
         if len(matches)!=1:raise ValueError('Original installation dispatch remains uncertain; no duplicate command was sent.')
         print(json.dumps(dict(command_id=matches[0]['CommandId'],reconciled=True)));return
     script=ROOT/'assets/platform/install-platform.sh';destination='/tmp/jumpserve-platform-'+packet['bundle_sha256']+'.zip';host_script='/tmp/jumpserve-platform-'+packet['bundle_sha256']+'.sh'
-    commands=['set -eu','aws s3 cp '+shlex.quote('s3://'+BUCKET+'/platform-supervisor/'+packet['bundle_sha256']+'.zip')+' '+shlex.quote(destination)+' --region us-east-1 --only-show-errors',"echo "+shlex.quote(packet['bundle_sha256']+'  '+destination)+' | sha256sum --check',"python3.12 -c "+shlex.quote('import pathlib,zipfile;pathlib.Path('+repr(host_script)+').write_bytes(zipfile.ZipFile('+repr(destination)+').read("install-platform.sh"))'),'bash '+shlex.quote(host_script)+' '+' '.join(shlex.quote(v) for v in (packet['bundle_sha256'],image['image'],image_archive_sha,platform['ARN'],BUCKET))]
-    save(intent,dict(comment=comment,worker_id=packet['worker_id'],bundle_sha256=packet['bundle_sha256'],image=image['image'],image_archive_sha256=image_archive_sha,qualification=str(reports[-1])))
+    commands=['set -eu','aws s3 cp '+shlex.quote('s3://'+BUCKET+'/platform-supervisor/'+packet['bundle_sha256']+'.zip')+' '+shlex.quote(destination)+' --region us-east-1 --only-show-errors',"echo "+shlex.quote(packet['bundle_sha256']+'  '+destination)+' | sha256sum --check',"python3.12 -c "+shlex.quote('import pathlib,zipfile;pathlib.Path('+repr(host_script)+').write_bytes(zipfile.ZipFile('+repr(destination)+').read("install-platform.sh"))'),'bash '+shlex.quote(host_script)+' '+' '.join(shlex.quote(v) for v in (packet['bundle_sha256'],runtime_image,image_archive_sha,platform['ARN'],BUCKET))]
+    save(intent,dict(comment=comment,worker_id=packet['worker_id'],bundle_sha256=packet['bundle_sha256'],image=runtime_image,qualified_image=image['image'],image_archive_sha256=image_archive_sha,qualification=str(reports[-1])))
     result=aws('ssm','send-command','--instance-ids',packet['worker_id'],'--document-name','AWS-RunShellScript','--comment',comment,'--parameters',json.dumps(dict(commands=commands)))
     save(directory/'install-command.json',dict(command_id=result['Command']['CommandId'],instance_id=packet['worker_id']))
     print(json.dumps(dict(command_id=result['Command']['CommandId'],submitted=True,production_verified=False)))

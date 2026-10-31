@@ -65,6 +65,7 @@ jobs:
           python3 -B bin/prepare-research-runtime.py --backend .runtime-research
           python3 -B bin/prepare-openclaw-worker.py --backend .runtime-research
           python3 -B bin/prepare-autonomy-runtime.py
+          cp -R .runtime-research ../jumpserve-back-end
           python3 -B -m unittest discover -s .runtime-research/research_workflow/tests -v
 
       - name: Test real-world runtime
