@@ -126,6 +126,16 @@ def main():
  try:
   f.bootstrap()
   migration=f.ROOT/'database/202610290001_builder_reconciliation.sql';f.query(migration.read_text());f.report['migration_sha256'][migration.name]=workflow.digest(migration.read_bytes())
+  # This end-to-end fixture runs the current controller, including its v2
+  # startup guard. Keep the generic historical bootstrap unchanged so the
+  # migration's separate before/after compatibility regression remains useful.
+  f.query("""create schema auth;
+create table auth.users(id uuid primary key,email text,email_confirmed_at timestamptz);
+create function auth.jwt() returns jsonb language sql stable as $$select '{}'::jsonb$$;
+create function auth.uid() returns uuid language sql stable as $$select null::uuid$$;
+grant usage on schema auth to anon,authenticated,service_role;""")
+  for name in ('202610300004_platform_supervisor.sql','202610310004_research_controller_health.sql'):
+   migration=f.ROOT/'database'/name;f.query(migration.read_text());f.report['migration_sha256'][name]=workflow.digest(migration.read_bytes())
   prompt=f.uid();f.query("insert into agent_prompt_versions(id,module_id,version,system_prompt,research_context,published_at,created_by,updated_by) values("+f.sql_text(prompt)+",'research-autonomy','research-autonomy-v10','Explicit synthetic integration prompt','No live model or scientific review',clock_timestamp(),'synthetic fixture','synthetic fixture');update agent_prompt_settings set active_version_id="+f.sql_text(prompt)+" where module_id='research-autonomy'")
   model_dispatch.rpc('heartbeat',dict(status='ready',configuration=dict(kind='explicit synthetic local provider',paid_fallback=False)))
   policy=json.loads(autonomy.autonomy_costs.POLICY_PATH.read_bytes())['bounded_tcp'];env=dict(NETWORK_BOUNDED_FUNCTION='arn:aws:lambda:us-east-1:395567831870:function:LocalCompletionFixture:1',NETWORK_BOUNDED_POLICY_SHA256=workflow.digest(workflow.canonical(policy)))
