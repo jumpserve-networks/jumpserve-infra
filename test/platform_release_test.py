@@ -10,6 +10,7 @@ from unittest.mock import Mock,patch
 ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('platform_production',ROOT/'bin/platform-production.py');release=importlib.util.module_from_spec(spec);spec.loader.exec_module(release)
 spec=importlib.util.spec_from_file_location('platform_synthesize',ROOT/'bin/platform-synthesize.py');synthesis=importlib.util.module_from_spec(spec);spec.loader.exec_module(synthesis)
+spec=importlib.util.spec_from_file_location('platform_diagnostics',ROOT/'bin/platform-deployment-diagnostics.py');diagnostics=importlib.util.module_from_spec(spec);spec.loader.exec_module(diagnostics)
 
 class PlatformReleaseTests(unittest.TestCase):
     def setUp(self):
@@ -18,6 +19,17 @@ class PlatformReleaseTests(unittest.TestCase):
     def test_frozen_lambda_code_update_is_supported(self):
         candidate=copy.deepcopy(self.base);candidate['Resources']['Function']['Properties']['Code']['S3Key']='new.zip'
         self.assertEqual(release.guard_template(self.base,candidate),[dict(logical_id='Function',type='AWS::Lambda::Function')])
+
+    def test_original_failure_diagnostics_are_bounded_read_only_and_omit_resource_inputs(self):
+        operation='9567fb05-b800-5175-9d2d-ee164fb3a31f';token='platform-'+operation+'-JumpServeBenchmarkStack'
+        cf=Mock();cf.describe_stacks.return_value=dict(Stacks=[dict(StackStatus='UPDATE_ROLLBACK_COMPLETE',Parameters=[dict(ParameterKey='BootstrapVersion',ParameterValue='/cdk-bootstrap/hnb659fds/version',ResolvedValue='31'),dict(ParameterKey='PrivateCredential',ParameterValue='must-not-appear')])])
+        cf.get_template.return_value=dict(TemplateBody=self.base)
+        cf.describe_stack_events.return_value=dict(StackEvents=[dict(ClientRequestToken=token,LogicalResourceId='Function',ResourceStatus='UPDATE_FAILED',ResourceStatusReason='Explicit fixture failure',ResourceProperties=dict(secret='must-not-appear')),dict(ClientRequestToken='unrelated',ResourceStatus='UPDATE_FAILED',ResourceStatusReason='unrelated')])
+        session=Mock();session.client.return_value=cf;result=diagnostics.collect(session,operation)
+        self.assertEqual(result['stack_status'],'UPDATE_ROLLBACK_COMPLETE');self.assertEqual(result['mutations'],0)
+        self.assertEqual(len(result['matching_events']),1);self.assertNotIn('must-not-appear',json.dumps(result))
+        self.assertEqual(session.client.call_args_list,[unittest.mock.call('cloudformation')])
+        self.assertEqual([call[0] for call in cf.method_calls],['describe_stacks','get_template','describe_stack_events'])
 
     def test_telemetry_rendering_preserves_existing_resource_and_other_changes(self):
         previous=copy.deepcopy(self.base);previous['Resources']['CDKMetadata']=dict(Type='AWS::CDK::Metadata',Properties=dict(Analytics='old-runtime'))
