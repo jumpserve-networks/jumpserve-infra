@@ -58,7 +58,7 @@ def package():
             if not path.is_file() or path.suffix not in ('.py','.json') or path.is_symlink():continue
             raw=path.read_bytes();name='platform_supervisor/'+path.name;files[name]=sha(raw)
             info=zipfile.ZipInfo(name,date_time=(1980,1,1,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;archive.writestr(info,raw)
-        for name in ('jumpserve-platform.service','install-platform.sh'):
+        for name in ('jumpserve-platform.service','install-platform.sh','qualify-platform-host.py','reconcile-platform-host.py','Dockerfile'):
             raw=(ROOT/'assets/platform'/name).read_bytes();files[name]=sha(raw)
             info=zipfile.ZipInfo(name,date_time=(1980,1,1,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;archive.writestr(info,raw)
     return buffer.getvalue(),files
@@ -169,15 +169,42 @@ def install(packet,packet_path):
     result=aws('ssm','send-command','--instance-ids',packet['worker_id'],'--document-name','AWS-RunShellScript','--comment',comment,'--parameters',json.dumps(dict(commands=commands)))
     save(directory/'install-command.json',dict(command_id=result['Command']['CommandId'],instance_id=packet['worker_id']))
     print(json.dumps(dict(command_id=result['Command']['CommandId'],submitted=True,production_verified=False)))
+def install_cloud(packet,packet_path):
+    validate(packet);target();directory=packet_path.parent
+    qualified=json.loads((directory/'cloud-qualified.json').read_bytes())
+    command=aws('ssm','get-command-invocation','--command-id',qualified['command_id'],'--instance-id',packet['worker_id'])
+    if command['Status']!='Success':raise ValueError('Original cloud qualification has not succeeded.')
+    reports=[json.loads(line) for line in command.get('StandardOutputContent','').splitlines() if line.startswith('{')]
+    if len(reports)!=1 or reports[0]!=qualified['report']:raise ValueError('Cloud qualification acknowledgement differs.')
+    report=reports[0]
+    if report.get('passed') is not True or report.get('live') is not True or report.get('bundle_sha256')!=packet['bundle_sha256'] or report.get('recipe_sha256')!=sha((ROOT/'assets/platform/Dockerfile').read_bytes()) or not 0<report.get('actual_provider_calls',0)<=6 or not report.get('existing_test_unchanged') or not report.get('container_check_passed') or not re.fullmatch('sha256:[a-f0-9]{64}',report.get('image','')):raise ValueError('Passed source-bound cloud software control required.')
+    if admin().query('select paused from public.platform_settings where id')!=[dict(paused=True)]:raise ValueError('Pause admission before initial installation.')
+    metadata=aws('ec2','describe-instances','--instance-ids',packet['worker_id'])['Reservations'][0]['Instances'][0]['MetadataOptions']
+    if metadata.get('State')!='applied' or metadata.get('HttpTokens')!='required' or metadata.get('HttpPutResponseHopLimit')!=1:raise ValueError('Applied metadata isolation required.')
+    secret=next((item for item in aws('secretsmanager','list-secrets')['SecretList'] if item['Name']=='jumpserve/platform-supervisor'),None)
+    if not secret:raise ValueError('Install the reviewed publisher service secret before cloud installation.')
+    comment='platform-install-'+packet['bundle_sha256'][:32];intent=directory/'install-intent.json'
+    if intent.exists():
+        previous=directory/'install-command.json'
+        if previous.exists():print(previous.read_text());return
+        matches=[c for c in aws('ssm','list-commands','--max-results','50')['Commands'] if c.get('Comment')==comment and packet['worker_id'] in c.get('InstanceIds',[])]
+        if len(matches)!=1:raise ValueError('Original installation remains unconfirmed; no duplicate command was sent.')
+        print(json.dumps(dict(command_id=matches[0]['CommandId'],reconciled=True)));return
+    bundle=packet['bundle_sha256'];destination='/tmp/jumpserve-platform-'+bundle+'.zip';script='/tmp/jumpserve-platform-'+bundle+'.sh'
+    proof_sha=sha(json.dumps(report,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode())
+    commands=['set -eu','aws s3 cp '+shlex.quote('s3://'+BUCKET+'/platform-supervisor/'+bundle+'.zip')+' '+shlex.quote(destination)+' --region us-east-1 --only-show-errors','echo '+shlex.quote(bundle+'  '+destination)+' | sha256sum --check','python3.12 -c '+shlex.quote('import pathlib,zipfile;pathlib.Path('+repr(script)+').write_bytes(zipfile.ZipFile('+repr(destination)+').read("install-platform.sh"))'),'bash '+shlex.quote(script)+' '+' '.join(shlex.quote(v) for v in (bundle,report['image'],proof_sha,secret['ARN'],BUCKET,'qualified-host'))]
+    save(intent,dict(comment=comment,worker_id=packet['worker_id'],bundle_sha256=bundle,image=report['image'],image_archive_sha256=None,cloud_qualification_sha256=proof_sha,qualification_command_id=qualified['command_id']))
+    result=aws('ssm','send-command','--instance-ids',packet['worker_id'],'--document-name','AWS-RunShellScript','--comment',comment,'--parameters',json.dumps(dict(commands=commands)))
+    saved=dict(command_id=result['Command']['CommandId'],instance_id=packet['worker_id']);save(directory/'install-command.json',saved);print(json.dumps(saved))
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('action',choices=['prepare','migrate','access','protect','harden','install']);parser.add_argument('--owners-file',type=Path);parser.add_argument('--packet',type=Path);parser.add_argument('--output',type=Path,default=ROOT/'.test-artifacts/platform-bootstrap/v1');args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('action',choices=['prepare','migrate','access','protect','harden','install','install-cloud']);parser.add_argument('--owners-file',type=Path);parser.add_argument('--packet',type=Path);parser.add_argument('--output',type=Path,default=ROOT/'.test-artifacts/platform-bootstrap/v1');args=parser.parse_args()
     if args.action=='prepare':
         if not args.owners_file:parser.error('--owners-file is required')
         prepare(args.owners_file,args.output)
     else:
         if not args.packet:parser.error('--packet is required')
         packet=json.loads(args.packet.read_bytes())
-        if args.action=='install':install(packet,args.packet)
+        if args.action in ('install','install-cloud'):globals()[args.action.replace('-','_')](packet,args.packet)
         else:globals()[args.action](packet)
 
 if __name__=='__main__':main()
