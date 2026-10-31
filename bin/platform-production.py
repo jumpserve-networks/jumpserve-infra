@@ -180,7 +180,7 @@ def frontend(session, revision):
         if response.status!=200:raise RuntimeError('Public frontend smoke check failed.')
     return dict(amplify_app=app,job_id=job['jobId'],public_revision=identity['revision'],public_smoke_passed=True)
 
-def infrastructure(session, candidate, operation):
+def infrastructure(session, candidate, operation, qualified_defaults=False):
     cf=session.client('cloudformation');proof=[]
     # All comparisons complete before the first mutation. A rejected stack can
     # never leave an earlier stack deployed as a partial "successful" release.
@@ -193,7 +193,8 @@ def infrastructure(session, candidate, operation):
         info=cf.describe_stacks(StackName=stack)['Stacks'][0]
         if info['StackStatus'] not in ('CREATE_COMPLETE','UPDATE_COMPLETE','UPDATE_ROLLBACK_COMPLETE'):raise RuntimeError('Stack is not settled: '+stack)
         synthesized=json.loads(path.read_bytes());template,preserved=render_preserving_telemetry(original,synthesized)
-        template,qualified_scope=render_qualified_budget_controllers(original,template,candidate,info)
+        qualified_scope=[]
+        if qualified_defaults:template,qualified_scope=render_qualified_budget_controllers(original,template,candidate,info)
         # Retain a value-free comparison even when a guard rejects the candidate.
         directory=Path('.test-artifacts/platform-release');directory.mkdir(parents=True,exist_ok=True)
         old=original.get('Resources',{});new=template.get('Resources',{})
@@ -239,8 +240,9 @@ def infrastructure(session, candidate, operation):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--component',choices=REPOSITORIES,required=True);parser.add_argument('--repository',required=True);parser.add_argument('--revision',required=True);parser.add_argument('--operation-id',required=True);parser.add_argument('--candidate',type=Path,default=Path('.candidate'));args=parser.parse_args()
+    parser.add_argument('--component',choices=REPOSITORIES,required=True);parser.add_argument('--repository',required=True);parser.add_argument('--revision',required=True);parser.add_argument('--operation-id',required=True);parser.add_argument('--candidate',type=Path,default=Path('.candidate'));parser.add_argument('--qualified-defaults',action='store_true');args=parser.parse_args()
     if args.repository!=REPOSITORIES[args.component] or not re.fullmatch('[a-f0-9]{40}',args.revision):raise ValueError('Exact repository/revision required.')
+    if args.qualified_defaults and args.component!='infrastructure':raise ValueError('Qualified defaults require their infrastructure release.')
     args.operation_id=str(uuid.UUID(args.operation_id))
     import boto3
     from botocore.config import Config
@@ -251,7 +253,7 @@ def main():
     session.client=lambda service:original_client(service,config=Config(retries=dict(total_max_attempts=1),connect_timeout=15,read_timeout=60))
     if session.client('sts').get_caller_identity()['Account']!=ACCOUNT:raise ValueError('AWS account differs.')
     if args.component=='frontend':result=frontend(session,args.revision)
-    elif args.component=='infrastructure':result=infrastructure(session,args.candidate,args.operation_id)
+    elif args.component=='infrastructure':result=infrastructure(session,args.candidate,args.operation_id,qualified_defaults=args.qualified_defaults)
     else:
         # The dedicated AMI job produces and verifies the actual selected image.
         proof=json.loads(Path('backend-proof/production-verification.json').read_bytes())

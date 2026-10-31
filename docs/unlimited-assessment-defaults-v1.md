@@ -57,9 +57,11 @@ runtime/authority differences. It starts from the deployed template, copies only
 the qualified controller code pointers and matching asset metadata, and retains
 all existing settings, including controller environments. The receipt lists
 candidate controller settings that were retained from production. The general
-release guard is unchanged. The profile
-applies only to that fixed qualified revision; it does not authorize future
-executor changes.
+release guard is unchanged. The profile requires the explicit
+`qualified_defaults: true` workflow input and applies only to that fixed
+qualified revision; it does not authorize future executor changes. Ordinary
+supervisor releases keep the normal guard and do not inherit this one-time
+deployment profile.
 
 The dedicated update also freezes the existing nonsecret Ubuntu AMI and CDK
 bootstrap parameter values. Both must match the reviewed profile and the actual

@@ -11,6 +11,7 @@ ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('platform_production',ROOT/'bin/platform-production.py');release=importlib.util.module_from_spec(spec);spec.loader.exec_module(release)
 spec=importlib.util.spec_from_file_location('platform_synthesize',ROOT/'bin/platform-synthesize.py');synthesis=importlib.util.module_from_spec(spec);spec.loader.exec_module(synthesis)
 spec=importlib.util.spec_from_file_location('platform_diagnostics',ROOT/'bin/platform-deployment-diagnostics.py');diagnostics=importlib.util.module_from_spec(spec);spec.loader.exec_module(diagnostics)
+spec=importlib.util.spec_from_file_location('platform_input',ROOT/'bin/platform-release-input.py');release_input=importlib.util.module_from_spec(spec);spec.loader.exec_module(release_input)
 
 class PlatformReleaseTests(unittest.TestCase):
     def setUp(self):
@@ -30,6 +31,20 @@ class PlatformReleaseTests(unittest.TestCase):
         self.assertEqual(len(result['matching_events']),1);self.assertNotIn('must-not-appear',json.dumps(result))
         self.assertEqual(session.client.call_args_list,[unittest.mock.call('cloudformation')])
         self.assertEqual([call[0] for call in cf.method_calls],['describe_stacks','get_template','describe_stack_events'])
+
+    def test_qualified_release_mode_is_explicit_and_rejects_cross_component_use(self):
+        revision='a'*40
+        environment=dict(PLATFORM_COMPONENT='infrastructure',PLATFORM_REPOSITORY='jumpserve-networks/jumpserve-infra',PLATFORM_REVISION=revision,PLATFORM_OPERATION_ID='9567fb05-b800-5175-9d2d-ee164fb3a31f')
+        class Response:
+            def __enter__(self):return self
+            def __exit__(self,*args):pass
+            def read(self,*args):return json.dumps(dict(object=dict(sha=revision))).encode()
+        for qualified in ('false','true'):
+            with patch.dict(os.environ,{**environment,'PLATFORM_QUALIFIED_DEFAULTS':qualified},clear=True),patch.object(release_input.urllib.request,'urlopen',return_value=Response()),patch.object(release_input.subprocess,'run') as run,patch('sys.argv',['platform-release-input.py','--execute']):release_input.main()
+            self.assertEqual('--qualified-defaults' in run.call_args.args[0],qualified=='true')
+        invalid={**environment,'PLATFORM_COMPONENT':'frontend','PLATFORM_REPOSITORY':'jumpserve-networks/jumpserve-front-end','PLATFORM_QUALIFIED_DEFAULTS':'true'}
+        with patch.dict(os.environ,invalid,clear=True),patch.object(release_input.urllib.request,'urlopen') as network,self.assertRaises(ValueError):release_input.inputs()
+        network.assert_not_called()
 
     def test_telemetry_rendering_preserves_existing_resource_and_other_changes(self):
         previous=copy.deepcopy(self.base);previous['Resources']['CDKMetadata']=dict(Type='AWS::CDK::Metadata',Properties=dict(Analytics='old-runtime'))
@@ -120,7 +135,11 @@ class PlatformReleaseTests(unittest.TestCase):
             previous_cwd=Path.cwd()
             try:
                 os.chdir(root)
-                with patch.object(release,'STACKS',('Fixture',)),patch.object(release,'publish_assets',return_value=[]):result=release.infrastructure(session,root,'fixture-operation')
+                generic=Mock();generic.get_template.return_value=dict(TemplateBody=old);generic.describe_stacks.return_value=dict(Stacks=[dict(StackStatus='UPDATE_COMPLETE',**info)])
+                generic_session=Mock();generic_session.client.return_value=generic
+                with patch.object(release,'STACKS',('Fixture',)),patch.object(release,'publish_assets') as generic_assets,self.assertRaises(ValueError):release.infrastructure(generic_session,root,'ordinary-operation')
+                generic.update_stack.assert_not_called();generic_assets.assert_not_called()
+                with patch.object(release,'STACKS',('Fixture',)),patch.object(release,'publish_assets',return_value=[]):result=release.infrastructure(session,root,'fixture-operation',qualified_defaults=True)
             finally:os.chdir(previous_cwd)
             self.assertEqual(cf.update_stack.call_args.kwargs['Parameters'],expected_parameters)
             self.assertEqual(result['stacks'][0]['status'],'UPDATE_COMPLETE')

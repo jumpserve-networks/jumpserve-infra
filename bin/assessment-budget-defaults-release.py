@@ -153,6 +153,8 @@ def migrate():
  assert read('fixture-closure-verified.json')['workflow_status']=='cancelled'
  for component in ('frontend','infrastructure'):
   proof=read(component+'-production-verification.json');assert proof['passed'] and proof['component']==component
+ scopes=[scope for stack in read('infrastructure-production-verification.json')['evidence']['stacks'] for scope in stack.get('qualified_scope',[])]
+ assert len(scopes)==1 and scopes[0]['qualified_files_sha256']==packet['qualified_files_sha256'] and scopes[0]['all_other_template_content_preserved']
  assert public('/research/capabilities')['autonomy']['defaults']['maximum_spend_usd'] is None
  raw=(ROOT/'database'/MIGRATION).read_bytes();archive=(BASE/'qualification-evidence.zip').read_bytes();assert digest(archive)==qualification['evidence']['sha256']
  with zipfile.ZipFile(io.BytesIO(archive)) as saved:assert saved.read('migration.sql')==raw
