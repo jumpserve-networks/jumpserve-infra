@@ -18,6 +18,25 @@ class PlatformReleaseTests(unittest.TestCase):
         candidate=copy.deepcopy(self.base);candidate['Resources']['Function']['Properties']['Code']['S3Key']='new.zip'
         self.assertEqual(release.guard_template(self.base,candidate),[dict(logical_id='Function',type='AWS::Lambda::Function')])
 
+    def test_telemetry_rendering_preserves_existing_resource_and_other_changes(self):
+        previous=copy.deepcopy(self.base);previous['Resources']['CDKMetadata']=dict(Type='AWS::CDK::Metadata',Properties=dict(Analytics='old-runtime'))
+        candidate=copy.deepcopy(previous);candidate['Resources']['CDKMetadata']['Properties']['Analytics']='new-runtime'
+        candidate['Resources']['Function']['Properties']['Code']['S3Key']='new.zip'
+        rendered,proof=release.render_preserving_telemetry(previous,candidate)
+        self.assertEqual(rendered['Resources']['CDKMetadata'],previous['Resources']['CDKMetadata'])
+        self.assertEqual(proof,[dict(logical_id='CDKMetadata',resource_sha256=release.sha(release.encoded(previous['Resources']['CDKMetadata'])))])
+        self.assertEqual(release.guard_template(previous,rendered),[dict(logical_id='Function',type='AWS::Lambda::Function')])
+        self.assertEqual(candidate['Resources']['CDKMetadata']['Properties']['Analytics'],'new-runtime')
+        with self.assertRaises(ValueError):release.guard_template(previous,candidate)
+        for change in ('type','property','deletion','addition','metadata'):
+            bad=copy.deepcopy(candidate);base=copy.deepcopy(previous)
+            if change=='type':bad['Resources']['CDKMetadata']['Type']='AWS::IAM::Role'
+            elif change=='property':bad['Resources']['CDKMetadata']['Properties']['Other']='unexpected'
+            elif change=='deletion':del bad['Resources']['CDKMetadata']
+            elif change=='addition':del base['Resources']['CDKMetadata']
+            else:bad['Resources']['CDKMetadata']['Metadata']=dict(unexpected='value')
+            with self.subTest(change=change),self.assertRaises(ValueError):release.guard_template(base,release.render_preserving_telemetry(base,bad)[0])
+
     def test_asset_create_without_list_permission_is_conditional_and_preserves_existing_objects(self):
         class HttpError(Exception):
             def __init__(self,status):self.response=dict(ResponseMetadata=dict(HTTPStatusCode=status))
