@@ -47,7 +47,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install fixed research regression dependencies
-        run: python3 -m pip install pydantic==2.13.5 boto3==1.42.4
+        run: python3 -m pip install pydantic==2.13.5 boto3==1.42.4 httpx==0.28.1
 
       - name: Read pinned research runtime revision
         id: research-runtime
