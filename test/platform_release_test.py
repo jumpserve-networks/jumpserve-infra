@@ -37,6 +37,31 @@ class PlatformReleaseTests(unittest.TestCase):
             else:bad['Resources']['CDKMetadata']['Metadata']=dict(unexpected='value')
             with self.subTest(change=change),self.assertRaises(ValueError):release.guard_template(base,release.render_preserving_telemetry(base,bad)[0])
 
+    def test_qualified_defaults_release_changes_only_three_controller_code_assets(self):
+        scope=json.loads((ROOT/'assessment-budget-defaults-release.json').read_bytes())
+        controllers=scope['controller_functions'];packages=scope['preserved_package_functions'];before=scope['previous_executor_version'];after=scope['generated_executor_version']
+        old=dict(Parameters={},Resources={name:dict(Type='AWS::Lambda::Function',Properties=dict(Role='retained-role',Code=dict(S3Key='old.zip'),Environment=dict(Variables=dict(EXECUTOR={'Ref':before})))) for name in controllers+packages})
+        old['Resources'][before]=dict(Type='AWS::Lambda::Version',Properties=dict(FunctionName={'Ref':packages[0]}))
+        old['Resources']['Policy']=dict(Type='AWS::IAM::Policy',Properties=dict(PolicyDocument=dict(Statement=[dict(Action='lambda:InvokeFunction',Resource={'Ref':before})])))
+        candidate=json.loads(json.dumps(old).replace(before,after))
+        for name in controllers+packages:candidate['Resources'][name]['Properties']['Code']['S3Key']='qualified.zip'
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);(root/'assessment-budget-defaults-release.json').write_text(json.dumps(scope));(root/'research-workflow-runtime.json').write_bytes((ROOT/'research-workflow-runtime.json').read_bytes())
+            rendered,proof=release.render_qualified_budget_controllers(old,candidate,root)
+            self.assertEqual([item['logical_id'] for item in release.guard_template(old,rendered)],sorted(controllers))
+            self.assertTrue(proof[0]['all_other_template_content_preserved'])
+            for name in packages+[before,'Policy']:self.assertEqual(rendered['Resources'][name],old['Resources'][name])
+            for attack in ('controller-role','executor-role','policy','addition','deletion'):
+                bad=copy.deepcopy(candidate)
+                if attack=='controller-role':bad['Resources'][controllers[0]]['Properties']['Role']='different'
+                elif attack=='executor-role':bad['Resources'][packages[0]]['Properties']['Role']='different'
+                elif attack=='policy':bad['Resources']['Policy']['Properties']['PolicyDocument']['Statement'][0]['Action']='lambda:*'
+                elif attack=='addition':bad['Resources']['Unexpected']=dict(Type='AWS::IAM::Role')
+                else:del bad['Resources']['Policy']
+                with self.subTest(attack=attack),self.assertRaises(ValueError):release.render_qualified_budget_controllers(old,bad,root)
+            manifest=json.loads((root/'research-workflow-runtime.json').read_bytes());manifest['files']['network_package.py']='0'*64;(root/'research-workflow-runtime.json').write_text(json.dumps(manifest))
+            with self.assertRaises(ValueError):release.render_qualified_budget_controllers(old,candidate,root)
+
     def test_asset_create_without_list_permission_is_conditional_and_preserves_existing_objects(self):
         class HttpError(Exception):
             def __init__(self,status):self.response=dict(ResponseMetadata=dict(HTTPStatusCode=status))
