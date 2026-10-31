@@ -1,0 +1,22 @@
+{
+  "version": "autonomy-recovery-execution-v1",
+  "scope": "Qualification and implementation of native repair, original-call reconciliation and restart-safe measurement persistence. Production deployment, assessment reset and scientific criterion changes are excluded.",
+  "acceptance": [
+    "A repair enters the native builder with retained source and checkpoint, changes experiment.py, executes incident-bound tests and freezes the exact candidate before fresh scientific reviews.",
+    "A terminal native stream whose finish acknowledgement was lost can be reconciled from its exact admitted request, original stream and durable completion receipt without replaying inference or rewriting the original call.",
+    "Incomplete streams, missing identities, changed bytes, active work and genuinely unknown calls remain fenced. Reconciliation records are append-only, service-only and idempotent.",
+    "An interrupted bounded measurement ingestion recovers the original retained response and persists one run and one set of observations without another execution.",
+    "Actual Linux TCP/netem observations retain the complete five-condition loss grid, three 30-second invocations per condition, units, invalid observations, source/configuration hashes and raw artifacts.",
+    "Restart and storage-failure controls retain original commitments, deadline and criteria and demonstrate no duplicate launch or inference. Local fixtures never become production paper evidence."
+  ],
+  "qualification": {
+    "platform": "Record actual architecture; linux/amd64 qualification must be explicit, emulation is labelled.",
+    "maximum_actual_provider_calls": 12,
+    "maximum_provider_reservation_cents": 1200,
+    "maximum_live_elapsed_seconds": 480,
+    "provider": "Existing authorized subscription only, no paid fallback and no retry of an uncertain call.",
+    "new_cloud_experiment_instances": 0,
+    "production_assessment_writes": 0
+  },
+  "evidence": "Retain original failed and passed logs, exact source/protocol hashes, actual available usage, raw measurements and all unverified boundaries. AI implementer review is neither independent nor held-out validation."
+}

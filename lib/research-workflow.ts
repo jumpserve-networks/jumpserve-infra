@@ -20,7 +20,22 @@ export function researchWorkflowIsEnabled(value: unknown): boolean {
 export function requireNetemPolicy(policy: Record<string, unknown>, account: string, region: string): void {
   if (policy.account !== account || policy.region !== region || policy.instance_type !== 't3.medium' || policy.root_gib !== 8 || policy.cpu_credits !== 'standard' || policy.max_instances !== 1 || policy.max_wall_seconds !== 1800) throw new Error('TCP sweep resource envelope differs from enforced infrastructure.');
   if (policy.version === 'netem-iperf-costs-v1' && policy.max_network_bytes === undefined) return;
-  if (policy.version !== 'netem-iperf-costs-v2' || policy.max_network_bytes !== 20000000000 || policy.max_output_bytes !== 3000000 || typeof policy.approved_for_lab_execution !== 'boolean') throw new Error('TCP sweep counter envelope requires its declared version and exact bound.');
+  const maximum = policy.version === 'netem-iperf-costs-v2' ? 20000000000 : policy.version === 'netem-iperf-costs-v3' ? 100000000000 : undefined;
+  if (maximum === undefined || policy.max_network_bytes !== maximum || policy.max_output_bytes !== 3000000 || typeof policy.approved_for_lab_execution !== 'boolean') throw new Error('TCP sweep counter envelope requires its declared version and exact bound.');
+}
+
+export function requireBuiltPackagePolicy(policy: Record<string, unknown>): void {
+  const maximum = policy.version === 'built-package-costs-v2' ? 10000000000 : policy.version === 'built-package-costs-v3' ? 100000000000 : undefined;
+  const reservation = policy.version === 'built-package-costs-v2' ? 1000 : 2000;
+  if (maximum === undefined || policy.max_network_bytes !== maximum || policy.maximum_cents !== reservation || policy.max_output_bytes !== 3000000 || typeof policy.approved_for_lab_execution !== 'boolean' || policy.instance_type !== 't3.medium' || policy.root_volume_gib !== 8 || policy.cpu_credits !== 'standard' || policy.max_instances !== 1 || policy.max_wall_seconds !== 1800) throw new Error('Built package reservation differs from the versioned disposable host envelope.');
+}
+
+export function researchNetworkPolicyFiles(files: Record<string, string>): {netem: string; built: string} {
+  // New limits enter a release only through its committed original-byte manifest.
+  return {
+    netem: files['policies/netem-iperf-costs-v3.json'] ? 'policies/netem-iperf-costs-v3.json' : files['policies/netem-iperf-costs-v2.json'] ? 'policies/netem-iperf-costs-v2.json' : 'policies/netem-iperf-costs-v1.json',
+    built: files['policies/built-package-costs-v3.json'] ? 'policies/built-package-costs-v3.json' : 'policies/built-package-costs-v2.json',
+  };
 }
 
 export function requireRepairQualification(qualification: {version?:string;approved_for_lab_recovery?:boolean;qualified_files_sha256?:string;evidence_sha256?:string}, files: Record<string,string>): void {
@@ -117,16 +132,16 @@ export class ResearchWorkflow extends Construct {
       if (packagesEnabled) networkingEnvironment.NETWORK_PACKAGE_FUNCTION=packageExecutor.functionArn;
       // Fixed built-in experiment code has a separate admission path from
       // submitted custom packages. Pin the executor version and cost policy.
-      // A historical pin retains v1. Only a new committed manifest explicitly
-      // declaring v2 can introduce the new counter envelope into a release.
-      const sweepPolicyName = manifest.files['policies/netem-iperf-costs-v2.json'] ? 'policies/netem-iperf-costs-v2.json' : 'policies/netem-iperf-costs-v1.json';
-      const sweepPolicy = JSON.parse(fs.readFileSync(path.join(runtime, sweepPolicyName), 'utf8'));
+      // Historical pins retain their exact policy. A new committed manifest
+      // must explicitly declare v3 before introducing the 100-GB envelope.
+      const policyFiles = researchNetworkPolicyFiles(manifest.files);
+      const sweepPolicy = JSON.parse(fs.readFileSync(path.join(runtime, policyFiles.netem), 'utf8'));
       requireNetemPolicy(sweepPolicy, cdk.Stack.of(this).account, cdk.Stack.of(this).region);
       networkingEnvironment.NETWORK_NETEM_IPERF_FUNCTION=packageExecutor.currentVersion.functionArn;
       networkingEnvironment.NETWORK_NETEM_IPERF_POLICY_SHA256=createHash('sha256').update(JSON.stringify(sweepPolicy,Object.keys(sweepPolicy).sort())).digest('hex');
       if(builderEnabled){
-        const buildPolicy=JSON.parse(fs.readFileSync(path.join(runtime,'policies/built-package-costs-v2.json'),'utf8'));
-        if(buildPolicy.instance_type!=='t3.medium'||buildPolicy.root_volume_gib!==8||buildPolicy.cpu_credits!=='standard'||buildPolicy.max_instances!==1||buildPolicy.max_wall_seconds!==1800)throw new Error('Built package reservation differs from disposable host configuration.');
+        const buildPolicy=JSON.parse(fs.readFileSync(path.join(runtime,policyFiles.built),'utf8'));
+        requireBuiltPackagePolicy(buildPolicy);
         networkingEnvironment.NETWORK_BUILT_PACKAGE_FUNCTION=packageExecutor.currentVersion.functionArn;
         networkingEnvironment.NETWORK_BUILT_PACKAGE_POLICY_SHA256=createHash('sha256').update(JSON.stringify(buildPolicy,Object.keys(buildPolicy).sort())).digest('hex');
       }

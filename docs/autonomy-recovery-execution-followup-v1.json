@@ -1,0 +1,11 @@
+{
+  "version": "autonomy-recovery-execution-followup-v1",
+  "prior_directory": "20261030T230544880097Z",
+  "prior_report_sha256": "b68642b713762f6f2c68f5381f7ea8418b20c473ef8fd7c6833b75ac4488638c",
+  "prior_checkpoint_sha256": "c667d383af99fc1b378362c23add222b90a5cb9bfc0e6053f3741fe2c0725043",
+  "purpose": "Continue the exact exposed software repair checkpoint after twelve verified completed responses changed the function and passed both retained tests. Finish incident metadata and frozen-candidate checks without repeating the earlier inference requests or altering the original tests/source baseline.",
+  "prior_failure": "The qualification guard rejected transport thirteen before its HTTP request. The application recorded an unknown fixture receipt; preserve that original and distinguish twelve actual HTTP calls from thirteen application transport entries. No production dispatch or native-call record is reconciled by this development continuation.",
+  "prospective_limits": {"maximum_new_actual_provider_calls": 6,"maximum_aggregate_actual_provider_calls": 18,"maximum_new_elapsed_seconds": 180,"maximum_new_reservation_cents": 600},
+  "acceptance": ["Verify every earlier request and terminal response plus the exact checkpoint before any new call.","No manual experiment.py or repair_test.py edit; correction of malformed JSON metadata is native model work.","Admit the qualification allowance before provider transport, preserving zero-call denials.","The repaired source, unchanged tests, incident-bound plan, executed server validator and compiled candidate must match.","Keep the failed twelve-call trial, all available usage and unknown charges; no scientific findings or production mutation."],
+  "reviewer": {"identity":"Codex implementing AI","independent":false,"human":false,"held_out":false}
+}

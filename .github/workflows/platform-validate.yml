@@ -56,11 +56,12 @@ jobs:
       - run: python3 -B -m unittest discover -s test -p category_budget_release_test.py -v
       - run: python3 -B -m unittest discover -s test -p research_runtime_release_test.py -v
       - run: python3 -B -m unittest discover -s test -p retained_control_test.py -v
+      - run: python3 -B -m unittest discover -s test -p integrated_research_release_test.py -v
       - run: python3 -B test/check_platform_database.py
         env:
           PLATFORM_TEST_DATABASE_URL: postgresql://postgres:platform-test-only@127.0.0.1:5432/postgres
-      - name: Verify category budgets and immutable funding records
-        run: python3 -B test/check_runtime_handoff_database.py
+      - name: Verify funding, maintenance and integrated native reconciliation
+        run: python3 -B test/check_integrated_native_reconciliation_database.py
         env:
           PYTHONPATH: .runtime-research/research_workflow:test
           UNLIMITED_DEFAULTS_TEST_DATABASE_URL: postgresql://postgres:platform-test-only@127.0.0.1:5432/postgres
