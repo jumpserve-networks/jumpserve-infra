@@ -158,6 +158,8 @@ create function public.research_model_dispatch(p_operation text,p_payload jsonb)
     check('daily maintenance uses the fixed bounded defaults',lambda: sql('select max_reserved_cents::text||\':\'||extract(epoch from deadline_at-created_at)::integer::text from public.platform_tasks where id='+quote(maintenance['task_id']))=='10000:21600' or (_ for _ in ()).throw(AssertionError()))
     control('cancel',maintenance['task_id'])
     check('cancelling maintenance cannot reset its daily admission limit',lambda: work('maintenance',payload=dict(policy_sha256=policy)) is None or (_ for _ in ()).throw(AssertionError()))
+    from platform_assessment_blocker_checks import run as check_assessment_blockers
+    check_assessment_blockers(globals(), work, control, policy)
     sql("update public.platform_operators set role='revoked' where user_id="+quote(owners[-1]))
     check('revoked owner cannot self reenroll or read retained history',lambda: snapshot(owners[-1],fail=True))
     (DIRECTORY/'report.json').write_text(json.dumps(dict(passed=True,database=DATABASE,checks=checks,limitations=['Synthetic authentication and Storage; production release adapters tested separately.']),indent=2)+'\n')

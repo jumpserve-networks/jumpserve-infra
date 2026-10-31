@@ -12,10 +12,29 @@ spec=importlib.util.spec_from_file_location('platform_production',ROOT/'bin/plat
 spec=importlib.util.spec_from_file_location('platform_synthesize',ROOT/'bin/platform-synthesize.py');synthesis=importlib.util.module_from_spec(spec);spec.loader.exec_module(synthesis)
 spec=importlib.util.spec_from_file_location('platform_diagnostics',ROOT/'bin/platform-deployment-diagnostics.py');diagnostics=importlib.util.module_from_spec(spec);spec.loader.exec_module(diagnostics)
 spec=importlib.util.spec_from_file_location('platform_input',ROOT/'bin/platform-release-input.py');release_input=importlib.util.module_from_spec(spec);spec.loader.exec_module(release_input)
+spec=importlib.util.spec_from_file_location('platform_bootstrap',ROOT/'bin/platform-supervisor.py');bootstrap=importlib.util.module_from_spec(spec);spec.loader.exec_module(bootstrap)
 
 class PlatformReleaseTests(unittest.TestCase):
     def setUp(self):
         self.base=dict(Parameters={},Resources=dict(Function=dict(Type='AWS::Lambda::Function',Properties=dict(Role='existing-role',Code=dict(S3Bucket='existing-bucket',S3Key='old.zip')))))
+
+    def test_bootstrap_cannot_apply_an_added_migration_using_an_old_review_packet(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);database=root/'database';database.mkdir()
+            for name in bootstrap.MIGRATIONS:(database/name).write_text('Synthetic reviewed migration '+name)
+            policy=b'{"version":"synthetic-policy"}'
+            backend=root/'backend';(backend/'platform_supervisor').mkdir(parents=True)
+            (backend/'platform_supervisor/policy.json').write_bytes(policy)
+            raw=b'Synthetic reviewed bundle';files={'reviewed.py':bootstrap.sha(raw)}
+            packet=dict(migration_sha256={name:bootstrap.sha((database/name).read_bytes()) for name in bootstrap.MIGRATIONS},bundle_sha256=bootstrap.sha(raw),files=files,policy=json.loads(policy),policy_sha256=bootstrap.sha(policy),aws_account='395567831870',supabase_project='regphejnlvfpyokpniny',bucket=bootstrap.BUCKET)
+            with patch.object(bootstrap,'ROOT',root),patch.object(bootstrap,'BACK',backend),patch.object(bootstrap,'package',return_value=(raw,files)):
+                self.assertEqual(bootstrap.validate(packet),raw)
+                outdated=copy.deepcopy(packet);del outdated['migration_sha256'][bootstrap.MIGRATIONS[-1]]
+                with self.assertRaisesRegex(ValueError,'migration set differs'):bootstrap.validate(outdated)
+                unreviewed=copy.deepcopy(packet);unreviewed['migration_sha256']['unreviewed.sql']='a'*64
+                with self.assertRaisesRegex(ValueError,'migration set differs'):bootstrap.validate(unreviewed)
+                (database/bootstrap.MIGRATIONS[-1]).write_text('Changed after review')
+                with self.assertRaisesRegex(ValueError,'migration changed'):bootstrap.validate(packet)
 
     def test_frozen_lambda_code_update_is_supported(self):
         candidate=copy.deepcopy(self.base);candidate['Resources']['Function']['Properties']['Code']['S3Key']='new.zip'
