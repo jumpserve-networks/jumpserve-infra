@@ -20,7 +20,7 @@ import zipfile
 import tarfile
 
 ROOT=Path(__file__).resolve().parents[1];BACK=ROOT.parent/'jumpserve-back-end'
-MIGRATIONS=['202610300004_platform_supervisor.sql','202610300005_platform_worker.sql','202610300006_platform_host_coordination.sql']
+MIGRATIONS=['202610300004_platform_supervisor.sql','202610300005_platform_worker.sql','202610300006_platform_host_coordination.sql','202610310002_assessment_blocker_repairs.sql']
 BUCKET='cdk-hnb659fds-assets-395567831870-us-east-1'
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def save(path,value):path.write_text(json.dumps(value,sort_keys=True,indent=2)+'\n')
@@ -63,6 +63,7 @@ def package():
             info=zipfile.ZipInfo(name,date_time=(1980,1,1,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;archive.writestr(info,raw)
     return buffer.getvalue(),files
 def validate(packet):
+    if set(packet['migration_sha256'])!=set(MIGRATIONS):raise ValueError('Prepared migration set differs; prepare a new review packet.')
     for name,digest in packet['migration_sha256'].items():
         if sha((ROOT/'database'/name).read_bytes())!=digest:raise ValueError('Prepared migration changed.')
     raw,files=package()
@@ -98,7 +99,7 @@ def harden(packet):
 def migrate(packet):
     validate(packet);db=admin()
     for name in MIGRATIONS:
-        marker={'202610300004_platform_supervisor.sql':"to_regclass('public.platform_settings')",'202610300005_platform_worker.sql':"to_regprocedure('public.platform_worker(text,uuid,uuid,uuid,jsonb)')",'202610300006_platform_host_coordination.sql':"to_regprocedure('public.research_model_dispatch_before_platform_v1(text,jsonb)')"}[name]
+        marker={'202610300004_platform_supervisor.sql':"to_regclass('public.platform_settings')",'202610300005_platform_worker.sql':"to_regprocedure('public.platform_worker(text,uuid,uuid,uuid,jsonb)')",'202610300006_platform_host_coordination.sql':"to_regprocedure('public.research_model_dispatch_before_platform_v1(text,jsonb)')",'202610310002_assessment_blocker_repairs.sql':"to_regclass('public.platform_assessment_repair_policy')"}[name]
         exists=db.query('select '+marker+' is not null present')[0]['present']
         if not exists:db.query((ROOT/'database'/name).read_text(),read_only=False)
     literal=db.literal

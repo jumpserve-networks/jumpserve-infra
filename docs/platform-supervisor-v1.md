@@ -22,9 +22,21 @@ slices. A shared database lock prevents both services from admitting native tool
 at once. Uncertain container cleanup keeps host admission fenced. The existing
 worker, research runtime, subscription grant and encrypted disk are preserved.
 
-After an owner resumes admission, the worker accepts owner-queued objectives and
-at most one automatic maintenance task per rolling 24 hours. Maintenance has a
-six-hour deadline and a $100 conservative reservation limit. A model call reserves
+After an owner resumes admission, the worker accepts owner-queued objectives,
+assessment blocker repairs, and at most one general maintenance task per rolling
+24 hours. Assessment blocker repairs bypass the daily maintenance interval. A
+transactional database outbox captures blocked tasks, operational repair diagnoses
+and waits, and failed/uncertain dispatches. The existing worker drains these events
+on its 15-second loop, with priority over general maintenance at the next safe
+shared-host slot. Already admitted research work retains host priority. A running
+coding slice can also delay pickup; event capture is immediate, execution depends
+on available capacity. This adapter does not require a worker reinstall.
+See [assessment blocker repairs](assessment-blocker-repairs-v1.md) for activation,
+deduplication, cancellation and verification limits.
+
+Each automatic task has a six-hour deadline and a $100 conservative reservation
+limit. Assessment repair
+deadlines are also bounded by the original assessment deadline. A model call reserves
 $1 before transport. These reservations are admission units, **not measured
 charges or a complete AWS billing cap**. Actual subscription allocation, host CPU
 credits, egress and image build charges remain unknown. Defaults do not reset
