@@ -52,8 +52,12 @@ Its dedicated deployment profile changes only the code assets and their matching
 CDK asset-path metadata for the API,
 autonomy controller and queue controller. The package executor, ingestion,
 cleanup, immutable executor version and every IAM policy retain their deployed
-content. The renderer rejects other runtime-source changes, configuration or
-authority differences. The general release guard is unchanged. The profile
+content. The renderer rejects other runtime-source changes and controller
+runtime/authority differences. It starts from the deployed template, copies only
+the qualified controller code pointers and matching asset metadata, and retains
+all existing settings, including controller environments. The receipt lists
+candidate controller settings that were retained from production. The general
+release guard is unchanged. The profile
 applies only to that fixed qualified revision; it does not authorize future
 executor changes.
 
