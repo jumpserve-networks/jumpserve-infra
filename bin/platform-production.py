@@ -4,6 +4,7 @@ Infrastructure is synthesized without credentials before this script is invoked.
 Only rendered templates are deployed, preserving existing literal parameters.
 """
 import argparse
+import copy
 import datetime as dt
 import hashlib
 import io
@@ -27,6 +28,19 @@ ALLOWED_TYPES={'AWS::Lambda::Function','AWS::Lambda::LayerVersion','AWS::Lambda:
 
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def encoded(value):return json.dumps(value,sort_keys=True,separators=(',',':')).encode()
+
+def render_preserving_telemetry(previous,candidate):
+    """Keep existing CDK analytics; never authorize a telemetry resource change."""
+    rendered=copy.deepcopy(candidate);preserved=[]
+    old=previous.get('Resources',{}).get('CDKMetadata');new=rendered.get('Resources',{}).get('CDKMetadata')
+    if old and new and old!=new and old.get('Type')==new.get('Type')=='AWS::CDK::Metadata':
+        original=copy.deepcopy(old);generated=copy.deepcopy(new)
+        old_analytics=original.get('Properties',{}).pop('Analytics',None)
+        new_analytics=generated.get('Properties',{}).pop('Analytics',None)
+        if isinstance(old_analytics,str) and isinstance(new_analytics,str) and original==generated:
+            rendered['Resources']['CDKMetadata']=copy.deepcopy(old)
+            preserved.append(dict(logical_id='CDKMetadata',resource_sha256=sha(encoded(old))))
+    return rendered,preserved
 
 def guard_template(previous, candidate):
     """No deletion/replacement of machines, storage, identities or IAM policies."""
@@ -125,13 +139,19 @@ def infrastructure(session, candidate, operation):
         if not path.is_file():raise ValueError('Both fixed stack templates are required.')
         original=cf.get_template(StackName=stack,TemplateStage='Original')['TemplateBody']
         if isinstance(original,str):original=json.loads(original)
-        template=json.loads(path.read_bytes());changes=guard_template(original,template)
+        synthesized=json.loads(path.read_bytes());template,preserved=render_preserving_telemetry(original,synthesized)
+        # Retain a value-free comparison even when a guard rejects the candidate.
+        directory=Path('.test-artifacts/platform-release');directory.mkdir(parents=True,exist_ok=True)
+        old=original.get('Resources',{});new=template.get('Resources',{})
+        comparison=[dict(logical_id=name,previous_type=old.get(name,{}).get('Type'),candidate_type=new.get(name,{}).get('Type'),changed_properties=sorted(key for key in set(old.get(name,{}).get('Properties',{}))|set(new.get(name,{}).get('Properties',{})) if old.get(name,{}).get('Properties',{}).get(key)!=new.get(name,{}).get('Properties',{}).get(key))) for name in sorted(set(old)|set(new)) if old.get(name)!=new.get(name)]
+        (directory/(stack+'-comparison.json')).write_bytes(encoded(dict(synthesized_template_sha256=sha(encoded(synthesized)),rendered_template_sha256=sha(encoded(template)),preserved_telemetry=preserved,resources=comparison)))
+        changes=guard_template(original,template)
         info=cf.describe_stacks(StackName=stack)['Stacks'][0]
         if info['StackStatus'] not in ('CREATE_COMPLETE','UPDATE_COMPLETE','UPDATE_ROLLBACK_COMPLETE'):raise RuntimeError('Stack is not settled: '+stack)
-        if changes:plans.append((stack,template,changes,info))
+        if changes:plans.append((stack,template,changes,info,preserved,sha(encoded(synthesized))))
     if not plans:raise ValueError('No supported rendered production change was found.')
     assets=publish_assets(session,candidate)
-    for stack,template,changes,info in plans:
+    for stack,template,changes,info,preserved,synthesized_sha256 in plans:
         body=encoded(template)
         if len(body)>1000000:raise ValueError('Rendered template exceeds its bounded deployment size.')
         template_argument=dict(TemplateBody=body.decode())
@@ -152,7 +172,7 @@ def infrastructure(session, candidate, operation):
             deployed=cf.get_template(StackName=stack,TemplateStage='Original')['TemplateBody']
             if isinstance(deployed,str):deployed=json.loads(deployed)
             if encoded(deployed)!=body:raise RuntimeError('Deployed template differs from the rendered candidate.')
-            return dict(stack=stack,status=status,template_sha256=sha(body),changes=changes,stack_id=result['StackId'])
+            return dict(stack=stack,status=status,template_sha256=sha(body),synthesized_template_sha256=synthesized_sha256,preserved_telemetry=preserved,changes=changes,stack_id=result['StackId'])
         proof.append(wait(settled))
     return dict(stacks=proof,assets=assets,scope='Exact rendered templates and settled stacks; application behavior still requires its module-specific checks.')
 
