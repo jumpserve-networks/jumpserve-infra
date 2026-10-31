@@ -16,7 +16,7 @@ repair task execution belongs to the separate AWS platform supervisor.
 - Applied only `database/202610310002_assessment_blocker_repairs.sql` to JumpServe
   Supabase project `regphejnlvfpyokpniny`. Migration SHA-256:
   `d81a8aa6f6b073100f3e8286a9e6130b4d258acc9b55af93df6c32a071f92dc0`.
-- Activation committed at `2026-10-31T17:19:37.378150Z`. The transactional private
+- Activation event recorded at `2026-10-31T17:19:37.378150Z`. The transactional private
   Platform Updates event is `55916da5-8e7a-5e59-87ea-bf30d7b70e69`.
 - The read-back verification event is `98362c8d-c6fe-5310-a779-fd2f63d3e899`,
   retaining the `2026-10-31T17:21:31.551537Z` observation.
@@ -35,6 +35,11 @@ repair at `17:19:45.999043Z`, about nine seconds after activation. At the record
 verification, 31 signals remained pending later safe admission. The daily general
 maintenance admission was still `2026-10-31T02:40:58.663989Z`; the new repair path
 therefore ran before the daily slot became eligible again.
+
+By the `2026-10-31T17:22:30.557825Z` progress read, the first repair had recorded
+seven admitted model calls and seven completed outcomes in the recent Supabase
+event window. This confirms that AWS work continued after task admission; it does
+not establish a successful correction or production release.
 
 Two admitted tasks cover the public paper assessment
 `444d171c-2fac-4ba9-b33c-2b46304cb0ec`: `6524dea3-7ceb-43c4-be0c-627f27b5112a`
