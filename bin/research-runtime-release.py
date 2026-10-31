@@ -52,7 +52,7 @@ def qualify():
  commands=[['python3','-B','-m','unittest','discover','-s','research_workflow/tests','-v'],['python3','-B','/qualification/checks.py']]
  receipts=[]
  for index,command in enumerate(commands):
-  args=['docker','run','--rm','--name','research-runtime-check-'+str(index),'--network','none','--read-only','--tmpfs','/tmp:rw,nosuid,nodev,size=64m','--cap-drop','ALL','--security-opt','no-new-privileges','--pids-limit','256','--memory','2g','--env','HOME=/tmp','--mount','type=bind,source='+str(ROOT/'.backend')+',target=/workspace,readonly','--mount','type=bind,source='+str(ROOT/'assets/platform/research-runtime-checks.py')+',target=/qualification/checks.py,readonly','--workdir','/workspace',image,*command]
+  args=['docker','run','--rm','--name','research-runtime-check-'+str(index),'--network','none','--read-only','--tmpfs','/tmp:rw,nosuid,nodev,size=1g','--cap-drop','ALL','--security-opt','no-new-privileges','--pids-limit','256','--memory','2g','--env','HOME=/tmp','--mount','type=bind,source='+str(ROOT/'.backend')+',target=/workspace,readonly','--mount','type=bind,source='+str(ROOT/'assets/platform/research-runtime-checks.py')+',target=/qualification/checks.py,readonly','--workdir','/workspace',image,*command]
   result=subprocess.run(args,capture_output=True,timeout=600)
   save('checks-'+str(index)+'.json',dict(command=command,exit_code=result.returncode,stdout=result.stdout[-300000:].decode(errors='replace'),stderr=result.stderr[-300000:].decode(errors='replace')))
   if result.returncode:raise ValueError('Independent credential-free qualification failed; retained output identifies the failure.')
