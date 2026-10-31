@@ -61,9 +61,10 @@ def main():
   assert worker_files(root)==worker_files(old),'Original worker code must be identical.'
   image=json.loads((root/'image.json').read_bytes());assert image['image']==old_report['image'] and image['recipe_sha256']==old_report['recipe_sha256']==digest((root/'Dockerfile').read_bytes())
   native.containers(native.container_prefix(args.original_task),old/'workspace')
-  workspace=old/'workspace';assert (workspace/'project/check.py').read_text()==CHECK
+  workspace=old/'workspace';paths=list((workspace/'project').rglob('*'));assert len(paths)<=100 and not any(p.is_symlink() for p in paths)
+  assert (workspace/'project/check.py').read_text()==CHECK
   before={p.name:digest(p.read_bytes()) for p in (workspace/'project').iterdir() if p.is_file()}
-  result=subprocess.run(['docker','run','--rm','--network','none','--read-only','--cap-drop','ALL','--security-opt','no-new-privileges','--user',str(os.getuid())+':'+str(os.getgid()),'--mount','type=bind,source='+str(workspace)+',target=/workspace,readonly','--workdir','/workspace',image['image'],'python3','-B','project/check.py'],capture_output=True,timeout=30)
+  result=subprocess.run(['docker','run','--rm','--network','none','--read-only','--memory','256m','--pids-limit','64','--cpus','1','--cap-drop','ALL','--security-opt','no-new-privileges','--user',str(os.getuid())+':'+str(os.getgid()),'--mount','type=bind,source='+str(workspace)+',target=/workspace,readonly','--workdir','/workspace',image['image'],'python3','-B','project/check.py'],capture_output=True,timeout=30)
   stdout=store.artifact('retained-source-check-stdout.txt',result.stdout);store.artifact('retained-source-check-stderr.txt',result.stderr)
   assert result.returncode==0 and result.stdout.strip()==b'three controls passed'
   assert (workspace/'project/check.py').read_text()==CHECK and before=={p.name:digest(p.read_bytes()) for p in (workspace/'project').iterdir() if p.is_file()}
