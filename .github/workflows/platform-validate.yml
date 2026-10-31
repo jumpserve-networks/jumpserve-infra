@@ -55,6 +55,7 @@ jobs:
       - run: python3 -B -m unittest discover -s test -p platform_release_test.py -v
       - run: python3 -B -m unittest discover -s test -p category_budget_release_test.py -v
       - run: python3 -B -m unittest discover -s test -p research_runtime_release_test.py -v
+      - run: python3 -B -m unittest discover -s test -p retained_control_test.py -v
       - run: python3 -B test/check_platform_database.py
         env:
           PLATFORM_TEST_DATABASE_URL: postgresql://postgres:platform-test-only@127.0.0.1:5432/postgres
