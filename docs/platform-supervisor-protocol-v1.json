@@ -1,0 +1,19 @@
+{
+  "version": "platform-supervisor-v1",
+  "authorization": "The user requested an autonomous OpenClaw platform supervisor for jumpserve-front-end, jumpserve-back-end and jumpserve-infra, explicitly including automatic merge and production deployment plus private remote progress and controls.",
+  "repositories": ["jumpserve-networks/jumpserve-front-end", "jumpserve-networks/jumpserve-back-end", "jumpserve-networks/jumpserve-infra"],
+  "acceptance": [
+    "Verified Google platform operators alone can read the dashboard, queue work, pause/resume admission, cancel queued work and disable automatic releases; arbitrary signed-in users cannot self-enroll.",
+    "Tasks, original model requests/responses, events, changes, operations, release verification and artifact identities persist separately from research assessment records.",
+    "An externally enforced worker lease, cancellation, deadline, conservative reservation ledger and fixed repository/release scope survive restarts. Missing costs remain unknown.",
+    "OpenClaw edits isolated source copies without deployment credentials. Trusted code freezes changes, runs required checks and publishes only matching tested contents.",
+    "Exact PR head and up-to-date protected-base checks precede automatic merges. Every external mutation has a durable intent; uncertain outcomes are reconciled without blind replay.",
+    "Release workflows address explicit components and exact revisions. Broad push-to-main deployments cannot run in parallel with the supervisor release path.",
+    "Completion requires recorded production verification of the released revision; submitted workflows and successful merges are separate states.",
+    "Private desktop/mobile UI exposes recorded stages, failures, evidence, PRs, release versions and controls, including empty, denied and unavailable states.",
+    "Actual isolated SQL, sandbox coding, GitHub/AWS protocol fixtures, restart/failure injection and browser checks preserve unsuccessful trials. Fixtures do not imply live deployment or independent validation."
+  ],
+  "defaults": {"reservation_cents_per_task":10000,"elapsed_seconds_per_task":21600,"parallel_tasks":1,"paid_fallback":false},
+  "bootstrap": "New service credentials, operator enrollment and initial production installation must be verified explicitly. The supervisor's standing authority does not grant unrelated interactive sessions blanket deployment permission.",
+  "reviewer": {"identity":"Codex implementing AI","independent":false,"human":false,"held_out":false}
+}

@@ -1,4 +1,4 @@
-name: Deploy Infrastructure
+name: Validate Infrastructure
 
 on:
   push:
@@ -39,7 +39,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24.16.0'
           cache: 'npm'
 
       - uses: actions/setup-python@v5
@@ -60,6 +60,7 @@ jobs:
       - name: Verify research runtime bytes and regressions
         run: |
           python3 -B bin/prepare-research-runtime.py --backend .runtime-research
+          python3 -B bin/prepare-openclaw-worker.py --backend .runtime-research
           python3 -B bin/prepare-autonomy-runtime.py
           python3 -B -m unittest discover -s .runtime-research/research_workflow/tests -v
 
@@ -82,47 +83,5 @@ jobs:
         env:
           PROMPT_TEST_DATABASE_URL: postgresql://postgres:test-only@127.0.0.1:5432/jumpserve_prompt_test
 
-      - name: Evaluate research answers with Bedrock
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        timeout-minutes: 30
-        run: |
-          python -m pip install strands-agents httpx boto3
-          python -B test/evaluate_agent.py --live --bootstrap-if-empty
-          python -B test/evaluate_agent.py --live --module congestion-control-real-world --bootstrap-if-empty --output .test-artifacts/real-world-agent-evaluation.json
-          python -B test/evaluate_leo_agent.py --live
-          python -m pip install -r test/http2-evaluation-requirements.txt
-          python -B test/evaluate_http2_agent.py --live
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: us-east-1
-
-      - name: Save answer evaluation report
-        if: always() && github.event_name == 'push'
-        uses: actions/upload-artifact@v4
-        with:
-          name: agent-answer-evaluation
-          path: .test-artifacts/*agent-evaluation*.json
-          include-hidden-files: true
-          if-no-files-found: ignore
-
-      - name: Install agent Python dependencies
-        run: |
-          pip install --target agent/layer/python --platform manylinux2014_x86_64 --only-binary=:all: --python-version 3.12 -r test/http2-evaluation-requirements.txt
-          cd agent/layer/python && rm -rf __pycache__ */__pycache__ boto3 botocore s3transfer jmespath botocore-*.dist-info boto3-*.dist-info s3transfer-*.dist-info jmespath-*.dist-info
-
-      - name: CDK Diff
-        if: github.event_name == 'pull_request'
-        run: npx cdk diff --all
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: us-east-1
-
-      - name: CDK Deploy
-        if: github.ref == 'refs/heads/main'
-        run: npx cdk deploy --all --require-approval never
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: us-east-1
+      # Production releases use platform-release.yml with OIDC and exact
+      # component/revision verification. Pull requests receive no AWS keys.
