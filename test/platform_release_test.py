@@ -1,6 +1,7 @@
 import copy
 import importlib.util
 import json
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -88,6 +89,21 @@ class PlatformReleaseTests(unittest.TestCase):
                 elif error=='changed-resolved':bad_info['Parameters'][0]['ResolvedValue']='different'
                 else:bad_old['Parameters']['Unexpected']=dict(Type='AWS::SSM::Parameter::Value<String>',Default='/unreviewed')
                 with self.subTest(parameter_error=error),self.assertRaises(ValueError):release.render_qualified_budget_controllers(bad_old,candidate,root,bad_info)
+            # Execute the actual deployment adapter against an explicit cloud
+            # fixture, proving the frozen values reach UpdateStack and readback.
+            assembly=root/'cdk.out';assembly.mkdir();(assembly/'Fixture.template.json').write_text(json.dumps(candidate))
+            cf=Mock();cf.get_template.side_effect=[dict(TemplateBody=old),dict(TemplateBody=rendered)]
+            expected_parameters=[dict(ParameterKey=name,ParameterValue=pin['resolved_value']) for name,pin in scope['existing_parameter_pins'].items()]
+            cf.describe_stacks.side_effect=[dict(Stacks=[dict(StackStatus='UPDATE_COMPLETE',**info)]),dict(Stacks=[dict(StackStatus='UPDATE_COMPLETE',Parameters=expected_parameters)])]
+            cf.update_stack.return_value=dict(StackId='synthetic-cloudformation-fixture');session=Mock();session.client.return_value=cf
+            previous_cwd=Path.cwd()
+            try:
+                os.chdir(root)
+                with patch.object(release,'STACKS',('Fixture',)),patch.object(release,'publish_assets',return_value=[]):result=release.infrastructure(session,root,'fixture-operation')
+            finally:os.chdir(previous_cwd)
+            self.assertEqual(cf.update_stack.call_args.kwargs['Parameters'],expected_parameters)
+            self.assertEqual(result['stacks'][0]['status'],'UPDATE_COMPLETE')
+            self.assertEqual(session.client.call_args_list,[unittest.mock.call('cloudformation')])
             manifest=json.loads((root/'research-workflow-runtime.json').read_bytes());manifest['files']['network_package.py']='0'*64;(root/'research-workflow-runtime.json').write_text(json.dumps(manifest))
             with self.assertRaises(ValueError):release.render_qualified_budget_controllers(old,candidate,root,info)
 
