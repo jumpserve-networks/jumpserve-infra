@@ -11,6 +11,8 @@ The initial implementation was verified locally before the explicitly requested
 production rollout. Production evidence and the activation record are retained in
 private Platform Updates and the deployment artifacts; local fixture reports
 remain historical evidence rather than a claim of production activation.
+See the [2026-10-31 production activation record](platform-supervisor-production-20261031.md)
+for executed cloud checks, exact source identities and remaining verification limits.
 
 ## Operation and authority
 
@@ -211,6 +213,7 @@ control is evidence for the captured coding path, not a claim that every final
 orchestration branch executed against production services. SQL fixtures use
 synthetic Google identities/Storage and an isolated research-claim transport.
 Browser fixtures use the real component and built CSS with synthetic auth,
-API and Realtime boundaries. Live Google OAuth, OIDC role assumption, actual
-publisher mutation permissions, deployment/rollback and Supabase Storage remain
-initial activation verification steps.
+API and Realtime boundaries. The production activation record separately reports
+actual OIDC, worker publisher permissions, private Storage, source and frontend
+revision checks. Fresh interactive Google OAuth and production backend/infrastructure
+updates or rollback were not exercised by the initial frontend release control.
