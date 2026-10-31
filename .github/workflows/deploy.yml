@@ -46,6 +46,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install fixed research regression dependencies
+        run: python3 -m pip install pydantic==2.13.5 boto3==1.42.4
+
       - name: Read pinned research runtime revision
         id: research-runtime
         run: echo "revision=$(python3 -c 'import json; print(json.load(open("research-workflow-runtime.json"))["source_revision"])')" >> "$GITHUB_OUTPUT"
