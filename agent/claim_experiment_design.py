@@ -17,9 +17,11 @@ MODEL_FIELDS = tuple(field for field in FIELDS if field != 'falsification')
 POLICY_BYTES = Path(__file__).with_name('claim-decision-policy-v1.json').read_bytes()
 POLICY = json.loads(POLICY_BYTES)
 POLICY_SHA256 = hashlib.sha256(POLICY_BYTES).hexdigest()
-RUNNER_CONTEXT = dict(version='claim-runner-context-v2',origin='server-code-contract',
-    builtin_metrics={'emulated-netem-v1':{'flow_completion_time_ms':'ms'},
-        'real-world-iperf-v1':{'throughput_mbit_s':'Mbit/s','received_bytes':'bytes','duration_seconds':'s','rtt_median_ms':'ms','retransmits':'count'}},
+RUNNER_CONTEXT = dict(version='claim-runner-context-v3',origin='server-code-contract',
+    builtin_metrics={'bounded-tcp-v1':{'round_trip_time_ms':'ms','received_bytes':'bytes'},
+        'emulated-netem-v1':{'flow_completion_time_ms':'ms'},
+        'real-world-iperf-v1':{'throughput_mbit_s':'Mbit/s','received_bytes':'bytes','duration_seconds':'s','rtt_median_ms':'ms','retransmits':'count'},
+        'netem-iperf-v1':{'throughput_mbit_s':'Mbit/s','received_bytes':'bytes','duration_seconds':'s','idle_rtt_ms':'ms','retransmits':'count'}},
     definitions=dict(flow_completion_time_ms='Elapsed time for a flow to complete, recorded in ms. This is not a one-way delay or a round-trip time.',
         delay_placement='A delay value in ms alone does not specify placement. Ask which directions/links receive the increment and whether the value is per-direction or total round-trip. A configured increment of x ms in each direction totals 2x ms for the round trip, not x ms. Do not infer measured RTT from configured increments.',
         unknown_quantity='When a source note does not identify the measured quantity, do not label its value as delay, RTT or flow completion time. Ask which quantity and source statement it describes.',

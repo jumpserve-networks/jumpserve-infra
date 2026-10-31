@@ -20,7 +20,7 @@ import zipfile
 import tarfile
 
 ROOT=Path(__file__).resolve().parents[1];BACK=ROOT.parent/'jumpserve-back-end'
-MIGRATIONS=['202610300004_platform_supervisor.sql','202610300005_platform_worker.sql','202610300006_platform_host_coordination.sql','202610310002_assessment_blocker_repairs.sql','202610310003_category_budgets.sql']
+MIGRATIONS=['202610300004_platform_supervisor.sql','202610300005_platform_worker.sql','202610300006_platform_host_coordination.sql','202610310002_assessment_blocker_repairs.sql','202610310003_category_budgets.sql','202610310004_research_controller_health.sql','202610310005_research_runtime_recovery.sql','202610310006_runtime_maintenance_handoff.sql']
 BUCKET='cdk-hnb659fds-assets-395567831870-us-east-1'
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def save(path,value):path.write_text(json.dumps(value,sort_keys=True,indent=2)+'\n')
@@ -58,7 +58,7 @@ def package():
             if not path.is_file() or path.suffix not in ('.py','.json') or path.is_symlink():continue
             raw=path.read_bytes();name='platform_supervisor/'+path.name;files[name]=sha(raw)
             info=zipfile.ZipInfo(name,date_time=(1980,1,1,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;archive.writestr(info,raw)
-        for name in ('jumpserve-platform.service','install-platform.sh','qualify-platform-host.py','reconcile-platform-host.py','Dockerfile'):
+        for name in ('jumpserve-platform.service','install-platform.sh','qualify-platform-host.py','reconcile-platform-host.py','qualify-retained-control.py','Dockerfile','research-runtime-gate.py','research-runtime-checks.py'):
             raw=(ROOT/'assets/platform'/name).read_bytes();files[name]=sha(raw)
             info=zipfile.ZipInfo(name,date_time=(1980,1,1,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;archive.writestr(info,raw)
     return buffer.getvalue(),files
@@ -99,7 +99,7 @@ def harden(packet):
 def migrate(packet):
     validate(packet);db=admin()
     for name in MIGRATIONS:
-        marker={'202610300004_platform_supervisor.sql':"to_regclass('public.platform_settings')",'202610300005_platform_worker.sql':"to_regprocedure('public.platform_worker(text,uuid,uuid,uuid,jsonb)')",'202610300006_platform_host_coordination.sql':"to_regprocedure('public.research_model_dispatch_before_platform_v1(text,jsonb)')",'202610310002_assessment_blocker_repairs.sql':"to_regclass('public.platform_assessment_repair_policy')",'202610310003_category_budgets.sql':"to_regclass('public.autonomy_budget_categories')"}[name]
+        marker={'202610300004_platform_supervisor.sql':"to_regclass('public.platform_settings')",'202610300005_platform_worker.sql':"to_regprocedure('public.platform_worker(text,uuid,uuid,uuid,jsonb)')",'202610300006_platform_host_coordination.sql':"to_regprocedure('public.research_model_dispatch_before_platform_v1(text,jsonb)')",'202610310002_assessment_blocker_repairs.sql':"to_regclass('public.platform_assessment_repair_policy')",'202610310003_category_budgets.sql':"to_regclass('public.autonomy_budget_categories')",'202610310004_research_controller_health.sql':"to_regprocedure('public.research_autonomy_runtime_observe(text,jsonb)')",'202610310005_research_runtime_recovery.sql':"to_regprocedure('public.research_runtime_resume(uuid)')",'202610310006_runtime_maintenance_handoff.sql':"to_regclass('public.research_runtime_maintenance_holds')"}[name]
         exists=db.query('select '+marker+' is not null present')[0]['present']
         if not exists:db.query((ROOT/'database'/name).read_text(),read_only=False)
     literal=db.literal

@@ -1,0 +1,106 @@
+name: Scoped platform release
+run-name: Platform release ${{ inputs.operation_id }}
+on:
+  workflow_dispatch:
+    inputs:
+      operation_id:
+        type: string
+        required: true
+      repository:
+        type: string
+        required: true
+      revision:
+        type: string
+        required: true
+      component:
+        type: choice
+        options: [frontend, infrastructure]
+        required: true
+      qualified_defaults:
+        description: Use the fixed, source-qualified unlimited-defaults release profile
+        type: boolean
+        default: false
+        required: false
+permissions:
+  contents: read
+  id-token: write
+concurrency:
+  group: jumpserve-platform-production
+  cancel-in-progress: false
+jobs:
+  release:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      PLATFORM_OPERATION_ID: ${{ inputs.operation_id }}
+      PLATFORM_REPOSITORY: ${{ inputs.repository }}
+      PLATFORM_REVISION: ${{ inputs.revision }}
+      PLATFORM_COMPONENT: ${{ inputs.component }}
+      PLATFORM_QUALIFIED_DEFAULTS: ${{ inputs.qualified_defaults && 'true' || 'false' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate the exact release target before obtaining AWS credentials
+        run: python3 -B bin/platform-release-input.py
+      - name: Check out the infrastructure candidate
+        if: inputs.component == 'infrastructure'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.revision }}
+          path: .candidate
+          persist-credentials: false
+      - name: Read immutable runtime pins
+        if: inputs.component == 'infrastructure'
+        id: pins
+        run: python3 -B bin/platform-release-input.py --pins
+      - if: inputs.component == 'infrastructure'
+        uses: actions/checkout@v4
+        with:
+          repository: jumpserve-networks/jumpserve-back-end
+          ref: ${{ steps.pins.outputs.research }}
+          path: .candidate/.runtime-research
+          persist-credentials: false
+      - if: inputs.component == 'infrastructure'
+        uses: actions/checkout@v4
+        with:
+          repository: jumpserve-networks/jumpserve-back-end
+          ref: ${{ steps.pins.outputs.real_world }}
+          path: .candidate/.runtime-backend
+          persist-credentials: false
+      - name: Build the trusted tool image and synthesize without credentials
+        if: inputs.component == 'infrastructure'
+        run: python3 -B bin/platform-synthesize.py
+      - name: Install the fixed release SDK
+        run: python3 -m pip install boto3==1.42.4
+      - name: Obtain renewable AWS role credentials through GitHub OIDC
+        uses: aws-actions/configure-aws-credentials@v6.2.3
+        with:
+          role-to-assume: arn:aws:iam::395567831870:role/JumpServePlatformRelease
+          role-session-name: platform-${{ github.run_id }}
+          aws-region: us-east-1
+          allowed-account-ids: '395567831870'
+          role-duration-seconds: 7200
+          unset-current-credentials: true
+      - name: Deploy the scoped component and verify the actual production revision
+        run: python3 -B bin/platform-release-input.py --execute
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: platform-release-${{ inputs.operation_id }}
+          path: production-verification.json
+          if-no-files-found: error
+      - name: Retain read-only AWS failure events when role credentials exist
+        if: failure() && inputs.component == 'infrastructure'
+        continue-on-error: true
+        run: python3 -B bin/platform-deployment-diagnostics.py --operation-id "$PLATFORM_OPERATION_ID"
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: platform-release-failure-${{ inputs.operation_id }}
+          path: .test-artifacts/platform-release/
+          if-no-files-found: ignore

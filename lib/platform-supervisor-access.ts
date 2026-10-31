@@ -43,6 +43,7 @@ export class PlatformSupervisorAccess extends Construct {
     allowRelease(['iam:PassRole'], [this.executionRole.roleArn], { StringEquals: { 'iam:PassedToService': 'cloudformation.amazonaws.com' } });
     allowRelease(['amplify:ListJobs', 'amplify:GetJob'], [arn('amplify', 'apps/*/branches/main/jobs/*'), arn('amplify', 'apps/*/branches/main')]);
     allowRelease(['s3:GetObject', 's3:PutObject'], [`arn:aws:s3:::${props.assetBucketName}/*`]);
+    allowRelease(['lambda:GetFunction'], Object.values(require('../research-runtime-targets.json') as Record<string, string>).map(name => arn('lambda', `function:${name}`)));
     // The existing EC2 instance profile refreshes credentials through IMDSv2.
     // It reads only service secrets; release powers remain in the OIDC job.
     const worker = iam.Role.fromRoleName(this, 'ExistingWorker', props.workerRoleName);

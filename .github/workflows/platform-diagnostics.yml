@@ -1,0 +1,45 @@
+name: Read original platform deployment failure
+run-name: Platform diagnostics ${{ inputs.operation_id }}
+on:
+  workflow_dispatch:
+    inputs:
+      operation_id:
+        type: string
+        required: true
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  diagnostics:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate the original operation identity before role acquisition
+        env:
+          ORIGINAL_OPERATION: ${{ inputs.operation_id }}
+        run: python3 -c 'import os,uuid; value=os.environ["ORIGINAL_OPERATION"]; assert str(uuid.UUID(value))==value'
+      - run: python3 -m pip install boto3==1.42.4
+      - uses: aws-actions/configure-aws-credentials@v6.2.3
+        with:
+          role-to-assume: arn:aws:iam::395567831870:role/JumpServePlatformRelease
+          role-session-name: diagnostics-${{ github.run_id }}
+          aws-region: us-east-1
+          allowed-account-ids: '395567831870'
+          role-duration-seconds: 900
+          unset-current-credentials: true
+      - name: Read the original stack outcome and bounded failure events
+        env:
+          ORIGINAL_OPERATION: ${{ inputs.operation_id }}
+        run: python3 -B bin/platform-deployment-diagnostics.py --operation-id "$ORIGINAL_OPERATION"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: platform-diagnostics-${{ inputs.operation_id }}
+          path: .test-artifacts/platform-release/diagnostics.json
+          if-no-files-found: error
