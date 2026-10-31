@@ -60,7 +60,7 @@ jobs:
         env:
           PLATFORM_TEST_DATABASE_URL: postgresql://postgres:platform-test-only@127.0.0.1:5432/postgres
       - name: Verify category budgets and immutable funding records
-        run: python3 -B test/check_research_runtime_database.py
+        run: python3 -B test/check_runtime_handoff_database.py
         env:
           PYTHONPATH: .runtime-research/research_workflow:test
           UNLIMITED_DEFAULTS_TEST_DATABASE_URL: postgresql://postgres:platform-test-only@127.0.0.1:5432/postgres
