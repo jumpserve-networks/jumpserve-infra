@@ -23,8 +23,8 @@ MIGRATIONS=['202610300004_platform_supervisor.sql','202610300005_platform_worker
 BUCKET='cdk-hnb659fds-assets-395567831870-us-east-1'
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def save(path,value):path.write_text(json.dumps(value,sort_keys=True,indent=2)+'\n')
-def aws(*args):
-    raw=subprocess.check_output(['aws',*args,'--profile','jumpserve','--region','us-east-1','--output','json'],timeout=60)
+def aws(*args,timeout=60):
+    raw=subprocess.check_output(['aws',*args,'--profile','jumpserve','--region','us-east-1','--output','json'],timeout=timeout)
     return json.loads(raw) if raw.strip() else None
 def target():
     if aws('sts','get-caller-identity')['Account']!='395567831870':raise ValueError('AWS target differs.')
@@ -134,7 +134,7 @@ def install(packet,packet_path):
         temporary.unlink()
     with archive.open('rb') as original:image_archive_sha=hashlib.file_digest(original,'sha256').hexdigest()
     for name,path in [(packet['bundle_sha256']+'.zip',directory/'runtime.zip'),('images/'+image_archive_sha+'.tar.gz',archive)]:
-        aws('s3api','put-object','--bucket',BUCKET,'--key','platform-supervisor/'+name,'--body',str(path),'--server-side-encryption','AES256')
+        aws('s3api','put-object','--bucket',BUCKET,'--key','platform-supervisor/'+name,'--body',str(path),'--server-side-encryption','AES256',timeout=600)
     comment='platform-install-'+packet['bundle_sha256'][:32];intent=directory/'install-intent.json'
     if intent.exists():
         commands=aws('ssm','list-commands','--max-results','50')['Commands'];matches=[c for c in commands if c.get('Comment')==comment and packet['worker_id'] in c.get('InstanceIds',[])]

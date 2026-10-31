@@ -8,6 +8,8 @@ test('platform releases use main-only OIDC and fixed service roles without stati
   const template = Template.fromStack(stack);
   template.hasResourceProperties('AWS::IAM::Role', { RoleName: 'JumpServePlatformRelease', AssumeRolePolicyDocument: { Statement: [Match.objectLike({ Action: 'sts:AssumeRoleWithWebIdentity', Condition: { StringEquals: { 'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com', 'token.actions.githubusercontent.com:sub': 'repo:jumpserve-networks/jumpserve-infra:ref:refs/heads/main' } } })], Version: '2012-10-17' } });
   const raw = JSON.stringify(template.toJSON());
+  expect(raw).toContain('arn:aws:apigateway:us-east-1::/apis/d3o7xdethb/*');
+  expect(raw).toContain('arn:aws:apigateway:us-east-1::/restapis/d3o7xdethb/*');
   for (const forbidden of ['AdministratorAccess', 'AWS_ACCESS_KEY_ID', 'ec2:RunInstances', 'iam:CreateRole', 'secretsmanager:PutSecretValue']) expect(raw).not.toContain(forbidden);
   template.hasResourceProperties('AWS::IAM::Policy', { PolicyDocument: { Statement: Match.arrayWith([Match.objectLike({ Action: 'iam:PassRole', Condition: { StringEquals: { 'iam:PassedToService': 'cloudformation.amazonaws.com' } } })]) } });
 });
