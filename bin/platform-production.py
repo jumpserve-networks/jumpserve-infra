@@ -42,7 +42,7 @@ def render_preserving_telemetry(previous,candidate):
             preserved.append(dict(logical_id='CDKMetadata',resource_sha256=sha(encoded(old))))
     return rendered,preserved
 
-def render_qualified_budget_controllers(previous,candidate,directory):
+def render_qualified_budget_controllers(previous,candidate,directory,stack_info):
     """One qualified defaults release; leave experiment code and authority intact."""
     profile=directory/'assessment-budget-defaults-release.json'
     manifest=json.loads((directory/'research-workflow-runtime.json').read_bytes())
@@ -70,7 +70,20 @@ def render_qualified_budget_controllers(previous,candidate,directory):
         rendered['Resources'][name]['Properties']['Code']=copy.deepcopy(code)
         rendered['Resources'][name].setdefault('Metadata',{})['aws:asset:path']=metadata['aws:asset:path']
         preserved_configuration.append(dict(logical_id=name,retained_candidate_differences=sorted(field for field in set(original['Properties'])|set(proposed['Properties']) if field!='Code' and original['Properties'].get(field)!=proposed['Properties'].get(field))))
-    return rendered,[dict(qualified_files_sha256=binding,controller_functions=sorted(controllers),controller_changes='Code and matching CDK asset-path metadata only',preserved_executor_version=before,preserved_package_functions=sorted(packages),preserved_controller_configuration=preserved_configuration,all_other_template_content_preserved=True)]
+    # SSM parameters re-resolve on every update, even with UsePreviousValue.
+    # Freeze these two nonsecret values from both the reviewed profile and the
+    # actual settled stack, avoiding new permissions or a changed machine image.
+    pins=[];parameters={item['ParameterKey']:item for item in stack_info['Parameters']}
+    declared=scope['existing_parameter_pins'];definitions=previous.get('Parameters',{})
+    if {name for name,value in definitions.items() if value['Type'].startswith('AWS::SSM::')}!=set(declared):raise ValueError('Unexpected SSM deployment parameters.')
+    for name,pin in declared.items():
+        definition=definitions[name];actual=parameters[name]
+        if set(definition)-{'Type','Default','Description'} or definition['Type']!=pin['parameter_type'] or definition.get('Default')!=pin['source_path'] or actual.get('ParameterValue')!=pin['source_path'] or actual.get('ResolvedValue')!=pin['resolved_value']:raise ValueError('Reviewed parameter value differs from the settled stack: '+name)
+        value=pin['resolved_value']
+        if not isinstance(value,str) or not (re.fullmatch(r'ami-[a-f0-9]{17}',value) if name!='BootstrapVersion' else re.fullmatch(r'[1-9][0-9]*',value)):raise ValueError('Invalid nonsecret parameter pin.')
+        rendered['Parameters'][name]={**definition,'Type':'String','Default':value}
+        pins.append(dict(parameter_key=name,source_path=pin['source_path'],resolved_value=value,previous_type=definition['Type'],type='String',live_value_preserved=True))
+    return rendered,[dict(qualified_files_sha256=binding,controller_functions=sorted(controllers),controller_changes='Code and matching CDK asset-path metadata only',preserved_executor_version=before,preserved_package_functions=sorted(packages),preserved_controller_configuration=preserved_configuration,parameter_pins=pins,all_other_template_content_preserved=True)]
 
 def guard_template(previous, candidate):
     """No deletion/replacement of machines, storage, identities or IAM policies."""
@@ -169,16 +182,20 @@ def infrastructure(session, candidate, operation):
         if not path.is_file():raise ValueError('Both fixed stack templates are required.')
         original=cf.get_template(StackName=stack,TemplateStage='Original')['TemplateBody']
         if isinstance(original,str):original=json.loads(original)
+        info=cf.describe_stacks(StackName=stack)['Stacks'][0]
+        if info['StackStatus'] not in ('CREATE_COMPLETE','UPDATE_COMPLETE','UPDATE_ROLLBACK_COMPLETE'):raise RuntimeError('Stack is not settled: '+stack)
         synthesized=json.loads(path.read_bytes());template,preserved=render_preserving_telemetry(original,synthesized)
-        template,qualified_scope=render_qualified_budget_controllers(original,template,candidate)
+        template,qualified_scope=render_qualified_budget_controllers(original,template,candidate,info)
         # Retain a value-free comparison even when a guard rejects the candidate.
         directory=Path('.test-artifacts/platform-release');directory.mkdir(parents=True,exist_ok=True)
         old=original.get('Resources',{});new=template.get('Resources',{})
         comparison=[dict(logical_id=name,previous_type=old.get(name,{}).get('Type'),candidate_type=new.get(name,{}).get('Type'),changed_properties=sorted(key for key in set(old.get(name,{}).get('Properties',{}))|set(new.get(name,{}).get('Properties',{})) if old.get(name,{}).get('Properties',{}).get(key)!=new.get(name,{}).get('Properties',{}).get(key))) for name in sorted(set(old)|set(new)) if old.get(name)!=new.get(name)]
         (directory/(stack+'-comparison.json')).write_bytes(encoded(dict(synthesized_template_sha256=sha(encoded(synthesized)),rendered_template_sha256=sha(encoded(template)),preserved_telemetry=preserved,qualified_scope=qualified_scope,resources=comparison)))
-        changes=guard_template(original,template)
-        info=cf.describe_stacks(StackName=stack)['Stacks'][0]
-        if info['StackStatus'] not in ('CREATE_COMPLETE','UPDATE_COMPLETE','UPDATE_ROLLBACK_COMPLETE'):raise RuntimeError('Stack is not settled: '+stack)
+        # The dedicated renderer proves the two exact live SSM-value freezes.
+        # Every resource and other template section still passes the same guard.
+        baseline=copy.deepcopy(original)
+        if qualified_scope and qualified_scope[0]['parameter_pins']:baseline['Parameters']=copy.deepcopy(template['Parameters'])
+        changes=guard_template(baseline,template)
         if changes:plans.append((stack,template,changes,info,preserved,qualified_scope,sha(encoded(synthesized))))
     if not plans:raise ValueError('No supported rendered production change was found.')
     assets=publish_assets(session,candidate)
@@ -194,12 +211,15 @@ def infrastructure(session, candidate, operation):
         token='platform-'+operation+'-'+stack
         # Native CloudFormation request tokens survive a lost update response.
         # Preserve all parameter values, tags and notification destinations.
-        parameters=[dict(ParameterKey=p['ParameterKey'],ParameterValue=p['ParameterValue']) for p in info.get('Parameters',[])]
+        pinned={item['parameter_key']:item['resolved_value'] for scope in qualified_scope for item in scope['parameter_pins']}
+        parameters=[dict(ParameterKey=p['ParameterKey'],ParameterValue=pinned.get(p['ParameterKey'],p['ParameterValue'])) for p in info.get('Parameters',[])]
         result=cf.update_stack(StackName=stack,**template_argument,Parameters=parameters,Capabilities=['CAPABILITY_IAM','CAPABILITY_NAMED_IAM'],RoleARN='arn:aws:iam::395567831870:role/JumpServePlatformCloudFormation',ClientRequestToken=token,Tags=info.get('Tags',[]),NotificationARNs=info.get('NotificationARNs',[]))
         def settled():
             current=cf.describe_stacks(StackName=stack)['Stacks'][0];status=current['StackStatus']
             if status.endswith('_IN_PROGRESS'):return None
             if status!='UPDATE_COMPLETE':raise RuntimeError('CloudFormation rolled back or failed: '+status)
+            actual_parameters={p['ParameterKey']:p['ParameterValue'] for p in current.get('Parameters',[])}
+            if any(actual_parameters.get(p['ParameterKey'])!=p['ParameterValue'] for p in parameters):raise RuntimeError('Deployed parameter value differs from the retained value.')
             deployed=cf.get_template(StackName=stack,TemplateStage='Original')['TemplateBody']
             if isinstance(deployed,str):deployed=json.loads(deployed)
             if encoded(deployed)!=body:raise RuntimeError('Deployed template differs from the rendered candidate.')
