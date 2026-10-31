@@ -58,7 +58,7 @@ def main():
         report['result']=result
         assert result['ready'], 'Bounded coding control did not complete.'
         assert (workspace/'project/check.py').read_text()==test,'Existing acceptance check changed.'
-        checked=subprocess.run(['docker','run','--rm','--network','none','--cap-drop','ALL','--mount','type=bind,source='+str(workspace)+',target=/workspace','--workdir','/workspace',image['image'],'python3','project/check.py'],capture_output=True,timeout=30)
+        checked=subprocess.run(['docker','run','--rm','--network','none','--cap-drop','ALL','--security-opt','no-new-privileges','--user',str(os.getuid())+':'+str(os.getgid()),'--mount','type=bind,source='+str(workspace)+',target=/workspace,readonly','--workdir','/workspace',image['image'],'python3','-B','project/check.py'],capture_output=True,timeout=30)
         store.artifact('cloud-control-check-stdout.txt',checked.stdout);store.artifact('cloud-control-check-stderr.txt',checked.stderr)
         assert checked.returncode==0 and checked.stdout.strip()==b'three controls passed'
         runs=store.rows('runs');assert 0<len(runs)<=6 and all(r['status']=='complete' for r in runs)
