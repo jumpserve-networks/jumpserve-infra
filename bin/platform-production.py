@@ -84,11 +84,14 @@ def render_qualified_budget_controllers(previous,candidate,directory,stack_info)
         rendered['Parameters'][name]={**definition,'Type':'String','Default':value}
         pins.append(dict(parameter_key=name,source_path=pin['source_path'],resolved_value=value,previous_type=definition['Type'],type='String',live_value_preserved=True))
     outputs={item['OutputKey']:item['OutputValue'] for item in stack_info.get('Outputs',[])};output_pins=[]
-    if set(scope['existing_output_pins'])!={'BenchmarkImagePipelineRoleArn'}:raise ValueError('Unreviewed output pin.')
+    if set(scope['existing_output_pins'])!={'BenchmarkImagePipelineRoleArn','BenchmarkSecurityGroupId'}:raise ValueError('Unreviewed output pin.')
     for name,pin in scope['existing_output_pins'].items():
-        role=old[pin['role_logical_id']]
-        expected='arn:aws:iam::395567831870:role/JumpServeBenchmarkImageBuilder'
-        if pin['value']!=expected or role['Type']!='AWS::IAM::Role' or role['Properties'].get('RoleName')!='JumpServeBenchmarkImageBuilder' or role['Properties'].get('Path','/')!='/' or outputs.get(name)!=expected:raise ValueError('Existing named-role output does not match its recorded identity.')
+        if name=='BenchmarkImagePipelineRoleArn':
+            role=old[pin['role_logical_id']];expected='arn:aws:iam::395567831870:role/JumpServeBenchmarkImageBuilder'
+            if pin['value']!=expected or role['Type']!='AWS::IAM::Role' or role['Properties'].get('RoleName')!='JumpServeBenchmarkImageBuilder' or role['Properties'].get('Path','/')!='/' or outputs.get(name)!=expected:raise ValueError('Existing named-role output does not match its recorded identity.')
+        else:
+            resource=old[pin['resource_logical_id']];expected=pin['value']
+            if resource['Type']!='AWS::EC2::SecurityGroup' or not resource['Properties'].get('VpcId') or not re.fullmatch(r'sg-(?:[a-f0-9]{8}|[a-f0-9]{17})',expected) or outputs.get(name)!=expected or previous['Outputs'][name]['Value']!={'Fn::GetAtt':[pin['resource_logical_id'],'GroupId']}:raise ValueError('Existing VPC security-group output does not match its recorded identity.')
         rendered['Outputs'][name]['Value']=expected
         output_pins.append(dict(output_key=name,value=expected,live_value_preserved=True))
     return rendered,[dict(qualified_files_sha256=binding,controller_functions=sorted(controllers),controller_changes='Code and matching CDK asset-path metadata only',preserved_executor_version=before,preserved_package_functions=sorted(packages),preserved_controller_configuration=preserved_configuration,parameter_pins=pins,output_pins=output_pins,all_other_template_content_preserved=True)]

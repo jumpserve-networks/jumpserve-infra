@@ -75,6 +75,9 @@ class PlatformReleaseTests(unittest.TestCase):
         old['Resources'][output_pin['role_logical_id']]=dict(Type='AWS::IAM::Role',Properties=dict(RoleName=output_pin['role_name']))
         old['Outputs']=dict(BenchmarkImagePipelineRoleArn=dict(Value={'Fn::GetAtt':[output_pin['role_logical_id'],'Arn']}))
         info=dict(Parameters=[],Outputs=[dict(OutputKey='BenchmarkImagePipelineRoleArn',OutputValue=output_pin['value'])])
+        group=scope['existing_output_pins']['BenchmarkSecurityGroupId'];old['Resources'][group['resource_logical_id']]=dict(Type='AWS::EC2::SecurityGroup',Properties=dict(VpcId='vpc-software-fixture'))
+        old['Outputs']['BenchmarkSecurityGroupId']=dict(Value={'Fn::GetAtt':[group['resource_logical_id'],'GroupId']})
+        info['Outputs'].append(dict(OutputKey='BenchmarkSecurityGroupId',OutputValue=group['value']))
         for name,pin in scope['existing_parameter_pins'].items():
             old['Parameters'][name]=dict(Type=pin['parameter_type'],Default=pin['source_path'])
             info['Parameters'].append(dict(ParameterKey=name,ParameterValue=pin['source_path'],ResolvedValue=pin['resolved_value']))
@@ -120,10 +123,12 @@ class PlatformReleaseTests(unittest.TestCase):
                 elif error=='changed-resolved':bad_info['Parameters'][0]['ResolvedValue']='different'
                 else:bad_old['Parameters']['Unexpected']=dict(Type='AWS::SSM::Parameter::Value<String>',Default='/unreviewed')
                 with self.subTest(parameter_error=error),self.assertRaises(ValueError):release.render_qualified_budget_controllers(bad_old,candidate,root,bad_info)
-            for error in ('changed-output','changed-role-path'):
+            for error in ('changed-output','changed-role-path','changed-group','missing-vpc'):
                 bad_info=copy.deepcopy(info);bad_old=copy.deepcopy(old)
                 if error=='changed-output':bad_info['Outputs'][0]['OutputValue']='arn:aws:iam::395567831870:role/Unrelated'
-                else:bad_old['Resources'][output_pin['role_logical_id']]['Properties']['Path']='/unreviewed/'
+                elif error=='changed-role-path':bad_old['Resources'][output_pin['role_logical_id']]['Properties']['Path']='/unreviewed/'
+                elif error=='changed-group':bad_info['Outputs'][1]['OutputValue']='sg-00000000000000000'
+                else:bad_old['Resources'][group['resource_logical_id']]['Properties'].pop('VpcId')
                 with self.subTest(output_error=error),self.assertRaises(ValueError):release.render_qualified_budget_controllers(bad_old,candidate,root,bad_info)
             # Execute the actual deployment adapter against an explicit cloud
             # fixture, proving the frozen values reach UpdateStack and readback.
