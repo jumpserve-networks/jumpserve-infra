@@ -56,3 +56,8 @@ jobs:
       - run: python3 -B test/check_platform_database.py
         env:
           PLATFORM_TEST_DATABASE_URL: postgresql://postgres:platform-test-only@127.0.0.1:5432/postgres
+      - name: Verify unlimited assessment defaults and immutable funding records
+        run: python3 -B test/check_unlimited_assessment_defaults_database.py
+        env:
+          PYTHONPATH: .runtime-research/research_workflow:test
+          UNLIMITED_DEFAULTS_TEST_DATABASE_URL: postgresql://postgres:platform-test-only@127.0.0.1:5432/postgres

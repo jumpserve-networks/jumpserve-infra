@@ -83,8 +83,13 @@ def publish_assets(session,candidate):
                 # objects; a newly generated ZIP need not match CDK ZIP metadata.
                 try:head=s3.head_object(Bucket=BUCKET,Key=key)
                 except Exception as error:
-                    if getattr(error,'response',{}).get('ResponseMetadata',{}).get('HTTPStatusCode')!=404:raise
-                    s3.put_object(Bucket=BUCKET,Key=key,Body=raw,ServerSideEncryption='AES256',Metadata={'platform-sha256':sha(raw)})
+                    # Without ListBucket, S3 reports a missing key as 403. A
+                    # conditional create preserves any existing asset without
+                    # broadening the release role or guessing that it is absent.
+                    if getattr(error,'response',{}).get('ResponseMetadata',{}).get('HTTPStatusCode') not in (403,404):raise
+                    try:s3.put_object(Bucket=BUCKET,Key=key,Body=raw,ServerSideEncryption='AES256',Metadata={'platform-sha256':sha(raw)},IfNoneMatch='*')
+                    except Exception as create_error:
+                        if getattr(create_error,'response',{}).get('ResponseMetadata',{}).get('HTTPStatusCode')!=412:raise
                     head=s3.head_object(Bucket=BUCKET,Key=key)
                 proof.append(dict(key=key,byte_count=head['ContentLength'],uploaded_sha256=(head.get('Metadata') or {}).get('platform-sha256')))
     return proof

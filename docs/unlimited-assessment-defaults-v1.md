@@ -1,0 +1,61 @@
+# Unlimited aggregate budgets for active and future assessments
+
+Operator instruction, October 31, 2026: **All active and future assessments**.
+This extends the earlier assessment-specific authorization. It does not alter
+platform-supervisor task budgets, scientific criteria, original seven-day
+deadlines, per-experiment resource bounds, cancellation, provider quotas, unknown
+outcomes, or the prohibition on a paid model fallback. Reservations remain
+recorded admission amounts and are not measured charges.
+
+## Active assessment authorization
+
+The deployed, audited `research_autonomy_set_budget` RPC applied explicit null
+ceilings to the four still-capped active assessments. One active assessment was
+already unlimited. All five now have no aggregate spending cap. Original hashes,
+deadlines, counters and commitments were preserved. Only safely budget-stopped
+tasks were requeued; separately blocked and uncertain work was retained.
+
+For `444d171c-2fac-4ba9-b33c-2b46304cb0ec`, both budget-stopped tasks were
+requeued. Its separate UUID-validation and expired-lease/reconciliation blockers
+were not relabeled or blindly replayed. Private authorization intents and verified
+RPC receipts are retained in `.test-artifacts/assessment-budget-policy-v1/` and
+the corresponding immutable Supabase amendment events.
+
+## Prepared future default
+
+The future-default release is prepared locally; it is not active merely because
+the existing assessments have been amended. Migration
+`202610310001_unlimited_assessment_defaults.sql` installs an immutable, private
+standing-authorization record, makes new workflow ceilings explicitly null, and
+retains an inherited-policy event for each new assessment. It serializes against
+the real admission lock and uses the existing audited amendment RPC to catch
+eligible assessments created during rollout. Completed, cancelled and expired
+assessments are not restarted.
+
+The latest intake implementation's initial-event funding metadata is updated
+without replacing its authorization, lease or confirmation wrappers. Existing
+initial prompts and historical limits remain unchanged. New API-generated
+initial prompts and the versioned controller resource policy declare unlimited
+defaults. A later explicit finite amendment remains enforceable.
+
+The frontend accepts explicit null defaults and historical finite records without
+treating missing values as unlimited. Confirmation terms use the assessment's
+recorded cap and shared deadline. Intake request identities and one-submission
+behavior remain intact. Legacy $100 defaults stay readable during rollout.
+
+## Validation and release boundary
+
+Local validation includes 398 backend tests (four environment-dependent skips),
+295 frontend tests, lint and the production frontend build. The isolated
+PostgreSQL check executes the existing audited-amendment and unknown-call tests,
+then exercises the new standing policy, active-assessment preservation, new
+intake, actual public API projection and browser/runtime policy-write denial.
+It uses no provider call or AWS resource. Docker stays stopped.
+
+Do not push, merge, migrate the default, or deploy these application/runtime
+changes until the user explicitly requests deployment of the current changes,
+as required by the repository deployment workflow. Before production activation,
+qualify and pin the exact changed runtime files, retain the declared source and
+checks, deploy the compatible frontend/backend with safe admission coordination,
+apply the reviewed migration, and verify new intake plus existing live budgets.
+Do not copy unrelated uncommitted research recovery work into that release.
