@@ -58,7 +58,7 @@ def package():
             if not path.is_file() or path.suffix not in ('.py','.json') or path.is_symlink():continue
             raw=path.read_bytes();name='platform_supervisor/'+path.name;files[name]=sha(raw)
             info=zipfile.ZipInfo(name,date_time=(1980,1,1,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;archive.writestr(info,raw)
-        for name in ('jumpserve-platform.service','install-platform.sh','qualify-platform-host.py','reconcile-platform-host.py','Dockerfile','research-runtime-gate.py','research-runtime-checks.py'):
+        for name in ('jumpserve-platform.service','install-platform.sh','qualify-platform-host.py','reconcile-platform-host.py','qualify-retained-control.py','Dockerfile','research-runtime-gate.py','research-runtime-checks.py'):
             raw=(ROOT/'assets/platform'/name).read_bytes();files[name]=sha(raw)
             info=zipfile.ZipInfo(name,date_time=(1980,1,1,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;archive.writestr(info,raw)
     return buffer.getvalue(),files

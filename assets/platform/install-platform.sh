@@ -45,7 +45,7 @@ assert hashlib.sha256(raw).hexdigest()==sha
 with zipfile.ZipFile(path) as archive:
  for item in archive.infolist():
   name=item.filename
-  assert name in ('jumpserve-platform.service','install-platform.sh','qualify-platform-host.py','reconcile-platform-host.py','Dockerfile','research-runtime-gate.py','research-runtime-checks.py') or name.startswith('platform_supervisor/') and name.count('/')==1 and pathlib.Path(name).suffix in ('.py','.json')
+  assert name in ('jumpserve-platform.service','install-platform.sh','qualify-platform-host.py','reconcile-platform-host.py','qualify-retained-control.py','Dockerfile','research-runtime-gate.py','research-runtime-checks.py') or name.startswith('platform_supervisor/') and name.count('/')==1 and pathlib.Path(name).suffix in ('.py','.json')
   assert not name.startswith('/') and '..' not in pathlib.Path(name).parts and not stat.S_ISLNK(item.external_attr>>16)
   target=pathlib.Path(destination)/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(archive.read(item));target.chmod(0o644)
 PY

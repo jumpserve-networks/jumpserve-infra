@@ -28,6 +28,15 @@ unchanged-test failures from the older Python 3.10 image's UTC timestamp parser;
 those failures are evidence of environment mismatch, never permission to change
 the tests or scientific code.
 
+An isolated six-call coding trial can produce a correct implementation and stop
+before the model writes its readiness file. Preserve that trial as failed. The
+separate `qualify-retained-control.py` profile verifies every original request
+and terminal stream, a definite pre-provider local admission stop with no failed
+tools, identical worker code and image, and the unchanged acceptance test in a
+read-only container. It makes zero new model calls and records a new source
+verification result; it never claims the original model declared completion or
+changes its failed report. Unknown calls cannot enter this profile.
+
 The tested source and derived approval go through an exact-head, protected backend
 PR. After merge, the broker generates an infrastructure PR containing only the
 new runtime manifest and a public certificate of hashes and software checks.
