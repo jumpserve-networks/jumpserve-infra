@@ -3,7 +3,7 @@
 Interactive release only. This renderer grants no deployment authority and does
 not alter the supervisor's narrower operational-release adapter.
 """
-import copy,hashlib,json,re
+import base64,copy,hashlib,json,re
 
 BUCKET='cdk-hnb659fds-assets-395567831870-us-east-1'
 CONTROLLERS={'ResearchWorkflowApiE04EBDAC','ResearchWorkflowAutonomyWorker1BCFF82C','ResearchWorkflowQueueWorker702E601D'}
@@ -34,7 +34,7 @@ def render(previous,key,policies):
     if env.get('NETWORK_'+prefix+'_FUNCTION') not in [{'Ref':v} for v in versions]:raise ValueError('Controller no longer uses the reviewed immutable executor.')
     env['NETWORK_'+prefix+'_FUNCTION']={'Ref':new_version}
     env['NETWORK_'+prefix+'_POLICY_SHA256']=digest(canonical(policies[runner]))
- result['Resources'][new_version]={'Type':'AWS::Lambda::Version','DeletionPolicy':'Retain','UpdateReplacePolicy':'Retain','Properties':{'FunctionName':{'Ref':EXECUTOR},'Description':'Qualified integrated research runtime '+key[:-4]}}
+ result['Resources'][new_version]={'Type':'AWS::Lambda::Version','DeletionPolicy':'Retain','UpdateReplacePolicy':'Retain','Properties':{'FunctionName':{'Ref':EXECUTOR},'CodeSha256':base64.b64encode(bytes.fromhex(key[:-4])).decode(),'Description':'Qualified integrated research runtime '+key[:-4]}}
  # Existing invocations retain their original executor version. No role,
  # permission, endpoint, machine, storage or stack parameter changes enter here.
  assert {n for n in old if old[n]!=result['Resources'][n]}==CONTROLLERS|PACKAGES

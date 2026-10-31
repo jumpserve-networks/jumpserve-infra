@@ -1,6 +1,6 @@
 # 100-GB runner allowance and remaining assessment blockers
 
-Status: implemented and locally verified, not committed, merged or deployed.
+Historical local implementation record. See [the integrated release](integrated-research-release-v1.md) for current qualification and production verification.
 Production remains on its existing pinned runtime and policies. The current
 runtime manifest and the historical policy bytes have not been changed.
 

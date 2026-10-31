@@ -28,6 +28,7 @@ class IntegratedRelease(unittest.TestCase):
   for name in ('ExistingAuthority','RetainedMachine'):self.assertEqual(after['Resources'][name],before['Resources'][name])
   self.assertEqual(set(after['Resources'])-set(before['Resources']),{version})
   self.assertEqual(after['Resources'][version]['DeletionPolicy'],'Retain')
+  self.assertEqual(after['Resources'][version]['Properties']['CodeSha256'],r.base64.b64encode(bytes.fromhex('b'*64)).decode())
  def test_invalid_approval_or_changed_envelope_denied(self):
   before,policies=fixture()
   for key,bad in [('approved_for_lab_execution',False),('max_network_bytes',100000000001),('maximum_cents',0),('instance_type','t3.large'),('max_wall_seconds',1801)]:
