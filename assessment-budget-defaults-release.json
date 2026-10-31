@@ -79,5 +79,17 @@
     "ResearchWorkflowPackageReaperED8C6D40"
   ],
   "previous_executor_version": "ResearchWorkflowPackageExecutorCurrentVersionBAB54FC3bf23d389c4f51fec7bd11802294b9311",
-  "generated_executor_version": "ResearchWorkflowPackageExecutorCurrentVersionBAB54FC329bec831d9a7e3052fe89514a27468f8"
+  "generated_executor_version": "ResearchWorkflowPackageExecutorCurrentVersionBAB54FC329bec831d9a7e3052fe89514a27468f8",
+  "existing_parameter_pins": {
+    "BootstrapVersion": {
+      "parameter_type": "AWS::SSM::Parameter::Value<String>",
+      "source_path": "/cdk-bootstrap/hnb659fds/version",
+      "resolved_value": "31"
+    },
+    "SsmParameterValueawsservicecanonicalubuntuserver2204stablecurrentamd64hvmebsgp2amiidC96584B6F00A464EAD1953AFF4B05118Parameter": {
+      "parameter_type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+      "source_path": "/aws/service/canonical/ubuntu/server/22.04/stable/current/amd64/hvm/ebs-gp2/ami-id",
+      "resolved_value": "ami-033ea4ff4a9c726dc"
+    }
+  }
 }

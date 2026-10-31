@@ -1,6 +1,7 @@
 import copy
 import importlib.util
 import json
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -43,17 +44,26 @@ class PlatformReleaseTests(unittest.TestCase):
         old=dict(Parameters={},Resources={name:dict(Type='AWS::Lambda::Function',Properties=dict(Role='retained-role',Code=dict(S3Bucket=release.BUCKET,S3Key='a'*64+'.zip'),Environment=dict(Variables=dict(EXECUTOR={'Ref':before}))),Metadata={'aws:asset:path':'asset.'+'a'*64,'aws:asset:property':'Code','aws:asset:is-bundled':False}) for name in controllers+packages})
         old['Resources'][before]=dict(Type='AWS::Lambda::Version',Properties=dict(FunctionName={'Ref':packages[0]}))
         old['Resources']['Policy']=dict(Type='AWS::IAM::Policy',Properties=dict(PolicyDocument=dict(Statement=[dict(Action='lambda:InvokeFunction',Resource={'Ref':before})])))
+        info=dict(Parameters=[])
+        for name,pin in scope['existing_parameter_pins'].items():
+            old['Parameters'][name]=dict(Type=pin['parameter_type'],Default=pin['source_path'])
+            info['Parameters'].append(dict(ParameterKey=name,ParameterValue=pin['source_path'],ResolvedValue=pin['resolved_value']))
         candidate=json.loads(json.dumps(old).replace(before,after))
         for name in controllers+packages:
             candidate['Resources'][name]['Properties']['Code']['S3Key']='b'*64+'.zip'
             candidate['Resources'][name]['Metadata']['aws:asset:path']='asset.'+'b'*64
         with tempfile.TemporaryDirectory() as temp:
             root=Path(temp);(root/'assessment-budget-defaults-release.json').write_text(json.dumps(scope));(root/'research-workflow-runtime.json').write_bytes((ROOT/'research-workflow-runtime.json').read_bytes())
-            rendered,proof=release.render_qualified_budget_controllers(old,candidate,root)
-            self.assertEqual([item['logical_id'] for item in release.guard_template(old,rendered)],sorted(controllers))
+            rendered,proof=release.render_qualified_budget_controllers(old,candidate,root,info)
+            baseline=copy.deepcopy(old);baseline['Parameters']=copy.deepcopy(rendered['Parameters'])
+            self.assertEqual([item['logical_id'] for item in release.guard_template(baseline,rendered)],sorted(controllers))
+            with self.assertRaises(ValueError):release.guard_template(old,rendered)
+            for pin in proof[0]['parameter_pins']:
+                self.assertEqual(rendered['Parameters'][pin['parameter_key']],dict(Type='String',Default=pin['resolved_value']))
             self.assertTrue(proof[0]['all_other_template_content_preserved'])
             for name in packages+[before,'Policy']:self.assertEqual(rendered['Resources'][name],old['Resources'][name])
             retained=copy.deepcopy(rendered)
+            retained['Parameters']=copy.deepcopy(old['Parameters'])
             for name in controllers:
                 retained['Resources'][name]['Properties']['Code']=copy.deepcopy(old['Resources'][name]['Properties']['Code'])
                 retained['Resources'][name]['Metadata']['aws:asset:path']=old['Resources'][name]['Metadata']['aws:asset:path']
@@ -63,7 +73,7 @@ class PlatformReleaseTests(unittest.TestCase):
                 if attack=='controller-role':bad['Resources'][controllers[0]]['Properties']['Role']='different'
                 elif attack=='handler':bad['Resources'][controllers[0]]['Properties']['Handler']='unexpected.handler'
                 else:bad['Resources'][controllers[0]]['Metadata']['aws:asset:path']='asset.'+'c'*64
-                with self.subTest(attack=attack),self.assertRaises(ValueError):release.render_qualified_budget_controllers(old,bad,root)
+                with self.subTest(attack=attack),self.assertRaises(ValueError):release.render_qualified_budget_controllers(old,bad,root,info)
             for ignored in ('environment','executor-role','policy','addition','deletion','other-metadata'):
                 bad=copy.deepcopy(candidate)
                 if ignored=='environment':bad['Resources'][controllers[0]]['Properties']['Environment']['Variables']['EXTRA']='out-of-scope'
@@ -72,9 +82,30 @@ class PlatformReleaseTests(unittest.TestCase):
                 elif ignored=='addition':bad['Resources']['Unexpected']=dict(Type='AWS::IAM::Role')
                 elif ignored=='deletion':del bad['Resources']['Policy']
                 else:bad['Resources'][packages[0]]['Metadata']['aws:asset:is-bundled']=True
-                with self.subTest(preserved=ignored):self.assertEqual(release.render_qualified_budget_controllers(old,bad,root)[0],rendered)
+                with self.subTest(preserved=ignored):self.assertEqual(release.render_qualified_budget_controllers(old,bad,root,info)[0],rendered)
+            for error in ('missing-resolved','changed-resolved','unexpected-parameter'):
+                bad_info=copy.deepcopy(info);bad_old=copy.deepcopy(old)
+                if error=='missing-resolved':bad_info['Parameters'][0].pop('ResolvedValue')
+                elif error=='changed-resolved':bad_info['Parameters'][0]['ResolvedValue']='different'
+                else:bad_old['Parameters']['Unexpected']=dict(Type='AWS::SSM::Parameter::Value<String>',Default='/unreviewed')
+                with self.subTest(parameter_error=error),self.assertRaises(ValueError):release.render_qualified_budget_controllers(bad_old,candidate,root,bad_info)
+            # Execute the actual deployment adapter against an explicit cloud
+            # fixture, proving the frozen values reach UpdateStack and readback.
+            assembly=root/'cdk.out';assembly.mkdir();(assembly/'Fixture.template.json').write_text(json.dumps(candidate))
+            cf=Mock();cf.get_template.side_effect=[dict(TemplateBody=old),dict(TemplateBody=rendered)]
+            expected_parameters=[dict(ParameterKey=name,ParameterValue=pin['resolved_value']) for name,pin in scope['existing_parameter_pins'].items()]
+            cf.describe_stacks.side_effect=[dict(Stacks=[dict(StackStatus='UPDATE_COMPLETE',**info)]),dict(Stacks=[dict(StackStatus='UPDATE_COMPLETE',Parameters=expected_parameters)])]
+            cf.update_stack.return_value=dict(StackId='synthetic-cloudformation-fixture');session=Mock();session.client.return_value=cf
+            previous_cwd=Path.cwd()
+            try:
+                os.chdir(root)
+                with patch.object(release,'STACKS',('Fixture',)),patch.object(release,'publish_assets',return_value=[]):result=release.infrastructure(session,root,'fixture-operation')
+            finally:os.chdir(previous_cwd)
+            self.assertEqual(cf.update_stack.call_args.kwargs['Parameters'],expected_parameters)
+            self.assertEqual(result['stacks'][0]['status'],'UPDATE_COMPLETE')
+            self.assertEqual(session.client.call_args_list,[unittest.mock.call('cloudformation')])
             manifest=json.loads((root/'research-workflow-runtime.json').read_bytes());manifest['files']['network_package.py']='0'*64;(root/'research-workflow-runtime.json').write_text(json.dumps(manifest))
-            with self.assertRaises(ValueError):release.render_qualified_budget_controllers(old,candidate,root)
+            with self.assertRaises(ValueError):release.render_qualified_budget_controllers(old,candidate,root,info)
 
     def test_asset_create_without_list_permission_is_conditional_and_preserves_existing_objects(self):
         class HttpError(Exception):

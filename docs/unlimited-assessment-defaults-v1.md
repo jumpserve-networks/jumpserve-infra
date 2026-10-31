@@ -61,6 +61,16 @@ release guard is unchanged. The profile
 applies only to that fixed qualified revision; it does not authorize future
 executor changes.
 
+The dedicated update also freezes the existing nonsecret Ubuntu AMI and CDK
+bootstrap parameter values. Both must match the reviewed profile and the actual
+settled stack's `ResolvedValue`, then become literal `String` parameters with
+those same values. The ordinary guard still rejects parameter-definition changes;
+this dedicated step verifies precisely these two value-preserving conversions.
+The final stack readback must preserve the captured parameter values. No SSM
+permission is added and no AMI is refreshed. Keeping `UsePreviousValue` would
+retain the SSM key and fetch its latest value, as described in the
+[AWS parameter documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-supplied-parameter-types.html).
+
 Local validation includes 398 backend tests (four environment-dependent skips),
 295 frontend tests, lint and the production frontend build. The isolated
 PostgreSQL check executes the existing audited-amendment and unknown-call tests,
