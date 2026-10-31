@@ -1,0 +1,109 @@
+{
+  "version": "network-traffic-100gb-local-v1",
+  "recorded_at": "2026-10-30T22:34:31.246146+00:00",
+  "status": "implemented-and-locally-verified;not-deployed",
+  "maximum_decimal_bytes": 100000000000,
+  "backend_tests": 403,
+  "infrastructure_tests": 100,
+  "infrastructure_skips": 0,
+  "typescript_build": "passed",
+  "source_files": {
+    "backend/research_workflow/network_spec.py": {
+      "sha256": "39c33c80b315c2e15b482848b8d91165ae0ef802aa9ee410d7cebccc181e15c8",
+      "bytes": 20180
+    },
+    "backend/research_workflow/netem_iperf.py": {
+      "sha256": "0909fb06f9cfdf7d0534a9f33d628943c57b802801d3e09d674bf1e2b021cf12",
+      "bytes": 14298
+    },
+    "backend/research_workflow/autonomy_inputs.py": {
+      "sha256": "e80dfd6f496c092a28f281f64dc71661013639e2a886bb10e1c8e9df41709a05",
+      "bytes": 25700
+    },
+    "backend/research_workflow/autonomy_costs.py": {
+      "sha256": "4da25bd42cfc7bc66a36de9ac00ea7b75219e6a4dd4b2a370b9749df92e355c3",
+      "bytes": 5346
+    },
+    "backend/research_workflow/tests/test_network_traffic_allowance.py": {
+      "sha256": "78a4e236084703139e787978585031c75e7fa18b2359971cd5f6487de0726c7f",
+      "bytes": 6555
+    },
+    "backend/research_workflow/policies/built-package-costs-v3.json": {
+      "sha256": "1cb21ac6da2b20863d8da80e42cf3c2e65e81c797b39d26eba64f00ccf037694",
+      "bytes": 1870
+    },
+    "backend/research_workflow/policies/netem-iperf-costs-v3.json": {
+      "sha256": "c41fcb8f5c31b245b278b6cd76a2a590d98b555b3fc803f2e39bf031fe8f3f4b",
+      "bytes": 1305
+    },
+    "backend/research_workflow/policies/network-traffic-100gb-validation-v1.json": {
+      "sha256": "5d924db97cc46b6c22fb40573a83e76ff4ae8d2d6298f77435b1638e03dd5b8e",
+      "bytes": 2389
+    },
+    "infra/lib/research-workflow.ts": {
+      "sha256": "2c328baa4aa9976ecc9ab364c71e64428f6659a11ac42d6ea8d3c212b3e4574d",
+      "bytes": 23024
+    },
+    "infra/test/research-workflow.test.ts": {
+      "sha256": "5be90e162060edc36b977523af1440f8b3e40b4beb4453987f34798bef33bd20",
+      "bytes": 14112
+    },
+    "infra/docs/network-traffic-100gb-v1.md": {
+      "sha256": "7177cd0190bf6d9660172326058926a36d8def51f1f4155f2b5cd88fc38fc9de",
+      "bytes": 5968
+    }
+  },
+  "historical_policy_hashes": {
+    "built-package-costs-v1.json": "cd6f4b2891199e2f29001168972964f3e769220034db57b2266bf89022b904e4",
+    "built-package-costs-v2.json": "ef48cd2fca9d87ddcd1730567d18e058c09111c0b4d880f052b30210a7f63e59",
+    "netem-iperf-costs-v1.json": "7f65f2f726ee685714c8dba1ae8fa8614e142ce80e5aad7cc0f669095311fe61",
+    "netem-iperf-costs-v2.json": "3bd4d81ff13b4596a675cd4ed8dce788bb80b9c2e38bcca356c40f4efb7cc1ea"
+  },
+  "validation_logs": {
+    "/Users/Shared/allstar/jumpserve-back-end/.test-artifacts/network-traffic-100gb-backend.log": {
+      "sha256": "2a8fcc2b153886b4d18d1c7fd78916b4843e5fb9948717d17c9814f2505cb539",
+      "bytes": 72499
+    },
+    "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/network-traffic-100gb-infra.log": {
+      "sha256": "b0d5eb2757e04dbb08c506345a2bb638fad80237ad1df31da6716e4670ec03e5",
+      "bytes": 1042
+    },
+    "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/network-traffic-100gb-infra-complete.log": {
+      "sha256": "79dad90b1d3f4532d7e7f0a221bc9a175f46ca866968db8b2c4d24de889b1f84",
+      "bytes": 1015
+    },
+    "/Users/Shared/allstar/jumpserve-infra/.test-artifacts/network-traffic-100gb-infra-build.log": {
+      "sha256": "20a797e92f8024034fdbd347cd8cd342383b44ea365d9434010da577a5f2d62b",
+      "bytes": 38
+    }
+  },
+  "public_observation": {
+    "path": ".test-artifacts/network-traffic-100gb/public-queue-observation.json",
+    "sha256": "503fa34027c5bfede2273a31cf927f514cd7659f95a9c78926efda57083d83d7",
+    "bytes": 7942,
+    "exact_retrieval_timestamp": null,
+    "scope": "Public bounded queue read only; original bytes retained. Counts and states may change; no database write."
+  },
+  "runtime_manifest_changed": false,
+  "production_mutations": 0,
+  "new_experiment_jobs": 0,
+  "real_model_calls": 0,
+  "new_policy_approved": false,
+  "measured_charges_usd": null,
+  "unallocated_local_compute_cost_usd": null,
+  "reviewer": {
+    "identity": "Codex implementing AI",
+    "type": "AI",
+    "independent": false,
+    "human": false,
+    "held_out": false
+  },
+  "conditional_gaps": [
+    "Fresh retained pricing review",
+    "Exact-source Linux operational qualification",
+    "Production deployment and effective-limit verification",
+    "Stalled native-builder handoff investigation and repair",
+    "Original expired-operation reconciliation",
+    "Scientific queue/window causal instrumentation and experiments"
+  ]
+}

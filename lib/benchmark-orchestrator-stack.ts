@@ -273,7 +273,9 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
     });
 
     new cdk.CfnOutput(this, 'BenchmarkSecurityGroupId', {
-      value: benchmarkSg.securityGroupId,
+      // VpcId is explicit, so Ref is the recorded group ID and avoids an
+      // unrelated DescribeSecurityGroups lookup during application releases.
+      value: (benchmarkSg.node.defaultChild as ec2.CfnSecurityGroup).ref,
       description: 'Security group for benchmark instances',
     });
 

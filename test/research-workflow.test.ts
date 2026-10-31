@@ -1,13 +1,26 @@
 import * as cdk from 'aws-cdk-lib';
 import * as api from 'aws-cdk-lib/aws-apigatewayv2';
 import { Template, Match } from 'aws-cdk-lib/assertions';
-import { ResearchWorkflow, researchWorkflowIsEnabled, requireNetemPolicy } from '../lib/research-workflow';
+import { ResearchWorkflow, researchWorkflowIsEnabled, requireNetemPolicy, requireBuiltPackagePolicy, researchNetworkPolicyFiles } from '../lib/research-workflow';
 test('netem counter envelope changes require v2 and preserve host and historical policy scope', () => {
   const base = {account:'395567831870',region:'us-east-1',instance_type:'t3.medium',root_gib:8,cpu_credits:'standard',max_instances:1,max_wall_seconds:1800};
   expect(()=>requireNetemPolicy({...base,version:'netem-iperf-costs-v1'},base.account,base.region)).not.toThrow();
   const v2={...base,version:'netem-iperf-costs-v2',max_network_bytes:20000000000,max_output_bytes:3000000,approved_for_lab_execution:false};
   expect(()=>requireNetemPolicy(v2,base.account,base.region)).not.toThrow();
   for (const changed of [{max_network_bytes:20000000001},{max_network_bytes:10000000000},{instance_type:'t3.large'},{max_wall_seconds:3600},{version:'netem-iperf-costs-v1'},{approved_for_lab_execution:'true'}]) expect(()=>requireNetemPolicy({...v2,...changed},base.account,base.region)).toThrow();
+});
+test('100-GB policies require explicit v3 identities without changing historical pins', () => {
+  const base = {account:'395567831870',region:'us-east-1',instance_type:'t3.medium',root_gib:8,cpu_credits:'standard',max_instances:1,max_wall_seconds:1800,max_output_bytes:3000000,approved_for_lab_execution:false};
+  const netem = {...base,version:'netem-iperf-costs-v3',max_network_bytes:100000000000};
+  expect(()=>requireNetemPolicy(netem,base.account,base.region)).not.toThrow();
+  for (const changed of [{max_network_bytes:100000000001},{max_network_bytes:20000000000},{version:'netem-iperf-costs-v2'},{approved_for_lab_execution:'true'}]) expect(()=>requireNetemPolicy({...netem,...changed},base.account,base.region)).toThrow();
+  const built = {...base,version:'built-package-costs-v3',root_volume_gib:8,max_network_bytes:100000000000,maximum_cents:2000};
+  expect(()=>requireBuiltPackagePolicy(built)).not.toThrow();
+  for (const changed of [{max_network_bytes:100000000001},{maximum_cents:1000},{max_wall_seconds:3600},{version:'built-package-costs-v2'},{max_instances:2}]) expect(()=>requireBuiltPackagePolicy({...built,...changed})).toThrow();
+  expect(()=>requireBuiltPackagePolicy({...built,version:'built-package-costs-v2',max_network_bytes:10000000000,maximum_cents:1000})).not.toThrow();
+  expect(researchNetworkPolicyFiles({})).toEqual({netem:'policies/netem-iperf-costs-v1.json',built:'policies/built-package-costs-v2.json'});
+  expect(researchNetworkPolicyFiles({'policies/netem-iperf-costs-v2.json':'historical-sha'}).netem).toBe('policies/netem-iperf-costs-v2.json');
+  expect(researchNetworkPolicyFiles({'policies/netem-iperf-costs-v3.json':'new-sha','policies/built-package-costs-v3.json':'new-sha'})).toEqual({netem:'policies/netem-iperf-costs-v3.json',built:'policies/built-package-costs-v3.json'});
 });
 test('explicit shared-pool production mode omits reservations while retaining bounded workers', () => {
   const app = new cdk.App({ context: { supabaseUrl: 'https://regphejnlvfpyokpniny.supabase.co', researchQueueEnabled: true, researchReservedConcurrencyEnabled: false } });

@@ -1,0 +1,203 @@
+{
+  "version": "native-repair-handoff-local-v1",
+  "status": "implemented-and-locally-verified;not-deployed",
+  "recorded_at": "2026-10-30T22:54:26.800837+00:00",
+  "backend_tests": 414,
+  "new_regression_tests": 11,
+  "native_integration": {
+    "status": "passed",
+    "directory": "20261030T225136626348Z",
+    "image": "sha256:ef9eec8c7c44fa2da5312721295aeea6ee92837a8e7f909c5f70785ecb9207be",
+    "platform": "local Linux/arm64 Docker; production Linux/amd64 not newly qualified",
+    "source_files": {
+      "autonomous_repair.py": {
+        "bytes": 23566,
+        "sha256": "dc574497e98fb059eb882232d2b1deb52df047247ee88030bb4b492c3a670d9a"
+      },
+      "autonomy.py": {
+        "bytes": 82816,
+        "sha256": "fb42b5c7832518358298f5e86786a632e4ae905a47f7c79e6eb23f1c97790d01"
+      },
+      "autonomy_model.py": {
+        "bytes": 29829,
+        "sha256": "4ead117a8ab6951dd2e46c1b2e2bde314a9031e37174f13e00389bac2220d467"
+      },
+      "experiment_builder.py": {
+        "bytes": 71131,
+        "sha256": "8ef71c5766740612d775636bb658759fbcb3fba43f5112da8cd8776688ddfb62"
+      },
+      "generated_package.py": {
+        "bytes": 5632,
+        "sha256": "4f02af4ece4023bd0534dc7e616754bb5c1498dccdfbb6312bb240d82e9385aa"
+      },
+      "netem_iperf.py": {
+        "bytes": 14298,
+        "sha256": "0909fb06f9cfdf7d0534a9f33d628943c57b802801d3e09d674bf1e2b021cf12"
+      },
+      "network_spec.py": {
+        "bytes": 20180,
+        "sha256": "39c33c80b315c2e15b482848b8d91165ae0ef802aa9ee410d7cebccc181e15c8"
+      },
+      "openclaw-builder-patch.json": {
+        "bytes": 951,
+        "sha256": "8b8f157008ad0353bc1cd3b3856778ab3d85b8bb9c22decbe4fde33a13cc39db"
+      },
+      "policies/native-repair-handoff-validation-v1.json": {
+        "bytes": 2286,
+        "sha256": "c1be57898b2de73f545bac48bf977ef633671b5a45749e515423dd64d00be826"
+      },
+      "repair_validation.py": {
+        "bytes": 10888,
+        "sha256": "4f37449fa9f84d1e62e738a3fa3a1d613ac6aef0f8606ef2fdb6d3850faa260b"
+      },
+      "source_project.py": {
+        "bytes": 2676,
+        "sha256": "a7bc65f7f95d4ff706b9b477b476772f6743a491bf9400e328c0e8514b5c83f0"
+      },
+      "tests/check_native_repair_handoff_linux.py": {
+        "bytes": 12669,
+        "sha256": "9ee5de299e46b8f29235172dff01a814360a919f6632087547b39f6f1930fdc3"
+      },
+      "tests/test_native_repair_handoff.py": {
+        "bytes": 10968,
+        "sha256": "2c6b531671a1c8a52fbda03695fb2b0b0b60ef5f7b3384e53a35389a3f1c948a"
+      }
+    },
+    "controller_admissions": 1,
+    "synthetic_native_responses": 7,
+    "validation": {
+      "exit_code": 0,
+      "image": "sha256:ef9eec8c7c44fa2da5312721295aeea6ee92837a8e7f909c5f70785ecb9207be",
+      "incident_sha256": "0460953e147761911521e55ff5a507551bd1b7e2ea106f440ba71a10fed17869",
+      "measured_charges_usd": null,
+      "output_prefix_only": false,
+      "passed": true,
+      "project_sha256": "e31c1ac9361afdc74d568d4324c3850d9e31cd411de23d54624a078152a8a146",
+      "report_encoding": "final-json-line-v2",
+      "runner_sha256": "9338e25aee69d6fdac9c2cbf44f6f613743eb4e40ea7d15b0f33487e9bf45355",
+      "scope": "Software development only; AI-authored tests are not independent, human or scientific validation.",
+      "source_change": {
+        "baseline_checkpoint": {
+          "artifact_id": "42c5bb33-4261-5314-b930-f07e9fa2338f",
+          "sha256": "9535aea95840b221b091d1d76f0d04d0d5ecb7a1efc93e6b920bc1623a85923c",
+          "version": "experiment-builder-v1"
+        },
+        "changed": true,
+        "current_experiment_sha256": "b8d4042c9431e9b9d97015add592662b7edf442fd1349c2d54c08289c4067210",
+        "original_experiment_sha256": "15943f5cb218972a16eb02f3377fa909d22d5a5e0631087bf15c3087534e5482",
+        "original_source_status": "recorded",
+        "scope": "Original-byte source change only; not correctness or independent scientific validation.",
+        "version": "repair-source-change-v1"
+      },
+      "stderr": {
+        "artifact_id": "fbbfa428-f314-56f7-96be-7a015b6237ce",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "version": "experiment-builder-v1"
+      },
+      "stdout": {
+        "artifact_id": "57a62b7f-7b98-5ea9-834e-7efed9bb7cfa",
+        "sha256": "54370ee2063ff3d36089ecff9b15b765c0da1f5a74eae99cb06de77ad642875d",
+        "version": "experiment-builder-v1"
+      },
+      "stop_reason": null,
+      "test_plan_binding_version": "repair-test-plan-binding-v2",
+      "test_plans": [
+        {
+          "original": {
+            "artifact_id": "2a838f58-3e78-5953-ad29-b5234244d4ef",
+            "sha256": "90bd07274a2e0ba77b7661c902869eda7ddb6bfb9c310cf1d55246295662566e",
+            "version": "experiment-builder-v1"
+          },
+          "path": "project/repair-test-plan.json"
+        }
+      ],
+      "test_result": {
+        "errors": 0,
+        "experiment_functions_executed": [
+          "convert"
+        ],
+        "failures": 0,
+        "passed": true,
+        "scope": "Actual model-authored software tests; not independent scientific validation.",
+        "test_output": "test_corrected_behavior (repair_test.RepairChecks) ... ok\ntest_original_failure (repair_test.RepairChecks) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 0.030s\n\nOK\n",
+        "tests_run": 2,
+        "version": "repair-development-validation-v1"
+      },
+      "version": "repair-development-validation-v1"
+    }
+  },
+  "trials": [
+    {
+      "directory": "20261030T224513476555Z",
+      "status": "failed",
+      "actual_provider_calls": 0,
+      "synthetic_native_responses": 0,
+      "error_type": "CalledProcessError",
+      "report_sha256": "659b8a1c4c7e1c14b8b561fee2c83ca37c04b29dc1ea4266be1558a824db5340"
+    },
+    {
+      "directory": "20261030T224638078695Z",
+      "status": "failed",
+      "actual_provider_calls": 0,
+      "synthetic_native_responses": 7,
+      "error_type": "TypeError",
+      "report_sha256": "272e11132e7c59dc00e62a0ffccff88181ad3b46c5f27f5d373dbd4e3891e427"
+    },
+    {
+      "directory": "20261030T224908464301Z",
+      "status": "failed",
+      "actual_provider_calls": 0,
+      "synthetic_native_responses": 7,
+      "error_type": "StopIteration",
+      "report_sha256": "bcbdd69a65f1879ba9da31c7f852d8a0351f778723323345e8c6aaa9eff5d53e"
+    },
+    {
+      "directory": "20261030T225044366102Z",
+      "status": "passed",
+      "actual_provider_calls": 0,
+      "synthetic_native_responses": 7,
+      "error_type": null,
+      "report_sha256": "1293f800d550a83cbee4cabd425b3bb4c871690debe009d65454fa40261742f6"
+    },
+    {
+      "directory": "20261030T225136626348Z",
+      "status": "passed",
+      "actual_provider_calls": 0,
+      "synthetic_native_responses": 7,
+      "error_type": null,
+      "report_sha256": "6bc71c37eb76f9e3e914767b99b49e541a823efe77e15e769d479a441796b0e8"
+    }
+  ],
+  "total_synthetic_native_responses": 28,
+  "actual_provider_calls": 0,
+  "production_writes": 0,
+  "cloud_instances": 0,
+  "scientific_completion": false,
+  "published_prompts_changed": false,
+  "runtime_manifest_changed": false,
+  "measured_charges_usd": null,
+  "unallocated_local_compute_cost_usd": null,
+  "reviewer": {
+    "identity": "Codex implementing AI",
+    "type": "AI",
+    "independent": false,
+    "human": false,
+    "held_out": false
+  },
+  "evidence": {
+    "path": ".test-artifacts/native-repair-handoff/23905a59d279cf27749f0f95d8bfa04cb5d1fa9ff9e008df88e24b620b388b8d.zip",
+    "sha256": "23905a59d279cf27749f0f95d8bfa04cb5d1fa9ff9e008df88e24b620b388b8d",
+    "retrieved_sha256": "23905a59d279cf27749f0f95d8bfa04cb5d1fa9ff9e008df88e24b620b388b8d",
+    "bytes": 1513859,
+    "members": 197,
+    "public": false,
+    "storage": "Local private release evidence; not yet uploaded to production Supabase."
+  },
+  "coverage_limits": [
+    "Original public history is a bounded projection; native request/response fragments are partial redacted views, not complete originals.",
+    "Native integration used real local OpenClaw and Docker with synthetic inference and persistence/registration fixtures.",
+    "Production Linux/amd64 and real subscription behavior were not newly evaluated.",
+    "Actual database persistence and browser flows were not newly exercised.",
+    "The affected production claim was not resumed; scientific results remain unverified."
+  ]
+}

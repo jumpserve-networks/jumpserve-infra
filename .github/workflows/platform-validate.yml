@@ -1,0 +1,64 @@
+name: Platform checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  validate:
+    name: Platform validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: platform-test-only
+        ports: ['5432:5432']
+        options: --health-cmd pg_isready --health-interval 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.16.0'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Read pinned runtime revisions
+        id: runtime
+        run: |
+          python3 -c 'import json,os; p=os.environ["GITHUB_OUTPUT"]; values={"research":json.load(open("research-workflow-runtime.json"))["source_revision"],"real_world":json.load(open("real-world-runtime.json"))["revision"]}; open(p,"a").write("".join(k+"="+v+"\n" for k,v in values.items()))'
+      - uses: actions/checkout@v4
+        with:
+          repository: jumpserve-networks/jumpserve-back-end
+          ref: ${{ steps.runtime.outputs.research }}
+          path: .runtime-research
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: jumpserve-networks/jumpserve-back-end
+          ref: ${{ steps.runtime.outputs.real_world }}
+          path: .runtime-backend
+          persist-credentials: false
+      - name: Prepare and hash-check immutable runtime assets
+        run: |
+          python3 -B bin/prepare-research-runtime.py --backend .runtime-research
+          python3 -B bin/prepare-openclaw-worker.py --backend .runtime-research
+          python3 -B bin/prepare-autonomy-runtime.py
+      - run: npm ci --ignore-scripts
+      - run: npm test -- --runInBand
+      - run: npm run build
+      - run: python3 -B -m unittest discover -s test -p platform_release_test.py -v
+      - run: python3 -B -m unittest discover -s test -p category_budget_release_test.py -v
+      - run: python3 -B test/check_platform_database.py
+        env:
+          PLATFORM_TEST_DATABASE_URL: postgresql://postgres:platform-test-only@127.0.0.1:5432/postgres
+      - name: Verify category budgets and immutable funding records
+        run: python3 -B test/check_category_budgets_database.py
+        env:
+          PYTHONPATH: .runtime-research/research_workflow:test
+          UNLIMITED_DEFAULTS_TEST_DATABASE_URL: postgresql://postgres:platform-test-only@127.0.0.1:5432/postgres

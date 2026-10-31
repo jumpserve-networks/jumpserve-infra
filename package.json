@@ -5,6 +5,9 @@
     "jumpserve-infra": "bin/jumpserve-infra.js"
   },
   "scripts": {
+    "test:platform:database": "python3 -B test/check_platform_database.py",
+    "cdk:platform": "cdk --app \"npx ts-node --prefer-ts-exts bin/platform.ts\"",
+    "test:research:netem-persistence": "python3 -B test/check_netem_measurement_persistence.py",
     "test:research:optional-budget": "python3 -B test/check_optional_budget_database.py",
     "test:research:completion": "python3 -B test/check_autonomy_completion_database.py",
     "test:research:repair": "python3 -B test/check_autonomous_repair_database.py",
@@ -33,7 +36,8 @@
     "test:research:turn-policy": "python3 -B test/check_autonomy_turn_policy_database.py",
     "test:research:paper-uploads": "python3 -B test/check_paper_upload_database.py",
     "test:research:paper-selection": "python3 -B test/check_paper_selection_database.py",
-    "test:research:autonomy:browser-fixture": "python3 -B test/serve_autonomy_fixture.py"
+    "test:research:autonomy:browser-fixture": "python3 -B test/serve_autonomy_fixture.py",
+    "test:research:unlimited-defaults": "python3 -B test/check_unlimited_assessment_defaults_database.py"
   },
   "devDependencies": {
     "@aws-sdk/client-cloudwatch-logs": "^3.1132.0",

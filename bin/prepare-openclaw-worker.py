@@ -1,8 +1,12 @@
 """Stage the declared private OpenClaw worker dependency inputs; no deployment."""
 from pathlib import Path
 import hashlib,json,shutil
+import argparse
 ROOT=Path(__file__).resolve().parents[1]
-source=ROOT.parent/'jumpserve-back-end/openclaw_worker'
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--backend',type=Path,default=ROOT.parent/'jumpserve-back-end')
+args=parser.parse_args()
+source=args.backend/'openclaw_worker'
 destination=ROOT/'.runtime-openclaw'
 lock=json.loads((ROOT/'openclaw-worker-runtime.json').read_bytes())
 for name,sha in lock['files'].items():

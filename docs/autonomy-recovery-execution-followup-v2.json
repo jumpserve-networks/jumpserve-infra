@@ -1,0 +1,14 @@
+{
+  "version": "autonomy-recovery-execution-followup-v2",
+  "prior_directory": "20261030T230853018072Z",
+  "prior_report_sha256": "4c7f3ece3c389b6fb32da81969431a80e4364c32b11a1de3d07e935242fd50c4",
+  "prior_checkpoint_sha256": "07b35a2106dd3bec31f6bf6703951f6de5c5b4d32417e2b643a494f9ba928703",
+  "prior_checkpoint_filename": "checkpoint.zip",
+  "prior_actual_provider_calls": 6,
+  "earlier_aggregate_actual_provider_calls": 18,
+  "ancestors": [{"directory":"20261030T230544880097Z","report_sha256":"b68642b713762f6f2c68f5381f7ea8418b20c473ef8fd7c6833b75ac4488638c"}],
+  "purpose": "Qualify a changed repair work packet after the retained continuation used six completed calls on repeated reads/checks without a candidate. The packet now supplies the exact test-plan object and metadata validation error directly and no longer unconditionally asks for another source edit.",
+  "prospective_limits": {"maximum_new_actual_provider_calls":6,"maximum_aggregate_actual_provider_calls":24,"maximum_new_elapsed_seconds":180,"maximum_new_reservation_cents":600},
+  "acceptance": ["All earlier requests, terminal streams, source/tests and checkpoint identities remain unchanged.","No manual project or metadata corrections; native tools perform any missing work.","Exact incident-bound server execution and frozen candidate must pass, or this new trial also remains failed/incomplete.","Preserve both earlier failures and their usage; no production mutation or scientific assessment reset."],
+  "reviewer": {"identity":"Codex implementing AI","independent":false,"human":false,"held_out":false}
+}

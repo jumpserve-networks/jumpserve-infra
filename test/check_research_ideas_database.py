@@ -58,6 +58,7 @@ def rpc(name,payload):
       'research_autonomy_resume_turns':dict(p_policy='text'),
       'research_model_dispatch':dict(p_operation='text',p_payload='jsonb'),
       'research_model_reconcile':dict(p_dispatch='uuid',p_artifact='uuid',p_sha256='text',p_proof='jsonb'),
+      'research_builder_call_reconcile':dict(p_call='uuid',p_artifact='uuid',p_sha256='text',p_proof='jsonb'),
       'research_model_reconciliation_candidates':dict(p_after='uuid'),
       'research_builder_call':dict(p_operation='text',p_payload='jsonb'),
       'research_builder_package':dict(p_dispatch='uuid',p_token='uuid',p_project='uuid',p_wrapper='uuid',p_manifest='uuid',p_candidate='uuid'),
@@ -116,7 +117,7 @@ def transport(path,method='GET',body=None,public=False,raw=False):
         return rpc(parsed.path.removeprefix('/rest/v1/rpc/'),body)
     if method!='GET' or body is not None:raise ValueError('Unexpected transport mutation')
     table=parsed.path.removeprefix('/rest/v1/')
-    allowed=['research_'+k for k in (*workflow.FIELDS,'studies','study_owners','paper_uploads','paper_reviews','queue_jobs','queue_events','prepared_plans','idea_packets','idea_runs','idea_readiness','idea_campaign_links','claim_designs','autonomy_workflows','autonomy_tasks','autonomy_turns','autonomy_events','model_dispatches','model_reconciliations','builder_calls','builder_packages','shared_campaigns','shared_campaign_members','autonomy_repairs','autonomy_repair_events')]
+    allowed=['research_'+k for k in (*workflow.FIELDS,'studies','study_owners','paper_uploads','paper_reviews','queue_jobs','queue_events','prepared_plans','idea_packets','idea_runs','idea_readiness','idea_campaign_links','claim_designs','autonomy_workflows','autonomy_tasks','autonomy_turns','autonomy_events','model_dispatches','model_reconciliations','builder_call_reconciliations','builder_calls','builder_packages','shared_campaigns','shared_campaign_members','autonomy_repairs','autonomy_repair_events')]
     if table not in allowed:raise ValueError('Unsupported relation')
     params=dict(urllib.parse.parse_qsl(parsed.query));columns=params.pop('select').split(',')
     aliases={'evidence_progress:context->evidence_progress':"context->'evidence_progress' as evidence_progress",'repair_progress:context->repair_progress':"context->'repair_progress' as repair_progress"}
@@ -127,14 +128,14 @@ def transport(path,method='GET',body=None,public=False,raw=False):
     if order:
         for entry in order.split(','):
             column,direction=entry.split('.')
-            if column not in ('created_at','id','version','number','study_id','dispatch_id') or direction not in ('asc','desc'):raise ValueError('Unsafe order')
+            if column not in ('created_at','id','version','number','study_id','dispatch_id','call_id') or direction not in ('asc','desc'):raise ValueError('Unsafe order')
             ordering.append(column+' '+direction)
     predicates=[]
     for column,value in params.items():
         if column=='and':
             if not value.startswith('(id.gt.') or not value.endswith(')'):raise ValueError('Unsafe keyset cursor')
             predicates.append('id>'+sql_text(str(uuid.UUID(value[7:-1]))));continue
-        if column not in ('id','study_id','owner_id','source_id','created_at','packet_id','task','run_id','campaign_id','protocol_id','task_id','number','claim_id','event','status','state','dispatch_id'):raise ValueError('Unsafe filter')
+        if column not in ('id','study_id','owner_id','source_id','created_at','packet_id','task','run_id','campaign_id','protocol_id','task_id','number','claim_id','event','status','state','dispatch_id','call_id'):raise ValueError('Unsafe filter')
         operator,argument=value.split('.',1)
         if operator=='eq':predicates.append(column+'='+sql_text(argument))
         elif operator=='is' and argument=='null':predicates.append(column+' is null')
@@ -193,6 +194,7 @@ grant all on public.agent_sessions to service_role;""")
     name='202610260001_executable_assessment_methods.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     for name in ('202610270001_experiment_builder.sql','202610270002_experiment_builder_prompt.sql','202610270003_builder_package_catalog.sql','202610270004_experiment_action_authority.sql','202610270005_builder_scheduling_window.sql','202610270006_experiment_builder_prompt_v2.sql','202610270007_experiment_builder_v2_publication.sql'):
         raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
+    name='202610300003_research_append_normalization.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     report['bootstrap_limit']='Legacy agent_sessions base table and Storage API catalog columns synthesized; listed prompt/research migrations executed as original files. Historical study-table migrations outside this feature are not replayed.'
     store.request=transport
 

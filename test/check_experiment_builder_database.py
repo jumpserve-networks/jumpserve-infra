@@ -3,19 +3,22 @@
 Local synthetic publication fixture is deliberate; no live AI or production
 prompt is evaluated/published. Real migration bytes are replayed unchanged.
 """
-import json,sys,tempfile
+import json,sys,tempfile,traceback
 from pathlib import Path
 from unittest.mock import patch
 import check_research_ideas_database as f
 import autonomy,store,workflow,autonomy_methods,dispatch_recovery,autonomous_repair
 import autonomy_fixtures
 import experiment_builder,network_spec,network_execution
+from check_autonomy_completion_database import DurableStorage
 
 def main():
  f.report.update(protocol='experiment-builder-validation-v1',design=__doc__,live_provider_calls=0,new_cloud_instances=0)
  try:
+  f.files=DurableStorage(f.DIRECTORY/'durable-storage')
   f.bootstrap()
-  name='202610290001_builder_reconciliation.sql';migration=(f.ROOT/'database'/name).read_bytes();f.report['migration_sha256'][name]=workflow.digest(migration);f.query(migration.decode())
+  for name in ('202610210003_partial_assessment_recovery.sql','202610280001_data_only_model_window.sql','202610280002_assessment_budget_amendments.sql','202610280003_controller_reconciliation_window.sql','202610280004_autonomous_repair.sql','202610290001_builder_reconciliation.sql','202610300001_optional_assessment_budget.sql','202610300002_native_call_reconciliation.sql'):
+   migration=(f.ROOT/'database'/name).read_bytes();f.report['migration_sha256'][name]=workflow.digest(migration);f.query(migration.decode())
   with patch.object(autonomy,'wake',return_value={}):study=autonomy.start(f.ACTOR,dict(request_id=f.uid(),autonomous=True,paper=dict(title='Builder software fixture',paper_url='https://example.org/builder-fixture.pdf',domain='Software verification',scope='Synthetic original prompt and native round-trip persistence only')))['id']
   initial=f.rpc('research_autonomy_control',dict(p_operation='lease',p_actor=None,p_study=None,p_payload={}))
   records=autonomy_fixtures.plan()['records'];source=next(r for r in records if r['kind']=='sources');claim=next(r for r in records if r['kind']=='claims')
@@ -82,11 +85,15 @@ def main():
   def limits():
    f.query('update research_autonomy_workflows set committed_cents=10000 where study_id='+f.sql_text(study))
    assert rpc('begin',**begin(4))['denied']=='budget'
-   f.query('update research_autonomy_workflows set committed_cents='+str(original_cents+100)+' where study_id='+f.sql_text(study))
+   # Preserve the exhaustion ledger; authorize a separate finite fixture cap
+   # rather than refunding commitments to make subsequent controls runnable.
+   f.query('select research_autonomy_set_budget('+','.join([f.sql_text(study)+'::uuid',f.sql_text(f.uid())+'::uuid','20000','false',f.sql_text('Synthetic test operator'),f.sql_text('Prospective local SQL test headroom; no production authority')])+')',role='service_role')
    # Fixture clock change requires bypassing immutable original authorization,
    # only in this isolated database. Application code has no such operation.
+   deadline=f.query('select deadline_at from research_autonomy_workflows where study_id='+f.sql_text(study))
    f.query('alter table research_autonomy_workflows disable trigger research_autonomy_workflow_immutable;update research_autonomy_workflows set deadline_at=clock_timestamp()+interval \'60 seconds\' where study_id='+f.sql_text(study)+';alter table research_autonomy_workflows enable trigger research_autonomy_workflow_immutable')
    assert rpc('begin',**begin(5))['denied']=='deadline'
+   f.query('alter table research_autonomy_workflows disable trigger research_autonomy_workflow_immutable;update research_autonomy_workflows set deadline_at='+f.sql_text(deadline)+'::timestamptz where study_id='+f.sql_text(study)+';alter table research_autonomy_workflows enable trigger research_autonomy_workflow_immutable')
    return {'budget':'refused','deadline':'refused'}
   f.check('budget and original elapsed limits cannot admit extra calls',limits)
   def security():
@@ -114,9 +121,13 @@ def main():
    return {'RLS':'enabled','browser_writes':'denied','stale_fence':'refused','draft_publication':'refused','authority_checks':'required; original live checks retained'}
   f.check('RLS, immutable history, fences and publication checks',security)
   def reconciliation():
+   third=rpc('begin',**begin(7))
+   rpc('finish',id=third['id'],status='unknown',response_artifact_id=None,response_sha256=None,usage=None,response_received=None,http_status=None,reason='Synthetic lost finish acknowledgement; terminal bytes exist only in the worker spool.')
+   terminal=b'data: {"type":"response.completed","response":{"status":"completed","model":"gpt-6.1-sol","output":[]}}\n\n'
    calls=store.rows('builder_calls',dict(study_id='eq.'+study,dispatch_id='eq.'+turn,order='number.asc'))
    checkpoint=store.artifact(study,f.ACTOR,b'Explicit checkpoint transport fixture; no execution',f.uid(),'application/octet-stream',dict(kind='builder-reconciled-workspace',dispatch_id=turn));store.append(study,f.ACTOR,'artifacts',checkpoint)
    proof=dict(version='builder-dispatch-reconciliation-v1',dispatch_id=turn,request_sha256=workflow.digest(raw),original_status='unknown',container_cleanup='stopped',checkpoint=dict(artifact_id=checkpoint['id'],sha256=checkpoint['sha256']),calls=[{k:c[k] for k in ('id','request_sha256','response_sha256')} for c in calls])
+   proof['calls'][-1]['response_sha256']=workflow.digest(terminal)
    def submit(value,role=None):
     original=workflow.canonical(value);a=store.artifact(study,f.ACTOR,original,f.uid(),'application/json',dict(kind='builder-dispatch-reconciliation',dispatch_id=turn));store.append(study,f.ACTOR,'artifacts',a)
     payload=dict(p_dispatch=turn,p_artifact=a['id'],p_sha256=a['sha256'],p_proof=value)
@@ -134,18 +145,34 @@ def main():
    f.rejects(lambda:submit(dict(proof,request_sha256='0'*64)))
    for role in ('anon','authenticated'):
     f.rejects(lambda role=role:f.query('select * from research_model_reconciliations',role=role))
+    f.rejects(lambda role=role:f.query('select * from research_builder_call_reconciliations',role=role))
     f.rejects(lambda role=role:submit(proof,role))
    assert f.rpc('research_model_reconciliation_candidates',dict(p_after=None))[0]['id']==turn
    with tempfile.TemporaryDirectory() as tmp:
     root=Path(tmp);directory=root/turn;directory.mkdir();(directory/'logical.json').write_bytes(raw)
     workspace=root/'builder-workspaces'/task['id']/'workspace';workspace.mkdir(parents=True);(workspace/'experiment.py').write_text('print("retained software fixture")\n')
-    with patch.object(experiment_builder,'container_action',return_value=[]) as cleanup,patch.object(experiment_builder,'normalize_workspace',return_value=b'{"bytes_unchanged":true,"fixture":true}'):
+    (directory/'call-3-response.bin').write_bytes(terminal)
+    captured=dict(version=dispatch_recovery.CALL_VERSION,call_id=third['id'],dispatch_id=turn,study_id=study,task_id=task['id'],request_sha256=third['request_sha256'],response_filename='call-3-response.bin',response_sha256=workflow.digest(terminal),status='complete',response_received=True,http_status=200)
+    (directory/'call-3-completion.json').write_bytes(workflow.canonical(captured))
+    original_reconcile=dispatch_recovery._reconcile_dispatches
+    def checked_reconcile(*args):
+     try:return original_reconcile(*args)
+     except Exception:
+      f.report['retained_reconciliation_failure']=traceback.format_exc();print(f.report['retained_reconciliation_failure']);raise
+    with patch.object(experiment_builder,'container_action',return_value=[]) as cleanup,patch.object(experiment_builder,'normalize_workspace',return_value=b'{"bytes_unchanged":true,"fixture":true}'),patch.object(dispatch_recovery,'_reconcile_dispatches',side_effect=checked_reconcile):
      recovered=dispatch_recovery.reconcile_spool(root)
     assert recovered==[turn],recovered
     cleanup.assert_called_once_with(task['id'],'stop')
    result=store.rows('model_reconciliations',dict(dispatch_id='eq.'+turn,study_id='eq.'+study))[0]
    confirmed=dispatch_recovery.confirmed(task,unknown,{},autonomous_repair.original,autonomous_repair.rows)
-   assert confirmed['native_calls']==2 and result['proof']['calls']==proof['calls']
+   assert confirmed['native_calls']==3 and result['proof']['calls']==proof['calls']
+   native=store.rows('builder_call_reconciliations',dict(study_id='eq.'+study,call_id='eq.'+third['id']))[0]
+   payload=dict(p_call=third['id'],p_artifact=native['artifact_id'],p_sha256=native['sha256'],p_proof=native['proof'])
+   assert f.rpc('research_builder_call_reconcile',payload)==native
+   f.rejects(lambda:f.rpc('research_builder_call_reconcile',dict(payload,p_proof=dict(native['proof'],request_sha256='0'*64))))
+   f.rejects(lambda:f.query("update research_builder_call_reconciliations set proof='{}'",role='service_role'))
+   assert f.query("select status from research_builder_calls where id="+f.sql_text(third['id']))=='unknown'
+   assert f.query('select research_builder_unresolved('+f.sql_text(task['id'])+'::uuid)',role='service_role')=='f'
    assert f.rpc('research_model_reconciliation_candidates',dict(p_after=None))==[]
    f.rejects(lambda:f.query("update research_model_reconciliations set proof='{}'",role='service_role'))
    f.rejects(lambda:f.query('delete from research_model_reconciliations',role='service_role'))
@@ -154,8 +181,10 @@ def main():
    assert json.loads(f.query('select row_to_json(d) from research_model_dispatches d where id='+f.sql_text(turn)))==unknown
    assert f.query("select count(*) from research_autonomy_events where event='model-dispatch-reconciled'")=='1'
    assert f.query('select count(*) from research_queue_jobs')=='0'
-   return dict(original_unknown_retained=True,browser_access_denied=True,distinct_call_hash_coverage=True,active_work_fenced=True,limits_unchanged=True,scientific_measurements=0,actual_worker_to_database_reconciliation=True,cleanup='mocked here; real Docker qualified separately')
+   return dict(original_unknown_retained=True,original_native_unknown_retained=True,lost_native_completion_reconciled=True,idempotent=True,browser_access_denied=True,distinct_call_hash_coverage=True,active_work_fenced=True,limits_unchanged=True,scientific_measurements=0,actual_worker_to_database_reconciliation=True,cleanup='mocked here; real Docker qualified separately')
   f.check('separate immutable reconciliation accounts for finished native calls without replay or budget reset',reconciliation)
+  tables=('autonomy_workflows','autonomy_tasks','autonomy_turns','model_dispatches','builder_calls','builder_call_reconciliations','model_reconciliations','artifacts','autonomy_events')
+  (f.DIRECTORY/'database-snapshot.json').write_bytes(workflow.canonical({name:store.rows(name,dict(study_id='eq.'+study,limit=1000)) for name in tables}))
   f.report['passed']=True
  except Exception as error:f.report.update(passed=False,error=str(error));raise
  finally:

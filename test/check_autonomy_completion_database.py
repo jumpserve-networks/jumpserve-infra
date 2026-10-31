@@ -5,7 +5,7 @@ model judgment are explicit fixtures. No live provider, AWS launch or production
 mutation. The native CLI, dispatch admission/outbox, PDF parser, controller,
 Postgres, queue, TCP exchanges and evidence calculation are real implementations.
 """
-import copy,io,json,os,sys,threading,time,traceback
+import copy,io,json,os,subprocess,sys,threading,time,traceback
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from types import SimpleNamespace
@@ -13,10 +13,34 @@ from unittest.mock import patch
 os.environ['RESEARCH_AI_RUNTIME']='openclaw-production-v1'
 os.environ['RESEARCH_AUTONOMY_ENABLED']='true'
 import check_research_ideas_database as f
-import autonomy,autonomy_model as model,autonomy_methods as methods,bounded_network,model_dispatch,network_spec,paper_uploads,openclaw_runtime as runtime,siwc_protocol as wire,store,worker,workflow
+import autonomy,autonomy_model as model,autonomy_methods as methods,bounded_network,model_dispatch,network_execution,network_spec,paper_uploads,openclaw_runtime as runtime,siwc_protocol as wire,store,worker,workflow
 
 TITLE='Unattended TCP software verification fixture'
 CLAIMS=['Each host-local TCP echo returns 32 bytes under the declared configuration.','Each host-local TCP echo returns 33 bytes under the declared configuration.']
+
+class DurableStorage:
+ """Filesystem transport fixture shared across actual process restarts."""
+ def __init__(self,root):self.root=Path(root);self.root.mkdir(exist_ok=True)
+ def path(self,key):return self.root/workflow.digest(key.encode())
+ def __contains__(self,key):return self.path(key).is_file()
+ def __getitem__(self,key):return self.path(key).read_bytes()
+ def __setitem__(self,key,value):
+  from dispatch_recovery import write_once
+  write_once(self.path(key),value)
+
+def resume_tcp(manifest_path):
+ path=Path(manifest_path).resolve()
+ if not path.is_relative_to(f.ROOT/'.test-artifacts/research-ideas/database') or path.name!='restart-manifest.json':raise ValueError('Fixed local completion fixture manifest required.')
+ saved=json.loads(path.read_bytes());f.DATABASE=saved['database'];f.query.__defaults__=(f.DATABASE,None)
+ f.files=DurableStorage(path.parent/'durable-storage');f.store.request=f.transport
+ # Recovery may read captured bytes and write SQL. Any fresh cloud invocation
+ # or provider call is a regression, not a transport to mock successfully.
+ with patch('boto3.client',side_effect=AssertionError('A restarted ingest must not invoke a cloud executor')),patch.object(runtime,'execute',side_effect=AssertionError('A restarted ingest must not invoke a model')):
+  result=worker.handler({})
+ jobs=store.rows('queue_jobs',dict(study_id='eq.'+saved['study']))
+ assert len(jobs)==1 and jobs[0]['id']==saved['job'] and jobs[0]['status']=='awaiting-review',jobs
+ assert len(store.rows('runs',dict(study_id='eq.'+saved['study'])))==1
+ (path.parent/'restart-result.json').write_bytes(workflow.canonical(dict(passed=True,job=saved['job'],pid=os.getpid(),outcomes=result,new_model_calls=0,new_executor_invocations=0)))
 
 def pdf():
  sys.path.insert(0,str(f.ROOT/'.runtime-autonomy-python/python'))
@@ -63,7 +87,14 @@ def main():
  f.report['conditional_gaps']=['Live model answer quality','Real Google browser authentication','Remote Supabase Storage upload/CORS','Deployed Lambda/cloud-job execution','Actual retained paper assessment completion']
  protocol=(f.ROOT/'docs/autonomy-completion-protocol-v1.json').read_bytes();(f.DIRECTORY/'protocol.json').write_bytes(protocol)
  f.report['protocol_sha256']=workflow.digest(protocol)
- halt=threading.Event();errors=[];native=[];spool=f.DIRECTORY/'native-spool';spool.mkdir();requests=[]
+ halt=threading.Event();errors=[];native=[];spool=f.DIRECTORY/'native-spool';spool.mkdir();requests=[];restart=dict(injected=False,required=False,count=0)
+ f.files=DurableStorage(f.DIRECTORY/'durable-storage')
+ original_rpc=store.rpc
+ def interrupted_rpc(name,payload):
+  if name=='research_network_update' and payload.get('p_phase')=='completed' and (not restart['injected'] or restart['required']):
+   restart.update(injected=True,required=True,job=payload['p_job'])
+   raise store.StoreError('Explicit storage-acknowledgement interruption after the original TCP response was durably captured.')
+  return original_rpc(name,payload)
  package=f.ROOT.parent/'jumpserve-back-end/experiments/openclaw_pilot/runtime/node_modules/openclaw';node=package.parent/'node/bin/node'
  assert node.exists() and json.loads((package/'package.json').read_bytes())['version']=='2026.10.5'
  def process(job):
@@ -99,7 +130,7 @@ def main():
   model_dispatch.rpc('heartbeat',dict(status='ready',configuration=dict(kind='explicit synthetic local provider',paid_fallback=False)))
   policy=json.loads(autonomy.autonomy_costs.POLICY_PATH.read_bytes())['bounded_tcp'];env=dict(NETWORK_BOUNDED_FUNCTION='arn:aws:lambda:us-east-1:395567831870:function:LocalCompletionFixture:1',NETWORK_BOUNDED_POLICY_SHA256=workflow.digest(workflow.canonical(policy)))
   client=SimpleNamespace(get_function_configuration=lambda **kwargs:dict(MemorySize=128,Timeout=5,Runtime='python3.12',Handler='index.handler',EphemeralStorage={'Size':512}),invoke=sdk_invoke)
-  with patch.object(runtime,'NODE',node),patch.object(runtime,'PACKAGE',package),patch.object(autonomy,'wake',return_value=dict(status='explicit local notification fixture')),patch.dict(os.environ,env),patch('boto3.client',return_value=client),patch.object(model_dispatch,'WAIT_SECONDS',45):
+  with patch.object(runtime,'NODE',node),patch.object(runtime,'PACKAGE',package),patch.object(autonomy,'wake',return_value=dict(status='explicit local notification fixture')),patch.dict(os.environ,env),patch('boto3.client',return_value=client),patch.object(model_dispatch,'WAIT_SECONDS',45),patch.object(store,'rpc',side_effect=interrupted_rpc):
    thread=threading.Thread(target=pump,daemon=True);thread.start()
    raw=pdf();study=f.uid();reserve=dict(action='reserve',request_id=study,filename='unattended-software-fixture.pdf',sha256=workflow.digest(raw),byte_count=len(raw))
    paper_uploads.submit(f.ACTOR,reserve);f.transport('/storage/v1/object/'+paper_uploads.BUCKET+'/'+study+'/'+reserve['sha256'],'POST',raw);paper_uploads.submit(f.ACTOR,dict(action='prepare',request_id=study))
@@ -121,6 +152,12 @@ def main():
    before_claims=workflow.digest(workflow.canonical(store.rows('claims',dict(study_id='eq.'+study))))
    for cycle in range(20):
     tick();worker.handler({})
+    if restart['required']:
+     manifest=f.DIRECTORY/'restart-manifest.json';manifest.write_bytes(workflow.canonical(dict(database=f.DATABASE,study=study,job=restart['job'])))
+     resumed=subprocess.run([sys.executable,'-B',str(Path(__file__).resolve()),'--resume-tcp',str(manifest)],capture_output=True,timeout=60)
+     (f.DIRECTORY/'restart-stdout.bin').write_bytes(resumed.stdout);(f.DIRECTORY/'restart-stderr.bin').write_bytes(resumed.stderr)
+     assert resumed.returncode==0,'Restarted ingestion failed; original subprocess logs retained.'
+     restart.update(required=False,count=restart['count']+1)
     tasks=store.rows('autonomy_tasks',dict(study_id='eq.'+study))
     if all(t['status'] in ('resolved','finished') for t in tasks):break
     # Real poll delay is honored; no database clock/status/criteria edits.
@@ -133,6 +170,7 @@ def main():
    assert workflow.digest(workflow.canonical(store.rows('claims',dict(study_id='eq.'+study))))==before_claims
    jobs=store.rows('queue_jobs',dict(study_id='eq.'+study));runs=store.rows('runs',dict(study_id='eq.'+study));measurements=store.rows('measurements',dict(study_id='eq.'+study));assessments=store.rows('assessments',dict(study_id='eq.'+study))
    assert len(jobs)==len(runs)==len(requests)==1,(jobs,runs,requests)
+   assert restart['injected'] and restart['count']==1 and json.loads((f.DIRECTORY/'restart-result.json').read_bytes())['pid']!=os.getpid()
    assert runs[0]['status']=='complete' and len(measurements)==4 and {a['label'] for a in assessments}=={'reproduced','discrepant'}
    assert all(m['status']=='recorded' for m in measurements)
    assert {str(m['value']) for m in measurements if m['metric']=='received_bytes'}=={'32'}
@@ -147,7 +185,7 @@ def main():
    f.report['checks'].append(dict(name='PDF confirmation through durable native dispatch and shared TCP measurement to frozen assessments',passed=True,evidence=dict(study=study,workflow_status=workflow_row['status'],claims=2,synthetic_model_judgments=len(turns),live_provider_calls=0,native_dispatches=len(native),jobs=1,runs=1,actual_tcp_exchanges=2,measurements=4,labels=sorted(a['label'] for a in assessments),hash_verified_artifacts=len(artifacts),manual_running_campaign_edits=0,original_limits_preserved=True,wall_seconds=time.monotonic()-began)))
    tables=('autonomy_workflows','autonomy_tasks','autonomy_turns','model_dispatches','queue_jobs','queue_events','protocols','configurations','runs','measurements','assessments')
    (f.DIRECTORY/'database-snapshot.json').write_bytes(workflow.canonical({table:store.rows(table,dict(study_id='eq.'+study,limit=1000)) for table in tables}))
-   f.report.update(passed=True,native=native,source_pdf_sha256=reserve['sha256'],final_commitments_cents=workflow_row['committed_cents'])
+   f.report.update(passed=True,native=native,source_pdf_sha256=reserve['sha256'],final_commitments_cents=workflow_row['committed_cents'],restart=dict(restart,real_process_restart=True,executor_invocations=len(requests),durable_storage='Local filesystem transport fixture, not remote Supabase Storage'))
  except Exception as error:f.report.update(passed=False,error=str(error),traceback=traceback.format_exc());raise
  finally:
   halt.set()
@@ -155,4 +193,7 @@ def main():
   if errors:f.report['worker_errors']=errors
   f.report['runtime_source_sha256']={p.name:workflow.digest(p.read_bytes()) for p in (f.ROOT.parent/'jumpserve-back-end/research_workflow').glob('*.py')}
   f.report['ended_at']=workflow.now();(f.DIRECTORY/'autonomy-completion-report.json').write_bytes(workflow.canonical(f.report));print(json.dumps(dict(report=str(f.DIRECTORY/'autonomy-completion-report.json'),passed=f.report.get('passed'),checks=f.report['checks'])))
-if __name__=='__main__':main()
+if __name__=='__main__':
+ if len(sys.argv)==3 and sys.argv[1]=='--resume-tcp':resume_tcp(sys.argv[2])
+ elif len(sys.argv)==1:main()
+ else:raise SystemExit('Only the fixed local TCP restart fixture is supported.')
