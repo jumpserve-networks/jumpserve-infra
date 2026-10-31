@@ -19,7 +19,9 @@ import zipfile
 ACCOUNT='395567831870'
 SITE='https://jumpserve.quaint-lab.org'
 REPOSITORIES={'frontend':'jumpserve-networks/jumpserve-front-end','infrastructure':'jumpserve-networks/jumpserve-infra','backend':'jumpserve-networks/jumpserve-back-end'}
-STACKS=('JumpServeBenchmarkStack','JumpServeAgentStack')
+# Evaluated agent releases have a separate qualification path. A general
+# infrastructure candidate must never deploy pending agent code indirectly.
+STACKS=('JumpServeBenchmarkStack',)
 BUCKET='cdk-hnb659fds-assets-395567831870-us-east-1'
 ALLOWED_TYPES={'AWS::Lambda::Function','AWS::Lambda::LayerVersion','AWS::Lambda::Permission','AWS::ApiGateway::Method','AWS::ApiGateway::Resource','AWS::ApiGateway::Deployment','AWS::ApiGateway::Stage','AWS::ApiGatewayV2::Integration','AWS::ApiGatewayV2::Route','AWS::ApiGatewayV2::Deployment','AWS::ApiGatewayV2::Stage','AWS::Events::Rule','AWS::Logs::LogGroup'}
 
