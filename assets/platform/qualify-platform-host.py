@@ -11,6 +11,16 @@ import threading
 import time
 import uuid
 
+def qualification_store(base):
+    class QualificationStore(base):
+        def rpc(self,operation,payload=None):
+            if operation=='claim':payload=dict(payload or {},only_task=self.qualification_task)
+            # This is the prospective software trial size, independent of the
+            # production category budget. All actual admissions stay recorded.
+            if operation=='begin-run' and len(self.rows('runs'))>=6:return dict(denied='budget')
+            return super().rpc(operation,payload)
+    return QualificationStore
+
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--root',type=Path,required=True);parser.add_argument('--task',required=True);args=parser.parse_args()
     root=args.root.resolve();sys.path.insert(0,str(root/'source'))
@@ -19,7 +29,8 @@ def main():
     from platform_supervisor.credentials import Credentials
     from platform_supervisor.store import Store
     image=json.loads((root/'image.json').read_bytes())
-    credentials=Credentials();store=Store(credentials.supabase,root/'spool',str(uuid.uuid5(uuid.UUID(args.task),'cloud-control')))
+    credentials=Credentials();store=qualification_store(Store)(credentials.supabase,root/'spool',str(uuid.uuid5(uuid.UUID(args.task),'cloud-control')))
+    store.qualification_task=str(uuid.UUID(args.task))
     stop=threading.Event();thread=None;report=dict(version='platform-cloud-control-v1',passed=False,live=True,image=image['image'],recipe_sha256=image['recipe_sha256'],maximum_actual_provider_calls=6,maximum_reservation_cents=600,maximum_elapsed_seconds=600,scientific_claim=False,independent_review=False)
     save(root/'prospective.json',canonical(report))
     for _ in range(20):
@@ -28,7 +39,7 @@ def main():
         if task:break
         time.sleep(15)
     else:raise ValueError('Research priority or admission prevents this bounded bootstrap control.')
-    if task['id']!=str(uuid.UUID(args.task)) or task['max_reserved_cents']!=600:raise ValueError('Bootstrap task identity or allowance differs.')
+    if task['id']!=str(uuid.UUID(args.task)) or not (task['max_reserved_cents']==-1 or task['max_reserved_cents']>=600):raise ValueError('Bootstrap task identity or allowance differs.')
     store.task=task
     store.artifact('cloud-control-prospective.json',canonical(report))
     store.event('cloud-control-started','Six-call software fixture admitted on the AWS host; no repository publishing is permitted.')

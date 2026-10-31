@@ -13,8 +13,20 @@ spec=importlib.util.spec_from_file_location('platform_synthesize',ROOT/'bin/plat
 spec=importlib.util.spec_from_file_location('platform_diagnostics',ROOT/'bin/platform-deployment-diagnostics.py');diagnostics=importlib.util.module_from_spec(spec);spec.loader.exec_module(diagnostics)
 spec=importlib.util.spec_from_file_location('platform_input',ROOT/'bin/platform-release-input.py');release_input=importlib.util.module_from_spec(spec);spec.loader.exec_module(release_input)
 spec=importlib.util.spec_from_file_location('platform_bootstrap',ROOT/'bin/platform-supervisor.py');bootstrap=importlib.util.module_from_spec(spec);spec.loader.exec_module(bootstrap)
+spec=importlib.util.spec_from_file_location('platform_qualification',ROOT/'assets/platform/qualify-platform-host.py');qualification=importlib.util.module_from_spec(spec);spec.loader.exec_module(qualification)
 
 class PlatformReleaseTests(unittest.TestCase):
+    def test_qualification_trial_still_fences_six_calls_under_unlimited_category_budgets(self):
+        class Store:
+            def __init__(self):self.admitted=[];self.qualification_task='11111111-1111-4111-8111-111111111111';self.claim_payload=None
+            def rows(self,table):self.asserted_table=table;return self.admitted
+            def rpc(self,operation,payload):
+                if operation=='claim':self.claim_payload=payload;return {'id':self.qualification_task,'max_reserved_cents':-1}
+                if operation=='begin-run':self.admitted.append(payload);return {'recorded':True}
+        store=qualification.qualification_store(Store)();store.rpc('claim',{'policy_sha256':'a'*64})
+        self.assertEqual(store.claim_payload['only_task'],store.qualification_task)
+        for i in range(6):self.assertTrue(store.rpc('begin-run',{'number':i})['recorded'])
+        self.assertEqual(store.rpc('begin-run',{'number':6}),{'denied':'budget'});self.assertEqual(len(store.admitted),6)
     def setUp(self):
         self.base=dict(Parameters={},Resources=dict(Function=dict(Type='AWS::Lambda::Function',Properties=dict(Role='existing-role',Code=dict(S3Bucket='existing-bucket',S3Key='old.zip')))))
 

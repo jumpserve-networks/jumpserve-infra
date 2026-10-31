@@ -181,13 +181,14 @@ export class ResearchWorkflow extends Construct {
           code: lambda.Code.fromAsset(runtime), handler: 'autonomy.handler', runtime: lambda.Runtime.PYTHON_3_12,
           memorySize: 1024, timeout: cdk.Duration.seconds(420), reservedConcurrentExecutions: reserveConcurrency ? 2 : undefined,
           retryAttempts: 0, maxEventAge: cdk.Duration.minutes(1), layers: [pdfLayer],
-          environment: { SUPABASE_URL: url, SUPABASE_SECRET_ARN: secret.secretArn, RESEARCH_AUTONOMY_ENABLED: 'true', RESEARCH_AUTONOMY_CONTEXT_RECOVERY: 'autonomy-context-budget-v1', RESEARCH_QUEUE_WORKERS_ENABLED: 'true', RESEARCH_QUEUE_WORKER_FUNCTION: worker.functionArn, ...networkingEnvironment,...aiEnvironment },
-          description: 'Durable parallel claim stages with atomic $100/7-day admission, uncapped AI turns, exact history and explicit blockers.',
+          environment: { SUPABASE_URL: url, SUPABASE_SECRET_ARN: secret.secretArn, RESEARCH_AUTONOMY_ENABLED: 'true', RESEARCH_CATEGORY_BUDGETS_ENABLED: 'true', RESEARCH_AUTONOMY_CONTEXT_RECOVERY: 'autonomy-context-budget-v1', RESEARCH_QUEUE_WORKERS_ENABLED: 'true', RESEARCH_QUEUE_WORKER_FUNCTION: worker.functionArn, ...networkingEnvironment,...aiEnvironment },
+          description: 'Durable parallel claim stages with Supabase category budgets, seven-day admission, exact history and explicit blockers.',
         });
         secret.grantRead(autonomous);
         worker.grantInvoke(autonomous);
         autonomous.grantInvoke(fn);
         fn.addEnvironment('RESEARCH_AUTONOMY_ENABLED', String(autonomyAdmission));
+        fn.addEnvironment('RESEARCH_CATEGORY_BUDGETS_ENABLED', 'true');
         fn.addEnvironment('RESEARCH_AUTONOMY_WORKER_FUNCTION', autonomous.functionArn);
         if(openclawEnabled){
           fn.addEnvironment('RESEARCH_AI_RUNTIME','openclaw-production-v1');
