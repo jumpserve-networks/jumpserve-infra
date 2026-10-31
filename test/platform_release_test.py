@@ -8,6 +8,7 @@ from unittest.mock import Mock,patch
 
 ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('platform_production',ROOT/'bin/platform-production.py');release=importlib.util.module_from_spec(spec);spec.loader.exec_module(release)
+spec=importlib.util.spec_from_file_location('platform_synthesize',ROOT/'bin/platform-synthesize.py');synthesis=importlib.util.module_from_spec(spec);spec.loader.exec_module(synthesis)
 
 class PlatformReleaseTests(unittest.TestCase):
     def setUp(self):
@@ -64,5 +65,22 @@ class PlatformReleaseTests(unittest.TestCase):
         self.assertIn('id-token: write',source);self.assertIn('role-to-assume: arn:aws:iam::395567831870:role/JumpServePlatformRelease',source)
         self.assertNotIn('secrets.AWS_ACCESS_KEY_ID',source);self.assertNotIn('secrets.AWS_SECRET_ACCESS_KEY',source)
         self.assertLess(source.index('synthesize without credentials'),source.index('Obtain renewable AWS role credentials'))
+
+    def test_synthesis_uses_checkout_owner_and_retains_credential_free_container_boundary(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);recipe=root/'assets/platform/Dockerfile';recipe.parent.mkdir(parents=True);recipe.write_text('FROM fixed-reviewed-image\n')
+            with patch.object(synthesis.Path,'cwd',return_value=root),patch.object(synthesis.os,'getuid',return_value=1001),patch.object(synthesis.os,'getgid',return_value=1002),patch.object(synthesis.subprocess,'run') as run:
+                synthesis.main()
+            containers=[call.args[0] for call in run.call_args_list if call.args[0][:2]==['docker','run']]
+            self.assertEqual(len(containers),4)
+            for command in containers:
+                self.assertEqual(command[command.index('--user')+1],'1001:1002')
+                self.assertEqual(command[command.index('--cap-drop')+1],'ALL')
+                self.assertEqual(command[command.index('--security-opt')+1],'no-new-privileges')
+                self.assertEqual([command[i+1] for i,value in enumerate(command) if value=='--env'],['HOME=/tmp'])
+                self.assertNotIn('--cap-add',command);self.assertNotIn('--privileged',command)
+            self.assertIn('--no-lookups',containers[-1]);self.assertIn('JumpServeBenchmarkStack',containers[-1])
+            self.assertIn('node node_modules/ts-node/dist/bin.js --prefer-ts-exts bin/benchmark.ts',containers[-1])
+            self.assertNotIn('JumpServeAgentStack',containers[-1])
 
 if __name__=='__main__':unittest.main()
