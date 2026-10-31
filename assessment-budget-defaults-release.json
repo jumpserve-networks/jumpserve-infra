@@ -97,6 +97,10 @@
       "role_logical_id": "BenchmarkImagePipelineRoleCAA30BA5",
       "role_name": "JumpServeBenchmarkImageBuilder",
       "value": "arn:aws:iam::395567831870:role/JumpServeBenchmarkImageBuilder"
+    },
+    "BenchmarkSecurityGroupId": {
+      "resource_logical_id": "BenchmarkInstanceSG6368283B",
+      "value": "sg-08c2146ece4519d74"
     }
   }
 }

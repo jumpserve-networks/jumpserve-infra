@@ -16,6 +16,10 @@ test('the selected AMI and bootstrap mode always change together', () => {
       env: { account: '395567831870', region: 'us-east-1' },
     });
     const template = Template.fromStack(stack);
+    const groupRef = template.toJSON().Outputs.BenchmarkSecurityGroupId.Value.Ref;
+    expect(typeof groupRef).toBe('string');
+    expect(template.toJSON().Resources[groupRef].Type).toBe('AWS::EC2::SecurityGroup');
+    expect(template.toJSON().Resources[groupRef].Properties.VpcId).toBeDefined();
   template.resourceCountIs('AWS::Lambda::Url', 0);
     const policies = template.findResources('AWS::IAM::Policy');
     const instancePolicies = Object.values(policies).filter((policy: any) =>

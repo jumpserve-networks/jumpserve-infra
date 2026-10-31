@@ -89,6 +89,13 @@ the final readback verifies it. The CDK definition derives the ARN from its fixe
 role identity. This avoids adding metadata access to the separately named image
 builder role. Its policy, trust and identity remain unchanged.
 
+The existing VPC security-group output is likewise retained as its recorded ID,
+with its resource type, explicit VPC, original output reference and live value
+checked. CDK emits the resource `Ref`, which returns the ID when `VpcId` is
+specified, as documented in the
+[AWS security-group reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-ec2-securitygroup.html).
+No EC2 metadata permission or network-rule change is introduced.
+
 Local validation includes 398 backend tests (four environment-dependent skips),
 295 frontend tests, lint and the production frontend build. The isolated
 PostgreSQL check executes the existing audited-amendment and unknown-call tests,
