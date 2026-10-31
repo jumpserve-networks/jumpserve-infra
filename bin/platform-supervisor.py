@@ -177,7 +177,11 @@ def install_cloud(packet,packet_path):
     reports=[json.loads(line) for line in command.get('StandardOutputContent','').splitlines() if line.startswith('{')]
     if len(reports)!=1 or reports[0]!=qualified['report']:raise ValueError('Cloud qualification acknowledgement differs.')
     report=reports[0]
-    if report.get('passed') is not True or report.get('live') is not True or report.get('bundle_sha256')!=packet['bundle_sha256'] or report.get('recipe_sha256')!=sha((ROOT/'assets/platform/Dockerfile').read_bytes()) or not 0<report.get('actual_provider_calls',0)<=6 or not report.get('existing_test_unchanged') or not report.get('container_check_passed') or not re.fullmatch('sha256:[a-f0-9]{64}',report.get('image','')):raise ValueError('Passed source-bound cloud software control required.')
+    if report.get('passed') is not True or report.get('live') is not True or report.get('recipe_sha256')!=sha((ROOT/'assets/platform/Dockerfile').read_bytes()) or not 0<report.get('actual_provider_calls',0)<=6 or not report.get('existing_test_unchanged') or not report.get('container_check_passed') or not re.fullmatch('sha256:[a-f0-9]{64}',report.get('image','')):raise ValueError('Passed source-bound cloud software control required.')
+    if report.get('bundle_sha256')!=packet['bundle_sha256']:
+        original=qualified.get('source_files',{})
+        differences={name for name in set(original)|set(packet['files']) if original.get(name)!=packet['files'].get(name)}
+        if not original or differences!={'install-platform.sh'}:raise ValueError('Only an initial installer repair may reuse qualification of unchanged worker sources and tool recipe.')
     if admin().query('select paused from public.platform_settings where id')!=[dict(paused=True)]:raise ValueError('Pause admission before initial installation.')
     metadata=aws('ec2','describe-instances','--instance-ids',packet['worker_id'])['Reservations'][0]['Instances'][0]['MetadataOptions']
     if metadata.get('State')!='applied' or metadata.get('HttpTokens')!='required' or metadata.get('HttpPutResponseHopLimit')!=1:raise ValueError('Applied metadata isolation required.')
@@ -192,7 +196,8 @@ def install_cloud(packet,packet_path):
         print(json.dumps(dict(command_id=matches[0]['CommandId'],reconciled=True)));return
     bundle=packet['bundle_sha256'];destination='/tmp/jumpserve-platform-'+bundle+'.zip';script='/tmp/jumpserve-platform-'+bundle+'.sh'
     proof_sha=sha(json.dumps(report,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode())
-    commands=['set -eu','aws s3 cp '+shlex.quote('s3://'+BUCKET+'/platform-supervisor/'+bundle+'.zip')+' '+shlex.quote(destination)+' --region us-east-1 --only-show-errors','echo '+shlex.quote(bundle+'  '+destination)+' | sha256sum --check','python3.12 -c '+shlex.quote('import pathlib,zipfile;pathlib.Path('+repr(script)+').write_bytes(zipfile.ZipFile('+repr(destination)+').read("install-platform.sh"))'),'bash '+shlex.quote(script)+' '+' '.join(shlex.quote(v) for v in (bundle,report['image'],proof_sha,secret['ARN'],BUCKET,'qualified-host'))]
+    aws('s3api','put-object','--bucket',BUCKET,'--key','platform-supervisor/'+bundle+'.zip','--body',str(directory/'runtime.zip'),'--server-side-encryption','AES256')
+    commands=['set -eu','aws s3 cp '+shlex.quote('s3://'+BUCKET+'/platform-supervisor/'+bundle+'.zip')+' '+shlex.quote(destination)+' --region us-east-1 --only-show-errors','echo '+shlex.quote(bundle+'  '+destination)+' | sha256sum --check','python3.12 -c '+shlex.quote('import pathlib,zipfile;pathlib.Path('+repr(script)+').write_bytes(zipfile.ZipFile('+repr(destination)+').read("install-platform.sh"))'),'bash '+shlex.quote(script)+' '+' '.join(shlex.quote(v) for v in (bundle,report['image'],proof_sha,secret['ARN'],BUCKET,'qualified-host',report['bundle_sha256']))]
     save(intent,dict(comment=comment,worker_id=packet['worker_id'],bundle_sha256=bundle,image=report['image'],image_archive_sha256=None,cloud_qualification_sha256=proof_sha,qualification_command_id=qualified['command_id']))
     result=aws('ssm','send-command','--instance-ids',packet['worker_id'],'--document-name','AWS-RunShellScript','--comment',comment,'--parameters',json.dumps(dict(commands=commands)))
     saved=dict(command_id=result['Command']['CommandId'],instance_id=packet['worker_id']);save(directory/'install-command.json',saved);print(json.dumps(saved))
