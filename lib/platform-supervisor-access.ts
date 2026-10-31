@@ -26,6 +26,9 @@ export class PlatformSupervisorAccess extends Construct {
     allowExecution(['events:DescribeRule', 'events:PutRule', 'events:PutTargets', 'events:RemoveTargets', 'events:EnableRule', 'events:DisableRule', 'events:ListTargetsByRule', 'events:TagResource', 'events:UntagResource'], [arn('events', 'rule/JumpServeBenchmarkStack-*'), arn('events', 'rule/JumpServeAgentStack-*')]);
     allowExecution(['logs:CreateLogGroup', 'logs:PutRetentionPolicy', 'logs:DescribeLogGroups', 'logs:TagResource', 'logs:UntagResource'], [arn('logs', 'log-group:/aws/lambda/JumpServe*')]);
     allowExecution(['s3:GetObject'], [`arn:aws:s3:::${props.assetBucketName}/*`]);
+    // CloudFormation resolves existing Role Arn attributes even for code-only
+    // Lambda updates. Metadata reads do not grant IAM mutation authority.
+    allowExecution(['iam:GetRole'], [arn('iam', 'role/JumpServeBenchmarkStack-*'), arn('iam', 'role/JumpServeAgentStack-*')]);
     allowExecution(['iam:PassRole'], [arn('iam', 'role/JumpServeBenchmarkStack-*'), arn('iam', 'role/JumpServeAgentStack-*')], { StringEquals: { 'iam:PassedToService': 'lambda.amazonaws.com' } });
     this.releaseRole = new iam.Role(this, 'Release', {
       roleName: 'JumpServePlatformRelease', maxSessionDuration: cdk.Duration.hours(2),

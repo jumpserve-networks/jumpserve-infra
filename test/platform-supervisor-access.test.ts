@@ -10,7 +10,13 @@ test('platform releases use main-only OIDC and fixed service roles without stati
   const raw = JSON.stringify(template.toJSON());
   expect(raw).toContain('arn:aws:apigateway:us-east-1::/apis/d3o7xdethb/*');
   expect(raw).toContain('arn:aws:apigateway:us-east-1::/restapis/d3o7xdethb/*');
-  for (const forbidden of ['AdministratorAccess', 'AWS_ACCESS_KEY_ID', 'ec2:RunInstances', 'iam:CreateRole', 'secretsmanager:PutSecretValue']) expect(raw).not.toContain(forbidden);
+  for (const forbidden of ['AdministratorAccess', 'AWS_ACCESS_KEY_ID', 'ec2:RunInstances', 'iam:CreateRole', 'iam:PutRolePolicy', 'iam:AttachRolePolicy', 'iam:UpdateAssumeRolePolicy', 'secretsmanager:PutSecretValue']) expect(raw).not.toContain(forbidden);
+  template.hasResourceProperties('AWS::IAM::Policy', { PolicyDocument: { Statement: Match.arrayWith([{
+    Effect: 'Allow', Action: 'iam:GetRole', Resource: [
+      'arn:aws:iam::395567831870:role/JumpServeBenchmarkStack-*',
+      'arn:aws:iam::395567831870:role/JumpServeAgentStack-*',
+    ],
+  }]) } });
   template.hasResourceProperties('AWS::IAM::Policy', { PolicyDocument: { Statement: Match.arrayWith([Match.objectLike({ Action: 'iam:PassRole', Condition: { StringEquals: { 'iam:PassedToService': 'cloudformation.amazonaws.com' } } })]) } });
 });
 

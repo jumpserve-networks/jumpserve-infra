@@ -218,7 +218,8 @@ def record_update():
   message='Unlimited aggregate assessment budgets are live for all active and future assessments. Verified the deployed frontend and backend, immutable standing policy, new intake and public queue. Original deadlines, reservation history, cancellation and uncertain-call safeguards remain enforced.'
  else:
   message='All five active assessments are uncapped and the compatible frontend is live. The future-default release is in progress through GitHub OIDC. Earlier attempts and their original failure or rollback outcomes are retained in this record.'
- stage='completed' if complete else 'progress';event=str(uuid.uuid5(uuid.UUID(read('frozen.json')['study_id']),'platform-release-'+stage+':'+details['infrastructure_intent']['operation_id']))
+ stage='completed' if complete else 'progress';content_sha=digest(canonical(dict(message=message,details=details)))
+ event=str(uuid.uuid5(uuid.UUID(read('frozen.json')['study_id']),'platform-release-'+stage+':'+details['infrastructure_intent']['operation_id']+':'+content_sha))
  lit=admin.literal;save('platform-'+stage+'-event-intent.json',dict(id=event,message=message,details=details))
  admin.query('insert into public.platform_events(id,task_id,actor,kind,message,details) values('+lit(event)+'::uuid,null,'+lit('Lab operator via Codex')+','+lit('release-'+stage)+','+lit(message)+','+lit(json.dumps(details))+'::jsonb) on conflict(id) do nothing',read_only=False)
  row=admin.query('select id,kind,message,details from public.platform_events where id='+lit(event))[0]
