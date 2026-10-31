@@ -21,6 +21,13 @@ only because the protected request/scientific content is unchanged; this profile
 makes zero evaluation-provider calls and does not claim independent scientific
 review.
 
+The tool image pins an Ubuntu 24.04 amd64 manifest and explicitly installs
+Python 3.12 in a virtual environment, matching the production controller minor
+version. The build asserts that version. The first AWS rehearsal retained four
+unchanged-test failures from the older Python 3.10 image's UTC timestamp parser;
+those failures are evidence of environment mismatch, never permission to change
+the tests or scientific code.
+
 The tested source and derived approval go through an exact-head, protected backend
 PR. After merge, the broker generates an infrastructure PR containing only the
 new runtime manifest and a public certificate of hashes and software checks.
