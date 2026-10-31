@@ -117,7 +117,9 @@ class PlatformReleaseTests(unittest.TestCase):
             candidate['Resources'][name]['Properties']['Code']['S3Key']='b'*64+'.zip'
             candidate['Resources'][name]['Metadata']['aws:asset:path']='asset.'+'b'*64
         with tempfile.TemporaryDirectory() as temp:
-            root=Path(temp);(root/'assessment-budget-defaults-release.json').write_text(json.dumps(scope));(root/'research-workflow-runtime.json').write_bytes((ROOT/'research-workflow-runtime.json').read_bytes())
+            # This regression is for the fixed historical defaults release;
+            # later runtime pins must not silently replace its qualified bytes.
+            root=Path(temp);(root/'assessment-budget-defaults-release.json').write_text(json.dumps(scope));(root/'research-workflow-runtime.json').write_bytes((ROOT/'test/fixtures/unlimited-defaults-runtime-v75.json').read_bytes())
             rendered,proof=release.render_qualified_budget_controllers(old,candidate,root,info)
             baseline=copy.deepcopy(old);baseline['Parameters']=copy.deepcopy(rendered['Parameters'])
             self.assertEqual([item['logical_id'] for item in release.guard_template(baseline,rendered)],sorted(controllers))
