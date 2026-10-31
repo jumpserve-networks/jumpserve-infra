@@ -55,6 +55,15 @@ Verification reads the settled template and downloads all three actual Lambda
 ZIPs, checking every file and ZIP checksum against the manifest. A dispatched
 workflow is never treated as a successful deployment.
 
+After qualification, a once-per-source maintenance hand-off prevents a continuous
+research workload from starving publication or deployment. It blocks only new
+research claim leases for at most twenty minutes, while existing provider calls
+and experiments finish normally. It preserves the shared-host exclusion rule;
+the platform still waits for existing calls to drain. Cancellation, completion
+or expiry makes a task-bound hold inactive. Hold and release records are private
+and immutable; retries cannot extend the original expiry. An initial operator
+rollout can use the same bounded drain while installing its qualified worker.
+
 Verified backend and infrastructure-pin release receipts are recorded in
 Supabase and exposed through the existing private Platform Updates dashboard.
 `research_runtime_resume` then considers known UUID-validation and expired-lease
