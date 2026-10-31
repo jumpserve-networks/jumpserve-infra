@@ -48,7 +48,8 @@ behavior remain intact. Legacy $100 defaults stay readable during rollout.
 The qualified default uses backend revision
 `06a163322ebb07c010c2d40a7caffde2b341a1ec` and source binding
 `17d0e6a9bc89fc68481719dab2a1de681d53418df70fcd5f7aff476bfb3d1ff6`.
-Its dedicated deployment profile changes only the code assets of the API,
+Its dedicated deployment profile changes only the code assets and their matching
+CDK asset-path metadata for the API,
 autonomy controller and queue controller. The package executor, ingestion,
 cleanup, immutable executor version and every IAM policy retain their deployed
 content. The renderer rejects other runtime-source changes, configuration or

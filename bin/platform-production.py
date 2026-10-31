@@ -65,19 +65,27 @@ def render_qualified_budget_controllers(previous,candidate,directory):
     rendered=references(copy.deepcopy(candidate));old=previous['Resources'];new=rendered['Resources']
     if before not in old or before in new or after not in new or after in old or old[before]['Type']!='AWS::Lambda::Version' or new[after]!=old[before]:raise ValueError('Qualified executor version cannot be preserved.')
     new[before]=new.pop(after)
+    def without_asset_pointer(resource):
+        value=copy.deepcopy(resource);metadata=value.get('Metadata',{})
+        if 'aws:asset:path' in metadata:
+            key=value.get('Properties',{}).get('Code',{}).get('S3Key')
+            if not isinstance(key,str) or not re.fullmatch('[a-f0-9]{64}\\.zip',key) or metadata['aws:asset:path']!='asset.'+key[:-4] or metadata.get('aws:asset:property')!='Code':raise ValueError('Controller asset metadata does not identify its code object.')
+            metadata.pop('aws:asset:path')
+        return value
     for name in packages:
-        original=copy.deepcopy(old[name]);generated=copy.deepcopy(new[name])
+        original=without_asset_pointer(old[name]);generated=without_asset_pointer(new[name])
         original_code=original.get('Properties',{}).pop('Code',None);generated_code=generated.get('Properties',{}).pop('Code',None)
-        if old[name]['Type']!='AWS::Lambda::Function' or original!=generated or not original_code or not generated_code:raise ValueError('Experiment configuration differs from the retained executor.')
-        new[name]['Properties']['Code']=copy.deepcopy(original_code)
+        if old[name]['Type']!='AWS::Lambda::Function' or original!=generated or not original_code or not generated_code:raise ValueError('Experiment configuration differs from the retained executor: '+name)
+        new[name]=copy.deepcopy(old[name])
     if set(old)!=set(new) or {k:v for k,v in previous.items() if k!='Resources'}!={k:v for k,v in rendered.items() if k!='Resources'}:raise ValueError('Defaults release changed other template structure.')
     for name in old:
         original=copy.deepcopy(old[name]);generated=copy.deepcopy(new[name])
         if name in controllers:
+            original=without_asset_pointer(original);generated=without_asset_pointer(generated)
             if original['Type']!='AWS::Lambda::Function':raise ValueError('Defaults controller identity differs.')
             original.get('Properties',{}).pop('Code',None);generated.get('Properties',{}).pop('Code',None)
         if original!=generated:raise ValueError('Defaults release changed configuration or authority: '+name)
-    return rendered,[dict(qualified_files_sha256=binding,controller_functions=sorted(controllers),preserved_executor_version=before,preserved_package_functions=sorted(packages),all_other_template_content_preserved=True)]
+    return rendered,[dict(qualified_files_sha256=binding,controller_functions=sorted(controllers),controller_changes='Code and matching CDK asset-path metadata only',preserved_executor_version=before,preserved_package_functions=sorted(packages),all_other_template_content_preserved=True)]
 
 def guard_template(previous, candidate):
     """No deletion/replacement of machines, storage, identities or IAM policies."""
