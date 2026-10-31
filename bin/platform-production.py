@@ -83,7 +83,15 @@ def render_qualified_budget_controllers(previous,candidate,directory,stack_info)
         if not isinstance(value,str) or not (re.fullmatch(r'ami-[a-f0-9]{17}',value) if name!='BootstrapVersion' else re.fullmatch(r'[1-9][0-9]*',value)):raise ValueError('Invalid nonsecret parameter pin.')
         rendered['Parameters'][name]={**definition,'Type':'String','Default':value}
         pins.append(dict(parameter_key=name,source_path=pin['source_path'],resolved_value=value,previous_type=definition['Type'],type='String',live_value_preserved=True))
-    return rendered,[dict(qualified_files_sha256=binding,controller_functions=sorted(controllers),controller_changes='Code and matching CDK asset-path metadata only',preserved_executor_version=before,preserved_package_functions=sorted(packages),preserved_controller_configuration=preserved_configuration,parameter_pins=pins,all_other_template_content_preserved=True)]
+    outputs={item['OutputKey']:item['OutputValue'] for item in stack_info.get('Outputs',[])};output_pins=[]
+    if set(scope['existing_output_pins'])!={'BenchmarkImagePipelineRoleArn'}:raise ValueError('Unreviewed output pin.')
+    for name,pin in scope['existing_output_pins'].items():
+        role=old[pin['role_logical_id']]
+        expected='arn:aws:iam::395567831870:role/JumpServeBenchmarkImageBuilder'
+        if pin['value']!=expected or role['Type']!='AWS::IAM::Role' or role['Properties'].get('RoleName')!='JumpServeBenchmarkImageBuilder' or role['Properties'].get('Path','/')!='/' or outputs.get(name)!=expected:raise ValueError('Existing named-role output does not match its recorded identity.')
+        rendered['Outputs'][name]['Value']=expected
+        output_pins.append(dict(output_key=name,value=expected,live_value_preserved=True))
+    return rendered,[dict(qualified_files_sha256=binding,controller_functions=sorted(controllers),controller_changes='Code and matching CDK asset-path metadata only',preserved_executor_version=before,preserved_package_functions=sorted(packages),preserved_controller_configuration=preserved_configuration,parameter_pins=pins,output_pins=output_pins,all_other_template_content_preserved=True)]
 
 def guard_template(previous, candidate):
     """No deletion/replacement of machines, storage, identities or IAM policies."""
@@ -172,7 +180,7 @@ def frontend(session, revision):
         if response.status!=200:raise RuntimeError('Public frontend smoke check failed.')
     return dict(amplify_app=app,job_id=job['jobId'],public_revision=identity['revision'],public_smoke_passed=True)
 
-def infrastructure(session, candidate, operation):
+def infrastructure(session, candidate, operation, qualified_defaults=False):
     cf=session.client('cloudformation');proof=[]
     # All comparisons complete before the first mutation. A rejected stack can
     # never leave an earlier stack deployed as a partial "successful" release.
@@ -185,7 +193,8 @@ def infrastructure(session, candidate, operation):
         info=cf.describe_stacks(StackName=stack)['Stacks'][0]
         if info['StackStatus'] not in ('CREATE_COMPLETE','UPDATE_COMPLETE','UPDATE_ROLLBACK_COMPLETE'):raise RuntimeError('Stack is not settled: '+stack)
         synthesized=json.loads(path.read_bytes());template,preserved=render_preserving_telemetry(original,synthesized)
-        template,qualified_scope=render_qualified_budget_controllers(original,template,candidate,info)
+        qualified_scope=[]
+        if qualified_defaults:template,qualified_scope=render_qualified_budget_controllers(original,template,candidate,info)
         # Retain a value-free comparison even when a guard rejects the candidate.
         directory=Path('.test-artifacts/platform-release');directory.mkdir(parents=True,exist_ok=True)
         old=original.get('Resources',{});new=template.get('Resources',{})
@@ -220,6 +229,8 @@ def infrastructure(session, candidate, operation):
             if status!='UPDATE_COMPLETE':raise RuntimeError('CloudFormation rolled back or failed: '+status)
             actual_parameters={p['ParameterKey']:p['ParameterValue'] for p in current.get('Parameters',[])}
             if any(actual_parameters.get(p['ParameterKey'])!=p['ParameterValue'] for p in parameters):raise RuntimeError('Deployed parameter value differs from the retained value.')
+            actual_outputs={item['OutputKey']:item['OutputValue'] for item in current.get('Outputs',[])}
+            if any(actual_outputs.get(pin['output_key'])!=pin['value'] for scope in qualified_scope for pin in scope['output_pins']):raise RuntimeError('Deployed output differs from its retained value.')
             deployed=cf.get_template(StackName=stack,TemplateStage='Original')['TemplateBody']
             if isinstance(deployed,str):deployed=json.loads(deployed)
             if encoded(deployed)!=body:raise RuntimeError('Deployed template differs from the rendered candidate.')
@@ -229,8 +240,9 @@ def infrastructure(session, candidate, operation):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--component',choices=REPOSITORIES,required=True);parser.add_argument('--repository',required=True);parser.add_argument('--revision',required=True);parser.add_argument('--operation-id',required=True);parser.add_argument('--candidate',type=Path,default=Path('.candidate'));args=parser.parse_args()
+    parser.add_argument('--component',choices=REPOSITORIES,required=True);parser.add_argument('--repository',required=True);parser.add_argument('--revision',required=True);parser.add_argument('--operation-id',required=True);parser.add_argument('--candidate',type=Path,default=Path('.candidate'));parser.add_argument('--qualified-defaults',action='store_true');args=parser.parse_args()
     if args.repository!=REPOSITORIES[args.component] or not re.fullmatch('[a-f0-9]{40}',args.revision):raise ValueError('Exact repository/revision required.')
+    if args.qualified_defaults and args.component!='infrastructure':raise ValueError('Qualified defaults require their infrastructure release.')
     args.operation_id=str(uuid.UUID(args.operation_id))
     import boto3
     from botocore.config import Config
@@ -241,7 +253,7 @@ def main():
     session.client=lambda service:original_client(service,config=Config(retries=dict(total_max_attempts=1),connect_timeout=15,read_timeout=60))
     if session.client('sts').get_caller_identity()['Account']!=ACCOUNT:raise ValueError('AWS account differs.')
     if args.component=='frontend':result=frontend(session,args.revision)
-    elif args.component=='infrastructure':result=infrastructure(session,args.candidate,args.operation_id)
+    elif args.component=='infrastructure':result=infrastructure(session,args.candidate,args.operation_id,qualified_defaults=args.qualified_defaults)
     else:
         # The dedicated AMI job produces and verifies the actual selected image.
         proof=json.loads(Path('backend-proof/production-verification.json').read_bytes())

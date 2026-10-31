@@ -12,6 +12,8 @@ def inputs():
     component=os.environ['PLATFORM_COMPONENT'];repository=os.environ['PLATFORM_REPOSITORY'];revision=os.environ['PLATFORM_REVISION'];operation=os.environ['PLATFORM_OPERATION_ID']
     expected={'frontend':'jumpserve-networks/jumpserve-front-end','infrastructure':'jumpserve-networks/jumpserve-infra'}
     if expected.get(component)!=repository or not re.fullmatch('[a-f0-9]{40}',revision) or str(uuid.UUID(operation))!=operation:raise ValueError('Exact platform release identity required.')
+    qualified=os.environ.get('PLATFORM_QUALIFIED_DEFAULTS','false')
+    if qualified not in ('true','false') or (qualified=='true' and component!='infrastructure'):raise ValueError('Qualified defaults apply only to their infrastructure release.')
     with urllib.request.urlopen(urllib.request.Request('https://api.github.com/repos/'+repository+'/git/ref/heads/main',headers={'User-Agent':'JumpServe-Platform-Release'}),timeout=30) as response:main=json.loads(response.read(100000))['object']['sha']
     if main!=revision:raise ValueError('Production main advanced; do not deploy a stale revision.')
     return component,repository,revision,operation
@@ -24,6 +26,9 @@ def main():
         if any(not re.fullmatch('[a-f0-9]{40}',value) for value in pins.values()):raise ValueError('Invalid runtime pin.')
         with open(os.environ['GITHUB_OUTPUT'],'a') as output:
             for name,value in pins.items():output.write(name+'='+value+'\n')
-    if args.execute:subprocess.run(['python3','-B','bin/platform-production.py','--component',component,'--repository',repository,'--revision',revision,'--operation-id',operation],check=True,timeout=4000)
+    if args.execute:
+        command=['python3','-B','bin/platform-production.py','--component',component,'--repository',repository,'--revision',revision,'--operation-id',operation]
+        if os.environ.get('PLATFORM_QUALIFIED_DEFAULTS')=='true':command.append('--qualified-defaults')
+        subprocess.run(command,check=True,timeout=4000)
 
 if __name__=='__main__':main()

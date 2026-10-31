@@ -16,6 +16,11 @@ on:
         type: choice
         options: [frontend, infrastructure]
         required: true
+      qualified_defaults:
+        description: Use the fixed, source-qualified unlimited-defaults release profile
+        type: boolean
+        default: false
+        required: false
 permissions:
   contents: read
   id-token: write
@@ -32,6 +37,7 @@ jobs:
       PLATFORM_REPOSITORY: ${{ inputs.repository }}
       PLATFORM_REVISION: ${{ inputs.revision }}
       PLATFORM_COMPONENT: ${{ inputs.component }}
+      PLATFORM_QUALIFIED_DEFAULTS: ${{ inputs.qualified_defaults && 'true' || 'false' }}
     steps:
       - uses: actions/checkout@v4
         with:

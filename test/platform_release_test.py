@@ -11,6 +11,7 @@ ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('platform_production',ROOT/'bin/platform-production.py');release=importlib.util.module_from_spec(spec);spec.loader.exec_module(release)
 spec=importlib.util.spec_from_file_location('platform_synthesize',ROOT/'bin/platform-synthesize.py');synthesis=importlib.util.module_from_spec(spec);spec.loader.exec_module(synthesis)
 spec=importlib.util.spec_from_file_location('platform_diagnostics',ROOT/'bin/platform-deployment-diagnostics.py');diagnostics=importlib.util.module_from_spec(spec);spec.loader.exec_module(diagnostics)
+spec=importlib.util.spec_from_file_location('platform_input',ROOT/'bin/platform-release-input.py');release_input=importlib.util.module_from_spec(spec);spec.loader.exec_module(release_input)
 
 class PlatformReleaseTests(unittest.TestCase):
     def setUp(self):
@@ -30,6 +31,20 @@ class PlatformReleaseTests(unittest.TestCase):
         self.assertEqual(len(result['matching_events']),1);self.assertNotIn('must-not-appear',json.dumps(result))
         self.assertEqual(session.client.call_args_list,[unittest.mock.call('cloudformation')])
         self.assertEqual([call[0] for call in cf.method_calls],['describe_stacks','get_template','describe_stack_events'])
+
+    def test_qualified_release_mode_is_explicit_and_rejects_cross_component_use(self):
+        revision='a'*40
+        environment=dict(PLATFORM_COMPONENT='infrastructure',PLATFORM_REPOSITORY='jumpserve-networks/jumpserve-infra',PLATFORM_REVISION=revision,PLATFORM_OPERATION_ID='9567fb05-b800-5175-9d2d-ee164fb3a31f')
+        class Response:
+            def __enter__(self):return self
+            def __exit__(self,*args):pass
+            def read(self,*args):return json.dumps(dict(object=dict(sha=revision))).encode()
+        for qualified in ('false','true'):
+            with patch.dict(os.environ,{**environment,'PLATFORM_QUALIFIED_DEFAULTS':qualified},clear=True),patch.object(release_input.urllib.request,'urlopen',return_value=Response()),patch.object(release_input.subprocess,'run') as run,patch('sys.argv',['platform-release-input.py','--execute']):release_input.main()
+            self.assertEqual('--qualified-defaults' in run.call_args.args[0],qualified=='true')
+        invalid={**environment,'PLATFORM_COMPONENT':'frontend','PLATFORM_REPOSITORY':'jumpserve-networks/jumpserve-front-end','PLATFORM_QUALIFIED_DEFAULTS':'true'}
+        with patch.dict(os.environ,invalid,clear=True),patch.object(release_input.urllib.request,'urlopen') as network,self.assertRaises(ValueError):release_input.inputs()
+        network.assert_not_called()
 
     def test_telemetry_rendering_preserves_existing_resource_and_other_changes(self):
         previous=copy.deepcopy(self.base);previous['Resources']['CDKMetadata']=dict(Type='AWS::CDK::Metadata',Properties=dict(Analytics='old-runtime'))
@@ -56,7 +71,10 @@ class PlatformReleaseTests(unittest.TestCase):
         old=dict(Parameters={},Resources={name:dict(Type='AWS::Lambda::Function',Properties=dict(Role='retained-role',Code=dict(S3Bucket=release.BUCKET,S3Key='a'*64+'.zip'),Environment=dict(Variables=dict(EXECUTOR={'Ref':before}))),Metadata={'aws:asset:path':'asset.'+'a'*64,'aws:asset:property':'Code','aws:asset:is-bundled':False}) for name in controllers+packages})
         old['Resources'][before]=dict(Type='AWS::Lambda::Version',Properties=dict(FunctionName={'Ref':packages[0]}))
         old['Resources']['Policy']=dict(Type='AWS::IAM::Policy',Properties=dict(PolicyDocument=dict(Statement=[dict(Action='lambda:InvokeFunction',Resource={'Ref':before})])))
-        info=dict(Parameters=[])
+        output_pin=scope['existing_output_pins']['BenchmarkImagePipelineRoleArn']
+        old['Resources'][output_pin['role_logical_id']]=dict(Type='AWS::IAM::Role',Properties=dict(RoleName=output_pin['role_name']))
+        old['Outputs']=dict(BenchmarkImagePipelineRoleArn=dict(Value={'Fn::GetAtt':[output_pin['role_logical_id'],'Arn']}))
+        info=dict(Parameters=[],Outputs=[dict(OutputKey='BenchmarkImagePipelineRoleArn',OutputValue=output_pin['value'])])
         for name,pin in scope['existing_parameter_pins'].items():
             old['Parameters'][name]=dict(Type=pin['parameter_type'],Default=pin['source_path'])
             info['Parameters'].append(dict(ParameterKey=name,ParameterValue=pin['source_path'],ResolvedValue=pin['resolved_value']))
@@ -76,6 +94,7 @@ class PlatformReleaseTests(unittest.TestCase):
             for name in packages+[before,'Policy']:self.assertEqual(rendered['Resources'][name],old['Resources'][name])
             retained=copy.deepcopy(rendered)
             retained['Parameters']=copy.deepcopy(old['Parameters'])
+            retained['Outputs']=copy.deepcopy(old['Outputs'])
             for name in controllers:
                 retained['Resources'][name]['Properties']['Code']=copy.deepcopy(old['Resources'][name]['Properties']['Code'])
                 retained['Resources'][name]['Metadata']['aws:asset:path']=old['Resources'][name]['Metadata']['aws:asset:path']
@@ -101,17 +120,26 @@ class PlatformReleaseTests(unittest.TestCase):
                 elif error=='changed-resolved':bad_info['Parameters'][0]['ResolvedValue']='different'
                 else:bad_old['Parameters']['Unexpected']=dict(Type='AWS::SSM::Parameter::Value<String>',Default='/unreviewed')
                 with self.subTest(parameter_error=error),self.assertRaises(ValueError):release.render_qualified_budget_controllers(bad_old,candidate,root,bad_info)
+            for error in ('changed-output','changed-role-path'):
+                bad_info=copy.deepcopy(info);bad_old=copy.deepcopy(old)
+                if error=='changed-output':bad_info['Outputs'][0]['OutputValue']='arn:aws:iam::395567831870:role/Unrelated'
+                else:bad_old['Resources'][output_pin['role_logical_id']]['Properties']['Path']='/unreviewed/'
+                with self.subTest(output_error=error),self.assertRaises(ValueError):release.render_qualified_budget_controllers(bad_old,candidate,root,bad_info)
             # Execute the actual deployment adapter against an explicit cloud
             # fixture, proving the frozen values reach UpdateStack and readback.
             assembly=root/'cdk.out';assembly.mkdir();(assembly/'Fixture.template.json').write_text(json.dumps(candidate))
             cf=Mock();cf.get_template.side_effect=[dict(TemplateBody=old),dict(TemplateBody=rendered)]
             expected_parameters=[dict(ParameterKey=name,ParameterValue=pin['resolved_value']) for name,pin in scope['existing_parameter_pins'].items()]
-            cf.describe_stacks.side_effect=[dict(Stacks=[dict(StackStatus='UPDATE_COMPLETE',**info)]),dict(Stacks=[dict(StackStatus='UPDATE_COMPLETE',Parameters=expected_parameters)])]
+            cf.describe_stacks.side_effect=[dict(Stacks=[dict(StackStatus='UPDATE_COMPLETE',**info)]),dict(Stacks=[dict(StackStatus='UPDATE_COMPLETE',Parameters=expected_parameters,Outputs=info['Outputs'])])]
             cf.update_stack.return_value=dict(StackId='synthetic-cloudformation-fixture');session=Mock();session.client.return_value=cf
             previous_cwd=Path.cwd()
             try:
                 os.chdir(root)
-                with patch.object(release,'STACKS',('Fixture',)),patch.object(release,'publish_assets',return_value=[]):result=release.infrastructure(session,root,'fixture-operation')
+                generic=Mock();generic.get_template.return_value=dict(TemplateBody=old);generic.describe_stacks.return_value=dict(Stacks=[dict(StackStatus='UPDATE_COMPLETE',**info)])
+                generic_session=Mock();generic_session.client.return_value=generic
+                with patch.object(release,'STACKS',('Fixture',)),patch.object(release,'publish_assets') as generic_assets,self.assertRaises(ValueError):release.infrastructure(generic_session,root,'ordinary-operation')
+                generic.update_stack.assert_not_called();generic_assets.assert_not_called()
+                with patch.object(release,'STACKS',('Fixture',)),patch.object(release,'publish_assets',return_value=[]):result=release.infrastructure(session,root,'fixture-operation',qualified_defaults=True)
             finally:os.chdir(previous_cwd)
             self.assertEqual(cf.update_stack.call_args.kwargs['Parameters'],expected_parameters)
             self.assertEqual(result['stacks'][0]['status'],'UPDATE_COMPLETE')

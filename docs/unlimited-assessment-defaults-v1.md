@@ -57,9 +57,11 @@ runtime/authority differences. It starts from the deployed template, copies only
 the qualified controller code pointers and matching asset metadata, and retains
 all existing settings, including controller environments. The receipt lists
 candidate controller settings that were retained from production. The general
-release guard is unchanged. The profile
-applies only to that fixed qualified revision; it does not authorize future
-executor changes.
+release guard is unchanged. The profile requires the explicit
+`qualified_defaults: true` workflow input and applies only to that fixed
+qualified revision; it does not authorize future executor changes. Ordinary
+supervisor releases keep the normal guard and do not inherit this one-time
+deployment profile.
 
 The dedicated update also freezes the existing nonsecret Ubuntu AMI and CDK
 bootstrap parameter values. Both must match the reviewed profile and the actual
@@ -79,6 +81,13 @@ is added. The original rollback and matching AWS failure events are retained.
 Release sessions continue to use GitHub OIDC; the one-time policy repair requires
 an administrator credential because the release service cannot edit its own
 authority.
+
+The fixed image-builder role's output is retained as its exact recorded ARN.
+The dedicated renderer checks the deployed role name, root path and actual
+stack output before replacing that output's lookup with the same literal value;
+the final readback verifies it. The CDK definition derives the ARN from its fixed
+role identity. This avoids adding metadata access to the separately named image
+builder role. Its policy, trust and identity remain unchanged.
 
 Local validation includes 398 backend tests (four environment-dependent skips),
 295 frontend tests, lint and the production frontend build. The isolated
