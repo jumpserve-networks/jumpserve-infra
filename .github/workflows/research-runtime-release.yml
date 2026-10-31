@@ -1,0 +1,73 @@
+name: Qualified research controller release
+run-name: Platform release ${{ inputs.operation_id }}
+on:
+  workflow_dispatch:
+    inputs:
+      operation_id: {type: string, required: true}
+      revision: {type: string, required: true}
+      pin_revision: {type: string, required: true}
+permissions:
+  contents: read
+  id-token: write
+concurrency:
+  group: jumpserve-platform-production
+  cancel-in-progress: false
+jobs:
+  release:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      PLATFORM_OPERATION_ID: ${{ inputs.operation_id }}
+      RESEARCH_RUNTIME_REVISION: ${{ inputs.revision }}
+      RESEARCH_RUNTIME_PIN_REVISION: ${{ inputs.pin_revision }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.pin_revision }}
+          path: .pin
+          persist-credentials: false
+      - name: Read exact qualification predecessor before obtaining credentials
+        id: pins
+        run: python3 -B bin/research-runtime-release.py pins
+      - uses: actions/checkout@v4
+        with:
+          repository: jumpserve-networks/jumpserve-back-end
+          ref: ${{ inputs.revision }}
+          path: .backend
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: jumpserve-networks/jumpserve-back-end
+          ref: ${{ steps.pins.outputs.previous }}
+          path: .previous
+          persist-credentials: false
+      - name: Independently qualify frozen source without credentials or network
+        run: python3 -B bin/research-runtime-release.py qualify
+      - run: python3 -m pip install boto3==1.42.4
+      - uses: aws-actions/configure-aws-credentials@v6.2.3
+        with:
+          role-to-assume: arn:aws:iam::395567831870:role/JumpServePlatformRelease
+          role-session-name: research-runtime-${{ github.run_id }}
+          aws-region: us-east-1
+          allowed-account-ids: '395567831870'
+          role-duration-seconds: 7200
+          unset-current-credentials: true
+      - name: Change only existing controller code and verify actual deployed bytes
+        run: python3 -B bin/research-runtime-release.py execute
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: platform-release-${{ inputs.operation_id }}
+          path: production-verification.json
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: research-runtime-evidence-${{ inputs.operation_id }}
+          path: .test-artifacts/research-runtime-release/
+          if-no-files-found: ignore
