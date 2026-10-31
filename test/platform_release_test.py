@@ -40,7 +40,7 @@ class PlatformReleaseTests(unittest.TestCase):
     def test_qualified_defaults_release_changes_only_three_controller_code_assets(self):
         scope=json.loads((ROOT/'assessment-budget-defaults-release.json').read_bytes())
         controllers=scope['controller_functions'];packages=scope['preserved_package_functions'];before=scope['previous_executor_version'];after=scope['generated_executor_version']
-        old=dict(Parameters={},Resources={name:dict(Type='AWS::Lambda::Function',Properties=dict(Role='retained-role',Code=dict(S3Key='a'*64+'.zip'),Environment=dict(Variables=dict(EXECUTOR={'Ref':before}))),Metadata={'aws:asset:path':'asset.'+'a'*64,'aws:asset:property':'Code','aws:asset:is-bundled':False}) for name in controllers+packages})
+        old=dict(Parameters={},Resources={name:dict(Type='AWS::Lambda::Function',Properties=dict(Role='retained-role',Code=dict(S3Bucket=release.BUCKET,S3Key='a'*64+'.zip'),Environment=dict(Variables=dict(EXECUTOR={'Ref':before}))),Metadata={'aws:asset:path':'asset.'+'a'*64,'aws:asset:property':'Code','aws:asset:is-bundled':False}) for name in controllers+packages})
         old['Resources'][before]=dict(Type='AWS::Lambda::Version',Properties=dict(FunctionName={'Ref':packages[0]}))
         old['Resources']['Policy']=dict(Type='AWS::IAM::Policy',Properties=dict(PolicyDocument=dict(Statement=[dict(Action='lambda:InvokeFunction',Resource={'Ref':before})])))
         candidate=json.loads(json.dumps(old).replace(before,after))
@@ -53,16 +53,26 @@ class PlatformReleaseTests(unittest.TestCase):
             self.assertEqual([item['logical_id'] for item in release.guard_template(old,rendered)],sorted(controllers))
             self.assertTrue(proof[0]['all_other_template_content_preserved'])
             for name in packages+[before,'Policy']:self.assertEqual(rendered['Resources'][name],old['Resources'][name])
-            for attack in ('controller-role','executor-role','policy','addition','deletion','asset-pointer','other-metadata'):
+            retained=copy.deepcopy(rendered)
+            for name in controllers:
+                retained['Resources'][name]['Properties']['Code']=copy.deepcopy(old['Resources'][name]['Properties']['Code'])
+                retained['Resources'][name]['Metadata']['aws:asset:path']=old['Resources'][name]['Metadata']['aws:asset:path']
+            self.assertEqual(retained,old)
+            for attack in ('controller-role','handler','asset-pointer'):
                 bad=copy.deepcopy(candidate)
                 if attack=='controller-role':bad['Resources'][controllers[0]]['Properties']['Role']='different'
-                elif attack=='executor-role':bad['Resources'][packages[0]]['Properties']['Role']='different'
-                elif attack=='policy':bad['Resources']['Policy']['Properties']['PolicyDocument']['Statement'][0]['Action']='lambda:*'
-                elif attack=='addition':bad['Resources']['Unexpected']=dict(Type='AWS::IAM::Role')
-                elif attack=='deletion':del bad['Resources']['Policy']
-                elif attack=='asset-pointer':bad['Resources'][controllers[0]]['Metadata']['aws:asset:path']='asset.'+'c'*64
-                else:bad['Resources'][packages[0]]['Metadata']['aws:asset:is-bundled']=True
+                elif attack=='handler':bad['Resources'][controllers[0]]['Properties']['Handler']='unexpected.handler'
+                else:bad['Resources'][controllers[0]]['Metadata']['aws:asset:path']='asset.'+'c'*64
                 with self.subTest(attack=attack),self.assertRaises(ValueError):release.render_qualified_budget_controllers(old,bad,root)
+            for ignored in ('environment','executor-role','policy','addition','deletion','other-metadata'):
+                bad=copy.deepcopy(candidate)
+                if ignored=='environment':bad['Resources'][controllers[0]]['Properties']['Environment']['Variables']['EXTRA']='out-of-scope'
+                elif ignored=='executor-role':bad['Resources'][packages[0]]['Properties']['Role']='different'
+                elif ignored=='policy':bad['Resources']['Policy']['Properties']['PolicyDocument']['Statement'][0]['Action']='lambda:*'
+                elif ignored=='addition':bad['Resources']['Unexpected']=dict(Type='AWS::IAM::Role')
+                elif ignored=='deletion':del bad['Resources']['Policy']
+                else:bad['Resources'][packages[0]]['Metadata']['aws:asset:is-bundled']=True
+                with self.subTest(preserved=ignored):self.assertEqual(release.render_qualified_budget_controllers(old,bad,root)[0],rendered)
             manifest=json.loads((root/'research-workflow-runtime.json').read_bytes());manifest['files']['network_package.py']='0'*64;(root/'research-workflow-runtime.json').write_text(json.dumps(manifest))
             with self.assertRaises(ValueError):release.render_qualified_budget_controllers(old,candidate,root)
 
