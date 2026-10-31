@@ -204,8 +204,28 @@ def verify_intake():
  active=admin.query("select study_id,status,max_spend_cents,committed_cents,deadline_at from public.research_autonomy_workflows where study_id='444d171c-2fac-4ba9-b33c-2b46304cb0ec'")[0];assert active['max_spend_cents'] is None
  result=dict(passed=True,study_id=study,production_intake_rpc_unlimited=True,inherited_operator_policy=event['policy_id'],actual_public_api_default_unlimited=True,qualification_cancelled_before_worker_admission=True,new_model_calls=0,new_experiments=0,original_assessment=active,fresh_interactive_google_upload_tested=False)
  save('production-new-intake-verified.json',result);return result
+def record_update():
+ frontend=read('frontend-production-verification.json');assert frontend['passed']
+ complete=all((BASE/name).exists() for name in ('infrastructure-production-verification.json','migration-applied-and-verified.json','production-new-intake-verified.json'))
+ details=dict(version='unlimited-assessment-defaults-release-v1',execution='Operator-requested interactive release',frontend=frontend,
+   infrastructure_intent=read('infrastructure-verification-intent.json'),future_default_active=complete,
+   failed_attempts=[json.loads(path.read_bytes()) for path in sorted(BASE.glob('infrastructure-release-failed-attempt-*.json'))])
+ if complete:
+  for name in ('infrastructure-production-verification','migration-applied-and-verified','production-new-intake-verified'):
+   proof=read(name+'.json');assert proof['passed'];details[name]=proof
+  infrastructure=details['infrastructure-production-verification'];intent=details['infrastructure_intent']
+  assert all(infrastructure[key]==intent[key] for key in ('operation_id','repository','revision','workflow_revision'))
+  message='Unlimited aggregate assessment budgets are live for all active and future assessments. Verified the deployed frontend and backend, immutable standing policy, new intake and public queue. Original deadlines, reservation history, cancellation and uncertain-call safeguards remain enforced.'
+ else:
+  message='All five active assessments are uncapped and the compatible frontend is live. The future-default release is in progress through GitHub OIDC. '+str(len(details['failed_attempts']))+' earlier infrastructure attempts stopped before production updates; their evidence is retained.'
+ stage='completed' if complete else 'progress';event=str(uuid.uuid5(uuid.UUID(read('frozen.json')['study_id']),'platform-release-'+stage+':'+details['infrastructure_intent']['operation_id']))
+ lit=admin.literal;save('platform-'+stage+'-event-intent.json',dict(id=event,message=message,details=details))
+ admin.query('insert into public.platform_events(id,task_id,actor,kind,message,details) values('+lit(event)+'::uuid,null,'+lit('Lab operator via Codex')+','+lit('release-'+stage)+','+lit(message)+','+lit(json.dumps(details))+'::jsonb) on conflict(id) do nothing',read_only=False)
+ row=admin.query('select id,kind,message,details from public.platform_events where id='+lit(event))[0]
+ assert row['message']==message and row['details']==details
+ save('platform-'+stage+'-event-verified.json',row);return dict(recorded=True,event_id=event,future_default_active=complete)
 def main():
- parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('action',choices=['prepare','qualify','collect','approve','health','proof-frontend','proof-infrastructure','migrate','verify-intake']);args=parser.parse_args()
+ parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('action',choices=['prepare','qualify','collect','approve','health','proof-frontend','proof-infrastructure','migrate','verify-intake','record-update']);args=parser.parse_args()
  result=enable_store() if args.action=='health' else production_proof(args.action.removeprefix('proof-')) if args.action.startswith('proof-') else globals()[args.action.replace('-','_')]()
  if args.action=='prepare':result={key:result[key] for key in ('version','qualified_files_sha256','study_id','task_id','resources')}
  print(json.dumps(result),flush=True)

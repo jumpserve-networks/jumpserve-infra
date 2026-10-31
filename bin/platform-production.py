@@ -42,6 +42,43 @@ def render_preserving_telemetry(previous,candidate):
             preserved.append(dict(logical_id='CDKMetadata',resource_sha256=sha(encoded(old))))
     return rendered,preserved
 
+def render_qualified_budget_controllers(previous,candidate,directory):
+    """One qualified defaults release; leave experiment code and authority intact."""
+    profile=directory/'assessment-budget-defaults-release.json'
+    manifest=json.loads((directory/'research-workflow-runtime.json').read_bytes())
+    if not profile.is_file() or manifest['source_revision']!='06a163322ebb07c010c2d40a7caffde2b341a1ec':return candidate,[]
+    scope=json.loads(profile.read_bytes());files=manifest['files'];old_files=scope['previous_source_files']
+    if scope['version']!='unlimited-assessment-defaults-deployment-v1' or scope['source_revision']!=manifest['source_revision']:raise ValueError('Defaults release identity differs.')
+    if set(files)!=set(old_files) or sorted(name for name in files if files[name]!=old_files[name])!=sorted(scope['changed_source_files']):raise ValueError('Defaults release changed unrelated runtime sources.')
+    binding=sha(encoded({name:value for name,value in files.items() if name!='policies/autonomous-repair-release-v1.json'}))
+    if binding!=scope['qualified_files_sha256'] or binding!='17d0e6a9bc89fc68481719dab2a1de681d53418df70fcd5f7aff476bfb3d1ff6':raise ValueError('Defaults release lacks its exact qualified source.')
+    controllers={'ResearchWorkflowApiE04EBDAC','ResearchWorkflowAutonomyWorker1BCFF82C','ResearchWorkflowQueueWorker702E601D'}
+    packages={'ResearchWorkflowPackageExecutor32D08CE2','ResearchWorkflowPackageIngestAA97237D','ResearchWorkflowPackageReaperED8C6D40'}
+    if set(scope['controller_functions'])!=controllers or set(scope['preserved_package_functions'])!=packages:raise ValueError('Defaults release scope differs.')
+    before=scope['previous_executor_version'];after=scope['generated_executor_version']
+    def references(value):
+        if isinstance(value,list):return [references(item) for item in value]
+        if not isinstance(value,dict):return value
+        if value=={'Ref':after}:return {'Ref':before}
+        if set(value)=={'Fn::GetAtt'} and isinstance(value['Fn::GetAtt'],list) and value['Fn::GetAtt'][0]==after:return {'Fn::GetAtt':[before,*value['Fn::GetAtt'][1:]]}
+        return {key:references(item) for key,item in value.items()}
+    rendered=references(copy.deepcopy(candidate));old=previous['Resources'];new=rendered['Resources']
+    if before not in old or before in new or after not in new or after in old or old[before]['Type']!='AWS::Lambda::Version' or new[after]!=old[before]:raise ValueError('Qualified executor version cannot be preserved.')
+    new[before]=new.pop(after)
+    for name in packages:
+        original=copy.deepcopy(old[name]);generated=copy.deepcopy(new[name])
+        original_code=original.get('Properties',{}).pop('Code',None);generated_code=generated.get('Properties',{}).pop('Code',None)
+        if old[name]['Type']!='AWS::Lambda::Function' or original!=generated or not original_code or not generated_code:raise ValueError('Experiment configuration differs from the retained executor.')
+        new[name]['Properties']['Code']=copy.deepcopy(original_code)
+    if set(old)!=set(new) or {k:v for k,v in previous.items() if k!='Resources'}!={k:v for k,v in rendered.items() if k!='Resources'}:raise ValueError('Defaults release changed other template structure.')
+    for name in old:
+        original=copy.deepcopy(old[name]);generated=copy.deepcopy(new[name])
+        if name in controllers:
+            if original['Type']!='AWS::Lambda::Function':raise ValueError('Defaults controller identity differs.')
+            original.get('Properties',{}).pop('Code',None);generated.get('Properties',{}).pop('Code',None)
+        if original!=generated:raise ValueError('Defaults release changed configuration or authority: '+name)
+    return rendered,[dict(qualified_files_sha256=binding,controller_functions=sorted(controllers),preserved_executor_version=before,preserved_package_functions=sorted(packages),all_other_template_content_preserved=True)]
+
 def guard_template(previous, candidate):
     """No deletion/replacement of machines, storage, identities or IAM policies."""
     if set(candidate)-{'Description','Resources','Parameters','Outputs','Mappings','Conditions','Metadata','Rules','AWSTemplateFormatVersion','Transform'}:raise ValueError('Unknown template section.')
@@ -140,18 +177,19 @@ def infrastructure(session, candidate, operation):
         original=cf.get_template(StackName=stack,TemplateStage='Original')['TemplateBody']
         if isinstance(original,str):original=json.loads(original)
         synthesized=json.loads(path.read_bytes());template,preserved=render_preserving_telemetry(original,synthesized)
+        template,qualified_scope=render_qualified_budget_controllers(original,template,candidate)
         # Retain a value-free comparison even when a guard rejects the candidate.
         directory=Path('.test-artifacts/platform-release');directory.mkdir(parents=True,exist_ok=True)
         old=original.get('Resources',{});new=template.get('Resources',{})
         comparison=[dict(logical_id=name,previous_type=old.get(name,{}).get('Type'),candidate_type=new.get(name,{}).get('Type'),changed_properties=sorted(key for key in set(old.get(name,{}).get('Properties',{}))|set(new.get(name,{}).get('Properties',{})) if old.get(name,{}).get('Properties',{}).get(key)!=new.get(name,{}).get('Properties',{}).get(key))) for name in sorted(set(old)|set(new)) if old.get(name)!=new.get(name)]
-        (directory/(stack+'-comparison.json')).write_bytes(encoded(dict(synthesized_template_sha256=sha(encoded(synthesized)),rendered_template_sha256=sha(encoded(template)),preserved_telemetry=preserved,resources=comparison)))
+        (directory/(stack+'-comparison.json')).write_bytes(encoded(dict(synthesized_template_sha256=sha(encoded(synthesized)),rendered_template_sha256=sha(encoded(template)),preserved_telemetry=preserved,qualified_scope=qualified_scope,resources=comparison)))
         changes=guard_template(original,template)
         info=cf.describe_stacks(StackName=stack)['Stacks'][0]
         if info['StackStatus'] not in ('CREATE_COMPLETE','UPDATE_COMPLETE','UPDATE_ROLLBACK_COMPLETE'):raise RuntimeError('Stack is not settled: '+stack)
-        if changes:plans.append((stack,template,changes,info,preserved,sha(encoded(synthesized))))
+        if changes:plans.append((stack,template,changes,info,preserved,qualified_scope,sha(encoded(synthesized))))
     if not plans:raise ValueError('No supported rendered production change was found.')
     assets=publish_assets(session,candidate)
-    for stack,template,changes,info,preserved,synthesized_sha256 in plans:
+    for stack,template,changes,info,preserved,qualified_scope,synthesized_sha256 in plans:
         body=encoded(template)
         if len(body)>1000000:raise ValueError('Rendered template exceeds its bounded deployment size.')
         template_argument=dict(TemplateBody=body.decode())
@@ -172,7 +210,7 @@ def infrastructure(session, candidate, operation):
             deployed=cf.get_template(StackName=stack,TemplateStage='Original')['TemplateBody']
             if isinstance(deployed,str):deployed=json.loads(deployed)
             if encoded(deployed)!=body:raise RuntimeError('Deployed template differs from the rendered candidate.')
-            return dict(stack=stack,status=status,template_sha256=sha(body),synthesized_template_sha256=synthesized_sha256,preserved_telemetry=preserved,changes=changes,stack_id=result['StackId'])
+            return dict(stack=stack,status=status,template_sha256=sha(body),synthesized_template_sha256=synthesized_sha256,preserved_telemetry=preserved,qualified_scope=qualified_scope,changes=changes,stack_id=result['StackId'])
         proof.append(wait(settled))
     return dict(stacks=proof,assets=assets,scope='Exact rendered templates and settled stacks; application behavior still requires its module-specific checks.')
 
