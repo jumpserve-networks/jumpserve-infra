@@ -51,5 +51,12 @@ class IntegratedRelease(unittest.TestCase):
   self.assertEqual(before['Resources'][group],after['Resources'][group])
   self.assertEqual(before['Resources']['ExistingAuthority'],after['Resources']['ExistingAuthority'])
   for name in names:self.assertEqual(after['Resources'][name]['Properties']['Environment']['Variables']['NETWORK_PACKAGE_SECURITY_GROUP'],'sg-0123456789abcdef0')
+ def test_verified_operator_published_version_needs_no_new_cloudformation_authority(self):
+  before,policies=fixture();arn=r.EXECUTOR_ARN+':61'
+  after,version=r.render(before,'b'*64+'.zip',policies,published_executor_arn=arn)
+  self.assertIsNone(version);self.assertEqual(set(before['Resources']),set(after['Resources']))
+  for name in r.CONTROLLERS:self.assertEqual(after['Resources'][name]['Properties']['Environment']['Variables']['NETWORK_BUILT_PACKAGE_FUNCTION'],arn)
+  for invalid in (r.EXECUTOR_ARN+':$LATEST',r.EXECUTOR_ARN.replace('395567831870','000000000000')+':61',r.EXECUTOR_ARN.replace('PackageExe','Other')+':61'):
+   with self.assertRaises(ValueError):r.render(before,'b'*64+'.zip',policies,published_executor_arn=invalid)
 
 if __name__=='__main__':unittest.main()
