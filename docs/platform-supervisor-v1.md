@@ -7,9 +7,10 @@ production deployments by this named service. Initial activation remains a
 separate explicit deployment step; ordinary interactive sessions retain their
 existing deployment rules.
 
-The current implementation is local. No production migration, IAM change,
-repository protection change, merge, application deployment or worker installation
-has been performed by this implementation session.
+The initial implementation was verified locally before the explicitly requested
+production rollout. Production evidence and the activation record are retained in
+private Platform Updates and the deployment artifacts; local fixture reports
+remain historical evidence rather than a claim of production activation.
 
 ## Operation and authority
 
@@ -101,7 +102,7 @@ The current automatic production adapters are:
 | --- | --- |
 | Frontend | Amplify's main build; exact successful build commit, public `/api/platform-version` match and HTTP smoke check |
 | Benchmark backend | Existing pinned AMI build, success/failure ingestion checks, selected production launcher image and live image/source receipt |
-| Existing infrastructure | Credential-free synthesis, guarded changes to existing Lambda/API/event/log resources, scoped CloudFormation update and exact deployed template comparison |
+| Existing benchmark infrastructure | Credential-free synthesis, guarded changes to existing Lambda/API/event/log resources in `JumpServeBenchmarkStack`, scoped CloudFormation update and exact deployed template comparison |
 
 New IAM/compute/storage identities, SQL migrations, worker changes, evaluated agent
 changes and qualified research/real-world runtime pins require their dedicated
@@ -110,6 +111,9 @@ it does not quietly send it through a broader deployment. This version does not
 automate every possible repository change. Scientific qualification and frozen
 criteria remain required. Cross-repository releases are recorded separately and
 are not an atomic transaction.
+General infrastructure releases do not deploy `JumpServeAgentStack`; this also
+prevents unrelated pending agent source changes from entering an infrastructure
+release through a newly synthesized asset.
 
 A merge, submitted workflow or successful CI job is not completion. Every
 applicable component needs an exact production verification receipt. A lost
@@ -166,9 +170,22 @@ including private enrollment inputs; never commit that packet.
    access/denial, publisher permissions, heartbeat and OIDC roles in production.
    Confirm the installed host-coordination wrapper against the actual research
    dispatch chain. A successful submission is not a successful installation.
-6. From an authorized Google session, resume admission and perform a bounded
-   end-to-end release control. Verify the actual production revision, retained
-   Supabase evidence and remote controls before describing the service as active.
+6. Resume admission through an authorized Google session or the explicitly
+   requested initial administrative bootstrap, recording the latter's distinct
+   actor and source instruction. Perform a bounded end-to-end release control.
+   Verify the actual production revision, retained Supabase evidence and remote
+   controls before describing the service as active.
+
+If image transfer from the operator computer is unavailable, build the same
+pinned recipe on the existing host and use `qualify-platform-host.py`. Its six
+provider-call limit is enforced by the Supabase task ledger. The control retains
+all requests/responses and checks numeric, zero and missing values with an
+unchanged acceptance script. `reconcile-platform-host.py` verifies retained work
+with provider transport disabled when a definite local admission stop occurred
+after the completion proposal. It preserves the original failed trial, cap and
+report and appends a separate receipt. `install-cloud` requires the original SSM
+result, source, recipe and image identities. Only a sole installer compatibility
+repair can reuse qualification of otherwise identical bundle inputs.
 
 Use the dashboard to disable releases or pause admission during investigation.
 Keep original records, versioned installation directories, failed reports and
