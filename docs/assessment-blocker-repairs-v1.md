@@ -1,7 +1,8 @@
 # Immediate assessment blocker repairs
 
-Status: implemented locally; production activation requires an explicit deployment
-request for this change. This document does not claim production activation.
+Status: activated in production on 2026-10-31 after the user's explicit deployment
+request. See the [production activation record](assessment-blocker-repairs-production-20261031.md)
+for the exact source, migration, private event receipts and observed worker pickup.
 
 The platform supervisor should react when an assessment encounters a blocker.
 General daily housekeeping remains a separate source of improvements. Migration
