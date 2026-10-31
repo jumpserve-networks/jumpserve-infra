@@ -217,7 +217,7 @@ def record_update():
   assert all(infrastructure[key]==intent[key] for key in ('operation_id','repository','revision','workflow_revision'))
   message='Unlimited aggregate assessment budgets are live for all active and future assessments. Verified the deployed frontend and backend, immutable standing policy, new intake and public queue. Original deadlines, reservation history, cancellation and uncertain-call safeguards remain enforced.'
  else:
-  message='All five active assessments are uncapped and the compatible frontend is live. The future-default release is in progress through GitHub OIDC. '+str(len(details['failed_attempts']))+' earlier infrastructure attempts stopped before application stack updates; their evidence is retained.'
+  message='All five active assessments are uncapped and the compatible frontend is live. The future-default release is in progress through GitHub OIDC. Earlier attempts and their original failure or rollback outcomes are retained in this record.'
  stage='completed' if complete else 'progress';event=str(uuid.uuid5(uuid.UUID(read('frozen.json')['study_id']),'platform-release-'+stage+':'+details['infrastructure_intent']['operation_id']))
  lit=admin.literal;save('platform-'+stage+'-event-intent.json',dict(id=event,message=message,details=details))
  admin.query('insert into public.platform_events(id,task_id,actor,kind,message,details) values('+lit(event)+'::uuid,null,'+lit('Lab operator via Codex')+','+lit('release-'+stage)+','+lit(message)+','+lit(json.dumps(details))+'::jsonb) on conflict(id) do nothing',read_only=False)
