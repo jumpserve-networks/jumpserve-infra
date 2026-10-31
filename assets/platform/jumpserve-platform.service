@@ -1,0 +1,30 @@
+[Unit]
+Description=JumpServe autonomous platform development supervisor
+After=network-online.target docker.service
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+Type=simple
+User=jumpserve
+Group=jumpserve
+SupplementaryGroups=docker
+EnvironmentFile=/etc/jumpserve-platform.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+UnsetEnvironment=AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_PROFILE AWS_DEFAULT_PROFILE
+WorkingDirectory=/opt/jumpserve/platform
+ExecStart=/opt/jumpserve/python/bin/python -B -m platform_supervisor.worker
+Restart=on-failure
+RestartSec=30
+TimeoutStopSec=120
+KillMode=control-group
+UMask=0077
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/jumpserve-platform /var/lib/jumpserve-openclaw/auth
+# Docker is deliberately accessed only by trusted host code. Generated tools
+# run in containers without this socket, service environment or host home.
+
+[Install]
+WantedBy=multi-user.target

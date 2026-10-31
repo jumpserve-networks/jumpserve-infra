@@ -7,6 +7,11 @@ on:
         description: Full backend commit to bake into the image
         required: true
         type: string
+      platform_operation_id:
+        description: Optional durable platform operation identity
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: read
@@ -108,3 +113,14 @@ jobs:
             cdk.out/benchmark-ami-live-verification.json
             cdk.out/benchmark-ami-verification-instances.json
             cdk.out/benchmark-ami-promotion.json
+      - name: Bind the selected image to the platform release
+        if: success() && inputs.platform_operation_id != ''
+        env:
+          PLATFORM_OPERATION_ID: ${{ inputs.platform_operation_id }}
+        run: python3 -B bin/platform-ami-proof.py
+      - uses: actions/upload-artifact@v4
+        if: success() && inputs.platform_operation_id != ''
+        with:
+          name: platform-release-${{ inputs.platform_operation_id }}
+          path: production-verification.json
+          if-no-files-found: error
