@@ -13,7 +13,7 @@ EXECUTOR_ARN='arn:aws:lambda:us-east-1:395567831870:function:JumpServeBenchmarkS
 def canonical(value):return json.dumps(value,sort_keys=True,separators=(',',':')).encode()
 def digest(raw):return hashlib.sha256(raw).hexdigest()
 
-def render(previous,key,policies,security_group_pin=None,published_executor_arn=None):
+def render(previous,key,policies,security_group_pin=None,published_executor_arn=None,previous_executor_arn=None):
  if not re.fullmatch(r'[a-f0-9]{64}\.zip',key):raise ValueError('Content-addressed runtime ZIP required.')
  expected={'built-package-v1':('built-package-costs-v3',2000),'netem-iperf-v1':('netem-iperf-costs-v3',100)}
  if set(policies)!=set(expected):raise ValueError('Both exact v3 policies required.')
@@ -23,6 +23,7 @@ def render(previous,key,policies,security_group_pin=None,published_executor_arn=
  old=previous['Resources'];versions=[n for n,r in old.items() if r['Type']=='AWS::Lambda::Version' and r.get('Properties',{}).get('FunctionName')=={'Ref':EXECUTOR}]
  if not versions:raise ValueError('Existing immutable executor version required.')
  if published_executor_arn is not None and not re.fullmatch(re.escape(EXECUTOR_ARN)+r':[1-9][0-9]*',published_executor_arn):raise ValueError('Only the existing exact executor immutable ARN can be pinned.')
+ if previous_executor_arn is not None and not re.fullmatch(re.escape(EXECUTOR_ARN)+r':[1-9][0-9]*',previous_executor_arn):raise ValueError('The verified predecessor must identify the existing immutable executor.')
  result=copy.deepcopy(previous);new_version=None if published_executor_arn else 'ResearchWorkflowPackageExecutorIntegratedVersion'+key[:24]
  if new_version in old:raise ValueError('This immutable release version already exists; reconcile its original deployment.')
  for name in CONTROLLERS|PACKAGES:
@@ -33,7 +34,8 @@ def render(previous,key,policies,security_group_pin=None,published_executor_arn=
   if name in CONTROLLERS:
    env=resource['Properties']['Environment']['Variables']
    for prefix,runner in [('BUILT_PACKAGE','built-package-v1'),('NETEM_IPERF','netem-iperf-v1')]:
-    if env.get('NETWORK_'+prefix+'_FUNCTION') not in [{'Ref':v} for v in versions]:raise ValueError('Controller no longer uses the reviewed immutable executor.')
+    value=env.get('NETWORK_'+prefix+'_FUNCTION')
+    if value not in [{'Ref':v} for v in versions] and not (previous_executor_arn is not None and value==previous_executor_arn):raise ValueError('Controller no longer uses the reviewed immutable executor.')
     env['NETWORK_'+prefix+'_FUNCTION']=published_executor_arn or {'Ref':new_version}
     env['NETWORK_'+prefix+'_POLICY_SHA256']=digest(canonical(policies[runner]))
   elif 'NETWORK_PACKAGE_SECURITY_GROUP' in resource['Properties'].get('Environment',{}).get('Variables',{}):
@@ -41,7 +43,7 @@ def render(previous,key,policies,security_group_pin=None,published_executor_arn=
    # The fixed release caller verifies this pin against both installed Lambda
    # environments and the existing stack's physical security-group identity.
    env=resource['Properties']['Environment']['Variables'];value=env['NETWORK_PACKAGE_SECURITY_GROUP']
-   if value!={'Fn::GetAtt':['ResearchWorkflowPackageMachinesF1AA60C3','GroupId']} or not isinstance(security_group_pin,str) or not re.fullmatch(r'sg-(?:[a-f0-9]{8}|[a-f0-9]{17})',security_group_pin):raise ValueError('Existing network placement must have a verified literal pin.')
+   if not isinstance(security_group_pin,str) or not re.fullmatch(r'sg-(?:[a-f0-9]{8}|[a-f0-9]{17})',security_group_pin) or value not in ({'Fn::GetAtt':['ResearchWorkflowPackageMachinesF1AA60C3','GroupId']},security_group_pin):raise ValueError('Existing network placement must have a verified literal pin.')
    if old['ResearchWorkflowPackageMachinesF1AA60C3']['Type']!='AWS::EC2::SecurityGroup':raise ValueError('Existing security group identity differs.')
    env['NETWORK_PACKAGE_SECURITY_GROUP']=security_group_pin
  if new_version:
