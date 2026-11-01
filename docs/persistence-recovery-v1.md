@@ -59,6 +59,12 @@ token or subscription grant is copied.
 
 CloudWatch creates the required service-linked OpsCenter action role when the
 alarms are provisioned. Verify that role and alarm action history at release.
+The probe uses unreserved Lambda concurrency: the initial production deployment
+showed that this account's entire concurrency quota is the minimum unreserved
+pool (10), so even a reservation of one prevents function creation. The once-per-
+minute schedule, 20-second timeout and disabled retries bound ordinary probe
+activity. If account-wide throttling prevents telemetry, the missing-data alarm
+still creates an AWS incident. Existing research concurrency is unchanged.
 Incidents are retained in AWS; email/SMS subscriptions are not configured.
 The monitor deliberately cannot restart the database or replay work.
 

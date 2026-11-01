@@ -8,7 +8,7 @@ test('independent probe has bounded reads, least privilege and outage incidents 
   const template = Template.fromStack(stack);
   template.hasResourceProperties('AWS::Lambda::Function', {
     Handler: 'monitor.handler', Runtime: 'python3.12', Timeout: 20,
-    MemorySize: 128, ReservedConcurrentExecutions: 1,
+    MemorySize: 128, ReservedConcurrentExecutions: Match.absent(),
     Environment: {Variables: {SUPABASE_SECRET_ARN: Match.anyValue()}},
   });
   template.hasResourceProperties('AWS::Events::Rule', {

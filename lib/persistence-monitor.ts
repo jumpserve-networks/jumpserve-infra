@@ -31,7 +31,9 @@ export class PersistenceMonitor extends Construct {
       }),
       timeout: cdk.Duration.seconds(20),
       memorySize: 128,
-      reservedConcurrentExecutions: 1,
+      // A reservation can make creation fail in accounts whose entire
+      // concurrency quota is the required unreserved pool. This read-only
+      // minute probe uses that pool; missed/throttled probes still alarm.
       retryAttempts: 0,
       maxEventAge: cdk.Duration.minutes(1),
       logGroup: group,
