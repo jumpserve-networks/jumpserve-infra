@@ -88,6 +88,15 @@ original bytes and verifies the real failed handoff without production mutations
 provider calls, or execution of archived code. These are implementing-AI software
 checks, not independent scientific or unattended-completion qualification.
 
+The first production passive probe caught a persistence-adapter integration
+failure: the bounded `limit=2` metadata lookup collided with `Store.rows`' default
+limit. That failed probe remains recorded. The corrective worker accepts an
+explicit query limit while preserving the task selector and the default bound.
+Three additional regressions exercise the actual production adapter, including
+the original-metadata plus storage-GET path; they do not replace the existing
+delivery controls. The correction must pass its source-bound qualification and
+the same real production probe before delivery is described as verified.
+
 Production remains unchanged until an explicit deployment request. A release must
 qualify the exact supervisor bundle, apply the forward migration under the existing
 bounded maintenance procedure, install and hash-verify the new worker, and restore
