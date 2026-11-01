@@ -58,5 +58,18 @@ class IntegratedRelease(unittest.TestCase):
   for name in r.CONTROLLERS:self.assertEqual(after['Resources'][name]['Properties']['Environment']['Variables']['NETWORK_BUILT_PACKAGE_FUNCTION'],arn)
   for invalid in (r.EXECUTOR_ARN+':$LATEST',r.EXECUTOR_ARN.replace('395567831870','000000000000')+':61',r.EXECUTOR_ARN.replace('PackageExe','Other')+':61'):
    with self.assertRaises(ValueError):r.render(before,'b'*64+'.zip',policies,published_executor_arn=invalid)
+ def test_followup_requires_exact_verified_literal_predecessor_and_network(self):
+  before,policies=fixture();group='ResearchWorkflowPackageMachinesF1AA60C3';before['Resources'][group]=dict(Type='AWS::EC2::SecurityGroup',Properties=dict(VpcId='vpc-fixture'))
+  sg='sg-0123456789abcdef0';old=r.EXECUTOR_ARN+':14';new=r.EXECUTOR_ARN+':15'
+  for name in r.CONTROLLERS:
+   for prefix in ('BUILT_PACKAGE','NETEM_IPERF'):before['Resources'][name]['Properties']['Environment']['Variables']['NETWORK_'+prefix+'_FUNCTION']=old
+  before['Resources'][r.EXECUTOR]['Properties']['Environment']['Variables']['NETWORK_PACKAGE_SECURITY_GROUP']=sg
+  with self.assertRaises(ValueError):r.render(before,'b'*64+'.zip',policies,sg,new)
+  with self.assertRaises(ValueError):r.render(before,'b'*64+'.zip',policies,'sg-11111111111111111',new,old)
+  with self.assertRaises(ValueError):r.render(before,'b'*64+'.zip',policies,sg,new,r.EXECUTOR_ARN+':13')
+  after,version=r.render(before,'b'*64+'.zip',policies,sg,new,old)
+  self.assertIsNone(version);self.assertEqual(set(before['Resources']),set(after['Resources']))
+  self.assertEqual(after['Resources'][r.EXECUTOR]['Properties']['Environment']['Variables']['NETWORK_PACKAGE_SECURITY_GROUP'],sg)
+  for name in r.CONTROLLERS:self.assertEqual(after['Resources'][name]['Properties']['Environment']['Variables']['NETWORK_BUILT_PACKAGE_FUNCTION'],new)
 
 if __name__=='__main__':unittest.main()
