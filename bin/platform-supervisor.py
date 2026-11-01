@@ -24,6 +24,7 @@ MIGRATIONS=['202610300004_platform_supervisor.sql','202610300005_platform_worker
 MIGRATIONS.append('202611010006_platform_repair_fair_scheduling.sql')
 MIGRATIONS.extend(['202611010007_controller_queue_reconciliation.sql','202611010008_repair_incident_delivery.sql'])
 MIGRATIONS.extend(['202611010009_controller_terminal_recovery.sql','202611010010_controller_incident_evidence.sql'])
+MIGRATIONS.append('202611010011_platform_incident_closure.sql')
 BUCKET='cdk-hnb659fds-assets-395567831870-us-east-1'
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def save(path,value):path.write_text(json.dumps(value,sort_keys=True,indent=2)+'\n')
@@ -121,6 +122,7 @@ def migrate(packet):
             '202611010008_repair_incident_delivery.sql':"to_regprocedure('public.platform_repair_context_data_before_delivery_v5(uuid)')",
             '202611010009_controller_terminal_recovery.sql':"to_regprocedure('public.research_controller_dispatch_reconcile(uuid,uuid,text,jsonb)')",
             '202611010010_controller_incident_evidence.sql':"to_regprocedure('public.platform_repair_context_data_before_transport_v6(uuid)')",
+            '202611010011_platform_incident_closure.sql':"to_regprocedure('public.platform_worker_before_incident_closure_v7(text,uuid,uuid,uuid,jsonb)')",
         }[name]
         exists=db.query('select '+marker+' is not null present')[0]['present']
         if not exists:db.query((ROOT/'database'/name).read_text(),read_only=False)

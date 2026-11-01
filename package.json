@@ -10,6 +10,7 @@
     "test:platform:scheduling": "python3 -B test/check_platform_fair_scheduling_database.py",
     "test:platform:controller-handoff": "python3 -B test/check_controller_handoff_database.py",
     "test:platform:controller-terminal": "python3 -B test/check_controller_terminal_database.py",
+    "test:platform:incident-closure": "python3 -B test/check_incident_closure_database.py",
     "cdk:platform": "cdk --app \"npx ts-node --prefer-ts-exts bin/platform.ts\"",
     "test:research:netem-persistence": "python3 -B test/check_netem_measurement_persistence.py",
     "test:research:optional-budget": "python3 -B test/check_optional_budget_database.py",
