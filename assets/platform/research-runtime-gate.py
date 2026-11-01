@@ -26,19 +26,44 @@ class InspectionBoundary(ast.NodeTransformer):
   expected=ast.parse('inspection_identifier(read)').body[0]
   if ast.dump(node,include_attributes=False)==ast.dump(expected,include_attributes=False):return None
   return self.generic_visit(node)
+class SourceEnvelopeBoundary(ast.NodeTransformer):
+ """Permit only omission of duplicated initial inline transport in rereads."""
+ def visit_FunctionDef(self,node):
+  if node.name!='inspect_evidence':return node
+  assignment=ast.parse("inline_fields=('inline_passage','inline_fragments','inline_fragment_coverage','inline_reading_guidance')").body[0]
+  before=ast.parse("envelope=dict(source_material={k:v for k,v in material.items() if k!='inline_passage'},record_kind='extracted-paper-text' if extracted else 'source-metadata-only')").body[0]
+  after=ast.parse("envelope=dict(source_material={k:v for k,v in material.items() if k not in inline_fields},record_kind='extracted-paper-text' if extracted else 'source-metadata-only')").body[0]
+  class Normalize(ast.NodeTransformer):
+   def visit_Assign(self,n):
+    shape=ast.dump(n,include_attributes=False)
+    if shape==ast.dump(assignment,include_attributes=False):return None
+    if shape==ast.dump(after,include_attributes=False):return copy.deepcopy(before)
+    return self.generic_visit(n)
+  # Both exact nodes are required; a differently scoped/changed field list
+  # or any other reader/auth/coverage edit remains frozen by the final AST.
+  shapes=[ast.dump(n,include_attributes=False) for n in ast.walk(node)]
+  if ast.dump(assignment,include_attributes=False) in shapes and ast.dump(after,include_attributes=False) in shapes:
+   return Normalize().visit(node)
+  return node
 def protected_tree(raw,name):
  tree=ast.parse(raw)
+ if name=='autonomy.py':tree=SourceEnvelopeBoundary().visit(tree)
  for node in tree.body:
   if isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef)) and node.name in FUNCTIONS.get(name,set()):node.body=[ast.Pass()]
   elif name=='autonomy_model.py' and isinstance(node,ast.FunctionDef) and node.name=='parse':InspectionBoundary().visit(node)
   elif name=='autonomy_model.py' and isinstance(node,ast.ImportFrom) and node.module=='workflow':node.names=[n for n in node.names if n.name!='identifier']
- # The generated observation RPC is the sole permitted store routing addition.
+ # Only these fixed service RPC routes may be added to store routing.
  if name=='store.py':
-  allowed=ast.parse("if name=='research_autonomy_runtime_observe':return request('/rest/v1/rpc/'+name,'POST',payload)").body[0]
+  allowed=[ast.dump(ast.parse("if name=="+repr(route)+":return request('/rest/v1/rpc/'+name,'POST',payload)").body[0],include_attributes=False)
+   for route in ('research_autonomy_runtime_observe','research_controller_dispatch_reconcile')]
   for node in tree.body:
-   if isinstance(node,ast.FunctionDef) and node.name=='rpc':node.body=[n for n in node.body if ast.dump(n,include_attributes=False)!=ast.dump(allowed,include_attributes=False)]
+   if isinstance(node,ast.FunctionDef) and node.name=='rpc':node.body=[n for n in node.body if ast.dump(n,include_attributes=False) not in allowed]
  # An operational helper may be added without changing any other module node.
  tree.body=[n for n in tree.body if not (name=='autonomy_model.py' and isinstance(n,ast.FunctionDef) and n.name=='inspection_identifier')]
+ if name=='dispatch_recovery.py':
+  marker=ast.dump(ast.parse("CONTROLLER_VERSION='controller-terminal-reconciliation-v1'").body[0],include_attributes=False)
+  tree.body=[n for n in tree.body if not (isinstance(n,ast.FunctionDef) and n.name=='controller_terminal')
+   and ast.dump(n,include_attributes=False)!=marker]
  return ast.dump(tree,include_attributes=False)
 def inspect(before,after,manifest):
  before=Path(before);after=Path(after);files={};changed=[]

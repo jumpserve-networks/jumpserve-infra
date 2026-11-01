@@ -6,6 +6,19 @@ root=Path.cwd()/'research_workflow';sys.path[:0]=[str(root),str(root/'tests')]
 import autonomy,autonomy_model as model,autonomous_repair as repair,store,siwc_protocol as wire
 from test_autonomy import answer,response,task
 class OperationalQualification(unittest.TestCase):
+ def test_source_reread_delivers_actual_fragments_within_reader_budget(self):
+  import autonomy_inputs as inputs
+  from test_autonomy_inputs import source_fixture
+  t,c,s,raw,records,lookup,packet=source_fixture();packet['pages']=[dict(page=1,text=c['description']+' '+'x'*6000)]
+  raw=__import__('workflow').canonical(packet);records['artifacts'][t['context']['text_artifact_id']]['sha256']=__import__('workflow').digest(raw)
+  with patch.object(autonomy,'one',side_effect=lookup),patch.object(autonomy,'inventory',return_value=[]),patch.object(autonomy,'retained_jobs',return_value=[]),patch.object(store,'artifact_bytes',return_value=raw):
+   material,expected=inputs.source_text(t,c,s,lookup);actual=[];cursor=0
+   for _ in range(len(expected)+1):
+    page=autonomy.inspect_evidence(t,dict(kind='source',id=s['id'],cursor=cursor))['result'];actual.extend(page['records'])
+    self.assertLessEqual(len(__import__('workflow').canonical(page)),autonomy.evidence.READ_BYTES)
+    if page['next_cursor'] is None:break
+    self.assertGreater(page['next_cursor'],cursor);cursor=page['next_cursor']
+   self.assertEqual(actual,expected);self.assertFalse(page['source_material']['complete_source_review'])
  def test_invalid_read_identifiers_are_rejected_before_evidence_transport(self):
   for value in ['bounded-tcp-v1','invented',' ']:
    decision=answer('inspect');decision.update(reason='retained-evidence',read_request=dict(kind='runtime-contract',id=value,cursor=0))
