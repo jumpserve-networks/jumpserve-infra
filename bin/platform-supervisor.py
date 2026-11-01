@@ -20,7 +20,7 @@ import zipfile
 import tarfile
 
 ROOT=Path(__file__).resolve().parents[1];BACK=ROOT.parent/'jumpserve-back-end'
-MIGRATIONS=['202610300004_platform_supervisor.sql','202610300005_platform_worker.sql','202610300006_platform_host_coordination.sql','202610310002_assessment_blocker_repairs.sql','202610310003_category_budgets.sql','202610310004_research_controller_health.sql','202610310005_research_runtime_recovery.sql','202610310006_runtime_maintenance_handoff.sql','202611010001_platform_repair_context.sql']
+MIGRATIONS=['202610300004_platform_supervisor.sql','202610300005_platform_worker.sql','202610300006_platform_host_coordination.sql','202610310002_assessment_blocker_repairs.sql','202610310003_category_budgets.sql','202610310004_research_controller_health.sql','202610310005_research_runtime_recovery.sql','202610310006_runtime_maintenance_handoff.sql','202611010001_platform_repair_context.sql','202611010002_queued_dispatch_recovery.sql','202611010003_platform_repair_semantic_evidence.sql']
 BUCKET='cdk-hnb659fds-assets-395567831870-us-east-1'
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def save(path,value):path.write_text(json.dumps(value,sort_keys=True,indent=2)+'\n')
@@ -99,7 +99,19 @@ def harden(packet):
 def migrate(packet):
     validate(packet);db=admin()
     for name in MIGRATIONS:
-        marker={'202610300004_platform_supervisor.sql':"to_regclass('public.platform_settings')",'202610300005_platform_worker.sql':"to_regprocedure('public.platform_worker(text,uuid,uuid,uuid,jsonb)')",'202610300006_platform_host_coordination.sql':"to_regprocedure('public.research_model_dispatch_before_platform_v1(text,jsonb)')",'202610310002_assessment_blocker_repairs.sql':"to_regclass('public.platform_assessment_repair_policy')",'202610310003_category_budgets.sql':"to_regclass('public.autonomy_budget_categories')",'202610310004_research_controller_health.sql':"to_regprocedure('public.research_autonomy_runtime_observe(text,jsonb)')",'202610310005_research_runtime_recovery.sql':"to_regprocedure('public.research_runtime_resume(uuid)')",'202610310006_runtime_maintenance_handoff.sql':"to_regclass('public.research_runtime_maintenance_holds')",'202611010001_platform_repair_context.sql':"to_regprocedure('public.platform_repair_context(uuid,uuid,uuid)')"}[name]
+        marker={
+            '202610300004_platform_supervisor.sql':"to_regclass('public.platform_settings')",
+            '202610300005_platform_worker.sql':"to_regprocedure('public.platform_worker(text,uuid,uuid,uuid,jsonb)')",
+            '202610300006_platform_host_coordination.sql':"to_regprocedure('public.research_model_dispatch_before_platform_v1(text,jsonb)')",
+            '202610310002_assessment_blocker_repairs.sql':"to_regclass('public.platform_assessment_repair_policy')",
+            '202610310003_category_budgets.sql':"to_regclass('public.autonomy_budget_categories')",
+            '202610310004_research_controller_health.sql':"to_regprocedure('public.research_autonomy_runtime_observe(text,jsonb)')",
+            '202610310005_research_runtime_recovery.sql':"to_regprocedure('public.research_runtime_resume(uuid)')",
+            '202610310006_runtime_maintenance_handoff.sql':"to_regclass('public.research_runtime_maintenance_holds')",
+            '202611010001_platform_repair_context.sql':"to_regprocedure('public.platform_repair_context(uuid,uuid,uuid)')",
+            '202611010002_queued_dispatch_recovery.sql':"to_regclass('public.research_queued_dispatch_reconciliations')",
+            '202611010003_platform_repair_semantic_evidence.sql':"to_regprocedure('public.platform_repair_context_data_before_semantic_v2(uuid)')",
+        }[name]
         exists=db.query('select '+marker+' is not null present')[0]['present']
         if not exists:db.query((ROOT/'database'/name).read_text(),read_only=False)
     literal=db.literal

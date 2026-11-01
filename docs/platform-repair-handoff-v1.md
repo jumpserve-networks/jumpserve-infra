@@ -4,6 +4,10 @@ Implemented and verified locally; production activation is recorded separately
 in private Platform Updates. This extends the existing
 [assessment blocker flow](assessment-blocker-repairs-v1.md).
 
+The [semantic evidence and queued-admission follow-up](platform-repair-recovery-v2.md)
+addresses a nested timing field found in production and adds trusted recovery for
+unclaimed admissions whose original controller turn ended.
+
 The observed platform repair repeatedly ran local checks and wrote logs while its
 own `progress.json` said that original incident evidence was unavailable. The
 controller supplied a short trigger diagnostic and treated every incomplete slice
