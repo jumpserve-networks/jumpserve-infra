@@ -17,8 +17,9 @@ for executed cloud checks, exact source identities and remaining verification li
 ## Operation and authority
 
 `platform_supervisor/worker.py` runs on the existing subscription host with a
-separate spool and systemd service. Research gets priority between scheduling
-slices. A shared database lock prevents both services from admitting native tools
+separate spool and systemd service. Fair host admission gives queued repairs a
+turn after existing research calls drain, with a research admission window after
+each supervisor checkpoint. A shared database lock prevents both services from admitting native tools
 at once. Uncertain container cleanup keeps host admission fenced. The existing
 worker, research runtime, subscription grant and encrypted disk are preserved.
 
@@ -28,11 +29,14 @@ assessment blocker repairs, and at most one general maintenance task per rolling
 transactional database outbox captures blocked tasks, operational repair diagnoses
 and waits, and failed/uncertain dispatches. The existing worker drains these events
 on its 15-second loop, with priority over general maintenance at the next safe
-shared-host slot. Already admitted research work retains host priority. A running
+shared-host slot. Already admitted research work finishes before a repair starts. A running
 coding slice can also delay pickup; event capture is immediate, execution depends
 on available capacity. This adapter does not require a worker reinstall.
 See [assessment blocker repairs](assessment-blocker-repairs-v1.md) for activation,
 deduplication, cancellation and verification limits.
+See [fair host scheduling](platform-fair-scheduling-v1.md) for the new migration,
+bounded reservations, cooldown and required production verification. Activation
+requires an explicitly requested database release, recorded in Platform Updates.
 
 Each automatic task has a six-hour deadline and a $100 conservative reservation
 limit. Assessment repair
