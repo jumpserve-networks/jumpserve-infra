@@ -7,6 +7,7 @@
   "scripts": {
     "cdk:observability": "cdk --app \"npx ts-node --prefer-ts-exts bin/observability.ts\"",
     "test:platform:database": "python3 -B test/check_platform_database.py",
+    "test:platform:scheduling": "python3 -B test/check_platform_fair_scheduling_database.py",
     "cdk:platform": "cdk --app \"npx ts-node --prefer-ts-exts bin/platform.ts\"",
     "test:research:netem-persistence": "python3 -B test/check_netem_measurement_persistence.py",
     "test:research:optional-budget": "python3 -B test/check_optional_budget_database.py",
