@@ -28,6 +28,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - run: python3 -m pip install boto3==1.42.4
       - name: Read pinned runtime revisions
         id: runtime
         run: |
@@ -57,11 +58,12 @@ jobs:
       - run: python3 -B -m unittest discover -s test -p research_runtime_release_test.py -v
       - run: python3 -B -m unittest discover -s test -p retained_control_test.py -v
       - run: python3 -B -m unittest discover -s test -p integrated_research_release_test.py -v
+      - run: python3 -B -m unittest discover -s test -p persistence_monitor_test.py -v
       - run: python3 -B test/check_platform_database.py
         env:
           PLATFORM_TEST_DATABASE_URL: postgresql://postgres:platform-test-only@127.0.0.1:5432/postgres
       - name: Verify funding, reconciliation, repair contracts and the actual proof lookup
-        run: python3 -B test/check_repair_contract_database.py
+        run: python3 -B test/check_persistence_polling_database.py
         env:
           PYTHONPATH: .runtime-research/research_workflow:test
           UNLIMITED_DEFAULTS_TEST_DATABASE_URL: postgresql://postgres:platform-test-only@127.0.0.1:5432/postgres
