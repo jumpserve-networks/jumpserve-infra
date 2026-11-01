@@ -4,6 +4,9 @@ Status: activated in production on 2026-10-31 after the user's explicit deployme
 request. See the [production activation record](assessment-blocker-repairs-production-20261031.md)
 for the exact source, migration, private event receipts and observed worker pickup.
 
+The [repair evidence handoff and blocked-progress guard](platform-repair-handoff-v1.md)
+describes the follow-up behavior, release procedure and verification.
+
 The platform supervisor should react when an assessment encounters a blocker.
 General daily housekeeping remains a separate source of improvements. Migration
 `202610310002_assessment_blocker_repairs.sql` adds a transactional outbox and an
