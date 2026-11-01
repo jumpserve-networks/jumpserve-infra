@@ -75,3 +75,7 @@ Activation verification must show an actual stored unclaimed-admission proof,
 unchanged terminal parent/counters/deadline and a wake caused by that proof rather
 than telemetry. A queued admission closure is not a completed research assessment
 or evidence of a successful source correction; verify resulting repairs separately.
+
+The subsequent private-contract delivery and proof-query correction are described
+in `platform-repair-recovery-contract-v1.md`. Version 80 closed the original queue
+admission but its diagnosis reader still used a nonexistent generic `id` sort key.
