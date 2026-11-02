@@ -48,3 +48,9 @@ versions when those implementations are activated.
 
 Ordinary unrelated interactive repository work retains its separate deployment
 rule. Do not use this research mandate to deploy unrelated local changes.
+
+The [persistent incident and operational self-repair implementation](platform-autonomous-recovery-v2.md)
+uses this existing mandate for versioned follow-up attempts and machine-qualified
+supervisor updates. Its verified activation manifest, installation receipt and
+actual research continuation remain separate evidence; no model can create a new
+owner grant or certify itself by writing an approval field.

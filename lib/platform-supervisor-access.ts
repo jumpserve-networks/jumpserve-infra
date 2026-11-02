@@ -44,6 +44,11 @@ export class PlatformSupervisorAccess extends Construct {
     allowRelease(['amplify:ListJobs', 'amplify:GetJob'], [arn('amplify', 'apps/*/branches/main/jobs/*'), arn('amplify', 'apps/*/branches/main')]);
     allowRelease(['s3:GetObject', 's3:PutObject'], [`arn:aws:s3:::${props.assetBucketName}/*`]);
     allowRelease(['lambda:GetFunction'], Object.values(require('../research-runtime-targets.json') as Record<string, string>).map(name => arn('lambda', `function:${name}`)));
+    // Only the frozen self-update workflow receives these powers through OIDC.
+    // Generated code still has no cloud or publisher credentials.
+    allowRelease(['secretsmanager:GetSecretValue'], [arn('secretsmanager', 'secret:jumpserve/supabase-service-key-*')]);
+    allowRelease(['ssm:SendCommand'], [`arn:aws:ssm:${stack.region}::document/AWS-RunShellScript`, arn('ec2', 'instance/i-087f1493809643115')]);
+    allowRelease(['ssm:GetCommandInvocation', 'ssm:ListCommands'], ['*']);
     // The existing EC2 instance profile refreshes credentials through IMDSv2.
     // It reads only service secrets; release powers remain in the OIDC job.
     const worker = iam.Role.fromRoleName(this, 'ExistingWorker', props.workerRoleName);

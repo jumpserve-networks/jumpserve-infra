@@ -1,0 +1,76 @@
+name: Qualified supervisor self-update
+run-name: Platform release ${{ inputs.operation_id }}
+on:
+  workflow_dispatch:
+    inputs:
+      operation_id: {type: string, required: true}
+      revision: {type: string, required: true}
+      previous_revision: {type: string, required: true}
+      qualification_artifact_id: {type: string, required: true}
+permissions:
+  contents: read
+  id-token: write
+concurrency:
+  group: jumpserve-platform-production
+  cancel-in-progress: false
+jobs:
+  release:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      PLATFORM_OPERATION_ID: ${{ inputs.operation_id }}
+      SUPERVISOR_REVISION: ${{ inputs.revision }}
+      PREVIOUS_SUPERVISOR_REVISION: ${{ inputs.previous_revision }}
+      SUPERVISOR_QUALIFICATION_ARTIFACT: ${{ inputs.qualification_artifact_id }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Validate exact source inputs before obtaining credentials
+        id: pins
+        run: python3 -B bin/supervisor-runtime-release.py pins
+      - uses: actions/checkout@v4
+        with:
+          repository: jumpserve-networks/jumpserve-back-end
+          ref: ${{ inputs.revision }}
+          path: .backend
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: jumpserve-networks/jumpserve-back-end
+          ref: ${{ inputs.previous_revision }}
+          path: .previous
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: jumpserve-networks/jumpserve-back-end
+          ref: ${{ steps.pins.outputs.research }}
+          path: .runtime
+          persist-credentials: false
+      - name: Build fixed tools and run isolated qualification before cloud credentials
+        run: python3 -B bin/supervisor-runtime-release.py qualify
+      - run: python3 -m pip install boto3==1.42.4
+      - uses: aws-actions/configure-aws-credentials@v6.2.3
+        with:
+          role-to-assume: arn:aws:iam::395567831870:role/JumpServePlatformRelease
+          role-session-name: supervisor-runtime-${{ github.run_id }}
+          aws-region: us-east-1
+          allowed-account-ids: '395567831870'
+          role-duration-seconds: 2700
+          unset-current-credentials: true
+      - name: Install once and verify the actual supervisor source
+        run: python3 -B bin/supervisor-runtime-release.py execute
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: platform-release-${{ inputs.operation_id }}
+          path: production-verification.json
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: supervisor-runtime-evidence-${{ inputs.operation_id }}
+          path: .test-artifacts/supervisor-runtime-release/
+          if-no-files-found: ignore
