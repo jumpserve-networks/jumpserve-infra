@@ -1,7 +1,8 @@
 # Supervisor HTTP recovery and fair reconciliation
 
-Status: implemented and verified locally. Production migration, qualified bundle
-installation and observation of live recovery remain separate release work.
+Status: deployed on 2026-11-02. The [production record](platform-reconciliation-production-20261102.md)
+contains exact revisions, qualification, installed-source verification and the
+observed automatic reconciliation of the original HTTP 503.
 
 The 2026-11-02 audit found task `910739f6-118c-47ea-ab3e-ddd70b8efe34`
 repeatedly reclaiming the shared host after its original deadline. Native call
