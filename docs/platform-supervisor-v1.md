@@ -7,6 +7,13 @@ production deployments by this named service. Initial activation remains a
 separate explicit deployment step; ordinary interactive sessions retain their
 existing deployment rules.
 
+The owner's later [standing paper-reproduction mandate](platform-supervisor-standing-authority-v1.md)
+authorizes all necessary supervisor actions without further human permission.
+The adapter and IAM restrictions described below identify current implementation
+boundaries; they do not require another owner authorization. Extending and
+qualifying those capabilities is system work. Authorization, installed capability
+and verified production activation remain separate facts.
+
 The initial implementation was verified locally before the explicitly requested
 production rollout. Production evidence and the activation record are retained in
 private Platform Updates and the deployment artifacts; local fixture reports
