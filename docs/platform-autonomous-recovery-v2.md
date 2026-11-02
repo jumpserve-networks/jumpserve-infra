@@ -99,6 +99,10 @@ later self-updates. A verified capability activation emits one operational
 evidence event for active waiting/blocked claims; repeat acknowledgments do not
 emit another signal. Installation does not imply experiment or scientific success.
 
+Migration `202611020004_private_incident_continuation_context.sql` explicitly
+removes inherited execution grants on the context helper. Browsers and direct
+service calls cannot bypass the existing task/lease-checked worker RPC.
+
 ## Initial activation and verification
 
 This initial implementation changes a frozen broker and must first use the
@@ -106,13 +110,13 @@ existing explicitly requested deployment procedure. No production mutation is
 performed by local verification or by generating a bootstrap packet.
 
 1. Run the backend supervisor suite, the infrastructure release tests and
-   `python3 -B test/check_supervisor_self_install_database.py`. The latter retains
+   `python3 -B test/check_private_continuation_context_database.py`. The latter retains
    all preceding database regressions and tests the real SQL admission paths.
    Run infrastructure Jest checks and TypeScript build as usual. Qualify exact
    protected source revisions and the installed Linux bundle for the release.
    Merge the infrastructure broker asset before backend CI checks that consume
    it from protected infrastructure `main`.
-2. Apply both new migrations through the project-locked migration path. Deploy
+2. Apply all three new migrations through the project-locked migration path. Deploy
    the reviewed access-stack change: the OIDC release role gains Supabase service
    secret read and SSM access to the existing supervisor host. Coding containers
    receive none of these credentials or permissions. No instance replacement,
