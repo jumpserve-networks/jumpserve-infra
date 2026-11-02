@@ -6,6 +6,9 @@ for the exact source, migration, private event receipts and observed worker pick
 
 The [repair evidence handoff and blocked-progress guard](platform-repair-handoff-v1.md)
 describes the follow-up behavior, release procedure and verification.
+The [evidence-reading progress guard](assessment-reading-progress-v1.md) describes
+detection and recovery of cyclic planning reads. Its qualification and production
+release receipts establish activation separately from this existing outbox.
 
 The platform supervisor should react when an assessment encounters a blocker.
 General daily housekeeping remains a separate source of improvements. Migration
