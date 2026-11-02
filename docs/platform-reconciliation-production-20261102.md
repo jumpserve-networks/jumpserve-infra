@@ -58,6 +58,11 @@ deadline or model call was granted to the expired task. The assessment workflow
 remained running, and fresh supervisor heartbeats continued after admission
 resumed.
 
+At `2026-11-02T17:23:26.369378Z`, the supervisor acquired independent task
+`682d2b60-af18-42b1-8ce2-e391ecdcc7da` and subsequently reported `working`.
+This confirms live admission progressed beyond the expired task; acquiring the
+lease is separate from completing that improvement.
+
 This verifies the specific live HTTP recovery path. Concurrent independent-task
 rotation, backoff and shared-host safeguards passed the database and supervisor
 regressions. Passing qualification or reconciling this call does not establish
