@@ -44,6 +44,10 @@ deduplication, cancellation and verification limits.
 See [fair host scheduling](platform-fair-scheduling-v1.md) for the new migration,
 bounded reservations, cooldown and required production verification. Activation
 requires an explicitly requested database release, recorded in Platform Updates.
+The [HTTP recovery and reconciliation follow-up](platform-reconciliation-progress-v1.md)
+adds evidence-backed supplemental failure outcomes and prevents an unchanged
+task-local unknown from monopolizing independent repair turns. Its local
+verification and production release requirements are recorded separately.
 
 Each automatic task has a six-hour deadline and a $100 conservative reservation
 limit. Assessment repair

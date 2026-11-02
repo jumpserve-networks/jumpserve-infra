@@ -3,6 +3,11 @@
 Release scope: database only. Production activation and observed scheduling
 evidence are recorded separately in Platform Updates.
 
+The [2026-11-02 reconciliation follow-up](platform-reconciliation-progress-v1.md)
+narrows urgent priority to shared cleanup, live calls and external mutations.
+It adds task-local waiting and a retained-evidence HTTP failure adapter while
+preserving the admission and cooldown behavior described here.
+
 The live status audit on 2026-11-01 found a ready, unpaused supervisor, 24 queued
 tasks and ongoing research dispatches. Recent supervisor claims only closed work
 whose original deadlines had already passed. The old host gate gives research
