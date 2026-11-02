@@ -26,6 +26,7 @@ MIGRATIONS.extend(['202611010007_controller_queue_reconciliation.sql','202611010
 MIGRATIONS.extend(['202611010009_controller_terminal_recovery.sql','202611010010_controller_incident_evidence.sql'])
 MIGRATIONS.append('202611010011_platform_incident_closure.sql')
 MIGRATIONS.append('202611020001_platform_reconciliation_progress.sql')
+MIGRATIONS.extend(['202611020002_platform_incident_continuations.sql','202611020003_supervisor_self_install.sql'])
 BUCKET='cdk-hnb659fds-assets-395567831870-us-east-1'
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def save(path,value):path.write_text(json.dumps(value,sort_keys=True,indent=2)+'\n')
@@ -63,7 +64,7 @@ def package():
             if not path.is_file() or path.suffix not in ('.py','.json') or path.is_symlink():continue
             raw=path.read_bytes();name='platform_supervisor/'+path.name;files[name]=sha(raw)
             info=zipfile.ZipInfo(name,date_time=(1980,1,1,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;archive.writestr(info,raw)
-        for name in ('jumpserve-platform.service','install-platform.sh','qualify-platform-host.py','reconcile-platform-host.py','qualify-retained-control.py','Dockerfile','research-runtime-gate.py','research-runtime-checks.py'):
+        for name in ('jumpserve-platform.service','install-platform.sh','qualify-platform-host.py','reconcile-platform-host.py','qualify-retained-control.py','Dockerfile','research-runtime-gate.py','research-runtime-checks.py','supervisor-runtime-gate.py'):
             raw=(ROOT/'assets/platform'/name).read_bytes();files[name]=sha(raw)
             info=zipfile.ZipInfo(name,date_time=(1980,1,1,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;archive.writestr(info,raw)
     return buffer.getvalue(),files
@@ -91,6 +92,7 @@ def prepare(owners_file,out):
     if subject.get('use_immutable_subject') is not False or subject.get('use_default') is not True or subject.get('sub_claim_prefix')!='repo:jumpserve-networks/jumpserve-infra':raise ValueError('GitHub OIDC subject format differs from the reviewed trust policy.')
     policy=(BACK/'platform_supervisor/policy.json').read_bytes()
     packet=dict(version='platform-bootstrap-v1',aws_account='395567831870',supabase_project='regphejnlvfpyokpniny',worker_id=worker,worker_role=role,bucket=BUCKET,api_ids=['d3o7xdethb'],bundle_sha256=sha(raw),files=files,policy_sha256=sha(policy),policy=json.loads(policy),owners=owners,migration_sha256={name:sha((ROOT/'database'/name).read_bytes()) for name in MIGRATIONS},automatic_releases=True,initially_paused=True,metadata_options_before=metadata,requires_metadata_hardening=requires_hardening)
+    packet['backend_revision']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=BACK,text=True).strip()
     save(out/'private-packet.json',packet);(out/'private-packet.json').chmod(0o600)
     command=['npx','cdk','--app','npx ts-node --prefer-ts-exts bin/platform.ts','synth','JumpServePlatformAccessStack','--quiet','-c','platformWorkerRoleName='+role,'-c','platformAssetBucketName='+BUCKET,'-c','platformApiIds=d3o7xdethb','--output',str(out/'cdk.out')]
     subprocess.run(command,cwd=ROOT,check=True,timeout=120,capture_output=True)
@@ -125,6 +127,8 @@ def migrate(packet):
             '202611010010_controller_incident_evidence.sql':"to_regprocedure('public.platform_repair_context_data_before_transport_v6(uuid)')",
             '202611010011_platform_incident_closure.sql':"to_regprocedure('public.platform_worker_before_incident_closure_v7(text,uuid,uuid,uuid,jsonb)')",
             '202611020001_platform_reconciliation_progress.sql':"to_regprocedure('public.platform_worker_before_http_recovery_v8(text,uuid,uuid,uuid,jsonb)')",
+            '202611020002_platform_incident_continuations.sql':"to_regprocedure('public.platform_worker_before_continuations_v9(text,uuid,uuid,uuid,jsonb)')",
+            '202611020003_supervisor_self_install.sql':"to_regprocedure('public.platform_supervisor_install(uuid,text,uuid)')",
         }[name]
         exists=db.query('select '+marker+' is not null present')[0]['present']
         if not exists:db.query((ROOT/'database'/name).read_text(),read_only=False)
@@ -228,15 +232,42 @@ def install_cloud(packet,packet_path):
     save(intent,dict(comment=comment,worker_id=packet['worker_id'],bundle_sha256=bundle,image=report['image'],image_archive_sha256=None,cloud_qualification_sha256=proof_sha,qualification_command_id=qualified['command_id']))
     result=aws('ssm','send-command','--instance-ids',packet['worker_id'],'--document-name','AWS-RunShellScript','--comment',comment,'--parameters',json.dumps(dict(commands=commands)))
     saved=dict(command_id=result['Command']['CommandId'],instance_id=packet['worker_id']);save(directory/'install-command.json',saved);print(json.dumps(saved))
+def activate_self_runtime(packet,packet_path):
+    """Initial verified baseline only; subsequent updates use the OIDC broker."""
+    validate(packet);target();revision=packet.get('backend_revision','')
+    if packet['worker_id']!='i-087f1493809643115':raise ValueError('Fixed supervisor self-update host required')
+    if not re.fullmatch('[a-f0-9]{40}',revision):raise ValueError('Prepare a packet at the exact committed backend source.')
+    if subprocess.check_output(['git','status','--porcelain'],cwd=BACK,text=True).strip():raise ValueError('Initial activation requires clean committed backend source.')
+    main=json.loads(subprocess.check_output(['gh','api','repos/jumpserve-networks/jumpserve-back-end/commits/main'],text=True))['sha']
+    checks=json.loads(subprocess.check_output(['gh','api','repos/jumpserve-networks/jumpserve-back-end/commits/'+revision+'/check-runs?per_page=100'],text=True))['check_runs']
+    if main!=revision or not any(c['name']=='Platform validation' and c['conclusion']=='success' for c in checks):raise ValueError('Exact protected backend main checks required')
+    marker=packet_path.parent/'self-runtime-verification-command.json';comment='supervisor-baseline-'+packet['bundle_sha256'][:32]
+    if not marker.exists():
+        matches=[c for c in aws('ssm','list-commands','--max-results','50')['Commands'] if c.get('Comment')==comment and packet['worker_id'] in c.get('InstanceIds',[])]
+        if len(matches)>1:raise ValueError('Ambiguous original baseline verification')
+        if matches:command=matches[0]
+        else:
+            code="import hashlib,json,pathlib,subprocess;root=pathlib.Path('/opt/jumpserve/platform');expected="+repr(packet['files'])+";assert root.resolve().name=="+repr(packet['bundle_sha256'])+";assert all(hashlib.sha256((root/n).read_bytes()).hexdigest()==h for n,h in expected.items());subprocess.run(['systemctl','is-active','--quiet','jumpserve-platform.service','jumpserve-openclaw.service'],check=True);print(json.dumps(dict(passed=True,installed_files_verified=True,bundle_sha256="+repr(packet['bundle_sha256'])+",revision="+repr(revision)+")))"
+            command=aws('ssm','send-command','--instance-ids',packet['worker_id'],'--document-name','AWS-RunShellScript','--comment',comment,'--parameters',json.dumps(dict(commands=['python3.12 -B -c '+shlex.quote(code)])))['Command']
+        save(marker,dict(command_id=command['CommandId']));print(json.dumps(dict(pending=True,command_id=command['CommandId'])));return
+    command=json.loads(marker.read_bytes())['command_id'];result=aws('ssm','get-command-invocation','--command-id',command,'--instance-id',packet['worker_id'])
+    if result['Status'] in ('Pending','InProgress','Delayed'):print(json.dumps(dict(pending=True,command_id=command)));return
+    if result['Status']!='Success' or result['ResponseCode']!=0:raise ValueError('Initial supervisor readback did not pass; original result retained')
+    proof=json.loads(result['StandardOutputContent'].splitlines()[-1]);proof['command_id']=command
+    if proof!=dict(passed=True,installed_files_verified=True,bundle_sha256=packet['bundle_sha256'],revision=revision,command_id=command):raise ValueError('Initial installed source receipt differs')
+    manifest=dict(version='platform-supervisor-self-repair-v1',source_revision=revision,bundle_sha256=packet['bundle_sha256'],bundle_files=packet['files'],files={n.removeprefix('platform_supervisor/'):h for n,h in packet['files'].items() if n.startswith('platform_supervisor/')})
+    db=admin();literal=db.literal
+    result=db.query('select public.platform_supervisor_activate(null,'+literal(json.dumps(manifest))+'::jsonb,'+literal(json.dumps(proof))+'::jsonb)',read_only=False)
+    save(packet_path.parent/'self-runtime-activation.json',dict(manifest=manifest,verification=proof));print(json.dumps(dict(activated=True,revision=revision,bundle_sha256=packet['bundle_sha256'])))
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('action',choices=['prepare','migrate','access','protect','harden','install','install-cloud']);parser.add_argument('--owners-file',type=Path);parser.add_argument('--packet',type=Path);parser.add_argument('--output',type=Path,default=ROOT/'.test-artifacts/platform-bootstrap/v1');args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('action',choices=['prepare','migrate','access','protect','harden','install','install-cloud','activate-self-runtime']);parser.add_argument('--owners-file',type=Path);parser.add_argument('--packet',type=Path);parser.add_argument('--output',type=Path,default=ROOT/'.test-artifacts/platform-bootstrap/v1');args=parser.parse_args()
     if args.action=='prepare':
         if not args.owners_file:parser.error('--owners-file is required')
         prepare(args.owners_file,args.output)
     else:
         if not args.packet:parser.error('--packet is required')
         packet=json.loads(args.packet.read_bytes())
-        if args.action in ('install','install-cloud'):globals()[args.action.replace('-','_')](packet,args.packet)
+        if args.action in ('install','install-cloud','activate-self-runtime'):globals()[args.action.replace('-','_')](packet,args.packet)
         else:globals()[args.action](packet)
 
 if __name__=='__main__':main()

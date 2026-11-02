@@ -48,6 +48,10 @@ The [HTTP recovery and reconciliation follow-up](platform-reconciliation-progres
 adds evidence-backed supplemental failure outcomes and prevents an unchanged
 task-local unknown from monopolizing independent repair turns. Its local
 verification and production release requirements are recorded separately.
+The locally prepared [persistent incident and self-repair extension](platform-autonomous-recovery-v2.md)
+adds bounded follow-up attempts and a frozen qualification path for operational
+supervisor updates. It requires its own initial production activation and does
+not change the historical release records above.
 
 Each automatic task has a six-hour deadline and a $100 conservative reservation
 limit. Assessment repair
