@@ -1,15 +1,16 @@
 # Persistent assessment incidents and operational supervisor self-repair
 
-Status: implemented and tested locally; production activation is pending. This
-implements the owner's existing standing mandate, without another authorization
-grant. It does not establish that an assessment resumed or produced measurements.
+Status: deployed on 2026-11-02. The [production record](platform-autonomous-recovery-production-20261102.md)
+contains the exact sources, installed-runtime verification and observed automatic
+follow-up admission. This implements the owner's existing standing mandate;
+assessment recovery and future self-updates still require their own evidence.
 
 ## Incident lifetime and bounded attempts
 
 An assessment incident can outlive an individual six-hour platform task.
 Migration `202611020002_platform_incident_continuations.sql` preserves the original
 one-to-one incident link and appends `platform_assessment_repair_attempts`.
-The existing 15-second maintenance loop can admit a follow-up for an unresolved
+The existing worker maintenance pass can admit a follow-up for an unresolved
 incident whose last attempt completed, expired, or reached a concrete operational
 blocker. It does not reset the predecessor's status, counters, deadline or calls.
 
@@ -153,7 +154,7 @@ self-update, IAM activation and assessment recovery remain release verification
 requirements; local passing results do not claim those outcomes.
 
 Local verification on 2026-11-02 passed 105 supervisor tests, 514 research workflow
-tests, 43 release-broker tests, 117 database checks, the infrastructure TypeScript
+tests, 43 release-broker tests, 118 database checks, the infrastructure TypeScript
 build and 100 Jest checks. Five existing optional Jest checks were skipped.
 Deterministic packaging verified all 31 bundle files. No provider calls or
 production mutations were made by these checks.
