@@ -27,6 +27,7 @@ MIGRATIONS.extend(['202611010009_controller_terminal_recovery.sql','202611010010
 MIGRATIONS.append('202611010011_platform_incident_closure.sql')
 MIGRATIONS.append('202611020001_platform_reconciliation_progress.sql')
 MIGRATIONS.extend(['202611020002_platform_incident_continuations.sql','202611020003_supervisor_self_install.sql'])
+MIGRATIONS.append('202611020004_private_incident_continuation_context.sql')
 BUCKET='cdk-hnb659fds-assets-395567831870-us-east-1'
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def save(path,value):path.write_text(json.dumps(value,sort_keys=True,indent=2)+'\n')
@@ -129,6 +130,7 @@ def migrate(packet):
             '202611020001_platform_reconciliation_progress.sql':"to_regprocedure('public.platform_worker_before_http_recovery_v8(text,uuid,uuid,uuid,jsonb)')",
             '202611020002_platform_incident_continuations.sql':"to_regprocedure('public.platform_worker_before_continuations_v9(text,uuid,uuid,uuid,jsonb)')",
             '202611020003_supervisor_self_install.sql':"to_regprocedure('public.platform_supervisor_install(uuid,text,uuid)')",
+            '202611020004_private_incident_continuation_context.sql':"case when not has_function_privilege('service_role','public.platform_repair_context_data(uuid)','EXECUTE') and not has_function_privilege('authenticated','public.platform_repair_context_data(uuid)','EXECUTE') and not has_function_privilege('anon','public.platform_repair_context_data(uuid)','EXECUTE') then 'sealed' end",
         }[name]
         exists=db.query('select '+marker+' is not null present')[0]['present']
         if not exists:db.query((ROOT/'database'/name).read_text(),read_only=False)
