@@ -1,0 +1,9 @@
+{
+  "id": "jumpserve-supervisor",
+  "name": "JumpServe supervisor tools",
+  "description": "Read shared supervisor health and queue qualified work from verified Slack conversations",
+  "categories": ["developer-tools"],
+  "contracts": { "tools": ["jumpserve_status", "jumpserve_request"] },
+  "activation": { "onStartup": true },
+  "configSchema": { "type": "object", "additionalProperties": false }
+}

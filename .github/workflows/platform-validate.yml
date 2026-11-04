@@ -59,13 +59,15 @@ jobs:
       - run: python3 -B -m unittest discover -s test -p supervisor_runtime_release_test.py -v
       - run: python3 -B -m unittest discover -s test -p source_reader_gate_test.py -v
       - run: python3 -B -m unittest discover -s test -p retained_control_test.py -v
+      - run: python3 -B -m unittest discover -s test -p platform_slack_test.py -v
+      - run: node --test assets/platform/slack-tools/index.test.js
       - run: python3 -B -m unittest discover -s test -p integrated_research_release_test.py -v
       - run: python3 -B -m unittest discover -s test -p persistence_monitor_test.py -v
       - run: python3 -B test/check_platform_database.py
         env:
           PLATFORM_TEST_DATABASE_URL: postgresql://postgres:platform-test-only@127.0.0.1:5432/postgres
-      - name: Verify funding, recovery continuations, self-install receipts and fair host admission
-        run: python3 -B test/check_private_continuation_context_database.py
+      - name: Verify recovery, self-install receipts, fair host admission and private Slack delegation
+        run: python3 -B test/check_platform_slack_database.py
         env:
           PYTHONPATH: .runtime-research/research_workflow:test
           UNLIMITED_DEFAULTS_TEST_DATABASE_URL: postgresql://postgres:platform-test-only@127.0.0.1:5432/postgres
