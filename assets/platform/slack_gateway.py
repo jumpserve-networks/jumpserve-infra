@@ -94,6 +94,7 @@ def configuration(root, bridge_origin, bridge_token, channel_policy):
         tools=dict(allow=list(TOOLS), toolSearch=False, codeMode=False, elevated=dict(enabled=False)),
         browser=dict(enabled=False),
         plugins=dict(enabled=True, allow=['slack', 'jumpserve-supervisor'],
+                     slots=dict(memory='none'),
                      load=dict(paths=[str(Path(__file__).resolve().with_name('slack-tools'))]),
                      entries={'jumpserve-supervisor': dict(enabled=True)}),
         skills=dict(allowBundled=[]),
@@ -344,7 +345,7 @@ def main():
     # separate installer; rotate only the ephemeral loopback bridge credentials.
     if config_path.exists():
         installed = json.loads(config_path.read_bytes()).get('plugins', {})
-        for key in ('installs', 'slots'):
+        for key in ('installs',):
             if key in installed: config['plugins'][key] = installed[key]
         if 'slack' in installed.get('entries', {}): config['plugins']['entries']['slack'] = installed['entries']['slack']
         for path in installed.get('load', {}).get('paths', []):

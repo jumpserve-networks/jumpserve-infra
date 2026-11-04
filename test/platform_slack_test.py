@@ -141,6 +141,7 @@ class SlackGatewayTests(unittest.TestCase):
         self.assertFalse(config['browser']['enabled'])
         self.assertFalse(config['commands']['config'])
         self.assertEqual(config['session']['dmScope'], 'per-channel-peer')
+        self.assertEqual(config['plugins']['slots']['memory'], 'none')
         self.assertNotIn('users', config['channels']['slack']['channels'][gateway.CHANNEL])
     def test_configuration_uses_native_writer_and_checks_metadata(self):
         policy = json.loads((ROOT/'assets/platform/slack-channel-policy.json').read_bytes())

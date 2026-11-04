@@ -102,7 +102,7 @@ def main():
     candidate=gateway.configuration(BASE,'http://127.0.0.1:18801','synthetic-offline-bridge-token',json.loads((release/'slack-channel-policy.json').read_bytes()))
     installed=json.loads(config.read_bytes()).get('plugins',{})
     candidate['plugins']['load']['paths'].append(str(vendor))
-    for key in ('installs','slots'):
+    for key in ('installs',):
         if key in installed: candidate['plugins'][key]=installed[key]
     if 'slack' in installed.get('entries',{}): candidate['plugins']['entries']['slack']=installed['entries']['slack']
     staged=BASE/'qualified-config.json'; staged.write_bytes(gateway.canonical(candidate)); staged.chmod(0o600); os.chown(staged,uid,gid)
