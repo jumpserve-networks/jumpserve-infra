@@ -18,6 +18,7 @@
     "test:platform:slack": "python3 -B -m unittest discover -s test -p platform_slack_test.py -v",
     "test:platform:slack-tools": "node --test assets/platform/slack-tools/index.test.js",
     "test:platform:slack-database": "python3 -B test/check_platform_slack_database.py",
+    "test:platform:capabilities": "python3 -B test/check_platform_capability_database.py",
     "cdk:platform": "cdk --app \"npx ts-node --prefer-ts-exts bin/platform.ts\"",
     "test:research:netem-persistence": "python3 -B test/check_netem_measurement_persistence.py",
     "test:research:optional-budget": "python3 -B test/check_optional_budget_database.py",

@@ -4,6 +4,7 @@ const TEAM = 'T01J887B6CE';
 const CHANNEL = 'C0CEXNJE0HX';
 const OWNER = 'U06EL9LK476';
 const repositories = ['jumpserve-networks/jumpserve-front-end', 'jumpserve-networks/jumpserve-back-end', 'jumpserve-networks/jumpserve-infra'];
+const names = ['jumpserve_status', 'jumpserve_request', 'jumpserve_task', 'jumpserve_control'];
 
 export function principal(context) {
   if (context.messageChannel !== 'slack' || typeof context.assertInvocationCurrent !== 'function') return null;
@@ -60,7 +61,14 @@ export default {
           objective: {type: 'string', minLength: 1, maxLength: 12000},
           repositories: {type: 'array', minItems: 1, maxItems: 3, uniqueItems: true, items: {type: 'string', enum: repositories}},
         }, ['title', 'objective', 'repositories']),
+        tool('jumpserve_task', 'Inspect current progress, blockers, changes, releases and model-call states for a task shared in this conversation.', {
+          task_id: {type: 'string', format: 'uuid'},
+        }, ['task_id']),
+        tool('jumpserve_control', 'Execute an explicitly requested supervisor operator action without another owner permission exchange. Pause/resume work, disable/enable automatic qualified merges/releases, or cancel a shared task. Supply task_id only for cancel. Report the recorded state; in-flight operations still reconcile.', {
+          action: {type: 'string', enum: ['pause', 'resume', 'disable-releases', 'enable-releases', 'cancel']},
+          task_id: {type: 'string', format: 'uuid'},
+        }, ['action']),
       ];
-    }}, {names: ['jumpserve_status', 'jumpserve_request']});
+    }}, {names});
   },
 };

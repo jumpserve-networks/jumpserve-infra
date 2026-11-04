@@ -54,3 +54,11 @@ uses this existing mandate for versioned follow-up attempts and machine-qualifie
 supervisor updates. Its verified activation manifest, installation receipt and
 actual research continuation remain separate evidence; no model can create a new
 owner grant or certify itself by writing an approval field.
+
+The locally prepared [capability acquisition extension](platform-autonomous-recovery-v2.md#prepared-capability-acquisition-extension-not-deployed)
+turns a missing operational tool or diagnostic adapter into linked implementation
+work under that same authority, followed by qualification, exact self-installation
+and eligible parent resumption. It does not require a new human grant for each
+pack. Installed capability evidence, unsupported service adapters and actual
+experiment recovery remain distinct; the prepared extension has not yet been
+activated in production.

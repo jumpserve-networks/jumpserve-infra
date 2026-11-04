@@ -156,6 +156,49 @@ class SlackGatewayTests(unittest.TestCase):
         with patch.object(gateway.subprocess,'run',side_effect=write):
             actual=gateway.write_configuration(config,path,'node','openclaw.mjs',{})
         self.assertEqual(actual['meta']['lastTouchedVersion'],'2026.10.5')
+    def test_members_can_use_controls_without_an_additional_owner_approval(self):
+        envelope = dict(self.envelope(), operation='jumpserve_control', payload={'action':'pause'})
+        self.bridge.tool(envelope)
+        path, params = self.store.tool_calls[-1]
+        self.assertTrue(path.endswith('/platform_slack_control'))
+        self.assertEqual(params['p_sender'], 'USECOND')
+        self.assertEqual(params['p_request'], envelope['request_id'])
+        self.assertEqual(params['p_session'], envelope['actor']['session_id'])
+        self.assertEqual(params['p_action'], 'pause')
+        self.assertIsNone(params['p_task'])
+        self.assertNotIn('approval', params)
+        task = str(uuid.uuid4())
+        envelope['payload'] = dict(action='cancel', task_id=task)
+        self.bridge.tool(envelope)
+        self.assertEqual(self.store.tool_calls[-1][1]['p_task'], task)
+        self.members.remove('USECOND')
+        with self.assertRaises(ValueError): self.bridge.tool(envelope)
+        self.assertEqual(len(self.store.tool_calls), 2)
+    def test_controls_reject_ambiguous_targets_and_forged_fields_before_dispatch(self):
+        for payload in ({}, {'action':'cancel'}, {'action':'pause','task_id':str(uuid.uuid4())},
+                        {'action':'cancel','task_id':'invalid'}, {'action':'resume','actor':gateway.OWNER},
+                        {'action':'arbitrary-command'}, {'action':None}, []):
+            with self.assertRaises((ValueError,TypeError,AttributeError)):
+                self.bridge.tool(dict(self.envelope(),operation='jumpserve_control',payload=payload))
+        self.assertEqual(self.store.tool_calls, [])
+    def test_task_inspection_binds_identity_and_only_accepts_a_task_id(self):
+        task = str(uuid.uuid4())
+        envelope = dict(self.envelope(),operation='jumpserve_task',payload={'task_id':task})
+        self.bridge.tool(envelope)
+        self.assertEqual(self.store.tool_calls[-1][1]['p_task'], task)
+        self.assertEqual(self.store.tool_calls[-1][1]['p_channel'], gateway.CHANNEL)
+        for payload in ({}, {'task_id':'invalid'}, {'task_id':task,'include_private':True}):
+            with self.assertRaises(ValueError): self.bridge.tool(dict(envelope,payload=payload))
+        self.assertEqual(len(self.store.tool_calls), 1)
+    def test_activation_requires_the_installed_operations_contract(self):
+        contract = dict(version='platform-slack-operations-v2',tools=list(gateway.TOOLS),
+                        controls=list(gateway.CONTROLS),requires_additional_owner_approval=False)
+        store=types.SimpleNamespace(request=lambda *args:contract)
+        self.assertEqual(gateway.verify_operations(store), contract)
+        for change in (dict(version='old'), dict(tools=['jumpserve_status']),
+                       dict(controls=[]), dict(requires_additional_owner_approval=True)):
+            with self.assertRaises(ValueError):
+                gateway.verify_operations(types.SimpleNamespace(request=lambda *args:dict(contract,**change)))
 
 
 class SlackCredentialTests(unittest.TestCase):
