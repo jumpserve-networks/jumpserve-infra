@@ -120,6 +120,14 @@ def main():
                 raise ValueError('Slack plugin provenance was not trusted.')
     if not args.activate:
         print(json.dumps(dict(staged=True,bundle_sha256=args.sha256,service_started=False))); return
+    # Staging precedes migrations; activation must prove the new read-only RPC
+    # contract before touching the running service. No owner JWT is synthesized.
+    sys.path.insert(0,'/opt/jumpserve/platform')
+    from platform_supervisor.credentials import Credentials
+    from platform_supervisor.store import Store
+    credential=Credentials()
+    store=Store(lambda:credential.secret(supabase),BASE,'7100785f-1d80-40be-bfb0-d9170caad095')
+    gateway.verify_operations(store)
     # An explicit release has now qualified the source and native plugin. Keep
     # original calls/state across upgrades; never erase an unknown-call fence.
     run(['systemctl','stop','jumpserve-platform-slack.service']) if Path('/etc/systemd/system/jumpserve-platform-slack.service').exists() else None

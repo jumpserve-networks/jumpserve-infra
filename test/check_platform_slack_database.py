@@ -6,6 +6,7 @@ import check_research_ideas_database as f
 import workflow
 
 MIGRATION = '202611040001_platform_slack_gateway.sql'
+OPERATIONS = '202611040002_platform_slack_controls.sql'
 
 
 def main():
@@ -85,7 +86,92 @@ def main():
         assert f.query('select storage_path from platform_slack_records where id='+q(ident))==path
     f.check('original Slack model evidence is immutable, private and content-addressed', evidence)
 
-    f.report.update(passed=True, protocol='platform-slack-gateway-v1')
+    raw = (f.ROOT / 'database' / OPERATIONS).read_bytes()
+    f.query(raw.decode()); f.report['migration_sha256'][OPERATIONS] = workflow.digest(raw)
+    def inspect(ident=None, sender='USECOND', room=channel, role='service_role'):
+        return rpc('platform_slack_task', team, room, sender, ident, role=role)
+    def control(action, target=None, ident=None, session=None, sender='USECOND', room=channel, role='service_role'):
+        return rpc('platform_slack_control', ident or f.uid(), team, room, sender, session or f.uid(), action, target, role=role)
+
+    def operational_authority():
+        contract = inspect()
+        assert contract['requires_additional_owner_approval'] is False
+        assert contract['controls'] == ['pause','resume','disable-releases','enable-releases','cancel']
+        assert contract['tools'] == ['jumpserve_status','jumpserve_request','jumpserve_task','jumpserve_control']
+        before = json.loads(f.query('select to_jsonb(s) from platform_settings s where id'))
+        ident, session = f.uid(), f.uid()
+        result = control('pause',ident=ident,session=session)
+        assert result['paused'] is True and result['revision'] == before['revision'] + 1
+        assert control('pause',ident=ident,session=session)['replayed'] is True
+        assert f.query('select revision from platform_settings where id') == str(result['revision'])
+        resumed = control('resume')
+        assert resumed['paused'] is False
+        assert control('disable-releases')['automatic_releases'] is False
+        assert control('enable-releases')['automatic_releases'] is True
+        # An acknowledgement replay cannot apply an old pause over a later resume.
+        assert control('pause',ident=ident,session=session)['paused'] is True
+        assert f.query('select paused from platform_settings where id') == 'f'
+        f.rejects(lambda:control('resume',ident=ident,session=session))
+        f.rejects(lambda:control('pause',ident=ident,session=f.uid()))
+        f.rejects(lambda:control('pause',ident=ident,session=session,sender='UTHIRD'))
+        record = json.loads(f.query('select payload from platform_requests where id='+q(ident)))
+        assert record['sender_id']=='USECOND' and record['session_id']==session
+        assert f.query('select actor_id from platform_requests where id='+q(ident)) == delegated
+        for action, expected in (('pause',before['paused']),('disable-releases',not before['automatic_releases'])):
+            if expected: control(action)
+    f.check('all delegated channel members execute audited controls without Google impersonation or extra approval, with exact replay', operational_authority)
+
+    def shared_details():
+        queued = request(payload=dict(task,title='Synthetic inspectable shared task'))['task_id']
+        private = request(payload=dict(task,title='Synthetic isolated DM task v2'),sender=owner,room='DPRIVATE')['task_id']
+        result = inspect(queued)
+        assert result['task']['id'] == queued and result['task']['objective'] == task['objective']
+        assert 'requested_by' not in result['task'] and 'checkpoint' not in result['task']
+        assert all(set(e)=={'sequence','id','kind','created_at'} for e in result['events'])
+        f.rejects(lambda:inspect(private))
+        f.rejects(lambda:control('cancel',private))
+        assert inspect(private,sender=owner,room='DPRIVATE')['task']['id'] == private
+        f.rejects(lambda:inspect(queued,sender=owner,room='DPRIVATE'))
+        assert control('cancel',private,sender=owner,room='DPRIVATE')['status']=='cancelled'
+        assert f.query('select count(*) from platform_requests where action=\'slack-cancel\' and payload->>\'task_id\'='+q(private)) == '1'
+    f.check('task inspection and cancellation preserve channel versus private DM isolation and exclude raw private payloads', shared_details)
+
+    def cancellation():
+        original_session=f.uid()
+        queued = request(session=original_session,payload=dict(task,title='Synthetic queued cancellation'))['task_id']
+        result = control('cancel',queued)
+        assert result['status']=='cancelled' and result['cancel_requested'] is True
+        active = request(payload=dict(task,title='Synthetic uncertain in-flight cancellation'))['task_id']
+        f.query("update platform_tasks set status='reconciling',checkpoint='{\"original_operation\":\"retained-fixture\"}' where id="+q(active))
+        def retained(): return f.query('select jsonb_build_array(deadline_at,max_reserved_cents,committed_cents,checkpoint) from platform_tasks where id='+q(active))
+        before=retained(); ident, session=f.uid(),f.uid()
+        stopped=control('cancel',active,ident=ident,session=session)
+        assert stopped['status']=='reconciling' and stopped['cancel_requested'] is True
+        assert retained()==before
+        assert control('cancel',active,ident=ident,session=session)['replayed'] is True
+        f.rejects(lambda:control('cancel',queued))
+        assert request(session=original_session,payload=dict(task,title='Synthetic queued cancellation'))['task_id']==queued
+        assert inspect(queued)['task']['status']=='cancelled'
+    f.check('Slack cancellation stops queued work without resetting terminal outcomes, counters, deadlines or uncertain operations', cancellation)
+
+    def denied_controls():
+        for action, target in [('arbitrary-command',None),('pause',f.uid()),('cancel',None),(None,None)]:
+            f.rejects(lambda:control(action,target))
+        for room, sender in [('COTHER','USECOND'),('DPRIVATE','USECOND')]:
+            f.rejects(lambda:control('pause',sender=sender,room=room))
+        for role in ('anon','authenticated'):
+            f.rejects(lambda:inspect(role=role))
+            f.rejects(lambda:control('pause',role=role))
+        f.query('update platform_slack_bindings set enabled=false')
+        f.rejects(inspect); f.rejects(lambda:control('pause'))
+        f.query('update platform_slack_bindings set enabled=true')
+        f.query("update platform_operators set role='revoked' where user_id="+q(delegated))
+        f.rejects(inspect); f.rejects(lambda:control('resume'))
+        f.query("update platform_operators set role='owner' where user_id="+q(delegated))
+        f.rejects(lambda:f.query("select public.platform_control('pause',"+q(f.uid())+")",role='service_role'))
+    f.check('browser roles, unknown actions, revoked bindings and other conversations cannot dispatch operator controls', denied_controls)
+
+    f.report.update(passed=True, protocol='platform-slack-operations-v2')
     path=f.DIRECTORY/'platform-slack-report.json'; path.write_text(json.dumps(f.report,indent=2)+'\n')
     print(json.dumps(dict(passed=True,checks=len(f.report['checks']),report=str(path),provider_calls=0,production_mutations=0)))
 

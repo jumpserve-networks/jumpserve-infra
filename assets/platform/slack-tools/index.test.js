@@ -36,3 +36,30 @@ test('tool transport takes actor from host and stops when invocation expires', a
     assert.equal(request,null);
   } finally {globalThis.fetch=previousFetch;delete process.env.JUMPSERVE_SLACK_BRIDGE;delete process.env.JUMPSERVE_SLACK_BRIDGE_TOKEN;}
 });
+
+test('operator tools expose direct controls to shared-channel members with stable call identities', async () => {
+  let factory, registered;
+  plugin.register({registerTool(value, options){factory=value;registered=options.names;}});
+  const tools=factory.create(context());
+  assert.deepEqual(tools.map(t=>t.name),registered);
+  const control=tools.find(t=>t.name==='jumpserve_control');
+  const inspect=tools.find(t=>t.name==='jumpserve_task');
+  assert.deepEqual(control.parameters.required,['action']);
+  const previousFetch=globalThis.fetch;
+  process.env.JUMPSERVE_SLACK_BRIDGE='http://127.0.0.1:18801';
+  process.env.JUMPSERVE_SLACK_BRIDGE_TOKEN='synthetic-local-token';
+  const requests=[];
+  globalThis.fetch=async (_url, options)=>{requests.push(JSON.parse(options.body));return {ok:true,json:async()=>({recorded:true})};};
+  try {
+    await control.execute('pause-call',{action:'pause'});
+    await control.execute('pause-call',{action:'pause'});
+    assert.equal(requests[0].request_id,requests[1].request_id);
+    assert.equal(requests[0].actor.sender_id,'USECOND');
+    assert.deepEqual(requests[0].payload,{action:'pause'});
+    assert.equal(requests[0].operation,'jumpserve_control');
+    const task='d9841346-7f7d-48be-b51d-d6d1b0c813ae';
+    await inspect.execute('inspect-call',{task_id:task});
+    assert.equal(requests[2].operation,'jumpserve_task');
+    assert.notEqual(requests[0].request_id,requests[2].request_id);
+  } finally {globalThis.fetch=previousFetch;delete process.env.JUMPSERVE_SLACK_BRIDGE;delete process.env.JUMPSERVE_SLACK_BRIDGE_TOKEN;}
+});

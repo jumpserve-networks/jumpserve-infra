@@ -19,6 +19,52 @@ thread. Keep DMs separate from channel threads and from other users' DMs.
 Group conversation access does not enroll participants as Google platform owners
 or expose private owner conversation history.
 
+## Prepared expansion: direct operator controls
+
+The 2026-11-04 follow-up requests broader supervisor and Slack authority. The
+supervisor already holds standing permission to implement, qualify, merge and
+deploy JumpServe improvements without another owner permission exchange. The
+prepared Slack operations v2 removes the original status/queue-only interface:
+
+- `jumpserve_status`: live supervisor health, settings and shared tasks.
+- `jumpserve_request`: queue improvements, runtime/self-repairs, tools and skills
+  under the supervisor's existing standing authority.
+- `jumpserve_task`: inspect a shared task's current blocker, progress, changes,
+  releases and model-call states.
+- `jumpserve_control`: pause/resume work, disable/enable automatic qualified
+  merges/releases, or cancel a task shared in the conversation.
+
+Every human member of the admitted channel receives these delegated controls.
+An explicit operational instruction needs no additional owner approval or
+confirmation step. Global settings affect the supervisor; task inspection and
+cancellation preserve the existing channel/owner-DM separation. Controls record
+the actual Slack actor and session under the owner delegation, never a fabricated
+Google JWT. Replaying a request returns its original acknowledgement without
+reapplying the action over a later command.
+
+Credential protection, cancellation, private histories, scientific evidence,
+fixed qualification and uncertain-action reconciliation remain in place. These
+changes do not give a conversational model a credential-bearing host shell or
+permit it to erase evidence or manufacture successful outcomes. Capability gaps
+remain implementation work under standing authority, rather than reasons to ask
+for another owner grant.
+
+**Operations v2 is prepared locally, not activated in production.** The running
+bundle described below still offers the original two tools. Deployment requires
+the current explicit deployment instruction in `AGENTS.md`. Apply the forward
+migration `202611040002_platform_slack_controls.sql` after the original Slack
+migration; do not edit the already-applied original. The v2 release packet lists
+every required migration and hash. Both activation and runtime startup probe the
+read-only operations contract and refuse to advertise the expanded tools until
+that migration and the owner binding are available.
+
+Local v2 qualification passed 126 database checks, 18 Python regressions, three
+tool-transport tests, and pinned native configuration/plugin validation with all
+four tools registered. The prepared bundle is
+`ffffb34be4f7665b1357de100c77c993bef312ba0e7259f6960dc8345587d3e7`.
+No production mutation, model call or local Gateway startup was performed for
+this expansion. Live v2 operator controls remain unverified until deployment.
+
 ## Prepared configuration
 
 `assets/platform/slack-app-manifest.json` defines the workspace app. Its scopes
@@ -35,7 +81,7 @@ never commit actual credentials.
 
 Both OpenClaw and its Slack plugin remain pinned to `2026.10.5`, with Node
 `24.16.0`. The configuration passes the pinned CLI's schema check. Its runtime
-loads both supervisor tools, and the official Slack plugin installation passes
+loads the registered supervisor tools, and the official Slack plugin installation passes
 the version, integrity and trusted-install checks.
 
 ## Verified credentials and gateway
@@ -54,7 +100,7 @@ confirmed cgroup OOM failures during native Gateway startup; the unused default
 memory plugin is now disabled. Only the new Slack service is installed or
 restarted during activation.
 
-`assets/platform/slack_gateway.py` runs the native Slack Gateway with isolated
+The deployed v1 Slack Gateway runs with isolated
 state and the existing subscription credential refresh owner. It exposes only
 `jumpserve_status` and `jumpserve_request`. Every channel member can request work;
 new tasks use the current database category budget and existing qualified release
@@ -68,8 +114,8 @@ repeats a completed model call. Truly uncertain calls retain their fence across
 service restarts. Recurring chat heartbeats, unsolicited introductions, presence
 greetings, generated shell tools and automatic framework updates are disabled.
 
-Local verification includes 122 database checks, 14 Python checks, two tool
-transport tests, and the pinned native configuration/plugin checks. Production
+The deployed v1's local verification included 122 database checks, 14 Python
+checks, two tool transport tests, and the pinned native configuration/plugin checks. Production
 conversation checks are recorded below.
 
 `python3 -B bin/platform-slack.py prepare` freezes the qualified source bundle and
@@ -127,7 +173,9 @@ fixed-host installer first for validation and then `--activate`. Verify the bund
 hash before running its root-owned bootstrap. Preserve applied migrations and
 all original call/state records, including uncertain-call fences. Verify actual
 Slack replies and retained receipts after activation; service activity alone is
-insufficient.
+insufficient. For v2 apply **all** migrations listed in the release packet before
+activation, including the new controls migration. A v1-only migration runner is
+insufficient; the installer deliberately rejects the missing v2 contract.
 
 Socket Mode uses an outbound connection from AWS and needs no public Gateway
 port. Run the qualified Gateway under systemd on AWS; the user's computer must

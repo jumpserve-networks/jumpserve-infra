@@ -3,7 +3,7 @@ import ast,hashlib,json,re
 from pathlib import Path
 
 VERSION='platform-supervisor-self-repair-v1'
-KERNEL={'__init__.py','common.py','credentials.py','store.py','github.py','source.py','releases.py','self_runtime.py','standing_authority.py','policy.json'}
+KERNEL={'__init__.py','common.py','credentials.py','store.py','github.py','source.py','releases.py','self_runtime.py','standing_authority.py','capabilities.py','policy.json'}
 METHODS={'worker.py':{'Controller.boundary','Controller.operation','Controller.coding_available','Controller.reconcile_pending','Controller.run','main'},
  'native.py':{'execute','containers','container_prefix','failure_status','reconcile'},'checks.py':{'execute'},
  'call_recovery.py':{'http_failure','effective_status','reconcile_http'}}
@@ -76,6 +76,11 @@ def inspect(previous,candidate,manifest):
     if a.get(fn)!=b[fn] and header_effects(node):raise ValueError('Changed function import-time effects require separate qualification')
    for fn in METHODS.get(name,set()):
     if fn not in a or a[fn]!=b.get(fn):raise ValueError('Frozen supervisor admission/qualification method changed: '+name+':'+fn)
+  if name.startswith('capability_'):
+   import importlib.util
+   spec=importlib.util.spec_from_file_location('trusted_capability_contract',previous/'capabilities.py')
+   module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+   module.descriptor(raw,name)
  for path in (previous/'tests').glob('*.py'):
   proposed=candidate/'tests'/path.name
   if not proposed.is_file() or proposed.is_symlink() or proposed.read_bytes()!=path.read_bytes():raise ValueError('Existing supervisor checks changed')

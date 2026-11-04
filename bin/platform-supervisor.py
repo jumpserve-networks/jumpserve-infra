@@ -28,6 +28,7 @@ MIGRATIONS.append('202611010011_platform_incident_closure.sql')
 MIGRATIONS.append('202611020001_platform_reconciliation_progress.sql')
 MIGRATIONS.extend(['202611020002_platform_incident_continuations.sql','202611020003_supervisor_self_install.sql'])
 MIGRATIONS.append('202611020004_private_incident_continuation_context.sql')
+MIGRATIONS.append('202611040003_supervisor_capabilities.sql')
 BUCKET='cdk-hnb659fds-assets-395567831870-us-east-1'
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def save(path,value):path.write_text(json.dumps(value,sort_keys=True,indent=2)+'\n')

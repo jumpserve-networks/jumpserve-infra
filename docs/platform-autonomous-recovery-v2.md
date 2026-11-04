@@ -106,6 +106,78 @@ service calls cannot bypass the existing task/lease-checked worker RPC.
 
 ## Initial activation and verification
 
+### Prepared capability acquisition extension (not deployed)
+
+The 2026-11-04 source adds an automatic capability implementation loop in
+`platform_supervisor/capabilities.py` and forward migration
+`202611040003_supervisor_capabilities.sql`. This section describes prepared local
+work, not the installed November 2 runtime or a proven production recovery.
+
+When a coding turn writes a structured `capability-request.json`, the controller
+retains its exact bytes before queueing linked implementation work. The parent
+waits while a separate backend task implements a declared operational tool pack
+and new regression tests. It inherits the parent's deadline, category policy,
+and incident/capability family accounting. Concurrent or repeated submissions
+cannot create duplicate implementations. Parent cancellation reaches child work;
+unknown calls, pending external actions and uncertain cleanup remain fenced.
+
+The implementation uses the existing frozen checks, protected GitHub revisions
+and supervisor self-update workflow. The new registry only delivers tool files
+whose module bytes match the verified installed supervisor manifest. A passing
+proposal or local test cannot register a production capability. Activation also
+requires the implementation task's exact confirmed deploy operation, verified
+release and installed source record. Eligible parents resume automatically;
+paused, cancelled, expired or uncertain work does not. A later unrelated blocker
+cannot be cleared by replaying an old activation.
+
+The first pack contract supports executable workspace tools and read-only
+diagnostic collectors. A literal `CAPABILITY` declares its id, revision,
+description, instructions and relative tool files. Tool scripts run through the
+existing isolated `exec` tool. An optional installed `collect(context)` receives
+the current task's evidence packet; `context.original(artifact_id)` retrieves
+only indexed originals from that packet and verifies study, path, byte count and
+hash. Derived collector results are retained privately and projected through the
+existing credential/contact redaction boundary before model delivery. Candidate
+modules and delivered scripts are never imported by the host before activation.
+An installed collector's programming fault automatically requests its next
+revision, with a sanitized stack and retained private original. Persistence or
+original-identity uncertainty remains a reconciliation hold, not a code upgrade.
+Implementation tasks skip optional collectors so a broken collector does not
+prevent its own repair.
+
+Once a verified capability is available, the controller archives the exact old
+local stop and request as private artifacts before retiring them from active
+workspace inputs. This happens once per activation, and does not rewrite a
+provider outcome or scientific finding. Tool rollback or removal is detected by
+installed-source readback rather than treating an old registry entry as current.
+
+This is an implementation path under existing standing authority, not a new
+owner permission exchange. It does not automatically confer an unavailable cloud
+permission, add a database mutation API, or qualify a change to frozen scientific
+or admission code. Those remain concrete service/release adapter work with their
+own executed checks; a tool pack must not claim to have installed them.
+
+Initial installation of this extension changes the frozen controller's wiring
+and acquisition kernel. Use the explicitly requested bootstrap/release procedure,
+apply the forward migration, install the qualified controller and gate together,
+and record the new exact installed baseline. Subsequent operational packs use
+the existing self-update route without another owner approval. Do not use the
+old frozen gate to certify this initial kernel change or infer activation from
+a mandate. Verify a live missing-tool request through actual self-installation,
+parent resumption and fresh measurements separately before claiming unattended
+production recovery. The prior Slack controls expansion is independent local
+work and is not activated by this migration.
+
+Local verification runs `npm run test:platform:capabilities`, the backend
+supervisor suite, and the infrastructure release-broker tests. They use explicit
+synthetic install/provider receipts and retained local PostgreSQL, never a live
+model, production mutation or a Docker daemon on the owner's computer.
+The prepared source passed 116 supervisor tests, 133 database checks and 22
+release-broker tests. Deterministic bundle SHA-256:
+`99f1c035629e16587b81b3fd8286bbaf3dea2e4b59191c020f9cecdf125e929f`.
+Protected-main CI, initial production installation and a live autonomous
+capability acquisition remain separate verification requirements.
+
 This initial implementation changes a frozen broker and must first use the
 existing explicitly requested deployment procedure. No production mutation is
 performed by local verification or by generating a bootstrap packet.

@@ -216,17 +216,19 @@ def prepare():
         results.append(dict(command=command,exit_code=result.returncode,stdout=result.stdout,stderr=result.stderr))
         if result.returncode: raise RuntimeError('Slack regression checks failed.')
     migration=ROOT/'database/202611040001_platform_slack_gateway.sql'
+    migration_names=[migration.name,'202611040002_platform_slack_controls.sql']
+    migrations=[dict(name=name,sha256=module.digest((ROOT/'database'/name).read_bytes())) for name in migration_names]
     database_reports=sorted((ROOT/'.test-artifacts/research-ideas/database').glob('*/platform-slack-report.json'))
     if not database_reports: raise RuntimeError('Passed local Slack database checks are required.')
     database=json.loads(database_reports[-1].read_bytes())
-    if database.get('passed') is not True or database['migration_sha256'].get(migration.name)!=module.digest(migration.read_bytes()):
+    if database.get('passed') is not True or any(database['migration_sha256'].get(item['name'])!=item['sha256'] for item in migrations):
         raise RuntimeError('Local database qualification does not match this migration.')
     names=['slack_gateway.py','slack_api.py','slack-channel-policy.json','jumpserve-platform-slack.service',
            'install-slack-gateway.py','slack-tools/index.js','slack-tools/openclaw.plugin.json','slack-tools/package.json']
     files={name:(ROOT/'assets/platform'/name).read_bytes() for name in names}
-    proof=dict(passed=True,version='platform-slack-qualification-v1',openclaw_version='2026.10.5',node_version='24.16.0',
+    proof=dict(passed=True,version='platform-slack-qualification-v2',openclaw_version='2026.10.5',node_version='24.16.0',
                files={name:module.digest(raw) for name,raw in files.items()},migration_sha256=module.digest(migration.read_bytes()),
-               database_report=str(database_reports[-1]),results=results,provider_calls=0,live_conversation_verified=False)
+               migrations=migrations,database_report=str(database_reports[-1]),results=results,provider_calls=0,live_conversation_verified=False)
     files['qualification.json']=module.canonical(proof)
     buffer=io.BytesIO()
     with zipfile.ZipFile(buffer,'w',zipfile.ZIP_DEFLATED) as archive:
@@ -235,7 +237,7 @@ def prepare():
             info.external_attr=0o100644<<16;archive.writestr(info,raw)
     bundle=buffer.getvalue(); bundle_sha=module.digest(bundle)
     module.save(qualification/'platform-slack.zip',bundle)
-    packet=dict(version='platform-slack-release-v1',bundle_sha256=bundle_sha,migration=migration.name,
+    packet=dict(version='platform-slack-release-v2',bundle_sha256=bundle_sha,migration=migration.name,migrations=migrations,
                 migration_sha256=proof['migration_sha256'],target_account=ACCOUNT,target_region=REGION,
                 target_instance='i-087f1493809643115',secret_id=SECRET,team_id=TEAM,channel_id=CHANNEL,app_id=APP,
                 qualified=True,activated=False,live_conversation_verified=False)
