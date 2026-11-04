@@ -1,0 +1,47 @@
+{
+  "channels": {
+    "slack": {
+      "enabled": true,
+      "mode": "socket",
+      "botToken": {
+        "source": "env",
+        "provider": "default",
+        "id": "SLACK_BOT_TOKEN"
+      },
+      "appToken": {
+        "source": "env",
+        "provider": "default",
+        "id": "SLACK_APP_TOKEN"
+      },
+      "dmPolicy": "allowlist",
+      "allowFrom": ["U06EL9LK476"],
+      "dm": { "enabled": true, "groupEnabled": false },
+      "groupPolicy": "allowlist",
+      "channels": {
+        "C0CEXNJE0HX": {
+          "enabled": true,
+          "requireMention": true,
+          "requireMentionInBotThreads": false,
+          "replyToMode": "all",
+          "allowBots": false
+        }
+      },
+      "allowBots": false,
+      "joinIntro": false,
+      "configWrites": false,
+      "replyToMode": "all",
+      "thread": { "historyScope": "thread", "inheritParent": false },
+      "commands": { "native": false, "nativeSkills": false },
+      "slashCommand": { "enabled": false },
+      "actions": {
+        "messages": true,
+        "reactions": true,
+        "pins": false,
+        "memberInfo": true,
+        "emojiList": false
+      },
+      "presenceEvents": { "mode": "off" },
+      "streaming": { "mode": "off" }
+    }
+  }
+}

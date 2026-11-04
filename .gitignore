@@ -1,5 +1,7 @@
 *.js
 !jest.config.js
+# Handwritten OpenClaw plugin source and its Node test.
+!assets/platform/slack-tools/*.js
 *.d.ts
 node_modules
 

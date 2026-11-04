@@ -1,0 +1,28 @@
+[Unit]
+Description=JumpServe private Slack conversation gateway
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=jumpserve
+Group=jumpserve
+EnvironmentFile=/etc/jumpserve-platform-slack.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+UnsetEnvironment=AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_PROFILE AWS_DEFAULT_PROFILE
+WorkingDirectory=/opt/jumpserve/platform-slack
+ExecStart=/opt/jumpserve/python/bin/python -B /opt/jumpserve/platform-slack/slack_gateway.py
+Restart=on-failure
+RestartSec=15
+TimeoutStopSec=90
+KillMode=control-group
+UMask=0077
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/lib/jumpserve-platform-slack /var/lib/jumpserve-openclaw/auth
+MemoryMax=2G
+
+[Install]
+WantedBy=multi-user.target
