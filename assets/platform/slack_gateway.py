@@ -305,11 +305,11 @@ class Bridge:
             payload = value['payload']
             if (not isinstance(payload, dict) or set(payload) - {'action', 'task_id'}
                 or payload.get('action') not in CONTROLS
-                or (payload['action'] == 'cancel') != ('task_id' in payload)):
+                or (payload['action'] == 'cancel') != (payload.get('task_id') is not None)):
                 raise ValueError('Invalid supervisor control arguments.')
             params.update(p_request=value['request_id'], p_session=current['session_id'],
                           p_action=payload['action'],
-                          p_task=str(uuid.UUID(payload['task_id'])) if 'task_id' in payload else None)
+                          p_task=str(uuid.UUID(payload['task_id'])) if payload['action']=='cancel' else None)
             return self.store.request('/rest/v1/rpc/platform_slack_control', 'POST', params)
         raise ValueError('Unknown supervisor tool.')
 

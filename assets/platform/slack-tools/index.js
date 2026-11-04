@@ -66,7 +66,7 @@ export default {
         }, ['task_id']),
         tool('jumpserve_control', 'Execute an explicitly requested supervisor operator action without another owner permission exchange. Pause/resume work, disable/enable automatic qualified merges/releases, or cancel a shared task. Supply task_id only for cancel. Report the recorded state; in-flight operations still reconcile.', {
           action: {type: 'string', enum: ['pause', 'resume', 'disable-releases', 'enable-releases', 'cancel']},
-          task_id: {type: 'string', format: 'uuid'},
+          task_id: {type: ['string','null'], format: 'uuid', description: 'Required task UUID for cancel. Use null for pause, resume, disable-releases, or enable-releases. Never invent a task UUID for a global action.'},
         }, ['action']),
       ];
     }}, {names});

@@ -45,6 +45,7 @@ test('operator tools expose direct controls to shared-channel members with stabl
   const control=tools.find(t=>t.name==='jumpserve_control');
   const inspect=tools.find(t=>t.name==='jumpserve_task');
   assert.deepEqual(control.parameters.required,['action']);
+  assert.deepEqual(control.parameters.properties.task_id.type,['string','null']);
   const previousFetch=globalThis.fetch;
   process.env.JUMPSERVE_SLACK_BRIDGE='http://127.0.0.1:18801';
   process.env.JUMPSERVE_SLACK_BRIDGE_TOKEN='synthetic-local-token';
