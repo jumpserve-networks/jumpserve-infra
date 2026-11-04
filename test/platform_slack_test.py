@@ -181,6 +181,15 @@ class SlackGatewayTests(unittest.TestCase):
             with self.assertRaises((ValueError,TypeError,AttributeError)):
                 self.bridge.tool(dict(self.envelope(),operation='jumpserve_control',payload=payload))
         self.assertEqual(self.store.tool_calls, [])
+    def test_native_nullable_task_argument_allows_global_controls_without_inventing_a_target(self):
+        envelope=dict(self.envelope(),operation='jumpserve_control',payload={'action':'resume','task_id':None})
+        self.bridge.tool(envelope)
+        self.assertEqual(self.store.tool_calls[-1][1]['p_action'],'resume')
+        self.assertIsNone(self.store.tool_calls[-1][1]['p_task'])
+        for payload in ({'action':'cancel','task_id':None},
+                        {'action':'resume','task_id':'00000000-0000-0000-0000-000000000000'}):
+            with self.assertRaises(ValueError):self.bridge.tool(dict(envelope,payload=payload))
+        self.assertEqual(len(self.store.tool_calls),1)
     def test_task_inspection_binds_identity_and_only_accepts_a_task_id(self):
         task = str(uuid.uuid4())
         envelope = dict(self.envelope(),operation='jumpserve_task',payload={'task_id':task})

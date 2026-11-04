@@ -106,12 +106,14 @@ service calls cannot bypass the existing task/lease-checked worker RPC.
 
 ## Initial activation and verification
 
-### Prepared capability acquisition extension (not deployed)
+### Deployed capability acquisition extension
 
 The 2026-11-04 source adds an automatic capability implementation loop in
 `platform_supervisor/capabilities.py` and forward migration
-`202611040003_supervisor_capabilities.sql`. This section describes prepared local
-work, not the installed November 2 runtime or a proven production recovery.
+`202611040003_supervisor_capabilities.sql`. The owner explicitly requested its
+production deployment on November 4. The qualified kernel is installed and its
+running process and files verified. A complete autonomous capability acquisition
+and research recovery require their own evidence.
 
 When a coding turn writes a structured `capability-request.json`, the controller
 retains its exact bytes before queueing linked implementation work. The parent
@@ -165,8 +167,8 @@ the existing self-update route without another owner approval. Do not use the
 old frozen gate to certify this initial kernel change or infer activation from
 a mandate. Verify a live missing-tool request through actual self-installation,
 parent resumption and fresh measurements separately before claiming unattended
-production recovery. The prior Slack controls expansion is independent local
-work and is not activated by this migration.
+production recovery. The Slack controls expansion uses its own migration and
+gateway activation; this migration alone does not activate it.
 
 Local verification runs `npm run test:platform:capabilities`, the backend
 supervisor suite, and the infrastructure release-broker tests. They use explicit
@@ -175,12 +177,22 @@ model, production mutation or a Docker daemon on the owner's computer.
 The prepared source passed 116 supervisor tests, 133 database checks and 22
 release-broker tests. Deterministic bundle SHA-256:
 `99f1c035629e16587b81b3fd8286bbaf3dea2e4b59191c020f9cecdf125e929f`.
-Protected-main CI, initial production installation and a live autonomous
-capability acquisition remain separate verification requirements.
+Protected-main CI passed for infrastructure
+`f162271a8adf98c694257668b8ed2afe59cc819b` and backend
+`1a8e96e2c86692506a2bde72ecdcd516a83eaab1`. Production installation and process
+verification completed at 21:52 UTC on November 4. See the
+[release record](platform-capability-release-20261104.md) for exact receipts.
+The live capability canary remains separate from the operator bootstrap and
+does not establish 100% unattended completion.
 
-This initial implementation changes a frozen broker and must first use the
-existing explicitly requested deployment procedure. No production mutation is
-performed by local verification or by generating a bootstrap packet.
+### November 2 initial self-repair baseline procedure
+
+The original implementation changed a frozen broker and used the explicitly
+requested deployment procedure below. It applies only when no initial baseline
+exists. An upgrade such as the November 4 capability kernel must retain its own
+operator installation intent, actual SSM receipt and verified activation; do not
+replace or replay the immutable initial activation. Local verification or
+generating a bootstrap packet does not mutate production.
 
 1. Run the backend supervisor suite, the infrastructure release tests and
    `python3 -B test/check_private_continuation_context_database.py`. The latter retains

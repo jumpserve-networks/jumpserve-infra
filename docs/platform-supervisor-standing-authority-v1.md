@@ -55,10 +55,11 @@ supervisor updates. Its verified activation manifest, installation receipt and
 actual research continuation remain separate evidence; no model can create a new
 owner grant or certify itself by writing an approval field.
 
-The locally prepared [capability acquisition extension](platform-autonomous-recovery-v2.md#prepared-capability-acquisition-extension-not-deployed)
+The deployed [capability acquisition extension](platform-autonomous-recovery-v2.md#deployed-capability-acquisition-extension)
 turns a missing operational tool or diagnostic adapter into linked implementation
 work under that same authority, followed by qualification, exact self-installation
 and eligible parent resumption. It does not require a new human grant for each
 pack. Installed capability evidence, unsupported service adapters and actual
-experiment recovery remain distinct; the prepared extension has not yet been
-activated in production.
+experiment recovery remain distinct. The initial kernel was explicitly deployed
+and verified on 2026-11-04; that operator bootstrap is not an autonomous pack
+installation or proof of unattended experiment recovery.
