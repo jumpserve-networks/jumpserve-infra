@@ -132,6 +132,17 @@ The recorded local results and retained evidence hashes are in
 
 ## Restart and rollback
 
+The publisher can also be installed through the protected
+`intake-publisher-release.yml` workflow using the existing
+`JumpServePlatformRelease` GitHub OIDC role. It accepts only a release UUID,
+the exact protected source revision and the deployed content-addressed runtime
+and publisher objects. It validates inputs before role acquisition and invokes
+the same pinned publisher request on the original refresh owner. A private S3
+intent is written before sending SSM, client mutation retries are disabled, and
+a lost acknowledgement is reconciled by its original release UUID. An
+unconfirmed intent cannot send another command. This path uses no desktop AWS
+session or copied long-lived credentials.
+
 Completed captured answers can resume controller work without another inference.
 An expired uncertain provider invocation remains blocked under its original ID;
 new child IDs cannot replace it. The durable completion outbox retries storage

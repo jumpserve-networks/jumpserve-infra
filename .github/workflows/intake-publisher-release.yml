@@ -1,0 +1,51 @@
+name: Install dedicated intake access publisher
+run-name: Intake publisher ${{ inputs.release_id }}
+on:
+  workflow_dispatch:
+    inputs:
+      release_id: {type: string, required: true}
+      revision: {type: string, required: true}
+      runtime_object: {type: string, required: true}
+      publisher_object: {type: string, required: true}
+permissions:
+  contents: read
+  id-token: write
+concurrency:
+  group: jumpserve-intake-publisher
+  cancel-in-progress: false
+jobs:
+  release:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      INTAKE_RELEASE_ID: ${{ inputs.release_id }}
+      INTAKE_REVISION: ${{ inputs.revision }}
+      INTAKE_RUNTIME_OBJECT: ${{ inputs.runtime_object }}
+      INTAKE_PUBLISHER_OBJECT: ${{ inputs.publisher_object }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python3 -m pip install boto3==1.42.4
+      - name: Verify the pinned publisher and durable dispatch regressions
+        run: python3 -B -m unittest discover -s test -p intake_release_test.py -v
+      - name: Bind exact source and validate inputs before role acquisition
+        run: python3 -B bin/deploy-intake-publisher.py --prepare-only --release-id "$INTAKE_RELEASE_ID" --revision "$INTAKE_REVISION" --runtime-object "$INTAKE_RUNTIME_OBJECT" --publisher-object "$INTAKE_PUBLISHER_OBJECT"
+      - uses: aws-actions/configure-aws-credentials@v6.2.3
+        with:
+          role-to-assume: arn:aws:iam::395567831870:role/JumpServePlatformRelease
+          role-session-name: intake-publisher-${{ github.run_id }}
+          aws-region: us-east-1
+          allowed-account-ids: '395567831870'
+          role-duration-seconds: 900
+          unset-current-credentials: true
+      - name: Install or reconcile the original source-bound publisher command
+        run: python3 -B bin/deploy-intake-publisher.py --release-id "$INTAKE_RELEASE_ID" --revision "$INTAKE_REVISION" --runtime-object "$INTAKE_RUNTIME_OBJECT" --publisher-object "$INTAKE_PUBLISHER_OBJECT"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: intake-publisher-${{ inputs.release_id }}
+          path: .test-artifacts/intake-publisher-release/
+          if-no-files-found: ignore
