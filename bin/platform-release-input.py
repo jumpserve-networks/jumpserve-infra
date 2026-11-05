@@ -14,7 +14,10 @@ def inputs():
     if expected.get(component)!=repository or not re.fullmatch('[a-f0-9]{40}',revision) or str(uuid.UUID(operation))!=operation:raise ValueError('Exact platform release identity required.')
     qualified=os.environ.get('PLATFORM_QUALIFIED_DEFAULTS','false')
     if qualified not in ('true','false') or (qualified=='true' and component!='infrastructure'):raise ValueError('Qualified defaults apply only to their infrastructure release.')
-    with urllib.request.urlopen(urllib.request.Request('https://api.github.com/repos/'+repository+'/git/ref/heads/main',headers={'User-Agent':'JumpServe-Platform-Release'}),timeout=30) as response:main=json.loads(response.read(100000))['object']['sha']
+    headers={'User-Agent':'JumpServe-Platform-Release'}
+    token=os.environ.get('GH_TOKEN') or os.environ.get('GITHUB_TOKEN')
+    if token:headers['Authorization']='Bearer '+token
+    with urllib.request.urlopen(urllib.request.Request('https://api.github.com/repos/'+repository+'/git/ref/heads/main',headers=headers),timeout=30) as response:main=json.loads(response.read(100000))['object']['sha']
     if main!=revision:raise ValueError('Production main advanced; do not deploy a stale revision.')
     return component,repository,revision,operation
 

@@ -61,6 +61,8 @@ jobs:
           role-duration-seconds: 2700
           unset-current-credentials: true
       - name: Install once and verify the actual supervisor source
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: python3 -B bin/supervisor-runtime-release.py execute
       - uses: actions/upload-artifact@v4
         if: success()

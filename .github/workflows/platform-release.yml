@@ -46,6 +46,8 @@ jobs:
         with:
           python-version: '3.12'
       - name: Validate the exact release target before obtaining AWS credentials
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: python3 -B bin/platform-release-input.py
       - name: Check out the infrastructure candidate
         if: inputs.component == 'infrastructure'
@@ -57,6 +59,8 @@ jobs:
       - name: Read immutable runtime pins
         if: inputs.component == 'infrastructure'
         id: pins
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: python3 -B bin/platform-release-input.py --pins
       - if: inputs.component == 'infrastructure'
         uses: actions/checkout@v4
@@ -99,6 +103,8 @@ jobs:
           role-duration-seconds: 7200
           unset-current-credentials: true
       - name: Deploy the scoped component and verify the actual production revision
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: python3 -B bin/platform-release-input.py --execute
       - uses: actions/upload-artifact@v4
         if: success()
