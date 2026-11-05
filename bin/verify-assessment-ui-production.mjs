@@ -20,10 +20,10 @@ try{
  const path='/research-verification/assessments';let title,assessment;
  await check('production cards and table open the same recorded assessments',async()=>{
   await page.goto(site+path);const first=page.locator('article[data-paper-id]').first();await first.waitFor();title=await first.locator('h2 a').innerText();assessment=await first.locator('h2 a').getAttribute('href');assert.match(assessment,/^\/research-verification\/assessment\/[a-f0-9-]+$/);
-  await page.getByRole('navigation',{name:'Assessment view',exact:true}).getByRole('button',{name:'Table',exact:true}).click();const table=page.getByRole('table',{name:'Assessments',exact:true});await table.getByRole('link',{name:title,exact:true}).waitFor();assert.equal(await table.getByRole('link',{name:title,exact:true}).getAttribute('href'),assessment);await page.screenshot({path:out+'/table-desktop.png',fullPage:true});
+  await page.getByRole('navigation',{name:'Assessment view',exact:true}).getByRole('button',{name:'Table',exact:true}).click();const table=page.getByRole('table',{name:'Assessments',exact:true});const link=table.locator(`a[href="${assessment}"]`);await link.waitFor();assert.equal(await link.innerText(),title);await page.screenshot({path:out+'/table-desktop.png',fullPage:true});
  });
  await check('production name filter retains the selected table view',async()=>{
-  await page.getByLabel('Filter by name',{exact:true}).fill(title.slice(0,128));await page.getByRole('button',{name:'Filter',exact:true}).click();await page.waitForURL(url=>url.searchParams.has('name'));await page.getByRole('table',{name:'Assessments',exact:true}).getByRole('link',{name:title,exact:true}).waitFor();assert.equal(new URL(page.url()).searchParams.get('view'),'table');
+  await page.getByLabel('Filter by name',{exact:true}).fill(title.slice(0,128));await page.getByRole('button',{name:'Filter',exact:true}).click();await page.waitForURL(url=>url.searchParams.has('name'));await page.getByRole('table',{name:'Assessments',exact:true}).locator(`a[href="${assessment}"]`).waitFor();assert.equal(new URL(page.url()).searchParams.get('view'),'table');
  });
  await check('ready paper overview links to claim selection with exact sign-in return',async()=>{
   await page.goto(site+assessment);await page.getByTestId('assessment-detail').waitFor();await page.locator('[data-assessment-stage]').filter({hasNotText:'Loading…'}).waitFor();
