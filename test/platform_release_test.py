@@ -239,7 +239,8 @@ class PlatformReleaseTests(unittest.TestCase):
             with patch.object(synthesis.Path,'cwd',return_value=root),patch.object(synthesis.os,'getuid',return_value=1001),patch.object(synthesis.os,'getgid',return_value=1002),patch.object(synthesis.subprocess,'run') as run:
                 synthesis.main()
             containers=[call.args[0] for call in run.call_args_list if call.args[0][:2]==['docker','run']]
-            self.assertEqual(len(containers),4)
+            self.assertEqual(len(containers),5)
+            self.assertTrue(any(command[-5:]==['python3','-B','bin/prepare-research-api-runtime.py','--backend','.runtime-research-api'] for command in containers))
             for command in containers:
                 self.assertEqual(command[command.index('--user')+1],'1001:1002')
                 self.assertEqual(command[command.index('--cap-drop')+1],'ALL')
