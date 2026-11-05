@@ -83,6 +83,7 @@ jobs:
           python3 -B bin/prepare-intake-runtime.py --backend .runtime-intake-source
           python3 -B bin/prepare-openclaw-worker.py --backend .runtime-research
           python3 -B bin/prepare-autonomy-runtime.py
+          python3 -B -m unittest discover -s test -p intake_pdf_bootstrap_test.py -v
           cp -R .runtime-research ../jumpserve-back-end
           python3 -B -m unittest discover -s .runtime-research/research_workflow/tests -v
 

@@ -32,4 +32,7 @@ test('intake uses separate encrypted compute; original refresh owner is imported
  const resources=JSON.stringify(template.toJSON());
  expect(resources).not.toContain('refresh_token');expect(resources).not.toContain('JumpServeOpenClawStack/Worker');
  expect(resources).toContain('intake-runtime');expect(resources).toContain('jumpserve-intake.service');
+ expect(resources).toContain('pypdf-6.19.0-py3-none-any.whl');
+ expect(resources).toContain('pip install --no-index --no-deps');
+ expect(resources).toContain('intake-pdf-check.py');
 });
