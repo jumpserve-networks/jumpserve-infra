@@ -1,0 +1,47 @@
+{
+  "version": "intake-repair-bootstrap-local-qualification-v1",
+  "intake_revision": "3f08f2115a68e1e14fa5cd9616599d2ec589d23b",
+  "intake_source_binding": "ce289f36b6683d30523ff3b5aaf7626bd7042002a4968015f7fd779eb0dc1e05",
+  "supervisor_revision": "dafc8a21caebc63a43b813bd1d0b2620749fb92c",
+  "supervisor_predecessor": "13c003c311b966d47218670d8e102e381aea8f4e",
+  "supervisor_source_binding": "55894b782ef2fe81a888c10283582bbb5c5fc33a389be911a4b60b9f159420ce",
+  "validation": {
+    "intake_tests": 529,
+    "intake_skips": 0,
+    "supervisor_tests": 130,
+    "database_checks": 146,
+    "installer_and_scope_checks": 10,
+    "cdk_checks": 1,
+    "typescript_build": "passed"
+  },
+  "evidence": {
+    "intake_packet": {
+      "path": ".test-artifacts/intake-initialization-repair-v2/packet.json",
+      "sha256": "4e3fe78e9a7b5b1600aea0806d0c7812158325ee01a22d4536ea6c24989abb95"
+    },
+    "supervisor_scope": {
+      "path": "../jumpserve-back-end/.test-artifacts/intake-repair-supervisor-scope-final.json",
+      "sha256": "12fb92c3727533730882945cbe447d78e72656531f1740f584ad753c68d8da34"
+    },
+    "supervisor_tests": {
+      "path": "../jumpserve-back-end/.test-artifacts/intake-repair-supervisor-tests-final.log",
+      "sha256": "70bb75b5febfc9a5f58e630fea2a774ce6d35dd5e1c4660bd0617af9fe5939e7"
+    },
+    "database_tests": {
+      "path": ".test-artifacts/intake-initialization-database-v2.log",
+      "sha256": "62d3de5c93426665ee236761b111685062c4ce650900551ac5eb08b193353ee6"
+    },
+    "installation_request": {
+      "path": ".test-artifacts/intake-initialization-install-final.json",
+      "sha256": "5a60c583c8402f0572923e8c1353cf60cdec437e81286dcd945b3e8facba2575"
+    }
+  },
+  "external_provider_calls": 0,
+  "production_mutations": 0,
+  "installed": false,
+  "limitations": [
+    "Local qualification only; protected publication, production installation/readback and guarded resume remain deployment work.",
+    "A real new-paper provider-to-Supabase round trip and parallel extraction latency are not proven by these local checks.",
+    "Supplying missing source inputs is not proof that all requested supervisor capabilities are installed."
+  ]
+}

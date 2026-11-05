@@ -31,6 +31,10 @@ export class IntakeWorker extends Construct {
     const publisher=new assets.Asset(this,'PublisherService',{path:path.join(root,'assets/openclaw/jumpserve-intake-access.service')});
     const role=new iam.Role(this,'Role',{assumedBy:new iam.ServicePrincipal('ec2.amazonaws.com'),managedPolicies:[iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonSSMManagedInstanceCore')]});
     props.secret.grantRead(role);runtime.grantRead(role);dependencies.grantRead(role);service.grantRead(role);
+    // Repair artifacts contain reviewed code/metadata only. A stable read
+    // prefix lets the qualified installer advance source without another IAM
+    // change; it independently verifies every old/new byte before a swap.
+    role.addToPolicy(new iam.PolicyStatement({actions:['s3:GetObject'],resources:[runtime.bucket.arnForObjects('intake-repair/*')]}));
     const parameter='arn:aws:ssm:us-east-1:395567831870:parameter/jumpserve/intake-access-v1';
     role.addToPolicy(new iam.PolicyStatement({actions:['ssm:GetParameter'],resources:[parameter]}));
     role.addToPolicy(new iam.PolicyStatement({effect:iam.Effect.DENY,actions:['ssm:GetParameter','ssm:GetParameters','ssm:GetParametersByPath'],notResources:[parameter]}));
