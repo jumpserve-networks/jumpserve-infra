@@ -66,6 +66,8 @@ jobs:
           python3 -B bin/prepare-intake-runtime.py --backend .runtime-intake-source
       - name: Check dedicated intake orchestration and complete byte budgets
         run: python3 -B -m unittest discover -s .runtime-intake-source/research_workflow/tests -p 'test_intake*.py' -v
+      - name: Verify intake PDF dependency and actual parser subprocess
+        run: python3 -B -m unittest discover -s test -p intake_pdf_bootstrap_test.py -v
       - run: npm ci --ignore-scripts
       - run: npm test -- --runInBand
       - run: npm run build

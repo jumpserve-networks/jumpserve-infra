@@ -10,6 +10,7 @@ EnvironmentFile=/etc/jumpserve-intake.env
 Environment=PYTHONDONTWRITEBYTECODE=1
 UnsetEnvironment=AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_PROFILE AWS_DEFAULT_PROFILE
 WorkingDirectory=/opt/jumpserve/intake-runtime
+ExecStartPre=/opt/jumpserve/python/bin/python -B /opt/jumpserve/intake-pdf-check.py
 ExecStart=/opt/jumpserve/python/bin/python -B -m intake_worker
 Restart=on-failure
 RestartSec=15

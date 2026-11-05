@@ -27,10 +27,16 @@ export class IntakeWorker extends Construct {
     for(const [name,sha] of Object.entries(lock.files))if(createHash('sha256').update(fs.readFileSync(path.join(dependencyDir,name))).digest('hex')!==sha)throw new Error('Pinned native dependencies differ.');
     const runtime=new assets.Asset(this,'Runtime',{path:directory});
     const dependencies=new assets.Asset(this,'Dependencies',{path:dependencyDir});
+    const pdfLock=JSON.parse(fs.readFileSync(path.join(root,'autonomy-pdf-runtime.json'),'utf8'));
+    const pdfWheelPath=path.join(root,'.test-artifacts/autonomy-dependencies',pdfLock.wheel);
+    if(pdfLock.requirement!=='pypdf==6.19.0'||createHash('sha256').update(fs.readFileSync(pdfWheelPath)).digest('hex')!==pdfLock.sha256)throw new Error('Pinned intake PDF wheel differs; run prepare-autonomy-runtime.py.');
+    const pdfWheel=new assets.Asset(this,'PdfDependency',{path:pdfWheelPath});
+    const pdfCheck=new assets.Asset(this,'PdfCheck',{path:path.join(root,'assets/openclaw/verify-intake-pdf.py')});
     const service=new assets.Asset(this,'Service',{path:path.join(root,'assets/openclaw/jumpserve-intake.service')});
     const publisher=new assets.Asset(this,'PublisherService',{path:path.join(root,'assets/openclaw/jumpserve-intake-access.service')});
     const role=new iam.Role(this,'Role',{assumedBy:new iam.ServicePrincipal('ec2.amazonaws.com'),managedPolicies:[iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonSSMManagedInstanceCore')]});
     props.secret.grantRead(role);runtime.grantRead(role);dependencies.grantRead(role);service.grantRead(role);
+    pdfWheel.grantRead(role);pdfCheck.grantRead(role);
     // Repair artifacts contain reviewed code/metadata only. A stable read
     // prefix lets the qualified installer advance source without another IAM
     // change; it independently verifies every old/new byte before a swap.
@@ -51,6 +57,12 @@ export class IntakeWorker extends Construct {
       'mkdir -p /opt/jumpserve/dependencies /opt/jumpserve/intake-runtime /var/lib/jumpserve-openclaw/auth /var/lib/jumpserve-intake',
       `aws s3 cp s3://${dependencies.s3BucketName}/${dependencies.s3ObjectKey} /opt/jumpserve/dependencies.zip --region us-east-1`,
       'unzip -q /opt/jumpserve/dependencies.zip -d /opt/jumpserve/dependencies','bash /opt/jumpserve/dependencies/install.sh',
+      `aws s3 cp s3://${pdfWheel.s3BucketName}/${pdfWheel.s3ObjectKey} /opt/jumpserve/${pdfLock.wheel} --region us-east-1`,
+      `echo '${pdfLock.sha256}  /opt/jumpserve/${pdfLock.wheel}' | sha256sum --check`,
+      `/opt/jumpserve/python/bin/pip install --no-index --no-deps /opt/jumpserve/${pdfLock.wheel}`,
+      'chmod -R a+rX /opt/jumpserve/python',
+      `aws s3 cp s3://${pdfCheck.s3BucketName}/${pdfCheck.s3ObjectKey} /opt/jumpserve/intake-pdf-check.py --region us-east-1`,
+      'chmod 644 /opt/jumpserve/intake-pdf-check.py',
       `aws s3 cp s3://${runtime.s3BucketName}/${runtime.s3ObjectKey} /opt/jumpserve/intake.zip --region us-east-1`,
       'unzip -q /opt/jumpserve/intake.zip -d /opt/jumpserve/intake-runtime',
       `/opt/jumpserve/python/bin/python -c 'import hashlib,json,pathlib; r=pathlib.Path("/opt/jumpserve/intake-runtime"); m=json.loads((r/"intake-manifest.json").read_bytes()); assert all(hashlib.sha256((r/n).read_bytes()).hexdigest()==h for n,h in m["files"].items())'`,
@@ -79,5 +91,8 @@ export class IntakeWorker extends Construct {
     new cdk.CfnOutput(cdk.Stack.of(this),'IntakePublisherBucket',{value:publisher.s3BucketName});
     new cdk.CfnOutput(cdk.Stack.of(this),'IntakePublisherObject',{value:publisher.s3ObjectKey});
     new cdk.CfnOutput(cdk.Stack.of(this),'IntakeSourceBinding',{value:manifest.source_binding});
+    new cdk.CfnOutput(cdk.Stack.of(this),'IntakePdfWheelObject',{value:pdfWheel.s3ObjectKey});
+    new cdk.CfnOutput(cdk.Stack.of(this),'IntakePdfCheckObject',{value:pdfCheck.s3ObjectKey});
+    new cdk.CfnOutput(cdk.Stack.of(this),'IntakeServiceObject',{value:service.s3ObjectKey});
   }
 }
