@@ -143,6 +143,15 @@ a lost acknowledgement is reconciled by its original release UUID. An
 unconfirmed intent cannot send another command. This path uses no desktop AWS
 session or copied long-lived credentials.
 
+The intake stack also grants this protected role SSM maintenance and console
+read access to its exact intake host, plus the metadata reads needed to resolve
+and verify that host. `intake-bootstrap-diagnostics.yml` uses fresh OIDC sessions
+and checks the stack's source binding before collecting service/bootstrap state.
+It accepts no host IDs, shell commands or static integration keys from callers.
+Bootstrap checks import the pinned package as the service account, after making
+only immutable code directories readable/traversable. Private auth/state paths
+retain their restrictive permissions.
+
 Completed captured answers can resume controller work without another inference.
 An expired uncertain provider invocation remains blocked under its original ID;
 new child IDs cannot replace it. The durable completion outbox retries storage
