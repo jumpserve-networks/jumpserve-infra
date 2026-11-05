@@ -1,0 +1,33 @@
+name: Diagnose dedicated intake bootstrap
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: intake-bootstrap-diagnostics
+  cancel-in-progress: false
+jobs:
+  diagnose:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 -m pip install boto3==1.42.4
+      # Existing integration credentials stay in the runner; diagnostics are
+      # fixed to the deployed host and cannot run caller-supplied commands.
+      - run: python3 -B bin/intake-bootstrap-diagnostics.py
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-east-1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: intake-bootstrap-diagnostics
+          path: .test-artifacts/intake-bootstrap/
+          include-hidden-files: true
+          retention-days: 3
