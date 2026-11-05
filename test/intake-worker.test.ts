@@ -20,7 +20,15 @@ test('intake uses separate encrypted compute; original refresh owner is imported
  expect(intake).toBeDefined();expect(intake!.Properties.SecurityGroupIngress).toBeUndefined();
  const policies=JSON.stringify(template.findResources('AWS::IAM::Policy'));
  expect(policies).toContain('ssm:PutParameter');expect(policies).toContain('ssm:GetParameter');expect(policies).toContain('NotResource');
- expect(policies).not.toContain('iam:PassRole');expect(policies).not.toContain('ssm:SendCommand');
+ expect(policies).not.toContain('iam:PassRole');
+ const release=Object.values(template.findResources('AWS::IAM::Policy')).find(x=>x.Properties.Roles?.includes('JumpServePlatformRelease'));
+ expect(release).toBeDefined();
+ const command=release!.Properties.PolicyDocument.Statement.find((x:{Action:string|string[]})=>x.Action==='ssm:SendCommand'||Array.isArray(x.Action)&&x.Action.includes('ssm:SendCommand'));
+ const host=Object.keys(template.findResources('AWS::EC2::Instance'))[0];
+ expect(command.Resource).toHaveLength(2);
+ expect(command.Resource).toEqual(expect.arrayContaining(['arn:aws:ssm:us-east-1::document/AWS-RunShellScript',
+  {'Fn::Join':['',['arn:',{Ref:'AWS::Partition'},':ec2:us-east-1:395567831870:instance/',{Ref:host}]]}]));
+ expect(JSON.stringify(release)).not.toContain('instance/*');
  const resources=JSON.stringify(template.toJSON());
  expect(resources).not.toContain('refresh_token');expect(resources).not.toContain('JumpServeOpenClawStack/Worker');
  expect(resources).toContain('intake-runtime');expect(resources).toContain('jumpserve-intake.service');

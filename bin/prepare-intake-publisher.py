@@ -28,8 +28,10 @@ def build(outputs):
   'aws s3 cp s3://'+values['IntakePublisherBucket']+'/'+values['IntakePublisherObject']+' /opt/jumpserve/intake-publisher.service --region us-east-1',
   'echo '+shlex.quote(service_sha+'  /opt/jumpserve/intake-publisher.service')+' | sha256sum --check',
   'systemctl stop jumpserve-intake-access.service || true',
+  'chmod a+rx /opt/jumpserve/intake-releases',
   'chmod -R a+rX '+release,
   'ln -sfn '+release+' /opt/jumpserve/intake-runtime',
+  "runuser -u jumpserve -- /opt/jumpserve/python/bin/python -B -c 'import sys; sys.path.insert(0,\"/opt/jumpserve/intake-runtime\"); import intake_worker; intake_worker.runtime.verify_runtime()'",
   'install -m 644 /opt/jumpserve/intake-publisher.service /etc/systemd/system/jumpserve-intake-access.service',
   'systemctl daemon-reload','systemctl enable --now jumpserve-intake-access.service',
   'systemctl is-active jumpserve-intake-access.service']

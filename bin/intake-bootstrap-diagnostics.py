@@ -9,7 +9,6 @@ from pathlib import Path
 import boto3
 from botocore.config import Config
 
-INSTANCE = 'i-00dc52abbcf706670'
 REGION = 'us-east-1'
 OUT = Path('.test-artifacts/intake-bootstrap')
 # No environment, auth stores, parameter values, prompts, or paper text are read.
@@ -39,14 +38,20 @@ def main():
     def client(name):
         return boto3.client(name, config=config)
     assert client('sts').get_caller_identity()['Account'] == '395567831870', 'Wrong AWS account'
+    stack = client('cloudformation').describe_stacks(StackName='JumpServeIntakeStack')['Stacks'][0]
+    outputs = {item['OutputKey']: item['OutputValue'] for item in stack['Outputs']}
+    pin = json.loads(Path('intake-worker-runtime.json').read_text())
+    assert outputs['IntakeSourceBinding'] == pin['source_binding'], 'Wrong intake source binding'
+    instance_id = outputs['IntakeInstanceId']
+    assert re.fullmatch(r'i-[a-f0-9]{17}', instance_id), 'Invalid intake host identity'
     ec2, ssm = client('ec2'), client('ssm')
-    instance = ec2.describe_instances(InstanceIds=[INSTANCE])['Reservations'][0]['Instances'][0]
+    instance = ec2.describe_instances(InstanceIds=[instance_id])['Reservations'][0]['Instances'][0]
     tags = {t['Key']: t['Value'] for t in instance.get('Tags', [])}
     assert tags.get('aws:cloudformation:stack-name') == 'JumpServeIntakeStack', 'Wrong host stack'
-    info = ssm.describe_instance_information(Filters=[{'Key': 'InstanceIds', 'Values': [INSTANCE]}])['InstanceInformationList']
-    report = {'instance_id': INSTANCE, 'state': instance['State']['Name'], 'type': instance['InstanceType'],
+    info = ssm.describe_instance_information(Filters=[{'Key': 'InstanceIds', 'Values': [instance_id]}])['InstanceInformationList']
+    report = {'instance_id': instance_id, 'source_binding': pin['source_binding'], 'state': instance['State']['Name'], 'type': instance['InstanceType'],
               'public_ip_assigned': bool(instance.get('PublicIpAddress')), 'ssm_ping': info[0]['PingStatus'] if info else None}
-    console = ec2.get_console_output(InstanceId=INSTANCE, Latest=True)
+    console = ec2.get_console_output(InstanceId=instance_id, Latest=True)
     console_text = console.get('Output', '')
     if console_text and '\n' not in console_text:
         try:
@@ -55,7 +60,7 @@ def main():
             pass
     (OUT / 'console.txt').write_text(redact(console_text))
     if info and info[0]['PingStatus'] == 'Online':
-        result = ssm.send_command(InstanceIds=[INSTANCE], DocumentName='AWS-RunShellScript',
+        result = ssm.send_command(InstanceIds=[instance_id], DocumentName='AWS-RunShellScript',
             Comment='Read-only dedicated intake bootstrap diagnostics', TimeoutSeconds=120,
             Parameters={'commands': [COMMAND], 'executionTimeout': ['90']})
         report['command_id'] = result['Command']['CommandId']
@@ -63,7 +68,7 @@ def main():
         for _ in range(60):
             time.sleep(2)
             try:
-                result = ssm.get_command_invocation(CommandId=report['command_id'], InstanceId=INSTANCE)
+                result = ssm.get_command_invocation(CommandId=report['command_id'], InstanceId=instance_id)
             except ssm.exceptions.InvocationDoesNotExist:
                 continue
             if result['Status'] in ('Pending', 'InProgress', 'Delayed'):
