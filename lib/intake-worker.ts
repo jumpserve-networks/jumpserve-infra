@@ -50,6 +50,10 @@ export class IntakeWorker extends Construct {
       `aws s3 cp s3://${runtime.s3BucketName}/${runtime.s3ObjectKey} /opt/jumpserve/intake.zip --region us-east-1`,
       'unzip -q /opt/jumpserve/intake.zip -d /opt/jumpserve/intake-runtime',
       `/opt/jumpserve/python/bin/python -c 'import hashlib,json,pathlib; r=pathlib.Path("/opt/jumpserve/intake-runtime"); m=json.loads((r/"intake-manifest.json").read_bytes()); assert all(hashlib.sha256((r/n).read_bytes()).hexdigest()==h for n,h in m["files"].items())'`,
+      // Restrictive bootstrap umask also affects directories created by unzip.
+      // Only immutable code/policies become readable; auth/state stay private.
+      'chmod -R a+rX /opt/jumpserve/intake-runtime',
+      `runuser -u jumpserve -- /opt/jumpserve/python/bin/python -B -c 'import sys; sys.path.insert(0,"/opt/jumpserve/intake-runtime"); import intake_worker; intake_worker.runtime.verify_runtime()'`,
       `printf '%s\n' 'SUPABASE_URL=https://regphejnlvfpyokpniny.supabase.co' 'SUPABASE_SECRET_ARN=${props.secret.secretArn}' 'AWS_DEFAULT_REGION=us-east-1' 'RESEARCH_AI_RUNTIME=openclaw-production-v1' 'RESEARCH_CATEGORY_BUDGETS_ENABLED=true' 'INTAKE_HOME=/var/lib/jumpserve-intake' > /etc/jumpserve-intake.env`,
       'chmod 600 /etc/jumpserve-intake.env','chown -R jumpserve:jumpserve /var/lib/jumpserve-intake',
       `aws s3 cp s3://${service.s3BucketName}/${service.s3ObjectKey} /etc/systemd/system/jumpserve-intake.service --region us-east-1`,
