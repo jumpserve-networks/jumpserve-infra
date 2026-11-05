@@ -5,6 +5,11 @@
     "jumpserve-infra": "bin/jumpserve-infra.js"
   },
   "scripts": {
+    "prepare:intake": "python3 -B bin/prepare-intake-runtime.py",
+    "cdk:intake": "cdk --app \"npx ts-node --prefer-ts-exts bin/intake.ts\"",
+    "test:research:intake": "python3 -B test/check_dedicated_intake_database.py",
+    "test:research:intake-native": "python3 -B test/qualify_intake_native.py",
+    "test:research:paper-authors": "python3 -B test/check_paper_review_authors_database.py",
     "cdk:observability": "cdk --app \"npx ts-node --prefer-ts-exts bin/observability.ts\"",
     "test:platform:database": "python3 -B test/check_platform_database.py",
     "test:platform:scheduling": "python3 -B test/check_platform_fair_scheduling_database.py",

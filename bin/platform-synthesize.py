@@ -12,7 +12,7 @@ def main():
     tag='jumpserve-platform-release:'+hashlib.sha256(recipe.read_bytes()).hexdigest()[:16]
     out=root/'.test-artifacts/platform-release';out.mkdir(parents=True,exist_ok=True)
     with (out/'image.log').open('wb') as log:subprocess.run(['docker','build','--platform','linux/amd64','-t',tag,'-f',str(recipe),str(recipe.parent)],stdout=log,stderr=subprocess.STDOUT,check=True,timeout=600)
-    commands=[['npm','ci','--ignore-scripts'],['python3','-B','bin/prepare-research-runtime.py','--backend','.runtime-research'],['python3','-B','bin/prepare-autonomy-runtime.py'],['node','node_modules/aws-cdk/bin/cdk','synth','--app','node node_modules/ts-node/dist/bin.js --prefer-ts-exts bin/benchmark.ts','JumpServeBenchmarkStack','--quiet','--no-lookups']]
+    commands=[['npm','ci','--ignore-scripts'],['python3','-B','bin/prepare-research-runtime.py','--backend','.runtime-research'],['python3','-B','bin/prepare-research-api-runtime.py','--backend','.runtime-research-api'],['python3','-B','bin/prepare-autonomy-runtime.py'],['node','node_modules/aws-cdk/bin/cdk','synth','--app','node node_modules/ts-node/dist/bin.js --prefer-ts-exts bin/benchmark.ts','JumpServeBenchmarkStack','--quiet','--no-lookups']]
     # Match the bind-mounted checkout owner while retaining the dropped capabilities.
     user=str(os.getuid())+':'+str(os.getgid())
     for i,command in enumerate(commands):

@@ -130,7 +130,7 @@ class Handler(BaseHTTPRequestHandler):
     def respond(self, status, value):
         raw = json.dumps(value).encode()
         self.send_response(status)
-        for key, value in {'Content-Type': 'application/json', 'Content-Length': str(len(raw)), 'Access-Control-Allow-Origin': 'http://127.0.0.1:6105', 'Access-Control-Allow-Headers': 'authorization,apikey,content-type,x-client-info,prefer,accept', 'Access-Control-Allow-Methods': 'GET,POST,OPTIONS', 'Cache-Control': 'no-store'}.items():
+        for key, value in {'Content-Type': 'application/json', 'Content-Length': str(len(raw)), 'Access-Control-Allow-Origin': 'http://127.0.0.1:6105', 'Access-Control-Allow-Headers': 'authorization,apikey,content-type,x-client-info,prefer,accept', 'Access-Control-Allow-Methods': 'GET,POST,PATCH,OPTIONS', 'Cache-Control': 'no-store'}.items():
             self.send_header(key, value)
         self.end_headers()
         self.wfile.write(raw)
@@ -142,6 +142,9 @@ class Handler(BaseHTTPRequestHandler):
         self.handle_request()
 
     def do_POST(self):
+        self.handle_request()
+
+    def do_PATCH(self):
         self.handle_request()
 
     def handle_request(self):
@@ -175,6 +178,17 @@ class Handler(BaseHTTPRequestHandler):
         if MODE == 'unavailable':
             return self.respond(503, dict(message='Synthetic profile storage outage.'))
         try:
+            if self.command == 'PATCH':
+                value=json.loads(body);params=urllib.parse.parse_qs(path.query)
+                if len(value)!=1 or next(iter(value)) not in ('first_name','last_name'):
+                    return self.respond(400,dict(message='Only a conditional name update is supported.'))
+                field=next(iter(value));identity=params.get('id',[''])[0];prior=params.get(field,[''])[0]
+                if not identity.startswith('eq.') or identity[3:] not in ACTORS or not prior.startswith('eq.'):
+                    return self.respond(400,dict(message='Explicit identity and name comparison required.'))
+                sql='update profiles set '+field+'='+literal(value[field])+' where id='+literal(identity[3:])+' and '+field+'='+literal(prior[3:])+' returning *'
+                result=query('with changed as ('+sql+') select row_to_json(changed) from changed',actor=actor)
+                WRITES+=int(bool(result))
+                return self.respond(200,json.loads(result) if result else None)
             if self.command == 'POST':
                 value = json.loads(body)
                 if set(value) != {'id', 'first_name', 'last_name', 'timezone'} or value['id'] not in ACTORS:

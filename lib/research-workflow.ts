@@ -55,6 +55,11 @@ export class ResearchWorkflow extends Construct {
         throw new Error('Research runtime is absent or differs from the manifest. Run bin/prepare-research-runtime.py with the documented backend checkout.');
       }
     }
+    const apiRuntime = path.join(__dirname, '..', '.runtime-api', 'research_workflow');
+    const apiManifest = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'research-api-runtime.json'), 'utf8')) as { files: Record<string, string> };
+    for (const [file, sha256] of Object.entries(apiManifest.files)) {
+      if (!/^(?:[a-z_]+\.(?:py|mjs)|openclaw-builder-patch\.json|(?:plans|policies)\/[a-z0-9-]+\.json|skills\/network-environment-repair-v1\/SKILL\.md)$/.test(file) || !fs.existsSync(path.join(apiRuntime, file)) || createHash('sha256').update(fs.readFileSync(path.join(apiRuntime, file))).digest('hex') !== sha256) throw new Error('Research API runtime differs from its pin. Run bin/prepare-research-api-runtime.py.');
+    }
     const url = this.node.tryGetContext('supabaseUrl');
     if (url !== 'https://regphejnlvfpyokpniny.supabase.co') throw new Error('Research workflow requires the verified JumpServe Supabase project.');
     const secret = secretsmanager.Secret.fromSecretNameV2(this, 'SupabaseServiceKey', 'jumpserve/supabase-service-key');
@@ -149,7 +154,7 @@ export class ResearchWorkflow extends Construct {
       executors.emulated.addToRolePolicy(new iam.PolicyStatement({actions:['ec2:TerminateInstances'],resources:[cdk.Stack.of(this).formatArn({service:'ec2',resource:'instance',resourceName:'*',arnFormat:cdk.ArnFormat.SLASH_RESOURCE_NAME})],conditions:{StringEquals:{'ec2:ResourceTag/Project':'JumpServe'}}}));
     }
     const fn = new lambda.Function(this, 'Api', {
-      code: lambda.Code.fromAsset(runtime, { exclude: ['tests', '__pycache__', '*.pyc', 'cli.py', 'server.py', 'bridge.py', 'README.md'] }),
+      code: lambda.Code.fromAsset(apiRuntime, { exclude: ['tests', '__pycache__', '*.pyc', 'cli.py', 'server.py', 'bridge.py', 'README.md'] }),
       handler: 'api.handler', runtime: lambda.Runtime.PYTHON_3_12,
       timeout: cdk.Duration.seconds(29), memorySize: 512, reservedConcurrentExecutions: reserveConcurrency ? 4 : undefined,
       environment: { SUPABASE_URL: url, SUPABASE_ANON_KEY: this.node.tryGetContext('supabaseAnonKey') ?? '', SUPABASE_SECRET_ARN: secret.secretArn, RESEARCH_QUEUE_WORKERS_ENABLED: String(queueEnabled),...networkingEnvironment },
@@ -162,6 +167,8 @@ export class ResearchWorkflow extends Construct {
     httpApi.addRoutes({ path: '/research/studies/{studyId}/autonomy', methods: [api.HttpMethod.GET, api.HttpMethod.POST], integration });
     for (const route of ['/research/capabilities', '/research/papers', '/research/papers/{studyId}/title', '/research/queue', '/research/studies', '/research/studies/{studyId}', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/prepare', '/research/studies/{studyId}/idea', '/research/studies/{studyId}/gap-experiments', '/research/studies/{studyId}/claim-design']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.GET], integration });
     for (const route of ['/research/studies', '/research/studies/{studyId}/records', '/research/studies/{studyId}/protocols', '/research/studies/{studyId}/runs', '/research/studies/{studyId}/publish', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/queue-actions', '/research/studies/{studyId}/prepare', '/research/studies/{studyId}/idea','/research/studies/{studyId}/network', '/research/studies/{studyId}/gap-experiments', '/research/studies/{studyId}/claim-design']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.POST], integration });
+    // Bind existing routes first to preserve the integration's deployed identity.
+    for (const path of ['/research/prompts', '/research/prompts/{versionId}', '/research/papers/{studyId}']) httpApi.addRoutes({ path, methods: [api.HttpMethod.GET], integration });
     if (queueEnabled) {
       const worker = new lambda.Function(this, 'QueueWorker', {
         code: lambda.Code.fromAsset(runtime), handler: 'worker.handler', runtime: lambda.Runtime.PYTHON_3_12,

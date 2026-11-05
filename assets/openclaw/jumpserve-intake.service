@@ -1,0 +1,27 @@
+[Unit]
+Description=JumpServe dedicated warm paper intake
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=jumpserve
+Group=jumpserve
+EnvironmentFile=/etc/jumpserve-intake.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+UnsetEnvironment=AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_PROFILE AWS_DEFAULT_PROFILE
+WorkingDirectory=/opt/jumpserve/intake-runtime
+ExecStart=/opt/jumpserve/python/bin/python -B -m intake_worker
+Restart=on-failure
+RestartSec=15
+TimeoutStopSec=240
+KillMode=control-group
+UMask=0077
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/lib/jumpserve-intake
+MemoryMax=6G
+
+[Install]
+WantedBy=multi-user.target
