@@ -76,7 +76,10 @@ def execute():
  if session.client('sts').get_caller_identity()['Account']!=ACCOUNT:raise ValueError('JumpServe account required')
  key=session.client('secretsmanager').get_secret_value(SecretId='jumpserve/supabase-service-key')['SecretString']
  qualified=json.loads((OUT/'qualified.json').read_bytes());scope=qualified['scope'];op=os.environ['PLATFORM_OPERATION_ID'];revision=os.environ['SUPERVISOR_REVISION']
- req=urllib.request.Request('https://api.github.com/repos/jumpserve-networks/jumpserve-back-end/commits/main',headers={'User-Agent':'JumpServe-Supervisor-Release'})
+ headers={'User-Agent':'JumpServe-Supervisor-Release'}
+ token=os.environ.get('GH_TOKEN') or os.environ.get('GITHUB_TOKEN')
+ if token:headers['Authorization']='Bearer '+token
+ req=urllib.request.Request('https://api.github.com/repos/jumpserve-networks/jumpserve-back-end/commits/main',headers=headers)
  with urllib.request.urlopen(req,timeout=30) as response:main=json.load(response)['sha']
  if main!=revision:raise ValueError('Backend main advanced; retain original intent and requalify')
  previous=request(key,'/rest/v1/rpc/platform_supervisor_runtime',{})

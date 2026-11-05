@@ -17,7 +17,10 @@ def read(name):return json.loads((BASE/name).read_bytes())
 def module():
  spec=importlib.util.spec_from_file_location('runtime_gate',ROOT/'assets/platform/research-runtime-gate.py');value=importlib.util.module_from_spec(spec);spec.loader.exec_module(value);return value
 def public_main(repo):
- with urllib.request.urlopen(urllib.request.Request('https://api.github.com/repos/jumpserve-networks/'+repo+'/git/ref/heads/main',headers={'User-Agent':'JumpServe-Research-Runtime'}),timeout=30) as response:return json.load(response)['object']['sha']
+ headers={'User-Agent':'JumpServe-Research-Runtime'}
+ token=os.environ.get('GH_TOKEN') or os.environ.get('GITHUB_TOKEN')
+ if token:headers['Authorization']='Bearer '+token
+ with urllib.request.urlopen(urllib.request.Request('https://api.github.com/repos/jumpserve-networks/'+repo+'/git/ref/heads/main',headers=headers),timeout=30) as response:return json.load(response)['object']['sha']
 def inputs():
  operation=os.environ['PLATFORM_OPERATION_ID'];revision=os.environ['RESEARCH_RUNTIME_REVISION'];pin=os.environ['RESEARCH_RUNTIME_PIN_REVISION']
  if str(uuid.UUID(operation))!=operation or not all(re.fullmatch('[a-f0-9]{40}',s) for s in (revision,pin)):raise ValueError('Exact operational runtime identities required.')
