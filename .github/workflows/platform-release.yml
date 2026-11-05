@@ -84,6 +84,11 @@ jobs:
         run: python3 -B bin/platform-synthesize.py
       - name: Install the fixed release SDK
         run: python3 -m pip install boto3==1.42.4
+      - name: Qualify fixed service manifests and pinned PDF parser before credentials
+        if: inputs.component == 'infrastructure'
+        run: |
+          python3 -B bin/platform-service-release.py --qualify
+          python3 -B bin/prepare-autonomy-runtime.py
       - name: Obtain renewable AWS role credentials through GitHub OIDC
         uses: aws-actions/configure-aws-credentials@v6.2.3
         with:
