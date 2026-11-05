@@ -37,7 +37,7 @@ try{
   return {widths:[1365,390],themes:['light','dark'],overflow:false,screenshot_scroll_origin:'top-of-document'};
  });
  await check('previous assessments, explicit missing data and sign-in return paths',async()=>{
-  await page.goto(origin+'/research-verification/previous-assessments',{waitUntil:'networkidle'});await page.getByRole('heading',{name:'Previous Assessments',exact:true}).waitFor();
+  await page.goto(origin+'/research-verification/assessments',{waitUntil:'networkidle'});await page.getByRole('heading',{name:'Assessments',exact:true}).waitFor();
   await page.goto(origin+'/research-verification/experiment-queue?assessment=00000000-0000-4000-8000-000000000000',{waitUntil:'networkidle'});assert.match(await page.locator('main').innerText(),/unavailable|not found|unknown|could not/i);assert.doesNotMatch(await page.locator('main').innerText(),/\b0 reproduced\b/);
   for(const path of ['/research-verification/new-assessment','/research-verification/experiment-queue']){await page.goto(origin+path,{waitUntil:'networkidle'});const url=new URL(page.url());assert.equal(url.pathname,'/login');assert.equal(url.searchParams.get('next'),path);}
   return {missing_state:'explicit',authentication:'anonymous owner access denied; return paths preserved'};

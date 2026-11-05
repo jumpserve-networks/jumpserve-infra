@@ -32,7 +32,7 @@ jobs:
       - name: Read pinned runtime revisions
         id: runtime
         run: |
-          python3 -c 'import json,os; p=os.environ["GITHUB_OUTPUT"]; values={"research":json.load(open("research-workflow-runtime.json"))["source_revision"],"real_world":json.load(open("real-world-runtime.json"))["revision"],"intake":json.load(open("intake-worker-runtime.json"))["source_revision"]}; open(p,"a").write("".join(k+"="+v+"\n" for k,v in values.items()))'
+          python3 -c 'import json,os; p=os.environ["GITHUB_OUTPUT"]; values={"research_api":json.load(open("research-api-runtime.json"))["source_revision"],"research":json.load(open("research-workflow-runtime.json"))["source_revision"],"real_world":json.load(open("real-world-runtime.json"))["revision"],"intake":json.load(open("intake-worker-runtime.json"))["source_revision"]}; open(p,"a").write("".join(k+"="+v+"\n" for k,v in values.items()))'
       - uses: actions/checkout@v4
         with:
           repository: jumpserve-networks/jumpserve-back-end
@@ -51,9 +51,16 @@ jobs:
           ref: ${{ steps.runtime.outputs.real_world }}
           path: .runtime-backend
           persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: jumpserve-networks/jumpserve-back-end
+          ref: ${{ steps.runtime.outputs.research_api }}
+          path: .runtime-research-api
+          persist-credentials: false
       - name: Prepare and hash-check immutable runtime assets
         run: |
           python3 -B bin/prepare-research-runtime.py --backend .runtime-research
+          python3 -B bin/prepare-research-api-runtime.py --backend .runtime-research-api
           python3 -B bin/prepare-openclaw-worker.py --backend .runtime-research
           python3 -B bin/prepare-autonomy-runtime.py
           python3 -B bin/prepare-intake-runtime.py --backend .runtime-intake-source
@@ -78,6 +85,11 @@ jobs:
           PLATFORM_TEST_DATABASE_URL: postgresql://postgres:platform-test-only@127.0.0.1:5432/postgres
       - name: Verify recovery, private Slack delegation and dedicated parallel intake
         run: python3 -B test/check_dedicated_intake_database.py
+        env:
+          PYTHONPATH: .runtime-research/research_workflow:test
+          UNLIMITED_DEFAULTS_TEST_DATABASE_URL: postgresql://postgres:platform-test-only@127.0.0.1:5432/postgres
+      - name: Verify owner-confirmed author corrections and legacy confirmations
+        run: python3 -B test/check_paper_review_authors_database.py
         env:
           PYTHONPATH: .runtime-research/research_workflow:test
           UNLIMITED_DEFAULTS_TEST_DATABASE_URL: postgresql://postgres:platform-test-only@127.0.0.1:5432/postgres
