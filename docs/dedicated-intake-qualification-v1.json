@@ -1,0 +1,52 @@
+{
+  "version": "dedicated-intake-local-qualification-v1",
+  "recorded_at": "2026-11-05T00:36:05.351445+00:00",
+  "reviewer": {
+    "type": "AI",
+    "independence": "Implementer; not independent"
+  },
+  "source_revision": "e1dcb31b2f02a92118f2505e4e20b9f4a9181cf5",
+  "source_binding": "6ca364e8a65f11e61c5777d876da9b6911f3b9a5cf84b34d9c9380803d6be62a",
+  "backend_tests": 526,
+  "intake_regressions": 12,
+  "database_checks": 140,
+  "publisher_tests": 2,
+  "cdk_tests": 1,
+  "typescript_build": "passed",
+  "cdk_synth": "passed",
+  "evidence": {
+    "database": {
+      "path": ".test-artifacts/research-ideas/database/20261105T003337424773Z/dedicated-intake-report.json",
+      "sha256": "3e5c0a5dd35f15e056ac62a2b08e33c7a4d4bf49d18eab5a79a28fbe60d8aeb2"
+    },
+    "native": {
+      "path": ".test-artifacts/intake-native/20261105T003358Z/qualification.json",
+      "sha256": "bd83bd2b115ccd434c5045436ed72544499a41456f39e550f5c152b571e224c2"
+    },
+    "migration": {
+      "path": "database/202611050001_dedicated_intake.sql",
+      "sha256": "5e7d9afc4039e9b7da90ff62229cda0a5f1063b99620fc25708d9edd3e262580"
+    },
+    "template": {
+      "path": ".test-artifacts/intake-cdk/JumpServeIntakeStack.template.json",
+      "sha256": "313d573540d0cd9e696a66d509f14f5a1d6efc8c3e17565593ea0eaff21426ad"
+    }
+  },
+  "native": {
+    "version": "2026.10.5",
+    "node_version": "24.16.0",
+    "concurrent_turns": 2,
+    "synthetic_inferences": 3,
+    "process_reused": true,
+    "exact_provider_requests": true
+  },
+  "provider_calls": 0,
+  "production_mutations": 0,
+  "deployed": false,
+  "production_latency_measured": false,
+  "limitations": [
+    "Synthetic upstream responses; no live provider-to-Supabase round trip.",
+    "New AWS host, publisher installation, migration and routing activation remain release work.",
+    "No claim of independent scientific validation or 100 percent unattended completion."
+  ]
+}

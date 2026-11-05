@@ -1,0 +1,26 @@
+[Unit]
+Description=JumpServe intake short-lived access publisher (existing refresh owner)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=jumpserve
+Group=jumpserve
+EnvironmentFile=/etc/jumpserve-openclaw.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+UnsetEnvironment=AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_PROFILE AWS_DEFAULT_PROFILE
+WorkingDirectory=/opt/jumpserve/intake-runtime
+ExecStart=/opt/jumpserve/python/bin/python -B -m intake_worker --publish-access
+Restart=on-failure
+RestartSec=15
+TimeoutStopSec=90
+UMask=0077
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/lib/jumpserve-openclaw/auth
+MemoryMax=512M
+
+[Install]
+WantedBy=multi-user.target
