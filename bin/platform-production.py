@@ -256,7 +256,12 @@ def main():
     session.client=lambda service:original_client(service,config=Config(retries=dict(total_max_attempts=1),connect_timeout=15,read_timeout=60))
     if session.client('sts').get_caller_identity()['Account']!=ACCOUNT:raise ValueError('AWS account differs.')
     if args.component=='frontend':result=frontend(session,args.revision)
-    elif args.component=='infrastructure':result=infrastructure(session,args.candidate,args.operation_id,qualified_defaults=args.qualified_defaults)
+    elif args.component=='infrastructure':
+        import importlib.util
+        spec=importlib.util.spec_from_file_location('fixed_service_release',Path(__file__).with_name('platform-service-release.py'))
+        service=importlib.util.module_from_spec(spec);spec.loader.exec_module(service)
+        result=service.execute(session,args.candidate,args.operation_id,args.revision)
+        if result is None:result=infrastructure(session,args.candidate,args.operation_id,qualified_defaults=args.qualified_defaults)
     else:
         # The dedicated AMI job produces and verifies the actual selected image.
         proof=json.loads(Path('backend-proof/production-verification.json').read_bytes())
