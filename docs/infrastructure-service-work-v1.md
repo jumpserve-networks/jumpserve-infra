@@ -57,3 +57,9 @@ supervisor checks, new handoff regressions and release identity/acknowledgment
 tests. Production qualification additionally requires a real infrastructure
 child, protected merge, executed service receipt and observed assessment
 continuation. Local synthetic receipts are not production evidence.
+
+The fixed release role also needs `s3:ListBucket` on its existing asset bucket.
+S3 returns 403 for a nonexistent object without that bucket permission, preventing
+the broker from recognizing first use of an immutable staging key. This grant
+adds no bucket mutation, deletion, other-bucket access or static credentials.
+See [the S3 GetObject permission contract](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html).

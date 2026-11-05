@@ -43,6 +43,9 @@ export class PlatformSupervisorAccess extends Construct {
     allowRelease(['iam:PassRole'], [this.executionRole.roleArn], { StringEquals: { 'iam:PassedToService': 'cloudformation.amazonaws.com' } });
     allowRelease(['amplify:ListJobs', 'amplify:GetJob'], [arn('amplify', 'apps/*/branches/main/jobs/*'), arn('amplify', 'apps/*/branches/main')]);
     allowRelease(['s3:GetObject', 's3:PutObject'], [`arn:aws:s3:::${props.assetBucketName}/*`]);
+    // S3 otherwise returns 403 for an absent immutable marker, even with object
+    // read access. The fixed broker must distinguish first use from denial.
+    allowRelease(['s3:ListBucket'], [`arn:aws:s3:::${props.assetBucketName}`]);
     allowRelease(['lambda:GetFunction'], Object.values(require('../research-runtime-targets.json') as Record<string, string>).map(name => arn('lambda', `function:${name}`)));
     // Only the frozen self-update workflow receives these powers through OIDC.
     // Generated code still has no cloud or publisher credentials.
