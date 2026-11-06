@@ -63,3 +63,40 @@ S3 returns 403 for a nonexistent object without that bucket permission, preventi
 the broker from recognizing first use of an immutable staging key. This grant
 adds no bucket mutation, deletion, other-bucket access or static credentials.
 See [the S3 GetObject permission contract](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html).
+
+`202611060001_service_repair_lifecycle.sql` records activation consumption in a
+private immutable relation. It backfills earlier consumption from retained
+activation/checkpoint and resume-event evidence, so an old successful service
+cannot reopen a later dependency wait. A different request can still resume
+its parent once after its own confirmed operation and verified release.
+
+Completed parser recovery closes only the exact intake incident. Closure requires
+the original failure hash, qualified service activation and release, matching
+original/source/text artifacts, finished contiguous source chunks, ready review
+selection, and completed controller/dispatch responses bound to retained artifact
+hashes. Missing or uncertain evidence keeps the incident open. No claim scope,
+measurement, research outcome, reservation, deadline or original attempt changes.
+Existing owner confirmation is retained; preparation does not establish a
+scientific finding.
+
+Repair roots include bounded continuation attempts. Unnecessary dependencies
+retire through cancellation rather than being certified as installed fixes.
+Active work stops at its existing boundary; uncertain original calls and
+operations remain available for reconciliation. Unrelated incidents and completed
+service tasks retain their outcomes.
+
+The matching backend change gives each derived service candidate an identity
+bound to its immutable request and base revision. Rebase retains the superseded
+candidate and uses a distinct record. A retained checkpoint from the earlier
+identity scheme can recover only after its original candidate is superseded and
+any original PR closure is confirmed. Pending or uncertain publication prevents
+replacement; historical patches and receipts are not overwritten.
+
+Run `npm run test:platform:service-lifecycle` for the isolated database chain and
+`python3 -B -m unittest discover -s platform_supervisor/tests -q` in the backend
+for controller regressions. The database entry point retains the existing service
+suite before applying the lifecycle migration. Local iteration may use
+`-- --reuse-base`; that mode verifies every baseline migration hash before cloning
+the isolated fixture database. CI always builds a fresh baseline. The SQL and
+backend fixes remain compatible with the existing service-work contract and can
+be released independently through their qualified deployment paths.
