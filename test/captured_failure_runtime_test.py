@@ -55,12 +55,14 @@ class FailureGate(unittest.TestCase):
   s=importlib.util.spec_from_file_location('runtime_files',ROOT/'bin/prepare-research-runtime.py');stage=importlib.util.module_from_spec(s);s.loader.exec_module(stage)
   with tempfile.TemporaryDirectory() as tmp:
    root=Path(tmp);(root/'research_workflow/policies').mkdir(parents=True)
-   values={'dispatch_recovery.py':b'reviewed recovery','policies/autonomous-repair-release-v1.json':b'{}','api.py':b'frozen API'}
-   for name,raw in values.items():(root/'research_workflow'/name).write_bytes(raw)
+   values={'dispatch_recovery.py':b'reviewed recovery','policies/autonomous-repair-release-v1.json':b'{}','api.py':b'frozen API','plans/ipv6-archive-v1.json':b'0'*1452605}
+   for name,raw in values.items():
+    p=root/'research_workflow'/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(raw)
    (root/'research_workflow/api.py').write_bytes(b'unrelated main API')
    blob=io.BytesIO()
    with tarfile.open(fileobj=blob,mode='w') as archive:
-    raw=values['api.py'];info=tarfile.TarInfo('source/research_workflow/api.py');info.size=len(raw);archive.addfile(info,io.BytesIO(raw))
+    for name in ('api.py','plans/ipv6-archive-v1.json'):
+     raw=values[name];info=tarfile.TarInfo('source/research_workflow/'+name);info.size=len(raw);archive.addfile(info,io.BytesIO(raw))
    manifest=dict(files={n:gate.digest(v) for n,v in values.items()},source_overlay=gate.overlay(dict(source_revision='a'*40)))
    actual=stage.verified_files(root,manifest,blob.getvalue());self.assertEqual(actual,values)
    self.assertEqual((root/'research_workflow/api.py').read_bytes(),b'unrelated main API')

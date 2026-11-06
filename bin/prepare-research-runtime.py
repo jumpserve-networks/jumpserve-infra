@@ -26,8 +26,8 @@ def verified_files(backend,manifest,base_archive=None):
             if not re.fullmatch(r'(?:[a-z_]+\.(?:py|mjs)|openclaw-builder-patch\.json|(?:plans|policies)/[a-z0-9-]+\.json|skills/network-environment-repair-v1/SKILL\.md)',name):raise ValueError('Unsafe runtime filename')
             if base is not None and name not in overlay['paths']:
                 matches=[m for m in base.getmembers() if m.name.endswith('/research_workflow/'+name)]
-                if len(matches)!=1 or not matches[0].isfile() or matches[0].size>1000000:raise ValueError('Exact plain frozen source member required.')
-                raw=base.extractfile(matches[0]).read(1000001)
+                if len(matches)!=1 or not matches[0].isfile() or matches[0].size>2000000:raise ValueError('Exact plain frozen source member required: '+name)
+                raw=base.extractfile(matches[0]).read(2000001)
             else:
                 path=Path(backend)/'research_workflow'/name
                 if any(p.is_symlink() for p in [path,*path.parents] if p.is_relative_to(Path(backend))):raise ValueError('Runtime source cannot follow links.')
