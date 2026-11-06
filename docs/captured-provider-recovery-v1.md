@@ -73,9 +73,20 @@ admits one exact SSM command; a missing acknowledgment is reconciled against
 that command and cannot trigger a replacement. The installer verifies the real
 worker predecessor before stopping it, verifies the bundle, atomically switches
 versioned runtime directories, retains the prior source for rollback, and checks
-the service PID's working directory and installed hashes. Spool and credentials
-are hashed before and after switching, before normal service startup. Those
-files are neither printed nor replaced. The supervisor runtime stays separate.
+the service PID's working directory and installed hashes. Retained directory
+identities, the small authentication database and the service environment are
+checked around the switch, with the existing credential-refresh lock held. The
+installer has no write path into the spool, never crawls experiment payloads or
+dependency caches, and labels that verification scope explicitly. Original
+scientific hashes remain in Supabase. Signals trigger restoration of prior
+source, and SSM delivery is bounded separately from execution. The supervisor
+runtime stays separate.
+
+If a prior release updated both execution controllers before worker installation
+failed, a new qualified operation can recognize the entire exact candidate and
+preserve its settled template without dispatching CloudFormation again. Mixed
+or unknown controller bytes still refuse installation. Original failed commands
+and rollback proofs remain under their original identities.
 
 If predecessor hashes differ, installation stops before switching. The actual
 worker source must then be retained and qualified; an authorization or an updated

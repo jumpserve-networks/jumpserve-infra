@@ -1,9 +1,22 @@
 """The dedicated recovery gate cannot change scientific or transport source."""
 import copy,importlib.util,json,tempfile,unittest,io,tarfile
+from unittest.mock import patch
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 s=importlib.util.spec_from_file_location('captured_gate',ROOT/'assets/platform/captured-failure-runtime-gate.py');gate=importlib.util.module_from_spec(s);s.loader.exec_module(gate)
 class FailureGate(unittest.TestCase):
+ def test_partial_release_accepts_only_a_complete_exact_candidate_without_relaxing_legacy_checks(self):
+  s=importlib.util.spec_from_file_location('fixed_partial_release',ROOT/'bin/research-runtime-release.py');release=importlib.util.module_from_spec(s);s.loader.exec_module(release)
+  q=dict(scope=dict(qualification_profile='captured-provider-failures-v1'),previous_manifest=dict(files={'old':'a'}),manifest=dict(files={'new':'b'}))
+  selected=release.controller_targets(q['scope'])
+  with patch.object(release,'installed',return_value=[]) as check:
+   self.assertEqual(release.controller_baseline(None,{},q,selected),'qualified-predecessor');self.assertEqual(check.call_count,1)
+  with patch.object(release,'installed',side_effect=[ValueError('Old source differs'),[]]) as check:
+   self.assertEqual(release.controller_baseline(None,{},q,selected),'already-qualified-candidate');self.assertEqual(check.call_args.args[2],q['manifest']['files'])
+  with patch.object(release,'installed',side_effect=ValueError('Mixed or foreign source')),self.assertRaises(ValueError):release.controller_baseline(None,{},q,selected)
+  with patch.object(release,'installed',side_effect=ValueError('Legacy source differs')) as check,self.assertRaises(ValueError):
+   release.controller_baseline(None,{},dict(q,scope={}),selected)
+  self.assertEqual(check.call_count,1)
  def test_captured_recovery_preserves_the_independently_pinned_http_api(self):
   s=importlib.util.spec_from_file_location('fixed_recovery_release',ROOT/'bin/research-runtime-release.py');release=importlib.util.module_from_spec(s);s.loader.exec_module(release)
   old=dict(Resources={n:dict(Type='AWS::Lambda::Function',Properties=dict(Code={'S3Bucket':'existing','S3Key':n+'.zip'},Role='retained-role',Environment={'Variables':{'retained':'value'}}),Metadata={'aws:asset:path':'retained'}) for n in release.CONTROLLERS})
