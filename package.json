@@ -24,6 +24,7 @@
     "test:platform:slack-tools": "node --test assets/platform/slack-tools/index.test.js",
     "test:platform:slack-database": "python3 -B test/check_platform_slack_database.py",
     "test:platform:capabilities": "python3 -B test/check_platform_capability_database.py",
+    "test:platform:service-lifecycle": "python3 -B test/check_service_repair_lifecycle_database.py",
     "cdk:platform": "cdk --app \"npx ts-node --prefer-ts-exts bin/platform.ts\"",
     "test:research:netem-persistence": "python3 -B test/check_netem_measurement_persistence.py",
     "test:research:optional-budget": "python3 -B test/check_optional_budget_database.py",
