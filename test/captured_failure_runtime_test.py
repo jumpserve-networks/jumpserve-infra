@@ -1,9 +1,21 @@
 """The dedicated recovery gate cannot change scientific or transport source."""
-import importlib.util,json,tempfile,unittest,io,tarfile
+import copy,importlib.util,json,tempfile,unittest,io,tarfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 s=importlib.util.spec_from_file_location('captured_gate',ROOT/'assets/platform/captured-failure-runtime-gate.py');gate=importlib.util.module_from_spec(s);s.loader.exec_module(gate)
 class FailureGate(unittest.TestCase):
+ def test_captured_recovery_preserves_the_independently_pinned_http_api(self):
+  s=importlib.util.spec_from_file_location('fixed_recovery_release',ROOT/'bin/research-runtime-release.py');release=importlib.util.module_from_spec(s);s.loader.exec_module(release)
+  old=dict(Resources={n:dict(Type='AWS::Lambda::Function',Properties=dict(Code={'S3Bucket':'existing','S3Key':n+'.zip'},Role='retained-role',Environment={'Variables':{'retained':'value'}}),Metadata={'aws:asset:path':'retained'}) for n in release.CONTROLLERS})
+  original=copy.deepcopy(old);selected=release.controller_targets(dict(qualification_profile='captured-provider-failures-v1'))
+  self.assertEqual(selected,release.CONTROLLERS-{release.HTTP_API})
+  new=release.render(old,'a'*64+'.zip',selected)
+  self.assertEqual(old,original);self.assertEqual(new['Resources'][release.HTTP_API],old['Resources'][release.HTTP_API])
+  for n in selected:
+   self.assertEqual(new['Resources'][n]['Properties']['Role'],'retained-role')
+   self.assertEqual(new['Resources'][n]['Properties']['Code']['S3Key'],'a'*64+'.zip')
+  self.assertEqual(release.controller_targets({}),release.CONTROLLERS)
+  with self.assertRaises(ValueError):release.render(old,'a'*64+'.zip',{release.HTTP_API})
  def fixture(self,root):
   before=root/'before';after=root/'after'
   for p in (before,after):
