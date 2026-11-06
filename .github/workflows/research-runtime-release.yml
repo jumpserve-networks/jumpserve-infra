@@ -48,6 +48,13 @@ jobs:
           ref: ${{ steps.pins.outputs.previous }}
           path: .previous
           persist-credentials: false
+      - uses: actions/checkout@v4
+        if: steps.pins.outputs.base != ''
+        with:
+          repository: jumpserve-networks/jumpserve-back-end
+          ref: ${{ steps.pins.outputs.base }}
+          path: .base
+          persist-credentials: false
       - name: Independently qualify frozen source without credentials or network
         env:
           GH_TOKEN: ${{ github.token }}
