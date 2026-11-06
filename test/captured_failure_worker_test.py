@@ -1,10 +1,23 @@
 """Worker install executes once; uncertain command acknowledgments cannot replay."""
-import hashlib,importlib.util,io,json,shlex,unittest
+import ast,hashlib,importlib.util,io,json,pathlib,shlex,stat,tempfile,unittest
 from pathlib import Path
 from unittest.mock import Mock,patch
 ROOT=Path(__file__).resolve().parents[1]
 s=importlib.util.spec_from_file_location('worker_broker',ROOT/'bin/captured-failure-worker-release.py');broker=importlib.util.module_from_spec(s);s.loader.exec_module(broker)
 class WorkerInstall(unittest.TestCase):
+ def test_retained_state_check_never_walks_large_experiment_or_dependency_trees_and_detects_auth_changes(self):
+  commands=broker.script('11111111-1111-4111-8111-111111111111','a'*64,{'dispatch_recovery.py':'b'*64},{'dispatch_recovery.py':'c'*64})
+  tree=ast.parse(shlex.split(commands[-1])[-1]);function=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='snapshot')
+  namespace=dict(hashlib=hashlib,stat=stat);exec(compile(ast.Module(body=[function],type_ignores=[]),'fixed-state-check','exec'),namespace)
+  with tempfile.TemporaryDirectory() as tmp:
+   root=pathlib.Path(tmp);(root/'spool/node_modules').mkdir(parents=True);(root/'auth/state').mkdir(parents=True)
+   credential=root/'auth/state/openclaw.sqlite';credential.write_bytes(b'synthetic existing credential')
+   cache=root/'spool/node_modules/large-cache'
+   with cache.open('wb') as f:f.truncate(40_000_000_000)
+   with patch.object(pathlib.Path,'rglob',side_effect=AssertionError('Retained data must not be crawled')):
+    before=namespace['snapshot'](root);self.assertEqual(before,namespace['snapshot'](root))
+    credential.write_bytes(b'changed credential');self.assertNotEqual(before,namespace['snapshot'](root))
+   self.assertEqual(cache.stat().st_size,40_000_000_000)
  def environment(self,lost=False):
   op='11111111-1111-4111-8111-111111111111';cmd='22222222-2222-4222-8222-222222222222';revision='a'*40;objects={};commands=[];admitted=False;receipt=None;activated=[]
   db=Mock();s3=Mock();ssm=Mock();session=Mock();session.client.side_effect=lambda name:ssm if name=='ssm' else s3

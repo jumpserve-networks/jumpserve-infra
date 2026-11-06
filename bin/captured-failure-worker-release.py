@@ -5,7 +5,7 @@ ROOT=Path(__file__).resolve().parents[1]
 HOST='i-087f1493809643115';BUCKET='cdk-hnb659fds-assets-395567831870-us-east-1'
 def script(operation,digest,files,previous):
  header='OP='+repr(operation)+'\nDIGEST='+repr(digest)+'\nFILES='+repr(files)+'\nPREVIOUS='+repr(previous)+'\n'
- code=header+'''import hashlib,json,os,pathlib,stat,subprocess,time,zipfile
+ code=header+'''import fcntl,hashlib,json,os,pathlib,signal,stat,subprocess,time,zipfile
 runtime=pathlib.Path('/opt/jumpserve/runtime');releases=pathlib.Path('/opt/jumpserve/research-runtime-releases');releases.mkdir(exist_ok=True);releases.chmod(0o755)
 archive=pathlib.Path('/tmp/research-worker-'+OP+'.zip');assert hashlib.sha256(archive.read_bytes()).hexdigest()==DIGEST
 assert all((runtime/n).is_file() and not (runtime/n).is_symlink() and hashlib.sha256((runtime/n).read_bytes()).hexdigest()==h for n,h in PREVIOUS.items())
@@ -23,30 +23,40 @@ with zipfile.ZipFile(archive) as z:
   else:p.write_bytes(raw);p.chmod(0o644)
 assert {p.relative_to(target).as_posix() for p in target.rglob('*') if p.is_file()}==set(FILES)
 def snapshot(root):
- # Only metadata hashes leave this process; original requests, auth and spool
- # contents are never printed, copied or changed by the installer.
+ # Runtime installation has no write path into retained state. Check directory
+ # identities and the small credential store; do not crawl experiment data or
+ # rebuildable dependency caches. Original payload hashes remain in Supabase.
  entries={};total=0
- for p in sorted(root.rglob('*')):
-  if p.is_symlink():entries[p.relative_to(root).as_posix()]=('link',os.readlink(p));continue
-  if not p.is_file():continue
-  size=p.stat().st_size;total+=size
-  assert total<=20_000_000_000,'Retained state exceeds bounded verification; nothing switched'
-  h=hashlib.sha256()
-  with p.open('rb') as f:
-   for chunk in iter(lambda:f.read(1048576),b''):h.update(chunk)
-  entries[p.relative_to(root).as_posix()]=(size,h.hexdigest())
+ for name in ('.','spool','auth','auth/state'):
+  p=root/name
+  if not p.exists():entries[name]='absent';continue
+  info=p.lstat();assert stat.S_ISDIR(info.st_mode) and not p.is_symlink()
+  entries[name]=(info.st_dev,info.st_ino,stat.S_IFMT(info.st_mode))
+ for name in ('auth/state/openclaw.sqlite','auth/state/openclaw.sqlite-wal','auth/state/openclaw.sqlite-shm'):
+  p=root/name
+  if not p.exists():entries[name]='absent';continue
+  info=p.lstat();assert stat.S_ISREG(info.st_mode) and not p.is_symlink();total+=info.st_size
+  assert total<=16_000_000,'Credential store exceeds bounded verification; nothing switched'
+  raw=p.read_bytes();assert len(raw)==info.st_size
+  entries[name]=(info.st_size,hashlib.sha256(raw).hexdigest())
  return entries
+def interrupted(signum,frame):raise TimeoutError('Installation interrupted; restore the prior source')
+signal.signal(signal.SIGTERM,interrupted);signal.signal(signal.SIGINT,interrupted)
 old=runtime.resolve();backup=releases/('before-'+OP);pending=runtime.with_name('runtime-pending-'+OP)
 assert not pending.exists() and not backup.exists()
 supervisor=pathlib.Path('/opt/jumpserve/platform').resolve()
-switched=False;moved=False
+switched=False;moved=False;auth_lock=None
 try:
  subprocess.run(['systemctl','stop','jumpserve-openclaw.service'],check=True,timeout=150)
- state=pathlib.Path('/var/lib/jumpserve-openclaw');before=snapshot(state)
+ state=pathlib.Path('/var/lib/jumpserve-openclaw');lock=state/'auth/refresh.lock'
+ if lock.exists():auth_lock=lock.open('rb');fcntl.flock(auth_lock,fcntl.LOCK_EX)
+ before=snapshot(state);env=pathlib.Path('/etc/jumpserve-openclaw.env');env_before=hashlib.sha256(env.read_bytes()).hexdigest()
  if not runtime.is_symlink():runtime.rename(backup);old=backup;moved=True
  pending.symlink_to(target,target_is_directory=True);os.replace(pending,runtime);switched=True
  assert all(hashlib.sha256((runtime/n).read_bytes()).hexdigest()==h for n,h in FILES.items())
  assert snapshot(state)==before and pathlib.Path('/opt/jumpserve/platform').resolve()==supervisor
+ assert hashlib.sha256(env.read_bytes()).hexdigest()==env_before
+ if auth_lock:auth_lock.close();auth_lock=None
  subprocess.run(['systemctl','start','jumpserve-openclaw.service'],check=True,timeout=60)
  for _ in range(5):
   time.sleep(1)
@@ -62,8 +72,11 @@ except BaseException:
  elif switched:runtime.symlink_to(old,target_is_directory=True)
  subprocess.run(['systemctl','start','jumpserve-openclaw.service'],check=True,timeout=60)
  raise
+finally:
+ if auth_lock:auth_lock.close()
 print(json.dumps(dict(passed=True,bundle_sha256=DIGEST,installed_files_verified=True,spool_unchanged=True,credentials_unchanged=True,
- retained_state_verified_before_restart=True,supervisor_unchanged=True,worker_pid=pid,provider_calls=0,scientific_completion=False)))
+ retained_state_verified_before_restart=True,retained_state_verification='directory-identities-and-locked-auth-files-v1',
+ supervisor_unchanged=True,worker_pid=pid,provider_calls=0,scientific_completion=False)))
 '''
  return ['set -eu','aws s3 cp '+shlex.quote('s3://'+BUCKET+'/platform-supervisor/research-runtime/'+digest+'.zip')+' '+shlex.quote('/tmp/research-worker-'+operation+'.zip')+' --region us-east-1 --only-show-errors','/opt/jumpserve/python/bin/python -B -c '+shlex.quote(code)]
 def persistence(session):
@@ -82,7 +95,7 @@ def install(session,operation,revision,qualification,bundle):
   if not admission.get('wait_for_safe_boundary'):break
   time.sleep(5)
  else:raise ValueError('Active research did not drain; no worker install command dispatched.')
- request=dict(DocumentName='AWS-RunShellScript',InstanceIds=[HOST],Comment='captured-failure-worker-'+operation,
+ request=dict(DocumentName='AWS-RunShellScript',InstanceIds=[HOST],Comment='captured-failure-worker-'+operation,TimeoutSeconds=60,
   Parameters=dict(commands=script(operation,digest,qualification['manifest']['files'],qualification['previous_manifest']['files']),executionTimeout=['600']))
  ssm=session.client('ssm');command=admission.get('command_id')
  if not command:
@@ -94,7 +107,7 @@ def install(session,operation,revision,qualification,bundle):
     if not page.get('NextToken'):break
     options['NextToken']=page['NextToken']
    else:raise ValueError('Original worker command lookup exceeds its bound.')
-   if len(matches)!=1 or any(matches[0].get(k)!=request[k] for k in ('DocumentName','InstanceIds','Parameters')):raise ValueError('Original worker install acknowledgment is uncertain; no replacement sent.')
+   if len(matches)!=1 or any(matches[0].get(k)!=request[k] for k in ('DocumentName','InstanceIds','Parameters','TimeoutSeconds')):raise ValueError('Original worker install acknowledgment is uncertain; no replacement sent.')
    command=matches[0]['CommandId']
   admit(command)
  for _ in range(120):

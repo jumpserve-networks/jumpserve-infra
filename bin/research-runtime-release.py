@@ -113,6 +113,16 @@ def installed(session,template,files,controllers=None):
    if set(archive.namelist())!=set(files) or {n:sha(archive.read(n)) for n in files}!=files:raise ValueError('Actual Lambda source differs from its qualified pin.')
   result.append(dict(logical_id=name,function=physical,code_sha256=config['CodeSha256'],source_verified=True))
  return result
+def controller_baseline(session,template,qualification,selected):
+ try:
+  installed(session,template,qualification['previous_manifest']['files'],selected)
+  return 'qualified-predecessor'
+ except ValueError:
+  if qualification['scope'].get('qualification_profile')!='captured-provider-failures-v1':raise
+  # A prior operation can finish its Lambda updates before worker installation
+  # fails. Accept only the entire exact candidate, never a mixed/unknown state.
+  installed(session,template,qualification['manifest']['files'],selected)
+  return 'already-qualified-candidate'
 def execute():
  import boto3
  operation,revision,pin=inputs();qualification=read('qualification.json')
@@ -128,7 +138,7 @@ def execute():
  if selected!=CONTROLLERS:
   api_manifest=json.loads((ROOT/'research-api-runtime.json').read_bytes())
   installed(session,previous,api_manifest['files'],{HTTP_API})
- installed(session,previous,qualification['previous_manifest']['files'],selected)
+ baseline=controller_baseline(session,previous,qualification,selected)
  stream=io.BytesIO()
  with zipfile.ZipFile(stream,'w',zipfile.ZIP_DEFLATED) as archive:
   for name,expected in sorted(qualification['manifest']['files'].items()):
@@ -137,12 +147,15 @@ def execute():
    if sha(raw)!=expected:raise ValueError('Source changed after qualification.')
    item=zipfile.ZipInfo(name,date_time=(1980,1,1,0,0,0));item.compress_type=zipfile.ZIP_DEFLATED;archive.writestr(item,raw)
  raw=stream.getvalue();key=sha(raw)+'.zip';candidate=render(previous,key,selected)
+ if baseline=='already-qualified-candidate' and candidate!=previous:raise ValueError('Already qualified controller template differs; reconcile the original release.')
  save('template-before.json',previous);save('template-candidate.json',candidate)
- s3.put_object(Bucket=BUCKET,Key=key,Body=raw,ServerSideEncryption='AES256',IfNoneMatch='*')
+ try:s3.put_object(Bucket=BUCKET,Key=key,Body=raw,ServerSideEncryption='AES256',IfNoneMatch='*')
+ except Exception:
+  if s3.get_object(Bucket=BUCKET,Key=key)['Body'].read()!=raw:raise ValueError('Original qualified controller bundle differs.') from None
  body=encoded(candidate);template_key='platform-releases/'+sha(body)+'.json';s3.put_object(Bucket=BUCKET,Key=template_key,Body=body,ServerSideEncryption='AES256')
  request=dict(StackName=STACK,TemplateURL='https://'+BUCKET+'.s3.us-east-1.amazonaws.com/'+template_key,Parameters=[dict(ParameterKey=p['ParameterKey'],ParameterValue=p['ParameterValue']) for p in info.get('Parameters',[])],Capabilities=['CAPABILITY_IAM','CAPABILITY_NAMED_IAM'],RoleARN='arn:aws:iam::395567831870:role/JumpServePlatformCloudFormation',ClientRequestToken='research-runtime-'+operation,Tags=info.get('Tags',[]),NotificationARNs=info.get('NotificationARNs',[]))
- save('deployment-intent.json',dict(request=request,previous_template_sha256=sha(encoded(previous)),candidate_template_sha256=sha(body)))
- cfn.update_stack(**request)
+ save('deployment-intent.json',dict(request=request,previous_template_sha256=sha(encoded(previous)),candidate_template_sha256=sha(body),controller_baseline=baseline,controller_update_required=baseline=='qualified-predecessor'))
+ if baseline=='qualified-predecessor':cfn.update_stack(**request)
  deadline=time.monotonic()+1800
  while time.monotonic()<deadline:
   current=cfn.describe_stacks(StackName=STACK)['Stacks'][0]
@@ -159,6 +172,7 @@ def execute():
   proof=dict(passed=True,operation_id=operation,repository='jumpserve-networks/jumpserve-back-end',revision=revision,component='research-runtime',pin_revision=pin,source_binding=qualification['scope']['source_binding'],certificate_sha256=qualification['certificate_sha256'],template_sha256=sha(encoded(actual)),functions=functions,all_other_template_content_preserved=True,scientific_and_request_content_unchanged=True,existing_tests_unchanged=True,verified_at=dt.datetime.now(dt.timezone.utc).isoformat())
   if worker is not None:proof['research_worker']=worker;proof['qualification_profile']='captured-provider-failures-v1'
   if preserved_api is not None:proof['preserved_http_api']=dict(source_revision=api_manifest['source_revision'],functions=preserved_api,source_unchanged=True)
+  proof['controller_baseline']=baseline
   (ROOT/'production-verification.json').write_bytes(encoded(proof));print(json.dumps(proof));return
  raise TimeoutError('Original deployment remains unconfirmed; never redispatch from a missing receipt.')
 if __name__=='__main__':
