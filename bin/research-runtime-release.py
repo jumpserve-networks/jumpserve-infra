@@ -15,7 +15,15 @@ def sha(raw):return hashlib.sha256(raw).hexdigest()
 def save(name,value):BASE.mkdir(parents=True,exist_ok=True);(BASE/name).write_bytes(encoded(value))
 def read(name):return json.loads((BASE/name).read_bytes())
 def module():
- spec=importlib.util.spec_from_file_location('runtime_gate',ROOT/'assets/platform/research-runtime-gate.py');value=importlib.util.module_from_spec(spec);spec.loader.exec_module(value);return value
+ path=ROOT/'assets/platform/research-runtime-gate.py';pin=ROOT/'.pin/research-workflow-runtime.json'
+ if pin.is_file():
+  manifest=json.loads(pin.read_bytes());binding=sha(encoded({n:h for n,h in manifest['files'].items() if n!='policies/autonomous-repair-release-v1.json'}))
+  certificate_path=ROOT/'.pin/research-runtime-qualifications'/(binding+'.json')
+  if certificate_path.is_file():
+   profile=json.loads(certificate_path.read_bytes())['scope'].get('qualification_profile')
+   if profile=='captured-provider-failures-v1':path=ROOT/'assets/platform/captured-failure-runtime-gate.py'
+   elif profile is not None:raise ValueError('Unknown dedicated runtime qualification profile.')
+ spec=importlib.util.spec_from_file_location('runtime_gate',path);value=importlib.util.module_from_spec(spec);spec.loader.exec_module(value);return value
 def public_main(repo):
  headers={'User-Agent':'JumpServe-Research-Runtime'}
  token=os.environ.get('GH_TOKEN') or os.environ.get('GITHUB_TOKEN')
@@ -32,14 +40,22 @@ def certificate():
  binding=sha(encoded({n:h for n,h in manifest['files'].items() if n!=gate.APPROVAL}))
  value=json.loads((ROOT/'.pin/research-runtime-qualifications'/ (binding+'.json')).read_bytes())
  if value['manifest']!=manifest or value['backend_revision']!=manifest['source_revision'] or value['passed'] is not True or value['provider_calls']!=0 or value['credential_free'] is not True:raise ValueError('Operational certificate differs.')
- if value['driver_sha256']!=sha((ROOT/'assets/platform/research-runtime-checks.py').read_bytes()) or value['gate_sha256']!=sha((ROOT/'assets/platform/research-runtime-gate.py').read_bytes()):raise ValueError('Trusted qualification profile changed.')
+ if value['driver_sha256']!=sha((ROOT/'assets/platform'/getattr(gate,'CHECKS','research-runtime-checks.py')).read_bytes()) or value['gate_sha256']!=sha(Path(gate.__file__).read_bytes()):raise ValueError('Trusted qualification profile changed.')
  return value
 def pins():
  inputs();value=certificate()
- with open(os.environ['GITHUB_OUTPUT'],'a') as output:output.write('previous='+value['previous_manifest']['source_revision']+'\n')
+ gate=module();base=gate.overlay(value['previous_manifest'])['base_revision'] if value['scope'].get('source_overlay') else ''
+ with open(os.environ['GITHUB_OUTPUT'],'a') as output:output.write('previous='+value['previous_manifest']['source_revision']+'\nbase='+base+'\n')
 def qualify():
  operation,revision,pin=inputs();gate=module();value=certificate()
- scope=gate.inspect(ROOT/'.previous/research_workflow',ROOT/'.backend/research_workflow',value['previous_manifest'])
+ previous=ROOT/'.previous';candidate=ROOT/'.backend'
+ if value['scope'].get('source_overlay'):
+  overlay=gate.overlay(value['previous_manifest'])
+  if value['manifest'].get('source_overlay')!=overlay or value['scope']['source_overlay']!=overlay:raise ValueError('Exact source composition differs.')
+  if value['previous_manifest'].get('source_overlay'):previous=gate.compose(ROOT/'.base',previous,ROOT/'.qualified-previous')
+  candidate=gate.compose(ROOT/'.base',candidate,ROOT/'.qualified-backend')
+ scope=gate.inspect(previous/'research_workflow',candidate/'research_workflow',value['previous_manifest'])
+ if value['scope'].get('source_overlay'):scope['source_overlay']=gate.overlay(value['previous_manifest'])
  # Approval metadata is the sole derived source difference from the earlier
  # candidate scope; every executable/scientific byte must agree.
  actual=dict(scope);expected=dict(value['scope']);actual['files']=dict(actual['files']);expected['files']=dict(expected['files']);actual['files'].pop(gate.APPROVAL);expected['files'].pop(gate.APPROVAL)
@@ -48,14 +64,16 @@ def qualify():
  approval=json.loads((ROOT/'.backend/research_workflow'/gate.APPROVAL).read_bytes())
  if approval!=gate.approval(scope,sha(encoded(clean))):raise ValueError('Derived approval does not bind its immutable certificate.')
  for name,expected_sha in value['manifest']['files'].items():
-  if sha((ROOT/'.backend/research_workflow'/name).read_bytes())!=expected_sha:raise ValueError('Pinned source differs: '+name)
+  if sha((candidate/'research_workflow'/name).read_bytes())!=expected_sha:raise ValueError('Pinned source differs: '+name)
  import subprocess
  image='jumpserve-research-release:'+sha((ROOT/'assets/platform/Dockerfile').read_bytes())[:16]
  subprocess.run(['docker','build','--tag',image,'--file','assets/platform/Dockerfile','.'],check=True,timeout=900)
  commands=[['python3','-B','-m','unittest','discover','-s','research_workflow/tests','-v'],['python3','-B','/qualification/checks.py']]
  receipts=[]
  for index,command in enumerate(commands):
-  args=['docker','run','--rm','--name','research-runtime-check-'+str(index),'--network','none','--read-only','--tmpfs','/tmp:rw,nosuid,nodev,size=1g','--cap-drop','ALL','--security-opt','no-new-privileges','--pids-limit','256','--memory','2g','--env','HOME=/tmp','--mount','type=bind,source='+str(ROOT/'.backend')+',target=/workspace,readonly','--mount','type=bind,source='+str(ROOT/'assets/platform/research-runtime-checks.py')+',target=/qualification/checks.py,readonly','--workdir','/workspace',image,*command]
+  driver=ROOT/'assets/platform'/getattr(gate,'CHECKS','research-runtime-checks.py')
+  args=['docker','run','--rm','--name','research-runtime-check-'+str(index),'--network','none','--read-only','--tmpfs','/tmp:rw,nosuid,nodev,size=1g','--cap-drop','ALL','--security-opt','no-new-privileges','--pids-limit','256','--memory','2g','--env','HOME=/tmp','--mount','type=bind,source='+str(candidate)+',target=/workspace,readonly','--mount','type=bind,source='+str(driver)+',target=/qualification/checks.py,readonly','--workdir','/workspace',image,*command]
+  if getattr(gate,'CHECKS',None):args[2:2]=['--mount','type=bind,source='+str(ROOT/'assets/platform/research-runtime-checks.py')+',target=/qualification/base-checks.py,readonly']
   result=subprocess.run(args,capture_output=True,timeout=600)
   save('checks-'+str(index)+'.json',dict(command=command,exit_code=result.returncode,stdout=result.stdout[-300000:].decode(errors='replace'),stderr=result.stderr[-300000:].decode(errors='replace')))
   if result.returncode:raise ValueError('Independent credential-free qualification failed; retained output identifies the failure.')
@@ -103,7 +121,8 @@ def execute():
  stream=io.BytesIO()
  with zipfile.ZipFile(stream,'w',zipfile.ZIP_DEFLATED) as archive:
   for name,expected in sorted(qualification['manifest']['files'].items()):
-   raw=(ROOT/'.backend/research_workflow'/name).read_bytes()
+   qualified=ROOT/'.qualified-backend' if qualification['manifest'].get('source_overlay') else ROOT/'.backend'
+   raw=(qualified/'research_workflow'/name).read_bytes()
    if sha(raw)!=expected:raise ValueError('Source changed after qualification.')
    item=zipfile.ZipInfo(name,date_time=(1980,1,1,0,0,0));item.compress_type=zipfile.ZIP_DEFLATED;archive.writestr(item,raw)
  raw=stream.getvalue();key=sha(raw)+'.zip';candidate=render(previous,key)
@@ -121,7 +140,12 @@ def execute():
   actual=cfn.get_template(StackName=STACK,TemplateStage='Original')['TemplateBody'];actual=json.loads(actual) if isinstance(actual,str) else actual
   if actual!=candidate or current.get('Parameters',[])!=info.get('Parameters',[]) or current.get('Outputs',[])!=info.get('Outputs',[]):raise ValueError('Actual settled production template differs.')
   functions=installed(session,actual,qualification['manifest']['files'])
+  worker=None
+  if qualification['scope'].get('qualification_profile')=='captured-provider-failures-v1':
+   spec=importlib.util.spec_from_file_location('fixed_captured_failure_worker',ROOT/'bin/captured-failure-worker-release.py');broker=importlib.util.module_from_spec(spec);spec.loader.exec_module(broker)
+   worker=broker.install(session,operation,revision,qualification,raw)
   proof=dict(passed=True,operation_id=operation,repository='jumpserve-networks/jumpserve-back-end',revision=revision,component='research-runtime',pin_revision=pin,source_binding=qualification['scope']['source_binding'],certificate_sha256=qualification['certificate_sha256'],template_sha256=sha(encoded(actual)),functions=functions,all_other_template_content_preserved=True,scientific_and_request_content_unchanged=True,existing_tests_unchanged=True,verified_at=dt.datetime.now(dt.timezone.utc).isoformat())
+  if worker is not None:proof['research_worker']=worker;proof['qualification_profile']='captured-provider-failures-v1'
   (ROOT/'production-verification.json').write_bytes(encoded(proof));print(json.dumps(proof));return
  raise TimeoutError('Original deployment remains unconfirmed; never redispatch from a missing receipt.')
 if __name__=='__main__':
