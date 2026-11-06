@@ -62,8 +62,12 @@ The pin records that base and all installed file hashes. Asset preparation and
 independent release qualification reproduce those bytes without overwriting
 backend main or silently releasing unrelated source.
 
-Research runtime release verification now covers the three controller Lambdas
-and the AWS OpenClaw research worker. A service-only installation intent drains
+Research runtime release verification covers both execution controller Lambdas,
+the independently pinned HTTP API, and the AWS OpenClaw research worker. This
+recovery profile changes the two execution controllers and OpenClaw worker; the
+HTTP API is verified against `research-api-runtime.json` before and after release
+and its template/source stays intact. The API does not invoke this recovery
+adapter. A service-only installation intent drains
 active research and holds new admissions for a bounded maintenance window. It
 admits one exact SSM command; a missing acknowledgment is reconciled against
 that command and cannot trigger a replacement. The installer verifies the real

@@ -1,13 +1,14 @@
 """Exact operational controller release, with source and production readback.
 
 Qualification happens before OIDC. Execution changes only Code and matching
-asset metadata for the three existing controllers in the settled live template.
+asset metadata for the declared controllers in the settled live template.
 """
 import argparse,base64,copy,datetime as dt,hashlib,importlib.util,io,json,os,re,time,urllib.request,uuid,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 BASE=ROOT/'.test-artifacts/research-runtime-release'
 CONTROLLERS={'ResearchWorkflowApiE04EBDAC','ResearchWorkflowAutonomyWorker1BCFF82C','ResearchWorkflowQueueWorker702E601D'}
+HTTP_API='ResearchWorkflowApiE04EBDAC'
 BUCKET='cdk-hnb659fds-assets-395567831870-us-east-1'
 STACK='JumpServeBenchmarkStack'
 def encoded(value):return json.dumps(value,sort_keys=True,separators=(',',':')).encode()
@@ -80,18 +81,24 @@ def qualify():
   receipts.append(dict(index=index,passed=True,stdout_sha256=sha(result.stdout),stderr_sha256=sha(result.stderr)))
  save('qualification.json',dict(passed=True,operation_id=operation,revision=revision,pin_revision=pin,scope=scope,manifest=value['manifest'],previous_manifest=value['previous_manifest'],independent_checks=receipts,certificate_sha256=sha(encoded(clean))))
  print(json.dumps(dict(qualified=True,source_binding=scope['source_binding'],provider_calls=0)))
-def render(previous,key):
+def controller_targets(scope):
+ # The captured-result adapter runs in execution controllers and the OpenClaw
+ # worker. The separately pinned HTTP API has its own source and release owner.
+ return CONTROLLERS-{HTTP_API} if scope.get('qualification_profile')=='captured-provider-failures-v1' else CONTROLLERS
+def render(previous,key,controllers=None):
  if not re.fullmatch('[a-f0-9]{64}\\.zip',key):raise ValueError('Content-addressed runtime object required.')
+ controllers=CONTROLLERS if controllers is None else controllers
+ if controllers not in (CONTROLLERS,CONTROLLERS-{HTTP_API}):raise ValueError('Fixed qualified controller targets required.')
  candidate=copy.deepcopy(previous)
- for name in sorted(CONTROLLERS):
+ for name in sorted(controllers):
   resource=candidate['Resources'][name]
   if resource['Type']!='AWS::Lambda::Function':raise ValueError('Existing controller identity differs.')
   resource['Properties']['Code']=dict(S3Bucket=BUCKET,S3Key=key)
   resource.setdefault('Metadata',{})['aws:asset:path']='asset.'+key[:-4]
  return candidate
-def installed(session,template,files):
+def installed(session,template,files,controllers=None):
  result=[]
- for name in sorted(CONTROLLERS):
+ for name in sorted(CONTROLLERS if controllers is None else controllers):
   code=template['Resources'][name]['Properties']['Code']
   if set(code)!={'S3Bucket','S3Key'} or code['S3Bucket']!=BUCKET:raise ValueError('Unexpected deployed code location.')
   # Fixed function names are passed from the bootstrap-maintained release
@@ -117,7 +124,11 @@ def execute():
  if info['StackStatus']!='UPDATE_COMPLETE':raise ValueError('Reconcile existing stack operation before a new release.')
  previous=cfn.get_template(StackName=STACK,TemplateStage='Original')['TemplateBody']
  if isinstance(previous,str):previous=json.loads(previous)
- installed(session,previous,qualification['previous_manifest']['files'])
+ selected=controller_targets(qualification['scope']);api_manifest=None
+ if selected!=CONTROLLERS:
+  api_manifest=json.loads((ROOT/'research-api-runtime.json').read_bytes())
+  installed(session,previous,api_manifest['files'],{HTTP_API})
+ installed(session,previous,qualification['previous_manifest']['files'],selected)
  stream=io.BytesIO()
  with zipfile.ZipFile(stream,'w',zipfile.ZIP_DEFLATED) as archive:
   for name,expected in sorted(qualification['manifest']['files'].items()):
@@ -125,7 +136,7 @@ def execute():
    raw=(qualified/'research_workflow'/name).read_bytes()
    if sha(raw)!=expected:raise ValueError('Source changed after qualification.')
    item=zipfile.ZipInfo(name,date_time=(1980,1,1,0,0,0));item.compress_type=zipfile.ZIP_DEFLATED;archive.writestr(item,raw)
- raw=stream.getvalue();key=sha(raw)+'.zip';candidate=render(previous,key)
+ raw=stream.getvalue();key=sha(raw)+'.zip';candidate=render(previous,key,selected)
  save('template-before.json',previous);save('template-candidate.json',candidate)
  s3.put_object(Bucket=BUCKET,Key=key,Body=raw,ServerSideEncryption='AES256',IfNoneMatch='*')
  body=encoded(candidate);template_key='platform-releases/'+sha(body)+'.json';s3.put_object(Bucket=BUCKET,Key=template_key,Body=body,ServerSideEncryption='AES256')
@@ -139,13 +150,15 @@ def execute():
   if current['StackStatus']!='UPDATE_COMPLETE':raise ValueError('Original CloudFormation operation did not complete successfully: '+current['StackStatus'])
   actual=cfn.get_template(StackName=STACK,TemplateStage='Original')['TemplateBody'];actual=json.loads(actual) if isinstance(actual,str) else actual
   if actual!=candidate or current.get('Parameters',[])!=info.get('Parameters',[]) or current.get('Outputs',[])!=info.get('Outputs',[]):raise ValueError('Actual settled production template differs.')
-  functions=installed(session,actual,qualification['manifest']['files'])
+  functions=installed(session,actual,qualification['manifest']['files'],selected)
+  preserved_api=installed(session,actual,api_manifest['files'],{HTTP_API}) if api_manifest else None
   worker=None
   if qualification['scope'].get('qualification_profile')=='captured-provider-failures-v1':
    spec=importlib.util.spec_from_file_location('fixed_captured_failure_worker',ROOT/'bin/captured-failure-worker-release.py');broker=importlib.util.module_from_spec(spec);spec.loader.exec_module(broker)
    worker=broker.install(session,operation,revision,qualification,raw)
   proof=dict(passed=True,operation_id=operation,repository='jumpserve-networks/jumpserve-back-end',revision=revision,component='research-runtime',pin_revision=pin,source_binding=qualification['scope']['source_binding'],certificate_sha256=qualification['certificate_sha256'],template_sha256=sha(encoded(actual)),functions=functions,all_other_template_content_preserved=True,scientific_and_request_content_unchanged=True,existing_tests_unchanged=True,verified_at=dt.datetime.now(dt.timezone.utc).isoformat())
   if worker is not None:proof['research_worker']=worker;proof['qualification_profile']='captured-provider-failures-v1'
+  if preserved_api is not None:proof['preserved_http_api']=dict(source_revision=api_manifest['source_revision'],functions=preserved_api,source_unchanged=True)
   (ROOT/'production-verification.json').write_bytes(encoded(proof));print(json.dumps(proof));return
  raise TimeoutError('Original deployment remains unconfirmed; never redispatch from a missing receipt.')
 if __name__=='__main__':
