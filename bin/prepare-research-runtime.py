@@ -10,9 +10,13 @@ ROOT=Path(__file__).resolve().parents[1]
 def verified_files(backend,manifest,base_archive=None):
     overlay=manifest.get('source_overlay');base=None
     if overlay is not None:
-        if (set(overlay)!={'version','base_revision','paths','tests'} or overlay['version']!='captured-provider-overlay-v1'
-            or overlay['paths']!=['dispatch_recovery.py','policies/autonomous-repair-release-v1.json']
-            or overlay['tests']!=['tests/test_captured_provider_failures.py'] or not re.fullmatch('[a-f0-9]{40}',overlay['base_revision'])):
+        compositions={
+            'captured-provider-overlay-v1':(['dispatch_recovery.py','policies/autonomous-repair-release-v1.json'],['tests/test_captured_provider_failures.py']),
+            'auth-entrypoint-overlay-v1':(['dispatch_recovery.py','openclaw_auth.mjs','policies/autonomous-repair-release-v1.json'],['tests/test_captured_provider_failures.py','tests/openclaw_auth_entrypoint_test.mjs','tests/test_openclaw_auth_entrypoints.py']),
+        }
+        if (set(overlay)!={'version','base_revision','paths','tests'} or overlay.get('version') not in compositions
+            or (overlay['paths'],overlay['tests'])!=compositions[overlay['version']]
+            or not re.fullmatch('[a-f0-9]{40}',overlay['base_revision'])):
             raise ValueError('Unknown runtime source composition.')
         if base_archive is None:
             # Public exact-revision source only; no credentials or code execution.

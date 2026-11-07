@@ -1,5 +1,31 @@
 # Captured provider failure recovery
 
+## Authentication entrypoint follow-up
+
+The versioned worker directory symlink exposed a separate authentication CLI
+bug: Node resolves the module URL but retains the invoked link in argv, so the
+former path comparison skipped the helper and returned no status JSON. The
+`auth-helper-entrypoint-v1` profile permits exactly the reviewed replacement
+with Node 24 `import.meta.main` and removal of its unused URL import. Every
+other executable runtime byte, including refresh and provider transport, stays
+bound to the installed predecessor. Existing tests and both former fixed check
+drivers remain unchanged.
+
+The independent checks run all 21 native auth cases explicitly, including the
+new versioned-directory and file-link regressions, alongside the former fixed
+scientific and recovery checks. The closed `auth-entrypoint-overlay-v1`
+composition retains the frozen base and captured-recovery overlay; unrelated
+backend main changes cannot enter the release. The migration
+`202611070001_auth_entrypoint_worker_install.sql` adds only this named profile
+to the existing worker installer allowlist. Its original command identity,
+drain, cancellation, deadline, source and credential-retention checks remain.
+
+The release verifies and preserves the separately pinned HTTP API, updates the
+two execution controllers and AWS worker, and records actual credential access
+and model-catalog readiness from the supervisor service environment. A valid
+credential or successful catalog request does not establish experiment or
+scientific completion; original unknown calls remain fenced.
+
 ## Failure and resulting behavior
 
 Two capability tasks were retrying a changed `assessment-evidence-v1` request

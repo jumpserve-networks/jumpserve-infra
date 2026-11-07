@@ -9,6 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 BASE=ROOT/'.test-artifacts/research-runtime-release'
 CONTROLLERS={'ResearchWorkflowApiE04EBDAC','ResearchWorkflowAutonomyWorker1BCFF82C','ResearchWorkflowQueueWorker702E601D'}
 HTTP_API='ResearchWorkflowApiE04EBDAC'
+WORKER_PROFILES={'captured-provider-failures-v1','auth-helper-entrypoint-v1'}
 BUCKET='cdk-hnb659fds-assets-395567831870-us-east-1'
 STACK='JumpServeBenchmarkStack'
 def encoded(value):return json.dumps(value,sort_keys=True,separators=(',',':')).encode()
@@ -23,6 +24,7 @@ def module():
   if certificate_path.is_file():
    profile=json.loads(certificate_path.read_bytes())['scope'].get('qualification_profile')
    if profile=='captured-provider-failures-v1':path=ROOT/'assets/platform/captured-failure-runtime-gate.py'
+   elif profile=='auth-helper-entrypoint-v1':path=ROOT/'assets/platform/auth-entrypoint-runtime-gate.py'
    elif profile is not None:raise ValueError('Unknown dedicated runtime qualification profile.')
  spec=importlib.util.spec_from_file_location('runtime_gate',path);value=importlib.util.module_from_spec(spec);spec.loader.exec_module(value);return value
 def public_main(repo):
@@ -75,6 +77,7 @@ def qualify():
   driver=ROOT/'assets/platform'/getattr(gate,'CHECKS','research-runtime-checks.py')
   args=['docker','run','--rm','--name','research-runtime-check-'+str(index),'--network','none','--read-only','--tmpfs','/tmp:rw,nosuid,nodev,size=1g','--cap-drop','ALL','--security-opt','no-new-privileges','--pids-limit','256','--memory','2g','--env','HOME=/tmp','--mount','type=bind,source='+str(candidate)+',target=/workspace,readonly','--mount','type=bind,source='+str(driver)+',target=/qualification/checks.py,readonly','--workdir','/workspace',image,*command]
   if getattr(gate,'CHECKS',None):args[2:2]=['--mount','type=bind,source='+str(ROOT/'assets/platform/research-runtime-checks.py')+',target=/qualification/base-checks.py,readonly']
+  if scope.get('qualification_profile')=='auth-helper-entrypoint-v1':args[2:2]=['--mount','type=bind,source='+str(ROOT/'assets/platform/captured-failure-runtime-checks.py')+',target=/qualification/captured-failure-checks.py,readonly']
   result=subprocess.run(args,capture_output=True,timeout=600)
   save('checks-'+str(index)+'.json',dict(command=command,exit_code=result.returncode,stdout=result.stdout[-300000:].decode(errors='replace'),stderr=result.stderr[-300000:].decode(errors='replace')))
   if result.returncode:raise ValueError('Independent credential-free qualification failed; retained output identifies the failure.')
@@ -84,7 +87,7 @@ def qualify():
 def controller_targets(scope):
  # The captured-result adapter runs in execution controllers and the OpenClaw
  # worker. The separately pinned HTTP API has its own source and release owner.
- return CONTROLLERS-{HTTP_API} if scope.get('qualification_profile')=='captured-provider-failures-v1' else CONTROLLERS
+ return CONTROLLERS-{HTTP_API} if scope.get('qualification_profile') in WORKER_PROFILES else CONTROLLERS
 def render(previous,key,controllers=None):
  if not re.fullmatch('[a-f0-9]{64}\\.zip',key):raise ValueError('Content-addressed runtime object required.')
  controllers=CONTROLLERS if controllers is None else controllers
@@ -118,7 +121,7 @@ def controller_baseline(session,template,qualification,selected):
   installed(session,template,qualification['previous_manifest']['files'],selected)
   return 'qualified-predecessor'
  except ValueError:
-  if qualification['scope'].get('qualification_profile')!='captured-provider-failures-v1':raise
+  if qualification['scope'].get('qualification_profile') not in WORKER_PROFILES:raise
   # A prior operation can finish its Lambda updates before worker installation
   # fails. Accept only the entire exact candidate, never a mixed/unknown state.
   installed(session,template,qualification['manifest']['files'],selected)
@@ -166,11 +169,11 @@ def execute():
   functions=installed(session,actual,qualification['manifest']['files'],selected)
   preserved_api=installed(session,actual,api_manifest['files'],{HTTP_API}) if api_manifest else None
   worker=None
-  if qualification['scope'].get('qualification_profile')=='captured-provider-failures-v1':
+  if qualification['scope'].get('qualification_profile') in WORKER_PROFILES:
    spec=importlib.util.spec_from_file_location('fixed_captured_failure_worker',ROOT/'bin/captured-failure-worker-release.py');broker=importlib.util.module_from_spec(spec);spec.loader.exec_module(broker)
    worker=broker.install(session,operation,revision,qualification,raw)
   proof=dict(passed=True,operation_id=operation,repository='jumpserve-networks/jumpserve-back-end',revision=revision,component='research-runtime',pin_revision=pin,source_binding=qualification['scope']['source_binding'],certificate_sha256=qualification['certificate_sha256'],template_sha256=sha(encoded(actual)),functions=functions,all_other_template_content_preserved=True,scientific_and_request_content_unchanged=True,existing_tests_unchanged=True,verified_at=dt.datetime.now(dt.timezone.utc).isoformat())
-  if worker is not None:proof['research_worker']=worker;proof['qualification_profile']='captured-provider-failures-v1'
+  if worker is not None:proof['research_worker']=worker;proof['qualification_profile']=qualification['scope']['qualification_profile']
   if preserved_api is not None:proof['preserved_http_api']=dict(source_revision=api_manifest['source_revision'],functions=preserved_api,source_unchanged=True)
   proof['controller_baseline']=baseline
   (ROOT/'production-verification.json').write_bytes(encoded(proof));print(json.dumps(proof));return
