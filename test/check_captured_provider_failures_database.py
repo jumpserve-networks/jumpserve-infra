@@ -179,11 +179,11 @@ def main():
   update research_model_dispatches set status='failed',ended_at=clock_timestamp() where status in ('queued','running');
   update research_builder_calls set status='unknown',ended_at=clock_timestamp() where status='running';
   insert into research_runtime_maintenance_releases(hold_id,reason) select h.id,'Synthetic isolated peer drain' from research_runtime_maintenance_holds h where not exists(select 1 from research_runtime_maintenance_releases r where r.hold_id=h.id);
-  do $test$ declare a jsonb;b jsonb;begin
-   insert into public.research_runtime_maintenance_holds(id,task_id,source_binding,reason,expires_at)
-    values(md5(OP::text||':existing-qualified-handoff')::uuid,TASK,'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa','Same task and qualified source handoff',clock_timestamp()+interval '20 minutes');
-   insert into public.research_runtime_maintenance_holds(id,reason,expires_at)
-    values(md5(OP::text||':foreign-handoff')::uuid,'Unrelated active maintenance',clock_timestamp()+interval '20 minutes');
+  do $test$ declare a jsonb;b jsonb;hold_created timestamptz:=clock_timestamp();begin
+   insert into public.research_runtime_maintenance_holds(id,task_id,source_binding,reason,created_at,expires_at)
+    values(md5(OP::text||':existing-qualified-handoff')::uuid,TASK,'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa','Same task and qualified source handoff',hold_created,hold_created+interval '20 minutes');
+   insert into public.research_runtime_maintenance_holds(id,reason,created_at,expires_at)
+    values(md5(OP::text||':foreign-handoff')::uuid,'Unrelated active maintenance',hold_created,hold_created+interval '20 minutes');
    a=public.research_runtime_worker_install(OP,REV,null);
    if a->'wait_for_safe_boundary' is distinct from 'true'::jsonb then raise exception 'Unrelated handoff was bypassed';end if;
    insert into public.research_runtime_maintenance_releases(hold_id,reason)
