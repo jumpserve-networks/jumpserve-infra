@@ -109,7 +109,11 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
         BENCHMARK_IMAGE_MODE: cdk.Fn.conditionIf(useBenchmarkAmi.logicalId, 'prebaked', 'base').toString(),
         SECURITY_GROUP_ID: benchmarkSg.securityGroupId,
         SUBNET_ID: publicSubnets[0].subnetId,
-        INSTANCE_PROFILE_ARN: instanceProfile.attrArn,
+        // Ref retains the owned profile name without requiring CloudFormation
+        // to call iam:GetInstanceProfile again during an AMI-only update.
+        INSTANCE_PROFILE_ARN: this.formatArn({
+          service: 'iam', region: '', resource: 'instance-profile', resourceName: instanceProfile.ref,
+        }),
       },
       bundling: {
         externalModules: ['@aws-sdk/*'],
