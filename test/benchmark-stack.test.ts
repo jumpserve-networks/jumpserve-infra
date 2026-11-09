@@ -40,6 +40,16 @@ test('the selected AMI and bootstrap mode always change together', () => {
         BENCHMARK_IMAGE_MODE: { 'Fn::If': ['UseBenchmarkAmi', 'prebaked', 'base'] },
       }) },
     });
+    const profileId = Object.keys(template.findResources('AWS::IAM::InstanceProfile'))[0];
+    const launcher = Object.values(template.findResources('AWS::Lambda::Function')).find(
+      (resource: any) => resource.Properties.Environment?.Variables?.BENCHMARK_IMAGE_MODE,
+    );
+    if (!launcher) throw new Error('Benchmark launcher is missing from the synthesized stack');
+    const profileArn = launcher.Properties.Environment.Variables.INSTANCE_PROFILE_ARN;
+    expect(profileArn).toEqual({ 'Fn::Join': ['', [
+      'arn:', { Ref: 'AWS::Partition' }, ':iam::395567831870:instance-profile/', { Ref: profileId },
+    ]] });
+    expect(JSON.stringify(profileArn)).not.toContain('Fn::GetAtt');
   } finally {
     lookup.mockRestore();
   }
