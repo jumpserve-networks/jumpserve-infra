@@ -82,6 +82,7 @@ jobs:
           python3 -B bin/prepare-openclaw-worker.py --backend .runtime-research
           python3 -B bin/prepare-autonomy-runtime.py
           python3 -B bin/prepare-intake-runtime.py --backend .runtime-intake-source
+          cp -R .runtime-research ../jumpserve-back-end
 
       - run: npm run build
       - run: npm test -- --runInBand
