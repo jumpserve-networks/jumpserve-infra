@@ -1,0 +1,6 @@
+# Local Python unit-test tools; not deployed with a Lambda or worker.
+boto3==1.42.4
+coverage==7.17.2
+httpx==0.28.1
+pydantic==2.13.5
+pypdf==6.19.0

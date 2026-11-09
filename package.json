@@ -37,6 +37,17 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
+    "test:coverage": "node test/run-all-coverage.mjs --check",
+    "test:coverage:report": "node test/run-all-coverage.mjs",
+    "test:coverage:typescript": "node test/run-coverage.mjs --typescript --check",
+    "test:coverage:typescript:report": "node test/run-coverage.mjs --typescript",
+    "test:coverage:python": ".venv-unit-tests/bin/python test/run_unit_coverage.py --check",
+    "test:coverage:python:report": ".venv-unit-tests/bin/python test/run_unit_coverage.py",
+    "test:coverage:native": "node test/run-coverage.mjs --check",
+    "test:coverage:native:report": "node test/run-coverage.mjs",
+    "test:coverage:sql:setup": ".venv-unit-tests/bin/python test/setup_sql_coverage.py",
+    "test:coverage:sql:report": ".venv-unit-tests/bin/python test/run_sql_coverage.py",
+    "test:coverage:sql": ".venv-unit-tests/bin/python test/run_sql_coverage.py --check",
     "test:ami": "python3 -B -m unittest discover -s test -p '*_test.py' -v",
     "test:agent": "python3 -B -m unittest discover -s test -p 'agent*_test.py' -v",
     "test:agent:database": "python3 -B test/check_agent_prompt_database.py",
@@ -67,6 +78,7 @@
     "@types/jest": "^30",
     "@types/node": "^24.10.1",
     "aws-cdk": "2.1118.2",
+    "c8": "12.0.0",
     "jest": "^30",
     "ts-jest": "^29",
     "ts-node": "^10.9.2",
@@ -76,5 +88,13 @@
     "aws-cdk-lib": "^2.248.0",
     "constructs": "^10.5.0",
     "esbuild": "^0.28.0"
+  },
+  "overrides": {
+    "c8": {
+      "test-exclude": {
+        "glob": "14.0.2",
+        "minimatch": "11.0.1"
+      }
+    }
   }
 }

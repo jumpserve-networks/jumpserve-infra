@@ -64,3 +64,51 @@ test('operator tools expose direct controls to shared-channel members with stabl
     assert.notEqual(requests[0].request_id,requests[2].request_id);
   } finally {globalThis.fetch=previousFetch;delete process.env.JUMPSERVE_SLACK_BRIDGE;delete process.env.JUMPSERVE_SLACK_BRIDGE_TOKEN;}
 });
+
+test('missing or malformed host identity cannot create supervisor tools', () => {
+  let factory;
+  plugin.register({registerTool(value) {factory = value;}});
+  for (const change of [
+    {requesterSenderId: undefined}, {nativeChannelId: undefined},
+    {sessionId: undefined}, {sessionId: 'not-a-uuid'},
+  ]) {
+    const invalid = {...context(), ...change};
+    assert.equal(principal(invalid), null);
+    assert.equal(factory.create(invalid), null);
+  }
+});
+
+test('bridge configuration, failed responses, and expired completion never claim success', async t => {
+  const previous = {origin: process.env.JUMPSERVE_SLACK_BRIDGE, token: process.env.JUMPSERVE_SLACK_BRIDGE_TOKEN};
+  t.after(() => {
+    for (const [key, value] of [['JUMPSERVE_SLACK_BRIDGE', previous.origin], ['JUMPSERVE_SLACK_BRIDGE_TOKEN', previous.token]]) {
+      if (value === undefined) delete process.env[key]; else process.env[key] = value;
+    }
+  });
+  let factory;
+  plugin.register({registerTool(value) {factory = value;}});
+  const tool = factory.create(context())[0];
+  const fetch = t.mock.method(globalThis, 'fetch', async () => ({ok: true, json: async () => ({recorded: true})}));
+  for (const [origin, token] of [[undefined, 'test'], ['https://remote.test', 'test'], ['http://127.0.0.1:18801', undefined]]) {
+    if (origin === undefined) delete process.env.JUMPSERVE_SLACK_BRIDGE; else process.env.JUMPSERVE_SLACK_BRIDGE = origin;
+    if (token === undefined) delete process.env.JUMPSERVE_SLACK_BRIDGE_TOKEN; else process.env.JUMPSERVE_SLACK_BRIDGE_TOKEN = token;
+    await assert.rejects(tool.execute('config', {}), /bridge is unavailable/);
+  }
+  assert.equal(fetch.mock.callCount(), 0);
+  process.env.JUMPSERVE_SLACK_BRIDGE = 'http://127.0.0.1:18801';
+  process.env.JUMPSERVE_SLACK_BRIDGE_TOKEN = 'synthetic-local-token';
+  fetch.mock.mockImplementation(async () => ({ok: false}));
+  await assert.rejects(tool.execute('failed', {}), /do not invent or replay/);
+  const controller = new AbortController();
+  fetch.mock.mockImplementation(async (_url, options) => {
+    assert.equal(options.signal, controller.signal);
+    assert.equal(options.redirect, 'error');
+    assert.equal(options.headers.Authorization, 'Bearer synthetic-local-token');
+    return {ok: true, json: async () => ({recorded: true})};
+  });
+  assert.deepEqual((await tool.execute('with-signal', {}, controller.signal)).details, {recorded: true});
+  let checks = 0;
+  const expiring = factory.create({...context(), assertInvocationCurrent() {if (++checks === 3) throw new Error('Expired after response');}})[0];
+  fetch.mock.mockImplementation(async () => ({ok: true, json: async () => ({recorded: true})}));
+  await assert.rejects(expiring.execute('expired', {}), /Expired after response/);
+});

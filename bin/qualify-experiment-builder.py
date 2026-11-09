@@ -315,7 +315,9 @@ print(json.dumps(dict(bucket='research-workflow-raw',path=key,sha256=digest(raw)
                 raw=(ROOT/'bin/retain_builder_image_host.py').read_bytes();install="from pathlib import Path;import base64;p=Path("+repr(host+'/retain-image.py')+");assert not p.exists();p.write_bytes(base64.b64decode("+repr(base64.b64encode(raw).decode())+"));p.chmod(0o644)"
                 cmd='set -eu\nset -a\n. /etc/jumpserve-openclaw.env\nset +a\nrunuser -u jumpserve -- /opt/jumpserve/python/bin/python -B '+host+'/retain-image.py'
                 report['ssm']=command(source,'retain-image',['set -eu','/opt/jumpserve/python/bin/python -B -c '+shlex.quote(install),cmd])
-            elif a.mode=='collect-image':
+            else:
+                # argparse and the preceding actions leave only this action.
+                assert a.mode=='collect-image','Unrecognized qualification action.'
                 value=json.loads((source/'retain-image-result.json').read_bytes());assert value['Status']=='Success'
                 item=json.loads(value['StandardOutputContent']);raw=storage(item['path']);assert r.sha(raw)==item['sha256']==item['retrieved_sha256'];manifest=json.loads(raw)
                 assert manifest['image']==item['image'] and sum(c['bytes'] for c in manifest['chunks'])==manifest['compressed_bytes']

@@ -83,7 +83,7 @@ def render_http2_answer(plan,evidence,literature_reader,configuration_reader):
             paragraphs.append('RFC 9113 §5.4.1 permits escalation from a stream error to a connection error (GOAWAY). **GOAWAY alone does not establish noncompliance**; error-code semantics and case context matter. Unmatched historical configurations do not establish causal effects of TLS or RFC revision. Full independent physical proxy/cloud validation remains untested. [Methods]('+PATH+'/methods); [RFC 9113, ref 45]('+PATH+'/literature).')
         elif topic=='assessment':
             paragraphs.extend([claim('table5'),claim('figure7'),claim('figure8'),'Archived reanalysis, corrected exploratory calculations and fresh owned-loopback controls are distinct. Literature review and independent fleet reproduction remain incomplete. A verified finite counterexample **can** establish noncompliance, but this assessment has not independently validated the needed case-level semantics for that conclusion. Rejection is not compliance; no exploit, prevalence or causal TLS/RFC effect is established.'])
-        elif topic=='uncovered':
+        else:  # The validated Topic union leaves only 'uncovered'.
             paragraphs.append('The recorded study does not cover this requested conclusion. It contains archived HTTP/2 protocol observations and separate owned-loopback endpoint controls, with partial literature review. No simulator/orbital results, current-provider measurement, exploit validation, population prevalence or independent historical proxy/cloud replication is available.')
     return '\n\n'.join(paragraphs)+f'\n\n[Recorded results]({PATH}/test-results) · [Methods and limitations]({PATH}/methods). Analysis: http2-assessment-v3.'
 

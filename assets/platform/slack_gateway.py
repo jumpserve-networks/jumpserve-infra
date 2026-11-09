@@ -232,11 +232,12 @@ class Bridge:
             for pending, in self.db.execute("select id from calls where status='retained'").fetchall():
                 try: self.settle(pending)
                 except ValueError:
-                    if self.db.execute('select status from calls where id=?',(pending,)).fetchone()[0]!='failed': raise
+                    if self.db.execute('select status from calls where id=?',(pending,)).fetchone()[0]!='failed':
+                        raise
             previous = self.db.execute('select id,status from calls where sha=?', (sha,)).fetchone()
             if previous:
-                if previous[1] == 'complete': return self.settle(previous[0])
-                if previous[1] == 'retained': return self.settle(previous[0])
+                if previous[1] in ('complete', 'retained'):
+                    return self.settle(previous[0])
                 raise ValueError('Original provider operation cannot be replayed.')
             if self.db.execute("select 1 from calls where status in ('dispatched','unknown') limit 1").fetchone():
                 raise ValueError('An uncertain provider operation fences new inference.')

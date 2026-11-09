@@ -44,3 +44,15 @@ test('the selected AMI and bootstrap mode always change together', () => {
     lookup.mockRestore();
   }
 });
+
+test('an explicitly enabled research workflow is mounted on the benchmark API', () => {
+  const app = new cdk.App({context: {supabaseUrl: 'https://regphejnlvfpyokpniny.supabase.co', researchWorkflowEnabled: true}});
+  const lookup = jest.spyOn(ec2.Vpc, 'fromLookup').mockImplementation((scope, id) => ec2.Vpc.fromVpcAttributes(scope, id, {
+    vpcId: 'vpc-unit', availabilityZones: ['us-east-1a'], publicSubnetIds: ['subnet-unit'], publicSubnetRouteTableIds: ['rtb-unit'],
+  }));
+  try {
+    const template = Template.fromStack(new BenchmarkOrchestratorStack(app, 'WithResearch', {env: {account: '395567831870', region: 'us-east-1'}}));
+    template.hasResourceProperties('AWS::ApiGatewayV2::Route', {RouteKey: 'GET /research/papers'});
+    template.hasResourceProperties('AWS::ApiGatewayV2::Route', {RouteKey: 'POST /benchmarks'});
+  } finally {lookup.mockRestore();}
+});

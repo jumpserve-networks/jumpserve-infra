@@ -155,3 +155,19 @@ test('log flushing happens before shutdown and cannot block it on failure', () =
   expect(result.stdout.indexOf('LOG_COLLECTION_WAIT')).toBeLessThan(result.stdout.indexOf('LOG_FLUSH'));
   expect(result.stdout.indexOf('LOG_FLUSH')).toBeLessThan(result.stdout.indexOf('SHUTDOWN'));
 });
+
+test('positive packet loss is explicit and zero loss adds no flag', () => {
+  expect(buildBenchmarkArgs({...config, loss_pct: 0})).not.toContain('--loss-pct');
+  expect(buildBenchmarkArgs({...config, loss_pct: 0.5})).toContain('--loss-pct 0.5');
+});
+
+test.each([
+  ['http://example.test/benchmarks/ingest', '11111111-1111-4111-8111-111111111111', 'a'.repeat(64)],
+  ['https://example.test/benchmarks/ingest', 'not-a-job', 'a'.repeat(64)],
+  ['https://example.test/benchmarks/ingest', '11111111-1111-4111-8111-111111111111', 'not-a-token'],
+])('bootstrap rejects invalid ingestion URL or capability before generating commands', (url, job, token) => {
+  const previous = process.env.BENCHMARK_INGEST_URL;
+  process.env.BENCHMARK_INGEST_URL = url;
+  try {expect(() => buildUserData(config, job, token)).toThrow('Invalid job ingestion configuration');}
+  finally {if (previous === undefined) delete process.env.BENCHMARK_INGEST_URL; else process.env.BENCHMARK_INGEST_URL = previous;}
+});

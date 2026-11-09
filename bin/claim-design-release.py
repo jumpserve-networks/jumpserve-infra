@@ -181,7 +181,9 @@ def archive_evidence(directory, release=False, reuse=False):
             entry = zipfile.ZipInfo(name, date_time=(1980, 1, 1, 0, 0, 0))
             entry.compress_type = zipfile.ZIP_DEFLATED
             archive.writestr(entry, raw)
-        archive.writestr('manifest.json', json.dumps(manifest, indent=2) + '\n')
+        entry = zipfile.ZipInfo('manifest.json', date_time=(1980, 1, 1, 0, 0, 0))
+        entry.compress_type = zipfile.ZIP_DEFLATED
+        archive.writestr(entry, json.dumps(manifest, indent=2) + '\n')
     raw = buffer.getvalue()
     if len(raw) > 32_000_000:
         raise RuntimeError('Declared storage budget exceeded')
@@ -375,7 +377,7 @@ def main():
             if active()[0]['active_version_id'] != CANDIDATE:
                 raise RuntimeError('Expected published candidate before archiving release receipts')
             receipt['private_release_originals'] = archive_evidence(directory, release=True)
-        elif args.mode == 'archive-reuse':
+        else:  # The remaining argparse choice is archive-reuse.
             if active()[0]['active_version_id'] != CANDIDATE:
                 raise RuntimeError('Expected unchanged published candidate before archiving reuse release receipts')
             receipt['private_release_originals'] = archive_evidence(directory, reuse=True)

@@ -85,7 +85,10 @@ def run_local():
  try:
   rt.verify_runtime();result['catalog']=rt.catalog(rt.credential());save()
   for case in packet['cases']:
-   if time.monotonic()-began>packet['limits']['maximum_elapsed_seconds'] or result['actual_provider_calls']>=5:raise ValueError('Frozen evaluation resource bound reached')
+   if (time.monotonic()-began>packet['limits']['maximum_elapsed_seconds']
+       or result['actual_provider_calls']>=packet['limits']['maximum_provider_calls']
+       or result['reserved_orchestration_cents']+100>packet['limits']['maximum_orchestration_reservation_cents']):
+    raise ValueError('Frozen evaluation resource bound reached')
    raw=(directory/(case['name']+'-request.json')).read_bytes()
    if sha(raw)!=case['request_sha256']:raise ValueError('Frozen request changed')
    result['actual_provider_calls']+=1;result['reserved_orchestration_cents']+=100;save()
