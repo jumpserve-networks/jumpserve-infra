@@ -349,6 +349,12 @@ activation records the previous version, actor, timestamp and full evaluation
 report in `agent_prompt_publications`. Model grading is a regression check, not
 proof of scientific correctness; review the saved answers as well.
 
+Historical HTTP/2, IPv6 and Reliable Sketch evaluator revisions are retained
+unchanged under `archive/agent-evaluators/`. Each module's `manifest.json` records
+their original paths, source revision, sizes and SHA-256 hashes for reproduction.
+The current evaluators remain at `test/evaluate_http2_agent.py`,
+`test/evaluate_ipv6_agent_v3.py` and `test/evaluate_reliable_agent.py`.
+
 Prompt text, publication RPCs and answer audit records are inaccessible to
 `anon` and ordinary `authenticated` clients. Administration uses Supabase
 Dashboard privileges or the backend service role. The model's tools have no
@@ -628,6 +634,25 @@ npm run cdk:benchmark -- diff JumpServeBenchmarkStack --profile default
 
 The full app also needs the agent Python layer; see `.github/workflows/deploy.yml`
 for its build steps. Deploying the standalone benchmark app does not require it.
+
+## Maintained and historical tools
+
+Current automated checks and deployment commands remain in `package.json`,
+`.github/workflows/` and their existing test suites. `maintained-tools.json` lists
+additional supported manual study initialization, evidence transfer, evaluated
+deployment and verification commands.
+
+Completed one-off release campaigns, incident-specific replay/retention programs
+and superseded manual checks live under `archive/historical-tools/`. Its manifest
+preserves original paths, source revisions, sizes and SHA-256 hashes. `npm test`
+checks archive integrity and the presence of supported manual tools. Original
+protocols, measurement records, reports, migrations and frozen source snapshots
+under `docs/` retain their existing locations and contents.
+
+For historical reproduction, use the recorded source revisions and original paths
+in isolated checkouts, with the original protocol and evidence. Archived programs
+retain their original path and sibling-repository assumptions. Add recurring checks
+to the automated suites; archive completed one-off campaigns with their provenance.
 
 ## Project structure
 

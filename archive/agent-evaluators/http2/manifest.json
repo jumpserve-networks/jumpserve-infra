@@ -1,0 +1,86 @@
+{
+  "version": "historical-agent-evaluators-v1",
+  "source_revision": "4c47a7990b6cf90f9085d4c1f308b6eec166a4ff",
+  "current_entrypoint": "test/evaluate_http2_agent.py",
+  "purpose": "Retain superseded HTTP/2 evaluation programs unchanged for provenance and historical reproduction.",
+  "reproduction": "Use source_revision and original_path in an isolated checkout for historical execution; the archived programs retain their original relative-root assumptions.",
+  "files": [
+    {
+      "original_path": "test/evaluate_http2_agent_v1.py",
+      "archived_path": "archive/agent-evaluators/http2/evaluate_http2_agent_v1.py",
+      "sha256": "ea93d29b70c9f7cdb5f24319be327463a0fab04b9f27931c36e5359dc977f560",
+      "bytes": 9617,
+      "lines": 113
+    },
+    {
+      "original_path": "test/evaluate_http2_agent_v2.py",
+      "archived_path": "archive/agent-evaluators/http2/evaluate_http2_agent_v2.py",
+      "sha256": "ee67550c6c264fe80262560b5fc729226f55d96eabb01a762257d0a2d194a06a",
+      "bytes": 9767,
+      "lines": 113
+    },
+    {
+      "original_path": "test/evaluate_http2_agent_v3.py",
+      "archived_path": "archive/agent-evaluators/http2/evaluate_http2_agent_v3.py",
+      "sha256": "58d36fc377cbd6226548357bc0144d9c2bda0e1790a4f5d5c50128781a9797ac",
+      "bytes": 9867,
+      "lines": 114
+    },
+    {
+      "original_path": "test/evaluate_http2_agent_v4.py",
+      "archived_path": "archive/agent-evaluators/http2/evaluate_http2_agent_v4.py",
+      "sha256": "7153753904adb5dc122772e2753a6d0f8418a86f4881bc727b536584dd21a311",
+      "bytes": 11310,
+      "lines": 122
+    },
+    {
+      "original_path": "test/evaluate_http2_agent_v5.py",
+      "archived_path": "archive/agent-evaluators/http2/evaluate_http2_agent_v5.py",
+      "sha256": "61c7dfb242dff8a7f3ab3d7ce2a6a1e5797308357f454bd15072cff287821b8b",
+      "bytes": 11409,
+      "lines": 122
+    },
+    {
+      "original_path": "test/evaluate_http2_agent_v6.py",
+      "archived_path": "archive/agent-evaluators/http2/evaluate_http2_agent_v6.py",
+      "sha256": "c46e7e7e132a8af8e296e8608e384a15bd80bd91613e63f8516828bdd76e7a27",
+      "bytes": 11425,
+      "lines": 122
+    },
+    {
+      "original_path": "test/evaluate_http2_agent_v7.py",
+      "archived_path": "archive/agent-evaluators/http2/evaluate_http2_agent_v7.py",
+      "sha256": "ba7776b90970a45f02ed5208a873521d6f97558c6d01822e1d7ec85fa0221ca6",
+      "bytes": 11792,
+      "lines": 125
+    },
+    {
+      "original_path": "test/evaluate_http2_agent_v8.py",
+      "archived_path": "archive/agent-evaluators/http2/evaluate_http2_agent_v8.py",
+      "sha256": "57c899be4a716bc31ea5b6b07c19dcbb0a51a5d73a3b2f776c648f2089ac42c0",
+      "bytes": 12047,
+      "lines": 125
+    },
+    {
+      "original_path": "test/evaluate_http2_agent_v9.py",
+      "archived_path": "archive/agent-evaluators/http2/evaluate_http2_agent_v9.py",
+      "sha256": "dce31c10e7c33a2c509183e0fadee6fc5fc2180bac8f9afaf1ca47eab4f02921",
+      "bytes": 12187,
+      "lines": 125
+    },
+    {
+      "original_path": "test/evaluate_http2_agent_v10.py",
+      "archived_path": "archive/agent-evaluators/http2/evaluate_http2_agent_v10.py",
+      "sha256": "c79ac495c342acb7e52dd9443a1928d0b5cdb05f5dc41bde85ee2fbb9bebe906",
+      "bytes": 13313,
+      "lines": 135
+    },
+    {
+      "original_path": "test/evaluate_http2_agent_v11.py",
+      "archived_path": "archive/agent-evaluators/http2/evaluate_http2_agent_v11.py",
+      "sha256": "0030d2650ee521fb45be14939370f25ce7f5454bbab135de0c4bea259b6e0f2a",
+      "bytes": 13731,
+      "lines": 138
+    }
+  ]
+}

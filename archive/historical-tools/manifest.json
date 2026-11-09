@@ -1,0 +1,894 @@
+{
+  "version": "historical-tools-archive-v1",
+  "repository": "jumpserve-infra",
+  "source_revision": "4c47a7990b6cf90f9085d4c1f308b6eec166a4ff",
+  "retirement_basis": "Reviewed programs without references from current checked-in application/runtime, automated test/workflow entrypoints, package commands or declared maintained manual tools. Historical-only dependencies are retained in the archives across all three repositories.",
+  "reproduction": "Use source_revision and original_path in isolated checkouts of the repositories for historical execution. Programs are preserved byte-for-byte and retain their original relative-root and sibling-repository assumptions; this archive is not a current command entrypoint.",
+  "preserved": [
+    "Original source bytes and executable modes",
+    "Existing protocols, measurements, reports, literature, data and evidence manifests",
+    "Current automated tests, runtime code, package commands and supported manual tooling",
+    "Explicitly retained CDN protocols and local runtime/credential directories"
+  ],
+  "files": [
+    {
+      "original_path": "bin/analyze-builder-stall-4055396e.py",
+      "archived_path": "archive/historical-tools/bin/analyze-builder-stall-4055396e.py",
+      "sha256": "b159714ce36fee9e5bc6d1b10c63e13b89d8a7ac2ddf36f9420a1f957bb5bf31",
+      "bytes": 12044,
+      "lines": 123,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/retain-builder-stall-4055396e.py"
+      ]
+    },
+    {
+      "original_path": "bin/archive-autonomy-production-evidence.py",
+      "archived_path": "archive/historical-tools/bin/archive-autonomy-production-evidence.py",
+      "sha256": "ca867b2f611c51966471791438b230a2f5574f26a3134011869028f966128724",
+      "bytes": 8632,
+      "lines": 110,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/archive-openclaw-evidence.py",
+      "archived_path": "archive/historical-tools/bin/archive-openclaw-evidence.py",
+      "sha256": "babc90432428a031fb4f7ee40d77ff38b0a7c1a38d6cde51562abdf3a8f653c0",
+      "bytes": 4499,
+      "lines": 42,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/assessment-catalog-release.py",
+      "archived_path": "archive/historical-tools/bin/assessment-catalog-release.py",
+      "sha256": "e442fb13674994643e05482a376e0d3e2343882caa384b249d80ca7e71757167",
+      "bytes": 10241,
+      "lines": 166,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/assessment-ui-release.py",
+      "archived_path": "archive/historical-tools/bin/assessment-ui-release.py",
+      "sha256": "620898fe2aeae7d1ca769d7087b2f323586e628e9b66d53355b79fc1929ef21d",
+      "bytes": 7520,
+      "lines": 101,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/authorize-assessment-4055396e-budget.py",
+      "archived_path": "archive/historical-tools/bin/authorize-assessment-4055396e-budget.py",
+      "sha256": "38ff7723626689f6c194c6909668e7cebef9a70a0659de8480db5b450e51e8db",
+      "bytes": 2894,
+      "lines": 21,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/retain-assessment-4055396e-recovery.py"
+      ]
+    },
+    {
+      "original_path": "bin/autonomy-completion-release.py",
+      "archived_path": "archive/historical-tools/bin/autonomy-completion-release.py",
+      "sha256": "ff4a5f8026cecc0acbe5b3a8398c9636c420c26253e4ae73bacdea24fa954747",
+      "bytes": 19180,
+      "lines": 112,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/optional-budget-release.py"
+      ]
+    },
+    {
+      "original_path": "bin/autonomy-followup-release.py",
+      "archived_path": "archive/historical-tools/bin/autonomy-followup-release.py",
+      "sha256": "7f4256a68c8acf514b1ed8b4b126fd2fb28209eb49a370defa8f6090afb7bf45",
+      "bytes": 21671,
+      "lines": 176,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/archive-autonomy-production-evidence.py",
+        "jumpserve-infra:bin/verify-bounded-autonomy-release.py"
+      ]
+    },
+    {
+      "original_path": "bin/autonomy_completion_qualification_host.py",
+      "archived_path": "archive/historical-tools/bin/autonomy_completion_qualification_host.py",
+      "sha256": "2a80b71bac0e11729f0a1884356d47078413e53947f768d7e9376f14e312b601",
+      "bytes": 6708,
+      "lines": 66,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/autonomy-completion-release.py",
+        "jumpserve-infra:bin/optional-budget-release.py"
+      ]
+    },
+    {
+      "original_path": "bin/built_package_operational_reviews_host.py",
+      "archived_path": "archive/historical-tools/bin/built_package_operational_reviews_host.py",
+      "sha256": "5d25911e46e61323aa080309b26c5e42157028e810a3c52207265bb577450a13",
+      "bytes": 5010,
+      "lines": 46,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/check-built-package-production.py"
+      ]
+    },
+    {
+      "original_path": "bin/check-autonomy-planner-local.py",
+      "archived_path": "archive/historical-tools/bin/check-autonomy-planner-local.py",
+      "sha256": "19ce07ce17b51d404fa2e3c091a69e6d9126dfa1e733b55f9629319193f5ce4c",
+      "bytes": 5863,
+      "lines": 55,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/retain-autonomy-completion.py"
+      ]
+    },
+    {
+      "original_path": "bin/check-builder-file-interface.py",
+      "archived_path": "archive/historical-tools/bin/check-builder-file-interface.py",
+      "sha256": "d782429e3cb8a65a36a39df6d770d23b96c88a4d1cffc2235a45bcfc080b9eef",
+      "bytes": 3353,
+      "lines": 24,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/check-builder-stall-fix-local.py",
+      "archived_path": "archive/historical-tools/bin/check-builder-stall-fix-local.py",
+      "sha256": "71edaebbcfa295d33ee9eedeeb067de5c6da3d52ae26c393d216a18c5b14334d",
+      "bytes": 9081,
+      "lines": 88,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/record-builder-stall-fix-local.py"
+      ]
+    },
+    {
+      "original_path": "bin/check-built-package-production.py",
+      "archived_path": "archive/historical-tools/bin/check-built-package-production.py",
+      "sha256": "364848f841dd39000b45ff92397e88bdd123566a8f5bb7b5eb863c3985a95e22",
+      "bytes": 24747,
+      "lines": 185,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/check-cancelled-study-context.py",
+      "archived_path": "archive/historical-tools/bin/check-cancelled-study-context.py",
+      "sha256": "b6f0fed08083b73395bef97a68c96320f8f518f32f9c4d92f10adaeb08350e90",
+      "bytes": 5057,
+      "lines": 34,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/check-network-package-production.py",
+      "archived_path": "archive/historical-tools/bin/check-network-package-production.py",
+      "sha256": "e156aaf042676cd412dbba1ec9ef343ab1dc36f3384b85848adf04b59ffaaea6",
+      "bytes": 16828,
+      "lines": 133,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/guided-network-release.py"
+      ]
+    },
+    {
+      "original_path": "bin/check-openclaw-arithmetic.py",
+      "archived_path": "archive/historical-tools/bin/check-openclaw-arithmetic.py",
+      "sha256": "953b18d9d67fce28eac7145744fb39dcd6f213fa2b2c0d8a3bea51c9382c259d",
+      "bytes": 5168,
+      "lines": 54,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/check-openclaw-partial-replay.py",
+      "archived_path": "archive/historical-tools/bin/check-openclaw-partial-replay.py",
+      "sha256": "c42d8dfe1b02ca45cd833c1c4bc016aed916318c98c8d9bc19b3cadfecbf21b9",
+      "bytes": 4814,
+      "lines": 42,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/check-planning-control-measurements.py",
+      "archived_path": "archive/historical-tools/bin/check-planning-control-measurements.py",
+      "sha256": "d9a34b3c458f20c87f0db80e46553a64849665b8ebdfead96d6a039684f8d305",
+      "bytes": 4681,
+      "lines": 41,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/check_builder_production_host.py",
+      "archived_path": "archive/historical-tools/bin/check_builder_production_host.py",
+      "sha256": "98c96f31ce8a3cc6b71aba96b954a8bf8e1b1393f45fead93ffb56305d8ca6db",
+      "bytes": 5305,
+      "lines": 74,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/verify-builder-v2-release.py"
+      ]
+    },
+    {
+      "original_path": "bin/collect-research-preparation-usage.py",
+      "archived_path": "archive/historical-tools/bin/collect-research-preparation-usage.py",
+      "sha256": "1a702898e6fa3531914aaae279ec9b7016671dfbad9ad0d9d4daa80804551d24",
+      "bytes": 4917,
+      "lines": 44,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/record-research-preparation-release.py"
+      ]
+    },
+    {
+      "original_path": "bin/diagnose-autonomy-context.py",
+      "archived_path": "archive/historical-tools/bin/diagnose-autonomy-context.py",
+      "sha256": "1f2698626d1f2a8278a93b311404cdbad63a9072ea756d23c516a57d01c35f4d",
+      "bytes": 2865,
+      "lines": 37,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/evaluate-paper-selection.py",
+      "archived_path": "archive/historical-tools/bin/evaluate-paper-selection.py",
+      "sha256": "12f91afd458ff877d11611ff77110680e4cd3586d0784c51aac7f6ae0548335f",
+      "bytes": 11771,
+      "lines": 164,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/paper-grouping-evaluation.py"
+      ]
+    },
+    {
+      "original_path": "bin/evaluate-planning-context.py",
+      "archived_path": "archive/historical-tools/bin/evaluate-planning-context.py",
+      "sha256": "f2b1497f1b993953dea53d74c04aa1818b81e92900bca0150c6e2067f2cb33c1",
+      "bytes": 9592,
+      "lines": 75,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/evaluate-planning-output-contract.py",
+        "jumpserve-infra:bin/followup-planning-source-read.py"
+      ]
+    },
+    {
+      "original_path": "bin/evaluate-planning-output-contract.py",
+      "archived_path": "archive/historical-tools/bin/evaluate-planning-output-contract.py",
+      "sha256": "0382f0ffdea0b387dd23f761dd9e03ec0d26de92153dc45582ac696ba1ec6c8e",
+      "bytes": 6883,
+      "lines": 52,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/export-ipv6-release.py",
+      "archived_path": "archive/historical-tools/bin/export-ipv6-release.py",
+      "sha256": "1476ee6ed744aa737b0a42d36ff8c6e62767799a6e76b71a8613576f1a12b8ff",
+      "bytes": 2471,
+      "lines": 34,
+      "mode": 420,
+      "previous_references": [
+        "Historical completed IPv6 release instructions; current public asset paths and frozen release outputs supersede these exporters."
+      ]
+    },
+    {
+      "original_path": "bin/export-ipv6-validation.py",
+      "archived_path": "archive/historical-tools/bin/export-ipv6-validation.py",
+      "sha256": "cd9902966f388c2383e9d1377ca175cb1b633caf620e698d90f57a81f61986f7",
+      "bytes": 1658,
+      "lines": 18,
+      "mode": 420,
+      "previous_references": [
+        "Historical completed IPv6 release instructions; current public asset paths and frozen release outputs supersede these exporters."
+      ]
+    },
+    {
+      "original_path": "bin/finalize-builder-release.py",
+      "archived_path": "archive/historical-tools/bin/finalize-builder-release.py",
+      "sha256": "d2bd48d436badee1235150f21172512906e948e1a5792b8953ad06c5dff385c0",
+      "bytes": 11459,
+      "lines": 178,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/followup-planning-source-read.py",
+      "archived_path": "archive/historical-tools/bin/followup-planning-source-read.py",
+      "sha256": "e16ef32a4962c89b84bc71d08756ba6d97b9a0de70ea4c1d38839920ce8703a4",
+      "bytes": 14388,
+      "lines": 91,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/guided-network-release.py",
+      "archived_path": "archive/historical-tools/bin/guided-network-release.py",
+      "sha256": "fab52afe9f42aff3c876ce996bafd4ac51c7cb0785484fa31fde22ffa481784d",
+      "bytes": 17195,
+      "lines": 179,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/check-built-package-production.py",
+        "jumpserve-infra:bin/check-network-package-production.py"
+      ]
+    },
+    {
+      "original_path": "bin/ipv6-unresolved-followup.py",
+      "archived_path": "archive/historical-tools/bin/ipv6-unresolved-followup.py",
+      "sha256": "97251ec6f434fad3a8432c5e360977266d8a135bfdf2cd0b12a700dc8ca6b6f0",
+      "bytes": 13399,
+      "lines": 212,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/openclaw-study-verify.py",
+      "archived_path": "archive/historical-tools/bin/openclaw-study-verify.py",
+      "sha256": "57afa7800bbf40fe426e21bd2a7bafaac49e9bdfbed0fbd2e3acdfd0941074a6",
+      "bytes": 9514,
+      "lines": 83,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/optional-budget-release.py",
+      "archived_path": "archive/historical-tools/bin/optional-budget-release.py",
+      "sha256": "e26c52b7bdad94967acf438a78a7c7eb4c5f34cedf1bd03804da5b04f02c3262",
+      "bytes": 23281,
+      "lines": 145,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/optional_budget_qualification_host.py",
+      "archived_path": "archive/historical-tools/bin/optional_budget_qualification_host.py",
+      "sha256": "f7ae1a408b56cfde6503fb407f109340e7122a2be530c9585861e270a5ae9550",
+      "bytes": 1560,
+      "lines": 19,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/optional-budget-release.py"
+      ]
+    },
+    {
+      "original_path": "bin/paper-grouping-evaluation.py",
+      "archived_path": "archive/historical-tools/bin/paper-grouping-evaluation.py",
+      "sha256": "f29e81cc97d465fd80cd3fc3dfd37af9c250fec0db0a24d2164c14972d54e09d",
+      "bytes": 8051,
+      "lines": 80,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/paper-grouping-release.py",
+      "archived_path": "archive/historical-tools/bin/paper-grouping-release.py",
+      "sha256": "9ef6d5be6287e3e5794e964fa896cb419761db3a3babdd7e69bc221e17a8915b",
+      "bytes": 20033,
+      "lines": 172,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/planning-context-release.py",
+      "archived_path": "archive/historical-tools/bin/planning-context-release.py",
+      "sha256": "07f4ab265b1fa5eb43402b9450eb332cc2e452ad0ef03b66cc5b552538bebda4",
+      "bytes": 10150,
+      "lines": 95,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/prepare-autonomy-followup-candidate.py",
+      "archived_path": "archive/historical-tools/bin/prepare-autonomy-followup-candidate.py",
+      "sha256": "be292af71f41ff44d4669079e0f74a6da7d5e12d5662002350f84872c5870940",
+      "bytes": 8866,
+      "lines": 68,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/autonomy-followup-release.py"
+      ]
+    },
+    {
+      "original_path": "bin/prepare-autonomy-v8-candidate.py",
+      "archived_path": "archive/historical-tools/bin/prepare-autonomy-v8-candidate.py",
+      "sha256": "61e3a5e819050b16971f49964c79f9f2007078e9df8047a458590237465fe3ff",
+      "bytes": 3839,
+      "lines": 29,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/autonomy-followup-release.py"
+      ]
+    },
+    {
+      "original_path": "bin/prepare-intake-initialization-repair.py",
+      "archived_path": "archive/historical-tools/bin/prepare-intake-initialization-repair.py",
+      "sha256": "06bb969b5d183cacce256300368f1c402c79a2a9bf4e5fbb34fd68f2dbd79318",
+      "bytes": 5272,
+      "lines": 80,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/public-queue-release.py",
+      "archived_path": "archive/historical-tools/bin/public-queue-release.py",
+      "sha256": "0fd17278c69b12cba46976533fceb7ba3f6d110e5116fe453d6e10b9658281e1",
+      "bytes": 10119,
+      "lines": 127,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/assessment-catalog-release.py"
+      ]
+    },
+    {
+      "original_path": "bin/record-autonomous-repair-local.py",
+      "archived_path": "archive/historical-tools/bin/record-autonomous-repair-local.py",
+      "sha256": "b192d7a8e313691434d82d66d18a5609a506cf6dacc953307ed8de554652e0be",
+      "bytes": 8400,
+      "lines": 52,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/record-autonomy-recovery-execution-local.py",
+      "archived_path": "archive/historical-tools/bin/record-autonomy-recovery-execution-local.py",
+      "sha256": "6af2f809ff33311eb8005d14cf1cab3e76b6e3c3ae96ac4f9ca1f1ae067b62d5",
+      "bytes": 9339,
+      "lines": 85,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/record-builder-recovery-local.py",
+      "archived_path": "archive/historical-tools/bin/record-builder-recovery-local.py",
+      "sha256": "e3c05caacf9ddc4f2645fad6ab69536b7d3deb45a1d27b0278e7bf82fc474d24",
+      "bytes": 5124,
+      "lines": 49,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/record-builder-stall-fix-local.py",
+      "archived_path": "archive/historical-tools/bin/record-builder-stall-fix-local.py",
+      "sha256": "3722d6c6eedf4dd29e9e28cb2b639110630fe9baa4fb96d9607b44da23e4f4f0",
+      "bytes": 6857,
+      "lines": 53,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/record-platform-local.py",
+      "archived_path": "archive/historical-tools/bin/record-platform-local.py",
+      "sha256": "d06b595966736a85399489fad9741cffeff0a274923e03be54ebe0a5e57727aa",
+      "bytes": 4691,
+      "lines": 27,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/record-research-preparation-release.py",
+      "archived_path": "archive/historical-tools/bin/record-research-preparation-release.py",
+      "sha256": "e1439742964c82fdf7706eed3f672450dde2f5e060faddd7b8cd32859664d191",
+      "bytes": 9607,
+      "lines": 68,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/record-research-release.py",
+      "archived_path": "archive/historical-tools/bin/record-research-release.py",
+      "sha256": "fcba026efe932844bbb1c17371edcbbb545acf05b67eaa394d8c58152b4af4eb",
+      "bytes": 7664,
+      "lines": 58,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/replay-assessment-4055396e.py",
+      "archived_path": "archive/historical-tools/bin/replay-assessment-4055396e.py",
+      "sha256": "7994c1cf869e0b9befbfbdf20b50c0bc2ebf94122e3b0ec0fd7ddddbb9a94b7d",
+      "bytes": 3011,
+      "lines": 29,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/retain-assessment-4055396e-recovery.py"
+      ]
+    },
+    {
+      "original_path": "bin/replay-assessment-numerics.py",
+      "archived_path": "archive/historical-tools/bin/replay-assessment-numerics.py",
+      "sha256": "da36be4341b89ce0c2b670695de5a4eb7cf19981b016b4b684a1578e0f661bd1",
+      "bytes": 9489,
+      "lines": 130,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/report-autonomy-followups.py",
+      "archived_path": "archive/historical-tools/bin/report-autonomy-followups.py",
+      "sha256": "529eb4cc05453b0b182e3383b5a4c283a01b58ffa00859737d5605227c263b57",
+      "bytes": 10092,
+      "lines": 101,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/autonomy-followup-release.py"
+      ]
+    },
+    {
+      "original_path": "bin/research-queue-validation.py",
+      "archived_path": "archive/historical-tools/bin/research-queue-validation.py",
+      "sha256": "c899af6bea24cb7f57fd5238560dc13b915e79d64124de2686b28e192f38240f",
+      "bytes": 7374,
+      "lines": 94,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/research-workflow-validation.py",
+      "archived_path": "archive/historical-tools/bin/research-workflow-validation.py",
+      "sha256": "2da15a0187c50520a380b10938a2347b4859198310b3fc8015023a7cf6f9e16c",
+      "bytes": 12439,
+      "lines": 73,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/retain-assessment-4055396e-recovery.py",
+      "archived_path": "archive/historical-tools/bin/retain-assessment-4055396e-recovery.py",
+      "sha256": "f01556487bac6d3dd7b5ab120d675c933651102dc5ff86b68a3e2faef1be07fb",
+      "bytes": 7450,
+      "lines": 45,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/retain-autonomy-completion.py",
+      "archived_path": "archive/historical-tools/bin/retain-autonomy-completion.py",
+      "sha256": "4634fe4565ba1d44ae17a69879cfeb1a5be6b8f35b8f4ffda38bc07b38832caf",
+      "bytes": 6823,
+      "lines": 45,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/retain-builder-stall-4055396e.py",
+      "archived_path": "archive/historical-tools/bin/retain-builder-stall-4055396e.py",
+      "sha256": "b016250e3fa2449c8ebf816f2112f2a554cb70ae40735d50a5324d386a17c2fc",
+      "bytes": 7542,
+      "lines": 94,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/retain-optional-budget-local.py",
+      "archived_path": "archive/historical-tools/bin/retain-optional-budget-local.py",
+      "sha256": "eea7b147bea39896c10a02f604df272a9e2c496a3feeea4b67e462eaf8335f7b",
+      "bytes": 4708,
+      "lines": 28,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/review-autonomy-followups.py",
+      "archived_path": "archive/historical-tools/bin/review-autonomy-followups.py",
+      "sha256": "a9800079c35c9630e43c18308deab5de393bc8d15ff6fd211347da7908da602a",
+      "bytes": 6355,
+      "lines": 48,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/autonomy-followup-release.py"
+      ]
+    },
+    {
+      "original_path": "bin/review-autonomy-trajectory.py",
+      "archived_path": "archive/historical-tools/bin/review-autonomy-trajectory.py",
+      "sha256": "b35896d413727cf9cdb4706774f3c7dd055aff620be00034a41543ce8848738f",
+      "bytes": 3754,
+      "lines": 41,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/autonomy-followup-release.py"
+      ]
+    },
+    {
+      "original_path": "bin/update-local-auth-6001.py",
+      "archived_path": "archive/historical-tools/bin/update-local-auth-6001.py",
+      "sha256": "d0debe56196eaec199394ede7f510be6a07aeb8d513451f75f59c7e059702d1a",
+      "bytes": 4855,
+      "lines": 88,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/verify-authenticated-claim-flow.py",
+      "archived_path": "archive/historical-tools/bin/verify-authenticated-claim-flow.py",
+      "sha256": "110f33527bfcab46f7f6c16f3617cc801c0a6e980235a36adda02852f8421b50",
+      "bytes": 7007,
+      "lines": 114,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/verify-autonomy-production.py",
+      "archived_path": "archive/historical-tools/bin/verify-autonomy-production.py",
+      "sha256": "b5b3e4db9611946db9be13fbabb98870cdf52fd7a887a37d06c54433a91f1199",
+      "bytes": 13930,
+      "lines": 105,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/verify-bounded-autonomy-release.py",
+      "archived_path": "archive/historical-tools/bin/verify-bounded-autonomy-release.py",
+      "sha256": "71e40be75ca6ce4aa7d8ec96a15a89a735f06905d7ba1658a9fc5e252a2a456b",
+      "bytes": 15064,
+      "lines": 145,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/archive-autonomy-production-evidence.py",
+        "jumpserve-infra:bin/autonomy-followup-release.py"
+      ]
+    },
+    {
+      "original_path": "bin/verify-builder-v2-release.py",
+      "archived_path": "archive/historical-tools/bin/verify-builder-v2-release.py",
+      "sha256": "f21c4cf8dc577d1dc5ee99f0a5325fd1cb8398801c4a59b88d0971b96481cc44",
+      "bytes": 19774,
+      "lines": 160,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "bin/verify-paper-assessment-reset.py",
+      "archived_path": "archive/historical-tools/bin/verify-paper-assessment-reset.py",
+      "sha256": "89588336a5fd2c3fcb4cdb6a160e7c6dfe7ca1a1009b766d01eeda160e232ec8",
+      "bytes": 2495,
+      "lines": 14,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "research/nines2026_delay_equalization/prepare_workers.py",
+      "archived_path": "archive/historical-tools/research/nines2026_delay_equalization/prepare_workers.py",
+      "sha256": "c651edb3076c093830274bb038a16807edbf3b96b5fae22debbfb6842e56ae7a",
+      "bytes": 928,
+      "lines": 19,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "test/archive_idea_interview_evidence.py",
+      "archived_path": "archive/historical-tools/test/archive_idea_interview_evidence.py",
+      "sha256": "4a100ead2ea462a42f1429f3ab4b0962420526bd2b0893f059bd0e8ccd7dd49f",
+      "bytes": 8732,
+      "lines": 109,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "test/check_autonomy_evidence_references.py",
+      "archived_path": "archive/historical-tools/test/check_autonomy_evidence_references.py",
+      "sha256": "836a9fac205123a4758647c286fc1a3d2048bafd2cc8eb48d9e6826823d2031d",
+      "bytes": 1500,
+      "lines": 20,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "test/check_autonomy_partial_database.py",
+      "archived_path": "archive/historical-tools/test/check_autonomy_partial_database.py",
+      "sha256": "f9d23f61431846295954f460569c3ca1de7d5781c63bb44b90e4e4272755cc6e",
+      "bytes": 7555,
+      "lines": 85,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "test/check_autonomy_planning_inputs_database.py",
+      "archived_path": "archive/historical-tools/test/check_autonomy_planning_inputs_database.py",
+      "sha256": "8c5e19cef5159aff0bb4520c3343b73f87bc3613603ca620f9cba44675f0b3db",
+      "bytes": 10167,
+      "lines": 90,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:test/check_autonomy_planning_live.py"
+      ]
+    },
+    {
+      "original_path": "test/check_autonomy_planning_live.py",
+      "archived_path": "archive/historical-tools/test/check_autonomy_planning_live.py",
+      "sha256": "b04dd319599529ab5ed4dc2893563fe6e9c458b4076bba7f919fb995e09944d4",
+      "bytes": 10381,
+      "lines": 87,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "test/check_claim_design_database.py",
+      "archived_path": "archive/historical-tools/test/check_claim_design_database.py",
+      "sha256": "1c955e053503902edca684ddcb7304964f22124b5af299c2dd198d3e14877c23",
+      "bytes": 15648,
+      "lines": 140,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "test/check_controller_handoff_retained.py",
+      "archived_path": "archive/historical-tools/test/check_controller_handoff_retained.py",
+      "sha256": "aadf6efc594eded504af7a615b8491788046a278f62aa97dbe350657cf73d4c4",
+      "bytes": 2956,
+      "lines": 48,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "test/check_controller_terminal_retained.py",
+      "archived_path": "archive/historical-tools/test/check_controller_terminal_retained.py",
+      "sha256": "a17e0edd49697271de6e7b08852620ce6e39a8f5ff04f2b9114a9ddc39db5e01",
+      "bytes": 4793,
+      "lines": 71,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "test/check_intake_initialization_database.py",
+      "archived_path": "archive/historical-tools/test/check_intake_initialization_database.py",
+      "sha256": "98d1064f57b5cd9087e2600f82e57c42336ed4853ce472b45618bda6cc4ac91f",
+      "bytes": 5250,
+      "lines": 49,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "test/check_method_window_database.py",
+      "archived_path": "archive/historical-tools/test/check_method_window_database.py",
+      "sha256": "d8938a767d610540750715128255eeb50e224c3bf420d44ba4dba396345d63d4",
+      "bytes": 3700,
+      "lines": 44,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "test/check_working_checkpoint_retained.py",
+      "archived_path": "archive/historical-tools/test/check_working_checkpoint_retained.py",
+      "sha256": "a81422e6abc68ad603345828121fdb40cd8330562ef7e297d2f05a3802a67998",
+      "bytes": 2870,
+      "lines": 35,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "test/evaluate_autonomy.py",
+      "archived_path": "archive/historical-tools/test/evaluate_autonomy.py",
+      "sha256": "9ec9532c91e2da887b1c6fa8556b8df856d639f295633ccb841d58d5c32df5df",
+      "bytes": 9396,
+      "lines": 75,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:test/evaluate_autonomy_evidence.py",
+        "jumpserve-infra:test/evaluate_autonomy_integration.py",
+        "jumpserve-infra:test/recover_autonomy_evaluation.py"
+      ]
+    },
+    {
+      "original_path": "test/evaluate_autonomy_evidence.py",
+      "archived_path": "archive/historical-tools/test/evaluate_autonomy_evidence.py",
+      "sha256": "7f34f1cda638624cd6ff7e143fa269d72414fa2b375fae8954adaa258a678731",
+      "bytes": 4092,
+      "lines": 28,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "test/evaluate_autonomy_followup_completion.py",
+      "archived_path": "archive/historical-tools/test/evaluate_autonomy_followup_completion.py",
+      "sha256": "4177b1499ef581202dc43bedd62b3c7bc07390848ca094df3f4659335b357129",
+      "bytes": 8078,
+      "lines": 71,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/autonomy-followup-release.py"
+      ]
+    },
+    {
+      "original_path": "test/evaluate_autonomy_followup_completion_v2.py",
+      "archived_path": "archive/historical-tools/test/evaluate_autonomy_followup_completion_v2.py",
+      "sha256": "12fe7c77d4ecc526f8c5b416a4079ffd9bb0728265f9d13c133d21b58c3250c3",
+      "bytes": 9670,
+      "lines": 82,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/autonomy-followup-release.py"
+      ]
+    },
+    {
+      "original_path": "test/evaluate_autonomy_followups.py",
+      "archived_path": "archive/historical-tools/test/evaluate_autonomy_followups.py",
+      "sha256": "a75185c278cef7d85e3fd7901136e227b8a13d379d3cd77fde064ad2ee7953e9",
+      "bytes": 13829,
+      "lines": 126,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/autonomy-followup-release.py"
+      ]
+    },
+    {
+      "original_path": "test/evaluate_autonomy_integration.py",
+      "archived_path": "archive/historical-tools/test/evaluate_autonomy_integration.py",
+      "sha256": "aa1488382fdf0f7f2ac3dbc6ba79ef2125cf4c81cb888be11877e595f5a3391f",
+      "bytes": 4817,
+      "lines": 34,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "test/evaluate_autonomy_trajectory.py",
+      "archived_path": "archive/historical-tools/test/evaluate_autonomy_trajectory.py",
+      "sha256": "db3100b7a59f9bd79c6335cdc3323564710fb066bde9b73ad2d74d0e5a0a1f95",
+      "bytes": 22276,
+      "lines": 263,
+      "mode": 420,
+      "previous_references": [
+        "jumpserve-infra:bin/autonomy-followup-release.py"
+      ]
+    },
+    {
+      "original_path": "test/evaluate_claim_design.py",
+      "archived_path": "archive/historical-tools/test/evaluate_claim_design.py",
+      "sha256": "8f67493c33ad4a667b09f4eaf14d2a4023d20542e4b5d6949803e3d808e5e401",
+      "bytes": 8090,
+      "lines": 74,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "test/evaluate_claim_design_v2.py",
+      "archived_path": "archive/historical-tools/test/evaluate_claim_design_v2.py",
+      "sha256": "cf6a24bb20156476d67536cbe4368f367db871099b6172eb5d895d841c3648f4",
+      "bytes": 18148,
+      "lines": 147,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "test/http2_answers_failed_v1.py",
+      "archived_path": "archive/historical-tools/test/http2_answers_failed_v1.py",
+      "sha256": "bef3ca112cc285cd3c3d27fb65b32f29f0e39a86dced0899e2b9522135788a10",
+      "bytes": 10002,
+      "lines": 90,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "test/http2_context_full_v1.py",
+      "archived_path": "archive/historical-tools/test/http2_context_full_v1.py",
+      "sha256": "e0c66ea00d3848f09df43e6087ac607f7563e922c328f8538ad3435da3854231",
+      "bytes": 547,
+      "lines": 11,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "test/prepare_autonomy_evidence.py",
+      "archived_path": "archive/historical-tools/test/prepare_autonomy_evidence.py",
+      "sha256": "6fbbe910249c522faacaf4c86bfb9fc3a3f777f07971740ffac50dbf8835e45f",
+      "bytes": 4229,
+      "lines": 28,
+      "mode": 420,
+      "previous_references": []
+    },
+    {
+      "original_path": "test/recover_autonomy_evaluation.py",
+      "archived_path": "archive/historical-tools/test/recover_autonomy_evaluation.py",
+      "sha256": "46674eec7e81eba66bf199331296f169e1c546cb3cc0629087ac4351fdf0c651",
+      "bytes": 6099,
+      "lines": 62,
+      "mode": 420,
+      "previous_references": []
+    }
+  ]
+}
