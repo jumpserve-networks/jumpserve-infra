@@ -107,7 +107,7 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
         SUPABASE_SECRET_ARN: supabaseSecret.secretArn,
         AMI_ID: amiId,
         BENCHMARK_IMAGE_MODE: cdk.Fn.conditionIf(useBenchmarkAmi.logicalId, 'prebaked', 'base').toString(),
-        SECURITY_GROUP_ID: benchmarkSg.securityGroupId,
+        SECURITY_GROUP_ID: (benchmarkSg.node.defaultChild as ec2.CfnSecurityGroup).ref,
         SUBNET_ID: publicSubnets[0].subnetId,
         // Ref retains the owned profile name without requiring CloudFormation
         // to call iam:GetInstanceProfile again during an AMI-only update.

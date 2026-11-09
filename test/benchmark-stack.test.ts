@@ -38,6 +38,7 @@ test('the selected AMI and bootstrap mode always change together', () => {
       Environment: { Variables: Match.objectLike({
         AMI_ID: { 'Fn::If': ['UseBenchmarkAmi', { Ref: 'BenchmarkAmiId' }, Match.anyValue()] },
         BENCHMARK_IMAGE_MODE: { 'Fn::If': ['UseBenchmarkAmi', 'prebaked', 'base'] },
+        SECURITY_GROUP_ID: { Ref: groupRef },
       }) },
     });
     const profileId = Object.keys(template.findResources('AWS::IAM::InstanceProfile'))[0];
