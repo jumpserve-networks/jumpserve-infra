@@ -39,7 +39,8 @@ export function researchNetworkPolicyFiles(files: Record<string, string>): {nete
 }
 
 export function requireRepairQualification(qualification: {version?:string;approved_for_lab_recovery?:boolean;qualified_files_sha256?:string;evidence_sha256?:string}, files: Record<string,string>): void {
-  const repairFiles = Object.fromEntries(Object.entries(files).filter(([name])=>name!=='policies/autonomous-repair-release-v1.json').sort(([a],[b])=>a < b ? -1 : a > b ? 1 : 0));
+  // Object keys are unique; their lexical ordering has no equality branch.
+  const repairFiles = Object.fromEntries(Object.entries(files).filter(([name])=>name!=='policies/autonomous-repair-release-v1.json').sort(([a],[b])=>a < b ? -1 : 1));
   const filesSha = createHash('sha256').update(JSON.stringify(repairFiles)).digest('hex');
   if (qualification.version !== 'autonomous-repair-release-v1' || qualification.approved_for_lab_recovery !== true || qualification.qualified_files_sha256 !== filesSha || !/^[a-f0-9]{64}$/.test(qualification.evidence_sha256 ?? '')) throw new Error('Passing exact-source live repair qualification is required before activation.');
 }

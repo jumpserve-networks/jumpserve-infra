@@ -58,3 +58,16 @@ test('an HTTP request cannot impersonate the IAM-only verification envelope', as
   expect(ec2).not.toHaveBeenCalled();
   ec2.mockRestore();
 });
+
+test.each([403, 500])('auth HTTP %s fails closed', async status => {
+  jest.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('{}', {status}));
+  await expect(requireUser({headers: {authorization: 'Bearer session'}})).rejects.toMatchObject({status: status === 403 ? 401 : 503});
+});
+
+test('invalid auth JSON fails closed and an absent email does not replace the verified id', async () => {
+  const fetch = jest.spyOn(globalThis, 'fetch').mockResolvedValueOnce(new Response('{'))
+    .mockResolvedValueOnce(Response.json({id: 'verified', identities: [{provider: 'google'}], email: null}));
+  await expect(requireUser({headers: {authorization: 'Bearer session'}})).rejects.toMatchObject({status: 503});
+  await expect(requireUser({headers: {authorization: 'Bearer session'}})).resolves.toEqual({id: 'verified', email: undefined});
+  expect(fetch).toHaveBeenCalledTimes(2);
+});

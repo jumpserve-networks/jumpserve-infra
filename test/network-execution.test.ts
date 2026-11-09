@@ -65,6 +65,14 @@ test('autonomous repair cannot activate without exact-source actual-answer quali
  expect(()=>requireRepairQualification(policy,{...files,'autonomy.py':'d'.repeat(64)})).toThrow('Passing exact-source live repair qualification');
  expect(()=>requireRepairQualification({...policy,evidence_sha256:''},files)).toThrow('Passing exact-source live repair qualification');
 });
+
+test('repair qualification hashes original file names in lexical order regardless of insertion order', () => {
+ const files = {'z.py':'z'.repeat(64),'a.py':'a'.repeat(64),'policies/autonomous-repair-release-v1.json':'excluded'};
+ const qualification = {version:'autonomous-repair-release-v1',approved_for_lab_recovery:true,
+  qualified_files_sha256:createHash('sha256').update(JSON.stringify({'a.py':files['a.py'],'z.py':files['z.py']})).digest('hex'),evidence_sha256:'e'.repeat(64)};
+ expect(()=>requireRepairQualification(qualification,files)).not.toThrow();
+ expect(()=>requireRepairQualification(qualification,Object.fromEntries(Object.entries(files).reverse()))).not.toThrow();
+});
 test('native experiment builder fails closed without its native worker and disposable executor',()=>{
  const app=new cdk.App({context:{supabaseUrl:'https://regphejnlvfpyokpniny.supabase.co',researchQueueEnabled:true,researchAutonomyEnabled:true,researchExperimentBuilderEnabled:true}});
  const stack=new cdk.Stack(app,'InvalidBuilder',{env:{account:'395567831870',region:'us-east-1'}});

@@ -22,6 +22,17 @@ def summary(run_id, cca, workload=50):
 
 
 class ComparisonTest(unittest.TestCase):
+    def test_invalid_recorded_settings_cannot_be_used_for_configuration_matching(self):
+        from comparison import numeric, recorded_configuration
+        for raw in ['invalid', {}, [], 10 ** 5000]:
+            with self.subTest(kind=type(raw).__name__): self.assertIsNone(numeric(raw))
+        for field, label in [('bottleneck_rate_megabit', 'rate_mbps'), ('snapshot_length_ms', 'snapshot_ms'), ('queue_buffer_size_kilobyte', 'buffer_kib')]:
+            for value in [None, -1, 'invalid']:
+                parent = dict(FIXTURE['parent'], **{field: value})
+                result = recorded_configuration(parent, FIXTURE['runs'], {'script': 'netem_nines.py'})
+                self.assertFalse(result['eligible'])
+                self.assertIn('Missing or invalid ' + label, result['reasons'])
+
     def test_unmatched_workloads_do_not_produce_algorithm_deltas(self):
         result = compare_validity(summary(1, 'bbr', 5), summary(2, 'cubic', 500))
         self.assertFalse(result['configuration_matched'])

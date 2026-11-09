@@ -20,7 +20,7 @@ def number(value):
     try:
         value = float(value)
         return value if math.isfinite(value) and value >= 0 else None
-    except (TypeError, ValueError):
+    except (TypeError, ValueError, OverflowError):
         return None
 
 

@@ -22,6 +22,24 @@ class RunAnalysisTest(unittest.TestCase):
     def summary(self, **kwargs):
         return summarize_run(self.fixture['parent'], self.fixture['runs'], self.fixture['snapshots'], **kwargs)
 
+    def test_negative_delay_is_unavailable_and_parking_lot_limitations_are_explicit(self):
+        self.fixture['runs'][0]['delay_added'] = -1
+        result = self.summary()
+        self.assertIsNone(result['clients'][0]['configured_added_rtt_ms'])
+        self.assertTrue(any(row['code'] == 'invalid_configured_delay' for row in result['warnings']))
+        self.fixture['parent']['topology'] = 'parking-lot'
+        result = self.summary(job_config={'script': 'netem_multi_bottleneck.py'})
+        self.assertTrue(any(row['code'] == 'experimental_topology' for row in result['warnings']))
+
+    def test_all_zero_matching_throughput_has_no_defined_fairness_index(self):
+        for rows in self.fixture['snapshots'].values():
+            for row in rows: row['megabits_per_second'] = 0
+        result = self.summary()
+        self.assertFalse(result['fairness']['available'])
+        self.assertNotIn('jains_index', result['fairness'])
+        self.assertTrue(all(client['metrics']['throughput']['time_weighted_mean'] == 0 for client in result['clients']))
+
+
     def test_2352_preserves_units_delay_semantics_and_measured_queue_estimates(self):
         result = self.summary()
         a, b = result['clients']

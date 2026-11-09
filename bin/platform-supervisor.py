@@ -132,6 +132,7 @@ def migrate(packet):
             '202611020002_platform_incident_continuations.sql':"to_regprocedure('public.platform_worker_before_continuations_v9(text,uuid,uuid,uuid,jsonb)')",
             '202611020003_supervisor_self_install.sql':"to_regprocedure('public.platform_supervisor_install(uuid,text,uuid)')",
             '202611020004_private_incident_continuation_context.sql':"case when not has_function_privilege('service_role','public.platform_repair_context_data(uuid)','EXECUTE') and not has_function_privilege('authenticated','public.platform_repair_context_data(uuid)','EXECUTE') and not has_function_privilege('anon','public.platform_repair_context_data(uuid)','EXECUTE') then 'sealed' end",
+            '202611040003_supervisor_capabilities.sql':"to_regprocedure('public.platform_capability_worker(text,uuid,uuid,uuid,jsonb)')",
         }[name]
         exists=db.query('select '+marker+' is not null present')[0]['present']
         if not exists:db.query((ROOT/'database'/name).read_text(),read_only=False)

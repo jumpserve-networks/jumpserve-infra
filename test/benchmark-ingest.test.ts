@@ -49,3 +49,44 @@ test('does not return private database errors', async () => {
   expect(response.statusCode).toBe(403);
   expect(response.body).not.toContain('private');
 });
+
+test('method, missing authorization, base64 input and error text follow the bounded ingestion contract', async () => {
+  expect(await handler({})).toMatchObject({statusCode: 405});
+  expect(await handler({requestContext: {http: {method: 'POST'}}})).toMatchObject({statusCode: 401});
+  const fetch = jest.spyOn(globalThis, 'fetch').mockResolvedValue(Response.json({accepted: true}));
+  const encoded = event({job_id: job, action: 'status', status: 'failed', error_message: 'x'.repeat(600)});
+  const result = await handler({...encoded, headers: {Authorization: `Bearer ${token}`}, isBase64Encoded: true, body: Buffer.from(encoded.body).toString('base64')});
+  expect(result.statusCode).toBe(200);
+  const payload = JSON.parse(fetch.mock.calls[0][1]!.body as string).payload;
+  expect(payload).toEqual({status: 'failed', error_message: 'x'.repeat(500)});
+});
+
+test.each([
+  [undefined, 400],
+  ['x'.repeat(Math.ceil(4.1 * 1024 * 1024 * 1.34) + 1), 400],
+  ['💧'.repeat(1_100_000), 413],
+])('invalid or oversized body is rejected before secret retrieval', async (body, status) => {
+  expect(await handler({...event({}), body})).toMatchObject({statusCode: status});
+  expect(SecretsManagerClient.prototype.send).not.toHaveBeenCalled();
+});
+
+test('a compressed payload above the compressed-byte bound is rejected before decompression', async () => {
+  const report_gzip = Buffer.alloc(3 * 1024 * 1024 + 1).toString('base64');
+  expect(await handler(event({job_id: job, action: 'results', report_gzip}))).toMatchObject({statusCode: 413});
+  expect(SecretsManagerClient.prototype.send).not.toHaveBeenCalled();
+});
+
+test('missing result content and missing service secrets cannot reach the database', async () => {
+  expect(await handler(event({job_id: job, action: 'results'}))).toMatchObject({statusCode: 400});
+  jest.mocked(SecretsManagerClient.prototype.send).mockResolvedValueOnce({} as never);
+  const fetch = jest.spyOn(globalThis, 'fetch');
+  expect(await handler(event({job_id: job, action: 'status', status: 'running'}))).toMatchObject({statusCode: 503});
+  expect(fetch).not.toHaveBeenCalled();
+});
+
+test.each([400, 500])('private unreadable RPC errors return only a generic HTTP %s classification', async status => {
+  jest.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('private details', {status}));
+  const response = await handler(event({job_id: job, action: 'status', status: 'running'}));
+  expect(response.statusCode).toBe(status === 400 ? 400 : 503);
+  expect(response.body).not.toContain('private');
+});

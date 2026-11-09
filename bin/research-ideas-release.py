@@ -66,7 +66,8 @@ def artifact_bundle(directory):
  if stored!=raw or sha(stored)!=digest:raise RuntimeError('Stored original artifact hash differs after retrieval')
  config=json.loads((ROOT/'cdk.json').read_text())['context'];public_key=config['supabaseAnonKey']
  with OPEN.open(urllib.request.Request('https://regphejnlvfpyokpniny.supabase.co/auth/v1/settings',headers={'apikey':public_key}),timeout=20) as response:
-  if response.status!=200:raise RuntimeError('Public credential validation failed')
+  auth_status=response.status
+ if auth_status!=200:raise RuntimeError('Public credential validation failed')
  public_status=200
  try:
   with OPEN.open(urllib.request.Request(base+path,headers={'apikey':public_key}),timeout=20) as response:response.read(1)

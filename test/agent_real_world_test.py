@@ -18,6 +18,24 @@ class RealWorldAnalysisTest(unittest.TestCase):
         report = fixture(*args)
         return summarize_report(report, report['job'])
 
+    def test_invalid_numbers_remain_unavailable_even_when_integer_conversion_overflows(self):
+        from real_world_analysis import number
+        for raw in ['invalid', {}, [], 10 ** 5000, float('inf'), -1, True, None]:
+            with self.subTest(kind=type(raw).__name__): self.assertIsNone(number(raw))
+        self.assertEqual(number('0'), 0)
+
+    def test_contrast_validation_and_exclusions_preserve_explicit_reasons(self):
+        metric = 'combined_mean_mbit_per_second'
+        for baseline, other, outcome in [('', 'bbr', metric), ('cubic', '', metric), ('cubic', 'cubic', metric), ('cubic', 'bbr', 'unknown')]:
+            with self.assertRaises(ValueError): compare_reports([], baseline, other, outcome)
+        unavailable = self.summary()
+        unavailable['comparison']['eligible'] = False
+        unavailable['comparison']['exclusions'] = []
+        outside = self.summary(SECOND, 'reno')
+        result = compare_reports([unavailable, outside], 'cubic', 'bbr', metric)
+        self.assertEqual(result['blocks'], [])
+        self.assertEqual({row['reason'] for row in result['excluded']}, {'Comparison provenance is incomplete', 'Algorithm is outside the selected contrast'})
+
     def test_summary_preserves_units_zero_and_missing_without_exposing_private_job_fields(self):
         report = fixture()
         report['job'].update(owner='private-email', nodes=[{'name': 'server', 'private_key': 'secret', 'public_ip': '192.0.2.1'}])
@@ -156,6 +174,22 @@ class RealWorldToolsTest(unittest.TestCase):
         self.assertEqual(len(result['excluded']), 2)
         self.assertEqual(self.db.get.call_count, 3)
         self.assertEqual(result['matched_blocks'], 0)
+
+    def test_trace_missing_jobs_reports_and_receivers_remain_explicit_and_queue_zero_is_retained(self):
+        for records in [[[]], [[{'record': fixture()['job']}], []]]:
+            self.db.get.side_effect = records
+            result = self.tools.get_real_world_trace(FIRST, 'throughput', 'receiver-1')
+            self.assertEqual(result['error'], 'Saved trace unavailable')
+        report = fixture(); self.db.get.side_effect = [[{'record': report['job']}], [{'report': report}]]
+        self.assertEqual(self.tools.get_real_world_trace(FIRST, 'throughput', 'missing-receiver')['error'], 'Receiver not found')
+        report['queue'] = [{'seconds': 0, 'backlog_bytes': 0, 'queue_delay_ms': None, 'drops': 0}]
+        self.db.get.side_effect = [[{'record': report['job']}], [{'report': report}]]
+        result = self.tools.get_real_world_trace(FIRST, 'queue')
+        self.assertEqual(result['receiver'], 'bottleneck')
+        self.assertEqual(result['points'], [{'seconds': 0, 'backlog_bytes': 0, 'queue_delay_ms': None, 'drops': 0, 'sent_bytes': None}])
+        with self.assertRaisesRegex(ValueError, 'metric must be'): self.tools.get_real_world_trace(FIRST, 'emulated-fct')
+        for ids in [None, 'not-a-list', [], [FIRST], [FIRST] * 21]:
+            with self.subTest(ids=ids), self.assertRaisesRegex(ValueError, '2 to 20'): self.tools.compare_real_world_tests(ids, 'cubic', 'bbr')
 
 
 if __name__ == '__main__':

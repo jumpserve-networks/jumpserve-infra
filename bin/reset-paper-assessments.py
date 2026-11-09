@@ -54,10 +54,12 @@ def backup():
    while rows<before['n']:
     limit=25 if t in ('research_autonomy_turns','research_model_dispatches') else 500
     chunk=admin.query('select to_jsonb(t)::text raw from public.'+ident(t)+' t where '+predicate+' order by '+sorting+' offset '+str(rows)+' limit '+str(limit))
-    if not chunk:raise ValueError('Incomplete backup page.')
+    if not chunk:
+     raise ValueError('Incomplete backup page.')
     for record in chunk:
      raw=record['raw'].encode();json.loads(raw);digest.update(sha(raw).encode());stream.write(raw+b'\n');rows+=1
-  if rows!=before['n'] or digest.hexdigest()!=before['hash']:raise ValueError('Database changed or backup bytes differ: '+t)
+  if rows!=before['n'] or digest.hexdigest()!=before['hash']:
+   raise ValueError('Database changed or backup bytes differ: '+t)
   data=file.read_bytes();assert len(data.splitlines())==rows
   packet['tables'][t]=dict(count=rows,database_hash=before['hash'],nonpaper=nonpaper,primary_key=pk[t],file=file.name,bytes=len(data),sha256=sha(data));save();print(json.dumps(dict(backed_up=t,rows=rows)),flush=True)
  packet['status']='backup-verified';save();(BASE/'selected.txt').write_text(directory.name+'\n');print(json.dumps(dict(directory=str(directory),assessments=31,rows=sum(t['count'] for t in packet['tables'].values()),status=packet['status'])))
@@ -92,7 +94,7 @@ def apply(dry_run=False):
  (directory/(name+'.sql')).write_text(sql)
  result=dict(version=packet['version'],operation=name,started_at=stamp(),sql_sha256=sha(sql.encode()),backup_manifest_sha256=sha(path.read_bytes()),status='running');out.write_text(json.dumps(result,indent=2))
  try:admin.query(sql,read_only=False);result.update(status='rolled-back-verified' if dry_run else 'committed',assessments=31,rows=sum(t['count'] for t in packet['tables'].values()),nonpaper_data_verified_unchanged=True,delete_guards_restored=True,rls_and_foreign_keys_preserved=True)
- except Exception as error:result.update(status='failed-transaction-rolled-back',reason=type(error).__name__);raise
+ except Exception as error:result.update(status='failed-transaction-outcome-unconfirmed',reason=type(error).__name__);raise
  finally:result['ended_at']=stamp();out.write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
 
 if __name__=='__main__':

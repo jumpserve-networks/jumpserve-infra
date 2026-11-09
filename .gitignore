@@ -14,6 +14,10 @@ agent/package
 agent/layer
 .test-artifacts/
 .venv/
+.venv-unit-tests/
+.coverage*
+!.coveragerc
+coverage/
 __pycache__/
 .runtime-backend/
 .runtime-research/

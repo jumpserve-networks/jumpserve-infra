@@ -3,6 +3,7 @@ import argparse,copy,datetime as dt,importlib.util,io,json,pathlib,shlex,subproc
 ROOT=pathlib.Path(__file__).resolve().parents[1];BACK=ROOT.parent/'jumpserve-back-end'
 spec=importlib.util.spec_from_file_location('continuation',ROOT/'bin/builder-continuation-release.py');q=importlib.util.module_from_spec(spec);spec.loader.exec_module(q)
 r=q.r;m=q.m;BASE=ROOT/'.test-artifacts/autonomous-repair-release-v1';STUDY='4055396e-35c0-4962-ba39-cf23e443ad8d';q.BASE=BASE;q.ASSESSMENT=STUDY
+LEGACY_EVIDENCE_SHA256='abfa36e381c69d2abc775de175e548090f4b1d01dd28da584d1bc2efc7d07330'
 def freeze(out,previous=None,validation_only=False):
  manifest=json.loads((ROOT/'research-workflow-runtime.json').read_bytes())
  assert not subprocess.check_output(['git','status','--porcelain'],cwd=BACK,text=True).strip()
@@ -171,7 +172,7 @@ def record_release(source,out):
   raw=(BACK/'research_workflow'/name).read_bytes();assert r.sha(raw)==sha;files['runtime/research_workflow/'+name]=raw
  for p in BASE.glob('*/JumpServeBenchmarkStack*.zip'):files[str(p.relative_to(ROOT))]=p.read_bytes()
  for p in BASE.glob('*/worker-ssm.json'):files[str(p.relative_to(ROOT))]=p.read_bytes()
- old=ROOT/'.test-artifacts/autonomous-repair-local/20261029T010001267011Z/evidence.zip';assert r.sha(old.read_bytes())=='abfa36e381c69d2abc775de175e548090f4b1d01dd28da584d1bc2efc7d07330';files[str(old.relative_to(ROOT))]=old.read_bytes()
+ old=ROOT/'.test-artifacts/autonomous-repair-local/20261029T010001267011Z/evidence.zip';assert r.sha(old.read_bytes())==LEGACY_EVIDENCE_SHA256;files[str(old.relative_to(ROOT))]=old.read_bytes()
  with r.prior.guard.OPEN.open('https://d3o7xdethb.execute-api.us-east-1.amazonaws.com/research/studies/'+STUDY+'/queue?public=1&diagnostics=1',timeout=30) as response:raw=response.read(2000000)
  queue=json.loads(raw);assert queue['study']['id']==STUDY;files['recorded-public-queue.json']=raw
  before=json.loads((source/'before-activation-queue.json').read_bytes());old=before['autonomy']['workflows'][0];now=queue['autonomy']['workflows'][0]

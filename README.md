@@ -487,6 +487,67 @@ in source control or AMI snapshots.
 
 ## Development
 
+### Unit-test coverage
+
+Set up local dependencies with `npm ci`, `python3 -m venv .venv-unit-tests`, and
+`.venv-unit-tests/bin/python -m pip install -r requirements-dev.txt`.
+`npm run test:coverage:report` runs the fixed TypeScript, Python and native
+JavaScript suites without enforcing the 100% target. Use
+`npm run test:coverage` to enforce the application/runtime target. Test failures
+or invalid source inventories exit 1; incomplete coverage exits 2.
+
+For a single language, use `test:coverage:typescript`, `test:coverage:python` or
+`test:coverage:native`; append `:report` to report gaps without enforcing the
+threshold. To include the optional cross-repository parser contract cases, set
+`JUMPSERVE_BACKEND_CHECKOUT` to the backend checkout before running the command.
+The runtime TypeScript, Python and native JavaScript suites each reach 100%
+lines and branches. TypeScript and JavaScript also require 100% statements and
+functions. Each language has a separate gate.
+
+Jest inventories `lib/`, `lambda/` and TypeScript entrypoints in `bin/`, including
+unloaded files; generated declarations are excluded. The owner-selected unit
+coverage scope is application/runtime code: Python includes `agent/` and
+`assets/`, including unimported and hyphenated runtime helpers. The runtime
+assets are the persistence monitor, Slack service and trusted release-policy
+gates. The explicit operator installers and qualification harnesses listed in
+`test/runtime_inventory.py` stay in the all-source diagnostic. Newly added
+runtime assets are included by default. Packaged
+dependencies, generated runtimes, test harnesses
+and fixtures are excluded. Handwritten JavaScript in `assets/` is measured
+separately. Every report must match its filesystem source inventory and exact
+raw counters. Release/diagnostic scripts in `bin/`, AMI commands, campaign and
+maintenance scripts, SQL migrations and standalone shell files are outside this
+unit target. `npm run test:coverage:report -- --all-sources` retains the broader
+diagnostic inventory in `coverage/python-all-sources/` and
+`coverage/all-sources-summary.json`, including the unmeasured SQL/shell list.
+
+`npm run test:coverage:sql:setup` builds the pinned `plpgsql_check` profiler and
+stages a relocatable PostgreSQL 16/17 installation under ignored test artifacts.
+It needs an existing PostgreSQL development installation, a C compiler, make,
+and Git; it does not install into system directories. On macOS the setup resolves
+the active SDK rather than using Homebrew's possibly obsolete build-time SDK.
+`npm run test:coverage:sql:report` then runs the platform database-unit checks in
+a brand-new cluster bound only to `127.0.0.1:54479`, using synthetic authentication
+and Storage fixtures, and stops that cluster afterward. It does not reuse or
+reconfigure an existing database. Original logs and the stopped cluster are
+retained under `.test-artifacts/sql-coverage/`.
+
+The SQL report at `coverage/sql/partial-report.json` contains the retained
+PL/pgSQL function bodies, source hashes/locations, statement counters and separate
+statement/branch coverage fractions. It currently covers only the three initial
+platform migrations; DDL, anonymous blocks, SQL-language bodies and replaced
+historical bodies remain unmeasured. `test:coverage:sql` deliberately exits 2
+after successful checks while that inventory remains incomplete. The repository
+all-source diagnostic continues to list SQL and shell as incomplete; this partial report does not
+claim 100% SQL coverage.
+
+The unit runner does not invoke live database checks, model evaluations or real
+deployment commands. Release-script unit tests use temporary files and mocked
+cloud, credential, native-runtime and service adapters; they do not qualify an
+actual production release. Reports and the repository summary are in
+`coverage/` and are not committed. Coverage-tool dependency overrides pin patched
+glob/minimatch versions within c8 without changing runtime application packages.
+
 The idea-specific conversation and source-faithful review update was released on
 2026-10-15 with the evaluated **research-ideas-v11** prompt and Amplify job **111**.
 See [the release report](docs/idea-interview-production-release-v1.json) and

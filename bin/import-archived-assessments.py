@@ -324,6 +324,20 @@ def publish():
         print(json.dumps(results[-1]),flush=True)
     save('publication-v1.json',dict(targets=target,at=workflow.now(),studies=results,application_deployment=False,reviewer=archive.REVIEWER))
 
+def verify_validation_archive(raw, manifest):
+    """Validate a retrieved archive against the retained original-file inventory."""
+    with zipfile.ZipFile(io.BytesIO(raw), 'r') as bundle:
+        expected = {file['name'] for file in manifest['files']} | {'manifest.json'}
+        if len(bundle.namelist()) != len(manifest['files']) + 1 or set(bundle.namelist()) != expected:
+            raise RuntimeError('Validation ZIP member identities differ.')
+        if bundle.read('manifest.json') != workflow.canonical(manifest):
+            raise RuntimeError('Validation ZIP manifest differs.')
+        for file in manifest['files']:
+            data = bundle.read(file['name'])
+            if len(data) != file['byte_count'] or workflow.digest(data) != file['sha256']:
+                raise RuntimeError('Validation original member bytes differ after retrieval.')
+
+
 def retain_evidence():
     """Keep exact successful/failed verification bytes private after publication.
 
@@ -386,14 +400,7 @@ def retain_evidence():
         store.append(study,actor,'artifacts',row)
         retrieved=store.artifact_bytes(study,row['id'],maximum=10_000_000)
         if retrieved!=raw:raise RuntimeError('Validation ZIP original bytes differ after retrieval.')
-        with zipfile.ZipFile(io.BytesIO(retrieved),'r') as bundle:
-            if len(bundle.namelist())!=len(manifest['files'])+1 or set(bundle.namelist())!={f['name'] for f in manifest['files']}|{'manifest.json'}:
-                raise RuntimeError('Validation ZIP member identities differ.')
-            if bundle.read('manifest.json')!=workflow.canonical(manifest):raise RuntimeError('Validation ZIP manifest differs.')
-            for file in manifest['files']:
-                data=bundle.read(file['name'])
-                if len(data)!=file['byte_count'] or workflow.digest(data)!=file['sha256']:
-                    raise RuntimeError('Validation original member bytes differ after retrieval.')
+        verify_validation_archive(retrieved, manifest)
         after=store.rows('publications',{'study_id':'eq.'+study,'order':'version.desc','limit':1},public=True)
         if not before or before!=after:raise RuntimeError('Publication changed during private evidence retention.')
         result=dict(module=item['module'],study_id=study,artifact_id=row['id'],sha256=row['sha256'],
@@ -419,8 +426,6 @@ def main():
     if args.command == 'inspect':
         inspect(args.supabase_only)
     elif args.command == 'export':
-        if args.supabase_only:
-            raise ValueError('Only inspect supports partial target verification.')
         export()
     elif args.command == 'prepare':
         prepare()
@@ -430,7 +435,7 @@ def main():
         verify(public=args.public)
     elif args.command == 'publish':
         publish()
-    elif args.command == 'retain-evidence':
+    else:
         retain_evidence()
 
 if __name__ == '__main__':

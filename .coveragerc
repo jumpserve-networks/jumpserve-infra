@@ -1,0 +1,27 @@
+[run]
+branch = True
+parallel = True
+source = ${UNIT_COVERAGE_ROOT-.}
+patch = subprocess
+omit =
+    */.venv*/*
+    */.test-artifacts/*
+    */.runtime*/*
+    */.backend/*
+    */.previous/*
+    */.base/*
+    */node_modules/*
+    */agent/package/*
+    */agent/layer/*
+    */test/*
+
+[report]
+precision = 2
+show_missing = True
+fail_under = 100
+
+[html]
+directory = coverage/python/html
+
+[json]
+output = coverage/python/coverage.json

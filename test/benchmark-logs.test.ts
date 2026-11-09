@@ -47,3 +47,31 @@ test('historical log responses redact credential tokens and preserve diagnostics
   expect(events[2].message).toBe('apikey: [REDACTED]');
   expect(events[3].message).toBe('Benchmark failed during running (exit 2)');
 });
+
+test('preflight and missing job ids do not query CloudWatch', async () => {
+  const send = jest.spyOn(CloudWatchLogsClient.prototype, 'send');
+  expect(await handler({requestContext: {http: {method: 'OPTIONS'}}})).toMatchObject({statusCode: 200, body: ''});
+  expect(await handler({})).toMatchObject({statusCode: 400});
+  expect(send).not.toHaveBeenCalled();
+});
+
+test('an absent stream is an empty result, while service failures retain their status', async () => {
+  const send = jest.spyOn(CloudWatchLogsClient.prototype, 'send')
+    .mockRejectedValueOnce(Object.assign(new Error('not created'), {name: 'ResourceNotFoundException'}) as never)
+    .mockRejectedValueOnce(new Error('CloudWatch unavailable') as never);
+  jest.spyOn(console, 'error').mockImplementation(() => {});
+  const missing = await handler({queryStringParameters: {jobId: 'new-job'}});
+  expect(JSON.parse(missing.body)).toEqual({events: [], nextToken: null});
+  expect(missing.statusCode).toBe(200);
+  const unavailable = await handler({queryStringParameters: {jobId: 'new-job'}});
+  expect(unavailable.statusCode).toBe(500);
+  expect(JSON.parse(unavailable.body).error).toBe('CloudWatch unavailable');
+  expect(send).toHaveBeenCalledTimes(2);
+});
+
+test('missing event arrays and missing event messages stay empty', async () => {
+  jest.spyOn(CloudWatchLogsClient.prototype, 'send').mockResolvedValueOnce({} as never)
+    .mockResolvedValueOnce({events: [{timestamp: 1}]} as never);
+  expect(JSON.parse((await handler({queryStringParameters: {jobId: 'empty'}})).body)).toEqual({events: []});
+  expect(JSON.parse((await handler({queryStringParameters: {jobId: 'empty'}})).body).events).toEqual([{timestamp: 1, message: ''}]);
+});

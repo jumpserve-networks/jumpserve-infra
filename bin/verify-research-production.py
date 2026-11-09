@@ -19,23 +19,25 @@ ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = 'https://d3o7xdethb.execute-api.us-east-1.amazonaws.com'
 STAMP = dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
 DIRECTORY = ROOT/'.test-artifacts/research-release'/STAMP
-DIRECTORY.mkdir(parents=True, exist_ok=False)
 sys.path.insert(0, str(ROOT.parent/'jumpserve-back-end/research_workflow'))
 import scheduler, store, workflow, preparation
-PREPARATION_FOLLOWUP = sys.argv[1:] == ['--preparation-followup']
-PREPARATION_RELEASE = sys.argv[1:] == ['--preparation'] or PREPARATION_FOLLOWUP
-if sys.argv[1:] and not PREPARATION_RELEASE: raise SystemExit('Only --preparation or --preparation-followup is supported.')
+PREPARATION_FOLLOWUP = False
+PREPARATION_RELEASE = False
 spec = importlib.util.spec_from_file_location('research_database', ROOT/'bin/research-workflow-database.py')
 database = importlib.util.module_from_spec(spec); spec.loader.exec_module(database)
-report = dict(version=1, started_at=workflow.now(), protocol='research-workflow-release-protocol-v1',
- amendment='research-workflow-release-amendment-v2', checks=[], passed=False,
- reviewer=dict(identity='Primary Codex AI implementer', type='AI', independence='Not independent'),
- design='Release development regressions; private synthetic numerical data, no paper assessment or held-out evaluation.',
- authenticated_google_request_verified=False, measured_charges_usd=None, model_usage=None)
-if PREPARATION_RELEASE:
-    report['protocol']='research-preparation-production-protocol-v1'
-    report['design']='Production preparation and scheduled archived-value rechecks in a private operator fixture; not a Google session or independent scientific validation.'
-if PREPARATION_FOLLOWUP:report['amendment']='research-preparation-production-amendment-v2'
+def initial_report():
+    value = dict(version=1, started_at=workflow.now(), protocol='research-workflow-release-protocol-v1',
+     amendment='research-workflow-release-amendment-v2', checks=[], passed=False,
+     reviewer=dict(identity='Primary Codex AI implementer', type='AI', independence='Not independent'),
+     design='Release development regressions; private synthetic numerical data, no paper assessment or held-out evaluation.',
+     authenticated_google_request_verified=False, measured_charges_usd=None, model_usage=None)
+    if PREPARATION_RELEASE:
+        value['protocol']='research-preparation-production-protocol-v1'
+        value['design']='Production preparation and scheduled archived-value rechecks in a private operator fixture; not a Google session or independent scientific validation.'
+    if PREPARATION_FOLLOWUP:value['amendment']='research-preparation-production-amendment-v2'
+    return value
+
+report = initial_report()
 
 def check(name, action):
     tick=time.monotonic()
@@ -239,20 +241,29 @@ def preparation_fixture():
     counts={label:sum(m['details']['label']==label for m in measurements) for label in ('reproduced','discrepant','inconclusive')}
     return dict(study_id=study_id,jobs=20,automatic_runs=6,manual_tasks=14,cells=1152,numerical_cell_labels=counts,artifacts=verified,assessments_imported=15,assessments_changed=0,publication=False,user_workspace_unchanged=True,wall_seconds=time.monotonic()-tick,trigger='Existing EventBridge schedule',authenticated_google_request=False,limitation='Rechecking previously exposed archived means; not independent reproduction or new empirical measurements.')
 
-try:
-    if sys.platform=='darwin':os.environ.setdefault('SSL_CERT_FILE','/etc/ssl/cert.pem')
-    check('deployed resources and original Lambda byte identities',configuration_checks)
-    check('public API and unauthorized request denial',public_checks)
-    if not PREPARATION_FOLLOWUP:check('scheduled private controls and remote original-byte hash verification',scheduled_fixture)
-    if PREPARATION_RELEASE:check('registered preparation, interrupted/resumed queue and six scheduled archived panels',preparation_fixture)
-    report['passed']=True
-except Exception as error:
-    report['failure_type']=type(error).__name__
-    site=traceback.extract_tb(error.__traceback__)[-1]
-    report['failure_site']=dict(file=site.filename,line=site.lineno,function=site.name)
-finally:
-    report['ended_at']=workflow.now()
-    report['artifacts']=[dict(path=str(p.relative_to(ROOT)),sha256=workflow.digest(p.read_bytes()),byte_count=p.stat().st_size) for p in sorted(DIRECTORY.iterdir()) if p.is_file()]
-    (DIRECTORY/'production-server-report.json').write_text(json.dumps(report,indent=2)+'\n')
-    print(json.dumps(dict(passed=report['passed'],report=str(DIRECTORY/'production-server-report.json'),checks=report['checks']),indent=2))
-    if not report['passed']:sys.exit(1)
+def main():
+    global PREPARATION_FOLLOWUP, PREPARATION_RELEASE, report
+    PREPARATION_FOLLOWUP = sys.argv[1:] == ['--preparation-followup']
+    PREPARATION_RELEASE = sys.argv[1:] == ['--preparation'] or PREPARATION_FOLLOWUP
+    if sys.argv[1:] and not PREPARATION_RELEASE: raise SystemExit('Only --preparation or --preparation-followup is supported.')
+    DIRECTORY.mkdir(parents=True, exist_ok=False)
+    report = initial_report()
+    try:
+        if sys.platform=='darwin':os.environ.setdefault('SSL_CERT_FILE','/etc/ssl/cert.pem')
+        check('deployed resources and original Lambda byte identities',configuration_checks)
+        check('public API and unauthorized request denial',public_checks)
+        if not PREPARATION_FOLLOWUP:check('scheduled private controls and remote original-byte hash verification',scheduled_fixture)
+        if PREPARATION_RELEASE:check('registered preparation, interrupted/resumed queue and six scheduled archived panels',preparation_fixture)
+        report['passed']=True
+    except Exception as error:
+        report['failure_type']=type(error).__name__
+        site=traceback.extract_tb(error.__traceback__)[-1]
+        report['failure_site']=dict(file=site.filename,line=site.lineno,function=site.name)
+    finally:
+        report['ended_at']=workflow.now()
+        report['artifacts']=[dict(path=str(p.relative_to(ROOT)),sha256=workflow.digest(p.read_bytes()),byte_count=p.stat().st_size) for p in sorted(DIRECTORY.iterdir()) if p.is_file()]
+        (DIRECTORY/'production-server-report.json').write_text(json.dumps(report,indent=2)+'\n')
+        print(json.dumps(dict(passed=report['passed'],report=str(DIRECTORY/'production-server-report.json'),checks=report['checks']),indent=2))
+    return 0 if report['passed'] else 1
+
+if __name__=='__main__':raise SystemExit(main())

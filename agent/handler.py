@@ -65,7 +65,7 @@ def _serialize_messages(messages: list) -> list[dict]:
     """Ensure messages are JSON-serializable plain dicts."""
     serialized = []
     for msg in messages:
-        m = dict(msg) if not isinstance(msg, dict) else msg
+        m = dict(msg)
         if "content" in m and isinstance(m["content"], list):
             clean_content = []
             for block in m["content"]:

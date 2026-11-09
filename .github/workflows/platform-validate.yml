@@ -28,7 +28,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python3 -m pip install boto3==1.42.4
+      - run: python3 -m pip install -r requirements-dev.txt
       - name: Read pinned runtime revisions
         id: runtime
         run: |

@@ -204,7 +204,12 @@ end $recovery$;
  try:r.admin.query(sql,read_only=False)
  except RuntimeError as error:
   if isinstance(error.__context__,urllib.error.HTTPError):
-   raw=error.__context__.read(1000000);(source/('recovery-error-'+r.sha(raw)+'.json')).write_bytes(raw);raise RuntimeError(json.loads(raw).get('message','Recovery SQL rejected').splitlines()[0][:500]) from None
+   raw=error.__context__.read(1000000);(source/('recovery-error-'+r.sha(raw)+'.json')).write_bytes(raw)
+   try:detail=json.loads(raw)
+   except (ValueError,UnicodeDecodeError):detail={}
+   message=detail.get('message') if isinstance(detail,dict) else None
+   if not isinstance(message,str) or not message.strip():message='Recovery SQL rejected'
+   raise RuntimeError(message.splitlines()[0][:500]) from None
   raise
  result=dict(status='rollback-verified' if dry else 'resumed',tasks=5,sql_sha256=r.sha(sql.encode()),limits_and_history_preserved=True);q.save(source/('recovery-dry-run.json' if dry else 'recovery-result.json'),result);return result
 
