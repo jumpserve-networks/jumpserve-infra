@@ -667,6 +667,6 @@ python3 -B test/serve_research_ideas_fixture.py
 npm test
 npm run lint
 npm run build
-node scripts/verify-network-execution.mjs
-node scripts/verify-research-ideas.mjs
+npm run verify:research:ideas -- --guided
+npm run verify:research:ideas
 ```
