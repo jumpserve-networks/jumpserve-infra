@@ -18,7 +18,7 @@ import unittest
 import urllib.error
 from unittest.mock import MagicMock, patch
 
-from builder_continuation_release_test import archive, canonical, digest, identity
+from research_verifier_fixtures import archive, canonical, digest, identity
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'bin/verify-research-production.py'

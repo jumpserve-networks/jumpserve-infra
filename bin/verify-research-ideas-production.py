@@ -2,7 +2,7 @@
 import base64,hashlib,importlib.util,io,json,ssl,subprocess,urllib.request,urllib.error,uuid,zipfile,datetime as dt
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-spec=importlib.util.spec_from_file_location('release',ROOT/'bin/research-ideas-release.py');release=importlib.util.module_from_spec(spec);spec.loader.exec_module(release)
+spec=importlib.util.spec_from_file_location('release',ROOT/'bin/research-security.py');release=importlib.util.module_from_spec(spec);spec.loader.exec_module(release)
 r=ROOT/'.test-artifacts/research-ideas/production'/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');r.mkdir(parents=True,exist_ok=False)
 report=dict(started_at=dt.datetime.now(dt.timezone.utc).isoformat(),checks=[],conditional_gaps=['Legitimate Google owner request and deployed cross-owner write denial require available authenticated sessions','Independent human/held-out scientific review'],new_model_calls=0,measured_charges_usd=None)
 try:

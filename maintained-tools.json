@@ -12,12 +12,15 @@
     "bin/ipv6-raw-storage.py",
     "bin/ipv6-study-database.py",
     "bin/leo-study-database.py",
+    "bin/openclaw-maintenance.py",
+    "bin/openclaw-storage.py",
     "bin/prepare-agent-layer.py",
     "bin/reliable-raw-storage.py",
     "bin/reliable-study-database.py",
     "bin/verify-http2-agent.py",
     "bin/verify-ipv6-agent.py",
-    "bin/verify-ipv6-feature.py"
+    "bin/verify-ipv6-feature.py",
+    "bin/verify-research-ideas-production.py"
   ],
   "protected_protocol_directories": [],
   "historical_archive": "archive/historical-tools/manifest.json"

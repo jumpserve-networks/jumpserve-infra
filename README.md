@@ -637,6 +637,25 @@ for its build steps. Deploying the standalone benchmark app does not require it.
 
 ## Maintained and historical tools
 
+Completed fixed release/qualification campaigns, the five-study importer,
+incident-specific diagnostics and one-time assessment resets have been retired
+from the working tree, together with tests dedicated to those commands.
+`retired-workflows.json` records every original path, Git revision and SHA-256
+hash. Recover source with `git show <source_revision>:<path>` in an isolated
+checkout at the recorded revisions. Older documents describe their historical
+commands; use the recorded source revisions when reproducing those workflows.
+
+Current production verification uses the read-only helpers in
+`bin/research-security.py`. Existing host storage maintenance uses
+`bin/openclaw-maintenance.py`, which also retains the guarded `target`,
+`native-auth`, `host-refresh` and `host-check` modes. For example,
+`python3 -B bin/openclaw-maintenance.py host-check` submits the existing pinned
+runtime/catalog check. SSM submission receipts do not establish that the host
+command completed. Native sign-in still requires held admission/polling, drained
+active or recent uncertain work, the private refresh lock and restoration of
+the previous service state. Its receipts remain private under
+`.test-artifacts/openclaw-maintenance/`.
+
 Current automated checks and deployment commands remain in `package.json`,
 `.github/workflows/` and their existing test suites. `maintained-tools.json` lists
 additional supported manual study initialization, evidence transfer, evaluated
