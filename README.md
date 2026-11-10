@@ -637,6 +637,10 @@ for its build steps. Deploying the standalone benchmark app does not require it.
 
 ## Maintained and historical tools
 
+The unused fixed-limit trajectory publication helper and its dedicated tests
+are recorded in `retired-workflows.json`. The frozen trajectory policy,
+publication fixtures and SQL authorization guards retain their existing bytes.
+
 Completed fixed release/qualification campaigns, the five-study importer,
 incident-specific diagnostics and one-time assessment resets have been retired
 from the working tree, together with tests dedicated to those commands.

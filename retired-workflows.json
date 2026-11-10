@@ -512,6 +512,22 @@
       "sha256": "18bb06dc36cd9d26c4b7392a70d960c0f834c2f0b44a463f435c6dfdb86c6b34",
       "bytes": 23582,
       "lines": 372
+    },
+    {
+      "path": "bin/autonomy_trajectory_evidence.py",
+      "source_revision": "7d72b68f907d7ab77e1321cd7c4fd78609f38a08",
+      "sha256": "a8f701ba2495c1a6067588dd3afe60790d5ac51e005bd5dbee0efb102c6fda22",
+      "bytes": 2727,
+      "lines": 41,
+      "reason": "Unused historical fixed-limit publication helper and its dedicated tests; frozen policy and SQL guards remain intact."
+    },
+    {
+      "path": "test/autonomy_trajectory_policy_test.py",
+      "source_revision": "7d72b68f907d7ab77e1321cd7c4fd78609f38a08",
+      "sha256": "994c6a06327c54fbfd790eeeb2f752bac9582a3b4478a71cfd5b80e975923f01",
+      "bytes": 3732,
+      "lines": 71,
+      "reason": "Unused historical fixed-limit publication helper and its dedicated tests; frozen policy and SQL guards remain intact."
     }
   ]
 }
