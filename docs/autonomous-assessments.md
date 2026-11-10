@@ -83,23 +83,32 @@ full-paper validation. References are not recursively expanded by this controlle
 ## Local setup and verification
 
 ```sh
-# jumpserve-infra; use the documented sibling backend checkout
-python3 -B bin/prepare-research-runtime.py
+# jumpserve-infra; dedicated isolated PostgreSQL on 127.0.0.1:54477
 python3 -B bin/prepare-autonomy-runtime.py
-env JUMPSERVE_BACKEND_CHECKOUT=../jumpserve-back-end npm test -- --runInBand
-npm run build
-# Dedicated isolated PostgreSQL is required on 127.0.0.1:54477.
-python3 -B test/check_autonomy_database.py
-python3 -B test/serve_autonomy_fixture.py
-# jumpserve-front-end, separate terminal; port 6002 is temporary verification only
+npm run test:research:autonomy
+npm run test:research:autonomy:browser-fixture
+
+# jumpserve-front-end, separate terminal
 npm test
 npm run lint
+export NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:4104
+export NEXT_PUBLIC_SUPABASE_ANON_KEY=explicit-local-fixture
+export NEXT_PUBLIC_RESEARCH_WORKFLOW_API_URL=http://127.0.0.1:4104
+export NEXT_PUBLIC_RESEARCH_CATALOG_API_URL=http://127.0.0.1:4104
+export NEXT_PUBLIC_BENCHMARK_API_URL=http://127.0.0.1:4104
 npm run build
-npm start -- --hostname 127.0.0.1 --port 6002
-node scripts/verify-research-autonomy.mjs
+PORT=6002 npm start -- --hostname 127.0.0.1
+
+# jumpserve-front-end, while both fixture servers are running
+npm run verify:research:autonomy
+
 # jumpserve-back-end
 python3 -B -m unittest discover -s research_workflow/tests
 ```
+
+The local fixture records hashes of the backend files it loads. Synthetic
+publication uses the frozen v8 guard inputs, and the database runs the controller
+health and paper review author migrations.
 
 The PDF layer is built from a hash-locked original pure-Python wheel. Its complete
 file inventory is validated before synthesis; bytecode and undeclared files cannot
