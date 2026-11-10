@@ -57,7 +57,7 @@ if mode:
     sys.path.insert(0,str(f.ROOT/'agent'));import claim_experiment_design as model_design
     report.update(response_version=model_design.RESPONSE_VERSION,runner_context_sha256=f.workflow.digest(model_design.canonical(model_design.RUNNER_CONTEXT)),response_channel_sha256=f.workflow.digest(model_design.canonical(model_design.response_channel())),input_sha256={n:f.workflow.digest((f.ROOT/n).read_bytes()) for n in ('agent/claim_experiment_design.py','agent/research_ideas.py')})
     for row in report['cases']:row['rendered_output_sha256']='c'*64
-    report=json.loads((f.ROOT/'docs/claim-design-followup-validation/v6-replay-exact-final/evaluation-reviewed.json').read_text())
+    report=json.loads((f.ROOT/'test/fixtures/synthetic-claim-publication.json').read_text())
     f.rpc('publish_agent_prompt',dict(p_version_id=claim_prompt,p_expected_active_version_id=None,p_expected_content_sha256=h,p_report=report,p_actor='Synthetic browser fixture only',p_module_id='research-claim-design'))
     study=f.uid();src=f.uid();claim=f.uid()
     f.store.rpc('research_create_study',dict(p_actor=f.ACTOR,p_id=study,p_document=f.workflow.paper_details(dict(title='Claim design browser software fixture',domain='Networking software verification',scope='Synthetic paper-shaped claim; no scientific findings',study_kind='paper',paper_url='https://example.org/claim-design-software-fixture'))))

@@ -14,12 +14,7 @@ boundaries; they do not require another owner authorization. Extending and
 qualifying those capabilities is system work. Authorization, installed capability
 and verified production activation remain separate facts.
 
-The initial implementation was verified locally before the explicitly requested
-production rollout. Production evidence and the activation record are retained in
-private Platform Updates and the deployment artifacts; local fixture reports
-remain historical evidence rather than a claim of production activation.
-See the [2026-10-31 production activation record](platform-supervisor-production-20261031.md)
-for executed cloud checks, exact source identities and remaining verification limits.
+Production evidence and activation records are held in private Platform Updates and deployment artifacts. Local synthetic fixture reports do not establish production activation.
 
 ## Operation and authority
 
@@ -39,8 +34,6 @@ on its 15-second loop, with priority over general maintenance at the next safe
 shared-host slot. Already admitted research work finishes before a repair starts. A running
 coding slice can also delay pickup; event capture is immediate, execution depends
 on available capacity. This adapter does not require a worker reinstall.
-See [assessment blocker repairs](assessment-blocker-repairs-v1.md) for activation,
-deduplication, cancellation and verification limits.
 See [fair host scheduling](platform-fair-scheduling-v1.md) for the new migration,
 bounded reservations, cooldown and required production verification. Activation
 requires an explicitly requested database release, recorded in Platform Updates.
@@ -50,7 +43,7 @@ task-local unknown from monopolizing independent repair turns. Its local
 verification and production release requirements are recorded separately.
 The [persistent incident and self-repair extension](platform-autonomous-recovery-v2.md)
 adds bounded follow-up attempts and a frozen qualification path for operational
-supervisor updates. Its [2026-11-02 production record](platform-autonomous-recovery-production-20261102.md)
+supervisor updates. Its private Platform Updates
 documents verified activation and observed follow-up admission separately from
 the historical releases above.
 

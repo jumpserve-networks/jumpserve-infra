@@ -1,11 +1,5 @@
 # Source-faithful idea reviews
 
-Production update (2026-10-15): the evaluated v11 prompt is published and the
-compatible agent/frontend are deployed. See
-[the production release report](idea-interview-production-release-v1.json) for
-the exact hashes, verification and remaining authenticated-session gaps. The
-local validation reports below remain historical records of their capture times.
-
 The original failed critic identified an invalid bootstrap procedure but described
 the statistics field as containing the opposite declaration. The correction
 separates recorded facts from model judgments.
@@ -85,9 +79,3 @@ fix; the later publication is recorded separately in the production report.
 For read-only deployment verification from a fresh checkout, restore the exact
 reviewed artifacts from the hash-verified archive before running the release
 verifier (requires valid JumpServe AWS and Supabase credentials):
-
-```sh
-mkdir -p .test-artifacts/research-ideas
-tar -xzf docs/idea-review-source-fidelity-evidence-v1.tar.gz -C .test-artifacts/research-ideas evaluations/20261015T032302556316Z
-python3 -B bin/idea-interview-release.py verify
-```

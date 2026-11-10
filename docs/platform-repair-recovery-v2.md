@@ -1,9 +1,6 @@
 # Semantic repair evidence and unclaimed queue recovery
 
-Qualified on isolated AWS with 550 checks and no copied model grant. See the
-[exact qualification](queued-recovery-qualification-v1.json); production activation
-is recorded separately in private Platform Updates. This follows
-[the incident handoff](platform-repair-handoff-v1.md).
+Production activation is recorded separately in private Platform Updates. The recovery flow follows [the incident handoff](platform-repair-handoff-v1.md) and does not copy model authorization grants.
 
 The production readback found that `task-transition.details.usage` changed on
 each controller wait. Its nested `controller_wall_seconds` made the incident

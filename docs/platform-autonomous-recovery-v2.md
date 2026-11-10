@@ -1,10 +1,5 @@
 # Persistent assessment incidents and operational supervisor self-repair
 
-Status: deployed on 2026-11-02. The [production record](platform-autonomous-recovery-production-20261102.md)
-contains the exact sources, installed-runtime verification and observed automatic
-follow-up admission. This implements the owner's existing standing mandate;
-assessment recovery and future self-updates still require their own evidence.
-
 ## Incident lifetime and bounded attempts
 
 An assessment incident can outlive an individual six-hour platform task.
@@ -170,20 +165,7 @@ parent resumption and fresh measurements separately before claiming unattended
 production recovery. The Slack controls expansion uses its own migration and
 gateway activation; this migration alone does not activate it.
 
-Local verification runs `npm run test:platform:capabilities`, the backend
-supervisor suite, and the infrastructure release-broker tests. They use explicit
-synthetic install/provider receipts and retained local PostgreSQL, never a live
-model, production mutation or a Docker daemon on the owner's computer.
-The prepared source passed 116 supervisor tests, 133 database checks and 22
-release-broker tests. Deterministic bundle SHA-256:
-`99f1c035629e16587b81b3fd8286bbaf3dea2e4b59191c020f9cecdf125e929f`.
-Protected-main CI passed for infrastructure
-`f162271a8adf98c694257668b8ed2afe59cc819b` and backend
-`1a8e96e2c86692506a2bde72ecdcd516a83eaab1`. Production installation and process
-verification completed at 21:52 UTC on November 4. See the
-[release record](platform-capability-release-20261104.md) for exact receipts.
-The live capability canary remains separate from the operator bootstrap and
-does not establish 100% unattended completion.
+Local verification runs `npm run test:platform:capabilities`, the backend supervisor suite and infrastructure release-broker tests. These use synthetic install/provider receipts and local PostgreSQL. Production installation and unattended recovery require separately recorded verification.
 
 ### November 2 initial self-repair baseline procedure
 

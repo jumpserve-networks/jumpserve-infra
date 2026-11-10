@@ -1,22 +1,8 @@
 # Research workflow: architecture, verification and release
 
-The [2026-10-07 production release](research-workflow-production-release-v1.md)
-records the deployed module, migration receipts, real scheduled controls,
-desktop/mobile checks, shared-pool hosting amendment and remaining conditional gaps.
+The [claim queue implementation](research-queue.md) adds dependency-aware campaign scheduling, bounded workers, private operational tables and per-claim progress. The current runtime manifest defines the exact release sources.
 
-The subsequent [claim queue implementation](research-queue.md) adds dependency-aware
-campaign scheduling and bounded workers, private operational tables and per-claim
-progress. Its [protocol](research-queue-protocol-v1.md) and
-[validator correction](research-queue-amendment-v2.md) preserve earlier reports.
-The original validation report below describes the original implementation bytes;
-it is not verification of the later queue release. The current runtime manifest
-contains six files; the original four-file manifest is archived separately.
-
-Implementation of `pdfs/research-claim-verification-workflow.pdf`. The declared
-scope is [implementation protocol v1](research-workflow-implementation-v1.md), with
-preserved [v2](research-workflow-amendment-v2.md) and
-[v3](research-workflow-amendment-v3.md) amendments. Backend usage and scientific
-boundaries are in `jumpserve-back-end/research_workflow/README.md`.
+Backend usage and scientific boundaries are documented in `jumpserve-back-end/research_workflow/README.md`.
 
 ## Implemented feature
 

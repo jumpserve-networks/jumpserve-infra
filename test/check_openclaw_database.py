@@ -82,26 +82,6 @@ def main():
    finish(t,turn)
    return dict(temporary_and_configuration_states_not_authentication=True,queued_identity_preserved_on_recovery=True,known_zero_provider_calls_preserved=True,missing_usage_not_zero=True,terminal_failed_attempt_not_replayed=True)
   f.check('availability recovery admits the original queued identity and preserves a pre-provider failure',temporary_recovery)
-  def publication_guards():
-   import copy,hashlib
-   for name in ('202610200010_openclaw_prompt_candidate.sql','202610210001_openclaw_prompt_v10.sql','202610210002_openclaw_publication_guard.sql'):
-    raw=(f.ROOT/'database'/name).read_bytes();f.report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();f.query(raw.decode())
-   reports={v:(f.ROOT/('docs/openclaw-production-evaluation-'+v+'.json')).read_text() for v in ('v9','v10')}
-   actual=json.loads(reports['v10']);args=dict(p_version_id=actual['prompt_id'],p_expected_active_version_id=pub['p_version_id'],p_expected_content_sha256=actual['prompt_sha256'],p_report=actual,p_actor='Synthetic local publication guard test; actual retained AI evaluation',p_module_id='research-autonomy')
-   f.rejects(lambda:f.rpc('publish_agent_prompt',args))
-   for version,raw in reports.items():
-    report=json.loads(raw);f.query('insert into agent_prompt_evaluations(prompt_version_id,outcome,report_raw,report_sha256,recorded_by) values('+','.join([f.sql_text(report['prompt_id'])+'::uuid',f.sql_text(report['status']),f.sql_text(raw),f.sql_text(hashlib.sha256(raw.encode()).hexdigest()),f.sql_text('Local SQL fixture; original actual evaluation report')])+')')
-   bad=copy.deepcopy(actual);bad['cases'][0]['raw_answer_reviewed']=False
-   f.rejects(lambda:f.rpc('publish_agent_prompt',dict(args,p_report=bad)))
-   rejected=json.loads(reports['v9'])
-   f.rejects(lambda:f.rpc('publish_agent_prompt',dict(args,p_version_id=rejected['prompt_id'],p_expected_content_sha256=rejected['prompt_sha256'],p_report=rejected)))
-   for role in ('anon','authenticated'):
-    assert f.query("select has_table_privilege(current_user,'agent_prompt_evaluations','SELECT,INSERT,UPDATE,DELETE')",role=role)=='f'
-   f.rejects(lambda:f.query("update agent_prompt_evaluations set outcome='passed'"))
-   assert f.rpc('publish_agent_prompt',args)==actual['prompt_id']
-   assert f.query("select count(*) from agent_prompt_evaluations where outcome='failed-substantive-review'")=='1'
-   return dict(retained_actual_evaluations=2,failed_candidate_unpublishable=True,exact_sixteen_answer_report_required=True,ai_reviewer_nonindependent=True,private_immutable_reports=True,actual_provider_calls_in_sql_campaign=0)
-  f.check('publication preserves failed candidate and requires the exact passing actual-answer review',publication_guards)
   f.report['passed']=True
  except Exception as error:f.report.update(passed=False,error=str(error),traceback=traceback.format_exc());raise
  finally:

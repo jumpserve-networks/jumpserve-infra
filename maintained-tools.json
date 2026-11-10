@@ -1,27 +1,13 @@
 {
   "version": "maintained-manual-tools-v1",
-  "purpose": "Current guarded study initialization, evidence import/export, evaluated agent deployment and verification.",
+  "purpose": "Current worker maintenance and read-only agent source verification outside CI entrypoints.",
   "automated_entrypoints": "Existing package scripts, workflow files and fixed test-suite configuration remain authoritative. This registry reads as documentation and never executes commands.",
   "manual_programs": [
-    "bin/deploy-http2-agent.py",
-    "bin/deploy-ipv6-agent.py",
-    "bin/deploy-reliable-agent.py",
-    "bin/http2-raw-storage.py",
-    "bin/http2-release-report.py",
-    "bin/http2-study-database.py",
-    "bin/ipv6-raw-storage.py",
-    "bin/ipv6-study-database.py",
-    "bin/leo-study-database.py",
     "bin/openclaw-maintenance.py",
     "bin/openclaw-storage.py",
     "bin/prepare-agent-layer.py",
-    "bin/reliable-raw-storage.py",
-    "bin/reliable-study-database.py",
     "bin/verify-http2-agent.py",
-    "bin/verify-ipv6-agent.py",
-    "bin/verify-ipv6-feature.py",
-    "bin/verify-research-ideas-production.py"
+    "bin/verify-ipv6-agent.py"
   ],
-  "protected_protocol_directories": [],
-  "historical_archive": "archive/historical-tools/manifest.json"
+  "protected_protocol_directories": []
 }

@@ -1,49 +1,8 @@
 # Claim queues and bounded parallel evaluation
 
-The queue UI adds `/research-verification/experiment-queue`, with
-an owner-only `GET /research/queue` overview and authenticated GET/POST
-`/research/studies/{studyId}/gap-experiments` selection endpoints. Deploy the
-updated hash-verified runtime and API routes before the frontend. The API also
-needs `RESEARCH_QUEUE_WORKER_FUNCTION` and an invocation grant scoped to that
-worker for prompt dispatch after enqueue. Scheduled polling remains the fallback;
-all database capacity/dependency/resource gates remain enforced. No additional
-database migration is required. The current registered plan is
-IPv6; unmatched sources/claims require domain preparation. See
-`jumpserve-front-end/docs/experiment-queue.md` for the protocol and verification
-limits. The October 17 release protocol and its resulting deployment evidence live
-in `jumpserve-front-end/docs/research-pathways-production-release-protocol-v1.json`
-and the corresponding release report. Historical records below refer to earlier
-versions. `python3 -B bin/research-queue-release.py inspect|diff|deploy|verify`
-provides fixed-target release receipts; it never submits scientific jobs or
-changes prompts, schema or publications.
+Queue capacity and prerequisites are enforced by PostgreSQL. Hosting concurrency is a separate deployment setting; inspect the current infrastructure configuration before release.
 
-Deployed verification and remaining gaps are recorded in the
-[production release report](research-workflow-production-release-v1.md).
-
-Production hosting uses the account's shared Lambda pool of 10 invocations,
-including other functions, with no separate API/worker reservations. The global
-four/study two **queued job** limits remain enforced by PostgreSQL. See the
-[release amendment](research-workflow-release-amendment-v2.md) for the AWS quota
-failure, changed hosting configuration and verification requirements; the original
-reserved-capacity proposal below is preserved as implementation history.
-
-Current local verification: [report v2](research-queue-validation-v2.json), with
-the original [report v1](research-queue-validation-v1.json) and
-[build follow-up](research-queue-build-followup-v2.md) preserved. The sandboxed
-font retrieval failure was resolved by a network-enabled build on identical
-application bytes. Forty-six backend, 120 frontend and 78 infrastructure tests
-passed; five existing infrastructure cases were skipped. Nine actual Postgres
-queue groups and eleven public/browser display checks passed. These checks are
-development regressions. Production deployment and live owner/Storage/scheduled
-worker checks remain unverified; no scientific claim labels changed.
-
-Implemented under [protocol v1](research-queue-protocol-v1.md) and preserved
-[amendment v2](research-queue-amendment-v2.md). This extends the existing
-[research workflow](research-workflow.md). Claims track conclusions; campaigns
-execute checks. An applicable claim-check mapping is required before queueing.
-Several claims can share one job; one claim can need several campaigns. Sharing
-data, code, controls or reviewers is explicit and never counted as independent
-replication. The existing IPv6 labels and evidence remain unchanged.
+This extends the [research workflow](research-workflow.md). Claims track conclusions; campaigns execute checks. An applicable claim-check mapping is required before queueing. Several claims can share one job, and one claim can need several campaigns. Shared data, code, controls or reviewers are never counted as independent replication.
 
 ## Owner workflow
 
@@ -158,13 +117,9 @@ a legitimate session are available.
 
 ## Release order: new explicit deployment request required
 
-1. Pass local blockers on exact release bytes. Preserve the original workflow
-   migration and reports; the queue migration is additive. The runtime manifest
-   covers all six server files. Its pre-queue version is archived in
-   `docs/research-workflow-validation/runtime-manifest-before-queue-v1.json`.
-2. Verify AWS account **395567831870** and Supabase project **regphejnlvfpyokpniny**
-   using the guarded migration command. Apply the original workflow migration if
-   absent, then the queue migration with a new receipt:
+1. Pass local checks on the exact release bytes and prepare the runtime manifest.
+2. Verify the intended AWS account and Supabase project. Apply the current
+   workflow and queue migrations with a new receipt:
 
    ```sh
    python3 -B bin/research-workflow-database.py --apply-queue \

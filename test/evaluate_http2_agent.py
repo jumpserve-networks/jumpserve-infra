@@ -81,7 +81,7 @@ def main():
                   pricing={'source':'https://www-cdn.anthropic.com/files/4zrzovbb/website/3684c2faafb97418665782cea0001f439f74b1d2.pdf',
                            'retrieved_date':'2026-10-04','input_usd_per_million':INPUT_PRICE,'output_usd_per_million':OUTPUT_PRICE,
                            'scope':'Model-specific standard geo cross-region; estimate, not billing reconciliation'}, cases=[])
-    directory = ROOT / '.test-artifacts'; directory.mkdir(exist_ok=True)
+    directory = ROOT / '.test-artifacts'; directory.mkdir(parents=True,exist_ok=True)
     output = directory / f'http2-agent-evaluation-{report["id"]}.json'
     def save():
         output.write_text(json.dumps(report, indent=2) + '\n')

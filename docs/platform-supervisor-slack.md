@@ -59,20 +59,7 @@ every required migration and hash. Both activation and runtime startup probe the
 read-only operations contract and refuse to advertise the expanded tools until
 that migration and the owner binding are available.
 
-Local v2 qualification passed 126 database checks, 19 Python regressions, three
-tool-transport tests, and pinned native configuration/plugin validation with all
-four tools registered. The initial v2 bundle was
-`ffffb34be4f7665b1357de100c77c993bef312ba0e7259f6960dc8345587d3e7`.
-The first live control test supplied a zero UUID for the global `resume` action.
-The gateway rejected that ambiguous target before dispatch; the subsequent live
-status was honest about the failed control. The forward correction explicitly
-declares a nullable optional task ID and accepts null for global actions. Cancel
-still requires a valid task ID; non-null targets on global controls remain
-rejected. The original failed tool call is retained, not relabeled successful.
-Latest installation and conversation verification receipts are recorded as
-versioned Supabase Platform Updates events. The
-[capability kernel release record](platform-capability-release-20261104.md)
-distinguishes operator installation from unattended recovery.
+Global controls accept a null task ID. Cancel requires a valid task ID; non-null targets on global controls are rejected. Installation and conversation verification receipts are recorded as versioned Supabase Platform Updates events. Operator installation alone does not establish unattended recovery.
 
 ## Prepared configuration
 

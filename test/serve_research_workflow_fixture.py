@@ -15,11 +15,12 @@ import uuid
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT.parent/'jumpserve-back-end/research_workflow'))
-import api, bridge, runner, store, workflow
+import api, runner, store, workflow
+from synthetic_study import study_fixture
 
 PSQL='/opt/homebrew/opt/postgresql@17/bin/psql'
 ACTOR='953f20a3-3fd8-4fb4-8844-5d4d72690e02'
-IPV6='953f20a3-3fd8-4fb4-8844-5d4d72690e01'
+SYNTHETIC='953f20a3-3fd8-4fb4-8844-5d4d72690e01'
 NUMERIC='953f20a3-3fd8-4fb4-8844-5d4d72690e10'
 def sql_text(value):return "'"+str(value).replace("'","''")+"'"
 def sql_json(value):return sql_text(json.dumps(value,allow_nan=False))+'::jsonb'
@@ -64,7 +65,7 @@ def main():
         if result.returncode:raise RuntimeError(result.stderr)
         return result.stdout.strip()
     empty=query("select count(*) from pg_tables where schemaname='public';")=='0'
-    if not empty and query(f"select count(*) from research_studies where id not in ('{IPV6}','{NUMERIC}');")!='0':raise SystemExit('Fixture cannot amend an unrelated database.')
+    if not empty and query(f"select count(*) from research_studies where id not in ('{SYNTHETIC}','{NUMERIC}');")!='0':raise SystemExit('Fixture cannot amend an unrelated database.')
     setup="""begin;
 do $$ begin create role anon; exception when duplicate_object then null; end $$;
 do $$ begin create role authenticated; exception when duplicate_object then null; end $$;
@@ -80,9 +81,8 @@ commit;"""
     if empty:
         query(setup)
         query((ROOT/'database/202610070001_research_workflow.sql').read_text())
-    assessment=ROOT.parent/'jumpserve-back-end/experiments/ipv6_dns/evidence/assessment-v2.json'
-    package=bridge.ipv6(assessment,IPV6)
-    for study,data in ((IPV6,package),(NUMERIC,numerical_fixture())):
+    package=study_fixture(SYNTHETIC)
+    for study,data in ((SYNTHETIC,package),(NUMERIC,numerical_fixture())):
         query(f"select research_create_study('{ACTOR}','{study}',{sql_json(data['paper'])});")
         # Resume an interrupted local fixture without replacing any saved bytes.
         missing=[entry for entry in data['records'] if query(f"select count(*) from research_{entry['kind']} where id='{entry['record']['id']}';")=='0']
@@ -132,6 +132,6 @@ commit;"""
             for key,value in result['headers'].items():self.send_header(key,value)
             self.end_headers();self.wfile.write(result['body'].encode())
         def do_POST(self):self.send_error(401,'No authenticated session in this read-only fixture')
-    print(json.dumps(dict(status='ready',origin='http://127.0.0.1:4102',database=target.path,ipv6_study=IPV6,numeric_fixture=NUMERIC,original_sha256=package['provenance']['original_sha256'],transport='actual public api.handler and store.snapshot; isolated SQL adapter uses role anon',authenticated_google_session=False)),flush=True)
+    print(json.dumps(dict(status='ready',origin='http://127.0.0.1:4102',database=target.path,synthetic_study=SYNTHETIC,numeric_fixture=NUMERIC,synthetic_data=True,transport='actual public api.handler and store.snapshot; isolated SQL adapter uses role anon',authenticated_google_session=False)),flush=True)
     ThreadingHTTPServer(('127.0.0.1',args.port),Handler).serve_forever()
 if __name__=='__main__':main()
