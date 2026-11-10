@@ -107,10 +107,9 @@ exercise actual database RPCs; actual worker code records a discrepant numerical
 run and dependency/review decisions. Backend barrier tests exercise overlapping
 worker slots. All cases are development regressions, not held-out validation.
 
-Frontend: `npm test`, `npm run lint`, `npm run build`, and the existing
-`npm run verify:research` with the read-only isolated browser fixture. The browser
-checks public pages plus the teaching queue's shared display in desktop/mobile,
-light/dark, exports, dependency/status/history and empty/unavailable states.
+Frontend checks use `npm test`, `npm run lint`, `npm run build` and
+`npm run verify:research:public-queue`. The browser verifier uses synthetic
+backend records for the current assessment and queue pages.
 Actual authenticated queue creation, review actions, Google login, remote Storage
 and deployed scheduled invocation remain conditional checks when credentials and
 a legitimate session are available.

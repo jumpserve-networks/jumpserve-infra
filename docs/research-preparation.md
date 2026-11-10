@@ -124,8 +124,6 @@ npm test
 npm run lint
 npm run build
 npm run verify:research:preparation
-npm run start -- -p 3004
-npm run verify:research -- --intake
 ```
 
 The component browser regression mounts the actual React component/helper with

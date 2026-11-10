@@ -36,7 +36,7 @@ are implemented and evaluated. Existing study chats keep their own module scopes
 ## Local release checks and precise limits
 
 Run the backend development regressions, frontend tests/lint/build, CDK assertions,
-isolated Postgres security/publication tests and the complete public browser story.
+isolated Postgres security/publication tests and the current public queue browser checks.
 The implementation reviewer is the primary Codex assistant: **AI, implementer,
 not independent**. Reused/tuned cases are development checks, not held-out science.
 
@@ -55,35 +55,15 @@ npm run lint
 npm run build
 ```
 
-The transactional database test refuses non-isolated database names, imports the
-exact local IPv6 register and rolls back all changes. PostgreSQL 17 tools used by
+The transactional database test refuses non-isolated database names, loads a
+synthetic study and rolls back all changes. PostgreSQL 17 tools used by
 the fixture are under `/opt/homebrew/opt/postgresql@17/bin`. Use a dedicated local
 cluster; do not substitute a remote Supabase connection. These tests model the
 default restrictive anonymous policy and permissive unrelated Storage policies.
 
-For browser checks, create the separate local `jumpserve_research_browser_test`
-database, start `npm run test:research:browser-fixture` in infrastructure, and use
-these commands in the frontend (separate terminals):
-
-```sh
-NEXT_PUBLIC_RESEARCH_WORKFLOW_API_URL=http://127.0.0.1:4102 npm run build
-NEXT_PUBLIC_RESEARCH_WORKFLOW_API_URL=http://127.0.0.1:4102 npm start -- --port 3004
-npm run verify:research
-```
-
-Playwright 1.62.1 is a pinned test dependency. On macOS the verifier uses installed
-Google Chrome; otherwise install Playwright Chromium with `npx playwright install
-chromium`. The verifier binds to the declared local origin and saves timestamped
-reports/screenshots/exports under `.test-artifacts/research-workflow/`, preserving
-failures. It waits for UI readiness and settled menus/themes, not background network
-idleness. Do not deploy a build containing the local fixture API origin.
-
-The browser fixture uses the **actual public API handler and snapshot code**, with
-only the persistence HTTP transport replaced by isolated Postgres queries under
-role `anon`. It also injects clearly identified invalid/unavailable transport cases.
-The IPv6 register is real archived evidence; the numerical cells and publication
-reviews are synthetic software fixtures. They do not establish new science,
-independent review, live Supabase Storage behavior or a Google-authenticated request.
+From the frontend, run `npm run verify:research:public-queue` to check current
+assessment and queue pages with synthetic backend records. The isolated database
+test above checks public snapshot access, draft privacy and publication gates.
 
 Local blockers: backend matching/missingness/budgets/ownership; database RLS,
 private originals, immutable evidence/publication snapshots/review gates; frontend
