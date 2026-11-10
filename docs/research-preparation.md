@@ -123,15 +123,13 @@ npm run build
 npm test
 npm run lint
 npm run build
-npm run verify:research:preparation
 ```
 
-The component browser regression mounts the actual React component/helper with
-a fixed synthetic transport. It checks interrupted/resumed requests, upload
-errors and unknown-paper states, desktop/mobile themes. It cannot make external
-requests and does not simulate a legitimate Google identity. Public guidance and
-sign-in return paths are also checked in the actual Next.js app. An actual owner
-browser request, remote Storage and deployed scheduling remain conditional.
+The frontend component and queue-helper unit tests use a synthetic transport to
+check interrupted requests, resumes, upload errors and unknown-paper states.
+Public guidance and sign-in return paths are also checked in the actual Next.js
+app. An actual owner browser request, remote Storage and deployed scheduling
+remain conditional.
 
 No production mutation/deployment is included in this implementation turn. When
 the current changes are explicitly authorized for deployment: verify account
