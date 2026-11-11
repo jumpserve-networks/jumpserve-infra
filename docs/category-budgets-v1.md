@@ -1,8 +1,5 @@
 # Supabase category budgets
 
-Status: activated and verified in production on October 31, 2026 after explicit
-deployment authorization. See [the production record](category-budgets-production-20261031.md).
-
 `public.autonomy_budget_categories` is the current policy table for autonomous
 work. Both numeric limits are seeded to **-1**, meaning unlimited, in all four
 categories:

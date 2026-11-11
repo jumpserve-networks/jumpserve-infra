@@ -23,17 +23,6 @@ alter table public.research_autonomy_tasks add constraint research_autonomy_task
 alter table public.research_autonomy_turns drop constraint research_autonomy_turns_number_check;
 alter table public.research_autonomy_turns add constraint research_autonomy_turns_number_check check(number>=1);
 
--- Optional private lab audit relations also accept later numbered turns for
--- future versioned campaigns. This does not amend or replay any frozen pilot.
-do $$ declare relation text; begin
- foreach relation in array array['research_runtime_pilot_calls','research_subscription_calls'] loop
-  if to_regclass('public.'||relation) is not null then
-   execute format('alter table public.%I drop constraint %I',relation,relation||'_number_check');
-   execute format('alter table public.%I add constraint %I check(number>=1)',relation,relation||'_number_check');
-  end if;
- end loop;
-end $$;
-
 -- Replace only the obsolete cap clauses in existing RPCs. Abort on unexpected
 -- definitions instead of silently installing a partial migration. Ownership,
 -- grants, security-definer/search_path and all other admission gates are kept.

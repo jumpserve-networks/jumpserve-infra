@@ -5,7 +5,10 @@ import check_research_ideas_database as f
 import autonomy,autonomy_model as model,worker,paper_uploads
 import autonomy_fixtures as fixture
 
-f.bootstrap();f.rpc('publish_agent_prompt',fixture.publish_fixture())
+fixture.bootstrap_autonomy()
+publication = fixture.publish_fixture()
+f.rpc('publish_agent_prompt', publication)
+input_sha256 = publication['p_report'].get('fixture_tested_working_tree_sha256') or fixture.local_runtime_hashes()
 # Match the deployed worker's pinned PDF layer, including its parser subprocess.
 sys.path.insert(0,str(f.ROOT/'.runtime-autonomy-python/python'))
 fixture.preparation.registered=fixture.registered;model.invoke=fixture.provider
@@ -45,12 +48,21 @@ class Handler(BaseHTTPRequestHandler):
   except Exception as error:self.respond(409 if 'HTTP 409' in str(error) else 400,dict(error=str(error)))
  def handle_request(self,method):
   parsed=urllib.parse.urlsplit(self.path)
-  if parsed.path=='/fixture-metadata':return self.respond(200,dict(database=f.DATABASE,url=fixture.URL,pdf_base64=base64.b64encode(fixture.pdf_bytes()).decode(),synthetic_auth=True,synthetic_provider=True,synthetic_storage=True,actual_cloud=False))
-  if self.headers.get('Authorization')!='Bearer explicit-software-fixture':return self.respond(401,dict(error='Explicit synthetic local authentication required.'))
+  if parsed.path == '/fixture-metadata':
+   return self.respond(200, dict(
+    database=f.DATABASE, url=fixture.URL,
+    pdf_base64=base64.b64encode(fixture.pdf_bytes()).decode(),
+    input_sha256=input_sha256, synthetic_auth=True, synthetic_provider=True,
+    synthetic_storage=True, actual_cloud=False,
+   ))
+  authorization = self.headers.get('Authorization')
+  authenticated = authorization == 'Bearer explicit-software-fixture'
+  if not authenticated and (authorization is not None or method != 'GET'):
+   return self.respond(401, dict(error='Explicit synthetic local authentication required.'))
   try:
    raw=self.rfile.read(int(self.headers.get('Content-Length',0))).decode() if method=='POST' else None
    event=dict(rawPath=parsed.path,body=raw,requestContext=dict(http=dict(method=method)),queryStringParameters=dict(urllib.parse.parse_qsl(parsed.query)))
-   self.respond(200,f.api.dispatch(event,f.ACTOR))
+   self.respond(200, f.api.dispatch(event, f.ACTOR if authenticated else None))
   except Exception as error:self.respond(getattr(error,'status',400),dict(error=str(error)))
 print(json.dumps(dict(port=4104,database=f.DATABASE,synthetic_auth=True,synthetic_provider=True,synthetic_storage=True)),flush=True)
 try:ThreadingHTTPServer(('127.0.0.1',4104),Handler).serve_forever()

@@ -7,14 +7,6 @@ country links prepare an editable question and preserve it through login.
 
 ## Recorded state
 
-The two study campaigns have been imported into JumpServe's Supabase project
-`regphejnlvfpyokpniny`: 448 initial states/346 configurations and 114 exploratory
-follow-up states/30 configurations. Scientific methods and remaining claim gaps
-are documented in `jumpserve-back-end/experiments/leo_failover/README.md`.
-The schema changes below and the evaluated prompt publication are applied.
-The agent and frontend use the existing production deployment workflows; no
-additional AWS application infrastructure is needed for the simulation.
-
 The active LEO prompt is saved in the existing prompt tables:
 
 | Field | Value |
@@ -27,16 +19,7 @@ The active LEO prompt is saved in the existing prompt tables:
 | Analysis/capability version | `leo-failover-chat-v1` |
 | Answer evaluation | All eight required cases passed |
 
-The full passing report is in `agent_prompt_publications.evaluation_report` and
-local ignored `.test-artifacts/leo-agent-evaluation.json`. It records exact
-prompt identity, content hash, model settings, evidence hash, answers, tool
-calls and grader judgments. Earlier failed evaluation attempts are retained
-locally; unsupported explanations and missing-data substitution were corrected
-in prompt/evidence instructions before publication. Model grading is a
-regression check, not proof of scientific accuracy or comprehensive AI safety.
-Emulated and real-world active prompt pointers were preserved.
-The non-sensitive case outcomes and report hash are retained in
-[`leo-agent-evaluation-summary.json`](leo-agent-evaluation-summary.json).
+Published prompt identities and evaluation reports are stored in Supabase prompt tables. Model grading is a regression check, not proof of scientific accuracy or comprehensive AI safety. Query current service records before claiming an active publication or successful deployment.
 
 ## Ownership and access
 
@@ -64,26 +47,10 @@ credential is bundled into browser code.
 
 ## Migration and eventual deployment order
 
-For production releases:
-
-1. Apply `database/202610040001_leo_study.sql` and
-   `database/202610040002_leo_prompt_publication.sql`. They extend existing prompt
-   and session module constraints and create six dedicated public result tables
-   with RLS and browser write denial. The first migration explicitly removes the
-   default anonymous-read restriction only from those six result tables.
-2. Import both completed campaigns with `bin/leo-study-database.py`. Its seed
-   insert never replaces an existing prompt, and its printed status reflects
-   the actual active/published/draft state.
-3. Publish the evaluated LEO prompt before enabling the agent/frontend.
-   This prerequisite is already met in the current database. The publication
-   function requires all eight exact case names, evaluated identity/hash/module,
-   model/analysis metadata and the expected prior active pointer.
-4. Deploy the module-aware agent using the repository's agent deployment
-   workflow, then deploy the frontend with its existing Supabase and agent URL
-   variables. No new public environment variable is required.
-5. Verify public results/JSON and an authenticated chat end to end. Check
-   deployed capabilities and returned module/prompt provenance. Preserve country
-   deep links and confirm that prepared questions are not automatically sent.
+After an explicit deployment request, apply the LEO schema and publication
+migrations before releasing a compatible agent and frontend. Publish a prompt
+only after its evaluated checks pass. Preserve RLS, browser write denial and
+module-scoped history, then verify public results and authenticated chat.
 
 A live browser chat through the deployed agent cannot be claimed verified until
 that agent advertises the new capability and an authorized Google session is
@@ -102,7 +69,7 @@ that the AWS account is `395567831870`.
 For a local evaluation of a specific draft, from `jumpserve-infra`:
 
 ```bash
-/Users/Shared/allstar/jumpserve-back-end/experiments/leo_failover/.venv/bin/python -B test/evaluate_leo_agent.py --live --profile jumpserve --prompt-id <draft-uuid>
+.venv-unit-tests/bin/python -B test/evaluate_leo_agent.py --live --profile jumpserve --prompt-id <draft-uuid>
 ```
 
 Add `--publish --actor <name>` only when publication of that reviewed draft is

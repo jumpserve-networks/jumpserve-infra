@@ -1,8 +1,0 @@
-{
-  "filename": "six-1.17.0-py2.py3-none-any.whl",
-  "sha256": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274",
-  "bytes": 11050,
-  "source_url": "https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl",
-  "license": "MIT; original license retained inside the wheel at six-1.17.0.dist-info/LICENSE",
-  "purpose": "Offline immutable-byte fixture for the qualification controller's existing fixed upstream hash. The wheel is never installed or executed by these unit tests."
-}

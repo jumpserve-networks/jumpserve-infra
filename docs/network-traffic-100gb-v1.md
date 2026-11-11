@@ -1,9 +1,5 @@
 # 100-GB runner allowance and remaining assessment blockers
 
-Historical local implementation record. See [the integrated release](integrated-research-release-v1.md) for current qualification and production verification.
-Production remains on its existing pinned runtime and policies. The current
-runtime manifest and the historical policy bytes have not been changed.
-
 The user requested a 100-GB network-traffic allowance. Here GB means decimal
 bytes: 100,000,000,000 per experimental invocation, not GiB, storage, per-paper
 usage or a monetary budget. Two executable paths receive new v3 policies:

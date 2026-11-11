@@ -44,7 +44,7 @@ def main():
         status=error.code;body=json.loads(error.read())
     assert status==401 and isinstance(body.get('error'),str),'Unauthenticated request was not rejected'
     report=dict(status='pass',checked_at=datetime.now(timezone.utc).isoformat(),aws_account=ACCOUNT,supabase_project='regphejnlvfpyokpniny',function=fn,function_url=URL,zip_sha256=hashlib.sha256(raw).hexdigest(),aws_code_sha256=config['Configuration']['CodeSha256'],code=checks,anonymous_request_status=status,layers=[row['Arn'] for row in config['Configuration']['Layers']],google_authenticated_chat='not exercised: no legitimate Google session available')
-    directory=ROOT/'docs/ipv6-study-validation';directory.mkdir(exist_ok=True)
+    directory=ROOT/'.test-artifacts/evaluations/ipv6-study-validation';directory.mkdir(parents=True,exist_ok=True)
     assert not (directory/'agent-production-v1.json').exists(),'Preserve original verification'
     (directory/'agent-production-v1.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))

@@ -23,7 +23,7 @@ from test_network_execution import document,SOURCE
 import network_execution,network_spec,package_runtime,worker
 
 DIRECTORY=f.ROOT/'.test-artifacts/network-execution/database'/f.STAMP;DIRECTORY.mkdir(parents=True,exist_ok=False)
-report=dict(protocol='docs/network-execution-validation-protocol-v1.json',started_at=dt.datetime.now(dt.timezone.utc).isoformat(),database=f.DATABASE,checks=[],
+report=dict(protocol='synthetic-network-execution-integration-v1',started_at=dt.datetime.now(dt.timezone.utc).isoformat(),database=f.DATABASE,checks=[],
     new_model_calls=0,cloud_experiments=0,measured_charges_usd=None,reviewer=dict(identity='Primary Codex AI implementer',type='AI',independent=False),
     scope='Actual local API/queue SQL and package HTTP measurements; synthetic Google identity, Storage transport and AWS dispatch.',
     conditional_gaps=['Legitimate Google session','AWS VM and independent cleanup','Docker execution','Mullvad/CDN origin credentials'])

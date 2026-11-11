@@ -3,26 +3,6 @@
 AWS CDK infrastructure for the JumpServe frontend, benchmark API and AI tools.
 No EC2 instance needs to run continuously for benchmarks.
 
-The local autonomous research candidate removes the AI turn-count ceiling while
-retaining the $100 paper commitment limit and seven-day deadline. See
-[the turn-policy implementation and validation](docs/autonomy-turn-policy-validation-v1.md)
-for the migration, recovery behavior, reproduction commands and release gaps.
-Historical pilot and model-evaluation protocols retain their original limits.
-
-The OpenClaw subscription configuration adds a separate private, continuously
-running inference host; benchmark machines remain disposable. See the
-[versioned OpenClaw release record](docs/openclaw-production-release-v1.md) for
-native host authorization, exact runtime pins, rejected/passing prompt evidence,
-private persistence, release order and remaining activation checks. Subscription
-allocation and unallocated host charges remain unknown when not reported.
-
-The builder recovery release retains completed native work, compresses long
-tool histories without discarding records, and stores supplemental reconciliation
-proofs without rewriting failed or unknown parent outcomes. See the
-[qualified development checks](docs/builder-recovery-qualification-v1.json) and
-[recovery release procedure](docs/builder-recovery-production-v1.md). These
-software checks do not establish scientific findings for an assessment.
-
 ## Architecture
 
 - Amplify hosts the Next.js frontend at https://jumpserve.quaint-lab.org.
@@ -226,9 +206,8 @@ for rollback, and remove superseded AMIs and snapshots through a separate review
 
 The backend repository's `Deploy benchmark AMI` workflow calls
 [`.github/workflows/benchmark-ami.yml`](.github/workflows/benchmark-ami.yml).
-Pushes to backend `main` rebuild the image, except changes confined to Markdown
-or `experiments/`. Run that workflow manually on `main` to refresh OS packages
-without a backend code change. Builds are serialized and do not cancel an
+Run that workflow explicitly on `main` to rebuild a selected backend revision
+or refresh OS packages. A merge alone does not trigger an AMI rebuild. Builds are serialized and do not cancel an
 already running deployment.
 
 The workflow:
@@ -548,25 +527,6 @@ actual production release. Reports and the repository summary are in
 `coverage/` and are not committed. Coverage-tool dependency overrides pin patched
 glob/minimatch versions within c8 without changing runtime application packages.
 
-The idea-specific conversation and source-faithful review update was released on
-2026-10-15 with the evaluated **research-ideas-v11** prompt and Amplify job **111**.
-See [the release report](docs/idea-interview-production-release-v1.json) and
-[review methods](docs/idea-review-source-fidelity.md). Authenticated production
-coaching remains unverified without a legitimate session; the released software
-does not establish scientific validity or independent AI-review accuracy.
-
-The unpublished research idea feature was **deployed to production on 2026-10-13**.
-`docs/research-ideas-production-release-v1.json` records the exact runtime revisions,
-five additive migrations, evaluated v2 prompt publication, private original-byte
-archive, Amplify job 109, and deployed browser/API/database checks. Legitimate
-Google owner and cross-owner requests remain conditional; planning readiness does
-not establish scientific validity. The original local validation report remains
-unchanged as historical evidence. Its protocol is
-`docs/research-ideas-protocol-v1.json`; `docs/research-ideas-amendment-v2.json`
-preserves the first prompt's actual-answer failures and declares the revised
-response channel and reused development evaluation cases. The channel formats
-one answer; it cannot execute code, retrieve sources or change a scientific claim.
-
 Run the scoped checks:
 
 ```sh
@@ -586,38 +546,6 @@ authentication/provider responses and local Storage transport are synthetic.
 The actual API/agent/SQL implementations are used. It does not verify production
 Google authentication or remote Supabase Storage.
 
-`python3 -B test/evaluate_research_ideas.py --live` is a separately billed, bounded
-eight-call development campaign for the v2 draft, after AWS account/project
-verification. It preserves provider response bytes, output/context hashes,
-tokens, failed calls and missing costs. It does not publish a prompt. All eight
-answers need recorded substantive inspection, identified honestly as AI or human,
-under the frozen rubric. Reused cases are not held-out validation. The exact v2
-reviewed report is linked by `docs/research-ideas-validation-v1.json`.
-
-Release requires a new explicit deployment instruction. After local blockers pass:
-verify AWS **395567831870** and Supabase **regphejnlvfpyokpniny**, apply
-`202610120001_research_ideas.sql`, `202610120002_research_idea_prompt.sql`, and
-the two draft seed migrations `202610120003`/`202610120004`, and the additive
-`202610130001_research_idea_review_roles.sql` constraint in order, retaining
-receipts. The last migration refuses one invocation selected for both review
-roles. Different invocations still share models/sources and are not independent
-scientific reviewers. Follow `docs/research-ideas-release-protocol-v3.json` for the
-declared release checks. Publish only the exact evaluated v2 candidate through the existing
-`publish_agent_prompt` RPC with its reviewed report and expected active pointer.
-The v1 candidate remains unpublished; its failed evidence is preserved. Stage
-the hash-pinned backend, release the research API/agent, then rebuild/release the
-frontend using real endpoint origins. Verify the deployed owner flow, cross-owner
-denial, remote raw-byte retrieval, mobile/desktop views, themes, exports and
-sign-in return paths. Unavailable legitimate-session checks remain conditional.
-Preserve schema/data on rollback; disable the UI/prompt through an authorized
-release rather than deleting evidence.
-
-Read-only deployed checks are repeatable with
-`python3 -B bin/verify-research-ideas-production.py` in this repository and
-`node scripts/verify-research-ideas-production.mjs` in the frontend. They verify
-the fixed production targets and preserve failed reports. They do not fabricate
-Google sessions, run research experiments, or invoke the model.
-
 ```bash
 npm ci
 npm run build
@@ -628,6 +556,14 @@ npm run cdk:benchmark -- diff JumpServeBenchmarkStack --profile default
 
 The full app also needs the agent Python layer; see `.github/workflows/deploy.yml`
 for its build steps. Deploying the standalone benchmark app does not require it.
+
+## Maintained tools
+
+The supported commands are documented in `package.json`, CI workflows and
+`maintained-tools.json`. Automated tests use synthetic fixtures. Historical
+archives, completed experiment corpora and release-evidence bundles are no
+longer checked into the working tree. Current schema/bootstrap migrations,
+runtime pins and operational policies remain active platform inputs.
 
 ## Project structure
 
@@ -731,29 +667,6 @@ python3 -B test/serve_research_ideas_fixture.py
 npm test
 npm run lint
 npm run build
-node scripts/verify-network-execution.mjs
-node scripts/verify-research-ideas.mjs
+npm run verify:research:ideas -- --guided
+npm run verify:research:ideas
 ```
-
-The frozen validation protocol is `docs/network-execution-validation-protocol-v1.json`.
-Tests use actual local HTTP measurements/Postgres with synthetic authentication,
-Storage/cloud dispatch and review responses. These are development checks reviewed
-by the AI implementer, not actual Google/Bedrock evaluation, independent review or
-CDN scientific validation. Google sign-in, remote Storage, real EC2 allocation,
-distributed execution, Docker packages and VPN/origin equipment are conditional
-until verified with legitimate sessions and inputs. Sampling thresholds can
-overshoot; built-in runners do not enforce the custom network byte threshold.
-Missing charges and unallocated compute/model usage remain unknown. No production
-change is authorized by this implementation turn; a new deployment request is
-required before merging/pushing main, enabling flags or applying this migration.
-
-The guided interface and built-in networking integration were released on
-2026-10-14. `networkExecutionEnabled=true` enables the registered emulated and
-real-world adapters. `networkPackagesEnabled=false` keeps custom-package queue
-admission disabled: the private production verifier stopped before VM execution,
-and boot, ingestion, wall-deadline and independent cleanup checks remain open.
-The private executor infrastructure is provisioned; this does not establish that
-the guest lifecycle works. Preserve the failed setup receipts and use the normal
-reviewed-plan gates for a later operational campaign. Do not fabricate reviews or
-remove readiness checks to enable packages. See
-`docs/guided-network-release-closure-scope-v4.json` and the production release report.
