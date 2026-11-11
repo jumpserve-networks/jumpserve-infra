@@ -1,7 +1,7 @@
 """Fixed-target online OpenClaw storage expansion; never replaces the worker."""
 import argparse,datetime as dt,importlib.util,json,pathlib,shlex
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-spec=importlib.util.spec_from_file_location('release',ROOT/'bin/openclaw-release.py');r=importlib.util.module_from_spec(spec);spec.loader.exec_module(r)
+spec=importlib.util.spec_from_file_location('release',ROOT/'bin/openclaw-maintenance.py');r=importlib.util.module_from_spec(spec);spec.loader.exec_module(r)
 BASE=ROOT/'.test-artifacts/openclaw-storage-v1'
 CONFIG=json.loads((ROOT/'openclaw-worker-storage.json').read_bytes())
 INSTANCE='i-087f1493809643115';VOLUME='vol-0993b9127ac7a8231';SIZE=300

@@ -6,19 +6,6 @@ separately declared, owned-loopback endpoint follow-up. No simulator or orbital
 model is involved. Scientific reproduction remains partial even when the
 software feature is released.
 
-Scientific inputs, six protocols and locks, original artifact revisions,
-reproduction commands, source inventory and limitations are in
-`jumpserve-back-end/experiments/http2_compliance/README.md`. Original downloaded
-bytes and author checkouts are retained locally; original author payloads are
-also retained in backend-only Supabase artifact records. Migration 010 creates
-the private `http2-study-artifacts` Storage bucket. All 40 accessible adopted
-sources and 57 original author JSON files (97 files, 34,909,794 bytes) passed
-upload/download SHA-256 checks. A private relational manifest links these exact
-bytes to the campaign; JSONB payloads alone do not preserve original formatting.
-Public JSON contains
-7,176 archived case observations and 84 separately identified loopback frames;
-CSV exports the archived observations with missing fields blank.
-
 ## Claim coverage
 
 | Claim / location | Assessment | Evidence and practical limit |
@@ -104,62 +91,12 @@ the full fresh snapshot remains available to backend rendering and read tools.
 
 ## Evaluation and release order
 
-1. Apply/import with `python3 -B bin/http2-study-database.py --apply` for a new,
-   verified study bundle. Do not overwrite an existing campaign with a different
-   protocol or analysis. `--prepare` applies subsequent migrations and inserts
-   immutable draft seeds; `--verify` reads persisted counts. Preserve pinned
-   originals with the dependency-pinned virtualenv command
-   `../jumpserve-back-end/experiments/leo_failover/.venv/bin/python -B
-   bin/http2-raw-storage.py`. It checks account, project, campaign, pinned
-   revision and every original hash before storage mutation. Reruns retain
-   the initial manifest identity and timestamp after matching all files.
-2. Run `npm run test:agent`, `npm run build`, `npm test`, and isolated database
-   checks with `PROMPT_TEST_DATABASE_URL=postgresql:///jumpserve_prompt_test
-   npm run test:agent:database`. Frontend requires its tests, lint, production
-   build, `npm run verify:http2` and browser checks of completed data.
-3. Evaluate with the dependency-pinned backend LEO virtualenv:
-   `../jumpserve-back-end/experiments/leo_failover/.venv/bin/python -B
-   test/evaluate_http2_agent.py --live --profile jumpserve`. This makes billed
-   Bedrock calls; no experiment launch or study mutation occurs. Each UUID report
-   captures answers, actual tool calls, prompt/evidence/code hashes, judgments,
-   timestamps and tokens. Eight fixed cases cover units, missing data, literature
-   coverage, uncertainty, discrepancies, injected source instructions, rejection
-   interpretation and error scope. They are regression checks, not a reliability
-   sample. Failed and later rounds remain separate.
-4. Review all actual answers against evidence, including claims the automated
-   grader missed. Save `human_review` with reviewer, time, all eight case names,
-   findings and a true/false decision. Only passing automatic and manual reviews
-   can publish via `--publish-reviewed <evaluation-uuid> --profile jumpserve`.
-   An earlier automatically passing v3 was disabled after manual review found
-   a false claim, before this module's backend deployment. Published records are
-   retained immutably. `--save-evaluations` persists all UUID reports privately
-   and aggregates their per-model token/cost estimates publicly.
-5. Restore the existing dependency layer with `bin/prepare-agent-layer.py`.
-   `python3 -B bin/deploy-http2-agent.py --diff` checks the existing Agent stack.
-   `--deploy` refuses absent manual approval or changed evaluated tool/context
-   hashes and deploys only `JumpServeAgentStack`. It does not deploy unrelated
-   stacks. Push the frontend's reviewed commit to main for its existing Amplify
-   build only after migration, publication and backend release pass.
-6. Verify deployed code and anonymous denial using
-   `../jumpserve-back-end/experiments/leo_failover/.venv/bin/python -B
-   bin/verify-http2-agent.py`; run frontend `npm run verify:http2 --
-   https://jumpserve.quaint-lab.org` and desktop/mobile browser checks. Exercise
-   an authenticated chat only with an available legitimate Google session.
-
 Live production status, exact released prompt/evaluation identity, verification
 evidence and remaining gaps are recorded in `http2-release-report.json`. Cost
 estimates include failed rounds and use the recorded per-model prices. They are
 not reconciled billing; existing hosting/build charges, workstation allocation
 and Codex orchestration charges are unavailable. No AWS experiment instances
 were provisioned.
-
-The report and private raw-storage manifest are frozen as version 1. Retained
-production HTTP/code checks and screenshots are in `docs/http2-validation`.
-`python3 -B bin/http2-release-report.py --save` verifies AWS/Supabase targets,
-campaign and active prompt before saving the existing report immutably to
-`http2_study_artifacts`; the saved hash and JSON payload must match. Report
-generation refuses to overwrite the frozen local file. Later verification
-campaigns need a new report version.
 
 The released prompt is `http2-evidence-v9`
 (`caf6bae2-acd3-4ef4-8147-bd8bc39895e2`), evaluated by

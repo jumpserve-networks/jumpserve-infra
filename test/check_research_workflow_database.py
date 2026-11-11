@@ -8,16 +8,14 @@ import uuid
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT.parent/'jumpserve-back-end/research_workflow'))
-import bridge
+from synthetic_study import study_fixture
 from workflow import canonical
 
 url=os.environ.get('RESEARCH_TEST_DATABASE_URL')
 if not url:raise SystemExit('Set RESEARCH_TEST_DATABASE_URL to an isolated jumpserve_research_workflow_test DB')
 psql='/opt/homebrew/opt/postgresql@17/bin/psql'
 study=str(uuid.UUID('953f20a3-3fd8-4fb4-8844-5d4d72690e01'));actor=str(uuid.UUID('953f20a3-3fd8-4fb4-8844-5d4d72690e02'))
-assessment=ROOT.parent/'jumpserve-back-end/experiments/ipv6_dns/evidence/assessment-v2.json'
-if not assessment.exists():raise SystemExit('The exact IPv6 assessment is needed for this register import test; no invented replacement.')
-package=bridge.ipv6(assessment,study)
+package=study_fixture(study)
 def literal(value):return "'"+json.dumps(value,ensure_ascii=False).replace("'","''")+"'::jsonb"
 
 setup="""
@@ -75,7 +73,7 @@ set local role anon;
 do $$ begin
  if (select count(*) from public.research_studies)<>1 then raise exception 'Published study hidden by default restrictive policy'; end if;
  if (select count(*) from public.research_claims)<>15 then raise exception 'Published snapshot changed after new draft'; end if;
- if (select count(*) from public.research_sources)<>74 or (select count(*) from public.research_gaps)<>9 then raise exception 'Register coverage changed'; end if;
+ if (select count(*) from public.research_sources)<>1 or (select count(*) from public.research_gaps)<>15 then raise exception 'Register coverage changed'; end if;
 end $$;
 reset role;
 set local role authenticated;
@@ -100,4 +98,4 @@ final=final.replace('rollback;',stale_review+'\nrollback;')
 process=subprocess.run([psql,url,'-X','-v','ON_ERROR_STOP=1','-q','-t','-A'],input=setup+migration+create+append+checks+append_reviews+publish+late+final,text=True,capture_output=True)
 if process.returncode:
     print(process.stderr,file=sys.stderr);raise SystemExit(process.returncode)
-print(json.dumps(dict(passed=True,database='jumpserve_research_workflow_test',rolled_back=True,original_assessment_sha256=package['provenance']['original_sha256'],imported_sources=74,original_claims=15,evidence_gaps=9,checks=['draft privacy','public snapshot','future draft privacy','RLS with default restrictive policy','browser write denial','private storage','RPC authorization','owner isolation','immutable evidence','review gate','unresolved claim gate','stale review rejection']),indent=2))
+print(json.dumps(dict(passed=True,database='jumpserve_research_workflow_test',rolled_back=True,synthetic=True,imported_sources=1,fixture_claims=15,evidence_gaps=15,checks=['draft privacy','public snapshot','future draft privacy','RLS with default restrictive policy','browser write denial','private storage','RPC authorization','owner isolation','immutable evidence','review gate','unresolved claim gate','stale review rejection']),indent=2))

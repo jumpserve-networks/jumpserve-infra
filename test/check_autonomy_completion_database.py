@@ -85,7 +85,7 @@ class Response(io.BytesIO):
 def main():
  f.report.update(protocol='autonomy-completion-protocol-v1',design=__doc__,live_provider_calls=0,new_cloud_instances=0,synthetic_judgments=True,actual_native_cli=True,manual_running_campaign_edits=0)
  f.report['conditional_gaps']=['Live model answer quality','Real Google browser authentication','Remote Supabase Storage upload/CORS','Deployed Lambda/cloud-job execution','Actual retained paper assessment completion']
- protocol=(f.ROOT/'docs/autonomy-completion-protocol-v1.json').read_bytes();(f.DIRECTORY/'protocol.json').write_bytes(protocol)
+ protocol=workflow.canonical(dict(version='completion-software-fixture-v1',scope='Synthetic local completion checks; no original research input'));(f.DIRECTORY/'protocol.json').write_bytes(protocol)
  f.report['protocol_sha256']=workflow.digest(protocol)
  halt=threading.Event();errors=[];native=[];spool=f.DIRECTORY/'native-spool';spool.mkdir();requests=[];restart=dict(injected=False,required=False,count=0)
  f.files=DurableStorage(f.DIRECTORY/'durable-storage')
@@ -95,7 +95,7 @@ def main():
    restart.update(injected=True,required=True,job=payload['p_job'])
    raise store.StoreError('Explicit storage-acknowledgement interruption after the original TCP response was durably captured.')
   return original_rpc(name,payload)
- package=f.ROOT.parent/'jumpserve-back-end/experiments/openclaw_pilot/runtime/node_modules/openclaw';node=package.parent/'node/bin/node'
+ package=f.ROOT.parent/'jumpserve-back-end/openclaw_worker/node_modules/openclaw';node=package.parent/'node/bin/node'
  assert node.exists() and json.loads((package/'package.json').read_bytes())['version']=='2026.10.5'
  def process(job):
   try:

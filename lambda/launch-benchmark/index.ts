@@ -5,7 +5,6 @@ import { buildUserData, type BenchmarkConfig } from './user-data';
 import {
   EC2Client,
   RunInstancesCommand,
-  CreateTagsCommand,
   TerminateInstancesCommand,
   DescribeInstancesCommand,
 } from '@aws-sdk/client-ec2';

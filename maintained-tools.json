@@ -1,0 +1,13 @@
+{
+  "version": "maintained-manual-tools-v1",
+  "purpose": "Current worker maintenance and read-only agent source verification outside CI entrypoints.",
+  "automated_entrypoints": "Existing package scripts, workflow files and fixed test-suite configuration remain authoritative. This registry reads as documentation and never executes commands.",
+  "manual_programs": [
+    "bin/openclaw-maintenance.py",
+    "bin/openclaw-storage.py",
+    "bin/prepare-agent-layer.py",
+    "bin/verify-http2-agent.py",
+    "bin/verify-ipv6-agent.py"
+  ],
+  "protected_protocol_directories": []
+}

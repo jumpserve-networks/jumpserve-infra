@@ -53,7 +53,7 @@ export class AmplifyStack extends cdk.Stack {
 
     const customDomain = this.node.tryGetContext('customDomain');
     if (customDomain) {
-      const domain = new amplify.CfnDomain(this, 'CustomDomain', {
+      new amplify.CfnDomain(this, 'CustomDomain', {
         appId: amplifyApp.attrAppId,
         domainName: customDomain,
         subDomainSettings: [

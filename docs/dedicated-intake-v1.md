@@ -80,10 +80,7 @@ OpenClaw 2026.10.5 fixture with synthetic upstream responses. It verifies two
 concurrent native requests, reuse of the same Gateway process, exact provider
 bytes and expired-ticket rejection. It makes zero external model calls.
 
-These checks qualify software behavior. They do not measure production latency,
-independent scientific accuracy, or a real provider-to-Supabase round trip.
-The recorded local results and retained evidence hashes are in
-[`dedicated-intake-qualification-v1.json`](dedicated-intake-qualification-v1.json).
+These checks qualify software behavior. They do not measure production latency, independent scientific accuracy or a real provider-to-Supabase round trip.
 
 ## Release order after deployment is requested
 

@@ -41,7 +41,7 @@ An unchanged recurrence after that correction stops further model calls for the
 task and leaves an explicit platform repair blocker. The same correction is not
 repeated merely because another turn or repair could be allocated. New evidence
 or changed adapter source can justify a different recovery. The existing
-[assessment blocker outbox](assessment-blocker-repairs-v1.md) captures repair
+assessment blocker outbox captures repair
 diagnoses and blocked tasks transactionally, independent of daily maintenance.
 Worker pickup and successful release still require available capacity and the
 installed qualified adapters.

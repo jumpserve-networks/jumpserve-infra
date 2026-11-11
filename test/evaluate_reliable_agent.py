@@ -33,7 +33,8 @@ def main():
  from tools.reliable_study import get_reliable_study_results,get_reliable_literature,get_reliable_configuration
  db=Database(url);prompt,previous=evaluation_snapshot(db,prompt_id=CANDIDATE,module_id=RELIABLE_MODULE)
  protocol=ROOT/'test/reliable-evaluation-cases-v3.json';cases=json.loads(protocol.read_text());assert sha(protocol)==json.loads(protocol.with_name('reliable-evaluation-cases-v3.lock.json').read_text())['sha256']
- out=ROOT/'docs/reliable-study-validation/chat-evaluation-v3.json'
+ out=ROOT/'.test-artifacts/evaluations/reliable-study-validation/chat-evaluation-v3.json'
+ out.parent.mkdir(parents=True,exist_ok=True)
  if a.publish_reviewed:
   report=json.loads(out.read_text())
   if not all(c.get('passed') for c in report['cases']) or report.get('secondary_review',{}).get('passed') is not True:raise RuntimeError('Reviews incomplete')

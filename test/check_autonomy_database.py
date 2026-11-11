@@ -10,7 +10,7 @@ import network_execution,network_spec,bounded_network
 def main():
  f.report.update(protocol='autonomy-bounded-followups-protocol-v1',amendment='autonomy-bounded-followups-amendment-v7',design='Actual local SQL/controller/arithmetic and bounded TCP loopback measurements; explicit synthetic provider/auth/Storage/source and AWS SDK. No Internet measurements or live model evaluation in this database campaign.')
  try:
-  f.bootstrap()
+  fixture.bootstrap_autonomy()
   payload=fixture.publish_fixture()
   def publication():
    f.rejects(lambda:f.rpc('publish_agent_prompt',dict(payload,p_report={})))

@@ -1,8 +1,5 @@
 # Idea-specific conversational planning
 
-Published and deployed on 2026-10-15 with research-ideas-v11; see
-[the production release report](idea-interview-production-release-v1.json).
-
 Current follow-up: source-faithful reviews and the eligible unpublished v11
 candidate are documented in [idea-review-source-fidelity.md](idea-review-source-fidelity.md).
 The original v1 validation report remains a historical record of the earlier

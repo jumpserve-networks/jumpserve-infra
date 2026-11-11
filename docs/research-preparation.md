@@ -2,37 +2,20 @@
 
 The intake path now connects an owning study to retained sources/claims,
 configurations, frozen protocols, campaigns, claim links and stable queue jobs.
-New intake defaults to preparing the exact registered paper plan. Existing
+An applicable reviewed plan can prepare the exact paper configuration. Existing
 workspaces have **Prepare paper and queue checks**, progress counts and **Resume
 queueing this plan** after a partial request. Creating a draft alone remains an
 explicit option. Unknown papers need an uploaded researcher-prepared plan; this
 release does not generate AI claims or conduct arbitrary domain experiments.
 
-## What the IPv6 plan does
+## Plan availability
 
-Exact PuRe item `item_3670144_1`, its reviewed PDF/resource aliases and DOI
-`10.1145/3730567.3764439` identify registered `ipv6-archive-v1`. Matching a title,
-different host or a later paper version never selects it. The manifest is
-1,452,605 bytes, SHA256
-`6bd31acb22a105c35ea9c54fa0a9381d0c5981bd554bed6443196b5eee3eebb3`.
-Its generator pins the retained assessment bytes and regenerates this manifest
-exactly; changes require a new version, with the old manifest preserved.
-
-The plan imports 74 source records, 15 claims, 144 configurations, 15 prior
-assessments and nine gaps. Six retrospective numerical campaigns recheck the
-1,152 already-recorded means against separately transcribed published absolute
-panel cells, under the exposed 0.0051 percentage-point tolerance. Fourteen manual
-tasks prepare source/dependency reviews and full domain follow-ups for the other
-claims. All 15 claims have applicable links; this is planning coverage, not
-completed scientific validation. Queue completion does not alter claim labels.
-
-The automatic checks share the earlier assessment's inputs and upstream errors.
-They do not rerun raw packets/daily parsing, resolve discrepancies, reproduce the
-relative figures, establish causality or measure today's Internet. The original
-source access/review declarations, limitations and reviewer identities remain
-visible. Imported SHA records do not mean that each literature PDF has been
-copied to this new study's Storage. The original manifest and compiled plan are
-retained privately; numerical workers retain their exact derived inputs/output.
+No historical paper plans are bundled in the runtime checkout. A new paper needs
+an explicitly supplied reviewed plan or the current autonomous preparation path.
+Previously persisted plans remain attached to their study records; deleting a
+repository copy does not alter those records. Unit and local integration tests
+use fictional inputs from the backend test fixture directory, which is never
+registered as a production plan.
 
 ## API and recovery
 
@@ -126,9 +109,7 @@ Use the same plan to resume, choosing a new output filename to preserve history.
 
 ## Verification and release order
 
-Protocol: [research-preparation-protocol-v1.md](research-preparation-protocol-v1.md).
-These are exposed development checks, with AI implementer inspection; no human
-or independent/held-out validation is asserted.
+These are exposed development checks with AI implementer inspection. No human, independent or held-out validation is asserted.
 
 ```sh
 # Backend
@@ -142,8 +123,6 @@ npm run build
 npm test
 npm run lint
 npm run build
-npm run start -- -p 3004
-npm run verify:research -- --intake
 ```
 
 The frontend component and queue-helper unit tests use a synthetic transport to
@@ -156,13 +135,6 @@ No production mutation/deployment is included in this implementation turn. When
 the current changes are explicitly authorized for deployment: verify account
 395567831870/project regphejnlvfpyokpniny, then apply the migration before the
 API/frontend. Keep the exact SQL and apply receipt.
-
-```sh
-python3 -B bin/research-workflow-database.py --apply-preparation \
-  --output docs/research-preparation-validation/production-migration-v1.json
-python3 -B bin/research-workflow-database.py --preparation \
-  --output docs/research-preparation-validation/production-security-v1.json
-```
 
 Deploy the reviewed runtime manifest/API routes, preserving the existing worker
 schedule, and then the frontend. Pin a committed backend revision before release;
