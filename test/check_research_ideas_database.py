@@ -125,6 +125,7 @@ def transport(path,method='GET',body=None,public=False,raw=False):
         'repair_progress:context->repair_progress': "context->'repair_progress' as repair_progress",
         'authors:metadata->authors': "metadata->'authors' as authors",
         'owner_authors:metadata->owner_authors': "metadata->'owner_authors' as owner_authors",
+        'active_study:research_studies!inner(id)': "(select json_build_object('id',s.id) from public.research_studies s where s.id=study_id and s.deleted_at is null) as active_study",
     }
     if any(not c.replace('_','').isalnum() and c not in ('value::text',*aliases) for c in columns):raise ValueError('Unsafe projection')
     columns=[aliases.get(c,c) for c in columns]
@@ -137,10 +138,13 @@ def transport(path,method='GET',body=None,public=False,raw=False):
             ordering.append(column+' '+direction)
     predicates=[]
     for column,value in params.items():
+        if column=='active_study.deleted_at':
+            if table!='research_study_owners' or value!='is.null':raise ValueError('Unsafe active-study join')
+            predicates.append('exists(select 1 from public.research_studies s where s.id=study_id and s.deleted_at is null)');continue
         if column=='and':
             if not value.startswith('(id.gt.') or not value.endswith(')'):raise ValueError('Unsafe keyset cursor')
             predicates.append('id>'+sql_text(str(uuid.UUID(value[7:-1]))));continue
-        if column not in ('id','study_id','owner_id','source_id','created_at','packet_id','task','run_id','campaign_id','protocol_id','task_id','number','claim_id','event','action','study_kind','status','state','dispatch_id','call_id'):raise ValueError('Unsafe filter')
+        if column not in ('id','study_id','owner_id','source_id','created_at','deleted_at','packet_id','task','run_id','campaign_id','protocol_id','task_id','number','claim_id','event','action','study_kind','status','state','dispatch_id','call_id'):raise ValueError('Unsafe filter')
         operator,argument=value.split('.',1)
         if operator=='eq':predicates.append(column+'='+sql_text(argument))
         elif operator=='gt' and column=='id':predicates.append('id>'+sql_text(str(uuid.UUID(argument))))
@@ -170,7 +174,7 @@ def rejects(callback):
     except (ValueError,RuntimeError,store.StoreError): return
     raise AssertionError('Expected rejection')
 def uid(): return str(uuid.uuid4())
-def bootstrap(apply_turn_policy=True):
+def bootstrap(apply_turn_policy=True,include_deleted_at=True):
     query('create database '+DATABASE+" with template template0 encoding 'UTF8'",'postgres')
     query("""do $$ begin create role anon; exception when duplicate_object then null; end $$;
 do $$ begin create role authenticated; exception when duplicate_object then null; end $$;
@@ -201,6 +205,9 @@ grant all on public.agent_sessions to service_role;""")
     for name in ('202610270001_experiment_builder.sql','202610270002_experiment_builder_prompt.sql','202610270003_builder_package_catalog.sql','202610270004_experiment_action_authority.sql','202610270005_builder_scheduling_window.sql','202610270006_experiment_builder_prompt_v2.sql','202610270007_experiment_builder_v2_publication.sql'):
         raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
     name='202610300003_research_append_normalization.sql';raw=(ROOT/'database'/name).read_bytes();report['migration_sha256'][name]=hashlib.sha256(raw).hexdigest();query(raw.decode())
+    # Legacy scenarios use the current API's visibility projection. The dedicated
+    # deletion suite skips this column shim and runs the original full migration.
+    if include_deleted_at:query('alter table public.research_studies add column deleted_at timestamptz')
     report['bootstrap_limit']='Legacy agent_sessions base table and Storage API catalog columns synthesized; listed prompt/research migrations executed as original files. Historical study-table migrations outside this feature are not replayed.'
     store.request=transport
 

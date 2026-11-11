@@ -5,7 +5,7 @@ import check_research_ideas_database as f
 
 
 def main():
-    f.bootstrap()
+    f.bootstrap(include_deleted_at=False)
     f.query("create schema auth; create table auth.users(id uuid primary key,is_anonymous boolean); create table auth.identities(user_id uuid references auth.users(id),provider text);")
     q=f.sql_text
     f.query("insert into auth.users values("+q(f.ACTOR)+",false),("+q(f.OTHER)+",false);insert into auth.identities values("+q(f.ACTOR)+",'google'),("+q(f.OTHER)+",'email');")
@@ -32,11 +32,15 @@ def main():
 
     def retained_and_idempotent():
         study=create()
+        assert f.store.owns(study,f.ACTOR)
+        assert not f.store.owns(study,f.OTHER)
         with ThreadPoolExecutor(max_workers=3) as pool:results=list(pool.map(lambda _:delete(study),range(3)))
         assert all(result==dict(id=study,deleted=True) for result in results)
         assert f.query("select count(*) from research_audit_events where study_id="+q(study)+" and action='delete-assessment'")=='1'
         assert f.query('select status from research_paper_intakes where study_id='+q(study))=='cancelled'
         assert f.query('select model_calls from research_paper_intakes where study_id='+q(study))=='0'
+        assert not f.store.owns(study,f.ACTOR)
+        assert f.store.rows('studies',{'id':'eq.'+study})==[]
         assert f.query('select count(*) from research_paper_uploads where id='+q(study))=='1'
         f.rejects(lambda:f.query('update research_studies set deleted_at=null where id='+q(study),role='service_role'))
         f.rejects(lambda:f.query("update research_paper_intakes set reason='Resume deleted paper' where study_id="+q(study)))
