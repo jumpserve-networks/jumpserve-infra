@@ -83,11 +83,11 @@ retrieval verification and SHA256 are recorded separately in
 `private-paper-upload-production-artifacts-v1.json`. Original protocols and their
 two amendments remain separate from results.
 
-Release reproduction follows the fixed-target `bin/private-paper-release.py`
-modes: inspect, migrate (once), diff, deploy, activate, verify, storage,
-control-read and frontend-status. The parser correction uses the separately
-recorded repair deployment. Do not reapply the migration or create controls merely
-to inspect this release. `verify` and `control-read` read the retained deployment
-and fixed follow-up control. Local test commands remain in
+The original release used the now-retired fixed-target utility
+`bin/private-paper-release.py`. Its modes included inspect, migrate (once),
+diff, deploy, activate, verify, storage, control-read and frontend-status.
+The parser correction used the separately recorded repair deployment.
+The release records above describe the retained deployment and follow-up control.
+Local test commands remain in
 `private-paper-uploads.md`; the full infrastructure suite uses
 `JUMPSERVE_BACKEND_CHECKOUT=/Users/Shared/allstar/jumpserve-back-end npm test -- --runInBand`.
