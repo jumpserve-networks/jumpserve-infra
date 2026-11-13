@@ -19,7 +19,7 @@ def main():
     for name in ['202611110001_next_paper_intake.sql','202611110002_assessment_deletion.sql','202611110003_paper_prompt_catalog.sql','202611110004_confirmed_experiment_plans.sql']:
         f.query((f.ROOT/'database'/name).read_text())
     front=f.ROOT.parent/'jumpserve-front-end'
-    result=subprocess.run(['node','--import','./scripts/lib/register-typescript.mjs','--input-type=module','-e',"import {breakdownFixture,planFixture} from './tests/support/experiment-plan-fixture.mjs';import {experimentPlanRequest} from './lib/paper-experiment-plan-model.ts';console.log(JSON.stringify({breakdown:breakdownFixture(),plan:planFixture(),request:experimentPlanRequest(breakdownFixture())}));"],cwd=front,capture_output=True,text=True,check=True)
+    result=subprocess.run(['node','--import','./scripts/lib/register-typescript.mjs','--input-type=module','-e',"import {breakdownFixture,planFixture,legacyPlanRequestFixture} from './tests/support/experiment-plan-fixture.mjs';import {planningInput} from './lib/paper-experiment-plan.ts';console.log(JSON.stringify({breakdown:breakdownFixture(),plan:planFixture(),request:legacyPlanRequestFixture(planningInput(breakdownFixture()))}));"],cwd=front,capture_output=True,text=True,check=True)
     fixture=json.loads(result.stdout)
 
     def intake(empty=False,status='ready',actor=f.ACTOR):
