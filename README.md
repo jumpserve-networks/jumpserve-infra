@@ -16,6 +16,15 @@ AWS account: `395567831870`; region: `us-east-1`.
 The legacy `JumpServeEc2Stack` is removed from the CDK app so `deploy --all` cannot
 recreate the permanent server, Elastic IP or SSH access.
 
+## Paper experiment planning
+
+Paper assessment Step 3 stores named stages and actionable substeps in Supabase.
+Apply the additive hierarchy migration before its matching frontend release;
+existing flat plans and in-flight calls retain their original format. See
+[hierarchical experiment plans](docs/hierarchical-experiment-plans.md) for bounds,
+release order and isolated database verification. This planning step does not
+dispatch workers or start experiments.
+
 ## Real-world congestion-control tests
 
 `lib/real-world-tests.ts` adds public result reads and authenticated test actions under `/real-world/*` to the
