@@ -16,6 +16,8 @@ import {duplicatedClaimFixture} from './tests/support/experiment-plan-link-revie
 import {reviewExperimentPlanLinks} from './lib/paper-experiment-plan-review.ts';
 const breakdown=hierarchyBreakdown(),cases=hierarchyPlanCases().map(c=>{let js_valid=true;try{validateExperimentPlan(c.plan,breakdown);}catch{js_valid=false;}return{...c,js_valid};});
 const {row}=duplicatedClaimFixture(),plan=maximumHierarchyPlan(30);
+// Retain the historical pre-profile provider contract.
+Object.assign(row.request,{model:'gpt-5.4-mini-2026-03-17',reasoning:{effort:'low'},max_output_tokens:16000});
 Object.assign(plan.experiments[0].stages[0].steps[0],{title:'Measure idle RTT',instructions:'Measure and retain idle RTT samples before the final H3 evaluation.',source_refs:['validate-3','experiment-1'],validation_ref:'validate-3'});
 row.response.output[0].content[0].text=JSON.stringify(plan);
 const keep=[{claim_ref:'validate-3',experiment:1,stage:4,step:6}];
