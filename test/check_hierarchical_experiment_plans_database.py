@@ -11,6 +11,7 @@ def main():
     previous.main()
     q=f.sql_text
     front=f.ROOT.parent/'jumpserve-front-end'
+    # Historical pre-profile DDL retains its original provider profile.
     code="""import {hierarchyBreakdown,hierarchyPlanCases} from './tests/support/hierarchical-plan-cases.mjs';
 import {hierarchicalImplementationPlan} from './tests/support/implementation-plan-fixture.mjs';
 import {validateExperimentPlan} from './lib/paper-experiment-plan.ts';
@@ -18,7 +19,7 @@ import {experimentPlanRequest} from './lib/paper-experiment-plan-model.ts';
 // This historical migration still has its original 24-action cap. The later
 // granular-action migration separately exercises its expanded cases.
 const breakdown=hierarchyBreakdown(),cases=hierarchyPlanCases().filter(c=>!c.requiresExpandedLimit).map(c=>{let js_valid=true;try{validateExperimentPlan(c.plan,breakdown);}catch{js_valid=false;}return{...c,js_valid};});
-console.log(JSON.stringify({breakdown,plan:hierarchicalImplementationPlan(),request:experimentPlanRequest(breakdown),cases}));"""
+console.log(JSON.stringify({breakdown,plan:hierarchicalImplementationPlan(),request:{...experimentPlanRequest(breakdown),model:'gpt-5.4-mini-2026-03-17',reasoning:{effort:'low'},max_output_tokens:16000},cases}));"""
     result=subprocess.run(['node','--import','./scripts/lib/register-typescript.mjs','--input-type=module','-e',code],cwd=front,capture_output=True,text=True,check=True)
     fixture=json.loads(result.stdout)
     study=f.uid()

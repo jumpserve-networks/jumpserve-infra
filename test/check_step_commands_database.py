@@ -11,6 +11,7 @@ def main():
     previous.main()
     q = f.sql_text
     front = f.ROOT.parent / 'jumpserve-front-end'
+    # Freeze the original provider profile while exercising historical pre-profile DDL.
     code = """import {stepCommandFixture,stepPlan,stepBreakdown} from './tests/support/step-command-fixture.mjs';
 import {stepCommandsRequest,STEP_COMMANDS_INSTRUCTIONS} from './lib/paper-step-commands-model.ts';
 import {stepCommandsInput,validateStepCommandSet} from './lib/paper-step-commands.ts';
@@ -24,7 +25,7 @@ const prior=stepCommandFixture('1.2.1');prior.actions['1.2.1'].prerequisites=['1
 for(const mutate of [s=>s.actions['1.1.1']=s.actions['1.2.1'],s=>s.actions['1.2.1'].prerequisites=['1.4.1'],s=>s.actions['1.2.1'].prerequisites=['setup'],s=>s.actions['1.2.1'].commands='tc qdisc add dev eth0 root netem delay 20ms',s=>s.actions['1.2.1'].commands='python3 "$HELPER" run',s=>s.actions['1.2.1'].commands=\"os.readlink(f'/proc/{pid}/exe')\"]){const set=structuredClone(prior);mutate(set);cases.push({ref:'1.2.1',set,valid:false});}
 const unblocked=stepCommandFixture('1.4.1');unblocked.actions['1.4.1']=stepCommandFixture().actions['1.1.1'];cases.push({ref:'1.4.1',set:unblocked,valid:false});
 for(const c of cases){let valid=true;try{validateStepCommandSet(c.set,plan,breakdown,1,c.ref);}catch{valid=false;}if(valid!==c.valid)throw Error('JS fixture mismatch');}
-console.log(JSON.stringify({study,plan,breakdown,cases,plan_request:experimentPlanRequest(breakdown),legacy_request:terminalCommandsRequest(study,1,plan,breakdown),legacy_commands:terminalCommandFixture(),requests:Object.fromEntries(refs.map(ref=>[ref,stepCommandsRequest(study,1,ref,plan,breakdown)]))}));"""
+console.log(JSON.stringify({study,plan,breakdown,cases,plan_request:{...experimentPlanRequest(breakdown),model:'gpt-5.4-mini-2026-03-17',reasoning:{effort:'low'},max_output_tokens:16000},legacy_request:terminalCommandsRequest(study,1,plan,breakdown),legacy_commands:terminalCommandFixture(),requests:Object.fromEntries(refs.map(ref=>[ref,stepCommandsRequest(study,1,ref,plan,breakdown)]))}));"""
     study = f.uid()
     fixture = json.loads(subprocess.run(['node', '--import', './scripts/lib/register-typescript.mjs', '--input-type=module', '-e', code], cwd=front, input=json.dumps(dict(study=study)), capture_output=True, text=True, check=True).stdout)
     f.query("select research_paper_intake('reserve'," + q(f.ACTOR) + '::uuid,' + q(study) + '::uuid,' + f.sql_json(dict(filename='Individual action software fixture.pdf', sha256='a' * 64, byte_count=100)) + ')', role='service_role')

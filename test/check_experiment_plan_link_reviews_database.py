@@ -12,7 +12,7 @@ def main():
     front = f.ROOT.parent / 'jumpserve-front-end'
     code = """import {duplicatedClaimFixture} from './tests/support/experiment-plan-link-review-fixture.mjs';
 import {reviewExperimentPlanLinks} from './lib/paper-experiment-plan-review.ts';
-const f=duplicatedClaimFixture();console.log(JSON.stringify({...f,expected:reviewExperimentPlanLinks(f.row,f.keep)}));"""
+const f=duplicatedClaimFixture();Object.assign(f.row.request,{model:'gpt-5.4-mini-2026-03-17',reasoning:{effort:'low'},max_output_tokens:16000});console.log(JSON.stringify({...f,expected:reviewExperimentPlanLinks(f.row,f.keep)}));"""
     fixture = json.loads(subprocess.run(['node', '--import', './scripts/lib/register-typescript.mjs', '--input-type=module', '-e', code], cwd=front, capture_output=True, text=True, check=True).stdout)
     tables = ['research_experiment_plans', 'research_experiment_plan_events', 'research_paper_intakes', 'research_experiment_plan_prompt_uses']
 

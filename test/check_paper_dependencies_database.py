@@ -11,6 +11,7 @@ def main():
     previous.main()
     q = f.sql_text
     front = f.ROOT.parent / 'jumpserve-front-end'
+    # Freeze the original provider profile while exercising historical pre-profile DDL.
     code = """import {dependencyBreakdown,dependencyCases} from './tests/support/paper-dependency-fixture.mjs';
 import {breakdownFixture} from './tests/support/experiment-plan-fixture.mjs';
 import {implementationBreakdown} from './tests/support/implementation-plan-fixture.mjs';
@@ -19,7 +20,7 @@ import {validatePaperBreakdown} from './lib/research-paper-breakdown.ts';
 import {planningInput} from './lib/paper-experiment-plan.ts';
 import {experimentPlanRequest} from './lib/paper-experiment-plan-model.ts';
 const breakdown=dependencyBreakdown(),cases=dependencyCases().map(c=>{let js_valid=true;try{validatePaperBreakdown(c.breakdown);}catch{js_valid=false;}return{...c,js_valid};});
-console.log(JSON.stringify({breakdown,cases,legacy:breakdownFixture(),legacy_input:planningInput(breakdownFixture()),input:planningInput(breakdown),request:experimentPlanRequest(breakdown),review:implementationBreakdown(),paper:evidencePaper}));"""
+console.log(JSON.stringify({breakdown,cases,legacy:breakdownFixture(),legacy_input:planningInput(breakdownFixture()),input:planningInput(breakdown),request:{...experimentPlanRequest(breakdown),model:'gpt-5.4-mini-2026-03-17',reasoning:{effort:'low'},max_output_tokens:16000},review:implementationBreakdown(),paper:evidencePaper}));"""
     fixture = json.loads(subprocess.run(['node', '--import', './scripts/lib/register-typescript.mjs', '--input-type=module', '-e', code], cwd=front, capture_output=True, text=True, check=True).stdout)
     tables = ['research_paper_intakes', 'research_paper_breakdown_reviews', 'research_experiment_plans', 'research_paper_prompt_versions']
 
