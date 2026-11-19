@@ -30,11 +30,14 @@ export class FrontendPaperIntakeStack extends cdk.Stack {
     const continuation=new lambda.Function(this,'PaperContinuation',{
       runtime:lambda.Runtime.PYTHON_3_12,handler:'index.handler',
       code:lambda.Code.fromAsset(path.join(__dirname,'../assets/frontend-paper-continuation'),{exclude:['**/__pycache__/**','**/*.pyc']}),
-      timeout:cdk.Duration.seconds(100),memorySize:128,reservedConcurrentExecutions:1,
+      // This account has only the mandatory unreserved pool. Durable database
+      // leases and original admission guards handle overlapping wake-ups.
+      timeout:cdk.Duration.seconds(100),memorySize:128,
       environment:{SECRET_ARN:secret.secretArn},logGroup:new logs.LogGroup(this,'PaperContinuationLogs',{retention:logs.RetentionDays.ONE_MONTH,removalPolicy:cdk.RemovalPolicy.RETAIN}),
       description:'Wake the Next.js paper controller for saved Step 2–4 work; no model or experiment execution.',
     });
     continuation.addToRolePolicy(new iam.PolicyStatement({actions:['secretsmanager:GetSecretValue'],resources:[secret.secretArn]}));
+    continuation.configureAsyncInvoke({retryAttempts:0,maxEventAge:cdk.Duration.minutes(1)});
     new events.Rule(this,'PaperContinuationSchedule',{
       schedule:events.Schedule.rate(cdk.Duration.minutes(1)),
       targets:[new targets.LambdaFunction(continuation,{retryAttempts:0,maxEventAge:cdk.Duration.minutes(1)})],

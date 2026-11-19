@@ -14,7 +14,8 @@ test('paper-intake runtime role can read only its retained secret and trusts the
 });
 test('paper continuation only wakes the Next.js controller on a bounded schedule',()=>{
  const app=new cdk.App();const template=Template.fromStack(new FrontendPaperIntakeStack(app,'Continuation',{env:{account:'395567831870',region:'us-east-1'}}));
- template.hasResourceProperties('AWS::Lambda::Function',{Runtime:'python3.12',Handler:'index.handler',Timeout:100,MemorySize:128,ReservedConcurrentExecutions:1,Environment:{Variables:{SECRET_ARN:Match.anyValue()}}});
+ template.hasResourceProperties('AWS::Lambda::Function',{Runtime:'python3.12',Handler:'index.handler',Timeout:100,MemorySize:128,ReservedConcurrentExecutions:Match.absent(),Environment:{Variables:{SECRET_ARN:Match.anyValue()}}});
+ template.hasResourceProperties('AWS::Lambda::EventInvokeConfig',{MaximumRetryAttempts:0,MaximumEventAgeInSeconds:60});
  template.hasResourceProperties('AWS::Events::Rule',{ScheduleExpression:'rate(1 minute)',Targets:Match.arrayWith([Match.objectLike({RetryPolicy:{MaximumEventAgeInSeconds:60,MaximumRetryAttempts:0}})])});
  const policies=Object.values(template.findResources('AWS::IAM::Policy')) as any[];
  const continuation=policies.find(policy=>policy.Properties.PolicyName.startsWith('PaperContinuationServiceRoleDefaultPolicy'));
