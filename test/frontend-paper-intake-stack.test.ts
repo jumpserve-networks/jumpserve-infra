@@ -7,7 +7,18 @@ test('paper-intake runtime role can read only its retained secret and trusts the
  template.hasResourceProperties('AWS::SecretsManager::Secret',{Name:'jumpserve/frontend/paper-intake'});
  template.hasResourceProperties('AWS::IAM::Role',{RoleName:'JumpServeFrontendPaperIntake',AssumeRolePolicyDocument:{Statement:Match.arrayWith([Match.objectLike({Principal:{Service:'amplify.amazonaws.com'},Condition:{StringEquals:{'aws:SourceAccount':'395567831870'},ArnLike:{'aws:SourceArn':[{'Fn::Join':['',['arn:',{Ref:'AWS::Partition'},':amplify:us-east-1:395567831870:apps/d24jvguj7brnkj']]},{'Fn::Join':['',['arn:',{Ref:'AWS::Partition'},':amplify:us-east-1:395567831870:apps/d24jvguj7brnkj/branches/main']]}]}}})])}});
  const policies=Object.values(template.findResources('AWS::IAM::Policy'));
- expect(policies).toHaveLength(1);expect(policies[0].Properties.PolicyDocument.Statement).toHaveLength(1);expect(policies[0].Properties.PolicyDocument.Statement[0]).toMatchObject({Action:'secretsmanager:GetSecretValue',Effect:'Allow'});expect(policies[0].Properties.PolicyDocument.Statement[0].Resource).toHaveProperty('Ref');
+ const compute=policies.find((policy:any)=>policy.Properties.PolicyName.startsWith('ComputeRoleDefaultPolicy'));
+ expect(compute).toBeDefined();expect(compute!.Properties.PolicyDocument.Statement).toHaveLength(1);expect(compute!.Properties.PolicyDocument.Statement[0]).toMatchObject({Action:'secretsmanager:GetSecretValue',Effect:'Allow'});expect(compute!.Properties.PolicyDocument.Statement[0].Resource).toHaveProperty('Ref');
  const secret=Object.values(template.findResources('AWS::SecretsManager::Secret'))[0];expect(secret.DeletionPolicy).toBe('Retain');
  expect(secret.Properties.SecretString).toBeUndefined();expect(JSON.stringify(template.toJSON())).not.toMatch(/sk-proj-|sb_secret_/);
+});
+test('paper continuation only wakes the Next.js controller on a bounded schedule',()=>{
+ const app=new cdk.App();const template=Template.fromStack(new FrontendPaperIntakeStack(app,'Continuation',{env:{account:'395567831870',region:'us-east-1'}}));
+ template.hasResourceProperties('AWS::Lambda::Function',{Runtime:'python3.12',Handler:'index.handler',Timeout:100,MemorySize:128,ReservedConcurrentExecutions:1,Environment:{Variables:{SECRET_ARN:Match.anyValue()}}});
+ template.hasResourceProperties('AWS::Events::Rule',{ScheduleExpression:'rate(1 minute)',Targets:Match.arrayWith([Match.objectLike({RetryPolicy:{MaximumEventAgeInSeconds:60,MaximumRetryAttempts:0}})])});
+ const policies=Object.values(template.findResources('AWS::IAM::Policy')) as any[];
+ const continuation=policies.find(policy=>policy.Properties.PolicyName.startsWith('PaperContinuationServiceRoleDefaultPolicy'));
+ expect(continuation).toBeDefined();expect(continuation.Properties.PolicyDocument.Statement).toHaveLength(1);
+ expect(continuation.Properties.PolicyDocument.Statement[0]).toMatchObject({Action:'secretsmanager:GetSecretValue',Effect:'Allow'});
+ expect(JSON.stringify(template.toJSON())).not.toMatch(/supabase\.co|sk-proj-|sb_secret_/);
 });
