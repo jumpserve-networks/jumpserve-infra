@@ -24,6 +24,31 @@ export class RealWorldTests extends Construct {
       throw new Error('Fetch the pinned backend runtime (see README) or set REAL_WORLD_RUNTIME_PATH to jumpserve-back-end/real_world.');
     }
     const code = lambda.Code.fromAsset(runtimePath, { exclude: ['__pycache__', '*.pyc', 'tests'] });
+    if (this.node.tryGetContext('cloudBenchmarksRetired') === true) {
+      const secret = secretsmanager.Secret.fromSecretNameV2(this, 'SupabaseServiceKey', 'jumpserve/supabase-service-key');
+      const service = new lambda.Function(this, 'Api', {
+        code, handler: 'api.handler', runtime: lambda.Runtime.PYTHON_3_12,
+        timeout: cdk.Duration.seconds(29), memorySize: 512,
+        environment: {
+          SUPABASE_URL: this.node.tryGetContext('supabaseUrl'),
+          SUPABASE_ANON_KEY: this.node.tryGetContext('supabaseAnonKey') ?? '',
+          SUPABASE_SECRET_ARN: secret.secretArn, RUNTIME_REVISION: revision,
+        },
+      });
+      this.apiFunction = service;
+      secret.grantRead(service);
+      const integration = new HttpLambdaIntegration('RealWorldIntegration', service);
+      for (const route of ['/real-world/tests', '/real-world/tests/{jobId}', '/real-world/tests/{jobId}/artifacts', '/real-world/reports', '/real-world/reports/{jobId}', '/real-world/reports/{jobId}/artifacts']) {
+        httpApi.addRoutes({ path: route, methods: [api.HttpMethod.GET], integration });
+      }
+      // The integration was originally allocated under the first catalog route.
+      // Preserve its deployed identity after retiring that execution-only route.
+      const resource = cdk.Stack.of(this).node.findAll().find(node =>
+        node instanceof api.CfnIntegration && node.integrationType === 'AWS_PROXY');
+      if (!(resource instanceof api.CfnIntegration)) throw new Error('Historical result integration is missing.');
+      resource.overrideLogicalId('BenchmarkApiGETrealworldregionsRealWorldIntegration6767E782');
+      return;
+    }
     // Retain legacy stores as migration backups; new runtime has no access.
     const table = new dynamodb.Table(this, 'Jobs', {
       partitionKey: { name: 'job_id', type: dynamodb.AttributeType.STRING },

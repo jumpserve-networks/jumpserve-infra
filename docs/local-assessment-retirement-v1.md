@@ -35,8 +35,9 @@ remain private. Original stopped-host disks are retained during decommissioning;
 they are not experiment results and must not become public skill assets.
 
 The website and read API continue serving assessments and existing measurement
-modules. The emulated/real-world benchmark services, module chat, database
-monitoring, DNS and hosting serve independent product features and are retained.
+modules. Module chat, DNS and hosting serve independent product features and are retained.
+The owner subsequently retired cloud benchmark execution, legacy AWS backups,
+old deployment assets and custom monitoring; see `cloud-benchmark-retirement-v1.md`.
 They are not required dependencies of the public assessment skill.
 
 The named platform supervisor is paused, automatic releases disabled and unfinished
