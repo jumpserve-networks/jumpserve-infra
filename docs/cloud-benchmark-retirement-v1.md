@@ -31,5 +31,5 @@ current stack references, non-CDK objects and retirement audit templates, reject
 concurrent stack changes and only removes old unreferenced immutable hash assets.
 The CDK bootstrap bucket and roles remain available for the website and read APIs.
 
-The local skill distribution and authenticated result import remain separate
-implementation work; this retirement does not establish that either has shipped.
+The standalone skill and optional MCP sharing are documented in
+`local-assessment-retirement-v1.md`. Their release is separate from this teardown.

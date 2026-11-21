@@ -4,12 +4,15 @@ The owner selected this architecture on 2026-11-20 and authorized shutdown of
 currently active work:
 
 Claude/Codex + skill → local assessment and experiments → optional JumpServe
-upload → public results.
+MCP sharing → public results.
 
-The skill must be independently installable without a JumpServe checkout or
-operator credentials. Its public distribution and supported authenticated bundle
-import are follow-up implementation work. Retiring the hosted runtime does not
-establish that either capability has shipped.
+The skill package is independently installable without a JumpServe checkout
+or operator credentials. The Next.js `/mcp` route stages an assessment preview,
+requires JumpServe account-owner approval in the browser, and submits the
+approved bundle to Supabase. Original PDFs, raw logs, and model work belong to
+the local workflow. Apply `202611210001_jumpserve_mcp_assessments.sql` before
+enabling the route with `JUMPSERVE_MCP_ENABLED=true`. Publishing the skill and
+enabling the live route are separate release steps.
 
 ## Retired services
 
@@ -24,7 +27,8 @@ establish that either capability has shipped.
 `cdk.json` selects `localAssessmentsOnly` and disables every hosted research
 execution flag. The retired host/access entrypoints reject that mode. The
 frontend credential role/secret are retained because existing assessment reads
-still use their server-only Supabase connection. They are not a new import API.
+still use their server-only Supabase connection. The Next.js MCP route can
+also resolve its server-only Supabase credential through the retained secret.
 
 ## Retained services and evidence
 
