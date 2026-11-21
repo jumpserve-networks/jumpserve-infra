@@ -38,9 +38,11 @@ def target():
     assert aws('sts', 'get-caller-identity')['Account'] == ACCOUNT, 'Wrong AWS account'
 
 def inventory():
+    if (OUT / 'aws-before.json').exists():
+        raise ValueError('The original inventory is frozen; use status to reconcile later operations')
     result = {'checked_at': dt.datetime.now(dt.timezone.utc).isoformat(), 'stacks': {}}
     for name in STACKS:
-        stack = aws('cloudformation', 'describe-stacks', '--stack-name', frozen_inventory()['stacks'][name]['stack']['StackId'])['Stacks'][0]
+        stack = aws('cloudformation', 'describe-stacks', '--stack-name', name)['Stacks'][0]
         resources = aws('cloudformation', 'list-stack-resources', '--stack-name', name)['StackResourceSummaries']
         template = aws('cloudformation', 'get-template', '--stack-name', name)['TemplateBody']
         rules = [aws('events', 'describe-rule', '--name', r['PhysicalResourceId'])
@@ -291,7 +293,7 @@ def status():
     result = {'stacks': {}, 'snapshots': aws('ec2', 'describe-snapshots', '--owner-ids', 'self',
         '--filters', 'Name=tag:Retirement,Values=local-skill-v1')['Snapshots']}
     for name in STACKS:
-        stack = aws('cloudformation', 'describe-stacks', '--stack-name', name)['Stacks'][0]
+        stack = aws('cloudformation', 'describe-stacks', '--stack-name', frozen_inventory()['stacks'][name]['stack']['StackId'])['Stacks'][0]
         result['stacks'][name] = {'status': stack['StackStatus']}
         if name in sets:
             change = aws('cloudformation', 'describe-change-set', '--change-set-name', sets[name]['Id'])
@@ -336,17 +338,22 @@ def delete_dedicated_stack(name):
 def scan_experiments():
     regions = aws('ec2', 'describe-regions')['Regions']
     def scan(region):
-        raw = subprocess.check_output(['aws', 'ec2', 'describe-instances', '--profile', 'default',
-            '--region', region['RegionName'], '--output', 'json', '--filters',
-            'Name=tag:Project,Values=JumpServe,JumpServeRealWorld,JumpServeNetworkPackage',
-            'Name=instance-state-name,Values=pending,running,stopping,stopped'], timeout=120)
-        data = json.loads(raw)
-        return {'region': region['RegionName'], 'instances': [i for r in data['Reservations'] for i in r['Instances']]}
+        try:
+            raw = subprocess.check_output(['aws', 'ec2', 'describe-instances', '--profile', 'default',
+                '--region', region['RegionName'], '--output', 'json', '--cli-connect-timeout', '5', '--cli-read-timeout', '10', '--filters',
+                'Name=tag:Project,Values=JumpServe,JumpServeRealWorld,JumpServeNetworkPackage',
+                'Name=instance-state-name,Values=pending,running,stopping,stopped'],
+                timeout=25, env={**os.environ, 'AWS_MAX_ATTEMPTS': '1'}, stderr=subprocess.PIPE)
+            data = json.loads(raw)
+            return {'region': region['RegionName'], 'checked': True, 'instances': [i for r in data['Reservations'] for i in r['Instances']]}
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as error:
+            return {'region': region['RegionName'], 'checked': False, 'error': type(error).__name__, 'instances': None}
     with ThreadPoolExecutor(max_workers=6) as pool: results = list(pool.map(scan, regions))
     save('experiment-host-scan.json', {'checked_at': dt.datetime.now(dt.timezone.utc).isoformat(), 'regions': results})
-    print(json.dumps({'regions_checked': len(results), 'instances': [
+    print(json.dumps({'regions_checked': sum(r['checked'] for r in results),
+        'unverified_regions': [r['region'] for r in results if not r['checked']], 'instances': [
         {'region': r['region'], 'id': i['InstanceId'], 'state': i['State']['Name']}
-        for r in results for i in r['instances']]}))
+        for r in results for i in r['instances'] or []]}))
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)

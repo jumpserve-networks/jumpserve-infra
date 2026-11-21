@@ -2,6 +2,12 @@ import copy
 import importlib.util
 from pathlib import Path
 import unittest
+from unittest.mock import patch
+import contextlib
+import io
+import json
+import subprocess
+import tempfile
 
 spec = importlib.util.spec_from_file_location('retirement', Path(__file__).resolve().parents[1] / 'bin/retire-hosted-assessments.py')
 retirement = importlib.util.module_from_spec(spec)
@@ -47,5 +53,26 @@ class RetirementTests(unittest.TestCase):
         result, removed, changed = retirement.render('JumpServeFrontendPaperIntakeStack', template)
         self.assertEqual(set(result['Resources']), {'Credentials', 'ComputeRole'})
         self.assertEqual(changed, [])
+
+    def test_status_reconciles_deleted_stacks_using_original_ids(self):
+        calls = []
+        def aws(*args):
+            calls.append(args)
+            if args[0] == 'ec2': return {'Snapshots': []}
+            return {'Stacks': [{'StackStatus': 'DELETE_COMPLETE'}]}
+        before = {'stacks': {name: {'stack': {'StackId': 'original-id-' + name}} for name in retirement.STACKS}}
+        with tempfile.TemporaryDirectory() as directory, patch.object(retirement, 'OUT', Path(directory)), patch.object(retirement, 'frozen_inventory', return_value=before), patch.object(retirement, 'aws', side_effect=aws), contextlib.redirect_stdout(io.StringIO()):
+            retirement.status()
+        for call in calls:
+            if call[0] == 'cloudformation': self.assertTrue(call[3].startswith('original-id-'))
+
+    def test_unreachable_region_remains_unverified_in_retained_scan(self):
+        output = io.StringIO()
+        with patch.object(retirement, 'aws', return_value={'Regions': [{'RegionName': 'unreachable-region'}]}), patch.object(retirement.subprocess, 'check_output', side_effect=subprocess.TimeoutExpired('aws', 25)), patch.object(retirement, 'save') as saved, contextlib.redirect_stdout(output):
+            retirement.scan_experiments()
+        report = json.loads(output.getvalue())
+        self.assertEqual(report['regions_checked'], 0)
+        self.assertEqual(report['unverified_regions'], ['unreachable-region'])
+        self.assertIsNone(saved.call_args.args[1]['regions'][0]['instances'])
 
 if __name__ == '__main__': unittest.main()
