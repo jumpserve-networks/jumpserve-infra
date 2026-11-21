@@ -61,4 +61,11 @@ class CdnDestructionTests(unittest.TestCase):
         batch = json.loads(calls[-1][-1])
         self.assertEqual([x['ResourceRecordSet']['Name'] for x in batch['Changes']], ['origin.jumpserve.dev.'])
 
+    def test_public_verification_rejects_http_and_server_render_failures(self):
+        with patch.object(retirement.subprocess, 'check_output', return_value=b'<html>Healthy page</html>\n200'):
+            self.assertEqual(retirement.read_public_page('/'), {'path': '/', 'status': 200})
+        for payload in (b'<html>Unavailable</html>\n503', b'<html>Application error: a server-side exception</html>\n200'):
+            with patch.object(retirement.subprocess, 'check_output', return_value=payload):
+                with self.assertRaises(AssertionError): retirement.read_public_page('/')
+
 if __name__ == '__main__': unittest.main()

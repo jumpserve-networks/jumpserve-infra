@@ -11,7 +11,6 @@ import os
 import re
 from pathlib import Path
 import subprocess
-import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / '.test-artifacts/cdn-study-destruction-20261120'
@@ -161,6 +160,17 @@ def status():
     save('aws-status.json', result)
     print(json.dumps(result))
 
+def read_public_page(path):
+    # Use the system TLS client, including its normal certificate verification.
+    # A framework Python install may not have the machine's CA bundle installed.
+    raw = subprocess.check_output(['curl', '--fail', '--silent', '--show-error', '--max-time', '30',
+        '--write-out', '\n%{http_code}', 'https://jumpserve.quaint-lab.org' + path], timeout=35)
+    body, status_code = raw.decode().rsplit('\n', 1)
+    assert status_code == '200', 'Public page did not return HTTP 200'
+    assert '<html' in body and 'Application error: a server-side exception' not in body
+    if path != '/': assert 'Shared local assessment' in body
+    return {'path': path, 'status': int(status_code)}
+
 def verify():
     before = original()
     result = {'checked_at': dt.datetime.now(dt.timezone.utc).isoformat(), 'stacks': {},
@@ -211,12 +221,7 @@ def verify():
     assert not [s for s in json.loads(snapshots) if str(s.get('resource_id')) == '595750731'], 'DO origin snapshot remains'
     result['public_http'] = []
     for path in ('/', '/research-verification/assessment/b702bf86-5b1e-42d4-8262-f4183d6da4fc'):
-        with urllib.request.urlopen('https://jumpserve.quaint-lab.org' + path, timeout=30) as response:
-            assert response.status == 200
-            body = response.read(2_000_000).decode()
-            assert '<html' in body and 'Application error: a server-side exception' not in body
-            if path != '/': assert 'Shared local assessment' in body
-            result['public_http'].append({'path': path, 'status': response.status})
+        result['public_http'].append(read_public_page(path))
     result.update(passed=True, bucket_deleted=True, distributions_deleted=2, certificates_deleted=len(study_certificates),
         unrelated_distributions_preserved=len(other), fastly_dns_preserved=True)
     save('verification.json', result)
