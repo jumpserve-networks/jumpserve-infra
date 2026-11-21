@@ -27,6 +27,7 @@ export class FrontendPaperIntakeStack extends cdk.Stack {
       description:'Production Amplify SSR: read only the paper-intake credential secret.',
     });
     role.addToPolicy(new iam.PolicyStatement({actions:['secretsmanager:GetSecretValue'],resources:[secret.secretArn]}));
+    if (this.node.tryGetContext('localAssessmentsOnly') !== true) {
     const continuation=new lambda.Function(this,'PaperContinuation',{
       runtime:lambda.Runtime.PYTHON_3_12,handler:'index.handler',
       code:lambda.Code.fromAsset(path.join(__dirname,'../assets/frontend-paper-continuation'),{exclude:['**/__pycache__/**','**/*.pyc']}),
@@ -42,6 +43,7 @@ export class FrontendPaperIntakeStack extends cdk.Stack {
       schedule:events.Schedule.rate(cdk.Duration.minutes(1)),
       targets:[new targets.LambdaFunction(continuation,{retryAttempts:0,maxEventAge:cdk.Duration.minutes(1)})],
     });
+    }
     new cdk.CfnOutput(this,'SecretArn',{value:secret.secretArn});
     new cdk.CfnOutput(this,'ComputeRoleArn',{value:role.roleArn});
   }

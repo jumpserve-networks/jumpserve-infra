@@ -49,6 +49,8 @@ export class ResearchWorkflow extends Construct {
   constructor(scope: Construct, id: string, httpApi: api.HttpApi, executors?: {emulated:lambda.IFunction;realWorld:lambda.IFunction;vpc:ec2.IVpc}) {
     super(scope, id);
     if (cdk.Stack.of(this).account !== '395567831870') throw new Error('Research workflow requires AWS account 395567831870.');
+    const localOnly = this.node.tryGetContext('localAssessmentsOnly') === true;
+    if (localOnly && ['researchQueueEnabled', 'researchAutonomyEnabled', 'researchOpenClawEnabled', 'researchExperimentBuilderEnabled', 'researchAutonomyRepairEnabled', 'networkExecutionEnabled', 'networkPackagesEnabled'].some(key => researchWorkflowIsEnabled(this.node.tryGetContext(key)))) throw new Error('Hosted assessment execution is retired. Use the local Claude/Codex skill architecture.');
     const runtime = process.env.RESEARCH_WORKFLOW_RUNTIME_PATH ?? path.join(__dirname, '..', '.runtime-backend', 'research_workflow');
     const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'research-workflow-runtime.json'), 'utf8')) as { files: Record<string, string> };
     for (const [file, sha256] of Object.entries(manifest.files)) {
@@ -164,10 +166,11 @@ export class ResearchWorkflow extends Construct {
     secret.grantRead(fn);
     fn.addEnvironment('RESEARCH_BUILDER_ENABLED',String(builderEnabled));
     const integration = new HttpLambdaIntegration('ResearchWorkflowIntegration', fn);
-    httpApi.addRoutes({ path: '/research/paper-uploads', methods: [api.HttpMethod.POST], integration });
-    httpApi.addRoutes({ path: '/research/studies/{studyId}/autonomy', methods: [api.HttpMethod.GET, api.HttpMethod.POST], integration });
+    // Local assessment mode exposes only the existing read paths.
+    if (!localOnly) httpApi.addRoutes({ path: '/research/paper-uploads', methods: [api.HttpMethod.POST], integration });
+    httpApi.addRoutes({ path: '/research/studies/{studyId}/autonomy', methods: localOnly ? [api.HttpMethod.GET] : [api.HttpMethod.GET, api.HttpMethod.POST], integration });
     for (const route of ['/research/capabilities', '/research/papers', '/research/papers/{studyId}/title', '/research/queue', '/research/studies', '/research/studies/{studyId}', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/prepare', '/research/studies/{studyId}/idea', '/research/studies/{studyId}/gap-experiments', '/research/studies/{studyId}/claim-design']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.GET], integration });
-    for (const route of ['/research/studies', '/research/studies/{studyId}/records', '/research/studies/{studyId}/protocols', '/research/studies/{studyId}/runs', '/research/studies/{studyId}/publish', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/queue-actions', '/research/studies/{studyId}/prepare', '/research/studies/{studyId}/idea','/research/studies/{studyId}/network', '/research/studies/{studyId}/gap-experiments', '/research/studies/{studyId}/claim-design']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.POST], integration });
+    if (!localOnly) for (const route of ['/research/studies', '/research/studies/{studyId}/records', '/research/studies/{studyId}/protocols', '/research/studies/{studyId}/runs', '/research/studies/{studyId}/publish', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/queue-actions', '/research/studies/{studyId}/prepare', '/research/studies/{studyId}/idea','/research/studies/{studyId}/network', '/research/studies/{studyId}/gap-experiments', '/research/studies/{studyId}/claim-design']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.POST], integration });
     // Bind existing routes first to preserve the integration's deployed identity.
     for (const path of ['/research/prompts', '/research/prompts/{versionId}', '/research/papers/{studyId}']) httpApi.addRoutes({ path, methods: [api.HttpMethod.GET], integration });
     if (queueEnabled) {

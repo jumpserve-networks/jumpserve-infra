@@ -1,6 +1,12 @@
 import * as cdk from 'aws-cdk-lib';
 import {Template,Match} from 'aws-cdk-lib/assertions';
 import {FrontendPaperIntakeStack} from '../lib/frontend-paper-intake-stack';
+test('local skill architecture retains result-read credentials without background assessment compute',()=>{
+ const app=new cdk.App({context:{localAssessmentsOnly:true}});
+ const template=Template.fromStack(new FrontendPaperIntakeStack(app,'LocalResults',{env:{account:'395567831870',region:'us-east-1'}}));
+ template.resourceCountIs('AWS::Lambda::Function',0);template.resourceCountIs('AWS::Events::Rule',0);
+ template.resourceCountIs('AWS::SecretsManager::Secret',1);template.resourceCountIs('AWS::IAM::Role',1);
+});
 test('paper-intake runtime role can read only its retained secret and trusts the production app',()=>{
  const app=new cdk.App();const template=Template.fromStack(new FrontendPaperIntakeStack(app,'Intake',{env:{account:'395567831870',region:'us-east-1'}}));
  template.resourceCountIs('AWS::Amplify::App',0);template.resourceCountIs('AWS::Amplify::Branch',0);
