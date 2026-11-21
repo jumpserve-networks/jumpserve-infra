@@ -355,12 +355,66 @@ def scan_experiments():
         {'region': r['region'], 'id': i['InstanceId'], 'state': i['State']['Name']}
         for r in results for i in r['instances'] or []]}))
 
+def retire_workflows():
+    names = ('intake-bootstrap-diagnostics.yml', 'intake-publisher-release.yml', 'platform-release.yml',
+        'research-runtime-release.yml', 'supervisor-runtime-release.yml', 'platform-diagnostics.yml')
+    receipts = []
+    for name in names:
+        path = 'repos/jumpserve-networks/jumpserve-infra/actions/workflows/' + name
+        previous = json.loads(subprocess.check_output(['gh', 'api', path], timeout=30))
+        subprocess.check_call(['gh', 'api', '--method', 'PUT', path + '/disable'], timeout=30)
+        current = json.loads(subprocess.check_output(['gh', 'api', path], timeout=30))
+        assert current['state'] == 'disabled_manually'
+        receipts.append({'name': name, 'id': current['id'], 'before': previous['state'], 'after': current['state']})
+        save('retired-workflows.json', receipts)
+    print(json.dumps({'disabled_workflows': len(receipts)}))
+
+def verify():
+    before = frozen_inventory()
+    plan = json.loads((OUT / 'change-plan.json').read_text())
+    receipts = {'checked_at': dt.datetime.now(dt.timezone.utc).isoformat(), 'stacks': {}, 'retained_logs': [], 'hosts': []}
+    for name, data in before['stacks'].items():
+        current = aws('cloudformation', 'describe-stacks', '--stack-name', data['stack']['StackId'])['Stacks'][0]
+        expected = 'DELETE_COMPLETE' if name in ('JumpServeIntakeStack', 'JumpServeOpenClawStack', 'JumpServePlatformAccessStack') else data['stack']['StackStatus']
+        assert current['StackStatus'] == expected, (name, current['StackStatus'])
+        receipts['stacks'][name] = current['StackStatus']
+        if name in plan:
+            actual = aws('cloudformation', 'get-template', '--stack-name', data['stack']['StackId'])['TemplateBody']
+            desired = json.loads((OUT / (name + '-retired.json')).read_text())
+            assert actual == desired, name + ' does not match the reviewed template'
+            for logical in plan[name]['removed']:
+                resource = next(r for r in data['resources'] if r['LogicalResourceId'] == logical)
+                if resource['ResourceType'] == 'AWS::Logs::LogGroup':
+                    physical = resource['PhysicalResourceId']
+                    groups = aws('logs', 'describe-log-groups', '--log-group-name-prefix', physical)['logGroups']
+                    assert any(g['logGroupName'] == physical for g in groups), 'Historical logs missing'
+                    receipts['retained_logs'].append(physical)
+        for resource in data['resources']:
+            if resource['ResourceType'] == 'AWS::EC2::Instance':
+                host = aws('ec2', 'describe-instances', '--instance-ids', resource['PhysicalResourceId'])['Reservations'][0]['Instances'][0]
+                assert host['State']['Name'] == 'terminated'
+                receipts['hosts'].append({'id': host['InstanceId'], 'state': host['State']['Name']})
+    functions = set(aws('lambda', 'list-functions', '--query', 'Functions[].FunctionName'))
+    removed_functions = [r['PhysicalResourceId'] for name, data in before['stacks'].items() if name in plan
+        for r in data['resources'] if r['LogicalResourceId'] in plan[name]['removed'] and r['ResourceType'] == 'AWS::Lambda::Function']
+    assert not functions & set(removed_functions), 'A retired function remains'
+    rules = {r['Name'] for r in aws('events', 'list-rules', '--name-prefix', 'JumpServe')['Rules']}
+    removed_rules = [r['PhysicalResourceId'] for name, data in before['stacks'].items() if name in plan
+        for r in data['resources'] if r['LogicalResourceId'] in plan[name]['removed'] and r['ResourceType'] == 'AWS::Events::Rule']
+    assert not rules & set(removed_rules), 'A retired schedule remains'
+    receipts.update(passed=True, removed_functions=len(removed_functions), removed_schedules=len(removed_rules),
+        removed_template_resources=sum(len(p['removed']) for p in plan.values()),
+        snapshots=aws('ec2', 'describe-snapshots', '--owner-ids', 'self', '--filters', 'Name=tag:Retirement,Values=local-skill-v1')['Snapshots'])
+    save('aws-verification.json', receipts)
+    print(json.dumps({k: v for k, v in receipts.items() if k not in ('snapshots', 'retained_logs')}, default=str))
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('mode', choices=['inventory', 'freeze', 'snapshot', 'prepare', 'propose', 'execute', 'status', 'retire-intake', 'retire-access', 'retire-openclaw', 'scan-experiments'])
+    parser.add_argument('mode', choices=['inventory', 'freeze', 'snapshot', 'prepare', 'propose', 'execute', 'status', 'retire-intake', 'retire-access', 'retire-openclaw', 'scan-experiments', 'retire-workflows', 'verify'])
     args = parser.parse_args()
     if args.mode != 'prepare': target()
     dedicated = {'retire-intake': 'JumpServeIntakeStack', 'retire-access': 'JumpServePlatformAccessStack', 'retire-openclaw': 'JumpServeOpenClawStack'}
     if args.mode in dedicated: delete_dedicated_stack(dedicated[args.mode])
     elif args.mode == 'scan-experiments': scan_experiments()
+    elif args.mode == 'retire-workflows': retire_workflows()
     else: globals()[args.mode]()
