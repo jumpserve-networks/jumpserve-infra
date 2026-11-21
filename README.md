@@ -3,6 +3,11 @@
 AWS CDK infrastructure for the JumpServe frontend, benchmark API and AI tools.
 No EC2 instance needs to run continuously for benchmarks.
 
+Paper assessments now use the owner-selected local Claude/Codex skill
+architecture. Hosted paper workers and supervisor services are retired; see
+[the retirement boundary and procedure](docs/local-assessment-retirement-v1.md).
+The public skill package and optional authenticated import remain follow-up work.
+
 ## Architecture
 
 - Amplify hosts the Next.js frontend at https://jumpserve.quaint-lab.org.

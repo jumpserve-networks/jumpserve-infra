@@ -1,5 +1,16 @@
 # Repository guidance
 
+## Owner-directed architecture change, 2026-11-20
+
+Paper assessment and experiment execution now belong in a standalone local
+Claude/Codex skill. JumpServe retains evidence, public results and an optional
+authenticated import boundary. Hosted paper intake, orchestration, research
+execution workers and the named platform supervisor are retired. Do not recreate
+their hosts, schedules or release roles under the historical standing authority
+below. Reinstating hosted execution requires a new explicit owner instruction.
+Preserve original evidence, uncertain outcomes and authorization history.
+See `docs/local-assessment-retirement-v1.md`.
+
 Use Context7 for library/API documentation and configuration work. Prefer
 connected tools and ordinary local checks; preserve unrelated local changes.
 

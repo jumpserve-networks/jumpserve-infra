@@ -4,6 +4,7 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as secrets from 'aws-cdk-lib/aws-secretsmanager';
 import {IntakeWorker} from '../lib/intake-worker';
 const app=new cdk.App();
+if(app.node.tryGetContext('localAssessmentsOnly')===true)throw new Error('The hosted paper intake stack is retired under the local skill architecture.');
 const stack=new cdk.Stack(app,'JumpServeIntakeStack',{env:{account:'395567831870',region:'us-east-1'}});
 new IntakeWorker(stack,'Intake',{vpc:ec2.Vpc.fromLookup(stack,'DefaultVpc',{isDefault:true}),
  ownerRoleArn:'arn:aws:iam::395567831870:role/JumpServeOpenClawStack-WorkerRoleAAEB1603-AMhySy8UAI7S',

@@ -25,7 +25,8 @@
     "benchmarkApiUrl": "https://d3o7xdethb.execute-api.us-east-1.amazonaws.com",
     "agentUrl": "https://idk3jouyc6g2uolmge5ctuizwq0kpgcf.lambda-url.us-east-1.on.aws/",
     "researchWorkflowEnabled": true,
-    "researchQueueEnabled": true,
+    "localAssessmentsOnly": true,
+    "researchQueueEnabled": false,
     "researchReservedConcurrencyEnabled": false,
     "@aws-cdk/aws-signer:signingProfileNamePassedToCfn": true,
     "@aws-cdk/aws-ecs-patterns:secGroupsDisablesImplicitOpenListener": true,
@@ -111,11 +112,11 @@
     "@aws-cdk/aws-route53-patterns:useDistribution": true,
     "@aws-cdk/aws-cloudfront:defaultFunctionRuntimeV2_0": true,
     "@aws-cdk/aws-elasticloadbalancingv2:usePostQuantumTlsPolicy": true,
-    "networkExecutionEnabled": true,
+    "networkExecutionEnabled": false,
     "networkPackagesEnabled": false,
-    "researchAutonomyEnabled": true,
-    "researchOpenClawEnabled": true,
-    "researchExperimentBuilderEnabled": true,
+    "researchAutonomyEnabled": false,
+    "researchOpenClawEnabled": false,
+    "researchExperimentBuilderEnabled": false,
     "networkPackageAmiId": "ami-033ea4ff4a9c726dc"
   }
 }
