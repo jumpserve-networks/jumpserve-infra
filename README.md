@@ -8,6 +8,10 @@ architecture. Hosted paper workers and supervisor services are retired; see
 [the retirement boundary and procedure](docs/local-assessment-retirement-v1.md).
 The public skill package and optional authenticated import remain follow-up work.
 
+The August 2026 CDN cache-study AWS and DigitalOcean resources have a separate
+[owner-directed retirement boundary](docs/cdn-study-retirement-v1.md). Cloudflare
+and Fastly are excluded from that teardown by the owner's latest instruction.
+
 ## Architecture
 
 - Amplify hosts the Next.js frontend at https://jumpserve.quaint-lab.org.
