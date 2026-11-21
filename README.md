@@ -1,12 +1,16 @@
 # JumpServe Infrastructure
 
-AWS CDK infrastructure for the JumpServe frontend, benchmark API and AI tools.
-No EC2 instance needs to run continuously for benchmarks.
+AWS CDK infrastructure for JumpServe hosting, historical result APIs and
+existing website chat.
 
-Paper assessments now use the owner-selected local Claude/Codex skill
-architecture. Hosted paper workers and supervisor services are retired; see
-[the retirement boundary and procedure](docs/local-assessment-retirement-v1.md).
-The public skill package and optional authenticated import remain follow-up work.
+Claude Code and Codex use the standalone skill for paper analysis and experiments
+on the user's machine. The Next.js MCP connector accepts selected results after
+owner approval. Apply [the additive Supabase migration](database/202611210001_jumpserve_mcp_assessments.sql)
+before enabling the connector. It uses the existing hosting and database.
+See [local assessment architecture and retirement](docs/local-assessment-retirement-v1.md).
+
+Run `python3 -B test/check_jumpserve_mcp_database.py` against an isolated local
+PostgreSQL server on port 54477 to verify the connector migration and grants.
 
 The August 2026 CDN cache-study AWS and DigitalOcean resources have a separate
 [owner-directed retirement boundary](docs/cdn-study-retirement-v1.md). Cloudflare
@@ -15,11 +19,13 @@ and Fastly are excluded from that teardown by the owner's latest instruction.
 ## Architecture
 
 - Amplify hosts the Next.js frontend at https://jumpserve.quaint-lab.org.
-- API Gateway and Lambda launch disposable EC2 machines for each test module.
-- Each instance boots a verified AMI, saves results to Supabase, streams logs to
-  CloudWatch and terminates automatically after success or failure.
-- Backend deployments briefly create an AMI builder and verification instances.
-- The agent stack provides the AI tools independently of benchmark compute.
+- The shared API Gateway and its two read Lambdas serve historical research
+  and real-world results.
+- Supabase stores assessment evidence, configurations and measurements.
+- The agent stack serves existing website chat independently.
+- Cloud benchmark launchers, AMI builds, hosted paper workers and supervisors
+  are retired. Sections below about those systems describe retained code and
+  historical operations.
 
 AWS account: `395567831870`; region: `us-east-1`.
 The legacy `JumpServeEc2Stack` is removed from the CDK app so `deploy --all` cannot

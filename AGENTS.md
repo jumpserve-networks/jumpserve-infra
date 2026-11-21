@@ -3,8 +3,12 @@
 ## Owner-directed architecture change, 2026-11-20
 
 Paper assessment and experiment execution now belong in a standalone local
-Claude/Codex skill. JumpServe retains evidence, public results and an optional
-authenticated import boundary. Hosted paper intake, orchestration, research
+Claude/Codex skill. JumpServe retains evidence and public results. The Next.js
+MCP connector previews and submits optional, owner-approved assessments using
+scoped credentials. Supabase stores the selected shared fields and relational
+measurements. Apply the additive connector migration before enabling MCP on a
+deployment. Preserve existing routes, RLS, and evidence.
+Hosted paper intake, orchestration, research
 execution workers and the named platform supervisor are retired. Do not recreate
 their hosts, schedules or release roles under the historical standing authority
 below. Reinstating hosted execution requires a new explicit owner instruction.
