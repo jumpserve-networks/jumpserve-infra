@@ -19,6 +19,8 @@ permissions:
 
 jobs:
   image:
+    # Owner retired hosted benchmark execution on 2026-11-21.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     timeout-minutes: 110
     env:

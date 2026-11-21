@@ -26,6 +26,7 @@
     "agentUrl": "https://idk3jouyc6g2uolmge5ctuizwq0kpgcf.lambda-url.us-east-1.on.aws/",
     "researchWorkflowEnabled": true,
     "localAssessmentsOnly": true,
+    "cloudBenchmarksRetired": true,
     "researchQueueEnabled": false,
     "researchReservedConcurrencyEnabled": false,
     "@aws-cdk/aws-signer:signingProfileNamePassedToCfn": true,

@@ -18,6 +18,29 @@ export class BenchmarkOrchestratorStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
+    if (this.node.tryGetContext('cloudBenchmarksRetired') === true) {
+      if (this.node.tryGetContext('localAssessmentsOnly') !== true) {
+        throw new Error('Cloud benchmark retirement requires local assessment execution.');
+      }
+      // Keep construct identities and the shared API origin for historical reads.
+      const httpApi = new apigatewayv2.HttpApi(this, 'BenchmarkApi', {
+        apiName: 'JumpServeBenchmarkApi',
+        corsPreflight: {
+          allowOrigins: ['*'],
+          allowMethods: [apigatewayv2.CorsHttpMethod.GET, apigatewayv2.CorsHttpMethod.POST, apigatewayv2.CorsHttpMethod.OPTIONS],
+          allowHeaders: ['Content-Type', 'Authorization'],
+        },
+      });
+      new RealWorldTests(this, 'RealWorldTests', httpApi);
+      if (researchWorkflowIsEnabled(this.node.tryGetContext('researchWorkflowEnabled'))) {
+        new ResearchWorkflow(this, 'ResearchWorkflow', httpApi);
+      }
+      new cdk.CfnOutput(this, 'BenchmarkApiUrl', {
+        value: httpApi.apiEndpoint, description: 'Benchmark API Gateway URL',
+      });
+      return;
+    }
+
     const supabaseUrl = this.node.tryGetContext('supabaseUrl');
 
     // Look up existing resources

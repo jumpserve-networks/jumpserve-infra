@@ -11,6 +11,12 @@ below. Reinstating hosted execution requires a new explicit owner instruction.
 Preserve original evidence, uncertain outcomes and authorization history.
 See `docs/local-assessment-retirement-v1.md`.
 
+On 2026-11-21 the owner also retired cloud benchmark launchers/orchestration,
+legacy AWS backup stores, obsolete AMIs/assets and custom database monitoring.
+Keep `cloudBenchmarksRetired` enabled. Preserve the shared historical read APIs,
+Supabase evidence, website hosting, DNS and website AI chat. See
+`docs/cloud-benchmark-retirement-v1.md`.
+
 Use Context7 for library/API documentation and configuration work. Prefer
 connected tools and ordinary local checks; preserve unrelated local changes.
 

@@ -173,6 +173,12 @@ export class ResearchWorkflow extends Construct {
     if (!localOnly) for (const route of ['/research/studies', '/research/studies/{studyId}/records', '/research/studies/{studyId}/protocols', '/research/studies/{studyId}/runs', '/research/studies/{studyId}/publish', '/research/studies/{studyId}/queue', '/research/studies/{studyId}/queue-actions', '/research/studies/{studyId}/prepare', '/research/studies/{studyId}/idea','/research/studies/{studyId}/network', '/research/studies/{studyId}/gap-experiments', '/research/studies/{studyId}/claim-design']) httpApi.addRoutes({ path: route, methods: [api.HttpMethod.POST], integration });
     // Bind existing routes first to preserve the integration's deployed identity.
     for (const path of ['/research/prompts', '/research/prompts/{versionId}', '/research/papers/{studyId}']) httpApi.addRoutes({ path, methods: [api.HttpMethod.GET], integration });
+    if (localOnly && this.node.tryGetContext('cloudBenchmarksRetired') === true) {
+      const resource = cdk.Stack.of(this).node.findAll().find(node =>
+        node instanceof api.CfnIntegration && node.integrationUri === fn.functionArn);
+      if (!(resource instanceof api.CfnIntegration)) throw new Error('Historical research integration is missing.');
+      resource.overrideLogicalId('BenchmarkApiPOSTresearchpaperuploadsResearchWorkflowIntegration8D8B5D65');
+    }
     if (queueEnabled) {
       const worker = new lambda.Function(this, 'QueueWorker', {
         code: lambda.Code.fromAsset(runtime), handler: 'worker.handler', runtime: lambda.Runtime.PYTHON_3_12,

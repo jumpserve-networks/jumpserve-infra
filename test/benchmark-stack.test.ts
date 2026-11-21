@@ -3,6 +3,23 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { Template, Match } from 'aws-cdk-lib/assertions';
 import { BenchmarkOrchestratorStack } from '../lib/benchmark-orchestrator-stack';
 
+test('retired cloud execution retains reads without execution authority or legacy stores', () => {
+  const app = new cdk.App({context: {supabaseUrl: 'https://regphejnlvfpyokpniny.supabase.co',
+    cloudBenchmarksRetired: true, localAssessmentsOnly: true, researchWorkflowEnabled: true}});
+  const template = Template.fromStack(new BenchmarkOrchestratorStack(app, 'ReadOnly', {
+    env: {account: '395567831870', region: 'us-east-1'},
+  }));
+  for (const type of ['AWS::EC2::SecurityGroup','AWS::IAM::InstanceProfile','AWS::StepFunctions::StateMachine',
+    'AWS::Events::Rule','AWS::DynamoDB::Table','AWS::S3::Bucket']) template.resourceCountIs(type,0);
+  template.resourceCountIs('AWS::Lambda::Function',2);
+  template.hasResourceProperties('AWS::ApiGatewayV2::Route',{RouteKey:'GET /research/papers'});
+  template.hasResourceProperties('AWS::ApiGatewayV2::Route',{RouteKey:'GET /real-world/reports'});
+  for (const route of Object.values(template.findResources('AWS::ApiGatewayV2::Route')) as any[]) {
+    expect(route.Properties.RouteKey.startsWith('GET ')).toBe(true);
+  }
+  expect(JSON.stringify(template.toJSON())).not.toMatch(/states:StartExecution|ec2:RunInstances|STATE_MACHINE_ARN|INSTANCE_PROFILE_ARN/);
+});
+
 test('the selected AMI and bootstrap mode always change together', () => {
   const app = new cdk.App({ context: { supabaseUrl: 'https://example.supabase.co' } });
   const lookup = jest.spyOn(ec2.Vpc, 'fromLookup').mockImplementation((scope, id) => (
