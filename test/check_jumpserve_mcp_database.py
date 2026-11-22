@@ -1,6 +1,7 @@
 """Apply the connector migration on an isolated PostgreSQL database and exercise its grants."""
 import json
 from concurrent.futures import ThreadPoolExecutor
+from uuid import uuid4
 
 import check_research_ideas_database as fixture
 
@@ -19,7 +20,8 @@ def main():
       alter table storage.objects add column name text, add column created_at timestamptz;
     """)
     for name in ("202611110001_next_paper_intake.sql", "202611110002_assessment_deletion.sql",
-                 "202611210001_jumpserve_mcp_assessments.sql", "202611220001_jumpserve_skill_pdf_copies.sql"):
+                 "202611210001_jumpserve_mcp_assessments.sql", "202611220001_jumpserve_skill_pdf_copies.sql",
+                 "202611220002_jumpserve_assessment_sources.sql"):
         query((fixture.ROOT / "database" / name).read_text())
 
     resource = quote("https://jumpserve.example.test/mcp")
@@ -111,6 +113,37 @@ def main():
     """)
     assert query("select research_skill_expired_pdfs()", role="service_role") == "jumpserve-mcp/11111111-1111-4111-8111-111111111111.pdf"
     print("PASS PDF verification gate and abandoned object cleanup selection", flush=True)
+
+    source_ids = [str(uuid4()), str(uuid4())]
+    checksum, bundle_hash = quote(bundle["paper"]["sha256"]), quote('d' * 64)
+    for source_id in source_ids:
+        query(f"""insert into research_skill_sources(id,owner_id,sha256,byte_count)
+          values ({quote(source_id)},{actor},{checksum},10) on conflict (id) do nothing""", role="service_role")
+
+    def stage_source(source_id, owner=actor, document=attached, digest=bundle_hash):
+        sql = f"select research_skill_preview_for_source({owner},{digest},{fixture.sql_json(document)},{quote(source_id)})"
+        return json.loads(query(sql, role="service_role"))
+
+    source_id = source_ids[0]
+    source = quote(source_id)
+    for role in ("anon", "authenticated"):
+        fixture.rejects(lambda: query("select * from research_skill_sources", role=role))
+        fixture.rejects(lambda: query(f"select research_skill_preview_for_source({actor},{bundle_hash},{fixture.sql_json(attached)},{source})", role=role))
+    fixture.rejects(lambda: query(f"update research_skill_sources set byte_count=11 where id={source}", role="service_role"))
+    fixture.rejects(lambda: stage_source(source_id, owner=other))
+    fixture.rejects(lambda: stage_source(source_id, document=bundle))
+    differing_pdf = {**attached, "paper": {**attached["paper"], "byte_count": 11}}
+    fixture.rejects(lambda: stage_source(source_id, document=differing_pdf))
+    assert stage_source(source_id) == stage_source(source_id) == {"preview_id": source_id, "study_id": None}
+    fixture.rejects(lambda: stage_source(source_id, digest=quote('e' * 64)))
+    assert stage_source(source_ids[1])["preview_id"] == source_ids[1]
+    assert json.loads(query(stage_pdf, role="service_role"))["preview_id"] == pdf_id
+    assert not query(f"select research_skill_shared({source})", role="anon")
+    query(f"update research_skill_submissions set pdf_verified_at=now(), approved_at=now() where id={source}", role="service_role")
+    assert query(f"select research_skill_submit({actor},{source})", role="service_role") == source_id
+    assert stage_source(source_id)["study_id"] == source_id
+    assert json.loads(query(f"select research_skill_shared({source})", role="anon")) == attached
+    print("PASS private and immutable source ownership, exact PDF binding, and stable assessment IDs", flush=True)
 
 
 if __name__ == "__main__":
