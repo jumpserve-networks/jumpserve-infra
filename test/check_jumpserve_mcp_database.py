@@ -21,7 +21,7 @@ def main():
     """)
     for name in ("202611110001_next_paper_intake.sql", "202611110002_assessment_deletion.sql",
                  "202611210001_jumpserve_mcp_assessments.sql", "202611220001_jumpserve_skill_pdf_copies.sql",
-                 "202611220002_jumpserve_assessment_sources.sql"):
+                 "202611220002_jumpserve_assessment_sources.sql", "202611220003_jumpserve_mcp_source_access.sql"):
         query((fixture.ROOT / "database" / name).read_text())
 
     resource = quote("https://jumpserve.example.test/mcp")
@@ -45,12 +45,32 @@ def main():
       {refresh},{client},{resource},{next_access},{next_refresh})""", role="service_role") == "t"
     assert not query(f"select jumpserve_mcp_actor({access},{resource})", role="service_role")
     assert query(f"select jumpserve_mcp_actor({next_access},{resource})", role="service_role") == fixture.ACTOR
+    allowed = lambda key: query(f"select jumpserve_mcp_can_read_sources({key},{resource})", role="service_role")
+    assert allowed(next_access) == "f"
+    scoped_code, scoped_access, scoped_refresh, rotated_access, rotated_refresh = [quote(c * 64) for c in "6789a"]
+    def scoped_exchange(grant, proof, access_key, refresh_key, callback="null", verifier="null", requested="null"):
+        return query(f"select jumpserve_mcp_exchange_scoped('{grant}',{proof},{client},{resource},{access_key},{refresh_key},{callback},{verifier},{requested})", role="service_role")
+
+    assert not scoped_exchange("refresh_token", next_refresh, scoped_access, scoped_refresh, requested="true")
+    assert query(f"select jumpserve_mcp_actor({next_access},{resource})", role="service_role") == fixture.ACTOR
+    query(f"""insert into jumpserve_mcp_codes(code_hash,owner_id,client_id,redirect_uri,resource,challenge,read_sources)
+      values ({scoped_code},{actor},{client},{redirect},{resource},{challenge},true)""", role="service_role")
+    assert not scoped_exchange("authorization_code", scoped_code, scoped_access, scoped_refresh, redirect, quote("Y" * 43))
+    assert scoped_exchange("authorization_code", scoped_code, scoped_access, scoped_refresh, redirect, challenge) == "source"
+    assert allowed(scoped_access) == "t"
+    assert scoped_exchange("refresh_token", scoped_refresh, rotated_access, rotated_refresh) == "source"
+    assert allowed(scoped_access) == "f"
+    assert allowed(rotated_access) == "t"
+    assert query(f"select jumpserve_mcp_can_read_sources({rotated_access},'https://other.example.test/mcp')", role="service_role") == "f"
     query(f"select jumpserve_mcp_revoke({actor},{resource})", role="service_role")
     assert not query(f"select jumpserve_mcp_actor({next_access},{resource})", role="service_role")
     for role in ("anon", "authenticated"):
+        fixture.rejects(lambda: query(f"select jumpserve_mcp_can_read_sources({rotated_access},{resource})", role=role))
         fixture.rejects(lambda: query(f"select jumpserve_mcp_actor({access},{resource})", role=role))
         fixture.rejects(lambda: query("select * from public.jumpserve_mcp_tokens", role=role))
     print("PASS code, PKCE, token audience, refresh, revocation and credential visibility", flush=True)
+    assert allowed(rotated_access) == "f"
+    print("PASS explicit PDF download consent, non-escalating refresh and revocable source access", flush=True)
 
     bundle = {
         "version": "jumpserve-assessment-v1",
