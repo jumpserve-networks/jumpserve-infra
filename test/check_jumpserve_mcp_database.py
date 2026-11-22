@@ -134,36 +134,82 @@ def main():
     assert query("select research_skill_expired_pdfs()", role="service_role") == "jumpserve-mcp/11111111-1111-4111-8111-111111111111.pdf"
     print("PASS PDF verification gate and abandoned object cleanup selection", flush=True)
 
-    source_ids = [str(uuid4()), str(uuid4())]
+    source_ids = [str(uuid4()) for _ in range(11)]
     checksum, bundle_hash = quote(bundle["paper"]["sha256"]), quote('d' * 64)
     for source_id in source_ids:
         query(f"""insert into research_skill_sources(id,owner_id,sha256,byte_count)
-          values ({quote(source_id)},{actor},{checksum},10) on conflict (id) do nothing""", role="service_role")
+          values ({quote(source_id)},{actor},{checksum},10)""", role="service_role")
+    missing_attachment = quote(source_ids[-1])
+    query(f"select research_skill_preview_for_source({actor},{bundle_hash},{fixture.sql_json(attached)},{missing_attachment})", role="service_role")
+    query(f"""update research_skill_submissions
+      set expires_at=now()-interval '1 day',pdf_verified_at=now()-interval '2 days'
+      where id={missing_attachment}""")
 
-    def stage_source(source_id, owner=actor, document=attached, digest=bundle_hash):
-        sql = f"select research_skill_preview_for_source({owner},{digest},{fixture.sql_json(document)},{quote(source_id)})"
-        return json.loads(query(sql, role="service_role"))
+    old_preview, abandoned_pdf = map(quote, (str(uuid4()), str(uuid4())))
+    query(f"""
+      insert into research_skill_submissions(id,owner_id,bundle_sha256,bundle,expires_at)
+      values ({old_preview},{actor},{quote('0' * 64)},{fixture.sql_json(bundle)},now()-interval '1 day'),
+        ({abandoned_pdf},{actor},{quote('f' * 64)},{fixture.sql_json(attached)},now()-interval '1 day')
+    """)
+    query((fixture.ROOT / "database" / "202611220004_jumpserve_private_assessments.sql").read_text())
+    assert query(f"select completed_at is not null from research_skill_submissions where id={old_preview}") == "t"
+    assert query(f"select completed_at is null from research_skill_submissions where id={missing_attachment}") == "t"
+    assert json.loads(query(f"select research_skill_shared({pdf})", role="anon")) == attached
+    fixture.rejects(lambda: query(stage_pdf, role="service_role"))
+
+    def stage_source(source_id, owner=actor, document=attached, digest=bundle_hash, role="service_role"):
+        sql = f"select research_skill_save_from_source({owner},{digest},{fixture.sql_json(document)},{quote(source_id)})"
+        return json.loads(query(sql, role=role))
 
     source_id = source_ids[0]
     source = quote(source_id)
+    fixture.rejects(lambda: stage_source(source_id))
+    assert query(f"select count(*) from research_skill_submissions where id={source}") == "0"
+    objects = [
+        f"({index},'research-paper-uploads','jumpserve-mcp/{source_id}.pdf',now()-interval '4 hours')"
+        for index, source_id in enumerate(source_ids, start=6)
+    ]
+    query("insert into storage.objects values " + ",".join(objects))
     for role in ("anon", "authenticated"):
         fixture.rejects(lambda: query("select * from research_skill_sources", role=role))
-        fixture.rejects(lambda: query(f"select research_skill_preview_for_source({actor},{bundle_hash},{fixture.sql_json(attached)},{source})", role=role))
+        fixture.rejects(lambda: stage_source(source_id, role=role))
     fixture.rejects(lambda: query(f"update research_skill_sources set byte_count=11 where id={source}", role="service_role"))
     fixture.rejects(lambda: stage_source(source_id, owner=other))
     fixture.rejects(lambda: stage_source(source_id, document=bundle))
     differing_pdf = {**attached, "paper": {**attached["paper"], "byte_count": 11}}
     fixture.rejects(lambda: stage_source(source_id, document=differing_pdf))
     assert stage_source(source_id) == stage_source(source_id) == {"preview_id": source_id, "study_id": None}
+    assert query(f"select completed_at is not null and pdf_verified_at is not null from research_skill_submissions where id={source}") == "t"
     fixture.rejects(lambda: stage_source(source_id, digest=quote('e' * 64)))
     assert stage_source(source_ids[1])["preview_id"] == source_ids[1]
-    assert json.loads(query(stage_pdf, role="service_role"))["preview_id"] == pdf_id
     assert not query(f"select research_skill_shared({source})", role="anon")
-    query(f"update research_skill_submissions set pdf_verified_at=now(), approved_at=now() where id={source}", role="service_role")
+    query(f"update research_skill_submissions set approved_at=now() where id={source}", role="service_role")
     assert query(f"select research_skill_submit({actor},{source})", role="service_role") == source_id
     assert stage_source(source_id)["study_id"] == source_id
     assert json.loads(query(f"select research_skill_shared({source})", role="anon")) == attached
     print("PASS private and immutable source ownership, exact PDF binding, and stable assessment IDs", flush=True)
+
+    remaining_source = quote(source_ids[1])
+    query(f"update research_skill_submissions set expires_at=now()-interval '1 day' where id={remaining_source}")
+    for assessment_id in source_ids[2:]:
+        assert stage_source(assessment_id)["preview_id"] == assessment_id
+    assert query(f"""select completed_at = pdf_verified_at and completed_at < now()-interval '1 day'
+      from research_skill_submissions where id={missing_attachment}""") == "t"
+    assert query(f"select count(*) from research_skill_submissions where id={abandoned_pdf}") == "0"
+    assert query(f"""select count(*) from research_skill_submissions
+        where owner_id={actor} and study_id is null and completed_at is not null""") == "11"
+    assert query("select research_skill_expired_pdfs()", role="service_role") == "jumpserve-mcp/11111111-1111-4111-8111-111111111111.pdf"
+    fixture.rejects(lambda: query(f"select research_skill_submit({actor},{remaining_source})", role="service_role"))
+    assert not query(f"select research_skill_shared({remaining_source})", role="anon")
+    fixture.rejects(lambda: query(
+        f"update research_skill_submissions set expires_at=now() where id={remaining_source}", role="service_role"))
+    query(f"""update research_skill_submissions set approved_at=now()-interval '2 days'
+      where owner_id={actor} and id={remaining_source} and bundle_sha256={bundle_hash} and completed_at is not null""", role="service_role")
+    assert not query(f"select research_skill_shared({remaining_source})", role="anon")
+    fixture.rejects(lambda: query(f"select research_skill_submit({other},{remaining_source})", role="service_role"))
+    assert query(f"select research_skill_submit({actor},{remaining_source})", role="service_role") == source_ids[1]
+    assert json.loads(query(f"select research_skill_shared({remaining_source})", role="anon")) == attached
+    print("PASS completed assessments, PDFs and exact owner approvals survive the old deadline", flush=True)
 
 
 if __name__ == "__main__":
