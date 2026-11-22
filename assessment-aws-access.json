@@ -1,0 +1,180 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "AWS access for client-run JumpServe paper experiments and their expiration schedules",
+  "Parameters": {
+    "OperatorPrincipalArn": {
+      "Type": "String",
+      "Description": "Approved JumpServe IAM principal that may assume the experiment client role",
+      "AllowedPattern": "^arn:aws:iam::395567831870:(role|user)/[A-Za-z0-9+=,.@_/-]+$"
+    },
+    "ExperimentResourcePolicyArn": {
+      "Type": "String",
+      "Description": "Customer-managed policy for provisioning and deleting approved experiment resources",
+      "AllowedPattern": "^arn:aws:iam::395567831870:policy/[A-Za-z0-9+=,.@_/-]+$"
+    },
+    "ExperimentDriverPolicyArn": {
+      "Type": "String",
+      "Default": "",
+      "Description": "Optional customer-managed policy for the trusted driver's runtime access",
+      "AllowedPattern": "^(|arn:aws:iam::395567831870:policy/[A-Za-z0-9+=,.@_/-]+)$"
+    }
+  },
+  "Conditions": {
+    "JumpServeAccount": { "Fn::Equals": [{ "Ref": "AWS::AccountId" }, "395567831870"] },
+    "HasDriverPolicy": { "Fn::Not": [{ "Fn::Equals": [{ "Ref": "ExperimentDriverPolicyArn" }, ""] }] }
+  },
+  "Resources": {
+    "ExecutionRole": {
+      "Condition": "JumpServeAccount",
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "RoleName": "JumpServeExperimentExecution",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [{ "Effect": "Allow", "Principal": { "Service": "cloudformation.amazonaws.com" }, "Action": "sts:AssumeRole" }]
+        },
+        "ManagedPolicyArns": [{ "Ref": "ExperimentResourcePolicyArn" }],
+        "Policies": [
+          {
+            "PolicyName": "SeparateExperimentAccess",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Deny",
+                  "Action": ["account:*", "organizations:*", "cloudformation:*", "scheduler:*", "sts:AssumeRole"],
+                  "Resource": "*"
+                },
+                {
+                  "Effect": "Deny",
+                  "Action": "iam:*",
+                  "NotResource": [
+                    "arn:aws:iam::395567831870:role/JumpServeExperimentWorkload-*",
+                    "arn:aws:iam::395567831870:instance-profile/JumpServeExperimentWorkload-*"
+                  ]
+                },
+                {
+                  "Effect": "Deny",
+                  "NotAction": ["iam:GetRole", "iam:GetInstanceProfile", "iam:PassRole"],
+                  "Resource": [
+                    "arn:aws:iam::395567831870:role/JumpServeExperimentWorkload-*",
+                    "arn:aws:iam::395567831870:instance-profile/JumpServeExperimentWorkload-*"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "CleanupRole": {
+      "Condition": "JumpServeAccount",
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "RoleName": "JumpServeExperimentCleanup",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": { "Service": "scheduler.amazonaws.com" },
+              "Action": "sts:AssumeRole",
+              "Condition": {
+                "StringEquals": { "aws:SourceAccount": "395567831870" },
+                "ArnLike": { "aws:SourceArn": "arn:aws:scheduler:*:395567831870:schedule-group/default" }
+              }
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "ExpireExperimentStacks",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "cloudformation:DeleteStack",
+                  "Resource": "arn:aws:cloudformation:*:395567831870:stack/JumpServeExperiment-*/*",
+                  "Condition": { "StringEquals": { "aws:ResourceTag/JumpServeManaged": "assessment" } }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "ClientRole": {
+      "Condition": "JumpServeAccount",
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "RoleName": "JumpServeExperimentClient",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [{ "Effect": "Allow", "Principal": { "AWS": { "Ref": "OperatorPrincipalArn" } }, "Action": "sts:AssumeRole" }]
+        },
+        "ManagedPolicyArns": {
+          "Fn::If": ["HasDriverPolicy", [{ "Ref": "ExperimentDriverPolicyArn" }], { "Ref": "AWS::NoValue" }]
+        },
+        "Policies": [
+          {
+            "PolicyName": "ExperimentStackAndLeaseLifecycle",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "cloudformation:CreateStack",
+                  "Resource": "arn:aws:cloudformation:*:395567831870:stack/JumpServeExperiment-*/*",
+                  "Condition": {
+                    "StringEquals": {
+                      "aws:RequestTag/JumpServeManaged": "assessment",
+                      "cloudformation:RoleArn": { "Fn::GetAtt": ["ExecutionRole", "Arn"] }
+                    }
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": "cloudformation:TagResource",
+                  "Resource": "arn:aws:cloudformation:*:395567831870:stack/JumpServeExperiment-*/*",
+                  "Condition": { "StringEquals": { "aws:RequestTag/JumpServeManaged": "assessment" } }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": ["cloudformation:DescribeStacks", "cloudformation:DescribeStackEvents", "cloudformation:ListStackResources"],
+                  "Resource": "arn:aws:cloudformation:*:395567831870:stack/JumpServeExperiment-*/*"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": "cloudformation:DeleteStack",
+                  "Resource": "arn:aws:cloudformation:*:395567831870:stack/JumpServeExperiment-*/*",
+                  "Condition": { "StringEquals": { "aws:ResourceTag/JumpServeManaged": "assessment" } }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": ["scheduler:CreateSchedule", "scheduler:GetSchedule", "scheduler:DeleteSchedule"],
+                  "Resource": "arn:aws:scheduler:*:395567831870:schedule/default/JumpServeExperiment-*"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": "iam:PassRole",
+                  "Resource": { "Fn::GetAtt": ["ExecutionRole", "Arn"] },
+                  "Condition": { "StringEquals": { "iam:PassedToService": "cloudformation.amazonaws.com" } }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": "iam:PassRole",
+                  "Resource": { "Fn::GetAtt": ["CleanupRole", "Arn"] },
+                  "Condition": { "StringEquals": { "iam:PassedToService": "scheduler.amazonaws.com" } }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Outputs": {
+    "ClientRoleArn": { "Condition": "JumpServeAccount", "Value": { "Fn::GetAtt": ["ClientRole", "Arn"] } }
+  }
+}
