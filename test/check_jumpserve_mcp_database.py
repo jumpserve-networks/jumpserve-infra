@@ -16,9 +16,10 @@ def main():
       create table auth.identities(user_id uuid references auth.users(id), provider text);
       insert into auth.users values ({actor}, false, null), ({other}, false, null);
       insert into auth.identities values ({actor}, 'google'), ({other}, 'email');
+      alter table storage.objects add column name text, add column created_at timestamptz;
     """)
     for name in ("202611110001_next_paper_intake.sql", "202611110002_assessment_deletion.sql",
-                 "202611210001_jumpserve_mcp_assessments.sql"):
+                 "202611210001_jumpserve_mcp_assessments.sql", "202611220001_jumpserve_skill_pdf_copies.sql"):
         query((fixture.ROOT / "database" / name).read_text())
 
     resource = quote("https://jumpserve.example.test/mcp")
@@ -84,6 +85,32 @@ def main():
     assert not query(f"select research_skill_shared({pid})", role="anon")
     fixture.rejects(lambda: query(f"select research_skill_submit({actor},{pid})", role="service_role"))
     print("PASS owner approval, private previews, concurrent idempotency, relational results and deletion", flush=True)
+
+    attached = {**bundle, "paper": {**bundle["paper"], "pdf_copy": True}}
+    stage_pdf = f"select research_skill_preview({actor},{quote('d' * 64)},{fixture.sql_json(attached)})"
+    pdf_id = json.loads(query(stage_pdf, role="service_role"))["preview_id"]
+    pdf = quote(pdf_id)
+    approval = f"update research_skill_submissions set approved_at=now() where id={pdf}"
+    fixture.rejects(lambda: query(approval, role="service_role"))
+    fixture.rejects(lambda: query(f"select research_skill_submit({actor},{pdf})", role="service_role"))
+    for role in ("anon", "authenticated"):
+        fixture.rejects(lambda: query("select research_skill_expired_pdfs()", role=role))
+        fixture.rejects(lambda: query(f"update research_skill_submissions set pdf_verified_at=now() where id={pdf}", role=role))
+    assert not query(f"select research_skill_shared({pdf})", role="anon")
+    query(f"update research_skill_submissions set pdf_verified_at=now() where id={pdf}", role="service_role")
+    query(approval, role="service_role")
+    assert query(f"select research_skill_submit({actor},{pdf})", role="service_role") == pdf_id
+    assert json.loads(query(f"select research_skill_shared({pdf})", role="anon")) == attached
+    query(f"""
+      insert into storage.objects values
+        (1,'research-paper-uploads','jumpserve-mcp/{pdf_id}.pdf',now()-interval '4 hours'),
+        (2,'research-paper-uploads','jumpserve-mcp/11111111-1111-4111-8111-111111111111.pdf',now()-interval '4 hours'),
+        (3,'research-paper-uploads','jumpserve-mcp/22222222-2222-4222-8222-222222222222.pdf',now()-interval '1 hour'),
+        (4,'research-paper-uploads','jumpserve-mcp/not-a-preview.pdf',now()-interval '4 hours'),
+        (5,'other-bucket','jumpserve-mcp/33333333-3333-4333-8333-333333333333.pdf',now()-interval '4 hours')
+    """)
+    assert query("select research_skill_expired_pdfs()", role="service_role") == "jumpserve-mcp/11111111-1111-4111-8111-111111111111.pdf"
+    print("PASS PDF verification gate and abandoned object cleanup selection", flush=True)
 
 
 if __name__ == "__main__":
