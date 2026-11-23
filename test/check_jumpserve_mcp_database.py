@@ -76,6 +76,8 @@ def main():
         "version": "jumpserve-assessment-v1",
         "paper": {"title": "Synthetic MCP paper", "domain": "Networking", "sha256": "a" * 64, "byte_count": 10},
         "summary": "Synthetic persistence fixture.",
+        "claims": [{"id": "c1", "page": 1, "claim": "Count events.", "criterion": "Match the setup.",
+                    "outcome": "inconclusive", "finding": "A counter was observed."}],
         "runs": [{
             "id": "r1", "configuration": "Synthetic development test",
             "started_at": "2026-10-01T12:00:00Z", "artifact_sha256": "b" * 64,
@@ -157,6 +159,10 @@ def main():
     assert json.loads(query(f"select research_skill_shared({pdf})", role="anon")) == attached
     fixture.rejects(lambda: query(stage_pdf, role="service_role"))
 
+    query((fixture.ROOT / "database" / "202611230001_jumpserve_private_evaluation_results.sql").read_text())
+    assert query(f"select count(*) from research_skill_generator_results where assessment_id={old_preview}") == "1"
+    assert query(f"select count(*) from research_skill_generator_results where assessment_id={missing_attachment}") == "0"
+
     def stage_source(source_id, owner=actor, document=attached, digest=bundle_hash, role="service_role"):
         sql = f"select research_skill_save_from_source({owner},{digest},{fixture.sql_json(document)},{quote(source_id)})"
         return json.loads(query(sql, role=role))
@@ -180,6 +186,58 @@ def main():
     fixture.rejects(lambda: stage_source(source_id, document=differing_pdf))
     assert stage_source(source_id) == stage_source(source_id) == {"preview_id": source_id, "study_id": None}
     assert query(f"select completed_at is not null and pdf_verified_at is not null from research_skill_submissions where id={source}") == "t"
+    original = query(f"select id from research_skill_generator_results where assessment_id={source}", role="service_role")
+    assert query(f"select paper_value is null and observed_value=0 from research_skill_generator_measurements where result_id={quote(original)}") == "t"
+    assert not query(f"select research_skill_shared({source})", role="anon")
+
+    revised = {**attached, "summary": "Additional version with the same source."}
+    revision_hash = quote('9' * 64)
+
+    def save_generator(owner=actor, document=revised, digest=revision_hash, role="service_role"):
+        return query(f"select research_skill_save_generator_result({owner},{source},{digest},{fixture.sql_json(document)})", role=role)
+
+    fixture.rejects(lambda: save_generator(owner=other))
+    fixture.rejects(lambda: save_generator(document={**revised, "paper": {**revised["paper"], "sha256": "8" * 64}}))
+    revision = save_generator()
+    assert revision != original and save_generator() == revision
+    fixture.rejects(lambda: save_generator(document=attached))
+
+    scorecard = {"version": "jumpserve-verifier-scorecard-v1", "paper_id": "fixture", "paper_sha256": "a" * 64,
+                 "assessment_sha256": "1" * 64, "answer_key_sha256": "2" * 64,
+                 "split": "held_out", "mode": "fresh", "scenario": None, "evidence_integrity": {"status": "verified"},
+                 "status": "scored", "score": {"earned": 2, "applicable_maximum": 2, "rubric_maximum": 2},
+                 "claims": [{"key_claim_id": "C1", "assessment_claim_id": "c1", "reported_outcome": "inconclusive",
+                             "supported_outcome": "inconclusive", "assessment": "correct", "evidence": ["data/trace.csv"],
+                             "finding": "The comparable evidence is insufficient."}]}
+
+    def save_score(owner=actor, artifact=revised, digest=revision_hash, card=scorecard, version='1.0.0', role="service_role"):
+        return query(f"select research_skill_save_verifier_result({owner},{source},{digest},{fixture.sql_json(artifact)},"
+                     f"{quote(version)},{quote('3' * 64)},{fixture.sql_json(card)})", role=role)
+
+    fixture.rejects(lambda: save_score(owner=other))
+    fixture.rejects(lambda: save_score(artifact=attached))
+    fixture.rejects(lambda: save_score(digest=quote('6' * 64)))
+    fixture.rejects(lambda: save_score(card={**scorecard, "claims": [{**scorecard["claims"][0], "reported_outcome": "reproduced"}]}))
+    with ThreadPoolExecutor(max_workers=3) as pool:
+        scores = list(pool.map(lambda _: save_score(), range(3)))
+    assert len(set(scores)) == 1 and save_score(version='1.1.0') != scores[0]
+    assert query(f"select generator_result_id from research_skill_verifier_results where id={quote(scores[0])}") == revision
+    assert query(f"select grade from research_skill_verifier_claims where verification_id={quote(scores[0])}") == "correct"
+
+    replay = {"version": "jumpserve-replay-analysis-v1", "paper": {"sha256": "a" * 64},
+              "scenario": "synthetic", "claims": bundle["claims"]}
+    replay_hash = quote('5' * 64)
+    replay_id = save_generator(document=replay, digest=replay_hash)
+    assert query(f"select count(*) from research_skill_generator_measurements where result_id={quote(replay_id)}") == "0"
+    fixture.rejects(lambda: save_score(artifact=replay, digest=replay_hash))
+    assert save_score(artifact=replay, digest=replay_hash, card={**scorecard, "mode": "replay", "scenario": "synthetic",
+                      "evidence_integrity": {"status": "fixture_only"}})
+    for role in ("anon", "authenticated"):
+        fixture.rejects(lambda: query("select * from research_skill_generator_results", role=role))
+        fixture.rejects(lambda: query("select * from research_skill_verifier_results", role=role))
+        fixture.rejects(lambda: save_generator(role=role))
+        fixture.rejects(lambda: save_score(role=role))
+    print("PASS private projections, review binding, scoped access, replay isolation and concurrent retries", flush=True)
     fixture.rejects(lambda: stage_source(source_id, digest=quote('e' * 64)))
     assert stage_source(source_ids[1])["preview_id"] == source_ids[1]
     assert not query(f"select research_skill_shared({source})", role="anon")
@@ -210,6 +268,13 @@ def main():
     assert query(f"select research_skill_submit({actor},{remaining_source})", role="service_role") == source_ids[1]
     assert json.loads(query(f"select research_skill_shared({remaining_source})", role="anon")) == attached
     print("PASS completed assessments, PDFs and exact owner approvals survive the old deadline", flush=True)
+
+    query(f"update research_studies set deleted_at=now() where id={source}")
+    fixture.rejects(lambda: save_generator())
+    fixture.rejects(lambda: save_score())
+    assert query(f"select count(*) from research_skill_verifier_results where generator_result_id={quote(revision)}") == "2"
+    assert not query(f"select research_skill_shared({source})", role="anon")
+    print("PASS deletion blocks new private writes while retaining evidence", flush=True)
 
 
 if __name__ == "__main__":
