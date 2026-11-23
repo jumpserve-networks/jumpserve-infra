@@ -9,6 +9,13 @@ owner approval. Apply [the additive Supabase migration](database/202611210001_ju
 before enabling the connector. It uses the existing hosting and database.
 See [local assessment architecture and retirement](docs/local-assessment-retirement-v1.md).
 
+Apply [the private evaluation results migration](database/202611230001_jumpserve_private_evaluation_results.sql)
+after the private assessments migration and before releasing the connector tools
+for additional Generator results and Verifier scorecards. The migration projects
+completed bundles into private claim, run, and measurement rows, including
+existing completed assessments. Each private scorecard references an exact
+Generator result and retains its answer-key hash and claim-level grades.
+
 Run `python3 -B test/check_jumpserve_mcp_database.py` against an isolated local
 PostgreSQL server on port 54477 to verify the connector migration and grants.
 
