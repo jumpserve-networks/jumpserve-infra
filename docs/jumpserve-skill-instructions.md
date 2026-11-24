@@ -53,3 +53,38 @@ To roll back, activate the previous published version by its ID and SHA-256
 using the current active ID as the expected baseline. The database records each
 activation in `research_skill_instruction_publications`. After an uncertain
 activation, check the pointer and history before retrying.
+
+## Track Coach recommendations
+
+After applying `202611240001_jumpserve_coach_recommendation_implementations.sql`,
+use the Supabase SQL Editor as the database owner to find recommendations by
+Coach report ID and their original one-based number. The view includes existing
+reports and updates as new reports arrive.
+
+```sql
+select coach_report_id, recommendation_number, title, status, generator_version_id,
+       git_commit_sha, recorded_at
+from public.research_skill_coach_recommendations
+order by report_created_at desc, coach_report_id, recommendation_number;
+```
+
+Use the published Generator version for a guidance change, or the full commit
+SHA from the JumpServe repository for a merged code change. Supply both if both
+identify the implementation. Use the same inputs to retry an uncertain record.
+
+```sql
+select public.research_skill_record_coach_implementation(
+  '<coach-report-id>', 2, p_generator_version_id => '<published-generator-version-id>'
+);
+
+select public.research_skill_record_coach_implementation(
+  '<coach-report-id>', 3, p_git_commit_sha => '<full-commit-sha>'
+);
+```
+
+For a guidance release, the owner can call the activation and record functions
+in one transaction after reviewing the candidate. `implemented` records where
+the recommendation was adopted, including versions later superseded or rolled
+back. `unrecorded` means there is no adoption record. Record older implementations
+when their published version or merged commit can be identified. The Coach and
+its connector can continue saving reports while adoption remains an owner action.
