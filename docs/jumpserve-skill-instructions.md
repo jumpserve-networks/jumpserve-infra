@@ -12,6 +12,20 @@ deploy the connector that recognizes `get_skill_instructions` and the artifact
 metadata, then distribute the updated plugin. The migration activates initial
 versions matching the three bundled workflow files.
 
+Apply `202611260001_jumpserve_skill_version_numbers.sql` before releasing the
+connector that shows version numbers. Each role has its own numbered revisions
+starting at 1, including drafts. The migration orders existing revisions by
+creation time and uses the UUID to break ties. The UUID and SHA-256 still pin
+the exact guidance. Activations and rollbacks keep the revision's number.
+
+Database owners can list drafts and published revisions by role and number.
+
+```sql
+select role, version_number, version_id, created_at
+from public.research_skill_instruction_versions
+order by role, version_number desc;
+```
+
 ## Publish guidance
 
 Use the Supabase SQL Editor as the database owner. The application service role
@@ -30,7 +44,7 @@ code, artifact contracts, and authorization use the normal release process.
    ```sql
    insert into public.research_skill_instruction_versions(role, instructions)
    values ('coach', $workflow$<exact tested Markdown>$workflow$)
-   returning version_id, sha256;
+   returning version_number, version_id, sha256;
    ```
 
 3. Confirm the active version against the baseline you reviewed, then activate
@@ -46,7 +60,7 @@ code, artifact contracts, and authorization use the normal release process.
    ```
 
 4. Verify a fresh authenticated `get_skill_instructions` call returns the
-   expected ID and checksum. The next invocation picks up the new guidance
+   expected version number, ID, and checksum. The next invocation picks up the new guidance
    without a deployment. Existing runs retain their pinned guidance.
 
 To roll back, activate the previous published version by its ID and SHA-256
