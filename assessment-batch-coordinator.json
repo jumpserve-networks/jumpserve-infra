@@ -1,0 +1,476 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Private coordinator and worker infrastructure for JumpServe synthetic batches",
+  "Parameters": {
+    "Zone": { "Type": "AWS::EC2::AvailabilityZone::Name" },
+    "EnableWebBatchStart": { "Type": "String", "AllowedValues": ["true", "false"], "Default": "false" },
+    "EnableParallelTraining": { "Type": "String", "AllowedValues": ["true", "false"], "Default": "false" },
+    "AdditionalWorkerAuthVolumeArns": {
+      "Type": "String",
+      "Default": "",
+      "AllowedPattern": "^$|^arn:aws:ec2:us-east-1:395567831870:volume/vol-[a-f0-9]{17}(,arn:aws:ec2:us-east-1:395567831870:volume/vol-[a-f0-9]{17})*$",
+      "Description": "Comma-separated ARNs of encrypted volumes with independent worker sign-ins in the worker Availability Zone."
+    },
+    "EnableTrainingBatchTerminal": { "Type": "String", "AllowedValues": ["true", "false"], "Default": "false" },
+    "TerminalSupabaseUrl": { "Type": "String", "AllowedPattern": "^$|^https://[a-z0-9]+[.]supabase[.]co$", "Default": "" },
+    "TerminalSupabaseAnonKey": { "Type": "String", "NoEcho": true, "Default": "" },
+    "CoordinatorAmi": {
+      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+      "Default": "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64"
+    }
+  },
+  "Rules": {
+    "JumpServeTarget": { "Assertions": [{
+      "Assert": { "Fn::And": [
+        { "Fn::Equals": [{ "Ref": "AWS::AccountId" }, "395567831870"] },
+        { "Fn::Equals": [{ "Ref": "AWS::Region" }, "us-east-1"] }
+      ] },
+      "AssertDescription": "Use the JumpServe account in us-east-1."
+    }] },
+    "TerminalConfiguration": {
+      "RuleCondition": { "Fn::Equals": [{ "Ref": "EnableTrainingBatchTerminal" }, "true"] },
+      "Assertions": [{
+        "Assert": { "Fn::And": [
+          { "Fn::Equals": [{ "Ref": "EnableWebBatchStart" }, "true"] },
+          { "Fn::Not": [{ "Fn::Equals": [{ "Ref": "TerminalSupabaseUrl" }, ""] }] },
+          { "Fn::Not": [{ "Fn::Equals": [{ "Ref": "TerminalSupabaseAnonKey" }, ""] }] }
+        ] },
+        "AssertDescription": "The live terminal requires web batches and the same Supabase project URL and public key as the site."
+      }]
+    }
+  },
+  "Conditions": {
+    "WebBatchStartEnabled": { "Fn::Equals": [{ "Ref": "EnableWebBatchStart" }, "true"] },
+    "ParallelTrainingEnabled": { "Fn::Equals": [{ "Ref": "EnableParallelTraining" }, "true"] },
+    "AdditionalWorkerVolumesConfigured": { "Fn::And": [
+      { "Condition": "ParallelTrainingEnabled" },
+      { "Fn::Not": [{ "Fn::Equals": [{ "Ref": "AdditionalWorkerAuthVolumeArns" }, ""] }] }
+    ] },
+    "TrainingBatchTerminalEnabled": { "Fn::And": [
+      { "Condition": "WebBatchStartEnabled" },
+      { "Fn::Equals": [{ "Ref": "EnableTrainingBatchTerminal" }, "true"] }
+    ] }
+  },
+  "Resources": {
+    "CoordinatorRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "RoleName": "JumpServeSyntheticBatchCoordinator",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [{ "Effect": "Allow", "Principal": { "Service": "ec2.amazonaws.com" }, "Action": "sts:AssumeRole" }]
+        },
+        "ManagedPolicyArns": [{ "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore" }],
+        "Policies": [{ "PolicyName": "AssumeExperimentClient", "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [{ "Effect": "Allow", "Action": "sts:AssumeRole", "Resource": { "Fn::Sub": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/JumpServeExperimentClient" } }]
+        } }]
+      }
+    },
+    "CoordinatorProfile": {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Properties": { "Roles": [{ "Ref": "CoordinatorRole" }] }
+    },
+    "Network": {
+      "Type": "AWS::EC2::VPC",
+      "Properties": { "CidrBlock": "10.234.0.0/24", "EnableDnsSupport": true, "EnableDnsHostnames": true }
+    },
+    "Gateway": { "Type": "AWS::EC2::InternetGateway" },
+    "GatewayAttachment": {
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+      "Properties": { "VpcId": { "Ref": "Network" }, "InternetGatewayId": { "Ref": "Gateway" } }
+    },
+    "Subnet": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": { "VpcId": { "Ref": "Network" }, "CidrBlock": "10.234.0.0/28", "AvailabilityZone": { "Ref": "Zone" } }
+    },
+    "RouteTable": { "Type": "AWS::EC2::RouteTable", "Properties": { "VpcId": { "Ref": "Network" } } },
+    "OutboundRoute": {
+      "Type": "AWS::EC2::Route",
+      "DependsOn": "GatewayAttachment",
+      "Properties": { "RouteTableId": { "Ref": "RouteTable" }, "DestinationCidrBlock": "0.0.0.0/0", "GatewayId": { "Ref": "Gateway" } }
+    },
+    "SubnetRouteTable": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": { "SubnetId": { "Ref": "Subnet" }, "RouteTableId": { "Ref": "RouteTable" } }
+    },
+    "CoordinatorSecurity": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "VpcId": { "Ref": "Network" },
+        "GroupDescription": "Session Manager only for coordinator administration",
+        "SecurityGroupEgress": [{ "IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "CidrIp": "0.0.0.0/0" }]
+      }
+    },
+    "CodexVolume": {
+      "Type": "AWS::EC2::Volume",
+      "Properties": {
+        "AvailabilityZone": { "Ref": "Zone" }, "Encrypted": true, "VolumeType": "gp3", "Size": 1,
+        "Tags": [{ "Key": "Name", "Value": "JumpServe synthetic batch Codex session" }]
+      }
+    },
+    "WorkerVolumeAccess": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "JumpServeSyntheticBatchCodexVolume",
+        "Roles": ["JumpServeExperimentExecution"],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            { "Effect": "Allow", "Action": ["ec2:AttachVolume", "ec2:DetachVolume"],
+              "Resource": { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:volume/${CodexVolume}" } },
+            { "Fn::If": ["AdditionalWorkerVolumesConfigured",
+              { "Effect": "Allow", "Action": ["ec2:AttachVolume", "ec2:DetachVolume"],
+                "Resource": { "Fn::Split": [",", { "Ref": "AdditionalWorkerAuthVolumeArns" }] } },
+              { "Ref": "AWS::NoValue" }
+            ] },
+            { "Effect": "Allow", "Action": ["ec2:AttachVolume", "ec2:DetachVolume"],
+              "Resource": { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:instance/*" },
+              "Condition": { "StringEquals": { "ec2:ResourceTag/JumpServeBatchWorker": "true" } } }
+          ]
+        }
+      }
+    },
+    "TrainingWorkerNetwork": {
+      "Type": "AWS::EC2::VPC",
+      "Condition": "ParallelTrainingEnabled",
+      "Properties": { "CidrBlock": "10.233.0.0/24", "EnableDnsSupport": true, "EnableDnsHostnames": true }
+    },
+    "TrainingWorkerGateway": { "Type": "AWS::EC2::InternetGateway", "Condition": "ParallelTrainingEnabled" },
+    "TrainingWorkerGatewayAttachment": {
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+      "Condition": "ParallelTrainingEnabled",
+      "Properties": { "VpcId": { "Ref": "TrainingWorkerNetwork" }, "InternetGatewayId": { "Ref": "TrainingWorkerGateway" } }
+    },
+    "TrainingWorkerSubnet": {
+      "Type": "AWS::EC2::Subnet",
+      "Condition": "ParallelTrainingEnabled",
+      "Properties": { "VpcId": { "Ref": "TrainingWorkerNetwork" }, "CidrBlock": "10.233.0.0/24", "AvailabilityZone": { "Ref": "Zone" } }
+    },
+    "TrainingWorkerRouteTable": {
+      "Type": "AWS::EC2::RouteTable",
+      "Condition": "ParallelTrainingEnabled",
+      "Properties": { "VpcId": { "Ref": "TrainingWorkerNetwork" } }
+    },
+    "TrainingWorkerOutboundRoute": {
+      "Type": "AWS::EC2::Route",
+      "Condition": "ParallelTrainingEnabled",
+      "DependsOn": "TrainingWorkerGatewayAttachment",
+      "Properties": {
+        "RouteTableId": { "Ref": "TrainingWorkerRouteTable" },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": { "Ref": "TrainingWorkerGateway" }
+      }
+    },
+    "TrainingWorkerSubnetRoute": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Condition": "ParallelTrainingEnabled",
+      "Properties": { "SubnetId": { "Ref": "TrainingWorkerSubnet" }, "RouteTableId": { "Ref": "TrainingWorkerRouteTable" } }
+    },
+    "TrainingWorkerSecurity": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Condition": "ParallelTrainingEnabled",
+      "Properties": {
+        "VpcId": { "Ref": "TrainingWorkerNetwork" },
+        "GroupDescription": "Outbound package, model, and SSM access for training workers",
+        "SecurityGroupEgress": [
+          { "IpProtocol": "tcp", "FromPort": 80, "ToPort": 80, "CidrIp": "0.0.0.0/0" },
+          { "IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "CidrIp": "0.0.0.0/0" }
+        ]
+      }
+    },
+    "TrainingWorkerLaunchAccess": {
+      "Type": "AWS::IAM::Policy",
+      "Condition": "ParallelTrainingEnabled",
+      "Properties": {
+        "PolicyName": "JumpServeTrainingNetworkPlacement",
+        "Roles": ["JumpServeExperimentExecution"],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [{ "Effect": "Allow", "Action": "ec2:RunInstances", "Resource": [
+            { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:subnet/${TrainingWorkerSubnet}" },
+            { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:security-group/${TrainingWorkerSecurity.GroupId}" }
+          ] }]
+        }
+      }
+    },
+    "TrainingBatchBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Condition": "WebBatchStartEnabled",
+      "DeletionPolicy": "Retain",
+      "UpdateReplacePolicy": "Retain",
+      "Properties": {
+        "BucketEncryption": { "ServerSideEncryptionConfiguration": [{ "ServerSideEncryptionByDefault": { "SSEAlgorithm": "AES256" } }] },
+        "OwnershipControls": { "Rules": [{ "ObjectOwnership": "BucketOwnerEnforced" }] },
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true, "IgnorePublicAcls": true, "BlockPublicPolicy": true, "RestrictPublicBuckets": true
+        }
+      }
+    },
+    "TrainingBatchStartDocument": {
+      "Type": "AWS::SSM::Document",
+      "Condition": "WebBatchStartEnabled",
+      "Properties": {
+        "Name": "JumpServeStartTrainingBatchById",
+        "DocumentType": "Command",
+        "TargetType": "/AWS::EC2::Instance",
+        "UpdateMethod": "NewVersion",
+        "Content": {
+          "schemaVersion": "2.2",
+          "description": "Start a JumpServe training batch with the requested batch ID",
+          "parameters": {
+            "BatchId": {
+              "type": "String",
+              "interpolationType": "ENV_VAR",
+              "allowedPattern": "^[1-9][0-9]{0,9}$"
+            }
+          },
+          "mainSteps": [{
+            "action": "aws:runShellScript",
+            "name": "startTrainingBatch",
+            "inputs": {
+              "timeoutSeconds": "15",
+              "runCommand": [
+                "set -eu",
+                "test \"${SSM_BatchId}\" -le 2147483647",
+                "exec /usr/bin/systemctl start \"jumpserve-training-batch@${SSM_BatchId}.service\""
+              ]
+            }
+          }]
+        }
+      }
+    },
+    "TrainingBatchWebAccess": {
+      "Type": "AWS::IAM::Policy",
+      "Condition": "WebBatchStartEnabled",
+      "Properties": {
+        "PolicyName": "JumpServeTrainingBatchWeb",
+        "Roles": ["JumpServeFrontendPaperIntake"],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            { "Effect": "Allow", "Action": "ssm:SendCommand", "Resource": [
+              { "Fn::Sub": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:document/${TrainingBatchStartDocument}" },
+              { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:instance/${Coordinator}" }
+            ] },
+            { "Effect": "Allow", "Action": "s3:ListBucket", "Resource": { "Fn::GetAtt": ["TrainingBatchBucket", "Arn"] } },
+            { "Effect": "Allow", "Action": "s3:GetObject", "Resource": [
+              { "Fn::Sub": "${TrainingBatchBucket.Arn}/requests/*" },
+              { "Fn::Sub": "${TrainingBatchBucket.Arn}/progress/*" },
+              { "Fn::Sub": "${TrainingBatchBucket.Arn}/activity/*" }
+            ] },
+            { "Effect": "Allow", "Action": "s3:PutObject", "Resource": { "Fn::Sub": "${TrainingBatchBucket.Arn}/requests/*" } },
+            { "Effect": "Allow", "Action": ["s3:GetObject", "s3:PutObject"],
+              "Resource": { "Fn::Sub": "${TrainingBatchBucket.Arn}/batch-sequence.json" } }
+          ]
+        }
+      }
+    },
+    "TrainingBatchPublisherAccess": {
+      "Type": "AWS::IAM::Policy",
+      "Condition": "WebBatchStartEnabled",
+      "Properties": {
+        "PolicyName": "JumpServeTrainingBatchProgress",
+        "Roles": [{ "Ref": "CoordinatorRole" }],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            { "Effect": "Allow", "Action": "s3:PutObject", "Resource": [
+              { "Fn::Sub": "${TrainingBatchBucket.Arn}/progress/*" },
+              { "Fn::Sub": "${TrainingBatchBucket.Arn}/activity/*" }
+            ] }
+          ]
+        }
+      }
+    },
+    "TrainingTerminalConnections": {
+      "Type": "AWS::DynamoDB::Table",
+      "Condition": "TrainingBatchTerminalEnabled",
+      "Properties": {
+        "BillingMode": "PAY_PER_REQUEST",
+        "AttributeDefinitions": [
+          { "AttributeName": "channel", "AttributeType": "S" },
+          { "AttributeName": "connectionId", "AttributeType": "S" }
+        ],
+        "KeySchema": [
+          { "AttributeName": "channel", "KeyType": "HASH" },
+          { "AttributeName": "connectionId", "KeyType": "RANGE" }
+        ],
+        "TimeToLiveSpecification": { "AttributeName": "expiresAt", "Enabled": true }
+      }
+    },
+    "TrainingTerminalConnectRole": {
+      "Type": "AWS::IAM::Role",
+      "Condition": "TrainingBatchTerminalEnabled",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [{ "Effect": "Allow", "Principal": { "Service": "lambda.amazonaws.com" }, "Action": "sts:AssumeRole" }]
+        },
+        "Policies": [{ "PolicyName": "RegisterTerminalViewer", "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [{ "Effect": "Allow", "Action": "dynamodb:PutItem", "Resource": { "Fn::GetAtt": ["TrainingTerminalConnections", "Arn"] } }]
+        } }]
+      }
+    },
+    "TrainingTerminalConnect": {
+      "Type": "AWS::Lambda::Function",
+      "Condition": "TrainingBatchTerminalEnabled",
+      "Properties": {
+        "Runtime": "nodejs24.x",
+        "Handler": "index.handler",
+        "Role": { "Fn::GetAtt": ["TrainingTerminalConnectRole", "Arn"] },
+        "Timeout": 8,
+        "Environment": { "Variables": {
+          "SUPABASE_URL": { "Ref": "TerminalSupabaseUrl" },
+          "SUPABASE_ANON_KEY": { "Ref": "TerminalSupabaseAnonKey" },
+          "CONNECTIONS_TABLE": { "Ref": "TrainingTerminalConnections" }
+        } },
+        "Code": { "ZipFile": { "Fn::Join": ["\n", [
+          "const { DynamoDBClient, PutItemCommand } = require('@aws-sdk/client-dynamodb');",
+          "const db = new DynamoDBClient({ maxAttempts: 1 });",
+          "const protocol = 'jumpserve-terminal-v1';",
+          "const origins = new Set(['https://jumpserve.quaint-lab.org', 'http://localhost:6001']);",
+          "exports.handler = async event => {",
+          "  if (event.requestContext?.eventType !== 'CONNECT') return { statusCode: 405 };",
+          "  const headers = Object.fromEntries(Object.entries(event.headers ?? {}).map(([key, value]) => [key.toLowerCase(), value]));",
+          "  if (!origins.has(headers.origin)) return { statusCode: 403 };",
+          "  const [requested, token, extra] = (headers['sec-websocket-protocol'] ?? '').split(',').map(value => value.trim());",
+          "  if (requested !== protocol || !token || extra !== undefined || token.length > 8192 || !/^[A-Za-z0-9_-]+[.][A-Za-z0-9_-]+[.][A-Za-z0-9_-]+$/.test(token)) return { statusCode: 401 };",
+          "  const { batch, paper } = event.queryStringParameters ?? {};",
+          "  const connectionId = event.requestContext?.connectionId;",
+          "  if (!connectionId || !/^[1-9][0-9]{0,9}$/.test(batch ?? '') || Number(batch) > 2147483647 || !/^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$/.test(paper ?? '')) return { statusCode: 400 };",
+          "  try {",
+          "    const response = await fetch(process.env.SUPABASE_URL + '/auth/v1/user', {",
+          "      headers: { apikey: process.env.SUPABASE_ANON_KEY, authorization: 'Bearer ' + token },",
+          "      redirect: 'error', signal: AbortSignal.timeout(3500),",
+          "    });",
+          "    if (!response.ok) return { statusCode: response.status < 500 ? 401 : 503 };",
+          "    const user = await response.json();",
+          "    const google = user.app_metadata?.provider === 'google' ||",
+          "      (Array.isArray(user.app_metadata?.providers) && user.app_metadata.providers.includes('google')) ||",
+          "      user.identities?.some(identity => identity.provider === 'google');",
+          "    if (!user.id || user.is_anonymous || !google) return { statusCode: 403 };",
+          "    const now = Date.now();",
+          "    const { exp } = JSON.parse(Buffer.from(token.split('.')[1], 'base64url'));",
+          "    if (!Number.isSafeInteger(exp) || exp <= Math.floor(now / 1000)) return { statusCode: 401 };",
+          "    const expiresAt = Math.min(exp, Math.floor(now / 1000) + 7200);",
+          "    await db.send(new PutItemCommand({ TableName: process.env.CONNECTIONS_TABLE, Item: {",
+          "      channel: { S: batch + '/' + paper }, connectionId: { S: connectionId },",
+          "      expiresAt: { N: String(expiresAt) }, connectedAt: { N: String(now) },",
+          "    } }), { abortSignal: AbortSignal.timeout(3000) });",
+          "    return { statusCode: 200, headers: { 'Sec-WebSocket-Protocol': protocol } };",
+          "  } catch { return { statusCode: 503 }; }",
+          "};"
+        ]] } }
+      }
+    },
+    "TrainingTerminalApi": {
+      "Type": "AWS::ApiGatewayV2::Api",
+      "Condition": "TrainingBatchTerminalEnabled",
+      "Properties": { "Name": "JumpServeTrainingTerminal", "ProtocolType": "WEBSOCKET", "RouteSelectionExpression": "$request.body.action" }
+    },
+    "TrainingTerminalIntegration": {
+      "Type": "AWS::ApiGatewayV2::Integration",
+      "Condition": "TrainingBatchTerminalEnabled",
+      "Properties": {
+        "ApiId": { "Ref": "TrainingTerminalApi" },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationMethod": "POST",
+        "IntegrationUri": { "Fn::Sub": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${TrainingTerminalConnect.Arn}/invocations" }
+      }
+    },
+    "TrainingTerminalConnectRoute": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Condition": "TrainingBatchTerminalEnabled",
+      "Properties": {
+        "ApiId": { "Ref": "TrainingTerminalApi" },
+        "RouteKey": "$connect",
+        "Target": { "Fn::Sub": "integrations/${TrainingTerminalIntegration}" }
+      }
+    },
+    "TrainingTerminalConnectPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Condition": "TrainingBatchTerminalEnabled",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": { "Ref": "TrainingTerminalConnect" },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": { "Fn::Sub": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${TrainingTerminalApi}/terminal/$connect" }
+      }
+    },
+    "TrainingTerminalStage": {
+      "Type": "AWS::ApiGatewayV2::Stage",
+      "Condition": "TrainingBatchTerminalEnabled",
+      "DependsOn": ["TrainingTerminalConnectRoute", "TrainingTerminalConnectPermission"],
+      "Properties": {
+        "ApiId": { "Ref": "TrainingTerminalApi" },
+        "StageName": "terminal",
+        "AutoDeploy": true,
+        "DefaultRouteSettings": { "DataTraceEnabled": false, "ThrottlingBurstLimit": 50, "ThrottlingRateLimit": 20 }
+      }
+    },
+    "TrainingTerminalPublishAccess": {
+      "Type": "AWS::IAM::Policy",
+      "Condition": "TrainingBatchTerminalEnabled",
+      "Properties": {
+        "PolicyName": "JumpServeTrainingTerminalPublisher",
+        "Roles": [{ "Ref": "CoordinatorRole" }],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            { "Effect": "Allow", "Action": "dynamodb:Query", "Resource": { "Fn::GetAtt": ["TrainingTerminalConnections", "Arn"] } },
+            { "Effect": "Allow", "Action": "execute-api:ManageConnections",
+              "Resource": [
+                { "Fn::Sub": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${TrainingTerminalApi}/terminal/POST/@connections" },
+                { "Fn::Sub": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${TrainingTerminalApi}/terminal/POST/@connections/*" }
+              ] }
+          ]
+        }
+      }
+    },
+    "Coordinator": {
+      "Type": "AWS::EC2::Instance",
+      "DependsOn": ["OutboundRoute", "SubnetRouteTable"],
+      "Properties": {
+        "ImageId": { "Ref": "CoordinatorAmi" },
+        "InstanceType": "t3.medium",
+        "IamInstanceProfile": { "Ref": "CoordinatorProfile" },
+        "MetadataOptions": { "HttpTokens": "required", "HttpPutResponseHopLimit": 1, "HttpProtocolIpv6": "disabled" },
+        "NetworkInterfaces": [{ "DeviceIndex": "0", "AssociatePublicIpAddress": true, "DeleteOnTermination": true,
+          "GroupSet": [{ "Ref": "CoordinatorSecurity" }], "SubnetId": { "Ref": "Subnet" } }],
+        "BlockDeviceMappings": [{ "DeviceName": "/dev/xvda", "Ebs": {
+          "Encrypted": true, "VolumeType": "gp3", "VolumeSize": 24, "DeleteOnTermination": true } }],
+        "Tags": [{ "Key": "Name", "Value": "JumpServe private synthetic batch coordinator" }],
+        "UserData": { "Fn::Base64": { "Fn::Join": ["\n", [
+          "#!/bin/bash",
+          "set -eu",
+          "systemctl enable --now amazon-ssm-agent",
+          "dnf -qy install nodejs24 nodejs24-npm openssh-clients tar gzip e2fsprogs",
+          "dnf -qy install https://s3.amazonaws.com/session-manager-downloads/plugin/latest/linux_64bit/session-manager-plugin.rpm",
+          "for bin in node npm; do if ! command -v \"$bin\" >/dev/null; then ln -s \"$(command -v \"$bin-24\")\" \"/usr/local/bin/$bin\"; fi; done",
+          "bash -c 'npm install --global --no-audit --no-fund --prefix /opt/jumpserve-tools @openai/codex@0.171.0'",
+          "ln -s /opt/jumpserve-tools/bin/codex /usr/local/bin/codex",
+          "install -d -m 700 -o ec2-user -g ec2-user /home/ec2-user/.aws /home/ec2-user/.ssh /home/ec2-user/jumpserve-batch /home/ec2-user/jumpserve-runs",
+          "printf '[profile jumpserve-experiment]\\nrole_arn = arn:aws:iam::395567831870:role/JumpServeExperimentClient\\ncredential_source = Ec2InstanceMetadata\\nregion = us-east-1\\n' > /home/ec2-user/.aws/config",
+          "chown ec2-user:ec2-user /home/ec2-user/.aws/config",
+          "chmod 600 /home/ec2-user/.aws/config",
+          "touch /run/jumpserve-coordinator-ready",
+          ""
+        ]] } }
+      }
+    }
+  },
+  "Outputs": {
+    "CoordinatorInstance": { "Value": { "Ref": "Coordinator" } },
+    "CoordinatorRoleArn": { "Value": { "Fn::GetAtt": ["CoordinatorRole", "Arn"] } },
+    "TrainingBatchBucketName": { "Condition": "WebBatchStartEnabled", "Value": { "Ref": "TrainingBatchBucket" } },
+    "TrainingTerminalViewerUrl": { "Condition": "TrainingBatchTerminalEnabled", "Value": { "Fn::Sub": "wss://${TrainingTerminalApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/terminal" } },
+    "TrainingTerminalPublisherUrl": { "Condition": "TrainingBatchTerminalEnabled", "Value": { "Fn::Sub": "https://${TrainingTerminalApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/terminal" } },
+    "TrainingTerminalConnectionsTable": { "Condition": "TrainingBatchTerminalEnabled", "Value": { "Ref": "TrainingTerminalConnections" } },
+    "CodexVolumeId": { "Value": { "Ref": "CodexVolume" } },
+    "TrainingWorkerSubnetId": { "Condition": "ParallelTrainingEnabled", "Value": { "Ref": "TrainingWorkerSubnet" } },
+    "TrainingWorkerSecurityGroupId": { "Condition": "ParallelTrainingEnabled", "Value": { "Fn::GetAtt": ["TrainingWorkerSecurity", "GroupId"] } },
+    "WorkerZone": { "Value": { "Ref": "Zone" } }
+  }
+}
