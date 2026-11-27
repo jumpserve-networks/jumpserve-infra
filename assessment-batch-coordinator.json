@@ -46,6 +46,10 @@
       { "Condition": "ParallelTrainingEnabled" },
       { "Fn::Not": [{ "Fn::Equals": [{ "Ref": "AdditionalWorkerAuthVolumeArns" }, ""] }] }
     ] },
+    "ManagedWorkerSessionPool": { "Fn::And": [
+      { "Condition": "ParallelTrainingEnabled" },
+      { "Fn::Equals": [{ "Ref": "AdditionalWorkerAuthVolumeArns" }, ""] }
+    ] },
     "TrainingBatchTerminalEnabled": { "Fn::And": [
       { "Condition": "WebBatchStartEnabled" },
       { "Fn::Equals": [{ "Ref": "EnableTrainingBatchTerminal" }, "true"] }
@@ -109,6 +113,46 @@
         "Tags": [{ "Key": "Name", "Value": "JumpServe synthetic batch Codex session" }]
       }
     },
+    "WorkerSessionVolume2": {
+      "Type": "AWS::EC2::Volume",
+      "Condition": "ManagedWorkerSessionPool",
+      "DeletionPolicy": "Retain",
+      "UpdateReplacePolicy": "Retain",
+      "Properties": {
+        "AvailabilityZone": { "Ref": "Zone" }, "Encrypted": true, "VolumeType": "gp3", "Size": 1,
+        "Tags": [{ "Key": "Name", "Value": "JumpServe synthetic batch Codex session 2" }]
+      }
+    },
+    "WorkerSessionVolume3": {
+      "Type": "AWS::EC2::Volume",
+      "Condition": "ManagedWorkerSessionPool",
+      "DeletionPolicy": "Retain",
+      "UpdateReplacePolicy": "Retain",
+      "Properties": {
+        "AvailabilityZone": { "Ref": "Zone" }, "Encrypted": true, "VolumeType": "gp3", "Size": 1,
+        "Tags": [{ "Key": "Name", "Value": "JumpServe synthetic batch Codex session 3" }]
+      }
+    },
+    "WorkerSessionVolume4": {
+      "Type": "AWS::EC2::Volume",
+      "Condition": "ManagedWorkerSessionPool",
+      "DeletionPolicy": "Retain",
+      "UpdateReplacePolicy": "Retain",
+      "Properties": {
+        "AvailabilityZone": { "Ref": "Zone" }, "Encrypted": true, "VolumeType": "gp3", "Size": 1,
+        "Tags": [{ "Key": "Name", "Value": "JumpServe synthetic batch Codex session 4" }]
+      }
+    },
+    "WorkerSessionVolume5": {
+      "Type": "AWS::EC2::Volume",
+      "Condition": "ManagedWorkerSessionPool",
+      "DeletionPolicy": "Retain",
+      "UpdateReplacePolicy": "Retain",
+      "Properties": {
+        "AvailabilityZone": { "Ref": "Zone" }, "Encrypted": true, "VolumeType": "gp3", "Size": 1,
+        "Tags": [{ "Key": "Name", "Value": "JumpServe synthetic batch Codex session 5" }]
+      }
+    },
     "WorkerVolumeAccess": {
       "Type": "AWS::IAM::Policy",
       "Properties": {
@@ -119,6 +163,15 @@
           "Statement": [
             { "Effect": "Allow", "Action": ["ec2:AttachVolume", "ec2:DetachVolume"],
               "Resource": { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:volume/${CodexVolume}" } },
+            { "Fn::If": ["ManagedWorkerSessionPool",
+              { "Effect": "Allow", "Action": ["ec2:AttachVolume", "ec2:DetachVolume"], "Resource": [
+                { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:volume/${WorkerSessionVolume2}" },
+                { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:volume/${WorkerSessionVolume3}" },
+                { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:volume/${WorkerSessionVolume4}" },
+                { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:volume/${WorkerSessionVolume5}" }
+              ] },
+              { "Ref": "AWS::NoValue" }
+            ] },
             { "Fn::If": ["AdditionalWorkerVolumesConfigured",
               { "Effect": "Allow", "Action": ["ec2:AttachVolume", "ec2:DetachVolume"],
                 "Resource": { "Fn::Split": [",", { "Ref": "AdditionalWorkerAuthVolumeArns" }] } },
@@ -469,6 +522,10 @@
     "TrainingTerminalPublisherUrl": { "Condition": "TrainingBatchTerminalEnabled", "Value": { "Fn::Sub": "https://${TrainingTerminalApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/terminal" } },
     "TrainingTerminalConnectionsTable": { "Condition": "TrainingBatchTerminalEnabled", "Value": { "Ref": "TrainingTerminalConnections" } },
     "CodexVolumeId": { "Value": { "Ref": "CodexVolume" } },
+    "TrainingWorkerSessionVolumeIds": { "Condition": "ManagedWorkerSessionPool", "Value": { "Fn::Join": [",", [
+      { "Ref": "CodexVolume" }, { "Ref": "WorkerSessionVolume2" }, { "Ref": "WorkerSessionVolume3" },
+      { "Ref": "WorkerSessionVolume4" }, { "Ref": "WorkerSessionVolume5" }
+    ]] } },
     "TrainingWorkerSubnetId": { "Condition": "ParallelTrainingEnabled", "Value": { "Ref": "TrainingWorkerSubnet" } },
     "TrainingWorkerSecurityGroupId": { "Condition": "ParallelTrainingEnabled", "Value": { "Fn::GetAtt": ["TrainingWorkerSecurity", "GroupId"] } },
     "WorkerZone": { "Value": { "Ref": "Zone" } }
