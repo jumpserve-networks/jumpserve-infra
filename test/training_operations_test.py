@@ -1,10 +1,13 @@
+import hashlib
 import io
 import json
 from pathlib import Path
 import runpy
+import shutil
 import tarfile
 from tempfile import TemporaryDirectory
 import unittest
+from unittest.mock import patch
 
 
 BIN = Path(__file__).resolve().parents[1] / "bin"
@@ -67,3 +70,38 @@ class TrainingOperationsTests(unittest.TestCase):
     def test_recovery_requires_a_terminal_batch(self):
         with self.assertRaisesRegex(OPS["OperationError"], "batch_active"):
             OPS["recover_stage"](Path("/unavailable"), {"status": "running"}, "Example", "generator")
+
+    def test_release_reuses_approved_inputs_and_leaves_previous_release_available(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+            runtime, runs = root / "runtime", root / "runs"
+            old = runtime / "releases" / "baseline"
+            for name in OPS["RETAINED_DIRECTORIES"]:
+                (old / name).mkdir(parents=True)
+            runs.mkdir()
+            (runtime / "current").symlink_to(old)
+            archive = root / "source.tar.gz"
+            with tarfile.open(archive, "w:gz") as output:
+                for name in OPS["SOURCE_DIRECTORIES"]:
+                    entry = tarfile.TarInfo(name)
+                    entry.type = tarfile.DIRTYPE
+                    output.addfile(entry)
+                for name in (*OPS["MANIFESTS"], "scripts/run-jumpserve-synthetic-batch.mjs",
+                             "scripts/lib/jumpserve-synthetic-ec2.mjs", "scripts/run-jumpserve-training-batch.py"):
+                    value = b"{}" if name in OPS["MANIFESTS"] else b""
+                    entry = tarfile.TarInfo(name)
+                    entry.size = len(value)
+                    output.addfile(entry, io.BytesIO(value))
+                    if name in OPS["MANIFESTS"]:
+                        (old / name).write_bytes(value)
+            digest = hashlib.sha256(archive.read_bytes()).hexdigest()
+            with patch.dict(OPS["install_runtime"].__globals__, {
+                "RUNTIME": runtime, "RUNS": runs, "aws": lambda *args: shutil.copyfile(archive, args[-1]),
+            }):
+                OPS["install_runtime"]("fixture-bucket", digest)
+                OPS["install_runtime"]("fixture-bucket", digest)
+            active = (runtime / "current").resolve()
+            self.assertEqual(active.name, digest)
+            for name in OPS["RETAINED_DIRECTORIES"]:
+                self.assertEqual((active / name).resolve(), old / name)
+            self.assertTrue(old.is_dir())

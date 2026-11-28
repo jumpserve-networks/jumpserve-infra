@@ -43,7 +43,8 @@ Dispatch the frontend's `training-runtime-release.yml` workflow on `main`
 when the coordinator is idle. The workflow packages the protected commit,
 uploads a content-addressed archive and verifies the coordinator's receipt.
 The installer checks the digest, takes the batch lock, and atomically switches
-the active release. It retains the previous release and the benchmark inputs.
+the active release. It retains the previous release and reuses the existing
+benchmark inputs and dependency directories from their original release.
 Dependency changes require provisioning the matching dependencies on the
 coordinator before activating that release.
 

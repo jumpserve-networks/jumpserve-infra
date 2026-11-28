@@ -19,6 +19,7 @@ RUNTIME = HOME / "jumpserve-batch"
 RUNS = HOME / "jumpserve-runs"
 SOURCE_DIRECTORIES = {"lib", "scripts", "skills"}
 MANIFESTS = {"package.json", "package-lock.json"}
+RETAINED_DIRECTORIES = {"node_modules", "pdfs", "answer-keys"}
 MAX_ARCHIVE = 16 * 1024 * 1024
 MAX_EXPANDED = 64 * 1024 * 1024
 TERMINAL = {"completed", "passed", "stopped", "interrupted"}
@@ -126,11 +127,13 @@ def install_runtime(bucket, digest):
             raise OperationError("runtime_dependencies_changed")
         stage = work / "stage"
         stage.mkdir()
-        subprocess.run(["cp", "-a", "--reflink=auto", str(current) + "/.", str(stage)],
-                       timeout=200, check=True, capture_output=True)
-        for folder in SOURCE_DIRECTORIES:
-            shutil.rmtree(stage / folder)
-            (unpacked / folder).rename(stage / folder)
+        for name in SOURCE_DIRECTORIES | MANIFESTS:
+            (unpacked / name).rename(stage / name)
+        for name in RETAINED_DIRECTORIES:
+            existing = (current / name).resolve(strict=True)
+            if existing.name != name or existing.parent.parent != releases.resolve() or not existing.is_dir():
+                raise OperationError("unexpected_retained_directory")
+            (stage / name).symlink_to(existing, target_is_directory=True)
         for file in ("scripts/run-jumpserve-synthetic-batch.mjs", "scripts/lib/jumpserve-synthetic-ec2.mjs"):
             subprocess.run(["node", "--check", str(stage / file)], timeout=15, check=True, capture_output=True)
         runner = stage / "scripts/run-jumpserve-training-batch.py"
