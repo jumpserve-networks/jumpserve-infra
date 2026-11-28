@@ -28,8 +28,8 @@ Invoke `JumpServeTrainingBatchDiagnostics` on the coordinator with the AWS
 profile `jumpserve-training-automation`, a numeric `BatchId`, and a unique
 `RequestId` of 32 lowercase hexadecimal characters. Read the receipt at
 `diagnostics/<batch-id>/<request-id>.json` in the training bucket. The receipt
-includes allowlisted error categories and worker lease status. It omits raw
-journal text, contents of evidence and credentials.
+includes allowlisted per-paper failure codes and worker lease status. It omits
+raw journal text, contents of evidence and credentials.
 
 For one outstanding lease, use a new request ID and supply `Mode=recover`,
 the exact `Paper` identifier and `Stage=generator` or `Stage=verifier`. The
