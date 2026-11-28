@@ -1,0 +1,189 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Scoped EC2 and Session Manager access for client-run JumpServe batch leases",
+  "Conditions": {
+    "JumpServeTarget": {
+      "Fn::And": [
+        { "Fn::Equals": [{ "Ref": "AWS::AccountId" }, "395567831870"] },
+        { "Fn::Equals": [{ "Ref": "AWS::Region" }, "us-east-1"] }
+      ]
+    }
+  },
+  "Resources": {
+    "SsmWorkerRole": {
+      "Type": "AWS::IAM::Role",
+      "Condition": "JumpServeTarget",
+      "Properties": {
+        "RoleName": "JumpServeExperimentWorkload-SSM",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [{ "Effect": "Allow", "Principal": { "Service": "ec2.amazonaws.com" }, "Action": "sts:AssumeRole" }]
+        },
+        "ManagedPolicyArns": [{ "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore" }]
+      }
+    },
+    "SsmWorkerProfile": {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Condition": "JumpServeTarget",
+      "Properties": { "InstanceProfileName": "JumpServeExperimentWorkload-SSM", "Roles": [{ "Ref": "SsmWorkerRole" }] }
+    },
+    "ExperimentResources": {
+      "Type": "AWS::IAM::ManagedPolicy",
+      "Condition": "JumpServeTarget",
+      "Properties": {
+        "ManagedPolicyName": "JumpServeExperimentEc2Resources",
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "ObserveEc2",
+              "Effect": "Allow",
+              "Action": "ec2:Describe*",
+              "Resource": "*",
+              "Condition": { "StringEquals": { "aws:RequestedRegion": { "Ref": "AWS::Region" } } }
+            },
+            {
+              "Sid": "ResolveAmazonLinux",
+              "Effect": "Allow",
+              "Action": ["ssm:GetParameter", "ssm:GetParameters"],
+              "Resource": { "Fn::Sub": "arn:${AWS::Partition}:ssm:${AWS::Region}::parameter/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64" }
+            },
+            {
+              "Sid": "CreateTaggedNetwork",
+              "Effect": "Allow",
+              "Action": [
+                "ec2:CreateVpc", "ec2:CreateInternetGateway", "ec2:CreateSubnet",
+                "ec2:CreateRouteTable", "ec2:CreateSecurityGroup"
+              ],
+              "Resource": [
+                { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:vpc/*" },
+                { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:internet-gateway/*" },
+                { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:subnet/*" },
+                { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:route-table/*" },
+                { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:security-group/*" }
+              ],
+              "Condition": { "StringEquals": { "aws:RequestTag/JumpServeBatchWorker": "true" } }
+            },
+            {
+              "Sid": "ManageOwnedNetwork",
+              "Effect": "Allow",
+              "Action": [
+                "ec2:AttachInternetGateway", "ec2:DetachInternetGateway", "ec2:DeleteInternetGateway",
+                "ec2:CreateSubnet", "ec2:ModifySubnetAttribute", "ec2:DeleteSubnet",
+                "ec2:CreateRouteTable", "ec2:AssociateRouteTable", "ec2:DisassociateRouteTable",
+                "ec2:CreateRoute", "ec2:DeleteRoute", "ec2:DeleteRouteTable",
+                "ec2:CreateSecurityGroup", "ec2:AuthorizeSecurityGroupEgress", "ec2:RevokeSecurityGroupEgress",
+                "ec2:DeleteSecurityGroup", "ec2:ModifyVpcAttribute", "ec2:DeleteVpc",
+                "ec2:TerminateInstances"
+              ],
+              "Resource": { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:*" },
+              "Condition": { "StringEquals": { "ec2:ResourceTag/JumpServeBatchWorker": "true" } }
+            },
+            {
+              "Sid": "TagOnlyOnCreate",
+              "Effect": "Allow",
+              "Action": "ec2:CreateTags",
+              "Resource": { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:*" },
+              "Condition": { "StringEquals": {
+                "aws:RequestTag/JumpServeBatchWorker": "true",
+                "ec2:CreateAction": [
+                  "CreateVpc", "CreateInternetGateway", "CreateSubnet", "CreateRouteTable",
+                  "CreateSecurityGroup", "RunInstances"
+                ]
+              } }
+            },
+            {
+              "Sid": "LaunchAmazonLinux",
+              "Effect": "Allow",
+              "Action": "ec2:RunInstances",
+              "Resource": { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}::image/ami-*" },
+              "Condition": { "StringEquals": { "ec2:Owner": "amazon" } }
+            },
+            {
+              "Sid": "LaunchOnlyTaggedWorkerSizes",
+              "Effect": "Allow",
+              "Action": "ec2:RunInstances",
+              "Resource": { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:instance/*" },
+              "Condition": {
+                "StringEquals": { "aws:RequestTag/JumpServeBatchWorker": "true",
+                  "ec2:InstanceType": ["t3.small", "t3.medium", "t3.large"], "ec2:MetadataHttpTokens": "required" },
+                "NumericEquals": { "ec2:MetadataHttpPutResponseHopLimit": 1 }
+              }
+            },
+            {
+              "Sid": "BoundEncryptedRootVolume",
+              "Effect": "Allow",
+              "Action": "ec2:RunInstances",
+              "Resource": { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:volume/*" },
+              "Condition": {
+                "Bool": { "ec2:Encrypted": "true" },
+                "StringEquals": { "ec2:VolumeType": "gp3", "aws:RequestTag/JumpServeBatchWorker": "true" },
+                "NumericLessThanEquals": { "ec2:VolumeSize": 20 }
+              }
+            },
+            {
+              "Sid": "LaunchIntoOwnedNetwork",
+              "Effect": "Allow",
+              "Action": "ec2:RunInstances",
+              "Resource": [
+                { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:subnet/*" },
+                { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:security-group/*" }
+              ],
+              "Condition": { "StringEquals": { "ec2:ResourceTag/JumpServeBatchWorker": "true" } }
+            },
+            {
+              "Sid": "CreateWorkerInterface",
+              "Effect": "Allow",
+              "Action": "ec2:RunInstances",
+              "Resource": { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:network-interface/*" }
+            },
+            {
+              "Sid": "PassOnlySsmWorker",
+              "Effect": "Allow",
+              "Action": "iam:PassRole",
+              "Resource": { "Fn::GetAtt": ["SsmWorkerRole", "Arn"] },
+              "Condition": { "StringEquals": { "iam:PassedToService": "ec2.amazonaws.com" } }
+            }
+          ]
+        }
+      }
+    },
+    "ExperimentDriver": {
+      "Type": "AWS::IAM::ManagedPolicy",
+      "Condition": "JumpServeTarget",
+      "Properties": {
+        "ManagedPolicyName": "JumpServeExperimentEc2Driver",
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "ssm:StartSession",
+              "Resource": { "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:instance/*" },
+              "Condition": { "StringEquals": {
+                "ssm:resourceTag/JumpServeBatchWorker": "true",
+                "ssm:resourceTag/JumpServeManaged": "assessment"
+              } }
+            },
+            {
+              "Effect": "Allow",
+              "Action": "ssm:StartSession",
+              "Resource": { "Fn::Sub": "arn:${AWS::Partition}:ssm:${AWS::Region}::document/AWS-StartSSHSession" }
+            },
+            {
+              "Effect": "Allow",
+              "Action": ["ssmmessages:OpenDataChannel", "ssm:TerminateSession"],
+              "Resource": { "Fn::Sub": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:session/*" },
+              "Condition": { "StringEquals": { "ssm:resourceTag/aws:ssmmessages:session-id": "${aws:userid}" } }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "Outputs": {
+    "ExperimentResourcePolicyArn": { "Condition": "JumpServeTarget", "Value": { "Ref": "ExperimentResources" } },
+    "ExperimentDriverPolicyArn": { "Condition": "JumpServeTarget", "Value": { "Ref": "ExperimentDriver" } },
+    "InstanceProfileName": { "Condition": "JumpServeTarget", "Value": { "Ref": "SsmWorkerProfile" } }
+  }
+}

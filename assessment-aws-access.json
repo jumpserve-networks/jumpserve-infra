@@ -7,6 +7,12 @@
       "Description": "Approved JumpServe IAM principal that may assume the experiment client role",
       "AllowedPattern": "^arn:aws:iam::395567831870:(role|user)/[A-Za-z0-9+=,.@_/-]+$"
     },
+    "BatchCoordinatorRoleArn": {
+      "Type": "String",
+      "Default": "",
+      "Description": "Optional role of the private synthetic batch coordinator",
+      "AllowedPattern": "^(|arn:aws:iam::395567831870:role/JumpServeSyntheticBatchCoordinator)$"
+    },
     "ExperimentResourcePolicyArn": {
       "Type": "String",
       "Description": "Customer-managed policy for provisioning and deleting approved experiment resources",
@@ -21,7 +27,8 @@
   },
   "Conditions": {
     "JumpServeAccount": { "Fn::Equals": [{ "Ref": "AWS::AccountId" }, "395567831870"] },
-    "HasDriverPolicy": { "Fn::Not": [{ "Fn::Equals": [{ "Ref": "ExperimentDriverPolicyArn" }, ""] }] }
+    "HasDriverPolicy": { "Fn::Not": [{ "Fn::Equals": [{ "Ref": "ExperimentDriverPolicyArn" }, ""] }] },
+    "HasBatchCoordinator": { "Fn::Not": [{ "Fn::Equals": [{ "Ref": "BatchCoordinatorRoleArn" }, ""] }] }
   },
   "Resources": {
     "ExecutionRole": {
@@ -111,7 +118,13 @@
         "RoleName": "JumpServeExperimentClient",
         "AssumeRolePolicyDocument": {
           "Version": "2012-10-17",
-          "Statement": [{ "Effect": "Allow", "Principal": { "AWS": { "Ref": "OperatorPrincipalArn" } }, "Action": "sts:AssumeRole" }]
+          "Statement": [
+            { "Effect": "Allow", "Principal": { "AWS": { "Ref": "OperatorPrincipalArn" } }, "Action": "sts:AssumeRole" },
+            { "Fn::If": ["HasBatchCoordinator",
+              { "Effect": "Allow", "Principal": { "AWS": { "Ref": "BatchCoordinatorRoleArn" } }, "Action": "sts:AssumeRole" },
+              { "Ref": "AWS::NoValue" }
+            ] }
+          ]
         },
         "ManagedPolicyArns": {
           "Fn::If": ["HasDriverPolicy", [{ "Ref": "ExperimentDriverPolicyArn" }], { "Ref": "AWS::NoValue" }]
