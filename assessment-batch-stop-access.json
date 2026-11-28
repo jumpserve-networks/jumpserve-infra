@@ -1,0 +1,79 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Scoped website access to stop a numbered JumpServe synthetic training batch",
+  "Parameters": {
+    "CoordinatorInstance": {
+      "Type": "AWS::EC2::Instance::Id",
+      "Description": "CoordinatorInstance output of JumpServeSyntheticBatchCoordinator"
+    }
+  },
+  "Resources": {
+    "TrainingBatchStopDocument": {
+      "Type": "AWS::SSM::Document",
+      "Properties": {
+        "Name": "JumpServeStopTrainingBatchById",
+        "DocumentType": "Command",
+        "TargetType": "/AWS::EC2::Instance",
+        "UpdateMethod": "NewVersion",
+        "Content": {
+          "schemaVersion": "2.2",
+          "description": "Queue a graceful stop for the specified JumpServe training batch",
+          "parameters": {
+            "BatchId": {
+              "type": "String",
+              "interpolationType": "ENV_VAR",
+              "allowedPattern": "^[1-9][0-9]{0,9}$"
+            }
+          },
+          "mainSteps": [
+            {
+              "action": "aws:runShellScript",
+              "name": "stopTrainingBatch",
+              "inputs": {
+                "timeoutSeconds": "15",
+                "runCommand": [
+                  "set -eu",
+                  "test \"${SSM_BatchId}\" -le 2147483647",
+                  "exec /usr/bin/systemctl --no-block stop \"jumpserve-training-batch@${SSM_BatchId}.service\""
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "TrainingBatchStopWebAccess": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "JumpServeTrainingBatchStopWeb",
+        "Roles": [
+          "JumpServeFrontendPaperIntake"
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "ssm:SendCommand",
+              "Resource": [
+                {
+                  "Fn::Sub": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:document/${TrainingBatchStopDocument}"
+                },
+                {
+                  "Fn::Sub": "arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:instance/${CoordinatorInstance}"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "Outputs": {
+    "StopDocumentName": {
+      "Value": {
+        "Ref": "TrainingBatchStopDocument"
+      }
+    }
+  }
+}
