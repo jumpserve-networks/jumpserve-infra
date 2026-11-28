@@ -62,10 +62,30 @@ class TrainingOperationsTests(unittest.TestCase):
             self.assertEqual(OPS["inspect_batch"](root, journal), {
                 "batchStatus": "stopped", "stopPhase": "generating", "awsError": "ThrottlingException",
                 "leases": [{"paper": "Example", "stage": "generator", "cleaned": False, "creationUnconfirmed": True}],
+                "paperErrors": [],
             })
             case["database"]["assessment_id"] = "other-lease"
             with self.assertRaisesRegex(OPS["OperationError"], "lease_identity_mismatch"):
                 OPS["inspect_batch"](root, journal)
+
+    def test_paper_diagnostics_reveal_only_failure_codes(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+            result = OPS["inspect_batch"](root, {"status": "running", "cases": [
+                {"paper_id": "Unavailable", "status": "generation_error",
+                 "generation_error": "The worker did not become ready over Session Manager. /private/worker.log"},
+                {"paper_id": "Invalid", "status": "verification_error",
+                 "verification_error": "Malformed scorecard at /private/scorecard.json"},
+                {"paper_id": "Unknown", "status": "generation_error",
+                 "generation_error": "Private error contents"},
+                {"paper_id": "Passed", "status": "passed"},
+            ]})
+            self.assertEqual(result["paperErrors"], [
+                {"paper": "Unavailable", "stage": "generator", "code": "worker_not_ready"},
+                {"paper": "Invalid", "stage": "verifier", "code": "invalid_scorecard"},
+                {"paper": "Unknown", "stage": "generator", "code": "unclassified"},
+            ])
+            self.assertNotIn("private", json.dumps(result).lower())
 
     def test_recovery_requires_a_terminal_batch(self):
         with self.assertRaisesRegex(OPS["OperationError"], "batch_active"):

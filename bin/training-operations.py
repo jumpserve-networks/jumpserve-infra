@@ -28,6 +28,18 @@ AWS_ERRORS = (
     "RequestLimitExceeded", "VpcLimitExceeded", "VcpuLimitExceeded",
     "VolumeInUse", "AttachmentLimitExceeded", "LimitExceededException",
 )
+PAPER_ERROR_CODES = (
+    ("worker_not_ready", "did not become ready over session manager"),
+    ("unsafe_archive_entry", "unsafe stage artifact"),
+    ("transfer_limit", "exceeds the transfer limit"),
+    ("worker_transfer", "could not retrieve"),
+    ("worker_failure", "worker stopped"),
+    ("worker_deadline", "timed out"),
+    ("invalid_assessment", "bundle does not match"),
+    ("invalid_assessment", "bundle contains"),
+    ("missing_output", "expected a bounded regular output file"),
+    ("invalid_scorecard", "scorecard"),
+)
 
 
 class OperationError(Exception):
@@ -175,7 +187,14 @@ def checked_lease(directory, case):
 
 def inspect_batch(root, journal):
     leases = []
+    paper_errors = []
     for case in journal["cases"]:
+        status = case.get("status")
+        if status in {"generation_error", "verification_error"}:
+            reason = str(case.get(status, "")).lower()
+            code = next((label for label, match in PAPER_ERROR_CODES if match in reason), "unclassified")
+            paper_errors.append({"paper": require(case["paper_id"], r"[A-Za-z0-9][A-Za-z0-9_-]{0,79}"),
+                                 "stage": "generator" if status == "generation_error" else "verifier", "code": code})
         for stage in ("generator", "verifier"):
             directory = lease_directory(root, case, stage)
             if not (directory / "state.json").is_file():
@@ -191,6 +210,7 @@ def inspect_batch(root, journal):
     status = journal["status"]
     return {"batchStatus": status if status in TERMINAL | {"running", "preparing"} else "unknown",
             "leases": leases,
+            "paperErrors": paper_errors,
             "stopPhase": phase if phase in {"generating", "verifying", "saving_generator", "saving_verifier"} else None,
             "awsError": next((code for code in AWS_ERRORS if code in reason), None)}
 
