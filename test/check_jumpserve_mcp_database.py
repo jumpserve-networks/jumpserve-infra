@@ -21,7 +21,8 @@ def main():
     """)
     for name in ("202611110001_next_paper_intake.sql", "202611110002_assessment_deletion.sql",
                  "202611210001_jumpserve_mcp_assessments.sql", "202611220001_jumpserve_skill_pdf_copies.sql",
-                 "202611220002_jumpserve_assessment_sources.sql", "202611220003_jumpserve_mcp_source_access.sql"):
+                 "202611220002_jumpserve_assessment_sources.sql", "202611220003_jumpserve_mcp_source_access.sql",
+                 "202611280001_jumpserve_mcp_training_batch_access.sql"):
         query((fixture.ROOT / "database" / name).read_text())
 
     resource = quote("https://jumpserve.example.test/mcp")
@@ -62,6 +63,37 @@ def main():
     assert allowed(scoped_access) == "f"
     assert allowed(rotated_access) == "t"
     assert query(f"select jumpserve_mcp_can_read_sources({rotated_access},'https://other.example.test/mcp')", role="service_role") == "f"
+
+    def training_exchange(grant, proof, new_access, new_refresh, requested="null", callback="null", verifier="null"):
+        return query(f"""select jumpserve_mcp_exchange_training(
+            '{grant}',{proof},{client},{resource},{new_access},{new_refresh},{callback},{verifier},null,{requested}
+        )""", role="service_role")
+
+    def can_start(key, audience=resource, role="service_role"):
+        return query(f"select jumpserve_mcp_can_start_training({key},{audience})", role=role)
+
+    training_code, training_access, training_refresh, renewed_access, renewed_refresh = [quote(c * 64) for c in "bcdef"]
+    assert can_start(rotated_access) == "f"
+    assert not training_exchange("refresh_token", rotated_refresh, training_access, training_refresh, "true")
+    assert allowed(rotated_access) == "t"
+    query(f"""insert into jumpserve_mcp_codes(code_hash,owner_id,client_id,redirect_uri,resource,challenge,read_sources,start_training)
+      values ({training_code},{actor},{client},{redirect},{resource},{challenge},true,true)""", role="service_role")
+    assert not training_exchange("authorization_code", training_code, training_access, training_refresh,
+                                 "true", redirect, quote("Y" * 43))
+    assert training_exchange("authorization_code", training_code, training_access, training_refresh,
+                             "true", redirect, challenge) == "source_training"
+    assert can_start(training_access) == "t"
+    assert training_exchange("refresh_token", training_refresh, renewed_access, renewed_refresh) == "source_training"
+    assert can_start(training_access) == "f"
+    assert can_start(renewed_access, quote("https://other.example.test/mcp")) == "f"
+    assert can_start(renewed_access) == "t"
+    for role in ("anon", "authenticated"):
+        fixture.rejects(lambda: can_start(renewed_access, role=role))
+    assert training_exchange("refresh_token", renewed_refresh, training_access, training_refresh, "false") == "source"
+    assert can_start(training_access) == "f"
+    assert not training_exchange("refresh_token", training_refresh, renewed_access, renewed_refresh, "true")
+    print("PASS explicit training consent, scoped refresh and no re-escalation", flush=True)
+
     query(f"select jumpserve_mcp_revoke({actor},{resource})", role="service_role")
     assert not query(f"select jumpserve_mcp_actor({next_access},{resource})", role="service_role")
     for role in ("anon", "authenticated"):
